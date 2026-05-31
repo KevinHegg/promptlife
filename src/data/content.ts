@@ -1,4 +1,5 @@
-const A = '/assets/promptlife'
+const BASE = import.meta.env.BASE_URL.replace(/\/$/, '')
+const A = `${BASE}/assets/promptlife`
 
 export const acts = [
   { id: 'before-morning', number: 1, name: 'Before Morning', summary: 'Symbolic AI, training, pretraining, fine-tuning, alignment, and inference before the day begins.' },

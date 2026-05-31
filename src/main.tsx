@@ -3,7 +3,8 @@ import { createRoot } from 'react-dom/client'
 import { acts, games, glossary, lessons } from './data/content'
 import './styles/global.css'
 
-const ASSET = '/assets/promptlife'
+const BASE = import.meta.env.BASE_URL.replace(/\/$/, '')
+const ASSET = `${BASE}/assets/promptlife`
 
 function getStored(key, fallback) {
   try {

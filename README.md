@@ -28,6 +28,14 @@ npm run build
 
 The production build is written to `dist/`.
 
+## Test On A Phone
+
+The repo includes a GitHub Pages workflow. Pushes to `main` build the app with the `/promptlife/` base path and deploy it to:
+
+```text
+https://kevinhegg.github.io/promptlife/
+```
+
 ## MVP Features
 
 - Vite + React app shell.
