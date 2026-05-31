@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="icon-fine-tuning">
+  <circle cx="32" cy="32" r="27" fill="#D9F4F5" stroke="#0E8D9B" stroke-width="2"/>
+  
+  <path d="M18 24 H46 M18 32 H46 M18 40 H46" stroke="#071B6F" stroke-width="4" stroke-linecap="round"/><circle cx="27" cy="24" r="4" fill="#0E8D9B"/><circle cx="37" cy="32" r="4" fill="#1459C8"/><circle cx="31" cy="40" r="4" fill="#5A3EC8"/>
+
+</svg>

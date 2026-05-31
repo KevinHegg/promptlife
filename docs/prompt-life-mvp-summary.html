@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Prompt Life MVP Summary</title>
+    <style>
+      :root {
+        color: #0b1230;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      body {
+        margin: 0;
+        background: #f8faf7;
+      }
+
+      main {
+        max-width: 920px;
+        margin: 0 auto;
+        padding: 40px 32px;
+      }
+
+      h1 {
+        margin: 0 0 8px;
+        color: #071b6f;
+        font-size: 40px;
+        line-height: 1;
+      }
+
+      h2 {
+        margin: 28px 0 10px;
+        color: #071b6f;
+        font-size: 22px;
+      }
+
+      p,
+      li {
+        font-size: 14px;
+        line-height: 1.55;
+      }
+
+      .kicker {
+        margin: 0 0 18px;
+        color: #0e8d9b;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .summary-grid,
+      .shot-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .panel,
+      figure {
+        margin: 0;
+        padding: 14px;
+        border: 1px solid #d6e0f0;
+        border-radius: 8px;
+        background: white;
+        break-inside: avoid;
+      }
+
+      .panel strong {
+        color: #071b6f;
+      }
+
+      figure img {
+        width: 100%;
+        border: 1px solid #d6e0f0;
+        border-radius: 8px;
+      }
+
+      figcaption {
+        margin-top: 8px;
+        color: #36405e;
+        font-size: 12px;
+        font-weight: 800;
+      }
+
+      code {
+        padding: 2px 5px;
+        border-radius: 4px;
+        background: #eef3ff;
+        color: #071b6f;
+      }
+
+      @media print {
+        body {
+          background: white;
+        }
+
+        main {
+          padding: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p class="kicker">Prompt Life MVP Summary - May 31, 2026</p>
+      <h1>Prompt Life</h1>
+      <p>Mobile-first MVP for teaching how large language models work from pretraining to response. The product tone is warm, precise, and model-literate: reduce mystery without hype or fear.</p>
+
+      <section class="summary-grid" aria-label="Summary">
+        <div class="panel">
+          <strong>What changed</strong>
+          <p>Expanded the seed into a polished Vite + React + TypeScript app with 21 lessons, 24 glossary terms, saved progress, reflections, stronger mini-games, improved glossary drawer behavior, and mobile-first UI polish.</p>
+        </div>
+        <div class="panel">
+          <strong>Verification</strong>
+          <p>Ran <code>npm install</code>, <code>npm run typecheck</code>, and <code>npm run build</code>. All passed. Mobile browser QA at 390 x 844 found no console errors.</p>
+        </div>
+      </section>
+
+      <h2>Files Changed</h2>
+      <ul>
+        <li><code>src/main.tsx</code>: app state, lesson flow, interactions, games, glossary drawer, badge screen.</li>
+        <li><code>src/data/content.ts</code>: 21-lesson A-to-Z path plus the required glossary coverage.</li>
+        <li><code>src/styles/global.css</code>: mobile layout, focus states, reduced motion, cards, controls, games.</li>
+        <li><code>src/styles/promptlife.tokens.css</code>: token cleanup for current visual system.</li>
+        <li><code>README.md</code>: exact local development and build instructions.</li>
+        <li><code>docs/PRODUCT_BLUEPRINT.md</code>: learning architecture and v0.2 direction.</li>
+      </ul>
+
+      <h2>How To Run</h2>
+      <p>From the project folder, run <code>npm install</code>, then <code>npm run dev</code>, then open <code>http://localhost:5173/</code>. For verification, run <code>npm run typecheck</code> and <code>npm run build</code>.</p>
+
+      <h2>Done</h2>
+      <ul>
+        <li>Navigation: Home, Learn, Play, Glossary, Badge.</li>
+        <li>Lesson pattern: definition, relationship, metaphor, tiny interaction, checkpoint, reflection.</li>
+        <li>LocalStorage progress for lessons, game insights, reflections, and location.</li>
+        <li>Mini-games: Context Stack, Attention Weave, Token Pipeline Relay.</li>
+        <li>Badge unlock requires lesson checkpoint progress plus mini-game insights.</li>
+        <li>Core teaching distinctions kept explicit: training vs inference, embeddings vs hidden states, attention vs human attention, logits to softmax to sampling, context windows vs memory, diffusion vs autoregressive text.</li>
+      </ul>
+
+      <h2>Next Three v0.2 Improvements</h2>
+      <ol>
+        <li>Add short instructor mode with discussion prompts and downloadable classroom handouts.</li>
+        <li>Add a guided "trace one prompt" animation that links tokens, hidden states, logits, and sampled output across one continuous run.</li>
+        <li>Add lightweight accessibility QA with automated checks and keyboard-only walkthrough scripts.</li>
+      </ol>
+
+      <h2>Mobile Screenshots</h2>
+      <section class="shot-grid" aria-label="Mobile screenshots">
+        <figure>
+          <img src="screenshots/01-home-mobile.png" alt="Prompt Life home screen at mobile width" />
+          <figcaption>Home</figcaption>
+        </figure>
+        <figure>
+          <img src="screenshots/02-learn-mobile.png" alt="Prompt Life learn map at mobile width" />
+          <figcaption>Learn</figcaption>
+        </figure>
+        <figure>
+          <img src="screenshots/03-lesson-mobile.png" alt="Prompt Life pretraining lesson at mobile width" />
+          <figcaption>Lesson</figcaption>
+        </figure>
+        <figure>
+          <img src="screenshots/04-play-mobile.png" alt="Prompt Life play screen at mobile width" />
+          <figcaption>Play</figcaption>
+        </figure>
+        <figure>
+          <img src="screenshots/05-context-stack-mobile.png" alt="Prompt Life Context Stack game at mobile width" />
+          <figcaption>Context Stack</figcaption>
+        </figure>
+        <figure>
+          <img src="screenshots/06-glossary-mobile.png" alt="Prompt Life glossary at mobile width" />
+          <figcaption>Glossary</figcaption>
+        </figure>
+        <figure>
+          <img src="screenshots/07-glossary-drawer-mobile.png" alt="Prompt Life glossary drawer at mobile width" />
+          <figcaption>Glossary Drawer</figcaption>
+        </figure>
+        <figure>
+          <img src="screenshots/08-badge-mobile.png" alt="Prompt Life badge screen at mobile width" />
+          <figcaption>Badge</figcaption>
+        </figure>
+      </section>
+    </main>
+  </body>
+</html>
