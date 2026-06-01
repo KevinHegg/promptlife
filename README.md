@@ -50,7 +50,7 @@ https://kevinhegg.github.io/promptlife/
 
 ## Reset Progress
 
-Progress is stored in this browser's `localStorage`, not cookies. Use the Badge screen's `Reset progress` button to start over on this device. Reset clears lessons, exercises, reflections, mini-game insights, tours, and last location.
+Progress is stored in this browser's `localStorage`, not cookies. Use the Badge screen's `Reset progress` button to start over on this device. Reset clears lessons, exercises, Prompt Run progress, reflections, mini-game insights, tours, and last location.
 
 For local debugging, add `?debug=1` to the app URL and open the Badge screen to reveal progress tools. See [docs/STORAGE_AND_RESET.md](docs/STORAGE_AND_RESET.md) for the exact keys and reset behavior.
 
@@ -63,8 +63,9 @@ For local debugging, add `?debug=1` to the app URL and open the Badge screen to 
 - Reusable exercise system with consistent goal, action, feedback, and insight states.
 - LocalStorage progress for completed lessons, exercises, game insights, reflections, and the current location.
 - Lightweight React/SVG/CSS concept animations with reduced-motion support.
+- Play mode centered on Prompt Run, an interactive 12-step inference loop plus final ordering challenge.
 - Guided side tours:
-  - Trace One Prompt
+  - Prompt Run, formerly Trace One Prompt
   - How AI Learns
 - Glossary screen plus accessible glossary drawer.
 - Three non-competitive mini-games:
@@ -78,4 +79,4 @@ For local debugging, add `?debug=1` to the app URL and open the Badge screen to 
 
 One screen, one idea. One interaction, one relationship. Keep text in HTML for accessibility. Use visual assets to reduce mystery, not to hide the explanation.
 
-See [docs/PRODUCT_BLUEPRINT.md](docs/PRODUCT_BLUEPRINT.md) for the learning architecture, [docs/ANIMATION_SYSTEM.md](docs/ANIMATION_SYSTEM.md) for the concept animation approach, [docs/EXERCISE_SYSTEM.md](docs/EXERCISE_SYSTEM.md) for reusable exercises, and [docs/STORAGE_AND_RESET.md](docs/STORAGE_AND_RESET.md) for local progress storage.
+See [docs/PRODUCT_BLUEPRINT.md](docs/PRODUCT_BLUEPRINT.md) for the learning architecture, [docs/PLAY_MODE_V0_5.md](docs/PLAY_MODE_V0_5.md) for Prompt Run, [docs/ANIMATION_SYSTEM.md](docs/ANIMATION_SYSTEM.md) for the concept animation approach, [docs/EXERCISE_SYSTEM.md](docs/EXERCISE_SYSTEM.md) for reusable exercises, and [docs/STORAGE_AND_RESET.md](docs/STORAGE_AND_RESET.md) for local progress storage.

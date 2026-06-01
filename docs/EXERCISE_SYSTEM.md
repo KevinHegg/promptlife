@@ -83,6 +83,21 @@ The reusable components live in `src/components/ExerciseSystem.tsx`.
 - `InsightUnlocked`
 - `ExerciseControls`
 
+## Prompt Run Usage
+
+Prompt Run uses the same `ExerciseShell` for 12 interactive steps plus a final order challenge. The step data lives in `src/data/promptRun.ts` so the main lesson exercise library can stay focused on reusable lesson exercises.
+
+Prompt Run currently reuses these input types:
+
+- `label-tokens`
+- `drag-match`
+- `drag-order`
+- `connect-nodes`
+- `tap-choice`
+- `next-token-pick`
+
+The Prompt Run wrapper adds hints, step navigation, local Prompt Run progress, and a Continue gate. Continue unlocks only after a correct answer or Show me.
+
 ## Feedback Rules
 
 - Correct feedback begins with `Insight unlocked.`
@@ -130,11 +145,17 @@ Exercise progress is stored in browser `localStorage` under:
 
 - `promptlife:v1:exerciseProgress`
 
+Prompt Run has separate route-level progress under:
+
+- `promptlife:v1:promptRunProgress`
+
 The value tracks:
 
 - completed exercise IDs,
 - attempt counts,
 - last selected answer,
 - insight unlocked state.
+
+Prompt Run progress tracks completed steps, revealed steps, final challenge completion, attempts, last answers, and correct insights.
 
 No personal data, cookies, backend, or account is required. Reset controls remove this key along with the other Prompt Life progress keys.

@@ -1,0 +1,504 @@
+import type { Exercise, ExerciseItem } from './exercises'
+
+export const PROMPT_RUN_SAMPLE = 'The dog chased the cat across the ...'
+export const PROMPT_RUN_FINAL_ID = 'prompt-run-final-order'
+
+export type PromptRunStep = {
+  id: string
+  title: string
+  concept: string
+  goal: string
+  why: string
+  hints: string[]
+  exercise: Exercise
+}
+
+export type PromptRunProgress = {
+  completedSteps: string[]
+  finalChallengeComplete: boolean
+  insights: string[]
+  revealedSteps: string[]
+  attempts: Record<string, number>
+  lastAnswers: Record<string, unknown>
+}
+
+export function emptyPromptRunProgress(): PromptRunProgress {
+  return {
+    completedSteps: [],
+    finalChallengeComplete: false,
+    insights: [],
+    revealedSteps: [],
+    attempts: {},
+    lastAnswers: {}
+  }
+}
+
+function promptTokenItems() {
+  return ['The', 'dog', 'chased', 'the', 'cat', 'across', 'the'].map((token, index) => ({
+    id: `pr-prompt-${index}`,
+    label: token,
+    bucket: 'Prompt'
+  }))
+}
+
+export const promptRunSteps: PromptRunStep[] = [
+  {
+    id: 'prompt-run-prompt-response',
+    title: 'Prompt or Response?',
+    concept: 'prompt vs response',
+    goal: 'Separate the prompt tokens from the first generated response token.',
+    why: 'A response grows one generated token at a time.',
+    hints: ['The prompt is what the model already had before generating.', 'yard is the token chosen by the model, then appended to the context.'],
+    exercise: {
+      id: 'prompt-run-prompt-response',
+      title: 'Prompt or Response?',
+      concept: 'Prompt tokens versus generated response tokens',
+      prompt: 'The | dog | chased | the | cat | across | the | yard',
+      goal: 'Label the first seven tokens as Prompt and yard as Generated response token.',
+      actionVerb: 'Label',
+      actionInstruction: 'Tap each token until the first seven read Prompt and yard reads Response.',
+      inputType: 'label-tokens',
+      buckets: ['Prompt', 'Response'],
+      items: [
+        ...promptTokenItems(),
+        { id: 'pr-response-yard', label: 'yard', bucket: 'Response', feedback: 'yard was chosen by the model, then appended to the context.' }
+      ],
+      correctActions: {
+        'pr-prompt-0': 'Prompt',
+        'pr-prompt-1': 'Prompt',
+        'pr-prompt-2': 'Prompt',
+        'pr-prompt-3': 'Prompt',
+        'pr-prompt-4': 'Prompt',
+        'pr-prompt-5': 'Prompt',
+        'pr-prompt-6': 'Prompt',
+        'pr-response-yard': 'Response'
+      },
+      incorrectActions: {
+        'pr-response-yard:Prompt': 'yard was chosen by the model, then appended to the context.'
+      },
+      feedbackCorrect: 'Good. The first seven tokens were given to the model; yard was generated next.',
+      feedbackIncorrect: 'yard was chosen by the model, then appended to the context.',
+      insight: 'A response grows one generated token at a time.',
+      glossaryTerms: ['prompt', 'response', 'generated token', 'autoregression'],
+      completionKey: 'prompt-run:prompt-response'
+    }
+  },
+  {
+    id: 'prompt-run-tokenizer',
+    title: 'Tokenizer',
+    concept: 'tokenization',
+    goal: 'Show that the model processes token chunks, not raw English directly.',
+    why: 'Text becomes tokens before the model can process it.',
+    hints: ['Look for the small chunks that can travel into the model.', 'The raw-English claim is the misconception. The model receives token IDs after tokenization.'],
+    exercise: {
+      id: 'prompt-run-tokenizer',
+      title: 'Tokenizer',
+      concept: 'Text becomes token chunks',
+      prompt: PROMPT_RUN_SAMPLE,
+      goal: 'Label the processable chunks as Token chunk and the misconception as Not a model input.',
+      actionVerb: 'Label',
+      actionInstruction: 'Tap each card to label token chunks and the raw-English misconception.',
+      inputType: 'label-tokens',
+      buckets: ['Token chunk', 'Not a model input'],
+      items: [
+        'The',
+        'dog',
+        'chased',
+        'the',
+        'cat',
+        'across',
+        'the'
+      ].map((token, index) => ({ id: `pr-token-${index}`, label: token, bucket: 'Token chunk' } as ExerciseItem)).concat([
+        { id: 'raw-english', label: 'model reads raw English directly', bucket: 'Not a model input', feedback: 'The model receives token IDs, not raw words or meanings.' }
+      ]),
+      feedbackCorrect: 'Good. The sentence has been broken into model-readable token chunks.',
+      feedbackIncorrect: 'The model receives token IDs, not raw English words directly.',
+      insight: 'Text becomes tokens before the model can process it.',
+      glossaryTerms: ['token', 'token-id', 'tokenization'],
+      completionKey: 'prompt-run:tokenizer'
+    }
+  },
+  {
+    id: 'prompt-run-token-ids',
+    title: 'Token IDs',
+    concept: 'token ID',
+    goal: 'Match tokens to lookup numbers.',
+    why: 'Token IDs are how tokens find embeddings.',
+    hints: ['A token ID is a lookup number, not a dictionary meaning.', 'dog goes to 421, cat goes to 982, and across goes to 1576.'],
+    exercise: {
+      id: 'prompt-run-token-ids',
+      title: 'Token IDs',
+      concept: 'Chunks become lookup numbers',
+      prompt: 'dog -> 421, cat -> 982, across -> 1576',
+      goal: 'Match each token card to its numeric ID card.',
+      actionVerb: 'Drag',
+      actionInstruction: 'Tap a token, then tap the matching ID number.',
+      inputType: 'drag-match',
+      items: [
+        { id: 'dog-token', label: 'dog', matchId: 'id-421' },
+        { id: 'cat-token', label: 'cat', matchId: 'id-982' },
+        { id: 'across-token', label: 'across', matchId: 'id-1576' },
+        { id: 'id-421', label: '421' },
+        { id: 'id-982', label: '982' },
+        { id: 'id-1576', label: '1576' },
+        { id: 'dictionary-definition', label: 'dictionary definition' }
+      ],
+      incorrectActions: {
+        'dog-token:dictionary-definition': 'The ID is a lookup number, like a library call number, not a definition.',
+        'cat-token:dictionary-definition': 'The ID is a lookup number, like a library call number, not a definition.',
+        'across-token:dictionary-definition': 'The ID is a lookup number, like a library call number, not a definition.'
+      },
+      feedbackCorrect: 'Good. Each token maps to a numeric ID.',
+      feedbackIncorrect: 'The ID is a lookup number, like a library call number, not a dictionary definition.',
+      insight: 'Token IDs are how tokens find embeddings.',
+      glossaryTerms: ['token-id', 'embedding', 'token'],
+      completionKey: 'prompt-run:token-ids'
+    }
+  },
+  {
+    id: 'prompt-run-embedding',
+    title: 'Embedding Lookup',
+    concept: 'embedding',
+    goal: 'Move token IDs into the embedding table to retrieve learned starting vectors.',
+    why: 'An embedding is a token’s learned starting vector.',
+    hints: ['The vector comes from a learned table.', 'Match each token ID to a vector bar, not to a human-written note.'],
+    exercise: {
+      id: 'prompt-run-embedding',
+      title: 'Embedding Lookup',
+      concept: 'Token IDs retrieve learned starting vectors',
+      prompt: 'ID 421 enters the embedding table.',
+      goal: 'Match each token ID to its vector bar.',
+      actionVerb: 'Drag',
+      actionInstruction: 'Tap an ID, then tap the vector it retrieves.',
+      inputType: 'drag-match',
+      items: [
+        { id: 'lookup-421', label: 'ID 421', matchId: 'vector-dog' },
+        { id: 'lookup-982', label: 'ID 982', matchId: 'vector-cat' },
+        { id: 'lookup-1576', label: 'ID 1576', matchId: 'vector-across' },
+        { id: 'vector-dog', label: '[0.31, -0.08, 0.72]' },
+        { id: 'vector-cat', label: '[0.27, 0.11, 0.69]' },
+        { id: 'vector-across', label: '[-0.04, 0.55, 0.18]' },
+        { id: 'human-written', label: 'hand-written by a human' }
+      ],
+      incorrectActions: {
+        'lookup-421:human-written': 'Embeddings are learned during training, not hand-written by a human.',
+        'lookup-982:human-written': 'Embeddings are learned during training, not hand-written by a human.',
+        'lookup-1576:human-written': 'Embeddings are learned during training, not hand-written by a human.'
+      },
+      feedbackCorrect: 'Good. The ID retrieves a learned vector from the embedding table.',
+      feedbackIncorrect: 'Embeddings are learned during training; they are not hand-written definitions.',
+      insight: 'An embedding is a token’s learned starting vector.',
+      glossaryTerms: ['embedding', 'token-id', 'training', 'vector'],
+      completionKey: 'prompt-run:embedding'
+    }
+  },
+  {
+    id: 'prompt-run-tensor',
+    title: 'Tensor Stack',
+    concept: 'tensor',
+    goal: 'Put the model-readable shapes in the right relationship.',
+    why: 'The transformer transforms tensors, not words.',
+    hints: ['Start with many token vectors arranged by token position and feature columns.', 'batch x tokens x features is an extension; one single number is the misconception.'],
+    exercise: {
+      id: 'prompt-run-tensor',
+      title: 'Tensor Stack',
+      concept: 'Organized blocks of numbers',
+      prompt: 'Token vectors need an organized shape before transformer layers can use them.',
+      goal: 'Order these from the core shape to the optional extension to the misconception.',
+      actionVerb: 'Order',
+      actionInstruction: 'Use Up and Down to put the tensor shapes in order.',
+      inputType: 'drag-order',
+      items: [
+        { id: 'single-number', label: 'one single number' },
+        { id: 'batch-tokens-features', label: 'batch x tokens x features' },
+        { id: 'tokens-features', label: 'tokens x features' }
+      ],
+      correctActions: ['tokens-features', 'batch-tokens-features', 'single-number'],
+      incorrectActions: {
+        'single-number-first': 'A tensor is an organized block of many numbers, not one single number.'
+      },
+      feedbackCorrect: 'Good. Token vectors form a tokens x features block, with batch as an optional outer dimension.',
+      feedbackIncorrect: 'A tensor is an organized block of many numbers, not one word or one single number.',
+      insight: 'The transformer transforms tensors, not words.',
+      glossaryTerms: ['tensor', 'vector', 'embedding'],
+      completionKey: 'prompt-run:tensor'
+    }
+  },
+  {
+    id: 'prompt-run-attention',
+    title: 'Attention',
+    concept: 'attention',
+    goal: 'Connect a pronoun to the token it most likely depends on.',
+    why: 'Attention lets token positions use relevant context.',
+    hints: ['Read the sentence as a clue about reference.', 'In this sentence, it ran most likely points back to cat.'],
+    exercise: {
+      id: 'prompt-run-attention',
+      title: 'Attention',
+      concept: 'Weighted relevance between token positions',
+      prompt: 'The dog chased the cat because it ran.',
+      goal: 'Connect it to the most likely referent.',
+      actionVerb: 'Connect',
+      actionInstruction: 'Tap the token that it most likely refers to.',
+      inputType: 'connect-nodes',
+      targetId: 'it',
+      correctAnswer: 'cat',
+      items: [
+        { id: 'the-1', label: 'The' },
+        { id: 'dog', label: 'dog', feedback: 'dog is possible in other sentences, but here cat is the more likely referent.' },
+        { id: 'chased', label: 'chased' },
+        { id: 'the-2', label: 'the' },
+        { id: 'cat', label: 'cat', correct: true },
+        { id: 'because', label: 'because' },
+        { id: 'it', label: 'it' },
+        { id: 'ran', label: 'ran' }
+      ],
+      feedbackCorrect: 'Good. In this sentence, it ran most likely refers to the cat.',
+      feedbackIncorrect: 'In this sentence, it ran most likely refers to the cat.',
+      insight: 'Attention lets token positions use relevant context.',
+      glossaryTerms: ['attention', 'hidden state', 'context'],
+      brainMetaphor: 'Like focusing on a relevant word.',
+      brainLimit: 'Attention is not awareness. It is learned relevance weighting.',
+      completionKey: 'prompt-run:attention'
+    }
+  },
+  {
+    id: 'prompt-run-mlp',
+    title: 'MLP Feature Reshape',
+    concept: 'MLP',
+    goal: 'Match a context to the feature that should get stronger.',
+    why: 'MLPs help reshape token features after attention mixes context.',
+    hints: ['The same token can point toward different features after context is mixed.', 'The animal sentence strengthens animal/pet; the command sentence strengthens command/software.'],
+    exercise: {
+      id: 'prompt-run-mlp',
+      title: 'MLP Feature Reshape',
+      concept: 'Per-token feature reshaping',
+      prompt: 'Display token: cat',
+      goal: 'Match each context to the feature that becomes stronger.',
+      actionVerb: 'Drag',
+      actionInstruction: 'Tap a context, then tap the feature that strengthens.',
+      inputType: 'drag-match',
+      items: [
+        { id: 'animal-context', label: 'The dog chased the cat.', matchId: 'animal-feature' },
+        { id: 'command-context', label: 'The cat command printed the file.', matchId: 'command-feature' },
+        { id: 'animal-feature', label: 'animal / pet feature' },
+        { id: 'command-feature', label: 'command / software feature' },
+        { id: 'same-feature', label: 'same exact feature every time' }
+      ],
+      incorrectActions: {
+        'animal-context:same-feature': 'The embedding starts stable, but hidden states change with context.',
+        'command-context:same-feature': 'The embedding starts stable, but hidden states change with context.'
+      },
+      feedbackCorrect: 'Good. The same token can carry different temporary features in different contexts.',
+      feedbackIncorrect: 'The embedding starts stable, but hidden states change with context.',
+      insight: 'MLPs help reshape token features after attention mixes context.',
+      glossaryTerms: ['MLP', 'feature', 'hidden state', 'context'],
+      completionKey: 'prompt-run:mlp'
+    }
+  },
+  {
+    id: 'prompt-run-hidden-state',
+    title: 'Hidden State',
+    concept: 'hidden state',
+    goal: 'Decide whether hidden states are durable memory or temporary run state.',
+    why: 'Hidden states are the model’s temporary scratchpad of meaning.',
+    hints: ['Ask what survives after the current forward pass ends.', 'Weights remain; hidden states disappear after the run.'],
+    exercise: {
+      id: 'prompt-run-hidden-state',
+      title: 'Hidden State',
+      concept: 'Temporary context-shaped internal vector',
+      prompt: 'A hidden state exists while the model processes the current context.',
+      goal: 'Choose what kind of thing a hidden state is.',
+      actionVerb: 'Choose',
+      actionInstruction: 'Choose the accurate description.',
+      inputType: 'tap-choice',
+      items: [
+        { id: 'temporary', label: 'Temporary context-shaped vector during this forward pass', correct: true },
+        { id: 'permanent', label: 'Permanent memory', feedback: 'Hidden states disappear after the run; weights remain.' },
+        { id: 'database', label: 'Database record', feedback: 'A hidden state is internal computation, not a retrieved database row.' }
+      ],
+      correctAnswer: 'temporary',
+      feedbackCorrect: 'Good. Hidden states are temporary vectors shaped by the current context.',
+      feedbackIncorrect: 'Hidden states disappear after the run; weights remain.',
+      insight: 'Hidden states are the model’s temporary scratchpad of meaning.',
+      glossaryTerms: ['hidden state', 'forward pass', 'weight'],
+      completionKey: 'prompt-run:hidden-state'
+    }
+  },
+  {
+    id: 'prompt-run-logits',
+    title: 'Logits',
+    concept: 'logits',
+    goal: 'Identify raw next-token scores before probabilities.',
+    why: 'The final hidden state produces scores for possible next tokens.',
+    hints: ['These numbers are not probabilities yet.', 'They are raw scores before softmax turns them into comparable probabilities.'],
+    exercise: {
+      id: 'prompt-run-logits',
+      title: 'Logits',
+      concept: 'Raw scores before probabilities',
+      prompt: 'yard: 8.1, street: 7.4, quantum: 0.3, elephant: 0.1',
+      goal: 'Choose what these raw numbers are.',
+      actionVerb: 'Choose',
+      actionInstruction: 'Tap the accurate description.',
+      inputType: 'tap-choice',
+      items: [
+        { id: 'raw-scores', label: 'Raw scores before probabilities', correct: true },
+        { id: 'final-answer', label: 'The final answer', feedback: 'Logits are raw next-token scores, not a finished response.' },
+        { id: 'memory', label: 'Permanent memory', feedback: 'Logits are temporary scores for one decoding step.' },
+        { id: 'database-lookup', label: 'Database lookup', feedback: 'Logits come from the final hidden state, not a database lookup.' }
+      ],
+      correctAnswer: 'raw-scores',
+      feedbackCorrect: 'Good. Logits are raw next-token scores.',
+      feedbackIncorrect: 'Logits are raw next-token scores before probabilities.',
+      insight: 'The final hidden state produces scores for possible next tokens.',
+      glossaryTerms: ['logits', 'hidden state', 'softmax'],
+      completionKey: 'prompt-run:logits'
+    }
+  },
+  {
+    id: 'prompt-run-softmax',
+    title: 'Softmax Funnel',
+    concept: 'softmax',
+    goal: 'Send raw score bars through the softmax funnel.',
+    why: 'Softmax makes next-token choices comparable.',
+    hints: ['Softmax comes after logits.', 'The output is a probability distribution that sums to 1.'],
+    exercise: {
+      id: 'prompt-run-softmax',
+      title: 'Softmax Funnel',
+      concept: 'Scores become probabilities',
+      prompt: 'Raw scores enter: yard 8.1, street 7.4, quantum 0.3, elephant 0.1.',
+      goal: 'Choose what comes out of softmax.',
+      actionVerb: 'Choose',
+      actionInstruction: 'Tap the softmax output.',
+      inputType: 'tap-choice',
+      items: [
+        { id: 'probabilities', label: 'A probability distribution', correct: true },
+        { id: 'database', label: 'A database lookup', feedback: 'Softmax transforms raw scores; it does not retrieve documents.' },
+        { id: 'full-response', label: 'A full response', feedback: 'Softmax prepares next-token probabilities, not the whole answer.' },
+        { id: 'memory', label: 'A permanent memory', feedback: 'Softmax is temporary computation during decoding.' }
+      ],
+      correctAnswer: 'probabilities',
+      feedbackCorrect: 'Good. Softmax turns raw scores into probabilities that sum to 1.',
+      feedbackIncorrect: 'Softmax turns raw scores into probabilities that sum to 1.',
+      insight: 'Softmax makes next-token choices comparable.',
+      glossaryTerms: ['softmax', 'logits', 'probability'],
+      completionKey: 'prompt-run:softmax'
+    }
+  },
+  {
+    id: 'prompt-run-sampling',
+    title: 'Sampling',
+    concept: 'sampling',
+    goal: 'Choose a plausible next token from the probability cloud.',
+    why: 'The model chooses from probabilities, not certainty.',
+    hints: ['Use the local sentence context: across the ... usually expects a place.', 'yard and street are strongest; room, floor, and road are plausible lower-probability choices.'],
+    exercise: {
+      id: 'prompt-run-sampling',
+      title: 'Sampling',
+      concept: 'Choosing one next token',
+      prompt: PROMPT_RUN_SAMPLE,
+      goal: 'Pick a plausible next token.',
+      actionVerb: 'Choose',
+      actionInstruction: 'Tap a likely or plausible continuation.',
+      inputType: 'next-token-pick',
+      context: PROMPT_RUN_SAMPLE,
+      items: [
+        { id: 'yard', label: 'yard', correct: true, detail: 'high probability' },
+        { id: 'street', label: 'street', correct: true, detail: 'high probability' },
+        { id: 'room', label: 'room', correct: true, detail: 'plausible, lower probability' },
+        { id: 'floor', label: 'floor', correct: true, detail: 'plausible, lower probability' },
+        { id: 'road', label: 'road', correct: true, detail: 'plausible, lower probability' },
+        { id: 'quantum', label: 'quantum', feedback: 'quantum is possible in the vocabulary, but unlikely in this context.' },
+        { id: 'elephant', label: 'elephant', feedback: 'elephant is possible in the vocabulary, but unlikely after across the.' }
+      ],
+      correctAnswer: ['yard', 'street', 'room', 'floor', 'road'],
+      feedbackCorrect: 'Good. You chose a context-plausible next token.',
+      feedbackIncorrect: 'That token is possible in the vocabulary, but unlikely in this context.',
+      insight: 'The model chooses from probabilities, not certainty.',
+      glossaryTerms: ['sampling', 'softmax', 'vocabulary cloud', 'next token'],
+      completionKey: 'prompt-run:sampling'
+    }
+  },
+  {
+    id: 'prompt-run-append-repeat',
+    title: 'Append and Repeat',
+    concept: 'autoregression',
+    goal: 'Put the generation loop in order after yard is chosen.',
+    why: 'Responses are built one token at a time.',
+    hints: ['The chosen token joins the context before the next run.', 'The model does not generate the whole response at once.'],
+    exercise: {
+      id: 'prompt-run-append-repeat',
+      title: 'Append and Repeat',
+      concept: 'Next token, append, repeat',
+      prompt: 'The dog chased the cat across the ... -> yard',
+      goal: 'Order the steps after yard is sampled.',
+      actionVerb: 'Order',
+      actionInstruction: 'Use Up and Down to place the autoregressive loop in order.',
+      inputType: 'drag-order',
+      items: [
+        { id: 'run-again', label: 'The model runs again' },
+        { id: 'whole-response', label: 'The whole response appears at once' },
+        { id: 'yard-context', label: 'yard becomes part of the context' },
+        { id: 'yard-chosen', label: 'yard is chosen as one token' }
+      ],
+      correctActions: ['yard-chosen', 'yard-context', 'run-again', 'whole-response'],
+      incorrectActions: {
+        'whole-response-before-append': 'The whole response is not generated at once. yard is appended, then the model runs again.'
+      },
+      feedbackCorrect: 'Good. yard becomes part of the context, then the model runs again.',
+      feedbackIncorrect: 'The whole response is not generated at once. The model generates one token, appends it, and runs again.',
+      insight: 'Responses are built one token at a time.',
+      glossaryTerms: ['autoregression', 'generated token', 'context window'],
+      completionKey: 'prompt-run:append-repeat'
+    }
+  }
+]
+
+export const promptRunFinalChallenge: Exercise = {
+  id: PROMPT_RUN_FINAL_ID,
+  title: 'Put the Run in Order',
+  concept: 'Full inference loop',
+  prompt: 'Arrange the path from prompt to repeated forward pass.',
+  goal: 'Put the full Prompt Run in the order a learner should remember.',
+  actionVerb: 'Order',
+  actionInstruction: 'Use Up and Down to order the whole run.',
+  inputType: 'drag-order',
+  items: [
+    { id: 'attention', label: 'Attention mixes relevant context' },
+    { id: 'sampling', label: 'Sampling chooses one token' },
+    { id: 'prompt-context', label: 'Prompt enters context' },
+    { id: 'hidden', label: 'Hidden states update' },
+    { id: 'tokens', label: 'Text becomes tokens' },
+    { id: 'append', label: 'Token is appended' },
+    { id: 'softmax', label: 'Softmax makes probabilities' },
+    { id: 'tensor', label: 'Vectors form a tensor' },
+    { id: 'repeat', label: 'The model runs again' },
+    { id: 'mlp', label: 'MLP reshapes features' },
+    { id: 'embeddings', label: 'Token IDs retrieve embeddings' },
+    { id: 'logits', label: 'Final hidden state produces logits' }
+  ],
+  correctActions: [
+    'prompt-context',
+    'tokens',
+    'embeddings',
+    'tensor',
+    'attention',
+    'mlp',
+    'hidden',
+    'logits',
+    'softmax',
+    'sampling',
+    'append',
+    'repeat'
+  ],
+  incorrectActions: {
+    'softmax-before-logits': 'Softmax comes after logits. Logits are the raw scores; softmax turns them into probabilities.',
+    'sampling-before-softmax': 'Sampling comes after softmax, because it chooses from probabilities.',
+    'append-before-sampling': 'The token is appended after sampling chooses it.',
+    'attention-after-consciousness': 'Attention is learned relevance weighting, not consciousness or awareness.'
+  },
+  feedbackCorrect: 'Good. You ordered a prompt-to-response loop without adding training, permanent memory, or magic.',
+  feedbackIncorrect: 'Check the decoding order: logits come before softmax, softmax comes before sampling, and the chosen token is appended before the next run.',
+  insight: 'A prompt becomes a response through repeated forward passes, not magic.',
+  glossaryTerms: ['inference', 'token', 'embedding', 'attention', 'MLP', 'hidden state', 'logits', 'softmax', 'sampling', 'autoregression'],
+  completionKey: 'prompt-run:final-order'
+}

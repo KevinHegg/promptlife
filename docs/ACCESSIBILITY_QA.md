@@ -6,6 +6,8 @@ Date: 2026-05-31
 
 - Primary navigation uses real `button` elements.
 - Lesson checkpoint answers use real `button` elements and expose selected state with `aria-pressed`.
+- Prompt Run uses the reusable exercise shell with button-based tap, match, order, label, connect, and reveal controls.
+- Drag-like Prompt Run tasks have tap/button fallbacks through Up/Down and tap-to-match controls.
 - Glossary drawer opens as a modal `dialog`, focuses the Close button, supports Escape to close, and restores previous focus.
 - Search input is labeled by visible text.
 - Reflection fields are labeled for screen readers.
@@ -19,6 +21,7 @@ Date: 2026-05-31
 - Lesson continue action stays above the bottom nav.
 - Glossary drawer is bottom-sheet style with safe-area-aware padding.
 - Mini-game controls are reachable and readable at 390px.
+- Prompt Run and Play screens have extra safe-area-aware bottom padding so feedback, hints, and final controls can scroll above the fixed bottom nav.
 
 ## Reduced-Motion Checklist
 
@@ -39,17 +42,26 @@ Date: 2026-05-31
 ## Screen-Reader Feedback
 
 - Checkpoint feedback uses `role="status"`.
+- Exercise feedback uses `aria-live="polite"` and scrolls into view after Check or Show me.
 - Game insight notices use `role="status"`.
 - Context Stack fallen-card status uses `aria-live="polite"`.
 - Micro-interaction output regions use live text where state changes are explanatory.
 
 ## Animation Checks
 
-- `Trace One Prompt` has Back and Next buttons and a text sentence for every visual step.
+- `Prompt Run` has Back and Continue buttons, visible hints, reveal, feedback, and a text explanation for every visual step.
 - Animation wrappers include `aria-label` or group labels.
 - Interactive animation controls are keyboard-reachable buttons.
 - Static captions describe what motion would otherwise imply.
 - No animation relies on color alone; labels, captions, or state text also communicate the concept.
+
+## v0.5 Prompt Run Checks
+
+- Continue is disabled until a correct action or reveal.
+- Hints are optional and do not penalize progress.
+- Wrong feedback names the misconception when practical.
+- Attention and connect tasks use real buttons and text readouts.
+- The final order challenge uses Up/Down buttons rather than pointer-only drag.
 
 ## Known Limitations
 

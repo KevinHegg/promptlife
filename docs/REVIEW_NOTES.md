@@ -104,6 +104,9 @@ Screenshot evidence:
 - `npm install`: passed, no vulnerabilities.
 - `npm run typecheck`: passed.
 - `npm run build`: passed.
+- `npm run build:pages`: passed.
+- Reset verification: passed. User reset clears `promptlife:v1:promptRunProgress` back to an empty progress object, clears lesson progress, and leaves unrelated `localStorage` untouched.
+- Reveal verification: passed. Show me unlocks Continue, records the step as completed/revealed, and advances to the next step.
 - Reset verification: passed. User reset clears `promptlife:v1:exerciseProgress` back to an empty progress object, clears lesson progress, and leaves unrelated `localStorage` untouched.
 
 ### Known Issues
@@ -284,3 +287,100 @@ Legacy keys are still read for migration and removed by reset:
 1. Add automated tests for storage migration and reset behavior.
 2. Add an automated accessibility smoke test with axe or Playwright assertions.
 3. Add a glossary relationship graph connecting prompt, response, context, decoding, and training terms.
+
+## v0.5 Play Mode and Prompt Run Update
+
+### What Changed
+
+- Reframed Play as a learning arcade with a featured Prompt Run activity, three side challenges, and the How AI Learns tour.
+- Replaced the mostly linear Trace One Prompt walkthrough with Prompt Run, an interactive 12-step spine activity plus a final ordering challenge.
+- Added `src/data/promptRun.ts` for Prompt Run step data and progress defaults.
+- Added Prompt Run progress under `promptlife:v1:promptRunProgress`.
+- Added hints, reveal-friendly continuation, and a Continue gate that unlocks after a correct action or Show me.
+- Improved exercise feedback behavior so feedback scrolls into view after Check or Show me.
+- Improved Context Stack, Attention Weave, and Token Pipeline Relay with clearer target states and specific feedback.
+- Updated Badge criteria and stats so Prompt Run counts as a major model-literacy milestone.
+- Added extra safe-area-aware bottom padding on Play, Prompt Run, mini-games, tour, and Badge screens.
+- Created `docs/PLAY_MODE_V0_5.md`.
+
+### Files Changed
+
+- `README.md`
+- `src/components/ExerciseSystem.tsx`
+- `src/data/promptRun.ts`
+- `src/main.tsx`
+- `src/styles/global.css`
+- `docs/ACCESSIBILITY_QA.md`
+- `docs/ANIMATION_SYSTEM.md`
+- `docs/EXERCISE_SYSTEM.md`
+- `docs/PLAY_MODE_V0_5.md`
+- `docs/PRODUCT_BLUEPRINT.md`
+- `docs/STORAGE_AND_RESET.md`
+- `docs/REVIEW_NOTES.md`
+
+### Prompt Run Steps Implemented
+
+1. Prompt or Response?
+2. Tokenizer
+3. Token IDs
+4. Embedding Lookup
+5. Tensor Stack
+6. Attention
+7. MLP Feature Reshape
+8. Hidden State
+9. Logits
+10. Softmax Funnel
+11. Sampling
+12. Append and Repeat
+13. Full Run Challenge: Put the run in order
+
+### Mini-Game Improvements
+
+- Context Stack now asks learners to keep request, example, and tone visible when output arrives.
+- Attention Weave now asks learners to connect `it` to `cat` in `The dog chased the cat because it ran.`
+- Token Pipeline Relay now requires the target path `pass to transform to hold to pass`.
+
+### Screens Reviewed
+
+- Play home
+- Prompt Run step 1
+- Prompt Run wrong feedback
+- Prompt Run correct feedback
+- Prompt Run Softmax step
+- Prompt Run final ordering challenge
+- Context Stack challenge
+- Attention Weave challenge
+- Token Pipeline Relay challenge
+- Badge progress
+
+Screenshot evidence:
+
+- `docs/screenshots/v0-5-play-home.png`
+- `docs/screenshots/v0-5-prompt-run-step-1.png`
+- `docs/screenshots/v0-5-prompt-run-wrong-feedback.png`
+- `docs/screenshots/v0-5-prompt-run-correct-feedback.png`
+- `docs/screenshots/v0-5-prompt-run-softmax.png`
+- `docs/screenshots/v0-5-prompt-run-final-order.png`
+- `docs/screenshots/v0-5-context-stack-challenge.png`
+- `docs/screenshots/v0-5-attention-weave-challenge.png`
+- `docs/screenshots/v0-5-token-relay-challenge.png`
+- `docs/screenshots/v0-5-badge-progress.png`
+
+### Build Result
+
+- `npm install`: passed, no vulnerabilities.
+- `npm run typecheck`: passed.
+- `npm run build`: passed.
+
+### Known Issues
+
+- Watch and Challenge modes are documented for a future pass; v0.5 ships Practice mode first.
+- Drag-like activities use accessible button/tap fallbacks instead of pointer drag gestures.
+- Prompt Run progress is local to one browser and device.
+- The old `traceComplete` storage key is kept as a compatibility/save flag while Prompt Run uses the new detailed progress key.
+
+### Next Three Recommended Improvements
+
+1. Add automated tests for Prompt Run step progression, reveal behavior, and reset clearing `promptRunProgress`.
+2. Add Watch and Challenge modes once the Practice spine is classroom-reviewed.
+3. Add richer visual feedback for the final ordering challenge without removing the keyboard-accessible Up/Down fallback.

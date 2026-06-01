@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import type { Exercise, ExerciseItem } from '../data/exercises'
 
 type ExerciseProgress = {
@@ -45,6 +45,7 @@ export function ExerciseShell({ exercise, progress, onAttempt, onGlossary }: Exe
   const [toggleId, setToggleId] = useState(exercise.items[0]?.id ?? '')
   const [reflection, setReflection] = useState('')
   const [result, setResult] = useState<ResultState>(null)
+  const feedbackRef = useRef<HTMLDivElement | null>(null)
   const itemById = useMemo(() => Object.fromEntries(exercise.items.map((item) => [item.id, item])) as Record<string, ExerciseItem>, [exercise.items])
   const completed = Boolean(progress?.completed?.includes(exercise.id))
   const attempts = progress?.attempts?.[exercise.id] ?? 0
@@ -62,6 +63,14 @@ export function ExerciseShell({ exercise, progress, onAttempt, onGlossary }: Exe
     setReflection('')
     setResult(null)
   }, [exercise])
+
+  useEffect(() => {
+    if (!result) return
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    window.setTimeout(() => {
+      feedbackRef.current?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' })
+    }, 0)
+  }, [result])
 
   function snapshotAnswer() {
     if (exercise.inputType === 'tap-choice' || exercise.inputType === 'next-token-pick' || exercise.inputType === 'connect-nodes') return selectedId
@@ -93,6 +102,25 @@ export function ExerciseShell({ exercise, progress, onAttempt, onGlossary }: Exe
     if (exercise.inputType === 'toggle-state' && toggleId) {
       const selected = itemById[toggleId]
       if (selected?.feedback) return selected.feedback
+    }
+
+    if (exercise.inputType === 'drag-match') {
+      const wrongMatch = exercise.items.find((item) => item.matchId && matches[item.id] && matches[item.id] !== item.matchId)
+      if (wrongMatch) {
+        const chosen = matches[wrongMatch.id]
+        const specific = exercise.incorrectActions?.[`${wrongMatch.id}:${chosen}`]
+        if (specific) return specific
+        if (wrongMatch.feedback) return wrongMatch.feedback
+      }
+    }
+
+    if (exercise.inputType === 'drag-order') {
+      const at = (id: string) => order.indexOf(id)
+      if (exercise.incorrectActions?.['single-number-first'] && order[0] === 'single-number') return exercise.incorrectActions['single-number-first']
+      if (exercise.incorrectActions?.['whole-response-before-append'] && at('whole-response') > -1 && at('yard-context') > -1 && at('whole-response') < at('yard-context')) return exercise.incorrectActions['whole-response-before-append']
+      if (exercise.incorrectActions?.['softmax-before-logits'] && at('softmax') > -1 && at('logits') > -1 && at('softmax') < at('logits')) return exercise.incorrectActions['softmax-before-logits']
+      if (exercise.incorrectActions?.['sampling-before-softmax'] && at('sampling') > -1 && at('softmax') > -1 && at('sampling') < at('softmax')) return exercise.incorrectActions['sampling-before-softmax']
+      if (exercise.incorrectActions?.['append-before-sampling'] && at('append') > -1 && at('sampling') > -1 && at('append') < at('sampling')) return exercise.incorrectActions['append-before-sampling']
     }
 
     return exercise.feedbackIncorrect
@@ -202,6 +230,7 @@ export function ExerciseShell({ exercise, progress, onAttempt, onGlossary }: Exe
       <ExerciseHeader exercise={exercise} completed={completed} attempts={attempts} />
       <ActionCue verb={exercise.actionVerb} instruction={exercise.actionInstruction} />
       <div className="exercise-try-area" aria-label="Try area">
+        <strong className="try-area-label">Try area</strong>
         {exercise.inputType === 'tap-choice' && <TapChoiceExercise exercise={exercise} selectedId={selectedId} onSelect={(id) => { setSelectedId(id); setResult(null) }} />}
         {exercise.inputType === 'next-token-pick' && <NextTokenPickExercise exercise={exercise} selectedId={selectedId} onSelect={(id) => { setSelectedId(id); setResult(null) }} />}
         {exercise.inputType === 'tap-multiple' && <TapMultipleExercise exercise={exercise} selectedIds={selectedIds} onToggle={(id) => {
@@ -243,7 +272,9 @@ export function ExerciseShell({ exercise, progress, onAttempt, onGlossary }: Exe
         )}
       </div>
       <ExerciseControls onCheck={checkAnswer} onRetry={() => setResult(null)} onReveal={revealAnswer} result={result} />
-      <ExerciseFeedback result={result} insight={exercise.insight} />
+      <div ref={feedbackRef} className="exercise-feedback-anchor">
+        <ExerciseFeedback result={result} insight={exercise.insight} />
+      </div>
       {(exercise.brainMetaphor || exercise.brainLimit) && (
         <div className="exercise-boundary">
           {exercise.brainMetaphor && <p><strong>Brain metaphor:</strong> {exercise.brainMetaphor}</p>}
@@ -288,8 +319,8 @@ export function ExerciseHeader({ exercise, completed, attempts }: { exercise: Ex
 export function ActionCue({ verb, instruction }: { verb: Exercise['actionVerb'], instruction: string }) {
   return (
     <div className="action-cue">
-      <strong>{verb}</strong>
-      <span>{instruction}</span>
+      <strong>Do this</strong>
+      <span><b>{verb}:</b> {instruction}</span>
     </div>
   )
 }

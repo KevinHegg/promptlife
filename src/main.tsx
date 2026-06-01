@@ -17,12 +17,12 @@ import {
   SoftmaxFunnelAnimation,
   TensorBlockAnimation,
   TokenCardsAnimation,
-  TraceStepAnimation,
   TrainingLoopAnimation
 } from './components/ConceptAnimations'
 import { ExerciseShell } from './components/ExerciseSystem'
 import { acts, games, glossary, learningModes, lessons } from './data/content'
 import { emptyExerciseProgress, exerciseById, exercises, lessonExerciseIds } from './data/exercises'
+import { PROMPT_RUN_FINAL_ID, PROMPT_RUN_SAMPLE, emptyPromptRunProgress, promptRunFinalChallenge, promptRunSteps } from './data/promptRun'
 import './styles/global.css'
 
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '')
@@ -34,6 +34,7 @@ const STORAGE_KEYS = {
   reflections: 'promptlife:v1:reflections',
   gameInsights: 'promptlife:v1:gameInsights',
   exerciseProgress: 'promptlife:v1:exerciseProgress',
+  promptRunProgress: 'promptlife:v1:promptRunProgress',
   traceComplete: 'promptlife:v1:traceComplete',
   learningTourComplete: 'promptlife:v1:learningTourComplete'
 }
@@ -44,6 +45,7 @@ const LEGACY_STORAGE_KEYS = {
   reflections: 'pl.reflections',
   gameInsights: 'pl.gameInsights',
   exerciseProgress: 'pl.exerciseProgress',
+  promptRunProgress: 'pl.promptRunProgress',
   traceComplete: 'pl.traceComplete',
   learningTourComplete: 'pl.learningTourComplete'
 }
@@ -102,6 +104,7 @@ function App() {
   const [reflections, setReflections] = useStoredState(STORAGE_KEYS.reflections, {}, LEGACY_STORAGE_KEYS.reflections)
   const [gameInsights, setGameInsights] = useStoredState(STORAGE_KEYS.gameInsights, [], LEGACY_STORAGE_KEYS.gameInsights)
   const [exerciseProgress, setExerciseProgress] = useStoredState(STORAGE_KEYS.exerciseProgress, emptyExerciseProgress(), LEGACY_STORAGE_KEYS.exerciseProgress)
+  const [promptRunProgress, setPromptRunProgress] = useStoredState(STORAGE_KEYS.promptRunProgress, emptyPromptRunProgress(), LEGACY_STORAGE_KEYS.promptRunProgress)
   const [traceComplete, setTraceComplete] = useStoredState(STORAGE_KEYS.traceComplete, false, LEGACY_STORAGE_KEYS.traceComplete)
   const [learningTourComplete, setLearningTourComplete] = useStoredState(STORAGE_KEYS.learningTourComplete, false, LEGACY_STORAGE_KEYS.learningTourComplete)
   const [gameId, setGameId] = useState(null)
@@ -152,6 +155,28 @@ function App() {
     })
   }, [setExerciseProgress])
 
+  const recordPromptRunAttempt = useCallback((stepId, payload) => {
+    setPromptRunProgress((prev) => {
+      const base = {
+        ...emptyPromptRunProgress(),
+        ...prev,
+        completedSteps: [...(prev?.completedSteps ?? [])],
+        insights: [...(prev?.insights ?? [])],
+        revealedSteps: [...(prev?.revealedSteps ?? [])],
+        attempts: { ...(prev?.attempts ?? {}) },
+        lastAnswers: { ...(prev?.lastAnswers ?? {}) }
+      }
+      const completesStep = payload.correct || payload.revealed
+      base.attempts[stepId] = (base.attempts[stepId] ?? 0) + 1
+      base.lastAnswers[stepId] = payload.answer
+      if (completesStep && stepId !== PROMPT_RUN_FINAL_ID && !base.completedSteps.includes(stepId)) base.completedSteps.push(stepId)
+      if (payload.correct && !base.insights.includes(stepId)) base.insights.push(stepId)
+      if (payload.revealed && !base.revealedSteps.includes(stepId)) base.revealedSteps.push(stepId)
+      if (completesStep && stepId === PROMPT_RUN_FINAL_ID) base.finalChallengeComplete = true
+      return base
+    })
+  }, [setPromptRunProgress])
+
   function clearPromptLifeStorage() {
     try {
       PROMPT_LIFE_STORAGE_KEYS.forEach((key) => localStorage.removeItem(key))
@@ -169,6 +194,7 @@ function App() {
     setReflections({})
     setGameInsights([])
     setExerciseProgress(emptyExerciseProgress())
+    setPromptRunProgress(emptyPromptRunProgress())
     setTraceComplete(false)
     setLearningTourComplete(false)
     setGameId(null)
@@ -199,6 +225,14 @@ function App() {
       lastAnswers: {},
       insights: exerciseIds
     })
+    setPromptRunProgress({
+      completedSteps: promptRunSteps.map((step) => step.id),
+      finalChallengeComplete: true,
+      insights: [...promptRunSteps.map((step) => step.id), PROMPT_RUN_FINAL_ID],
+      revealedSteps: [],
+      attempts: Object.fromEntries([...promptRunSteps.map((step) => step.id), PROMPT_RUN_FINAL_ID].map((id) => [id, 1])),
+      lastAnswers: {}
+    })
     setTraceComplete(true)
     setLearningTourComplete(true)
     setTab('badge')
@@ -214,6 +248,7 @@ function App() {
     setReflections({})
     setGameInsights([])
     setExerciseProgress(emptyExerciseProgress())
+    setPromptRunProgress(emptyPromptRunProgress())
     setTraceComplete(false)
     setLearningTourComplete(false)
     setGameId(null)
@@ -283,12 +318,14 @@ function App() {
             gameId={gameId}
             gameInsights={gameInsights}
             traceComplete={traceComplete}
+            promptRunProgress={promptRunProgress}
             learningTourComplete={learningTourComplete}
             exerciseProgress={exerciseProgress}
             setGameId={setGameId}
             onGlossary={setDrawerTerm}
             onInsight={recordGameInsight}
             onExerciseAttempt={recordExerciseAttempt}
+            onPromptRunAttempt={recordPromptRunAttempt}
             onTraceComplete={() => setTraceComplete(true)}
             onLearningTourComplete={() => setLearningTourComplete(true)}
           />
@@ -301,6 +338,7 @@ function App() {
             gameInsights={gameInsights}
             reflections={reflections}
             exerciseProgress={exerciseProgress}
+            promptRunProgress={promptRunProgress}
             statusMessage={statusMessage}
             debugEnabled={debugEnabled}
             onResetProgress={() => resetProgress()}
@@ -394,11 +432,11 @@ function JourneyScreen({ completed, currentLessonId, onOpenLesson, onTrace, onLe
       <section className="tour-feature-panel" aria-labelledby="guided-tours-title">
         <div>
           <p className="eyebrow">Guided side tours</p>
-          <h2 id="guided-tours-title">Trace and compare</h2>
-          <p>Use these when the map feels abstract: one follows a prompt through the model, the other compares how AI systems learn.</p>
+          <h2 id="guided-tours-title">Run and compare</h2>
+          <p>Use these when the map feels abstract: one guides a prompt through the model, the other compares how AI systems learn.</p>
         </div>
         <div className="tour-actions">
-          <button className="secondary-btn" onClick={onTrace}>Trace One Prompt</button>
+          <button className="secondary-btn" onClick={onTrace}>Prompt Run</button>
           <button className="secondary-btn" onClick={onLearningTour}>How AI Learns</button>
         </div>
       </section>
@@ -961,98 +999,227 @@ function FeatureCloudDemo() {
   )
 }
 
-function PlayScreen({ gameId, gameInsights, traceComplete, learningTourComplete, exerciseProgress, setGameId, onGlossary, onInsight, onExerciseAttempt, onTraceComplete, onLearningTourComplete }) {
-  if (gameId === 'trace-one-prompt') return <TraceOnePromptScreen onBack={() => setGameId(null)} onComplete={onTraceComplete} saved={traceComplete} />
+function PlayScreen({ gameId, gameInsights, traceComplete, promptRunProgress, learningTourComplete, exerciseProgress, setGameId, onGlossary, onInsight, onExerciseAttempt, onPromptRunAttempt, onTraceComplete, onLearningTourComplete }) {
+  if (gameId === 'trace-one-prompt') {
+    return (
+      <PromptRunScreen
+        onBack={() => setGameId(null)}
+        onComplete={onTraceComplete}
+        saved={traceComplete}
+        promptRunProgress={promptRunProgress}
+        onPromptRunAttempt={onPromptRunAttempt}
+        onGlossary={onGlossary}
+      />
+    )
+  }
   if (gameId === 'how-ai-learns') return <HowAILearnsScreen onBack={() => setGameId(null)} onComplete={onLearningTourComplete} saved={learningTourComplete} exerciseProgress={exerciseProgress} onExerciseAttempt={onExerciseAttempt} onGlossary={onGlossary} />
   if (gameId === 'context-stack') return <ContextStack onBack={() => setGameId(null)} onGlossary={onGlossary} onInsight={onInsight} saved={gameInsights.includes('context-stack')} />
   if (gameId === 'attention-weave') return <AttentionWeave onBack={() => setGameId(null)} onGlossary={onGlossary} onInsight={onInsight} saved={gameInsights.includes('attention-weave')} />
   if (gameId === 'token-relay') return <TokenRelay onBack={() => setGameId(null)} onGlossary={onGlossary} onInsight={onInsight} saved={gameInsights.includes('token-relay')} />
 
-  const playItems = [
-    { id: 'trace-one-prompt', title: 'Trace One Prompt', summary: 'Follow "Explain attention simply" from text to sampled next token.', image: `${ASSET}/illustrations/scene-token-pipeline-relay@mobile.png`, saved: traceComplete },
-    { id: 'how-ai-learns', title: 'How AI Learns', summary: 'Compare training, feedback, retrieval, and temporary in-context steering.', image: `${ASSET}/illustrations/scene-training-rainstorm@mobile.png`, saved: learningTourComplete },
-    ...games.map((game) => ({ ...game, saved: gameInsights.includes(game.id) }))
+  const promptRunDone = Boolean(promptRunProgress?.finalChallengeComplete || traceComplete)
+  const promptRunStarted = promptRunDone || (promptRunProgress?.completedSteps?.length ?? 0) > 0
+  const promptRunCount = (promptRunProgress?.completedSteps?.length ?? 0) + (promptRunProgress?.finalChallengeComplete ? 1 : 0)
+  const sideChallenges = games.map((game) => {
+    const meta = {
+      'context-stack': { action: 'Push and observe what falls out.', concept: 'Context windows.', time: '3 min' },
+      'attention-weave': { action: 'Connect relevant tokens.', concept: 'Attention as relevance.', time: '3 min' },
+      'token-relay': { action: 'Toggle operators.', concept: 'Sequence, state, and determinism.', time: '3 min' }
+    }[game.id]
+    return { ...game, ...meta, saved: gameInsights.includes(game.id) }
+  })
+  const tourItems = [
+    {
+      id: 'how-ai-learns',
+      title: 'How AI Learns',
+      summary: 'Compare training, feedback, retrieval, and temporary in-context steering.',
+      image: `${ASSET}/illustrations/scene-training-rainstorm@mobile.png`,
+      action: 'Sort learning types.',
+      concept: 'Durable training vs temporary steering.',
+      time: '5 min',
+      saved: learningTourComplete
+    }
   ]
 
   return (
     <section className="screen play-screen" aria-labelledby="play-title">
       <ScreenHeader
-        kicker="Side tours"
+        kicker="Learning arcade"
         title="Play to understand"
-        subtitle="No scores, timers, or leaderboards. Just small simulations that make invisible model mechanics easier to see."
+        subtitle="Small, calm challenges that make model mechanics visible. No scores, timers, or leaderboards."
         titleId="play-title"
       />
-      <div className="game-list">
-        {playItems.map((game) => {
-          const saved = game.saved
-          return (
-            <button className="game-card" key={game.id} onClick={() => setGameId(game.id)}>
-              <img src={game.image} alt="" aria-hidden="true" />
-              <span>
-                <strong>{game.title}</strong>
-                <small>{game.summary}</small>
-              </span>
-              {saved && <span className="mini-status">saved</span>}
-            </button>
-          )
-        })}
-      </div>
+      <section className="play-section featured" aria-labelledby="featured-play-title">
+        <p className="eyebrow">Featured activity</p>
+        <PlayCard
+          featured
+          item={{
+            id: 'trace-one-prompt',
+            title: 'Prompt Run',
+            summary: 'Guide one prompt through the model.',
+            image: `${ASSET}/illustrations/scene-token-pipeline-relay@mobile.png`,
+            action: 'Label, connect, choose, append.',
+            concept: 'The full inference loop.',
+            time: '8-10 min',
+            saved: promptRunDone,
+            progressText: promptRunDone ? 'Complete' : promptRunStarted ? `${promptRunCount} of 13 steps` : 'Not started'
+          }}
+          onStart={() => setGameId('trace-one-prompt')}
+        />
+      </section>
+      <section className="play-section" aria-labelledby="side-challenges-title">
+        <h2 id="side-challenges-title">Side challenges</h2>
+        <div className="game-list">
+          {sideChallenges.map((game) => <PlayCard key={game.id} item={game} onStart={() => setGameId(game.id)} />)}
+        </div>
+      </section>
+      <section className="play-section" aria-labelledby="tours-title">
+        <h2 id="tours-title">Tours</h2>
+        <div className="game-list">
+          {tourItems.map((game) => <PlayCard key={game.id} item={game} onStart={() => setGameId(game.id)} />)}
+        </div>
+      </section>
     </section>
   )
 }
 
-const traceSteps = [
-  { title: 'Text prompt appears', sentence: 'The prompt begins as accessible text in the temporary context window.', why: 'Why this matters: the model only works with the input it can currently see.' },
-  { title: 'Tokenizer splits text', sentence: 'The tokenizer splits "Explain attention simply." into token cards.', why: '' },
-  { title: 'Token IDs appear', sentence: 'Each token card maps to a token ID used for lookup.', why: '' },
-  { title: 'Embeddings appear', sentence: 'Each token ID retrieves a learned starting vector.', why: 'Why this matters: embeddings are learned starting points, not final meanings.' },
-  { title: 'Vectors stack', sentence: 'The prompt-token vectors stack into a tensor block for the model to process together.', why: '' },
-  { title: 'Attention connects positions', sentence: 'Attention arcs weight relevance across token positions in the current context.', why: 'Why this matters: attention is relevance weighting, not consciousness.' },
-  { title: 'MLPs reshape features', sentence: 'MLPs reshape each token position after attention has mixed context.', why: '' },
-  { title: 'Hidden states glow', sentence: 'Hidden states are temporary context-shaped vectors for this forward pass over the prompt.', why: 'Why this matters: inference changes temporary states, not durable weights.' },
-  { title: 'Vocabulary cloud appears', sentence: 'The final hidden state points toward possible next tokens.', why: '' },
-  { title: 'Softmax makes probabilities', sentence: 'Logits become softmax probabilities over candidate tokens.', why: 'Why this matters: probabilities prepare the model to choose one next token.' },
-  { title: 'One token is sampled', sentence: 'Sampling chooses one generated response token from the probability cloud.', why: '' },
-  { title: 'The loop repeats', sentence: 'The chosen response token is appended to the context and the model predicts again once.', why: 'Why this matters: LLM text generation is autoregressive.' }
-]
+function PlayCard({ item, onStart, featured = false }) {
+  const actionLabel = item.saved ? 'Continue' : 'Start'
+  return (
+    <button className={featured ? 'play-card is-featured' : 'play-card'} onClick={onStart}>
+      <img src={item.image} alt="" aria-hidden="true" />
+      <span className="play-card-copy">
+        <strong>{item.title}</strong>
+        <small>{item.summary}</small>
+        <span className="play-card-meta"><b>Action:</b> {item.action}</span>
+        <span className="play-card-meta"><b>Teaches:</b> {item.concept}</span>
+        <span className="play-card-meta"><b>Time:</b> {item.time}</span>
+      </span>
+      <span className="play-card-status">
+        <span className="mini-status">{item.progressText ?? (item.saved ? 'Complete' : 'Ready')}</span>
+        <span>{actionLabel}</span>
+      </span>
+    </button>
+  )
+}
 
-function TraceOnePromptScreen({ onBack, onComplete, saved }) {
-  const [step, setStep] = useState(0)
-  const current = traceSteps[step]
-  const atStart = step === 0
-  const atEnd = step === traceSteps.length - 1
+function makePromptRunExerciseProgress(promptRunProgress) {
+  const completed = [...(promptRunProgress?.completedSteps ?? [])]
+  if (promptRunProgress?.finalChallengeComplete) completed.push(PROMPT_RUN_FINAL_ID)
+  return {
+    completed,
+    attempts: promptRunProgress?.attempts ?? {},
+    lastAnswers: promptRunProgress?.lastAnswers ?? {},
+    insights: promptRunProgress?.insights ?? []
+  }
+}
+
+function PromptRunScreen({ onBack, onComplete, saved, promptRunProgress, onPromptRunAttempt, onGlossary }) {
+  const firstIncomplete = promptRunSteps.findIndex((step) => !(promptRunProgress?.completedSteps ?? []).includes(step.id))
+  const initialIndex = firstIncomplete === -1 ? promptRunSteps.length : firstIncomplete
+  const [stepIndex, setStepIndex] = useState(initialIndex)
+  const [hintLevel, setHintLevel] = useState(0)
+  const [continueNudge, setContinueNudge] = useState(false)
+  const [locallyUnlocked, setLocallyUnlocked] = useState([])
+  const atFinal = stepIndex >= promptRunSteps.length
+  const currentStep = atFinal ? null : promptRunSteps[stepIndex]
+  const currentExercise = atFinal ? promptRunFinalChallenge : currentStep.exercise
+  const currentId = atFinal ? PROMPT_RUN_FINAL_ID : currentStep.id
+  const totalSteps = promptRunSteps.length + 1
+  const displayIndex = atFinal ? totalSteps : stepIndex + 1
+  const completedStepIds = promptRunProgress?.completedSteps ?? []
+  const progressCount = completedStepIds.length + (promptRunProgress?.finalChallengeComplete ? 1 : 0)
+  const currentSolved = locallyUnlocked.includes(currentId) || (atFinal ? promptRunProgress?.finalChallengeComplete : completedStepIds.includes(currentId))
+  const runDone = Boolean(promptRunProgress?.finalChallengeComplete)
+  const hints = atFinal
+    ? ['Start with visible context, then tokenization and embedding lookup.', 'Decoding order is logits, softmax, sampling, append, repeat. No training step belongs inside inference.']
+    : currentStep.hints
+  const exerciseProgressForRun = useMemo(() => makePromptRunExerciseProgress(promptRunProgress), [promptRunProgress])
+
+  useEffect(() => {
+    setHintLevel(0)
+    setContinueNudge(false)
+  }, [currentId])
+
+  function handleAttempt(exerciseId, payload) {
+    onPromptRunAttempt(atFinal ? PROMPT_RUN_FINAL_ID : currentStep.id, payload)
+    if (payload.correct || payload.revealed) {
+      setLocallyUnlocked((prev) => prev.includes(currentId) ? prev : [...prev, currentId])
+      setContinueNudge(false)
+    }
+  }
 
   function goNext() {
-    if (atEnd) {
-      if (saved) setStep(0)
-      else onComplete()
+    if (!currentSolved) {
+      setContinueNudge(true)
       return
     }
-    setStep((prev) => prev + 1)
+    if (atFinal) {
+      if (saved && runDone) {
+        setStepIndex(0)
+      } else {
+        onComplete()
+      }
+      return
+    }
+    setStepIndex((prev) => Math.min(promptRunSteps.length, prev + 1))
   }
 
   return (
-    <section className="screen trace-screen" aria-labelledby="trace-title">
-      <GameHeader title="Trace One Prompt" onBack={onBack}>
-        <p className="seed-chip">{step + 1} of {traceSteps.length}</p>
+    <section className="screen prompt-run-screen" aria-labelledby="prompt-run-title">
+      <GameHeader title="Prompt Run" onBack={onBack}>
+        <p className="seed-chip">{displayIndex} of {totalSteps}</p>
       </GameHeader>
-      <p className="lede small">Follow one prompt through the model: "Explain attention simply."</p>
-      <PromptVsResponseBox includeDemo={false} />
-      <div className="trace-progress" aria-label={`Trace step ${step + 1} of ${traceSteps.length}`}>
-        <span style={{ width: `${((step + 1) / traceSteps.length) * 100}%` }} />
+      <p className="lede small">Guide one prompt through the model. Formerly Trace One Prompt.</p>
+      <p className="prompt-run-sample"><strong>Sample prompt:</strong> {PROMPT_RUN_SAMPLE}</p>
+      <div className="trace-progress" aria-label={`Prompt Run progress ${displayIndex} of ${totalSteps}`}>
+        <span style={{ width: `${Math.max((displayIndex / totalSteps) * 100, (progressCount / totalSteps) * 100)}%` }} />
       </div>
-      <section className="trace-card" aria-labelledby="trace-step-title">
-        <h2 id="trace-step-title">{current.title}</h2>
-        <p>{current.sentence}</p>
-        <TraceStepAnimation step={step} />
-        {current.why && <p className="why-note">{current.why}</p>}
+      <section className="prompt-run-step-card" aria-labelledby="prompt-run-step-title">
+        <span className="step-label">{atFinal ? 'Final challenge' : `Step ${stepIndex + 1}`}</span>
+        <h2 id="prompt-run-step-title">{atFinal ? 'Full Run Challenge' : currentStep.title}</h2>
+        <p>{atFinal ? 'Put the run in order and keep the inference loop distinct from training, memory, and consciousness myths.' : currentStep.goal}</p>
+        <PromptRunHintPanel hintLevel={hintLevel} hints={hints} onHint={() => setHintLevel((level) => Math.min(hints.length, level + 1))} />
       </section>
-      <div className="trace-controls">
-        <button className="secondary-btn" disabled={atStart} onClick={() => setStep((prev) => Math.max(0, prev - 1))}>Back</button>
-        <button className="primary-btn" onClick={goNext}>{atEnd ? (saved ? 'Replay trace' : 'Save trace insight') : 'Next'}</button>
+      <ExerciseShell
+        key={currentExercise.id}
+        exercise={currentExercise}
+        progress={exerciseProgressForRun}
+        onAttempt={handleAttempt}
+        onGlossary={onGlossary}
+      />
+      {continueNudge && (
+        <p className="feedback" role="status">
+          <strong>Try the step first.</strong> Continue unlocks after a correct action or Show me.
+        </p>
+      )}
+      <div className="trace-controls prompt-run-controls">
+        <button className="secondary-btn" disabled={stepIndex === 0} onClick={() => setStepIndex((prev) => Math.max(0, prev - 1))}>Back</button>
+        <button className="primary-btn" disabled={!currentSolved} onClick={goNext}>
+          {atFinal ? (saved && runDone ? 'Replay Prompt Run' : 'Save Prompt Run') : 'Continue'}
+        </button>
       </div>
-      {saved && <p className="feedback good" role="status">Insight unlocked: you can trace how a prompt becomes the next token.</p>}
+      <PromptRunCompletionSummary progressCount={progressCount} totalSteps={totalSteps} saved={saved || runDone} />
     </section>
+  )
+}
+
+function PromptRunHintPanel({ hintLevel, hints, onHint }) {
+  const visibleHint = hintLevel > 0 ? hints[Math.min(hintLevel, hints.length) - 1] : 'Hints are here when you want a nudge. No penalty, no shame.'
+  return (
+    <div className="prompt-run-hint">
+      <strong>Hint</strong>
+      <p>{visibleHint}</p>
+      <button className="secondary-btn" onClick={onHint} disabled={hintLevel >= hints.length}>{hintLevel >= hints.length ? 'Hints shown' : hintLevel === 0 ? 'Get hint' : 'Next hint'}</button>
+    </div>
+  )
+}
+
+function PromptRunCompletionSummary({ progressCount, totalSteps, saved }) {
+  return (
+    <p className={saved ? 'feedback good prompt-run-summary' : 'feedback prompt-run-summary'} role="status">
+      {saved ? 'Insight unlocked: Prompt Run is complete.' : `${progressCount} of ${totalSteps} Prompt Run steps complete.`}
+    </p>
   )
 }
 
@@ -1125,13 +1292,14 @@ function GameHeader({ title, onBack, children = null }) {
 }
 
 function ContextStack({ onBack, onGlossary, onInsight, saved }) {
-  const deck = ['System: helpful tutor', 'User: explain LLMs', 'Fact: tokens are chunks', 'Constraint: use examples', 'Tone: academic', 'Distractor: jokes', 'Output: three bullets']
-  const target = ['User: explain LLMs', 'Constraint: use examples', 'Tone: academic']
+  const deck = ['System: helpful tutor', 'User: explain LLMs', 'Example: dog/cat sentence', 'Tone: academic', 'Distractor: jokes', 'Output: three bullets']
+  const target = ['User: explain LLMs', 'Example: dog/cat sentence', 'Tone: academic']
   const [stack, setStack] = useState([])
   const windowSize = 4
   const visible = stack.slice(-windowSize)
   const fallen = stack.slice(0, Math.max(0, stack.length - windowSize))
   const hasTarget = target.every((card) => visible.includes(card))
+  const lostTarget = target.find((card) => fallen.includes(card))
 
   useEffect(() => {
     if (hasTarget) onInsight('context-stack')
@@ -1142,7 +1310,7 @@ function ContextStack({ onBack, onGlossary, onInsight, saved }) {
       <GameHeader title="Context Stack" onBack={onBack} />
       <img className="game-hero" src={`${ASSET}/illustrations/scene-context-stack@mobile.png`} alt="Cards entering a limited context window" />
       <p className="lede small">Push cards into a window that holds only the last {windowSize}. Older cards fall out of view.</p>
-      <InfoCallout title="Goal">Keep the user request, examples, and tone visible at the same time.</InfoCallout>
+      <InfoCallout title="Goal">Keep request, example, and tone visible when the final output card arrives.</InfoCallout>
       <div className="context-window" aria-label="Visible context window">
         {visible.length ? visible.map((card, index) => <span key={`${card}-${index}`}>{card}</span>) : <em>Window is empty.</em>}
       </div>
@@ -1150,7 +1318,11 @@ function ContextStack({ onBack, onGlossary, onInsight, saved }) {
         <strong>Fell out:</strong> {fallen.length ? fallen.join(' | ') : 'nothing yet'}
         <small>{fallen.length ? 'The oldest card left because the window can only hold the newest visible context.' : 'Nothing has exceeded the context limit yet.'}</small>
       </div>
-      <InsightNotice active={hasTarget || saved} activeText="Insight unlocked: the model cannot use what fell out of the window." idleText="Push cards until the most useful context fits together." />
+      <InsightNotice
+        active={hasTarget || saved}
+        activeText="Insight unlocked: the model cannot use what is no longer in context."
+        idleText={lostTarget ? `The model lost ${lostTarget} because it left the window.` : 'Push cards until request, example, and tone fit together.'}
+      />
       <div className="deck-grid" aria-label="Deck of context cards">
         {deck.map((card) => <button key={card} onClick={() => setStack((prev) => [...prev, card])}>{card}</button>)}
       </div>
@@ -1168,11 +1340,12 @@ function AttentionWeave({ onBack, onGlossary, onInsight, saved }) {
   const nodes = ['The', 'dog', 'chased', 'the', 'cat', 'because', 'it', 'ran']
   const [selected, setSelected] = useState(null)
   const [links, setLinks] = useState([])
-  const active = links.length >= 3
+  const correctLink = links.some(([a, b]) => (a === 6 && b === 4) || (a === 4 && b === 6))
+  const wrongItLink = links.find(([a, b]) => (a === 6 || b === 6) && a !== 4 && b !== 4)
 
   useEffect(() => {
-    if (active) onInsight('attention-weave')
-  }, [active, onInsight])
+    if (correctLink) onInsight('attention-weave')
+  }, [correctLink, onInsight])
 
   function tap(index) {
     if (selected == null) {
@@ -1189,7 +1362,7 @@ function AttentionWeave({ onBack, onGlossary, onInsight, saved }) {
     <section className="screen game-screen" aria-labelledby="attention-title">
       <GameHeader title="Attention Weave" onBack={onBack} />
       <img className="game-hero" src={`${ASSET}/illustrations/scene-attention-weave@mobile.png`} alt="Token nodes connected by glowing attention arcs" />
-      <p className="lede small">Tap a source token, then a target token. Build arcs to represent relevance between positions.</p>
+      <p className="lede small">Tap a source token, then a target token. In this sentence, connect <strong>it</strong> to the word it most likely depends on.</p>
       <InfoCallout title="Status">
         {selected == null ? 'Choose a source token.' : `Source selected: ${nodes[selected]}. Now choose a target token.`}
       </InfoCallout>
@@ -1206,8 +1379,12 @@ function AttentionWeave({ onBack, onGlossary, onInsight, saved }) {
         </svg>
         {nodes.map((node, index) => <button key={node + index} className={selected === index ? 'weave-node active' : 'weave-node'} onClick={() => tap(index)}>{node}</button>)}
       </div>
-      <div className="meter" aria-label={`${links.length} relevance arcs drawn`}><span style={{ width: `${Math.min(100, links.length * 34)}%` }} /></div>
-      <InsightNotice active={active || saved} activeText="Insight unlocked: attention is not consciousness. It is a learned weighting of relevance between token positions." idleText="Draw three arcs to unlock the attention insight." />
+      <div className="meter" aria-label={`${links.length} relevance arcs drawn`}><span style={{ width: `${correctLink || saved ? 100 : Math.min(72, links.length * 24)}%` }} /></div>
+      <InsightNotice
+        active={correctLink || saved}
+        activeText="Insight unlocked: attention-like relevance helps token positions use context. It is not consciousness."
+        idleText={wrongItLink ? "In this sentence, 'it' most likely refers to the cat." : "Connect 'it' to the token it most likely refers to."}
+      />
       <div className="game-actions">
         <button className="secondary-btn" onClick={() => { setLinks([]); setSelected(null) }}>Reset</button>
         <button className="text-btn" onClick={() => onGlossary('attention')}>Open attention in glossary</button>
@@ -1219,13 +1396,14 @@ function AttentionWeave({ onBack, onGlossary, onInsight, saved }) {
 
 function TokenRelay({ onBack, onGlossary, onInsight, saved }) {
   const choices = ['pass', 'transform', 'hold']
-  const [modes, setModes] = useState(['pass', 'transform', 'hold', 'pass'])
+  const targetPath = ['pass', 'transform', 'hold', 'pass']
+  const [modes, setModes] = useState(['hold', 'pass', 'transform', 'pass'])
   const seed = '42'
-  const allModes = choices.every((choice) => modes.includes(choice))
+  const correctPath = modes.join('|') === targetPath.join('|')
 
   useEffect(() => {
-    if (allModes) onInsight('token-relay')
-  }, [allModes, onInsight])
+    if (correctPath) onInsight('token-relay')
+  }, [correctPath, onInsight])
 
   function cycle(index) {
     setModes((prev) => prev.map((mode, i) => i === index ? choices[(choices.indexOf(mode) + 1) % choices.length] : mode))
@@ -1236,7 +1414,7 @@ function TokenRelay({ onBack, onGlossary, onInsight, saved }) {
       <GameHeader title="Token Pipeline Relay" onBack={onBack}><p className="seed-chip">seed {seed}</p></GameHeader>
       <img className="game-hero" src={`${ASSET}/illustrations/scene-token-pipeline-relay@mobile.png`} alt="Tokens moving through pass, transform, and hold operators" />
       <p className="lede small">Tap each operator to cycle pass, transform, and hold. The run is replayable, but it is not training.</p>
-      <InfoCallout title="Determinism">Same seed + same choices = same run.</InfoCallout>
+      <InfoCallout title="Target path">pass to transform to hold to pass</InfoCallout>
       <div className="token-lane" aria-label="Tokens moving through the relay">
         {['prompt', 'state', 'logits', 'next'].map((token) => <span key={token}>{token}</span>)}
       </div>
@@ -1248,7 +1426,11 @@ function TokenRelay({ onBack, onGlossary, onInsight, saved }) {
       <div className="relay-output" aria-live="polite">
         Output path: {modes.join(' -> ')}
       </div>
-      <InsightNotice active={allModes || saved} activeText="Insight unlocked: Same seed + same choices = same run." idleText="Use all three operators to unlock the inference insight." />
+      <InsightNotice
+        active={correctPath || saved}
+        activeText="Insight unlocked: deterministic systems can still produce complex outcomes."
+        idleText="One operator changed the whole path. Same seed plus same choices means the same run."
+      />
       <button className="text-btn" onClick={() => onGlossary('inference')}>Why this is not training</button>
       <GameReflection prompt="How did changing one operator alter the path without changing model weights?" />
     </section>
@@ -1373,6 +1555,7 @@ function BadgeScreen({
   gameInsights,
   reflections,
   exerciseProgress,
+  promptRunProgress,
   statusMessage,
   debugEnabled,
   onResetProgress,
@@ -1384,9 +1567,12 @@ function BadgeScreen({
   const [copied, setCopied] = useState(false)
   const reflectionCount = Object.values(reflections as Record<string, string>).filter((text) => text.trim().length > 0).length
   const completedExerciseCount = exerciseProgress?.completed?.length ?? 0
-  const unlocked = progress >= 80 && gameInsights.length >= 2
+  const promptRunDone = Boolean(promptRunProgress?.finalChallengeComplete)
+  const promptRunStepCount = (promptRunProgress?.completedSteps?.length ?? 0) + (promptRunDone ? 1 : 0)
+  const unlocked = progress >= 80 && gameInsights.length >= 2 && promptRunDone
   const lessonsNeeded = Math.max(0, Math.ceil(lessons.length * 0.8) - completed.length)
   const gameInsightsNeeded = Math.max(0, 2 - gameInsights.length)
+  const promptRunNeeded = promptRunDone ? 0 : 1
 
   async function copyShareText() {
     try {
@@ -1406,18 +1592,19 @@ function BadgeScreen({
         <span><strong>{completed.length}</strong> of {lessons.length} lessons</span>
         <span><strong>{gameInsights.length}</strong> of {games.length} game insights</span>
         <span><strong>{completedExerciseCount}</strong> of {exercises.length} exercises</span>
+        <span><strong>{promptRunStepCount}</strong> of 13 Prompt Run</span>
         <span><strong>{reflectionCount}</strong> reflections</span>
       </div>
       <section className="idea-panel">
         <h2>{unlocked ? 'Badge unlocked' : 'Badge criterion'}</h2>
         <p>This badge means you can explain what an LLM is, what it is not, and how a prompt becomes a response without treating the model as magic.</p>
-        <p>{unlocked ? 'You met the learning threshold.' : `Remaining: ${lessonsNeeded} lesson checkpoint${lessonsNeeded === 1 ? '' : 's'} and ${gameInsightsNeeded} mini-game insight${gameInsightsNeeded === 1 ? '' : 's'}.`}</p>
+        <p>{unlocked ? 'You met the learning threshold.' : `Remaining: ${lessonsNeeded} lesson checkpoint${lessonsNeeded === 1 ? '' : 's'}, ${gameInsightsNeeded} mini-game insight${gameInsightsNeeded === 1 ? '' : 's'}, and ${promptRunNeeded} Prompt Run completion${promptRunNeeded === 1 ? '' : 's'}.`}</p>
       </section>
       <button className="primary-btn" onClick={copyShareText}>Copy share text</button>
       {copied && <p className="feedback good" role="status">Share text copied.</p>}
       <section className="settings-panel" aria-labelledby="reset-progress-title">
         <h2 id="reset-progress-title">Start over</h2>
-        <p>Progress is stored only on this device. Resetting clears Prompt Life lesson progress, exercise attempts, reflections, mini-game insights, tour progress, and last location.</p>
+        <p>Progress is stored only on this device. Resetting clears Prompt Life lesson progress, exercise attempts, Prompt Run progress, reflections, mini-game insights, tour progress, and last location.</p>
         <button className="secondary-btn danger" onClick={onResetProgress}>Reset progress</button>
         {statusMessage && <p className="feedback good" role="status">{statusMessage}</p>}
       </section>

@@ -21,7 +21,7 @@ The core metaphor is a day in the life of a prompt. A learner follows one prompt
 3. Workday: transformer layers refine hidden states through attention, MLPs, residual paths, and normalization.
 4. Decision Room: hidden states become logits, softmax probabilities, and sampled next tokens.
 5. The Day Repeats: autoregressive generation appends one token at a time inside a context window.
-6. Side Tours: Trace One Prompt, How AI Learns, context-window demos, attention demos, token pipeline demos, diffusion, multimodal AI, brain-metaphor limits, risk vs myth.
+6. Side Tours and Play: Prompt Run, How AI Learns, context-window demos, attention demos, token pipeline demos, diffusion, multimodal AI, brain-metaphor limits, risk vs myth.
 7. Badge: the learner earns a Model Literate confidence badge.
 
 ## Lesson Pattern
@@ -68,9 +68,9 @@ Correct feedback uses `Insight unlocked.` Incorrect feedback uses `Not quite.` w
 
 ## Mini-Games
 
-### Trace One Prompt
+### Prompt Run
 
-A guided walkthrough follows the prompt "Explain attention simply." from text to tokens, token IDs, embeddings, tensors, attention, MLPs, hidden states, logits, softmax, sampling, and one autoregressive repeat. This is a learning trace, not a score-based game.
+An interactive spine activity follows the prompt "The dog chased the cat across the ..." from prompt/response labeling through tokens, token IDs, embeddings, tensors, attention, MLPs, hidden states, logits, softmax, sampling, and one autoregressive repeat. This is a learning run, not a score-based game.
 
 ### How AI Learns
 

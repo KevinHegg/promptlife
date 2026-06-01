@@ -32,7 +32,7 @@ The animation primitives live in `src/components/ConceptAnimations.tsx`.
 - `TrainingLoopAnimation`: prediction, comparison, durable weight update, repeat.
 - `FineTuningPathAnimation`: targeted examples carve a preferred path.
 - `InferenceFlowAnimation`: a forward pass uses existing weights.
-- `TraceStepAnimation`: compact visuals for the Trace One Prompt walkthrough.
+- `TraceStepAnimation`: legacy compact visuals from the earlier Trace One Prompt walkthrough.
 - `LearningModeAnimation`: compact visual for How AI Learns modes.
 
 ## Lesson Mapping
@@ -54,24 +54,25 @@ The animation primitives live in `src/components/ConceptAnimations.tsx`.
 - Diffusion: `DiffusionDenoiseAnimation`
 - Multimodal AI: `MultimodalMixerAnimation`
 
-## Guided Walkthrough
+## Prompt Run
 
-`Trace One Prompt` follows:
+`Prompt Run`, formerly Trace One Prompt, turns the walkthrough into an interactive spine activity. It follows the sample prompt `The dog chased the cat across the ...` through:
 
-1. Text prompt appears.
-2. Tokenizer splits text into token cards.
-3. Token IDs appear.
-4. Embedding lookup turns token IDs into vector bars.
-5. Vectors stack into a tensor block.
-6. Attention arcs connect token positions.
-7. MLP/gears reshape features.
-8. Hidden states glow as temporary context-shaped meaning.
-9. Final hidden state points to a vocabulary cloud.
-10. Logits become softmax probabilities.
-11. One next token is sampled.
-12. The token is appended and the loop repeats once.
+1. Prompt or Response?
+2. Tokenizer
+3. Token IDs
+4. Embedding Lookup
+5. Tensor Stack
+6. Attention
+7. MLP Feature Reshape
+8. Hidden State
+9. Logits
+10. Softmax Funnel
+11. Sampling
+12. Append and Repeat
+13. Full Run Challenge
 
-Completion is stored in `localStorage` as `promptlife:v1:traceComplete`.
+Detailed Prompt Run progress is stored in `localStorage` as `promptlife:v1:promptRunProgress`. The older `promptlife:v1:traceComplete` key remains as a compatibility/save flag.
 
 ## Screenshot Evidence
 

@@ -80,7 +80,7 @@ img {
 }
 
 .screen {
-  padding: 1rem 0.9rem calc(1.8rem + env(safe-area-inset-bottom));
+  padding: 1rem 0.9rem calc(3.25rem + env(safe-area-inset-bottom));
 }
 
 .screen-header {
@@ -1628,6 +1628,87 @@ p {
   gap: 0.8rem;
 }
 
+.play-section {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.play-section.featured {
+  margin-top: 0;
+}
+
+.play-section h2 {
+  margin: 0;
+}
+
+.play-card {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 4.7rem 1fr;
+  gap: 0.8rem;
+  align-items: start;
+  border: 1px solid rgba(35, 67, 116, 0.16);
+  border-radius: 8px;
+  padding: 0.8rem;
+  text-align: left;
+  background: white;
+  color: var(--pl-ink);
+  box-shadow: 0 12px 32px rgba(7, 27, 111, 0.08);
+}
+
+.play-card.is-featured {
+  grid-template-columns: 1fr;
+  background: linear-gradient(180deg, #ffffff 0%, #effaf7 100%);
+  border-color: rgba(11, 143, 139, 0.28);
+}
+
+.play-card img {
+  width: 4.7rem;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.play-card.is-featured img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+}
+
+.play-card-copy,
+.play-card-status,
+.play-card-meta {
+  display: grid;
+  gap: 0.24rem;
+}
+
+.play-card-copy strong {
+  color: var(--pl-navy);
+  font-size: 1.05rem;
+}
+
+.play-card-copy small,
+.play-card-meta {
+  color: #58627f;
+  line-height: 1.35;
+}
+
+.play-card-meta {
+  font-size: 0.84rem;
+}
+
+.play-card-status {
+  grid-column: 1 / -1;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  color: var(--pl-purple);
+  font-weight: 900;
+}
+
+.play-card-status > span:last-child {
+  justify-self: end;
+}
+
 .game-card {
   width: 100%;
   display: grid;
@@ -1709,6 +1790,63 @@ p {
   background: #eef3ff;
   color: var(--pl-navy);
   font-weight: 900;
+}
+
+.prompt-run-screen,
+.game-screen,
+.learning-tour-screen,
+.play-screen,
+.badge-screen {
+  padding-bottom: calc(10.5rem + env(safe-area-inset-bottom));
+}
+
+.prompt-run-sample {
+  margin: 0;
+  padding: 0.75rem;
+  border-radius: 8px;
+  background: #f7fbff;
+  color: #24314f;
+}
+
+.prompt-run-step-card {
+  display: grid;
+  gap: 0.7rem;
+  padding: 1rem;
+  border: 1px solid rgba(35, 67, 116, 0.16);
+  border-radius: 8px;
+  background: white;
+  box-shadow: 0 12px 32px rgba(7, 27, 111, 0.08);
+}
+
+.prompt-run-step-card h2,
+.prompt-run-step-card p,
+.prompt-run-hint p,
+.prompt-run-summary {
+  margin-bottom: 0;
+}
+
+.prompt-run-hint {
+  display: grid;
+  gap: 0.55rem;
+  padding: 0.8rem;
+  border: 1px solid rgba(215, 144, 55, 0.3);
+  border-radius: 8px;
+  background: #fff8ec;
+  color: #45300b;
+}
+
+.prompt-run-hint strong {
+  color: #6a3f0c;
+}
+
+.prompt-run-hint .secondary-btn {
+  width: 100%;
+  background: white;
+}
+
+.prompt-run-controls {
+  margin-top: 0.3rem;
+  padding-bottom: 1rem;
 }
 
 .context-window {
@@ -2086,9 +2224,27 @@ p {
   font-weight: 760;
 }
 
+.action-cue b,
+.try-area-label {
+  color: var(--pl-navy);
+}
+
 .exercise-try-area {
   display: grid;
   gap: 0.75rem;
+}
+
+.try-area-label {
+  display: inline-flex;
+  width: max-content;
+  min-height: 30px;
+  align-items: center;
+  padding: 0.28rem 0.55rem;
+  border-radius: 8px;
+  background: #f1f6e8;
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
 }
 
 .exercise-choice-grid,
