@@ -50,7 +50,7 @@ https://kevinhegg.github.io/promptlife/
 
 ## Reset Progress
 
-Progress is stored in this browser's `localStorage`, not cookies. Use the Badge screen's `Reset progress` button to start over on this device.
+Progress is stored in this browser's `localStorage`, not cookies. Use the Badge screen's `Reset progress` button to start over on this device. Reset clears lessons, exercises, reflections, mini-game insights, tours, and last location.
 
 For local debugging, add `?debug=1` to the app URL and open the Badge screen to reveal progress tools. See [docs/STORAGE_AND_RESET.md](docs/STORAGE_AND_RESET.md) for the exact keys and reset behavior.
 
@@ -60,7 +60,8 @@ For local debugging, add `?debug=1` to the app URL and open the Badge screen to 
 - Mobile-first layout tuned for 390px width.
 - Simple navigation: Home, Journey, Play, Glossary, Badge.
 - Consistent lesson pattern: definition, relationship, metaphor, tiny interaction, checkpoint, reflection.
-- LocalStorage progress for completed lessons, game insights, reflections, and the current location.
+- Reusable exercise system with consistent goal, action, feedback, and insight states.
+- LocalStorage progress for completed lessons, exercises, game insights, reflections, and the current location.
 - Lightweight React/SVG/CSS concept animations with reduced-motion support.
 - Guided side tours:
   - Trace One Prompt
@@ -77,4 +78,4 @@ For local debugging, add `?debug=1` to the app URL and open the Badge screen to 
 
 One screen, one idea. One interaction, one relationship. Keep text in HTML for accessibility. Use visual assets to reduce mystery, not to hide the explanation.
 
-See [docs/PRODUCT_BLUEPRINT.md](docs/PRODUCT_BLUEPRINT.md) for the learning architecture, [docs/ANIMATION_SYSTEM.md](docs/ANIMATION_SYSTEM.md) for the concept animation approach, and [docs/STORAGE_AND_RESET.md](docs/STORAGE_AND_RESET.md) for local progress storage.
+See [docs/PRODUCT_BLUEPRINT.md](docs/PRODUCT_BLUEPRINT.md) for the learning architecture, [docs/ANIMATION_SYSTEM.md](docs/ANIMATION_SYSTEM.md) for the concept animation approach, [docs/EXERCISE_SYSTEM.md](docs/EXERCISE_SYSTEM.md) for reusable exercises, and [docs/STORAGE_AND_RESET.md](docs/STORAGE_AND_RESET.md) for local progress storage.

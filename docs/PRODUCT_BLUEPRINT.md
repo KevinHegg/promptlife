@@ -32,9 +32,21 @@ Each lesson follows the same structure:
 - One-sentence definition
 - Relationship line explaining how it connects to neighboring concepts
 - Metaphor with explicit limits when needed
-- Tiny interaction
+- Exercise or tiny interaction with an explicit action
 - Checkpoint question
 - Reflection prompt
+
+## Exercise Pattern
+
+Exercises use the shared `ExerciseShell` pattern:
+
+- Goal
+- Do this
+- Try area
+- Feedback
+- Why this matters
+
+Correct feedback uses `Insight unlocked.` Incorrect feedback uses `Not quite.` with a specific misconception. Exercises stay noncompetitive and use local progress rather than scores.
 
 ## Core Distinctions
 
@@ -64,6 +76,10 @@ A guided walkthrough follows the prompt "Explain attention simply." from text to
 
 A side tour compares supervised learning, self-supervised learning, pretraining, instruction tuning, human feedback learning/RLHF, preference optimization, in-context learning, RAG, continual or online learning, and self-play/self-training.
 
+### Exercise Library
+
+The starter exercise library includes Prompt or Response?, Pick the Next Token, Durable or Temporary?, Attention Is Relevance, Context Window: What Fell Out?, Training Nudge, Softmax Funnel, MLP Feature Reshape, Open Book or Learned?, and Brain Metaphor Boundary.
+
 ### Context Stack
 
 Cards represent pieces of context. The learner pushes cards into a limited window; old cards fall out. This teaches context windows, truncation, recency, and instruction ordering.
@@ -88,6 +104,6 @@ Tokens move through pass, transform, and hold operators. The learner cycles oper
 
 ## v0.2 Direction
 
-1. Add an instructor mode with discussion prompts and classroom handouts.
+1. Add automated exercise tests for each input type and storage reset behavior.
 2. Add automated accessibility checks and a keyboard-only QA walkthrough.
-3. Add a concept relationship graph connecting glossary terms and lesson animations.
+3. Add instructor mode with discussion prompts and classroom handouts.

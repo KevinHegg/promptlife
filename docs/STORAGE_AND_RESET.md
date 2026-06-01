@@ -9,6 +9,7 @@ Prompt Life stores only local learning progress:
 - Last app location
 - Current lesson ID
 - Completed lesson checkpoints
+- Completed exercise IDs, attempt counts, last selected answers, and insight unlocks
 - Lesson reflections
 - Mini-game insight unlocks
 - Trace One Prompt completion
@@ -27,6 +28,7 @@ Prompt Life does not require cookies, a backend, or user accounts for progress.
 - `promptlife:v1:progress`
 - `promptlife:v1:reflections`
 - `promptlife:v1:gameInsights`
+- `promptlife:v1:exerciseProgress`
 - `promptlife:v1:traceComplete`
 - `promptlife:v1:learningTourComplete`
 
@@ -39,6 +41,7 @@ Earlier local builds used these keys:
 - `pl.completed`
 - `pl.reflections`
 - `pl.gameInsights`
+- `pl.exerciseProgress`
 - `pl.traceComplete`
 - `pl.learningTourComplete`
 
@@ -56,7 +59,7 @@ After reset, the app returns to Home and shows:
 
 `Progress reset. You can begin again.`
 
-Reset clears Prompt Life progress only. It does not clear unrelated `localStorage` values from the same browser.
+Reset clears Prompt Life progress only, including exercise progress. It does not clear unrelated `localStorage` values from the same browser.
 
 ## Developer Debug Reset
 
@@ -67,7 +70,7 @@ Add `?debug=1` to the app URL to reveal Badge-screen progress tools:
 - Unlock badge for visual testing
 - Clear all Prompt Life localStorage keys
 
-The debug clear action removes the Prompt Life namespaced keys and legacy `pl.*` keys. It does not touch unrelated browser storage.
+The debug clear action removes the Prompt Life namespaced keys and legacy `pl.*` keys, including exercise progress. It does not touch unrelated browser storage.
 
 ## Known Limitations
 
@@ -75,4 +78,3 @@ The debug clear action removes the Prompt Life namespaced keys and legacy `pl.*`
 - Clearing browser site data outside the app will remove progress.
 - Debug tools are intentionally simple and are exposed by URL query, not authentication.
 - Resetting in memory and clearing raw localStorage are separate developer concerns; the user-facing reset both clears storage and returns the app to a clean start state.
-

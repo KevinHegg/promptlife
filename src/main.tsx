@@ -20,7 +20,9 @@ import {
   TraceStepAnimation,
   TrainingLoopAnimation
 } from './components/ConceptAnimations'
+import { ExerciseShell } from './components/ExerciseSystem'
 import { acts, games, glossary, learningModes, lessons } from './data/content'
+import { emptyExerciseProgress, exerciseById, exercises, lessonExerciseIds } from './data/exercises'
 import './styles/global.css'
 
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '')
@@ -31,6 +33,7 @@ const STORAGE_KEYS = {
   progress: 'promptlife:v1:progress',
   reflections: 'promptlife:v1:reflections',
   gameInsights: 'promptlife:v1:gameInsights',
+  exerciseProgress: 'promptlife:v1:exerciseProgress',
   traceComplete: 'promptlife:v1:traceComplete',
   learningTourComplete: 'promptlife:v1:learningTourComplete'
 }
@@ -40,6 +43,7 @@ const LEGACY_STORAGE_KEYS = {
   progress: 'pl.completed',
   reflections: 'pl.reflections',
   gameInsights: 'pl.gameInsights',
+  exerciseProgress: 'pl.exerciseProgress',
   traceComplete: 'pl.traceComplete',
   learningTourComplete: 'pl.learningTourComplete'
 }
@@ -97,6 +101,7 @@ function App() {
   const [completed, setCompleted] = useStoredState(STORAGE_KEYS.progress, [], LEGACY_STORAGE_KEYS.progress)
   const [reflections, setReflections] = useStoredState(STORAGE_KEYS.reflections, {}, LEGACY_STORAGE_KEYS.reflections)
   const [gameInsights, setGameInsights] = useStoredState(STORAGE_KEYS.gameInsights, [], LEGACY_STORAGE_KEYS.gameInsights)
+  const [exerciseProgress, setExerciseProgress] = useStoredState(STORAGE_KEYS.exerciseProgress, emptyExerciseProgress(), LEGACY_STORAGE_KEYS.exerciseProgress)
   const [traceComplete, setTraceComplete] = useStoredState(STORAGE_KEYS.traceComplete, false, LEGACY_STORAGE_KEYS.traceComplete)
   const [learningTourComplete, setLearningTourComplete] = useStoredState(STORAGE_KEYS.learningTourComplete, false, LEGACY_STORAGE_KEYS.learningTourComplete)
   const [gameId, setGameId] = useState(null)
@@ -127,6 +132,26 @@ function App() {
     setGameInsights((prev) => prev.includes(id) ? prev : [...prev, id])
   }, [setGameInsights])
 
+  const recordExerciseAttempt = useCallback((exerciseId, payload) => {
+    setExerciseProgress((prev) => {
+      const base = {
+        ...emptyExerciseProgress(),
+        ...prev,
+        attempts: { ...(prev?.attempts ?? {}) },
+        lastAnswers: { ...(prev?.lastAnswers ?? {}) },
+        completed: [...(prev?.completed ?? [])],
+        insights: [...(prev?.insights ?? [])]
+      }
+      base.attempts[exerciseId] = (base.attempts[exerciseId] ?? 0) + 1
+      base.lastAnswers[exerciseId] = payload.answer
+      if (payload.correct) {
+        if (!base.completed.includes(exerciseId)) base.completed.push(exerciseId)
+        if (!base.insights.includes(exerciseId)) base.insights.push(exerciseId)
+      }
+      return base
+    })
+  }, [setExerciseProgress])
+
   function clearPromptLifeStorage() {
     try {
       PROMPT_LIFE_STORAGE_KEYS.forEach((key) => localStorage.removeItem(key))
@@ -143,6 +168,7 @@ function App() {
     setCompleted([])
     setReflections({})
     setGameInsights([])
+    setExerciseProgress(emptyExerciseProgress())
     setTraceComplete(false)
     setLearningTourComplete(false)
     setGameId(null)
@@ -164,8 +190,15 @@ function App() {
   }
 
   function unlockBadgeForTesting() {
+    const exerciseIds = exercises.map((exercise) => exercise.id)
     setCompleted(lessons.map((lesson) => lesson.id))
     setGameInsights(games.map((game) => game.id))
+    setExerciseProgress({
+      completed: exerciseIds,
+      attempts: Object.fromEntries(exerciseIds.map((id) => [id, 1])),
+      lastAnswers: {},
+      insights: exerciseIds
+    })
     setTraceComplete(true)
     setLearningTourComplete(true)
     setTab('badge')
@@ -175,6 +208,16 @@ function App() {
   function clearAllPromptLifeKeysForDebug() {
     if (!window.confirm('Start over? This will clear your Prompt Life progress on this device.')) return
     clearPromptLifeStorage()
+    setTab('home')
+    setLessonId(lessons[0].id)
+    setCompleted([])
+    setReflections({})
+    setGameInsights([])
+    setExerciseProgress(emptyExerciseProgress())
+    setTraceComplete(false)
+    setLearningTourComplete(false)
+    setGameId(null)
+    setDrawerTerm(null)
     setStatusMessage('Prompt Life localStorage keys cleared. Reload or reset progress to begin from a blank state.')
   }
 
@@ -227,9 +270,11 @@ function App() {
             lessonIndex={activeLessonIndex}
             totalLessons={lessons.length}
             reflection={reflections[activeLesson.id] ?? ''}
+            exerciseProgress={exerciseProgress}
             onComplete={completeLesson}
             onNext={nextLesson}
             onReflection={recordReflection}
+            onExerciseAttempt={recordExerciseAttempt}
             onGlossary={setDrawerTerm}
           />
         )}
@@ -239,9 +284,11 @@ function App() {
             gameInsights={gameInsights}
             traceComplete={traceComplete}
             learningTourComplete={learningTourComplete}
+            exerciseProgress={exerciseProgress}
             setGameId={setGameId}
             onGlossary={setDrawerTerm}
             onInsight={recordGameInsight}
+            onExerciseAttempt={recordExerciseAttempt}
             onTraceComplete={() => setTraceComplete(true)}
             onLearningTourComplete={() => setLearningTourComplete(true)}
           />
@@ -253,6 +300,7 @@ function App() {
             progress={progress}
             gameInsights={gameInsights}
             reflections={reflections}
+            exerciseProgress={exerciseProgress}
             statusMessage={statusMessage}
             debugEnabled={debugEnabled}
             onResetProgress={() => resetProgress()}
@@ -393,13 +441,14 @@ function JourneyScreen({ completed, currentLessonId, onOpenLesson, onTrace, onLe
   )
 }
 
-function LessonScreen({ lesson, lessonIndex, totalLessons, reflection, onComplete, onNext, onReflection, onGlossary }) {
+function LessonScreen({ lesson, lessonIndex, totalLessons, reflection, exerciseProgress, onComplete, onNext, onReflection, onExerciseAttempt, onGlossary }) {
   const [choice, setChoice] = useState(null)
   const [revealed, setRevealed] = useState(false)
   const [continueHint, setContinueHint] = useState(false)
   const checkpointRef = useRef<HTMLElement | null>(null)
   const selectedAnswer = choice == null ? null : lesson.quiz.choices[choice]
   const isCorrect = selectedAnswer === lesson.quiz.answer
+  const exercise = exerciseById[lesson.exerciseId ?? lessonExerciseIds[lesson.id]]
   const relatedTerms = useMemo(() => {
     return lesson.terms
       .map((term) => glossary.find((item) => item.id === term || item.term.toLowerCase() === term.toLowerCase()))
@@ -470,12 +519,23 @@ function LessonScreen({ lesson, lessonIndex, totalLessons, reflection, onComplet
         <PromptVsResponseBox includeDemo={['what-is-llm', 'inference', 'sampling', 'autoregression', 'context-window'].includes(lesson.id)} />
       )}
 
-      <section className="lesson-panel interaction-card" aria-labelledby="interaction-title">
-        <span className="step-label">Try it</span>
-        <h2 id="interaction-title">{lesson.interaction.title}</h2>
-        <MicroInteraction type={lesson.interaction.type} />
-        <p>{lesson.interaction.copy}</p>
-      </section>
+      {exercise ? (
+        <section className="lesson-panel exercise-panel">
+          <ExerciseShell
+            exercise={exercise}
+            progress={exerciseProgress}
+            onAttempt={onExerciseAttempt}
+            onGlossary={onGlossary}
+          />
+        </section>
+      ) : (
+        <section className="lesson-panel interaction-card" aria-labelledby="interaction-title">
+          <span className="step-label">Try it</span>
+          <h2 id="interaction-title">{lesson.interaction.title}</h2>
+          <MicroInteraction type={lesson.interaction.type} />
+          <p>{lesson.interaction.copy}</p>
+        </section>
+      )}
 
       <section ref={checkpointRef} className="lesson-panel quiz-card" aria-labelledby="quiz-title">
         <span className="step-label">Checkpoint</span>
@@ -901,9 +961,9 @@ function FeatureCloudDemo() {
   )
 }
 
-function PlayScreen({ gameId, gameInsights, traceComplete, learningTourComplete, setGameId, onGlossary, onInsight, onTraceComplete, onLearningTourComplete }) {
+function PlayScreen({ gameId, gameInsights, traceComplete, learningTourComplete, exerciseProgress, setGameId, onGlossary, onInsight, onExerciseAttempt, onTraceComplete, onLearningTourComplete }) {
   if (gameId === 'trace-one-prompt') return <TraceOnePromptScreen onBack={() => setGameId(null)} onComplete={onTraceComplete} saved={traceComplete} />
-  if (gameId === 'how-ai-learns') return <HowAILearnsScreen onBack={() => setGameId(null)} onComplete={onLearningTourComplete} saved={learningTourComplete} onGlossary={onGlossary} />
+  if (gameId === 'how-ai-learns') return <HowAILearnsScreen onBack={() => setGameId(null)} onComplete={onLearningTourComplete} saved={learningTourComplete} exerciseProgress={exerciseProgress} onExerciseAttempt={onExerciseAttempt} onGlossary={onGlossary} />
   if (gameId === 'context-stack') return <ContextStack onBack={() => setGameId(null)} onGlossary={onGlossary} onInsight={onInsight} saved={gameInsights.includes('context-stack')} />
   if (gameId === 'attention-weave') return <AttentionWeave onBack={() => setGameId(null)} onGlossary={onGlossary} onInsight={onInsight} saved={gameInsights.includes('attention-weave')} />
   if (gameId === 'token-relay') return <TokenRelay onBack={() => setGameId(null)} onGlossary={onGlossary} onInsight={onInsight} saved={gameInsights.includes('token-relay')} />
@@ -996,7 +1056,7 @@ function TraceOnePromptScreen({ onBack, onComplete, saved }) {
   )
 }
 
-function HowAILearnsScreen({ onBack, onComplete, saved, onGlossary }) {
+function HowAILearnsScreen({ onBack, onComplete, saved, exerciseProgress, onExerciseAttempt, onGlossary }) {
   const [index, setIndex] = useState(0)
   const mode = learningModes[index]
   const atStart = index === 0
@@ -1034,6 +1094,12 @@ function HowAILearnsScreen({ onBack, onComplete, saved, onGlossary }) {
         <strong>Learning objective</strong>
         <p>Explain the difference between durable weight updates, temporary in-context steering, retrieval, normal inference, human feedback, and self-supervised pretraining.</p>
       </section>
+      <ExerciseShell
+        exercise={exerciseById['durable-or-temporary']}
+        progress={exerciseProgress}
+        onAttempt={onExerciseAttempt}
+        onGlossary={onGlossary}
+      />
       <div className="trace-controls">
         <button className="secondary-btn" disabled={atStart} onClick={() => setIndex((prev) => Math.max(0, prev - 1))}>Back</button>
         <button className="primary-btn" onClick={goNext}>{atEnd ? (saved ? 'Replay tour' : 'Save learning insight') : 'Next'}</button>
@@ -1306,6 +1372,7 @@ function BadgeScreen({
   progress,
   gameInsights,
   reflections,
+  exerciseProgress,
   statusMessage,
   debugEnabled,
   onResetProgress,
@@ -1316,6 +1383,7 @@ function BadgeScreen({
 }) {
   const [copied, setCopied] = useState(false)
   const reflectionCount = Object.values(reflections as Record<string, string>).filter((text) => text.trim().length > 0).length
+  const completedExerciseCount = exerciseProgress?.completed?.length ?? 0
   const unlocked = progress >= 80 && gameInsights.length >= 2
   const lessonsNeeded = Math.max(0, Math.ceil(lessons.length * 0.8) - completed.length)
   const gameInsightsNeeded = Math.max(0, 2 - gameInsights.length)
@@ -1337,6 +1405,7 @@ function BadgeScreen({
       <div className="badge-stats">
         <span><strong>{completed.length}</strong> of {lessons.length} lessons</span>
         <span><strong>{gameInsights.length}</strong> of {games.length} game insights</span>
+        <span><strong>{completedExerciseCount}</strong> of {exercises.length} exercises</span>
         <span><strong>{reflectionCount}</strong> reflections</span>
       </div>
       <section className="idea-panel">
@@ -1348,7 +1417,7 @@ function BadgeScreen({
       {copied && <p className="feedback good" role="status">Share text copied.</p>}
       <section className="settings-panel" aria-labelledby="reset-progress-title">
         <h2 id="reset-progress-title">Start over</h2>
-        <p>Progress is stored only on this device. Resetting clears Prompt Life lesson progress, reflections, mini-game insights, tour progress, and last location.</p>
+        <p>Progress is stored only on this device. Resetting clears Prompt Life lesson progress, exercise attempts, reflections, mini-game insights, tour progress, and last location.</p>
         <button className="secondary-btn danger" onClick={onResetProgress}>Reset progress</button>
         {statusMessage && <p className="feedback good" role="status">{statusMessage}</p>}
       </section>

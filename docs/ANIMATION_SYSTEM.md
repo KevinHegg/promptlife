@@ -71,7 +71,7 @@ The animation primitives live in `src/components/ConceptAnimations.tsx`.
 11. One next token is sampled.
 12. The token is appended and the loop repeats once.
 
-Completion is stored in `localStorage` as `pl.traceComplete`.
+Completion is stored in `localStorage` as `promptlife:v1:traceComplete`.
 
 ## Screenshot Evidence
 
@@ -81,7 +81,7 @@ Completion is stored in `localStorage` as `pl.traceComplete`.
 
 ## How AI Learns Side Tour
 
-`How AI Learns` compares durable training, temporary in-context steering, retrieval, normal inference, human feedback, and self-supervised pretraining. Completion is stored in `localStorage` as `pl.learningTourComplete`.
+`How AI Learns` compares durable training, temporary in-context steering, retrieval, normal inference, human feedback, and self-supervised pretraining. Completion is stored in `localStorage` as `promptlife:v1:learningTourComplete`.
 
 The mode content lives in `src/data/content.ts` as `learningModes`.
 

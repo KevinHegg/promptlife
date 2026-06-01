@@ -2,6 +2,122 @@
 
 Date: 2026-05-31
 
+## v0.4 Exercise System Update
+
+### What Changed
+
+- Added a reusable exercise schema and starter exercise library in `src/data/exercises.ts`.
+- Added `ExerciseShell` and reusable input components in `src/components/ExerciseSystem.tsx`.
+- Replaced unclear lesson "Try it" interactions with shared exercise patterns where an exercise is mapped.
+- Added exercise progress to namespaced `localStorage`.
+- Updated reset controls so user reset and debug key clearing remove exercise progress.
+- Added an exercise-progress stat to the Badge screen.
+- Added a Durable or Temporary sorting exercise inside the How AI Learns side tour.
+- Created `docs/EXERCISE_SYSTEM.md`.
+
+### Files Changed
+
+- `README.md`
+- `src/components/ExerciseSystem.tsx`
+- `src/data/exercises.ts`
+- `src/main.tsx`
+- `src/styles/global.css`
+- `docs/EXERCISE_SYSTEM.md`
+- `docs/PRODUCT_BLUEPRINT.md`
+- `docs/STORAGE_AND_RESET.md`
+- `docs/REVIEW_NOTES.md`
+
+### Exercise Components Added
+
+- `ExerciseShell`
+- `ExerciseHeader`
+- `ActionCue`
+- `TapChoiceExercise`
+- `TapMultipleExercise`
+- `DragOrderExercise`
+- `DragMatchExercise`
+- `SortBucketsExercise`
+- `ConnectNodesExercise`
+- `ToggleStateExercise`
+- `TypeReflectionExercise`
+- `LabelTokensExercise`
+- `NextTokenPickExercise`
+- `ExerciseFeedback`
+- `InsightUnlocked`
+- `ExerciseControls`
+
+### Exercises Created
+
+- Prompt or Response?
+- Pick the Next Token
+- Durable or Temporary?
+- Attention Is Relevance
+- Context Window: What Fell Out?
+- Training Nudge
+- Softmax Funnel
+- MLP Feature Reshape
+- Open Book or Learned?
+- Brain Metaphor Boundary
+
+### Lessons Updated
+
+- What Is an LLM?
+- Training
+- Inference
+- Tokenization
+- Token IDs
+- Embeddings
+- Attention
+- MLP
+- Hidden States
+- Logits
+- Softmax
+- Sampling
+- Autoregression
+- Context Window
+- Brain Metaphor Limits
+- Risk vs Myth
+
+### Screens Reviewed
+
+- Lesson with tap-choice exercise
+- Prompt or Response label-token exercise
+- Durable or Temporary sort-buckets exercise
+- Attention connect-nodes exercise
+- Wrong answer feedback
+- Correct answer feedback
+- Badge exercise-progress stat
+- Badge reset/debug controls
+
+Screenshot evidence:
+
+- `docs/screenshots/v0-4-lesson-tap-choice-exercise-mobile.png`
+- `docs/screenshots/v0-4-prompt-response-exercise-mobile.png`
+- `docs/screenshots/v0-4-durable-temporary-exercise-mobile.png`
+- `docs/screenshots/v0-4-attention-connect-exercise-mobile.png`
+- `docs/screenshots/v0-4-exercise-wrong-feedback-mobile.png`
+- `docs/screenshots/v0-4-exercise-correct-feedback-mobile.png`
+- `docs/screenshots/v0-4-badge-exercise-progress-mobile.png`
+
+### Build Result
+
+- `npm install`: passed, no vulnerabilities.
+- `npm run typecheck`: passed.
+- `npm run build`: passed.
+- Reset verification: passed. User reset clears `promptlife:v1:exerciseProgress` back to an empty progress object, clears lesson progress, and leaves unrelated `localStorage` untouched.
+
+### Known Issues
+
+- Drag-style exercises currently use accessible button-based ordering/matching instead of pointer drag gestures.
+- Exercise progress is local to one browser and device.
+- `Show me` reveals a correct pattern but intentionally does not mark the exercise complete.
+
+### Next Three Recommended Improvements
+
+1. Add automated tests for each exercise input type and exercise progress reset.
+2. Add Playwright or axe accessibility checks for focus order, touch targets, and feedback announcements.
+3. Add richer drag-and-drop behavior while preserving the current keyboard-accessible fallback.
+
 ## What Changed
 
 - Clarified prompt-vs-response language across the app so learners can tell prompt processing, response generation, training, and retrieval/context use apart.
