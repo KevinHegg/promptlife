@@ -30,11 +30,29 @@ The production build is written to `dist/`.
 
 ## Test On A Phone
 
-The repo includes a GitHub Pages workflow. Pushes to `main` build the app with the `/promptlife/` base path and deploy it to:
+For a same-Wi-Fi phone test without deploying, run Vite on your local network:
+
+```bash
+npm run dev -- --host 0.0.0.0
+```
+
+Then open the Network URL Vite prints, usually in this shape:
+
+```text
+http://YOUR-MAC-LAN-IP:5173/
+```
+
+The repo also includes a GitHub Pages workflow. Pushes to `main` build the app with the `/promptlife/` base path and deploy it to:
 
 ```text
 https://kevinhegg.github.io/promptlife/
 ```
+
+## Reset Progress
+
+Progress is stored in this browser's `localStorage`, not cookies. Use the Badge screen's `Reset progress` button to start over on this device.
+
+For local debugging, add `?debug=1` to the app URL and open the Badge screen to reveal progress tools. See [docs/STORAGE_AND_RESET.md](docs/STORAGE_AND_RESET.md) for the exact keys and reset behavior.
 
 ## MVP Features
 
@@ -43,6 +61,10 @@ https://kevinhegg.github.io/promptlife/
 - Simple navigation: Home, Journey, Play, Glossary, Badge.
 - Consistent lesson pattern: definition, relationship, metaphor, tiny interaction, checkpoint, reflection.
 - LocalStorage progress for completed lessons, game insights, reflections, and the current location.
+- Lightweight React/SVG/CSS concept animations with reduced-motion support.
+- Guided side tours:
+  - Trace One Prompt
+  - How AI Learns
 - Glossary screen plus accessible glossary drawer.
 - Three non-competitive mini-games:
   - Context Stack
@@ -55,4 +77,4 @@ https://kevinhegg.github.io/promptlife/
 
 One screen, one idea. One interaction, one relationship. Keep text in HTML for accessibility. Use visual assets to reduce mystery, not to hide the explanation.
 
-See [docs/PRODUCT_BLUEPRINT.md](docs/PRODUCT_BLUEPRINT.md) for the learning architecture and v0.2 direction.
+See [docs/PRODUCT_BLUEPRINT.md](docs/PRODUCT_BLUEPRINT.md) for the learning architecture, [docs/ANIMATION_SYSTEM.md](docs/ANIMATION_SYSTEM.md) for the concept animation approach, and [docs/STORAGE_AND_RESET.md](docs/STORAGE_AND_RESET.md) for local progress storage.
