@@ -20,15 +20,16 @@ import {
   TrainingLoopAnimation
 } from './components/ConceptAnimations'
 import { ExerciseShell } from './components/ExerciseSystem'
+import { VisualAid, VisualAidGallery } from './components/VisualAids'
 import { acts, games, glossary, learningModes, lessons } from './data/content'
-import { emptyExerciseProgress, exerciseById, exercises, lessonExerciseIds } from './data/exercises'
+import { emptyExerciseProgress, exerciseById, exercises } from './data/exercises'
 import { PROMPT_RUN_FINAL_ID, PROMPT_RUN_SAMPLE, emptyPromptRunProgress, promptRunFinalChallenge, promptRunSteps } from './data/promptRun'
 import './styles/global.css'
 
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '')
 const ASSET = `${BASE}/assets/promptlife`
 // Bump this for each shipped app change; the Badge screen displays it under Start over.
-const APP_VERSION = '0.5.1'
+const APP_VERSION = '0.6.0'
 const STORAGE_KEYS = {
   lastLocation: 'promptlife:v1:lastLocation',
   lessonId: 'promptlife:v1:lessonId',
@@ -52,24 +53,19 @@ const LEGACY_STORAGE_KEYS = {
   learningTourComplete: 'pl.learningTourComplete'
 }
 const PROMPT_LIFE_STORAGE_KEYS = [...Object.values(STORAGE_KEYS), ...Object.values(LEGACY_STORAGE_KEYS)]
-const PROMPT_RESPONSE_LESSON_IDS = new Set([
-  'what-is-llm',
-  'training',
-  'fine-tuning',
-  'inference',
-  'tokens',
-  'token-ids',
-  'embeddings',
-  'tensors',
-  'attention',
-  'mlp',
-  'hidden-states',
-  'logits',
-  'softmax',
-  'sampling',
-  'autoregression',
-  'context-window'
-])
+function prefersReducedMotion() {
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches
+}
+
+function getReviewRoute() {
+  const base = BASE || ''
+  const path = base && window.location.pathname.startsWith(base)
+    ? window.location.pathname.slice(base.length) || '/'
+    : window.location.pathname
+  if (path.startsWith('/review/lesson-cards')) return 'lesson-cards'
+  if (path.startsWith('/review/visual-aids')) return 'visual-aids'
+  return null
+}
 
 function getStored(key, fallback, legacyKey = null) {
   try {
@@ -100,6 +96,8 @@ function useStoredState(key, fallback, legacyKey = null) {
 }
 
 function App() {
+  const shellRef = useRef<HTMLElement | null>(null)
+  const reviewRoute = useMemo(() => getReviewRoute(), [])
   const [tab, setTab] = useStoredState(STORAGE_KEYS.lastLocation, 'home', LEGACY_STORAGE_KEYS.lastLocation)
   const [lessonId, setLessonId] = useStoredState(STORAGE_KEYS.lessonId, lessons[0].id, LEGACY_STORAGE_KEYS.lessonId)
   const [completed, setCompleted] = useStoredState(STORAGE_KEYS.progress, [], LEGACY_STORAGE_KEYS.progress)
@@ -124,6 +122,16 @@ function App() {
   const activeLessonIndex = Math.max(0, lessons.findIndex((lesson) => lesson.id === activeLesson.id))
   const progress = Math.round((completed.length / lessons.length) * 100)
   const nextOpenLesson = lessons.find((lesson) => !completed.includes(lesson.id)) ?? activeLesson
+
+  useEffect(() => {
+    requestAnimationFrame(() => {
+      shellRef.current?.scrollTo({ top: 0, behavior: prefersReducedMotion() ? 'auto' : 'smooth' })
+      const focusTarget = tab === 'learn'
+        ? document.getElementById('lesson-title')
+        : document.querySelector<HTMLElement>('.screen h1[id]')
+      focusTarget?.focus?.({ preventScroll: true })
+    })
+  }, [tab, lessonId, gameId])
 
   const completeLesson = useCallback((id) => {
     setCompleted((prev) => prev.includes(id) ? prev : [...prev, id])
@@ -255,7 +263,7 @@ function App() {
     setLearningTourComplete(false)
     setGameId(null)
     setDrawerTerm(null)
-    setStatusMessage('Prompt Life localStorage keys cleared. Reload or reset progress to begin from a blank state.')
+    setStatusMessage('Prompt Life saved progress keys cleared. Reload or reset progress to begin from a blank state.')
   }
 
   function openLesson(id) {
@@ -278,10 +286,18 @@ function App() {
     }
   }
 
+  if (reviewRoute === 'lesson-cards') {
+    return <ReviewLessonCards />
+  }
+
+  if (reviewRoute === 'visual-aids') {
+    return <VisualAidReviewPage />
+  }
+
   return (
     <div className="pl-app">
       <SkipLink />
-      <main id="main" className="pl-shell">
+      <main id="main" className="pl-shell" ref={shellRef}>
         {tab === 'home' && (
           <HomeScreen
             progress={progress}
@@ -307,11 +323,9 @@ function App() {
             lessonIndex={activeLessonIndex}
             totalLessons={lessons.length}
             reflection={reflections[activeLesson.id] ?? ''}
-            exerciseProgress={exerciseProgress}
             onComplete={completeLesson}
             onNext={nextLesson}
             onReflection={recordReflection}
-            onExerciseAttempt={recordExerciseAttempt}
             onGlossary={setDrawerTerm}
           />
         )}
@@ -423,6 +437,8 @@ function Pillar({ icon, label }) {
 }
 
 function JourneyScreen({ completed, currentLessonId, onOpenLesson, onTrace, onLearningTour }) {
+  const currentActId = lessons.find((lesson) => lesson.id === currentLessonId)?.act ?? acts[0].id
+
   return (
     <section className="screen journey-screen" aria-labelledby="journey-title">
       <ScreenHeader
@@ -431,9 +447,10 @@ function JourneyScreen({ completed, currentLessonId, onOpenLesson, onTrace, onLe
         subtitle="Follow one prompt from before training through inference, generation, and model literacy."
         titleId="journey-title"
       />
+      <StageTimeline currentActId={currentActId} />
       <section className="tour-feature-panel" aria-labelledby="guided-tours-title">
         <div>
-          <p className="eyebrow">Guided side tours</p>
+          <p className="eyebrow">Guided comparisons</p>
           <h2 id="guided-tours-title">Run and compare</h2>
           <p>Use these when the map feels abstract: one guides a prompt through the model, the other compares how AI systems learn.</p>
         </div>
@@ -454,6 +471,7 @@ function JourneyScreen({ completed, currentLessonId, onOpenLesson, onTrace, onLe
                   <p>{act.summary}</p>
                 </div>
               </div>
+              <SectionIntroCard act={act} />
               {actLessons.map((lesson) => {
                 const done = completed.includes(lesson.id)
                 const current = lesson.id === currentLessonId
@@ -481,14 +499,38 @@ function JourneyScreen({ completed, currentLessonId, onOpenLesson, onTrace, onLe
   )
 }
 
-function LessonScreen({ lesson, lessonIndex, totalLessons, reflection, exerciseProgress, onComplete, onNext, onReflection, onExerciseAttempt, onGlossary }) {
+function StageTimeline({ currentActId }) {
+  return (
+    <ol className="stage-timeline" aria-label="Prompt Life stages">
+      {acts.map((act) => (
+        <li key={act.id} className={act.id === currentActId ? 'active' : ''}>
+          <span>{act.number}</span>
+          <strong>{act.name}</strong>
+        </li>
+      ))}
+    </ol>
+  )
+}
+
+function SectionIntroCard({ act }) {
+  return (
+    <div className="section-intro-card" aria-label={`${act.name} focus`}>
+      <p>{act.promptMoment}</p>
+      <dl>
+        <div><dt>Focus</dt><dd>{act.focus}</dd></div>
+        <div><dt>Keep clear</dt><dd>{act.keyDistinction}</dd></div>
+      </dl>
+    </div>
+  )
+}
+
+function LessonScreen({ lesson, lessonIndex, totalLessons, reflection, onComplete, onNext, onReflection, onGlossary }) {
   const [choice, setChoice] = useState(null)
   const [revealed, setRevealed] = useState(false)
   const [continueHint, setContinueHint] = useState(false)
   const checkpointRef = useRef<HTMLElement | null>(null)
   const selectedAnswer = choice == null ? null : lesson.quiz.choices[choice]
   const isCorrect = selectedAnswer === lesson.quiz.answer
-  const exercise = exerciseById[lesson.exerciseId ?? lessonExerciseIds[lesson.id]]
   const relatedTerms = useMemo(() => {
     return lesson.terms
       .map((term) => glossary.find((item) => item.id === term || item.term.toLowerCase() === term.toLowerCase()))
@@ -499,14 +541,12 @@ function LessonScreen({ lesson, lessonIndex, totalLessons, reflection, exerciseP
     setChoice(null)
     setRevealed(false)
     setContinueHint(false)
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' })
   }, [lesson.id])
 
   function saveAndContinue() {
     if (!isCorrect) {
       setContinueHint(true)
-      checkpointRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      checkpointRef.current?.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'center' })
       return
     }
     onComplete(lesson.id)
@@ -523,13 +563,10 @@ function LessonScreen({ lesson, lessonIndex, totalLessons, reflection, exerciseP
         <div className="lesson-progress" aria-label={`Lesson ${lessonIndex + 1} of ${totalLessons}`}>
           <span style={{ width: `${((lessonIndex + 1) / totalLessons) * 100}%` }} />
         </div>
-        <h1 id="lesson-title">{lesson.title}</h1>
+        <StageTimeline currentActId={lesson.act} />
+        <h1 id="lesson-title" tabIndex={-1}>{lesson.title}</h1>
         <p className="lede small">{lesson.subtitle}</p>
         <p className="lesson-definition">{lesson.definition}</p>
-        <picture>
-          <source media="(min-width: 700px)" srcSet={lesson.image.replace('@mobile', '')} />
-          <img className="lesson-art compact" src={lesson.image} alt={lesson.alt} />
-        </picture>
         {relatedTerms.length > 0 && (
           <div className="term-row compact" aria-label="Related glossary terms">
             {relatedTerms.map((term) => (
@@ -539,14 +576,20 @@ function LessonScreen({ lesson, lessonIndex, totalLessons, reflection, exerciseP
         )}
       </header>
 
+      <section className="lesson-panel visual-aid-panel" aria-labelledby="visual-aid-title">
+        <span className="step-label">Visual aid</span>
+        <h2 id="visual-aid-title">What to picture</h2>
+        <VisualAid id={lesson.visualAidId} headingId="visual-aid-title" />
+      </section>
+
       <section className="lesson-panel core-panel" aria-labelledby="core-idea-title">
-        <span className="step-label">Learn</span>
+        <span className="step-label">Core idea</span>
         <h2 id="core-idea-title">Core idea</h2>
         <p>{lesson.definition}</p>
-        <div className="metaphor-strip">
-          <strong>Metaphor</strong>
-          <span>{lesson.metaphor}</span>
-        </div>
+        <dl className="lesson-detail-grid">
+          <div><dt>Where it happens</dt><dd>{lesson.where}</dd></div>
+          <div><dt>Why it matters</dt><dd>{lesson.why}</dd></div>
+        </dl>
       </section>
 
       <section className="lesson-panel connection-panel" aria-labelledby="connect-title">
@@ -555,27 +598,24 @@ function LessonScreen({ lesson, lessonIndex, totalLessons, reflection, exerciseP
         <p>{lesson.relationship}</p>
       </section>
 
-      {PROMPT_RESPONSE_LESSON_IDS.has(lesson.id) && (
-        <PromptVsResponseBox includeDemo={['what-is-llm', 'inference', 'sampling', 'autoregression', 'context-window'].includes(lesson.id)} />
+      <section className="lesson-panel metaphor-panel" aria-labelledby="metaphor-title">
+        <span className="step-label">Metaphor</span>
+        <h2 id="metaphor-title">Useful picture</h2>
+        <p>{lesson.metaphor}</p>
+      </section>
+
+      <BrainBridge bridge={lesson.brainBridge} />
+
+      {lesson.id === 'prompt-response' && (
+        <PromptVsResponseBox includeDemo />
       )}
 
-      {exercise ? (
-        <section className="lesson-panel exercise-panel">
-          <ExerciseShell
-            exercise={exercise}
-            progress={exerciseProgress}
-            onAttempt={onExerciseAttempt}
-            onGlossary={onGlossary}
-          />
-        </section>
-      ) : (
-        <section className="lesson-panel interaction-card" aria-labelledby="interaction-title">
-          <span className="step-label">Try it</span>
-          <h2 id="interaction-title">{lesson.interaction.title}</h2>
-          <MicroInteraction type={lesson.interaction.type} />
-          <p>{lesson.interaction.copy}</p>
-        </section>
-      )}
+      <section className="lesson-panel interaction-card" aria-labelledby="interaction-title">
+        <span className="step-label">Tiny interaction</span>
+        <h2 id="interaction-title">{lesson.interaction.title}</h2>
+        <MicroInteraction type={lesson.interaction.type} />
+        <p>{lesson.interaction.copy}</p>
+      </section>
 
       <section ref={checkpointRef} className="lesson-panel quiz-card" aria-labelledby="quiz-title">
         <span className="step-label">Checkpoint</span>
@@ -613,6 +653,26 @@ function LessonScreen({ lesson, lessonIndex, totalLessons, reflection, exerciseP
       <button className={isCorrect ? 'primary-btn sticky-action is-ready' : 'primary-btn sticky-action'} onClick={saveAndContinue}>
         {isCorrect ? (lessonIndex + 1 === totalLessons ? 'Finish and view badge' : 'Next lesson') : choice == null ? 'Answer checkpoint to continue' : 'Retry checkpoint to continue'}
       </button>
+    </section>
+  )
+}
+
+function BrainBridge({ bridge }) {
+  if (!bridge) return null
+  return (
+    <section className="lesson-panel brain-bridge" aria-labelledby="brain-bridge-title">
+      <span className="step-label">Brain bridge</span>
+      <h2 id="brain-bridge-title">Helpful, then limited</h2>
+      <dl>
+        <div>
+          <dt>Helpful comparison</dt>
+          <dd>{bridge.metaphor}</dd>
+        </div>
+        <div>
+          <dt>Where it breaks</dt>
+          <dd>{bridge.limit}</dd>
+        </div>
+      </dl>
     </section>
   )
 }
@@ -1046,9 +1106,9 @@ function PlayScreen({ gameId, gameInsights, traceComplete, promptRunProgress, le
   return (
     <section className="screen play-screen" aria-labelledby="play-title">
       <ScreenHeader
-        kicker="Learning arcade"
+        kicker="Play lab"
         title="Play to understand"
-        subtitle="Small, calm challenges that make model mechanics visible. No scores, timers, or leaderboards."
+        subtitle="Small, calm challenges that make model mechanics visible through action and reflection."
         titleId="play-title"
       />
       <section className="play-section featured" aria-labelledby="featured-play-title">
@@ -1070,13 +1130,13 @@ function PlayScreen({ gameId, gameInsights, traceComplete, promptRunProgress, le
         />
       </section>
       <section className="play-section" aria-labelledby="side-challenges-title">
-        <h2 id="side-challenges-title">Side challenges</h2>
+        <h2 id="side-challenges-title">Practice challenges</h2>
         <div className="game-list">
           {sideChallenges.map((game) => <PlayCard key={game.id} item={game} onStart={() => setGameId(game.id)} />)}
         </div>
       </section>
       <section className="play-section" aria-labelledby="tours-title">
-        <h2 id="tours-title">Tours</h2>
+        <h2 id="tours-title">Guided comparisons</h2>
         <div className="game-list">
           {tourItems.map((game) => <PlayCard key={game.id} item={game} onStart={() => setGameId(game.id)} />)}
         </div>
@@ -1141,6 +1201,10 @@ function PromptRunScreen({ onBack, onComplete, saved, promptRunProgress, onPromp
   useEffect(() => {
     setHintLevel(0)
     setContinueNudge(false)
+    requestAnimationFrame(() => {
+      document.querySelector<HTMLElement>('.pl-shell')?.scrollTo({ top: 0, behavior: prefersReducedMotion() ? 'auto' : 'smooth' })
+      document.getElementById('prompt-run-step-title')?.focus?.({ preventScroll: true })
+    })
   }, [currentId])
 
   function handleAttempt(exerciseId, payload) {
@@ -1169,17 +1233,17 @@ function PromptRunScreen({ onBack, onComplete, saved, promptRunProgress, onPromp
 
   return (
     <section className="screen prompt-run-screen" aria-labelledby="prompt-run-title">
-      <GameHeader title="Prompt Run" onBack={onBack}>
+      <GameHeader title="Prompt Run" titleId="prompt-run-title" onBack={onBack}>
         <p className="seed-chip">{displayIndex} of {totalSteps}</p>
       </GameHeader>
-      <p className="lede small">Guide one prompt through the model. Formerly Trace One Prompt.</p>
+      <p className="lede small">Guide one prompt through the model from visible context to one selected token.</p>
       <p className="prompt-run-sample"><strong>Sample prompt:</strong> {PROMPT_RUN_SAMPLE}</p>
       <div className="trace-progress" aria-label={`Prompt Run progress ${displayIndex} of ${totalSteps}`}>
         <span style={{ width: `${Math.max((displayIndex / totalSteps) * 100, (progressCount / totalSteps) * 100)}%` }} />
       </div>
       <section className="prompt-run-step-card" aria-labelledby="prompt-run-step-title">
         <span className="step-label">{atFinal ? 'Final challenge' : `Step ${stepIndex + 1}`}</span>
-        <h2 id="prompt-run-step-title">{atFinal ? 'Full Run Challenge' : currentStep.title}</h2>
+        <h2 id="prompt-run-step-title" tabIndex={-1}>{atFinal ? 'Full Run Challenge' : currentStep.title}</h2>
         <p>{atFinal ? 'Put the run in order and keep the inference loop distinct from training, memory, and consciousness myths.' : currentStep.goal}</p>
         <PromptRunHintPanel hintLevel={hintLevel} hints={hints} onHint={() => setHintLevel((level) => Math.min(hints.length, level + 1))} />
       </section>
@@ -1231,6 +1295,13 @@ function HowAILearnsScreen({ onBack, onComplete, saved, exerciseProgress, onExer
   const atStart = index === 0
   const atEnd = index === learningModes.length - 1
 
+  useEffect(() => {
+    requestAnimationFrame(() => {
+      document.querySelector<HTMLElement>('.pl-shell')?.scrollTo({ top: 0, behavior: prefersReducedMotion() ? 'auto' : 'smooth' })
+      document.getElementById('learning-mode-title')?.focus?.({ preventScroll: true })
+    })
+  }, [index])
+
   function goNext() {
     if (atEnd) {
       if (saved) setIndex(0)
@@ -1242,7 +1313,7 @@ function HowAILearnsScreen({ onBack, onComplete, saved, exerciseProgress, onExer
 
   return (
     <section className="screen learning-tour-screen" aria-labelledby="learning-tour-title">
-      <GameHeader title="How AI Learns" onBack={onBack}>
+      <GameHeader title="How AI Learns" titleId="learning-tour-title" onBack={onBack}>
         <p className="seed-chip">{index + 1} of {learningModes.length}</p>
       </GameHeader>
       <p className="lede small">Compare durable learning, temporary steering, retrieval, inference, human feedback, and self-supervised pretraining.</p>
@@ -1250,7 +1321,7 @@ function HowAILearnsScreen({ onBack, onComplete, saved, exerciseProgress, onExer
         <span style={{ width: `${((index + 1) / learningModes.length) * 100}%` }} />
       </div>
       <section className="learning-mode-card" aria-labelledby="learning-mode-title">
-        <h2 id="learning-mode-title">{mode.label}</h2>
+        <h2 id="learning-mode-title" tabIndex={-1}>{mode.label}</h2>
         <LearningModeAnimation mode={mode} />
         <dl className="mode-details">
           <div><dt>Plain meaning</dt><dd>{mode.plain}</dd></div>
@@ -1283,11 +1354,11 @@ function HowAILearnsScreen({ onBack, onComplete, saved, exerciseProgress, onExer
   )
 }
 
-function GameHeader({ title, onBack, children = null }) {
+function GameHeader({ title, titleId = undefined, onBack, children = null }) {
   return (
     <header className="game-header">
       <button className="text-btn" onClick={onBack}>Back to games</button>
-      <h1>{title}</h1>
+      <h1 id={titleId} tabIndex={-1}>{title}</h1>
       {children}
     </header>
   )
@@ -1309,7 +1380,7 @@ function ContextStack({ onBack, onGlossary, onInsight, saved }) {
 
   return (
     <section className="screen game-screen" aria-labelledby="context-title">
-      <GameHeader title="Context Stack" onBack={onBack} />
+      <GameHeader title="Context Stack" titleId="context-title" onBack={onBack} />
       <img className="game-hero" src={`${ASSET}/illustrations/scene-context-stack@mobile.png`} alt="Cards entering a limited context window" />
       <p className="lede small">Push cards into a window that holds only the last {windowSize}. Older cards fall out of view.</p>
       <InfoCallout title="Goal">Keep request, example, and tone visible when the final output card arrives.</InfoCallout>
@@ -1362,7 +1433,7 @@ function AttentionWeave({ onBack, onGlossary, onInsight, saved }) {
 
   return (
     <section className="screen game-screen" aria-labelledby="attention-title">
-      <GameHeader title="Attention Weave" onBack={onBack} />
+      <GameHeader title="Attention Weave" titleId="attention-title" onBack={onBack} />
       <img className="game-hero" src={`${ASSET}/illustrations/scene-attention-weave@mobile.png`} alt="Token nodes connected by glowing attention arcs" />
       <p className="lede small">Tap a source token, then a target token. In this sentence, connect <strong>it</strong> to the word it most likely depends on.</p>
       <InfoCallout title="Status">
@@ -1413,7 +1484,7 @@ function TokenRelay({ onBack, onGlossary, onInsight, saved }) {
 
   return (
     <section className="screen game-screen" aria-labelledby="relay-title">
-      <GameHeader title="Token Pipeline Relay" onBack={onBack}><p className="seed-chip">seed {seed}</p></GameHeader>
+      <GameHeader title="Token Pipeline Relay" titleId="relay-title" onBack={onBack}><p className="seed-chip">seed {seed}</p></GameHeader>
       <img className="game-hero" src={`${ASSET}/illustrations/scene-token-pipeline-relay@mobile.png`} alt="Tokens moving through pass, transform, and hold operators" />
       <p className="lede small">Tap each operator to cycle pass, transform, and hold. The run is replayable, but it is not training.</p>
       <InfoCallout title="Target path">pass to transform to hold to pass</InfoCallout>
@@ -1587,12 +1658,12 @@ function BadgeScreen({
 
   return (
     <section className="screen badge-screen" aria-labelledby="badge-title">
-      <ScreenHeader kicker="Progress" title="Prompt Life: Model Literate" subtitle="A confidence badge, not a leaderboard." titleId="badge-title" />
+      <ScreenHeader kicker="Progress" title="Prompt Life: Model Literate" subtitle="Track your understanding of the prompt-to-response path." titleId="badge-title" />
       <img className="badge-art" src={`${ASSET}/brand/model-literate-badge.svg`} alt="Model Literate badge" />
       <div className="progress-meter" aria-label={`${progress}% lesson progress`}><span style={{ width: `${progress}%` }} /></div>
       <div className="badge-stats">
         <span><strong>{completed.length}</strong> of {lessons.length} lessons</span>
-        <span><strong>{gameInsights.length}</strong> of {games.length} game insights</span>
+        <span><strong>{gameInsights.length}</strong> of {games.length} play insights</span>
         <span><strong>{completedExerciseCount}</strong> of {exercises.length} exercises</span>
         <span><strong>{promptRunStepCount}</strong> of 13 Prompt Run</span>
         <span><strong>{reflectionCount}</strong> reflections</span>
@@ -1600,7 +1671,7 @@ function BadgeScreen({
       <section className="idea-panel">
         <h2>{unlocked ? 'Badge unlocked' : 'Badge criterion'}</h2>
         <p>This badge means you can explain what an LLM is, what it is not, and how a prompt becomes a response without treating the model as magic.</p>
-        <p>{unlocked ? 'You met the learning threshold.' : `Remaining: ${lessonsNeeded} lesson checkpoint${lessonsNeeded === 1 ? '' : 's'}, ${gameInsightsNeeded} mini-game insight${gameInsightsNeeded === 1 ? '' : 's'}, and ${promptRunNeeded} Prompt Run completion${promptRunNeeded === 1 ? '' : 's'}.`}</p>
+        <p>{unlocked ? 'You met the learning threshold.' : `Remaining: ${lessonsNeeded} lesson checkpoint${lessonsNeeded === 1 ? '' : 's'}, ${gameInsightsNeeded} play insight${gameInsightsNeeded === 1 ? '' : 's'}, and ${promptRunNeeded} Prompt Run completion${promptRunNeeded === 1 ? '' : 's'}.`}</p>
       </section>
       <button className="primary-btn" onClick={copyShareText}>Copy share text</button>
       {copied && <p className="feedback good" role="status">Share text copied.</p>}
@@ -1615,7 +1686,7 @@ function BadgeScreen({
         <section className="settings-panel debug-panel" aria-labelledby="debug-tools-title">
           <p className="eyebrow">Debug mode</p>
           <h2 id="debug-tools-title">Progress tools</h2>
-          <p>Visible because the URL includes <code>?debug=1</code>. These tools only touch Prompt Life localStorage keys.</p>
+          <p>Visible in diagnostics mode. These tools only touch Prompt Life saved progress keys.</p>
           <div className="debug-actions">
             <button className="secondary-btn" onClick={onMarkFirstLessonComplete}>Mark first lesson complete</button>
             <button className="secondary-btn" onClick={onMarkAllLessonsIncomplete}>Mark all lessons incomplete</button>
@@ -1628,11 +1699,60 @@ function BadgeScreen({
   )
 }
 
+function ReviewLessonCards() {
+  return (
+    <main className="review-route lesson-review-route" aria-labelledby="review-title">
+      <header className="review-cover">
+        <p className="eyebrow">Prompt Life v{APP_VERSION}</p>
+        <h1 id="review-title" tabIndex={-1}>Lesson Cards</h1>
+        <p>One accessible review card per lesson, built from the same HTML lesson content used in the app.</p>
+      </header>
+      {lessons.map((lesson, index) => (
+        <article className="review-card lesson-review-card" key={lesson.id} aria-labelledby={`${lesson.id}-review-title`}>
+          <div className="lesson-progress-row">
+            <span>{lesson.actLabel}</span>
+            <span>{index + 1} / {lessons.length}</span>
+          </div>
+          <h2 id={`${lesson.id}-review-title`}>{lesson.title}</h2>
+          <p className="lede small">{lesson.subtitle}</p>
+          <VisualAid id={lesson.visualAidId} compact />
+          <dl className="review-lesson-grid">
+            <div><dt>Definition</dt><dd>{lesson.definition}</dd></div>
+            <div><dt>Where</dt><dd>{lesson.where}</dd></div>
+            <div><dt>Why</dt><dd>{lesson.why}</dd></div>
+            <div><dt>Relationship</dt><dd>{lesson.relationship}</dd></div>
+            <div><dt>Metaphor</dt><dd>{lesson.metaphor}</dd></div>
+            <div><dt>Brain bridge</dt><dd>{lesson.brainBridge?.metaphor}</dd></div>
+            <div><dt>Brain limit</dt><dd>{lesson.brainBridge?.limit}</dd></div>
+            <div><dt>Checkpoint</dt><dd>{lesson.quiz.question} Answer: {lesson.quiz.answer}.</dd></div>
+          </dl>
+          <div className="term-row compact" aria-label={`Glossary terms for ${lesson.title}`}>
+            {lesson.terms.map((term) => <span key={term}>{term}</span>)}
+          </div>
+        </article>
+      ))}
+    </main>
+  )
+}
+
+function VisualAidReviewPage() {
+  return (
+    <main className="review-route visual-aid-review-route" aria-labelledby="visual-review-title">
+      <header className="review-cover">
+        <p className="eyebrow">Prompt Life v{APP_VERSION}</p>
+        <h1 id="visual-review-title" tabIndex={-1}>Visual Aid Gallery</h1>
+        <p>Reusable SVG/CSS diagrams for the v0.6 lesson path.</p>
+      </header>
+      <VisualAidGallery />
+    </main>
+  )
+}
+
 function ScreenHeader({ kicker, title, subtitle, titleId }) {
   return (
     <header className="screen-header">
       <p className="eyebrow">{kicker}</p>
-      <h1 id={titleId}>{title}</h1>
+      <h1 id={titleId} tabIndex={-1}>{title}</h1>
       <p>{subtitle}</p>
     </header>
   )
@@ -1649,14 +1769,16 @@ function BottomNav({ tab, setTab }) {
   const activeTab = tab === 'learn' ? 'journey' : tab
 
   return (
-    <nav className="bottom-nav" aria-label="Primary navigation">
-      {items.map(([id, label, icon]) => (
-        <button key={id} data-tab={id} className={activeTab === id ? 'active' : ''} onClick={() => setTab(id)} aria-current={activeTab === id ? 'page' : undefined}>
-          <img src={`${ASSET}/icons/png/${icon}@48.png`} alt="" aria-hidden="true" />
-          <span>{label}</span>
-        </button>
-      ))}
-    </nav>
+    <div className="bottom-nav-layer">
+      <nav className="bottom-nav" aria-label="Primary navigation">
+        {items.map(([id, label, icon]) => (
+          <button key={id} data-tab={id} className={activeTab === id ? 'active' : ''} onClick={() => setTab(id)} aria-current={activeTab === id ? 'page' : undefined}>
+            <img src={`${ASSET}/icons/png/${icon}@48.png`} alt="" aria-hidden="true" />
+            <span>{label}</span>
+          </button>
+        ))}
+      </nav>
+    </div>
   )
 }
 

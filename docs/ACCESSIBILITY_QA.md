@@ -1,6 +1,6 @@
 # Accessibility QA
 
-Date: 2026-05-31
+Date: 2026-06-02
 
 ## Keyboard Walkthrough
 
@@ -18,10 +18,12 @@ Date: 2026-05-31
 - Reviewed at 390px by 844px in the in-app browser.
 - Bottom navigation labels fit: Home, Journey, Play, Glossary, Badge.
 - Main touch targets are 44px or larger.
-- Lesson continue action stays above the bottom nav.
+- App content now scrolls inside a fixed mobile shell, so browser chrome changes are less likely to trap the bottom nav.
+- Lesson continue action can scroll above the bottom nav.
 - Glossary drawer is bottom-sheet style with safe-area-aware padding.
 - Mini-game controls are reachable and readable at 390px.
 - Prompt Run and Play screens have extra safe-area-aware bottom padding so feedback, hints, and final controls can scroll above the fixed bottom nav.
+- v0.6 needs real iPhone Safari and Chrome confirmation after deployment; the in-app browser is useful but not a full Mobile Safari substitute.
 
 ## Reduced-Motion Checklist
 
@@ -38,6 +40,8 @@ Date: 2026-05-31
 - Screens are labeled with heading IDs.
 - Images include meaningful alt text when they teach or orient the user; decorative icons use empty alt text and `aria-hidden`.
 - Mini-games use buttons for actions instead of clickable divs.
+- Game screens now pass IDs to their visible `h1` headings so `aria-labelledby` targets exist.
+- Review routes use a standalone `main` without app chrome for cleaner printing.
 
 ## Screen-Reader Feedback
 
@@ -54,6 +58,7 @@ Date: 2026-05-31
 - Interactive animation controls are keyboard-reachable buttons.
 - Static captions describe what motion would otherwise imply.
 - No animation relies on color alone; labels, captions, or state text also communicate the concept.
+- v0.6 visual aids are static SVG/CSS diagrams with surrounding HTML captions.
 
 ## v0.5 Prompt Run Checks
 
@@ -68,3 +73,4 @@ Date: 2026-05-31
 - No automated axe audit is wired into the project yet.
 - Focus trapping inside the glossary drawer is basic; Escape and focus restore work, but Tab can still reach browser chrome after the drawer controls.
 - The app does not yet offer a full high-contrast theme toggle beyond the existing contrast improvements.
+- Real iPhone Safari QA remains a manual deployment follow-up.

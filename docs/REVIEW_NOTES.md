@@ -1,6 +1,56 @@
 # Review Notes
 
-Date: 2026-05-31
+Date: 2026-06-02
+
+## v0.6 Content Repair and Mobile Shell
+
+### What Changed
+
+- Normalized the Journey into the requested 25-lesson concept path.
+- Added Prompt vs Response, Vectors, and How AI Learns as formal Journey lessons.
+- Folded Alignment, Vocabulary Cloud, and Brain Metaphor Limits into surrounding lessons and glossary content instead of keeping them as standalone lessons.
+- Added Brain Bridge to every lesson so brain metaphors are useful but explicitly bounded.
+- Added reusable `VisualAid` diagrams and a `/review/visual-aids` gallery.
+- Rebuilt the lesson page hierarchy around hero, visual aid, core idea, relationship, metaphor, Brain Bridge, tiny interaction, checkpoint, reflection, and continue.
+- Moved reusable exercises out of Journey lessons so Journey teaches and Play practices.
+- Added section intro cards and a stage timeline to the Journey map.
+- Repaired the mobile shell with internal scrolling, safe-area bottom padding, and a frosted bottom navigation gradient.
+- Added scroll-to-top/focus behavior for main navigation, lessons, Prompt Run steps, and How AI Learns steps.
+- Added `/review/lesson-cards` plus `npm run export:lesson-pdf`.
+- Added simple PWA metadata through `public/manifest.webmanifest` and mobile app meta tags.
+- Cleaned ordinary UI copy to avoid internal product language and old names.
+
+### Files Changed
+
+- `README.md`
+- `index.html`
+- `package.json`
+- `public/manifest.webmanifest`
+- `scripts/export-lesson-pdf.mjs`
+- `src/components/VisualAids.tsx`
+- `src/data/content.ts`
+- `src/main.tsx`
+- `src/styles/global.css`
+- `docs/ACCESSIBILITY_QA.md`
+- `docs/CONTENT_QA_CHECKLIST.md`
+- `docs/CONTENT_REPAIR_V0_6.md`
+- `docs/VISUAL_AIDS_V0_6.md`
+- `docs/review/LESSON_CONTENT_MATRIX.md`
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed.
+- `npm run export:lesson-pdf`: passed.
+- Browser screenshots captured for Home, Journey section intro, lesson top, lesson visual aid, Brain Bridge, bottom nav gradient, 320px pill wrapping, review lesson cards, visual aid gallery, and Badge.
+- Responsive smoke check passed at 320px, 390px, and 430px with no horizontal overflow. Desktop review route rendered 25 lesson cards.
+- Real iPhone Safari/Chrome test remains a post-deploy manual check.
+
+### Next Three Recommended Improvements
+
+1. Add automated route checks for `/review/lesson-cards`, `/review/visual-aids`, lesson navigation, and progress reset.
+2. Add a real axe or Playwright accessibility pass for focus order, modal focus trapping, and touch target regression checks.
+3. Add a lightweight service worker only after the content shell is stable enough to benefit from offline caching.
 
 ## v0.4 Exercise System Update
 
