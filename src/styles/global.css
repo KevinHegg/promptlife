@@ -1611,6 +1611,16 @@ p {
   margin-bottom: 0;
 }
 
+.app-version {
+  margin: 0.35rem 0 0;
+  min-height: 1.1rem;
+  text-align: right;
+  color: #9aa4b8;
+  font-size: 0.76rem;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
 .secondary-btn.danger {
   border-color: #d99b7b;
   background: #fff3ec;

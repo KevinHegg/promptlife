@@ -27,6 +27,8 @@ import './styles/global.css'
 
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '')
 const ASSET = `${BASE}/assets/promptlife`
+// Bump this for each shipped app change; the Badge screen displays it under Start over.
+const APP_VERSION = '0.5.1'
 const STORAGE_KEYS = {
   lastLocation: 'promptlife:v1:lastLocation',
   lessonId: 'promptlife:v1:lessonId',
@@ -1608,6 +1610,7 @@ function BadgeScreen({
         <button className="secondary-btn danger" onClick={onResetProgress}>Reset progress</button>
         {statusMessage && <p className="feedback good" role="status">{statusMessage}</p>}
       </section>
+      <p className="app-version" aria-label={`Prompt Life version ${APP_VERSION}`}>v{APP_VERSION}</p>
       {debugEnabled && (
         <section className="settings-panel debug-panel" aria-labelledby="debug-tools-title">
           <p className="eyebrow">Debug mode</p>
