@@ -2,6 +2,64 @@
 
 Date: 2026-06-02
 
+## v0.6.3 Content Inventory and RAG Addendum
+
+### What Changed
+
+- Added `RAG and Retrieval` as a dedicated Journey card after `Context Window`.
+- Added `Grounding` to the glossary, including relationship, metaphor, Brain Bridge, and limitation copy.
+- Added a dedicated `Open-Book Retrieval` visual aid and mapped RAG to the `Open Book or Learned?` practice activity.
+- Enhanced `/review/lesson-cards` with stage, current exercise, prompt/response note, rewrite notes, illustration need, and rubric scores.
+- Added `npm run export:lesson-cards` for the inventory review PDF.
+- Generated the full content inventory, rubric, lesson matrix, misconception map, curriculum gaps, architecture proposal, visual aid inventory, first-five rewrite draft plus RAG addendum, UI copy cleanup list, and review-card instructions.
+- Created `src/data/contentReview.js` so review route data and generated docs share the same audit metadata.
+
+### Files Changed
+
+- `README.md`
+- `package.json`
+- `scripts/export-lesson-pdf.mjs`
+- `scripts/generate-content-inventory.mjs`
+- `src/components/VisualAids.tsx`
+- `src/data/content.ts`
+- `src/data/contentReview.js`
+- `src/data/exercises.ts`
+- `src/main.tsx`
+- `src/styles/global.css`
+- `docs/content-inventory/*`
+- `docs/screenshots/v0-6-3-*.png`
+
+### Inventory Completeness
+
+- Journey lessons reviewed: 26 of 26.
+- Matrix rows: 26 of 26.
+- Every current Journey lesson includes a definition, relationship line, metaphor, Brain Bridge, limitation, visual aid, checkpoint, glossary terms, review stage, confusion risk, missing-explanation note, illustration need, rewrite priority, and rubric scores.
+- Existing source doc note: `docs/HOW_AI_LEARNS_SIDE_TOUR.md` was referenced by the prompt but does not exist in this checkout; this pass used `docs/PLAY_MODE_V0_5.md`, `docs/ANIMATION_SYSTEM.md`, `docs/EXERCISE_SYSTEM.md`, and current `learningModes` data as the authoritative side-tour context.
+
+### Highest-Priority Content Problems
+
+- Vectors, tensors, hidden states, and context windows still need stronger shared examples and clearer axis/temporary-state visuals.
+- Attention and MLP should be rewritten as a tighter pair so learners can distinguish cross-position relevance from per-token feature reshaping.
+- RAG now has a dedicated card, but the v0.7 curriculum should add stronger source-trust and citation examples.
+- Risk literacy should eventually gain a synthesis lesson after the risk/myth card.
+
+### Verification
+
+- `npm install`: already up to date during this pass.
+- `npm run typecheck`: passed.
+- `npm run build`: passed.
+- `npm run export:lesson-cards`: passed.
+- `/review/lesson-cards`: loaded in the in-app browser without app chrome or bottom navigation.
+- RAG Journey lesson and Grounding glossary drawer: verified in the in-app browser at mobile width.
+- `docs/content-inventory/prompt-life-lesson-cards-v0-6.pdf`: generated.
+- Real iPhone Safari/Chrome test remains a post-deploy manual check.
+
+### Next Three Recommended Improvements
+
+1. Rewrite the highest-priority lessons in app data, starting with Vectors, Tensors, Attention, MLP, Hidden States, Context Window, RAG, and Risk vs Myth.
+2. Add a shared dog/cat example path across tokenization, attention, logits, softmax, sampling, autoregression, context, and RAG.
+3. Add automated review-route and mobile smoke tests that verify lesson count, RAG placement, PDF export, bottom-nav clipping, and glossary drawer fields.
+
 ## v0.6 Content Repair and Mobile Shell
 
 ### What Changed

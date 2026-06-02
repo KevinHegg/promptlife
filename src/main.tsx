@@ -22,14 +22,15 @@ import {
 import { ExerciseShell } from './components/ExerciseSystem'
 import { VisualAid, VisualAidGallery } from './components/VisualAids'
 import { acts, games, glossary, learningModes, lessons } from './data/content'
-import { emptyExerciseProgress, exerciseById, exercises } from './data/exercises'
+import { buildLessonReviewProfile, reviewRubricCategories } from './data/contentReview'
+import { emptyExerciseProgress, exerciseById, exercises, lessonExerciseIds } from './data/exercises'
 import { PROMPT_RUN_FINAL_ID, PROMPT_RUN_SAMPLE, emptyPromptRunProgress, promptRunFinalChallenge, promptRunSteps } from './data/promptRun'
 import './styles/global.css'
 
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '')
 const ASSET = `${BASE}/assets/promptlife`
 // Bump this for each shipped app change; the Badge screen displays it under Start over.
-const APP_VERSION = '0.6.1'
+const APP_VERSION = '0.6.3'
 const STORAGE_KEYS = {
   lastLocation: 'promptlife:v1:lastLocation',
   lessonId: 'promptlife:v1:lessonId',
@@ -1530,7 +1531,7 @@ function GameReflection({ prompt }) {
 
 function GlossaryScreen({ onOpen }) {
   const [query, setQuery] = useState('')
-  const terms = glossary.filter((item) => `${item.term} ${item.definition} ${item.relationship} ${item.metaphor} ${item.confused ?? ''}`.toLowerCase().includes(query.toLowerCase()))
+  const terms = glossary.filter((item) => `${item.term} ${item.definition} ${item.relationship} ${item.metaphor} ${item.brainMetaphor ?? ''} ${item.brainLimit ?? ''} ${item.confused ?? ''}`.toLowerCase().includes(query.toLowerCase()))
 
   return (
     <section className="screen glossary-screen" aria-labelledby="glossary-title">
@@ -1563,7 +1564,7 @@ function GlossaryDrawer({ termId, onOpen, onClose }) {
   const closeRef = useRef(null)
   const relatedTerms = useMemo(() => {
     if (!item) return []
-    const haystack = `${item.definition} ${item.relationship} ${item.metaphor} ${item.confused ?? ''}`.toLowerCase()
+    const haystack = `${item.definition} ${item.relationship} ${item.metaphor} ${item.brainMetaphor ?? ''} ${item.brainLimit ?? ''} ${item.confused ?? ''}`.toLowerCase()
     return glossary
       .filter((term) => term.id !== item.id && haystack.includes(term.term.toLowerCase()))
       .slice(0, 4)
@@ -1606,6 +1607,8 @@ function GlossaryDrawer({ termId, onOpen, onClose }) {
         <p id="drawer-definition">{item.definition}</p>
         <section className="concept-card compact"><span>Relationship</span><p>{item.relationship}</p></section>
         <section className="concept-card compact"><span>Metaphor</span><p>{item.metaphor}</p></section>
+        {item.brainMetaphor && <section className="concept-card compact"><span>Brain bridge</span><p>{item.brainMetaphor}</p></section>}
+        {item.brainLimit && <section className="concept-card compact"><span>Where it breaks</span><p>{item.brainLimit}</p></section>}
         {item.confused && <section className="concept-card compact"><span>Often confused with</span><p>{item.confused}</p></section>}
         {relatedTerms.length > 0 && (
           <section className="concept-card compact">
@@ -1705,32 +1708,58 @@ function ReviewLessonCards() {
       <header className="review-cover">
         <p className="eyebrow">Prompt Life v{APP_VERSION}</p>
         <h1 id="review-title" tabIndex={-1}>Lesson Cards</h1>
-        <p>One accessible review card per lesson, built from the same HTML lesson content used in the app.</p>
+        <p>One accessible curriculum-review card per lesson, built from current app data plus inventory notes and rubric scores.</p>
       </header>
-      {lessons.map((lesson, index) => (
-        <article className="review-card lesson-review-card" key={lesson.id} aria-labelledby={`${lesson.id}-review-title`}>
-          <div className="lesson-progress-row">
-            <span>{lesson.actLabel}</span>
-            <span>{index + 1} / {lessons.length}</span>
-          </div>
-          <h2 id={`${lesson.id}-review-title`}>{lesson.title}</h2>
-          <p className="lede small">{lesson.subtitle}</p>
-          <VisualAid id={lesson.visualAidId} compact />
-          <dl className="review-lesson-grid">
-            <div><dt>Definition</dt><dd>{lesson.definition}</dd></div>
-            <div><dt>Where</dt><dd>{lesson.where}</dd></div>
-            <div><dt>Why</dt><dd>{lesson.why}</dd></div>
-            <div><dt>Relationship</dt><dd>{lesson.relationship}</dd></div>
-            <div><dt>Metaphor</dt><dd>{lesson.metaphor}</dd></div>
-            <div><dt>Brain bridge</dt><dd>{lesson.brainBridge?.metaphor}</dd></div>
-            <div><dt>Brain limit</dt><dd>{lesson.brainBridge?.limit}</dd></div>
-            <div><dt>Checkpoint</dt><dd>{lesson.quiz.question} Answer: {lesson.quiz.answer}.</dd></div>
-          </dl>
-          <div className="term-row compact" aria-label={`Glossary terms for ${lesson.title}`}>
-            {lesson.terms.map((term) => <span key={term}>{term}</span>)}
-          </div>
-        </article>
-      ))}
+      {lessons.map((lesson, index) => {
+        const profile = buildLessonReviewProfile(lesson)
+        const exerciseId = lessonExerciseIds[lesson.id]
+        const exercise = exerciseId ? exerciseById[exerciseId] : null
+        const incorrectAnswers = lesson.quiz.choices.filter((choice) => choice !== lesson.quiz.answer)
+        const feedbackEntries = Object.entries(lesson.quiz.feedback ?? {})
+
+        return (
+          <article className="review-card lesson-review-card" key={lesson.id} aria-labelledby={`${lesson.id}-review-title`}>
+            <div className="lesson-progress-row">
+              <span>{index + 1} / {lessons.length}</span>
+              <span>{lesson.actLabel}</span>
+            </div>
+            <h2 id={`${lesson.id}-review-title`}>{lesson.title}</h2>
+            <p className="lede small">{lesson.subtitle}</p>
+            <div className="review-meta-row" aria-label={`Review status for ${lesson.title}`}>
+              <span>Stage: {profile.stage}</span>
+              <span>Priority: {profile.rewritePriority}</span>
+              <span>Rubric avg: {profile.rubricAverage}/5</span>
+            </div>
+            <VisualAid id={lesson.visualAidId} compact />
+            <dl className="review-lesson-grid">
+              <div><dt>Definition</dt><dd>{lesson.definition}</dd></div>
+              <div><dt>Current explanation</dt><dd><strong>Where:</strong> {lesson.where} <strong>Why:</strong> {lesson.why}</dd></div>
+              <div><dt>Relationship</dt><dd>{lesson.relationship}</dd></div>
+              <div><dt>Metaphor</dt><dd>{lesson.metaphor}</dd></div>
+              <div><dt>Brain metaphor</dt><dd>{lesson.brainBridge?.metaphor ?? 'None listed.'}</dd></div>
+              <div><dt>Brain limit</dt><dd>{lesson.brainBridge?.limit ?? 'None listed.'}</dd></div>
+              <div><dt>Prompt/response note</dt><dd>{profile.promptResponseNote}</dd></div>
+              <div><dt>Visual aid</dt><dd><code>{lesson.visualAidId}</code></dd></div>
+              <div><dt>Current exercise</dt><dd>{exercise ? <><code>{exercise.id}</code>: {exercise.title}</> : 'None rendered in Journey; no direct Play mapping.'}</dd></div>
+              <div><dt>Checkpoint</dt><dd>{lesson.quiz.question} Correct: {lesson.quiz.answer}. Incorrect: {incorrectAnswers.join('; ')}.</dd></div>
+              <div><dt>Feedback</dt><dd>{lesson.quiz.explain}{feedbackEntries.length > 0 ? ` Choice notes: ${feedbackEntries.map(([choice, note]) => `${choice}: ${note}`).join(' ')}` : ''}</dd></div>
+              <div><dt>Rewrite notes</dt><dd><strong>Risk:</strong> {profile.confusionRisk} <strong>Missing:</strong> {profile.missingExplanation}</dd></div>
+              <div><dt>Illustration needed</dt><dd>{profile.illustrationNeeded}</dd></div>
+            </dl>
+            <section className="review-rubric" aria-labelledby={`${lesson.id}-rubric-title`}>
+              <h3 id={`${lesson.id}-rubric-title`}>Rubric Scores</h3>
+              <div className="rubric-mini-grid">
+                {reviewRubricCategories.map((category) => (
+                  <span key={category.key}><strong>{category.label}</strong> {profile.rubric[category.key]}/5</span>
+                ))}
+              </div>
+            </section>
+            <div className="term-row compact" aria-label={`Glossary terms for ${lesson.title}`}>
+              {lesson.terms.map((term) => <span key={term}>{term}</span>)}
+            </div>
+          </article>
+        )
+      })}
     </main>
   )
 }

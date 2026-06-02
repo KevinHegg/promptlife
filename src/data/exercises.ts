@@ -260,21 +260,25 @@ export const exercises: Exercise[] = [
     title: 'Open Book or Learned?',
     concept: 'Weights, retrieved context, and temporary instructions',
     prompt: 'RAG can feel like learning, but it usually places source material into context.',
-    goal: 'Sort each item by whether it lives in weights, context, or a temporary instruction.',
+    goal: 'Sort each item by whether it lives in weights, enters context, or is generated as response text.',
     actionVerb: 'Sort',
-    actionInstruction: 'Sort each item into Learned in weights, Placed in context, or Temporary instruction.',
+    actionInstruction: 'Sort each item into Learned in weights, Placed in context, or Generated response.',
     inputType: 'sort-buckets',
-    buckets: ['Learned in weights', 'Placed in context', 'Temporary instruction'],
+    buckets: ['Learned in weights', 'Placed in context', 'Generated response'],
     items: [
-      { id: 'trained-books', label: 'model trained on many books', bucket: 'Learned in weights' },
-      { id: 'retrieved-pdf', label: 'PDF retrieved into context', bucket: 'Placed in context' },
-      { id: 'conversation-example', label: 'conversation example inside prompt', bucket: 'Temporary instruction' },
-      { id: 'fine-tuned-support', label: 'fine-tuned customer support model', bucket: 'Learned in weights' }
+      { id: 'trained-documents', label: 'Pretraining on many documents', bucket: 'Learned in weights' },
+      { id: 'fine-tuned-support', label: 'Fine-tuning a support assistant', bucket: 'Learned in weights' },
+      { id: 'retrieved-pdf', label: 'Retrieved PDF passage', bucket: 'Placed in context' },
+      { id: 'search-snippet', label: 'Search result snippet', bucket: 'Placed in context' },
+      { id: 'system-instruction', label: 'System instruction', bucket: 'Placed in context' },
+      { id: 'user-question', label: 'User question', bucket: 'Placed in context' },
+      { id: 'answer-paragraph', label: 'The answer paragraph', bucket: 'Generated response' },
+      { id: 'generated-citation', label: 'A generated citation', bucket: 'Generated response' }
     ],
     feedbackCorrect: 'Good. You separated learned weights from open-book context.',
-    feedbackIncorrect: 'RAG places material into context. It is not the same as training weights.',
-    insight: 'RAG is like an open-book exam; it is not the same as learning.',
-    glossaryTerms: ['RAG', 'retrieval', 'context window', 'weights'],
+    feedbackIncorrect: 'RAG places material into context. It is not the same as training weights, and the answer is still generated.',
+    insight: 'RAG is like an open-book exam. The book is in context, not permanently inside the model.',
+    glossaryTerms: ['RAG', 'retrieval', 'context window', 'grounding', 'weights'],
     completionKey: 'exercise:open-book-or-learned'
   },
   {
@@ -321,6 +325,7 @@ export const lessonExerciseIds: Record<string, string> = {
   sampling: 'pick-next-token',
   autoregression: 'prompt-or-response-label',
   'context-window': 'context-window-fell-out',
+  'rag-retrieval': 'open-book-or-learned',
   'brain-metaphor': 'brain-metaphor-boundary',
   'risk-myth': 'open-book-or-learned'
 }

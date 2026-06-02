@@ -42,9 +42,9 @@ export const acts = [
     id: 'day-repeats',
     number: 5,
     name: 'The Day Repeats',
-    summary: 'Generation repeats one token at a time inside a temporary context window.',
-    promptMoment: 'The selected token is appended, then the model runs again.',
-    focus: 'Understand autoregression and temporary context.',
+    summary: 'Generation repeats one token at a time inside a temporary context window that may include retrieved material.',
+    promptMoment: 'The selected token is appended, retrieved context may be visible, then the model runs again.',
+    focus: 'Understand autoregression, temporary context, and retrieval as open-book context.',
     keyDistinction: 'The context window is visible working input, not permanent memory.'
   },
   {
@@ -643,6 +643,42 @@ export const lessons = [
     }
   },
   {
+    id: 'rag-retrieval',
+    act: 'day-repeats',
+    actLabel: 'The Day Repeats',
+    title: 'RAG and Retrieval',
+    shortTitle: 'Open-Book AI',
+    subtitle: 'Retrieved text joins the current context',
+    icon: icons.context,
+    image: images.context,
+    alt: 'Retrieved document cards placed into a limited context window before response generation',
+    terms: ['rag', 'retrieval', 'grounding', 'context window', 'input context', 'prompt tokens', 'response tokens', 'inference', 'fine-tuning', 'training', 'hallucination'],
+    visualAidId: 'rag-retrieval',
+    definition: 'Retrieval-augmented generation, or RAG, retrieves outside information and places it into the model’s context before generating a response.',
+    where: 'It happens during inference, before or during response generation, and usually does not change model weights.',
+    why: 'RAG helps learners see that the model is not magically knowing private documents; retrieved snippets become temporary context.',
+    relationship: 'RAG depends on the context window: retrieved text becomes prompt/context tokens, then the model still uses attention, hidden states, logits, softmax, and sampling to generate response tokens.',
+    metaphor: 'Open-book AI: the model gets notes before answering.',
+    brainBridge: brain('It is a little like looking something up in notes before answering a question.', 'A human can judge sources, remember what was read, and reason about trust in richer ways. The model still generates likely response tokens from retrieved context and learned weights.'),
+    interaction: { type: 'context', title: 'Place the notes in context', copy: 'Retrieved cards enter the current context. They do not permanently update the model.' },
+    quiz: {
+      question: 'What does RAG usually do?',
+      choices: [
+        'Retrieves outside information and places it into the current context',
+        'Permanently updates the model’s weights',
+        'Makes the model conscious of documents',
+        'Guarantees that every answer is true'
+      ],
+      answer: 'Retrieves outside information and places it into the current context',
+      explain: 'RAG is retrieval plus context. It can improve grounding, but it is not training, fine-tuning, permanent memory, or a truth guarantee.',
+      feedback: {
+        'Permanently updates the model’s weights': 'Not quite. Unless a separate training process happens, RAG does not durably update model weights.',
+        'Makes the model conscious of documents': 'Not quite. Retrieved documents become visible context; the model does not become aware of them.',
+        'Guarantees that every answer is true': 'Not quite. RAG can reduce hallucinations, but retrieval can be poor and the model can still misuse context.'
+      }
+    }
+  },
+  {
     id: 'how-ai-learns',
     act: 'side-tours',
     actLabel: 'Wider AI Literacy',
@@ -791,8 +827,9 @@ export const glossary = [
   { id: 'autoregression', term: 'Autoregression', definition: 'Generating a response by choosing one token, appending it, and repeating.', relationship: 'The vocabulary cloud is consulted again after each generated token.', metaphor: 'Adding train cars one at a time.' },
   { id: 'diffusion', term: 'Diffusion', definition: 'A generation method that starts with noise and iteratively denoises.', relationship: 'Diffusion differs from autoregressive text prediction.', metaphor: 'Developing an image from static.' },
   { id: 'multimodal', term: 'Multimodal', definition: 'Able to work across multiple media types, such as text, images, audio, or video.', relationship: 'Different modalities can be represented in compatible vector spaces or processed by connected model components.', metaphor: 'A shared transit hub for different kinds of information.' },
-  { id: 'rag', term: 'RAG', definition: 'Retrieval-augmented generation: adding retrieved source material to the prompt before generation.', relationship: 'RAG changes context, not the model base weights.', metaphor: 'Bringing notes into an open-book response.' },
+  { id: 'rag', term: 'RAG', definition: 'Retrieval-augmented generation: retrieving outside information and placing it into the model context before generation.', relationship: 'RAG changes context, not the model base weights.', metaphor: 'Bringing notes into an open-book response.', confused: 'Not training, fine-tuning, permanent memory, or a guarantee that the answer is true.' },
   { id: 'retrieval', term: 'Retrieval', definition: 'Finding external material and placing it into the current context for the model to use.', relationship: 'Retrieval supports inference without necessarily changing weights.', metaphor: 'Pulling a source from the library shelf.' },
+  { id: 'grounding', term: 'Grounding', definition: 'Connecting a model response to available evidence, such as retrieved documents, cited sources, data, or tool results.', relationship: 'RAG is one way to improve grounding, but grounding can still fail if retrieval is poor or the model misuses the retrieved context.', metaphor: 'Tying the balloon to the ground.', brainMetaphor: 'Like checking your answer against notes before speaking.', brainLimit: 'The model is not consciously verifying truth unless the system is designed to check evidence.', confused: 'Grounding can help, but it does not make every answer true.' },
   { id: 'in-context learning', term: 'In-context learning', definition: 'Behavior change caused by examples or instructions inside the prompt during inference.', relationship: 'It steers the current run without normally updating weights.', metaphor: 'Temporary instructions on a whiteboard.', confused: 'Despite the name, it is not durable training.' },
   { id: 'neural network', term: 'Neural network', definition: 'A layered model made of learned numerical transformations.', relationship: 'The term borrows from brain language, but modern networks are engineered mathematical systems.', metaphor: 'A network of adjustable transformations.', confused: 'Not a biological brain.' },
   { id: 'hallucination', term: 'Hallucination', definition: 'A confident model output that is unsupported, incorrect, or fabricated.', relationship: 'Hallucinations can arise because generation optimizes likely text, not guaranteed truth.', metaphor: 'A fluent answer with a missing citation trail.', confused: 'Not lying; lying implies intent.' },

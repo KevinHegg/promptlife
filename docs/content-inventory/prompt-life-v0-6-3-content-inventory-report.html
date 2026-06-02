@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Prompt Life v0.6.3 Content Inventory Report</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #101735;
+        --muted: #4a5570;
+        --teal: #0b8f8b;
+        --line: #d8e0ef;
+        --soft: #f5f8fc;
+      }
+
+      body {
+        margin: 0;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        color: var(--ink);
+        background: white;
+      }
+
+      main {
+        max-width: 820px;
+        margin: 0 auto;
+        padding: 32px;
+      }
+
+      section {
+        break-inside: avoid;
+        margin-bottom: 28px;
+      }
+
+      h1 {
+        margin: 0 0 8px;
+        color: #071b6f;
+        font-size: 34px;
+        line-height: 1;
+      }
+
+      h2 {
+        margin: 0 0 10px;
+        color: #071b6f;
+        font-size: 21px;
+      }
+
+      p,
+      li {
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.5;
+      }
+
+      ul {
+        margin-top: 8px;
+        padding-left: 20px;
+      }
+
+      .eyebrow {
+        margin: 0 0 8px;
+        color: var(--teal);
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0;
+        text-transform: uppercase;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .card {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--soft);
+        padding: 14px;
+      }
+
+      .card strong {
+        display: block;
+        color: var(--ink);
+        margin-bottom: 4px;
+      }
+
+      figure {
+        margin: 0 0 24px;
+        break-inside: avoid;
+      }
+
+      img {
+        display: block;
+        width: 100%;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+      }
+
+      figcaption {
+        margin-top: 8px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      code {
+        color: #071b6f;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      }
+
+      @media print {
+        main {
+          padding: 24px;
+        }
+
+        figure.screenshot {
+          break-before: page;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section>
+        <p class="eyebrow">Prompt Life v0.6.3</p>
+        <h1>Content Inventory and RAG Addendum Report</h1>
+        <p>
+          This pass completed the curriculum inventory artifacts, added RAG and Retrieval as a dedicated Journey card, added Grounding to the glossary, upgraded the lesson-card review route, exported the review PDF, and verified the app builds.
+        </p>
+      </section>
+
+      <section class="grid">
+        <div class="card">
+          <strong>Journey count</strong>
+          <p>26 lessons inventoried. RAG and Retrieval is lesson 22, immediately after Context Window.</p>
+        </div>
+        <div class="card">
+          <strong>PDF artifacts</strong>
+          <p><code>docs/content-inventory/prompt-life-lesson-cards-v0-6.pdf</code> and this report PDF. The review deck has 27 PDF page objects: one cover plus 26 lessons.</p>
+        </div>
+        <div class="card">
+          <strong>Verification</strong>
+          <p><code>npm run typecheck</code>, <code>npm run build</code>, and <code>npm run export:lesson-cards</code> passed.</p>
+        </div>
+        <div class="card">
+          <strong>Deploy target</strong>
+          <p>Main branch update prepared for GitHub Pages phone testing.</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>Files Changed</h2>
+        <ul>
+          <li><code>src/data/content.ts</code>, <code>src/data/exercises.ts</code>, <code>src/data/contentReview.js</code></li>
+          <li><code>src/main.tsx</code>, <code>src/components/VisualAids.tsx</code>, <code>src/styles/global.css</code></li>
+          <li><code>scripts/export-lesson-pdf.mjs</code>, <code>scripts/generate-content-inventory.mjs</code>, <code>package.json</code>, <code>README.md</code></li>
+          <li><code>docs/content-inventory/*</code>, <code>docs/REVIEW_NOTES.md</code>, and <code>docs/screenshots/v0-6-3-*.png</code></li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>What Is Done</h2>
+        <ul>
+          <li>Generated complete current-content inventory, quality rubric, lesson matrix JSON, gaps, architecture proposal, visual inventory, misconception map, rewrite draft, UI copy cleanup list, and review instructions.</li>
+          <li>Added RAG and Retrieval / Open-Book AI as a Journey card with prompt/response and durable/temporary distinctions.</li>
+          <li>Added Grounding glossary content with metaphor, Brain Bridge, and limitation.</li>
+          <li>Enhanced <code>/review/lesson-cards</code> with inventory fields and rubric scores.</li>
+          <li>Exported the inventory lesson-card PDF with one review card per lesson.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>How To Run Locally</h2>
+        <ul>
+          <li><code>npm install</code></li>
+          <li><code>npm run dev</code></li>
+          <li>Open <code>http://localhost:5173/</code></li>
+          <li>For the review route, open <code>http://localhost:5173/review/lesson-cards</code></li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Next Three v0.2 Improvements</h2>
+        <ul>
+          <li>Rewrite the highest-priority lessons in app data: Vectors, Tensors, Attention, MLP, Hidden States, Context Window, RAG, and Risk vs Myth.</li>
+          <li>Add a shared dog/cat example path across tokenization, attention, decoding, autoregression, context, and RAG.</li>
+          <li>Add automated route and mobile smoke tests for lesson count, RAG placement, PDF export, bottom-nav clipping, and glossary drawer fields.</li>
+        </ul>
+      </section>
+
+      <figure class="screenshot">
+        <img src="../screenshots/v0-6-3-review-lesson-cards.png" alt="Lesson cards review route with inventory and rubric fields" />
+        <figcaption>Review route cover and first lesson card.</figcaption>
+      </figure>
+
+      <figure class="screenshot">
+        <img src="../screenshots/v0-6-3-review-rag-card.png" alt="RAG and Retrieval review card with Open-Book Retrieval visual aid" />
+        <figcaption>RAG and Retrieval review card, including the dedicated visual aid.</figcaption>
+      </figure>
+
+      <figure class="screenshot">
+        <img src="../screenshots/v0-6-3-rag-lesson-mobile.png" alt="Mobile Journey lesson screen for RAG and Retrieval" />
+        <figcaption>Mobile Journey lesson for RAG and Retrieval.</figcaption>
+      </figure>
+
+      <figure class="screenshot">
+        <img src="../screenshots/v0-6-3-grounding-drawer-mobile.png" alt="Grounding glossary drawer with relationship, metaphor, brain bridge, and limitation" />
+        <figcaption>Grounding glossary drawer with the new brain metaphor and limitation fields.</figcaption>
+      </figure>
+    </main>
+  </body>
+</html>

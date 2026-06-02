@@ -7,8 +7,11 @@ import { fileURLToPath } from 'node:url'
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const port = Number(process.env.PROMPTLIFE_PDF_PORT || 4186)
-const outDir = path.join(root, 'docs', 'review')
-const outPath = path.join(outDir, 'prompt-life-lesson-cards-v0-6.pdf')
+const route = process.env.PROMPTLIFE_PDF_ROUTE || '/review/lesson-cards?print=1'
+const defaultOut = path.join('docs', 'review', 'prompt-life-lesson-cards-v0-6.pdf')
+const requestedOut = process.env.PROMPTLIFE_PDF_OUT || defaultOut
+const outPath = path.isAbsolute(requestedOut) ? requestedOut : path.join(root, requestedOut)
+const outDir = path.dirname(outPath)
 
 await mkdir(outDir, { recursive: true })
 
@@ -27,7 +30,7 @@ server.stdout.on('data', (chunk) => process.stdout.write(chunk))
 server.stderr.on('data', (chunk) => process.stderr.write(chunk))
 
 try {
-  const url = `http://127.0.0.1:${port}/review/lesson-cards?print=1`
+  const url = `http://127.0.0.1:${port}${route}`
   await waitForUrl(url)
   const chrome = findChrome()
   await runChrome(chrome, url, outPath)

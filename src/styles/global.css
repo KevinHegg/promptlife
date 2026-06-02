@@ -2931,8 +2931,59 @@ p {
   font-size: 1.65rem;
 }
 
+.review-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 0.65rem 0 0.75rem;
+}
+
+.review-meta-row span {
+  border: 1px solid #d5def0;
+  border-radius: 8px;
+  background: #f3f7ff;
+  color: #263452;
+  padding: 0.38rem 0.55rem;
+  font-size: 0.78rem;
+  font-weight: 850;
+}
+
 .review-lesson-grid {
   margin-top: 0.85rem;
+}
+
+.review-rubric {
+  margin-top: 0.8rem;
+  padding: 0.7rem;
+  border-radius: 8px;
+  background: #f8fbff;
+}
+
+.review-rubric h3 {
+  margin: 0 0 0.5rem;
+  color: var(--pl-navy);
+  font-size: 0.95rem;
+}
+
+.rubric-mini-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.35rem;
+}
+
+.rubric-mini-grid span {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.45rem;
+  border-radius: 8px;
+  background: white;
+  color: #263452;
+  padding: 0.38rem 0.45rem;
+  font-size: 0.72rem;
+}
+
+.rubric-mini-grid strong {
+  color: var(--pl-teal);
 }
 
 .aid-review-card {
@@ -3097,6 +3148,11 @@ p {
 }
 
 @media print {
+  @page {
+    size: letter landscape;
+    margin: 0.25in;
+  }
+
   html,
   body,
   #root {
@@ -3117,10 +3173,106 @@ p {
     border-color: #d7deee;
   }
 
-  .lesson-review-card {
-    min-height: 96vh;
+  .review-cover {
+    min-height: 94vh;
     break-after: page;
     page-break-after: always;
+  }
+
+  .review-card h2 {
+    margin-bottom: 0.15rem;
+    font-size: 0.98rem;
+    line-height: 1.05;
+  }
+
+  .lesson-review-route .lede {
+    margin-bottom: 0.2rem;
+    font-size: 0.62rem;
+    line-height: 1.2;
+  }
+
+  .lesson-review-route .lesson-progress-row {
+    font-size: 0.54rem;
+  }
+
+  .lesson-review-route .review-meta-row {
+    gap: 0.16rem;
+    margin: 0.18rem 0 0.24rem;
+  }
+
+  .lesson-review-route .visual-aid {
+    float: right;
+    width: 2.65in;
+    margin: 0 0 0.08in 0.14in;
+  }
+
+  .lesson-review-route .aid-canvas {
+    min-height: 0;
+    aspect-ratio: 16 / 8.4;
+  }
+
+  .lesson-review-route .visual-aid figcaption,
+  .lesson-review-route .review-lesson-grid dd,
+  .lesson-review-route .review-lesson-grid dt,
+  .lesson-review-route .review-meta-row span,
+  .lesson-review-route .term-row span,
+  .lesson-review-route .rubric-mini-grid span {
+    font-size: 0.49rem;
+    line-height: 1.16;
+  }
+
+  .lesson-review-route .review-lesson-grid {
+    clear: none;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.06in;
+    margin-top: 0.04in;
+  }
+
+  .lesson-review-route .review-lesson-grid div {
+    padding: 0.055in;
+  }
+
+  .lesson-review-route .review-rubric {
+    clear: both;
+    margin-top: 0.08in;
+    padding: 0.055in;
+  }
+
+  .lesson-review-route .review-rubric h3 {
+    margin-bottom: 0.04in;
+    font-size: 0.58rem;
+  }
+
+  .lesson-review-route .rubric-mini-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0.25rem;
+  }
+
+  .lesson-review-route .rubric-mini-grid span {
+    display: block;
+    padding: 0.035in;
+  }
+
+  .lesson-review-route .term-row.compact {
+    gap: 0.05in;
+    margin-top: 0.06in;
+  }
+
+  .lesson-review-route .term-row span,
+  .lesson-review-route .review-meta-row span {
+    min-height: 0;
+    padding: 0.035in 0.05in;
+  }
+
+  .lesson-review-card {
+    min-height: 0;
+    margin: 0;
+    padding: 0.16in;
+    break-after: page;
+    page-break-after: always;
+    break-inside: avoid;
+    page-break-inside: avoid;
+    overflow: hidden;
   }
 
   .lesson-review-card:last-child {

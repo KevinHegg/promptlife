@@ -22,6 +22,7 @@ export const visualAidCatalog = [
   { id: 'sampling', title: 'Sample One Token', caption: 'Sampling chooses one token from the probability cloud.', pattern: 'sampling' },
   { id: 'autoregression', title: 'Append and Repeat', caption: 'The chosen token is appended, then the model runs again.', pattern: 'loop' },
   { id: 'context-window', title: 'Temporary Context Window', caption: 'Only visible context can influence the next token.', pattern: 'window' },
+  { id: 'rag-retrieval', title: 'Open-Book Retrieval', caption: 'Retrieved document cards enter the context before response tokens are generated.', pattern: 'rag' },
   { id: 'ai-learns', title: 'Learning Modes', caption: 'Durable training, retrieval, and temporary steering change different things.', pattern: 'learns' },
   { id: 'diffusion', title: 'Denoise, Not Append', caption: 'Diffusion refines noise step by step instead of generating text token by token.', pattern: 'diffusion' },
   { id: 'multimodal', title: 'Shared Media Hub', caption: 'Different media types can connect through learned representations.', pattern: 'multimodal' },
@@ -98,6 +99,8 @@ function VisualPattern({ aid }) {
       return <LoopSvg />
     case 'window':
       return <WindowSvg />
+    case 'rag':
+      return <RagSvg />
     case 'learns':
     case 'compare':
       return <LearnsSvg />
@@ -423,6 +426,30 @@ function WindowSvg() {
         </g>
       ))}
       <Label x="96" y="178" className="tiny">temporary visible input</Label>
+    </>
+  )
+}
+
+function RagSvg() {
+  return (
+    <>
+      <rect className="aid-box prompt" x="22" y="42" width="76" height="42" rx="8" />
+      <Label x="34" y="67" className="tiny dark">prompt</Label>
+      <rect className="aid-box" x="124" y="34" width="88" height="56" rx="8" />
+      <Label x="139" y="57" className="tiny">retriever</Label>
+      <path className="aid-line" d="M140 71 H196 M140 80 H190" />
+      <rect className="aid-box muted" x="82" y="126" width="154" height="54" rx="8" />
+      <Label x="110" y="158" className="tiny">context window</Label>
+      <rect className="aid-chip" x="104" y="104" width="68" height="30" rx="8" />
+      <Label x="113" y="124" className="tiny">retrieved</Label>
+      <rect className="aid-chip" x="178" y="104" width="52" height="30" rx="8" />
+      <Label x="189" y="124" className="tiny">notes</Label>
+      <rect className="aid-box output" x="254" y="130" width="62" height="42" rx="8" />
+      <Label x="262" y="155" className="tiny dark">answer</Label>
+      <Arrow x1={98} y1={63} x2={124} y2={63} />
+      <Arrow x1={168} y1={90} x2={138} y2={104} />
+      <Arrow x1={236} y1={153} x2={254} y2={153} />
+      <Label x="64" y="198" className="tiny">retrieval plus context, not training</Label>
     </>
   )
 }
