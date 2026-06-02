@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Prompt Life v0.6.1 Navbar Report</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 36px;
+        color: #111b3f;
+        background: #fbfcf8;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.5;
+      }
+      h1,
+      h2 {
+        color: #071b6f;
+        line-height: 1.1;
+      }
+      h1 {
+        margin: 0 0 10px;
+        font-size: 38px;
+      }
+      h2 {
+        margin: 26px 0 8px;
+        font-size: 22px;
+      }
+      p {
+        margin: 0 0 10px;
+      }
+      ul {
+        margin-top: 8px;
+        padding-left: 22px;
+      }
+      li {
+        margin: 5px 0;
+      }
+      code {
+        padding: 2px 5px;
+        border-radius: 5px;
+        background: #eef3ff;
+        color: #071b6f;
+        font-weight: 700;
+      }
+      .kicker {
+        color: #0e8d9b;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+      .panel,
+      figure {
+        margin: 16px 0;
+        padding: 16px;
+        border: 1px solid #d7deee;
+        border-radius: 8px;
+        background: white;
+      }
+      figure {
+        break-inside: avoid;
+      }
+      img {
+        display: block;
+        width: 100%;
+        max-width: 390px;
+        margin: 0 auto;
+        border: 1px solid #e1e6f3;
+      }
+      figcaption {
+        margin-top: 8px;
+        color: #34415f;
+        font-weight: 800;
+      }
+      @page {
+        size: letter;
+        margin: 0.6in;
+      }
+    </style>
+  </head>
+  <body>
+    <p class="kicker">Prompt Life v0.6.1 - June 2, 2026</p>
+    <h1>Bottom Navbar Transparency and Blur Clip</h1>
+    <p>Updated the mobile bottom navigation so it is slightly more transparent and no longer lets the blur fog the content area above the nav.</p>
+
+    <section class="panel">
+      <h2>What Changed</h2>
+      <ul>
+        <li>Bumped the app version from <code>0.6.0</code> to <code>0.6.1</code>.</li>
+        <li>Reduced the bottom nav panel opacity to <code>rgba(255, 255, 255, 0.82)</code>.</li>
+        <li>Shortened and clipped the nav backdrop layer with <code>overflow: hidden</code>.</li>
+        <li>Moved the blur surface lower with a masked pseudo-element so the top edge stays clear.</li>
+        <li>Extended the blur surface downward below the viewport with a negative bottom offset.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Verification</h2>
+      <p><code>npm run typecheck</code>: passed.</p>
+      <p><code>npm run build</code>: passed.</p>
+      <p>Browser CSS metrics confirmed the nav background, lower blur start, and offscreen downward extension.</p>
+    </section>
+
+    <figure>
+      <img src="screenshots/v0-6-1-navbar-clip.png" alt="Prompt Life lesson page showing clipped bottom navigation blur" />
+      <figcaption>Updated bottom nav: transparent panel, clipped top blur, and downward fade below the content area.</figcaption>
+    </figure>
+  </body>
+</html>
