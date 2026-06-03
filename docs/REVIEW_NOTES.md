@@ -13,6 +13,7 @@ Date: 2026-06-02
 - Kept the tensor visual as a stable static tokens x features diagram for mobile and PDF reliability; no Three.js or new 3D library was added.
 - Expanded the glossary for Batch 2 terms: tokenizer, tokenization, embedding table, distributed representation, activation, and weight tensor, plus improved inference/forward-pass/context entries.
 - Bumped the visible app version to `v0.9.0`.
+- Applied a follow-up polish bump to `v0.9.1` after fixing duplicate React keys in the Prompt vs Response token demo.
 - Updated the default lesson PDF export path to `docs/review/prompt-life-lesson-cards-v0-9.pdf`.
 - Updated `npm run export:lesson-cards` to generate `docs/content-inventory/prompt-life-lesson-cards-v0-9-batch-2.pdf`.
 

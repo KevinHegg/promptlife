@@ -30,7 +30,7 @@ import './styles/global.css'
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '')
 const ASSET = `${BASE}/assets/promptlife`
 // Bump this for each shipped app change; the Badge screen displays it under Start over.
-const APP_VERSION = '0.9.0'
+const APP_VERSION = '0.9.1'
 const STORAGE_KEYS = {
   lastLocation: 'promptlife:v1:lastLocation',
   lessonId: 'promptlife:v1:lessonId',
@@ -824,7 +824,7 @@ function PromptOrResponseDemo() {
       <TokenLegend />
       <div className="demo-row" aria-label="Prompt tokens">
         <strong>Prompt tokens</strong>
-        <div>{promptTokens.map((token) => <TokenPill key={token} token={token} kind="prompt" />)}</div>
+        <div>{promptTokens.map((token, index) => <TokenPill key={`prompt-${index}-${token}`} token={token} kind="prompt" />)}</div>
       </div>
       <div className="demo-row" aria-label="Next-token candidates">
         <strong>Next-token candidates</strong>
@@ -837,8 +837,8 @@ function PromptOrResponseDemo() {
       <div className="demo-row" aria-label="Current context for the next forward pass">
         <strong>Current context for the next forward pass</strong>
         <div>
-          {promptTokens.map((token) => <TokenPill key={token} token={token} kind="prompt" />)}
-          {responseTokens.map((token) => <TokenPill key={token} token={token} kind="response" />)}
+          {promptTokens.map((token, index) => <TokenPill key={`context-prompt-${index}-${token}`} token={token} kind="prompt" />)}
+          {responseTokens.map((token, index) => <TokenPill key={`context-response-${index}-${token}`} token={token} kind="response" />)}
         </div>
       </div>
       <button className="secondary-btn" onClick={() => setCount((count + 1) % (generated.length + 1))}>Next token</button>

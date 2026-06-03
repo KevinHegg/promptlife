@@ -6,6 +6,8 @@ Date: 2026-06-03
 
 Implemented Batch 2 of the Prompt Life curriculum: Inference, Prompt vs Response, Tokenization, Token IDs, Embeddings, Vectors, and Tensors. This pass also fixed the Batch 1 visual/PDF layout problems by moving long explanations out of SVG labels and into HTML legends with numbered callouts.
 
+Follow-up polish: bumped the visible app version to `v0.9.1` after fixing duplicate React keys in the Prompt vs Response token demo.
+
 ## Files Changed
 
 - `README.md`
@@ -88,6 +90,7 @@ Each lesson now includes the full app fields where supported: one-sentence defin
 - `npm run build`: passed.
 - `npm run export:lesson-pdf`: passed and wrote `docs/review/prompt-life-lesson-cards-v0-9.pdf`.
 - `npm run export:lesson-cards`: passed and wrote `docs/content-inventory/prompt-life-lesson-cards-v0-9-batch-2.pdf`.
+- GitHub Pages deploy: passed for `main`.
 - In-app browser check: loaded local app and `/review/lesson-cards`; review route showed 28 cards and all seven Batch 2 lessons.
 - Mobile overflow audit: passed at 320px, 390px, and 430px for Batch 1 fixed visuals and all Batch 2 lesson visuals.
 - PDF visual QA: inspected page 10, `Prompt vs Response`; no clipped visual, vertical captions, or unreadable labels found.
