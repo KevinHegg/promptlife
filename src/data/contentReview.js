@@ -16,7 +16,9 @@ const stageByLessonId = {
   history: 'architecture',
   training: 'pretraining',
   pretraining: 'pretraining',
+  'overfitting-generalization': 'pretraining',
   'fine-tuning': 'fine-tuning',
+  alignment: 'alignment',
   inference: 'inference',
   'prompt-response': 'prompt processing',
   tokens: 'prompt processing',
@@ -42,6 +44,7 @@ const stageByLessonId = {
 
 const promptResponseNotesByStage = {
   pretraining: 'This happens before ordinary prompting; it can change future behavior by updating weights rather than producing one live response.',
+  alignment: 'Alignment affects response behavior, but it does not mean the model understands morality or that one prompt permanently teaches it.',
   'fine-tuning': 'This happens before or between deployments; it changes future response patterns, not the current response token by token.',
   inference: 'This is the live prompt-to-response path: fixed weights process current context and generate response tokens.',
   'prompt processing': 'This card should stay explicit that prompt tokens and response-so-far tokens enter the same current context before the next token is chosen.',
@@ -60,7 +63,9 @@ const confusionRiskByLessonId = {
   history: 'Learners may read rules versus learned patterns as a total replacement story instead of two still-useful traditions.',
   training: 'Ordinary chat can be mistaken for training unless durable weight updates are foregrounded.',
   pretraining: 'Broad exposure can be misread as verbatim memorization of every source document.',
+  'overfitting-generalization': 'Memorization can be mistaken for understanding unless new-example performance is foregrounded.',
   'fine-tuning': 'Fine-tuning may be confused with prompting, system messages, or one-off personalization.',
+  alignment: 'Alignment can be mistaken for moral understanding, full trustworthiness, or a perfect safety guarantee.',
   inference: 'Temporary hidden states may be mistaken for new memories or weight changes.',
   'prompt-response': 'Learners may think the whole answer appears at once instead of being generated token by token.',
   tokens: 'Tokens may be mistaken for whole words or human concepts.',
@@ -89,7 +94,9 @@ const missingExplanationByLessonId = {
   history: 'Name one place rules still matter, such as policies, tool routing, or validation around learned models.',
   training: 'Show the loss signal and backprop update as the step that ordinary inference lacks.',
   pretraining: 'Clarify that broad datasets shape statistical patterns without guaranteeing source recall or truth.',
+  'overfitting-generalization': 'Show training examples and new examples together so the learner can see why held-out evaluation matters.',
   'fine-tuning': 'Distinguish full fine-tuning, adapter-style updates, and instruction/policy tuning without adding too much detail.',
+  alignment: 'Keep alignment framed as behavior shaping through training, policy, evaluation, and system design rather than moral agency.',
   inference: 'Make the forward pass tangible: fixed weights plus temporary activations produce one set of next-token scores.',
   'prompt-response': 'Add the response-so-far as a visible part of the next input context.',
   tokens: 'Show that token boundaries can be word pieces, punctuation, or spaces, not necessarily words.',
@@ -118,7 +125,9 @@ const illustrationNeedByLessonId = {
   history: 'Split-panel rulebook versus learned landscape, with a small note that systems can combine them.',
   training: 'Training loop with predict, compare, loss, update weights, repeat.',
   pretraining: 'Broad data rain carving durable pathways into a model landscape.',
+  'overfitting-generalization': 'Two curves: an overfit curve that traces training dots too tightly and a smoother curve that predicts new dots.',
   'fine-tuning': 'Targeted trail added onto an existing pretrained terrain.',
+  alignment: 'Response landscape with preferred paths, warning zones, guardrails, policy checkpoint, and human feedback marker.',
   inference: 'Forward-pass pipeline with fixed weights underneath and temporary states above.',
   'prompt-response': 'Given prompt cards and newly generated response cards entering the next context together.',
   tokens: 'Tokenizer conveyor splitting a short sentence into uneven chunks.',
@@ -144,6 +153,8 @@ const illustrationNeedByLessonId = {
 
 const priorityByLessonId = {
   history: 'medium',
+  'overfitting-generalization': 'high',
+  alignment: 'high',
   tokens: 'medium',
   vectors: 'high',
   tensors: 'high',
@@ -180,7 +191,9 @@ const rubricOverridesByLessonId = {
   history: { promptResponse: 3, durableTemporary: 3, visual: 3, exercise: 2 },
   training: { placement: 5, durableTemporary: 5, exercise: 4 },
   pretraining: { placement: 5, durableTemporary: 5, exercise: 2 },
+  'overfitting-generalization': { placement: 5, durableTemporary: 5, promptResponse: 4, visual: 5, exercise: 4 },
   'fine-tuning': { placement: 5, durableTemporary: 5, exercise: 2 },
+  alignment: { placement: 5, durableTemporary: 5, promptResponse: 4, brain: 5, visual: 5, exercise: 4 },
   inference: { placement: 5, promptResponse: 5, durableTemporary: 5, exercise: 4 },
   'prompt-response': { placement: 5, relationship: 5, promptResponse: 5, exercise: 4 },
   tokens: { placement: 5, promptResponse: 5, durableTemporary: 3, exercise: 4 },
@@ -219,14 +232,14 @@ export function getRubricAverage(lessonId) {
 
 export function buildLessonReviewProfile(lesson) {
   const lessonId = typeof lesson === 'string' ? lesson : lesson.id
-  const stage = stageByLessonId[lessonId] ?? 'architecture'
+  const stage = typeof lesson === 'object' && lesson.stageType ? lesson.stageType : stageByLessonId[lessonId] ?? 'architecture'
 
   return {
     stage,
-    promptResponseNote: promptResponseNoteByLessonId[lessonId] ?? promptResponseNotesByStage[stage],
-    confusionRisk: confusionRiskByLessonId[lessonId] ?? 'No major confusion risk identified beyond normal vocabulary load.',
-    missingExplanation: missingExplanationByLessonId[lessonId] ?? 'No urgent missing explanation identified.',
-    illustrationNeeded: illustrationNeedByLessonId[lessonId] ?? 'Keep the current visual aid and make labels more explicit if space allows.',
+    promptResponseNote: typeof lesson === 'object' && lesson.promptVsResponseNote ? lesson.promptVsResponseNote : promptResponseNoteByLessonId[lessonId] ?? promptResponseNotesByStage[stage],
+    confusionRisk: typeof lesson === 'object' && lesson.misconception ? lesson.misconception : confusionRiskByLessonId[lessonId] ?? 'No major confusion risk identified beyond normal vocabulary load.',
+    missingExplanation: typeof lesson === 'object' && lesson.coreExplanation ? lesson.coreExplanation : missingExplanationByLessonId[lessonId] ?? 'No urgent missing explanation identified.',
+    illustrationNeeded: typeof lesson === 'object' && lesson.visualAidId ? `Current visual aid: ${lesson.visualAidId}. ${illustrationNeedByLessonId[lessonId] ?? 'Keep labels explicit and mobile-readable.'}` : illustrationNeedByLessonId[lessonId] ?? 'Keep the current visual aid and make labels more explicit if space allows.',
     rewritePriority: priorityByLessonId[lessonId] ?? 'low',
     rubric: getLessonRubric(lessonId),
     rubricAverage: getRubricAverage(lessonId)

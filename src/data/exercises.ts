@@ -312,7 +312,12 @@ export const exerciseById = Object.fromEntries(exercises.map((exercise) => [exer
 
 export const lessonExerciseIds: Record<string, string> = {
   'what-is-llm': 'pick-next-token',
+  history: 'durable-or-temporary',
   training: 'training-nudge',
+  pretraining: 'training-nudge',
+  'overfitting-generalization': 'durable-or-temporary',
+  'fine-tuning': 'durable-or-temporary',
+  alignment: 'durable-or-temporary',
   inference: 'training-nudge',
   tokens: 'prompt-or-response-label',
   'token-ids': 'prompt-or-response-label',

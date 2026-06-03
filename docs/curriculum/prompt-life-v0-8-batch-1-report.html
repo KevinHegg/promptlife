@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Prompt Life v0.8 Batch 1 Report</title>
+    <style>
+      :root {
+        color: #14211d;
+        background: #f6f3eb;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.45;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        padding: 40px;
+      }
+
+      main {
+        max-width: 920px;
+        margin: 0 auto;
+      }
+
+      h1, h2 {
+        margin: 0;
+        line-height: 1.08;
+      }
+
+      h1 {
+        color: #071b6f;
+        font-size: 34px;
+      }
+
+      h2 {
+        margin-top: 28px;
+        color: #071b6f;
+        font-size: 22px;
+      }
+
+      p { margin: 10px 0; }
+
+      ul, ol {
+        margin: 10px 0 0;
+        padding-left: 22px;
+      }
+
+      li { margin: 5px 0; }
+
+      code {
+        padding: 1px 4px;
+        border-radius: 4px;
+        background: #e8e2d5;
+        font-family: "SFMono-Regular", Consolas, monospace;
+        font-size: 0.92em;
+      }
+
+      .eyebrow {
+        margin-bottom: 8px;
+        color: #0e8d9b;
+        font-size: 13px;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .lede {
+        max-width: 760px;
+        color: #35423e;
+        font-size: 17px;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+        margin-top: 18px;
+      }
+
+      .stat {
+        border: 1px solid #d7cfbd;
+        border-radius: 8px;
+        padding: 14px;
+        background: #fffaf0;
+      }
+
+      .stat strong {
+        display: block;
+        color: #071b6f;
+        font-size: 25px;
+      }
+
+      .stat span {
+        color: #58645f;
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .note {
+        margin-top: 18px;
+        padding: 12px 14px;
+        border-left: 4px solid #0e8d9b;
+        background: #eaf6f4;
+      }
+
+      figure {
+        break-inside: avoid;
+        margin: 22px 0 0;
+      }
+
+      img {
+        display: block;
+        width: min(100%, 390px);
+        max-height: 760px;
+        object-fit: contain;
+        border: 1px solid #cfd7e6;
+        border-radius: 8px;
+        background: white;
+      }
+
+      figcaption {
+        margin-top: 8px;
+        color: #56615d;
+        font-size: 13px;
+      }
+
+      .screens {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+        align-items: start;
+      }
+
+      .page-break {
+        break-before: page;
+      }
+
+      @page {
+        size: letter;
+        margin: 0.55in;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p class="eyebrow">Prompt Life v0.8.0</p>
+      <h1>Batch 1 Foundation Implementation</h1>
+      <p class="lede">Implemented the first v0.7 curriculum batch in the actual app: the foundation story from what an LLM is through training, pretraining, overfitting, fine-tuning, and alignment.</p>
+
+      <section class="grid" aria-label="Summary stats">
+        <div class="stat"><strong>7</strong><span>Batch 1 lessons</span></div>
+        <div class="stat"><strong>2</strong><span>new Journey cards</span></div>
+        <div class="stat"><strong>28</strong><span>total lessons</span></div>
+        <div class="stat"><strong>0</strong><span>new games</span></div>
+      </section>
+
+      <h2>What Changed</h2>
+      <ul>
+        <li>Rewrote Batch 1 lesson data with lifecycle fields, durable/temporary distinctions, prompt/response notes, misconceptions, and feedback.</li>
+        <li>Renamed the existing `history` lesson to Rationalists vs Empiricists while preserving progress compatibility.</li>
+        <li>Added Overfitting and Generalization plus Alignment as new Journey lessons.</li>
+        <li>Added lightweight React/SVG visual aids for Batch 1 concepts.</li>
+        <li>Expanded glossary vocabulary and related-term links for training, overfitting, fine-tuning, and alignment.</li>
+        <li>Updated review route, lesson-card export target, and visible app version.</li>
+      </ul>
+
+      <h2>Files Changed</h2>
+      <ul>
+        <li><code>package.json</code></li>
+        <li><code>src/components/VisualAids.tsx</code></li>
+        <li><code>src/data/content.ts</code></li>
+        <li><code>src/data/contentReview.js</code></li>
+        <li><code>src/data/exercises.ts</code></li>
+        <li><code>src/main.tsx</code></li>
+        <li><code>docs/REVIEW_NOTES.md</code></li>
+        <li><code>docs/curriculum/BATCH_1_IMPLEMENTATION_REPORT_V0_8.md</code></li>
+        <li><code>docs/curriculum/BATCH_1_REVIEW_MATRIX_V0_8.md</code></li>
+        <li><code>docs/curriculum/SOURCE_NEEDS_V0_8_BATCH_1.md</code></li>
+        <li><code>docs/content-inventory/prompt-life-lesson-cards-v0-8-batch-1.pdf</code></li>
+        <li><code>docs/screenshots/v0-8-batch-1-*.png</code></li>
+      </ul>
+
+      <h2>Verification</h2>
+      <ul>
+        <li><code>npm install</code>: passed.</li>
+        <li><code>npm run typecheck</code>: passed.</li>
+        <li><code>npm run build</code>: passed.</li>
+        <li><code>npm run export:lesson-cards</code>: passed.</li>
+        <li>390px and 320px overflow checks passed for the first seven lessons.</li>
+        <li>Reset QA passed in an isolated browser session.</li>
+      </ul>
+
+      <h2>Known Issues</h2>
+      <ul>
+        <li>The `history` id is intentionally preserved even though the visible title changed.</li>
+        <li>Batch 1 source review is still needed before publication-final copy.</li>
+        <li>Batch 1 uses existing micro-interactions; no new exercise types were added.</li>
+      </ul>
+
+      <h2>Next Steps</h2>
+      <ol>
+        <li>Implement Batch 2: Inference, Prompt vs Response, Tokenization, Token IDs, Embeddings, Vectors, and Tensors.</li>
+        <li>Add a source/bibliography pass for Batch 1 claims.</li>
+        <li>Add automated route checks for the first seven lessons, review route, glossary drawer, reset, and Badge denominator.</li>
+      </ol>
+
+      <h2 class="page-break">Screenshots</h2>
+      <div class="screens">
+        <figure>
+          <img src="../screenshots/v0-8-batch-1-journey-top.png" alt="Journey top showing the expanded Before Morning section.">
+          <figcaption>Journey top with Batch 1 foundation section.</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/v0-8-batch-1-what-is-llm-top.png" alt="What Is an LLM lesson top.">
+          <figcaption>What Is an LLM lesson top.</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/v0-8-batch-1-rationalists.png" alt="Rationalists vs Empiricists lesson.">
+          <figcaption>Rationalists vs Empiricists replaces the old Two AI Traditions title.</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/v0-8-batch-1-training-visual.png" alt="Training loop visual.">
+          <figcaption>Training visual: predict, compare, loss, update weights, repeat.</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/v0-8-batch-1-overfitting-visual.png" alt="Overfitting versus generalization visual.">
+          <figcaption>Overfitting visual: old dots versus transferable pattern.</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/v0-8-batch-1-alignment.png" alt="Alignment lesson top.">
+          <figcaption>Alignment lesson top with glossary chips wrapping cleanly.</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/v0-8-batch-1-brain-bridge.png" alt="Brain Bridge for Alignment.">
+          <figcaption>Brain Bridge explicitly limits the cognition metaphor.</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/v0-8-batch-1-checkpoint-correct.png" alt="Alignment checkpoint correct feedback.">
+          <figcaption>Checkpoint correct feedback.</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/v0-8-batch-1-checkpoint-wrong.png" alt="Alignment checkpoint wrong feedback.">
+          <figcaption>Checkpoint wrong feedback.</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/v0-8-batch-1-review-route.png" alt="Review route showing v0.8 lesson cards.">
+          <figcaption>Review route and PDF source surface.</figcaption>
+        </figure>
+      </div>
+    </main>
+  </body>
+</html>

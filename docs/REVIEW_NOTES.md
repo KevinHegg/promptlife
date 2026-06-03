@@ -2,6 +2,58 @@
 
 Date: 2026-06-02
 
+## v0.8 Batch 1 Foundation Implementation
+
+### What Changed
+
+- Implemented the first v0.7 curriculum batch in actual app data and UI.
+- Rewrote the foundation section around LLM lifecycle placement, durable versus temporary change, prompt versus response, misconception, metaphor, Brain Bridge, and visual aid.
+- Renamed the learner-facing `Two AI Traditions` lesson to `Rationalists vs Empiricists` while preserving the existing `history` id for progress compatibility.
+- Added `Overfitting and Generalization` and `Alignment` as new Journey lessons.
+- Added Batch 1 fields to the lesson data where relevant: `pathType`, `stageType`, `oneSentenceDefinition`, `coreExplanation`, `whereItHappens`, `durableVsTemporary`, `promptVsResponseNote`, `whyItMatters`, `howItConnects`, `misconception`, checkpoint aliases, and feedback aliases.
+- Updated the lesson UI and review route to show the new lifecycle fields.
+- Added or improved lightweight SVG visual aids for the Batch 1 concepts.
+- Expanded glossary terms for rationalism/empiricism, training, overfitting/generalization, fine-tuning/adapters, and alignment methods.
+- Bumped the visible app version to `v0.8.0`.
+- Updated `npm run export:lesson-cards` to generate `docs/content-inventory/prompt-life-lesson-cards-v0-8-batch-1.pdf`.
+- No new games, gameplay polish, or heavy 3D libraries were added.
+
+### Files Changed
+
+- `package.json`
+- `src/components/VisualAids.tsx`
+- `src/data/content.ts`
+- `src/data/contentReview.js`
+- `src/data/exercises.ts`
+- `src/main.tsx`
+- `docs/curriculum/BATCH_1_IMPLEMENTATION_REPORT_V0_8.md`
+- `docs/curriculum/BATCH_1_REVIEW_MATRIX_V0_8.md`
+- `docs/curriculum/SOURCE_NEEDS_V0_8_BATCH_1.md`
+- `docs/curriculum/prompt-life-v0-8-batch-1-report.html`
+- `docs/curriculum/prompt-life-v0-8-batch-1-report.pdf`
+- `docs/content-inventory/prompt-life-lesson-cards-v0-8-batch-1.pdf`
+- `docs/screenshots/v0-8-batch-1-*.png`
+
+### Batch 1 Lessons Implemented
+
+1. What Is an LLM?
+2. Rationalists vs Empiricists
+3. Training
+4. Pretraining
+5. Overfitting and Generalization
+6. Fine-Tuning
+7. Alignment
+
+### Verification
+
+- `npm install`: passed.
+- `npm run typecheck`: passed.
+- `npm run build`: passed.
+- `npm run export:lesson-cards`: passed; wrote `docs/content-inventory/prompt-life-lesson-cards-v0-8-batch-1.pdf`.
+- Mobile screenshot QA: passed at 390px for Journey top, Batch 1 lesson states, visual aids, Brain Bridge, checkpoint feedback, and review route.
+- 390px and 320px overflow checks: passed for the first seven lessons.
+- Reset QA: passed in an isolated browser session; progress reset to 0 and the app returned to Home.
+
 ## v0.7 Curriculum Bible and Visual Learning Plan
 
 ### What Changed

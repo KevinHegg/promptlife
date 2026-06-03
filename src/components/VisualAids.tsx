@@ -1,11 +1,13 @@
 import React from 'react'
 
 export const visualAidCatalog = [
-  { id: 'llm-overview', title: 'Prompt to Prediction', caption: 'A prompt enters the current context; learned weights shape next-token probabilities.', pattern: 'cloud' },
-  { id: 'traditions', title: 'Rules and Learned Patterns', caption: 'Symbolic AI follows explicit rules; deep learning uses learned parameters.', pattern: 'compare' },
-  { id: 'training-loop', title: 'Training Loop', caption: 'Predict, compare, update weights, repeat.', pattern: 'training' },
-  { id: 'pretraining-rain', title: 'Broad Pretraining', caption: 'Many prediction updates carve broad capability into model weights.', pattern: 'training' },
+  { id: 'llm-overview', title: 'Prompt to Prediction', caption: 'Prompt/context flows through learned weights into next-token probabilities; one generated response token is appended.', pattern: 'llmOverview' },
+  { id: 'traditions', title: 'Rules and Learned Patterns', caption: 'Symbolic/rationalist systems use explicit rules; deep-learning/empiricist systems learn useful patterns from examples.', pattern: 'traditions' },
+  { id: 'training-loop', title: 'Training Loop', caption: 'Predict, compare, loss, update weights, repeat. Training changes weights.', pattern: 'training' },
+  { id: 'pretraining-rain', title: 'Broad Pretraining', caption: 'A wide stream of data shapes broad durable learning before normal use.', pattern: 'pretraining' },
+  { id: 'overfitting-generalization', title: 'Overfitting vs Generalization', caption: 'Memorizing examples is not the same as learning transferable patterns.', pattern: 'overfitting' },
   { id: 'fine-tune-path', title: 'Fine-Tuning Path', caption: 'Targeted examples nudge an already-trained model toward a desired pattern.', pattern: 'fine' },
+  { id: 'alignment', title: 'Alignment Landscape', caption: 'Alignment shapes behavior with preferred paths, guardrails, feedback, and policies; it does not create moral agency.', pattern: 'alignment' },
   { id: 'inference-pass', title: 'Forward Pass', caption: 'Inference creates temporary states while durable weights stay fixed.', pattern: 'inference' },
   { id: 'prompt-response', title: 'Prompt vs Response', caption: 'Prompt tokens are given; response tokens are generated and appended.', pattern: 'promptResponse' },
   { id: 'tokenization', title: 'Text to Tokens', caption: 'Text is split into model-readable chunks before embedding lookup.', pattern: 'token' },
@@ -64,10 +66,20 @@ export function VisualAidGallery() {
 
 function VisualPattern({ aid }) {
   switch (aid.pattern) {
+    case 'llmOverview':
+      return <LlmOverviewSvg />
+    case 'traditions':
+      return <TraditionsSvg />
     case 'training':
       return <TrainingSvg />
+    case 'pretraining':
+      return <PretrainingSvg />
+    case 'overfitting':
+      return <OverfittingSvg />
     case 'fine':
       return <FineTuneSvg />
+    case 'alignment':
+      return <AlignmentSvg />
     case 'inference':
       return <InferenceSvg />
     case 'promptResponse':
@@ -123,6 +135,58 @@ function Arrow({ x1, y1, x2, y2 }) {
   return <path className="aid-arrow" d={`M${x1} ${y1} C${(x1 + x2) / 2} ${y1}, ${(x1 + x2) / 2} ${y2}, ${x2} ${y2}`} />
 }
 
+function LlmOverviewSvg() {
+  return (
+    <>
+      <rect className="aid-box prompt" x="16" y="66" width="74" height="48" rx="8" />
+      <circle className="aid-core" cx="142" cy="90" r="36" />
+      {[0, 1, 2, 3].map((index) => (
+        <circle key={index} className={index === 1 ? 'aid-dot alt' : 'aid-dot'} cx={216 + index * 22} cy={70 + (index % 2) * 34} r={9 + index * 2} />
+      ))}
+      <rect className="aid-box output" x="246" y="140" width="58" height="34" rx="8" />
+      <Arrow x1={90} y1={90} x2={106} y2={90} />
+      <Arrow x1={178} y1={90} x2={204} y2={90} />
+      <Arrow x1={248} y1={112} x2={266} y2={140} />
+      <Label x="25" y="87" className="tiny dark">prompt/</Label>
+      <Label x="25" y="103" className="tiny dark">context</Label>
+      <Label x="112" y="84" className="tiny">learned</Label>
+      <Label x="114" y="101" className="tiny">weights</Label>
+      <Label x="202" y="42" className="tiny">next-token</Label>
+      <Label x="202" y="57" className="tiny">probabilities</Label>
+      <Label x="255" y="161" className="tiny dark">token</Label>
+      <Label x="60" y="190" className="tiny">generated response token is appended</Label>
+    </>
+  )
+}
+
+function TraditionsSvg() {
+  return (
+    <>
+      <rect className="aid-box prompt" x="18" y="30" width="124" height="116" rx="10" />
+      <rect className="aid-box" x="178" y="30" width="124" height="116" rx="10" />
+      <Label x="39" y="53" className="tiny dark">symbolic</Label>
+      <Label x="40" y="68" className="tiny dark">rationalist</Label>
+      <Label x="194" y="53" className="tiny">deep learning</Label>
+      <Label x="199" y="68" className="tiny">empiricist</Label>
+      {['rules', 'if/then', 'symbols'].map((label, index) => (
+        <g key={label}>
+          <rect className="aid-chip prompt" x="34" y={82 + index * 24} width="86" height="18" rx="5" />
+          <Label x="45" y={96 + index * 24} className="tiny dark">{label}</Label>
+        </g>
+      ))}
+      {['examples', 'loss', 'updates'].map((label, index) => (
+        <g key={label}>
+          <circle className={index === 1 ? 'aid-dot alt' : 'aid-dot'} cx={206 + index * 31} cy={96 + (index % 2) * 18} r="14" />
+          <Label x={188 + index * 31} y={133} className="tiny">{label}</Label>
+        </g>
+      ))}
+      <path className="aid-line" d="M142 88 H178" />
+      <rect className="aid-box muted" x="76" y="164" width="168" height="28" rx="8" />
+      <Label x="95" y="183" className="tiny">modern systems can combine both</Label>
+    </>
+  )
+}
+
 function CloudSvg() {
   return (
     <>
@@ -153,7 +217,7 @@ function TrainingSvg() {
   const steps = [
     ['predict', 26, 42],
     ['compare', 180, 42],
-    ['update', 180, 132],
+    ['loss', 180, 132],
     ['repeat', 26, 132]
   ]
   return (
@@ -168,7 +232,41 @@ function TrainingSvg() {
       <Arrow x1={228} y1={86} x2={228} y2={132} />
       <Arrow x1={180} y1={154} x2={122} y2={154} />
       <Arrow x1={74} y1={132} x2={74} y2={86} />
-      <Label x="86" y="112" className="tiny">durable weight update</Label>
+      <Label x="100" y="112" className="tiny">update weights</Label>
+      <Label x="80" y="194" className="tiny">training changes weights</Label>
+    </>
+  )
+}
+
+function PretrainingSvg() {
+  return (
+    <>
+      <path className="aid-land" d="M18 166 L76 102 L126 134 L178 78 L232 118 L302 58 L302 166 Z" />
+      {[0, 1, 2, 3, 4, 5, 6].map((drop) => (
+        <path key={drop} className="aid-line" d={`M${46 + drop * 34} 28 L${34 + drop * 32} ${80 + (drop % 2) * 18}`} />
+      ))}
+      <path className="aid-path" d="M34 154 C76 138, 110 128, 140 112 S206 84, 276 74" />
+      <path className="aid-path thin" d="M54 168 C106 150, 146 150, 180 130 S238 106, 288 104" />
+      <Label x="48" y="50" className="tiny">text/data stream</Label>
+      <Label x="82" y="192" className="tiny">broad durable learning before use</Label>
+    </>
+  )
+}
+
+function OverfittingSvg() {
+  const trainDots = [[42, 142], [84, 78], [126, 116], [168, 62], [210, 132]]
+  const newDots = [[246, 96], [282, 82]]
+  return (
+    <>
+      <path className="aid-line" d="M30 164 H300" />
+      <path className="aid-line" d="M34 166 V34" />
+      <path className="aid-arc alt" d="M40 142 C62 52, 92 50, 126 116 S156 24, 210 132 S250 182, 292 150" />
+      <path className="aid-path thin" d="M40 148 C92 122, 150 102, 212 90 S260 82, 296 76" />
+      {trainDots.map(([x, y]) => <circle key={`${x}-${y}`} className="aid-dot" cx={x} cy={y} r="7" />)}
+      {newDots.map(([x, y]) => <rect key={`${x}-${y}`} className="aid-chip output" x={x - 8} y={y - 8} width="16" height="16" rx="4" />)}
+      <Label x="48" y="28" className="tiny muted-text">overfit: old dots only</Label>
+      <Label x="142" y="184" className="tiny">smooth curve</Label>
+      <Label x="142" y="199" className="tiny">reaches new dots</Label>
     </>
   )
 }
@@ -178,10 +276,33 @@ function FineTuneSvg() {
     <>
       <path className="aid-land" d="M20 162 L98 78 L145 126 L210 58 L300 162 Z" />
       <path className="aid-path" d="M42 154 C80 128, 105 122, 137 113 S201 83, 266 73" />
+      <rect className="aid-chip prompt" x="92" y="32" width="74" height="28" rx="8" />
+      <Label x="101" y="51" className="tiny dark">examples</Label>
       <circle className="aid-dot" cx="137" cy="113" r="10" />
       <circle className="aid-dot alt" cx="266" cy="73" r="10" />
-      <Label x="54" y="184" className="tiny">pretrained terrain</Label>
-      <Label x="183" y="40" className="tiny">targeted trail</Label>
+      <Arrow x1="128" y1="60" x2="137" y2="103" />
+      <Label x="36" y="184" className="tiny">pretrained base</Label>
+      <Label x="174" y="39" className="tiny">fine-tuned path</Label>
+      <Label x="190" y="184" className="tiny">future responses shaped</Label>
+    </>
+  )
+}
+
+function AlignmentSvg() {
+  return (
+    <>
+      <path className="aid-land" d="M20 164 L82 92 L136 130 L196 54 L300 164 Z" />
+      <path className="aid-path" d="M42 154 C86 126, 116 124, 150 108 S208 76, 270 66" />
+      <path className="aid-arc alt" d="M52 60 C86 42, 114 42, 142 58" />
+      <rect className="aid-chip output" x="52" y="40" width="84" height="28" rx="8" />
+      <Label x="62" y="59" className="tiny dark">warning</Label>
+      <rect className="aid-chip prompt" x="190" y="36" width="92" height="30" rx="8" />
+      <Label x="202" y="56" className="tiny dark">preferred</Label>
+      <rect className="aid-box muted" x="98" y="142" width="126" height="28" rx="8" />
+      <Label x="117" y="161" className="tiny">policy check</Label>
+      <circle className="aid-dot" cx="162" cy="102" r="10" />
+      <Label x="172" y="106" className="tiny">feedback</Label>
+      <Label x="50" y="192" className="tiny">shapes behavior, not moral agency</Label>
     </>
   )
 }

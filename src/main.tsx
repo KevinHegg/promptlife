@@ -30,7 +30,7 @@ import './styles/global.css'
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '')
 const ASSET = `${BASE}/assets/promptlife`
 // Bump this for each shipped app change; the Badge screen displays it under Start over.
-const APP_VERSION = '0.6.3'
+const APP_VERSION = '0.8.0'
 const STORAGE_KEYS = {
   lastLocation: 'promptlife:v1:lastLocation',
   lessonId: 'promptlife:v1:lessonId',
@@ -530,6 +530,13 @@ function LessonScreen({ lesson, lessonIndex, totalLessons, reflection, onComplet
   const [revealed, setRevealed] = useState(false)
   const [continueHint, setContinueHint] = useState(false)
   const checkpointRef = useRef<HTMLElement | null>(null)
+  const definition = lesson.oneSentenceDefinition ?? lesson.definition
+  const coreExplanation = lesson.coreExplanation ?? lesson.definition
+  const whereItHappens = lesson.whereItHappens ?? lesson.where
+  const durableVsTemporary = lesson.durableVsTemporary
+  const promptVsResponseNote = lesson.promptVsResponseNote
+  const whyItMatters = lesson.whyItMatters ?? lesson.why
+  const howItConnects = lesson.howItConnects ?? lesson.relationship
   const selectedAnswer = choice == null ? null : lesson.quiz.choices[choice]
   const isCorrect = selectedAnswer === lesson.quiz.answer
   const relatedTerms = useMemo(() => {
@@ -567,7 +574,7 @@ function LessonScreen({ lesson, lessonIndex, totalLessons, reflection, onComplet
         <StageTimeline currentActId={lesson.act} />
         <h1 id="lesson-title" tabIndex={-1}>{lesson.title}</h1>
         <p className="lede small">{lesson.subtitle}</p>
-        <p className="lesson-definition">{lesson.definition}</p>
+        <p className="lesson-definition">{definition}</p>
         {relatedTerms.length > 0 && (
           <div className="term-row compact" aria-label="Related glossary terms">
             {relatedTerms.map((term) => (
@@ -586,17 +593,21 @@ function LessonScreen({ lesson, lessonIndex, totalLessons, reflection, onComplet
       <section className="lesson-panel core-panel" aria-labelledby="core-idea-title">
         <span className="step-label">Core idea</span>
         <h2 id="core-idea-title">Core idea</h2>
-        <p>{lesson.definition}</p>
+        <p>{coreExplanation}</p>
         <dl className="lesson-detail-grid">
-          <div><dt>Where it happens</dt><dd>{lesson.where}</dd></div>
-          <div><dt>Why it matters</dt><dd>{lesson.why}</dd></div>
+          {lesson.stageType && <div><dt>Model lifecycle</dt><dd>{stageLabel(lesson.stageType)}</dd></div>}
+          <div><dt>Where it happens</dt><dd>{whereItHappens}</dd></div>
+          {durableVsTemporary && <div><dt>Durable or temporary</dt><dd>{durableVsTemporary}</dd></div>}
+          {promptVsResponseNote && <div><dt>Prompt vs response</dt><dd>{promptVsResponseNote}</dd></div>}
+          <div><dt>Why it matters</dt><dd>{whyItMatters}</dd></div>
+          {lesson.misconception && <div><dt>Misconception corrected</dt><dd>{lesson.misconception}</dd></div>}
         </dl>
       </section>
 
       <section className="lesson-panel connection-panel" aria-labelledby="connect-title">
         <span className="step-label">How it connects</span>
         <h2 id="connect-title">One relationship</h2>
-        <p>{lesson.relationship}</p>
+        <p>{howItConnects}</p>
       </section>
 
       <section className="lesson-panel metaphor-panel" aria-labelledby="metaphor-title">
@@ -676,6 +687,20 @@ function BrainBridge({ bridge }) {
       </dl>
     </section>
   )
+}
+
+function stageLabel(stageType) {
+  const labels = {
+    architecture: 'architecture / model background',
+    pretraining: 'training before ordinary use',
+    'fine-tuning': 'targeted training after pretraining',
+    alignment: 'behavior shaping and system design',
+    inference: 'ordinary model use',
+    'prompt-processing': 'prompt processing',
+    'response-generation': 'response generation',
+    'risk-ethics': 'risk and ethics'
+  }
+  return labels[stageType] ?? stageType
 }
 
 function Checkpoint({ quiz, choice, setChoice, revealed }) {
@@ -1531,7 +1556,7 @@ function GameReflection({ prompt }) {
 
 function GlossaryScreen({ onOpen }) {
   const [query, setQuery] = useState('')
-  const terms = glossary.filter((item) => `${item.term} ${item.definition} ${item.relationship} ${item.metaphor} ${item.brainMetaphor ?? ''} ${item.brainLimit ?? ''} ${item.confused ?? ''}`.toLowerCase().includes(query.toLowerCase()))
+  const terms = glossary.filter((item) => `${item.term} ${item.definition} ${item.relationship} ${item.metaphor} ${item.brainMetaphor ?? ''} ${item.brainLimit ?? ''} ${item.confused ?? ''} ${(item.related ?? []).join(' ')}`.toLowerCase().includes(query.toLowerCase()))
 
   return (
     <section className="screen glossary-screen" aria-labelledby="glossary-title">
@@ -1564,6 +1589,12 @@ function GlossaryDrawer({ termId, onOpen, onClose }) {
   const closeRef = useRef(null)
   const relatedTerms = useMemo(() => {
     if (!item) return []
+    if (item.related?.length) {
+      return item.related
+        .map((related) => glossary.find((term) => term.id === related || term.term.toLowerCase() === String(related).toLowerCase()))
+        .filter(Boolean)
+        .slice(0, 6)
+    }
     const haystack = `${item.definition} ${item.relationship} ${item.metaphor} ${item.brainMetaphor ?? ''} ${item.brainLimit ?? ''} ${item.confused ?? ''}`.toLowerCase()
     return glossary
       .filter((term) => term.id !== item.id && haystack.includes(term.term.toLowerCase()))
@@ -1716,6 +1747,13 @@ function ReviewLessonCards() {
         const exercise = exerciseId ? exerciseById[exerciseId] : null
         const incorrectAnswers = lesson.quiz.choices.filter((choice) => choice !== lesson.quiz.answer)
         const feedbackEntries = Object.entries(lesson.quiz.feedback ?? {})
+        const definition = lesson.oneSentenceDefinition ?? lesson.definition
+        const coreExplanation = lesson.coreExplanation ?? lesson.definition
+        const whereItHappens = lesson.whereItHappens ?? lesson.where
+        const durableVsTemporary = lesson.durableVsTemporary ?? 'Not listed in current app data.'
+        const promptVsResponseNote = lesson.promptVsResponseNote ?? profile.promptResponseNote
+        const whyItMatters = lesson.whyItMatters ?? lesson.why
+        const howItConnects = lesson.howItConnects ?? lesson.relationship
 
         return (
           <article className="review-card lesson-review-card" key={lesson.id} aria-labelledby={`${lesson.id}-review-title`}>
@@ -1732,13 +1770,17 @@ function ReviewLessonCards() {
             </div>
             <VisualAid id={lesson.visualAidId} compact />
             <dl className="review-lesson-grid">
-              <div><dt>Definition</dt><dd>{lesson.definition}</dd></div>
-              <div><dt>Current explanation</dt><dd><strong>Where:</strong> {lesson.where} <strong>Why:</strong> {lesson.why}</dd></div>
-              <div><dt>Relationship</dt><dd>{lesson.relationship}</dd></div>
+              <div><dt>Definition</dt><dd>{definition}</dd></div>
+              <div><dt>Core explanation</dt><dd>{coreExplanation}</dd></div>
+              <div><dt>Where it happens</dt><dd>{whereItHappens}</dd></div>
+              <div><dt>Durable vs temporary</dt><dd>{durableVsTemporary}</dd></div>
+              <div><dt>Prompt vs response</dt><dd>{promptVsResponseNote}</dd></div>
+              <div><dt>Why it matters</dt><dd>{whyItMatters}</dd></div>
+              <div><dt>Relationship</dt><dd>{howItConnects}</dd></div>
               <div><dt>Metaphor</dt><dd>{lesson.metaphor}</dd></div>
               <div><dt>Brain metaphor</dt><dd>{lesson.brainBridge?.metaphor ?? 'None listed.'}</dd></div>
               <div><dt>Brain limit</dt><dd>{lesson.brainBridge?.limit ?? 'None listed.'}</dd></div>
-              <div><dt>Prompt/response note</dt><dd>{profile.promptResponseNote}</dd></div>
+              <div><dt>Misconception</dt><dd>{lesson.misconception ?? profile.confusionRisk}</dd></div>
               <div><dt>Visual aid</dt><dd><code>{lesson.visualAidId}</code></dd></div>
               <div><dt>Current exercise</dt><dd>{exercise ? <><code>{exercise.id}</code>: {exercise.title}</> : 'None rendered in Journey; no direct Play mapping.'}</dd></div>
               <div><dt>Checkpoint</dt><dd>{lesson.quiz.question} Correct: {lesson.quiz.answer}. Incorrect: {incorrectAnswers.join('; ')}.</dd></div>
