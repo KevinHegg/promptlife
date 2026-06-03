@@ -2,6 +2,74 @@
 
 Date: 2026-06-02
 
+## v0.7 Curriculum Bible and Visual Learning Plan
+
+### What Changed
+
+- Created a v0.7 curriculum architecture package for the next implementation pass.
+- Proposed a 35-lesson model-literacy Journey that keeps the day-in-the-life-of-a-prompt through-line while adding missing academic concepts.
+- Marked each proposed lesson as Essential Path, Deep Path, or Optional Side Tour.
+- Added complete draft cards for Overfitting and Generalization, Alignment, Hallucinations, Grounding, Effective Prompting From Model Literacy, Energy/Water/Compute, and Human-Centered AI Ethics.
+- Added a visual-learning framework that reserves 3D for cases where rotation reveals otherwise-hidden structure.
+- Added lesson-by-lesson visual aid specs, including reduced-motion and accessibility notes.
+- Added a metaphor and Brain Bridge matrix so cognition metaphors stay useful but bounded.
+- Added a v0.7 misconception map and source-needs list for publication review.
+- Added `scripts/generate-curriculum-v07.mjs` so the curriculum docs can be regenerated consistently.
+- No new games or gameplay polish were added.
+
+### Files Changed
+
+- `scripts/generate-curriculum-v07.mjs`
+- `docs/curriculum/PROMPT_LIFE_CURRICULUM_BIBLE_V0_7.md`
+- `docs/curriculum/JOURNEY_ARCHITECTURE_V0_7.md`
+- `docs/curriculum/NEW_LESSON_DRAFTS_V0_7.md`
+- `docs/curriculum/VISUAL_LEARNING_FRAMEWORK_V0_7.md`
+- `docs/curriculum/VISUAL_AID_SPECS_V0_7.md`
+- `docs/curriculum/METAPHOR_AND_BRAIN_BRIDGE_MATRIX_V0_7.md`
+- `docs/curriculum/MISCONCEPTION_MAP_V0_7.md`
+- `docs/curriculum/SOURCE_NEEDS_V0_7.md`
+
+### Proposed New Lesson Architecture
+
+- Essential Path: 26 lessons covering LLM basics, training, inference, prompt/response, tokenization, embeddings, vectors, tensors, context, attention, MLPs, layers, hidden states, logits, softmax, sampling, autoregression, RAG, hallucinations, effective prompting, risk/myth, and synthesis.
+- Deep Path: 6 lessons covering overfitting/generalization, alignment, grounding, prompt injection/tool risk, energy/water/compute, and human-centered AI ethics.
+- Optional Side Tour: 3 lessons covering rationalists vs empiricists, diffusion vs autoregression, and multimodal AI.
+- Current `How AI Learns` should be split across training, fine-tuning, alignment, RAG, grounding, and effective prompting instead of staying as a single umbrella card.
+
+### New Cards Drafted
+
+- Overfitting and Generalization
+- Alignment
+- Hallucinations
+- Grounding
+- Effective Prompting From Model Literacy
+- Energy, Water, and Compute
+- Human-Centered AI Ethics
+
+### Visual Framework Summary
+
+- Primary visual types: static SVG diagram, step animation, interactive 2D diagram, CSS 3D object, rotatable 3D object, sorting/checking exercise, split-screen contrast, and evidence/causality diagram.
+- 3D is justified only when rotation reveals structure that a flat image hides.
+- Good 3D candidates: tensor cube, layer stack, feature cloud, vocabulary cloud, and context tray.
+- Poor 3D candidates: hallucination, alignment, ethics, privacy, prompt injection, and energy use.
+
+### Missing Source Needs
+
+- Transformer architecture, attention, MLP/feed-forward layers, pretraining/next-token prediction, instruction tuning/RLHF, fine-tuning, RAG, grounding, hallucinations, prompt injection, privacy/data governance, diffusion, multimodal AI, alignment, energy/water/compute, human-centered AI ethics, and papal/Vatican AI ethics references need external source review before final publication.
+- Energy and water copy intentionally avoids precise numbers: `SOURCE NEEDED: current estimates vary by model, hardware, data center, and measurement method.`
+
+### Recommendations for Next Implementation Pass
+
+1. Implement the Essential Path refinements first, using the v0.7 Bible as the source of truth for card structure.
+2. Replace the current `How AI Learns` umbrella card with more precise Deep Path cards where appropriate.
+3. Build the 2D visual aids before adding any 3D; reserve 3D for tensors, layers, feature/vocabulary clouds, and context/RAG trays.
+4. Add a lightweight source-review pass before publishing infrastructure, ethics, alignment, hallucination, and RAG claims as final copy.
+
+### Build Result
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed.
+
 ## v0.6.3 Content Inventory and RAG Addendum
 
 ### What Changed
