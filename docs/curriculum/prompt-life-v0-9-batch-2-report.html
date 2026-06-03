@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prompt Life v0.9 Batch 2 Report</title>
+  <style>
+    :root {
+      color: #0b1230;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f7f9fb;
+    }
+    body {
+      margin: 0;
+      padding: 32px;
+      background: #f7f9fb;
+    }
+    main {
+      max-width: 1060px;
+      margin: 0 auto;
+      display: grid;
+      gap: 18px;
+    }
+    section {
+      background: white;
+      border: 1px solid #d8e0ef;
+      border-radius: 8px;
+      padding: 22px;
+      box-shadow: 0 10px 28px rgba(7, 27, 111, 0.08);
+      break-inside: avoid;
+    }
+    h1, h2, h3, p {
+      margin-top: 0;
+    }
+    h1 {
+      font-size: 40px;
+      line-height: 1.05;
+      margin-bottom: 10px;
+      color: #071b6f;
+    }
+    h2 {
+      color: #071b6f;
+      margin-bottom: 10px;
+    }
+    h3 {
+      margin-bottom: 8px;
+      color: #0e8d9b;
+      font-size: 16px;
+      text-transform: uppercase;
+    }
+    p, li {
+      line-height: 1.45;
+      color: #253452;
+    }
+    code {
+      background: #eef3ff;
+      border-radius: 6px;
+      padding: 2px 5px;
+      color: #071b6f;
+    }
+    ul {
+      margin-bottom: 0;
+    }
+    .meta {
+      color: #0e8d9b;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+    figure {
+      margin: 0;
+      padding: 12px;
+      border: 1px solid #d8e0ef;
+      border-radius: 8px;
+      background: #fbfcff;
+      break-inside: avoid;
+    }
+    figcaption {
+      margin-top: 8px;
+      font-weight: 850;
+      color: #253452;
+    }
+    img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      border: 1px solid #d8e0ef;
+      display: block;
+      background: white;
+    }
+    .wide {
+      grid-column: 1 / -1;
+    }
+    .checks {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px 18px;
+    }
+    .checks li {
+      margin-bottom: 4px;
+    }
+    @media print {
+      body {
+        padding: 18px;
+        background: white;
+      }
+      section {
+        box-shadow: none;
+      }
+      .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      figure {
+        page-break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section>
+      <p class="meta">Prompt Life v0.9.0 · Batch 2 · June 3, 2026</p>
+      <h1>Inference to Tensors</h1>
+      <p>Implemented Batch 2 of the curriculum and fixed the Batch 1 visual/PDF layout issues with HTML legends, numbered callouts, and print-safe captions.</p>
+    </section>
+
+    <section>
+      <h2>What Changed</h2>
+      <ul>
+        <li>Implemented full cards for Inference, Prompt vs Response, Tokenization, Token IDs, Embeddings, Vectors, and Tensors.</li>
+        <li>Bumped the visible app version to <code>v0.9.0</code>.</li>
+        <li>Moved lessons 8-14 into the complete lesson schema: definition, core explanation, where it happens, durable/temp, prompt/response, metaphor, Brain Bridge, misconception, visual aid, and checkpoint.</li>
+        <li>Improved Batch 1 visuals for Rationalists vs Empiricists, Training, Overfitting, and Alignment.</li>
+        <li>Updated the glossary for tokenizer, tokenization, embedding table, distributed representation, activation, hidden state, and weight tensor.</li>
+        <li>Updated the default lesson-card PDF path to <code>docs/review/prompt-life-lesson-cards-v0-9.pdf</code>.</li>
+        <li>Generated the v0.9 lesson-card PDF at <code>docs/content-inventory/prompt-life-lesson-cards-v0-9-batch-2.pdf</code>.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>How To Run Locally</h2>
+      <p>From this repo:</p>
+      <p><code>cd ~/Desktop/promptlife</code><br><code>npm install</code><br><code>npm run dev</code></p>
+      <p>Open <code>http://localhost:5173/</code>. For same-Wi-Fi phone testing, run <code>npm run dev -- --host 0.0.0.0</code> and open the Network URL Vite prints.</p>
+    </section>
+
+    <section>
+      <h2>Verification</h2>
+      <ul class="checks">
+        <li><code>npm install</code>: passed.</li>
+        <li><code>npm run typecheck</code>: passed.</li>
+        <li><code>npm run build</code>: passed.</li>
+        <li><code>npm run export:lesson-pdf</code>: passed.</li>
+        <li><code>npm run export:lesson-cards</code>: passed.</li>
+        <li>Mobile overflow audit: passed at 320px, 390px, and 430px.</li>
+        <li>Review route: 28 lesson cards, Batch 2 present.</li>
+        <li>PDF sample page: no clipped visual, vertical caption, or unreadable label found.</li>
+        <li>No new games, Three.js, or heavy 3D library added.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Files Changed</h2>
+      <p><code>README.md</code>, <code>package.json</code>, <code>scripts/export-lesson-pdf.mjs</code>, <code>src/components/VisualAids.tsx</code>, <code>src/data/content.ts</code>, <code>src/main.tsx</code>, <code>src/styles/global.css</code>, <code>docs/REVIEW_NOTES.md</code>, Batch 2 curriculum docs, v0.9 lesson-card PDFs, and v0.9 screenshot artifacts.</p>
+    </section>
+
+    <section>
+      <h2>Next Three v0.10 Improvements</h2>
+      <ol>
+        <li>Implement Batch 3 for Attention, MLP, Layers, and Hidden States as a connected transformer-workday section.</li>
+        <li>Add source citations or a bibliography layer for Batch 1 and Batch 2 before broader publication.</li>
+        <li>Add an automated screenshot/overflow script to the repo so future visual-aid changes can be checked repeatably.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Screenshots</h2>
+      <div class="grid">
+        <figure>
+          <img src="../screenshots/v0-9-batch-2-journey-top.png" alt="Journey top at mobile width">
+          <figcaption>Journey top</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/v0-9-batch-2-rationalists-fixed.png" alt="Rules and learned patterns visual aid">
+          <figcaption>Batch 1 fixed: Rationalists vs Empiricists</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/v0-9-batch-2-training-fixed.png" alt="Training loop visual aid">
+          <figcaption>Batch 1 fixed: Training Loop</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/v0-9-batch-2-overfitting-fixed.png" alt="Overfitting and generalization visual aid">
+          <figcaption>Batch 1 fixed: Overfitting</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/v0-9-batch-2-alignment-fixed.png" alt="Alignment landscape visual aid">
+          <figcaption>Batch 1 fixed: Alignment</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/v0-9-batch-2-inference.png" alt="Inference visual aid">
+          <figcaption>Batch 2: Inference</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/v0-9-batch-2-prompt-response.png" alt="Prompt versus response visual aid">
+          <figcaption>Batch 2: Prompt vs Response</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/v0-9-batch-2-tokenization.png" alt="Tokenization visual aid">
+          <figcaption>Batch 2: Tokenization</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/v0-9-batch-2-token-ids.png" alt="Token IDs visual aid">
+          <figcaption>Batch 2: Token IDs</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/v0-9-batch-2-embeddings.png" alt="Embedding lookup visual aid">
+          <figcaption>Batch 2: Embeddings</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/v0-9-batch-2-vectors.png" alt="Feature vector visual aid">
+          <figcaption>Batch 2: Vectors</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/v0-9-batch-2-tensors.png" alt="Tensor block visual aid">
+          <figcaption>Batch 2: Tensors</figcaption>
+        </figure>
+        <figure class="wide">
+          <img src="../screenshots/v0-9-batch-2-review-route.png" alt="Lesson review route Prompt vs Response card">
+          <figcaption>Review route sample</figcaption>
+        </figure>
+        <figure class="wide">
+          <img src="../screenshots/v0-9-batch-2-pdf-sample.png" alt="PDF sample showing Prompt vs Response review card">
+          <figcaption>PDF sample page</figcaption>
+        </figure>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

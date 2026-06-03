@@ -2,6 +2,56 @@
 
 Date: 2026-06-02
 
+## v0.9 Batch 2 Inference-To-Tensors Implementation
+
+### What Changed
+
+- Implemented the second curriculum batch in app data: Inference, Prompt vs Response, Tokenization, Token IDs, Embeddings, Vectors, and Tensors.
+- Moved lessons 8-14 into the full lesson schema with lifecycle placement, durable versus temporary notes, prompt/response notes, misconception targets, Brain Bridge limits, and checkpoint feedback.
+- Updated the Morning Commute act summary so it covers ordinary inference, prompt/response distinction, and numerical representation.
+- Improved Batch 1 and Batch 2 visual aids with HTML legends and numbered SVG callouts so labels do not collide with shapes.
+- Kept the tensor visual as a stable static tokens x features diagram for mobile and PDF reliability; no Three.js or new 3D library was added.
+- Expanded the glossary for Batch 2 terms: tokenizer, tokenization, embedding table, distributed representation, activation, and weight tensor, plus improved inference/forward-pass/context entries.
+- Bumped the visible app version to `v0.9.0`.
+- Updated the default lesson PDF export path to `docs/review/prompt-life-lesson-cards-v0-9.pdf`.
+- Updated `npm run export:lesson-cards` to generate `docs/content-inventory/prompt-life-lesson-cards-v0-9-batch-2.pdf`.
+
+### Files Changed
+
+- `README.md`
+- `package.json`
+- `scripts/export-lesson-pdf.mjs`
+- `src/components/VisualAids.tsx`
+- `src/data/content.ts`
+- `src/main.tsx`
+- `src/styles/global.css`
+- `docs/curriculum/BATCH_2_IMPLEMENTATION_REPORT_V0_9.md`
+- `docs/curriculum/VISUAL_AID_LAYOUT_RULES_V0_9_BATCH_2.md`
+- `docs/curriculum/BATCH_2_REVIEW_MATRIX_V0_9.md`
+- `docs/curriculum/SOURCE_NEEDS_V0_9_BATCH_2.md`
+- `docs/curriculum/prompt-life-v0-9-batch-2-report.html`
+- `docs/curriculum/prompt-life-v0-9-batch-2-report.pdf`
+- `docs/content-inventory/prompt-life-lesson-cards-v0-9-batch-2.pdf`
+- `docs/review/prompt-life-lesson-cards-v0-9.pdf`
+- `docs/screenshots/v0-9-batch-2-*.png`
+
+### Batch 2 Lessons Implemented
+
+1. Inference
+2. Prompt vs Response
+3. Tokenization
+4. Token IDs
+5. Embeddings
+6. Vectors
+7. Tensors
+
+### Verification
+
+- `npm install`: passed.
+- `npm run typecheck`: passed before artifact generation.
+- `npm run build`: passed before artifact generation.
+- PDF export, screenshots, and final deployment checks are recorded in `docs/curriculum/BATCH_2_IMPLEMENTATION_REPORT_V0_9.md`.
+
 ## v0.8 Batch 1 Foundation Implementation
 
 ### What Changed

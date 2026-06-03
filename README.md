@@ -9,6 +9,7 @@ The through-line is a day in the life of a prompt. The app follows one prompt fr
 From this project folder:
 
 ```bash
+cd ~/Desktop/promptlife
 npm install
 npm run dev
 ```
@@ -34,10 +35,10 @@ The production build is written to `dist/`.
 npm run export:lesson-pdf
 ```
 
-This writes the review deck to:
+This writes the default review deck to:
 
 ```text
-docs/review/prompt-life-lesson-cards-v0-6.pdf
+docs/review/prompt-life-lesson-cards-v0-9.pdf
 ```
 
 For the curriculum inventory pass, run:
@@ -49,7 +50,7 @@ npm run export:lesson-cards
 This writes the inventory review deck to:
 
 ```text
-docs/content-inventory/prompt-life-lesson-cards-v0-6.pdf
+docs/content-inventory/prompt-life-lesson-cards-v0-9-batch-2.pdf
 ```
 
 ## Test On A Phone
@@ -57,6 +58,7 @@ docs/content-inventory/prompt-life-lesson-cards-v0-6.pdf
 For a same-Wi-Fi phone test without deploying, run Vite on your local network:
 
 ```bash
+cd ~/Desktop/promptlife
 npm run dev -- --host 0.0.0.0
 ```
 
@@ -89,6 +91,8 @@ For local debugging, add `?debug=1` to the app URL and open the Badge screen to 
 - Lightweight React/SVG/CSS concept animations with reduced-motion support.
 - Lightweight lesson visual aids plus review routes at `/review/lesson-cards` and `/review/visual-aids`.
 - Lesson-card PDF export through `npm run export:lesson-pdf` and inventory review export through `npm run export:lesson-cards`.
+- v0.9 Batch 2 lessons for Inference, Prompt vs Response, Tokenization, Token IDs, Embeddings, Vectors, and Tensors.
+- HTML legend/callout visual aid system designed to stay readable in mobile and PDF review.
 - Play mode centered on Prompt Run, an interactive 12-step inference loop plus final ordering challenge.
 - Guided comparisons:
   - Prompt Run

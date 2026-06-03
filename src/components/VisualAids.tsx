@@ -1,20 +1,20 @@
 import React from 'react'
 
 export const visualAidCatalog = [
-  { id: 'llm-overview', title: 'Prompt to Prediction', caption: 'Prompt/context flows through learned weights into next-token probabilities; one generated response token is appended.', pattern: 'llmOverview' },
-  { id: 'traditions', title: 'Rules and Learned Patterns', caption: 'Symbolic/rationalist systems use explicit rules; deep-learning/empiricist systems learn useful patterns from examples.', pattern: 'traditions' },
-  { id: 'training-loop', title: 'Training Loop', caption: 'Predict, compare, loss, update weights, repeat. Training changes weights.', pattern: 'training' },
-  { id: 'pretraining-rain', title: 'Broad Pretraining', caption: 'A wide stream of data shapes broad durable learning before normal use.', pattern: 'pretraining' },
-  { id: 'overfitting-generalization', title: 'Overfitting vs Generalization', caption: 'Memorizing examples is not the same as learning transferable patterns.', pattern: 'overfitting' },
-  { id: 'fine-tune-path', title: 'Fine-Tuning Path', caption: 'Targeted examples nudge an already-trained model toward a desired pattern.', pattern: 'fine' },
-  { id: 'alignment', title: 'Alignment Landscape', caption: 'Alignment shapes behavior with preferred paths, guardrails, feedback, and policies; it does not create moral agency.', pattern: 'alignment' },
-  { id: 'inference-pass', title: 'Forward Pass', caption: 'Inference creates temporary states while durable weights stay fixed.', pattern: 'inference' },
-  { id: 'prompt-response', title: 'Prompt vs Response', caption: 'Prompt tokens are given; response tokens are generated and appended.', pattern: 'promptResponse' },
-  { id: 'tokenization', title: 'Text to Tokens', caption: 'Text is split into model-readable chunks before embedding lookup.', pattern: 'token' },
-  { id: 'token-ids', title: 'Token IDs', caption: 'Each token gets a lookup number that points to an embedding row.', pattern: 'ids' },
-  { id: 'embeddings', title: 'Embedding Lookup', caption: 'A token ID retrieves a learned starting vector.', pattern: 'vector' },
-  { id: 'vectors', title: 'Feature Vector', caption: 'A vector is a list of numerical features, not a sentence.', pattern: 'bars' },
-  { id: 'tensors', title: 'Tensor Block', caption: 'Tensors organize many token vectors for layer-by-layer processing.', pattern: 'tensor' },
+  { id: 'llm-overview', title: 'Prompt to Prediction', caption: 'Prompt/context flows through learned weights into next-token probabilities; one generated response token is appended.', pattern: 'llmOverview', legend: ['Prompt/context is given input.', 'Learned weights are used during inference.', 'The selected response token is appended.'] },
+  { id: 'traditions', title: 'Rules and Learned Patterns', caption: 'Symbolic/rationalist systems use explicit rules; deep-learning/empiricist systems learn useful patterns from examples.', pattern: 'traditions', legend: ['Rules: if/then logic and symbols.', 'Examples: data, loss, and weight updates.', 'Modern AI products can combine learned models with rules and tools.'] },
+  { id: 'training-loop', title: 'Training Loop', caption: 'Predict, compare, loss, update weights, repeat. Training changes weights.', pattern: 'training', legend: ['Predict and compare against a target.', 'Loss measures error.', 'Weight updates make training durable.'] },
+  { id: 'pretraining-rain', title: 'Broad Pretraining', caption: 'A wide stream of data shapes broad durable learning before normal use.', pattern: 'pretraining', legend: ['Many examples flow through the training loop.', 'Repeated updates shape broad model capability.'] },
+  { id: 'overfitting-generalization', title: 'Overfitting vs Generalization', caption: 'Memorizing examples is not the same as learning transferable patterns.', pattern: 'overfitting', legend: ['Overfit curve traces old dots too tightly.', 'Generalizing curve is smoother and reaches new examples.', 'Held-out examples test whether learning transfers.'] },
+  { id: 'fine-tune-path', title: 'Fine-Tuning Path', caption: 'Targeted examples nudge an already-trained model toward a desired pattern.', pattern: 'fine', legend: ['Fine-tuning starts from a pretrained base.', 'Targeted examples shape future responses.'] },
+  { id: 'alignment', title: 'Alignment Landscape', caption: 'Alignment shapes behavior with preferred paths, guardrails, feedback, and policies; it does not create moral agency.', pattern: 'alignment', legend: ['Preferred path: behavior the system encourages.', 'Warning zone: outputs to avoid or handle carefully.', 'Policy check: runtime or review constraint.', 'Feedback: behavior signal, not conscience.'] },
+  { id: 'inference-pass', title: 'Forward Pass', caption: 'Inference creates temporary states while durable weights stay fixed.', pattern: 'inference', legend: ['Current context enters the model.', 'Fixed weights are used, not updated.', 'Temporary hidden states lead to next-token scores.'] },
+  { id: 'prompt-response', title: 'Prompt vs Response', caption: 'Prompt tokens are given; response tokens are generated and appended.', pattern: 'promptResponse', legend: ['Prompt tokens are supplied context.', 'The generated token yard is appended.', 'The next run sees prompt plus response so far.'] },
+  { id: 'tokenization', title: 'Text to Tokens', caption: 'Text is split into model-readable chunks before embedding lookup.', pattern: 'token', legend: ['Tokens can be words, word pieces, punctuation, or spaces.', 'This app uses simplified tokens; real tokenizers may split differently.'] },
+  { id: 'token-ids', title: 'Token IDs', caption: 'Each token gets a lookup number that points to an embedding row.', pattern: 'ids', legend: ['The token is not carried forward as raw English.', 'The ID is a lookup key, not the meaning.', 'The ID points to an embedding row.'] },
+  { id: 'embeddings', title: 'Embedding Lookup', caption: 'A token ID retrieves a learned starting vector.', pattern: 'vector', legend: ['The embedding table was learned during training.', 'Inference retrieves one row temporarily for the current context.', 'Later layers reshape embeddings into hidden states.'] },
+  { id: 'vectors', title: 'Feature Vector', caption: 'A vector is a list of numerical features, not a sentence.', pattern: 'bars', legend: ['Slider labels are simplified teaching examples.', 'Real features are distributed across many dimensions.'] },
+  { id: 'tensors', title: 'Tensor Block', caption: 'Tensors organize many token vectors for layer-by-layer processing.', pattern: 'tensor', legend: ['Token positions run down one axis.', 'Feature dimensions run across another axis.', 'Batch x tokens x features is an advanced shape note.'] },
   { id: 'attention', title: 'Attention Weave', caption: 'Attention is weighted relevance between token positions.', pattern: 'attention' },
   { id: 'mlp', title: 'MLP Reshape', caption: 'The MLP reshapes each token position feature vector.', pattern: 'mlp' },
   { id: 'layers', title: 'Layer Stack', caption: 'Repeated blocks refine hidden states while carrying useful signal forward.', pattern: 'layers' },
@@ -38,13 +38,23 @@ export function VisualAid({ id, headingId = undefined, compact = false }) {
   return (
     <figure className={compact ? 'visual-aid compact' : 'visual-aid'} aria-labelledby={headingId}>
       <div className={`aid-canvas aid-${aid.pattern}`} aria-hidden="true">
-        <svg viewBox="0 0 320 210" role="img" focusable="false">
+        <svg viewBox="0 0 320 210" preserveAspectRatio="xMidYMid meet" focusable="false">
           <VisualPattern aid={aid} />
         </svg>
       </div>
       <figcaption>
         <strong>{aid.title}</strong>
         <span>{aid.caption}</span>
+        {aid.legend?.length > 0 && (
+          <ol className="aid-legend">
+            {aid.legend.map((item, index) => (
+              <li key={item}>
+                <span aria-hidden="true">{index + 1}</span>
+                <p>{item}</p>
+              </li>
+            ))}
+          </ol>
+        )}
       </figcaption>
     </figure>
   )
@@ -89,6 +99,7 @@ function VisualPattern({ aid }) {
     case 'ids':
       return <IdsSvg />
     case 'vector':
+      return <EmbeddingSvg />
     case 'bars':
       return <VectorSvg />
     case 'tensor':
@@ -131,8 +142,22 @@ function Label({ x, y, children, className = '' }) {
   return <text x={x} y={y} className={className}>{children}</text>
 }
 
+function Callout({ x, y, children }) {
+  return (
+    <g>
+      <circle className="aid-callout" cx={x} cy={y} r="12" />
+      <Label x={Number(x) - 4} y={Number(y) + 5} className="tiny dark">{children}</Label>
+    </g>
+  )
+}
+
 function Arrow({ x1, y1, x2, y2 }) {
-  return <path className="aid-arrow" d={`M${x1} ${y1} C${(x1 + x2) / 2} ${y1}, ${(x1 + x2) / 2} ${y2}, ${x2} ${y2}`} />
+  const startX = Number(x1)
+  const startY = Number(y1)
+  const endX = Number(x2)
+  const endY = Number(y2)
+  const midX = (startX + endX) / 2
+  return <path className="aid-arrow" d={`M${startX} ${startY} C${midX} ${startY}, ${midX} ${endY}, ${endX} ${endY}`} />
 }
 
 function LlmOverviewSvg() {
@@ -162,27 +187,25 @@ function LlmOverviewSvg() {
 function TraditionsSvg() {
   return (
     <>
-      <rect className="aid-box prompt" x="18" y="30" width="124" height="116" rx="10" />
-      <rect className="aid-box" x="178" y="30" width="124" height="116" rx="10" />
-      <Label x="39" y="53" className="tiny dark">symbolic</Label>
-      <Label x="40" y="68" className="tiny dark">rationalist</Label>
-      <Label x="194" y="53" className="tiny">deep learning</Label>
-      <Label x="199" y="68" className="tiny">empiricist</Label>
-      {['rules', 'if/then', 'symbols'].map((label, index) => (
+      <rect className="aid-box prompt" x="18" y="30" width="124" height="118" rx="10" />
+      <rect className="aid-box" x="178" y="30" width="124" height="118" rx="10" />
+      <Label x="55" y="54" className="tiny dark">Rules</Label>
+      <Label x="206" y="54" className="tiny">Learned</Label>
+      {['If/then', 'Symbols', 'Search'].map((label, index) => (
         <g key={label}>
-          <rect className="aid-chip prompt" x="34" y={82 + index * 24} width="86" height="18" rx="5" />
-          <Label x="45" y={96 + index * 24} className="tiny dark">{label}</Label>
+          <rect className="aid-chip prompt" x="34" y={74 + index * 24} width="90" height="18" rx="5" />
+          <Label x="48" y={88 + index * 24} className="tiny dark">{label}</Label>
         </g>
       ))}
-      {['examples', 'loss', 'updates'].map((label, index) => (
+      {['Examples', 'Loss', 'Updates'].map((label, index) => (
         <g key={label}>
-          <circle className={index === 1 ? 'aid-dot alt' : 'aid-dot'} cx={206 + index * 31} cy={96 + (index % 2) * 18} r="14" />
-          <Label x={188 + index * 31} y={133} className="tiny">{label}</Label>
+          <rect className={index === 1 ? 'aid-chip output' : 'aid-chip'} x="194" y={74 + index * 24} width="92" height="18" rx="5" />
+          <Label x="207" y={88 + index * 24} className={index === 1 ? 'tiny dark' : 'tiny'}>{label}</Label>
         </g>
       ))}
       <path className="aid-line" d="M142 88 H178" />
-      <rect className="aid-box muted" x="76" y="164" width="168" height="28" rx="8" />
-      <Label x="95" y="183" className="tiny">modern systems can combine both</Label>
+      <rect className="aid-box muted" x="72" y="166" width="176" height="30" rx="8" />
+      <Label x="116" y="185" className="tiny">combine both</Label>
     </>
   )
 }
@@ -215,25 +238,27 @@ function CloudSvg() {
 
 function TrainingSvg() {
   const steps = [
-    ['predict', 26, 42],
-    ['compare', 180, 42],
-    ['loss', 180, 132],
-    ['repeat', 26, 132]
+    ['Predict', 22, 50],
+    ['Compare', 114, 32],
+    ['Loss', 222, 50],
+    ['Update', 190, 134],
+    ['Repeat', 56, 134]
   ]
   return (
     <>
       {steps.map(([label, x, y]) => (
         <g key={label}>
-          <rect className="aid-box" x={Number(x)} y={Number(y)} width="96" height="44" rx="8" />
-          <Label x={Number(x) + 22} y={Number(y) + 28}>{label}</Label>
+          <rect className={label === 'Update' ? 'aid-box output' : 'aid-box'} x={Number(x)} y={Number(y)} width="76" height="38" rx="8" />
+          <Label x={Number(x) + 12} y={Number(y) + 24} className={label === 'Update' ? 'tiny dark' : 'tiny'}>{label}</Label>
         </g>
       ))}
-      <Arrow x1={122} y1={64} x2={180} y2={64} />
-      <Arrow x1={228} y1={86} x2={228} y2={132} />
-      <Arrow x1={180} y1={154} x2={122} y2={154} />
-      <Arrow x1={74} y1={132} x2={74} y2={86} />
-      <Label x="100" y="112" className="tiny">update weights</Label>
-      <Label x="80" y="194" className="tiny">training changes weights</Label>
+      <Arrow x1={98} y1={69} x2={114} y2={52} />
+      <Arrow x1={190} y1={52} x2={222} y2={69} />
+      <Arrow x1={260} y1={88} x2={228} y2={134} />
+      <Arrow x1={190} y1={153} x2={132} y2={153} />
+      <Arrow x1={56} y1={134} x2={60} y2={88} />
+      <rect className="aid-box muted" x="88" y="96" width="144" height="24" rx="8" />
+      <Label x="109" y="112" className="tiny">weights change here</Label>
     </>
   )
 }
@@ -264,9 +289,9 @@ function OverfittingSvg() {
       <path className="aid-path thin" d="M40 148 C92 122, 150 102, 212 90 S260 82, 296 76" />
       {trainDots.map(([x, y]) => <circle key={`${x}-${y}`} className="aid-dot" cx={x} cy={y} r="7" />)}
       {newDots.map(([x, y]) => <rect key={`${x}-${y}`} className="aid-chip output" x={x - 8} y={y - 8} width="16" height="16" rx="4" />)}
-      <Label x="48" y="28" className="tiny muted-text">overfit: old dots only</Label>
-      <Label x="142" y="184" className="tiny">smooth curve</Label>
-      <Label x="142" y="199" className="tiny">reaches new dots</Label>
+      <Callout x="122" y="54">1</Callout>
+      <Callout x="232" y="86">2</Callout>
+      <Callout x="276" y="56">3</Callout>
     </>
   )
 }
@@ -294,68 +319,117 @@ function AlignmentSvg() {
       <path className="aid-land" d="M20 164 L82 92 L136 130 L196 54 L300 164 Z" />
       <path className="aid-path" d="M42 154 C86 126, 116 124, 150 108 S208 76, 270 66" />
       <path className="aid-arc alt" d="M52 60 C86 42, 114 42, 142 58" />
-      <rect className="aid-chip output" x="52" y="40" width="84" height="28" rx="8" />
-      <Label x="62" y="59" className="tiny dark">warning</Label>
-      <rect className="aid-chip prompt" x="190" y="36" width="92" height="30" rx="8" />
-      <Label x="202" y="56" className="tiny dark">preferred</Label>
-      <rect className="aid-box muted" x="98" y="142" width="126" height="28" rx="8" />
-      <Label x="117" y="161" className="tiny">policy check</Label>
+      <rect className="aid-chip output" x="48" y="40" width="92" height="28" rx="8" />
+      <rect className="aid-chip prompt" x="190" y="34" width="92" height="30" rx="8" />
+      <rect className="aid-box muted" x="98" y="140" width="126" height="30" rx="8" />
       <circle className="aid-dot" cx="162" cy="102" r="10" />
-      <Label x="172" y="106" className="tiny">feedback</Label>
-      <Label x="50" y="192" className="tiny">shapes behavior, not moral agency</Label>
+      <Callout x="244" y="76">1</Callout>
+      <Callout x="92" y="54">2</Callout>
+      <Callout x="160" y="155">3</Callout>
+      <Callout x="182" y="102">4</Callout>
     </>
   )
 }
 
 function InferenceSvg() {
+  const steps = [
+    ['context', 18],
+    ['states', 104],
+    ['scores', 190],
+    ['next', 258]
+  ]
   return (
     <>
-      {['context', 'layers', 'logits', 'token'].map((label, index) => (
+      {steps.map(([label, x], index) => (
         <g key={label}>
-          <rect className="aid-box" x={18 + index * 76} y="78" width="62" height="44" rx="8" />
-          <Label x={26 + index * 76} y="104" className="tiny">{label}</Label>
-          {index < 3 && <Arrow x1={80 + index * 76} y1="100" x2={94 + index * 76} y2="100" />}
+          <rect className={label === 'next' ? 'aid-box output' : 'aid-box'} x={Number(x)} y="68" width={label === 'next' ? 50 : 66} height="42" rx="8" />
+          <Label x={Number(x) + 10} y="94" className={label === 'next' ? 'tiny dark' : 'tiny'}>{label}</Label>
+          {index < 3 && <Arrow x1={Number(x) + 66} y1="89" x2={Number(steps[index + 1][1])} y2="89" />}
         </g>
       ))}
-      <rect className="aid-box muted" x="92" y="145" width="136" height="32" rx="8" />
-      <Label x="116" y="166" className="tiny">weights stay fixed</Label>
+      <rect className="aid-box prompt" x="76" y="144" width="170" height="34" rx="8" />
+      <Label x="101" y="166" className="tiny dark">fixed weights: no update</Label>
+      <Callout x="50" y="54">1</Callout>
+      <Callout x="160" y="132">2</Callout>
+      <Callout x="220" y="52">3</Callout>
     </>
   )
 }
 
 function PromptResponseSvg() {
+  const promptTokens = [
+    ['The', 16, 34],
+    ['dog', 52, 34],
+    ['chased', 88, 52],
+    ['the', 142, 34],
+    ['cat', 178, 34],
+    ['across', 214, 54],
+    ['the', 270, 34]
+  ]
+  const nextTokens = [
+    ['The', 28, 34],
+    ['dog', 66, 38],
+    ['chased', 108, 58],
+    ['...', 170, 28],
+    ['the', 202, 36],
+    ['yard', 242, 42, 'output']
+  ]
   return (
     <>
-      {['The', 'dog', 'chased'].map((token, index) => (
-        <rect key={token} className="aid-chip prompt" x={28 + index * 64} y="54" width="54" height="34" rx="8" />
+      <Label x="18" y="24" className="tiny">given prompt</Label>
+      {promptTokens.map(([token, x, width]) => (
+        <g key={`${token}-${x}`}>
+          <rect className="aid-chip prompt" x={Number(x)} y="38" width={Number(width)} height="26" rx="7" />
+          <Label x={Number(x) + 7} y="56" className="tiny dark">{token}</Label>
+        </g>
       ))}
-      {['yard', 'and'].map((token, index) => (
-        <rect key={token} className="aid-chip output" x={220 + index * 58} y="54" width="50" height="34" rx="8" />
+      <rect className="aid-chip output" x="136" y="88" width="46" height="28" rx="7" />
+      <Label x="144" y="107" className="tiny dark">yard</Label>
+      <Arrow x1="160" y1="64" x2="160" y2="88" />
+      <Label x="188" y="106" className="tiny">generated</Label>
+      <Label x="188" y="120" className="tiny">token</Label>
+      <rect className="aid-box muted" x="14" y="144" width="292" height="46" rx="8" />
+      <Label x="22" y="136" className="tiny">next context</Label>
+      {nextTokens.map(([token, x, width, kind]) => (
+        <g key={`next-${token}-${x}-${kind ?? 'prompt'}`} transform={`translate(${Number(x)}, 154)`}>
+          <rect className={kind === 'output' ? 'aid-chip output' : 'aid-chip prompt'} width={Number(width)} height="24" rx="6" />
+          <Label x="6" y="17" className="tiny dark">{token}</Label>
+        </g>
       ))}
-      <Label x="36" y="76" className="tiny dark">The</Label>
-      <Label x="99" y="76" className="tiny dark">dog</Label>
-      <Label x="156" y="76" className="tiny dark">chased</Label>
-      <Label x="227" y="76" className="tiny dark">yard</Label>
-      <Label x="283" y="76" className="tiny dark">and</Label>
-      <rect className="aid-box" x="42" y="130" width="236" height="38" rx="8" />
-      <Label x="82" y="154">current context grows</Label>
-      <Arrow x1="245" y1="88" x2="245" y2="130" />
+      <Callout x="300" y="26">1</Callout>
+      <Callout x="118" y="102">2</Callout>
+      <Callout x="300" y="168">3</Callout>
     </>
   )
 }
 
 function TokenSvg() {
+  const row1 = [
+    ['The', 22, 34],
+    ['dog', 60, 38],
+    ['chased', 102, 58],
+    ['the', 164, 36],
+    ['cat', 204, 36]
+  ]
+  const row2 = [
+    ['across', 62, 62],
+    ['the', 128, 36],
+    ['yard', 168, 42],
+    ['.', 214, 24]
+  ]
   return (
     <>
       <rect className="aid-box prompt" x="26" y="38" width="260" height="38" rx="8" />
-      <Label x="70" y="62">Explain attention simply</Label>
-      {['Explain', 'attention', 'simply'].map((token, index) => (
-        <g key={token}>
-          <rect className="aid-chip" x={38 + index * 94} y="122" width="78" height="36" rx="8" />
-          <Label x={47 + index * 94} y="145" className="tiny">{token}</Label>
+      <Label x="70" y="62" className="tiny dark">The dog chased ... yard.</Label>
+      {[...row1, ...row2].map(([token, x, width], index) => (
+        <g key={`${token}-${index}`}>
+          <rect className={token === '.' ? 'aid-chip output' : 'aid-chip'} x={Number(x)} y={index < row1.length ? 112 : 150} width={Number(width)} height="28" rx="7" />
+          <Label x={Number(x) + 7} y={index < row1.length ? 131 : 169} className={token === '.' ? 'tiny dark' : 'tiny'}>{token}</Label>
         </g>
       ))}
-      <Arrow x1="160" y1="76" x2="160" y2="122" />
+      <Arrow x1="160" y1="76" x2="160" y2="112" />
+      <Callout x="276" y="124">1</Callout>
+      <Callout x="236" y="164">2</Callout>
     </>
   )
 }
@@ -363,14 +437,45 @@ function TokenSvg() {
 function IdsSvg() {
   return (
     <>
-      {['token', 'ID', 'row'].map((label, index) => (
-        <g key={label}>
-          <rect className="aid-box" x={38 + index * 86} y="76" width="68" height="44" rx="8" />
-          <Label x={54 + index * 86} y="104">{label}</Label>
-          {index < 2 && <Arrow x1={106 + index * 86} y1="98" x2={124 + index * 86} y2="98" />}
+      <rect className="aid-chip prompt" x="24" y="78" width="64" height="38" rx="8" />
+      <Label x="42" y="102" className="tiny dark">dog</Label>
+      <rect className="aid-box" x="122" y="72" width="70" height="50" rx="8" />
+      <Label x="138" y="92" className="tiny">ID</Label>
+      <Label x="136" y="110" className="tiny">421</Label>
+      <rect className="aid-box output" x="230" y="66" width="70" height="62" rx="8" />
+      {[0, 1, 2, 3].map((bar) => (
+        <rect key={bar} className="aid-bar dark-bar" x={242 + bar * 11} y={112 - bar * 9} width="7" height={14 + bar * 9} rx="3" />
+      ))}
+      <Label x="250" y="84" className="tiny dark">row</Label>
+      <Arrow x1="88" y1="97" x2="122" y2="97" />
+      <Arrow x1="192" y1="97" x2="230" y2="97" />
+      <rect className="aid-box muted" x="76" y="156" width="170" height="28" rx="8" />
+      <Label x="95" y="174" className="tiny">lookup key, not meaning</Label>
+    </>
+  )
+}
+
+function EmbeddingSvg() {
+  return (
+    <>
+      <rect className="aid-box prompt" x="22" y="42" width="70" height="38" rx="8" />
+      <Label x="40" y="66" className="tiny dark">ID 421</Label>
+      <rect className="aid-box muted" x="122" y="24" width="86" height="132" rx="8" />
+      {[0, 1, 2, 3].map((row) => (
+        <g key={row}>
+          <rect className={row === 2 ? 'aid-chip output' : 'aid-chip'} x="136" y={42 + row * 26} width="58" height="18" rx="5" />
+          <Label x="144" y={56 + row * 26} className={row === 2 ? 'tiny dark' : 'tiny'}>row {row + 1}</Label>
         </g>
       ))}
-      <Label x="78" y="155" className="tiny">lookup key, not meaning</Label>
+      <rect className="aid-box" x="236" y="72" width="78" height="54" rx="8" />
+      {[0, 1, 2, 3, 4].map((bar) => (
+        <rect key={bar} className="aid-bar" x={248 + bar * 12} y={112 - bar * 6} width="8" height={14 + bar * 6} rx="3" />
+      ))}
+      <Arrow x1="92" y1="61" x2="122" y2="94" />
+      <Arrow x1="194" y1="94" x2="236" y2="98" />
+      <Callout x="60" y="96">1</Callout>
+      <Callout x="168" y="168">2</Callout>
+      <Callout x="278" y="144">3</Callout>
     </>
   )
 }
@@ -379,11 +484,14 @@ function VectorSvg() {
   const heights = [42, 82, 58, 104, 72, 36, 92]
   return (
     <>
-      <rect className="aid-box muted" x="34" y="36" width="252" height="144" rx="10" />
+      <rect className="aid-box muted" x="34" y="30" width="252" height="150" rx="10" />
+      <Label x="72" y="54" className="tiny">simplified</Label>
       {heights.map((height, index) => (
         <rect key={index} className="aid-bar" x={62 + index * 31} y={154 - height} width="18" height={height} rx="5" />
       ))}
-      <Label x="86" y="190" className="tiny">many numerical features</Label>
+      <Label x="82" y="190" className="tiny">distributed features</Label>
+      <Callout x="276" y="52">1</Callout>
+      <Callout x="252" y="146">2</Callout>
     </>
   )
 }
@@ -392,14 +500,20 @@ function TensorSvg() {
   return (
     <>
       {[0, 1, 2].map((sheet) => (
-        <g key={sheet} transform={`translate(${48 + sheet * 34}, ${44 + sheet * 20})`}>
-          <rect className="aid-sheet" width="152" height="86" rx="8" />
-          {[0, 1, 2, 3, 4, 5].map((cell) => (
-            <rect key={cell} className="aid-cell" x={18 + (cell % 3) * 38} y={18 + Math.floor(cell / 3) * 30} width="24" height="18" rx="4" />
+        <g key={sheet} transform={`translate(${52 + sheet * 28}, ${42 + sheet * 18})`}>
+          <rect className="aid-sheet" width="154" height="86" rx="8" />
+          {[0, 1, 2, 3, 4, 5, 6, 7].map((cell) => (
+            <rect key={cell} className="aid-cell" x={18 + (cell % 4) * 30} y={18 + Math.floor(cell / 4) * 30} width="20" height="18" rx="4" />
           ))}
         </g>
       ))}
-      <Label x="74" y="190" className="tiny">tokens by features by layers</Label>
+      <path className="aid-line" d="M38 58 V154" />
+      <path className="aid-line" d="M52 178 H238" />
+      <Label x="12" y="112" className="tiny">tokens</Label>
+      <Label x="118" y="197" className="tiny">features</Label>
+      <Callout x="72" y="60">1</Callout>
+      <Callout x="232" y="178">2</Callout>
+      <Callout x="252" y="92">3</Callout>
     </>
   )
 }

@@ -30,7 +30,7 @@ import './styles/global.css'
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '')
 const ASSET = `${BASE}/assets/promptlife`
 // Bump this for each shipped app change; the Badge screen displays it under Start over.
-const APP_VERSION = '0.8.0'
+const APP_VERSION = '0.9.0'
 const STORAGE_KEYS = {
   lastLocation: 'promptlife:v1:lastLocation',
   lessonId: 'promptlife:v1:lessonId',
@@ -541,7 +541,7 @@ function LessonScreen({ lesson, lessonIndex, totalLessons, reflection, onComplet
   const isCorrect = selectedAnswer === lesson.quiz.answer
   const relatedTerms = useMemo(() => {
     return lesson.terms
-      .map((term) => glossary.find((item) => item.id === term || item.term.toLowerCase() === term.toLowerCase()))
+      .map((term) => findGlossaryTerm(term))
       .filter(Boolean)
   }, [lesson.terms])
 
@@ -703,6 +703,17 @@ function stageLabel(stageType) {
   return labels[stageType] ?? stageType
 }
 
+function matchesGlossaryTerm(item, value) {
+  const normalized = String(value).toLowerCase()
+  return item.id === value ||
+    item.term.toLowerCase() === normalized ||
+    item.aliases?.some((alias) => alias.toLowerCase() === normalized)
+}
+
+function findGlossaryTerm(value) {
+  return glossary.find((item) => matchesGlossaryTerm(item, value))
+}
+
 function Checkpoint({ quiz, choice, setChoice, revealed }) {
   const selectedAnswer = choice == null ? null : quiz.choices[choice]
   const isCorrect = selectedAnswer === quiz.answer
@@ -751,7 +762,7 @@ function Checkpoint({ quiz, choice, setChoice, revealed }) {
 function ConceptBlock({ label, text, terms = [], onGlossary = null }) {
   const relatedTerms = useMemo(() => {
     return terms
-      .map((term) => glossary.find((item) => item.id === term || item.term.toLowerCase() === term.toLowerCase()))
+      .map((term) => findGlossaryTerm(term))
       .filter(Boolean)
   }, [terms])
 
@@ -1556,7 +1567,7 @@ function GameReflection({ prompt }) {
 
 function GlossaryScreen({ onOpen }) {
   const [query, setQuery] = useState('')
-  const terms = glossary.filter((item) => `${item.term} ${item.definition} ${item.relationship} ${item.metaphor} ${item.brainMetaphor ?? ''} ${item.brainLimit ?? ''} ${item.confused ?? ''} ${(item.related ?? []).join(' ')}`.toLowerCase().includes(query.toLowerCase()))
+  const terms = glossary.filter((item) => `${item.term} ${(item.aliases ?? []).join(' ')} ${item.definition} ${item.relationship} ${item.metaphor} ${item.brainMetaphor ?? ''} ${item.brainLimit ?? ''} ${item.confused ?? ''} ${(item.related ?? []).join(' ')}`.toLowerCase().includes(query.toLowerCase()))
 
   return (
     <section className="screen glossary-screen" aria-labelledby="glossary-title">
@@ -1585,13 +1596,13 @@ function GlossaryScreen({ onOpen }) {
 }
 
 function GlossaryDrawer({ termId, onOpen, onClose }) {
-  const item = glossary.find((term) => term.id === termId || term.term.toLowerCase() === String(termId).toLowerCase())
+  const item = findGlossaryTerm(termId)
   const closeRef = useRef(null)
   const relatedTerms = useMemo(() => {
     if (!item) return []
     if (item.related?.length) {
       return item.related
-        .map((related) => glossary.find((term) => term.id === related || term.term.toLowerCase() === String(related).toLowerCase()))
+        .map((related) => findGlossaryTerm(related))
         .filter(Boolean)
         .slice(0, 6)
     }
@@ -1812,7 +1823,7 @@ function VisualAidReviewPage() {
       <header className="review-cover">
         <p className="eyebrow">Prompt Life v{APP_VERSION}</p>
         <h1 id="visual-review-title" tabIndex={-1}>Visual Aid Gallery</h1>
-        <p>Reusable SVG/CSS diagrams for the v0.6 lesson path.</p>
+        <p>Reusable SVG/CSS diagrams for the current lesson path, with mobile and PDF readability checks.</p>
       </header>
       <VisualAidGallery />
     </main>

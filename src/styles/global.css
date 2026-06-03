@@ -649,11 +649,13 @@ p {
   display: grid;
   gap: 0.65rem;
   margin: 0;
+  min-width: 0;
 }
 
 .aid-canvas {
   position: relative;
   width: 100%;
+  min-width: 0;
   aspect-ratio: 16 / 10.5;
   border-radius: 8px;
   background:
@@ -673,10 +675,17 @@ p {
   gap: 0.18rem;
   color: #33415f;
   line-height: 1.4;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .visual-aid figcaption strong {
+  display: block;
   color: var(--pl-navy);
+}
+
+.visual-aid figcaption > span {
+  display: block;
 }
 
 .visual-aid.compact .aid-canvas {
@@ -715,6 +724,12 @@ p {
 .aid-dot {
   fill: #9be7d5;
   stroke: rgba(255, 255, 255, 0.42);
+  stroke-width: 2;
+}
+
+.aid-callout {
+  fill: #f6d697;
+  stroke: #071b6f;
   stroke-width: 2;
 }
 
@@ -780,6 +795,10 @@ p {
   fill: #9be7d5;
 }
 
+.aid-bar.dark-bar {
+  fill: #071b6f;
+}
+
 .aid-bar.horizontal {
   fill: #ffb86b;
 }
@@ -799,12 +818,12 @@ p {
 
 .visual-aid text {
   fill: white;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 900;
 }
 
 .visual-aid .tiny {
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .visual-aid .dark {
@@ -820,6 +839,45 @@ p {
 .aid-box.output + text,
 .aid-chip.output + text {
   fill: #071b6f;
+}
+
+.aid-legend {
+  display: grid;
+  gap: 0.35rem;
+  margin: 0.35rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.aid-legend li {
+  display: grid;
+  grid-template-columns: 1.35rem minmax(0, 1fr);
+  gap: 0.42rem;
+  align-items: start;
+  min-width: 0;
+}
+
+.aid-legend li > span {
+  display: grid;
+  place-items: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 999px;
+  background: #fff3df;
+  color: #5f3700;
+  border: 1px solid #d79037;
+  font-size: 0.72rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.aid-legend p {
+  margin: 0;
+  min-width: 0;
+  color: #394766;
+  font-size: 0.84rem;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
 }
 
 .brain-bridge {
@@ -3202,13 +3260,22 @@ p {
 
   .lesson-review-route .visual-aid {
     float: right;
-    width: 2.65in;
+    width: 2.8in;
     margin: 0 0 0.08in 0.14in;
+    gap: 0.035in;
   }
 
   .lesson-review-route .aid-canvas {
     min-height: 0;
     aspect-ratio: 16 / 8.4;
+  }
+
+  .lesson-review-route .visual-aid text {
+    font-size: 13px;
+  }
+
+  .lesson-review-route .visual-aid .tiny {
+    font-size: 11px;
   }
 
   .lesson-review-route .visual-aid figcaption,
@@ -3219,6 +3286,33 @@ p {
   .lesson-review-route .rubric-mini-grid span {
     font-size: 0.49rem;
     line-height: 1.16;
+  }
+
+  .lesson-review-route .visual-aid figcaption {
+    display: block;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .lesson-review-route .aid-legend {
+    gap: 0.025in;
+    margin-top: 0.035in;
+  }
+
+  .lesson-review-route .aid-legend li {
+    grid-template-columns: 0.15in minmax(0, 1fr);
+    gap: 0.035in;
+  }
+
+  .lesson-review-route .aid-legend li > span {
+    width: 0.14in;
+    height: 0.14in;
+    font-size: 0.42rem;
+  }
+
+  .lesson-review-route .aid-legend p {
+    font-size: 0.43rem;
+    line-height: 1.12;
   }
 
   .lesson-review-route .review-lesson-grid {
@@ -3272,7 +3366,7 @@ p {
     page-break-after: always;
     break-inside: avoid;
     page-break-inside: avoid;
-    overflow: hidden;
+    overflow: visible;
   }
 
   .lesson-review-card:last-child {
