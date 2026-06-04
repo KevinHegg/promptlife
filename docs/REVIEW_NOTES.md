@@ -2,6 +2,74 @@
 
 Date: 2026-06-04
 
+## v0.12 Wider AI Literacy Implementation And UX Repair
+
+### What Changed
+
+- Implemented the v0.11 Wider AI Literacy plan as eight draft Journey cards:
+  1. The Perfect Storm
+  2. Collective Intelligence, Extracted
+  3. Benefits Worth Taking Seriously
+  4. Costs We Must Count
+  5. Human-Centered AI
+  6. Better AI Is a Choice
+  7. Effective Prompting from Model Literacy
+  8. Model Literate Synthesis
+- Added Learn, Preview, and Review behavior to Journey cards.
+- Journey now shows all cards in sequence with global numbering plus Start/Continue/Preview/Review actions and Essential/Deep/Ethics path labels.
+- Preview mode shows "Previewing this card. Progress will not change." and never completes the card.
+- Review mode shows "Reviewing a completed card." and never double-counts progress.
+- Preview/Review actions say "Return to Journey."
+- Improved scroll-to-top behavior by including lesson mode in the existing internal `.pl-shell` scroll/focus effect.
+- Updated the Badge criterion to focus on enough Essential checkpoints, Prompt Run completion, and Model Literate Synthesis completion.
+- Added coded placeholder visual aids for all eight Wider AI cards.
+- Expanded glossary terms for Wider AI origins, benefits, costs, human-centered AI, governance, responsible AI, effective prompting, uncertainty, and model literacy.
+- Bumped the visible Badge version to `v0.12.0`.
+
+### Files Changed
+
+- `src/main.tsx`
+- `src/data/content.ts`
+- `src/components/VisualAids.tsx`
+- `src/styles/global.css`
+- `docs/curriculum/WIDER_AI_IMPLEMENTATION_REPORT_V0_12.md`
+- `docs/curriculum/WIDER_AI_SOURCE_NEEDS_V0_12.md`
+- `docs/design/GENERATED_VISUAL_ASSET_PLAN_V0_11.md`
+- `docs/REVIEW_NOTES.md`
+- `docs/screenshots/v0-12-*.png`
+- `docs/curriculum/prompt-life-v0-12-wider-ai-implementation-report.html`
+- `docs/curriculum/prompt-life-v0-12-wider-ai-implementation-report.pdf`
+
+### Contrast Notes
+
+- Primary buttons now keep white text on a dark indigo/teal gradient instead of bright teal/amber.
+- Active stage markers and completion dots now use dark ink on bright teal.
+- Journey path/action chips use dark ink on paper surfaces.
+- Preview/Review notices use dark text on light paper.
+- Patched visual labels on light diagram boxes where inherited white text could reduce readability.
+- Remaining follow-up: older concept animation panels are readable but still use the pre-v0.10 deep-blue animation style and should be migrated in a later animation-focused pass.
+
+### Source Needs
+
+- Added `docs/curriculum/WIDER_AI_SOURCE_NEEDS_V0_12.md`.
+- No precise environmental, labor, copyright, governance, or benefit statistics were added to learner-facing UI.
+- No learner-facing `SOURCE NEEDED` copy was added.
+
+### Verification
+
+- `npm install`: passed before implementation.
+- `npm run typecheck`: passed before and after implementation.
+- `npm run build`: passed before and after implementation.
+- Browser QA verified Preview, Review, Learn completion, Next Lesson, Return to Journey, focus, and top-scroll behavior.
+- Screenshots were captured for the new Wider AI Journey section, Review mode, representative Preview cards, and the visual-aid gallery.
+
+### Known Issues / TODO
+
+- Grounding and Hallucinations are still glossary/RAG concepts, not dedicated Journey cards. TODO: decide whether to add dedicated cards before or near Risk vs Myth.
+- Wider AI cards are draft curriculum copy and need source review before being treated as cited publication material.
+- Generated PNG assets remain planned only.
+- Vite reports a single-chunk size warning after build; no heavy dependency was added, but route/code splitting may be useful later.
+
 ## v0.11 Wider AI Literacy Planning
 
 ### What Changed

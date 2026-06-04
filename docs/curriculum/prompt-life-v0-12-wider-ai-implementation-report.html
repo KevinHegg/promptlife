@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Prompt Life v0.12 Wider AI Implementation Report</title>
+  <style>
+    :root {
+      --ink: #07124a;
+      --soft: #26324f;
+      --muted: #59637e;
+      --paper: #fffdf8;
+      --mist: #eef5f4;
+      --line: rgba(18, 30, 114, 0.18);
+      --teal: #0f7778;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--mist);
+      line-height: 1.48;
+    }
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 38px 30px 56px;
+      background: var(--paper);
+    }
+    header {
+      border-bottom: 2px solid var(--line);
+      margin-bottom: 24px;
+      padding-bottom: 18px;
+    }
+    .eyebrow {
+      margin: 0 0 6px;
+      color: var(--teal);
+      font-weight: 900;
+      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: 0.04em;
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: 34px;
+      line-height: 1.08;
+    }
+    h2 {
+      margin: 26px 0 10px;
+      font-size: 22px;
+      line-height: 1.18;
+    }
+    h3 {
+      margin: 18px 0 8px;
+      font-size: 16px;
+    }
+    p { color: var(--soft); }
+    ul, ol { color: var(--soft); padding-left: 1.25rem; }
+    li { margin: 0.18rem 0; }
+    code {
+      color: var(--ink);
+      background: #eef3ff;
+      border-radius: 6px;
+      padding: 1px 5px;
+      font-size: 0.92em;
+    }
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin: 18px 0 22px;
+    }
+    .summary-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #f8fbff;
+      padding: 12px;
+    }
+    .summary-card strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--ink);
+    }
+    .note {
+      border-left: 4px solid var(--teal);
+      background: #f1fffc;
+      border-radius: 8px;
+      padding: 12px 14px;
+      color: #063d43;
+      font-weight: 750;
+    }
+    figure {
+      break-inside: avoid;
+      margin: 18px 0 24px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: white;
+      padding: 12px;
+      box-shadow: 0 8px 18px rgba(7, 18, 74, 0.08);
+    }
+    figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 6px;
+      border: 1px solid rgba(18, 30, 114, 0.12);
+    }
+    figcaption {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .page-break { break-before: page; }
+    @page { margin: 0.55in; }
+    @media print {
+      body { background: white; }
+      main { padding: 0; max-width: none; }
+      .summary-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">Prompt Life v0.12</p>
+      <h1>Wider AI Literacy Implementation + UX Repair</h1>
+      <p>Internal report generated 2026-06-04. This PDF wraps the response summary and screenshots for the v0.12 implementation pass.</p>
+    </header>
+
+    <section>
+      <h2>What Changed</h2>
+      <div class="summary-grid">
+        <div class="summary-card"><strong>Journey cards</strong>Added eight Wider AI Literacy draft cards and one final synthesis card position.</div>
+        <div class="summary-card"><strong>Modes</strong>Added Learn, Preview, and Review behavior with progress-safe Return to Journey actions.</div>
+        <div class="summary-card"><strong>Visuals</strong>Added eight coded SVG/HTML placeholder visual aids; no generated PNG assets.</div>
+        <div class="summary-card"><strong>Readability</strong>Improved key contrast issues and added reusable text-surface utility classes.</div>
+      </div>
+      <p class="note">Preview and Review modes do not update lesson completion, reflection progress, or badge progress. Learn mode keeps the normal checkpoint-gated Next lesson behavior.</p>
+    </section>
+
+    <section>
+      <h2>Files Changed</h2>
+      <ul>
+        <li><code>src/main.tsx</code></li>
+        <li><code>src/data/content.ts</code></li>
+        <li><code>src/components/VisualAids.tsx</code></li>
+        <li><code>src/styles/global.css</code></li>
+        <li><code>docs/curriculum/WIDER_AI_IMPLEMENTATION_REPORT_V0_12.md</code></li>
+        <li><code>docs/curriculum/WIDER_AI_SOURCE_NEEDS_V0_12.md</code></li>
+        <li><code>docs/design/GENERATED_VISUAL_ASSET_PLAN_V0_11.md</code></li>
+        <li><code>docs/REVIEW_NOTES.md</code></li>
+        <li><code>docs/screenshots/v0-12-*.png</code></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>New Journey Cards</h2>
+      <ol>
+        <li>The Perfect Storm</li>
+        <li>Collective Intelligence, Extracted</li>
+        <li>Benefits Worth Taking Seriously</li>
+        <li>Costs We Must Count</li>
+        <li>Human-Centered AI</li>
+        <li>Better AI Is a Choice</li>
+        <li>Effective Prompting from Model Literacy</li>
+        <li>Model Literate Synthesis</li>
+      </ol>
+      <p>RAG and Retrieval remains a dedicated Journey card. Grounding and Hallucinations remain glossary/RAG concepts for now; a future pass should decide whether each deserves a dedicated Journey card.</p>
+    </section>
+
+    <section>
+      <h2>Verification</h2>
+      <ul>
+        <li><code>npm install</code>: passed before implementation.</li>
+        <li><code>npm run typecheck</code>: passed before and after implementation.</li>
+        <li><code>npm run build</code>: passed before and after implementation.</li>
+        <li>Browser QA verified Preview, Review, Learn completion, Next Lesson, Return to Journey, focus, and top-scroll behavior.</li>
+        <li>Known build note: Vite reports a single app chunk over 500 kB after minification. No heavy dependency was added.</li>
+      </ul>
+    </section>
+
+    <section class="page-break">
+      <h2>Screenshots</h2>
+      <figure>
+        <img src="../screenshots/v0-12-journey-wider-ai-section.png" alt="Journey screen scrolled to the Wider AI Literacy section with new numbered cards and Preview labels." />
+        <figcaption>Journey with new Wider AI Literacy cards, global numbering, path labels, and Preview actions.</figcaption>
+      </figure>
+      <figure>
+        <img src="../screenshots/v0-12-review-mode.png" alt="Completed What Is an LLM card in Review mode with Return to Journey action." />
+        <figcaption>Review mode for a completed card. Progress is not double-counted.</figcaption>
+      </figure>
+      <figure>
+        <img src="../screenshots/v0-12-perfect-storm-preview.png" alt="The Perfect Storm card in Preview mode." />
+        <figcaption>The Perfect Storm in Preview mode with Return to Journey.</figcaption>
+      </figure>
+      <figure>
+        <img src="../screenshots/v0-12-collective-intelligence-preview.png" alt="Collective Intelligence, Extracted card in Preview mode." />
+        <figcaption>Collective Intelligence, Extracted draft Journey card.</figcaption>
+      </figure>
+      <figure>
+        <img src="../screenshots/v0-12-costs-we-must-count-preview.png" alt="Costs We Must Count card in Preview mode." />
+        <figcaption>Costs We Must Count draft Journey card.</figcaption>
+      </figure>
+      <figure>
+        <img src="../screenshots/v0-12-human-centered-ai-preview.png" alt="Human-Centered AI card in Preview mode." />
+        <figcaption>Human-Centered AI draft Journey card.</figcaption>
+      </figure>
+      <figure>
+        <img src="../screenshots/v0-12-better-ai-choice-preview.png" alt="Better AI Is a Choice card in Preview mode." />
+        <figcaption>Better AI Is a Choice draft Journey card.</figcaption>
+      </figure>
+      <figure>
+        <img src="../screenshots/v0-12-model-literate-synthesis-preview.png" alt="Model Literate Synthesis card in Preview mode." />
+        <figcaption>Model Literate Synthesis capstone card.</figcaption>
+      </figure>
+      <figure>
+        <img src="../screenshots/v0-12-visual-aid-perfect-storm-gallery.png" alt="Internal visual aid gallery showing the Storm Front coded visual aid." />
+        <figcaption>Internal Visual Aid Gallery view for the new Storm Front coded visual.</figcaption>
+      </figure>
+    </section>
+
+    <section class="page-break">
+      <h2>Known Issues</h2>
+      <ul>
+        <li>Wider AI cards are draft curriculum copy and need source review before citation-heavy publication.</li>
+        <li>Generated PNG assets remain deferred by design.</li>
+        <li>Older concept animation panels are readable but should later migrate to the v0.10 visual identity style.</li>
+        <li>Grounding and Hallucinations may deserve dedicated Journey cards in a future curriculum architecture pass.</li>
+      </ul>
+
+      <h2>Next Three v0.13 Steps</h2>
+      <ol>
+        <li>Source-review the Wider AI claims and add scoped citations where needed.</li>
+        <li>Decide whether Grounding and Hallucinations become dedicated Journey cards.</li>
+        <li>Refine the eight new coded visual aids after iPhone review.</li>
+      </ol>
+    </section>
+  </main>
+</body>
+</html>

@@ -31,7 +31,7 @@ import './styles/global.css'
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '')
 const ASSET = `${BASE}/assets/promptlife`
 // Bump this for each shipped app change; the Badge screen displays it under Start over.
-const APP_VERSION = '0.10.0'
+const APP_VERSION = '0.12.0'
 const STORAGE_KEYS = {
   lastLocation: 'promptlife:v1:lastLocation',
   lessonId: 'promptlife:v1:lessonId',
@@ -103,6 +103,7 @@ function App() {
   const reviewRoute = useMemo(() => getReviewRoute(), [])
   const [tab, setTab] = useStoredState(STORAGE_KEYS.lastLocation, 'home', LEGACY_STORAGE_KEYS.lastLocation)
   const [lessonId, setLessonId] = useStoredState(STORAGE_KEYS.lessonId, lessons[0].id, LEGACY_STORAGE_KEYS.lessonId)
+  const [lessonMode, setLessonMode] = useState('learn')
   const [completed, setCompleted] = useStoredState(STORAGE_KEYS.progress, [], LEGACY_STORAGE_KEYS.progress)
   const [reflections, setReflections] = useStoredState(STORAGE_KEYS.reflections, {}, LEGACY_STORAGE_KEYS.reflections)
   const [gameInsights, setGameInsights] = useStoredState(STORAGE_KEYS.gameInsights, [], LEGACY_STORAGE_KEYS.gameInsights)
@@ -125,6 +126,7 @@ function App() {
   const activeLessonIndex = Math.max(0, lessons.findIndex((lesson) => lesson.id === activeLesson.id))
   const progress = Math.round((completed.length / lessons.length) * 100)
   const nextOpenLesson = lessons.find((lesson) => !completed.includes(lesson.id)) ?? activeLesson
+  const activeLessonMode = getLessonMode(activeLesson.id, lessonMode, completed, nextOpenLesson.id)
 
   useEffect(() => {
     requestAnimationFrame(() => {
@@ -134,7 +136,7 @@ function App() {
         : document.querySelector<HTMLElement>('.screen h1[id]')
       focusTarget?.focus?.({ preventScroll: true })
     })
-  }, [tab, lessonId, gameId])
+  }, [tab, lessonId, lessonMode, gameId])
 
   const completeLesson = useCallback((id) => {
     setCompleted((prev) => prev.includes(id) ? prev : [...prev, id])
@@ -211,6 +213,7 @@ function App() {
     setTraceComplete(false)
     setLearningTourComplete(false)
     setGameId(null)
+    setLessonMode('learn')
     setDrawerTerm(null)
     setStatusMessage('Progress reset. You can begin again.')
   }
@@ -218,6 +221,7 @@ function App() {
   function markFirstLessonComplete() {
     setCompleted([lessons[0].id])
     setLessonId(lessons[1]?.id ?? lessons[0].id)
+    setLessonMode('learn')
     setTab('journey')
     setStatusMessage('First lesson marked complete for testing.')
   }
@@ -225,6 +229,7 @@ function App() {
   function markAllLessonsIncomplete() {
     setCompleted([])
     setLessonId(lessons[0].id)
+    setLessonMode('learn')
     setStatusMessage('All lessons marked incomplete.')
   }
 
@@ -265,12 +270,14 @@ function App() {
     setTraceComplete(false)
     setLearningTourComplete(false)
     setGameId(null)
+    setLessonMode('learn')
     setDrawerTerm(null)
     setStatusMessage('Prompt Life saved progress keys cleared. Reload or reset progress to begin from a blank state.')
   }
 
-  function openLesson(id) {
+  function openLesson(id, mode = 'learn') {
     setLessonId(id)
+    setLessonMode(mode)
     setTab('learn')
   }
 
@@ -283,10 +290,15 @@ function App() {
     const next = lessons[activeLessonIndex + 1]
     if (next) {
       setLessonId(next.id)
+      setLessonMode('learn')
       setTab('learn')
     } else {
       setTab('badge')
     }
+  }
+
+  function returnToJourney() {
+    setTab('journey')
   }
 
   if (reviewRoute === 'lesson-cards') {
@@ -310,7 +322,7 @@ function App() {
             progress={progress}
             nextLessonTitle={nextOpenLesson.title}
             statusMessage={statusMessage}
-            onStart={() => openLesson(nextOpenLesson.id)}
+            onStart={() => openLesson(nextOpenLesson.id, 'learn')}
             onJourney={() => setTab('journey')}
             onPlay={() => setTab('play')}
           />
@@ -327,11 +339,13 @@ function App() {
         {tab === 'learn' && (
           <LessonScreen
             lesson={activeLesson}
+            mode={activeLessonMode}
             lessonIndex={activeLessonIndex}
             totalLessons={lessons.length}
-            reflection={reflections[activeLesson.id] ?? ''}
+            reflection={activeLessonMode === 'preview' ? '' : reflections[activeLesson.id] ?? ''}
             onComplete={completeLesson}
             onNext={nextLesson}
+            onReturnToJourney={returnToJourney}
             onReflection={recordReflection}
             onGlossary={setDrawerTerm}
           />
@@ -376,6 +390,13 @@ function App() {
       <GlossaryDrawer termId={drawerTerm} onOpen={setDrawerTerm} onClose={() => setDrawerTerm(null)} />
     </div>
   )
+}
+
+function getLessonMode(lessonId, requestedMode, completed, currentLessonId) {
+  if (requestedMode === 'preview' || requestedMode === 'review') return requestedMode
+  if (completed.includes(lessonId)) return 'review'
+  if (lessonId !== currentLessonId) return 'preview'
+  return 'learn'
 }
 
 function SkipLink() {
@@ -482,17 +503,25 @@ function JourneyScreen({ completed, currentLessonId, onOpenLesson, onTrace, onLe
               {actLessons.map((lesson) => {
                 const done = completed.includes(lesson.id)
                 const current = lesson.id === currentLessonId
+                const lessonNumber = lessons.findIndex((item) => item.id === lesson.id) + 1
+                const mode = done ? 'review' : current ? 'learn' : 'preview'
+                const actionLabel = done ? 'Review' : current ? (completed.length ? 'Continue' : 'Start') : 'Preview'
+                const pathLabel = getPathLabel(lesson.pathType)
                 return (
                   <button
                     className={current ? 'lesson-row is-current' : 'lesson-row'}
                     key={lesson.id}
-                    onClick={() => onOpenLesson(lesson.id)}
-                    aria-label={`${lesson.title}. ${done ? 'Completed.' : current ? 'Recommended next.' : 'Not completed.'}`}
+                    onClick={() => onOpenLesson(lesson.id, mode)}
+                    aria-label={`${lessonNumber}. ${lesson.title}. ${actionLabel}. ${pathLabel}.`}
                   >
-                    <img src={lesson.icon} alt="" aria-hidden="true" />
+                    <span className="lesson-row-number" aria-hidden="true">{lessonNumber}</span>
                     <span>
                       <strong>{lesson.title}</strong>
                       <small>{lesson.subtitle}</small>
+                      <span className="lesson-row-meta">
+                        <em>{pathLabel}</em>
+                        <b>{actionLabel}</b>
+                      </span>
                     </span>
                     <span className={done ? 'complete-dot is-complete' : 'complete-dot'} aria-hidden="true">{done ? '✓' : current ? '•' : ''}</span>
                   </button>
@@ -504,6 +533,16 @@ function JourneyScreen({ completed, currentLessonId, onOpenLesson, onTrace, onLe
       </div>
     </section>
   )
+}
+
+function getPathLabel(pathType) {
+  const labels = {
+    essential: 'Essential',
+    deep: 'Deep',
+    ethics: 'Ethics',
+    'side-tour': 'Deep'
+  }
+  return labels[pathType] ?? 'Essential'
 }
 
 function StageTimeline({ currentActId }) {
@@ -531,11 +570,13 @@ function SectionIntroCard({ act }) {
   )
 }
 
-function LessonScreen({ lesson, lessonIndex, totalLessons, reflection, onComplete, onNext, onReflection, onGlossary }) {
+function LessonScreen({ lesson, mode, lessonIndex, totalLessons, reflection, onComplete, onNext, onReturnToJourney, onReflection, onGlossary }) {
   const [choice, setChoice] = useState(null)
   const [revealed, setRevealed] = useState(false)
   const [continueHint, setContinueHint] = useState(false)
+  const [draftReflection, setDraftReflection] = useState(reflection)
   const checkpointRef = useRef<HTMLElement | null>(null)
+  const canUpdateProgress = mode === 'learn'
   const definition = lesson.oneSentenceDefinition ?? lesson.definition
   const coreExplanation = lesson.coreExplanation ?? lesson.definition
   const whereItHappens = lesson.whereItHappens ?? lesson.where
@@ -555,9 +596,14 @@ function LessonScreen({ lesson, lessonIndex, totalLessons, reflection, onComplet
     setChoice(null)
     setRevealed(false)
     setContinueHint(false)
-  }, [lesson.id])
+    setDraftReflection(mode === 'preview' ? '' : reflection)
+  }, [lesson.id, mode, reflection])
 
   function saveAndContinue() {
+    if (!canUpdateProgress) {
+      onReturnToJourney()
+      return
+    }
     if (!isCorrect) {
       setContinueHint(true)
       checkpointRef.current?.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'center' })
@@ -581,6 +627,8 @@ function LessonScreen({ lesson, lessonIndex, totalLessons, reflection, onComplet
         <h1 id="lesson-title" tabIndex={-1}>{lesson.title}</h1>
         <p className="lede small">{lesson.subtitle}</p>
         <p className="lesson-definition">{definition}</p>
+        {mode === 'preview' && <p className="mode-note" role="status">Previewing this card. Progress will not change.</p>}
+        {mode === 'review' && <p className="mode-note" role="status">Reviewing a completed card.</p>}
         {relatedTerms.length > 0 && (
           <div className="term-row compact" aria-label="Related glossary terms">
             {relatedTerms.map((term) => (
@@ -660,16 +708,23 @@ function LessonScreen({ lesson, lessonIndex, totalLessons, reflection, onComplet
         <label>
           <span className="sr-only">Reflection for {lesson.title}</span>
           <textarea
-            value={reflection}
-            onChange={(event) => onReflection(lesson.id, event.target.value)}
-            placeholder="Example: Inference uses the model's weights but does not rewrite them."
+            value={canUpdateProgress ? reflection : draftReflection}
+            onChange={(event) => {
+              if (canUpdateProgress) {
+                onReflection(lesson.id, event.target.value)
+              } else {
+                setDraftReflection(event.target.value)
+              }
+            }}
+            readOnly={!canUpdateProgress}
+            placeholder={canUpdateProgress ? "Example: Inference uses the model's weights but does not rewrite them." : 'Reflection is available in Learn mode.'}
             rows={3}
           />
         </label>
       </section>
 
-      <button className={isCorrect ? 'primary-btn sticky-action is-ready' : 'primary-btn sticky-action'} onClick={saveAndContinue}>
-        {isCorrect ? (lessonIndex + 1 === totalLessons ? 'Finish and view badge' : 'Next lesson') : choice == null ? 'Answer checkpoint to continue' : 'Retry checkpoint to continue'}
+      <button className={isCorrect || !canUpdateProgress ? 'primary-btn sticky-action is-ready' : 'primary-btn sticky-action'} onClick={saveAndContinue}>
+        {!canUpdateProgress ? 'Return to Journey' : isCorrect ? (lessonIndex + 1 === totalLessons ? 'Finish and view badge' : 'Next lesson') : choice == null ? 'Answer checkpoint to continue' : 'Retry checkpoint to continue'}
       </button>
     </section>
   )
@@ -704,7 +759,12 @@ function stageLabel(stageType) {
     inference: 'ordinary model use',
     'prompt-processing': 'prompt processing',
     'response-generation': 'response generation',
-    'risk-ethics': 'risk and ethics'
+    'retrieval-inference': 'retrieval during inference',
+    'risk-ethics': 'risk and ethics',
+    'social-ethics': 'social and ethical context',
+    'responsible-use': 'responsible AI use',
+    'model-literacy': 'model literacy synthesis',
+    prompting: 'prompting and context'
   }
   return labels[stageType] ?? stageType
 }
@@ -1701,10 +1761,14 @@ function BadgeScreen({
   const completedExerciseCount = exerciseProgress?.completed?.length ?? 0
   const promptRunDone = Boolean(promptRunProgress?.finalChallengeComplete)
   const promptRunStepCount = (promptRunProgress?.completedSteps?.length ?? 0) + (promptRunDone ? 1 : 0)
-  const unlocked = progress >= 80 && gameInsights.length >= 2 && promptRunDone
-  const lessonsNeeded = Math.max(0, Math.ceil(lessons.length * 0.8) - completed.length)
-  const gameInsightsNeeded = Math.max(0, 2 - gameInsights.length)
+  const essentialLessons = lessons.filter((lesson) => getPathLabel(lesson.pathType) === 'Essential')
+  const essentialCompleted = essentialLessons.filter((lesson) => completed.includes(lesson.id)).length
+  const essentialTarget = Math.ceil(essentialLessons.length * 0.8)
+  const synthesisDone = completed.includes('model-literate-synthesis')
+  const unlocked = essentialCompleted >= essentialTarget && promptRunDone && synthesisDone
+  const lessonsNeeded = Math.max(0, essentialTarget - essentialCompleted)
   const promptRunNeeded = promptRunDone ? 0 : 1
+  const synthesisNeeded = synthesisDone ? 0 : 1
 
   async function copyShareText() {
     try {
@@ -1730,7 +1794,7 @@ function BadgeScreen({
       <section className="idea-panel">
         <h2>{unlocked ? 'Badge unlocked' : 'Badge criterion'}</h2>
         <p>This badge means you can explain what an LLM is, what it is not, and how a prompt becomes a response without treating the model as magic.</p>
-        <p>{unlocked ? 'You met the learning threshold.' : `Remaining: ${lessonsNeeded} lesson checkpoint${lessonsNeeded === 1 ? '' : 's'}, ${gameInsightsNeeded} play insight${gameInsightsNeeded === 1 ? '' : 's'}, and ${promptRunNeeded} Prompt Run completion${promptRunNeeded === 1 ? '' : 's'}.`}</p>
+        <p>{unlocked ? 'You met the learning threshold.' : `Remaining: ${lessonsNeeded} essential checkpoint${lessonsNeeded === 1 ? '' : 's'}, ${promptRunNeeded} Prompt Run completion${promptRunNeeded === 1 ? '' : 's'}, and ${synthesisNeeded} synthesis card completion${synthesisNeeded === 1 ? '' : 's'}.`}</p>
       </section>
       <button className="primary-btn" onClick={copyShareText}>Copy share text</button>
       {copied && <p className="feedback good" role="status">Share text copied.</p>}

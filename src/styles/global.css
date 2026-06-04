@@ -80,6 +80,23 @@ h2[tabindex="-1"]:focus {
   border: 0;
 }
 
+.pl-on-dark {
+  color: #fff;
+}
+
+.pl-on-paper {
+  color: var(--pl-ink);
+}
+
+.pl-muted-on-paper {
+  color: var(--pl-ink-soft);
+}
+
+.pl-callout-text {
+  color: var(--pl-ink-soft);
+  line-height: 1.45;
+}
+
 .skip-link {
   position: fixed;
   left: 1rem;
@@ -253,7 +270,7 @@ p {
 .primary-btn {
   width: 100%;
   border: 0;
-  background: linear-gradient(135deg, var(--pl-indigo), var(--pl-violet) 40%, var(--pl-teal) 76%, var(--pl-amber));
+  background: linear-gradient(135deg, #07124A, var(--pl-indigo) 46%, #0B5C66);
   color: white;
   box-shadow: var(--pl-glow-violet), 0 12px 24px rgba(18, 30, 114, 0.18);
 }
@@ -417,7 +434,7 @@ p {
 
 .stage-timeline li.active span {
   background: var(--pl-teal);
-  color: white;
+  color: var(--pl-indigo);
   box-shadow: var(--pl-glow-cyan);
 }
 
@@ -465,7 +482,7 @@ p {
   height: 2.15rem;
   border-radius: var(--pl-radius-sm);
   color: white;
-  background: linear-gradient(135deg, var(--pl-violet), var(--pl-teal));
+  background: linear-gradient(135deg, #07124A, var(--pl-indigo));
   box-shadow: var(--pl-glow-cyan);
   font-weight: 900;
 }
@@ -555,6 +572,18 @@ p {
   box-shadow: var(--pl-glow-amber), var(--pl-card-depth-1);
 }
 
+.lesson-row-number {
+  display: grid;
+  place-items: center;
+  width: 2.45rem;
+  height: 2.45rem;
+  border-radius: var(--pl-radius-sm);
+  background: #EEF3FF;
+  color: var(--pl-indigo);
+  font-weight: 950;
+  box-shadow: inset 0 0 0 1px rgba(18, 30, 114, 0.12);
+}
+
 .lesson-row img {
   width: 2.5rem;
 }
@@ -570,6 +599,39 @@ p {
   line-height: 1.35;
 }
 
+.lesson-row-meta {
+  display: flex;
+  gap: 0.45rem;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 0.48rem;
+}
+
+.lesson-row-meta em,
+.lesson-row-meta b {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.65rem;
+  border-radius: var(--pl-radius-sm);
+  padding: 0.22rem 0.45rem;
+  font-size: 0.72rem;
+  font-style: normal;
+  line-height: 1.1;
+}
+
+.lesson-row-meta em {
+  border: 1px solid rgba(18, 30, 114, 0.12);
+  background: #F6F9FF;
+  color: var(--pl-ink-soft);
+  font-weight: 850;
+}
+
+.lesson-row-meta b {
+  border: 1px solid rgba(15, 168, 164, 0.22);
+  background: #EFFFFB;
+  color: #063D43;
+}
+
 .complete-dot {
   display: grid;
   place-items: center;
@@ -577,13 +639,14 @@ p {
   height: 1.8rem;
   border: 2px solid rgba(18, 30, 114, 0.18);
   border-radius: 50%;
-  color: white;
+  color: var(--pl-indigo);
   font-weight: 900;
 }
 
 .complete-dot.is-complete {
   background: var(--pl-teal);
   border-color: var(--pl-teal);
+  color: var(--pl-indigo);
 }
 
 .lesson-progress,
@@ -636,6 +699,17 @@ p {
   background: rgba(53, 230, 226, 0.10);
   color: #123f45;
   font-weight: 800;
+}
+
+.mode-note {
+  margin: 0.85rem 0 0;
+  padding: 0.68rem 0.78rem;
+  border: 1px solid rgba(15, 168, 164, 0.22);
+  border-left: 4px solid var(--pl-teal);
+  border-radius: var(--pl-card-radius);
+  background: #F1FFFC;
+  color: #063D43;
+  font-weight: 850;
 }
 
 .lesson-art.compact {
@@ -1156,7 +1230,7 @@ p {
   width: 1.75rem;
   height: 1.75rem;
   border-radius: 50%;
-  background: var(--pl-purple);
+  background: var(--pl-indigo);
   color: white;
   font-weight: 900;
 }
@@ -1208,6 +1282,11 @@ p {
   resize: vertical;
   color: var(--pl-ink);
   background: #f8fbff;
+}
+
+.reflection-card textarea[readonly] {
+  background: #F2F5FA;
+  color: var(--pl-ink-soft);
 }
 
 .loop-demo,
@@ -1268,6 +1347,7 @@ p {
 
 .loop-demo span.active {
   background: var(--pl-teal);
+  color: var(--pl-indigo);
 }
 
 .inference-demo ol {

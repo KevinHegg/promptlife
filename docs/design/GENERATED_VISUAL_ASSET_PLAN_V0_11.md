@@ -4,6 +4,21 @@ Date: 2026-06-04
 
 Purpose: plan future Image 2 / generated PNG assets for the Wider AI Literacy expansion. This is a plan only. No generated PNG assets are added in this pass.
 
+## v0.12 Update
+
+The v0.12 implementation pass added coded SVG/HTML placeholder visual aids for all eight Wider AI Literacy cards:
+
+- `perfect-storm`
+- `collective-intelligence-lantern`
+- `benefits-tool-garden`
+- `costs-invisible-factory`
+- `human-centered-ai-garden`
+- `responsible-ai-forked-path`
+- `prompting-context-tray`
+- `synthesis-map-compass-lantern`
+
+No generated PNG assets were added. Future generated assets should remain textless conceptual art and should be reviewed against the coded placeholder first.
+
 ## Policy
 
 Generated images should be textless conceptual assets only. They can provide atmosphere, object metaphors, and focal art, but they must not carry instructional text.
@@ -138,6 +153,38 @@ Forbidden elements:
   2. Data provenance and consent.
   3. Efficient infrastructure.
   4. Human review and governance.
+
+## Asset Spec: prompting-context-tray
+
+- ID: `prompting-context-tray`
+- Lesson: Effective Prompting from Model Literacy
+- Visual purpose: Show prompting as context design for the current inference run, not magic wording or permanent teaching.
+- Prompt for image generation: `Textless ZenTron Origami scene: transparent rice-paper context tray on a calm indigo desk, small unlabeled paper cards flowing into the tray to suggest task, context, examples, constraints, evidence, uncertainty, and output format; a gentle response ribbon emerges from the tray; cyan retrieval glow, amber review seal, Japanese paper-cut layering, anime clarity, no words, no letters, no readable symbols, no UI text.`
+- Required style: Transparent tray, paper cards, one response ribbon, calm context-design metaphor.
+- Forbidden elements: No prompt text, no magic spellbook, no readable labels, no keyboard close-up, no robot teacher.
+- Transparent or simple background preference: Simple rice-paper desk with enough quiet space for overlays.
+- Codex overlay plan: HTML/SVG labels for Task, Context, Examples, Constraints, Evidence, Uncertainty, Format, Human review.
+- Alt text: Prompt component cards enter a transparent context tray before a generated response ribbon emerges, showing that prompting shapes the current context.
+- Callouts:
+  1. Prompt parts become current context.
+  2. Evidence and uncertainty help review.
+  3. Prompting usually does not change weights.
+
+## Asset Spec: synthesis-map-compass-lantern
+
+- ID: `synthesis-map-compass-lantern`
+- Lesson: Model Literate Synthesis
+- Visual purpose: Tie model mechanics and human responsibility together at the end of the Journey.
+- Prompt for image generation: `Textless ZenTron Origami final synthesis scene: calm learner silhouette or abstract hand holding a folded paper map of model mechanics, a small compass, and a glowing paper lantern; subtle paths suggest training, inference, context, retrieval, generation, risk, benefit, cost, and responsibility without labels; indigo ink, cyan and amber glow, rice-paper layers, serene anime clarity, no words, no letters, no signage.`
+- Required style: Capstone image, map plus compass plus lantern, one quiet focal composition.
+- Forbidden elements: No graduation poster, no readable map text, no mystical prophecy, no robot face, no dense infographic.
+- Transparent or simple background preference: Simple zen-garden or paper-desk background.
+- Codex overlay plan: HTML callouts below the image: map for mechanics, compass for judgment, lantern for responsible use.
+- Alt text: A learner uses a map, compass, and lantern to connect model mechanics with human responsibility.
+- Callouts:
+  1. Mechanics: training, inference, context, generation.
+  2. Judgment: grounding, uncertainty, review.
+  3. Responsibility: benefits, costs, and human choices.
 
 ## Implementation Notes
 
