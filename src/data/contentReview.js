@@ -144,7 +144,7 @@ const illustrationNeedByLessonId = {
   sampling: 'Weighted vocabulary cloud with one selected token.',
   autoregression: 'Loop diagram: score, sample, append, run again.',
   'context-window': 'Limited stack of cards where older cards fall out.',
-  'rag-retrieval': 'Three lanes: user question, retriever searches a document shelf, retrieved cards enter the context window, and the LLM generates response tokens.',
+  'rag-retrieval': 'Gold-standard open-book retrieval scene: Prompt, Retriever, Notes, Context, Response, and fixed weights with numbered HTML callouts.',
   'how-ai-learns': 'Matrix of durable weight change, temporary context steering, and retrieval.',
   diffusion: 'Denoising sequence beside a next-token text loop.',
   multimodal: 'Text, image, audio, and video paths meeting in a shared representation hub.',

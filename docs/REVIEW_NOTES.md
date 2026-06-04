@@ -2,6 +2,43 @@
 
 Date: 2026-06-02
 
+## v0.9.3 Visual System Reset And RAG Gold Standard
+
+### What Changed
+
+- Created a stricter visual-aid component pattern: `VisualAidCard`, `DiagramScene`, `CalloutList`, and `KeyTakeaway`.
+- Added visual metadata for learning objective, accessible description, key takeaway, and print/PDF review notes.
+- Rebuilt `rag-retrieval` as the gold-standard Open-Book Retrieval visual.
+- Improved `/review/visual-aids` so each aid shows id, lesson, visual scene, callouts, accessible description, mobile preview note, and print/PDF note.
+- Fully repaired the RAG and Retrieval lesson fields: one-sentence definition, core explanation, where it happens, durable vs temporary, prompt vs response, why it matters, how it connects, metaphor, Brain Bridge, misconception, checkpoint aliases, and feedback aliases.
+- Updated `Open Book or Learned?` with the requested RAG sorting items and insight.
+- Bumped the visible app version to `v0.9.3`.
+- Updated the default lesson PDF export path to `docs/review/prompt-life-lesson-cards-v0-9-3.pdf`.
+- Updated `npm run export:lesson-cards` to generate `docs/content-inventory/prompt-life-lesson-cards-v0-9-3-visual-system.pdf`.
+- Added an iPhone GitHub Pages cache note to `README.md`.
+
+### Files Changed
+
+- `README.md`
+- `package.json`
+- `scripts/export-lesson-pdf.mjs`
+- `src/components/VisualAids.tsx`
+- `src/data/content.ts`
+- `src/data/contentReview.js`
+- `src/data/exercises.ts`
+- `src/main.tsx`
+- `src/styles/global.css`
+- `docs/curriculum/VISUAL_AID_SYSTEM_V0_9_3.md`
+- `docs/curriculum/VISUAL_SYSTEM_RESET_V0_9_3.md`
+
+### Was RAG Stale Or Unrepaired?
+
+RAG was current in the repo but visually unrepaired. The v0.9.2 pass focused mostly on Batch 1 and Batch 2 visuals, while RAG still used the older mini-infographic visual style and thinner lesson fields.
+
+### Verification
+
+- Final screenshot, PDF, build, export, browser QA, and deployment results are recorded in `docs/curriculum/VISUAL_SYSTEM_RESET_V0_9_3.md` and the v0.9.3 PDF report.
+
 ## v0.9.2 Visual Repair And Canonical Example Pass
 
 ### What Changed

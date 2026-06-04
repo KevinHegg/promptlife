@@ -1,16 +1,17 @@
 import React from 'react'
 import { canonicalPromptResponse } from '../data/canonicalExamples'
+import { lessons } from '../data/content'
 
 export const visualAidCatalog = [
   { id: 'llm-overview', title: 'Prompt to Prediction', caption: 'Prompt/context flows through learned weights into next-token probabilities; one generated response token is appended.', pattern: 'llmOverview', legend: ['Prompt/context is given input.', 'Learned weights are used during inference.', 'The selected response token is appended.'] },
-  { id: 'traditions', title: 'Rules and Learned Patterns', caption: 'Symbolic/rationalist systems use explicit rules; deep-learning/empiricist systems learn useful patterns from examples.', pattern: 'traditions', legend: ['Rules: if/then logic and symbols.', 'Examples: data, loss, and weight updates.', 'Modern AI products can combine learned models with rules and tools.'] },
-  { id: 'training-loop', title: 'Training Loop', caption: 'Predict, compare, loss, update weights, repeat. Training changes weights.', pattern: 'training', legend: ['The model predicts a target.', 'The prediction is compared with the target.', 'Loss measures error.', 'Update weights is the durable-change step.', 'The loop repeats many times.'] },
+  { id: 'traditions', title: 'Rules and Learned Patterns', subtitle: 'Two traditions, one modern toolkit', caption: 'Symbolic/rationalist systems use explicit rules; deep-learning/empiricist systems learn useful patterns from examples.', pattern: 'traditions', objective: 'Contrast explicit rules with learned patterns without turning the diagram into a poster.', callouts: [{ heading: 'Rules', body: 'Symbolic systems use explicit if/then logic and symbols.' }, { heading: 'Examples', body: 'Deep-learning systems use data, loss, and weight updates.' }, { heading: 'Bridge', body: 'Modern AI products can combine learned models with rules and tools.' }], keyTakeaway: 'Modern AI often blends learned patterns with hand-built rules and tools.', accessibleDescription: 'Two side-by-side panels compare rules and symbols with examples, loss, and weights, joined by a small bridge.', printNote: 'Short panel labels only; explanatory comparison stays in HTML callouts.' },
+  { id: 'training-loop', title: 'Training Loop', subtitle: 'Durable change happens at weight update', caption: 'Predict, compare, loss, update weights, repeat. Training changes weights.', pattern: 'training', objective: 'Show the sequence of training and make the durable weight-update step visually distinct.', callouts: [{ heading: 'Predict', body: 'The model predicts a target.' }, { heading: 'Compare', body: 'The prediction is compared with the target.' }, { heading: 'Loss', body: 'Loss measures error.' }, { heading: 'Update weights', body: 'Weight updates are the durable-change step.' }, { heading: 'Repeat', body: 'The loop repeats many times.' }], keyTakeaway: 'Training changes weights; ordinary inference does not.', accessibleDescription: 'A five-step loop moves from Predict to Compare to Loss to Update weights to Repeat, with Update weights highlighted.', printNote: 'Five nodes stay aligned at 320px and in exported review PDFs.' },
   { id: 'pretraining-rain', title: 'Broad Pretraining', caption: 'A wide stream of data shapes broad durable learning before normal use.', pattern: 'pretraining', legend: ['Many examples flow through the training loop.', 'Repeated updates shape broad model capability.'] },
   { id: 'overfitting-generalization', title: 'Overfitting vs Generalization', caption: 'Memorizing examples is not the same as learning transferable patterns.', pattern: 'overfitting', legend: ['Overfit curve traces old dots too tightly.', 'Generalizing curve is smoother and reaches new examples.', 'Held-out examples test whether learning transfers.'] },
   { id: 'fine-tune-path', title: 'Fine-Tuning Path', caption: 'Targeted examples nudge an already-trained model toward a desired pattern.', pattern: 'fine', legend: ['Fine-tuning starts from a pretrained base.', 'Targeted examples shape future responses.'] },
   { id: 'alignment', title: 'Alignment Landscape', caption: 'Alignment shapes behavior with preferred paths, guardrails, feedback, and policies; it does not create moral agency.', pattern: 'alignment', legend: ['Preferred path: behavior the system encourages.', 'Guardrail: boundary around risky terrain.', 'Warning zone: outputs to avoid or handle carefully.', 'Policy check and feedback are system signals, not conscience.'] },
   { id: 'inference-pass', title: 'Forward Pass', caption: 'Inference creates temporary states while durable weights stay fixed.', pattern: 'inference', legend: ['Current context enters the model.', 'Fixed weights are used, not updated.', 'Temporary hidden states lead to next-token scores.'] },
-  { id: 'prompt-response', title: 'Prompt vs Response', caption: 'A complete user prompt is given; response tokens are generated and appended.', pattern: 'promptResponse', legend: [`User prompt: ${canonicalPromptResponse.userPrompt}`, `Response so far: ${canonicalPromptResponse.responseSoFar}.`, `Next token: ${canonicalPromptResponse.chosenNextToken}. Next context combines prompt + response so far + floor.`] },
+  { id: 'prompt-response', title: 'Prompt vs Response', subtitle: 'Given context versus generated tokens', caption: 'A complete user prompt is given; response tokens are generated and appended.', pattern: 'promptResponse', objective: 'Separate the complete user prompt from the incomplete response-so-far and next generated token.', callouts: [{ heading: 'User prompt', body: `The complete request is: ${canonicalPromptResponse.userPrompt}` }, { heading: 'Response so far', body: `The model has already generated: ${canonicalPromptResponse.responseSoFar}.` }, { heading: 'Next token', body: `${canonicalPromptResponse.chosenNextToken} is appended, so the next context combines prompt plus response so far plus floor.` }], keyTakeaway: 'The response grows one token at a time inside the current context.', accessibleDescription: 'The visual separates a complete user prompt, response-so-far token chips, the next token floor, and the next context row.', printNote: 'Token chips wrap inside the visual frame; full example text stays in HTML callouts.' },
   { id: 'tokenization', title: 'Text to Tokens', caption: 'Generated response text is split into model-readable chunks before embedding lookup.', pattern: 'token', legend: [`Generated response: ${canonicalPromptResponse.generatedResponse}`, 'Simplified for learning. Real tokenizers may split differently.'] },
   { id: 'token-ids', title: 'Token IDs', caption: 'Each token gets a lookup number that points to an embedding row.', pattern: 'ids', legend: ['dog -> 421, cat -> 982, floor -> 1576.', 'The ID is a lookup key, not the meaning.', 'The ID points to an embedding row.'] },
   { id: 'embeddings', title: 'Embedding Lookup', caption: 'A token ID retrieves a learned starting vector.', pattern: 'vector', legend: ['The embedding table was learned during training.', 'Inference retrieves one row temporarily for the current context.', 'The retrieved embedding is a starting vector, not a definition.'] },
@@ -25,7 +26,7 @@ export const visualAidCatalog = [
   { id: 'sampling', title: 'Sample One Token', caption: 'Sampling chooses one token from the probability cloud.', pattern: 'sampling' },
   { id: 'autoregression', title: 'Append and Repeat', caption: 'The chosen token is appended, then the model runs again.', pattern: 'loop' },
   { id: 'context-window', title: 'Temporary Context Window', caption: 'Only visible context can influence the next token.', pattern: 'window' },
-  { id: 'rag-retrieval', title: 'Open-Book Retrieval', caption: 'Retrieved document cards enter the context before response tokens are generated.', pattern: 'rag' },
+  { id: 'rag-retrieval', title: 'Open-Book Retrieval', subtitle: 'Retrieval plus context, not training', caption: 'Retrieved notes enter the context before response tokens are generated.', pattern: 'rag', objective: 'Show that RAG retrieves outside information and places it into context; it does not train the model.', callouts: [{ heading: 'Ask', body: 'The user prompt starts the run.' }, { heading: 'Retrieve', body: 'A search system finds relevant outside material.' }, { heading: 'Add to context', body: 'Retrieved notes become temporary context tokens.' }, { heading: 'Generate', body: 'The model still generates response tokens one at a time.' }, { heading: 'Weights stay fixed', body: 'RAG does not normally update model weights.' }], keyTakeaway: 'RAG is retrieval plus context, not training.', accessibleDescription: 'The RAG diagram moves from Prompt to Retriever to Notes, then into a Context tray and Generated response, with a separate fixed-weights note.', printNote: 'Gold-standard v0.9.3 visual: short diagram labels, five HTML callouts, and a one-sentence takeaway.' },
   { id: 'ai-learns', title: 'Learning Modes', caption: 'Durable training, retrieval, and temporary steering change different things.', pattern: 'learns' },
   { id: 'diffusion', title: 'Denoise, Not Append', caption: 'Diffusion refines noise step by step instead of generating text token by token.', pattern: 'diffusion' },
   { id: 'multimodal', title: 'Shared Media Hub', caption: 'Different media types can connect through learned representations.', pattern: 'multimodal' },
@@ -33,46 +34,102 @@ export const visualAidCatalog = [
 ]
 
 const aidById = Object.fromEntries(visualAidCatalog.map((aid) => [aid.id, aid]))
+const lessonByVisualAidId = Object.fromEntries(lessons.map((lesson) => [lesson.visualAidId, lesson]))
 
-// Keep in-canvas labels short. Mobile layouts and PDF export are much more reliable
-// when full explanations live in HTML captions and numbered callouts.
+function getCallouts(aid) {
+  if (aid.callouts?.length) {
+    return aid.callouts.map((callout, index) => ({
+      number: callout.number ?? index + 1,
+      heading: callout.heading ?? `Step ${index + 1}`,
+      body: callout.body
+    }))
+  }
+
+  return (aid.legend ?? []).map((body, index) => ({
+    number: index + 1,
+    heading: `Point ${index + 1}`,
+    body
+  }))
+}
+
+// Visual aids must use short in-diagram labels plus HTML callouts because mobile
+// screens and PDF export cannot reliably preserve dense SVG text layouts.
 export function VisualAid({ id, headingId = undefined, compact = false }) {
   const aid = aidById[id] ?? aidById['llm-overview']
+  return <VisualAidCard aid={aid} headingId={headingId} compact={compact} />
+}
+
+function VisualAidCard({ aid, headingId = undefined, compact = false }) {
+  const callouts = getCallouts(aid)
   return (
-    <figure className={compact ? 'visual-aid compact' : 'visual-aid'} aria-labelledby={headingId}>
-      <div className={`aid-canvas aid-${aid.pattern}`} aria-hidden="true">
-        <svg viewBox="0 0 320 210" preserveAspectRatio="xMidYMid meet" focusable="false">
-          <VisualPattern aid={aid} />
-        </svg>
-      </div>
+    <figure className={compact ? 'visual-aid visual-aid-card compact' : 'visual-aid visual-aid-card'} aria-labelledby={headingId}>
+      <DiagramScene aid={aid} />
       <figcaption>
-        <strong>{aid.title}</strong>
-        <span>{aid.caption}</span>
-        {aid.legend?.length > 0 && (
-          <ol className="aid-legend">
-            {aid.legend.map((item, index) => (
-              <li key={item}>
-                <span aria-hidden="true">{index + 1}</span>
-                <p>{item}</p>
-              </li>
-            ))}
-          </ol>
-        )}
+        <div className="aid-caption-copy">
+          <strong>{aid.title}</strong>
+          {aid.subtitle && <em>{aid.subtitle}</em>}
+          <span>{aid.caption}</span>
+        </div>
+        <CalloutList callouts={callouts} />
+        {aid.keyTakeaway && <KeyTakeaway text={aid.keyTakeaway} />}
+        {aid.accessibleDescription && <p className="sr-only">Accessible description: {aid.accessibleDescription}</p>}
       </figcaption>
     </figure>
   )
 }
 
+function DiagramScene({ aid }) {
+  return (
+    <div className={`aid-canvas aid-${aid.pattern}`} aria-hidden="true">
+      <svg viewBox="0 0 320 210" preserveAspectRatio="xMidYMid meet" focusable="false">
+        <VisualPattern aid={aid} />
+      </svg>
+    </div>
+  )
+}
+
+function CalloutList({ callouts }) {
+  if (!callouts?.length) return null
+
+  return (
+    <ol className="aid-callout-list aid-legend">
+      {callouts.map((callout) => (
+        <li key={`${callout.number}-${callout.heading}`}>
+          <span aria-hidden="true">{callout.number}</span>
+          <p><strong>{callout.heading}</strong> {callout.body}</p>
+        </li>
+      ))}
+    </ol>
+  )
+}
+
+function KeyTakeaway({ text }) {
+  return <p className="aid-key-takeaway"><strong>Key takeaway:</strong> {text}</p>
+}
+
 export function VisualAidGallery() {
   return (
     <div className="visual-aid-gallery">
-      {visualAidCatalog.map((aid) => (
-        <section id={aid.id} className="review-card aid-review-card" key={aid.id} aria-labelledby={`${aid.id}-review-title`}>
-          <p className="eyebrow">{aid.id}</p>
-          <h2 id={`${aid.id}-review-title`}>{aid.title}</h2>
-          <VisualAid id={aid.id} compact />
-        </section>
-      ))}
+      {visualAidCatalog.map((aid) => {
+        const lesson = lessonByVisualAidId[aid.id]
+        return (
+          <section id={aid.id} className="review-card aid-review-card" key={aid.id} aria-labelledby={`${aid.id}-review-title`}>
+            <p className="eyebrow">{aid.id}</p>
+            <h2 id={`${aid.id}-review-title`}>{aid.title}</h2>
+            <div className="aid-review-meta" aria-label={`Review metadata for ${aid.title}`}>
+              <span>Lesson: {lesson?.title ?? 'Shared/support visual'}</span>
+              <span>Pattern: {aid.pattern}</span>
+            </div>
+            <VisualAid id={aid.id} compact />
+            <dl className="aid-review-details">
+              <div><dt>Learning objective</dt><dd>{aid.objective ?? aid.caption}</dd></div>
+              <div><dt>Accessible description</dt><dd>{aid.accessibleDescription ?? aid.caption}</dd></div>
+              <div><dt>Mobile preview</dt><dd>Review at 320px, 390px, and 430px; diagram labels must stay inside the canvas.</dd></div>
+              <div><dt>Print/PDF notes</dt><dd>{aid.printNote ?? 'Use the same scene and HTML callouts in exported lesson-card PDFs.'}</dd></div>
+            </dl>
+          </section>
+        )
+      })}
     </div>
   )
 }
@@ -264,7 +321,7 @@ function TrainingSvg() {
     ['1', 'Predict', 22, 38, 78],
     ['2', 'Compare', 120, 38, 88],
     ['3', 'Loss', 230, 38, 68],
-    ['4', 'Update weights', 158, 132, 118],
+    ['4', 'Update weights', 154, 132, 144],
     ['5', 'Repeat', 56, 132, 82]
   ]
   return (
@@ -275,7 +332,7 @@ function TrainingSvg() {
       <path className="aid-line" d="M100 57 H120" />
       <path className="aid-line" d="M208 57 H230" />
       <path className="aid-line" d="M264 76 C264 100, 242 114, 220 132" />
-      <path className="aid-line" d="M158 151 H138" />
+      <path className="aid-line" d="M154 151 H138" />
       <path className="aid-line" d="M56 132 C32 110, 34 76, 54 76" />
       <rect className="aid-box prompt" x="106" y="92" width="108" height="24" rx="8" />
       <Label x="124" y="109" className="tiny dark">durable step</Label>
@@ -700,23 +757,37 @@ function WindowSvg() {
 function RagSvg() {
   return (
     <>
-      <rect className="aid-box prompt" x="22" y="42" width="76" height="42" rx="8" />
-      <Label x="34" y="67" className="tiny dark">prompt</Label>
-      <rect className="aid-box" x="124" y="34" width="88" height="56" rx="8" />
-      <Label x="139" y="57" className="tiny">retriever</Label>
-      <path className="aid-line" d="M140 71 H196 M140 80 H190" />
-      <rect className="aid-box muted" x="82" y="126" width="154" height="54" rx="8" />
-      <Label x="110" y="158" className="tiny">context window</Label>
-      <rect className="aid-chip" x="104" y="104" width="68" height="30" rx="8" />
-      <Label x="113" y="124" className="tiny">retrieved</Label>
-      <rect className="aid-chip" x="178" y="104" width="52" height="30" rx="8" />
-      <Label x="189" y="124" className="tiny">notes</Label>
-      <rect className="aid-box output" x="254" y="130" width="62" height="42" rx="8" />
-      <Label x="262" y="155" className="tiny dark">answer</Label>
-      <Arrow x1={98} y1={63} x2={124} y2={63} />
-      <Arrow x1={168} y1={90} x2={138} y2={104} />
-      <Arrow x1={236} y1={153} x2={254} y2={153} />
-      <Label x="108" y="198" className="tiny">retrieval context</Label>
+      <rect className="aid-box prompt" x="16" y="32" width="70" height="38" rx="8" />
+      <Label x="31" y="56" className="tiny dark">Prompt</Label>
+      <Callout x="22" y="32">1</Callout>
+
+      <rect className="aid-box" x="122" y="26" width="82" height="50" rx="8" />
+      <Label x="138" y="56" className="tiny">Retriever</Label>
+      <Callout x="198" y="28">2</Callout>
+
+      <g>
+        <rect className="aid-chip prompt" x="238" y="24" width="58" height="28" rx="7" />
+        <rect className="aid-chip prompt" x="246" y="40" width="58" height="28" rx="7" />
+        <Label x="258" y="59" className="tiny dark">Notes</Label>
+      </g>
+      <Callout x="300" y="44">3</Callout>
+
+      <rect className="aid-box muted" x="80" y="116" width="154" height="42" rx="10" />
+      <Label x="128" y="142" className="tiny">Context</Label>
+      <path className="aid-line" d="M96 158 H222" />
+
+      <rect className="aid-box output" x="244" y="122" width="62" height="38" rx="8" />
+      <Label x="254" y="146" className="tiny dark">Response</Label>
+      <Callout x="302" y="128">4</Callout>
+
+      <rect className="aid-box prompt" x="24" y="168" width="98" height="26" rx="8" />
+      <Label x="38" y="186" className="tiny dark">weights fixed</Label>
+      <Callout x="140" y="180">5</Callout>
+
+      <path className="aid-line" d="M86 51 H122" />
+      <path className="aid-line" d="M204 51 H238" />
+      <path className="aid-line" d="M270 68 C270 96, 212 100, 186 116" />
+      <path className="aid-line" d="M234 137 H244" />
     </>
   )
 }

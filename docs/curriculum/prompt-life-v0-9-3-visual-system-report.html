@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prompt Life v0.9.3 Visual System Report</title>
+  <style>
+    :root {
+      color: #112044;
+      background: #f6f8fc;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.45;
+    }
+    body {
+      margin: 0;
+      padding: 28px;
+    }
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    section {
+      break-inside: avoid;
+      margin: 0 0 22px;
+      padding: 22px;
+      background: white;
+      border: 1px solid #d8e0f1;
+      border-radius: 8px;
+    }
+    h1, h2 {
+      color: #071b78;
+      line-height: 1.1;
+      margin: 0 0 12px;
+    }
+    h1 {
+      font-size: 36px;
+    }
+    h2 {
+      font-size: 22px;
+    }
+    p, li {
+      font-size: 14px;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    code {
+      background: #eef4ff;
+      border-radius: 4px;
+      padding: 1px 4px;
+    }
+    .eyebrow {
+      color: #00858e;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+    figure {
+      margin: 0;
+      break-inside: avoid;
+    }
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border: 1px solid #d8e0f1;
+      border-radius: 8px;
+      background: #f8fbff;
+    }
+    figcaption {
+      margin-top: 6px;
+      font-size: 12px;
+      color: #53617d;
+    }
+    .wide {
+      grid-column: 1 / -1;
+    }
+    @media print {
+      body {
+        background: white;
+        padding: 18px;
+      }
+      section {
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <section>
+    <p class="eyebrow">Prompt Life v0.9.3</p>
+    <h1>Visual System Reset Report</h1>
+    <p>This pass creates a stricter visual-aid pattern and rebuilds RAG and Retrieval as the gold-standard Open-Book Retrieval visual. It does not start Batch 3, add games, or add 3D libraries.</p>
+  </section>
+
+  <section>
+    <h2>What Changed</h2>
+    <ul>
+      <li>Added the visual pattern: <code>VisualAidCard</code>, <code>DiagramScene</code>, <code>CalloutList</code>, and <code>KeyTakeaway</code>.</li>
+      <li>Added learning objective, accessible description, key takeaway, and print/PDF notes to visual metadata.</li>
+      <li>Rebuilt RAG as a four-zone diagram: Prompt, Retriever, Notes, Context, Response, plus fixed weights.</li>
+      <li>Completed RAG lesson fields for durable-vs-temporary, prompt-vs-response, core explanation, misconceptions, and feedback.</li>
+      <li>Improved the visual gallery so review cards show visual id, lesson, scene, callouts, accessible description, mobile preview, and print/PDF notes.</li>
+      <li>Updated <code>Open Book or Learned?</code> with the requested RAG sorting items.</li>
+      <li>Bumped the visible app version to <code>v0.9.3</code> and updated export filenames.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>RAG Finding</h2>
+    <p>RAG was current in the repo but visually unrepaired. The source already had the <code>rag-retrieval</code> Journey card, but it still used an older mini-infographic visual and thinner lesson fields because v0.9.2 focused mostly on Batch 1 and Batch 2 visuals.</p>
+  </section>
+
+  <section>
+    <h2>Files Changed</h2>
+    <ul>
+      <li><code>README.md</code>, <code>package.json</code>, and <code>scripts/export-lesson-pdf.mjs</code></li>
+      <li><code>src/components/VisualAids.tsx</code></li>
+      <li><code>src/data/content.ts</code>, <code>src/data/contentReview.js</code>, and <code>src/data/exercises.ts</code></li>
+      <li><code>src/main.tsx</code> and <code>src/styles/global.css</code></li>
+      <li><code>docs/REVIEW_NOTES.md</code></li>
+      <li>v0.9.3 curriculum docs, PDFs, screenshots, and this report</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Verification</h2>
+    <ul>
+      <li><code>npm install</code>: passed, 0 vulnerabilities.</li>
+      <li><code>npm run typecheck</code>: passed.</li>
+      <li><code>npm run build</code>: passed.</li>
+      <li><code>npm run build:pages</code>: passed.</li>
+      <li><code>npm run export:lesson-pdf</code>: passed.</li>
+      <li><code>npm run export:lesson-cards</code>: passed.</li>
+      <li>In-app browser QA confirmed the RAG visual and completed RAG fields.</li>
+      <li>320px, 390px, and 430px checks showed no horizontal overflow for RAG, Training Loop, Prompt vs Response, visual gallery, or the RAG lesson-card sample.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Screenshots</h2>
+    <div class="grid">
+      <figure>
+        <img src="../screenshots/v0-9-3-rag-gold-standard.png" alt="RAG gold-standard visual screenshot">
+        <figcaption>RAG gold standard: retrieval plus context, not training.</figcaption>
+      </figure>
+      <figure>
+        <img src="../screenshots/v0-9-3-visual-gallery.png" alt="Visual aid gallery screenshot">
+        <figcaption>Visual gallery with review metadata.</figcaption>
+      </figure>
+      <figure>
+        <img src="../screenshots/v0-9-3-training-loop-repaired.png" alt="Training Loop repaired screenshot">
+        <figcaption>Training Loop with a widened Update weights node.</figcaption>
+      </figure>
+      <figure>
+        <img src="../screenshots/v0-9-3-prompt-response-repaired.png" alt="Prompt vs Response repaired screenshot">
+        <figcaption>Prompt vs Response using the v0.9.2 canonical example.</figcaption>
+      </figure>
+      <figure class="wide">
+        <img src="../screenshots/v0-9-3-pdf-sample-rag.png" alt="RAG print route PDF sample screenshot">
+        <figcaption>RAG lesson-card sample from the print route used by PDF export.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section>
+    <h2>Known Remaining Issues</h2>
+    <ul>
+      <li>Some older visuals outside the named repair targets still use the legacy metadata fallback and should be converted gradually.</li>
+      <li>Source citations are still needed before publication-final claims about RAG and transformer internals.</li>
+      <li>Real iPhone Safari testing remains the final check after GitHub Pages deploy, especially for browser cache and safe-area behavior.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Ready For Batch 3?</h2>
+    <p>Yes for visual-system foundation after final deploy verification. Batch 3 should use the RAG pattern as the model: one objective, simple scene, numbered HTML callouts, key takeaway, and accessible description.</p>
+  </section>
+
+  <section>
+    <h2>Next Three Steps</h2>
+    <ul>
+      <li>Build Batch 3 for Attention, MLP, Layers, and Hidden States using this stricter visual pattern.</li>
+      <li>Add source citations or bibliography notes for RAG and transformer internals.</li>
+      <li>Convert remaining legacy visuals to the card/scene/callout/takeaway pattern over time.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>How To Run</h2>
+    <ul>
+      <li><code>cd ~/Desktop/promptlife</code></li>
+      <li><code>npm install</code></li>
+      <li><code>npm run dev</code></li>
+      <li>Open <code>http://localhost:5173/</code>.</li>
+      <li>For iPhone testing after deploy, open <code>https://kevinhegg.github.io/promptlife/?v=093</code> or confirm the Badge page shows <code>v0.9.3</code>.</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>

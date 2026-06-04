@@ -263,16 +263,16 @@ export const exercises: Exercise[] = [
     items: [
       { id: 'trained-documents', label: 'Pretraining on many documents', bucket: 'Learned in weights' },
       { id: 'fine-tuned-support', label: 'Fine-tuning a support assistant', bucket: 'Learned in weights' },
-      { id: 'retrieved-pdf', label: 'Retrieved PDF passage', bucket: 'Placed in context' },
+      { id: 'retrieved-pdf', label: 'Retrieved policy PDF', bucket: 'Placed in context' },
       { id: 'search-snippet', label: 'Search result snippet', bucket: 'Placed in context' },
       { id: 'system-instruction', label: 'System instruction', bucket: 'Placed in context' },
-      { id: 'user-question', label: 'User question', bucket: 'Placed in context' },
-      { id: 'answer-paragraph', label: 'The answer paragraph', bucket: 'Generated response' },
-      { id: 'generated-citation', label: 'A generated citation', bucket: 'Generated response' }
+      { id: 'user-prompt', label: 'User prompt', bucket: 'Placed in context' },
+      { id: 'answer-paragraph', label: 'Generated answer paragraph', bucket: 'Generated response' },
+      { id: 'generated-citation', label: 'Generated citation', bucket: 'Generated response' }
     ],
     feedbackCorrect: 'Good. You separated learned weights from open-book context.',
     feedbackIncorrect: 'RAG places material into context. It is not the same as training weights, and the answer is still generated.',
-    insight: 'RAG is like an open-book exam. The book is in context, not permanently inside the model.',
+    insight: 'RAG is like an open-book exam. The book enters context; it is not permanently inside the model.',
     glossaryTerms: ['RAG', 'retrieval', 'context window', 'grounding', 'weights'],
     completionKey: 'exercise:open-book-or-learned'
   },

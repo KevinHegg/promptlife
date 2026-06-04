@@ -38,7 +38,7 @@ npm run export:lesson-pdf
 This writes the default review deck to:
 
 ```text
-docs/review/prompt-life-lesson-cards-v0-9-2.pdf
+docs/review/prompt-life-lesson-cards-v0-9-3.pdf
 ```
 
 For the curriculum inventory pass, run:
@@ -50,7 +50,7 @@ npm run export:lesson-cards
 This writes the inventory review deck to:
 
 ```text
-docs/content-inventory/prompt-life-lesson-cards-v0-9-2-visual-repair.pdf
+docs/content-inventory/prompt-life-lesson-cards-v0-9-3-visual-system.pdf
 ```
 
 ## Test On A Phone
@@ -74,6 +74,8 @@ The repo also includes a GitHub Pages workflow. Pushes to `main` build the app w
 https://kevinhegg.github.io/promptlife/
 ```
 
+Developer cache note for iPhone testing: after a `main` deploy, use a hard refresh, clear site data, add a cache-busting query such as `?v=093`, or confirm the visible app version on the Badge page.
+
 ## Reset Progress
 
 Progress is stored in this browser's `localStorage`, not cookies. Use the Badge screen's `Reset progress` button to start over on this device. Reset clears lessons, exercises, Prompt Run progress, reflections, mini-game insights, tours, and last location.
@@ -93,6 +95,7 @@ For local debugging, add `?debug=1` to the app URL and open the Badge screen to 
 - Lesson-card PDF export through `npm run export:lesson-pdf` and inventory review export through `npm run export:lesson-cards`.
 - v0.9 Batch 2 lessons for Inference, Prompt vs Response, Tokenization, Token IDs, Embeddings, Vectors, and Tensors.
 - v0.9.2 canonical pet-conflict example used across Prompt vs Response, tokenization, token IDs, embeddings, vectors, tensors, exercises, Prompt Run, glossary examples, and review PDFs.
+- v0.9.3 visual-aid system reset with RAG and Retrieval rebuilt as the gold-standard open-book retrieval visual.
 - HTML legend/callout visual aid system designed to stay readable in mobile and PDF review.
 - Play mode centered on Prompt Run, an interactive 12-step inference loop plus final ordering challenge.
 - Guided comparisons:

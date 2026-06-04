@@ -8,7 +8,7 @@ import { fileURLToPath } from 'node:url'
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const port = Number(process.env.PROMPTLIFE_PDF_PORT || 4186)
 const route = process.env.PROMPTLIFE_PDF_ROUTE || '/review/lesson-cards?print=1'
-const defaultOut = path.join('docs', 'review', 'prompt-life-lesson-cards-v0-9-2.pdf')
+const defaultOut = path.join('docs', 'review', 'prompt-life-lesson-cards-v0-9-3.pdf')
 const requestedOut = process.env.PROMPTLIFE_PDF_OUT || defaultOut
 const outPath = path.isAbsolute(requestedOut) ? requestedOut : path.join(root, requestedOut)
 const outDir = path.dirname(outPath)
