@@ -20,7 +20,7 @@ import {
   TrainingLoopAnimation
 } from './components/ConceptAnimations'
 import { ExerciseShell } from './components/ExerciseSystem'
-import { VisualAid, VisualAidGallery } from './components/VisualAids'
+import { VisualAid, VisualAidGallery, visualAidStyleVariants } from './components/VisualAids'
 import { acts, games, glossary, learningModes, lessons } from './data/content'
 import { buildLessonReviewProfile, reviewRubricCategories } from './data/contentReview'
 import { emptyExerciseProgress, exerciseById, exercises, lessonExerciseIds } from './data/exercises'
@@ -31,7 +31,7 @@ import './styles/global.css'
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '')
 const ASSET = `${BASE}/assets/promptlife`
 // Bump this for each shipped app change; the Badge screen displays it under Start over.
-const APP_VERSION = '0.9.3'
+const APP_VERSION = '0.10.0'
 const STORAGE_KEYS = {
   lastLocation: 'promptlife:v1:lastLocation',
   lessonId: 'promptlife:v1:lessonId',
@@ -66,6 +66,7 @@ function getReviewRoute() {
     : window.location.pathname
   if (path.startsWith('/review/lesson-cards')) return 'lesson-cards'
   if (path.startsWith('/review/visual-aids')) return 'visual-aids'
+  if (path.startsWith('/review/style-guide')) return 'style-guide'
   return null
 }
 
@@ -294,6 +295,10 @@ function App() {
 
   if (reviewRoute === 'visual-aids') {
     return <VisualAidReviewPage />
+  }
+
+  if (reviewRoute === 'style-guide') {
+    return <StyleGuideReviewPage />
   }
 
   return (
@@ -1835,6 +1840,194 @@ function VisualAidReviewPage() {
         <p>Reusable SVG/CSS diagrams for the current lesson path, with mobile and PDF readability checks.</p>
       </header>
       <VisualAidGallery />
+    </main>
+  )
+}
+
+function StyleGuideReviewPage() {
+  const colorSwatches = [
+    ['Rice paper', '--pl-bg', '#F7F5EF'],
+    ['Mist blue', '--pl-bg-mist', '#EAF3F4'],
+    ['Paper surface', '--pl-surface-paper', '#FFFDF8'],
+    ['Ink navy', '--pl-ink', '#07124A'],
+    ['Deep indigo', '--pl-indigo', '#121E72'],
+    ['Cyan glow', '--pl-cyan', '#35E6E2'],
+    ['Soft teal', '--pl-teal', '#0FA8A4'],
+    ['Violet glow', '--pl-violet', '#7A5CFF'],
+    ['Warm amber', '--pl-amber', '#F2B85B'],
+    ['Sakura', '--pl-sakura', '#F5A6C8'],
+    ['Insight', '--pl-success', '#179A74'],
+    ['Risk', '--pl-risk', '#B94A5A']
+  ]
+  const navItems = [
+    ['home', 'Home', 'icon-seed-run'],
+    ['journey', 'Journey', 'icon-layers'],
+    ['play', 'Play', 'icon-quiz'],
+    ['glossary', 'Glossary', 'icon-glossary'],
+    ['badge', 'Badge', 'icon-model-literate-badge']
+  ]
+
+  return (
+    <main className="review-route style-guide-route" aria-labelledby="style-guide-title">
+      <header className="review-cover style-guide-cover">
+        <p className="eyebrow">Prompt Life v{APP_VERSION}</p>
+        <h1 id="style-guide-title" tabIndex={-1}>ZenTron Origami</h1>
+        <p>Internal visual identity playground for the v0.10 calming futuristic learning garden.</p>
+      </header>
+
+      <section className="review-card style-guide-section" aria-labelledby="style-colors-title">
+        <p className="eyebrow">1. Color swatches</p>
+        <h2 id="style-colors-title">Rice paper, mist, ink, and glow</h2>
+        <div className="style-swatch-grid">
+          {colorSwatches.map(([label, token, value]) => (
+            <article className="style-swatch" key={token}>
+              <span style={{ background: value }} aria-hidden="true" />
+              <strong>{label}</strong>
+              <code>{token}</code>
+              <small>{value}</small>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="review-card style-guide-section" aria-labelledby="style-type-title">
+        <p className="eyebrow">2. Typography examples</p>
+        <h2 id="style-type-title">Readable, spacious, not shouty</h2>
+        <div className="style-mobile-frame">
+          <p className="eyebrow">Section eyebrow</p>
+          <h1>Prompt Life</h1>
+          <p className="lede">A day in the life of a prompt, from visible context to one next token at a time.</p>
+          <p>Body copy keeps a calm line height so academic readers can move quickly without feeling pushed.</p>
+          <small>Microcopy stays useful and legible at 320px.</small>
+        </div>
+      </section>
+
+      <section className="review-card style-guide-section" aria-labelledby="style-cards-title">
+        <p className="eyebrow">3-5. Cards, chips, and callouts</p>
+        <h2 id="style-cards-title">Paper layers with computational edges</h2>
+        <div className="style-mobile-frame style-card-stack">
+          <article className="concept-card">
+            <span>Concept card</span>
+            <p>Paper panels should feel layered, quiet, and touchable.</p>
+          </article>
+          <div className="term-row">
+            {['temporary context', 'durable weights', 'retrieved notes'].map((label) => <button key={label}>{label}</button>)}
+          </div>
+          <ol className="aid-legend">
+            <li><span>1</span><p><strong>Prompt</strong> The visible input starts the run.</p></li>
+            <li><span>2</span><p><strong>Glow path</strong> Neon marks information flow.</p></li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="style-brain-bridge" className="review-card style-guide-section" aria-labelledby="style-brain-title">
+        <p className="eyebrow">6. Brain Bridge card</p>
+        <h2 id="style-brain-title">Helpful comparison, then the limit</h2>
+        <div className="style-mobile-frame">
+          <section className="lesson-panel brain-bridge" aria-label="Brain Bridge preview">
+            <h2>Helpful, then limited</h2>
+            <dl>
+              <div>
+                <dt>Helpful comparison</dt>
+                <dd>Like looking something up in notes before answering a question.</dd>
+              </div>
+              <div>
+                <dt>Where it breaks</dt>
+                <dd>The model is not consciously judging the source. It is still generating likely tokens.</dd>
+              </div>
+            </dl>
+          </section>
+        </div>
+      </section>
+
+      <section className="review-card style-guide-section" aria-labelledby="style-checkpoint-title">
+        <p className="eyebrow">7. Checkpoint card</p>
+        <h2 id="style-checkpoint-title">Dojo practice, not a trap</h2>
+        <div className="style-mobile-frame">
+          <section className="quiz-card style-checkpoint-card" aria-label="Checkpoint preview">
+            <p className="step-label">Checkpoint</p>
+            <h2>What does RAG usually do?</h2>
+            <div className="answer-list">
+              {['Retrieves outside information into the current context.', 'Permanently changes the model weights.'].map((answer, index) => (
+                <button className="answer" key={answer}>
+                  <span>{index + 1}</span>
+                  <strong>{answer}</strong>
+                </button>
+              ))}
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section className="review-card style-guide-section" aria-labelledby="style-aid-title">
+        <p className="eyebrow">8. VisualAidCard shell</p>
+        <h2 id="style-aid-title">Neon diagram inside a paper frame</h2>
+        <div className="style-mobile-frame">
+          <VisualAid id="rag-retrieval" compact />
+        </div>
+        <div className="style-variant-list" aria-label="Visual aid style variants">
+          {visualAidStyleVariants.map((variant) => (
+            <span key={variant.id}><strong>{variant.label}</strong> {variant.use}</span>
+          ))}
+        </div>
+      </section>
+
+      <section id="style-bottom-nav" className="review-card style-guide-section" aria-labelledby="style-nav-title">
+        <p className="eyebrow">9. Bottom nav mock</p>
+        <h2 id="style-nav-title">Floating paper-glass dock</h2>
+        <div className="style-mobile-frame style-nav-preview">
+          <div className="style-bottom-nav-layer">
+            <nav className="style-bottom-nav-mock" aria-label="Bottom navigation preview">
+              {navItems.map(([id, label, icon], index) => (
+                <button key={id} className={index === 1 ? 'active' : ''} aria-current={index === 1 ? 'page' : undefined}>
+                  <img src={`${ASSET}/icons/png/${icon}@48.png`} alt="" aria-hidden="true" />
+                  <span>{label}</span>
+                </button>
+              ))}
+            </nav>
+          </div>
+        </div>
+      </section>
+
+      <section className="review-card style-guide-section" aria-labelledby="style-hero-title">
+        <p className="eyebrow">10. Lesson hero mock</p>
+        <h2 id="style-hero-title">One focal object, quiet support</h2>
+        <div className="style-mobile-frame">
+          <section className="lesson-hero style-lesson-hero" aria-label="Lesson hero preview">
+            <p className="eyebrow">Morning Commute</p>
+            <h1>RAG and Retrieval</h1>
+            <p className="lede small">Open-book AI: retrieved notes enter the context before response tokens are generated.</p>
+            <div className="lesson-definition">RAG is retrieval plus context, not training.</div>
+          </section>
+        </div>
+      </section>
+
+      <section className="review-card style-guide-section" aria-labelledby="style-drawer-title">
+        <p className="eyebrow">11. Glossary drawer mock</p>
+        <h2 id="style-drawer-title">Folded reference note</h2>
+        <div className="style-mobile-frame">
+          <aside className="style-glossary-drawer-mock" aria-label="Glossary drawer preview">
+            <button className="drawer-close">Close</button>
+            <p className="eyebrow">Glossary</p>
+            <h2>Grounding</h2>
+            <p>Grounding means connecting a model's response to available evidence, such as retrieved documents, cited sources, data, or tool results.</p>
+            <section className="concept-card compact"><span>Relationship</span><p>RAG is one way to improve grounding, but grounding can still fail.</p></section>
+          </aside>
+        </div>
+      </section>
+
+      <section className="review-card style-guide-section" aria-labelledby="style-badge-title">
+        <p className="eyebrow">12. Badge mock</p>
+        <h2 id="style-badge-title">Enamel seal / academic crest</h2>
+        <div className="style-mobile-frame style-badge-preview">
+          <img className="badge-art" src={`${ASSET}/brand/model-literate-badge.svg`} alt="Model Literate badge" />
+          <div className="badge-stats">
+            <span><strong>21</strong> of 26 lessons</span>
+            <span><strong>3</strong> play insights</span>
+            <span><strong>v${APP_VERSION}</strong> visual pass</span>
+          </div>
+        </div>
+      </section>
     </main>
   )
 }

@@ -1,6 +1,76 @@
 # Review Notes
 
-Date: 2026-06-02
+Date: 2026-06-04
+
+## v0.10 Visual Identity Reset
+
+### What Changed
+
+- Created the `ZenTron Origami` visual identity direction: rice-paper calm, neon computational paths, origami/fold cues, and sparse anime-inspired composition.
+- Added a full style guide at `docs/design/PROMPT_LIFE_STYLE_GUIDE_V0_10.md`.
+- Added implementation notes at `docs/design/STYLE_IMPLEMENTATION_NOTES_V0_10.md`.
+- Expanded `src/styles/promptlife.tokens.css` with semantic tokens for color, spacing, radius, shadow, glow, typography, z-index, motion, card depth, paper layers, and backwards-compatible aliases.
+- Added the hidden internal review route `/review/style-guide`.
+- Updated the app shell with a rice-paper/mist background, faint fold/zen lines, layered paper cards, folded-tab chips, visual-aid paper frames, and a calmer floating paper-glass bottom dock.
+- Added visual-aid style variants: `paper-diagram`, `neon-flow`, `origami-object`, `zen-garden-map`, and `retrieval-shelf`.
+- Updated the `rag-retrieval` pilot visual to use paper-layer nodes, numbered paper seals, a subtle neon retrieval path, and a context tray.
+- Bumped the visible Badge version to `v0.10.0`.
+- Captured v0.10 screenshots for the style guide, Home shell, Journey card, RAG pilot, Brain Bridge, and bottom nav.
+
+### Files Changed
+
+- `src/styles/promptlife.tokens.css`
+- `src/styles/global.css`
+- `src/components/VisualAids.tsx`
+- `src/main.tsx`
+- `docs/design/PROMPT_LIFE_STYLE_GUIDE_V0_10.md`
+- `docs/design/STYLE_IMPLEMENTATION_NOTES_V0_10.md`
+- `docs/REVIEW_NOTES.md`
+- `docs/screenshots/v0-10-style-guide.png`
+- `docs/screenshots/v0-10-home-shell.png`
+- `docs/screenshots/v0-10-journey-card.png`
+- `docs/screenshots/v0-10-rag-pilot.png`
+- `docs/screenshots/v0-10-brain-bridge.png`
+- `docs/screenshots/v0-10-bottom-nav.png`
+
+### Style Guide Created
+
+The style guide defines the visual philosophy, design principles, visual feng shui rules, color system, typography roles, shape language, motion language, and policy for 2D/SVG, CSS 3D, and generated images.
+
+### Design Tokens Added
+
+The token file now provides reusable variables for the v0.10 system and keeps older token names such as `--pl-navy`, `--pl-purple`, and `--pl-mint` mapped so existing UI remains stable.
+
+### Style Playground Route Added
+
+`/review/style-guide` includes mobile-width preview sections for color, typography, cards, chips, callouts, Brain Bridge, checkpoint, VisualAid shell, bottom nav mock, lesson hero, glossary drawer, and badge.
+
+### App Shell Changes
+
+The base app now uses a calm paper/mist atmosphere, paper-surface card styling, folded chips, a clipped mist blur behind the bottom dock, and safer scroll padding so the nav does not hide content.
+
+### Pilot RAG Visual Changes
+
+The RAG visual remains conceptually unchanged: RAG is retrieval plus context, not training. The presentation now uses fewer hard rectangles, a retrieval-shelf variant, paper nodes, neon pathing, numbered seals, and HTML callouts below the diagram.
+
+### Build And Typecheck Results
+
+- `npm install`: passed, 0 vulnerabilities.
+- `npm run typecheck`: passed.
+- `npm run build`: passed.
+- `git diff --check`: passed.
+- Chrome mobile viewport audit at 320px, 390px, and 430px: no document/body overflow for Home, `/review/style-guide`, or `/review/visual-aids#rag-retrieval`.
+
+### Known Style Issues
+
+- Existing PNG illustration art still reflects earlier MVP style and should be refreshed later.
+- Older concept animation panels still use the previous deep-blue animation surface language.
+- Only RAG was redesigned as a pilot visual; the variant system is ready but the remaining visual aids still need dedicated art passes.
+- Review PDFs remain internal review artifacts, not learner-facing product features.
+
+### Next Recommended Prompt
+
+Apply the v0.10 visual identity to the next high-priority visual cluster: Context Window, Attention, MLP, Hidden States, Logits, Softmax, Sampling, and Autoregression. Keep each visual sparse, mobile-first, and anchored to one focal object.
 
 ## v0.9.3 Visual System Reset And RAG Gold Standard
 

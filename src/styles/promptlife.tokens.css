@@ -1,52 +1,204 @@
 :root {
-  --pl-navy: #071B6F;
+  /* Color: ZenTron Origami base surfaces. */
+  --pl-bg: #F7F5EF;
+  --pl-bg-mist: #EAF3F4;
+  --pl-surface: rgba(255, 255, 255, 0.82);
+  --pl-surface-paper: #FFFDF8;
+  --pl-surface-glass: rgba(255, 255, 255, 0.68);
+  --pl-paper-edge: rgba(7, 18, 74, 0.14);
+  --pl-paper-line: rgba(18, 30, 114, 0.08);
+  --pl-ink: #07124A;
+  --pl-ink-soft: #243052;
+  --pl-ink-muted: #53607A;
+  --pl-indigo: #121E72;
+  --pl-indigo-soft: #24358F;
+
+  /* Color: computational glow accents. */
+  --pl-cyan: #35E6E2;
+  --pl-teal: #0FA8A4;
+  --pl-violet: #7A5CFF;
+  --pl-amber: #F2B85B;
+  --pl-sakura: #F5A6C8;
+
+  /* Color: learning semantics. */
+  --pl-success: #179A74;
+  --pl-caution: #C07A24;
+  --pl-risk: #B94A5A;
+  --pl-context: #35E6E2;
+  --pl-durable: #7A5CFF;
+  --pl-retrieved: #0FA8A4;
+  --pl-generated: #F2B85B;
+
+  /* Backwards-compatible aliases from earlier passes. */
+  --pl-navy: var(--pl-indigo);
   --pl-blue: #1459C8;
-  --pl-teal: #0E8D9B;
   --pl-mint: #9BE7D5;
-  --pl-purple: #5A3EC8;
-  --pl-amber: #FFB86B;
-  --pl-offwhite: #F7F9FA;
+  --pl-purple: var(--pl-violet);
+  --pl-offwhite: var(--pl-bg);
   --pl-charcoal: #20242D;
-  --pl-ink: #0B1230;
-  --pl-surface: #ffffff;
-  --pl-border: #D6E0F0;
-  --pl-shadow: 0 14px 40px rgba(7, 27, 111, 0.12);
+  --pl-border: rgba(18, 30, 114, 0.16);
+
+  /* Spacing: small mobile-first rhythm. */
+  --pl-space-1: 0.25rem;
+  --pl-space-2: 0.5rem;
+  --pl-space-3: 0.75rem;
+  --pl-space-4: 1rem;
+  --pl-space-5: 1.25rem;
+  --pl-space-6: 1.5rem;
+  --pl-space-8: 2rem;
+
+  /* Radius: paper cards remain restrained and rectangular. */
   --pl-radius-sm: 8px;
   --pl-radius-md: 8px;
   --pl-radius-lg: 8px;
+  --pl-card-radius: 8px;
+  --pl-chip-radius: 8px;
+  --pl-seal-radius: 999px;
+
+  /* Shadow and depth: paper layers, not floating SaaS slabs. */
+  --pl-shadow-paper: 0 12px 28px rgba(7, 18, 74, 0.10);
+  --pl-shadow-paper-deep: 0 20px 52px rgba(7, 18, 74, 0.14);
+  --pl-shadow-inset-paper: inset 0 1px 0 rgba(255, 255, 255, 0.82);
+  --pl-origami-fold-shadow: 0 10px 20px rgba(7, 18, 74, 0.10);
+  --pl-card-depth-1: 0 8px 20px rgba(7, 18, 74, 0.08);
+  --pl-card-depth-2: 0 16px 36px rgba(7, 18, 74, 0.12);
+  --pl-shadow: var(--pl-shadow-paper);
+
+  /* Glow: active computation must support, never replace, contrast. */
+  --pl-glow-cyan: 0 0 0 1px rgba(53, 230, 226, 0.35), 0 0 24px rgba(53, 230, 226, 0.34);
+  --pl-glow-violet: 0 0 0 1px rgba(122, 92, 255, 0.30), 0 0 26px rgba(122, 92, 255, 0.28);
+  --pl-glow-amber: 0 0 0 1px rgba(242, 184, 91, 0.32), 0 0 22px rgba(242, 184, 91, 0.28);
+
+  /* Typography: use the existing system stack with explicit roles. */
   --pl-font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --pl-text-display: clamp(2rem, 9vw, 3rem);
+  --pl-text-title: clamp(1.35rem, 5vw, 1.85rem);
+  --pl-text-section: 1.18rem;
+  --pl-text-body: 1rem;
+  --pl-text-micro: 0.78rem;
+  --pl-leading-body: 1.55;
+  --pl-leading-tight: 1.12;
+  --pl-reading-width: 42rem;
+
+  /* Z-index: keep chrome predictable. */
+  --pl-z-base: 0;
+  --pl-z-dock: 15;
+  --pl-z-drawer: 30;
+  --pl-z-toast: 40;
+
+  /* Motion: calm paper and glow movement. */
+  --pl-motion-fast: 160ms ease;
+  --pl-motion-medium: 260ms ease;
+  --pl-motion-slow: 720ms ease;
+  --pl-motion-breath: 6s ease-in-out;
+
+  /* Layout: bottom dock and safe-area sizing. */
+  --pl-nav-height: 5.35rem;
+  --pl-bottom-safe-padding: env(safe-area-inset-bottom);
+  --pl-shell-width: 480px;
 }
 
 .pl-card {
   background: var(--pl-surface);
   border: 1px solid var(--pl-border);
-  border-radius: 8px;
-  box-shadow: var(--pl-shadow);
+  border-radius: var(--pl-card-radius);
+  box-shadow: var(--pl-shadow-paper);
 }
 
 .pl-button {
   border: 0;
-  border-radius: 8px;
+  border-radius: var(--pl-radius-sm);
   padding: 0.85rem 1.1rem;
-  font-weight: 700;
-  background: var(--pl-teal);
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--pl-indigo), var(--pl-teal));
   color: white;
 }
 
 .pl-button.secondary {
-  background: #EEF8FA;
-  color: var(--pl-navy);
+  border: 1px solid rgba(15, 168, 164, 0.24);
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--pl-indigo);
 }
 
 .pl-mobile-shell {
-  width: min(100%, 480px);
+  width: min(100%, var(--pl-shell-width));
   margin: 0 auto;
   min-height: 100dvh;
-  background: var(--pl-offwhite);
+  background: var(--pl-bg);
 }
 
 .pl-art {
   display: block;
   width: 100%;
   height: auto;
+}
+
+/* Reusable visual motif classes for sparse use in review and app surfaces. */
+.pl-paper-layer {
+  position: relative;
+  background: var(--pl-surface-paper);
+  border: 1px solid var(--pl-paper-edge);
+  border-radius: var(--pl-card-radius);
+  box-shadow: var(--pl-shadow-paper);
+}
+
+.pl-paper-layer::after,
+.pl-origami-fold::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 1.15rem;
+  height: 1.15rem;
+  border-left: 1px solid rgba(7, 18, 74, 0.12);
+  border-bottom: 1px solid rgba(7, 18, 74, 0.12);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.82), rgba(234, 243, 244, 0.84));
+  clip-path: polygon(100% 0, 0 0, 100% 100%);
+  pointer-events: none;
+}
+
+.pl-neon-path {
+  color: var(--pl-cyan);
+  filter: drop-shadow(0 0 8px rgba(53, 230, 226, 0.42));
+}
+
+.pl-zen-rings {
+  background:
+    radial-gradient(ellipse at 24% 20%, transparent 0 2.4rem, rgba(18, 30, 114, 0.08) 2.45rem 2.5rem, transparent 2.55rem),
+    radial-gradient(ellipse at 78% 72%, transparent 0 3.2rem, rgba(15, 168, 164, 0.09) 3.25rem 3.32rem, transparent 3.38rem);
+}
+
+.pl-glow-node {
+  display: inline-grid;
+  place-items: center;
+  width: 0.72rem;
+  height: 0.72rem;
+  border-radius: 999px;
+  background: var(--pl-cyan);
+  box-shadow: var(--pl-glow-cyan);
+}
+
+.pl-paper-seal {
+  display: inline-grid;
+  place-items: center;
+  min-width: 1.35rem;
+  height: 1.35rem;
+  border-radius: var(--pl-seal-radius);
+  border: 1px solid rgba(192, 122, 36, 0.42);
+  background: #FFF5DF;
+  color: #653B08;
+  font-size: 0.72rem;
+  font-weight: 900;
+}
+
+.pl-folded-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2rem;
+  border: 1px solid rgba(18, 30, 114, 0.14);
+  border-radius: var(--pl-chip-radius);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0 82%, rgba(234, 243, 244, 0.92) 82% 100%);
+  color: var(--pl-indigo);
+  box-shadow: var(--pl-card-depth-1);
 }

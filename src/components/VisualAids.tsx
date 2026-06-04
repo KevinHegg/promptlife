@@ -2,6 +2,23 @@ import React from 'react'
 import { canonicalPromptResponse } from '../data/canonicalExamples'
 import { lessons } from '../data/content'
 
+export const visualAidStyleVariants = [
+  { id: 'paper-diagram', label: 'Paper diagram', use: 'Exact, calm diagrams.' },
+  { id: 'neon-flow', label: 'Neon flow', use: 'Prompt to model to token flows.' },
+  { id: 'origami-object', label: 'Origami object', use: 'Tensors, layers, and transformations.' },
+  { id: 'zen-garden-map', label: 'Zen garden map', use: 'Alignment, risk, hallucination, and ethics.' },
+  { id: 'retrieval-shelf', label: 'Retrieval shelf', use: 'RAG, grounding, and evidence entering context.' }
+]
+
+function getVisualAidVariant(aid) {
+  if (aid.variant) return aid.variant
+  if (['llmOverview', 'promptResponse', 'inference', 'softmax', 'sampling', 'loop'].includes(aid.pattern)) return 'neon-flow'
+  if (['tensor', 'layers', 'mlp', 'bars', 'vector', 'hidden'].includes(aid.pattern)) return 'origami-object'
+  if (['alignment', 'risk', 'overfitting', 'diffusion'].includes(aid.pattern)) return 'zen-garden-map'
+  if (aid.pattern === 'rag') return 'retrieval-shelf'
+  return 'paper-diagram'
+}
+
 export const visualAidCatalog = [
   { id: 'llm-overview', title: 'Prompt to Prediction', caption: 'Prompt/context flows through learned weights into next-token probabilities; one generated response token is appended.', pattern: 'llmOverview', legend: ['Prompt/context is given input.', 'Learned weights are used during inference.', 'The selected response token is appended.'] },
   { id: 'traditions', title: 'Rules and Learned Patterns', subtitle: 'Two traditions, one modern toolkit', caption: 'Symbolic/rationalist systems use explicit rules; deep-learning/empiricist systems learn useful patterns from examples.', pattern: 'traditions', objective: 'Contrast explicit rules with learned patterns without turning the diagram into a poster.', callouts: [{ heading: 'Rules', body: 'Symbolic systems use explicit if/then logic and symbols.' }, { heading: 'Examples', body: 'Deep-learning systems use data, loss, and weight updates.' }, { heading: 'Bridge', body: 'Modern AI products can combine learned models with rules and tools.' }], keyTakeaway: 'Modern AI often blends learned patterns with hand-built rules and tools.', accessibleDescription: 'Two side-by-side panels compare rules and symbols with examples, loss, and weights, joined by a small bridge.', printNote: 'Short panel labels only; explanatory comparison stays in HTML callouts.' },
@@ -26,7 +43,7 @@ export const visualAidCatalog = [
   { id: 'sampling', title: 'Sample One Token', caption: 'Sampling chooses one token from the probability cloud.', pattern: 'sampling' },
   { id: 'autoregression', title: 'Append and Repeat', caption: 'The chosen token is appended, then the model runs again.', pattern: 'loop' },
   { id: 'context-window', title: 'Temporary Context Window', caption: 'Only visible context can influence the next token.', pattern: 'window' },
-  { id: 'rag-retrieval', title: 'Open-Book Retrieval', subtitle: 'Retrieval plus context, not training', caption: 'Retrieved notes enter the context before response tokens are generated.', pattern: 'rag', objective: 'Show that RAG retrieves outside information and places it into context; it does not train the model.', callouts: [{ heading: 'Ask', body: 'The user prompt starts the run.' }, { heading: 'Retrieve', body: 'A search system finds relevant outside material.' }, { heading: 'Add to context', body: 'Retrieved notes become temporary context tokens.' }, { heading: 'Generate', body: 'The model still generates response tokens one at a time.' }, { heading: 'Weights stay fixed', body: 'RAG does not normally update model weights.' }], keyTakeaway: 'RAG is retrieval plus context, not training.', accessibleDescription: 'The RAG diagram moves from Prompt to Retriever to Notes, then into a Context tray and Generated response, with a separate fixed-weights note.', printNote: 'Gold-standard v0.9.3 visual: short diagram labels, five HTML callouts, and a one-sentence takeaway.' },
+  { id: 'rag-retrieval', title: 'Open-Book Retrieval', subtitle: 'Retrieval plus context, not training', caption: 'Retrieved notes enter the context before response tokens are generated.', pattern: 'rag', variant: 'retrieval-shelf', objective: 'Show that RAG retrieves outside information and places it into context; it does not train the model.', callouts: [{ heading: 'Ask', body: 'The user prompt starts the run.' }, { heading: 'Retrieve', body: 'A search system finds relevant outside material.' }, { heading: 'Add to context', body: 'Retrieved notes become temporary context tokens.' }, { heading: 'Generate', body: 'The model still generates response tokens one at a time.' }, { heading: 'Weights stay fixed', body: 'RAG does not normally update model weights.' }], keyTakeaway: 'RAG is retrieval plus context, not training.', accessibleDescription: 'The RAG diagram moves from Prompt to Retriever to Notes, then into a Context tray and Generated response, with a separate fixed-weights note.', printNote: 'v0.10 pilot visual: paper-layer nodes, subtle neon retrieval path, HTML callouts, and a one-sentence takeaway.' },
   { id: 'ai-learns', title: 'Learning Modes', caption: 'Durable training, retrieval, and temporary steering change different things.', pattern: 'learns' },
   { id: 'diffusion', title: 'Denoise, Not Append', caption: 'Diffusion refines noise step by step instead of generating text token by token.', pattern: 'diffusion' },
   { id: 'multimodal', title: 'Shared Media Hub', caption: 'Different media types can connect through learned representations.', pattern: 'multimodal' },
@@ -61,9 +78,17 @@ export function VisualAid({ id, headingId = undefined, compact = false }) {
 
 function VisualAidCard({ aid, headingId = undefined, compact = false }) {
   const callouts = getCallouts(aid)
+  const variant = getVisualAidVariant(aid)
+  const className = [
+    'visual-aid',
+    'visual-aid-card',
+    compact ? 'compact' : '',
+    `variant-${variant}`,
+    `visual-aid-${aid.id}`
+  ].filter(Boolean).join(' ')
   return (
-    <figure className={compact ? 'visual-aid visual-aid-card compact' : 'visual-aid visual-aid-card'} aria-labelledby={headingId}>
-      <DiagramScene aid={aid} />
+    <figure className={className} aria-labelledby={headingId}>
+      <DiagramScene aid={aid} variant={variant} />
       <figcaption>
         <div className="aid-caption-copy">
           <strong>{aid.title}</strong>
@@ -78,9 +103,9 @@ function VisualAidCard({ aid, headingId = undefined, compact = false }) {
   )
 }
 
-function DiagramScene({ aid }) {
+function DiagramScene({ aid, variant }) {
   return (
-    <div className={`aid-canvas aid-${aid.pattern}`} aria-hidden="true">
+    <div className={`aid-canvas aid-${aid.pattern} aid-variant-${variant}`} aria-hidden="true">
       <svg viewBox="0 0 320 210" preserveAspectRatio="xMidYMid meet" focusable="false">
         <VisualPattern aid={aid} />
       </svg>
@@ -119,6 +144,7 @@ export function VisualAidGallery() {
             <div className="aid-review-meta" aria-label={`Review metadata for ${aid.title}`}>
               <span>Lesson: {lesson?.title ?? 'Shared/support visual'}</span>
               <span>Pattern: {aid.pattern}</span>
+              <span>Variant: {getVisualAidVariant(aid)}</span>
             </div>
             <VisualAid id={aid.id} compact />
             <dl className="aid-review-details">
@@ -757,37 +783,47 @@ function WindowSvg() {
 function RagSvg() {
   return (
     <>
-      <rect className="aid-box prompt" x="16" y="32" width="70" height="38" rx="8" />
-      <Label x="31" y="56" className="tiny dark">Prompt</Label>
+      <path className="aid-zen-ring" d="M38 176 C84 142, 128 142, 174 176" />
+      <path className="aid-zen-ring alt" d="M146 188 C194 152, 242 154, 288 188" />
+
+      <g className="rag-paper-node">
+        <path className="aid-paper-node prompt" d="M16 34 H74 L88 48 V74 H16 Z" />
+        <path className="aid-fold-line" d="M74 34 V48 H88" />
+        <Label x="31" y="58" className="tiny dark">Prompt</Label>
+      </g>
       <Callout x="22" y="32">1</Callout>
 
-      <rect className="aid-box" x="122" y="26" width="82" height="50" rx="8" />
-      <Label x="138" y="56" className="tiny">Retriever</Label>
-      <Callout x="198" y="28">2</Callout>
-
-      <g>
-        <rect className="aid-chip prompt" x="238" y="24" width="58" height="28" rx="7" />
-        <rect className="aid-chip prompt" x="246" y="40" width="58" height="28" rx="7" />
-        <Label x="258" y="59" className="tiny dark">Notes</Label>
+      <g className="rag-paper-node">
+        <path className="aid-paper-node retriever" d="M116 26 H190 L206 42 V78 H116 Z" />
+        <path className="aid-fold-line" d="M190 26 V42 H206" />
+        <Label x="133" y="57" className="tiny dark">Retriever</Label>
       </g>
-      <Callout x="300" y="44">3</Callout>
+      <Callout x="204" y="30">2</Callout>
 
-      <rect className="aid-box muted" x="80" y="116" width="154" height="42" rx="10" />
-      <Label x="128" y="142" className="tiny">Context</Label>
-      <path className="aid-line" d="M96 158 H222" />
+      <g className="rag-doc-stack">
+        <path className="aid-doc-card" d="M236 24 H290 L302 36 V57 H236 Z" />
+        <path className="aid-doc-card alt" d="M246 43 H298 L306 53 V76 H246 Z" />
+        <Label x="260" y="64" className="tiny dark">Notes</Label>
+      </g>
+      <Callout x="300" y="43">3</Callout>
 
-      <rect className="aid-box output" x="244" y="122" width="62" height="38" rx="8" />
-      <Label x="254" y="146" className="tiny dark">Response</Label>
-      <Callout x="302" y="128">4</Callout>
+      <path className="aid-context-tray" d="M74 116 H222 L236 130 V162 H74 Z" />
+      <path className="aid-fold-line light" d="M222 116 V130 H236" />
+      <Label x="121" y="143" className="tiny">Context tray</Label>
 
-      <rect className="aid-box prompt" x="24" y="168" width="98" height="26" rx="8" />
-      <Label x="38" y="186" className="tiny dark">weights fixed</Label>
-      <Callout x="140" y="180">5</Callout>
+      <path className="aid-paper-node output" d="M246 122 H298 L306 132 V164 H246 Z" />
+      <Label x="254" y="147" className="tiny dark">Response</Label>
+      <Callout x="302" y="127">4</Callout>
 
-      <path className="aid-line" d="M86 51 H122" />
-      <path className="aid-line" d="M204 51 H238" />
-      <path className="aid-line" d="M270 68 C270 96, 212 100, 186 116" />
-      <path className="aid-line" d="M234 137 H244" />
+      <path className="aid-fixed-note" d="M24 170 H118 L128 180 V196 H24 Z" />
+      <path className="aid-fold-line" d="M118 170 V180 H128" />
+      <Label x="38" y="187" className="tiny dark">weights fixed</Label>
+      <Callout x="142" y="181">5</Callout>
+
+      <path className="aid-neon-path" d="M88 54 C104 40, 105 40, 116 52" />
+      <path className="aid-neon-path" d="M206 52 C218 35, 224 34, 236 42" />
+      <path className="aid-neon-path" d="M278 76 C278 96, 218 100, 190 116" />
+      <path className="aid-neon-path" d="M236 142 C240 142, 242 142, 246 142" />
     </>
   )
 }

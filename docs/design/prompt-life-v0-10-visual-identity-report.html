@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prompt Life v0.10 Visual Identity Report</title>
+  <style>
+    :root {
+      --bg: #F7F5EF;
+      --paper: #FFFDF8;
+      --ink: #07124A;
+      --soft: #243052;
+      --teal: #0FA8A4;
+      --violet: #7A5CFF;
+      --amber: #F2B85B;
+      --line: rgba(18, 30, 114, 0.16);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.52;
+    }
+    main {
+      width: min(100%, 980px);
+      margin: 0 auto;
+      padding: 32px;
+    }
+    section, header {
+      margin: 0 0 22px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 253, 248, 0.92);
+      box-shadow: 0 16px 36px rgba(7, 18, 74, 0.10);
+      break-inside: avoid;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      margin-bottom: 12px;
+      font-size: 44px;
+      line-height: 1.05;
+    }
+    h2 {
+      margin-bottom: 10px;
+      font-size: 24px;
+    }
+    h3 {
+      margin-bottom: 8px;
+      font-size: 18px;
+    }
+    .eyebrow {
+      margin-bottom: 8px;
+      color: var(--teal);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+    .lede {
+      color: var(--soft);
+      font-size: 18px;
+    }
+    ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+    li + li { margin-top: 5px; }
+    code {
+      color: var(--ink);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.93em;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .grid li {
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 5px 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.72);
+      color: var(--soft);
+      font-size: 13px;
+      font-weight: 800;
+    }
+    figure {
+      margin: 0;
+      break-inside: avoid;
+    }
+    figure + figure { margin-top: 18px; }
+    img {
+      display: block;
+      width: 100%;
+      max-width: 420px;
+      margin: 0 auto;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: white;
+      box-shadow: 0 14px 30px rgba(7, 18, 74, 0.12);
+    }
+    figcaption {
+      margin-top: 8px;
+      color: var(--soft);
+      font-size: 13px;
+      text-align: center;
+    }
+    .accent {
+      border-left: 4px solid var(--teal);
+    }
+    .next {
+      border-left: 4px solid var(--amber);
+    }
+    @media print {
+      @page { size: letter; margin: 0.35in; }
+      body { background: white; }
+      main { padding: 0; }
+      section, header {
+        box-shadow: none;
+      }
+      .page-break {
+        break-before: page;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">Prompt Life v0.10</p>
+      <h1>Visual Identity Reset Report</h1>
+      <p class="lede">A calming futuristic learning garden: anime meets Tron, Japanese origami meets paper-cut interface, and zen garden calm meets neon computational depth.</p>
+      <div class="pill-row">
+        <span class="pill">ZenTron Origami</span>
+        <span class="pill">Mobile-first at 390px</span>
+        <span class="pill">Internal review artifact</span>
+      </div>
+    </header>
+
+    <section class="accent">
+      <h2>What Is Done</h2>
+      <ul>
+        <li>Created the v0.10 style guide and implementation notes.</li>
+        <li>Expanded design tokens for color, spacing, radius, shadows, glow, typography, motion, z-index, card depth, and paper layers.</li>
+        <li>Added the hidden internal route <code>/review/style-guide</code>.</li>
+        <li>Lightly refreshed the app shell, cards, chips, visual-aid frames, Brain Bridge styling, and bottom nav.</li>
+        <li>Tagged visual aids with style variants and redesigned the RAG visual as the retrieval-shelf pilot.</li>
+        <li>Bumped the visible Badge version to <code>v0.10.0</code>.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Files Changed</h2>
+      <div class="grid">
+        <ul>
+          <li><code>src/styles/promptlife.tokens.css</code></li>
+          <li><code>src/styles/global.css</code></li>
+          <li><code>src/components/VisualAids.tsx</code></li>
+          <li><code>src/main.tsx</code></li>
+        </ul>
+        <ul>
+          <li><code>docs/design/PROMPT_LIFE_STYLE_GUIDE_V0_10.md</code></li>
+          <li><code>docs/design/STYLE_IMPLEMENTATION_NOTES_V0_10.md</code></li>
+          <li><code>docs/REVIEW_NOTES.md</code></li>
+          <li><code>docs/screenshots/v0-10-*.png</code></li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>How To Run Locally</h2>
+      <ul>
+        <li><code>cd /Users/kevinhegg/Desktop/promptlife</code></li>
+        <li><code>npm install</code></li>
+        <li><code>npm run dev</code></li>
+        <li>Open <code>http://localhost:5173/</code> on this Mac, or use Vite's printed Network URL from your iPhone on the same Wi-Fi.</li>
+        <li>After the GitHub Pages deploy, test the pushed main branch at <code>https://kevinhegg.github.io/promptlife/</code>.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Verification</h2>
+      <ul>
+        <li><code>npm install</code>: passed, 0 vulnerabilities.</li>
+        <li><code>npm run typecheck</code>: passed.</li>
+        <li><code>npm run build</code>: passed.</li>
+        <li><code>git diff --check</code>: passed.</li>
+        <li>Chrome mobile viewport audit at 320px, 390px, and 430px: no document/body overflow for Home, <code>/review/style-guide</code>, or <code>/review/visual-aids#rag-retrieval</code>.</li>
+      </ul>
+    </section>
+
+    <section class="next">
+      <h2>Next Three Best v0.11 Improvements</h2>
+      <ul>
+        <li>Apply the v0.10 visual language to Context Window, Attention, MLP, Hidden States, Logits, Softmax, Sampling, and Autoregression.</li>
+        <li>Refresh older PNG art and concept animation panels so they stop feeling like a previous visual era.</li>
+        <li>Add automated mobile visual checks for the style guide, RAG pilot, bottom nav, glossary drawer, Badge version, and progress reset.</li>
+      </ul>
+    </section>
+
+    <section class="page-break">
+      <p class="eyebrow">Screenshots</p>
+      <h2>Mobile UI Captures</h2>
+      <figure>
+        <img src="../screenshots/v0-10-style-guide.png" alt="Prompt Life v0.10 style guide route on a mobile viewport">
+        <figcaption>Internal style guide route with v0.10 color system and typography.</figcaption>
+      </figure>
+      <figure>
+        <img src="../screenshots/v0-10-home-shell.png" alt="Prompt Life home screen with paper cards and floating bottom navigation">
+        <figcaption>Home shell with rice-paper cards and the bottom paper-glass dock.</figcaption>
+      </figure>
+      <figure>
+        <img src="../screenshots/v0-10-journey-card.png" alt="Prompt Life Journey screen with stage timeline and lesson card">
+        <figcaption>Journey screen with layered section card and mobile-safe stage timeline.</figcaption>
+      </figure>
+    </section>
+
+    <section>
+      <figure>
+        <img src="../screenshots/v0-10-rag-pilot.png" alt="RAG pilot visual showing prompt, retriever, notes, context tray, response, and fixed weights">
+        <figcaption>RAG pilot visual: retrieval plus context, not training.</figcaption>
+      </figure>
+      <figure>
+        <img src="../screenshots/v0-10-brain-bridge.png" alt="Brain Bridge and checkpoint examples from the style guide route">
+        <figcaption>Brain Bridge and checkpoint preview cards.</figcaption>
+      </figure>
+      <figure>
+        <img src="../screenshots/v0-10-bottom-nav.png" alt="Prompt Life floating bottom navigation dock">
+        <figcaption>Bottom nav with clipped mist blur and safe-area-aware dock.</figcaption>
+      </figure>
+    </section>
+  </main>
+</body>
+</html>
