@@ -2,6 +2,75 @@
 
 Date: 2026-06-04
 
+## v0.11 Wider AI Literacy Planning
+
+### What Changed
+
+- Planned a new Wider AI Literacy expansion that extends Prompt Life from model mechanics into AI origins, extracted collective intelligence, benefits, costs, human-centered judgment, responsible design choices, effective prompting, and synthesis.
+- Created `docs/curriculum/WIDER_AI_LITERACY_EXPANSION_V0_11.md` with eight proposed cards:
+  1. The Perfect Storm
+  2. Collective Intelligence, Extracted
+  3. Benefits Worth Taking Seriously
+  4. Costs We Must Count
+  5. Human-Centered AI
+  6. Better AI Is a Choice
+  7. Effective Prompting from Model Literacy
+  8. Model Literate Synthesis
+- Created `docs/curriculum/WIDER_AI_SOURCE_NEEDS_V0_11.md` with placeholder-based source needs for environmental footprint, energy, water, data provenance, copyright, labor disruption, deskilling, education impacts, benefits, human-centered AI, Vatican/Catholic sources, and secular governance sources.
+- Created `docs/design/GENERATED_VISUAL_ASSET_PLAN_V0_11.md` for future textless generated image assets in the ZenTron Origami style.
+- Created an internal PDF report at `docs/curriculum/prompt-life-v0-11-wider-ai-literacy-planning-report.pdf`.
+- Kept this pass documentation-only: no Journey cards implemented, no games added, no generated PNG app assets added, no heavy 3D libraries added, and no learner-facing PDF features added.
+
+### Files Changed
+
+- `docs/curriculum/WIDER_AI_LITERACY_EXPANSION_V0_11.md`
+- `docs/curriculum/WIDER_AI_SOURCE_NEEDS_V0_11.md`
+- `docs/curriculum/prompt-life-v0-11-wider-ai-literacy-planning-report.html`
+- `docs/curriculum/prompt-life-v0-11-wider-ai-literacy-planning-report.pdf`
+- `docs/design/GENERATED_VISUAL_ASSET_PLAN_V0_11.md`
+- `docs/REVIEW_NOTES.md`
+
+### Proposed Cards
+
+- `The Perfect Storm`: explains why LLMs arrived now through data, compute, algorithms, human labor, and incentives.
+- `Collective Intelligence, Extracted`: names the human-created cultural and creative traces behind model capability.
+- `Benefits Worth Taking Seriously`: separates demonstrated, plausible, and speculative benefits.
+- `Costs We Must Count`: counts physical, social, cultural, and ethical costs without inventing statistics.
+- `Human-Centered AI`: centers dignity, learning, responsibility, creativity, relationships, and common good.
+- `Better AI Is a Choice`: frames design, policy, governance, and incentives as changeable.
+- `Effective Prompting from Model Literacy`: shows prompting as context shaping, not magic wording or weight change.
+- `Model Literate Synthesis`: ties mechanics and human consequences into a final teach-back.
+
+### Proposed Visual Assets
+
+- `perfect-storm`
+- `collective-intelligence-lantern`
+- `benefits-tool-garden`
+- `costs-invisible-factory`
+- `human-centered-ai-garden`
+- `responsible-ai-forked-path`
+
+All generated image assets are specified as textless conceptual art only. Instructional labels and callouts remain HTML/SVG.
+
+### Source Needs
+
+The source-needs document marks claims requiring review before publication, especially environmental footprint, energy/water, data provenance, copyright/compensation, labor, deskilling, education impacts, benefit evidence tiers, human-centered AI, Vatican/Catholic sources, and secular governance sources.
+
+### Verification
+
+- `npm install`: passed, 0 vulnerabilities.
+- `npm run typecheck`: passed.
+- `npm run build`: passed.
+- `npm run build:pages`: passed.
+- No changes were made to `src/data/content.ts`.
+- No Journey cards were implemented.
+- No games were added.
+- No generated PNG app assets were added.
+
+### Next Recommended Prompt
+
+Implement the v0.11 Wider AI Literacy cards in app data as a draft Journey expansion after RAG/Grounding/Hallucinations and before Risk vs Myth. Do not add games. Use existing `VisualAidCard` patterns first and wait for explicit approval before generating or committing image assets.
+
 ## v0.10 Visual Identity Reset
 
 ### What Changed

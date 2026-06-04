@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prompt Life v0.11 Wider AI Literacy Planning Report</title>
+  <style>
+    :root {
+      --bg: #F7F5EF;
+      --paper: #FFFDF8;
+      --ink: #07124A;
+      --soft: #243052;
+      --teal: #0FA8A4;
+      --amber: #F2B85B;
+      --line: rgba(18, 30, 114, 0.16);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.52;
+    }
+    main {
+      width: min(100%, 980px);
+      margin: 0 auto;
+      padding: 32px;
+    }
+    header, section {
+      margin: 0 0 22px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 253, 248, 0.94);
+      box-shadow: 0 16px 36px rgba(7, 18, 74, 0.10);
+      break-inside: avoid;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { margin-bottom: 12px; font-size: 42px; line-height: 1.05; }
+    h2 { margin-bottom: 10px; font-size: 24px; }
+    h3 { margin-bottom: 8px; font-size: 18px; }
+    .eyebrow {
+      margin-bottom: 8px;
+      color: var(--teal);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+    .lede { color: var(--soft); font-size: 18px; }
+    ul { margin: 0; padding-left: 20px; }
+    li + li { margin-top: 5px; }
+    code {
+      color: var(--ink);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.93em;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+      font-size: 14px;
+    }
+    th, td {
+      border: 1px solid var(--line);
+      padding: 8px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th { background: rgba(234, 243, 244, 0.72); }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .grid li { min-width: 0; overflow-wrap: anywhere; }
+    .pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 5px 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.72);
+      color: var(--soft);
+      font-size: 13px;
+      font-weight: 800;
+    }
+    .accent { border-left: 4px solid var(--teal); }
+    .next { border-left: 4px solid var(--amber); }
+    figure { margin: 0; break-inside: avoid; }
+    figure + figure { margin-top: 18px; }
+    img {
+      display: block;
+      width: 100%;
+      max-width: 420px;
+      margin: 0 auto;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: white;
+      box-shadow: 0 14px 30px rgba(7, 18, 74, 0.12);
+    }
+    figcaption {
+      margin-top: 8px;
+      color: var(--soft);
+      font-size: 13px;
+      text-align: center;
+    }
+    @media print {
+      @page { size: letter; margin: 0.35in; }
+      body { background: white; }
+      main { padding: 0; }
+      header, section { box-shadow: none; }
+      .page-break { break-before: page; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">Prompt Life v0.11</p>
+      <h1>Wider AI Literacy Planning Report</h1>
+      <p class="lede">A curriculum expansion plan for origins, extracted collective intelligence, benefits, costs, human-centered AI, responsible choices, effective prompting, and final synthesis.</p>
+      <div class="pill-row">
+        <span class="pill">Planning only</span>
+        <span class="pill">No app cards implemented</span>
+        <span class="pill">No generated PNG assets</span>
+        <span class="pill">Internal review artifact</span>
+      </div>
+    </header>
+
+    <section class="accent">
+      <h2>What Changed</h2>
+      <ul>
+        <li>Created <code>docs/curriculum/WIDER_AI_LITERACY_EXPANSION_V0_11.md</code>.</li>
+        <li>Created <code>docs/curriculum/WIDER_AI_SOURCE_NEEDS_V0_11.md</code>.</li>
+        <li>Created <code>docs/design/GENERATED_VISUAL_ASSET_PLAN_V0_11.md</code>.</li>
+        <li>Updated <code>docs/REVIEW_NOTES.md</code> with v0.11 results.</li>
+        <li>Kept this as a documentation-only planning pass.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Proposed Cards</h2>
+      <table>
+        <thead>
+          <tr><th>Card</th><th>Purpose</th><th>Path label</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>The Perfect Storm</td><td>Why LLMs arrived now through data, compute, algorithms, labor, and incentives.</td><td>Essential</td></tr>
+          <tr><td>Collective Intelligence, Extracted</td><td>No creators, no model; human expression powers capability.</td><td>Ethics</td></tr>
+          <tr><td>Benefits Worth Taking Seriously</td><td>Separate demonstrated help from plausible support and speculative hype.</td><td>Essential</td></tr>
+          <tr><td>Costs We Must Count</td><td>Count physical, social, cultural, and ethical costs honestly.</td><td>Ethics</td></tr>
+          <tr><td>Human-Centered AI</td><td>Judge tools by dignity, learning, responsibility, relationships, and common good.</td><td>Ethics</td></tr>
+          <tr><td>Better AI Is a Choice</td><td>Design, policy, governance, and incentives shape outcomes.</td><td>Deep</td></tr>
+          <tr><td>Effective Prompting from Model Literacy</td><td>Prompting shapes context, not weights.</td><td>Essential</td></tr>
+          <tr><td>Model Literate Synthesis</td><td>Understand the machine, then decide how to use it.</td><td>Essential</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Proposed Visual Assets</h2>
+      <ul>
+        <li><code>perfect-storm</code></li>
+        <li><code>collective-intelligence-lantern</code></li>
+        <li><code>benefits-tool-garden</code></li>
+        <li><code>costs-invisible-factory</code></li>
+        <li><code>human-centered-ai-garden</code></li>
+        <li><code>responsible-ai-forked-path</code></li>
+      </ul>
+      <p>All generated images are planned as textless conceptual assets. Instructional labels, callouts, and captions remain HTML/SVG controlled by the app.</p>
+    </section>
+
+    <section>
+      <h2>Source Needs</h2>
+      <p>The source-needs document uses placeholders rather than invented statistics. Review is required for environmental footprint, energy demand, water use, data provenance, copyright, labor disruption, deskilling, education impacts, AI benefits, human-centered AI, Vatican/Catholic sources, and secular governance frameworks.</p>
+    </section>
+
+    <section>
+      <h2>Verification</h2>
+      <ul>
+        <li><code>npm install</code>: passed, 0 vulnerabilities.</li>
+        <li><code>npm run typecheck</code>: passed before documentation edits.</li>
+        <li><code>npm run build</code>: passed before documentation edits.</li>
+        <li>Final verification will be rerun after this report is generated.</li>
+        <li>No Journey cards, games, generated PNG app assets, heavy 3D libraries, or learner-facing PDF features were added.</li>
+      </ul>
+    </section>
+
+    <section class="next">
+      <h2>Next Recommended Implementation Prompt</h2>
+      <p>Implement the v0.11 Wider AI Literacy cards in app data as a draft Journey expansion after RAG/Grounding/Hallucinations and before Risk vs Myth. Do not add games. Use existing <code>VisualAidCard</code> patterns first and wait for explicit approval before generating or committing image assets.</p>
+    </section>
+
+    <section class="page-break">
+      <p class="eyebrow">Screenshots</p>
+      <h2>Current App Context</h2>
+      <p>No new UI pages were implemented in this planning pass. These existing v0.10 screenshots provide visual context for the future implementation.</p>
+      <figure>
+        <img src="../screenshots/v0-10-style-guide.png" alt="Prompt Life v0.10 style guide route">
+        <figcaption>Existing style guide route that future Wider AI cards should follow.</figcaption>
+      </figure>
+      <figure>
+        <img src="../screenshots/v0-10-home-shell.png" alt="Prompt Life home shell">
+        <figcaption>Existing mobile shell and bottom dock.</figcaption>
+      </figure>
+      <figure>
+        <img src="../screenshots/v0-10-rag-pilot.png" alt="Prompt Life RAG pilot visual">
+        <figcaption>Existing RAG pilot visual; future Wider AI visuals should keep text in HTML/SVG callouts.</figcaption>
+      </figure>
+    </section>
+  </main>
+</body>
+</html>
