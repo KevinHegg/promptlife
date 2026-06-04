@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prompt Life v0.9.2 Visual Repair Report</title>
+  <style>
+    :root {
+      color: #112044;
+      background: #f6f8fc;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.45;
+    }
+    body {
+      margin: 0;
+      padding: 28px;
+    }
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    section {
+      break-inside: avoid;
+      margin: 0 0 22px;
+      padding: 22px;
+      background: white;
+      border: 1px solid #d8e0f1;
+      border-radius: 8px;
+    }
+    h1, h2, h3 {
+      color: #071b78;
+      line-height: 1.1;
+      margin: 0 0 12px;
+    }
+    h1 {
+      font-size: 36px;
+    }
+    h2 {
+      font-size: 22px;
+      margin-top: 2px;
+    }
+    p, li {
+      font-size: 14px;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    code {
+      background: #eef4ff;
+      border-radius: 4px;
+      padding: 1px 4px;
+    }
+    .eyebrow {
+      color: #00858e;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+    figure {
+      margin: 0;
+      break-inside: avoid;
+    }
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border: 1px solid #d8e0f1;
+      border-radius: 8px;
+      background: #f8fbff;
+    }
+    figcaption {
+      margin-top: 6px;
+      font-size: 12px;
+      color: #53617d;
+    }
+    .wide {
+      grid-column: 1 / -1;
+    }
+    @media print {
+      body {
+        background: white;
+        padding: 18px;
+      }
+      section {
+        box-shadow: none;
+      }
+      .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <section>
+    <p class="eyebrow">Prompt Life v0.9.2</p>
+    <h1>Visual Repair Report</h1>
+    <p>This pass fixes Batch 1 and Batch 2 visual/text alignment issues, centralizes the canonical prompt-response example, and refreshes review/PDF artifacts for mobile-first human review.</p>
+  </section>
+
+  <section>
+    <h2>What Changed</h2>
+    <ul>
+      <li>Added <code>src/data/canonicalExamples.ts</code> as the shared source for the prompt, generated response, response-so-far, next-token choices, and attention-only variant.</li>
+      <li>Updated Prompt vs Response, Tokenization, Token IDs, Embeddings, Vectors, Tensors, Autoregression, Prompt Run, exercises, glossary examples, and review cards to use the canonical example.</li>
+      <li>Repaired visual aids so in-canvas labels are short and full explanations live in HTML captions and numbered callouts.</li>
+      <li>Updated export paths to <code>docs/review/prompt-life-lesson-cards-v0-9-2.pdf</code> and <code>docs/content-inventory/prompt-life-lesson-cards-v0-9-2-visual-repair.pdf</code>.</li>
+      <li>Bumped the visible app version to <code>v0.9.2</code>.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Canonical Example</h2>
+    <p><strong>User prompt:</strong> Give me one sentence with two household pets in conflict.</p>
+    <p><strong>Generated response:</strong> A jealous dog chased a startled cat across the kitchen floor.</p>
+    <p><strong>Response so far:</strong> A jealous dog chased a startled cat across the kitchen</p>
+    <p><strong>Next-token candidates:</strong> floor, room, tiles, counter, quantum, elephant. Chosen token: floor.</p>
+    <p><strong>Attention-only variant:</strong> A jealous dog chased a startled cat because it hissed. Teaching target: it -> cat.</p>
+  </section>
+
+  <section>
+    <h2>Verification</h2>
+    <ul>
+      <li><code>npm install</code>: passed, 0 vulnerabilities.</li>
+      <li><code>npm run typecheck</code>: passed.</li>
+      <li><code>npm run build</code>: passed.</li>
+      <li><code>npm run build:pages</code>: passed.</li>
+      <li><code>npm run export:lesson-pdf</code>: passed.</li>
+      <li><code>npm run export:lesson-cards</code>: passed.</li>
+      <li>Mobile visual-card overflow checks at 320px, 390px, and 430px: passed for the repaired visual cards.</li>
+      <li>In-app browser review-route QA found the repaired visual cards and canonical text.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Files Changed</h2>
+    <ul>
+      <li><code>README.md</code>, <code>package.json</code>, and <code>scripts/export-lesson-pdf.mjs</code></li>
+      <li><code>src/components/ConceptAnimations.tsx</code>, <code>src/components/ExerciseSystem.tsx</code>, and <code>src/components/VisualAids.tsx</code></li>
+      <li><code>src/data/canonicalExamples.ts</code>, <code>src/data/content.ts</code>, <code>src/data/contentReview.js</code>, <code>src/data/exercises.ts</code>, and <code>src/data/promptRun.ts</code></li>
+      <li><code>src/main.tsx</code> and <code>src/styles/global.css</code></li>
+      <li>v0.9.2 curriculum docs, lesson PDFs, screenshots, and this report PDF</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>How To Run Locally</h2>
+    <ul>
+      <li><code>cd ~/Desktop/promptlife</code></li>
+      <li><code>npm install</code></li>
+      <li><code>npm run dev</code></li>
+      <li>Open the Vite URL, usually <code>http://localhost:5173/</code>.</li>
+      <li>For phone testing from GitHub Pages, use <code>https://kevinhegg.github.io/promptlife/</code> after <code>main</code> deploys.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Screenshots</h2>
+    <div class="grid">
+      <figure>
+        <img src="../screenshots/v0-9-2-training-loop-fixed.png" alt="Training Loop repaired visual screenshot">
+        <figcaption>Training Loop: clean five-step loop with durable update step.</figcaption>
+      </figure>
+      <figure>
+        <img src="../screenshots/v0-9-2-prompt-response-fixed.png" alt="Prompt vs Response repaired visual screenshot">
+        <figcaption>Prompt vs Response: complete prompt, response so far, and next token.</figcaption>
+      </figure>
+      <figure>
+        <img src="../screenshots/v0-9-2-tokenization-fixed.png" alt="Tokenization repaired visual screenshot">
+        <figcaption>Tokenization: canonical generated response split into simplified tokens.</figcaption>
+      </figure>
+      <figure>
+        <img src="../screenshots/v0-9-2-token-ids-fixed.png" alt="Token IDs repaired visual screenshot">
+        <figcaption>Token IDs: dog, cat, and floor IDs shown as lookup keys.</figcaption>
+      </figure>
+      <figure>
+        <img src="../screenshots/v0-9-2-embeddings-fixed.png" alt="Embeddings repaired visual screenshot">
+        <figcaption>Embeddings: ID lookup to table row to vector.</figcaption>
+      </figure>
+      <figure>
+        <img src="../screenshots/v0-9-2-vectors-fixed.png" alt="Vectors repaired visual screenshot">
+        <figcaption>Vectors: simplified feature sliders plus distributed-feature note.</figcaption>
+      </figure>
+      <figure>
+        <img src="../screenshots/v0-9-2-tensors-fixed.png" alt="Tensors repaired visual screenshot">
+        <figcaption>Tensors: stable 2D tokens x features grid.</figcaption>
+      </figure>
+      <figure>
+        <img src="../screenshots/v0-9-2-review-pdf-sample.png" alt="Prompt vs Response print-route PDF sample screenshot">
+        <figcaption>Print-route sample used by the lesson-card PDF exporter.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section>
+    <h2>Known Remaining Issues</h2>
+    <ul>
+      <li>Source review is still needed before publication-final claims about transformer internals.</li>
+      <li>The tensor visual remains 2D for PDF reliability; any future 3D tensor needs a print-safe fallback.</li>
+      <li>Real iPhone Safari testing remains the final post-deploy check.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Next Three v0.2 Improvements</h2>
+    <ul>
+      <li>Implement Batch 3 as Attention, MLP, Layers, and Hidden States with the same canonical thread.</li>
+      <li>Add source citations or bibliography notes for Batch 1 and Batch 2 concepts.</li>
+      <li>Add a reusable screenshot/overflow script to make future visual-aid QA repeatable.</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>

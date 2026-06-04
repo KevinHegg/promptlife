@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState, type CSSProperties } from 'react'
+import { canonicalPromptResponse } from '../data/canonicalExamples'
 
 function usePrefersReducedMotion() {
   const [reduced, setReduced] = useState(false)
@@ -34,19 +35,19 @@ function AnimationFrame({ className = '', title, caption, ariaLabel, interactive
 
 export function TokenCardsAnimation() {
   const [split, setSplit] = useState(false)
-  const tokens = ['Explain', ' attention', ' simply', '.']
+  const tokens = canonicalPromptResponse.responseTokens
 
   return (
     <AnimationFrame
       className="token-cards-animation"
       title="Tokenizer"
-      caption={split ? 'Text becomes token cards before the model sees IDs or vectors.' : 'Tap once to split the prompt into model-readable chunks.'}
-      ariaLabel="A prompt splitting into token cards"
+      caption={split ? 'Text becomes token cards before the model sees IDs or vectors.' : 'Tap once to split the generated response into model-readable chunks.'}
+      ariaLabel="A generated response splitting into token cards"
       interactive
     >
-      <button className="animation-control" onClick={() => setSplit(!split)}>{split ? 'Join prompt' : 'Split prompt'}</button>
+      <button className="animation-control" onClick={() => setSplit(!split)}>{split ? 'Join response' : 'Split response'}</button>
       <div className="token-card-row">
-        {split ? tokens.map((token) => <span className="prompt-token" key={token}>Prompt: {token}</span>) : <strong>Explain attention simply.</strong>}
+        {split ? tokens.map((token, index) => <span className="response-token" key={`${token}-${index}`}>Response: {token}</span>) : <strong>{canonicalPromptResponse.generatedResponse}</strong>}
       </div>
     </AnimationFrame>
   )
@@ -192,14 +193,14 @@ export function HiddenStateGlowAnimation() {
 export function SoftmaxFunnelAnimation() {
   const [converted, setConverted] = useState(false)
   const raw = [
-    ['works', 88],
-    ['helps', 54],
-    ['glows', 28]
+    ['floor', 88],
+    ['room', 54],
+    ['quantum', 12]
   ]
   const probs = [
-    ['works', 64],
-    ['helps', 26],
-    ['glows', 10]
+    ['floor', 64],
+    ['room', 26],
+    ['quantum', 10]
   ]
   const rows = converted ? probs : raw
 
@@ -226,8 +227,8 @@ export function SoftmaxFunnelAnimation() {
 }
 
 export function SamplingPickAnimation() {
-  const [pick, setPick] = useState('works')
-  const candidates = ['works', 'helps', 'means', 'looks']
+  const [pick, setPick] = useState<string>(canonicalPromptResponse.chosenNextToken)
+  const candidates = canonicalPromptResponse.nextTokenCandidates
 
   return (
     <AnimationFrame
@@ -248,21 +249,22 @@ export function SamplingPickAnimation() {
 
 export function AutoregressiveLoopAnimation() {
   const [count, setCount] = useState(0)
-  const generated = ['works', 'by']
+  const generated = [canonicalPromptResponse.chosenNextToken, '.']
   const visible = generated.slice(0, count)
 
   return (
     <AnimationFrame
       className="autoregressive-loop-animation"
       title="Next, append, repeat"
-      caption={count ? 'The sampled token is appended, then the model predicts again.' : 'Generation starts with a prompt and predicts the next token.'}
+      caption={count ? 'The sampled token is appended, then the model predicts again.' : 'Generation starts from a complete user prompt and a response-so-far.'}
       ariaLabel="Autoregressive generation appending one token at a time"
       interactive
     >
       <button className="animation-control" onClick={() => setCount((count + 1) % 3)}>Predict next</button>
       <div className="loop-token-row">
-        {['Explain', 'attention', 'simply'].map((token) => <span className="prompt-token" key={token}>Prompt: {token}</span>)}
-        {visible.map((token) => <strong className="response-token" key={token}>Response: {token}</strong>)}
+        <span className="prompt-token">Prompt: user request</span>
+        {canonicalPromptResponse.responseSoFarTokens.slice(-3).map((token, index) => <span className="response-token" key={`loop-${index}-${token}`}>Response: {token}</span>)}
+        {visible.map((token, index) => <strong className="response-token" key={`${token}-${index}`}>Response: {token}</strong>)}
       </div>
       <div className="loop-arrow">next token {'->'} append {'->'} repeat</div>
     </AnimationFrame>
@@ -447,16 +449,16 @@ export function TraceStepAnimation({ step }) {
 
 function PromptAppear() {
   return (
-    <AnimationFrame className="trace-mini prompt-mini" title="Prompt" caption="The typed prompt is temporary context." ariaLabel="The prompt Explain attention simply">
-      <strong>"Explain attention simply."</strong>
+    <AnimationFrame className="trace-mini prompt-mini" title="Prompt" caption="The typed prompt is temporary context." ariaLabel={`The prompt ${canonicalPromptResponse.userPrompt}`}>
+      <strong>"{canonicalPromptResponse.userPrompt}"</strong>
     </AnimationFrame>
   )
 }
 
 function TokenCardsStatic() {
   return (
-    <AnimationFrame className="trace-mini" title="Tokens" caption="The tokenizer turns text into chunks." ariaLabel="Prompt split into token cards">
-      <div className="token-card-row">{['Explain', ' attention', ' simply', '.'].map((token) => <span className="prompt-token" key={token}>Prompt: {token}</span>)}</div>
+    <AnimationFrame className="trace-mini" title="Tokens" caption="The tokenizer turns response text into chunks." ariaLabel="Response split into token cards">
+      <div className="token-card-row">{canonicalPromptResponse.responseTokens.slice(0, 5).map((token, index) => <span className="response-token" key={`${token}-${index}`}>Response: {token}</span>)}</div>
     </AnimationFrame>
   )
 }
@@ -464,7 +466,7 @@ function TokenCardsStatic() {
 function TokenIdStatic() {
   return (
     <AnimationFrame className="trace-mini" title="Token IDs" caption="Token chunks become lookup numbers." ariaLabel="Token cards paired with token IDs">
-      <div className="id-row">{['4821', '1987', '7110', '13'].map((id) => <span key={id}>ID {id}</span>)}</div>
+      <div className="id-row">{canonicalPromptResponse.tokenIds.map((item) => <span key={item.id}>{item.token} ID {item.id}</span>)}</div>
     </AnimationFrame>
   )
 }
@@ -508,7 +510,7 @@ function HiddenStateStatic() {
 function VocabCloudStatic() {
   return (
     <AnimationFrame className="trace-mini sample-static" title="Vocabulary cloud" caption="The final state points toward candidate next tokens." ariaLabel="Vocabulary cloud of candidate tokens">
-      <div className="sample-cloud"><span>works</span><span>means</span><span>helps</span><span>uses</span></div>
+      <div className="sample-cloud"><span>floor</span><span>room</span><span>tiles</span><span>quantum</span></div>
     </AnimationFrame>
   )
 }
@@ -517,7 +519,7 @@ function SoftmaxStatic() {
   return (
     <AnimationFrame className="trace-mini softmax-funnel-animation" title="Softmax" caption="Raw logits become probabilities." ariaLabel="Logit bars converted to probability bars">
       <div className="funnel-bars">
-        {['works', 'means', 'helps'].map((word, index) => <span key={word}><strong>{word}</strong><i style={{ width: `${72 - index * 22}%` }} /><em>{62 - index * 20}%</em></span>)}
+        {['floor', 'room', 'tiles'].map((word, index) => <span key={word}><strong>{word}</strong><i style={{ width: `${72 - index * 22}%` }} /><em>{62 - index * 20}%</em></span>)}
       </div>
     </AnimationFrame>
   )
@@ -525,16 +527,16 @@ function SoftmaxStatic() {
 
 function SampleStatic() {
   return (
-    <AnimationFrame className="trace-mini sample-static" title="Sample" caption="One token is chosen from the distribution." ariaLabel="The token works selected from candidates">
-      <div className="sample-cloud"><span className="active">works</span><span>means</span><span>helps</span></div>
+    <AnimationFrame className="trace-mini sample-static" title="Sample" caption="One token is chosen from the distribution." ariaLabel="The token floor selected from candidates">
+      <div className="sample-cloud"><span className="active">floor</span><span>room</span><span>tiles</span></div>
     </AnimationFrame>
   )
 }
 
 function AutoregressiveStatic() {
   return (
-    <AnimationFrame className="trace-mini autoregressive-loop-animation" title="Repeat" caption="The chosen token is appended and the loop runs again." ariaLabel="A sampled token appended to the prompt">
-      <div className="loop-token-row"><span className="prompt-token">Prompt: Explain</span><span className="prompt-token">Prompt: attention</span><span className="prompt-token">Prompt: simply</span><strong className="response-token">Response: works</strong></div>
+    <AnimationFrame className="trace-mini autoregressive-loop-animation" title="Repeat" caption="The chosen token is appended and the loop runs again." ariaLabel="A sampled token appended to the response">
+      <div className="loop-token-row"><span className="prompt-token">Prompt: user request</span><span className="response-token">Response: kitchen</span><strong className="response-token">Response: floor</strong></div>
       <div className="loop-arrow">append {'->'} predict again</div>
     </AnimationFrame>
   )

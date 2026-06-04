@@ -10,7 +10,7 @@
     "build:pages": "GITHUB_PAGES=true vite build",
     "preview": "vite preview --host 0.0.0.0",
     "export:lesson-pdf": "node scripts/export-lesson-pdf.mjs",
-    "export:lesson-cards": "PROMPTLIFE_PDF_OUT=docs/content-inventory/prompt-life-lesson-cards-v0-9-batch-2.pdf node scripts/export-lesson-pdf.mjs"
+    "export:lesson-cards": "PROMPTLIFE_PDF_OUT=docs/content-inventory/prompt-life-lesson-cards-v0-9-2-visual-repair.pdf node scripts/export-lesson-pdf.mjs"
   },
   "dependencies": {
     "@vitejs/plugin-react": "latest",

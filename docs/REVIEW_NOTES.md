@@ -2,6 +2,44 @@
 
 Date: 2026-06-02
 
+## v0.9.2 Visual Repair And Canonical Example Pass
+
+### What Changed
+
+- Added a centralized canonical example in `src/data/canonicalExamples.ts`.
+- Replaced the incomplete dog/cat prompt pattern with a complete user prompt: `Give me one sentence with two household pets in conflict.`
+- Standardized the generated response: `A jealous dog chased a startled cat across the kitchen floor.`
+- Updated Prompt vs Response, Tokenization, Token IDs, Embeddings, Vectors, Tensors, Autoregression, Prompt Run, exercises, review route copy, and glossary examples to use the canonical pattern.
+- Kept the attention-specific variant separate: `A jealous dog chased a startled cat because it hissed.`
+- Repaired Batch 1 and Batch 2 visual aids so SVGs use short labels, numbered callouts, and HTML legends instead of dense in-canvas prose.
+- Added review anchors to lesson and visual-aid cards so screenshots can target individual repaired visuals.
+- Bumped the visible app version to `v0.9.2`.
+- Updated the lesson PDF export path to `docs/review/prompt-life-lesson-cards-v0-9-2.pdf`.
+- Updated `npm run export:lesson-cards` to generate `docs/content-inventory/prompt-life-lesson-cards-v0-9-2-visual-repair.pdf`.
+
+### Files Changed
+
+- `README.md`
+- `package.json`
+- `scripts/export-lesson-pdf.mjs`
+- `src/components/ConceptAnimations.tsx`
+- `src/components/ExerciseSystem.tsx`
+- `src/components/VisualAids.tsx`
+- `src/data/canonicalExamples.ts`
+- `src/data/content.ts`
+- `src/data/contentReview.js`
+- `src/data/exercises.ts`
+- `src/data/promptRun.ts`
+- `src/main.tsx`
+- `src/styles/global.css`
+- `docs/curriculum/CANONICAL_EXAMPLES_V0_9_2.md`
+- `docs/curriculum/VISUAL_AID_QA_V0_9_2.md`
+- `docs/curriculum/BATCH_2_VISUAL_REPAIR_REPORT_V0_9_2.md`
+
+### Verification
+
+- Final typecheck, build, PDF export, screenshot, and browser QA results are recorded in `docs/curriculum/BATCH_2_VISUAL_REPAIR_REPORT_V0_9_2.md`.
+
 ## v0.9 Batch 2 Inference-To-Tensors Implementation
 
 ### What Changed
@@ -616,7 +654,7 @@ Legacy keys are still read for migration and removed by reset:
 ### Mini-Game Improvements
 
 - Context Stack now asks learners to keep request, example, and tone visible when output arrives.
-- Attention Weave now asks learners to connect `it` to `cat` in `The dog chased the cat because it ran.`
+- Attention Weave now asks learners to connect `it` to `cat` in a short dog/cat pronoun sentence.
 - Token Pipeline Relay now requires the target path `pass to transform to hold to pass`.
 
 ### Screens Reviewed

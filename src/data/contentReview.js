@@ -111,7 +111,7 @@ const missingExplanationByLessonId = {
   logits: 'Make vocabulary projection explicit: final hidden state to one score per candidate token.',
   softmax: 'Show that softmax normalizes scores into a distribution that sums to one.',
   sampling: 'Add temperature/top-p as knobs that shape selection without overexplaining math.',
-  autoregression: 'Use one short dog/cat sentence to show next token, append, repeat.',
+  autoregression: 'Use the canonical pet-conflict response to show next token, append, repeat.',
   'context-window': 'Show what falls out and that retrieval adds text to context rather than training weights.',
   'rag-retrieval': 'Name the retrieval step, the context insertion step, and the fact that weights remain unchanged unless training also happens.',
   'how-ai-learns': 'Separate durable training, retrieval, temporary instructions, and deployed online learning in one table.',

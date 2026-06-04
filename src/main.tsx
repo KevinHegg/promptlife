@@ -25,12 +25,13 @@ import { acts, games, glossary, learningModes, lessons } from './data/content'
 import { buildLessonReviewProfile, reviewRubricCategories } from './data/contentReview'
 import { emptyExerciseProgress, exerciseById, exercises, lessonExerciseIds } from './data/exercises'
 import { PROMPT_RUN_FINAL_ID, PROMPT_RUN_SAMPLE, emptyPromptRunProgress, promptRunFinalChallenge, promptRunSteps } from './data/promptRun'
+import { attentionExample, canonicalPromptResponse } from './data/canonicalExamples'
 import './styles/global.css'
 
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '')
 const ASSET = `${BASE}/assets/promptlife`
 // Bump this for each shipped app change; the Badge screen displays it under Start over.
-const APP_VERSION = '0.9.1'
+const APP_VERSION = '0.9.2'
 const STORAGE_KEYS = {
   lastLocation: 'promptlife:v1:lastLocation',
   lessonId: 'promptlife:v1:lessonId',
@@ -812,19 +813,24 @@ function TokenLegend() {
 }
 
 function PromptOrResponseDemo() {
-  const promptTokens = ['The', 'dog', 'chased', 'the', 'cat', 'across', 'the']
-  const generated = ['yard', 'and', 'stopped']
+  const generated = [canonicalPromptResponse.chosenNextToken, '.']
   const [count, setCount] = useState(0)
   const responseTokens = generated.slice(0, count)
-  const candidates = count === 0 ? ['yard', 'street', 'room', 'floor', 'road'] : ['and', 'then', 'quickly']
+  const candidates = count === 0 ? canonicalPromptResponse.nextTokenCandidates : ['.', 'and', 'then']
 
   return (
     <section className="prompt-response-demo" aria-labelledby="prompt-response-demo-title">
       <h3 id="prompt-response-demo-title">Prompt or Response?</h3>
       <TokenLegend />
       <div className="demo-row" aria-label="Prompt tokens">
-        <strong>Prompt tokens</strong>
-        <div>{promptTokens.map((token, index) => <TokenPill key={`prompt-${index}-${token}`} token={token} kind="prompt" />)}</div>
+        <strong>User prompt</strong>
+        <div><TokenPill token={canonicalPromptResponse.userPrompt} kind="prompt" /></div>
+      </div>
+      <div className="demo-row" aria-label="Response so far">
+        <strong>Response so far</strong>
+        <div>
+          {canonicalPromptResponse.responseSoFarTokens.map((token, index) => <TokenPill key={`so-far-${index}-${token}`} token={token} kind="response" />)}
+        </div>
       </div>
       <div className="demo-row" aria-label="Next-token candidates">
         <strong>Next-token candidates</strong>
@@ -837,12 +843,13 @@ function PromptOrResponseDemo() {
       <div className="demo-row" aria-label="Current context for the next forward pass">
         <strong>Current context for the next forward pass</strong>
         <div>
-          {promptTokens.map((token, index) => <TokenPill key={`context-prompt-${index}-${token}`} token={token} kind="prompt" />)}
+          <TokenPill token="User prompt" kind="prompt" />
+          {canonicalPromptResponse.responseSoFarTokens.map((token, index) => <TokenPill key={`context-so-far-${index}-${token}`} token={token} kind="response" />)}
           {responseTokens.map((token, index) => <TokenPill key={`context-response-${index}-${token}`} token={token} kind="response" />)}
         </div>
       </div>
       <button className="secondary-btn" onClick={() => setCount((count + 1) % (generated.length + 1))}>Next token</button>
-      <p>Once <strong>yard</strong> is generated, it becomes part of the context for the next step.</p>
+      <p>Once <strong>{canonicalPromptResponse.chosenNextToken}</strong> is generated, it becomes part of the context for the next step.</p>
     </section>
   )
 }
@@ -921,11 +928,11 @@ function InferenceDemo() {
 
 function TokenizeDemo() {
   const [split, setSplit] = useState(false)
-  const tokens = ['Explain', ' how', ' attention', ' works']
+  const tokens = canonicalPromptResponse.responseTokens
   return (
     <div className="token-demo">
       <button onClick={() => setSplit(!split)} aria-label="Toggle tokenization demo">{split ? 'Join prompt' : 'Split prompt'}</button>
-      <div>{split ? tokens.map((token) => <span key={token}>{token}</span>) : <strong>Explain how attention works</strong>}</div>
+      <div>{split ? tokens.map((token, index) => <span key={`${token}-${index}`}>{token}</span>) : <strong>{canonicalPromptResponse.generatedResponse}</strong>}</div>
       <p>{split ? 'Insight unlocked: text becomes chunks before it becomes vectors.' : 'Tap to reveal the chunks the model sees.'}</p>
     </div>
   )
@@ -956,14 +963,14 @@ function EmbeddingDemo() {
 }
 
 function AttentionDemo() {
-  const [target, setTarget] = useState(2)
+  const [target, setTarget] = useState(8)
   return (
     <div className="attention-demo" role="group" aria-label="Attention relevance demo">
-      {['The', 'dog', 'chased', 'the', 'cat'].map((token, index) => (
+      {attentionExample.tokens.map((token, index) => (
         <button key={token + index} className={target === index ? 'active' : ''} onClick={() => setTarget(index)}>{token}</button>
       ))}
-      <div className="spotlight-line" style={{ transform: `translateX(${target * 20}%)` }} />
-      <p>Selected token: <strong>{['The', 'dog', 'chased', 'the', 'cat'][target]}</strong>. Attention is relevance, not awareness.</p>
+      <div className="spotlight-line" style={{ transform: `translateX(${Math.min(4, target) * 20}%)` }} />
+      <p>Selected token: <strong>{attentionExample.tokens[target]}</strong>. In this example, <strong>it</strong> most likely points to <strong>cat</strong>. Attention is relevance, not awareness.</p>
     </div>
   )
 }
@@ -995,9 +1002,9 @@ function MlpDemo() {
 function SoftmaxDemo() {
   const [mode, setMode] = useState('balanced')
   const modes = {
-    focused: ['cat 72%', 'yard 18%', 'ball 10%'],
-    balanced: ['cat 48%', 'yard 30%', 'ball 22%'],
-    wider: ['cat 32%', 'yard 25%', 'ball 20%', 'moon 13%', 'mailman 10%']
+    focused: ['floor 72%', 'room 18%', 'tiles 10%'],
+    balanced: ['floor 48%', 'room 30%', 'tiles 22%'],
+    wider: ['floor 32%', 'room 25%', 'tiles 20%', 'quantum 13%', 'elephant 10%']
   }
 
   return (
@@ -1016,7 +1023,7 @@ function SoftmaxDemo() {
 }
 
 function ContextWindowDemo() {
-  const tokens = ['The', 'dog', 'chased', 'the', 'cat', 'across', 'the', 'yard']
+  const tokens = canonicalPromptResponse.responseTokens
   const [windowSize, setWindowSize] = useState(5)
   return (
     <div className="context-demo">
@@ -1402,8 +1409,8 @@ function GameHeader({ title, titleId = undefined, onBack, children = null }) {
 }
 
 function ContextStack({ onBack, onGlossary, onInsight, saved }) {
-  const deck = ['System: helpful tutor', 'User: explain LLMs', 'Example: dog/cat sentence', 'Tone: academic', 'Distractor: jokes', 'Output: three bullets']
-  const target = ['User: explain LLMs', 'Example: dog/cat sentence', 'Tone: academic']
+  const deck = ['System: helpful tutor', 'User: explain LLMs', 'Example: pet-conflict sentence', 'Tone: academic', 'Distractor: jokes', 'Output: three bullets']
+  const target = ['User: explain LLMs', 'Example: pet-conflict sentence', 'Tone: academic']
   const [stack, setStack] = useState([])
   const windowSize = 4
   const visible = stack.slice(-windowSize)
@@ -1447,11 +1454,13 @@ function ContextStack({ onBack, onGlossary, onInsight, saved }) {
 }
 
 function AttentionWeave({ onBack, onGlossary, onInsight, saved }) {
-  const nodes = ['The', 'dog', 'chased', 'the', 'cat', 'because', 'it', 'ran']
+  const nodes = attentionExample.tokens
   const [selected, setSelected] = useState(null)
   const [links, setLinks] = useState([])
-  const correctLink = links.some(([a, b]) => (a === 6 && b === 4) || (a === 4 && b === 6))
-  const wrongItLink = links.find(([a, b]) => (a === 6 || b === 6) && a !== 4 && b !== 4)
+  const itIndex = attentionExample.tokens.indexOf(attentionExample.target)
+  const catIndex = attentionExample.tokens.indexOf(attentionExample.referent)
+  const correctLink = links.some(([a, b]) => (a === itIndex && b === catIndex) || (a === catIndex && b === itIndex))
+  const wrongItLink = links.find(([a, b]) => (a === itIndex || b === itIndex) && a !== catIndex && b !== catIndex)
 
   useEffect(() => {
     if (correctLink) onInsight('attention-weave')
@@ -1479,10 +1488,10 @@ function AttentionWeave({ onBack, onGlossary, onInsight, saved }) {
       <div className="weave-board">
         <svg viewBox="0 0 320 190" aria-hidden="true">
           {links.map(([a, b], index) => {
-            const ax = 34 + (a % 4) * 82
-            const ay = a < 4 ? 52 : 134
-            const bx = 34 + (b % 4) * 82
-            const by = b < 4 ? 52 : 134
+            const ax = 32 + (a % 5) * 64
+            const ay = a < 5 ? 52 : 134
+            const bx = 32 + (b % 5) * 64
+            const by = b < 5 ? 52 : 134
             const mx = (ax + bx) / 2
             return <path key={`${a}-${b}`} d={`M${ax} ${ay} Q${mx} ${22 + index * 8} ${bx} ${by}`} />
           })}
@@ -1767,7 +1776,7 @@ function ReviewLessonCards() {
         const howItConnects = lesson.howItConnects ?? lesson.relationship
 
         return (
-          <article className="review-card lesson-review-card" key={lesson.id} aria-labelledby={`${lesson.id}-review-title`}>
+          <article id={lesson.id} className="review-card lesson-review-card" key={lesson.id} aria-labelledby={`${lesson.id}-review-title`}>
             <div className="lesson-progress-row">
               <span>{index + 1} / {lessons.length}</span>
               <span>{lesson.actLabel}</span>

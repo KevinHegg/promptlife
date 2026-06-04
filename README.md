@@ -38,7 +38,7 @@ npm run export:lesson-pdf
 This writes the default review deck to:
 
 ```text
-docs/review/prompt-life-lesson-cards-v0-9.pdf
+docs/review/prompt-life-lesson-cards-v0-9-2.pdf
 ```
 
 For the curriculum inventory pass, run:
@@ -50,7 +50,7 @@ npm run export:lesson-cards
 This writes the inventory review deck to:
 
 ```text
-docs/content-inventory/prompt-life-lesson-cards-v0-9-batch-2.pdf
+docs/content-inventory/prompt-life-lesson-cards-v0-9-2-visual-repair.pdf
 ```
 
 ## Test On A Phone
@@ -92,6 +92,7 @@ For local debugging, add `?debug=1` to the app URL and open the Badge screen to 
 - Lightweight lesson visual aids plus review routes at `/review/lesson-cards` and `/review/visual-aids`.
 - Lesson-card PDF export through `npm run export:lesson-pdf` and inventory review export through `npm run export:lesson-cards`.
 - v0.9 Batch 2 lessons for Inference, Prompt vs Response, Tokenization, Token IDs, Embeddings, Vectors, and Tensors.
+- v0.9.2 canonical pet-conflict example used across Prompt vs Response, tokenization, token IDs, embeddings, vectors, tensors, exercises, Prompt Run, glossary examples, and review PDFs.
 - HTML legend/callout visual aid system designed to stay readable in mobile and PDF review.
 - Play mode centered on Prompt Run, an interactive 12-step inference loop plus final ordering challenge.
 - Guided comparisons:

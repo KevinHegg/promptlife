@@ -117,7 +117,8 @@ export function ExerciseShell({ exercise, progress, onAttempt, onGlossary }: Exe
     if (exercise.inputType === 'drag-order') {
       const at = (id: string) => order.indexOf(id)
       if (exercise.incorrectActions?.['single-number-first'] && order[0] === 'single-number') return exercise.incorrectActions['single-number-first']
-      if (exercise.incorrectActions?.['whole-response-before-append'] && at('whole-response') > -1 && at('yard-context') > -1 && at('whole-response') < at('yard-context')) return exercise.incorrectActions['whole-response-before-append']
+      const appendContextIndex = order.findIndex((id) => id.endsWith('-context'))
+      if (exercise.incorrectActions?.['whole-response-before-append'] && at('whole-response') > -1 && appendContextIndex > -1 && at('whole-response') < appendContextIndex) return exercise.incorrectActions['whole-response-before-append']
       if (exercise.incorrectActions?.['softmax-before-logits'] && at('softmax') > -1 && at('logits') > -1 && at('softmax') < at('logits')) return exercise.incorrectActions['softmax-before-logits']
       if (exercise.incorrectActions?.['sampling-before-softmax'] && at('sampling') > -1 && at('softmax') > -1 && at('sampling') < at('softmax')) return exercise.incorrectActions['sampling-before-softmax']
       if (exercise.incorrectActions?.['append-before-sampling'] && at('append') > -1 && at('sampling') > -1 && at('append') < at('sampling')) return exercise.incorrectActions['append-before-sampling']
