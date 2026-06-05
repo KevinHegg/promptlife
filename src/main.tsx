@@ -31,7 +31,7 @@ import './styles/global.css'
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '')
 const ASSET = `${BASE}/assets/promptlife`
 // Bump this for each shipped app change; the Badge screen displays it under Start over.
-const APP_VERSION = '0.12.0'
+const APP_VERSION = '0.13.0'
 const STORAGE_KEYS = {
   lastLocation: 'promptlife:v1:lastLocation',
   lessonId: 'promptlife:v1:lessonId',
@@ -543,6 +543,21 @@ function getPathLabel(pathType) {
     'side-tour': 'Deep'
   }
   return labels[pathType] ?? 'Essential'
+}
+
+function getReviewAction(lesson) {
+  if (['how-ai-learns', 'risk-myth'].includes(lesson.id)) return 'revise'
+  if (['history', 'pretraining', 'overfitting-generalization', 'layers', 'diffusion', 'multimodal'].includes(lesson.id)) return 'defer'
+  return 'keep'
+}
+
+function hasSourceNeeds(lesson) {
+  return ['ethics', 'deep'].includes(lesson.pathType) ||
+    ['rag-retrieval', 'grounding', 'hallucinations', 'alignment', 'perfect-storm', 'benefits-worth-taking-seriously', 'costs-we-must-count', 'human-centered-ai', 'better-ai-choice', 'risk-myth'].includes(lesson.id)
+}
+
+function hasVisualNeeds(lesson) {
+  return ['perfect-storm', 'collective-intelligence', 'benefits-worth-taking-seriously', 'costs-we-must-count', 'human-centered-ai', 'better-ai-choice', 'effective-prompting-literacy', 'model-literate-synthesis'].includes(lesson.id)
 }
 
 function StageTimeline({ currentActId }) {
@@ -1843,6 +1858,10 @@ function ReviewLessonCards() {
         const promptVsResponseNote = lesson.promptVsResponseNote ?? profile.promptResponseNote
         const whyItMatters = lesson.whyItMatters ?? lesson.why
         const howItConnects = lesson.howItConnects ?? lesson.relationship
+        const pathLabel = getPathLabel(lesson.pathType)
+        const reviewAction = getReviewAction(lesson)
+        const sourceNeeded = hasSourceNeeds(lesson)
+        const visualNeeded = hasVisualNeeds(lesson)
 
         return (
           <article id={lesson.id} className="review-card lesson-review-card" key={lesson.id} aria-labelledby={`${lesson.id}-review-title`}>
@@ -1853,13 +1872,18 @@ function ReviewLessonCards() {
             <h2 id={`${lesson.id}-review-title`}>{lesson.title}</h2>
             <p className="lede small">{lesson.subtitle}</p>
             <div className="review-meta-row" aria-label={`Review status for ${lesson.title}`}>
+              <span>Path: {pathLabel}</span>
               <span>Stage: {profile.stage}</span>
+              <span>Recommendation: {reviewAction}</span>
+              <span>Source needed: {sourceNeeded ? 'yes' : 'no'}</span>
+              <span>Visual needed: {visualNeeded ? 'yes' : 'no'}</span>
               <span>Priority: {profile.rewritePriority}</span>
               <span>Rubric avg: {profile.rubricAverage}/5</span>
             </div>
             <VisualAid id={lesson.visualAidId} compact />
             <dl className="review-lesson-grid">
               <div><dt>Definition</dt><dd>{definition}</dd></div>
+              <div><dt>Core objective</dt><dd>{whyItMatters}</dd></div>
               <div><dt>Core explanation</dt><dd>{coreExplanation}</dd></div>
               <div><dt>Where it happens</dt><dd>{whereItHappens}</dd></div>
               <div><dt>Durable vs temporary</dt><dd>{durableVsTemporary}</dd></div>
@@ -1870,6 +1894,9 @@ function ReviewLessonCards() {
               <div><dt>Brain metaphor</dt><dd>{lesson.brainBridge?.metaphor ?? 'None listed.'}</dd></div>
               <div><dt>Brain limit</dt><dd>{lesson.brainBridge?.limit ?? 'None listed.'}</dd></div>
               <div><dt>Misconception</dt><dd>{lesson.misconception ?? profile.confusionRisk}</dd></div>
+              <div><dt>Review recommendation</dt><dd>{reviewAction}</dd></div>
+              <div><dt>Source-needed flag</dt><dd>{sourceNeeded ? 'Yes. Add source review before v1 publication.' : 'No immediate external source need beyond existing mechanism review.'}</dd></div>
+              <div><dt>Visual-needed flag</dt><dd>{visualNeeded ? 'Yes. Placeholder coded visual should be reviewed or refined before v1.' : 'No immediate visual gap identified.'}</dd></div>
               <div><dt>Visual aid</dt><dd><code>{lesson.visualAidId}</code></dd></div>
               <div><dt>Current exercise</dt><dd>{exercise ? <><code>{exercise.id}</code>: {exercise.title}</> : 'None rendered in Journey; no direct Play mapping.'}</dd></div>
               <div><dt>Checkpoint</dt><dd>{lesson.quiz.question} Correct: {lesson.quiz.answer}. Incorrect: {incorrectAnswers.join('; ')}.</dd></div>

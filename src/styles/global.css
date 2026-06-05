@@ -926,6 +926,11 @@ p {
   stroke-width: 4;
 }
 
+.aid-line.dashed {
+  stroke-dasharray: 7 7;
+  opacity: 0.72;
+}
+
 .aid-land {
   fill: rgba(255, 255, 255, 0.13);
   stroke: rgba(255, 255, 255, 0.24);
@@ -3233,6 +3238,8 @@ p {
 
 .review-route {
   width: min(100%, 900px);
+  height: 100svh;
+  height: 100dvh;
   min-height: 100vh;
   margin: 0 auto;
   padding: 1rem;
@@ -3241,6 +3248,9 @@ p {
     radial-gradient(circle at 12% 88%, rgba(245, 166, 200, 0.14), transparent 15rem),
     var(--pl-bg);
   color: var(--pl-ink);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
 }
 
 .review-cover,

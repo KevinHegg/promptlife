@@ -44,6 +44,8 @@ export const visualAidCatalog = [
   { id: 'autoregression', title: 'Append and Repeat', caption: 'The chosen token is appended, then the model runs again.', pattern: 'loop' },
   { id: 'context-window', title: 'Temporary Context Window', caption: 'Only visible context can influence the next token.', pattern: 'window' },
   { id: 'rag-retrieval', title: 'Open-Book Retrieval', subtitle: 'Retrieval plus context, not training', caption: 'Retrieved notes enter the context before response tokens are generated.', pattern: 'rag', variant: 'retrieval-shelf', objective: 'Show that RAG retrieves outside information and places it into context; it does not train the model.', callouts: [{ heading: 'Ask', body: 'The user prompt starts the run.' }, { heading: 'Retrieve', body: 'A search system finds relevant outside material.' }, { heading: 'Add to context', body: 'Retrieved notes become temporary context tokens.' }, { heading: 'Generate', body: 'The model still generates response tokens one at a time.' }, { heading: 'Weights stay fixed', body: 'RAG does not normally update model weights.' }], keyTakeaway: 'RAG is retrieval plus context, not training.', accessibleDescription: 'The RAG diagram moves from Prompt to Retriever to Notes, then into a Context tray and Generated response, with a separate fixed-weights note.', printNote: 'v0.10 pilot visual: paper-layer nodes, subtle neon retrieval path, HTML callouts, and a one-sentence takeaway.' },
+  { id: 'grounding-evidence', title: 'Evidence Anchor', subtitle: 'Tying answers to evidence', caption: 'Evidence enters context so the generated response can stay connected to sources.', pattern: 'groundingEvidence', variant: 'retrieval-shelf', objective: 'Show grounding as evidence plus generated response, not a truth guarantee.', callouts: [{ heading: 'Evidence', body: 'Retrieved documents, data, citations, or tool results can enter the current run.' }, { heading: 'Context', body: 'The evidence becomes visible input, not permanent model memory.' }, { heading: 'Answer', body: 'The response should stay connected to the evidence while still being reviewed.' }, { heading: 'Limit', body: 'Grounding helps, but it can fail when retrieval is poor or the model misuses evidence.' }], keyTakeaway: 'Grounding helps tie an answer to evidence; it does not guarantee truth.', accessibleDescription: 'Evidence cards are placed into a context tray, then an answer card is tied back to them with an anchor line.', printNote: 'Keep the diagram sparse; evidence and limitation detail stays in HTML callouts.' },
+  { id: 'hallucination-bridge', title: 'Unsupported Bridge', subtitle: 'Fluent is not always grounded', caption: 'A response can look smooth while missing evidence supports.', pattern: 'hallucinationBridge', variant: 'zen-garden-map', objective: 'Show hallucination as fluent generated output without enough evidence support.', callouts: [{ heading: 'Fluent surface', body: 'The output may read smoothly and confidently.' }, { heading: 'Missing support', body: 'Some claims may lack evidence, citation, or retrieved context.' }, { heading: 'Generation', body: 'Likely-token generation is not the same as truth verification.' }, { heading: 'Review', body: 'Grounding, retrieval, uncertainty, and human review reduce risk but do not erase it.' }], keyTakeaway: 'Fluency is not evidence.', accessibleDescription: 'A smooth output bridge crosses the scene while several evidence pillars are missing underneath.', printNote: 'Use short labels only; the “not lying” distinction remains in lesson copy.' },
   { id: 'ai-learns', title: 'Learning Modes', caption: 'Durable training, retrieval, and temporary steering change different things.', pattern: 'learns' },
   { id: 'diffusion', title: 'Denoise, Not Append', caption: 'Diffusion refines noise step by step instead of generating text token by token.', pattern: 'diffusion' },
   { id: 'multimodal', title: 'Shared Media Hub', caption: 'Different media types can connect through learned representations.', pattern: 'multimodal' },
@@ -218,6 +220,10 @@ function VisualPattern({ aid }) {
       return <WindowSvg />
     case 'rag':
       return <RagSvg />
+    case 'groundingEvidence':
+      return <GroundingEvidenceSvg />
+    case 'hallucinationBridge':
+      return <HallucinationBridgeSvg />
     case 'learns':
     case 'compare':
       return <LearnsSvg />
@@ -848,6 +854,77 @@ function RagSvg() {
       <path className="aid-neon-path" d="M206 52 C218 35, 224 34, 236 42" />
       <path className="aid-neon-path" d="M278 76 C278 96, 218 100, 190 116" />
       <path className="aid-neon-path" d="M236 142 C240 142, 242 142, 246 142" />
+    </>
+  )
+}
+
+function GroundingEvidenceSvg() {
+  const evidenceCards = [
+    ['PDF', 28, 34],
+    ['Data', 106, 24],
+    ['Tool', 184, 34]
+  ]
+
+  return (
+    <>
+      <path className="aid-zen-ring" d="M48 184 C94 152, 218 152, 272 184" />
+      {evidenceCards.map(([label, x, y], index) => (
+        <g key={label}>
+          <path className={index === 1 ? 'aid-paper-node retriever' : 'aid-doc-card'} d={`M${x} ${y} H${Number(x) + 58} L${Number(x) + 70} ${Number(y) + 12} V${Number(y) + 42} H${x} Z`} />
+          <path className="aid-fold-line" d={`M${Number(x) + 58} ${y} V${Number(y) + 12} H${Number(x) + 70}`} />
+          <Label x={Number(x) + 15} y={Number(y) + 27} className="tiny dark">{label}</Label>
+          <path className="aid-neon-path" d={`M${Number(x) + 34} ${Number(y) + 42} C116 96, 150 100, 154 122`} />
+        </g>
+      ))}
+      <Callout x="22" y="54">1</Callout>
+
+      <path className="aid-context-tray" d="M56 120 H206 L222 136 V166 H56 Z" />
+      <path className="aid-fold-line light" d="M206 120 V136 H222" />
+      <Label x="104" y="147" className="tiny">Context</Label>
+      <Callout x="72" y="120">2</Callout>
+
+      <path className="aid-paper-node output" d="M238 116 H294 L306 128 V166 H238 Z" />
+      <path className="aid-fold-line" d="M294 116 V128 H306" />
+      <Label x="250" y="143" className="tiny dark">Answer</Label>
+      <Callout x="304" y="116">3</Callout>
+
+      <path className="aid-select" d="M266 166 C240 194, 116 194, 94 166" />
+      <circle className="aid-callout" cx="94" cy="166" r="11" />
+      <Label x="90" y="171" className="tiny dark">4</Label>
+      <path className="aid-neon-path" d="M222 144 C226 144, 232 144, 238 144" />
+    </>
+  )
+}
+
+function HallucinationBridgeSvg() {
+  return (
+    <>
+      <path className="aid-zen-ring" d="M44 184 C106 150, 214 150, 276 184" />
+      <path className="aid-arc" d="M38 118 C86 56, 234 56, 282 118" />
+      <Label x="112" y="64" className="tiny">fluent output</Label>
+      <Callout x="62" y="106">1</Callout>
+
+      <rect className="aid-chip output" x="54" y="104" width="58" height="28" rx="8" />
+      <Label x="66" y="123" className="tiny dark">claim</Label>
+      <rect className="aid-chip output" x="132" y="84" width="58" height="28" rx="8" />
+      <Label x="144" y="103" className="tiny dark">claim</Label>
+      <rect className="aid-chip output" x="210" y="104" width="58" height="28" rx="8" />
+      <Label x="222" y="123" className="tiny dark">claim</Label>
+
+      <rect className="aid-paper-node retriever" x="42" y="150" width="64" height="28" rx="8" />
+      <Label x="56" y="169" className="tiny dark">source</Label>
+      <path className="aid-line" d="M74 150 V130" />
+      <path className="aid-line dashed" d="M160 142 V116" />
+      <path className="aid-line dashed" d="M238 142 V130" />
+      <Callout x="160" y="148">2</Callout>
+
+      <path className="aid-fixed-note" d="M190 22 H292 L304 34 V56 H190 Z" />
+      <path className="aid-fold-line" d="M292 22 V34 H304" />
+      <Label x="204" y="41" className="tiny dark">check source</Label>
+      <Callout x="292" y="60">3</Callout>
+
+      <circle className="aid-dot alt" cx="160" cy="172" r="10" />
+      <Label x="178" y="176" className="tiny">review</Label>
     </>
   )
 }

@@ -2,6 +2,37 @@
 
 Date: 2026-06-04
 
+## v0.13 Whole Journey Review And Content Freeze Candidate
+
+### What Changed
+
+- Added dedicated Journey cards for Grounding and Hallucinations after RAG and Retrieval.
+- Added coded visual aids for `grounding-evidence` and `hallucination-bridge`.
+- Added glossary term `Citation`.
+- Bumped visible Badge version to `v0.13.0`.
+- Expanded `/review/lesson-cards` with path labels, keep/revise/defer recommendations, source-needed flags, visual-needed flags, and core objective fields.
+- Fixed mobile scrolling on standalone review routes so `/review/lesson-cards` and `/review/visual-aids` can be inspected beyond the first viewport.
+- Created whole-Journey review and content-freeze candidate docs:
+  - `docs/curriculum/JOURNEY_REVIEW_V0_13.md`
+  - `docs/curriculum/CONTENT_FREEZE_CANDIDATE_V0_13.md`
+  - `docs/curriculum/SOURCE_REVIEW_PLAN_V0_13.md`
+  - `docs/curriculum/V0_13_CHANGE_LOG.md`
+
+### Curriculum Decision
+
+- RAG remains a dedicated Journey card after Context Window.
+- Grounding and Hallucinations now appear as dedicated concise cards after RAG and before How AI Learns / wider risk literacy.
+- v1 should use a three-path model: Essential Mechanics, Deep Model Literacy, and Ethics/Society.
+- Ethics, environmental, labor, copyright, governance, and benefit claims need source review before publication-ready v1 language.
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- Browser QA at 390px verified Journey placement, Grounding preview mode, glossary term presence, Badge version placement, review-route metadata, and review-route scrolling.
+- Screenshots are tracked in the v0.13 PDF implementation report.
+
 ## v0.12 Wider AI Literacy Implementation And UX Repair
 
 ### What Changed

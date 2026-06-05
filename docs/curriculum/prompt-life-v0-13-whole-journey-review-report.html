@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Prompt Life v0.13 Whole Journey Review Report</title>
+  <style>
+    :root {
+      --ink: #07124a;
+      --soft: #26324f;
+      --muted: #59637e;
+      --paper: #fffdf8;
+      --mist: #eef5f4;
+      --line: rgba(18, 30, 114, 0.18);
+      --teal: #0f7778;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--mist);
+      line-height: 1.48;
+    }
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 38px 30px 56px;
+      background: var(--paper);
+    }
+    header {
+      border-bottom: 2px solid var(--line);
+      margin-bottom: 24px;
+      padding-bottom: 18px;
+    }
+    .eyebrow {
+      margin: 0 0 6px;
+      color: var(--teal);
+      font-weight: 900;
+      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: 0.04em;
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: 34px;
+      line-height: 1.08;
+    }
+    h2 {
+      margin: 26px 0 10px;
+      font-size: 22px;
+      line-height: 1.18;
+    }
+    p { color: var(--soft); }
+    ul, ol { color: var(--soft); padding-left: 1.25rem; }
+    li { margin: 0.18rem 0; }
+    code {
+      color: var(--ink);
+      background: #eef3ff;
+      border-radius: 6px;
+      padding: 1px 5px;
+      font-size: 0.92em;
+    }
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin: 18px 0 22px;
+    }
+    .summary-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #f8fbff;
+      padding: 12px;
+    }
+    .summary-card strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--ink);
+    }
+    .note {
+      border-left: 4px solid var(--teal);
+      background: #f1fffc;
+      border-radius: 8px;
+      padding: 12px 14px;
+      color: #063d43;
+      font-weight: 750;
+    }
+    figure {
+      break-inside: avoid;
+      margin: 18px 0 24px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: white;
+      padding: 12px;
+      box-shadow: 0 8px 18px rgba(7, 18, 74, 0.08);
+    }
+    figure img {
+      display: block;
+      width: min(100%, 390px);
+      height: auto;
+      margin: 0 auto;
+      border-radius: 6px;
+      border: 1px solid rgba(18, 30, 114, 0.12);
+    }
+    figcaption {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .page-break { break-before: page; }
+    @page { margin: 0.55in; }
+    @media print {
+      body { background: white; }
+      main { padding: 0; max-width: none; }
+      .summary-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">Prompt Life v0.13</p>
+      <h1>Whole Journey Review + Content Freeze Candidate</h1>
+      <p>Internal report generated 2026-06-04. This PDF wraps the response summary and screenshots for the v0.13 review and implementation pass.</p>
+    </header>
+
+    <section>
+      <h2>What Changed</h2>
+      <div class="summary-grid">
+        <div class="summary-card"><strong>New Journey cards</strong>Added dedicated Grounding and Hallucinations cards after RAG and Retrieval.</div>
+        <div class="summary-card"><strong>New visuals</strong>Added lightweight SVG/HTML visuals for Evidence Anchor and Unsupported Bridge.</div>
+        <div class="summary-card"><strong>Review route</strong>Added path, recommendation, source-needed, visual-needed, and core objective metadata.</div>
+        <div class="summary-card"><strong>Content freeze</strong>Created v0.13 whole-Journey review, source plan, and v1 structure proposal.</div>
+      </div>
+      <p class="note">RAG, Grounding, and Hallucinations now form a clearer sequence: retrieval puts evidence into context, grounding ties the answer to evidence, and hallucination literacy reminds learners that fluent output can outrun support.</p>
+    </section>
+
+    <section>
+      <h2>Files Changed</h2>
+      <ul>
+        <li><code>src/main.tsx</code></li>
+        <li><code>src/data/content.ts</code></li>
+        <li><code>src/components/VisualAids.tsx</code></li>
+        <li><code>src/styles/global.css</code></li>
+        <li><code>README.md</code></li>
+        <li><code>docs/REVIEW_NOTES.md</code></li>
+        <li><code>docs/curriculum/JOURNEY_REVIEW_V0_13.md</code></li>
+        <li><code>docs/curriculum/CONTENT_FREEZE_CANDIDATE_V0_13.md</code></li>
+        <li><code>docs/curriculum/SOURCE_REVIEW_PLAN_V0_13.md</code></li>
+        <li><code>docs/curriculum/V0_13_CHANGE_LOG.md</code></li>
+        <li><code>docs/screenshots/v0-13-*.png</code></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>How To Run Locally</h2>
+      <pre><code>cd ~/Desktop/promptlife
+npm install
+npm run dev</code></pre>
+      <p>Open the local URL printed by Vite. For phone testing on the same Wi-Fi network, run <code>npm run dev -- --host 0.0.0.0</code> and open the Network URL Vite prints.</p>
+    </section>
+
+    <section>
+      <h2>What Is Done</h2>
+      <ul>
+        <li>Grounding and Hallucinations are implemented as dedicated concise Journey cards.</li>
+        <li>RAG remains a dedicated card and appears immediately before Grounding.</li>
+        <li>The glossary includes Grounding, Hallucination, RAG, Retrieval, and the new Citation term.</li>
+        <li>The review routes expose the v0.13 curriculum metadata and now scroll correctly on mobile-height windows.</li>
+        <li>The visible app version is <code>v0.13.0</code> under the Start over panel on Badge.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Verification</h2>
+      <ul>
+        <li><code>npm run typecheck</code>: passed.</li>
+        <li><code>npm run build</code>: passed.</li>
+        <li><code>npm run build:pages</code>: passed.</li>
+        <li>Browser QA at 390px verified Journey placement, Grounding preview mode, glossary term presence, Badge version placement, review-route metadata, and review-route scrolling.</li>
+        <li>Known build note: Vite reports a single app chunk over 500 kB after minification. No heavy dependency was added.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Next Three v0.2 Improvements</h2>
+      <ol>
+        <li>Add Journey path filtering so Essential, Deep, and Ethics/Society can be explored without making all 38 cards feel required.</li>
+        <li>Run the v0.13 source review plan and add source notes for environmental, labor, copyright, governance, benefit, RAG, grounding, and hallucination claims.</li>
+        <li>Tighten How AI Learns and Risk vs Myth now that RAG, Grounding, and Hallucinations have dedicated cards.</li>
+      </ol>
+    </section>
+
+    <section class="page-break">
+      <h2>Screenshots</h2>
+      <figure>
+        <img src="../screenshots/v0-13-journey-rag-grounding-hallucinations.png" alt="Journey screen showing RAG and Retrieval, Grounding, and Hallucinations as consecutive cards." />
+        <figcaption>Journey placement: RAG and Retrieval, Grounding, and Hallucinations now appear as consecutive cards before Wider AI Literacy.</figcaption>
+      </figure>
+      <figure>
+        <img src="../screenshots/v0-13-grounding-lesson.png" alt="Grounding lesson page in preview mode with definition and glossary chips." />
+        <figcaption>New Grounding lesson card in Preview mode.</figcaption>
+      </figure>
+      <figure>
+        <img src="../screenshots/v0-13-hallucinations-lesson.png" alt="Hallucinations lesson page in preview mode with definition and glossary chips." />
+        <figcaption>New Hallucinations lesson card in Preview mode.</figcaption>
+      </figure>
+      <figure>
+        <img src="../screenshots/v0-13-review-route-grounding.png" alt="Review route showing Grounding card metadata and Evidence Anchor visual." />
+        <figcaption>Updated review route metadata on the Grounding card.</figcaption>
+      </figure>
+      <figure>
+        <img src="../screenshots/v0-13-visual-aid-grounding.png" alt="Visual aid gallery showing the Evidence Anchor visual for Grounding." />
+        <figcaption>Grounding visual aid: Evidence Anchor.</figcaption>
+      </figure>
+      <figure>
+        <img src="../screenshots/v0-13-visual-aid-hallucinations.png" alt="Visual aid gallery showing the Unsupported Bridge visual for Hallucinations." />
+        <figcaption>Hallucinations visual aid: Unsupported Bridge.</figcaption>
+      </figure>
+      <figure>
+        <img src="../screenshots/v0-13-badge-version.png" alt="Badge page showing the version number under the Reset progress panel." />
+        <figcaption>Badge page version placement: <code>v0.13.0</code>.</figcaption>
+      </figure>
+    </section>
+  </main>
+</body>
+</html>
