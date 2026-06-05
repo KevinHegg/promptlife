@@ -31,7 +31,7 @@ import './styles/global.css'
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '')
 const ASSET = `${BASE}/assets/promptlife`
 // Bump this for each shipped app change; the Badge screen displays it under Start over.
-const APP_VERSION = '0.15.0'
+const APP_VERSION = '0.15.1'
 const STORAGE_KEYS = {
   lastLocation: 'promptlife:v1:lastLocation',
   lessonId: 'promptlife:v1:lessonId',
@@ -169,6 +169,8 @@ function useStoredState(key, fallback, legacyKey = null) {
 function App() {
   const shellRef = useRef<HTMLElement | null>(null)
   const journeyReturnActRef = useRef(null)
+  const handledJourneyTopRequestRef = useRef(0)
+  const [journeyTopRequest, setJourneyTopRequest] = useState(0)
   const reviewRoute = useMemo(() => getReviewRoute(), [])
   const [tab, setTab] = useStoredState(STORAGE_KEYS.lastLocation, 'home', LEGACY_STORAGE_KEYS.lastLocation)
   const [lessonId, setLessonId] = useStoredState(STORAGE_KEYS.lessonId, lessons[0].id, LEGACY_STORAGE_KEYS.lessonId)
@@ -198,22 +200,30 @@ function App() {
   const activeLessonMode = getLessonMode(activeLesson.id, lessonMode, completed, nextOpenLesson.id)
 
   useEffect(() => {
-    requestAnimationFrame(() => {
-      const journeyReturnActId = tab === 'journey' ? journeyReturnActRef.current : null
+    const frameId = requestAnimationFrame(() => {
+      const shouldScrollJourneyTop = tab === 'journey' && journeyTopRequest !== handledJourneyTopRequestRef.current
+      const journeyReturnActId = tab === 'journey' && !shouldScrollJourneyTop ? journeyReturnActRef.current : null
       if (journeyReturnActId) {
         scrollToJourneySection(journeyReturnActId, shellRef.current)
         journeyReturnActRef.current = null
+      } else if (shouldScrollJourneyTop) {
+        handledJourneyTopRequestRef.current = journeyTopRequest
+        journeyReturnActRef.current = null
+        scrollJourneyToTop(shellRef.current)
       } else {
-        shellRef.current?.scrollTo({ top: 0, behavior: prefersReducedMotion() ? 'auto' : 'smooth' })
+        scrollAppToTop(shellRef.current)
       }
-      const focusTarget = tab === 'learn'
+      const focusTarget = shouldScrollJourneyTop
+        ? document.getElementById('journey-title')
+        : tab === 'learn'
         ? document.getElementById('lesson-title')
         : journeyReturnActId
           ? document.getElementById(`journey-section-title-${journeyReturnActId}`)
         : document.querySelector<HTMLElement>('.screen h1[id]')
       focusTarget?.focus?.({ preventScroll: true })
     })
-  }, [tab, lessonId, lessonMode, gameId])
+    return () => cancelAnimationFrame(frameId)
+  }, [tab, lessonId, lessonMode, gameId, journeyTopRequest])
 
   const completeLesson = useCallback((id) => {
     setCompleted((prev) => prev.includes(id) ? prev : [...prev, id])
@@ -364,6 +374,20 @@ function App() {
     openLesson(id, mode)
   }
 
+  function openJourneyTop() {
+    journeyReturnActRef.current = null
+    setTab('journey')
+    setJourneyTopRequest((request) => request + 1)
+  }
+
+  function navigatePrimaryTab(id) {
+    if (id === 'journey') {
+      openJourneyTop()
+      return
+    }
+    setTab(id)
+  }
+
   function openPlayFeature(id) {
     setGameId(id)
     setTab('play')
@@ -407,7 +431,7 @@ function App() {
             nextLessonTitle={nextOpenLesson.title}
             statusMessage={statusMessage}
             onStart={() => openLesson(nextOpenLesson.id, 'learn')}
-            onJourney={() => setTab('journey')}
+            onJourney={openJourneyTop}
             onPlay={() => setTab('play')}
           />
         )}
@@ -470,7 +494,7 @@ function App() {
           />
         )}
       </main>
-      <BottomNav tab={tab} setTab={setTab} />
+      <BottomNav tab={tab} onNavigate={navigatePrimaryTab} />
       <GlossaryDrawer
         termId={drawerTerm}
         onOpen={setDrawerTerm}
@@ -711,6 +735,20 @@ function scrollToJourneySection(actId, shell = document.querySelector<HTMLElemen
   const top = shell.scrollTop + targetRect.top - shellRect.top - 12
   shell.scrollTo({ top: Math.max(0, top), behavior: prefersReducedMotion() ? 'auto' : 'smooth' })
   document.getElementById(`journey-section-title-${actId}`)?.focus?.({ preventScroll: true })
+}
+
+function scrollAppToTop(shell = document.querySelector<HTMLElement>('.pl-shell')) {
+  const behavior = prefersReducedMotion() ? 'auto' : 'smooth'
+  if (shell) {
+    shell.scrollTo({ top: 0, behavior })
+    return
+  }
+  window.scrollTo({ top: 0, behavior })
+}
+
+function scrollJourneyToTop(shell = document.querySelector<HTMLElement>('.pl-shell')) {
+  scrollAppToTop(shell)
+  document.getElementById('journey-title')?.focus?.({ preventScroll: true })
 }
 
 function StageTimeline({ currentActId, items = acts, onStageSelect = null }) {
@@ -2432,7 +2470,7 @@ function ScreenHeader({ kicker, title, subtitle, titleId }) {
   )
 }
 
-function BottomNav({ tab, setTab }) {
+function BottomNav({ tab, onNavigate }) {
   const items = [
     ['home', 'Home', 'icon-seed-run'],
     ['journey', 'Journey', 'icon-layers'],
@@ -2446,7 +2484,7 @@ function BottomNav({ tab, setTab }) {
     <div className="bottom-nav-layer">
       <nav className="bottom-nav" aria-label="Primary navigation">
         {items.map(([id, label, icon]) => (
-          <button key={id} data-tab={id} className={activeTab === id ? 'active' : ''} onClick={() => setTab(id)} aria-current={activeTab === id ? 'page' : undefined}>
+          <button key={id} data-tab={id} className={activeTab === id ? 'active' : ''} onClick={() => onNavigate(id)} aria-current={activeTab === id ? 'page' : undefined}>
             <img src={`${ASSET}/icons/png/${icon}@48.png`} alt="" aria-hidden="true" />
             <span>{label}</span>
           </button>

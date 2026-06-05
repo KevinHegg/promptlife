@@ -2,6 +2,33 @@
 
 Date: 2026-06-05
 
+## v0.15.1 Navigation Polish
+
+### What Changed
+
+- Journey bottom nav now always returns to the top of the Journey screen.
+- The Home Journey action uses the same top-of-Journey path.
+- Added a shared app-shell top scroll helper and a Journey-specific top helper.
+- Bumped visible Badge version to `v0.15.1`.
+
+### Behavior Notes
+
+- Stage links still scroll to specific Journey sections.
+- The lesson card Return to Journey action still returns near the lesson's section.
+- Preview, Review, and Learn progress behavior is unchanged.
+- Reduced-motion preference is still respected.
+
+### Verification
+
+- `npm install`: passed.
+- Baseline `npm run typecheck`: passed.
+- Baseline `npm run build`: passed with the existing Vite large-chunk warning.
+- Final `npm run typecheck`: passed.
+- Final `npm run build`: passed with the existing Vite large-chunk warning.
+- Browser QA at 390px verified Home, Journey, Play, Glossary, Badge, Preview, Review, Learn, and stage-link paths.
+- 320px isolated browser capture verified Journey top, all eight stage buttons, and no document or stage overflow.
+- Screenshots and the wrapped response PDF are tracked in `docs/curriculum/prompt-life-v0-15-1-navigation-polish-report.pdf`.
+
 ## v0.15 Journey Narrative Architecture
 
 ### What Changed

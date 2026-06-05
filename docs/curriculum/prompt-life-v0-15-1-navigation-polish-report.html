@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Prompt Life v0.15.1 Navigation Polish Report</title>
+    <style>
+      :root {
+        color: #101a4c;
+        background: #f7f5ef;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        background: #f7f5ef;
+      }
+
+      main {
+        max-width: 8.2in;
+        margin: 0 auto;
+        padding: 0.45in;
+      }
+
+      h1,
+      h2,
+      h3 {
+        margin: 0;
+        line-height: 1.08;
+        color: #10176b;
+      }
+
+      h1 {
+        font-size: 30px;
+      }
+
+      h2 {
+        margin-top: 28px;
+        font-size: 20px;
+      }
+
+      h3 {
+        margin-top: 18px;
+        font-size: 15px;
+      }
+
+      p,
+      li {
+        font-size: 12.5px;
+        line-height: 1.5;
+      }
+
+      ul {
+        margin-top: 8px;
+        padding-left: 18px;
+      }
+
+      .eyebrow {
+        margin: 0 0 8px;
+        color: #008f91;
+        font-size: 11px;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .summary {
+        margin-top: 18px;
+        padding: 16px;
+        border: 1px solid #d9e0ef;
+        border-radius: 10px;
+        background: #ffffff;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .card {
+        padding: 13px;
+        border: 1px solid #d9e0ef;
+        border-radius: 10px;
+        background: #ffffff;
+      }
+
+      .shot {
+        break-inside: avoid;
+        margin-top: 18px;
+        padding: 14px;
+        border: 1px solid #d9e0ef;
+        border-radius: 10px;
+        background: #ffffff;
+      }
+
+      .shot img {
+        display: block;
+        max-width: 100%;
+        max-height: 7.25in;
+        margin: 10px auto 0;
+        border: 1px solid #d9e0ef;
+        border-radius: 8px;
+      }
+
+      code {
+        padding: 1px 4px;
+        border-radius: 4px;
+        background: #eef5f6;
+        color: #10176b;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        font-size: 11px;
+      }
+
+      .note {
+        color: #4d587f;
+      }
+
+      @media print {
+        body {
+          background: #ffffff;
+        }
+
+        main {
+          padding: 0.35in;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p class="eyebrow">Prompt Life v0.15.1</p>
+      <h1>Navigation Polish Report</h1>
+      <p class="note">Date: 2026-06-05. Scope: make the primary Journey navigation reliably return to the top of the Journey overview without changing curriculum, games, section architecture, or progress rules.</p>
+
+      <section class="summary">
+        <h2>Response Summary</h2>
+        <p>The bottom Journey nav now works as a dependable "back to the top of Journey" action. It exits Learn, Preview, or Review card views safely, opens Journey, scrolls the app shell to the top after render, and focuses the Journey heading. The eight stage buttons still scroll to their individual sections.</p>
+      </section>
+
+      <section class="grid">
+        <div class="card">
+          <h2>What Changed</h2>
+          <ul>
+            <li>Bumped visible app version to <code>0.15.1</code>.</li>
+            <li>Added a one-shot Journey-top navigation request.</li>
+            <li>Routed Home's View map action and the bottom Journey nav through the same top-of-Journey path.</li>
+            <li>Added shared helpers: <code>scrollAppToTop()</code> and <code>scrollJourneyToTop()</code>.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h2>Preserved</h2>
+          <ul>
+            <li>Stage buttons still call <code>scrollToJourneySection()</code>.</li>
+            <li>The lesson card Return to Journey action still returns near the current lesson section.</li>
+            <li>Preview, Review, and Learn progress behavior is unchanged.</li>
+            <li>Reduced-motion preference is respected by scroll helpers.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h2>Files Changed</h2>
+        <ul>
+          <li><code>src/main.tsx</code></li>
+          <li><code>docs/REVIEW_NOTES.md</code></li>
+          <li><code>docs/curriculum/V0_15_1_NAVIGATION_FIX.md</code></li>
+          <li><code>docs/curriculum/prompt-life-v0-15-1-navigation-polish-report.html</code></li>
+          <li><code>docs/curriculum/prompt-life-v0-15-1-navigation-polish-report.pdf</code></li>
+          <li><code>docs/screenshots/v0-15-1-journey-top-after-nav.png</code></li>
+          <li><code>docs/screenshots/v0-15-1-stage-link-new-dawn.png</code></li>
+          <li><code>docs/screenshots/v0-15-1-journey-top-320.png</code></li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Manual QA Result</h2>
+        <ul>
+          <li>390px: Home to Journey opens at top.</li>
+          <li>390px: Journey scrolled down, then Journey bottom nav returns to top.</li>
+          <li>390px: Midnight Ledger and New Dawn stage links still scroll to sections.</li>
+          <li>390px: Journey bottom nav after a stage jump returns to Journey top after smooth scroll settles.</li>
+          <li>390px: Preview, Review, and Learn card modes exit to Journey top through bottom nav without changing completion behavior.</li>
+          <li>390px: Play, Glossary, and Badge to Journey open at top.</li>
+          <li>320px: isolated browser capture verified Journey title, all eight stage buttons, <code>scrollTop: 0</code>, and no document or stage overflow.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Build Result</h2>
+        <ul>
+          <li><code>npm install</code>: passed.</li>
+          <li><code>npm run typecheck</code>: passed.</li>
+          <li><code>npm run build</code>: passed.</li>
+          <li><code>npm run build:pages</code>: passed.</li>
+          <li><code>git diff --check</code>: passed.</li>
+        </ul>
+        <p class="note">Known issue: Vite still reports the existing single JavaScript chunk above 500 kB after minification.</p>
+      </section>
+
+      <section>
+        <h2>Next Three Recommended Steps</h2>
+        <ul>
+          <li>Add a small automated interaction test for bottom-nav scroll behavior.</li>
+          <li>Split the large app bundle once content stabilizes.</li>
+          <li>Do a focused keyboard and reduced-motion accessibility pass on Journey navigation.</li>
+        </ul>
+      </section>
+
+      <section class="shot">
+        <h2>Screenshot: Journey Top After Bottom Nav</h2>
+        <p>390px app browser after tapping Journey from another state.</p>
+        <img src="../screenshots/v0-15-1-journey-top-after-nav.png" alt="Prompt Life Journey top screen at 390 pixels after bottom Journey navigation" />
+      </section>
+
+      <section class="shot">
+        <h2>Screenshot: Stage Link Still Works</h2>
+        <p>390px app browser after tapping the New Dawn stage link.</p>
+        <img src="../screenshots/v0-15-1-stage-link-new-dawn.png" alt="Prompt Life New Dawn Journey section after stage-link navigation" />
+      </section>
+
+      <section class="shot">
+        <h2>Screenshot: 320px Journey Layout</h2>
+        <p>Isolated 320px capture with Journey at the top and all eight stage buttons visible.</p>
+        <img src="../screenshots/v0-15-1-journey-top-320.png" alt="Prompt Life Journey top screen at 320 pixels with two-column stage buttons" />
+      </section>
+    </main>
+  </body>
+</html>
