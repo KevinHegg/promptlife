@@ -1388,7 +1388,12 @@ p {
 .softmax-demo,
 .context-demo,
 .diffusion-demo,
-.risk-demo {
+.risk-demo,
+.prompt-trace-demo,
+.micro-step-demo,
+.pretraining-toggle-demo,
+.overfit-curve-demo,
+.micro-sort-demo {
   width: 100%;
   border: 0;
   background: #081945;
@@ -1398,7 +1403,12 @@ p {
 }
 
 .loop-demo,
-.token-demo {
+.token-demo,
+.prompt-trace-demo,
+.micro-step-demo,
+.pretraining-toggle-demo,
+.overfit-curve-demo,
+.micro-sort-demo {
   display: grid;
   gap: 0.8rem;
 }
@@ -1406,7 +1416,10 @@ p {
 .loop-demo button,
 .token-demo button,
 .inference-demo button,
-.diffusion-demo button {
+.diffusion-demo button,
+.micro-step-buttons button,
+.training-step-row button,
+.micro-sort-chip {
   width: 100%;
   min-height: 48px;
   border: 1px solid rgba(255, 255, 255, 0.28);
@@ -1468,13 +1481,160 @@ p {
 .context-demo p,
 .diffusion-demo p,
 .feature-cloud-demo p,
-.feature-cloud-demo small {
+.feature-cloud-demo small,
+.prompt-trace-demo p,
+.micro-step-demo p,
+.pretraining-toggle-demo p,
+.overfit-curve-demo p,
+.micro-sort-demo p {
   margin: 0.85rem 0 0;
   color: #eef8ff;
 }
 
 .mini-insight {
   font-weight: 900;
+}
+
+.micro-step-buttons,
+.training-step-row,
+.micro-sort-items {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.45rem;
+}
+
+.micro-step-buttons button.active,
+.training-step-row button.active,
+.training-step-row button.durable.active,
+.micro-sort-chip.is-correct {
+  border-color: var(--pl-mint);
+  background: var(--pl-mint);
+  color: var(--pl-indigo);
+}
+
+.prompt-trace-card,
+.pretraining-toggle-demo .state-card,
+.curve-card,
+.micro-sort-buckets div {
+  border-radius: 8px;
+  padding: 0.85rem;
+  background: rgba(255, 255, 255, 0.11);
+}
+
+.prompt-trace-card strong,
+.pretraining-toggle-demo .state-card strong,
+.curve-card strong,
+.micro-sort-buckets strong {
+  color: white;
+}
+
+.token-probability-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  align-items: center;
+  margin-top: 0.75rem;
+}
+
+.token-probability-cloud span {
+  display: inline-flex;
+  min-height: 2.1rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 0.38rem 0.7rem;
+  background: rgba(255, 255, 255, 0.14);
+  color: white;
+  font-size: var(--size);
+  font-weight: 900;
+}
+
+.token-probability-cloud span.chosen {
+  background: var(--pl-mint);
+  color: var(--pl-indigo);
+}
+
+.token-probability-cloud span.unlikely {
+  opacity: 0.58;
+}
+
+.training-step-row button.durable {
+  box-shadow: inset 0 0 0 2px rgba(176, 255, 235, 0.2);
+}
+
+.pretraining-toggle-demo .segmented-control button,
+.overfit-curve-demo .segmented-control button {
+  color: white;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.pretraining-toggle-demo .segmented-control button.active,
+.overfit-curve-demo .segmented-control button.active {
+  color: var(--pl-indigo);
+}
+
+.curve-card {
+  display: grid;
+  gap: 0.45rem;
+  min-height: 8.5rem;
+  align-content: center;
+  background:
+    radial-gradient(circle at 24% 70%, rgba(255, 255, 255, 0.95) 0 4px, transparent 5px),
+    radial-gradient(circle at 42% 35%, rgba(255, 255, 255, 0.95) 0 4px, transparent 5px),
+    radial-gradient(circle at 66% 58%, rgba(255, 255, 255, 0.95) 0 4px, transparent 5px),
+    linear-gradient(135deg, rgba(255, 170, 76, 0.42), rgba(11, 143, 139, 0.22));
+}
+
+.curve-card.is-generalizing {
+  background:
+    radial-gradient(circle at 24% 70%, rgba(255, 255, 255, 0.95) 0 4px, transparent 5px),
+    radial-gradient(circle at 42% 35%, rgba(255, 255, 255, 0.95) 0 4px, transparent 5px),
+    radial-gradient(circle at 66% 58%, rgba(255, 255, 255, 0.95) 0 4px, transparent 5px),
+    radial-gradient(circle at 82% 45%, var(--pl-mint) 0 5px, transparent 6px),
+    linear-gradient(135deg, rgba(11, 143, 139, 0.45), rgba(176, 255, 235, 0.24));
+}
+
+.curve-card span {
+  display: inline-flex;
+  width: max-content;
+  max-width: 100%;
+  border-radius: 999px;
+  padding: 0.25rem 0.55rem;
+  background: rgba(8, 25, 69, 0.68);
+  color: white;
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.micro-sort-chip {
+  display: grid;
+  gap: 0.22rem;
+  text-align: left;
+}
+
+.micro-sort-chip span {
+  color: #d9e9ff;
+  font-size: 0.82rem;
+}
+
+.micro-sort-chip.is-correct span {
+  color: #15334e;
+}
+
+.micro-sort-buckets {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.micro-sort-buckets div {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.micro-sort-buckets span {
+  color: #d9e9ff;
+  font-size: 0.84rem;
+  line-height: 1.35;
 }
 
 .segmented-control {

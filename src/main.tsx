@@ -33,7 +33,7 @@ import './styles/global.css'
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '')
 const ASSET = `${BASE}/assets/promptlife`
 // Bump this for each shipped app change; the Badge screen displays it under Start over.
-const APP_VERSION = '0.16.1'
+const APP_VERSION = '0.17.1'
 const STORAGE_KEYS = {
   lastLocation: 'promptlife:v1:lastLocation',
   lessonId: 'promptlife:v1:lessonId',
@@ -671,20 +671,18 @@ function JourneyScreen({ completed, currentLessonId, onOpenLesson, onTrace, onLe
                 const lessonNumber = lessons.findIndex((item) => item.id === lesson.id) + 1
                 const mode = done ? 'review' : current ? 'learn' : 'preview'
                 const actionLabel = done ? 'Review' : current ? (completed.length ? 'Continue' : 'Start') : 'Preview'
-                const pathLabel = getPathLabel(lesson.pathType)
                 return (
                   <button
                     className={current ? 'lesson-row is-current' : 'lesson-row'}
                     key={lesson.id}
                     onClick={() => onOpenLesson(lesson.id, mode)}
-                    aria-label={`${lessonNumber}. ${lesson.title}. ${actionLabel}. ${pathLabel}.`}
+                    aria-label={`${lessonNumber}. ${lesson.title}. ${actionLabel}.`}
                   >
                     <span className="lesson-row-number" aria-hidden="true">{lessonNumber}</span>
                     <span>
                       <strong>{lesson.title}</strong>
                       <small>{lesson.subtitle}</small>
                       <span className="lesson-row-meta">
-                        <em>{pathLabel}</em>
                         <b>{actionLabel}</b>
                       </span>
                     </span>
@@ -874,9 +872,8 @@ function LessonScreen({ lesson, mode, lessonIndex, totalLessons, reflection, onC
         <VisualAid id={lesson.visualAidId} headingId="visual-aid-title" />
       </section>
 
-      <section className="lesson-panel core-panel" aria-labelledby="core-idea-title">
+      <section className="lesson-panel core-panel" aria-label="Core idea">
         <span className="step-label">Core idea</span>
-        <h2 id="core-idea-title">Core idea</h2>
         <p>{coreExplanation}</p>
         <dl className="lesson-detail-grid">
           {lesson.stageType && <div><dt>Model lifecycle</dt><dd>{stageLabel(lesson.stageType)}</dd></div>}
@@ -1258,6 +1255,13 @@ function PromptVsResponseBox({ includeDemo = true }) {
 }
 
 function MicroInteraction({ type }) {
+  if (type === 'prompt-trace') return <PromptTraceInteraction />
+  if (type === 'traditions-sort') return <TraditionsSortInteraction />
+  if (type === 'training-steps') return <TrainingStepInteraction />
+  if (type === 'pretraining-toggle') return <PretrainingToggleInteraction />
+  if (type === 'overfitting-curve') return <OverfittingCurveInteraction />
+  if (type === 'fine-tuning-sort') return <FineTuningSortInteraction />
+  if (type === 'alignment-groups') return <AlignmentGroupingInteraction />
   if (type === 'training') return <TrainingLoopAnimation />
   if (type === 'fine-tune') return <FineTuningPathAnimation />
   if (type === 'inference') return <InferenceFlowAnimation />
@@ -1275,6 +1279,230 @@ function MicroInteraction({ type }) {
   if (type === 'multimodal') return <MultimodalMixerAnimation />
   if (type === 'risk') return <RiskSortDemo />
   return <FeatureCloudAnimation />
+}
+
+function PromptTraceInteraction() {
+  const steps = [
+    {
+      label: 'Context',
+      title: 'Current context',
+      body: `Prompt: "${canonicalPromptResponse.userPrompt}" Response so far: "${canonicalPromptResponse.responseSoFar}".`
+    },
+    {
+      label: 'Token cloud',
+      title: 'Next-token cloud',
+      body: 'floor, room, and tiles are plausible. quantum and elephant are much weaker in this local context.'
+    },
+    {
+      label: 'Chosen',
+      title: 'Chosen token',
+      body: `${canonicalPromptResponse.chosenNextToken} is selected from the probability cloud.`
+    },
+    {
+      label: 'Appended',
+      title: 'Append and repeat',
+      body: `"${canonicalPromptResponse.nextContextResponse}" becomes the response-so-far for the next run.`
+    }
+  ]
+  const [step, setStep] = useState(0)
+  const current = steps[step]
+
+  return (
+    <div className="prompt-trace-demo">
+      <div className="micro-step-buttons" role="group" aria-label="Prompt trace steps">
+        {steps.map((item, index) => (
+          <button key={item.label} className={step === index ? 'active' : ''} onClick={() => setStep(index)} aria-pressed={step === index}>
+            {index + 1}. {item.label}
+          </button>
+        ))}
+      </div>
+      <div className="prompt-trace-card" aria-live="polite">
+        <strong>{current.title}</strong>
+        <p>{current.body}</p>
+        {step === 1 && (
+          <div className="token-probability-cloud" aria-label="Simplified next-token candidates">
+            {canonicalPromptResponse.nextTokenCandidates.map((token, index) => (
+              <span key={token} className={token === canonicalPromptResponse.chosenNextToken ? 'chosen' : (canonicalPromptResponse.plausibleNextTokens as readonly string[]).includes(token) ? 'plausible' : 'unlikely'} style={{ '--size': `${1.08 - index * 0.06}rem` } as React.CSSProperties}>
+                {token}
+              </span>
+            ))}
+          </div>
+        )}
+      </div>
+      {step === steps.length - 1 && <p className="mini-insight">Insight unlocked: generation is score, choose, append, repeat.</p>}
+    </div>
+  )
+}
+
+function TrainingStepInteraction() {
+  const steps = [
+    { label: 'Predict', detail: 'The model guesses the target next token.' },
+    { label: 'Compare', detail: 'The guess is compared with the actual target.' },
+    { label: 'Loss', detail: 'Loss measures how wrong the prediction was.' },
+    { label: 'Update weights', detail: 'The optimizer changes weights. This is the durable step.' }
+  ]
+  const [step, setStep] = useState(0)
+  const current = steps[step]
+
+  return (
+    <div className="micro-step-demo">
+      <div className="training-step-row" aria-label="Training loop steps">
+        {steps.map((item, index) => (
+          <button
+            key={item.label}
+            className={[step === index ? 'active' : '', item.label === 'Update weights' ? 'durable' : ''].filter(Boolean).join(' ')}
+            onClick={() => setStep(index)}
+            aria-pressed={step === index}
+          >
+            {item.label}
+          </button>
+        ))}
+      </div>
+      <p aria-live="polite"><strong>{current.label}:</strong> {current.detail}</p>
+      {current.label === 'Update weights' && <p className="mini-insight">Insight unlocked: this is training, not ordinary inference.</p>}
+    </div>
+  )
+}
+
+function PretrainingToggleInteraction() {
+  const [mode, setMode] = useState('pattern')
+  const copy = mode === 'pattern'
+    ? 'Broad pretraining repeats the training loop at huge scale, shaping grammar, style, facts, associations, task patterns, and reasoning-like behavior.'
+    : 'Perfect recall is the myth. Seeing text during training does not mean the model stores every source as a searchable memory.'
+
+  return (
+    <div className="pretraining-toggle-demo">
+      <div className="segmented-control wide" role="group" aria-label="Compare pretraining mental models">
+        <button className={mode === 'pattern' ? 'active' : ''} onClick={() => setMode('pattern')} aria-pressed={mode === 'pattern'}>Broad pattern learning</button>
+        <button className={mode === 'myth' ? 'active' : ''} onClick={() => setMode('myth')} aria-pressed={mode === 'myth'}>Perfect recall myth</button>
+      </div>
+      <div className="state-card" aria-live="polite">
+        <strong>{mode === 'pattern' ? 'Better model' : 'Myth to drop'}</strong>
+        <p>{copy}</p>
+      </div>
+      {mode === 'pattern' && <p className="mini-insight">Insight unlocked: pretraining builds broad durable patterns, not a file cabinet.</p>}
+    </div>
+  )
+}
+
+function OverfittingCurveInteraction() {
+  const [choice, setChoice] = useState('overfit')
+  const generalizing = choice === 'generalizing'
+  return (
+    <div className="overfit-curve-demo">
+      <div className="segmented-control wide" role="group" aria-label="Choose which curve handles new examples">
+        <button className={!generalizing ? 'active' : ''} onClick={() => setChoice('overfit')} aria-pressed={!generalizing}>Overfit curve</button>
+        <button className={generalizing ? 'active' : ''} onClick={() => setChoice('generalizing')} aria-pressed={generalizing}>Generalizing curve</button>
+      </div>
+      <div className={generalizing ? 'curve-card is-generalizing' : 'curve-card'} aria-live="polite">
+        <span>training dots</span>
+        <span>held-out dots</span>
+        <strong>{generalizing ? 'New examples handled better' : 'Old examples traced too tightly'}</strong>
+      </div>
+      <p>{generalizing ? 'Insight unlocked: evaluation needs held-out examples.' : 'This curve memorizes the answer key and misses the new cases.'}</p>
+    </div>
+  )
+}
+
+function TraditionsSortInteraction() {
+  return (
+    <CycleSortInteraction
+      label="Sort AI-system ingredients"
+      categories={['Rules', 'Learned patterns', 'Hybrid system']}
+      items={[
+        { id: 'if-then-policy', label: 'if/then policy', category: 'Rules' },
+        { id: 'model-weights', label: 'model weights', category: 'Learned patterns' },
+        { id: 'rag-search', label: 'RAG search', category: 'Hybrid system' },
+        { id: 'safety-filter', label: 'safety filter', category: 'Hybrid system' },
+        { id: 'grammar-pattern', label: 'grammar pattern', category: 'Learned patterns' },
+        { id: 'tool-call-rule', label: 'tool call rule', category: 'Rules' }
+      ]}
+      insight="Modern AI systems often combine learned models with rules, retrieval, filters, tools, and policies."
+    />
+  )
+}
+
+function FineTuningSortInteraction() {
+  return (
+    <CycleSortInteraction
+      label="Sort customization moves"
+      categories={['Durable training', 'Temporary context steering', 'Decoding choice']}
+      items={[
+        { id: 'fine-tuning-examples', label: 'fine-tuning examples', category: 'Durable training' },
+        { id: 'prompt-instructions', label: 'prompt instructions', category: 'Temporary context steering' },
+        { id: 'retrieved-pdf', label: 'retrieved PDF', category: 'Temporary context steering' },
+        { id: 'sampling-token', label: 'sampling next token', category: 'Decoding choice' },
+        { id: 'adapter-weights', label: 'adapter weights', category: 'Durable training' }
+      ]}
+      insight="Fine-tuning shapes future behavior. Prompting and RAG steer the current context. Sampling chooses one next token."
+    />
+  )
+}
+
+function AlignmentGroupingInteraction() {
+  return (
+    <CycleSortInteraction
+      label="Group alignment methods"
+      categories={['Durable shaping', 'Runtime steering', 'Evaluation']}
+      items={[
+        { id: 'instruction-tuning', label: 'instruction tuning', category: 'Durable shaping' },
+        { id: 'human-feedback', label: 'human feedback learning', category: 'Durable shaping' },
+        { id: 'preference-optimization', label: 'preference optimization', category: 'Durable shaping' },
+        { id: 'system-prompt', label: 'system prompt', category: 'Runtime steering' },
+        { id: 'policy-filter', label: 'policy filter', category: 'Runtime steering' },
+        { id: 'tool-rule', label: 'tool rule', category: 'Runtime steering' },
+        { id: 'safety-test', label: 'safety test', category: 'Evaluation' },
+        { id: 'red-team-review', label: 'red-team review', category: 'Evaluation' }
+      ]}
+      insight="Alignment is a layered effort: some methods train behavior, some steer a run, and some test the system."
+    />
+  )
+}
+
+function CycleSortInteraction({ label, categories, items, insight }) {
+  const [assignments, setAssignments] = useState({})
+  const allAssigned = items.every((item) => assignments[item.id])
+  const allCorrect = items.every((item) => assignments[item.id] === item.category)
+
+  function cycle(itemId) {
+    setAssignments((prev) => {
+      const current = prev[itemId]
+      const currentIndex = categories.indexOf(current)
+      const nextCategory = categories[(currentIndex + 1) % categories.length]
+      return { ...prev, [itemId]: nextCategory }
+    })
+  }
+
+  return (
+    <div className="micro-sort-demo">
+      <div className="micro-sort-items" aria-label={label}>
+        {items.map((item) => {
+          const assigned = assignments[item.id]
+          const correct = assigned === item.category
+          return (
+            <button
+              key={item.id}
+              className={['micro-sort-chip', assigned ? 'is-assigned' : '', allAssigned && correct ? 'is-correct' : ''].filter(Boolean).join(' ')}
+              onClick={() => cycle(item.id)}
+              aria-pressed={Boolean(assigned)}
+            >
+              <strong>{item.label}</strong>
+              <span>{assigned ?? 'Tap to sort'}</span>
+            </button>
+          )
+        })}
+      </div>
+      <div className="micro-sort-buckets" aria-label="Current buckets">
+        {categories.map((category) => (
+          <div key={category}>
+            <strong>{category}</strong>
+            <span>{items.filter((item) => assignments[item.id] === category).map((item) => item.label).join(', ') || 'empty'}</span>
+          </div>
+        ))}
+      </div>
+      <p aria-live="polite">{allAssigned ? (allCorrect ? `Insight unlocked: ${insight}` : 'A few cards are still in the wrong group. Keep cycling.') : 'Tap each card until it lands in the best group.'}</p>
+    </div>
+  )
 }
 
 function TrainingLoopDemo() {

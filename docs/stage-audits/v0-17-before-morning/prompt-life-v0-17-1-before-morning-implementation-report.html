@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Prompt Life v0.17.1 Before Morning Implementation Report</title>
+  <style>
+    :root {
+      color: #07124a;
+      background: #f7f5ef;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.45;
+    }
+
+    body {
+      margin: 0;
+      background: #f7f5ef;
+    }
+
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 44px 28px;
+    }
+
+    section,
+    figure {
+      break-inside: avoid;
+      margin: 0 0 24px;
+      border: 1px solid rgba(18, 30, 114, 0.15);
+      border-radius: 8px;
+      background: rgba(255, 253, 248, 0.92);
+      box-shadow: 0 12px 28px rgba(7, 18, 74, 0.08);
+      padding: 24px;
+    }
+
+    h1,
+    h2,
+    h3 {
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: 42px;
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 24px;
+    }
+
+    h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+    }
+
+    p {
+      margin: 0 0 12px;
+    }
+
+    ul,
+    ol {
+      margin: 0;
+      padding-left: 22px;
+    }
+
+    li + li {
+      margin-top: 6px;
+    }
+
+    code {
+      border-radius: 6px;
+      background: #eef3ff;
+      color: #121e72;
+      padding: 2px 5px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.92em;
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: #0f7f7b;
+      font-size: 13px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .metric {
+      border-radius: 8px;
+      background: #effaf7;
+      padding: 14px;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 22px;
+      color: #121e72;
+    }
+
+    figure img {
+      display: block;
+      width: auto;
+      max-width: 100%;
+      max-height: 760px;
+      margin: 12px auto 0;
+      border-radius: 8px;
+      border: 1px solid rgba(18, 30, 114, 0.12);
+      background: white;
+    }
+
+    figcaption {
+      color: #34435f;
+      font-size: 14px;
+    }
+
+    @media print {
+      body {
+        background: white;
+      }
+
+      main {
+        padding: 0;
+      }
+
+      section,
+      figure {
+        box-shadow: none;
+        page-break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section>
+      <p class="eyebrow">Prompt Life v0.17.1</p>
+      <h1>Before Morning Implementation Report</h1>
+      <p>Date: June 5, 2026</p>
+      <p>This report wraps the implementation summary and UI screenshots for the v0.17.1 Before Morning polish pass.</p>
+    </section>
+
+    <section>
+      <h2>What Changed</h2>
+      <ul>
+        <li>Bumped the visible Badge version to <code>v0.17.1</code>.</li>
+        <li>Removed the duplicate visible <code>Core idea</code> heading after the lesson-card pill.</li>
+        <li>Removed repeated path-label chips from individual Journey rows.</li>
+        <li>Revised the first seven Before Morning cards for clearer mobile-first teaching.</li>
+        <li>Added/refined tiny interactions for prompt trace, rule/pattern sorting, training steps, pretraining myths, overfitting curves, fine-tuning contrast, and alignment grouping.</li>
+        <li>Added internal exercise metadata for the revised lesson architecture.</li>
+        <li>Added a text-only future Image 2 asset plan. No generated PNG assets were created.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Verification</h2>
+      <div class="grid">
+        <div class="metric"><strong>Passed</strong><span><code>npm run typecheck</code></span></div>
+        <div class="metric"><strong>Passed</strong><span><code>npm run build</code></span></div>
+        <div class="metric"><strong>Passed</strong><span><code>npm run audit:answers</code></span></div>
+        <div class="metric"><strong>Passed</strong><span><code>npm run build:pages</code></span></div>
+        <div class="metric"><strong>67</strong><span>audited answer surfaces</span></div>
+      </div>
+      <p>The build still reports the existing Vite large-chunk warning.</p>
+    </section>
+
+    <section>
+      <h2>Files Changed</h2>
+      <ul>
+        <li><code>src/main.tsx</code></li>
+        <li><code>src/data/content.ts</code></li>
+        <li><code>src/data/exercises.ts</code></li>
+        <li><code>src/components/VisualAids.tsx</code></li>
+        <li><code>src/styles/global.css</code></li>
+        <li><code>docs/REVIEW_NOTES.md</code></li>
+        <li><code>docs/stage-audits/v0-17-before-morning/IMAGE_ASSET_PLAN.md</code></li>
+        <li><code>docs/stage-audits/v0-17-before-morning/IMPLEMENTATION_REPORT_V0_17_1.md</code></li>
+        <li><code>docs/stage-audits/v0-17-before-morning/screenshot-index.md</code></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Next Three v0.2 Improvements</h2>
+      <ol>
+        <li>Create the four planned textless Image 2 assets and keep instructional text in HTML callouts.</li>
+        <li>Add focused regression tests for the new tiny interactions and answer randomization helper.</li>
+        <li>Add a repeatable mobile screenshot harness for 320px, 390px, and 430px checks.</li>
+      </ol>
+    </section>
+
+    <figure>
+      <figcaption><strong>Journey overview.</strong> First seven Journey rows no longer repeat path labels inside each card row.</figcaption>
+      <img src="screenshots/v0-17-1-before-morning-overview.png" alt="Journey overview after row cleanup" />
+    </figure>
+
+    <figure>
+      <figcaption><strong>What Is an LLM?</strong> Revised prompt trace showing the next-token cloud.</figcaption>
+      <img src="screenshots/v0-17-1-01-what-is-llm-trace.png" alt="What Is an LLM prompt trace interaction" />
+    </figure>
+
+    <figure>
+      <figcaption><strong>Rationalists vs Empiricists.</strong> Revised rules and learned patterns visual.</figcaption>
+      <img src="screenshots/v0-17-1-02-rationalists-visual.png" alt="Rules and learned patterns visual" />
+    </figure>
+
+    <figure>
+      <figcaption><strong>Training.</strong> Durable update step highlighted.</figcaption>
+      <img src="screenshots/v0-17-1-03-training-update.png" alt="Training update weights interaction" />
+    </figure>
+
+    <figure>
+      <figcaption><strong>Pretraining.</strong> Perfect-recall myth distinction.</figcaption>
+      <img src="screenshots/v0-17-1-04-pretraining-myth.png" alt="Pretraining myth toggle interaction" />
+    </figure>
+
+    <figure>
+      <figcaption><strong>Overfitting.</strong> Generalizing curve and held-out examples distinction.</figcaption>
+      <img src="screenshots/v0-17-1-05-overfitting-generalizing.png" alt="Overfitting and generalization curve interaction" />
+    </figure>
+
+    <figure>
+      <figcaption><strong>Fine-Tuning.</strong> Durable training versus temporary context steering versus decoding choice.</figcaption>
+      <img src="screenshots/v0-17-1-06-fine-tuning-sort.png" alt="Fine-tuning sort interaction" />
+    </figure>
+
+    <figure>
+      <figcaption><strong>Alignment.</strong> Durable shaping, runtime steering, and evaluation grouped.</figcaption>
+      <img src="screenshots/v0-17-1-07-alignment-groups.png" alt="Alignment grouping interaction" />
+    </figure>
+
+    <figure>
+      <figcaption><strong>Checkpoint randomization.</strong> Answer ordering still comes from the randomized choice system.</figcaption>
+      <img src="screenshots/v0-17-1-checkpoint-randomized.png" alt="Randomized checkpoint answer state" />
+    </figure>
+
+    <figure>
+      <figcaption><strong>320px Alignment spot check.</strong> Chips and bucket labels wrap at narrow width.</figcaption>
+      <img src="screenshots/v0-17-1-320-alignment-check.png" alt="Alignment interaction at 320px width" />
+    </figure>
+
+    <figure>
+      <figcaption><strong>Badge version.</strong> Single badge remains and version appears under Start over.</figcaption>
+      <img src="screenshots/v0-17-1-badge-version.png" alt="Badge page showing v0.17.1" />
+    </figure>
+  </main>
+</body>
+</html>

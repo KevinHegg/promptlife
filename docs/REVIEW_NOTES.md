@@ -2,6 +2,39 @@
 
 Date: 2026-06-05
 
+## v0.17.1 Before Morning Implementation Pass
+
+### What Changed
+
+- Bumped the visible app version to `v0.17.1`.
+- Removed the duplicate visible `Core idea` heading after the `CORE IDEA` pill on lesson cards.
+- Removed repeated path-label chips from individual Journey rows while keeping Journey filters and stage context.
+- Revised the first seven Before Morning cards for clearer mobile-first teaching:
+  - What Is an LLM now uses the canonical prompt trace and `floor` next-token example.
+  - Rationalists vs Empiricists now sorts rules, learned patterns, and hybrid system pieces.
+  - Training foregrounds predict, compare, loss, update weights, repeat.
+  - Pretraining now separates large-scale pattern learning from perfect recall.
+  - Overfitting now emphasizes held-out examples and generalization.
+  - Fine-Tuning now contrasts durable training with prompting, RAG, and sampling.
+  - Alignment now groups durable shaping, runtime steering, and evaluation.
+- Added/refined Before Morning exercises in `src/data/exercises.ts` for internal lesson architecture review.
+- Added `docs/stage-audits/v0-17-before-morning/IMAGE_ASSET_PLAN.md` for four future textless Image 2 assets without generating PNGs.
+- Added `docs/stage-audits/v0-17-before-morning/IMPLEMENTATION_REPORT_V0_17_1.md` and v0.17.1 screenshots.
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed; 67 total audited surfaces, 45 randomized, 22 fixed-order exclusions.
+- Browser QA at 390px verified Journey cleanup, revised Before Morning interactions, checkpoint randomization behavior, Badge version placement, and no console errors.
+- Browser QA at 320px verified Alignment interaction wrapping.
+
+### Known Issues
+
+- The existing Vite large-chunk warning remains.
+- The planned Image 2 assets are still future work; v0.17.1 only adds the asset plan.
+
 ## v0.17 Before Morning Stage Audit
 
 ### What Changed

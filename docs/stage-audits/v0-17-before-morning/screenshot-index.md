@@ -4,6 +4,22 @@ Date: 2026-06-05
 
 All standard screenshots were captured at 390px wide and 844px tall. Dense-card spot checks were captured at 320px and 430px.
 
+## v0.17.1 Implementation Screenshots
+
+Captured after the Before Morning implementation pass.
+
+- `screenshots/v0-17-1-before-morning-overview.png`
+- `screenshots/v0-17-1-01-what-is-llm-trace.png`
+- `screenshots/v0-17-1-02-rationalists-visual.png`
+- `screenshots/v0-17-1-03-training-update.png`
+- `screenshots/v0-17-1-04-pretraining-myth.png`
+- `screenshots/v0-17-1-05-overfitting-generalizing.png`
+- `screenshots/v0-17-1-06-fine-tuning-sort.png`
+- `screenshots/v0-17-1-07-alignment-groups.png`
+- `screenshots/v0-17-1-checkpoint-randomized.png`
+- `screenshots/v0-17-1-320-alignment-check.png`
+- `screenshots/v0-17-1-badge-version.png`
+
 ## Stage-Level Screenshots
 
 - `screenshots/journey-top.png`
@@ -111,4 +127,3 @@ Each card includes:
 - Bottom nav Journey returned to the top/stage flow.
 - Checkpoint feedback screenshots were captured without pressing a lesson-advance action.
 - Pretraining was the current Learn card in this local state; other screenshot states came from Review or Preview as available.
-
