@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Prompt Life v0.14 Glossary + Journey Report</title>
+  <style>
+    :root {
+      --ink: #07124a;
+      --soft: #26324f;
+      --muted: #59637e;
+      --paper: #fffdf8;
+      --mist: #eef5f4;
+      --line: rgba(18, 30, 114, 0.18);
+      --teal: #0f7778;
+      --aqua: #e9fffb;
+      --blue: #eef3ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--mist);
+      line-height: 1.48;
+    }
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 38px 30px 56px;
+      background: var(--paper);
+    }
+    header {
+      border-bottom: 2px solid var(--line);
+      margin-bottom: 24px;
+      padding-bottom: 18px;
+    }
+    .eyebrow {
+      margin: 0 0 6px;
+      color: var(--teal);
+      font-weight: 900;
+      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: 0.04em;
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: 34px;
+      line-height: 1.08;
+    }
+    h2 {
+      margin: 26px 0 10px;
+      font-size: 22px;
+      line-height: 1.18;
+    }
+    h3 {
+      margin: 18px 0 8px;
+      font-size: 16px;
+      color: var(--teal);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    p { color: var(--soft); }
+    ul, ol { color: var(--soft); padding-left: 1.25rem; }
+    li { margin: 0.18rem 0; }
+    code {
+      color: var(--ink);
+      background: var(--blue);
+      border-radius: 6px;
+      padding: 1px 5px;
+      font-size: 0.92em;
+    }
+    pre {
+      background: #07124a;
+      color: white;
+      border-radius: 8px;
+      padding: 14px;
+      overflow-wrap: anywhere;
+      white-space: pre-wrap;
+    }
+    pre code {
+      color: white;
+      background: transparent;
+      padding: 0;
+    }
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin: 18px 0 22px;
+    }
+    .summary-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #f8fbff;
+      padding: 12px;
+      color: var(--soft);
+    }
+    .summary-card strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--ink);
+    }
+    .note {
+      border-left: 4px solid var(--teal);
+      background: var(--aqua);
+      border-radius: 8px;
+      padding: 12px 14px;
+      color: #063d43;
+      font-weight: 750;
+    }
+    .qa {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #ffffff;
+      padding: 12px 14px;
+    }
+    figure {
+      break-inside: avoid;
+      margin: 18px 0 24px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: white;
+      padding: 12px;
+      box-shadow: 0 8px 18px rgba(7, 18, 74, 0.08);
+    }
+    figure img {
+      display: block;
+      width: min(100%, 390px);
+      height: auto;
+      margin: 0 auto;
+      border-radius: 6px;
+      border: 1px solid rgba(18, 30, 114, 0.12);
+    }
+    figcaption {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .page-break { break-before: page; }
+    @page { margin: 0.55in; }
+    @media print {
+      body { background: white; }
+      main { padding: 0; max-width: none; }
+      .summary-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">Prompt Life v0.14</p>
+      <h1>Glossary + Journey Path Clarity Report</h1>
+      <p>Internal report generated 2026-06-05. This PDF wraps the response summary and screenshots for the v0.14 mobile-first glossary and Journey filtering pass.</p>
+    </header>
+
+    <section>
+      <h2>What Changed</h2>
+      <div class="summary-grid">
+        <div class="summary-card"><strong>Glossary sorting</strong>Added A-Z and Learning path sort modes, with A-Z as the default reference mode.</div>
+        <div class="summary-card"><strong>Learning metadata</strong>Added first-introduced lesson metadata on learning-path cards and in the drawer.</div>
+        <div class="summary-card"><strong>Lesson links</strong>Added Open lesson from the drawer, routing completed lessons to Review and incomplete lessons to Preview.</div>
+        <div class="summary-card"><strong>Journey filters</strong>Added All, Essential, Deep, and Ethics filters without changing progress rules.</div>
+      </div>
+      <p class="note">The pass keeps the curriculum stable while making the app easier to skim: glossary terms can now be found alphabetically or followed in learning order, and the Journey can be narrowed without treating all 38 cards as required.</p>
+    </section>
+
+    <section>
+      <h2>Files Changed</h2>
+      <ul>
+        <li><code>src/main.tsx</code></li>
+        <li><code>src/data/content.ts</code></li>
+        <li><code>src/styles/global.css</code></li>
+        <li><code>README.md</code></li>
+        <li><code>docs/REVIEW_NOTES.md</code></li>
+        <li><code>docs/curriculum/GLOSSARY_ORDERING_V0_14.md</code></li>
+        <li><code>docs/curriculum/JOURNEY_PATH_FILTERS_V0_14.md</code></li>
+        <li><code>docs/curriculum/V0_14_CHANGE_LOG.md</code></li>
+        <li><code>docs/curriculum/prompt-life-v0-14-glossary-journey-report.html</code></li>
+        <li><code>docs/curriculum/prompt-life-v0-14-glossary-journey-report.pdf</code></li>
+        <li><code>docs/screenshots/v0-14-*.png</code></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>How To Run Locally</h2>
+      <pre><code>cd ~/Desktop/promptlife
+npm install
+npm run dev</code></pre>
+      <p>Open the local URL printed by Vite. For phone testing on the same Wi-Fi network, run <code>npm run dev -- --host 0.0.0.0</code> and open the Network URL Vite prints.</p>
+      <p>For the deployed build, open <code>https://kevinhegg.github.io/promptlife/?v=014</code> after the GitHub Pages run completes.</p>
+    </section>
+
+    <section>
+      <h2>What Is Done</h2>
+      <ul>
+        <li>The Glossary defaults to A-Z and can switch to Learning path.</li>
+        <li>Search works in both sort modes and keeps the selected mode active.</li>
+        <li>Learning path groups terms by Journey section and shows <code>Introduced in</code> metadata.</li>
+        <li>The glossary drawer shows <code>First appears in</code> and an <code>Open lesson</code> action.</li>
+        <li>Glossary lesson links preserve progress: completed cards open Review mode, future cards open Preview mode.</li>
+        <li>Journey filters show All, Essential, Deep, and Ethics, with counts of 38, 27, 5, and 6 cards.</li>
+        <li>Filtering does not alter completion, badge state, or the current open lesson.</li>
+        <li>The visible app version is <code>v0.14.0</code>.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Verification</h2>
+      <div class="qa">
+        <h3>Commands</h3>
+        <ul>
+          <li><code>npm install</code>: passed.</li>
+          <li><code>npm run typecheck</code>: passed.</li>
+          <li><code>npm run build</code>: passed with the existing Vite large-chunk warning.</li>
+          <li><code>npm run build:pages</code>: passed with the existing Vite large-chunk warning.</li>
+        </ul>
+        <h3>Browser QA</h3>
+        <ul>
+          <li>390px screenshots captured for Glossary A-Z, Learning path, token search, drawer metadata, Preview from glossary, Review from glossary, and Journey filters.</li>
+          <li>320, 390, and 430px overflow checks passed for Glossary A-Z, Learning path, token search, and Journey All/Essential/Deep/Ethics filters.</li>
+          <li>Completed one lesson through the normal checkpoint flow, then verified the glossary drawer opens that lesson in Review mode.</li>
+          <li>Verified a future glossary lesson opens in Preview mode without changing progress.</li>
+          <li>Verified the Return to Journey control exists on Preview/Review lesson pages.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>Next Three v0.2 Improvements</h2>
+      <ol>
+        <li>Add a source-review pass for Ethics cards so public-facing claims can move from careful draft language to cited teaching language.</li>
+        <li>Consider saving the learner's preferred Glossary sort only after observing whether resetting to A-Z feels annoying in testing.</li>
+        <li>Add a compact path overview on the Badge page so learners can see Essential, Deep, and Ethics progress separately.</li>
+      </ol>
+    </section>
+
+    <section class="page-break">
+      <h2>Screenshots</h2>
+      <figure>
+        <img src="../screenshots/v0-14-glossary-az.png" alt="Glossary screen at mobile width showing A-Z sorting active." />
+        <figcaption>Glossary default: A-Z sorting is active, with compact cards for fast lookup.</figcaption>
+      </figure>
+      <figure>
+        <img src="../screenshots/v0-14-glossary-learning-path.png" alt="Glossary screen showing Learning path sorting with Before Morning section." />
+        <figcaption>Glossary Learning path: terms are grouped by Journey section and show introduced-in metadata.</figcaption>
+      </figure>
+      <figure>
+        <img src="../screenshots/v0-14-glossary-search-token.png" alt="Glossary search for token while Learning path sorting remains active." />
+        <figcaption>Search with sort active: the token search stays in Learning path mode.</figcaption>
+      </figure>
+      <figure>
+        <img src="../screenshots/v0-14-glossary-drawer-first-appears.png" alt="Glossary drawer showing First appears in metadata and Open lesson button." />
+        <figcaption>Glossary drawer: First appears in metadata and Open lesson action are visible.</figcaption>
+      </figure>
+      <figure>
+        <img src="../screenshots/v0-14-preview-from-glossary.png" alt="Lesson page opened from a glossary drawer in Preview mode." />
+        <figcaption>Preview from glossary: future/incomplete lesson links do not change progress.</figcaption>
+      </figure>
+      <figure>
+        <img src="../screenshots/v0-14-review-from-glossary.png" alt="Lesson page opened from a glossary drawer in Review mode after completion." />
+        <figcaption>Review from glossary: completed lesson links open the completed-card review state.</figcaption>
+      </figure>
+      <figure>
+        <img src="../screenshots/v0-14-journey-all-filter.png" alt="Journey screen showing the All filter selected." />
+        <figcaption>Journey filter: All shows all 38 cards.</figcaption>
+      </figure>
+      <figure>
+        <img src="../screenshots/v0-14-journey-essential-filter.png" alt="Journey screen showing the Essential filter selected." />
+        <figcaption>Journey filter: Essential shows the shorter 27-card path.</figcaption>
+      </figure>
+      <figure>
+        <img src="../screenshots/v0-14-journey-ethics-filter.png" alt="Journey screen showing the Ethics filter selected." />
+        <figcaption>Journey filter: Ethics shows the 6-card social and human consequences path.</figcaption>
+      </figure>
+    </section>
+  </main>
+</body>
+</html>

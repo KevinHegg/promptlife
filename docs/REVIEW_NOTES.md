@@ -1,6 +1,42 @@
 # Review Notes
 
-Date: 2026-06-04
+Date: 2026-06-05
+
+## v0.14 Glossary And Journey Path Clarity
+
+### What Changed
+
+- Added Glossary sorting:
+  - `A-Z`
+  - `Learning path`
+- Made `A-Z` the default Glossary order.
+- Added learning-path section grouping and first-introduced lesson metadata.
+- Added `Open lesson` from the glossary drawer.
+- Added Journey filters: All, Essential, Deep, Ethics.
+- Re-labeled existing Journey path types so Essential is a shorter 27-card path, with 5 Deep cards and 6 Ethics cards.
+- Bumped visible Badge version to `v0.14.0`.
+- Added docs:
+  - `docs/curriculum/GLOSSARY_ORDERING_V0_14.md`
+  - `docs/curriculum/JOURNEY_PATH_FILTERS_V0_14.md`
+  - `docs/curriculum/V0_14_CHANGE_LOG.md`
+
+### Behavior Notes
+
+- Glossary search works in both sort modes.
+- Glossary sort preference is intentionally not stored; it resets to `A-Z`.
+- Completed lessons opened from the drawer use Review mode.
+- Incomplete/future lessons opened from the drawer use Preview mode.
+- Journey filters do not change progress, completion, or badge state.
+
+### Verification
+
+- `npm install`: passed.
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- Browser QA at 320, 390, and 430px: passed with no horizontal overflow in the new Glossary and Journey filter states.
+- Glossary drawer lesson links were verified in both Preview and Review modes.
+- Screenshots and the wrapped response PDF are tracked in `docs/curriculum/prompt-life-v0-14-glossary-journey-report.pdf`.
 
 ## v0.13 Whole Journey Review And Content Freeze Candidate
 

@@ -31,7 +31,7 @@ import './styles/global.css'
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '')
 const ASSET = `${BASE}/assets/promptlife`
 // Bump this for each shipped app change; the Badge screen displays it under Start over.
-const APP_VERSION = '0.13.0'
+const APP_VERSION = '0.14.0'
 const STORAGE_KEYS = {
   lastLocation: 'promptlife:v1:lastLocation',
   lessonId: 'promptlife:v1:lessonId',
@@ -55,6 +55,73 @@ const LEGACY_STORAGE_KEYS = {
   learningTourComplete: 'pl.learningTourComplete'
 }
 const PROMPT_LIFE_STORAGE_KEYS = [...Object.values(STORAGE_KEYS), ...Object.values(LEGACY_STORAGE_KEYS)]
+const GLOSSARY_RELATED_SECTION = 'Related AI literacy terms'
+const GLOSSARY_SECTION_ORDER = [
+  'Before Morning',
+  'Prompt Arrives',
+  'Morning Commute',
+  'Workday',
+  'Decision Room',
+  'The Day Repeats',
+  'Wider AI Literacy',
+  GLOSSARY_RELATED_SECTION
+]
+const GLOSSARY_LEARNING_GROUPS = [
+  { firstLessonId: 'what-is-llm', termIds: ['llm'] },
+  { firstLessonId: 'history', termIds: ['rationalism', 'empiricism', 'symbolic-ai', 'deep-learning'] },
+  { firstLessonId: 'training', termIds: ['training', 'training-data', 'loss', 'weight', 'parameter', 'weight-update'] },
+  { firstLessonId: 'pretraining', termIds: ['pretraining', 'next-token'] },
+  { firstLessonId: 'overfitting-generalization', termIds: ['overfitting', 'generalization', 'validation-data'] },
+  { firstLessonId: 'fine-tuning', termIds: ['fine-tuning', 'adapter'] },
+  { firstLessonId: 'alignment', termIds: ['alignment', 'instruction-tuning', 'human-feedback-learning', 'rlhf', 'preference-optimization', 'policy', 'guardrail', 'evaluation'] },
+  { firstLessonId: 'inference', termIds: ['inference', 'forward-pass'] },
+  { firstLessonId: 'prompt-response', termIds: ['prompt', 'response', 'prompt-tokens', 'response-tokens', 'generated-token', 'completion', 'input-context', 'decoding-step', 'model-output'] },
+  { firstLessonId: 'tokens', termIds: ['token', 'tokenizer', 'tokenization'] },
+  { firstLessonId: 'token-ids', termIds: ['token-id'] },
+  { firstLessonId: 'embeddings', termIds: ['embedding', 'embedding-table'] },
+  { firstLessonId: 'vectors', termIds: ['vector', 'feature', 'distributed-representation'] },
+  { firstLessonId: 'tensors', termIds: ['tensor', 'activation', 'weight-tensor'] },
+  { firstLessonId: 'attention', termIds: ['attention'] },
+  { firstLessonId: 'mlp', termIds: ['MLP'] },
+  { firstLessonId: 'layers', termIds: ['layer'] },
+  { firstLessonId: 'hidden-states', termIds: ['hidden state'] },
+  { firstLessonId: 'logits', termIds: ['logits'] },
+  { firstLessonId: 'softmax', termIds: ['softmax', 'probability'] },
+  { firstLessonId: 'sampling', termIds: ['sampling', 'temperature', 'top-k', 'top-p'] },
+  { firstLessonId: 'autoregression', termIds: ['autoregression'] },
+  { firstLessonId: 'context-window', termIds: ['context window', 'memory'] },
+  { firstLessonId: 'rag-retrieval', termIds: ['rag', 'retrieval'] },
+  { firstLessonId: 'grounding', termIds: ['grounding', 'citation'] },
+  { firstLessonId: 'hallucinations', termIds: ['hallucination', 'uncertainty'] },
+  { firstLessonId: 'how-ai-learns', termIds: ['in-context learning'] },
+  { firstLessonId: 'risk-myth', termIds: ['prompt-injection', 'privacy'] },
+  { firstLessonId: 'diffusion', termIds: ['diffusion'] },
+  { firstLessonId: 'multimodal', termIds: ['multimodal'] },
+  { firstLessonId: 'perfect-storm', termIds: ['perfect-storm-term', 'human-feedback-labor', 'compute', 'data-center'] },
+  { firstLessonId: 'collective-intelligence', termIds: ['collective-intelligence-term', 'data-provenance', 'consent', 'compensation', 'copyright'] },
+  { firstLessonId: 'benefits-worth-taking-seriously', termIds: ['accessibility', 'translation', 'summarization'] },
+  { firstLessonId: 'costs-we-must-count', termIds: ['energy-use', 'water-use', 'carbon-emissions', 'labor-disruption', 'deskilling'] },
+  { firstLessonId: 'human-centered-ai', termIds: ['human-centered-ai-term', 'dignity', 'common-good'] },
+  { firstLessonId: 'better-ai-choice', termIds: ['responsible-ai', 'model-distillation', 'efficient-inference', 'governance'] },
+  { firstLessonId: 'effective-prompting-literacy', termIds: ['effective-prompting', 'human-review'] },
+  { firstLessonId: 'model-literate-synthesis', termIds: ['model-literacy'] },
+  { firstLessonId: null, termIds: ['neural network', 'model-checkpoint'] }
+]
+const GLOSSARY_LEARNING_HINTS = Object.fromEntries(
+  GLOSSARY_LEARNING_GROUPS.flatMap((group, groupIndex) =>
+    group.termIds.map((id, termIndex) => [id, {
+      firstLessonId: group.firstLessonId,
+      learningOrder: groupIndex * 100 + termIndex
+    }])
+  )
+)
+const JOURNEY_FILTERS = [
+  { id: 'all', label: 'All' },
+  { id: 'essential', label: 'Essential' },
+  { id: 'deep', label: 'Deep' },
+  { id: 'ethics', label: 'Ethics' }
+]
+
 function prefersReducedMotion() {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches
 }
@@ -281,6 +348,12 @@ function App() {
     setTab('learn')
   }
 
+  function openLessonFromGlossary(id) {
+    const mode = completed.includes(id) ? 'review' : 'preview'
+    setDrawerTerm(null)
+    openLesson(id, mode)
+  }
+
   function openPlayFeature(id) {
     setGameId(id)
     setTab('play')
@@ -387,7 +460,12 @@ function App() {
         )}
       </main>
       <BottomNav tab={tab} setTab={setTab} />
-      <GlossaryDrawer termId={drawerTerm} onOpen={setDrawerTerm} onClose={() => setDrawerTerm(null)} />
+      <GlossaryDrawer
+        termId={drawerTerm}
+        onOpen={setDrawerTerm}
+        onClose={() => setDrawerTerm(null)}
+        onOpenLesson={openLessonFromGlossary}
+      />
     </div>
   )
 }
@@ -465,7 +543,13 @@ function Pillar({ icon, label }) {
 }
 
 function JourneyScreen({ completed, currentLessonId, onOpenLesson, onTrace, onLearningTour }) {
+  const [pathFilter, setPathFilter] = useState('all')
   const currentActId = lessons.find((lesson) => lesson.id === currentLessonId)?.act ?? acts[0].id
+  const visibleLessons = lessons.filter((lesson) => matchesJourneyPathFilter(lesson, pathFilter))
+  const activeFilter = JOURNEY_FILTERS.find((filter) => filter.id === pathFilter) ?? JOURNEY_FILTERS[0]
+  const filterSummary = pathFilter === 'all'
+    ? `Showing all ${visibleLessons.length} Journey cards.`
+    : `Showing ${visibleLessons.length} ${activeFilter.label} cards.`
 
   return (
     <section className="screen journey-screen" aria-labelledby="journey-title">
@@ -476,6 +560,26 @@ function JourneyScreen({ completed, currentLessonId, onOpenLesson, onTrace, onLe
         titleId="journey-title"
       />
       <StageTimeline currentActId={currentActId} />
+      <section className="path-filter-panel" aria-labelledby="journey-filter-title">
+        <div>
+          <p className="eyebrow">Path view</p>
+          <h2 id="journey-filter-title">Choose a path</h2>
+          <p>All cards build model literacy. Essential is the shortest path. Deep adds mechanics. Ethics connects AI to human consequences.</p>
+        </div>
+        <div className="segmented-control path-filter-control" aria-label="Filter Journey cards by path">
+          {JOURNEY_FILTERS.map((filter) => (
+            <button
+              key={filter.id}
+              className={pathFilter === filter.id ? 'active' : ''}
+              onClick={() => setPathFilter(filter.id)}
+              aria-pressed={pathFilter === filter.id}
+            >
+              {filter.label}
+            </button>
+          ))}
+        </div>
+        <p className="filter-summary" role="status">{filterSummary}</p>
+      </section>
       <section className="tour-feature-panel" aria-labelledby="guided-tours-title">
         <div>
           <p className="eyebrow">Guided comparisons</p>
@@ -489,7 +593,8 @@ function JourneyScreen({ completed, currentLessonId, onOpenLesson, onTrace, onLe
       </section>
       <div className="journey-list">
         {acts.map((act) => {
-          const actLessons = lessons.filter((lesson) => lesson.act === act.id)
+          const actLessons = visibleLessons.filter((lesson) => lesson.act === act.id)
+          if (!actLessons.length) return null
           return (
             <section className="act-section" key={act.id} aria-labelledby={`${act.id}-title`}>
               <div className="act-heading">
@@ -543,6 +648,11 @@ function getPathLabel(pathType) {
     'side-tour': 'Deep'
   }
   return labels[pathType] ?? 'Essential'
+}
+
+function matchesJourneyPathFilter(lesson, filterId) {
+  if (filterId === 'all') return true
+  return getPathLabel(lesson.pathType).toLowerCase() === filterId
 }
 
 function getReviewAction(lesson) {
@@ -793,6 +903,98 @@ function matchesGlossaryTerm(item, value) {
 
 function findGlossaryTerm(value) {
   return glossary.find((item) => matchesGlossaryTerm(item, value))
+}
+
+function getGlossaryHint(item) {
+  const aliasHint = item.aliases?.map((alias) => GLOSSARY_LEARNING_HINTS[alias]).find(Boolean)
+  return GLOSSARY_LEARNING_HINTS[item.id] ||
+    GLOSSARY_LEARNING_HINTS[item.term] ||
+    GLOSSARY_LEARNING_HINTS[item.term.toLowerCase()] ||
+    aliasHint ||
+    null
+}
+
+function getGlossarySection(lesson) {
+  if (!lesson) return GLOSSARY_RELATED_SECTION
+  if (lesson.act === 'before-morning') return 'Before Morning'
+  if (lesson.act === 'morning' && lesson.actLabel === 'Prompt Arrives') return 'Prompt Arrives'
+  if (lesson.act === 'morning') return 'Morning Commute'
+  if (lesson.act === 'workday') return 'Workday'
+  if (lesson.act === 'decision-room') return 'Decision Room'
+  if (lesson.act === 'day-repeats') return 'The Day Repeats'
+  return 'Wider AI Literacy'
+}
+
+function findFirstLessonForTerm(item) {
+  return lessons.find((lesson) => lesson.terms?.some((term) => matchesGlossaryTerm(item, term)))
+}
+
+function getGlossaryLearningMetadata(item) {
+  const hint = getGlossaryHint(item)
+  const hintedLesson = hint?.firstLessonId
+    ? lessons.find((lesson) => lesson.id === hint.firstLessonId)
+    : null
+  const firstLesson = hintedLesson ?? findFirstLessonForTerm(item)
+  const lessonIndex = firstLesson ? lessons.findIndex((lesson) => lesson.id === firstLesson.id) : -1
+  const hasMappedLesson = Boolean(firstLesson)
+  const section = hasMappedLesson ? getGlossarySection(firstLesson) : GLOSSARY_RELATED_SECTION
+  const sectionIndex = GLOSSARY_SECTION_ORDER.indexOf(section)
+  const journeyOrder = hint?.learningOrder ?? (lessonIndex >= 0 ? lessonIndex * 100 : Number.MAX_SAFE_INTEGER)
+
+  return {
+    firstLessonId: firstLesson?.id ?? null,
+    firstLessonTitle: firstLesson?.title ?? null,
+    journeyOrder,
+    pathLabel: firstLesson ? getPathLabel(firstLesson.pathType) : null,
+    section,
+    sectionIndex: sectionIndex >= 0 ? sectionIndex : GLOSSARY_SECTION_ORDER.length - 1
+  }
+}
+
+function getGlossarySearchText(item) {
+  const meta = getGlossaryLearningMetadata(item)
+  return [
+    item.term,
+    ...(item.aliases ?? []),
+    item.definition,
+    item.relationship,
+    item.metaphor,
+    item.brainMetaphor,
+    item.brainLimit,
+    item.confused,
+    ...(item.related ?? []),
+    meta.firstLessonTitle,
+    meta.section,
+    meta.pathLabel
+  ].filter(Boolean).join(' ').toLowerCase()
+}
+
+function sortGlossaryTerms(items, sortMode) {
+  const sorted = [...items]
+  if (sortMode === 'learning') {
+    return sorted.sort((a, b) => {
+      const metaA = getGlossaryLearningMetadata(a)
+      const metaB = getGlossaryLearningMetadata(b)
+      return metaA.sectionIndex - metaB.sectionIndex ||
+        metaA.journeyOrder - metaB.journeyOrder ||
+        a.term.localeCompare(b.term)
+    })
+  }
+  return sorted.sort((a, b) => a.term.localeCompare(b.term))
+}
+
+function groupGlossaryTermsBySection(items) {
+  return items.reduce((groups, item) => {
+    const meta = getGlossaryLearningMetadata(item)
+    const key = meta.firstLessonId ? meta.section : GLOSSARY_RELATED_SECTION
+    const existing = groups.find((group) => group.section === key)
+    if (existing) {
+      existing.terms.push(item)
+    } else {
+      groups.push({ section: key, terms: [item] })
+    }
+    return groups
+  }, [])
 }
 
 function Checkpoint({ quiz, choice, setChoice, revealed }) {
@@ -1656,7 +1858,14 @@ function GameReflection({ prompt }) {
 
 function GlossaryScreen({ onOpen }) {
   const [query, setQuery] = useState('')
-  const terms = glossary.filter((item) => `${item.term} ${(item.aliases ?? []).join(' ')} ${item.definition} ${item.relationship} ${item.metaphor} ${item.brainMetaphor ?? ''} ${item.brainLimit ?? ''} ${item.confused ?? ''} ${(item.related ?? []).join(' ')}`.toLowerCase().includes(query.toLowerCase()))
+  const [sortMode, setSortMode] = useState('az')
+  const normalizedQuery = query.trim().toLowerCase()
+  const matchingTerms = glossary.filter((item) => getGlossarySearchText(item).includes(normalizedQuery))
+  const terms = sortGlossaryTerms(matchingTerms, sortMode)
+  const groupedTerms = sortMode === 'learning' ? groupGlossaryTermsBySection(terms) : [{ section: null, terms }]
+  const helperText = sortMode === 'learning'
+    ? 'Learning path shows how the vocabulary builds from prompt to response.'
+    : 'Find terms alphabetically.'
 
   return (
     <section className="screen glossary-screen" aria-labelledby="glossary-title">
@@ -1668,25 +1877,50 @@ function GlossaryScreen({ onOpen }) {
       />
       <label className="search-box">
         Search terms
-        <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="token, tensor, softmax..." />
+        <span className="search-row">
+          <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="token, tensor, softmax..." />
+          {query && <button type="button" className="search-reset" onClick={() => setQuery('')}>Clear</button>}
+        </span>
       </label>
+      <section className="glossary-controls" aria-labelledby="glossary-sort-title">
+        <h2 id="glossary-sort-title" className="sr-only">Sort glossary terms</h2>
+        <div className="segmented-control glossary-sort-toggle" aria-label="Sort glossary terms">
+          <button className={sortMode === 'az' ? 'active' : ''} onClick={() => setSortMode('az')} aria-pressed={sortMode === 'az'}>A-Z</button>
+          <button className={sortMode === 'learning' ? 'active' : ''} onClick={() => setSortMode('learning')} aria-pressed={sortMode === 'learning'}>Learning path</button>
+        </div>
+        <p className="glossary-helper">{helperText}</p>
+      </section>
       <div className="glossary-list">
-        {terms.map((item) => (
-          <button className="glossary-card" key={item.id} onClick={() => onOpen(item.id)}>
-            <strong>{item.term}</strong>
-            <span>{item.definition}</span>
-            <small>{item.relationship}</small>
-          </button>
+        {groupedTerms.map((group) => (
+          <section className="glossary-group" key={group.section ?? 'az'} aria-label={group.section ?? 'A-Z glossary terms'}>
+            {group.section && <h2 className="glossary-section-heading">{group.section}</h2>}
+            {group.terms.map((item) => {
+              const meta = getGlossaryLearningMetadata(item)
+              return (
+                <button className="glossary-card" key={item.id} onClick={() => onOpen(item.id)}>
+                  <strong>{item.term}</strong>
+                  <span>{item.definition}</span>
+                  <small>{item.relationship}</small>
+                  {sortMode === 'learning' && (
+                    <small className="intro-line">
+                      {meta.firstLessonTitle ? `Introduced in: ${meta.firstLessonTitle}` : 'Related AI literacy term'}
+                    </small>
+                  )}
+                </button>
+              )
+            })}
+          </section>
         ))}
       </div>
-      {!terms.length && <p className="empty-note">No matching term yet. Try a shorter search.</p>}
+      {!terms.length && <p className="empty-note">No glossary terms match that search.</p>}
     </section>
   )
 }
 
-function GlossaryDrawer({ termId, onOpen, onClose }) {
+function GlossaryDrawer({ termId, onOpen, onClose, onOpenLesson }) {
   const item = findGlossaryTerm(termId)
   const closeRef = useRef(null)
+  const meta = item ? getGlossaryLearningMetadata(item) : null
   const relatedTerms = useMemo(() => {
     if (!item) return []
     if (item.related?.length) {
@@ -1741,6 +1975,18 @@ function GlossaryDrawer({ termId, onOpen, onClose }) {
         {item.brainMetaphor && <section className="concept-card compact"><span>Brain bridge</span><p>{item.brainMetaphor}</p></section>}
         {item.brainLimit && <section className="concept-card compact"><span>Where it breaks</span><p>{item.brainLimit}</p></section>}
         {item.confused && <section className="concept-card compact"><span>Often confused with</span><p>{item.confused}</p></section>}
+        {meta?.firstLessonId && (
+          <section className="concept-card compact drawer-lesson-card">
+            <span>First appears in</span>
+            <p>{meta.firstLessonTitle}</p>
+            <button
+              className="secondary-btn drawer-lesson-action"
+              onClick={() => onOpenLesson(meta.firstLessonId)}
+            >
+              Open lesson
+            </button>
+          </section>
+        )}
         {relatedTerms.length > 0 && (
           <section className="concept-card compact">
             <span>Related terms</span>
