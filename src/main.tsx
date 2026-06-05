@@ -26,12 +26,13 @@ import { buildLessonReviewProfile, reviewRubricCategories } from './data/content
 import { emptyExerciseProgress, exerciseById, exercises, lessonExerciseIds } from './data/exercises'
 import { PROMPT_RUN_FINAL_ID, PROMPT_RUN_SAMPLE, emptyPromptRunProgress, promptRunFinalChallenge, promptRunSteps } from './data/promptRun'
 import { attentionExample, canonicalPromptResponse } from './data/canonicalExamples'
+import { getLessonSourceReview, sourceRegistry } from './data/sourceRegistry'
 import './styles/global.css'
 
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '')
 const ASSET = `${BASE}/assets/promptlife`
 // Bump this for each shipped app change; the Badge screen displays it under Start over.
-const APP_VERSION = '0.15.1'
+const APP_VERSION = '0.16.0'
 const STORAGE_KEYS = {
   lastLocation: 'promptlife:v1:lastLocation',
   lessonId: 'promptlife:v1:lessonId',
@@ -98,11 +99,11 @@ const GLOSSARY_LEARNING_GROUPS = [
   { firstLessonId: 'diffusion', termIds: ['diffusion'] },
   { firstLessonId: 'multimodal', termIds: ['multimodal'] },
   { firstLessonId: 'perfect-storm', termIds: ['perfect-storm-term', 'human-feedback-labor', 'compute', 'data-center'] },
-  { firstLessonId: 'collective-intelligence', termIds: ['collective-intelligence-term', 'data-provenance', 'consent', 'compensation', 'copyright'] },
-  { firstLessonId: 'costs-we-must-count', termIds: ['energy-use', 'water-use', 'carbon-emissions', 'labor-disruption', 'deskilling'] },
+  { firstLessonId: 'collective-intelligence', termIds: ['collective-intelligence-term', 'source-review', 'data-provenance', 'consent', 'compensation', 'copyright'] },
+  { firstLessonId: 'costs-we-must-count', termIds: ['environmental-footprint', 'energy-use', 'water-use', 'carbon-emissions', 'e-waste', 'labor-disruption', 'deskilling'] },
   { firstLessonId: 'risk-myth', termIds: ['prompt-injection', 'privacy'] },
   { firstLessonId: 'benefits-worth-taking-seriously', termIds: ['accessibility', 'translation', 'summarization'] },
-  { firstLessonId: 'human-centered-ai', termIds: ['human-centered-ai-term', 'dignity', 'common-good'] },
+  { firstLessonId: 'human-centered-ai', termIds: ['human-centered-ai-term', 'dignity', 'accountability', 'common-good'] },
   { firstLessonId: 'better-ai-choice', termIds: ['responsible-ai', 'model-distillation', 'efficient-inference', 'governance'] },
   { firstLessonId: 'effective-prompting-literacy', termIds: ['effective-prompting', 'human-review'] },
   { firstLessonId: 'model-literate-synthesis', termIds: ['model-literacy'] },
@@ -2198,6 +2199,8 @@ function ReviewLessonCards() {
         const pathLabel = getPathLabel(lesson.pathType)
         const reviewAction = getReviewAction(lesson)
         const sourceNeeded = hasSourceNeeds(lesson)
+        const sourceReview = getLessonSourceReview(lesson.id)
+        const sourceTitles = sourceReview.sourceIds.map((sourceId) => sourceRegistry.find((source) => source.id === sourceId)?.title ?? sourceId)
         const visualNeeded = hasVisualNeeds(lesson)
 
         return (
@@ -2212,7 +2215,8 @@ function ReviewLessonCards() {
               <span>Path: {pathLabel}</span>
               <span>Stage: {profile.stage}</span>
               <span>Recommendation: {reviewAction}</span>
-              <span>Source needed: {sourceNeeded ? 'yes' : 'no'}</span>
+              <span>Source status: {sourceReview.status}</span>
+              <span>Source needed: {sourceReview.status === 'needs source' || sourceNeeded ? 'yes' : 'no'}</span>
               <span>Visual needed: {visualNeeded ? 'yes' : 'no'}</span>
               <span>Priority: {profile.rewritePriority}</span>
               <span>Rubric avg: {profile.rubricAverage}/5</span>
@@ -2232,7 +2236,11 @@ function ReviewLessonCards() {
               <div><dt>Brain limit</dt><dd>{lesson.brainBridge?.limit ?? 'None listed.'}</dd></div>
               <div><dt>Misconception</dt><dd>{lesson.misconception ?? profile.confusionRisk}</dd></div>
               <div><dt>Review recommendation</dt><dd>{reviewAction}</dd></div>
-              <div><dt>Source-needed flag</dt><dd>{sourceNeeded ? 'Yes. Add source review before v1 publication.' : 'No immediate external source need beyond existing mechanism review.'}</dd></div>
+              <div><dt>Source status</dt><dd>{sourceReview.status}</dd></div>
+              <div><dt>Source ids</dt><dd>{sourceReview.sourceIds.length ? sourceReview.sourceIds.join(', ') : 'None listed for v0.16.'}</dd></div>
+              <div><dt>Source titles</dt><dd>{sourceTitles.length ? sourceTitles.join('; ') : 'None listed for v0.16.'}</dd></div>
+              <div><dt>Source caveat</dt><dd>{sourceReview.caveat}</dd></div>
+              <div><dt>Source-needed flag</dt><dd>{sourceReview.status === 'needs source' || sourceNeeded ? 'Yes. Add or maintain source review before v1 publication.' : 'No immediate external source need beyond current v0.16 review.'}</dd></div>
               <div><dt>Visual-needed flag</dt><dd>{visualNeeded ? 'Yes. Placeholder coded visual should be reviewed or refined before v1.' : 'No immediate visual gap identified.'}</dd></div>
               <div><dt>Visual aid</dt><dd><code>{lesson.visualAidId}</code></dd></div>
               <div><dt>Current exercise</dt><dd>{exercise ? <><code>{exercise.id}</code>: {exercise.title}</> : 'None rendered in Journey; no direct Play mapping.'}</dd></div>

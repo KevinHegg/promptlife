@@ -2,6 +2,88 @@
 
 Date: 2026-06-05
 
+## v0.16 Source Review + Late-Day Copy Discipline
+
+### What Changed
+
+- Added an internal source registry in `src/data/sourceRegistry.ts`.
+- Added source status, source IDs, source titles, and caveat notes to the internal `/review/lesson-cards` route.
+- Tightened Midnight Ledger and New Dawn learner-facing copy so claims are careful, humane, and source-aware.
+- Added or improved glossary terms for source review, environmental footprint, e-waste, and accountability.
+- Bumped visible Badge version to `v0.16.0`.
+- Added docs:
+  - `docs/curriculum/SOURCE_REGISTRY_V0_16.md`
+  - `docs/curriculum/SOURCE_REVIEW_V0_16.md`
+  - `docs/curriculum/V0_16_CHANGE_LOG.md`
+
+### Files Changed
+
+- `src/data/content.ts`
+- `src/data/sourceRegistry.ts`
+- `src/main.tsx`
+- `docs/REVIEW_NOTES.md`
+- `docs/curriculum/SOURCE_REGISTRY_V0_16.md`
+- `docs/curriculum/SOURCE_REVIEW_V0_16.md`
+- `docs/curriculum/V0_16_CHANGE_LOG.md`
+
+### Cards Reviewed
+
+- Collective Intelligence, Extracted
+- Costs We Must Count
+- Risk vs Myth
+- Benefits Worth Taking Seriously
+- Human-Centered AI
+- Better AI Is a Choice
+- Effective Prompting from Model Literacy
+- Model Literate Synthesis
+
+### Claims Softened Or Removed
+
+- Replaced broad consent/compensation language with disputed provenance, consent, transparency, attribution, and compensation wording.
+- Replaced broad infrastructure-cost language with scoped variation by model, workload, hardware, cooling, region, electricity source, and deployment.
+- Reframed benefits into demonstrated or commonly observed, plausible, and speculative tiers.
+- Replaced "costs are real but not inevitable" with "costs are real and shaped by choices."
+- Added explicit non-guarantee language for mitigation choices.
+
+### Source Registry Status
+
+- Governance and risk sources reviewed: NIST AI RMF, NIST Generative AI Profile, UNESCO, OECD, EU AI Act, Council of Europe framework convention.
+- Human-centered / Catholic sources reviewed: Laudato Si', Dignitas Infinita, Antiqua et nova, Rome Call for AI Ethics, and Pope Leo XIV's Magnifica Humanitas.
+- Environmental sources reviewed: IEA Energy and AI and UNU-INWEH Environmental Cost of AI's Energy Use.
+- Labor and copyright sources reviewed: U.S. Copyright Office AI initiative, ILO generative AI jobs update, and OECD regional GenAI jobs report.
+
+### Learner-Facing Copy Changes
+
+- No citations were added to ordinary Journey cards.
+- No precise environmental statistics were added.
+- No unverified papal encyclical claim was added.
+- Source flags appear only in internal review places.
+
+### Source-Needed Items
+
+- Current, jurisdiction-aware sources for data provenance, consent, attribution, licensing, and compensation.
+- Task-specific benefit evidence for accessibility, translation, summarization, tutoring, research triage, administrative drafting, and scientific workflows.
+- Education/workplace evidence for deskilling and authentic-learning risks.
+- Any future standalone Prompt Injection / Tool Risk card.
+
+### Verification
+
+- Baseline `npm install`: passed.
+- Baseline `npm run typecheck`: passed.
+- Baseline `npm run build`: passed with the existing Vite large-chunk warning.
+- Final `npm run typecheck`: passed.
+- Final `npm run build`: passed with the existing Vite large-chunk warning.
+- Final `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- Browser QA at 390px: passed for Midnight Ledger, New Dawn, revised lesson previews, internal source-review fields, glossary drawer, Journey filters, Preview/Review/Learn modes, and Journey bottom-nav return-to-top.
+- Source/copy scans: passed. No learner-facing precise energy/water statistics, unverified papal AI-encyclical claim, or internal source labels appear outside the review route.
+- Screenshots and wrapped response PDF are tracked in `docs/curriculum/prompt-life-v0-16-source-review-report.pdf`.
+
+### Next Recommended Steps
+
+- Add source citations to a review-only source page if the internal review route becomes crowded.
+- Do a focused source pass for the benefits card once target domains are chosen.
+- Consider a separate security pass for Prompt Injection / Tool Risk.
+
 ## v0.15.1 Navigation Polish
 
 ### What Changed
