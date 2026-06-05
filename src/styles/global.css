@@ -3230,6 +3230,18 @@ p {
   box-shadow: inset 0 0 0 2px rgba(11, 143, 139, 0.18);
 }
 
+.exercise-option.is-correct {
+  border-color: #0b8f70;
+  background: #e8fbf2;
+  box-shadow: inset 0 0 0 2px rgba(11, 143, 112, 0.18);
+}
+
+.exercise-option.is-wrong {
+  border-color: #a9691b;
+  background: #fff7ea;
+  box-shadow: inset 0 0 0 2px rgba(169, 105, 27, 0.18);
+}
+
 .sort-chip.is-assigned {
   background: #fff7e8;
   border-color: rgba(215, 144, 55, 0.45);

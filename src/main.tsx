@@ -27,12 +27,13 @@ import { emptyExerciseProgress, exerciseById, exercises, lessonExerciseIds } fro
 import { PROMPT_RUN_FINAL_ID, PROMPT_RUN_SAMPLE, emptyPromptRunProgress, promptRunFinalChallenge, promptRunSteps } from './data/promptRun'
 import { attentionExample, canonicalPromptResponse } from './data/canonicalExamples'
 import { getLessonSourceReview, sourceRegistry } from './data/sourceRegistry'
+import { CHOICE_ORDER_SEED_KEY, buildQuizChoices, getChoiceOrderSeed } from './utils/choiceOrder'
 import './styles/global.css'
 
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '')
 const ASSET = `${BASE}/assets/promptlife`
 // Bump this for each shipped app change; the Badge screen displays it under Start over.
-const APP_VERSION = '0.16.0'
+const APP_VERSION = '0.16.1'
 const STORAGE_KEYS = {
   lastLocation: 'promptlife:v1:lastLocation',
   lessonId: 'promptlife:v1:lessonId',
@@ -42,7 +43,8 @@ const STORAGE_KEYS = {
   exerciseProgress: 'promptlife:v1:exerciseProgress',
   promptRunProgress: 'promptlife:v1:promptRunProgress',
   traceComplete: 'promptlife:v1:traceComplete',
-  learningTourComplete: 'promptlife:v1:learningTourComplete'
+  learningTourComplete: 'promptlife:v1:learningTourComplete',
+  choiceOrderSeed: CHOICE_ORDER_SEED_KEY
 }
 const LEGACY_STORAGE_KEYS = {
   lastLocation: 'pl.tab',
@@ -807,8 +809,13 @@ function LessonScreen({ lesson, mode, lessonIndex, totalLessons, reflection, onC
   const promptVsResponseNote = lesson.promptVsResponseNote
   const whyItMatters = lesson.whyItMatters ?? lesson.why
   const howItConnects = lesson.howItConnects ?? lesson.relationship
-  const selectedAnswer = choice == null ? null : lesson.quiz.choices[choice]
-  const isCorrect = selectedAnswer === lesson.quiz.answer
+  const choiceOrderSeed = useMemo(() => getChoiceOrderSeed(), [])
+  const checkpointChoices = useMemo(
+    () => buildQuizChoices(`lesson:${lesson.id}:checkpoint`, lesson.quiz, choiceOrderSeed),
+    [lesson.id, lesson.quiz, choiceOrderSeed]
+  )
+  const selectedChoice = choice == null ? null : checkpointChoices.find((item) => item.id === choice) ?? null
+  const isCorrect = Boolean(selectedChoice?.isCorrect)
   const relatedTerms = useMemo(() => {
     return lesson.terms
       .map((term) => findGlossaryTerm(term))
@@ -910,9 +917,10 @@ function LessonScreen({ lesson, mode, lessonIndex, totalLessons, reflection, onC
         <span className="step-label">Checkpoint</span>
         <Checkpoint
           quiz={lesson.quiz}
-          choice={choice}
-          setChoice={(index) => {
-            setChoice(index)
+          choices={checkpointChoices}
+          selectedChoiceId={choice}
+          setChoice={(choiceId) => {
+            setChoice(choiceId)
             setRevealed(true)
             setContinueHint(false)
           }}
@@ -1089,42 +1097,44 @@ function groupGlossaryTermsBySection(items) {
   }, [])
 }
 
-function Checkpoint({ quiz, choice, setChoice, revealed }) {
-  const selectedAnswer = choice == null ? null : quiz.choices[choice]
-  const isCorrect = selectedAnswer === quiz.answer
-  const feedback = selectedAnswer && quiz.feedback?.[selectedAnswer] ? quiz.feedback[selectedAnswer] : quiz.explain
+function Checkpoint({ quiz, choices, selectedChoiceId, setChoice, revealed }) {
+  const selectedChoice = selectedChoiceId == null ? null : choices.find((item) => item.id === selectedChoiceId) ?? null
+  const isCorrect = Boolean(selectedChoice?.isCorrect)
+  const feedback = selectedChoice?.feedback ?? quiz.explain
   const feedbackHasLead = !isCorrect && typeof feedback === 'string' && feedback.startsWith('Not quite.')
+  const feedbackHasCorrectLead = isCorrect && typeof feedback === 'string' && feedback.startsWith('Insight unlocked')
 
   return (
     <>
       <h2 id="quiz-title">{quiz.question}</h2>
       <div className="answer-list" role="list">
-        {quiz.choices.map((answer, index) => {
-          const selected = choice === index
-          const answerIsCorrect = answer === quiz.answer
+        {choices.map((answer, index) => {
+          const selected = selectedChoiceId === answer.id
           const className = [
             'answer',
             selected ? 'is-selected' : '',
-            revealed && selected && answerIsCorrect ? 'is-correct' : '',
-            revealed && selected && !answerIsCorrect ? 'is-wrong' : ''
+            revealed && answer.isCorrect ? 'is-correct' : '',
+            revealed && selected && !answer.isCorrect ? 'is-wrong' : ''
           ].filter(Boolean).join(' ')
+          const optionLabel = `Answer ${String.fromCharCode(65 + index)}: ${answer.label}${revealed && answer.isCorrect ? '. Correct answer.' : ''}`
 
           return (
             <button
-              key={answer}
+              key={answer.id}
               className={className}
-              onClick={() => setChoice(index)}
+              onClick={() => setChoice(answer.id)}
               aria-pressed={selected}
+              aria-label={optionLabel}
             >
               <span aria-hidden="true">{String.fromCharCode(65 + index)}</span>
-              <strong>{answer}</strong>
+              <strong>{answer.label}</strong>
             </button>
           )
         })}
       </div>
       {revealed && (
         <p className={isCorrect ? 'feedback good' : 'feedback'} role="status">
-          {isCorrect && <strong>Insight unlocked.</strong>}
+          {isCorrect && !feedbackHasCorrectLead && <strong>Insight unlocked.</strong>}
           {!isCorrect && !feedbackHasLead && <strong>Not quite.</strong>}
           {' '}{feedback}
           {!isCorrect && <span> Choose another answer to retry.</span>}
@@ -2153,7 +2163,7 @@ function BadgeScreen({
       {copied && <p className="feedback good" role="status">Share text copied.</p>}
       <section className="settings-panel" aria-labelledby="reset-progress-title">
         <h2 id="reset-progress-title">Start over</h2>
-        <p>Progress is stored only on this device. Resetting clears Prompt Life lesson progress, exercise attempts, Prompt Run progress, reflections, mini-game insights, tour progress, and last location.</p>
+        <p>Progress is stored only on this device. Resetting clears Prompt Life lesson progress, exercise attempts, Prompt Run progress, reflections, mini-game insights, tour progress, last location, and checkpoint answer order seed.</p>
         <button className="secondary-btn danger" onClick={onResetProgress}>Reset progress</button>
         {statusMessage && <p className="feedback good" role="status">{statusMessage}</p>}
       </section>

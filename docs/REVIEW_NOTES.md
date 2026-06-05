@@ -2,6 +2,60 @@
 
 Date: 2026-06-05
 
+## v0.16.1 Checkpoint Randomization + Assessment Integrity
+
+### What Changed
+
+- Bumped visible app version to `v0.16.1`.
+- Added stable per-device answer randomization for Journey checkpoints.
+- Added stable per-device answer randomization for `tap-choice` and `next-token-pick` exercises, including Prompt Run single-choice steps.
+- Added `src/utils/choiceOrder.ts` for deterministic seeded shuffling.
+- Added `npm run audit:answers` for internal answer-position QA.
+- Updated Badge Start over copy to note that reset clears the checkpoint answer order seed.
+
+### Files Changed
+
+- `package.json`
+- `scripts/audit-answers.mjs`
+- `src/components/ExerciseSystem.tsx`
+- `src/main.tsx`
+- `src/styles/global.css`
+- `src/utils/choiceOrder.ts`
+- `docs/curriculum/CHECKPOINT_RANDOMIZATION_AUDIT_V0_16_1.md`
+- `docs/curriculum/CHECKPOINT_RANDOMIZATION_V0_16_1.md`
+
+### Randomization Strategy
+
+- Store a local seed at `promptlife:v1:choiceOrderSeed`.
+- Combine seed plus question identity, then apply deterministic Fisher-Yates shuffle.
+- Store selected Journey checkpoint answers by stable choice ID, not visible position.
+- Keep order stable across re-renders, feedback reveal, Preview, Review, and Learn mode.
+
+### Exclusions
+
+- `drag-order`, `sort-buckets`, `drag-match`, `label-tokens`, `connect-nodes`, `toggle-state`, and `tap-multiple` stay fixed.
+- Reason: authored order, sequence, grouping, matching, or token position supports the learning objective.
+
+### QA Results
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed.
+- Audit result: 61 total surfaces, 45 randomized, 16 fixed-order exclusions. First correct answer positions after audit-seed shuffle: position 1 = 9, position 2 = 19, position 3 = 9, position 4 = 8.
+- Browser QA at 390px: passed for Learn, Preview, Review, Prompt Run single-choice exercise behavior, and Badge reset/version copy.
+
+### Known Issues
+
+- The Vite bundle still emits the existing large-chunk warning.
+- The shuffle is intentionally not cryptographic; it is for assessment integrity and stable learning behavior.
+
+### Next Recommended Steps
+
+- Add a small regression test around the shuffle helper.
+- Consider an internal visual answer-order review route if future review passes need it.
+- Revisit multi-select randomization only if user testing shows authored grouping creates bias.
+
 ## v0.16 Source Review + Late-Day Copy Discipline
 
 ### What Changed

@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import type { Exercise, ExerciseItem } from '../data/exercises'
+import { getChoiceOrderSeed, shuffleChoicesForQuestion } from '../utils/choiceOrder'
 
 type ExerciseProgress = {
   completed?: string[]
@@ -33,6 +34,10 @@ function isCorrectItem(exercise: Exercise, item: ExerciseItem) {
   return Boolean(item.correct)
 }
 
+function shouldRandomizeExerciseChoices(exercise: Exercise) {
+  return (exercise.inputType === 'tap-choice' || exercise.inputType === 'next-token-pick') && exercise.items.length > 1
+}
+
 export function ExerciseShell({ exercise, progress, onAttempt, onGlossary }: ExerciseShellProps) {
   const [selectedId, setSelectedId] = useState<string | null>(null)
   const [selectedIds, setSelectedIds] = useState<string[]>([])
@@ -47,6 +52,11 @@ export function ExerciseShell({ exercise, progress, onAttempt, onGlossary }: Exe
   const [result, setResult] = useState<ResultState>(null)
   const feedbackRef = useRef<HTMLDivElement | null>(null)
   const itemById = useMemo(() => Object.fromEntries(exercise.items.map((item) => [item.id, item])) as Record<string, ExerciseItem>, [exercise.items])
+  const choiceOrderSeed = useMemo(() => getChoiceOrderSeed(), [])
+  const orderedChoiceItems = useMemo(() => {
+    if (!shouldRandomizeExerciseChoices(exercise)) return exercise.items
+    return shuffleChoicesForQuestion(`exercise:${exercise.id}`, exercise.items, choiceOrderSeed)
+  }, [choiceOrderSeed, exercise])
   const completed = Boolean(progress?.completed?.includes(exercise.id))
   const attempts = progress?.attempts?.[exercise.id] ?? 0
 
@@ -232,8 +242,8 @@ export function ExerciseShell({ exercise, progress, onAttempt, onGlossary }: Exe
       <ActionCue verb={exercise.actionVerb} instruction={exercise.actionInstruction} />
       <div className="exercise-try-area" aria-label="Try area">
         <strong className="try-area-label">Try area</strong>
-        {exercise.inputType === 'tap-choice' && <TapChoiceExercise exercise={exercise} selectedId={selectedId} onSelect={(id) => { setSelectedId(id); setResult(null) }} />}
-        {exercise.inputType === 'next-token-pick' && <NextTokenPickExercise exercise={exercise} selectedId={selectedId} onSelect={(id) => { setSelectedId(id); setResult(null) }} />}
+        {exercise.inputType === 'tap-choice' && <TapChoiceExercise exercise={exercise} items={orderedChoiceItems} result={result} selectedId={selectedId} onSelect={(id) => { setSelectedId(id); setResult(null) }} />}
+        {exercise.inputType === 'next-token-pick' && <NextTokenPickExercise exercise={exercise} items={orderedChoiceItems} result={result} selectedId={selectedId} onSelect={(id) => { setSelectedId(id); setResult(null) }} />}
         {exercise.inputType === 'tap-multiple' && <TapMultipleExercise exercise={exercise} selectedIds={selectedIds} onToggle={(id) => {
           setSelectedIds((prev) => prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id])
           setResult(null)
@@ -326,23 +336,48 @@ export function ActionCue({ verb, instruction }: { verb: Exercise['actionVerb'],
   )
 }
 
-export function TapChoiceExercise({ exercise, selectedId, onSelect }: { exercise: Exercise, selectedId: string | null, onSelect: (id: string) => void }) {
+export function TapChoiceExercise({
+  exercise,
+  items = exercise.items,
+  result,
+  selectedId,
+  onSelect
+}: {
+  exercise: Exercise
+  items?: ExerciseItem[]
+  result?: ResultState
+  selectedId: string | null
+  onSelect: (id: string) => void
+}) {
   return (
     <div className="exercise-choice-grid">
       {exercise.sequence && (
         <ContextPreview sequence={exercise.sequence} windowSize={exercise.windowSize ?? exercise.sequence.length} />
       )}
-      {exercise.items.map((item) => (
-        <button key={item.id} className={selectedId === item.id ? 'exercise-option is-selected' : 'exercise-option'} onClick={() => onSelect(item.id)} aria-pressed={selectedId === item.id}>
-          <strong>{item.label}</strong>
-          {item.detail && <span>{item.detail}</span>}
-        </button>
-      ))}
+      {items.map((item, index) => {
+        const selected = selectedId === item.id
+        const answerIsCorrect = isCorrectItem(exercise, item)
+        const showAnswerState = Boolean(result)
+        const className = [
+          'exercise-option',
+          selected ? 'is-selected' : '',
+          showAnswerState && answerIsCorrect ? 'is-correct' : '',
+          showAnswerState && selected && !answerIsCorrect ? 'is-wrong' : ''
+        ].filter(Boolean).join(' ')
+        const optionLabel = `Choice ${String.fromCharCode(65 + index)}: ${item.label}${showAnswerState && answerIsCorrect ? '. Correct answer.' : ''}`
+
+        return (
+          <button key={item.id} className={className} onClick={() => onSelect(item.id)} aria-pressed={selected} aria-label={optionLabel}>
+            <strong>{item.label}</strong>
+            {item.detail && <span>{item.detail}</span>}
+          </button>
+        )
+      })}
     </div>
   )
 }
 
-export function NextTokenPickExercise(props: { exercise: Exercise, selectedId: string | null, onSelect: (id: string) => void }) {
+export function NextTokenPickExercise(props: { exercise: Exercise, items?: ExerciseItem[], result?: ResultState, selectedId: string | null, onSelect: (id: string) => void }) {
   return (
     <>
       {props.exercise.context && <p className="exercise-context-line"><strong>Current context:</strong> {props.exercise.context}</p>}
