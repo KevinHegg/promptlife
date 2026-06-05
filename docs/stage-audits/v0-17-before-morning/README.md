@@ -15,12 +15,13 @@ This is an internal review package for a later Deep Research and implementation 
 Cards audited:
 
 1. What Is an LLM?
-2. Rationalists vs Empiricists
-3. Training
-4. Pretraining
-5. Overfitting and Generalization
-6. Fine-Tuning
-7. Alignment
+2. Where LLMs Fit
+3. Rationalists vs Empiricists
+4. Training
+5. Pretraining
+6. Overfitting and Generalization
+7. Fine-Tuning
+8. Alignment
 
 ## Files
 
@@ -29,6 +30,8 @@ Cards audited:
 - `stage-audit.json`: machine-readable audit summary.
 - `screenshot-index.md`: index of all captured screenshots.
 - `screenshots/`: mobile screenshots at 390px, plus 320px and 430px spot checks.
+
+v0.17.2 implementation note: `Where LLMs Fit` was added after the original v0.17 audit to provide topology context before the history side-tour. It uses a coded SVG/HTML visual aid and should not be included in the next textless Image 2 asset batch.
 
 ## Verification Snapshot
 
@@ -41,4 +44,3 @@ Cards audited:
 ## Current State Summary
 
 The stage is conceptually correct and in a sensible order. It already makes the durable weight-change distinction clear. The main issues are depth balance, repeated panel headings, visual density, and interaction quality. Several cards have tiny interactions that are more illustrative than diagnostic. The stage should remain one badge path toward "Prompt Life: Model Literate"; no additional badges are recommended.
-

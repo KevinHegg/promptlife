@@ -33,7 +33,7 @@ import './styles/global.css'
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '')
 const ASSET = `${BASE}/assets/promptlife`
 // Bump this for each shipped app change; the Badge screen displays it under Start over.
-const APP_VERSION = '0.17.1'
+const APP_VERSION = '0.17.2'
 const STORAGE_KEYS = {
   lastLocation: 'promptlife:v1:lastLocation',
   lessonId: 'promptlife:v1:lessonId',
@@ -72,7 +72,8 @@ const GLOSSARY_SECTION_ORDER = [
 ]
 const GLOSSARY_LEARNING_GROUPS = [
   { firstLessonId: 'what-is-llm', termIds: ['llm'] },
-  { firstLessonId: 'history', termIds: ['rationalism', 'empiricism', 'symbolic-ai', 'deep-learning'] },
+  { firstLessonId: 'where-llms-fit', termIds: ['ai', 'machine-learning', 'classical-machine-learning', 'deep-learning', 'generative-ai', 'diffusion', 'multimodal', 'symbolic-ai', 'rule-based-ai', 'foundation-model'] },
+  { firstLessonId: 'history', termIds: ['rationalism', 'empiricism'] },
   { firstLessonId: 'training', termIds: ['training', 'training-data', 'loss', 'weight', 'parameter', 'weight-update'] },
   { firstLessonId: 'pretraining', termIds: ['pretraining', 'next-token'] },
   { firstLessonId: 'overfitting-generalization', termIds: ['overfitting', 'generalization', 'validation-data'] },
@@ -98,8 +99,6 @@ const GLOSSARY_LEARNING_GROUPS = [
   { firstLessonId: 'grounding', termIds: ['grounding', 'citation'] },
   { firstLessonId: 'hallucinations', termIds: ['hallucination', 'uncertainty'] },
   { firstLessonId: 'how-ai-learns', termIds: ['in-context learning'] },
-  { firstLessonId: 'diffusion', termIds: ['diffusion'] },
-  { firstLessonId: 'multimodal', termIds: ['multimodal'] },
   { firstLessonId: 'perfect-storm', termIds: ['perfect-storm-term', 'human-feedback-labor', 'compute', 'data-center'] },
   { firstLessonId: 'collective-intelligence', termIds: ['collective-intelligence-term', 'source-review', 'data-provenance', 'consent', 'compensation', 'copyright'] },
   { firstLessonId: 'costs-we-must-count', termIds: ['environmental-footprint', 'energy-use', 'water-use', 'carbon-emissions', 'e-waste', 'labor-disruption', 'deskilling'] },
@@ -1256,6 +1255,7 @@ function PromptVsResponseBox({ includeDemo = true }) {
 
 function MicroInteraction({ type }) {
   if (type === 'prompt-trace') return <PromptTraceInteraction />
+  if (type === 'ai-topology') return <AiTopologyInteraction />
   if (type === 'traditions-sort') return <TraditionsSortInteraction />
   if (type === 'training-steps') return <TrainingStepInteraction />
   if (type === 'pretraining-toggle') return <PretrainingToggleInteraction />
@@ -1279,6 +1279,44 @@ function MicroInteraction({ type }) {
   if (type === 'multimodal') return <MultimodalMixerAnimation />
   if (type === 'risk') return <RiskSortDemo />
   return <FeatureCloudAnimation />
+}
+
+function AiTopologyInteraction() {
+  const branches = [
+    { id: 'ai', label: 'AI', detail: 'AI is the broad field: systems built to perform tasks associated with intelligence.' },
+    { id: 'rules', label: 'Rules', detail: 'Symbolic or rule-based AI follows explicit logic, conditions, symbols, or policies.' },
+    { id: 'machine-learning', label: 'Machine learning', detail: 'Machine learning systems learn patterns from data instead of relying only on hand-written rules.' },
+    { id: 'classical-ml', label: 'Classical ML', detail: 'Classical machine learning uses smaller or more specialized learned models that are not usually huge deep networks.' },
+    { id: 'deep-learning', label: 'Deep learning', detail: 'Deep learning uses large neural networks to learn layered representations from data.' },
+    { id: 'generative-ai', label: 'Generative AI', detail: 'Generative AI systems create new text, images, audio, code, video, or other media.' },
+    { id: 'llm', label: 'LLM', detail: 'An LLM generates language or code one response token at a time.' },
+    { id: 'diffusion', label: 'Diffusion', detail: 'Diffusion models often generate images, audio, or video by denoising patterns.' },
+    { id: 'multimodal', label: 'Multimodal', detail: 'Multimodal AI works across more than one media type, such as text plus images.' }
+  ]
+  const [activeId, setActiveId] = useState('ai')
+  const active = branches.find((branch) => branch.id === activeId) ?? branches[0]
+
+  return (
+    <div className="ai-topology-demo">
+      <div className="ai-branch-grid" role="group" aria-label="AI family branches">
+        {branches.map((branch) => (
+          <button
+            key={branch.id}
+            className={active.id === branch.id ? 'active' : ''}
+            onClick={() => setActiveId(branch.id)}
+            aria-pressed={active.id === branch.id}
+          >
+            {branch.label}
+          </button>
+        ))}
+      </div>
+      <div className="ai-branch-card" aria-live="polite">
+        <strong>{active.label}</strong>
+        <p>{active.detail}</p>
+      </div>
+      {active.id === 'llm' && <p className="mini-insight">Insight unlocked: an LLM is one branch, not the whole AI tree.</p>}
+    </div>
+  )
 }
 
 function PromptTraceInteraction() {

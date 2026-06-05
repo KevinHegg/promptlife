@@ -2,6 +2,34 @@
 
 Date: 2026-06-05
 
+## v0.17.2 Before Morning Topology Card Pass
+
+### What Changed
+
+- Bumped the visible app version to `v0.17.2`.
+- Added the new Essential Journey card `Where LLMs Fit` immediately after `What Is an LLM?` and before `Rationalists vs Empiricists`.
+- Added a coded SVG / HTML visual aid, `ai-family-tree`, using a sparse AI family-tree structure with HTML callouts rather than a dense mini-infographic or generated PNG.
+- Added the `ai-topology` tiny interaction so learners can tap branches such as AI, machine learning, deep learning, generative AI, LLM, diffusion, and multimodal AI.
+- Updated the opening `What Is an LLM?` relationship line so it leads into the topology card before the history side-tour.
+- Added or updated glossary terms for `AI`, `machine learning`, `classical machine learning`, `deep learning`, `generative AI`, `LLM`, `diffusion model`, `multimodal AI`, `symbolic AI`, `rule-based AI`, and `foundation model`.
+- Updated glossary learning-path order so the topology terms appear with `Where LLMs Fit`.
+- Updated internal lesson-review metadata for the new card.
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run audit:answers`: passed; 68 total audited surfaces, 46 randomized, 22 fixed-order exclusions. The new `Where LLMs Fit` checkpoint is randomized.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- Browser QA: passed for Journey order, Preview mode, Review visual-aid route, Learn-mode smoke test, glossary learning path, Badge version, and console errors.
+- PDF report generated: `docs/stage-audits/v0-17-before-morning/prompt-life-v0-17-2-where-llms-fit-report.pdf`.
+
+### Constraints Preserved
+
+- No generated PNG assets were added.
+- No new games, heavy 3D libraries, checkpoint-randomization changes, or additional badges were added.
+- One badge remains: `Prompt Life: Model Literate`.
+
 ## v0.17.1 Before Morning Implementation Pass
 
 ### What Changed

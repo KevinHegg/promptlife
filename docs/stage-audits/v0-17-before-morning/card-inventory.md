@@ -22,7 +22,7 @@ Global path-label flag: Journey rows show `Essential` or `Deep`. These labels ar
 - Durable vs temporary note: Weights were changed during training or fine-tuning. During ordinary inference, hidden states are temporary and weights normally stay fixed.
 - Prompt vs response note: Prompt tokens are given to the model. Response tokens are generated one at a time.
 - Why it matters: Lowers mystery without treating the model as a mind, database, or hand-written rulebook.
-- How it connects: Leads into the comparison between rule-based AI and learned systems.
+- How it connects: Leads into the topology card that places LLMs inside AI, machine learning, and generative AI.
 - Metaphor: A vast autocomplete engine with learned structure.
 - Brain Bridge: Like a person using context to anticipate what word might come next.
 - Where Brain Bridge breaks: A person has a body, goals, lived experience, and awareness. The model has learned weights and temporary computations.
@@ -34,9 +34,37 @@ Global path-label flag: Journey rows show `Essential` or `Deep`. These labels ar
 - Correct answer: A learned prediction system
 - Incorrect answers: A conscious reader; A hand-written rulebook; A search engine that knows every file
 - Feedback: Correct explains learned weights turning context into next-token probabilities. Wrong answers explain that the model is not conscious, not a database, and not a hand-coded rulebook.
-- Current recommendation status: keep, but expand the concrete trace just enough to prevent "next-token prediction" from sounding trivial.
+- Current recommendation status: implemented in v0.17.1, then connected to the v0.17.2 topology card.
 
-## 2. Rationalists vs Empiricists
+## 2. Where LLMs Fit
+
+- Card id: `where-llms-fit`
+- Title: Where LLMs Fit
+- Subtitle: AI → machine learning → generative AI → LLMs
+- Stage: Before Morning
+- Path label: Essential
+- Current review recommendation: keep
+- One-sentence definition: A large language model is one kind of generative AI system, built with deep-learning methods inside the broader field of artificial intelligence.
+- Core explanation: AI is the broad field. Machine learning learns patterns from data. Deep learning is one kind of machine learning. Generative AI creates new media. LLMs are generative AI systems focused on language and code. Diffusion models are another kind of generative AI.
+- Where it happens: A map of AI categories, not a step inside one model run.
+- Durable vs temporary note: This describes families of systems, not a durable weight update or a temporary inference state.
+- Prompt vs response note: LLMs generate response tokens; other generative systems may generate pixels, audio, video frames, or other outputs.
+- Why it matters: Learners should not treat `AI`, `machine learning`, `generative AI`, and `LLM` as interchangeable words.
+- How it connects: It follows the opening LLM definition and precedes the older rules-first versus learned-patterns tradition card.
+- Metaphor: A family tree with overlapping branches.
+- Brain Bridge: Like naming different human abilities such as language, vision, memory, planning, and creativity.
+- Where Brain Bridge breaks: AI categories are engineered systems, not natural species. Boundaries overlap and change as systems combine methods.
+- Misconception: All AI is an LLM, or all generative AI works like ChatGPT.
+- Glossary chips: `ai`, `machine-learning`, `classical-machine-learning`, `deep-learning`, `generative-ai`, `llm`, `diffusion`, `multimodal`, `symbolic-ai`, `rule-based-ai`, `foundation-model`
+- Visual aid id: `ai-family-tree`
+- Tiny interaction: `ai-topology`, "Tap a branch"
+- Checkpoint question: Which statement is most accurate?
+- Correct answer: An LLM is one kind of generative AI inside the broader AI family.
+- Incorrect answers: All AI systems are LLMs; Diffusion models and LLMs work the same way; Machine learning and AI mean exactly the same thing.
+- Feedback: Correct unlocks the one-branch mental model. Wrong answers clarify that the category names overlap but are not interchangeable.
+- Current recommendation status: keep as coded SVG/HTML; do not generate a PNG for this card yet.
+
+## 3. Rationalists vs Empiricists
 
 - Card id: `history`
 - Title: Rationalists vs Empiricists
@@ -64,7 +92,7 @@ Global path-label flag: Journey rows show `Essential` or `Deep`. These labels ar
 - Feedback: Correct says LLMs are learned prediction systems shaped by data. Wrong answers preserve the point that rules still matter around software, but LLM fluency mostly comes from learned weights.
 - Current recommendation status: defer. The card is useful but more abstract than the others and should be framed as a side-tour, not a bottleneck.
 
-## 3. Training
+## 4. Training
 
 - Card id: `training`
 - Title: Training
@@ -92,7 +120,7 @@ Global path-label flag: Journey rows show `Essential` or `Deep`. These labels ar
 - Feedback: Correct distinguishes training changes from inference use. Wrong answers clarify training is a weight-changing process, not ordinary response generation.
 - Current recommendation status: keep. Add a stronger visual emphasis on loss/backprop/update as the missing step from inference.
 
-## 4. Pretraining
+## 5. Pretraining
 
 - Card id: `pretraining`
 - Title: Pretraining
@@ -120,7 +148,7 @@ Global path-label flag: Journey rows show `Essential` or `Deep`. These labels ar
 - Feedback: Correct says pretraining changes weights before normal use. Wrong answers explain pretraining is durable, not a temporary chat event.
 - Current recommendation status: defer. The card belongs here, but needs more concrete distinction from Training and stronger protection against "perfect recall" myths.
 
-## 5. Overfitting and Generalization
+## 6. Overfitting and Generalization
 
 - Card id: `overfitting-generalization`
 - Title: Overfitting and Generalization
@@ -148,7 +176,7 @@ Global path-label flag: Journey rows show `Essential` or `Deep`. These labels ar
 - Feedback: Correct emphasizes generalization. Wrong answers distinguish overfitting from context, retrieval, and autoregression.
 - Current recommendation status: defer. Strong conceptual value, but probably deep-path unless the core badge path needs an explicit "memorization is not learning" moment.
 
-## 6. Fine-Tuning
+## 7. Fine-Tuning
 
 - Card id: `fine-tuning`
 - Title: Fine-Tuning
@@ -176,7 +204,7 @@ Global path-label flag: Journey rows show `Essential` or `Deep`. These labels ar
 - Feedback: Correct says fine-tuning changes future behavior more durably than a single prompt. Wrong answers contrast prompting/RAG with training.
 - Current recommendation status: keep. Needs a stronger tiny interaction contrasting fine-tuning with prompting and RAG.
 
-## 7. Alignment
+## 8. Alignment
 
 - Card id: `alignment`
 - Title: Alignment
@@ -203,4 +231,3 @@ Global path-label flag: Journey rows show `Essential` or `Deep`. These labels ar
 - Incorrect answers: Make the model conscious; Guarantee every answer is true; Permanently solve all AI risk
 - Feedback: Correct says alignment shapes behavior, but is not magic morality. Wrong answers reject consciousness, truth guarantees, and permanent risk-solving.
 - Current recommendation status: keep. Needs more nuance, but probably less text per screen through better visual grouping rather than longer prose.
-

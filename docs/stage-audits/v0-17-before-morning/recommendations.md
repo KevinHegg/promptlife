@@ -8,6 +8,8 @@ Before Morning is the right opening stage. It answers the needed question: what 
 
 Do not add additional badges. The only badge path should remain `Prompt Life: Model Literate`.
 
+v0.17.2 update: add `Where LLMs Fit` after `What Is an LLM?` and before `Rationalists vs Empiricists`. Keep it coded SVG/HTML, not an Image 2 PNG candidate. This resolves part of the abstraction problem by giving learners a simple AI topology before the history side-tour.
+
 ## Top Five Content Problems
 
 1. "What Is an LLM?" is accurate but risks sounding too small if "next-token prediction" is not paired with a concrete prompt-to-token trace.
@@ -29,7 +31,8 @@ Do not add additional badges. The only badge path should remain `Prompt Life: Mo
 | Card | Recommendation | Content priority | Visual priority | Interaction priority | Notes |
 |---|---|---:|---:|---:|---|
 | What Is an LLM? | Revise lightly | High | High | Medium | Keep concise but add a one-prompt trace so next-token prediction feels powerful, not trivial. |
-| Rationalists vs Empiricists | Revise / optional side-tour | Medium | Medium | Low | Keep as Deep/side-tour. It may be too abstract for the required path. |
+| Where LLMs Fit | Keep | Medium | Medium | Medium | New Essential topology card. Keep sparse and coded; do not turn it into a dense poster. |
+| Rationalists vs Empiricists | Revise / optional side-tour | Medium | Medium | Low | Keep as Deep/side-tour after the topology card. It may be too abstract for the required path. |
 | Training | Keep | Medium | Medium | Medium | Strong essential card. Emphasize loss and weight update as the durable step. |
 | Pretraining | Revise | Medium | High | Medium | Keep separate from Training, but make the scale and "not perfect recall" distinction more concrete. |
 | Overfitting and Generalization | Keep as Deep | Medium | Medium | Medium | Valuable, but not essential for the shortest path unless v1 wants a memorization checkpoint early. |
@@ -149,4 +152,3 @@ Specific future interaction ideas:
 ## Recommended Next Implementation Prompt
 
 Implement the v0.17 Before Morning polish pass from `docs/stage-audits/v0-17-before-morning/`. Do not add new cards or badges. Keep the stage order, preserve checkpoint randomization and progress rules, remove the duplicate Core idea heading pattern, revise only the seven Before Morning cards, add or refine tiny interactions where recommended, and update visuals according to the audit: Image 2 textless asset candidates for What Is an LLM?, Pretraining, Fine-Tuning, and Alignment; coded SVG for Rationalists vs Empiricists, Training, and Overfitting. Run typecheck, build, audit:answers, browser QA at 390px plus 320/430 spot checks, and update the internal report PDF with screenshots.
-

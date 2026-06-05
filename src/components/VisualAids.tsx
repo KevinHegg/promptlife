@@ -13,7 +13,7 @@ export const visualAidStyleVariants = [
 function getVisualAidVariant(aid) {
   if (aid.variant) return aid.variant
   if (['llmOverview', 'promptResponse', 'inference', 'softmax', 'sampling', 'loop'].includes(aid.pattern)) return 'neon-flow'
-  if (['tensor', 'layers', 'mlp', 'bars', 'vector', 'hidden'].includes(aid.pattern)) return 'origami-object'
+  if (['tensor', 'layers', 'mlp', 'bars', 'vector', 'hidden', 'aiTopology'].includes(aid.pattern)) return 'origami-object'
   if (['alignment', 'risk', 'overfitting', 'diffusion'].includes(aid.pattern)) return 'zen-garden-map'
   if (aid.pattern === 'rag') return 'retrieval-shelf'
   return 'paper-diagram'
@@ -21,6 +21,7 @@ function getVisualAidVariant(aid) {
 
 export const visualAidCatalog = [
   { id: 'llm-overview', title: 'Prompt to Prediction', subtitle: 'Score, choose, append, repeat', caption: 'A concrete prompt trace flows through learned weights into next-token probabilities; floor is selected and appended.', pattern: 'llmOverview', objective: 'Make next-token prediction feel concrete and powerful without implying the model writes the whole answer at once.', callouts: [{ heading: 'Current context', body: `Prompt plus response so far: ${canonicalPromptResponse.responseSoFar}.` }, { heading: 'Learned weights', body: 'Inference uses weights shaped earlier during training.' }, { heading: 'Token cloud', body: 'The model scores candidate next tokens such as floor, room, and tiles.' }, { heading: 'Append', body: 'The chosen token becomes part of the next context.' }], keyTakeaway: 'LLM generation is score, choose, append, repeat.', accessibleDescription: 'Prompt context enters a learned-weight cloud, candidate next tokens appear, and the chosen token floor is appended to the response.', printNote: 'Future textless Image 2 asset: before-morning-llm-cloud.png. Keep explanatory text in HTML callouts.' },
+  { id: 'ai-family-tree', title: 'AI Family Tree', subtitle: 'Where LLMs fit', caption: 'AI branches into rule-based systems and machine learning; deep learning includes generative AI, including LLMs and diffusion models.', pattern: 'aiTopology', objective: 'Give learners a simple topology of AI categories before the history card introduces rules-first and learned-pattern traditions.', callouts: [{ heading: 'AI', body: 'The broad field, not a synonym for LLM.' }, { heading: 'Machine learning', body: 'Systems learn patterns from data; deep learning is one branch.' }, { heading: 'Generative AI', body: 'Systems create new media, including language, images, audio, code, or video.' }, { heading: 'LLMs', body: 'Language/code generators that usually produce response tokens autoregressively.' }, { heading: 'Diffusion and multimodal', body: 'Other generative branches can denoise patterns or work across media types.' }], keyTakeaway: 'An LLM is one kind of generative AI inside the broader AI family.', accessibleDescription: 'A folded paper tree starts at AI, splits into rule-based AI and machine learning, then branches through classical machine learning, deep learning, generative AI, LLMs, diffusion, multimodal models, and other deep-learning systems.', printNote: 'Coded SVG only; no generated PNG asset in v0.17.2. Keep full definitions in HTML callouts below the diagram.' },
   { id: 'traditions', title: 'Rules and Learned Patterns', subtitle: 'Two traditions, one modern toolkit', caption: 'Rules-first AI uses symbols and if-then logic; deep learning learns useful patterns from examples by adjusting weights.', pattern: 'traditions', objective: 'Contrast explicit rules with learned patterns without turning the diagram into a poster.', callouts: [{ heading: 'Rules', body: 'Symbolic systems use explicit if/then logic and symbols.' }, { heading: 'Examples', body: 'Deep-learning systems use examples, loss, and weight updates.' }, { heading: 'Bridge', body: 'Modern systems often combine learned models with rules, retrieval, tools, filters, and policies.' }], keyTakeaway: 'Modern AI often blends learned patterns with hand-built rules and tools.', accessibleDescription: 'Two side-by-side panels compare rules, symbols, and if-then logic with examples, loss, and weights, joined by a bridge labeled combine both.', printNote: 'Short panel labels only; explanatory comparison stays in HTML callouts.' },
   { id: 'training-loop', title: 'Training Loop', subtitle: 'Durable change happens at weight update', caption: 'Predict, compare, loss, update weights, repeat. Training changes weights.', pattern: 'training', objective: 'Show the sequence of training and make the durable weight-update step visually distinct.', callouts: [{ heading: 'Predict', body: 'The model predicts a target.' }, { heading: 'Compare', body: 'The prediction is compared with the target.' }, { heading: 'Loss', body: 'Loss measures error.' }, { heading: 'Update weights', body: 'Weight updates are the durable-change step.' }, { heading: 'Repeat', body: 'The loop repeats many times.' }], keyTakeaway: 'Training changes weights; ordinary inference does not.', accessibleDescription: 'A five-step loop moves from Predict to Compare to Loss to Update weights to Repeat, with Update weights highlighted.', printNote: 'Five nodes stay aligned at 320px and in exported review PDFs.' },
   { id: 'pretraining-rain', title: 'Broad Pretraining', subtitle: 'Scale, not perfect recall', caption: 'Enormous streams of examples repeat the training loop and shape broad durable patterns before normal use.', pattern: 'pretraining', callouts: [{ heading: 'Huge scale', body: 'Many examples flow through the same predict, loss, update loop.' }, { heading: 'Broad patterns', body: 'Weights pick up grammar, style, facts, associations, task shapes, and reasoning-like patterns.' }, { heading: 'Limit', body: 'Pretraining is not a perfect searchable memory of every source.' }], keyTakeaway: 'Pretraining changes weights broadly; it does not create perfect recall.', accessibleDescription: 'Data streams fall across a landscape, carving broad paths that represent durable pattern learning.', printNote: 'Future textless Image 2 asset: before-morning-pretraining-landscape.png. Keep labels in HTML callouts.' },
@@ -174,6 +175,8 @@ function VisualPattern({ aid }) {
   switch (aid.pattern) {
     case 'llmOverview':
       return <LlmOverviewSvg />
+    case 'aiTopology':
+      return <AiTopologySvg />
     case 'traditions':
       return <TraditionsSvg />
     case 'training':
@@ -316,6 +319,49 @@ function LlmOverviewSvg() {
       <Label x="202" y="57" className="tiny">probabilities</Label>
       <Label x="255" y="161" className="tiny dark">token</Label>
       <Label x="128" y="190" className="tiny">append</Label>
+    </>
+  )
+}
+
+function AiTopologySvg() {
+  const nodes = [
+    { label: 'AI', x: 128, y: 12, width: 64, kind: 'prompt' },
+    { label: 'Rules', x: 18, y: 56, width: 76, kind: 'output' },
+    { label: 'ML', x: 204, y: 56, width: 70, kind: '' },
+    { label: 'Classical', x: 122, y: 100, width: 82, kind: 'muted' },
+    { label: 'Deep', x: 228, y: 100, width: 70, kind: '' },
+    { label: 'Gen AI', x: 148, y: 142, width: 76, kind: 'output' },
+    { label: 'Other DL', x: 238, y: 142, width: 72, kind: 'muted' },
+    { label: 'LLMs', x: 58, y: 176, width: 58, kind: 'prompt' },
+    { label: 'Diffusion', x: 126, y: 176, width: 78, kind: '' },
+    { label: 'Multi', x: 214, y: 176, width: 58, kind: '' }
+  ]
+  const classFor = (kind) => ['aid-box', kind].filter(Boolean).join(' ')
+  const labelClassFor = (kind) => kind === 'prompt' || kind === 'output' ? 'tiny dark' : 'tiny'
+
+  return (
+    <>
+      <polygon className="aid-land" points="14,196 62,52 158,24 274,54 306,196" />
+      <polygon className="aid-sheet" points="128,12 192,12 184,40 136,40" />
+      <path className="aid-line" d="M160 40 C122 48, 84 50, 56 56" />
+      <path className="aid-line" d="M160 40 C182 50, 206 50, 239 56" />
+      <path className="aid-line" d="M239 84 C214 94, 190 96, 163 100" />
+      <path className="aid-line" d="M239 84 C252 90, 260 94, 263 100" />
+      <path className="aid-line" d="M263 128 C244 137, 222 138, 186 142" />
+      <path className="aid-line dashed" d="M263 128 C274 136, 280 138, 274 142" />
+      <path className="aid-line" d="M186 170 C152 174, 114 174, 87 176" />
+      <path className="aid-line" d="M186 170 C179 174, 171 174, 165 176" />
+      <path className="aid-line" d="M186 170 C204 174, 222 174, 243 176" />
+      {nodes.map((node) => (
+        <g key={node.label}>
+          <rect className={classFor(node.kind)} x={node.x} y={node.y} width={node.width} height="28" rx="8" />
+          <Label x={node.x + 10} y={node.y + 19} className={labelClassFor(node.kind)}>{node.label}</Label>
+        </g>
+      ))}
+      <Callout x="56" y="42">1</Callout>
+      <Callout x="238" y="42">2</Callout>
+      <Callout x="186" y="130">3</Callout>
+      <Callout x="288" y="184">4</Callout>
     </>
   )
 }

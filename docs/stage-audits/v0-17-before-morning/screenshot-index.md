@@ -4,6 +4,19 @@ Date: 2026-06-05
 
 All standard screenshots were captured at 390px wide and 844px tall. Dense-card spot checks were captured at 320px and 430px.
 
+## v0.17.2 Topology Card Screenshots
+
+Captured after adding `Where LLMs Fit`.
+
+- `screenshots/v0-17-2-journey-order.png`
+- `screenshots/v0-17-2-where-llms-fit-390.png`
+- `screenshots/v0-17-2-where-llms-fit-visual-390.png`
+- `screenshots/v0-17-2-where-llms-fit-branch.png`
+- `screenshots/v0-17-2-where-llms-fit-checkpoint.png`
+- `screenshots/v0-17-2-ai-family-tree-review-320.png`
+- `screenshots/v0-17-2-glossary-topology.png`
+- `screenshots/v0-17-2-badge-version.png`
+
 ## v0.17.1 Implementation Screenshots
 
 Captured after the Before Morning implementation pass.

@@ -13,6 +13,7 @@ export const reviewRubricCategories = [
 
 const stageByLessonId = {
   'what-is-llm': 'architecture',
+  'where-llms-fit': 'architecture',
   history: 'architecture',
   training: 'pretraining',
   pretraining: 'pretraining',
@@ -60,6 +61,7 @@ const promptResponseNoteByLessonId = {
 
 const confusionRiskByLessonId = {
   'what-is-llm': 'Next-token prediction can sound trivial unless the role of learned weights and repeated inference is made concrete.',
+  'where-llms-fit': 'Learners may treat AI, machine learning, generative AI, and LLM as interchangeable labels.',
   history: 'Learners may read rules versus learned patterns as a total replacement story instead of two still-useful traditions.',
   training: 'Ordinary chat can be mistaken for training unless durable weight updates are foregrounded.',
   pretraining: 'Broad exposure can be misread as verbatim memorization of every source document.',
@@ -91,6 +93,7 @@ const confusionRiskByLessonId = {
 
 const missingExplanationByLessonId = {
   'what-is-llm': 'Add a concrete one-prompt trace that shows context, weights, logits, sampling, and append-repeat at a glance.',
+  'where-llms-fit': 'Keep the topology sparse: AI, rule-based AI, machine learning, deep learning, generative AI, LLMs, diffusion, multimodal, and other deep-learning systems.',
   history: 'Name one place rules still matter, such as policies, tool routing, or validation around learned models.',
   training: 'Show the loss signal and backprop update as the step that ordinary inference lacks.',
   pretraining: 'Clarify that broad datasets shape statistical patterns without guaranteeing source recall or truth.',
@@ -122,6 +125,7 @@ const missingExplanationByLessonId = {
 
 const illustrationNeedByLessonId = {
   'what-is-llm': 'One-page prompt lifecycle: prompt enters, fixed weights process, next token sampled, response grows.',
+  'where-llms-fit': 'Coded ZenTron Origami family tree: AI splits into rule-based AI and machine learning; deep learning contains generative AI with LLMs, diffusion, and multimodal models.',
   history: 'Split-panel rulebook versus learned landscape, with a small note that systems can combine them.',
   training: 'Training loop with predict, compare, loss, update weights, repeat.',
   pretraining: 'Broad data rain carving durable pathways into a model landscape.',
@@ -152,6 +156,7 @@ const illustrationNeedByLessonId = {
 }
 
 const priorityByLessonId = {
+  'where-llms-fit': 'medium',
   history: 'medium',
   'overfitting-generalization': 'high',
   alignment: 'high',
@@ -188,6 +193,7 @@ const baselineRubric = {
 
 const rubricOverridesByLessonId = {
   'what-is-llm': { relationship: 5, promptResponse: 5, durableTemporary: 5, exercise: 4 },
+  'where-llms-fit': { accuracy: 5, placement: 5, relationship: 5, durableTemporary: 5, visual: 5, exercise: 4 },
   history: { promptResponse: 3, durableTemporary: 3, visual: 3, exercise: 2 },
   training: { placement: 5, durableTemporary: 5, exercise: 4 },
   pretraining: { placement: 5, durableTemporary: 5, exercise: 2 },

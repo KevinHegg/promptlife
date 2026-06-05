@@ -1390,6 +1390,7 @@ p {
 .diffusion-demo,
 .risk-demo,
 .prompt-trace-demo,
+.ai-topology-demo,
 .micro-step-demo,
 .pretraining-toggle-demo,
 .overfit-curve-demo,
@@ -1405,6 +1406,7 @@ p {
 .loop-demo,
 .token-demo,
 .prompt-trace-demo,
+.ai-topology-demo,
 .micro-step-demo,
 .pretraining-toggle-demo,
 .overfit-curve-demo,
@@ -1417,6 +1419,7 @@ p {
 .token-demo button,
 .inference-demo button,
 .diffusion-demo button,
+.ai-branch-grid button,
 .micro-step-buttons button,
 .training-step-row button,
 .micro-sort-chip {
@@ -1483,6 +1486,7 @@ p {
 .feature-cloud-demo p,
 .feature-cloud-demo small,
 .prompt-trace-demo p,
+.ai-topology-demo p,
 .micro-step-demo p,
 .pretraining-toggle-demo p,
 .overfit-curve-demo p,
@@ -1497,13 +1501,33 @@ p {
 
 .micro-step-buttons,
 .training-step-row,
+.ai-branch-grid,
 .micro-sort-items {
   display: grid;
   grid-template-columns: 1fr;
   gap: 0.45rem;
 }
 
+.ai-branch-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.ai-branch-grid button {
+  padding: 0.58rem 0.45rem;
+  line-height: 1.12;
+  overflow-wrap: anywhere;
+}
+
+.ai-branch-card {
+  min-height: 7.35rem;
+}
+
+.ai-branch-card p {
+  line-height: 1.45;
+}
+
 .micro-step-buttons button.active,
+.ai-branch-grid button.active,
 .training-step-row button.active,
 .training-step-row button.durable.active,
 .micro-sort-chip.is-correct {
@@ -1513,6 +1537,7 @@ p {
 }
 
 .prompt-trace-card,
+.ai-branch-card,
 .pretraining-toggle-demo .state-card,
 .curve-card,
 .micro-sort-buckets div {
@@ -1522,6 +1547,7 @@ p {
 }
 
 .prompt-trace-card strong,
+.ai-branch-card strong,
 .pretraining-toggle-demo .state-card strong,
 .curve-card strong,
 .micro-sort-buckets strong {

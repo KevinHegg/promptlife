@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Prompt Life v0.17.2 Where LLMs Fit Report</title>
+  <style>
+    :root {
+      color: #07124a;
+      background: #f7f5ef;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.45;
+    }
+
+    body {
+      margin: 0;
+      background: #f7f5ef;
+    }
+
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 44px 28px;
+    }
+
+    section,
+    figure {
+      break-inside: avoid;
+      margin: 0 0 24px;
+      border: 1px solid rgba(18, 30, 114, 0.15);
+      border-radius: 8px;
+      background: rgba(255, 253, 248, 0.94);
+      box-shadow: 0 12px 28px rgba(7, 18, 74, 0.08);
+      padding: 24px;
+    }
+
+    h1,
+    h2,
+    h3 {
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: 42px;
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 24px;
+    }
+
+    h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+    }
+
+    p {
+      margin: 0 0 12px;
+    }
+
+    ul,
+    ol {
+      margin: 0;
+      padding-left: 22px;
+    }
+
+    li + li {
+      margin-top: 6px;
+    }
+
+    code {
+      border-radius: 6px;
+      background: #eef3ff;
+      color: #121e72;
+      padding: 2px 5px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.92em;
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: #0f7f7b;
+      font-size: 13px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .metric {
+      border-radius: 8px;
+      background: #effaf7;
+      padding: 14px;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 22px;
+      color: #121e72;
+    }
+
+    figure img {
+      display: block;
+      width: auto;
+      max-width: 100%;
+      max-height: 760px;
+      margin: 12px auto 0;
+      border-radius: 8px;
+      border: 1px solid rgba(18, 30, 114, 0.12);
+      background: white;
+    }
+
+    figcaption {
+      color: #34435f;
+      font-size: 14px;
+    }
+
+    @media print {
+      body {
+        background: white;
+      }
+
+      main {
+        padding: 0;
+      }
+
+      section,
+      figure {
+        box-shadow: none;
+        page-break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section>
+      <p class="eyebrow">Prompt Life v0.17.2</p>
+      <h1>Where LLMs Fit Report</h1>
+      <p>Date: June 5, 2026</p>
+      <p>This report wraps the implementation summary and screenshots for the Before Morning topology-card pass.</p>
+    </section>
+
+    <section>
+      <h2>What Changed</h2>
+      <ul>
+        <li>Bumped the visible app version to <code>v0.17.2</code>.</li>
+        <li>Added <code>Where LLMs Fit</code> after <code>What Is an LLM?</code> and before <code>Rationalists vs Empiricists</code>.</li>
+        <li>Added a coded SVG / HTML visual aid, <code>ai-family-tree</code>, with short labels and HTML callouts.</li>
+        <li>Added the <code>ai-topology</code> tiny interaction so learners can tap a branch and reveal a one-sentence explanation.</li>
+        <li>Updated glossary learning-path order and internal review metadata.</li>
+        <li>Preserved checkpoint randomization, one badge, existing progress keys, games, and the no-generated-PNG constraint.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Files Changed</h2>
+      <ul>
+        <li><code>src/data/content.ts</code></li>
+        <li><code>src/main.tsx</code></li>
+        <li><code>src/components/VisualAids.tsx</code></li>
+        <li><code>src/styles/global.css</code></li>
+        <li><code>src/data/contentReview.js</code></li>
+        <li><code>docs/REVIEW_NOTES.md</code></li>
+        <li><code>docs/stage-audits/v0-17-before-morning/README.md</code></li>
+        <li><code>docs/stage-audits/v0-17-before-morning/card-inventory.md</code></li>
+        <li><code>docs/stage-audits/v0-17-before-morning/recommendations.md</code></li>
+        <li><code>docs/stage-audits/v0-17-before-morning/IMPLEMENTATION_REPORT_V0_17_2.md</code></li>
+        <li><code>docs/stage-audits/v0-17-before-morning/screenshot-index.md</code></li>
+        <li><code>docs/stage-audits/v0-17-before-morning/prompt-life-v0-17-2-where-llms-fit-report.html</code></li>
+        <li><code>docs/stage-audits/v0-17-before-morning/screenshots/</code> v0.17.2 screenshots</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>New Card Content</h2>
+      <p><strong>Title:</strong> Where LLMs Fit</p>
+      <p><strong>Subtitle:</strong> AI → machine learning → generative AI → LLMs</p>
+      <p><strong>Definition:</strong> A large language model is one kind of generative AI system, built with deep-learning methods inside the broader field of artificial intelligence.</p>
+      <p><strong>Checkpoint:</strong> Which statement is most accurate? Correct: An LLM is one kind of generative AI inside the broader AI family.</p>
+    </section>
+
+    <section>
+      <h2>Visual Aid Behavior</h2>
+      <p>The diagram shows AI branching into rule-based AI and machine learning; machine learning into classical ML and deep learning; deep learning into generative AI and other deep-learning systems; and generative AI into LLMs, diffusion, and multimodal models.</p>
+      <p>The tiny interaction lets learners tap AI, Rules, Machine learning, Classical ML, Deep learning, Generative AI, LLM, Diffusion, or Multimodal to reveal a short explanation.</p>
+    </section>
+
+    <section>
+      <h2>Glossary Updates</h2>
+      <p>Added or updated: <code>AI</code>, <code>machine learning</code>, <code>classical machine learning</code>, <code>deep learning</code>, <code>generative AI</code>, <code>LLM</code>, <code>diffusion model</code>, <code>multimodal AI</code>, <code>symbolic AI</code>, <code>rule-based AI</code>, and <code>foundation model</code>.</p>
+      <p><code>LLM</code> remains introduced by the first card. The topology terms are introduced by <code>Where LLMs Fit</code>.</p>
+    </section>
+
+    <section>
+      <h2>Verification</h2>
+      <div class="grid">
+        <div class="metric"><strong>Passed</strong><span><code>npm run typecheck</code></span></div>
+        <div class="metric"><strong>Passed</strong><span><code>npm run build</code></span></div>
+        <div class="metric"><strong>Passed</strong><span><code>npm run build:pages</code></span></div>
+        <div class="metric"><strong>Passed</strong><span><code>npm run audit:answers</code></span></div>
+        <div class="metric"><strong>68</strong><span>audited answer surfaces</span></div>
+        <div class="metric"><strong>46</strong><span>randomized surfaces</span></div>
+      </div>
+      <p>The new <code>Where LLMs Fit</code> checkpoint is randomized. Preview, Review, and Learn modes were smoke-tested. Browser console errors: none observed.</p>
+      <p>The build still reports the existing Vite large-chunk warning.</p>
+    </section>
+
+    <section>
+      <h2>Known Issues</h2>
+      <ul>
+        <li>The existing Vite large-chunk warning remains.</li>
+        <li>The new Essential card raises the dynamic Essential lesson denominator; some local progress states may need one more Essential checkpoint.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Image 2 Readiness</h2>
+      <p>Before Morning is ready for Image 2 asset generation. The new topology card should stay coded SVG/HTML for now. The next textless Image 2 candidates remain <code>What Is an LLM?</code>, <code>Pretraining</code>, <code>Fine-Tuning</code>, and <code>Alignment</code>.</p>
+    </section>
+
+    <section>
+      <h2>Run Locally</h2>
+      <ol>
+        <li><code>npm install</code></li>
+        <li><code>npm run dev -- --host 0.0.0.0</code></li>
+        <li>Open <code>http://localhost:5173/</code> on this computer or the Vite network URL on a phone on the same Wi-Fi.</li>
+      </ol>
+    </section>
+
+    <figure>
+      <figcaption><strong>Journey order.</strong> Where LLMs Fit appears as card 2; Rationalists vs Empiricists follows as card 3.</figcaption>
+      <img src="screenshots/v0-17-2-journey-order.png" alt="Journey order showing Where LLMs Fit after What Is an LLM" />
+    </figure>
+
+    <figure>
+      <figcaption><strong>New card top.</strong> The new lesson opens with the required title, subtitle, definition, and glossary chips.</figcaption>
+      <img src="screenshots/v0-17-2-where-llms-fit-390.png" alt="Where LLMs Fit lesson top at 390px" />
+    </figure>
+
+    <figure>
+      <figcaption><strong>New visual aid.</strong> The coded AI family tree is readable at mobile width with short labels and callouts.</figcaption>
+      <img src="screenshots/v0-17-2-where-llms-fit-visual-390.png" alt="AI family tree visual aid inside Where LLMs Fit at 390px" />
+    </figure>
+
+    <figure>
+      <figcaption><strong>Tiny interaction.</strong> Tapping the LLM branch reveals the one-token-at-a-time explanation and insight.</figcaption>
+      <img src="screenshots/v0-17-2-where-llms-fit-branch.png" alt="Where LLMs Fit branch interaction after tapping LLM" />
+    </figure>
+
+    <figure>
+      <figcaption><strong>Randomized checkpoint.</strong> The correct answer is displayed by the randomized choice system, not authored position.</figcaption>
+      <img src="screenshots/v0-17-2-where-llms-fit-checkpoint.png" alt="Where LLMs Fit checkpoint with randomized answer order" />
+    </figure>
+
+    <figure>
+      <figcaption><strong>Review route at 320px.</strong> The visual-aid gallery shows the new <code>ai-family-tree</code> visual attached to the new lesson.</figcaption>
+      <img src="screenshots/v0-17-2-ai-family-tree-review-320.png" alt="AI Family Tree visual aid review at 320px" />
+    </figure>
+
+    <figure>
+      <figcaption><strong>Glossary learning path.</strong> Topology terms are introduced by Where LLMs Fit.</figcaption>
+      <img src="screenshots/v0-17-2-glossary-topology.png" alt="Glossary learning path with AI topology terms" />
+    </figure>
+
+    <figure>
+      <figcaption><strong>Badge version.</strong> The single badge remains Prompt Life: Model Literate, with v0.17.2 under Start over.</figcaption>
+      <img src="screenshots/v0-17-2-badge-version.png" alt="Badge page showing v0.17.2 under Start over" />
+    </figure>
+  </main>
+</body>
+</html>
