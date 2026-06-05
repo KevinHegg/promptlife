@@ -2,6 +2,49 @@
 
 Date: 2026-06-05
 
+## v0.17 Before Morning Stage Audit
+
+### What Changed
+
+- Created the internal audit package at `docs/stage-audits/v0-17-before-morning/`.
+- Audited all seven Before Morning cards without changing live curriculum, progress rules, games, or checkpoint randomization.
+- Captured 390px screenshots for Journey stage views and every Before Morning card section, including checkpoint feedback where easy.
+- Added 320px and 430px dense-card spot checks.
+- Created a machine-readable `stage-audit.json` for later Deep Research and implementation planning.
+- Added an internal PDF report wrapping the response summary and representative screenshots.
+
+### Cards Audited
+
+- What Is an LLM?
+- Rationalists vs Empiricists
+- Training
+- Pretraining
+- Overfitting and Generalization
+- Fine-Tuning
+- Alignment
+
+### Key Findings
+
+- The stage order is sound and should stay mostly intact.
+- `CORE IDEA` plus `Core idea` is duplicated on every lesson and should be cleaned up in a later UI polish pass.
+- Training and Pretraining should stay separate, but their visuals/interactions need clearer distinction.
+- Fine-Tuning needs a stronger tiny interaction contrasting durable training with prompting, RAG, and sampling.
+- Alignment needs the same nuance with less text density, likely through visual grouping and a misconception check.
+
+### Verification
+
+- `npm install`: up to date, no vulnerabilities.
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed; checkpoint randomization remains intact.
+- Browser QA: captured required mobile screenshots at 390px plus 320px and 430px spot checks.
+
+### Known Issues
+
+- The Vite large-chunk warning remains.
+- Some correct checkpoint answers can still land in position A for a specific local seed; this is expected under stable randomization.
+- Screenshots were captured from the current local progress state, with Pretraining as the current Learn card.
+
 ## v0.16.1 Checkpoint Randomization + Assessment Integrity
 
 ### What Changed
