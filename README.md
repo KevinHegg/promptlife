@@ -74,7 +74,7 @@ The repo also includes a GitHub Pages workflow. Pushes to `main` build the app w
 https://kevinhegg.github.io/promptlife/
 ```
 
-Developer cache note for iPhone testing: after a `main` deploy, use a hard refresh, clear site data, add a cache-busting query such as `?v=014`, or confirm the visible app version on the Badge page.
+Developer cache note for iPhone testing: after a `main` deploy, use a hard refresh, clear site data, add a cache-busting query such as `?v=015`, or confirm the visible app version on the Badge page.
 
 ## Reset Progress
 
@@ -98,6 +98,7 @@ For local debugging, add `?debug=1` to the app URL and open the Badge screen to 
 - v0.9.3 visual-aid system reset with RAG and Retrieval rebuilt as the gold-standard open-book retrieval visual.
 - v0.13 dedicated Journey cards for RAG, Grounding, and Hallucinations, plus a content-freeze candidate review.
 - v0.14 Glossary A-Z/Learning path sorting and Journey path filters for Essential, Deep, and Ethics.
+- v0.15 eight-section Journey narrative with clickable stage links and late-day sections for Twilight, Midnight Ledger, and New Dawn.
 - HTML legend/callout visual aid system designed to stay readable in mobile and PDF review.
 - Play mode centered on Prompt Run, an interactive 12-step inference loop plus final ordering challenge.
 - Guided comparisons:

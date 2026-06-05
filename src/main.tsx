@@ -31,7 +31,7 @@ import './styles/global.css'
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '')
 const ASSET = `${BASE}/assets/promptlife`
 // Bump this for each shipped app change; the Badge screen displays it under Start over.
-const APP_VERSION = '0.14.0'
+const APP_VERSION = '0.15.0'
 const STORAGE_KEYS = {
   lastLocation: 'promptlife:v1:lastLocation',
   lessonId: 'promptlife:v1:lessonId',
@@ -58,12 +58,13 @@ const PROMPT_LIFE_STORAGE_KEYS = [...Object.values(STORAGE_KEYS), ...Object.valu
 const GLOSSARY_RELATED_SECTION = 'Related AI literacy terms'
 const GLOSSARY_SECTION_ORDER = [
   'Before Morning',
-  'Prompt Arrives',
   'Morning Commute',
   'Workday',
   'Decision Room',
   'The Day Repeats',
-  'Wider AI Literacy',
+  'Twilight: The Wider Landscape',
+  'Midnight Ledger',
+  'New Dawn',
   GLOSSARY_RELATED_SECTION
 ]
 const GLOSSARY_LEARNING_GROUPS = [
@@ -94,13 +95,13 @@ const GLOSSARY_LEARNING_GROUPS = [
   { firstLessonId: 'grounding', termIds: ['grounding', 'citation'] },
   { firstLessonId: 'hallucinations', termIds: ['hallucination', 'uncertainty'] },
   { firstLessonId: 'how-ai-learns', termIds: ['in-context learning'] },
-  { firstLessonId: 'risk-myth', termIds: ['prompt-injection', 'privacy'] },
   { firstLessonId: 'diffusion', termIds: ['diffusion'] },
   { firstLessonId: 'multimodal', termIds: ['multimodal'] },
   { firstLessonId: 'perfect-storm', termIds: ['perfect-storm-term', 'human-feedback-labor', 'compute', 'data-center'] },
   { firstLessonId: 'collective-intelligence', termIds: ['collective-intelligence-term', 'data-provenance', 'consent', 'compensation', 'copyright'] },
-  { firstLessonId: 'benefits-worth-taking-seriously', termIds: ['accessibility', 'translation', 'summarization'] },
   { firstLessonId: 'costs-we-must-count', termIds: ['energy-use', 'water-use', 'carbon-emissions', 'labor-disruption', 'deskilling'] },
+  { firstLessonId: 'risk-myth', termIds: ['prompt-injection', 'privacy'] },
+  { firstLessonId: 'benefits-worth-taking-seriously', termIds: ['accessibility', 'translation', 'summarization'] },
   { firstLessonId: 'human-centered-ai', termIds: ['human-centered-ai-term', 'dignity', 'common-good'] },
   { firstLessonId: 'better-ai-choice', termIds: ['responsible-ai', 'model-distillation', 'efficient-inference', 'governance'] },
   { firstLessonId: 'effective-prompting-literacy', termIds: ['effective-prompting', 'human-review'] },
@@ -167,6 +168,7 @@ function useStoredState(key, fallback, legacyKey = null) {
 
 function App() {
   const shellRef = useRef<HTMLElement | null>(null)
+  const journeyReturnActRef = useRef(null)
   const reviewRoute = useMemo(() => getReviewRoute(), [])
   const [tab, setTab] = useStoredState(STORAGE_KEYS.lastLocation, 'home', LEGACY_STORAGE_KEYS.lastLocation)
   const [lessonId, setLessonId] = useStoredState(STORAGE_KEYS.lessonId, lessons[0].id, LEGACY_STORAGE_KEYS.lessonId)
@@ -197,9 +199,17 @@ function App() {
 
   useEffect(() => {
     requestAnimationFrame(() => {
-      shellRef.current?.scrollTo({ top: 0, behavior: prefersReducedMotion() ? 'auto' : 'smooth' })
+      const journeyReturnActId = tab === 'journey' ? journeyReturnActRef.current : null
+      if (journeyReturnActId) {
+        scrollToJourneySection(journeyReturnActId, shellRef.current)
+        journeyReturnActRef.current = null
+      } else {
+        shellRef.current?.scrollTo({ top: 0, behavior: prefersReducedMotion() ? 'auto' : 'smooth' })
+      }
       const focusTarget = tab === 'learn'
         ? document.getElementById('lesson-title')
+        : journeyReturnActId
+          ? document.getElementById(`journey-section-title-${journeyReturnActId}`)
         : document.querySelector<HTMLElement>('.screen h1[id]')
       focusTarget?.focus?.({ preventScroll: true })
     })
@@ -371,6 +381,7 @@ function App() {
   }
 
   function returnToJourney() {
+    journeyReturnActRef.current = activeLesson.act
     setTab('journey')
   }
 
@@ -546,10 +557,23 @@ function JourneyScreen({ completed, currentLessonId, onOpenLesson, onTrace, onLe
   const [pathFilter, setPathFilter] = useState('all')
   const currentActId = lessons.find((lesson) => lesson.id === currentLessonId)?.act ?? acts[0].id
   const visibleLessons = lessons.filter((lesson) => matchesJourneyPathFilter(lesson, pathFilter))
+  const visibleActs = acts.filter((act) => visibleLessons.some((lesson) => lesson.act === act.id))
+  const [activeStageId, setActiveStageId] = useState(currentActId)
   const activeFilter = JOURNEY_FILTERS.find((filter) => filter.id === pathFilter) ?? JOURNEY_FILTERS[0]
   const filterSummary = pathFilter === 'all'
-    ? `Showing all ${visibleLessons.length} Journey cards.`
-    : `Showing ${visibleLessons.length} ${activeFilter.label} cards.`
+    ? `Showing all ${visibleLessons.length} Journey cards across ${visibleActs.length} stages.`
+    : `Showing ${visibleLessons.length} ${activeFilter.label} cards across ${visibleActs.length} stages.`
+
+  useEffect(() => {
+    setActiveStageId(visibleActs.some((act) => act.id === currentActId)
+      ? currentActId
+      : visibleActs[0]?.id ?? acts[0].id)
+  }, [currentActId, pathFilter])
+
+  function handleStageSelect(actId) {
+    setActiveStageId(actId)
+    scrollToJourneySection(actId)
+  }
 
   return (
     <section className="screen journey-screen" aria-labelledby="journey-title">
@@ -559,12 +583,17 @@ function JourneyScreen({ completed, currentLessonId, onOpenLesson, onTrace, onLe
         subtitle="Follow one prompt from before training through inference, generation, and model literacy."
         titleId="journey-title"
       />
-      <StageTimeline currentActId={currentActId} />
+      <p className="stage-jump-hint">Jump to a stage of the prompt’s day.</p>
+      <StageTimeline
+        currentActId={activeStageId}
+        items={visibleActs}
+        onStageSelect={handleStageSelect}
+      />
       <section className="path-filter-panel" aria-labelledby="journey-filter-title">
         <div>
           <p className="eyebrow">Path view</p>
           <h2 id="journey-filter-title">Choose a path</h2>
-          <p>All cards build model literacy. Essential is the shortest path. Deep adds mechanics. Ethics connects AI to human consequences.</p>
+          <p>All cards follow the full day. Essential is the shortest path. Deep adds mechanics. Ethics follows costs, choices, and human consequences.</p>
         </div>
         <div className="segmented-control path-filter-control" aria-label="Filter Journey cards by path">
           {JOURNEY_FILTERS.map((filter) => (
@@ -592,15 +621,19 @@ function JourneyScreen({ completed, currentLessonId, onOpenLesson, onTrace, onLe
         </div>
       </section>
       <div className="journey-list">
-        {acts.map((act) => {
+        {visibleActs.map((act) => {
           const actLessons = visibleLessons.filter((lesson) => lesson.act === act.id)
-          if (!actLessons.length) return null
           return (
-            <section className="act-section" key={act.id} aria-labelledby={`${act.id}-title`}>
+            <section
+              id={`journey-section-${act.id}`}
+              className={`act-section act-section-${act.id}`}
+              key={act.id}
+              aria-labelledby={`journey-section-title-${act.id}`}
+            >
               <div className="act-heading">
                 <span aria-hidden="true">{act.number}</span>
                 <div>
-                  <h2 id={`${act.id}-title`}>{act.name}</h2>
+                  <h2 id={`journey-section-title-${act.id}`} tabIndex={-1}>{act.name}</h2>
                   <p>{act.summary}</p>
                 </div>
               </div>
@@ -670,13 +703,38 @@ function hasVisualNeeds(lesson) {
   return ['perfect-storm', 'collective-intelligence', 'benefits-worth-taking-seriously', 'costs-we-must-count', 'human-centered-ai', 'better-ai-choice', 'effective-prompting-literacy', 'model-literate-synthesis'].includes(lesson.id)
 }
 
-function StageTimeline({ currentActId }) {
+function scrollToJourneySection(actId, shell = document.querySelector<HTMLElement>('.pl-shell')) {
+  const target = document.getElementById(`journey-section-${actId}`)
+  if (!shell || !target) return
+  const shellRect = shell.getBoundingClientRect()
+  const targetRect = target.getBoundingClientRect()
+  const top = shell.scrollTop + targetRect.top - shellRect.top - 12
+  shell.scrollTo({ top: Math.max(0, top), behavior: prefersReducedMotion() ? 'auto' : 'smooth' })
+  document.getElementById(`journey-section-title-${actId}`)?.focus?.({ preventScroll: true })
+}
+
+function StageTimeline({ currentActId, items = acts, onStageSelect = null }) {
   return (
     <ol className="stage-timeline" aria-label="Prompt Life stages">
-      {acts.map((act) => (
+      {items.map((act) => (
         <li key={act.id} className={act.id === currentActId ? 'active' : ''}>
-          <span>{act.number}</span>
-          <strong>{act.name}</strong>
+          {onStageSelect ? (
+            <button
+              className="stage-link"
+              onClick={() => onStageSelect(act.id)}
+              aria-current={act.id === currentActId ? 'step' : undefined}
+              aria-label={`Jump to ${act.name}. ${act.navHint}`}
+            >
+              <span>{act.number}</span>
+              <strong>{act.name}</strong>
+              <small>{act.navHint}</small>
+            </button>
+          ) : (
+            <>
+              <span>{act.number}</span>
+              <strong>{act.name}</strong>
+            </>
+          )}
         </li>
       ))}
     </ol>
@@ -685,7 +743,8 @@ function StageTimeline({ currentActId }) {
 
 function SectionIntroCard({ act }) {
   return (
-    <div className="section-intro-card" aria-label={`${act.name} focus`}>
+    <div className={`section-intro-card section-intro-${act.id}`} aria-label={`${act.name} focus`}>
+      <span className="section-motif" aria-hidden="true" />
       <p>{act.promptMoment}</p>
       <dl>
         <div><dt>Focus</dt><dd>{act.focus}</dd></div>
@@ -916,13 +975,7 @@ function getGlossaryHint(item) {
 
 function getGlossarySection(lesson) {
   if (!lesson) return GLOSSARY_RELATED_SECTION
-  if (lesson.act === 'before-morning') return 'Before Morning'
-  if (lesson.act === 'morning' && lesson.actLabel === 'Prompt Arrives') return 'Prompt Arrives'
-  if (lesson.act === 'morning') return 'Morning Commute'
-  if (lesson.act === 'workday') return 'Workday'
-  if (lesson.act === 'decision-room') return 'Decision Room'
-  if (lesson.act === 'day-repeats') return 'The Day Repeats'
-  return 'Wider AI Literacy'
+  return acts.find((act) => act.id === lesson.act)?.name ?? GLOSSARY_RELATED_SECTION
 }
 
 function findFirstLessonForTerm(item) {

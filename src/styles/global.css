@@ -390,9 +390,16 @@ p {
   gap: 1rem;
 }
 
+.stage-jump-hint {
+  margin: 0 0 0.45rem;
+  color: var(--pl-ink-soft);
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
 .stage-timeline {
   display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 0.28rem;
   margin: 0 0 1rem;
   padding: 0.55rem;
@@ -409,6 +416,20 @@ p {
   min-width: 0;
   color: #61708e;
   text-align: center;
+}
+
+.stage-link {
+  width: 100%;
+  display: grid;
+  gap: 0.2rem;
+  min-height: 5.35rem;
+  place-items: center;
+  align-content: start;
+  border: 1px solid rgba(18, 30, 114, 0.12);
+  border-radius: var(--pl-radius-sm);
+  background: rgba(255, 255, 255, 0.68);
+  color: inherit;
+  padding: 0.45rem 0.28rem;
 }
 
 .stage-timeline span {
@@ -432,10 +453,24 @@ p {
   overflow-wrap: anywhere;
 }
 
+.stage-timeline small {
+  display: block;
+  color: #66728d;
+  font-size: 0.5rem;
+  font-weight: 750;
+  line-height: 1.12;
+}
+
 .stage-timeline li.active span {
   background: var(--pl-teal);
   color: var(--pl-indigo);
   box-shadow: var(--pl-glow-cyan);
+}
+
+.stage-timeline li.active .stage-link {
+  border-color: rgba(15, 168, 164, 0.42);
+  background: linear-gradient(180deg, rgba(239, 255, 251, 0.92), rgba(255, 253, 248, 0.86));
+  box-shadow: var(--pl-card-depth-1);
 }
 
 .stage-timeline li.active strong {
@@ -444,8 +479,13 @@ p {
 
 @media (max-width: 359px) {
   .stage-timeline {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0.18rem;
     padding: 0.45rem;
+  }
+
+  .stage-link {
+    min-height: 4.2rem;
   }
 
   .stage-timeline span {
@@ -454,12 +494,12 @@ p {
   }
 
   .stage-timeline strong {
-    display: none;
+    display: block;
+    font-size: 0.55rem;
   }
 
-  .stage-timeline li.active strong {
-    display: block;
-    font-size: 0.54rem;
+  .stage-timeline small {
+    display: none;
   }
 }
 
@@ -498,6 +538,7 @@ p {
 }
 
 .section-intro-card {
+  position: relative;
   display: grid;
   gap: 0.65rem;
   margin-bottom: 0.85rem;
@@ -505,10 +546,55 @@ p {
   border-radius: var(--pl-card-radius);
   background: rgba(255, 255, 255, 0.58);
   color: var(--pl-ink-soft);
+  overflow: hidden;
 }
 
 .section-intro-card p {
+  position: relative;
   margin: 0;
+}
+
+.section-motif {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.86;
+}
+
+.section-intro-twilight-landscape {
+  background:
+    linear-gradient(135deg, rgba(246, 242, 255, 0.88), rgba(238, 255, 252, 0.62)),
+    rgba(255, 255, 255, 0.58);
+}
+
+.section-intro-twilight-landscape .section-motif {
+  background:
+    radial-gradient(circle at 82% 18%, rgba(126, 97, 255, 0.22), transparent 36%),
+    linear-gradient(180deg, transparent 58%, rgba(53, 230, 226, 0.14) 58.5%, transparent 60%);
+}
+
+.section-intro-midnight-ledger {
+  background:
+    linear-gradient(135deg, rgba(238, 243, 255, 0.94), rgba(255, 248, 236, 0.76)),
+    rgba(255, 255, 255, 0.62);
+}
+
+.section-intro-midnight-ledger .section-motif {
+  background:
+    repeating-linear-gradient(90deg, transparent 0 23px, rgba(181, 125, 31, 0.16) 23px 24px),
+    repeating-linear-gradient(180deg, transparent 0 29px, rgba(18, 30, 114, 0.08) 29px 30px);
+}
+
+.section-intro-new-dawn {
+  background:
+    linear-gradient(135deg, rgba(255, 247, 232, 0.92), rgba(234, 255, 252, 0.68)),
+    rgba(255, 255, 255, 0.62);
+}
+
+.section-intro-new-dawn .section-motif {
+  background:
+    radial-gradient(circle at 82% 22%, rgba(255, 184, 76, 0.22), transparent 32%),
+    radial-gradient(circle at 14% 88%, rgba(53, 230, 226, 0.14), transparent 34%);
 }
 
 .section-intro-card dl,

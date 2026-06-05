@@ -2,6 +2,50 @@
 
 Date: 2026-06-05
 
+## v0.15 Journey Narrative Architecture
+
+### What Changed
+
+- Replaced the old six-section Journey architecture with eight time-of-day sections:
+  - Before Morning
+  - Morning Commute
+  - Workday
+  - Decision Room
+  - The Day Repeats
+  - Twilight: The Wider Landscape
+  - Midnight Ledger
+  - New Dawn
+- Split the former broad Wider AI Literacy group into Twilight, Midnight Ledger, and New Dawn.
+- Reordered the existing late-Journey lesson blocks so Learn mode and Next Lesson follow the new narrative sequence.
+- Added clickable stage links on the Journey screen.
+- Added the hint: `Jump to a stage of the prompt's day.`
+- Updated Journey filter helper copy for the new full-day metaphor.
+- Updated Glossary Learning path grouping to use the new eight section names.
+- Bumped visible Badge version to `v0.15.0`.
+- Added docs:
+  - `docs/curriculum/JOURNEY_SECTION_RESTRUCTURE_V0_15.md`
+  - `docs/curriculum/V0_15_CHANGE_LOG.md`
+
+### Behavior Notes
+
+- Stage links are real buttons and scroll inside the app shell to visible Journey sections.
+- Under filters, empty sections and their stage links are hidden so jumps do not point to missing sections.
+- Preview, Review, and Learn modes keep the v0.14 behavior.
+- Returning from a Preview or Review lesson returns to Journey near that lesson's section when possible.
+- No new lessons, games, generated image assets, or heavy libraries were added.
+
+### Verification
+
+- `npm install`: passed.
+- Baseline `npm run typecheck`: passed.
+- Baseline `npm run build`: passed with the existing Vite large-chunk warning.
+- Final `npm run typecheck`: passed.
+- Final `npm run build`: passed with the existing Vite large-chunk warning.
+- Final `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- Browser QA at 320, 390, and 430px: passed with no horizontal overflow in Journey All, Essential, Deep, or Ethics filters.
+- Browser QA verified section jumps to Twilight, Midnight Ledger, and New Dawn; Ethics filter hides empty section links; Glossary Learning path shows the new section groups; Preview mode from New Dawn returns near the originating section.
+- Screenshots and the wrapped response PDF are tracked in `docs/curriculum/prompt-life-v0-15-journey-narrative-report.pdf`.
+
 ## v0.14 Glossary And Journey Path Clarity
 
 ### What Changed

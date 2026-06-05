@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Prompt Life v0.15 Journey Narrative Report</title>
+  <style>
+    :root {
+      --ink: #07124a;
+      --soft: #26324f;
+      --muted: #59637e;
+      --paper: #fffdf8;
+      --mist: #eef5f4;
+      --line: rgba(18, 30, 114, 0.18);
+      --teal: #0f7778;
+      --aqua: #e9fffb;
+      --blue: #eef3ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--mist);
+      line-height: 1.48;
+    }
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 38px 30px 56px;
+      background: var(--paper);
+    }
+    header {
+      border-bottom: 2px solid var(--line);
+      margin-bottom: 24px;
+      padding-bottom: 18px;
+    }
+    .eyebrow {
+      margin: 0 0 6px;
+      color: var(--teal);
+      font-weight: 900;
+      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: 0.04em;
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: 34px;
+      line-height: 1.08;
+    }
+    h2 {
+      margin: 26px 0 10px;
+      font-size: 22px;
+      line-height: 1.18;
+    }
+    p { color: var(--soft); }
+    ul, ol { color: var(--soft); padding-left: 1.25rem; }
+    li { margin: 0.18rem 0; }
+    code {
+      color: var(--ink);
+      background: var(--blue);
+      border-radius: 6px;
+      padding: 1px 5px;
+      font-size: 0.92em;
+    }
+    pre {
+      background: #07124a;
+      color: white;
+      border-radius: 8px;
+      padding: 14px;
+      overflow-wrap: anywhere;
+      white-space: pre-wrap;
+    }
+    pre code {
+      color: white;
+      background: transparent;
+      padding: 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      color: var(--soft);
+      font-size: 14px;
+    }
+    th, td {
+      border: 1px solid var(--line);
+      padding: 8px;
+      vertical-align: top;
+      text-align: left;
+    }
+    th {
+      color: var(--ink);
+      background: #f8fbff;
+    }
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin: 18px 0 22px;
+    }
+    .summary-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #f8fbff;
+      padding: 12px;
+      color: var(--soft);
+    }
+    .summary-card strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--ink);
+    }
+    .note {
+      border-left: 4px solid var(--teal);
+      background: var(--aqua);
+      border-radius: 8px;
+      padding: 12px 14px;
+      color: #063d43;
+      font-weight: 750;
+    }
+    figure {
+      break-inside: avoid;
+      margin: 18px 0 24px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: white;
+      padding: 12px;
+      box-shadow: 0 8px 18px rgba(7, 18, 74, 0.08);
+    }
+    figure img {
+      display: block;
+      width: min(100%, 390px);
+      height: auto;
+      margin: 0 auto;
+      border-radius: 6px;
+      border: 1px solid rgba(18, 30, 114, 0.12);
+    }
+    figcaption {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .page-break { break-before: page; }
+    @page { margin: 0.55in; }
+    @media print {
+      body { background: white; }
+      main { padding: 0; max-width: none; }
+      .summary-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">Prompt Life v0.15</p>
+      <h1>Journey Narrative Architecture Report</h1>
+      <p>Internal report generated 2026-06-05. This PDF wraps the response summary and screenshots for the eight-section Journey narrative pass.</p>
+    </header>
+
+    <section>
+      <h2>What Changed</h2>
+      <div class="summary-grid">
+        <div class="summary-card"><strong>Eight-section Journey</strong>Replaced the six-section map with a fuller day structure from Before Morning to New Dawn.</div>
+        <div class="summary-card"><strong>Late-day split</strong>Split the old broad Wider AI Literacy ending into Twilight, Midnight Ledger, and New Dawn.</div>
+        <div class="summary-card"><strong>Clickable stages</strong>Made Journey stage items real buttons that scroll inside the app shell.</div>
+        <div class="summary-card"><strong>Glossary grouping</strong>Updated Learning path glossary grouping to the new section names.</div>
+      </div>
+      <p class="note">No new lessons were added. The existing 38 cards were reassigned and reordered so Journey, Learn mode, and Next Lesson all follow the same narrative arc.</p>
+    </section>
+
+    <section>
+      <h2>Files Changed</h2>
+      <ul>
+        <li><code>src/data/content.ts</code></li>
+        <li><code>src/main.tsx</code></li>
+        <li><code>src/styles/global.css</code></li>
+        <li><code>README.md</code></li>
+        <li><code>docs/REVIEW_NOTES.md</code></li>
+        <li><code>docs/curriculum/JOURNEY_SECTION_RESTRUCTURE_V0_15.md</code></li>
+        <li><code>docs/curriculum/V0_15_CHANGE_LOG.md</code></li>
+        <li><code>docs/curriculum/prompt-life-v0-15-journey-narrative-report.html</code></li>
+        <li><code>docs/curriculum/prompt-life-v0-15-journey-narrative-report.pdf</code></li>
+        <li><code>docs/screenshots/v0-15-*.png</code></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>How To Run Locally</h2>
+      <pre><code>cd ~/Desktop/promptlife
+npm install
+npm run dev</code></pre>
+      <p>Open the local URL printed by Vite. For phone testing on the same Wi-Fi network, run <code>npm run dev -- --host 0.0.0.0</code> and open the Network URL Vite prints.</p>
+      <p>For the deployed build, open <code>https://kevinhegg.github.io/promptlife/?v=015</code> after the GitHub Pages run completes.</p>
+    </section>
+
+    <section>
+      <h2>New Section Structure</h2>
+      <table>
+        <thead><tr><th>#</th><th>Section</th><th>Role</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Before Morning</td><td>Model shaping before ordinary use.</td></tr>
+          <tr><td>2</td><td>Morning Commute</td><td>Text becomes tokens, IDs, vectors, and tensors.</td></tr>
+          <tr><td>3</td><td>Workday</td><td>Transformer layers process the current context.</td></tr>
+          <tr><td>4</td><td>Decision Room</td><td>Scores become probabilities and one next token is chosen.</td></tr>
+          <tr><td>5</td><td>The Day Repeats</td><td>Responses grow; context changes and expires.</td></tr>
+          <tr><td>6</td><td>Twilight: The Wider Landscape</td><td>Other AI systems and why LLMs arrived now.</td></tr>
+          <tr><td>7</td><td>Midnight Ledger</td><td>Costs, extraction, risk, and institutional shadows.</td></tr>
+          <tr><td>8</td><td>New Dawn</td><td>Benefits, human-centered use, responsible choices, prompting, and synthesis.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Card Reassignment Summary</h2>
+      <ul>
+        <li><strong>Twilight:</strong> How AI Learns, Diffusion vs Autoregression, Multimodal AI, The Perfect Storm.</li>
+        <li><strong>Midnight Ledger:</strong> Collective Intelligence, Extracted; Costs We Must Count; Risk vs Myth.</li>
+        <li><strong>New Dawn:</strong> Benefits Worth Taking Seriously; Human-Centered AI; Better AI Is a Choice; Effective Prompting from Model Literacy; Model Literate Synthesis.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Behavior</h2>
+      <ul>
+        <li>Stage links scroll to visible Journey sections and respect reduced-motion settings.</li>
+        <li>Journey filters keep All, Essential, Deep, and Ethics. Empty sections are hidden under filters.</li>
+        <li>Glossary Learning path now groups terms by the eight-section architecture.</li>
+        <li>Preview/Review/Learn behavior remains unchanged. Preview from New Dawn returned near the New Dawn section during QA.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Verification</h2>
+      <ul>
+        <li><code>npm install</code>: passed.</li>
+        <li><code>npm run typecheck</code>: passed.</li>
+        <li><code>npm run build</code>: passed with the existing Vite large-chunk warning.</li>
+        <li><code>npm run build:pages</code>: passed with the existing Vite large-chunk warning.</li>
+        <li>Browser QA at 320, 390, and 430px found no horizontal overflow in Journey All, Essential, Deep, or Ethics filters.</li>
+        <li>Browser QA verified section jumps, Glossary Learning path grouping, Ethics filter stage hiding, and Preview/Return behavior.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Known Issues</h2>
+      <ul>
+        <li>The existing Vite single-chunk warning remains.</li>
+        <li>Reset-progress QA was not clicked because it clears local device progress and requires explicit confirmation.</li>
+        <li>Prompt Injection / Tool Risk remains inside Risk vs Myth rather than a dedicated card.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Next Three Recommended Steps</h2>
+      <ol>
+        <li>Run the source-review pass for Midnight Ledger and New Dawn before v1 publication language.</li>
+        <li>Consider a dedicated Prompt Injection / Tool Risk card if security literacy needs more space.</li>
+        <li>Add separate Badge progress for Essential, Deep, and Ethics once the path model stabilizes.</li>
+      </ol>
+    </section>
+
+    <section class="page-break">
+      <h2>Screenshots</h2>
+      <figure>
+        <img src="../screenshots/v0-15-journey-eight-sections.png" alt="Journey top showing eight clickable stage links across two rows." />
+        <figcaption>Journey top: eight stage links over two rows at 390px.</figcaption>
+      </figure>
+      <figure>
+        <img src="../screenshots/v0-15-twilight-section.png" alt="Twilight section showing the wider AI landscape cards." />
+        <figcaption>Twilight: The Wider Landscape introduces other AI systems and why LLMs arrived now.</figcaption>
+      </figure>
+      <figure>
+        <img src="../screenshots/v0-15-midnight-ledger-section.png" alt="Midnight Ledger section showing costs and risk cards." />
+        <figcaption>Midnight Ledger counts costs and risks without doom language.</figcaption>
+      </figure>
+      <figure>
+        <img src="../screenshots/v0-15-new-dawn-section.png" alt="New Dawn section showing benefits and human-centered use cards." />
+        <figcaption>New Dawn moves toward benefits, responsible choices, prompting, and synthesis.</figcaption>
+      </figure>
+      <figure>
+        <img src="../screenshots/v0-15-ethics-filter.png" alt="Ethics filter showing only late-day section links and cards." />
+        <figcaption>Ethics filter: empty sections are hidden, leaving three active stages.</figcaption>
+      </figure>
+      <figure>
+        <img src="../screenshots/v0-15-glossary-learning-path-groups.png" alt="Glossary Learning path with section grouping active." />
+        <figcaption>Glossary Learning path remains grouped and readable.</figcaption>
+      </figure>
+      <figure>
+        <img src="../screenshots/v0-15-glossary-late-groups.png" alt="Glossary Learning path showing Midnight Ledger group terms." />
+        <figcaption>Glossary late group: Midnight Ledger terms are grouped under the new section name.</figcaption>
+      </figure>
+    </section>
+  </main>
+</body>
+</html>
