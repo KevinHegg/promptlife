@@ -2,6 +2,33 @@
 
 Date: 2026-06-06
 
+## v0.18.4 Home Generated Asset Integration
+
+### What Changed
+
+- Bumped the visible app version to `v0.18.4`.
+- Replaced the Home hero fallback illustration with `public/assets/generated/home/home-hero-prompt-cloud.png`.
+- Replaced the Home logo mark with `public/assets/generated/home/promptlife-mark.png`.
+- Pointed the favicon, Apple touch icon, and web manifest icon at the generated mark.
+- Kept Home labels, copy, alt text, and captions in app code; no text was added to the PNGs.
+- Kept the previous Home art as image-load fallback behavior for the generated Home assets.
+- Updated `src/data/visualAssets.ts` so the Home assets are marked as integrated.
+- Left Journey cards, progress logic, badge logic, dependencies, and checkpoint behavior unchanged.
+
+### Final Home Copy
+
+- Eyebrow: `A DAY IN THE LIFE OF A PROMPT`
+- Title: `Prompt Life`
+- Tagline: `Demystifying LLMs in the AI era through clear explanations, useful metaphors, and a little play.`
+- Big idea: `An LLM is not a mind, a database, or magic. It is a learned prediction system that turns context into likely next tokens.`
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- Browser QA: passed at 390px and 320px. The generated Home hero and mark loaded from `assets/generated/home/`, there was no horizontal overflow, the standalone Home subhead stayed absent, and no console errors were reported.
+
 ## v0.18.3 Home Subhead Removal
 
 ### What Changed

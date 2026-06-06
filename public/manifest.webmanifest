@@ -8,8 +8,8 @@
   "theme_color": "#071B6F",
   "icons": [
     {
-      "src": "./assets/promptlife/brand/promptlife-mark.png",
-      "sizes": "512x512",
+      "src": "./assets/generated/home/promptlife-mark.png",
+      "sizes": "1254x1254",
       "type": "image/png"
     }
   ]

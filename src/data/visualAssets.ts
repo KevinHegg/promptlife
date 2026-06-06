@@ -21,39 +21,41 @@ export type GeneratedVisualAsset = {
   sourceNote: string
 }
 
-export type PlannedHomeVisualAsset = {
+export type HomeVisualAsset = {
   id: string
   filename: string
   path: string
-  status: 'planned'
+  status: 'integrated'
   purpose: string
   alt: string
   sourceNote: string
 }
 
 const sourceNote = 'Provided textless generated PNG. Instructional labels, callouts, captions, accessibility text, and key takeaways live in HTML/SVG/app code, not inside the image file.'
-const plannedHomeSourceNote = 'Planned future generated asset. The Home page currently uses the existing Prompt Life fallback asset and can swap to this path when the textless PNG is added.'
+const homeSourceNote = 'Provided textless generated Home PNG. The Home page uses this asset as the primary image while keeping instructional labels, copy, alt text, and fallback behavior in app code.'
 
-export const plannedHomeVisualAssets: Record<'hero' | 'mark', PlannedHomeVisualAsset> = {
+export const homeVisualAssets: Record<'hero' | 'mark', HomeVisualAsset> = {
   hero: {
     id: 'home-hero-prompt-cloud',
     filename: 'home-hero-prompt-cloud.png',
     path: generatedHomeAssetPath('home-hero-prompt-cloud.png'),
-    status: 'planned',
+    status: 'integrated',
     purpose: 'Show a prompt entering a glowing feature cloud and one response token emerging.',
     alt: 'A prompt flows through a glowing model cloud and emerges as one response token.',
-    sourceNote: plannedHomeSourceNote
+    sourceNote: homeSourceNote
   },
   mark: {
     id: 'promptlife-mark-generated',
     filename: 'promptlife-mark.png',
     path: generatedHomeAssetPath('promptlife-mark.png'),
-    status: 'planned',
+    status: 'integrated',
     purpose: 'Provide a simple square Prompt Life logo mark that can also work as an app icon or favicon.',
     alt: 'A compact Prompt Life mark showing a prompt signal, model cloud, and emerging token.',
-    sourceNote: plannedHomeSourceNote
+    sourceNote: homeSourceNote
   }
 }
+
+export const plannedHomeVisualAssets = homeVisualAssets
 
 export const generatedVisualAssets: GeneratedVisualAsset[] = [
   {

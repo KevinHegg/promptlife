@@ -295,7 +295,11 @@ p {
 .brand-mark {
   position: relative;
   width: 2.82rem;
+  height: 2.82rem;
   margin: 0;
+  border-radius: 7px;
+  object-fit: cover;
+  display: block;
   filter: drop-shadow(0 5px 10px rgba(7, 18, 74, 0.12));
 }
 
@@ -336,7 +340,7 @@ p {
     radial-gradient(ellipse at 18% 82%, transparent 0 3.2rem, rgba(53, 230, 226, 0.12) 3.28rem 3.35rem, transparent 3.44rem);
 }
 
-.home-visual-slot picture {
+.home-visual-slot .hero-art {
   position: relative;
   z-index: 1;
   display: block;
@@ -354,9 +358,10 @@ p {
 }
 
 .home-hero .hero-art {
-  aspect-ratio: 16 / 8.2;
+  aspect-ratio: 4 / 3;
   margin: 0;
   border: 1px solid rgba(255, 255, 255, 0.20);
+  object-position: center;
   box-shadow: none;
 }
 

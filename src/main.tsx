@@ -34,14 +34,13 @@ const BASE = import.meta.env.BASE_URL.replace(/\/$/, '')
 const ASSET = `${BASE}/assets/promptlife`
 const GENERATED_ASSET = `${BASE}/assets/generated`
 const HOME_ASSETS = {
-  mark: `${ASSET}/brand/promptlife-mark.svg`,
-  futureMark: `${GENERATED_ASSET}/home/promptlife-mark.png`,
-  heroDesktop: `${ASSET}/illustrations/scene-hero-feature-cloud.png`,
-  heroMobile: `${ASSET}/illustrations/scene-hero-feature-cloud@mobile.png`,
-  futureHero: `${GENERATED_ASSET}/home/home-hero-prompt-cloud.png`
+  mark: `${GENERATED_ASSET}/home/promptlife-mark.png`,
+  markFallback: `${ASSET}/brand/promptlife-mark.svg`,
+  hero: `${GENERATED_ASSET}/home/home-hero-prompt-cloud.png`,
+  heroFallback: `${ASSET}/illustrations/scene-hero-feature-cloud@mobile.png`
 }
 // Bump this for each shipped app change; the Badge screen displays it under Start over.
-const APP_VERSION = '0.18.3'
+const APP_VERSION = '0.18.4'
 const STORAGE_KEYS = {
   lastLocation: 'promptlife:v1:lastLocation',
   lessonId: 'promptlife:v1:lessonId',
@@ -542,23 +541,40 @@ function SkipLink() {
 }
 
 function HomeScreen({ progress, nextLessonTitle, statusMessage, onStart, onJourney, onPlay }) {
+  const [homeAssetFailures, setHomeAssetFailures] = useState({ mark: false, hero: false })
+  const markSrc = homeAssetFailures.mark ? HOME_ASSETS.markFallback : HOME_ASSETS.mark
+  const heroSrc = homeAssetFailures.hero ? HOME_ASSETS.heroFallback : HOME_ASSETS.hero
+
+  function handleHomeAssetError(asset: 'mark' | 'hero') {
+    setHomeAssetFailures((failures) => failures[asset] ? failures : { ...failures, [asset]: true })
+  }
+
   return (
     <section className="screen home-screen" aria-labelledby="home-title">
       {statusMessage && <p className="feedback good" role="status">{statusMessage}</p>}
       <div className="home-hero">
         <div className="home-brand-row">
-          <span className="home-logo-frame" data-future-asset={HOME_ASSETS.futureMark}>
-            <img className="brand-mark" src={HOME_ASSETS.mark} alt="Prompt Life mark: a signal moving through connected nodes" />
+          <span className="home-logo-frame">
+            <img
+              className="brand-mark"
+              src={markSrc}
+              alt="Prompt Life mark: a prompt signal moving through a model cloud toward one response token"
+              onError={() => handleHomeAssetError('mark')}
+            />
           </span>
           <p className="eyebrow">A DAY IN THE LIFE OF A PROMPT</p>
         </div>
         <h1 id="home-title">Prompt Life</h1>
         <p className="lede home-tagline">Demystifying LLMs in the AI era through clear explanations, useful metaphors, and a little play.</p>
-        <div className="home-visual-slot" data-future-asset={HOME_ASSETS.futureHero}>
-          <picture>
-            <source media="(min-width: 700px)" srcSet={HOME_ASSETS.heroDesktop} />
-            <img className="hero-art" src={HOME_ASSETS.heroMobile} alt="A prompt traveling through a glowing feature cloud and emerging as one response token" />
-          </picture>
+        <div className="home-visual-slot">
+          <img
+            className="hero-art"
+            src={heroSrc}
+            alt="A prompt traveling through a glowing model cloud and emerging as one response token"
+            loading="eager"
+            decoding="async"
+            onError={() => handleHomeAssetError('hero')}
+          />
         </div>
       </div>
 
