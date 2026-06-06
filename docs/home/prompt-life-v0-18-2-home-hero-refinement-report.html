@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prompt Life v0.18.2 Home Hero Refinement Report</title>
+  <style>
+    :root {
+      --ink: #07124a;
+      --muted: #53607a;
+      --paper: #fffdf8;
+      --mist: #edf6f5;
+      --line: rgba(18, 30, 114, 0.16);
+      --teal: #0fa8a4;
+      --amber: #b87622;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: linear-gradient(180deg, var(--mist), #f8f5ee);
+      color: var(--ink);
+      font: 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    main {
+      width: min(100%, 980px);
+      margin: 0 auto;
+      padding: 32px;
+    }
+
+    section {
+      margin: 0 0 24px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 253, 248, 0.92);
+      box-shadow: 0 12px 28px rgba(7, 18, 74, 0.08);
+      break-inside: avoid;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0 0 10px;
+      line-height: 1.15;
+      color: var(--ink);
+    }
+
+    h1 {
+      font-size: 34px;
+    }
+
+    h2 {
+      font-size: 21px;
+    }
+
+    h3 {
+      font-size: 16px;
+    }
+
+    p {
+      margin: 0 0 10px;
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: var(--teal);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .lede {
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .fact {
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.68);
+    }
+
+    ul {
+      margin: 8px 0 0;
+      padding-left: 20px;
+    }
+
+    code {
+      color: #14365f;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.92em;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      margin: 2px 4px 2px 0;
+      padding: 2px 8px;
+      border: 1px solid rgba(15, 168, 164, 0.26);
+      border-radius: 999px;
+      background: #effffc;
+      color: #063d43;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .warning {
+      border-left: 4px solid var(--amber);
+    }
+
+    .shots {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      align-items: start;
+    }
+
+    figure {
+      margin: 0;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: white;
+      break-inside: avoid;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border: 1px solid rgba(18, 30, 114, 0.10);
+      border-radius: 6px;
+    }
+
+    figcaption {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    @media print {
+      body {
+        background: white;
+      }
+
+      main {
+        width: 100%;
+        padding: 0;
+      }
+
+      section {
+        box-shadow: none;
+      }
+
+      .shots {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section>
+      <p class="eyebrow">Prompt Life v0.18.2</p>
+      <h1>Home Hero Refinement</h1>
+      <p class="lede">Focused Home-page polish pass: sharper mission copy, stronger hierarchy, a more intentional logo area, and a stable prompt-cloud visual slot ready for future generated Home assets.</p>
+    </section>
+
+    <section>
+      <h2>What Changed</h2>
+      <div class="grid">
+        <div class="fact">
+          <h3>Copy</h3>
+          <p>Added the prominent Home subhead <code>Demystifying LLMs</code> and replaced <code>clear mechanics</code> with <code>clear explanations</code>.</p>
+        </div>
+        <div class="fact">
+          <h3>Hero</h3>
+          <p>The existing textless prompt-cloud image now sits in a deeper indigo/cyan/violet frame that better matches the generated asset direction.</p>
+        </div>
+        <div class="fact">
+          <h3>Logo</h3>
+          <p>The top mark now has a deliberate square frame and the app has a standard favicon link using the current square mark.</p>
+        </div>
+        <div class="fact">
+          <h3>Layout</h3>
+          <p>The Home cards use tighter spacing, with Continue Learning secondary and Big Idea peeking into the first mobile viewport.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Final Home Copy</h2>
+      <ul>
+        <li>Eyebrow: <code>A DAY IN THE LIFE OF A PROMPT</code></li>
+        <li>Main title: <code>Prompt Life</code></li>
+        <li>Prominent subhead: <code>Demystifying LLMs</code></li>
+        <li>Tagline: <code>Demystifying LLMs in the AI era through clear explanations, useful metaphors, and a little play.</code></li>
+        <li>Big idea: <code>An LLM is not a mind, a database, or magic. It is a learned prediction system that turns context into likely next tokens.</code></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Asset Readiness</h2>
+      <ul>
+        <li>Future hero path: <code>public/assets/generated/home/home-hero-prompt-cloud.png</code></li>
+        <li>Future mark path: <code>public/assets/generated/home/promptlife-mark.png</code></li>
+        <li>Planned Home asset metadata added in <code>src/data/visualAssets.ts</code>.</li>
+        <li>Current fallback hero and mark remain in use until the generated files are available.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Verification</h2>
+      <p>
+        <span class="status">typecheck passed</span>
+        <span class="status">build passed</span>
+        <span class="status">build:pages passed</span>
+        <span class="status">browser QA passed</span>
+      </p>
+      <ul>
+        <li><code>npm run typecheck</code>: passed.</li>
+        <li><code>npm run build</code>: passed with the existing Vite large-chunk warning.</li>
+        <li><code>npm run build:pages</code>: passed with the existing Vite large-chunk warning.</li>
+        <li>Mobile QA: 390px and 320px passed with no horizontal overflow and no clean-tab console errors.</li>
+      </ul>
+    </section>
+
+    <section class="warning">
+      <h2>Known Issues</h2>
+      <ul>
+        <li>The current Home hero image is still the existing fallback illustration; the new generated Home hero has not been added yet.</li>
+        <li>The existing Vite large-chunk warning remains.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Next Three Recommended Steps</h2>
+      <ul>
+        <li>Generate and integrate the Home hero prompt-cloud asset.</li>
+        <li>Generate and integrate the square Prompt Life mark for app icon/favicon/social use.</li>
+        <li>After those assets land, re-check Home at 320px, 390px, and on iPhone.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Screenshots</h2>
+      <div class="shots">
+        <figure>
+          <img src="screenshots/home-v0-18-2-390.png" alt="Home page at 390 pixels after v0.18.2 polish">
+          <figcaption>Home at 390px.</figcaption>
+        </figure>
+        <figure>
+          <img src="screenshots/home-v0-18-2-320.png" alt="Home page at 320 pixels after v0.18.2 polish">
+          <figcaption>Home at 320px.</figcaption>
+        </figure>
+        <figure>
+          <img src="screenshots/home-v0-18-2-with-scroll.png" alt="Home page scrolled to Big Idea and quick actions">
+          <figcaption>Scrolled Home view.</figcaption>
+        </figure>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

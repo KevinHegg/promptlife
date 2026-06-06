@@ -1724,7 +1724,7 @@ export const lessons = [
     correctAnswer: 'Mechanics matter, and humans remain responsible',
     incorrectAnswers: ['Fluent output proves wisdom', 'Ethics replaces learning the mechanics', 'Mechanics alone settle every use decision'],
     feedbackCorrect: 'Insight unlocked: model literacy joins mechanism with judgment.',
-    feedbackIncorrect: 'Not quite. Model literacy needs both clear mechanics and human responsibility.',
+    feedbackIncorrect: 'Not quite. Model literacy needs both clear explanations and human responsibility.',
     interaction: { type: 'cloud', title: 'Light the map', copy: 'Trace training, inference, context, retrieval, generation, risk, benefit, cost, and responsibility together.' },
     quiz: {
       question: 'Which statement is model-literate?',

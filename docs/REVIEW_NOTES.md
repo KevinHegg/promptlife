@@ -2,6 +2,34 @@
 
 Date: 2026-06-06
 
+## v0.18.2 Home Hero Refinement
+
+### What Changed
+
+- Bumped the visible app version to `v0.18.2`.
+- Revised the Home hero copy to foreground `Demystifying LLMs`.
+- Replaced the Home tagline phrase `clear mechanics` with `clear explanations`.
+- Reframed the Home hero logo into a cleaner square mark container for future logo/fav icon asset swaps.
+- Wrapped the existing prompt-cloud Home illustration in a deeper, stable visual slot so it better matches the generated Before Morning asset direction.
+- Added planned Home asset references for `public/assets/generated/home/home-hero-prompt-cloud.png` and `public/assets/generated/home/promptlife-mark.png`.
+- Added a standard favicon link to the existing square Prompt Life mark.
+- Kept Journey progress rules, badge logic, lesson order, dependencies, and checkpoint behavior unchanged.
+
+### Final Home Copy
+
+- Eyebrow: `A DAY IN THE LIFE OF A PROMPT`
+- Title: `Prompt Life`
+- Prominent subhead: `Demystifying LLMs`
+- Tagline: `Demystifying LLMs in the AI era through clear explanations, useful metaphors, and a little play.`
+- Big idea: `An LLM is not a mind, a database, or magic. It is a learned prediction system that turns context into likely next tokens.`
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- Browser QA: passed at 390px and 320px with no horizontal overflow, no console errors, and the Big Idea panel visible as the first screen scrolls.
+
 ## v0.18.1 Where LLMs Fit Visual Repair
 
 ### What Changed

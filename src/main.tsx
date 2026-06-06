@@ -32,8 +32,16 @@ import './styles/global.css'
 
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '')
 const ASSET = `${BASE}/assets/promptlife`
+const GENERATED_ASSET = `${BASE}/assets/generated`
+const HOME_ASSETS = {
+  mark: `${ASSET}/brand/promptlife-mark.svg`,
+  futureMark: `${GENERATED_ASSET}/home/promptlife-mark.png`,
+  heroDesktop: `${ASSET}/illustrations/scene-hero-feature-cloud.png`,
+  heroMobile: `${ASSET}/illustrations/scene-hero-feature-cloud@mobile.png`,
+  futureHero: `${GENERATED_ASSET}/home/home-hero-prompt-cloud.png`
+}
 // Bump this for each shipped app change; the Badge screen displays it under Start over.
-const APP_VERSION = '0.18.1'
+const APP_VERSION = '0.18.2'
 const STORAGE_KEYS = {
   lastLocation: 'promptlife:v1:lastLocation',
   lessonId: 'promptlife:v1:lessonId',
@@ -538,21 +546,28 @@ function HomeScreen({ progress, nextLessonTitle, statusMessage, onStart, onJourn
     <section className="screen home-screen" aria-labelledby="home-title">
       {statusMessage && <p className="feedback good" role="status">{statusMessage}</p>}
       <div className="home-hero">
-        <img className="brand-mark" src={`${ASSET}/brand/promptlife-mark.svg`} alt="Prompt Life logo" />
-        <p className="eyebrow">A day in the life of a prompt</p>
+        <div className="home-brand-row">
+          <span className="home-logo-frame" data-future-asset={HOME_ASSETS.futureMark}>
+            <img className="brand-mark" src={HOME_ASSETS.mark} alt="Prompt Life mark: a signal moving through connected nodes" />
+          </span>
+          <p className="eyebrow">A DAY IN THE LIFE OF A PROMPT</p>
+        </div>
         <h1 id="home-title">Prompt Life</h1>
-        <p className="lede">Model literacy for the AI era: clear mechanics, useful metaphors, and a little play.</p>
-        <picture>
-          <source media="(min-width: 700px)" srcSet={`${ASSET}/illustrations/scene-hero-feature-cloud.png`} />
-          <img className="hero-art" src={`${ASSET}/illustrations/scene-hero-feature-cloud@mobile.png`} alt="A prompt traveling through a glowing feature cloud" />
-        </picture>
+        <p className="home-subhead">Demystifying LLMs</p>
+        <p className="lede home-tagline">Demystifying LLMs in the AI era through clear explanations, useful metaphors, and a little play.</p>
+        <div className="home-visual-slot" data-future-asset={HOME_ASSETS.futureHero}>
+          <picture>
+            <source media="(min-width: 700px)" srcSet={HOME_ASSETS.heroDesktop} />
+            <img className="hero-art" src={HOME_ASSETS.heroMobile} alt="A prompt traveling through a glowing feature cloud and emerging as one response token" />
+          </picture>
+        </div>
       </div>
 
       <section className="progress-panel" aria-labelledby="progress-title">
         <div>
           <p className="eyebrow">Current path</p>
           <h2 id="progress-title">{progress ? 'Continue learning' : 'Start at the beginning'}</h2>
-          <p>{progress}% complete. Next stop: {nextLessonTitle}.</p>
+          <p>{progress}% complete. Next stop: {nextLessonTitle}</p>
         </div>
         <ProgressRing progress={progress} label={`${progress}% complete`} />
         <button className="primary-btn" onClick={onStart}>{progress ? 'Continue journey' : 'Start journey'}</button>
@@ -560,7 +575,7 @@ function HomeScreen({ progress, nextLessonTitle, statusMessage, onStart, onJourn
 
       <section className="idea-panel" aria-labelledby="big-idea">
         <h2 id="big-idea">Big idea</h2>
-        <p>An LLM is not a mind, not a database, and not magic. It is a learned prediction machine that turns context into next-token probabilities.</p>
+        <p>An LLM is not a mind, a database, or magic. It is a learned prediction system that turns context into likely next tokens.</p>
       </section>
 
       <div className="quick-actions" aria-label="Quick actions">

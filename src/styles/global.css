@@ -228,18 +228,125 @@ p {
   -webkit-backdrop-filter: blur(8px);
 }
 
+.home-screen {
+  display: grid;
+  gap: 0.95rem;
+}
+
 .home-hero {
-  padding: 1.1rem;
+  display: grid;
+  gap: 0.68rem;
+  padding: 1rem;
   overflow: hidden;
 }
 
-.home-hero h1 {
-  font-size: 2.28rem;
+.home-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(132deg, transparent 0 52%, rgba(53, 230, 226, 0.10) 52.2% 52.6%, transparent 52.8%),
+    radial-gradient(circle at 82% 14%, rgba(122, 92, 255, 0.12), transparent 7.5rem),
+    radial-gradient(circle at 12% 92%, rgba(53, 230, 226, 0.12), transparent 8rem);
+}
+
+.home-hero > * {
+  position: relative;
+}
+
+.home-brand-row {
+  display: flex;
+  align-items: center;
+  gap: 0.72rem;
+  min-width: 0;
+}
+
+.home-brand-row .eyebrow {
+  margin: 0;
+  color: var(--pl-teal);
+  line-height: 1.22;
+}
+
+.home-logo-frame {
+  position: relative;
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  width: 3.9rem;
+  height: 3.9rem;
+  border: 1px solid rgba(18, 30, 114, 0.16);
+  border-radius: var(--pl-card-radius);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.94) 0 78%, rgba(234, 243, 244, 0.88) 78% 100%),
+    var(--pl-surface-paper);
+  box-shadow: var(--pl-card-depth-1), inset 0 1px 0 rgba(255, 255, 255, 0.78);
+  overflow: hidden;
+}
+
+.home-logo-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0.38rem;
+  border-radius: 7px;
+  background: radial-gradient(circle at 50% 18%, rgba(53, 230, 226, 0.18), transparent 1.1rem);
 }
 
 .brand-mark {
-  width: 3.45rem;
-  margin-bottom: 0.6rem;
+  position: relative;
+  width: 2.82rem;
+  margin: 0;
+  filter: drop-shadow(0 5px 10px rgba(7, 18, 74, 0.12));
+}
+
+.home-hero h1 {
+  margin: 0;
+  font-size: 2.42rem;
+}
+
+.home-subhead {
+  margin: -0.12rem 0 0;
+  color: var(--pl-indigo);
+  font-size: 1.38rem;
+  font-weight: 950;
+  line-height: 1.08;
+}
+
+.home-tagline {
+  margin: 0;
+  max-width: 32rem;
+}
+
+.home-visual-slot {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  margin-top: 0.2rem;
+  padding: 0.36rem;
+  border: 1px solid rgba(18, 30, 114, 0.16);
+  border-radius: var(--pl-card-radius);
+  background:
+    radial-gradient(circle at 22% 22%, rgba(53, 230, 226, 0.16), transparent 5rem),
+    radial-gradient(circle at 84% 76%, rgba(122, 92, 255, 0.18), transparent 5.5rem),
+    linear-gradient(135deg, rgba(7, 18, 74, 0.98), rgba(18, 30, 114, 0.90) 54%, rgba(15, 168, 164, 0.80));
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08), 0 12px 26px rgba(7, 18, 74, 0.12);
+  overflow: hidden;
+}
+
+.home-visual-slot::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(120deg, transparent 0 42%, rgba(255, 255, 255, 0.08) 42.2% 42.7%, transparent 42.9%),
+    radial-gradient(ellipse at 18% 82%, transparent 0 3.2rem, rgba(53, 230, 226, 0.12) 3.28rem 3.35rem, transparent 3.44rem);
+}
+
+.home-visual-slot picture {
+  position: relative;
+  z-index: 1;
+  display: block;
 }
 
 .hero-art,
@@ -254,8 +361,10 @@ p {
 }
 
 .home-hero .hero-art {
-  aspect-ratio: 16 / 7.8;
-  margin-bottom: 0.25rem;
+  aspect-ratio: 16 / 8.2;
+  margin: 0;
+  border: 1px solid rgba(255, 255, 255, 0.20);
+  box-shadow: none;
 }
 
 .primary-btn,
@@ -311,6 +420,42 @@ p {
   margin-top: 1rem;
 }
 
+.home-screen .progress-panel,
+.home-screen .idea-panel {
+  margin-top: 0;
+}
+
+.home-screen .progress-panel {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.76), rgba(255, 253, 248, 0.86)),
+    var(--pl-surface-paper);
+  gap: 0.68rem;
+  padding: 0.86rem;
+}
+
+.home-screen .progress-panel h2 {
+  margin-bottom: 0.35rem;
+}
+
+.home-screen .progress-panel p {
+  margin-bottom: 0;
+}
+
+.home-screen .progress-panel .primary-btn {
+  min-height: 46px;
+  padding-block: 0.72rem;
+}
+
+.home-screen .progress-ring {
+  width: 4.25rem;
+  height: 4.25rem;
+}
+
+.home-screen .progress-ring span {
+  width: 3.12rem;
+  height: 3.12rem;
+}
+
 .progress-panel .primary-btn {
   grid-column: 1 / -1;
 }
@@ -340,6 +485,14 @@ p {
   margin-top: 1rem;
 }
 
+.home-screen .idea-panel {
+  padding: 0.92rem 1rem;
+}
+
+.home-screen .idea-panel p {
+  margin-bottom: 0;
+}
+
 .quick-actions,
 .game-actions {
   display: flex;
@@ -364,6 +517,12 @@ p {
   scrollbar-width: thin;
 }
 
+.home-screen .chip-row {
+  flex-wrap: wrap;
+  overflow: visible;
+  padding: 0.05rem 0 0;
+}
+
 .pillar-chip {
   display: inline-flex;
   align-items: center;
@@ -379,6 +538,11 @@ p {
   color: var(--pl-indigo);
   box-shadow: var(--pl-card-depth-1);
   font-weight: 800;
+}
+
+.home-screen .pillar-chip {
+  flex: 1 1 6.8rem;
+  justify-content: center;
 }
 
 .pillar-chip img {
