@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Prompt Life v0.17.5 Bottom Nav Icons Report</title>
+  <style>
+    :root {
+      color: #07124a;
+      background: #f7f5ef;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.45;
+    }
+
+    body {
+      margin: 0;
+      background: #f7f5ef;
+    }
+
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 42px 28px;
+    }
+
+    section,
+    figure {
+      break-inside: avoid;
+      margin: 0 0 22px;
+      border: 1px solid rgba(18, 30, 114, 0.15);
+      border-radius: 8px;
+      background: rgba(255, 253, 248, 0.94);
+      box-shadow: 0 12px 28px rgba(7, 18, 74, 0.08);
+      padding: 22px;
+    }
+
+    h1,
+    h2 {
+      margin: 0 0 10px;
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      font-size: 38px;
+    }
+
+    h2 {
+      font-size: 22px;
+    }
+
+    p {
+      margin: 0 0 10px;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 22px;
+    }
+
+    li + li {
+      margin-top: 6px;
+    }
+
+    code {
+      border-radius: 6px;
+      background: #eef3ff;
+      color: #121e72;
+      padding: 2px 5px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.92em;
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: #0f7f7b;
+      font-size: 13px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    figure img {
+      display: block;
+      width: auto;
+      max-width: 100%;
+      max-height: 760px;
+      margin: 12px auto 0;
+      border-radius: 8px;
+      border: 1px solid rgba(18, 30, 114, 0.12);
+      background: white;
+    }
+
+    figcaption {
+      color: #34435f;
+      font-size: 14px;
+    }
+
+    @media print {
+      body {
+        background: white;
+      }
+
+      main {
+        padding: 0;
+      }
+
+      section,
+      figure {
+        box-shadow: none;
+        page-break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section>
+      <p class="eyebrow">Prompt Life v0.17.5</p>
+      <h1>Bottom Nav Icon Legibility Report</h1>
+      <p>Date: June 5, 2026</p>
+      <p>This report wraps the small UI pass that makes the bottom navigation icons easier to identify on mobile.</p>
+    </section>
+
+    <section>
+      <h2>What Changed</h2>
+      <ul>
+        <li>Bumped the visible app version to <code>v0.17.5</code>.</li>
+        <li>Increased live bottom nav icon width from <code>1.3rem</code> to <code>1.95rem</code>, a 50% increase.</li>
+        <li>Raised bottom nav button height from <code>56px</code> to <code>66px</code> so icons and labels have room.</li>
+        <li>Updated the internal style-guide bottom-nav mock to match the live nav sizing.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Files Changed</h2>
+      <ul>
+        <li><code>src/main.tsx</code></li>
+        <li><code>src/styles/global.css</code></li>
+        <li><code>docs/REVIEW_NOTES.md</code></li>
+        <li><code>docs/stage-audits/v0-17-before-morning/screenshot-index.md</code></li>
+        <li><code>docs/stage-audits/v0-17-before-morning/screenshots/v0-17-5-bottom-nav-icons.png</code></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Verification</h2>
+      <ul>
+        <li><code>npm run typecheck</code>: passed.</li>
+        <li><code>npm run build</code>: passed with the existing Vite large-chunk warning.</li>
+        <li><code>npm run build:pages</code>: passed with the existing Vite large-chunk warning.</li>
+        <li>Browser QA at 390px: icons render at about <code>31px</code> square, labels remain visible, and the dock stays inside the mobile viewport.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Known Issues</h2>
+      <p>The existing Vite large-chunk warning remains. No navbar-specific issue was observed.</p>
+    </section>
+
+    <figure>
+      <figcaption><strong>Updated bottom nav.</strong> Icons are 50% larger and remain paired with readable labels.</figcaption>
+      <img src="screenshots/v0-17-5-bottom-nav-icons.png" alt="Prompt Life bottom navigation with larger icons above labels" />
+    </figure>
+  </main>
+</body>
+</html>

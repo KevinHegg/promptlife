@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Prompt Life v0.17.4 Visual Loading + Key Terms Report</title>
+  <style>
+    :root {
+      color: #07124a;
+      background: #f7f5ef;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.45;
+    }
+
+    body {
+      margin: 0;
+      background: #f7f5ef;
+    }
+
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 44px 28px;
+    }
+
+    section,
+    figure {
+      break-inside: avoid;
+      margin: 0 0 24px;
+      border: 1px solid rgba(18, 30, 114, 0.15);
+      border-radius: 8px;
+      background: rgba(255, 253, 248, 0.94);
+      box-shadow: 0 12px 28px rgba(7, 18, 74, 0.08);
+      padding: 24px;
+    }
+
+    h1,
+    h2,
+    h3 {
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: 42px;
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 24px;
+    }
+
+    h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+    }
+
+    p {
+      margin: 0 0 12px;
+    }
+
+    ul,
+    ol {
+      margin: 0;
+      padding-left: 22px;
+    }
+
+    li + li {
+      margin-top: 6px;
+    }
+
+    code {
+      border-radius: 6px;
+      background: #eef3ff;
+      color: #121e72;
+      padding: 2px 5px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.92em;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+      font-size: 14px;
+    }
+
+    th,
+    td {
+      border-bottom: 1px solid rgba(18, 30, 114, 0.14);
+      padding: 9px 8px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      color: #0f7f7b;
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: #0f7f7b;
+      font-size: 13px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .metric {
+      border-radius: 8px;
+      background: #effaf7;
+      padding: 14px;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 22px;
+      color: #121e72;
+    }
+
+    figure img {
+      display: block;
+      width: auto;
+      max-width: 100%;
+      max-height: 760px;
+      margin: 12px auto 0;
+      border-radius: 8px;
+      border: 1px solid rgba(18, 30, 114, 0.12);
+      background: white;
+    }
+
+    figcaption {
+      color: #34435f;
+      font-size: 14px;
+    }
+
+    @media print {
+      body {
+        background: white;
+      }
+
+      main {
+        padding: 0;
+      }
+
+      section,
+      figure {
+        box-shadow: none;
+        page-break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section>
+      <p class="eyebrow">Prompt Life v0.17.4</p>
+      <h1>Visual Loading + Key Terms Collapse Report</h1>
+      <p>Date: June 5, 2026</p>
+      <p>This report wraps the v0.17.4 implementation summary and screenshots for the generated-asset loading fix and the two-row Key terms chip collapse.</p>
+    </section>
+
+    <section>
+      <h2>What Changed</h2>
+      <ul>
+        <li>Bumped the visible app version to <code>v0.17.4</code>.</li>
+        <li>Added a base-aware public asset helper so generated PNG paths work in local dev and GitHub Pages builds under <code>/promptlife/</code>.</li>
+        <li>Updated the generated visual-asset registry to use that helper for the four existing Before Morning PNGs.</li>
+        <li>Added a reusable <code>KeyTermsChips</code> lesson panel after the visual aid. It defaults to two rows, with <code>Show all terms</code> and <code>Show fewer</code>.</li>
+        <li>Prioritized the <code>Where LLMs Fit</code> chip order so the most important topology terms appear before overflow.</li>
+        <li>Kept <code>Where LLMs Fit</code> on the coded SVG/HTML <code>ai-family-tree</code> visual. No generated PNG was added for it.</li>
+        <li>Compacted the lesson-stage timeline under 340px so the first visual aid appears sooner on the narrowest phone check.</li>
+        <li>Updated review notes, screenshot index, and the v0.17.4 stage audit note.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Files Changed</h2>
+      <ul>
+        <li><code>src/utils/assetPath.ts</code></li>
+        <li><code>src/data/visualAssets.ts</code></li>
+        <li><code>src/components/VisualAids.tsx</code></li>
+        <li><code>src/main.tsx</code></li>
+        <li><code>src/styles/global.css</code></li>
+        <li><code>docs/REVIEW_NOTES.md</code></li>
+        <li><code>docs/stage-audits/v0-17-before-morning/GENERATED_ASSET_LOADING_FIX_V0_17_4.md</code></li>
+        <li><code>docs/stage-audits/v0-17-before-morning/screenshot-index.md</code></li>
+        <li><code>docs/stage-audits/v0-17-before-morning/screenshots/</code> v0.17.4 screenshots</li>
+        <li><code>docs/stage-audits/v0-17-before-morning/prompt-life-v0-17-4-visual-loading-key-terms-report.html</code></li>
+        <li><code>docs/stage-audits/v0-17-before-morning/prompt-life-v0-17-4-visual-loading-key-terms-report.pdf</code></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Asset Path Fix</h2>
+      <p><code>publicAssetPath(path)</code> now derives public asset URLs from <code>import.meta.env.BASE_URL</code>. That means the same registry produces the right URL shape for each build target:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Target</th>
+            <th>Example generated PNG path</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Local dev</td>
+            <td><code>/assets/generated/before-morning/before-morning-llm-cloud.png</code></td>
+          </tr>
+          <tr>
+            <td>GitHub Pages build</td>
+            <td><code>/promptlife/assets/generated/before-morning/before-morning-llm-cloud.png</code></td>
+          </tr>
+        </tbody>
+      </table>
+      <p>The generated-image fallback now reads: <code>Visual asset unavailable. The callouts below still explain the concept.</code></p>
+    </section>
+
+    <section>
+      <h2>Generated Image Load Status</h2>
+      <div class="grid">
+        <div class="metric"><strong>4 / 4</strong>Before Morning generated images loaded in local dev browser QA.</div>
+        <div class="metric"><strong>1448 x 1086</strong>Natural image size observed for each generated asset.</div>
+        <div class="metric"><strong>0</strong>Generated-asset 404s observed in local dev or mounted Pages-style preview.</div>
+        <div class="metric"><strong>Passed</strong>Mounted Pages-style check served JS and generated PNGs from <code>/promptlife/</code>.</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Chip Collapse Behavior</h2>
+      <ul>
+      <li>Glossary chips now render through a semantic <code>Key terms</code> section after the visual aid.</li>
+      <li>Collapsed mode clips the list after two rows with a soft fade.</li>
+      <li>The toggle is a real button with <code>aria-expanded</code> and <code>aria-controls</code>.</li>
+      <li>Expansion is local UI state only; it does not touch lesson progress, badge progress, or checkpoint state.</li>
+      <li>At 320px and 390px, <code>Where LLMs Fit</code> now shows the coded visual before the Key terms panel, then keeps the chips tidy below it.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Where LLMs Fit Visual Status</h2>
+      <p><code>Where LLMs Fit</code> still uses the coded SVG/HTML AI family tree. It has no generated image element and no generated PNG asset. The branch interaction and callouts appear before the Key terms panel so the visual is no longer buried by glossary chips.</p>
+    </section>
+
+    <section>
+      <h2>Verification</h2>
+      <ul>
+        <li><code>npm run typecheck</code>: passed.</li>
+        <li><code>npm run build</code>: passed with the existing Vite large-chunk warning.</li>
+        <li><code>npm run build:pages</code>: passed with the existing Vite large-chunk warning.</li>
+        <li><code>npm run audit:answers</code>: passed; 68 audited surfaces, 46 randomized, 22 fixed-order exclusions.</li>
+        <li>Browser QA: passed for generated images, Key terms collapse/expand, coded AI family tree, visual gallery, 320px/390px/430px mobile sweeps, local dev, and mounted Pages-style preview.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Known Issues</h2>
+      <ul>
+        <li>The existing Vite large-chunk warning remains.</li>
+        <li>The mounted Pages-style check proves local build paths; the deployed GitHub Pages CDN and iPhone cache still need a fresh-device check after push/deploy.</li>
+        <li>During repeated local dev reload automation, Vite logged one React <code>createRoot</code> HMR message. No generated asset 404s appeared, and the mounted Pages build had no console errors.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Next Three Recommended Steps</h2>
+      <ol>
+        <li>Add a lightweight Pages-build asset-path check that fails if generated PNGs resolve to root <code>/assets/...</code> in a GitHub Pages build.</li>
+        <li>Add a narrow visual-regression capture for <code>Where LLMs Fit</code> collapsed and expanded terms at 320px and 390px.</li>
+        <li>After deployment, test the iPhone URL with <code>?v=0174</code> or clear site data to avoid stale cached bundles.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Run Locally</h2>
+      <p>From the repository root:</p>
+      <ol>
+        <li><code>npm install</code></li>
+        <li><code>npm run dev -- --host 0.0.0.0</code></li>
+        <li>Open the local or network URL printed by Vite. For phone testing on the same Wi-Fi, use the network URL.</li>
+      </ol>
+      <p>For a Pages-style local build smoke test, run <code>npm run build:pages</code> and serve <code>dist</code> under a <code>/promptlife/</code> mount.</p>
+    </section>
+
+    <figure>
+      <figcaption><strong>What Is an LLM?</strong> Generated visual loads in the lesson at 390px.</figcaption>
+      <img src="screenshots/v0-17-4-llm-image-loaded.png" alt="What Is an LLM generated cloud visual loaded on mobile" />
+    </figure>
+
+    <figure>
+      <figcaption><strong>Pretraining.</strong> Generated landscape visual loads in the lesson at 390px.</figcaption>
+      <img src="screenshots/v0-17-4-pretraining-image-loaded.png" alt="Pretraining generated landscape visual loaded on mobile" />
+    </figure>
+
+    <figure>
+      <figcaption><strong>Fine-Tuning.</strong> Generated path visual loads in the lesson at 390px.</figcaption>
+      <img src="screenshots/v0-17-4-finetuning-image-loaded.png" alt="Fine-Tuning generated path visual loaded on mobile" />
+    </figure>
+
+    <figure>
+      <figcaption><strong>Alignment.</strong> Generated garden visual loads in the lesson at 390px.</figcaption>
+      <img src="screenshots/v0-17-4-alignment-image-loaded.png" alt="Alignment generated garden visual loaded on mobile" />
+    </figure>
+
+    <figure>
+      <figcaption><strong>Where LLMs Fit.</strong> Key terms collapse to two rows in a panel after the coded visual.</figcaption>
+      <img src="screenshots/v0-17-4-where-llms-fit-collapsed-chips.png" alt="Where LLMs Fit key terms collapsed to two rows" />
+    </figure>
+
+    <figure>
+      <figcaption><strong>Where LLMs Fit expanded.</strong> The same chip list expands below the visual with a Show fewer control.</figcaption>
+      <img src="screenshots/v0-17-4-where-llms-fit-expanded-chips.png" alt="Where LLMs Fit key terms expanded with Show fewer button" />
+    </figure>
+
+    <figure>
+      <figcaption><strong>AI family tree.</strong> The coded SVG/HTML visual remains visible and was not replaced by a generated PNG.</figcaption>
+      <img src="screenshots/v0-17-4-ai-family-tree-visible.png" alt="AI family tree coded visual visible on mobile" />
+    </figure>
+
+    <figure>
+      <figcaption><strong>Visual gallery.</strong> Generated assets remain visible in the review route with metadata.</figcaption>
+      <img src="screenshots/v0-17-4-visual-gallery-assets.png" alt="Visual gallery showing generated assets and metadata" />
+    </figure>
+
+    <figure>
+      <figcaption><strong>320px check.</strong> The AI family tree reaches the first viewport before the Key terms panel at a narrow mobile width.</figcaption>
+      <img src="screenshots/v0-17-4-320px-chip-collapse.png" alt="Where LLMs Fit key terms collapsed at 320px width" />
+    </figure>
+  </main>
+</body>
+</html>

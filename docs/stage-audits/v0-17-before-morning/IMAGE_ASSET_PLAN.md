@@ -1,8 +1,8 @@
-# Before Morning Image Asset Plan v0.17.1
+# Before Morning Image Asset Plan v0.17.3
 
 Date: 2026-06-05
 
-Purpose: define future textless Image 2 assets for the Before Morning stage without generating or adding PNG assets in this pass. Current app visuals remain coded SVG plus HTML callouts for accessibility.
+Purpose: record the textless generated assets planned in v0.17.1 and integrated in v0.17.3 for the Before Morning stage. The PNGs remain textless; instructional text lives in HTML callouts, captions, accessible descriptions, and review notes.
 
 ## Asset Rules
 
@@ -54,4 +54,4 @@ Purpose: define future textless Image 2 assets for the Before Morning stage with
 
 ## Implementation Note
 
-No generated PNG assets were created for v0.17.1. These filenames are reserved for a future visual-asset pass.
+No generated PNG assets were created for v0.17.1. In v0.17.3, the four provided files were added under `public/assets/generated/before-morning/` and wired into `src/data/visualAssets.ts` and `src/components/VisualAids.tsx`. Do not add baked-in text to these PNGs in future revisions; keep labels and teaching language in app code.

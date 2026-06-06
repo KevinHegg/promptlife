@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Prompt Life v0.17.3 Generated Asset Integration Report</title>
+  <style>
+    :root {
+      color: #07124a;
+      background: #f7f5ef;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.45;
+    }
+
+    body {
+      margin: 0;
+      background: #f7f5ef;
+    }
+
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 44px 28px;
+    }
+
+    section,
+    figure {
+      break-inside: avoid;
+      margin: 0 0 24px;
+      border: 1px solid rgba(18, 30, 114, 0.15);
+      border-radius: 8px;
+      background: rgba(255, 253, 248, 0.94);
+      box-shadow: 0 12px 28px rgba(7, 18, 74, 0.08);
+      padding: 24px;
+    }
+
+    h1,
+    h2,
+    h3 {
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: 42px;
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 24px;
+    }
+
+    h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+    }
+
+    p {
+      margin: 0 0 12px;
+    }
+
+    ul,
+    ol {
+      margin: 0;
+      padding-left: 22px;
+    }
+
+    li + li {
+      margin-top: 6px;
+    }
+
+    code {
+      border-radius: 6px;
+      background: #eef3ff;
+      color: #121e72;
+      padding: 2px 5px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.92em;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+      font-size: 14px;
+    }
+
+    th,
+    td {
+      border-bottom: 1px solid rgba(18, 30, 114, 0.14);
+      padding: 9px 8px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      color: #0f7f7b;
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: #0f7f7b;
+      font-size: 13px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .metric {
+      border-radius: 8px;
+      background: #effaf7;
+      padding: 14px;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 22px;
+      color: #121e72;
+    }
+
+    figure img {
+      display: block;
+      width: auto;
+      max-width: 100%;
+      max-height: 760px;
+      margin: 12px auto 0;
+      border-radius: 8px;
+      border: 1px solid rgba(18, 30, 114, 0.12);
+      background: white;
+    }
+
+    figcaption {
+      color: #34435f;
+      font-size: 14px;
+    }
+
+    @media print {
+      body {
+        background: white;
+      }
+
+      main {
+        padding: 0;
+      }
+
+      section,
+      figure {
+        box-shadow: none;
+        page-break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section>
+      <p class="eyebrow">Prompt Life v0.17.3</p>
+      <h1>Generated Asset Integration Report</h1>
+      <p>Date: June 5, 2026</p>
+      <p>This report wraps the implementation summary and screenshots for the Before Morning generated-asset integration pass.</p>
+    </section>
+
+    <section>
+      <h2>What Changed</h2>
+      <ul>
+        <li>Bumped the visible app version to <code>v0.17.3</code>.</li>
+        <li>Added <code>src/data/visualAssets.ts</code> as a registry for the four provided textless Before Morning PNG assets.</li>
+        <li>Integrated the provided assets into <code>What Is an LLM?</code>, <code>Pretraining</code>, <code>Fine-Tuning</code>, and <code>Alignment</code>.</li>
+        <li>Kept instructional labels, captions, callouts, accessible descriptions, and review metadata in HTML/app code.</li>
+        <li>Updated the visual-aid review gallery with generated-asset filename, path, type, alt text, and text-handling metadata.</li>
+        <li>Preserved Journey order, progress rules, checkpoint randomization, games, and the single badge model.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Files Changed</h2>
+      <ul>
+        <li><code>src/data/visualAssets.ts</code></li>
+        <li><code>src/components/VisualAids.tsx</code></li>
+        <li><code>src/data/content.ts</code></li>
+        <li><code>src/main.tsx</code></li>
+        <li><code>src/styles/global.css</code></li>
+        <li><code>public/assets/generated/before-morning/</code> four provided PNG assets</li>
+        <li><code>docs/REVIEW_NOTES.md</code></li>
+        <li><code>docs/stage-audits/v0-17-before-morning/README.md</code></li>
+        <li><code>docs/stage-audits/v0-17-before-morning/card-inventory.md</code></li>
+        <li><code>docs/stage-audits/v0-17-before-morning/recommendations.md</code></li>
+        <li><code>docs/stage-audits/v0-17-before-morning/IMAGE_ASSET_PLAN.md</code></li>
+        <li><code>docs/stage-audits/v0-17-before-morning/screenshot-index.md</code></li>
+        <li><code>docs/stage-audits/v0-17-before-morning/GENERATED_ASSET_INTEGRATION_V0_17_3.md</code></li>
+        <li><code>docs/stage-audits/v0-17-before-morning/screenshots/</code> v0.17.3 screenshots</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Assets Integrated</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Asset</th>
+            <th>Lesson</th>
+            <th>Visual Aid ID</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>before-morning-llm-cloud.png</code></td>
+            <td>What Is an LLM?</td>
+            <td><code>before-morning-llm-cloud</code></td>
+          </tr>
+          <tr>
+            <td><code>before-morning-pretraining-landscape.png</code></td>
+            <td>Pretraining</td>
+            <td><code>before-morning-pretraining-landscape</code></td>
+          </tr>
+          <tr>
+            <td><code>before-morning-finetuning-path.png</code></td>
+            <td>Fine-Tuning</td>
+            <td><code>before-morning-finetuning-path</code></td>
+          </tr>
+          <tr>
+            <td><code>before-morning-alignment-garden.png</code></td>
+            <td>Alignment</td>
+            <td><code>before-morning-alignment-garden</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Visual Aid Behavior</h2>
+      <p>The four generated-image visual aids render the provided PNG inside a stable 4:3 frame, then use app-rendered titles, captions, callouts, and key takeaways below the image. The visual-aid review gallery lists asset metadata and keeps the text-handling rule explicit.</p>
+      <p><code>Where LLMs Fit</code> remains <code>ai-family-tree</code>, a coded SVG/HTML visual aid. No generated PNG was added for that topology card.</p>
+    </section>
+
+    <section>
+      <h2>Accessibility Handling</h2>
+      <ul>
+        <li>Each generated image has dedicated <code>alt</code> text in the asset registry.</li>
+        <li>Each visual aid has an accessible description and HTML callouts.</li>
+        <li>The review gallery exposes filename, path, visual type, alt text, and text-handling notes.</li>
+        <li>The image frame includes a visible fallback note if an asset fails to load.</li>
+        <li>No instructional text is baked into the PNG files.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Verification</h2>
+      <div class="grid">
+        <div class="metric"><strong>Passed</strong><span><code>npm run typecheck</code></span></div>
+        <div class="metric"><strong>Passed</strong><span><code>npm run build</code></span></div>
+        <div class="metric"><strong>Passed</strong><span><code>npm run build:pages</code></span></div>
+        <div class="metric"><strong>Passed</strong><span><code>npm run audit:answers</code></span></div>
+        <div class="metric"><strong>68</strong><span>audited answer surfaces</span></div>
+        <div class="metric"><strong>46</strong><span>randomized surfaces</span></div>
+      </div>
+      <p>Browser QA passed for generated visual aids at 390px, Alignment at 320px, visual-aid gallery metadata, Learn mode, Preview mode, Review mode, Badge version, and console errors. Browser console errors observed: none.</p>
+      <p>The build still reports the existing Vite large-chunk warning.</p>
+    </section>
+
+    <section>
+      <h2>Known Issues</h2>
+      <ul>
+        <li>The existing Vite large-chunk warning remains.</li>
+        <li>The generated PNGs are 4:3 assets; the app intentionally preserves that ratio for stable mobile and PDF layout.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Next Three Recommended Steps</h2>
+      <ol>
+        <li>Add a lightweight visual regression script for the four generated visual-aid IDs at 320px and 390px.</li>
+        <li>User-test whether learners understand that image-backed visuals are conceptual scenes and that formal teaching text lives in HTML.</li>
+        <li>Clean stale old visual-aid IDs from historical v0.6 docs only if those docs are meant to stay current rather than archival.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Run Locally</h2>
+      <ol>
+        <li><code>npm install</code></li>
+        <li><code>npm run dev -- --host 0.0.0.0</code></li>
+        <li>Open <code>http://localhost:5173/</code> on this computer or the Vite network URL on a phone on the same Wi-Fi.</li>
+      </ol>
+    </section>
+
+    <figure>
+      <figcaption><strong>Visual gallery overview.</strong> The review route lists v0.17.3 and the first generated asset entry.</figcaption>
+      <img src="screenshots/v0-17-3-visual-gallery-before-morning.png" alt="Visual Aid Gallery showing the v0.17.3 generated LLM cloud entry" />
+    </figure>
+
+    <figure>
+      <figcaption><strong>What Is an LLM?</strong> The LLM cloud asset renders with generated-image metadata and HTML callouts.</figcaption>
+      <img src="screenshots/v0-17-3-llm-cloud.png" alt="Generated LLM cloud visual aid at 390px" />
+    </figure>
+
+    <figure>
+      <figcaption><strong>Pretraining.</strong> The pretraining landscape asset renders with textless art and HTML explanation.</figcaption>
+      <img src="screenshots/v0-17-3-pretraining-landscape.png" alt="Generated pretraining landscape visual aid at 390px" />
+    </figure>
+
+    <figure>
+      <figcaption><strong>Fine-Tuning.</strong> The fine-tuning path asset renders inside the same 4:3 frame with app-rendered callouts.</figcaption>
+      <img src="screenshots/v0-17-3-finetuning-path.png" alt="Generated fine-tuning path visual aid at 390px" />
+    </figure>
+
+    <figure>
+      <figcaption><strong>Alignment.</strong> The alignment garden asset renders with guardrail-oriented callouts.</figcaption>
+      <img src="screenshots/v0-17-3-alignment-garden.png" alt="Generated alignment garden visual aid at 390px" />
+    </figure>
+
+    <figure>
+      <figcaption><strong>320px Alignment check.</strong> The generated image and first callouts remain readable at a narrow mobile width.</figcaption>
+      <img src="screenshots/v0-17-3-320px-alignment.png" alt="Alignment generated visual aid at 320px" />
+    </figure>
+
+    <figure>
+      <figcaption><strong>Badge version.</strong> The single badge remains Prompt Life: Model Literate, with <code>v0.17.3</code> right-aligned under Start over.</figcaption>
+      <img src="screenshots/v0-17-3-badge-version.png" alt="Badge page showing v0.17.3 under Start over" />
+    </figure>
+  </main>
+</body>
+</html>

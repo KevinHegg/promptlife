@@ -33,7 +33,7 @@ import './styles/global.css'
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '')
 const ASSET = `${BASE}/assets/promptlife`
 // Bump this for each shipped app change; the Badge screen displays it under Start over.
-const APP_VERSION = '0.17.2'
+const APP_VERSION = '0.18.1'
 const STORAGE_KEYS = {
   lastLocation: 'promptlife:v1:lastLocation',
   lessonId: 'promptlife:v1:lessonId',
@@ -118,6 +118,21 @@ const GLOSSARY_LEARNING_HINTS = Object.fromEntries(
     }])
   )
 )
+const LESSON_TERM_DISPLAY_PRIORITY = {
+  'where-llms-fit': [
+    'ai',
+    'machine-learning',
+    'deep-learning',
+    'generative-ai',
+    'llm',
+    'diffusion',
+    'multimodal',
+    'symbolic-ai',
+    'classical-machine-learning',
+    'rule-based-ai',
+    'foundation-model'
+  ]
+}
 const JOURNEY_FILTERS = [
   { id: 'all', label: 'All' },
   { id: 'essential', label: 'Essential' },
@@ -856,13 +871,6 @@ function LessonScreen({ lesson, mode, lessonIndex, totalLessons, reflection, onC
         <p className="lesson-definition">{definition}</p>
         {mode === 'preview' && <p className="mode-note" role="status">Previewing this card. Progress will not change.</p>}
         {mode === 'review' && <p className="mode-note" role="status">Reviewing a completed card.</p>}
-        {relatedTerms.length > 0 && (
-          <div className="term-row compact" aria-label="Related glossary terms">
-            {relatedTerms.map((term) => (
-              <button key={term.id} onClick={() => onGlossary(term.id)}>{term.term}</button>
-            ))}
-          </div>
-        )}
       </header>
 
       <section className="lesson-panel visual-aid-panel" aria-labelledby="visual-aid-title">
@@ -870,6 +878,8 @@ function LessonScreen({ lesson, mode, lessonIndex, totalLessons, reflection, onC
         <h2 id="visual-aid-title">What to picture</h2>
         <VisualAid id={lesson.visualAidId} headingId="visual-aid-title" />
       </section>
+
+      <KeyTermsChips lessonId={lesson.id} terms={relatedTerms} onOpen={onGlossary} />
 
       <section className="lesson-panel core-panel" aria-label="Core idea">
         <span className="step-label">Core idea</span>
@@ -953,6 +963,84 @@ function LessonScreen({ lesson, mode, lessonIndex, totalLessons, reflection, onC
       <button className={isCorrect || !canUpdateProgress ? 'primary-btn sticky-action is-ready' : 'primary-btn sticky-action'} onClick={saveAndContinue}>
         {!canUpdateProgress ? 'Return to Journey' : isCorrect ? (lessonIndex + 1 === totalLessons ? 'Finish and view badge' : 'Next lesson') : choice == null ? 'Answer checkpoint to continue' : 'Retry checkpoint to continue'}
       </button>
+    </section>
+  )
+}
+
+function orderKeyTerms(lessonId, terms) {
+  const priority = LESSON_TERM_DISPLAY_PRIORITY[lessonId]
+  if (!priority) return terms
+  const priorityIndex = new Map()
+  priority.forEach((id, index) => priorityIndex.set(id, index))
+  return [...terms].sort((a, b) => {
+    const aIndex = priorityIndex.get(a.id) ?? Number.MAX_SAFE_INTEGER
+    const bIndex = priorityIndex.get(b.id) ?? Number.MAX_SAFE_INTEGER
+    if (aIndex !== bIndex) return aIndex - bIndex
+    return a.term.localeCompare(b.term)
+  })
+}
+
+function KeyTermsChips({ lessonId, terms, onOpen }) {
+  const [expanded, setExpanded] = useState(false)
+  const [canToggle, setCanToggle] = useState(terms.length > 8)
+  const listRef = useRef(null)
+  const orderedTerms = useMemo(() => orderKeyTerms(lessonId, terms), [lessonId, terms])
+  const listId = `key-terms-${lessonId}`
+
+  useEffect(() => {
+    setExpanded(false)
+  }, [lessonId])
+
+  useEffect(() => {
+    function measure() {
+      const list = listRef.current
+      if (!list) return
+      if (!expanded) {
+        setCanToggle(list.scrollHeight > list.clientHeight + 2)
+      }
+    }
+
+    measure()
+    window.addEventListener('resize', measure)
+    return () => window.removeEventListener('resize', measure)
+  }, [expanded, orderedTerms])
+
+  if (!orderedTerms.length) return null
+
+  return (
+    <section className="lesson-panel key-terms" aria-labelledby={`${listId}-title`}>
+      <div className="key-terms-header">
+        <div>
+          <h2 id={`${listId}-title`}>Key terms</h2>
+          <p>Tap a term to open the glossary.</p>
+        </div>
+        {canToggle && (
+          <button
+            type="button"
+            className="text-btn key-terms-toggle"
+            aria-expanded={expanded}
+            aria-controls={listId}
+            onClick={() => setExpanded((value) => !value)}
+          >
+            {expanded ? 'Show fewer' : 'Show all terms'}
+          </button>
+        )}
+      </div>
+      <div
+        ref={listRef}
+        id={listId}
+        className={[
+          'term-row',
+          'key-terms-list',
+          expanded ? 'is-expanded' : 'is-collapsed',
+          canToggle ? 'has-overflow' : ''
+        ].filter(Boolean).join(' ')}
+        aria-label="Key glossary terms"
+      >
+        {orderedTerms.map((term) => (
+          <button key={term.id} type="button" onClick={() => onOpen(term.id)}>{term.term}</button>
+        ))}
+      </div>
     </section>
   )
 }
@@ -1283,38 +1371,40 @@ function MicroInteraction({ type }) {
 
 function AiTopologyInteraction() {
   const branches = [
-    { id: 'ai', label: 'AI', detail: 'AI is the broad field: systems built to perform tasks associated with intelligence.' },
-    { id: 'rules', label: 'Rules', detail: 'Symbolic or rule-based AI follows explicit logic, conditions, symbols, or policies.' },
-    { id: 'machine-learning', label: 'Machine learning', detail: 'Machine learning systems learn patterns from data instead of relying only on hand-written rules.' },
-    { id: 'classical-ml', label: 'Classical ML', detail: 'Classical machine learning uses smaller or more specialized learned models that are not usually huge deep networks.' },
-    { id: 'deep-learning', label: 'Deep learning', detail: 'Deep learning uses large neural networks to learn layered representations from data.' },
-    { id: 'generative-ai', label: 'Generative AI', detail: 'Generative AI systems create new text, images, audio, code, video, or other media.' },
-    { id: 'llm', label: 'LLM', detail: 'An LLM generates language or code one response token at a time.' },
-    { id: 'diffusion', label: 'Diffusion', detail: 'Diffusion models often generate images, audio, or video by denoising patterns.' },
-    { id: 'multimodal', label: 'Multimodal', detail: 'Multimodal AI works across more than one media type, such as text plus images.' }
+    { id: 'ai', label: 'AI', level: 0, detail: 'The broad field of systems designed to perform tasks associated with intelligence.' },
+    { id: 'rule-based-ai', label: 'Rule-based AI', level: 1, detail: 'Systems that use explicit rules, symbols, or if/then logic.' },
+    { id: 'machine-learning', label: 'Machine learning', level: 1, detail: 'Systems that learn patterns from data.' },
+    { id: 'classical-ml', label: 'Classical ML', level: 2, detail: 'Machine-learning methods that are usually smaller and less layered than deep learning.' },
+    { id: 'deep-learning', label: 'Deep learning', level: 2, detail: 'Machine learning with large neural networks that learn layered representations.' },
+    { id: 'generative-ai', label: 'Generative AI', level: 3, detail: 'Systems that create new text, images, audio, code, or other media.' },
+    { id: 'llms', label: 'LLMs', level: 4, detail: 'Generative AI systems focused on language and code, producing response tokens one at a time.' },
+    { id: 'diffusion', label: 'Diffusion', level: 4, detail: 'Generative systems that often create images or other media by denoising patterns.' },
+    { id: 'multimodal', label: 'Multimodal', level: 4, detail: 'Systems that work across more than one media type, such as text and images.' },
+    { id: 'other-deep-learning', label: 'Other deep learning', level: 3, detail: 'Deep-learning systems that may classify, rank, recommend, detect, or predict without generating media.' }
   ]
   const [activeId, setActiveId] = useState('ai')
   const active = branches.find((branch) => branch.id === activeId) ?? branches[0]
+  const branchButton = (branch) => (
+    <button
+      key={branch.id}
+      className={`level-${branch.level} ${active.id === branch.id ? 'active' : ''}`.trim()}
+      onClick={() => setActiveId(branch.id)}
+      aria-pressed={active.id === branch.id}
+    >
+      {branch.label}
+    </button>
+  )
 
   return (
     <div className="ai-topology-demo">
-      <div className="ai-branch-grid" role="group" aria-label="AI family branches">
-        {branches.map((branch) => (
-          <button
-            key={branch.id}
-            className={active.id === branch.id ? 'active' : ''}
-            onClick={() => setActiveId(branch.id)}
-            aria-pressed={active.id === branch.id}
-          >
-            {branch.label}
-          </button>
-        ))}
+      <div className="ai-taxonomy-tree" role="group" aria-label="AI taxonomy branches">
+        {branches.map(branchButton)}
       </div>
       <div className="ai-branch-card" aria-live="polite">
         <strong>{active.label}</strong>
         <p>{active.detail}</p>
       </div>
-      {active.id === 'llm' && <p className="mini-insight">Insight unlocked: an LLM is one branch, not the whole AI tree.</p>}
+      {active.id === 'llms' && <p className="mini-insight">Insight unlocked: an LLM is one branch, not the whole AI family.</p>}
     </div>
   )
 }
@@ -2778,7 +2868,17 @@ function BottomNav({ tab, onNavigate }) {
   )
 }
 
-createRoot(document.getElementById('root')).render(
+const rootElement = document.getElementById('root')
+
+if (!rootElement) {
+  throw new Error('Prompt Life root element missing')
+}
+
+const promptLifeRootElement = rootElement as HTMLElement & { _promptLifeRoot?: ReturnType<typeof createRoot> }
+const promptLifeRoot = promptLifeRootElement._promptLifeRoot ?? createRoot(rootElement)
+promptLifeRootElement._promptLifeRoot = promptLifeRoot
+
+promptLifeRoot.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>

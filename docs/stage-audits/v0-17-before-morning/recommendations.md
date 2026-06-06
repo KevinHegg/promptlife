@@ -10,6 +10,8 @@ Do not add additional badges. The only badge path should remain `Prompt Life: Mo
 
 v0.17.2 update: add `Where LLMs Fit` after `What Is an LLM?` and before `Rationalists vs Empiricists`. Keep it coded SVG/HTML, not an Image 2 PNG candidate. This resolves part of the abstraction problem by giving learners a simple AI topology before the history side-tour.
 
+v0.17.3 update: integrate the four provided textless generated PNGs for `What Is an LLM?`, `Pretraining`, `Fine-Tuning`, and `Alignment`. Keep all instructional labels, captions, callouts, key takeaways, and accessibility text in app code.
+
 ## Top Five Content Problems
 
 1. "What Is an LLM?" is accurate but risks sounding too small if "next-token prediction" is not paired with a concrete prompt-to-token trace.
@@ -59,12 +61,12 @@ v0.17.2 update: add `Where LLMs Fit` after `What Is an LLM?` and before `Rationa
 | Fine-Tuning | Hybrid | Yes | Yes overlays | No | Revise current |
 | Alignment | Hybrid / generated PNG plus SVG overlays | Yes | Yes overlays | No | Revise current |
 
-Image 2 asset candidates:
+Integrated v0.17.3 generated assets:
 
-- What Is an LLM?: textless origami/neon model cloud turning a prompt ribbon into a glowing token.
-- Pretraining: data rain carving paths into a calm neon-paper landscape.
-- Fine-Tuning: a highlighted path through a pretrained origami terrain.
-- Alignment: a neon zen garden with guardrails, compass path, and warning zones, no text.
+- What Is an LLM?: `before-morning-llm-cloud.png`, a textless origami/neon model cloud turning a prompt ribbon into one outgoing token-like bead.
+- Pretraining: `before-morning-pretraining-landscape.png`, a textless folded-paper landscape shaped by many abstract streams.
+- Fine-Tuning: `before-morning-finetuning-path.png`, a textless highlighted path through a pretrained terrain.
+- Alignment: `before-morning-alignment-garden.png`, a textless garden with guardrails, compass-like guidance, and warning zones.
 
 Coded SVG candidates:
 
@@ -131,7 +133,7 @@ Specific future interaction ideas:
    - Mostly helping. The limitation lines are explicit and good. Alignment's Brain Bridge is especially important because it prevents moral-agency confusion. The main risk is cumulative density, not bad metaphor quality.
 
 9. Which visuals are worth custom Image 2 assets?
-   - What Is an LLM?, Pretraining, Fine-Tuning, and Alignment.
+   - Implemented in v0.17.3: What Is an LLM?, Pretraining, Fine-Tuning, and Alignment now use the provided textless generated PNG assets plus HTML callouts.
 
 10. Which visuals should remain coded SVG?
    - Rationalists vs Empiricists, Training, and Overfitting and Generalization. Fine-Tuning and Alignment should use coded overlays even if a textless image becomes the base.
@@ -151,4 +153,4 @@ Specific future interaction ideas:
 
 ## Recommended Next Implementation Prompt
 
-Implement the v0.17 Before Morning polish pass from `docs/stage-audits/v0-17-before-morning/`. Do not add new cards or badges. Keep the stage order, preserve checkpoint randomization and progress rules, remove the duplicate Core idea heading pattern, revise only the seven Before Morning cards, add or refine tiny interactions where recommended, and update visuals according to the audit: Image 2 textless asset candidates for What Is an LLM?, Pretraining, Fine-Tuning, and Alignment; coded SVG for Rationalists vs Empiricists, Training, and Overfitting. Run typecheck, build, audit:answers, browser QA at 390px plus 320/430 spot checks, and update the internal report PDF with screenshots.
+Implement the next Before Morning refinement pass from `docs/stage-audits/v0-17-before-morning/`. Do not add new cards or badges. Keep the stage order, preserve checkpoint randomization and progress rules, keep the four v0.17.3 generated assets textless with HTML callouts, and refine only targeted interaction or copy issues that user testing identifies. Run typecheck, build, build:pages, audit:answers, browser QA at 390px plus 320/430 spot checks, and update the internal report PDF with screenshots.

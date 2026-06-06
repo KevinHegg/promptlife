@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prompt Life v0.18.1 Where LLMs Fit Visual Repair Report</title>
+  <style>
+    :root {
+      --ink: #07124a;
+      --muted: #53607a;
+      --paper: #fffdf8;
+      --mist: #edf6f5;
+      --line: rgba(18, 30, 114, 0.16);
+      --cyan: #0fa8a4;
+      --amber: #b87622;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: linear-gradient(180deg, var(--mist), #f8f5ee);
+      color: var(--ink);
+      font: 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    main {
+      width: min(100%, 980px);
+      margin: 0 auto;
+      padding: 32px;
+    }
+
+    section {
+      margin: 0 0 24px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 253, 248, 0.92);
+      box-shadow: 0 12px 28px rgba(7, 18, 74, 0.08);
+      break-inside: avoid;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0 0 10px;
+      line-height: 1.15;
+      color: var(--ink);
+    }
+
+    h1 {
+      font-size: 34px;
+    }
+
+    h2 {
+      font-size: 21px;
+    }
+
+    h3 {
+      font-size: 16px;
+    }
+
+    p {
+      margin: 0 0 10px;
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: var(--cyan);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .lede {
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .fact {
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.68);
+    }
+
+    ul {
+      margin: 8px 0 0;
+      padding-left: 20px;
+    }
+
+    code {
+      color: #14365f;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.92em;
+    }
+
+    .shots {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    figure {
+      margin: 0;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: white;
+      break-inside: avoid;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 6px;
+      border: 1px solid rgba(18, 30, 114, 0.10);
+    }
+
+    figcaption {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      margin: 2px 4px 2px 0;
+      padding: 2px 8px;
+      border: 1px solid rgba(15, 168, 164, 0.26);
+      border-radius: 999px;
+      background: #effffc;
+      color: #063d43;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .warning {
+      border-left: 4px solid var(--amber);
+    }
+
+    @media print {
+      body {
+        background: white;
+      }
+
+      main {
+        width: 100%;
+        padding: 0;
+      }
+
+      section {
+        box-shadow: none;
+      }
+
+      .shots {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section>
+      <p class="eyebrow">Prompt Life v0.18.1</p>
+      <h1>Where LLMs Fit Visual Repair</h1>
+      <p class="lede">Focused repair pass for the AI family-tree visual. The folded topology map is now a clean coded taxonomy tree so learners can see that LLMs are one branch of generative AI inside the broader AI family.</p>
+    </section>
+
+    <section>
+      <h2>What Changed</h2>
+      <div class="grid">
+        <div class="fact">
+          <h3>Visual Layout</h3>
+          <p>Chose a clean vertical taxonomy tree because it was more readable than nested boxes at 320px and 390px.</p>
+        </div>
+        <div class="fact">
+          <h3>Hierarchy</h3>
+          <p>The diagram now shows <code>AI</code> to <code>Machine learning</code> to <code>Deep learning</code> to <code>Generative AI</code> to <code>LLMs</code>, with diffusion and multimodal as neighboring branches.</p>
+        </div>
+        <div class="fact">
+          <h3>Labels</h3>
+          <p>Removed compressed labels like <code>ML</code>, <code>Gen AI</code>, <code>Multi</code>, and <code>Other DL</code>. <code>Classical ML</code> remains as the allowed short label.</p>
+        </div>
+        <div class="fact">
+          <h3>Interaction</h3>
+          <p>The tiny interaction is still tap-through, but now the hierarchy stays visible while the selected branch highlights and the explanation changes.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Files Changed</h2>
+      <ul>
+        <li><code>src/components/DiagramKit.tsx</code></li>
+        <li><code>src/components/VisualAids.tsx</code></li>
+        <li><code>src/main.tsx</code></li>
+        <li><code>src/styles/global.css</code></li>
+        <li><code>docs/REVIEW_NOTES.md</code></li>
+        <li><code>docs/design/DIAGRAM_KIT_V0_18.md</code></li>
+        <li><code>docs/stage-audits/v0-17-before-morning/DIAGRAM_KIT_REFACTOR_V0_18.md</code></li>
+        <li><code>docs/stage-audits/v0-17-before-morning/WHERE_LLMS_FIT_VISUAL_REPAIR_V0_18_1.md</code></li>
+        <li><code>docs/stage-audits/v0-17-before-morning/screenshot-index.md</code></li>
+        <li>Report screenshots under <code>docs/stage-audits/v0-17-before-morning/screenshots/</code></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Verification</h2>
+      <p>
+        <span class="status">typecheck passed</span>
+        <span class="status">build passed</span>
+        <span class="status">build:pages passed</span>
+        <span class="status">audit:answers passed</span>
+        <span class="status">browser QA passed</span>
+      </p>
+      <ul>
+        <li><code>npm run typecheck</code>: passed.</li>
+        <li><code>npm run build</code>: passed with the existing Vite large-chunk warning.</li>
+        <li><code>npm run build:pages</code>: passed with the existing Vite large-chunk warning.</li>
+        <li><code>npm run audit:answers</code>: passed; 68 surfaces audited, 46 randomized, 22 fixed-order exclusions.</li>
+        <li>Live browser QA: no console errors in a clean tab; no horizontal overflow at 320px; all ten interaction nodes visible and tappable.</li>
+      </ul>
+    </section>
+
+    <section class="warning">
+      <h2>Known Issues</h2>
+      <ul>
+        <li>The existing Vite large-chunk warning remains.</li>
+        <li>The live mobile bottom navigation can cover the very bottom of long lesson content, but it does not obscure the repaired taxonomy diagram.</li>
+        <li>No generated PNG was added for <code>ai-family-tree</code>; this card remains coded SVG/HTML.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Next Three Recommended Steps</h2>
+      <ul>
+        <li>Add a tiny regression check for <code>ai-family-tree</code> label presence, no process-number seals, and no horizontal overflow at 320px.</li>
+        <li>Audit other coded visuals for similar “looks readable but teaches vaguely” problems.</li>
+        <li>After this taxonomy repair is stable on iPhone, continue the planned Image 2 asset generation for cards that actually need textless art.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Screenshots</h2>
+      <div class="shots">
+        <figure>
+          <img src="screenshots/v0-18-1-where-llms-fit-top.png" alt="Where LLMs Fit lesson top at 390px">
+          <figcaption>Where LLMs Fit lesson top at 390px.</figcaption>
+        </figure>
+        <figure>
+          <img src="screenshots/v0-18-1-ai-family-tree-390.png" alt="AI family tree visual at 390px">
+          <figcaption>AI family-tree visual at 390px.</figcaption>
+        </figure>
+        <figure>
+          <img src="screenshots/v0-18-1-ai-family-tree-320.png" alt="AI family tree visual at 320px">
+          <figcaption>AI family-tree visual at 320px.</figcaption>
+        </figure>
+        <figure>
+          <img src="screenshots/v0-18-1-ai-family-tree-interaction.png" alt="AI family tree interaction with selected branch">
+          <figcaption>Tap-through taxonomy interaction.</figcaption>
+        </figure>
+        <figure>
+          <img src="screenshots/v0-18-1-review-visual-aids-ai-family-tree.png" alt="AI family tree in the visual aid review route">
+          <figcaption>Review route visual-aid card.</figcaption>
+        </figure>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

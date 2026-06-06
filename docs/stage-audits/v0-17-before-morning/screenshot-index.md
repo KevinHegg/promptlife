@@ -1,8 +1,62 @@
 # Before Morning Screenshot Index v0.17
 
-Date: 2026-06-05
+Date: 2026-06-06
 
 All standard screenshots were captured at 390px wide and 844px tall. Dense-card spot checks were captured at 320px and 430px.
+
+## v0.18.1 Where LLMs Fit Visual Repair Screenshots
+
+Captured after replacing the folded AI topology map with a clean coded taxonomy tree and tap-through branch interaction.
+
+- `screenshots/v0-18-1-where-llms-fit-top.png`
+- `screenshots/v0-18-1-ai-family-tree-390.png`
+- `screenshots/v0-18-1-ai-family-tree-320.png`
+- `screenshots/v0-18-1-ai-family-tree-interaction.png`
+- `screenshots/v0-18-1-review-visual-aids-ai-family-tree.png`
+
+## v0.18.0 DiagramKit Screenshots
+
+Captured after adding DiagramKit, refactoring four coded Before Morning visuals, and verifying one generated asset still loads.
+
+- `screenshots/v0-18-ai-family-tree.png`
+- `screenshots/v0-18-rationalists-empiricists.png`
+- `screenshots/v0-18-training-loop.png`
+- `screenshots/v0-18-overfitting-plot.png`
+- `screenshots/v0-18-diagram-kit-gallery.png`
+- `screenshots/v0-18-320px-training.png`
+- `screenshots/v0-18-generated-asset-still-working.png`
+
+## v0.17.5 Bottom Nav Icon Screenshot
+
+Captured after increasing live bottom navigation icons by 50%.
+
+- `screenshots/v0-17-5-bottom-nav-icons.png`
+
+## v0.17.4 Visual Loading + Key Terms Collapse Screenshots
+
+Captured after adding base-aware generated asset paths and the visual-first Key terms panel collapse.
+
+- `screenshots/v0-17-4-llm-image-loaded.png`
+- `screenshots/v0-17-4-pretraining-image-loaded.png`
+- `screenshots/v0-17-4-finetuning-image-loaded.png`
+- `screenshots/v0-17-4-alignment-image-loaded.png`
+- `screenshots/v0-17-4-where-llms-fit-collapsed-chips.png`
+- `screenshots/v0-17-4-where-llms-fit-expanded-chips.png`
+- `screenshots/v0-17-4-ai-family-tree-visible.png`
+- `screenshots/v0-17-4-visual-gallery-assets.png`
+- `screenshots/v0-17-4-320px-chip-collapse.png`
+
+## v0.17.3 Generated Asset Integration Screenshots
+
+Captured after integrating the four provided textless generated PNGs into existing Before Morning visual aids.
+
+- `screenshots/v0-17-3-llm-cloud.png`
+- `screenshots/v0-17-3-pretraining-landscape.png`
+- `screenshots/v0-17-3-finetuning-path.png`
+- `screenshots/v0-17-3-alignment-garden.png`
+- `screenshots/v0-17-3-visual-gallery-before-morning.png`
+- `screenshots/v0-17-3-320px-alignment.png`
+- `screenshots/v0-17-3-badge-version.png`
 
 ## v0.17.2 Topology Card Screenshots
 

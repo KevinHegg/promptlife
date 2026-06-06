@@ -1,6 +1,141 @@
 # Review Notes
 
-Date: 2026-06-05
+Date: 2026-06-06
+
+## v0.18.1 Where LLMs Fit Visual Repair
+
+### What Changed
+
+- Bumped the visible app version to `v0.18.1`.
+- Replaced the `Where LLMs Fit` folded topology-map visual with a clean vertical taxonomy tree.
+- Removed numbered seals and tangled/crossing connector paths from the `ai-family-tree` visual.
+- Replaced compressed diagram labels such as `ML`, `Gen AI`, `Other`, and `Multi` with beginner-friendly labels.
+- Kept the visual coded SVG/HTML; no generated PNG asset or dependency was added.
+- Updated the `ai-topology` tiny interaction from a flat branch grid to a tap-through taxonomy tree with selected-node highlighting.
+- Added `docs/stage-audits/v0-17-before-morning/WHERE_LLMS_FIT_VISUAL_REPAIR_V0_18_1.md`.
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed; checkpoint randomization remains intact.
+- Browser QA: passed at 390px and 320px for the lesson visual, interaction, review visual-aid route, Badge version, and console errors.
+
+### Constraints Preserved
+
+- No new Journey cards, games, generated PNG assets, dependencies, checkpoint-randomization changes, progress-rule changes, or extra badges were added.
+- One badge remains: `Prompt Life: Model Literate`.
+
+## v0.18.0 DiagramKit + Illustration Clarity Foundation
+
+### What Changed
+
+- Bumped the visible app version to `v0.18.0`.
+- Added `src/components/DiagramKit.tsx` with reusable coded SVG/HTML primitives for Prompt Life teaching diagrams.
+- Added DiagramKit styles and a primitive gallery to `/review/visual-aids`.
+- Refactored the coded Before Morning visuals for `Where LLMs Fit`, `Rationalists vs Empiricists`, `Training`, and `Overfitting and Generalization`.
+- Kept the generated PNG-backed visuals for `What Is an LLM?`, `Pretraining`, `Fine-Tuning`, and `Alignment` unchanged.
+- Added `docs/design/DIAGRAM_KIT_V0_18.md`, `docs/curriculum/TINY_INTERACTION_TRIAGE_V0_18.md`, and `docs/stage-audits/v0-17-before-morning/DIAGRAM_KIT_REFACTOR_V0_18.md`.
+
+### Dependency Decision
+
+- No dependencies were added. The diagrams use local React/SVG components rather than D3, icon packages, generated PNGs, or 3D libraries.
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed; 68 total audited surfaces, 46 randomized, 22 fixed-order exclusions.
+- Browser smoke checks: main app, lesson review, visual-aid review, and Badge version render with no console errors.
+
+### Bundle Impact
+
+- Local production CSS increased from 68.76 kB to 73.47 kB raw, and from 15.00 kB to 15.97 kB gzip.
+- Local production JS increased from 630.81 kB to 638.93 kB raw, and from 170.95 kB to 173.88 kB gzip.
+
+### Constraints Preserved
+
+- No new Journey cards, games, generated PNG assets, checkpoint-randomization changes, progress-rule changes, heavy 3D libraries, or extra badges were added.
+- One badge remains: `Prompt Life: Model Literate`.
+
+## v0.17.5 Bottom Nav Icon Legibility Pass
+
+### What Changed
+
+- Bumped the visible app version to `v0.17.5`.
+- Increased the bottom navigation icons from `1.3rem` to `1.95rem`, a 50% size increase.
+- Raised the bottom navigation button height so larger icons do not crowd the labels.
+- Updated the internal style-guide bottom-nav mock to match the live navigation.
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- Browser QA at 390px: bottom nav icons are visibly larger and labels remain readable.
+- PDF report generated: `docs/stage-audits/v0-17-before-morning/prompt-life-v0-17-5-bottom-nav-icons-report.pdf`.
+
+### GitHub Pages Cache Note
+
+When testing deployed visual assets or navbar updates on iPhone/GitHub Pages, use a cache-busting query such as `?v=0175`, or clear site data if an old bundle is cached.
+
+## v0.17.4 Visual Loading + Key Terms Collapse Pass
+
+### What Changed
+
+- Bumped the visible app version to `v0.17.4`.
+- Added a base-aware public asset helper so generated Before Morning PNG paths work in local dev and GitHub Pages builds under `/promptlife/`.
+- Updated the generated visual asset registry to use the helper for all four textless PNGs.
+- Added a reusable `KeyTermsChips` lesson panel that appears after the visual aid, shows glossary chips in at most two rows by default, and supports `Show all terms` / `Show fewer` with `aria-expanded`.
+- Prioritized the `Where LLMs Fit` chip display order so the highest-value terms appear first before overflow.
+- Kept `Where LLMs Fit` on the coded SVG/HTML visual aid `ai-family-tree`; no generated PNG was added for it.
+- Refined the generated-image fallback message to: `Visual asset unavailable. The callouts below still explain the concept.`
+- Compacted the lesson-stage timeline under 340px so the visual aid appears in the first mobile viewport sooner.
+
+### GitHub Pages Cache Note
+
+When testing deployed visual assets on iPhone/GitHub Pages, use a cache-busting query such as `?v=0174`, or clear site data if an old bundle is cached.
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed; 68 total audited surfaces, 46 randomized, 22 fixed-order exclusions.
+- Browser QA: passed for generated images, Key terms collapse/expand, the coded AI family tree, visual gallery, local dev, mounted Pages-style preview, and generated-asset 404 checks.
+- PDF report generated: `docs/stage-audits/v0-17-before-morning/prompt-life-v0-17-4-visual-loading-key-terms-report.pdf`.
+
+### Constraints Preserved
+
+- No new Journey cards, games, generated assets, progress-rule changes, checkpoint-randomization changes, or extra badges were added.
+- One badge remains: `Prompt Life: Model Literate`.
+
+## v0.17.3 Before Morning Generated Asset Integration Pass
+
+### What Changed
+
+- Bumped the visible app version to `v0.17.3`.
+- Added a generated visual-asset registry for the four provided textless Before Morning PNGs.
+- Replaced the coded base visuals for `What Is an LLM?`, `Pretraining`, `Fine-Tuning`, and `Alignment` with the provided textless PNGs plus HTML callouts, captions, key takeaways, alt text, and accessible descriptions.
+- Kept the `Where LLMs Fit` AI family tree as coded SVG/HTML; no new cards, games, badges, heavy 3D libraries, or checkpoint-randomization changes were added.
+- Updated the visual-aid review gallery so each generated asset lists filename, path, visual type, alt text, text-handling note, and mobile/PDF review guidance.
+- Updated Before Morning internal docs and screenshot index for the v0.17.3 asset pass.
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed; 68 total audited surfaces, 46 randomized, 22 fixed-order exclusions.
+- Browser QA: passed for the four generated visual-aid lessons at 390px, Alignment at 320px, the visual-aid gallery, Learn-mode smoke test, Badge version, and console errors.
+- PDF report generated: `docs/stage-audits/v0-17-before-morning/prompt-life-v0-17-3-generated-asset-integration-report.pdf`.
+
+### Constraints Preserved
+
+- No images were generated in this pass; only the four provided PNG files were integrated.
+- No new Journey cards, games, checkpoint randomization changes, progress-rule changes, heavy 3D libraries, or extra badges were added.
+- One badge remains: `Prompt Life: Model Literate`.
 
 ## v0.17.2 Before Morning Topology Card Pass
 

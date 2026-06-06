@@ -1,9 +1,18 @@
 import React from 'react'
 import { canonicalPromptResponse } from '../data/canonicalExamples'
 import { lessons } from '../data/content'
+import { generatedVisualAssetById } from '../data/visualAssets'
+import {
+  DiagramKitAiFamilyTreeExample,
+  DiagramKitGallery,
+  DiagramKitOverfittingPlotExample,
+  DiagramKitTraditionsExample,
+  DiagramKitTrainingLoopExample
+} from './DiagramKit'
 
 export const visualAidStyleVariants = [
   { id: 'paper-diagram', label: 'Paper diagram', use: 'Exact, calm diagrams.' },
+  { id: 'generated-image', label: 'Generated image', use: 'Textless concept art with HTML callouts.' },
   { id: 'neon-flow', label: 'Neon flow', use: 'Prompt to model to token flows.' },
   { id: 'origami-object', label: 'Origami object', use: 'Tensors, layers, and transformations.' },
   { id: 'zen-garden-map', label: 'Zen garden map', use: 'Alignment, risk, hallucination, and ethics.' },
@@ -11,6 +20,7 @@ export const visualAidStyleVariants = [
 ]
 
 function getVisualAidVariant(aid) {
+  if (aid.generatedAssetId) return 'generated-image'
   if (aid.variant) return aid.variant
   if (['llmOverview', 'promptResponse', 'inference', 'softmax', 'sampling', 'loop'].includes(aid.pattern)) return 'neon-flow'
   if (['tensor', 'layers', 'mlp', 'bars', 'vector', 'hidden', 'aiTopology'].includes(aid.pattern)) return 'origami-object'
@@ -19,15 +29,34 @@ function getVisualAidVariant(aid) {
   return 'paper-diagram'
 }
 
+function getGeneratedAsset(aid) {
+  return aid.generatedAssetId ? generatedVisualAssetById[aid.generatedAssetId] : null
+}
+
+function generatedAid(assetId, fields) {
+  const asset = generatedVisualAssetById[assetId]
+  return {
+    ...fields,
+    pattern: 'generatedImage',
+    variant: 'generated-image',
+    generatedAssetId: asset.id,
+    objective: asset.purpose,
+    callouts: asset.callouts,
+    keyTakeaway: asset.keyTakeaway,
+    accessibleDescription: asset.accessibilityDescription,
+    printNote: asset.sourceNote
+  }
+}
+
 export const visualAidCatalog = [
-  { id: 'llm-overview', title: 'Prompt to Prediction', subtitle: 'Score, choose, append, repeat', caption: 'A concrete prompt trace flows through learned weights into next-token probabilities; floor is selected and appended.', pattern: 'llmOverview', objective: 'Make next-token prediction feel concrete and powerful without implying the model writes the whole answer at once.', callouts: [{ heading: 'Current context', body: `Prompt plus response so far: ${canonicalPromptResponse.responseSoFar}.` }, { heading: 'Learned weights', body: 'Inference uses weights shaped earlier during training.' }, { heading: 'Token cloud', body: 'The model scores candidate next tokens such as floor, room, and tiles.' }, { heading: 'Append', body: 'The chosen token becomes part of the next context.' }], keyTakeaway: 'LLM generation is score, choose, append, repeat.', accessibleDescription: 'Prompt context enters a learned-weight cloud, candidate next tokens appear, and the chosen token floor is appended to the response.', printNote: 'Future textless Image 2 asset: before-morning-llm-cloud.png. Keep explanatory text in HTML callouts.' },
-  { id: 'ai-family-tree', title: 'AI Family Tree', subtitle: 'Where LLMs fit', caption: 'AI branches into rule-based systems and machine learning; deep learning includes generative AI, including LLMs and diffusion models.', pattern: 'aiTopology', objective: 'Give learners a simple topology of AI categories before the history card introduces rules-first and learned-pattern traditions.', callouts: [{ heading: 'AI', body: 'The broad field, not a synonym for LLM.' }, { heading: 'Machine learning', body: 'Systems learn patterns from data; deep learning is one branch.' }, { heading: 'Generative AI', body: 'Systems create new media, including language, images, audio, code, or video.' }, { heading: 'LLMs', body: 'Language/code generators that usually produce response tokens autoregressively.' }, { heading: 'Diffusion and multimodal', body: 'Other generative branches can denoise patterns or work across media types.' }], keyTakeaway: 'An LLM is one kind of generative AI inside the broader AI family.', accessibleDescription: 'A folded paper tree starts at AI, splits into rule-based AI and machine learning, then branches through classical machine learning, deep learning, generative AI, LLMs, diffusion, multimodal models, and other deep-learning systems.', printNote: 'Coded SVG only; no generated PNG asset in v0.17.2. Keep full definitions in HTML callouts below the diagram.' },
+  generatedAid('before-morning-llm-cloud', { id: 'before-morning-llm-cloud', title: 'Prompt to Prediction', subtitle: 'Score, choose, append, repeat', caption: 'A textless model-cloud scene is paired with HTML callouts for context, learned weights, one generated token, and append-repeat.' }),
+  { id: 'ai-family-tree', title: 'AI Family Tree', subtitle: 'Where LLMs fit', caption: 'A clean taxonomy tree shows AI as the broad field, machine learning as one branch inside AI, and LLMs as one branch inside generative AI.', pattern: 'aiTopology', objective: 'Give learners a simple topology of AI categories before the history card introduces rules-first and learned-pattern traditions.', callouts: [{ heading: 'AI', body: 'AI is the broad field.' }, { heading: 'Machine learning', body: 'Machine learning systems learn patterns from data.' }, { heading: 'Deep learning', body: 'Deep learning is a neural-network branch of machine learning.' }, { heading: 'Generative AI', body: 'Generative AI creates new media, such as text, images, audio, code, or video.' }, { heading: 'LLMs', body: 'LLMs generate language/code; diffusion and multimodal systems are neighboring generative AI branches.' }], keyTakeaway: 'An LLM is one kind of generative AI inside the broader AI family.', accessibleDescription: 'A taxonomy tree starts at AI. One branch is Rule-based AI. Another branch is Machine learning, which splits into Classical ML and Deep learning. Deep learning splits into Other deep learning and Generative AI. Generative AI branches into LLMs, Diffusion, and Multimodal systems.', printNote: 'Coded SVG only; no generated PNG asset. Keep the taxonomy labels in SVG and the definitions in HTML callouts below the diagram.' },
   { id: 'traditions', title: 'Rules and Learned Patterns', subtitle: 'Two traditions, one modern toolkit', caption: 'Rules-first AI uses symbols and if-then logic; deep learning learns useful patterns from examples by adjusting weights.', pattern: 'traditions', objective: 'Contrast explicit rules with learned patterns without turning the diagram into a poster.', callouts: [{ heading: 'Rules', body: 'Symbolic systems use explicit if/then logic and symbols.' }, { heading: 'Examples', body: 'Deep-learning systems use examples, loss, and weight updates.' }, { heading: 'Bridge', body: 'Modern systems often combine learned models with rules, retrieval, tools, filters, and policies.' }], keyTakeaway: 'Modern AI often blends learned patterns with hand-built rules and tools.', accessibleDescription: 'Two side-by-side panels compare rules, symbols, and if-then logic with examples, loss, and weights, joined by a bridge labeled combine both.', printNote: 'Short panel labels only; explanatory comparison stays in HTML callouts.' },
   { id: 'training-loop', title: 'Training Loop', subtitle: 'Durable change happens at weight update', caption: 'Predict, compare, loss, update weights, repeat. Training changes weights.', pattern: 'training', objective: 'Show the sequence of training and make the durable weight-update step visually distinct.', callouts: [{ heading: 'Predict', body: 'The model predicts a target.' }, { heading: 'Compare', body: 'The prediction is compared with the target.' }, { heading: 'Loss', body: 'Loss measures error.' }, { heading: 'Update weights', body: 'Weight updates are the durable-change step.' }, { heading: 'Repeat', body: 'The loop repeats many times.' }], keyTakeaway: 'Training changes weights; ordinary inference does not.', accessibleDescription: 'A five-step loop moves from Predict to Compare to Loss to Update weights to Repeat, with Update weights highlighted.', printNote: 'Five nodes stay aligned at 320px and in exported review PDFs.' },
-  { id: 'pretraining-rain', title: 'Broad Pretraining', subtitle: 'Scale, not perfect recall', caption: 'Enormous streams of examples repeat the training loop and shape broad durable patterns before normal use.', pattern: 'pretraining', callouts: [{ heading: 'Huge scale', body: 'Many examples flow through the same predict, loss, update loop.' }, { heading: 'Broad patterns', body: 'Weights pick up grammar, style, facts, associations, task shapes, and reasoning-like patterns.' }, { heading: 'Limit', body: 'Pretraining is not a perfect searchable memory of every source.' }], keyTakeaway: 'Pretraining changes weights broadly; it does not create perfect recall.', accessibleDescription: 'Data streams fall across a landscape, carving broad paths that represent durable pattern learning.', printNote: 'Future textless Image 2 asset: before-morning-pretraining-landscape.png. Keep labels in HTML callouts.' },
+  generatedAid('before-morning-pretraining-landscape', { id: 'before-morning-pretraining-landscape', title: 'Broad Pretraining', subtitle: 'Scale, not perfect recall', caption: 'A textless folded landscape is paired with HTML callouts for many examples, repeated updates, broad patterns, and the perfect-recall limit.' }),
   { id: 'overfitting-generalization', title: 'Overfitting vs Generalization', caption: 'Memorizing training examples is not the same as learning patterns that transfer to held-out examples.', pattern: 'overfitting', legend: ['Training examples are old dots the model fit during training.', 'Held-out examples are new dots used to test transfer.', 'The overfit curve traces old dots too tightly.', 'The generalizing curve is smoother and reaches new examples.'] },
-  { id: 'fine-tune-path', title: 'Fine-Tuning Path', subtitle: 'Durable adaptation after pretraining', caption: 'Targeted examples or adapter weights nudge an already-trained model toward future behavior.', pattern: 'fine', callouts: [{ heading: 'Pretrained base', body: 'Fine-tuning starts from broad learned weights.' }, { heading: 'Targeted data', body: 'Domain, task, style, or preference examples adapt behavior.' }, { heading: 'Durable contrast', body: 'Prompts and RAG steer current context; fine-tuning shapes future responses.' }], keyTakeaway: 'Fine-tuning is durable training, not one prompt and not retrieval.', accessibleDescription: 'A highlighted path crosses a pretrained landscape after examples enter the model path.', printNote: 'Future textless Image 2 asset: before-morning-finetuning-path.png. Use coded overlays and HTML callouts.' },
-  { id: 'alignment', title: 'Alignment Landscape', subtitle: 'Shaping behavior, not conscience', caption: 'Alignment shapes behavior with durable training, runtime safeguards, policies, and evaluation; it does not create moral agency.', pattern: 'alignment', callouts: [{ heading: 'Durable shaping', body: 'Instruction tuning, human feedback, and preference optimization can shape future behavior.' }, { heading: 'Runtime steering', body: 'System prompts, policy filters, tool rules, and safeguards can steer the current run.' }, { heading: 'Evaluation', body: 'Safety tests and red-team reviews check behavior and reveal failures.' }, { heading: 'Limit', body: 'Alignment is not magic morality, conscience, or a guarantee of truth.' }], keyTakeaway: 'Alignment is layered behavior shaping, not moral agency.', accessibleDescription: 'A landscape has a preferred path, guardrail, policy marker, and evaluation marker shown with numbered callouts outside the art.', printNote: 'Future textless Image 2 asset: before-morning-alignment-garden.png. Keep labels outside the scene through callouts.' },
+  generatedAid('before-morning-finetuning-path', { id: 'before-morning-finetuning-path', title: 'Fine-Tuning Path', subtitle: 'Durable adaptation after pretraining', caption: 'A textless targeted-path scene is paired with HTML callouts for pretrained base, targeted data, future responses, and durable adaptation.' }),
+  generatedAid('before-morning-alignment-garden', { id: 'before-morning-alignment-garden', title: 'Alignment Landscape', subtitle: 'Shaping behavior, not conscience', caption: 'A textless alignment garden is paired with HTML callouts for preferred behavior, guardrails, feedback and policies, and the no-conscience limit.' }),
   { id: 'inference-pass', title: 'Forward Pass', caption: 'Inference creates temporary states while durable weights stay fixed.', pattern: 'inference', legend: ['Current context enters the model.', 'Fixed weights are used, not updated.', 'Temporary hidden states lead to next-token scores.'] },
   { id: 'prompt-response', title: 'Prompt vs Response', subtitle: 'Given context versus generated tokens', caption: 'A complete user prompt is given; response tokens are generated and appended.', pattern: 'promptResponse', objective: 'Separate the complete user prompt from the incomplete response-so-far and next generated token.', callouts: [{ heading: 'User prompt', body: `The complete request is: ${canonicalPromptResponse.userPrompt}` }, { heading: 'Response so far', body: `The model has already generated: ${canonicalPromptResponse.responseSoFar}.` }, { heading: 'Next token', body: `${canonicalPromptResponse.chosenNextToken} is appended, so the next context combines prompt plus response so far plus floor.` }], keyTakeaway: 'The response grows one token at a time inside the current context.', accessibleDescription: 'The visual separates a complete user prompt, response-so-far token chips, the next token floor, and the next context row.', printNote: 'Token chips wrap inside the visual frame; full example text stays in HTML callouts.' },
   { id: 'tokenization', title: 'Text to Tokens', caption: 'Generated response text is split into model-readable chunks before embedding lookup.', pattern: 'token', legend: [`Generated response: ${canonicalPromptResponse.generatedResponse}`, 'Simplified for learning. Real tokenizers may split differently.'] },
@@ -83,16 +112,18 @@ function getCallouts(aid) {
 // Visual aids must use short in-diagram labels plus HTML callouts because mobile
 // screens and PDF export cannot reliably preserve dense SVG text layouts.
 export function VisualAid({ id, headingId = undefined, compact = false }) {
-  const aid = aidById[id] ?? aidById['llm-overview']
+  const aid = aidById[id] ?? aidById['before-morning-llm-cloud']
   return <VisualAidCard aid={aid} headingId={headingId} compact={compact} />
 }
 
 function VisualAidCard({ aid, headingId = undefined, compact = false }) {
   const callouts = getCallouts(aid)
   const variant = getVisualAidVariant(aid)
+  const asset = getGeneratedAsset(aid)
   const className = [
     'visual-aid',
     'visual-aid-card',
+    asset ? 'has-generated-asset' : '',
     compact ? 'compact' : '',
     `variant-${variant}`,
     `visual-aid-${aid.id}`
@@ -115,11 +146,38 @@ function VisualAidCard({ aid, headingId = undefined, compact = false }) {
 }
 
 function DiagramScene({ aid, variant }) {
+  const asset = getGeneratedAsset(aid)
+  if (asset) return <GeneratedImageScene aid={aid} asset={asset} variant={variant} />
+
   return (
     <div className={`aid-canvas aid-${aid.pattern} aid-variant-${variant}`} aria-hidden="true">
       <svg viewBox="0 0 320 210" preserveAspectRatio="xMidYMid meet" focusable="false">
         <VisualPattern aid={aid} />
       </svg>
+    </div>
+  )
+}
+
+function GeneratedImageScene({ aid, asset, variant }) {
+  const [imageFailed, setImageFailed] = React.useState(false)
+
+  return (
+    <div className={`aid-canvas generated-aid-canvas aid-${aid.pattern} aid-variant-${variant}`}>
+      {!imageFailed ? (
+        <img
+          className="generated-aid-image"
+          src={asset.path}
+          alt={asset.alt}
+          loading="lazy"
+          decoding="async"
+          onError={() => setImageFailed(true)}
+        />
+      ) : (
+        <div className="generated-aid-fallback" role="note">
+          <strong>Visual asset unavailable.</strong>
+          <span>The callouts below still explain the concept.</span>
+        </div>
+      )}
     </div>
   )
 }
@@ -146,8 +204,10 @@ function KeyTakeaway({ text }) {
 export function VisualAidGallery() {
   return (
     <div className="visual-aid-gallery">
+      <DiagramKitGallery />
       {visualAidCatalog.map((aid) => {
         const lesson = lessonByVisualAidId[aid.id]
+        const asset = getGeneratedAsset(aid)
         return (
           <section id={aid.id} className="review-card aid-review-card" key={aid.id} aria-labelledby={`${aid.id}-review-title`}>
             <p className="eyebrow">{aid.id}</p>
@@ -156,12 +216,17 @@ export function VisualAidGallery() {
               <span>Lesson: {lesson?.title ?? 'Shared/support visual'}</span>
               <span>Pattern: {aid.pattern}</span>
               <span>Variant: {getVisualAidVariant(aid)}</span>
+              {asset && <span>Asset: {asset.filename}</span>}
+              {asset && <span>Type: {asset.visualType}</span>}
             </div>
             <VisualAid id={aid.id} compact />
             <dl className="aid-review-details">
               <div><dt>Learning objective</dt><dd>{aid.objective ?? aid.caption}</dd></div>
+              {asset && <div><dt>Asset path</dt><dd><code>{asset.path}</code></dd></div>}
+              {asset && <div><dt>Alt text</dt><dd>{asset.alt}</dd></div>}
               <div><dt>Accessible description</dt><dd>{aid.accessibleDescription ?? aid.caption}</dd></div>
-              <div><dt>Mobile preview</dt><dd>Review at 320px, 390px, and 430px; diagram labels must stay inside the canvas.</dd></div>
+              <div><dt>Mobile preview</dt><dd>Review at 320px, 390px, and 430px; images must fit the paper frame and callouts must remain readable below the visual.</dd></div>
+              {asset && <div><dt>Text handling</dt><dd>Instructional labels and callouts are HTML. The PNG remains textless concept art.</dd></div>}
               <div><dt>Print/PDF notes</dt><dd>{aid.printNote ?? 'Use the same scene and HTML callouts in exported lesson-card PDFs.'}</dd></div>
             </dl>
           </section>
@@ -324,72 +389,11 @@ function LlmOverviewSvg() {
 }
 
 function AiTopologySvg() {
-  const nodes = [
-    { label: 'AI', x: 128, y: 12, width: 64, kind: 'prompt' },
-    { label: 'Rules', x: 18, y: 56, width: 76, kind: 'output' },
-    { label: 'ML', x: 204, y: 56, width: 70, kind: '' },
-    { label: 'Classical', x: 122, y: 100, width: 82, kind: 'muted' },
-    { label: 'Deep', x: 228, y: 100, width: 70, kind: '' },
-    { label: 'Gen AI', x: 148, y: 142, width: 76, kind: 'output' },
-    { label: 'Other DL', x: 238, y: 142, width: 72, kind: 'muted' },
-    { label: 'LLMs', x: 58, y: 176, width: 58, kind: 'prompt' },
-    { label: 'Diffusion', x: 126, y: 176, width: 78, kind: '' },
-    { label: 'Multi', x: 214, y: 176, width: 58, kind: '' }
-  ]
-  const classFor = (kind) => ['aid-box', kind].filter(Boolean).join(' ')
-  const labelClassFor = (kind) => kind === 'prompt' || kind === 'output' ? 'tiny dark' : 'tiny'
-
-  return (
-    <>
-      <polygon className="aid-land" points="14,196 62,52 158,24 274,54 306,196" />
-      <polygon className="aid-sheet" points="128,12 192,12 184,40 136,40" />
-      <path className="aid-line" d="M160 40 C122 48, 84 50, 56 56" />
-      <path className="aid-line" d="M160 40 C182 50, 206 50, 239 56" />
-      <path className="aid-line" d="M239 84 C214 94, 190 96, 163 100" />
-      <path className="aid-line" d="M239 84 C252 90, 260 94, 263 100" />
-      <path className="aid-line" d="M263 128 C244 137, 222 138, 186 142" />
-      <path className="aid-line dashed" d="M263 128 C274 136, 280 138, 274 142" />
-      <path className="aid-line" d="M186 170 C152 174, 114 174, 87 176" />
-      <path className="aid-line" d="M186 170 C179 174, 171 174, 165 176" />
-      <path className="aid-line" d="M186 170 C204 174, 222 174, 243 176" />
-      {nodes.map((node) => (
-        <g key={node.label}>
-          <rect className={classFor(node.kind)} x={node.x} y={node.y} width={node.width} height="28" rx="8" />
-          <Label x={node.x + 10} y={node.y + 19} className={labelClassFor(node.kind)}>{node.label}</Label>
-        </g>
-      ))}
-      <Callout x="56" y="42">1</Callout>
-      <Callout x="238" y="42">2</Callout>
-      <Callout x="186" y="130">3</Callout>
-      <Callout x="288" y="184">4</Callout>
-    </>
-  )
+  return <DiagramKitAiFamilyTreeExample />
 }
 
 function TraditionsSvg() {
-  return (
-    <>
-      <rect className="aid-box prompt" x="18" y="28" width="126" height="126" rx="10" />
-      <rect className="aid-box" x="176" y="28" width="126" height="126" rx="10" />
-      <Label x="56" y="52" className="tiny dark">Rules</Label>
-      <Label x="206" y="52" className="tiny">Examples</Label>
-      {['Rules', 'Symbols', 'If-then'].map((label, index) => (
-        <g key={label}>
-          <rect className="aid-chip prompt" x="34" y={72 + index * 25} width="94" height="18" rx="5" />
-          <Label x="46" y={86 + index * 25} className="tiny dark">{label}</Label>
-        </g>
-      ))}
-      {['Examples', 'Loss', 'Weights'].map((label, index) => (
-        <g key={label}>
-          <rect className={index === 2 ? 'aid-chip output' : 'aid-chip'} x="192" y={72 + index * 25} width="94" height="18" rx="5" />
-          <Label x="204" y={86 + index * 25} className={index === 2 ? 'tiny dark' : 'tiny'}>{label}</Label>
-        </g>
-      ))}
-      <path className="aid-line" d="M144 91 H176" />
-      <rect className="aid-box muted" x="70" y="170" width="180" height="24" rx="8" />
-      <Label x="110" y="187" className="tiny">combine both</Label>
-    </>
-  )
+  return <DiagramKitTraditionsExample />
 }
 
 function CloudSvg() {
@@ -419,27 +423,7 @@ function CloudSvg() {
 }
 
 function TrainingSvg() {
-  const steps = [
-    ['1', 'Predict', 22, 38, 78],
-    ['2', 'Compare', 120, 38, 88],
-    ['3', 'Loss', 230, 38, 68],
-    ['4', 'Update weights', 154, 132, 144],
-    ['5', 'Repeat', 56, 132, 82]
-  ]
-  return (
-    <>
-      {steps.map(([number, label, x, y, width]) => (
-        <StepNode key={label} number={number} label={label} x={x} y={y} width={width} output={String(label).startsWith('Update')} />
-      ))}
-      <path className="aid-line" d="M100 57 H120" />
-      <path className="aid-line" d="M208 57 H230" />
-      <path className="aid-line" d="M264 76 C264 100, 242 114, 220 132" />
-      <path className="aid-line" d="M154 151 H138" />
-      <path className="aid-line" d="M56 132 C32 110, 34 76, 54 76" />
-      <rect className="aid-box prompt" x="106" y="92" width="108" height="24" rx="8" />
-      <Label x="124" y="109" className="tiny dark">durable step</Label>
-    </>
-  )
+  return <DiagramKitTrainingLoopExample />
 }
 
 function PretrainingSvg() {
@@ -458,26 +442,7 @@ function PretrainingSvg() {
 }
 
 function OverfittingSvg() {
-  const trainDots = [[42, 142], [84, 78], [126, 116], [168, 62], [210, 132]]
-  const newDots = [[246, 96], [282, 82]]
-  return (
-    <>
-      <path className="aid-line" d="M30 164 H300" />
-      <path className="aid-line" d="M34 166 V34" />
-      <path className="aid-arc alt" d="M40 142 C62 52, 92 50, 126 116 S156 24, 210 132 S250 182, 292 150" />
-      <path className="aid-path thin" d="M40 148 C92 122, 150 102, 212 90 S260 82, 296 76" />
-      {trainDots.map(([x, y]) => <circle key={`${x}-${y}`} className="aid-dot" cx={x} cy={y} r="7" />)}
-      {newDots.map(([x, y]) => <rect key={`${x}-${y}`} className="aid-chip output" x={x - 8} y={y - 8} width="16" height="16" rx="4" />)}
-      <circle className="aid-dot alt" cx="42" cy="26" r="5" />
-      <Label x="55" y="30" className="tiny">training examples</Label>
-      <rect className="aid-chip output" x="42" y="48" width="12" height="12" rx="3" />
-      <Label x="62" y="59" className="tiny">held-out examples</Label>
-      <path className="aid-arc alt" d="M40 76 H78" />
-      <Label x="86" y="80" className="tiny">overfit curve</Label>
-      <path className="aid-path thin" d="M40 100 H78" />
-      <Label x="86" y="104" className="tiny">generalizing curve</Label>
-    </>
-  )
+  return <DiagramKitOverfittingPlotExample />
 }
 
 function FineTuneSvg() {

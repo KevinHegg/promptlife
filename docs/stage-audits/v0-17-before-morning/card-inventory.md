@@ -28,13 +28,13 @@ Global path-label flag: Journey rows show `Essential` or `Deep`. These labels ar
 - Where Brain Bridge breaks: A person has a body, goals, lived experience, and awareness. The model has learned weights and temporary computations.
 - Misconception: An LLM is a conscious reader or a database.
 - Glossary chips: `llm`, `prompt`, `response`, `token`, `weight`, `inference`
-- Visual aid id: `llm-overview`
+- Visual aid id: `before-morning-llm-cloud`
 - Tiny interaction: `cloud`, "Follow one prompt"
 - Checkpoint question: Which description is most accurate?
 - Correct answer: A learned prediction system
 - Incorrect answers: A conscious reader; A hand-written rulebook; A search engine that knows every file
 - Feedback: Correct explains learned weights turning context into next-token probabilities. Wrong answers explain that the model is not conscious, not a database, and not a hand-coded rulebook.
-- Current recommendation status: implemented in v0.17.1, then connected to the v0.17.2 topology card.
+- Current recommendation status: implemented in v0.17.1, connected to the v0.17.2 topology card, then upgraded in v0.17.3 to use the provided textless generated PNG plus HTML callouts.
 
 ## 2. Where LLMs Fit
 
@@ -140,13 +140,13 @@ Global path-label flag: Journey rows show `Essential` or `Deep`. These labels ar
 - Where Brain Bridge breaks: Humans connect learning to lived experience. A model stores statistical structure in parameters.
 - Misconception: Pretraining means the model can perfectly recall everything it saw.
 - Glossary chips: `pretraining`, `training`, `training-data`, `weight`, `loss`, `next-token`, `inference`
-- Visual aid id: `pretraining-rain`
+- Visual aid id: `before-morning-pretraining-landscape`
 - Tiny interaction: `training`, "Run the broad loop"
 - Checkpoint question: During pretraining, what changes?
 - Correct answer: Model weights
 - Incorrect answers: Only the current chat; Only the user interface; Nothing changes
 - Feedback: Correct says pretraining changes weights before normal use. Wrong answers explain pretraining is durable, not a temporary chat event.
-- Current recommendation status: defer. The card belongs here, but needs more concrete distinction from Training and stronger protection against "perfect recall" myths.
+- Current recommendation status: v0.17.3 integrates the provided textless generated PNG plus HTML callouts. Keep checking that it distinguishes broad pretraining from perfect recall and from the smaller Training loop card.
 
 ## 6. Overfitting and Generalization
 
@@ -196,13 +196,13 @@ Global path-label flag: Journey rows show `Essential` or `Deep`. These labels ar
 - Where Brain Bridge breaks: The model is not choosing a new identity or values. Training changes output patterns.
 - Misconception: Prompting once is the same as fine-tuning.
 - Glossary chips: `fine-tuning`, `adapter`, `pretraining`, `training`, `prompt`, `response`, `alignment`
-- Visual aid id: `fine-tune-path`
+- Visual aid id: `before-morning-finetuning-path`
 - Tiny interaction: `fine-tune`, "Nudge the trail"
 - Checkpoint question: Which action is closest to fine-tuning?
 - Correct answer: Additional training that shapes future responses
 - Incorrect answers: Typing one better prompt; Retrieving one PDF into context; Sampling the next token
 - Feedback: Correct says fine-tuning changes future behavior more durably than a single prompt. Wrong answers contrast prompting/RAG with training.
-- Current recommendation status: keep. Needs a stronger tiny interaction contrasting fine-tuning with prompting and RAG.
+- Current recommendation status: v0.17.3 integrates the provided textless generated PNG plus HTML callouts. Keep the durable-versus-temporary contrast with prompting and RAG prominent in the tiny interaction.
 
 ## 8. Alignment
 
@@ -224,10 +224,10 @@ Global path-label flag: Journey rows show `Essential` or `Deep`. These labels ar
 - Where Brain Bridge breaks: The model does not acquire human values, moral agency, conscience, or care. Its behavior is shaped by training and system constraints.
 - Misconception: Aligned means morally good or fully trustworthy.
 - Glossary chips: `alignment`, `instruction-tuning`, `human-feedback-learning`, `rlhf`, `preference-optimization`, `policy`, `guardrail`, `evaluation`, `fine-tuning`
-- Visual aid id: `alignment`
+- Visual aid id: `before-morning-alignment-garden`
 - Tiny interaction: `fine-tune`, "Trace the guardrails"
 - Checkpoint question: What does alignment try to do?
 - Correct answer: Shape model behavior toward human goals, instructions, and safety boundaries
 - Incorrect answers: Make the model conscious; Guarantee every answer is true; Permanently solve all AI risk
 - Feedback: Correct says alignment shapes behavior, but is not magic morality. Wrong answers reject consciousness, truth guarantees, and permanent risk-solving.
-- Current recommendation status: keep. Needs more nuance, but probably less text per screen through better visual grouping rather than longer prose.
+- Current recommendation status: v0.17.3 integrates the provided textless generated PNG plus HTML callouts. Keep the visual grouping; avoid adding more prose unless user testing shows a specific confusion.

@@ -33,13 +33,16 @@ Cards audited:
 
 v0.17.2 implementation note: `Where LLMs Fit` was added after the original v0.17 audit to provide topology context before the history side-tour. It uses a coded SVG/HTML visual aid and should not be included in the next textless Image 2 asset batch.
 
+v0.17.3 implementation note: the four planned textless Before Morning PNG assets were provided and integrated into the existing visual-aid system for `What Is an LLM?`, `Pretraining`, `Fine-Tuning`, and `Alignment`. Instructional text remains in HTML callouts, captions, accessible descriptions, and review notes; the `Where LLMs Fit`, `Rationalists vs Empiricists`, `Training`, and `Overfitting and Generalization` visuals remain coded SVG/HTML.
+
 ## Verification Snapshot
 
 - `npm install`: up to date, no vulnerabilities.
 - `npm run typecheck`: passed.
 - `npm run build`: passed with the existing Vite large-chunk warning.
-- `npm run audit:answers`: passed. Before Morning checkpoint correct positions after audit seed remain mixed: What Is an LLM position 2, Rationalists vs Empiricists position 4, Training position 2, Pretraining position 4, Overfitting position 2, Fine-Tuning position 4, Alignment position 2.
-- Manual screenshot QA: captured Journey stage views, all seven cards at 390px, feedback states where easy, and dense-card spot checks at 320px and 430px.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed. Before Morning checkpoint correct positions after audit seed remain mixed: What Is an LLM position 2, Where LLMs Fit position 2, Rationalists vs Empiricists position 4, Training position 2, Pretraining position 4, Overfitting position 2, Fine-Tuning position 4, Alignment position 2.
+- Manual screenshot QA: captured Journey stage views, Before Morning generated-asset visuals at 390px, Alignment at 320px, review-gallery checks, and earlier card feedback states where easy.
 
 ## Current State Summary
 
