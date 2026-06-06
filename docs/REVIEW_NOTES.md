@@ -2,6 +2,22 @@
 
 Date: 2026-06-06
 
+## v0.18.3 Home Subhead Removal
+
+### What Changed
+
+- Bumped the visible app version to `v0.18.3`.
+- Removed the standalone Home subhead line `Demystifying LLMs` after browser review.
+- Kept `Demystifying LLMs` in the Home tagline so the mission language remains present without repeating.
+- Left Journey progress rules, badge logic, lesson order, dependencies, and checkpoint behavior unchanged.
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- Browser QA: passed at 390px and 320px with the standalone subhead absent and no horizontal overflow.
+
 ## v0.18.2 Home Hero Refinement
 
 ### What Changed

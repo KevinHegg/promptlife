@@ -304,17 +304,10 @@ p {
   font-size: 2.42rem;
 }
 
-.home-subhead {
-  margin: -0.12rem 0 0;
-  color: var(--pl-indigo);
-  font-size: 1.38rem;
-  font-weight: 950;
-  line-height: 1.08;
-}
-
 .home-tagline {
   margin: 0;
   max-width: 32rem;
+  font-weight: 650;
 }
 
 .home-visual-slot {

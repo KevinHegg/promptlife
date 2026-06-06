@@ -41,7 +41,7 @@ const HOME_ASSETS = {
   futureHero: `${GENERATED_ASSET}/home/home-hero-prompt-cloud.png`
 }
 // Bump this for each shipped app change; the Badge screen displays it under Start over.
-const APP_VERSION = '0.18.2'
+const APP_VERSION = '0.18.3'
 const STORAGE_KEYS = {
   lastLocation: 'promptlife:v1:lastLocation',
   lessonId: 'promptlife:v1:lessonId',
@@ -553,7 +553,6 @@ function HomeScreen({ progress, nextLessonTitle, statusMessage, onStart, onJourn
           <p className="eyebrow">A DAY IN THE LIFE OF A PROMPT</p>
         </div>
         <h1 id="home-title">Prompt Life</h1>
-        <p className="home-subhead">Demystifying LLMs</p>
         <p className="lede home-tagline">Demystifying LLMs in the AI era through clear explanations, useful metaphors, and a little play.</p>
         <div className="home-visual-slot" data-future-asset={HOME_ASSETS.futureHero}>
           <picture>
