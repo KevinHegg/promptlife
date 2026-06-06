@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Prompt Life v0.19.1 Morning Commute Report</title>
+  <style>
+    :root {
+      color: #07124a;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f7f5ef;
+    }
+    body {
+      margin: 0;
+      padding: 34px;
+      line-height: 1.45;
+      background: #f7f5ef;
+    }
+    h1, h2, h3 {
+      color: #121e72;
+      line-height: 1.1;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 34px;
+    }
+    h2 {
+      margin: 28px 0 10px;
+      font-size: 21px;
+    }
+    h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+    }
+    p, li {
+      font-size: 12.5px;
+    }
+    .eyebrow {
+      color: #0fa8a4;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .cover,
+    .panel,
+    figure {
+      border: 1px solid #d8dfef;
+      border-radius: 10px;
+      background: rgba(255, 253, 248, 0.94);
+      padding: 18px;
+      box-shadow: 0 10px 28px rgba(7, 18, 74, 0.08);
+      break-inside: avoid;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+    ul {
+      margin-top: 6px;
+      padding-left: 18px;
+    }
+    .checks {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin: 12px 0 0;
+    }
+    .checks span {
+      border-left: 4px solid #35e6e2;
+      border-radius: 8px;
+      background: #effffd;
+      padding: 8px 10px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+    figure {
+      margin: 0;
+    }
+    figure img {
+      display: block;
+      width: 100%;
+      max-height: 520px;
+      object-fit: contain;
+      object-position: top center;
+      border-radius: 8px;
+      border: 1px solid #d8dfef;
+      background: #eaf3f4;
+    }
+    figcaption {
+      margin-top: 8px;
+      color: #24304f;
+      font-size: 11.5px;
+      font-weight: 750;
+    }
+    code {
+      color: #121e72;
+      font-weight: 800;
+    }
+    .page-break {
+      break-before: page;
+    }
+  </style>
+</head>
+<body>
+  <section class="cover">
+    <p class="eyebrow">Prompt Life v0.19.1</p>
+    <h1>Morning Commute Implementation Pass</h1>
+    <p>Seven existing Morning Commute cards were polished without adding new cards, games, generated PNGs, heavy 3D libraries, progress changes, checkpoint-randomization changes, or badge changes.</p>
+    <div class="checks">
+      <span>typecheck passed</span>
+      <span>build passed</span>
+      <span>build:pages passed</span>
+      <span>audit:answers passed</span>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>What Changed</h2>
+    <ul>
+      <li><strong>Inference:</strong> fixed weights now visibly produce temporary activations, hidden states, and scores.</li>
+      <li><strong>Prompt vs Response:</strong> a compact role diagram separates prompt, response so far, next token, and current context.</li>
+      <li><strong>Tokenization:</strong> simplified token cards now include uneven chunks and punctuation.</li>
+      <li><strong>Token IDs:</strong> token, ID, and embedding-table row are separated.</li>
+      <li><strong>Embeddings:</strong> durable table versus temporary retrieved vector is explicit.</li>
+      <li><strong>Vectors:</strong> teaching sliders are contrasted with distributed unlabeled features.</li>
+      <li><strong>Tensors:</strong> token axis, feature axis, and batch note are clearer in a lightweight coded diagram.</li>
+      <li><strong>Review routes:</strong> hash links now scroll to the intended card inside the review container.</li>
+    </ul>
+  </section>
+
+  <section class="panel">
+    <h2>Known Issues</h2>
+    <ul>
+      <li>The existing Vite large-chunk warning remains.</li>
+      <li>In-app browser automation could navigate and screenshot review routes, but did not reliably activate bottom-nav buttons. Live Journey interaction screenshots remain a manual follow-up.</li>
+      <li>Embeddings remains the best future Morning Commute Image 2 candidate; no generated PNGs were added in this pass.</li>
+    </ul>
+  </section>
+
+  <section class="page-break">
+    <h2>Screenshots</h2>
+    <div class="grid">
+      <figure>
+        <img src="screenshots/v0-19-1-visual-inference-390.png" alt="Forward Pass visual at 390px">
+        <figcaption>Forward Pass: fixed weights and temporary activations.</figcaption>
+      </figure>
+      <figure>
+        <img src="screenshots/v0-19-1-visual-prompt-response-390.png" alt="Prompt vs Response visual at 390px">
+        <figcaption>Prompt vs Response: prompt, response so far, next token, current context.</figcaption>
+      </figure>
+      <figure>
+        <img src="screenshots/v0-19-1-visual-tokenization-390.png" alt="Tokenization visual at 390px">
+        <figcaption>Tokenization: uneven chunks and punctuation.</figcaption>
+      </figure>
+      <figure>
+        <img src="screenshots/v0-19-1-visual-token-ids-390.png" alt="Token IDs visual at 390px">
+        <figcaption>Token IDs: lookup keys, not meaning.</figcaption>
+      </figure>
+      <figure>
+        <img src="screenshots/v0-19-1-visual-embeddings-390.png" alt="Embedding Lookup visual at 390px">
+        <figcaption>Embeddings: durable table and temporary retrieved vector.</figcaption>
+      </figure>
+      <figure>
+        <img src="screenshots/v0-19-1-visual-vectors-390.png" alt="Feature Vector visual at 390px">
+        <figcaption>Vectors: teaching labels versus distributed features.</figcaption>
+      </figure>
+      <figure>
+        <img src="screenshots/v0-19-1-visual-tensors-390.png" alt="Tensor Block visual at 390px">
+        <figcaption>Tensors at 390px.</figcaption>
+      </figure>
+      <figure>
+        <img src="screenshots/v0-19-1-visual-tensors-320.png" alt="Tensor Block visual at 320px">
+        <figcaption>Tensors at 320px.</figcaption>
+      </figure>
+    </div>
+  </section>
+</body>
+</html>

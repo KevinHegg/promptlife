@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Prompt Life v0.18.7 Glossary Dojo Report</title>
+  <style>
+    :root {
+      --ink: #07124a;
+      --muted: #48546f;
+      --teal: #0fa8a4;
+      --paper: #fffdf8;
+      --mist: #eef7f6;
+      --line: #d8e1ef;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: #f7f5ef;
+      line-height: 1.45;
+    }
+    main {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 36px 28px 48px;
+    }
+    header,
+    section {
+      margin-bottom: 24px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--paper);
+      box-shadow: 0 12px 30px rgba(7, 18, 74, 0.08);
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { font-size: 34px; line-height: 1.05; }
+    h2 { font-size: 22px; }
+    h3 { font-size: 16px; margin-bottom: 6px; }
+    .eyebrow {
+      color: var(--teal);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+    .lede { color: var(--muted); font-size: 17px; }
+    ul { padding-left: 20px; margin-bottom: 0; }
+    li { margin: 5px 0; }
+    code {
+      padding: 2px 5px;
+      border-radius: 4px;
+      background: var(--mist);
+      color: var(--ink);
+      font-size: 0.92em;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .fact {
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #f8fbfb;
+    }
+    .fact p { margin-bottom: 0; color: var(--muted); }
+    figure {
+      break-inside: avoid;
+      margin: 0;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: white;
+    }
+    figure img {
+      width: 100%;
+      max-width: 390px;
+      margin: 0 auto;
+      border: 1px solid #dfe6f2;
+      border-radius: 8px;
+      display: block;
+    }
+    figcaption {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .screenshots {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+    @media print {
+      body { background: white; }
+      main { padding: 0; max-width: none; }
+      header, section { box-shadow: none; break-inside: avoid; }
+      .screenshots { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">Prompt Life v0.18.7</p>
+      <h1>Glossary Dojo V1 Report</h1>
+      <p class="lede">A focused mobile-first Play activity for practicing model-literacy vocabulary without scores, timers, streaks, leaderboards, or failure states.</p>
+      <p><strong>Date:</strong> June 6, 2026</p>
+    </header>
+
+    <section>
+      <h2>What Changed</h2>
+      <ul>
+        <li>Added Glossary Dojo as a Play subview with 12-question rounds and four answer choices per question.</li>
+        <li>Used `src/data/content.ts` glossary data as the source of truth, with a small optional metadata overlay.</li>
+        <li>Tracked Dojo practice in `promptlife.glossaryDojo.v1`, including current-round resume, recent mistakes, and per-term mastery.</li>
+        <li>Added entry points from Play and Glossary while keeping Journey progress, checkpoint randomization rules, badge criteria, dependencies, generated images, and the one-badge model unchanged.</li>
+        <li>Included the Dojo key in the app-wide Start over/debug clear path so reset clears Dojo practice too.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Implementation Details</h2>
+      <div class="grid">
+        <div class="fact">
+          <h3>Source Files Used</h3>
+          <p>`src/data/content.ts`, `src/utils/choiceOrder.ts`, `src/main.tsx`, and `src/styles/global.css`.</p>
+        </div>
+        <div class="fact">
+          <h3>New Files Added</h3>
+          <p>`src/data/glossaryDojoMeta.ts` and `src/features/glossary-dojo/*` for types, engine, storage, hook, game, and summary UI.</p>
+        </div>
+        <div class="fact">
+          <h3>Mastery Rule</h3>
+          <p>Mastered after a correct answer in two distinct rounds, or after a previously missed term is answered correctly in a later round.</p>
+        </div>
+        <div class="fact">
+          <h3>Question Types</h3>
+          <p>`term_to_definition`, `definition_to_term`, `confusable_pair`, `relationship`, and `stage_location`.</p>
+        </div>
+        <div class="fact">
+          <h3>Route Integration</h3>
+          <p>Play card under Glossary practice; Glossary button labeled Practice 12 terms. The Dojo is not added to the badge `games` array.</p>
+        </div>
+        <div class="fact">
+          <h3>Accessibility</h3>
+          <p>Native buttons, visible focus, status feedback, no positive tabindex, and text labels for correct/incorrect state.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Verification</h2>
+      <ul>
+        <li>`npm run typecheck`: passed.</li>
+        <li>`npm run build`: passed with the existing Vite large-chunk warning.</li>
+        <li>`npm run build:pages`: passed with the existing Vite large-chunk warning.</li>
+        <li>`npm run audit:answers`: passed.</li>
+        <li>`git diff --check`: passed.</li>
+        <li>Browser QA passed for Play entry, Glossary entry, incorrect/correct feedback, hard-reload resume, round summary, reset/restart, and 320px/390px/430px overflow checks.</li>
+        <li>Blocked-storage fallback is implemented in `storage.ts`; browser simulation was not practical in this environment.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Known Issues</h2>
+      <ul>
+        <li>The first metadata overlay is intentionally partial; richer relationship and confusable-pair questions improve as metadata grows.</li>
+        <li>The in-app browser automation focused the Start button but did not fire native button activation with its keypress command. Native button semantics and visible focus are implemented; a human keyboard spot check is recommended before v1.</li>
+        <li>Blocked-storage fallback should get a dedicated browser test if a test runner is added later.</li>
+        <li>The existing Vite bundle-size warning remains; this pass did not add dependencies or heavy assets.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Screenshots</h2>
+      <div class="screenshots">
+        <figure>
+          <img src="screenshots/v0-18-7-play-glossary-dojo-card-full-390.png" alt="Play screen showing the Glossary Dojo card at 390px">
+          <figcaption>Play entry: Glossary Dojo card under Glossary practice.</figcaption>
+        </figure>
+        <figure>
+          <img src="screenshots/v0-18-7-dojo-question-390.png" alt="Glossary Dojo question view at 390px">
+          <figcaption>Question view: 12-question round with four choices.</figcaption>
+        </figure>
+        <figure>
+          <img src="screenshots/v0-18-7-dojo-wrong-feedback-390.png" alt="Glossary Dojo incorrect feedback at 390px">
+          <figcaption>Incorrect feedback: no shaming, explicit contrast, correct match labeled.</figcaption>
+        </figure>
+        <figure>
+          <img src="screenshots/v0-18-7-dojo-correct-feedback-390.png" alt="Glossary Dojo correct feedback at 390px">
+          <figcaption>Correct feedback: starts with Insight strengthened.</figcaption>
+        </figure>
+        <figure>
+          <img src="screenshots/v0-18-7-dojo-resumed-from-play-390.png" alt="Glossary Dojo resumed after reload from Play at 390px">
+          <figcaption>Hard reload resume: Play card resumes the saved round.</figcaption>
+        </figure>
+        <figure>
+          <img src="screenshots/v0-18-7-dojo-feedback-action-320.png" alt="Glossary Dojo feedback and Next action visible above the dock at 320px">
+          <figcaption>320px: feedback and Next action visible above the dock after scrolling.</figcaption>
+        </figure>
+        <figure>
+          <img src="screenshots/v0-18-7-dojo-summary-390.png" alt="Glossary Dojo summary at 390px">
+          <figcaption>Summary: practiced terms, review list, start another round, and reset.</figcaption>
+        </figure>
+        <figure>
+          <img src="screenshots/v0-18-7-glossary-practice-entry-390.png" alt="Glossary screen with Practice 12 terms entry at 390px">
+          <figcaption>Glossary entry: Practice 12 terms button above search.</figcaption>
+        </figure>
+        <figure>
+          <img src="screenshots/v0-18-7-dojo-reset-start-390.png" alt="Glossary Dojo reset start screen at 390px">
+          <figcaption>Reset: Dojo practice returns to zeroed start state.</figcaption>
+        </figure>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

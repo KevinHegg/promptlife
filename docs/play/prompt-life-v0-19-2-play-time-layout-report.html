@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Prompt Life v0.19.2 Play Time Layout Report</title>
+    <style>
+      :root {
+        color: #111a4d;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.45;
+      }
+
+      body {
+        margin: 0;
+        background: #f7fbff;
+      }
+
+      main {
+        max-width: 860px;
+        margin: 0 auto;
+        padding: 40px 44px 56px;
+        background: #fff;
+      }
+
+      h1,
+      h2 {
+        color: #111177;
+        line-height: 1.08;
+      }
+
+      h1 {
+        margin: 0 0 8px;
+        font-size: 34px;
+      }
+
+      h2 {
+        margin: 28px 0 10px;
+        font-size: 20px;
+      }
+
+      p {
+        margin: 0 0 12px;
+      }
+
+      ul {
+        margin: 0;
+        padding-left: 20px;
+      }
+
+      li {
+        margin: 5px 0;
+      }
+
+      .meta {
+        color: #58627f;
+        font-size: 13px;
+        font-weight: 800;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .summary {
+        border: 1px solid #d8e1f2;
+        border-radius: 8px;
+        margin-top: 22px;
+        padding: 18px;
+        background: linear-gradient(180deg, #ffffff 0%, #f2fbfa 100%);
+      }
+
+      .screenshots {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+        align-items: start;
+      }
+
+      figure {
+        margin: 0;
+      }
+
+      img {
+        width: 100%;
+        border: 1px solid #d8e1f2;
+        border-radius: 8px;
+        box-shadow: 0 12px 24px rgba(7, 27, 111, 0.10);
+      }
+
+      figcaption {
+        margin-top: 8px;
+        color: #44506f;
+        font-size: 13px;
+        font-weight: 800;
+      }
+
+      code {
+        border-radius: 5px;
+        padding: 1px 5px;
+        background: #eef6ff;
+        color: #111177;
+        font-family: "SFMono-Regular", Consolas, monospace;
+        font-size: 0.92em;
+      }
+
+      @media print {
+        body {
+          background: #fff;
+        }
+
+        main {
+          padding: 22px 28px;
+        }
+
+        h1 {
+          font-size: 28px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p class="meta">Prompt Life report · v0.19.2 · June 6, 2026</p>
+      <h1>Play Card Time Layout</h1>
+      <p>The Play page now keeps each card's time estimate on one compact line, such as <code>Time: 3 min</code>, saving vertical space on mobile without changing the game content.</p>
+
+      <section class="summary" aria-labelledby="changed-title">
+        <h2 id="changed-title">What changed</h2>
+        <ul>
+          <li>Bumped the visible app version to <code>0.19.2</code>.</li>
+          <li>Updated the Play card time metadata markup so the label and value stay together.</li>
+          <li>Added a narrow CSS override for the time row only; Action and Teaches can still wrap naturally.</li>
+          <li>Left games, progress, badge logic, checkpoint randomization, dependencies, and assets unchanged.</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="verification-title">
+        <h2 id="verification-title">Verification</h2>
+        <ul>
+          <li><code>npm run typecheck</code>: passed.</li>
+          <li><code>npm run build</code>: passed with the existing Vite large-chunk warning.</li>
+          <li><code>npm run build:pages</code>: passed with the existing Vite large-chunk warning.</li>
+          <li><code>npm run audit:answers</code>: passed.</li>
+          <li>Layout QA at 390px and 320px confirmed six single-line time rows, each measuring 18px tall.</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="screenshots-title">
+        <h2 id="screenshots-title">Screenshots</h2>
+        <div class="screenshots">
+          <figure>
+            <img src="screenshots/v0-19-2-play-time-inline-390.png" alt="Prompt Life Play page at 390 pixels wide with compact inline Time rows.">
+            <figcaption>390px Play layout</figcaption>
+          </figure>
+          <figure>
+            <img src="screenshots/v0-19-2-play-time-inline-320.png" alt="Prompt Life Play page at 320 pixels wide with compact inline Time rows.">
+            <figcaption>320px Play layout</figcaption>
+          </figure>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

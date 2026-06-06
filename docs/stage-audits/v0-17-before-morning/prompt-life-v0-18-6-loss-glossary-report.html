@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Prompt Life v0.18.6 Loss Glossary Repair</title>
+  <style>
+    @page { size: letter; margin: 0.55in; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: #07124a;
+      background: #f7f5ef;
+      font: 14px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    h1, h2, h3 { margin: 0 0 0.14in; line-height: 1.08; color: #121e72; }
+    h1 { font-size: 32px; }
+    h2 { font-size: 21px; margin-top: 0.25in; }
+    h3 { font-size: 14px; color: #0a7772; text-transform: uppercase; letter-spacing: 0; }
+    p { margin: 0 0 0.12in; }
+    ul { margin: 0 0 0.16in 0.22in; padding: 0; }
+    li { margin-bottom: 0.05in; }
+    .cover, .card, .shot {
+      border: 1px solid rgba(18, 30, 114, 0.16);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.9);
+    }
+    .cover {
+      padding: 0.42in;
+      min-height: 3.6in;
+      background: linear-gradient(145deg, rgba(255,255,255,0.94), rgba(234,243,244,0.86));
+    }
+    .eyebrow {
+      color: #0fa8a4;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.16in;
+    }
+    .card {
+      padding: 0.18in;
+      margin-bottom: 0.16in;
+      break-inside: avoid;
+    }
+    .shot {
+      padding: 0.13in;
+      margin-bottom: 0.18in;
+      break-inside: avoid;
+    }
+    .shot img {
+      display: block;
+      max-width: 100%;
+      max-height: 6.4in;
+      margin: 0 auto 0.08in;
+      border: 1px solid rgba(18, 30, 114, 0.12);
+      border-radius: 6px;
+    }
+    .narrow img { width: 3.05in; }
+    .page-break { break-before: page; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+  </style>
+</head>
+<body>
+  <section class="cover">
+    <p class="eyebrow">Prompt Life content repair</p>
+    <h1>v0.18.6 Loss Glossary Repair</h1>
+    <p><strong>Date:</strong> 2026-06-06</p>
+    <p><strong>Scope:</strong> small content/glossary pass. No new cards, Journey order changes, progress changes, checkpoint randomization changes, generated images, or dependencies.</p>
+    <p><strong>Result:</strong> Loss now appears on Rationalists vs Empiricists, the glossary drawer explains it clearly, and the Rules and Learned Patterns visual explains loss in context.</p>
+  </section>
+
+  <section>
+    <h2>What Changed</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Content</h3>
+        <ul>
+          <li>Added Loss to Rationalists vs Empiricists key terms.</li>
+          <li>Improved the Loss glossary entry with definition, relationship, metaphor, Brain Bridge, limit, confusion warning, and related terms.</li>
+          <li>Updated the visual caption and Examples callout to define loss as a prediction-error training signal.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Sorting and QA</h3>
+        <ul>
+          <li>Moved Loss to the Rationalists vs Empiricists point in Glossary Learning path.</li>
+          <li>Prioritized Loss so it stays visible before chip expansion at 390px and 320px.</li>
+          <li>Confirmed checkpoint answer order still randomizes.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Verification</h3>
+      <p><code>npm run typecheck</code>, <code>npm run build</code>, and <code>npm run audit:answers</code> passed. Build retained the existing Vite large-chunk warning.</p>
+    </div>
+  </section>
+
+  <section class="page-break">
+    <h2>Screenshots</h2>
+    <div class="grid">
+      <div class="shot">
+        <img src="screenshots/v0-18-6-history-loss-chip-390.png" alt="Loss key term chip visible at 390px">
+        <p><strong>390px:</strong> Loss is visible in the collapsed key-term chips.</p>
+      </div>
+      <div class="shot">
+        <img src="screenshots/v0-18-6-history-loss-chip-320.png" alt="Loss key term chip visible at 320px">
+        <p><strong>320px:</strong> Loss remains visible and no chip overflow was detected.</p>
+      </div>
+    </div>
+    <div class="shot narrow">
+      <img src="screenshots/v0-18-6-history-visual-loss-callout-390.png" alt="Rules and Learned Patterns visual with Loss callout">
+      <p><strong>Visual copy:</strong> the Examples callout explains loss as the training signal that measures prediction error so weights can be adjusted.</p>
+    </div>
+  </section>
+
+  <section class="page-break">
+    <h2>Glossary Checks</h2>
+    <div class="grid">
+      <div class="shot">
+        <img src="screenshots/v0-18-6-loss-drawer-390.png" alt="Loss glossary drawer">
+        <p><strong>Drawer:</strong> Loss now has a clearer definition, relationship, metaphor, Brain Bridge, limit, and confusion warning.</p>
+      </div>
+      <div class="shot">
+        <img src="screenshots/v0-18-6-glossary-learning-loss-390.png" alt="Loss in Learning path glossary">
+        <p><strong>Learning path:</strong> Loss is introduced at Rationalists vs Empiricists.</p>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

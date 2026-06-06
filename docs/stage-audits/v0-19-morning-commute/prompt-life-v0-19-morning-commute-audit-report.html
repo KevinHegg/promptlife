@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Prompt Life v0.19 Morning Commute Audit Report</title>
+  <style>
+    @page { size: letter; margin: 0.55in; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: #07124a;
+      background: #f7f5ef;
+      font: 14px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    h1, h2, h3 { margin: 0 0 0.18in; line-height: 1.05; color: #121e72; }
+    h1 { font-size: 34px; }
+    h2 { font-size: 22px; margin-top: 0.26in; }
+    h3 { font-size: 15px; color: #0a6f7a; text-transform: uppercase; letter-spacing: 0; }
+    p { margin: 0 0 0.12in; }
+    ul, ol { margin: 0 0 0.16in 0.24in; padding: 0; }
+    li { margin-bottom: 0.05in; }
+    .cover {
+      min-height: 9.2in;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border: 1px solid rgba(18, 30, 114, 0.18);
+      border-radius: 10px;
+      padding: 0.45in;
+      background: linear-gradient(145deg, rgba(255,255,255,0.92), rgba(234,243,244,0.86));
+    }
+    .eyebrow {
+      color: #0fa8a4;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.16in;
+    }
+    .card {
+      break-inside: avoid;
+      border: 1px solid rgba(18, 30, 114, 0.16);
+      border-radius: 8px;
+      padding: 0.18in;
+      background: rgba(255,255,255,0.86);
+      margin-bottom: 0.16in;
+    }
+    .shot {
+      break-inside: avoid;
+      margin: 0 0 0.2in;
+      padding: 0.14in;
+      border: 1px solid rgba(18, 30, 114, 0.16);
+      border-radius: 8px;
+      background: #fff;
+    }
+    .shot img {
+      display: block;
+      max-width: 100%;
+      max-height: 6.8in;
+      margin: 0 auto 0.1in;
+      border: 1px solid rgba(18, 30, 114, 0.12);
+      border-radius: 6px;
+    }
+    .wide img { width: 3.1in; }
+    .page-break { break-before: page; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.92em; }
+  </style>
+</head>
+<body>
+  <section class="cover">
+    <p class="eyebrow">Prompt Life internal audit</p>
+    <h1>v0.19 Morning Commute Stage Audit</h1>
+    <p><strong>Date:</strong> 2026-06-06</p>
+    <p><strong>Stage:</strong> Morning Commute</p>
+    <p><strong>Cards:</strong> Inference, Prompt vs Response, Tokenization, Token IDs, Embeddings, Vectors, Tensors.</p>
+    <p><strong>Scope:</strong> audit-only. No live curriculum changes, generated assets, new games, heavy 3D libraries, progress changes, checkpoint randomization changes, or badge changes.</p>
+    <p><strong>Result:</strong> The stage is accurate and in a sound order. The next pass should focus on visual specificity and tiny interactions, especially Vectors and Tensors.</p>
+  </section>
+
+  <section class="page-break">
+    <h2>Findings</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>What is strong</h3>
+        <ul>
+          <li>Inference clearly says fixed weights are used, not durably updated.</li>
+          <li>Prompt vs Response correctly separates given context from generated tokens.</li>
+          <li>Embeddings are defined as learned starting vectors, not definitions or memories.</li>
+          <li>Checkpoint feedback is clear and randomized.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>What needs work</h3>
+        <ul>
+          <li>Vectors and Tensors remain the most abstract cards.</li>
+          <li>Tokenization should show uneven chunks more explicitly.</li>
+          <li>Token IDs need a stronger lookup-key visual.</li>
+          <li>Tensors should become a lightweight CSS 3D or coded axis inspector.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Next implementation direction</h3>
+      <p>Keep all seven cards. Repair coded visuals and tiny interactions before adding any generated Morning Commute PNGs. If one Image 2 asset is later generated, Embeddings is the best candidate because a textless lookup-table/meaning-cloud image could reduce abstraction while HTML keeps labels accessible.</p>
+    </div>
+  </section>
+
+  <section class="page-break">
+    <h2>Selected Screenshots</h2>
+    <div class="shot wide">
+      <img src="screenshots/journey-top-390.png" alt="Journey top at 390px">
+      <p><strong>Journey top:</strong> stage navigation remains readable at 390px.</p>
+    </div>
+    <div class="shot wide">
+      <img src="screenshots/morning-commute-overview-390.png" alt="Morning Commute stage overview at 390px">
+      <p><strong>Morning Commute overview:</strong> actual card order is Inference, Prompt vs Response, Tokenization, Token IDs, Embeddings, Vectors, Tensors.</p>
+    </div>
+  </section>
+
+  <section class="page-break">
+    <h2>Mechanics Screens</h2>
+    <div class="grid">
+      <div class="shot">
+        <img src="screenshots/09-inference-visual-aid.png" alt="Inference visual aid">
+        <p><strong>Inference:</strong> accurate forward-pass visual; next pass should emphasize temporary activations over fixed weights.</p>
+      </div>
+      <div class="shot">
+        <img src="screenshots/10-prompt-response-box-viewport-top.png" alt="Prompt vs Response explanation panel">
+        <p><strong>Prompt vs Response:</strong> role distinction is clear; demo is tall on mobile.</p>
+      </div>
+      <div class="shot">
+        <img src="screenshots/11-tokens-tiny-interaction.png" alt="Tokenization tiny interaction">
+        <p><strong>Tokenization:</strong> interaction should show uneven chunks and punctuation/space cases.</p>
+      </div>
+      <div class="shot">
+        <img src="screenshots/13-embeddings-correct-feedback.png" alt="Embeddings checkpoint correct feedback">
+        <p><strong>Embeddings:</strong> checkpoint reinforces learned starting vector.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-break">
+    <h2>Dense-Card Spot Checks</h2>
+    <div class="grid">
+      <div class="shot">
+        <img src="screenshots/14-vectors-visual-aid-320.png" alt="Vectors visual aid at 320px">
+        <p><strong>Vectors at 320px:</strong> readable, but concept remains abstract and simplified labels need care.</p>
+      </div>
+      <div class="shot">
+        <img src="screenshots/15-tensors-visual-aid-320.png" alt="Tensors visual aid at 320px">
+        <p><strong>Tensors at 320px:</strong> readable; strongest candidate for CSS 3D or coded axis inspection.</p>
+      </div>
+    </div>
+    <div class="shot wide">
+      <img src="screenshots/qa-before-morning-generated-asset-390.png" alt="Before Morning generated asset QA">
+      <p><strong>Regression QA:</strong> Before Morning generated assets still load in the review gallery.</p>
+    </div>
+  </section>
+</body>
+</html>
+

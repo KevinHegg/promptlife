@@ -1,0 +1,478 @@
+{
+  "shots": [
+    {
+      "name": "home-assets-390.png",
+      "note": "Home page generated mark and hero asset check at 390px."
+    },
+    {
+      "name": "journey-top-390.png",
+      "note": "Journey top at 390px."
+    },
+    {
+      "name": "morning-commute-stage-links-390.png",
+      "note": "Stage timeline jump links at 390px."
+    },
+    {
+      "name": "morning-commute-overview-390.png",
+      "note": "Morning Commute stage section at 390px."
+    },
+    {
+      "name": "09-inference-hero.png",
+      "note": "Inference lesson hero."
+    },
+    {
+      "name": "09-inference-visual-aid.png",
+      "note": "Inference visual aid panel."
+    },
+    {
+      "name": "09-inference-core-idea.png",
+      "note": "Inference core idea panel."
+    },
+    {
+      "name": "09-inference-model-lifecycle.png",
+      "note": "Inference where/durable/prompt-response/why notes."
+    },
+    {
+      "name": "09-inference-relationship.png",
+      "note": "Inference relationship panel."
+    },
+    {
+      "name": "09-inference-brain-bridge.png",
+      "note": "Inference Brain Bridge panel."
+    },
+    {
+      "name": "09-inference-tiny-interaction.png",
+      "note": "Inference tiny interaction."
+    },
+    {
+      "name": "09-inference-checkpoint.png",
+      "note": "Inference initial checkpoint."
+    },
+    {
+      "name": "09-inference-wrong-feedback.png",
+      "note": "Inference wrong-answer feedback."
+    },
+    {
+      "name": "09-inference-correct-feedback.png",
+      "note": "Inference correct-answer feedback."
+    },
+    {
+      "name": "09-inference-bottom-action.png",
+      "note": "Inference bottom action after correct answer in Preview mode."
+    },
+    {
+      "name": "10-prompt-response-hero.png",
+      "note": "Prompt vs Response lesson hero."
+    },
+    {
+      "name": "10-prompt-response-visual-aid.png",
+      "note": "Prompt vs Response visual aid panel."
+    },
+    {
+      "name": "10-prompt-response-core-idea.png",
+      "note": "Prompt vs Response core idea panel."
+    },
+    {
+      "name": "10-prompt-response-model-lifecycle.png",
+      "note": "Prompt vs Response where/durable/prompt-response/why notes."
+    },
+    {
+      "name": "10-prompt-response-relationship.png",
+      "note": "Prompt vs Response relationship panel."
+    },
+    {
+      "name": "10-prompt-response-brain-bridge.png",
+      "note": "Prompt vs Response Brain Bridge panel."
+    },
+    {
+      "name": "10-prompt-response-tiny-interaction.png",
+      "note": "Prompt vs Response tiny interaction."
+    },
+    {
+      "name": "10-prompt-response-checkpoint.png",
+      "note": "Prompt vs Response initial checkpoint."
+    },
+    {
+      "name": "10-prompt-response-wrong-feedback.png",
+      "note": "Prompt vs Response wrong-answer feedback."
+    },
+    {
+      "name": "10-prompt-response-correct-feedback.png",
+      "note": "Prompt vs Response correct-answer feedback."
+    },
+    {
+      "name": "10-prompt-response-bottom-action.png",
+      "note": "Prompt vs Response bottom action after correct answer in Preview mode."
+    },
+    {
+      "name": "11-tokens-hero.png",
+      "note": "Tokenization lesson hero."
+    },
+    {
+      "name": "11-tokens-visual-aid.png",
+      "note": "Tokenization visual aid panel."
+    },
+    {
+      "name": "11-tokens-core-idea.png",
+      "note": "Tokenization core idea panel."
+    },
+    {
+      "name": "11-tokens-model-lifecycle.png",
+      "note": "Tokenization where/durable/prompt-response/why notes."
+    },
+    {
+      "name": "11-tokens-relationship.png",
+      "note": "Tokenization relationship panel."
+    },
+    {
+      "name": "11-tokens-brain-bridge.png",
+      "note": "Tokenization Brain Bridge panel."
+    },
+    {
+      "name": "11-tokens-tiny-interaction.png",
+      "note": "Tokenization tiny interaction."
+    },
+    {
+      "name": "11-tokens-checkpoint.png",
+      "note": "Tokenization initial checkpoint."
+    },
+    {
+      "name": "11-tokens-wrong-feedback.png",
+      "note": "Tokenization wrong-answer feedback."
+    },
+    {
+      "name": "11-tokens-correct-feedback.png",
+      "note": "Tokenization correct-answer feedback."
+    },
+    {
+      "name": "11-tokens-bottom-action.png",
+      "note": "Tokenization bottom action after correct answer in Preview mode."
+    },
+    {
+      "name": "12-token-ids-hero.png",
+      "note": "Token IDs lesson hero."
+    },
+    {
+      "name": "12-token-ids-visual-aid.png",
+      "note": "Token IDs visual aid panel."
+    },
+    {
+      "name": "12-token-ids-core-idea.png",
+      "note": "Token IDs core idea panel."
+    },
+    {
+      "name": "12-token-ids-model-lifecycle.png",
+      "note": "Token IDs where/durable/prompt-response/why notes."
+    },
+    {
+      "name": "12-token-ids-relationship.png",
+      "note": "Token IDs relationship panel."
+    },
+    {
+      "name": "12-token-ids-brain-bridge.png",
+      "note": "Token IDs Brain Bridge panel."
+    },
+    {
+      "name": "12-token-ids-tiny-interaction.png",
+      "note": "Token IDs tiny interaction."
+    },
+    {
+      "name": "12-token-ids-checkpoint.png",
+      "note": "Token IDs initial checkpoint."
+    },
+    {
+      "name": "12-token-ids-wrong-feedback.png",
+      "note": "Token IDs wrong-answer feedback."
+    },
+    {
+      "name": "12-token-ids-correct-feedback.png",
+      "note": "Token IDs correct-answer feedback."
+    },
+    {
+      "name": "12-token-ids-bottom-action.png",
+      "note": "Token IDs bottom action after correct answer in Preview mode."
+    },
+    {
+      "name": "13-embeddings-hero.png",
+      "note": "Embeddings lesson hero."
+    },
+    {
+      "name": "13-embeddings-visual-aid.png",
+      "note": "Embeddings visual aid panel."
+    },
+    {
+      "name": "13-embeddings-core-idea.png",
+      "note": "Embeddings core idea panel."
+    },
+    {
+      "name": "13-embeddings-model-lifecycle.png",
+      "note": "Embeddings where/durable/prompt-response/why notes."
+    },
+    {
+      "name": "13-embeddings-relationship.png",
+      "note": "Embeddings relationship panel."
+    },
+    {
+      "name": "13-embeddings-brain-bridge.png",
+      "note": "Embeddings Brain Bridge panel."
+    },
+    {
+      "name": "13-embeddings-tiny-interaction.png",
+      "note": "Embeddings tiny interaction."
+    },
+    {
+      "name": "13-embeddings-checkpoint.png",
+      "note": "Embeddings initial checkpoint."
+    },
+    {
+      "name": "13-embeddings-wrong-feedback.png",
+      "note": "Embeddings wrong-answer feedback."
+    },
+    {
+      "name": "13-embeddings-correct-feedback.png",
+      "note": "Embeddings correct-answer feedback."
+    },
+    {
+      "name": "13-embeddings-bottom-action.png",
+      "note": "Embeddings bottom action after correct answer in Preview mode."
+    },
+    {
+      "name": "14-vectors-hero.png",
+      "note": "Vectors lesson hero."
+    },
+    {
+      "name": "14-vectors-visual-aid.png",
+      "note": "Vectors visual aid panel."
+    },
+    {
+      "name": "14-vectors-core-idea.png",
+      "note": "Vectors core idea panel."
+    },
+    {
+      "name": "14-vectors-model-lifecycle.png",
+      "note": "Vectors where/durable/prompt-response/why notes."
+    },
+    {
+      "name": "14-vectors-relationship.png",
+      "note": "Vectors relationship panel."
+    },
+    {
+      "name": "14-vectors-brain-bridge.png",
+      "note": "Vectors Brain Bridge panel."
+    },
+    {
+      "name": "14-vectors-tiny-interaction.png",
+      "note": "Vectors tiny interaction."
+    },
+    {
+      "name": "14-vectors-checkpoint.png",
+      "note": "Vectors initial checkpoint."
+    },
+    {
+      "name": "14-vectors-wrong-feedback.png",
+      "note": "Vectors wrong-answer feedback."
+    },
+    {
+      "name": "14-vectors-correct-feedback.png",
+      "note": "Vectors correct-answer feedback."
+    },
+    {
+      "name": "14-vectors-bottom-action.png",
+      "note": "Vectors bottom action after correct answer in Preview mode."
+    },
+    {
+      "name": "15-tensors-hero.png",
+      "note": "Tensors lesson hero."
+    },
+    {
+      "name": "15-tensors-visual-aid.png",
+      "note": "Tensors visual aid panel."
+    },
+    {
+      "name": "15-tensors-core-idea.png",
+      "note": "Tensors core idea panel."
+    },
+    {
+      "name": "15-tensors-model-lifecycle.png",
+      "note": "Tensors where/durable/prompt-response/why notes."
+    },
+    {
+      "name": "15-tensors-relationship.png",
+      "note": "Tensors relationship panel."
+    },
+    {
+      "name": "15-tensors-brain-bridge.png",
+      "note": "Tensors Brain Bridge panel."
+    },
+    {
+      "name": "15-tensors-tiny-interaction.png",
+      "note": "Tensors tiny interaction."
+    },
+    {
+      "name": "15-tensors-checkpoint.png",
+      "note": "Tensors initial checkpoint."
+    },
+    {
+      "name": "15-tensors-wrong-feedback.png",
+      "note": "Tensors wrong-answer feedback."
+    },
+    {
+      "name": "15-tensors-correct-feedback.png",
+      "note": "Tensors correct-answer feedback."
+    },
+    {
+      "name": "15-tensors-bottom-action.png",
+      "note": "Tensors bottom action after correct answer in Preview mode."
+    },
+    {
+      "name": "15-tensors-top-320.png",
+      "note": "Tensors top-of-card dense layout spot check at 320px."
+    },
+    {
+      "name": "15-tensors-visual-aid-320.png",
+      "note": "Tensors visual aid spot check at 320px."
+    },
+    {
+      "name": "15-tensors-top-430.png",
+      "note": "Tensors top-of-card dense layout spot check at 430px."
+    },
+    {
+      "name": "15-tensors-visual-aid-430.png",
+      "note": "Tensors visual aid spot check at 430px."
+    },
+    {
+      "name": "14-vectors-top-320.png",
+      "note": "Vectors dense abstract content spot check at 320px."
+    },
+    {
+      "name": "14-vectors-visual-aid-320.png",
+      "note": "Vectors visual aid spot check at 320px."
+    },
+    {
+      "name": "qa-before-morning-generated-asset-390.png",
+      "note": "Before Morning generated asset still loads in review gallery."
+    },
+    {
+      "name": "qa-ai-family-tree-390.png",
+      "note": "Where LLMs Fit taxonomy visual remains available in review gallery."
+    },
+    {
+      "name": "10-prompt-response-box-viewport-top.png",
+      "note": "Prompt vs Response explanatory panel viewport slice at 390px."
+    },
+    {
+      "name": "10-prompt-response-demo-viewport.png",
+      "note": "Prompt vs Response demo viewport slice at 390px."
+    }
+  ],
+  "misses": [],
+  "qa": {
+    "homeAssets": [
+      {
+        "alt": "Prompt Life mark: a prompt signal moving through a model cloud toward one response token",
+        "src": "http://127.0.0.1:5173/assets/generated/home/promptlife-mark.png",
+        "naturalWidth": 1254,
+        "naturalHeight": 1254
+      },
+      {
+        "alt": "A prompt traveling through a glowing model cloud and emerging as one response token",
+        "src": "http://127.0.0.1:5173/assets/generated/home/home-hero-prompt-cloud.png",
+        "naturalWidth": 1448,
+        "naturalHeight": 1086
+      },
+      {
+        "alt": "",
+        "src": "http://127.0.0.1:5173/assets/promptlife/icons/png/icon-tokens@48.png",
+        "naturalWidth": 48,
+        "naturalHeight": 48
+      },
+      {
+        "alt": "",
+        "src": "http://127.0.0.1:5173/assets/promptlife/icons/png/icon-attention@48.png",
+        "naturalWidth": 48,
+        "naturalHeight": 48
+      },
+      {
+        "alt": "",
+        "src": "http://127.0.0.1:5173/assets/promptlife/icons/png/icon-vocabulary-cloud@48.png",
+        "naturalWidth": 48,
+        "naturalHeight": 48
+      }
+    ],
+    "inference": {
+      "modeNote": "Previewing this card. Progress will not change.",
+      "bottomAction": "Return to Journey",
+      "title": "Inference",
+      "visualTitle": null,
+      "duplicateCoreHeadingCount": 0
+    },
+    "prompt-response": {
+      "modeNote": "Previewing this card. Progress will not change.",
+      "bottomAction": "Return to Journey",
+      "title": "Prompt vs Response",
+      "visualTitle": null,
+      "duplicateCoreHeadingCount": 0
+    },
+    "tokens": {
+      "modeNote": "Previewing this card. Progress will not change.",
+      "bottomAction": "Return to Journey",
+      "title": "Tokenization",
+      "visualTitle": null,
+      "duplicateCoreHeadingCount": 0
+    },
+    "token-ids": {
+      "modeNote": "Previewing this card. Progress will not change.",
+      "bottomAction": "Return to Journey",
+      "title": "Token IDs",
+      "visualTitle": null,
+      "duplicateCoreHeadingCount": 0
+    },
+    "embeddings": {
+      "modeNote": "Previewing this card. Progress will not change.",
+      "bottomAction": "Return to Journey",
+      "title": "Embeddings",
+      "visualTitle": null,
+      "duplicateCoreHeadingCount": 0
+    },
+    "vectors": {
+      "modeNote": "Previewing this card. Progress will not change.",
+      "bottomAction": "Return to Journey",
+      "title": "Vectors",
+      "visualTitle": null,
+      "duplicateCoreHeadingCount": 0
+    },
+    "tensors": {
+      "modeNote": "Previewing this card. Progress will not change.",
+      "bottomAction": "Return to Journey",
+      "title": "Tensors",
+      "visualTitle": null,
+      "duplicateCoreHeadingCount": 0
+    },
+    "beforeMorningAsset": {
+      "alt": "An abstract folded-paper prompt ribbon flows into a glowing model cloud, and one token-like bead exits.",
+      "src": "http://127.0.0.1:5173/assets/generated/before-morning/before-morning-llm-cloud.png",
+      "naturalWidth": 1448,
+      "naturalHeight": 1086
+    },
+    "aiFamilyTree": {
+      "heading": "AI Family Tree",
+      "buttons": [],
+      "hasSvg": true
+    },
+    "randomizedOrders": [
+      [
+        "Every document the model has seen",
+        "The training dataset",
+        "The model weights permanently",
+        "Temporary hidden states"
+      ],
+      [
+        "Every document the model has seen",
+        "Temporary hidden states",
+        "The training dataset",
+        "The model weights permanently"
+      ]
+    ],
+    "reviewLearnPreviewModes": "Morning Commute lesson rows open in Preview mode from a blank progress state; checkpoint clicks revealed feedback without pressing Continue or changing progress."
+  }
+}

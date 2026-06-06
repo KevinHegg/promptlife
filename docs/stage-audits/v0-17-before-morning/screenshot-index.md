@@ -4,6 +4,18 @@ Date: 2026-06-06
 
 All standard screenshots were captured at 390px wide and 844px tall. Dense-card spot checks were captured at 320px and 430px.
 
+## v0.18.6 Loss Glossary Repair Screenshots
+
+Captured after adding Loss to Rationalists vs Empiricists key terms, improving the Loss glossary entry, and moving Loss to the earlier Learning path introduction point.
+
+- `screenshots/v0-18-6-history-loss-chip-390.png`
+- `screenshots/v0-18-6-history-loss-chip-320.png`
+- `screenshots/v0-18-6-history-visual-loss-callout-390.png`
+- `screenshots/v0-18-6-loss-drawer-390.png`
+- `screenshots/v0-18-6-glossary-az-loss-390.png`
+- `screenshots/v0-18-6-glossary-learning-loss-390.png`
+- `screenshots/v0-18-6-loss-glossary-qa.json`
+
 ## v0.18.1 Where LLMs Fit Visual Repair Screenshots
 
 Captured after replacing the folded AI topology map with a clean coded taxonomy tree and tap-through branch interaction.

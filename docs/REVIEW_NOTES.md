@@ -2,6 +2,146 @@
 
 Date: 2026-06-06
 
+## v0.19.2 Play Card Time Layout
+
+### What Changed
+
+- Bumped the visible app version to `v0.19.2`.
+- Compact Play card time metadata so every card reads as a single inline line such as `Time: 3 min`.
+- Left Play card content, games, progress logic, badge logic, checkpoint randomization, dependencies, and generated assets unchanged.
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed.
+- Browser/layout QA: passed at 390px and 320px. All six Play cards report one-line 18px time rows: Prompt Run, Context Stack, Attention Weave, Token Pipeline Relay, Glossary Dojo, and How AI Learns.
+
+### Screenshots
+
+- `docs/play/screenshots/v0-19-2-play-time-inline-390.png`
+- `docs/play/screenshots/v0-19-2-play-time-inline-320.png`
+
+## v0.19.1 Morning Commute Implementation Pass
+
+### What Changed
+
+- Bumped the visible app version to `v0.19.1`.
+- Revised the seven existing Morning Commute cards without adding cards or changing order: Inference, Prompt vs Response, Tokenization, Token IDs, Embeddings, Vectors, and Tensors.
+- Updated card copy to clarify fixed weights versus temporary activations, prompt/response roles, uneven token chunks, ID-as-lookup-key, durable embedding table versus temporary retrieved vector, distributed vector features, and tensor axes.
+- Replaced reused generic tiny interactions with specific Morning Commute interactions for temporary inference state, prompt/response labels, token splitting, token-ID matching, embedding lookup, vector-view toggling, and tensor-axis inspection.
+- Refined the coded SVG/HTML visual aids for all seven cards; no generated PNG assets, new games, heavy 3D libraries, badge changes, progress changes, or checkpoint randomization changes were added.
+- Added review-route hash scrolling so direct links such as `/review/visual-aids#tensors` land on the intended review card.
+- Added `IMAGE_ASSET_PLAN.md`, `TINY_INTERACTION_PLAN.md`, and `IMPLEMENTATION_REPORT_V0_19_1.md` to the Morning Commute audit package.
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed; Morning Commute checkpoint answers still randomize by answer identity.
+- Browser screenshot QA: passed for revised coded visuals at 390px and Tensor Block at 320px through the in-app browser review route. In-app automation could navigate and screenshot review routes, but did not activate bottom-nav buttons reliably, so live Journey interaction screenshots remain a manual follow-up.
+
+### Screenshots
+
+- `docs/stage-audits/v0-19-morning-commute/screenshots/v0-19-1-visual-inference-390.png`
+- `docs/stage-audits/v0-19-morning-commute/screenshots/v0-19-1-visual-prompt-response-390.png`
+- `docs/stage-audits/v0-19-morning-commute/screenshots/v0-19-1-visual-tokenization-390.png`
+- `docs/stage-audits/v0-19-morning-commute/screenshots/v0-19-1-visual-token-ids-390.png`
+- `docs/stage-audits/v0-19-morning-commute/screenshots/v0-19-1-visual-embeddings-390.png`
+- `docs/stage-audits/v0-19-morning-commute/screenshots/v0-19-1-visual-vectors-390.png`
+- `docs/stage-audits/v0-19-morning-commute/screenshots/v0-19-1-visual-tensors-390.png`
+- `docs/stage-audits/v0-19-morning-commute/screenshots/v0-19-1-visual-tensors-320.png`
+
+## v0.18.7 Glossary Dojo V1
+
+### What Changed
+
+- Bumped the visible app version to `v0.18.7`.
+- Added Glossary Dojo, a mobile-first 12-question Play activity for practicing glossary terms, definitions, relationships, common mix-ups, and learning-neighborhood connections.
+- Added a small metadata overlay in `src/data/glossaryDojoMeta.ts` while keeping `src/data/content.ts` as the glossary source of truth.
+- Added Dojo-specific storage at `promptlife.glossaryDojo.v1` for rounds completed, questions answered, recent mistakes, per-term practice, and current-round resume.
+- Included the Dojo storage key in the app-wide Start over/debug clear path so Prompt Life reset does not leave Dojo practice behind.
+- Added entry points from Play (`Glossary Dojo`) and Glossary (`Practice 12 terms`) without adding a new badge insight, changing Journey progress, or modifying checkpoint randomization rules.
+- Reused the existing seeded choice-order helper for stable randomized answer order per built question.
+- Added `docs/play/GLOSSARY_DOJO_V1.md`.
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed.
+- Browser QA: passed for Play entry, Glossary entry, 12-question round start, incorrect feedback, correct feedback, hard-reload resume via the Play card, round summary, Dojo reset/restart, Badge stats unchanged, and 320px/390px/430px mobile overflow checks. At 320px, the feedback and Next action were scrolled into view and confirmed above the dock.
+- Accessibility QA: native buttons, visible focus styles, logical order, status feedback, and non-color text labels were verified. The in-app browser automation focused the Start button, but its keypress command did not activate native button controls, so manual keyboard activation remains a human spot check before v1.
+- Blocked-storage fallback is implemented in `storage.ts`; browser simulation was not practical in this environment because the in-app browser read-only scope does not expose storage mutation and the repo does not include standalone Playwright.
+
+### Screenshots
+
+- `docs/play/screenshots/v0-18-7-play-glossary-dojo-card-full-390.png`
+- `docs/play/screenshots/v0-18-7-dojo-question-390.png`
+- `docs/play/screenshots/v0-18-7-dojo-wrong-feedback-390.png`
+- `docs/play/screenshots/v0-18-7-dojo-correct-feedback-390.png`
+- `docs/play/screenshots/v0-18-7-dojo-resumed-from-play-390.png`
+- `docs/play/screenshots/v0-18-7-dojo-feedback-action-320.png`
+- `docs/play/screenshots/v0-18-7-dojo-summary-390.png`
+- `docs/play/screenshots/v0-18-7-glossary-practice-entry-390.png`
+- `docs/play/screenshots/v0-18-7-dojo-reset-start-390.png`
+
+## v0.18.6 Loss Glossary Repair
+
+### What Changed
+
+- Bumped the visible app version to `v0.18.6`.
+- Added `Loss` to the Rationalists vs Empiricists key-term chips because the Rules and Learned Patterns visual introduces the term there.
+- Improved the Loss glossary entry with a learner-friendly definition, relationship, metaphor, Brain Bridge, limit, confusion warning, and related terms.
+- Moved Loss earlier in Glossary Learning path sorting so it first appears with Rationalists vs Empiricists, where it is first introduced meaningfully.
+- Updated the Rules and Learned Patterns visual caption/callout copy to explain loss as the training signal that measures prediction error.
+- Left Journey order, progress logic, checkpoint randomization, generated images, dependencies, and badge logic unchanged.
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed.
+- Browser QA: passed at 390px and 320px. Loss appears in the collapsed Rationalists vs Empiricists key-term chips, the Loss drawer explains the term clearly, Glossary A-Z and Learning path both include Loss, Learning path introduces it at Rationalists vs Empiricists, no 320px chip overflow was detected, and two fresh sessions showed different checkpoint answer orders.
+
+### Screenshots
+
+- `docs/stage-audits/v0-17-before-morning/screenshots/v0-18-6-history-loss-chip-390.png`
+- `docs/stage-audits/v0-17-before-morning/screenshots/v0-18-6-history-loss-chip-320.png`
+- `docs/stage-audits/v0-17-before-morning/screenshots/v0-18-6-history-visual-loss-callout-390.png`
+- `docs/stage-audits/v0-17-before-morning/screenshots/v0-18-6-loss-drawer-390.png`
+- `docs/stage-audits/v0-17-before-morning/screenshots/v0-18-6-glossary-az-loss-390.png`
+- `docs/stage-audits/v0-17-before-morning/screenshots/v0-18-6-glossary-learning-loss-390.png`
+
+## v0.19 Morning Commute Stage Audit
+
+### What Changed
+
+- Added a documentation-only audit package at `docs/stage-audits/v0-19-morning-commute/`.
+- Inventoried the current Morning Commute cards: Inference, Prompt vs Response, Tokenization, Token IDs, Embeddings, Vectors, and Tensors.
+- Captured 91 mobile screenshots, including 390px card sections and 320px/430px spot checks for dense Vectors/Tensors content.
+- Added a machine-readable `stage-audit.json`, source-backed `card-inventory.md`, `recommendations.md`, `screenshot-index.md`, and an internal PDF report source.
+- Left live curriculum, Journey ordering, progress rules, checkpoint randomization, generated PNG assets, dependencies, and badge logic unchanged.
+
+### Findings
+
+- Current order is sound: Inference should stay before Prompt vs Response, followed by Tokenization, Token IDs, Embeddings, Vectors, and Tensors.
+- Vectors and Tensors are the highest-priority repair targets because they are accurate but abstract.
+- Prompt vs Response is not redundant with Autoregression: this card teaches given-versus-generated roles; Autoregression should teach the repeated generation loop.
+- Embeddings is the best future textless Image 2 candidate if Morning Commute gets a generated asset; Prompt vs Response, Tokenization, Token IDs, Vectors, and Tensors should remain coded SVG/HTML or CSS.
+- Tensors is the strongest lightweight CSS 3D candidate; no heavy 3D library is recommended.
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed.
+- Browser QA: passed for Home generated assets, Before Morning generated assets in the review route, Where LLMs Fit taxonomy visual in the review route, and Morning Commute Preview/Review lesson screenshots.
+
 ## v0.18.5 Home Pillar Chip Alignment
 
 ### What Changed

@@ -1,0 +1,41 @@
+{
+  "version": "0.18.7",
+  "date": "2026-06-06",
+  "automatedChecks": {
+    "roundSize": 12,
+    "optionsPerQuestion": 4,
+    "incorrectFeedbackExample": "Not quite. MLP sits elsewhere in the map. Weight travels with Loss in Before Morning.",
+    "correctFeedbackExample": "Insight strengthened. Energy use means The electricity required to train, run, cool, and support an AI system.",
+    "hardReloadResume": "After reload, Play home showed Round in progress and Resume round; opening Glossary Dojo resumed question 2 of 12.",
+    "summary": "Practice map updated",
+    "reset": "Ready for twelve terms? 0 rounds, 0 terms practiced, 0 mastered.",
+    "badgeStatsAfterDojo": "1 of 39 lessons; 0 of 3 play insights; 0 of 16 exercises; 0 of 13 Prompt Run; 0 reflections.",
+    "blockedStorage": "Fallback is implemented in storage.ts; browser simulation was not practical because the in-app browser read-only scope does not expose storage mutation and the repo does not include standalone Playwright."
+  },
+  "mobileChecks": {
+    "320": {
+      "horizontalOverflow": false,
+      "feedbackActionAboveDockAfterScroll": true,
+      "nextClickSucceeded": true
+    },
+    "390": {
+      "horizontalOverflow": false,
+      "summaryActionAboveDock": true
+    },
+    "430": {
+      "horizontalOverflow": false
+    }
+  },
+  "screenshots": [
+    "v0-18-7-play-glossary-dojo-card-full-390.png",
+    "v0-18-7-dojo-question-390.png",
+    "v0-18-7-dojo-wrong-feedback-390.png",
+    "v0-18-7-dojo-correct-feedback-390.png",
+    "v0-18-7-dojo-resumed-from-play-390.png",
+    "v0-18-7-dojo-feedback-action-320.png",
+    "v0-18-7-dojo-summary-390.png",
+    "v0-18-7-glossary-practice-entry-390.png",
+    "v0-18-7-dojo-reset-start-390.png"
+  ],
+  "knownIssue": "The in-app browser automation focused the Start button but did not fire native button activation with its keypress command. Native buttons and focus styles are implemented; human keyboard spot check recommended before v1."
+}

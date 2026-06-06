@@ -27,6 +27,8 @@ import { emptyExerciseProgress, exerciseById, exercises, lessonExerciseIds } fro
 import { PROMPT_RUN_FINAL_ID, PROMPT_RUN_SAMPLE, emptyPromptRunProgress, promptRunFinalChallenge, promptRunSteps } from './data/promptRun'
 import { attentionExample, canonicalPromptResponse } from './data/canonicalExamples'
 import { getLessonSourceReview, sourceRegistry } from './data/sourceRegistry'
+import { GlossaryDojoGame } from './features/glossary-dojo/GlossaryDojoGame'
+import { GLOSSARY_DOJO_STORAGE_KEY, clearGlossaryDojoProgress, loadGlossaryDojoProgress } from './features/glossary-dojo/storage'
 import { CHOICE_ORDER_SEED_KEY, buildQuizChoices, getChoiceOrderSeed } from './utils/choiceOrder'
 import './styles/global.css'
 
@@ -40,7 +42,7 @@ const HOME_ASSETS = {
   heroFallback: `${ASSET}/illustrations/scene-hero-feature-cloud@mobile.png`
 }
 // Bump this for each shipped app change; the Badge screen displays it under Start over.
-const APP_VERSION = '0.18.5'
+const APP_VERSION = '0.19.2'
 const STORAGE_KEYS = {
   lastLocation: 'promptlife:v1:lastLocation',
   lessonId: 'promptlife:v1:lessonId',
@@ -51,7 +53,8 @@ const STORAGE_KEYS = {
   promptRunProgress: 'promptlife:v1:promptRunProgress',
   traceComplete: 'promptlife:v1:traceComplete',
   learningTourComplete: 'promptlife:v1:learningTourComplete',
-  choiceOrderSeed: CHOICE_ORDER_SEED_KEY
+  choiceOrderSeed: CHOICE_ORDER_SEED_KEY,
+  glossaryDojo: GLOSSARY_DOJO_STORAGE_KEY
 }
 const LEGACY_STORAGE_KEYS = {
   lastLocation: 'pl.tab',
@@ -80,8 +83,8 @@ const GLOSSARY_SECTION_ORDER = [
 const GLOSSARY_LEARNING_GROUPS = [
   { firstLessonId: 'what-is-llm', termIds: ['llm'] },
   { firstLessonId: 'where-llms-fit', termIds: ['ai', 'machine-learning', 'classical-machine-learning', 'deep-learning', 'generative-ai', 'diffusion', 'multimodal', 'symbolic-ai', 'rule-based-ai', 'foundation-model'] },
-  { firstLessonId: 'history', termIds: ['rationalism', 'empiricism'] },
-  { firstLessonId: 'training', termIds: ['training', 'training-data', 'loss', 'weight', 'parameter', 'weight-update'] },
+  { firstLessonId: 'history', termIds: ['rationalism', 'empiricism', 'loss'] },
+  { firstLessonId: 'training', termIds: ['training', 'training-data', 'weight', 'parameter', 'weight-update'] },
   { firstLessonId: 'pretraining', termIds: ['pretraining', 'next-token'] },
   { firstLessonId: 'overfitting-generalization', termIds: ['overfitting', 'generalization', 'validation-data'] },
   { firstLessonId: 'fine-tuning', termIds: ['fine-tuning', 'adapter'] },
@@ -126,6 +129,15 @@ const GLOSSARY_LEARNING_HINTS = Object.fromEntries(
   )
 )
 const LESSON_TERM_DISPLAY_PRIORITY = {
+  history: [
+    'rationalism',
+    'empiricism',
+    'loss',
+    'deep-learning',
+    'symbolic-ai',
+    'training',
+    'weight'
+  ],
   'where-llms-fit': [
     'ai',
     'machine-learning',
@@ -309,6 +321,7 @@ function App() {
     } catch {
       // Reset still updates in-memory state even when storage is unavailable.
     }
+    clearGlossaryDojoProgress()
   }
 
   function resetProgress({ confirmReset = true } = {}) {
@@ -499,7 +512,7 @@ function App() {
             onLearningTourComplete={() => setLearningTourComplete(true)}
           />
         )}
-        {tab === 'glossary' && <GlossaryScreen onOpen={setDrawerTerm} />}
+        {tab === 'glossary' && <GlossaryScreen onOpen={setDrawerTerm} onPractice={() => openPlayFeature('glossary-dojo')} />}
         {tab === 'badge' && (
           <BadgeScreen
             completed={completed}
@@ -534,6 +547,19 @@ function getLessonMode(lessonId, requestedMode, completed, currentLessonId) {
   if (completed.includes(lessonId)) return 'review'
   if (lessonId !== currentLessonId) return 'preview'
   return 'learn'
+}
+
+function useReviewHashScroll() {
+  useEffect(() => {
+    const targetId = decodeURIComponent(window.location.hash.replace(/^#/, ''))
+    if (!targetId) return undefined
+
+    const frameId = window.requestAnimationFrame(() => {
+      document.getElementById(targetId)?.scrollIntoView({ block: 'start' })
+    })
+
+    return () => window.cancelAnimationFrame(frameId)
+  }, [])
 }
 
 function SkipLink() {
@@ -1382,7 +1408,13 @@ function MicroInteraction({ type }) {
   if (type === 'alignment-groups') return <AlignmentGroupingInteraction />
   if (type === 'training') return <TrainingLoopAnimation />
   if (type === 'fine-tune') return <FineTuningPathAnimation />
-  if (type === 'inference') return <InferenceFlowAnimation />
+  if (type === 'inference') return <InferenceTemporaryInteraction />
+  if (type === 'prompt-response-labels') return <PromptResponseLabelsInteraction />
+  if (type === 'tokenization-split') return <TokenizationSplitInteraction />
+  if (type === 'token-id-lookup') return <TokenIdLookupInteraction />
+  if (type === 'embedding-lookup') return <EmbeddingLookupInteraction />
+  if (type === 'vector-distribution') return <VectorDistributionInteraction />
+  if (type === 'tensor-axis') return <TensorAxisInteraction />
   if (type === 'tokens') return <TokenCardsAnimation />
   if (type === 'embeddings') return <EmbeddingLookupAnimation />
   if (type === 'tensor') return <TensorBlockAnimation />
@@ -1397,6 +1429,257 @@ function MicroInteraction({ type }) {
   if (type === 'multimodal') return <MultimodalMixerAnimation />
   if (type === 'risk') return <RiskSortDemo />
   return <FeatureCloudAnimation />
+}
+
+function InferenceTemporaryInteraction() {
+  const choices = [
+    { id: 'activations', label: 'Temporary activations', correct: true },
+    { id: 'weights', label: 'Model weights', correct: false },
+    { id: 'dataset', label: 'Training dataset', correct: false }
+  ]
+  const [choice, setChoice] = useState(null)
+  const selected = choices.find((item) => item.id === choice)
+
+  return (
+    <div className="morning-interaction inference-temporary-demo">
+      <div className="inference-mini-flow" aria-hidden="true">
+        <span>Context</span>
+        <span className="is-fixed">Fixed weights</span>
+        <span className="is-live">Temporary activations</span>
+        <span>Scores</span>
+      </div>
+      <p className="micro-prompt">Which part is temporary during ordinary inference?</p>
+      <div className="morning-choice-row" role="group" aria-label="Choose what is temporary during inference">
+        {choices.map((item) => (
+          <button
+            key={item.id}
+            className={choice === item.id ? 'active' : ''}
+            onClick={() => setChoice(item.id)}
+            aria-pressed={choice === item.id}
+          >
+            {item.label}
+          </button>
+        ))}
+      </div>
+      <p className={selected?.correct ? 'micro-feedback good' : 'micro-feedback'} role="status">
+        {selected
+          ? selected.correct
+            ? 'Insight strengthened. Inference uses fixed weights but creates temporary internal states for the current run.'
+            : 'Not quite. Ordinary inference uses the learned weights without permanently rewriting them.'
+          : 'Pick the part that appears for this run and then disappears.'}
+      </p>
+    </div>
+  )
+}
+
+function PromptResponseLabelsInteraction() {
+  const rows = [
+    { id: 'prompt', label: 'Prompt', body: canonicalPromptResponse.userPrompt },
+    { id: 'response', label: 'Response so far', body: canonicalPromptResponse.responseSoFar },
+    { id: 'next', label: 'Next token', body: canonicalPromptResponse.chosenNextToken },
+    { id: 'context', label: 'Current context', body: canonicalPromptResponse.promptContextLabel }
+  ]
+  const [active, setActive] = useState('prompt')
+  const current = rows.find((row) => row.id === active) ?? rows[0]
+
+  return (
+    <div className="morning-interaction prompt-response-label-demo">
+      <div className="prompt-response-lanes">
+        {rows.map((row) => (
+          <button key={row.id} className={active === row.id ? 'active' : ''} onClick={() => setActive(row.id)} aria-pressed={active === row.id}>
+            <strong>{row.label}</strong>
+            <span>{row.body}</span>
+          </button>
+        ))}
+      </div>
+      <p className="micro-feedback good" role="status">
+        <strong>{current.label}:</strong> {active === 'context' ? 'The next run sees prompt plus response-so-far plus the appended token.' : 'This is one role inside the current context.'}
+      </p>
+    </div>
+  )
+}
+
+function TokenizationSplitInteraction() {
+  const [step, setStep] = useState(0)
+  const tokens = canonicalPromptResponse.responseTokens
+  const uneven = [
+    ['kitchen', 'kitchen'],
+    ['startled', 'start | led'],
+    ['floor.', 'floor | .']
+  ]
+  const buttonLabel = step === 0 ? 'Show token cards' : step === 1 ? 'Show uneven chunks' : 'Reset sentence'
+
+  return (
+    <div className="morning-interaction tokenization-split-demo">
+      <button className="morning-primary-action" onClick={() => setStep((step + 1) % 3)}>{buttonLabel}</button>
+      <div className={step === 0 ? 'tokenization-sentence' : 'tokenization-token-grid'} aria-live="polite">
+        {step === 0 ? (
+          <strong>{canonicalPromptResponse.generatedResponse}</strong>
+        ) : (
+          tokens.map((token, index) => <span key={`${token}-${index}`}>{token}</span>)
+        )}
+      </div>
+      {step === 2 && (
+        <div className="uneven-token-examples" aria-label="Examples of uneven token chunks">
+          {uneven.map(([word, split]) => (
+            <span key={word}><strong>{word}</strong><em>{split}</em></span>
+          ))}
+        </div>
+      )}
+      <p className={step > 0 ? 'micro-feedback good' : 'micro-feedback'} role="status">
+        {step > 0
+          ? 'Insight strengthened. Tokens are model-readable chunks, not always human words.'
+          : 'Tap to split the sentence into simplified tokens.'}
+      </p>
+    </div>
+  )
+}
+
+function TokenIdLookupInteraction() {
+  const table = canonicalPromptResponse.tokenIds
+  const [token, setToken] = useState(table[0].token)
+  const [idChoice, setIdChoice] = useState(null)
+  const row = table.find((item) => item.token === token) ?? table[0]
+  const correct = idChoice === row.id
+
+  function chooseToken(nextToken) {
+    setToken(nextToken)
+    setIdChoice(null)
+  }
+
+  return (
+    <div className="morning-interaction token-id-lookup-demo">
+      <div className="morning-choice-row compact" role="group" aria-label="Choose a token">
+        {table.map((item) => (
+          <button key={item.token} className={token === item.token ? 'active' : ''} onClick={() => chooseToken(item.token)} aria-pressed={token === item.token}>
+            {item.token}
+          </button>
+        ))}
+      </div>
+      <div className="id-match-board">
+        <span className="lookup-token-card">{row.token}</span>
+        <span className="lookup-arrow" aria-hidden="true">to</span>
+        <div className="id-choice-stack" role="group" aria-label={`Choose the ID for ${row.token}`}>
+          {table.map((item) => (
+            <button key={item.id} className={idChoice === item.id ? 'active' : ''} onClick={() => setIdChoice(item.id)} aria-pressed={idChoice === item.id}>
+              ID {item.id}
+            </button>
+          ))}
+        </div>
+        <span className={correct ? 'lookup-table-row active' : 'lookup-table-row'}>embedding row {correct ? row.id : '?'}</span>
+      </div>
+      <p className={correct ? 'micro-feedback good' : 'micro-feedback'} role="status">
+        {idChoice
+          ? correct
+            ? 'Insight strengthened. The ID points to a learned embedding-table row.'
+            : 'Not quite. The ID is just a lookup key; the meaning comes from learned numerical patterns, not the number itself.'
+          : `Match ${row.token} to its lookup number.`}
+      </p>
+    </div>
+  )
+}
+
+function EmbeddingLookupInteraction() {
+  const rows = {
+    dog: { id: '421', bars: [42, 70, 34, 82, 54] },
+    cat: { id: '982', bars: [68, 38, 76, 44, 60] },
+    floor: { id: '1576', bars: [28, 58, 86, 48, 72] }
+  }
+  const [token, setToken] = useState('floor')
+  const current = rows[token]
+
+  return (
+    <div className="morning-interaction embedding-lookup-demo">
+      <div className="morning-choice-row compact" role="group" aria-label="Choose token ID to look up">
+        {Object.entries(rows).map(([label, row]) => (
+          <button key={label} className={token === label ? 'active' : ''} onClick={() => setToken(label)} aria-pressed={token === label}>
+            {label} to {row.id}
+          </button>
+        ))}
+      </div>
+      <div className="embedding-lookup-board" aria-live="polite">
+        <span className="embedding-id-card">ID {current.id}</span>
+        <div className="embedding-table-mini">
+          {Object.entries(rows).map(([label, row]) => (
+            <span key={label} className={token === label ? 'active' : ''}>row {row.id}</span>
+          ))}
+        </div>
+        <div className="embedding-vector-bars" aria-label={`Temporary starting vector for ${token}`}>
+          {current.bars.map((bar, index) => <span key={index} style={{ height: `${bar}%` }} />)}
+        </div>
+      </div>
+      <div className="durable-temporary-notes">
+        <span>Durable table</span>
+        <span>Temporary retrieved vector</span>
+        <span>Hidden state comes later</span>
+      </div>
+      <p className="micro-feedback good" role="status">Insight strengthened. An embedding starts the token in numerical space before context reshapes it.</p>
+    </div>
+  )
+}
+
+function VectorDistributionInteraction() {
+  const [mode, setMode] = useState('simplified')
+  const simpleRows = [
+    ['animal-ish', 72],
+    ['grammar role', 46],
+    ['tone', 38],
+    ['position', 64]
+  ]
+  const distributed = [20, 68, 44, 86, 36, 54, 72, 28, 62, 48, 78, 32]
+
+  return (
+    <div className="morning-interaction vector-distribution-demo">
+      <div className="segmented-control mini" role="group" aria-label="Choose vector view">
+        <button className={mode === 'simplified' ? 'active' : ''} onClick={() => setMode('simplified')} aria-pressed={mode === 'simplified'}>Teaching sliders</button>
+        <button className={mode === 'distributed' ? 'active' : ''} onClick={() => setMode('distributed')} aria-pressed={mode === 'distributed'}>Real-ish pattern</button>
+      </div>
+      {mode === 'simplified' ? (
+        <div className="vector-simple-bars" aria-label="Simplified vector feature sliders">
+          {simpleRows.map(([label, value]) => (
+            <span key={label}><strong>{label}</strong><i style={{ width: `${value}%` }} /></span>
+          ))}
+        </div>
+      ) : (
+        <div className="vector-distributed-grid" aria-label="Unlabeled distributed vector dimensions">
+          {distributed.map((value, index) => <span key={index} style={{ '--level': value } as React.CSSProperties} />)}
+        </div>
+      )}
+      <p className="micro-feedback good" role="status">Insight strengthened. Vectors let the model compute with many fuzzy numerical features at once.</p>
+      <small>Teaching labels are simplified; real dimensions are distributed and usually unlabeled.</small>
+    </div>
+  )
+}
+
+function TensorAxisInteraction() {
+  const [axis, setAxis] = useState('tokens')
+  const copy = {
+    tokens: 'Token axis: one row for each visible token position.',
+    features: 'Feature axis: many numbers across each token vector.',
+    batch: 'Batch note: systems often process more than one example at a time.'
+  }
+  const tokens = ['dog', 'cat', 'floor']
+  const features = ['f1', 'f2', 'f3', 'f4']
+
+  return (
+    <div className="morning-interaction tensor-axis-demo">
+      <div className="morning-choice-row compact" role="group" aria-label="Inspect tensor axes">
+        {Object.keys(copy).map((item) => (
+          <button key={item} className={axis === item ? 'active' : ''} onClick={() => setAxis(item)} aria-pressed={axis === item}>
+            {item === 'tokens' ? 'Token axis' : item === 'features' ? 'Feature axis' : 'Batch note'}
+          </button>
+        ))}
+      </div>
+      <div className={`tensor-axis-board highlight-${axis}`} aria-label="Tensor axis inspector">
+        <div className="tensor-token-labels">{tokens.map((token) => <span key={token}>{token}</span>)}</div>
+        <div className="tensor-feature-labels">{features.map((feature) => <span key={feature}>{feature}</span>)}</div>
+        <div className="tensor-cell-grid" aria-hidden="true">
+          {tokens.flatMap((token) => features.map((feature) => <span key={`${token}-${feature}`} />))}
+        </div>
+      </div>
+      <p className="micro-feedback good" role="status">Insight strengthened. {copy[axis]}</p>
+    </div>
+  )
 }
 
 function AiTopologyInteraction() {
@@ -1892,10 +2175,14 @@ function PlayScreen({ gameId, gameInsights, traceComplete, promptRunProgress, le
   if (gameId === 'context-stack') return <ContextStack onBack={() => setGameId(null)} onGlossary={onGlossary} onInsight={onInsight} saved={gameInsights.includes('context-stack')} />
   if (gameId === 'attention-weave') return <AttentionWeave onBack={() => setGameId(null)} onGlossary={onGlossary} onInsight={onInsight} saved={gameInsights.includes('attention-weave')} />
   if (gameId === 'token-relay') return <TokenRelay onBack={() => setGameId(null)} onGlossary={onGlossary} onInsight={onInsight} saved={gameInsights.includes('token-relay')} />
+  if (gameId === 'glossary-dojo') return <GlossaryDojoGame onBack={() => setGameId(null)} onGlossary={onGlossary} />
 
   const promptRunDone = Boolean(promptRunProgress?.finalChallengeComplete || traceComplete)
   const promptRunStarted = promptRunDone || (promptRunProgress?.completedSteps?.length ?? 0) > 0
   const promptRunCount = (promptRunProgress?.completedSteps?.length ?? 0) + (promptRunProgress?.finalChallengeComplete ? 1 : 0)
+  const dojoProgress = loadGlossaryDojoProgress()
+  const dojoRoundInProgress = Boolean(dojoProgress.currentRound)
+  const dojoMasteredCount = Object.values(dojoProgress.terms).filter((term) => term.mastered).length
   const sideChallenges = games.map((game) => {
     const meta = {
       'context-stack': { action: 'Push and observe what falls out.', concept: 'Context windows.', time: '3 min' },
@@ -1914,6 +2201,24 @@ function PlayScreen({ gameId, gameInsights, traceComplete, promptRunProgress, le
       concept: 'Durable training vs temporary steering.',
       time: '5 min',
       saved: learningTourComplete
+    }
+  ]
+  const glossaryPractice = [
+    {
+      id: 'glossary-dojo',
+      title: 'Glossary Dojo',
+      summary: 'Practice terms, definitions, relationships, and common mix-ups.',
+      image: `${ASSET}/icons/png/icon-glossary@48.png`,
+      action: dojoRoundInProgress ? 'Resume the current 12-term round.' : 'Start a 12-term round.',
+      concept: 'The vocabulary map behind model literacy.',
+      time: '4 min',
+      saved: dojoRoundInProgress,
+      actionLabel: dojoRoundInProgress ? 'Resume round' : 'Start round',
+      progressText: dojoRoundInProgress
+        ? 'Round in progress'
+        : dojoProgress.questionsAnswered
+          ? `${dojoProgress.questionsAnswered} practiced; ${dojoMasteredCount} mastered`
+          : 'Ready'
     }
   ]
 
@@ -1949,6 +2254,12 @@ function PlayScreen({ gameId, gameInsights, traceComplete, promptRunProgress, le
           {sideChallenges.map((game) => <PlayCard key={game.id} item={game} onStart={() => setGameId(game.id)} />)}
         </div>
       </section>
+      <section className="play-section" aria-labelledby="glossary-practice-title">
+        <h2 id="glossary-practice-title">Glossary practice</h2>
+        <div className="game-list">
+          {glossaryPractice.map((game) => <PlayCard key={game.id} item={game} onStart={() => setGameId(game.id)} />)}
+        </div>
+      </section>
       <section className="play-section" aria-labelledby="tours-title">
         <h2 id="tours-title">Guided comparisons</h2>
         <div className="game-list">
@@ -1960,7 +2271,7 @@ function PlayScreen({ gameId, gameInsights, traceComplete, promptRunProgress, le
 }
 
 function PlayCard({ item, onStart, featured = false }) {
-  const actionLabel = item.saved ? 'Continue' : 'Start'
+  const actionLabel = item.actionLabel ?? (item.saved ? 'Continue' : 'Start')
   return (
     <button className={featured ? 'play-card is-featured' : 'play-card'} onClick={onStart}>
       <img src={item.image} alt="" aria-hidden="true" />
@@ -1969,7 +2280,7 @@ function PlayCard({ item, onStart, featured = false }) {
         <small>{item.summary}</small>
         <span className="play-card-meta"><b>Action:</b> {item.action}</span>
         <span className="play-card-meta"><b>Teaches:</b> {item.concept}</span>
-        <span className="play-card-meta"><b>Time:</b> {item.time}</span>
+        <span className="play-card-meta play-card-time"><span><b>Time:</b> {item.time}</span></span>
       </span>
       <span className="play-card-status">
         <span className="mini-status">{item.progressText ?? (item.saved ? 'Complete' : 'Ready')}</span>
@@ -2344,7 +2655,7 @@ function GameReflection({ prompt }) {
   )
 }
 
-function GlossaryScreen({ onOpen }) {
+function GlossaryScreen({ onOpen, onPractice }) {
   const [query, setQuery] = useState('')
   const [sortMode, setSortMode] = useState('az')
   const normalizedQuery = query.trim().toLowerCase()
@@ -2363,6 +2674,14 @@ function GlossaryScreen({ onOpen }) {
         subtitle="Use each term with its neighbor. That is where the mental model gets stable."
         titleId="glossary-title"
       />
+      <section className="glossary-practice-panel" aria-labelledby="glossary-practice-heading">
+        <div>
+          <p className="eyebrow">Practice mode</p>
+          <h2 id="glossary-practice-heading">Glossary Dojo</h2>
+          <p>Practice twelve terms through definitions, relationships, and common mix-ups.</p>
+        </div>
+        <button className="secondary-btn" type="button" onClick={onPractice}>Practice 12 terms</button>
+      </section>
       <label className="search-box">
         Search terms
         <span className="search-row">
@@ -2549,7 +2868,7 @@ function BadgeScreen({
       {copied && <p className="feedback good" role="status">Share text copied.</p>}
       <section className="settings-panel" aria-labelledby="reset-progress-title">
         <h2 id="reset-progress-title">Start over</h2>
-        <p>Progress is stored only on this device. Resetting clears Prompt Life lesson progress, exercise attempts, Prompt Run progress, reflections, mini-game insights, tour progress, last location, and checkpoint answer order seed.</p>
+        <p>Progress is stored only on this device. Resetting clears Prompt Life lesson progress, exercise attempts, Prompt Run progress, Glossary Dojo practice, reflections, mini-game insights, tour progress, last location, and checkpoint answer order seed.</p>
         <button className="secondary-btn danger" onClick={onResetProgress}>Reset progress</button>
         {statusMessage && <p className="feedback good" role="status">{statusMessage}</p>}
       </section>
@@ -2572,6 +2891,8 @@ function BadgeScreen({
 }
 
 function ReviewLessonCards() {
+  useReviewHashScroll()
+
   return (
     <main className="review-route lesson-review-route" aria-labelledby="review-title">
       <header className="review-cover">
@@ -2664,6 +2985,8 @@ function ReviewLessonCards() {
 }
 
 function VisualAidReviewPage() {
+  useReviewHashScroll()
+
   return (
     <main className="review-route visual-aid-review-route" aria-labelledby="visual-review-title">
       <header className="review-cover">
@@ -2677,6 +3000,8 @@ function VisualAidReviewPage() {
 }
 
 function StyleGuideReviewPage() {
+  useReviewHashScroll()
+
   const colorSwatches = [
     ['Rice paper', '--pl-bg', '#F7F5EF'],
     ['Mist blue', '--pl-bg-mist', '#EAF3F4'],

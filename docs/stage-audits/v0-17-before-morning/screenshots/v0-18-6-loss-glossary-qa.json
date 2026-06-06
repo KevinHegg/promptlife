@@ -1,0 +1,126 @@
+{
+  "lessonTitle": "Rationalists vs Empiricists",
+  "lossChipCount": 1,
+  "keyTerms": [
+    "Rationalism",
+    "Empiricism",
+    "Loss",
+    "Deep learning",
+    "Symbolic AI",
+    "Training",
+    "Weight"
+  ],
+  "visibleKeyTerms390": [
+    "Rationalism",
+    "Empiricism",
+    "Loss",
+    "Deep learning",
+    "Symbolic AI"
+  ],
+  "visualText": "VISUAL AID\nWhat to picture\nRules\nsymbols\nif-then\nlogic\nPatterns\nexamples\nloss\nweights\nCombine both\nRules and Learned Patterns\nTwo traditions, one modern toolkit\nRules-first AI uses symbols and if-then logic; deep learning learns from examples by predicting, measuring loss, and updating weights.\n1\n\nRules Symbolic systems use explicit if/then logic and symbols.\n\n2\n\nExamples Loss is the training signal: it measures prediction error so weights can be adjusted.\n\n3\n\nBridge Modern systems often combine learned models with rules, retrieval, tools, filters, and policies.\n\nKey takeaway:\nModern AI often blends learned patterns with hand-built rules and tools.\n\nAccessible description: Two side-by-side panels compare rules, symbols, and if-then logic with examples, loss as a prediction-error signal, and weights, joined by a bridge labeled combine both.",
+  "drawer": "Close\n\nGLOSSARY\n\nLoss\n\nA number that measures how far the model’s prediction is from the target answer during training.\n\nRelationship\n\nTraining uses loss to decide how to adjust weights. Lower loss usually means the model’s predictions are closer to the training targets.\n\nMetaphor\n\nA practice score that tells the system how wrong it was.\n\nBrain bridge\n\nLike noticing that an answer was off and using that error to improve future practice.\n\nWhere it breaks\n\nThe model is not feeling disappointment or understanding a mistake. Loss is a numerical signal used by an optimizer.\n\nOften confused with\n\nTruth, confidence, punishment, or a human sense of failure.\n\nFirst appears in\n\nRationalists vs Empiricists\n\nOpen lesson\nRelated terms\nTraining\nWeight\nWeight update\nPretraining\nFine-tuning",
+  "visibleKeyTerms320": [
+    "Rationalism",
+    "Empiricism",
+    "Loss",
+    "Deep learning"
+  ],
+  "overflow320": {
+    "windowWidth": 320,
+    "bodyScrollWidth": 320,
+    "docScrollWidth": 320,
+    "shellScrollWidth": 318,
+    "shellClientWidth": 318,
+    "listLeft": 32,
+    "listRight": 288,
+    "buttons": [
+      {
+        "text": "Rationalism",
+        "left": 32,
+        "right": 150,
+        "width": 118
+      },
+      {
+        "text": "Empiricism",
+        "left": 157,
+        "right": 270,
+        "width": 113
+      },
+      {
+        "text": "Loss",
+        "left": 32,
+        "right": 93,
+        "width": 61
+      },
+      {
+        "text": "Deep learning",
+        "left": 100,
+        "right": 234,
+        "width": 134
+      },
+      {
+        "text": "Symbolic AI",
+        "left": 32,
+        "right": 151,
+        "width": 118
+      },
+      {
+        "text": "Training",
+        "left": 158,
+        "right": 247,
+        "width": 89
+      },
+      {
+        "text": "Weight",
+        "left": 32,
+        "right": 113,
+        "width": 80
+      }
+    ],
+    "overflowingButtons": []
+  },
+  "azLossCards": [
+    "DeskillingLoss or weakening of human skills when tools take over too much of the practice, judgment, or feedback loop.Deskilling is a risk when AI replaces learning, writing, reasoning, or professional practice instead of supporting it.",
+    "LossA number that measures how far the model’s prediction is from the target answer during training.Training uses loss to decide how to adjust weights. Lower loss usually means the model’s predictions are closer to the training targets.",
+    "PretrainingThe broad first stage of training that updates model weights by learning next-token patterns from large datasets.Pretraining creates general capability before fine-tuning or inference.",
+    "TrainingThe durable process of updating weights from prediction error or another training signal.Pretraining and fine-tuning are training phases; inference uses fixed weights.",
+    "Weight updateA change to model weights made during training to reduce error or improve a preference objective.Weight updates make training durable; ordinary inference normally does not do this."
+  ],
+  "learningLossCards": [
+    "LossA number that measures how far the model’s prediction is from the target answer during training.Training uses loss to decide how to adjust weights. Lower loss usually means the model’s predictions are closer to the training targets.Introduced in: Rationalists vs Empiricists",
+    "TrainingThe durable process of updating weights from prediction error or another training signal.Pretraining and fine-tuning are training phases; inference uses fixed weights.Introduced in: Training",
+    "Weight updateA change to model weights made during training to reduce error or improve a preference objective.Weight updates make training durable; ordinary inference normally does not do this.Introduced in: Training",
+    "PretrainingThe broad first stage of training that updates model weights by learning next-token patterns from large datasets.Pretraining creates general capability before fine-tuning or inference.Introduced in: Pretraining",
+    "DeskillingLoss or weakening of human skills when tools take over too much of the practice, judgment, or feedback loop.Deskilling is a risk when AI replaces learning, writing, reasoning, or professional practice instead of supporting it.Introduced in: Costs We Must Count"
+  ],
+  "learningSections": [
+    "Before Morning",
+    "Midnight Ledger"
+  ],
+  "lossLearningCard": "LossA number that measures how far the model’s prediction is from the target answer during training.Training uses loss to decide how to adjust weights. Lower loss usually means the model’s predictions are closer to the training targets.Introduced in: Rationalists vs Empiricists",
+  "randomOrders": [
+    [
+      "A conscious reasoning engine",
+      "Learned patterns from data",
+      "A spreadsheet macro",
+      "Only fixed if-then rules"
+    ],
+    [
+      "Only fixed if-then rules",
+      "Learned patterns from data",
+      "A conscious reasoning engine",
+      "A spreadsheet macro"
+    ]
+  ],
+  "assertions": {
+    "lossChipVisible": true,
+    "lossVisibleBeforeExpansion390": true,
+    "lossVisibleBeforeExpansion320": true,
+    "visualExplainsLoss": true,
+    "drawerDefinitionOk": true,
+    "azIncludesLoss": true,
+    "learningIntroducesInHistory": true,
+    "noChipOverflow320": true,
+    "randomizedOrdersDiffer": true
+  }
+}
