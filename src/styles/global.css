@@ -516,7 +516,9 @@ p {
 }
 
 .home-screen .chip-row {
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(8.9rem, 1fr));
+  gap: 0.55rem;
   overflow: visible;
   padding: 0.05rem 0 0;
 }
@@ -539,12 +541,26 @@ p {
 }
 
 .home-screen .pillar-chip {
-  flex: 1 1 6.8rem;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 1.45rem minmax(0, 1fr);
+  justify-content: stretch;
+  justify-items: start;
+  gap: 0.42rem;
+  width: 100%;
+  min-width: 0;
+  padding-inline: 0.62rem 0.68rem;
+  text-align: left;
+  white-space: normal;
+  line-height: 1.15;
 }
 
 .pillar-chip img {
   width: 1.35rem;
+}
+
+.pillar-chip-label {
+  min-width: 0;
+  overflow-wrap: normal;
 }
 
 .journey-list {

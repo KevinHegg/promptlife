@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prompt Life v0.18.5 Home Pillar Chip Alignment Report</title>
+  <style>
+    :root {
+      --ink: #07124a;
+      --muted: #53607a;
+      --paper: #fffdf8;
+      --mist: #edf6f5;
+      --line: rgba(18, 30, 114, 0.16);
+      --teal: #0fa8a4;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: linear-gradient(180deg, var(--mist), #f8f5ee);
+      color: var(--ink);
+      font: 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    main {
+      width: min(100%, 900px);
+      margin: 0 auto;
+      padding: 32px;
+    }
+
+    section {
+      margin: 0 0 24px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 253, 248, 0.92);
+      box-shadow: 0 12px 28px rgba(7, 18, 74, 0.08);
+      break-inside: avoid;
+    }
+
+    h1,
+    h2 {
+      margin: 0 0 10px;
+      line-height: 1.15;
+      color: var(--ink);
+    }
+
+    h1 {
+      font-size: 34px;
+    }
+
+    h2 {
+      font-size: 21px;
+    }
+
+    p {
+      margin: 0 0 10px;
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: var(--teal);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .lede {
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    ul {
+      margin: 8px 0 0;
+      padding-left: 20px;
+    }
+
+    code {
+      color: #14365f;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.92em;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      margin: 2px 4px 2px 0;
+      padding: 2px 8px;
+      border: 1px solid rgba(15, 168, 164, 0.26);
+      border-radius: 999px;
+      background: #effffc;
+      color: #063d43;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .shots {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      align-items: start;
+    }
+
+    figure {
+      margin: 0;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: white;
+      break-inside: avoid;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border: 1px solid rgba(18, 30, 114, 0.10);
+      border-radius: 6px;
+    }
+
+    figcaption {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    @media print {
+      body {
+        background: white;
+      }
+
+      main {
+        width: 100%;
+        padding: 0;
+      }
+
+      section {
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section>
+      <p class="eyebrow">Prompt Life v0.18.5</p>
+      <h1>Home Pillar Chip Alignment</h1>
+      <p class="lede">Aligned the three Home pillar pills so their icons use the same left inset and the long label stays inside its pill.</p>
+    </section>
+
+    <section>
+      <h2>What Changed</h2>
+      <ul>
+        <li>Wrapped each pillar label in <code>.pillar-chip-label</code> for predictable sizing.</li>
+        <li>Changed the Home pillar chips to a two-column grid: fixed icon lane plus flexible label lane.</li>
+        <li>Let the Home pillar row adapt from two columns at 390px to stacked full-width chips at 320px.</li>
+        <li>Bumped the visible app version to <code>v0.18.5</code>.</li>
+        <li>No Home copy, generated assets, Journey cards, progress logic, badge logic, checkpoint behavior, or dependencies changed.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Files Changed</h2>
+      <ul>
+        <li><code>src/main.tsx</code></li>
+        <li><code>src/styles/global.css</code></li>
+        <li><code>docs/REVIEW_NOTES.md</code></li>
+        <li><code>docs/home/screenshots/home-v0-18-5-pill-layout-390.png</code></li>
+        <li><code>docs/home/screenshots/home-v0-18-5-pill-layout-320.png</code></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Verification</h2>
+      <p>
+        <span class="status">typecheck passed</span>
+        <span class="status">build passed</span>
+        <span class="status">build:pages passed</span>
+        <span class="status">browser QA passed</span>
+      </p>
+      <ul>
+        <li><code>npm run typecheck</code>: passed.</li>
+        <li><code>npm run build</code>: passed with the existing Vite large-chunk warning.</li>
+        <li><code>npm run build:pages</code>: passed with the existing Vite large-chunk warning.</li>
+        <li>Browser QA: at 390px and 320px, every icon measured <code>10.9px</code> from its pill left edge.</li>
+        <li>The <code>Relationships</code> label did not overflow its pill, no horizontal overflow appeared, and no console errors were reported.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Screenshots</h2>
+      <div class="shots">
+        <figure>
+          <img src="screenshots/home-v0-18-5-pill-layout-390.png" alt="Home page at 390 pixels showing aligned Prompt Life pillar pills">
+          <figcaption>Home at 390px. Icons share the same left inset; Relationships stays inside the pill.</figcaption>
+        </figure>
+        <figure>
+          <img src="screenshots/home-v0-18-5-pill-layout-320.png" alt="Home page at 320 pixels showing stacked Prompt Life pillar pills">
+          <figcaption>Home at 320px. Pills stack full-width with consistent icon inset.</figcaption>
+        </figure>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

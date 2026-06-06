@@ -2,6 +2,23 @@
 
 Date: 2026-06-06
 
+## v0.18.5 Home Pillar Chip Alignment
+
+### What Changed
+
+- Bumped the visible app version to `v0.18.5`.
+- Updated the Home `Prompt Life pillars` chips to use a fixed icon lane and flexible label lane.
+- Kept each pill icon at the same left inset so `Definitions`, `Relationships`, and `Metaphors` align consistently.
+- Allowed the Home pillar row to switch from two columns at 390px to stacked full-width chips at 320px.
+- Left Home copy, generated Home assets, Journey cards, progress logic, badge logic, dependencies, and checkpoint behavior unchanged.
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- Browser QA: passed at 390px and 320px. Each pillar icon measured `10.9px` from its pill left edge, `Relationships` did not overflow, there was no horizontal overflow, and no console errors were reported.
+
 ## v0.18.4 Home Generated Asset Integration
 
 ### What Changed

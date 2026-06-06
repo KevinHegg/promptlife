@@ -40,7 +40,7 @@ const HOME_ASSETS = {
   heroFallback: `${ASSET}/illustrations/scene-hero-feature-cloud@mobile.png`
 }
 // Bump this for each shipped app change; the Badge screen displays it under Start over.
-const APP_VERSION = '0.18.4'
+const APP_VERSION = '0.18.5'
 const STORAGE_KEYS = {
   lastLocation: 'promptlife:v1:lastLocation',
   lessonId: 'promptlife:v1:lessonId',
@@ -619,7 +619,7 @@ function Pillar({ icon, label }) {
   return (
     <span className="pillar-chip">
       <img src={`${ASSET}/icons/png/${icon}@48.png`} alt="" aria-hidden="true" />
-      {label}
+      <span className="pillar-chip-label">{label}</span>
     </span>
   )
 }
