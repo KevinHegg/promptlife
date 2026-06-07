@@ -71,11 +71,11 @@ export const visualAidCatalog = [
   { id: 'logits', title: 'Raw Scoreboard', subtitle: 'Before probabilities', caption: 'The final hidden state feeds candidate next-token scores. These logits rank candidates, but they are raw scores, not probabilities or truth.', pattern: 'logits', objective: 'Show final hidden state becoming raw vocabulary scores before softmax.', callouts: [{ heading: 'Hidden state arrives', body: 'The final context-shaped vector reaches the output scoring step.' }, { heading: 'Candidates get scores', body: 'Possible next tokens such as floor, room, counter, and quantum receive raw logits.' }, { heading: 'Scores rank candidates', body: 'Higher score means stronger local candidate, not guaranteed truth.' }, { heading: 'Softmax comes next', body: 'Softmax converts raw scores into probabilities.' }], keyTakeaway: 'Logits are raw next-token scores, not probabilities and not truth.', accessibleDescription: 'The diagram starts with a final hidden state flowing into an output score panel. Candidate tokens floor, room, counter, and quantum have raw score bars from high to very low. A label says raw scores, not probabilities.', printNote: 'Coded SVG only; exact candidate labels and raw-score bars matter.' },
   { id: 'softmax', title: 'Score to Probability', subtitle: 'Normalize before choosing', caption: 'Softmax converts raw logits into probabilities that sum to 100%. High probability means likely under the model, not guaranteed true.', pattern: 'softmax', objective: 'Show raw-score values becoming rounded probabilities that sum to one.', callouts: [{ heading: 'Logits go in', body: 'Raw scores such as 8.2, 5.1, 2.0, and -1.0 enter softmax.' }, { heading: 'Softmax converts', body: 'The function turns score differences into a probability distribution.' }, { heading: 'Probabilities come out', body: 'The rounded teaching values sum to 100%.' }, { heading: 'Not truth', body: 'Probability is about model likelihood, not evidence or correctness.' }], keyTakeaway: 'Softmax turns raw scores into probabilities; it does not verify truth.', accessibleDescription: 'The diagram shows raw logits for floor, room, counter, and quantum on the left, a softmax arrow in the middle, and probabilities of 86 percent, 12 percent, 2 percent, and about zero percent on the right with a sum equals 100 percent note.', printNote: 'Coded SVG only; values are rounded teaching numbers and should remain visible at 320px.' },
   { id: 'sampling', title: 'Weighted Token Choice', subtitle: 'One token chosen', caption: 'Sampling chooses one next response token from probabilities. Probability is not truth: a low-probability token can still be possible, and a likely token can still be unsupported.', pattern: 'sampling', objective: 'Show probability weights and the single selected next token before autoregression repeats.', callouts: [{ heading: 'Probability candidates', body: 'floor is strongest, room is plausible, counter is weak, and quantum is barely likely in this context.' }, { heading: 'One token chosen', body: 'The decoding step chooses one next response token.' }, { heading: 'Append next', body: 'The chosen token is appended before the model runs again.' }, { heading: 'Not truth', body: 'A likely token can still be unsupported or wrong in a wider factual claim.' }], keyTakeaway: 'Sampling chooses one token from probabilities; probability is not truth.', accessibleDescription: 'The diagram shows weighted candidates floor at 86 percent, room at 12 percent, counter at 2 percent, and quantum at about zero percent. A highlighted selected-token card says floor and a note says one token chosen. Probability is not truth.', printNote: 'Coded SVG only; keep temperature/top-k/top-p out of the main visual.' },
-  { id: 'autoregression', title: 'Append and Repeat', caption: 'The chosen token is appended, then the model runs again.', pattern: 'loop' },
-  { id: 'context-window', title: 'Temporary Context Window', caption: 'Only visible context can influence the next token.', pattern: 'window' },
+  { id: 'autoregression', title: 'Append and Repeat', subtitle: 'One token, append, run again', caption: `The chosen token "${canonicalPromptResponse.chosenNextToken}" is appended to the response-so-far, then the model runs again.`, pattern: 'loop', objective: 'Make the autoregressive loop concrete: choose one token, append it, run the model again, and grow the response.', callouts: [{ heading: 'Response so far', body: `The model has generated: ${canonicalPromptResponse.responseSoFar}.` }, { heading: 'Choose token', body: `Sampling chooses one next token, here "${canonicalPromptResponse.chosenNextToken}".` }, { heading: 'Append', body: 'The chosen token becomes part of the temporary current context.' }, { heading: 'Run again', body: 'The next forward pass sees the longer response-so-far and chooses again.' }], keyTakeaway: 'Autoregression is choose, append, repeat; it is not permanent learning.', accessibleDescription: 'A concrete loop shows the user prompt, response so far, the chosen token floor, the updated context, and the steps choose token, append, run again, and response grows.', printNote: 'Coded SVG only; keep the token example and step labels readable at 320px.' },
+  { id: 'context-window', title: 'Temporary Context Window', subtitle: 'Limited visible input', caption: 'Only the cards still inside the context tray can influence the next token.', pattern: 'window', objective: 'Show the context window as temporary capacity: system, user, retrieved, and response-so-far cards can fit, while old context can fall out.', callouts: [{ heading: 'Visible now', body: 'System instructions, the user prompt, retrieved notes, and response-so-far may all be current context.' }, { heading: 'Limited tray', body: 'When the tray fills, older material can fall out or need summarizing by the surrounding system.' }, { heading: 'Temporary', body: 'Context can feel like memory, but it does not normally update weights or create permanent memory.' }, { heading: 'Next token', body: 'The model can use only what remains visible in the current run.' }], keyTakeaway: 'Context is temporary visible input, not durable memory.', accessibleDescription: 'A four-slot context tray contains system, user prompt, retrieved note, and response-so-far cards, while an old message sits outside the tray as fallen-out context.', printNote: 'Use short card labels in SVG and the fuller explanation in HTML callouts.' },
   { id: 'rag-retrieval', title: 'Open-Book Retrieval', subtitle: 'Retrieval plus context, not training', caption: 'Retrieved notes enter the context before response tokens are generated.', pattern: 'rag', variant: 'retrieval-shelf', objective: 'Show that RAG retrieves outside information and places it into context; it does not train the model.', callouts: [{ heading: 'Ask', body: 'The user prompt starts the run.' }, { heading: 'Retrieve', body: 'A search system finds relevant outside material.' }, { heading: 'Add to context', body: 'Retrieved notes become temporary context tokens.' }, { heading: 'Generate', body: 'The model still generates response tokens one at a time.' }, { heading: 'Weights stay fixed', body: 'RAG does not normally update model weights.' }], keyTakeaway: 'RAG is retrieval plus context, not training.', accessibleDescription: 'The RAG diagram moves from Prompt to Retriever to Notes, then into a Context tray and Generated response, with a separate fixed-weights note.', printNote: 'v0.10 pilot visual: paper-layer nodes, subtle neon retrieval path, HTML callouts, and a one-sentence takeaway.' },
-  { id: 'grounding-evidence', title: 'Evidence Anchor', subtitle: 'Tying answers to evidence', caption: 'Evidence enters context so the generated response can stay connected to sources.', pattern: 'groundingEvidence', variant: 'retrieval-shelf', objective: 'Show grounding as evidence plus generated response, not a truth guarantee.', callouts: [{ heading: 'Evidence', body: 'Retrieved documents, data, citations, or tool results can enter the current run.' }, { heading: 'Context', body: 'The evidence becomes visible input, not permanent model memory.' }, { heading: 'Answer', body: 'The response should stay connected to the evidence while still being reviewed.' }, { heading: 'Limit', body: 'Grounding helps, but it can fail when retrieval is poor or the model misuses evidence.' }], keyTakeaway: 'Grounding helps tie an answer to evidence; it does not guarantee truth.', accessibleDescription: 'Evidence cards are placed into a context tray, then an answer card is tied back to them with an anchor line.', printNote: 'Keep the diagram sparse; evidence and limitation detail stays in HTML callouts.' },
-  { id: 'hallucination-bridge', title: 'Unsupported Bridge', subtitle: 'Fluent is not always grounded', caption: 'A response can look smooth while missing evidence supports.', pattern: 'hallucinationBridge', variant: 'zen-garden-map', objective: 'Show hallucination as fluent generated output without enough evidence support.', callouts: [{ heading: 'Fluent surface', body: 'The output may read smoothly and confidently.' }, { heading: 'Missing support', body: 'Some claims may lack evidence, citation, or retrieved context.' }, { heading: 'Generation', body: 'Likely-token generation is not the same as truth verification.' }, { heading: 'Review', body: 'Grounding, retrieval, uncertainty, and human review reduce risk but do not erase it.' }], keyTakeaway: 'Fluency is not evidence.', accessibleDescription: 'A smooth output bridge crosses the scene while several evidence pillars are missing underneath.', printNote: 'Use short labels only; the “not lying” distinction remains in lesson copy.' },
+  { id: 'grounding-evidence', title: 'Claim Support Map', subtitle: 'Tying answers to evidence', caption: 'Grounding asks whether generated claims are actually connected to available evidence.', pattern: 'groundingEvidence', variant: 'retrieval-shelf', objective: 'Show grounding as a claim-to-evidence support relationship, not a truth guarantee.', callouts: [{ heading: 'Claim', body: 'A generated answer can contain several claims.' }, { heading: 'Evidence', body: 'Retrieved passages, data, citations, or tool results can support some claims.' }, { heading: 'Support check', body: 'A citation-looking answer is not grounded unless the evidence actually matches the claim.' }, { heading: 'Limit', body: 'Grounding helps, but the evidence and its use still need review.' }], keyTakeaway: 'Grounding ties claims to evidence; it does not make every claim true.', accessibleDescription: 'Two generated claims are shown. One claim connects to a retrieved policy passage and data result. A second claim has a missing support line and is marked needs review.', printNote: 'Keep the claim/evidence labels short; detailed source review stays in HTML callouts.' },
+  { id: 'hallucination-bridge', title: 'Unsupported Bridge', subtitle: 'Fluent is not always grounded', caption: 'A response can look smooth while one claim has support, another is uncertain, and another lacks evidence.', pattern: 'hallucinationBridge', variant: 'zen-garden-map', objective: 'Show hallucination as fluent generated output without enough evidence support, without implying lying or intent.', callouts: [{ heading: 'Fluent surface', body: 'The output may read smoothly and confidently.' }, { heading: 'Supported claim', body: 'One claim can be tied to evidence.' }, { heading: 'Missing support', body: 'Another claim may lack evidence, citation, or retrieved context.' }, { heading: 'Review', body: 'Grounding, uncertainty, and human review reduce risk but do not erase it.' }], keyTakeaway: 'Fluency is not evidence.', accessibleDescription: 'A smooth output bridge crosses the scene. One evidence pillar supports a claim, one support is marked uncertain, and one is missing, with a review note below.', printNote: 'Use short labels only; the not-lying distinction remains in lesson copy.' },
   { id: 'ai-learns', title: 'Learning Modes', caption: 'Durable training, retrieval, and temporary steering change different things.', pattern: 'learns' },
   { id: 'diffusion', title: 'Denoise, Not Append', caption: 'Diffusion refines noise step by step instead of generating text token by token.', pattern: 'diffusion' },
   { id: 'multimodal', title: 'Shared Media Hub', caption: 'Different media types can connect through learned representations.', pattern: 'multimodal' },
@@ -907,29 +907,60 @@ function SamplingSvg() {
 function LoopSvg() {
   return (
     <>
-      {['next', 'append', 'run again'].map((label, index) => (
-        <g key={label}>
-          <rect className="aid-box" x={34 + index * 88} y="74" width="72" height="42" rx="8" />
-          <Label x={43 + index * 88} y="99" className="tiny">{label}</Label>
-        </g>
-      ))}
-      <path className="aid-arc" d="M258 74 C298 28, 34 28, 34 74" />
-      <Label x="112" y="160" className="tiny">append repeat</Label>
+      <rect className="aid-box prompt" x="18" y="16" width="284" height="30" rx="8" />
+      <Label x="42" y="36" className="tiny dark">User prompt: pets in conflict</Label>
+
+      <path className="aid-context-tray" d="M28 66 H218 L232 80 V118 H28 Z" />
+      <path className="aid-fold-line light" d="M218 66 V80 H232" />
+      <Label x="44" y="84" className="tiny">response so far</Label>
+      <Label x="48" y="102" className="tiny">...cat across the kitchen</Label>
+      <Callout x="18" y="70">1</Callout>
+
+      <rect className="aid-chip output selected" x="242" y="74" width="58" height="34" rx="8" />
+      <Label x="255" y="96" className="tiny dark">floor</Label>
+      <Callout x="288" y="72">2</Callout>
+
+      <path className="aid-neon-path" d="M232 92 C236 92, 238 92, 242 92" />
+      <path className="aid-context-tray alt" d="M46 142 H266 L280 156 V192 H46 Z" />
+      <path className="aid-fold-line light" d="M266 142 V156 H280" />
+      <Label x="64" y="160" className="tiny">next context</Label>
+      <Label x="64" y="178" className="tiny">prompt + response so far + floor</Label>
+      <Callout x="274" y="158">3</Callout>
+
+      <path className="aid-arc" d="M282 174 C314 92, 280 38, 190 32" />
+      <path className="aid-select" d="M80 142 C50 126, 42 114, 48 100" />
+      <Label x="108" y="196" className="tiny">{'choose -> append -> run again'}</Label>
     </>
   )
 }
 
 function WindowSvg() {
+  const cards = [
+    ['Sys', 52, 82, 'aid-chip'],
+    ['User', 104, 82, 'aid-chip output'],
+    ['RAG', 156, 82, 'aid-chip'],
+    ['So far', 208, 82, 'aid-chip output'],
+    ['Old', 20, 154, 'aid-chip faded']
+  ]
+
   return (
     <>
-      <rect className="aid-box muted" x="74" y="42" width="174" height="116" rx="10" />
-      {['old', 'prompt', 'example', 'tone', 'next'].map((label, index) => (
+      <path className="aid-context-tray" d="M44 46 H268 L286 64 V132 H44 Z" />
+      <path className="aid-fold-line light" d="M268 46 V64 H286" />
+      <Label x="104" y="68" className="tiny">four-slot context tray</Label>
+      <Callout x="274" y="52">1</Callout>
+
+      {cards.map(([label, x, y, className], index) => (
         <g key={label}>
-          <rect className={index === 0 ? 'aid-chip faded' : 'aid-chip'} x={22 + index * 58} y={86} width="48" height="34" rx="8" />
-          <Label x={29 + index * 58} y="108" className="tiny">{label}</Label>
+          <rect className={String(className)} x={Number(x)} y={Number(y)} width="48" height="32" rx="8" />
+          <Label x={Number(x) + (String(label).length > 6 ? 4 : 8)} y={Number(y) + 20} className={index === 4 ? 'tiny muted-text' : 'tiny dark'}>{label}</Label>
         </g>
       ))}
-      <Label x="112" y="178" className="tiny">visible input</Label>
+
+      <path className="aid-line dashed" d="M44 170 C86 148, 72 128, 72 116" />
+      <Label x="16" y="194" className="tiny">fell out</Label>
+      <Label x="106" y="158" className="tiny">visible now</Label>
+      <Label x="92" y="196" className="tiny">temporary input, not memory</Label>
     </>
   )
 }
@@ -983,39 +1014,31 @@ function RagSvg() {
 }
 
 function GroundingEvidenceSvg() {
-  const evidenceCards = [
-    ['PDF', 28, 34],
-    ['Data', 106, 24],
-    ['Tool', 184, 34]
-  ]
-
   return (
     <>
       <path className="aid-zen-ring" d="M48 184 C94 152, 218 152, 272 184" />
-      {evidenceCards.map(([label, x, y], index) => (
-        <g key={label}>
-          <path className={index === 1 ? 'aid-paper-node retriever' : 'aid-doc-card'} d={`M${x} ${y} H${Number(x) + 58} L${Number(x) + 70} ${Number(y) + 12} V${Number(y) + 42} H${x} Z`} />
-          <path className="aid-fold-line" d={`M${Number(x) + 58} ${y} V${Number(y) + 12} H${Number(x) + 70}`} />
-          <Label x={Number(x) + 15} y={Number(y) + 27} className="tiny dark">{label}</Label>
-          <path className="aid-neon-path" d={`M${Number(x) + 34} ${Number(y) + 42} C116 96, 150 100, 154 122`} />
-        </g>
-      ))}
-      <Callout x="22" y="54">1</Callout>
+      <path className="aid-paper-node output" d="M24 28 H132 L146 42 V78 H24 Z" />
+      <path className="aid-fold-line" d="M132 28 V42 H146" />
+      <Label x="40" y="51" className="tiny dark">Claim: policy allows X</Label>
+      <Callout x="18" y="28">1</Callout>
 
-      <path className="aid-context-tray" d="M56 120 H206 L222 136 V166 H56 Z" />
-      <path className="aid-fold-line light" d="M206 120 V136 H222" />
-      <Label x="104" y="147" className="tiny">Context</Label>
-      <Callout x="72" y="120">2</Callout>
+      <path className="aid-paper-node output" d="M188 28 H286 L300 42 V78 H188 Z" />
+      <path className="aid-fold-line" d="M286 28 V42 H300" />
+      <Label x="204" y="51" className="tiny dark">Claim: always free</Label>
+      <Callout x="292" y="28">2</Callout>
 
-      <path className="aid-paper-node output" d="M238 116 H294 L306 128 V166 H238 Z" />
-      <path className="aid-fold-line" d="M294 116 V128 H306" />
-      <Label x="250" y="143" className="tiny dark">Answer</Label>
-      <Callout x="304" y="116">3</Callout>
+      <path className="aid-doc-card" d="M32 126 H134 L148 140 V174 H32 Z" />
+      <path className="aid-fold-line" d="M134 126 V140 H148" />
+      <Label x="50" y="151" className="tiny dark">Policy passage</Label>
+      <path className="aid-doc-card alt" d="M172 126 H274 L288 140 V174 H172 Z" />
+      <path className="aid-fold-line" d="M274 126 V140 H288" />
+      <Label x="194" y="151" className="tiny dark">Data result</Label>
 
-      <path className="aid-select" d="M266 166 C240 194, 116 194, 94 166" />
-      <circle className="aid-callout" cx="94" cy="166" r="11" />
-      <Label x="90" y="171" className="tiny dark">4</Label>
-      <path className="aid-neon-path" d="M222 144 C226 144, 232 144, 238 144" />
+      <path className="aid-neon-path" d="M82 78 C74 96, 74 110, 82 126" />
+      <path className="aid-neon-path" d="M96 78 C130 98, 184 106, 224 126" />
+      <path className="aid-line dashed" d="M238 78 C244 100, 244 112, 236 126" />
+      <Label x="64" y="206" className="tiny">supported by evidence</Label>
+      <Label x="210" y="206" className="tiny">needs review</Label>
     </>
   )
 }
@@ -1028,19 +1051,19 @@ function HallucinationBridgeSvg() {
       <Label x="112" y="64" className="tiny">fluent output</Label>
       <Callout x="62" y="106">1</Callout>
 
-      <rect className="aid-chip output" x="54" y="104" width="58" height="28" rx="8" />
-      <Label x="66" y="123" className="tiny dark">claim</Label>
-      <rect className="aid-chip output" x="132" y="84" width="58" height="28" rx="8" />
-      <Label x="144" y="103" className="tiny dark">claim</Label>
-      <rect className="aid-chip output" x="210" y="104" width="58" height="28" rx="8" />
-      <Label x="222" y="123" className="tiny dark">claim</Label>
+      <rect className="aid-chip output" x="48" y="104" width="62" height="28" rx="8" />
+      <Label x="59" y="123" className="tiny dark">supported</Label>
+      <rect className="aid-chip output" x="128" y="84" width="64" height="28" rx="8" />
+      <Label x="143" y="103" className="tiny dark">uncertain</Label>
+      <rect className="aid-chip output" x="212" y="104" width="60" height="28" rx="8" />
+      <Label x="223" y="123" className="tiny dark">missing</Label>
 
       <rect className="aid-paper-node retriever" x="42" y="150" width="64" height="28" rx="8" />
-      <Label x="56" y="169" className="tiny dark">source</Label>
+      <Label x="56" y="169" className="tiny dark">evidence</Label>
       <path className="aid-line" d="M74 150 V130" />
       <path className="aid-line dashed" d="M160 142 V116" />
-      <path className="aid-line dashed" d="M238 142 V130" />
-      <Callout x="160" y="148">2</Callout>
+      <path className="aid-line dashed" d="M242 142 V130" />
+      <Callout x="238" y="148">2</Callout>
 
       <path className="aid-fixed-note" d="M190 22 H292 L304 34 V56 H190 Z" />
       <path className="aid-fold-line" d="M292 22 V34 H304" />
@@ -1048,7 +1071,7 @@ function HallucinationBridgeSvg() {
       <Callout x="292" y="60">3</Callout>
 
       <circle className="aid-dot alt" cx="160" cy="172" r="10" />
-      <Label x="178" y="176" className="tiny">review</Label>
+      <Label x="178" y="176" className="tiny">fluency is not evidence</Label>
     </>
   )
 }

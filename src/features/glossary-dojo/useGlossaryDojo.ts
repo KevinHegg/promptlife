@@ -6,6 +6,8 @@ import {
   buildGlossaryDojoRound,
   evaluateGlossaryDojoAnswer,
   getGlossaryDojoFeedback,
+  getMissedQuestionSpecsFromRound,
+  getQuestionSpecsFromRound,
   makeTermsById,
   normalizeGlossaryTerms
 } from './engine'
@@ -40,16 +42,64 @@ export function useGlossaryDojo() {
 
   const startRound = useCallback(() => {
     const latest = loadGlossaryDojoProgress()
-    const roundNumber = latest.roundsCompleted + 1
+    const roundNumber = latest.roundsAttempted + 1
     const round = buildGlossaryDojoRound({
       terms,
       seed: `${choiceSeed}:glossary-dojo:${roundNumber}:${Date.now()}`,
-      roundNumber
+      roundNumber,
+      progress: latest,
+      sourceMode: 'new_round'
     })
     commit({
       ...latest,
-      currentRound: round,
-      lastCompletedRound: null
+      currentRound: round
+    })
+  }, [choiceSeed, commit, terms])
+
+  const repeatRound = useCallback(() => {
+    const latest = loadGlossaryDojoProgress()
+    const previous = latest.lastCompletedRound
+    if (!previous) {
+      startRound()
+      return
+    }
+    const roundNumber = latest.roundsAttempted + 1
+    const round = buildGlossaryDojoRound({
+      terms,
+      seed: `${choiceSeed}:glossary-dojo:repeat:${previous.id}:${roundNumber}:${Date.now()}`,
+      roundNumber,
+      progress: latest,
+      sourceMode: 'repeat_round',
+      targetTermIds: previous.targetTermIds,
+      questionSpecs: getQuestionSpecsFromRound(previous),
+      repeatedFromRound: previous
+    })
+    commit({
+      ...latest,
+      currentRound: round
+    })
+  }, [choiceSeed, commit, startRound, terms])
+
+  const reviewMissedRound = useCallback(() => {
+    const latest = loadGlossaryDojoProgress()
+    const previous = latest.lastCompletedRound
+    if (!previous) return
+    const specs = getMissedQuestionSpecsFromRound(previous)
+    if (!specs.length) return
+    const roundNumber = latest.roundsAttempted + 1
+    const round = buildGlossaryDojoRound({
+      terms,
+      seed: `${choiceSeed}:glossary-dojo:review:${previous.id}:${roundNumber}:${Date.now()}`,
+      roundNumber,
+      progress: latest,
+      sourceMode: 'review_missed',
+      targetTermIds: [...new Set(specs.map((spec) => spec.targetTermId))],
+      questionSpecs: specs,
+      reviewFromRound: previous
+    })
+    commit({
+      ...latest,
+      currentRound: round
     })
   }, [choiceSeed, commit, terms])
 
@@ -114,6 +164,8 @@ export function useGlossaryDojo() {
     currentIndex: currentRound?.currentIndex ?? 0,
     totalQuestions,
     startRound,
+    repeatRound,
+    reviewMissedRound,
     answerQuestion,
     nextQuestion,
     reset,

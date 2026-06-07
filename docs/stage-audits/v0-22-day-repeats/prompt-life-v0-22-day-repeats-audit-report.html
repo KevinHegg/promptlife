@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prompt Life v0.22 The Day Repeats Stage Audit</title>
+  <style>
+    :root {
+      --ink: #07145f;
+      --muted: #4b587b;
+      --line: #d8def0;
+      --teal: #04a7a5;
+      --violet: #7a51ff;
+      --paper: #ffffff;
+      --wash: #f5f8ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: #eef3f8;
+      font: 14px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 32px;
+      background: var(--paper);
+    }
+    h1, h2, h3 { line-height: 1.12; margin: 0 0 10px; }
+    h1 { font-size: 34px; }
+    h2 { font-size: 22px; margin-top: 28px; padding-top: 18px; border-top: 1px solid var(--line); }
+    h3 { font-size: 16px; margin-top: 16px; }
+    p { margin: 0 0 10px; }
+    ul, ol { margin: 0 0 14px 20px; padding: 0; }
+    li { margin: 4px 0; }
+    .eyebrow {
+      color: var(--teal);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .lede { color: var(--muted); font-size: 16px; max-width: 760px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin: 16px 0;
+    }
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      background: var(--wash);
+    }
+    .card strong { display: block; margin-bottom: 4px; }
+    .status {
+      display: inline-block;
+      margin: 8px 8px 8px 0;
+      padding: 6px 10px;
+      border: 1px solid rgba(122, 81, 255, .25);
+      border-radius: 999px;
+      color: var(--violet);
+      font-weight: 800;
+      font-size: 12px;
+    }
+    figure {
+      break-inside: avoid;
+      margin: 18px 0;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+    }
+    figure img {
+      display: block;
+      width: 100%;
+      max-width: 390px;
+      height: auto;
+      margin: 0 auto;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+    }
+    figcaption {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 12px;
+      text-align: center;
+    }
+    table { width: 100%; border-collapse: collapse; margin: 14px 0; }
+    th, td { border: 1px solid var(--line); padding: 8px; vertical-align: top; text-align: left; }
+    th { background: var(--wash); }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    @media print {
+      body { background: white; }
+      main { padding: 20px; }
+      h2 { break-after: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="eyebrow">Prompt Life v0.22 audit package</p>
+    <h1>The Day Repeats Stage Audit</h1>
+    <p class="lede">Documentation-only review of Autoregression, Context Window, RAG and Retrieval, Grounding, and Hallucinations. No live curriculum, progress, games, badge, dependency, generated asset, checkpoint randomization, or Glossary Dojo behavior was changed.</p>
+    <span class="status">63 screenshots</span>
+    <span class="status">390px primary QA</span>
+    <span class="status">320px and 430px spot checks</span>
+    <span class="status">Build passed</span>
+
+    <h2>Stage Audited</h2>
+    <p><strong>The Day Repeats</strong> teaches how a response grows after one token is chosen: append the token, run again, grow temporary context, retrieve evidence when a RAG system is present, ground what can be supported, and recognize hallucinations when fluent output outruns evidence.</p>
+
+    <div class="grid">
+      <div class="card"><strong>Stage focus</strong>How responses grow and context changes.</div>
+      <div class="card"><strong>Keep clear</strong>Context is temporary, not permanent memory.</div>
+      <div class="card"><strong>Cards audited</strong>Autoregression, Context Window, RAG and Retrieval, Grounding, Hallucinations.</div>
+      <div class="card"><strong>Screenshot safety</strong>Lesson captures used Preview mode in a temporary browser profile.</div>
+    </div>
+
+    <h2>Major Findings</h2>
+    <ul>
+      <li>The stage order is correct: Autoregression -> Context Window -> RAG and Retrieval -> Grounding -> Hallucinations.</li>
+      <li>Autoregression and Context Window are accurate but still use the older slim lesson schema.</li>
+      <li>RAG and Retrieval is the strongest current card: retrieval plus context, not training or permanent memory.</li>
+      <li>Grounding and Hallucinations handle evidence, truth, uncertainty, and intent carefully.</li>
+      <li>The next pass should make the complete loop more visible across the stage.</li>
+    </ul>
+
+    <h2>Visual Findings</h2>
+    <ul>
+      <li>RAG, Grounding, and Hallucinations remain readable at 320px and 390px.</li>
+      <li>Autoregression and Context Window are readable but too generic for their teaching burden.</li>
+      <li>No horizontal overflow was reported in the screenshot manifest.</li>
+      <li>No required Image 2 asset is recommended before the coded/SVG implementation pass.</li>
+    </ul>
+
+    <h2>Specific Answers</h2>
+    <ol>
+      <li>Autoregression is partly distinct from Sampling; the next pass should show Sampling chooses and Autoregression loops.</li>
+      <li>Context Window mostly avoids permanent-memory confusion, but needs an explicit durable-vs-temporary field.</li>
+      <li>RAG is clearly retrieval plus context, not training.</li>
+      <li>Grounding is clearly evidence support, not a truth guarantee.</li>
+      <li>Hallucinations are framed as unsupported fluent output, not lying or consciousness.</li>
+      <li>Autoregression is the visual that most needs repair.</li>
+      <li>Autoregression most needs a tiny interaction, with Context Window close behind.</li>
+      <li>No cards are too technical; Autoregression and Context Window are more thin than technical.</li>
+      <li>No cards are out of order.</li>
+      <li>No required Image 2 asset is justified now; Hallucinations is only an optional later textless bridge-scene candidate.</li>
+      <li>The stage prepares learners for later risk and responsibility stages by connecting temporary context, retrieval, grounding, hallucinations, and human judgment.</li>
+    </ol>
+
+    <h2>Recommended Assets</h2>
+    <table>
+      <thead>
+        <tr><th>Card</th><th>Coded SVG / HTML</th><th>Image 2</th><th>Tiny interaction</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Autoregression</td><td>Choose-token, append, rerun, context grows.</td><td>None.</td><td>Tap-step append loop.</td></tr>
+        <tr><td>Context Window</td><td>Tray with prompt, history, retrieved text, response-so-far, and old context falling out.</td><td>None.</td><td>Push cards into a limited window.</td></tr>
+        <tr><td>RAG and Retrieval</td><td>Keep current lanes; add lane-highlight states.</td><td>None.</td><td>Tap prompt -> retriever -> notes -> context -> response.</td></tr>
+        <tr><td>Grounding</td><td>Claim-to-evidence support map.</td><td>None.</td><td>Match claims to evidence.</td></tr>
+        <tr><td>Hallucinations</td><td>Bridge with supported and unsupported claims.</td><td>Optional later textless bridge scene.</td><td>Mark missing supports.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Representative Screenshots</h2>
+    <figure>
+      <img src="screenshots/day-repeats-overview.png" alt="The Day Repeats stage overview at 390px">
+      <figcaption>Stage overview with Autoregression current and the Day Repeats card sequence visible.</figcaption>
+    </figure>
+    <figure>
+      <img src="screenshots/autoregression-visual-aid-320.png" alt="Autoregression visual aid at 320px">
+      <figcaption>Autoregression is readable at 320px, but the loop should show response-so-far and context growth more directly.</figcaption>
+    </figure>
+    <figure>
+      <img src="screenshots/context-window-visual-aid-320.png" alt="Context Window visual aid at 320px">
+      <figcaption>Context Window is readable at 320px, but should show old context falling out and retrieved/context card types more clearly.</figcaption>
+    </figure>
+    <figure>
+      <img src="screenshots/rag-retrieval-visual-aid.png" alt="RAG and Retrieval visual aid at 390px">
+      <figcaption>RAG is the current gold-standard visual in this stage: prompt, retriever, notes, context tray, response, and fixed weights.</figcaption>
+    </figure>
+    <figure>
+      <img src="screenshots/grounding-visual-aid-320.png" alt="Grounding visual aid at 320px">
+      <figcaption>Grounding remains readable and correctly says evidence helps but does not guarantee truth.</figcaption>
+    </figure>
+    <figure>
+      <img src="screenshots/hallucinations-visual-aid-320.png" alt="Hallucinations visual aid at 320px">
+      <figcaption>Hallucinations visual keeps the key distinction clear: fluency is not evidence.</figcaption>
+    </figure>
+    <figure>
+      <img src="screenshots/rag-retrieval-wrong-feedback.png" alt="RAG wrong-answer checkpoint feedback at 390px">
+      <figcaption>Wrong-answer feedback remains non-shaming and reinforces RAG as retrieval plus context.</figcaption>
+    </figure>
+
+    <h2>Verification</h2>
+    <ul>
+      <li><code>npm run typecheck</code>: passed.</li>
+      <li><code>npm run build</code>: passed with the existing Vite large-chunk warning.</li>
+      <li><code>npm run build:pages</code>: passed with the existing Vite large-chunk warning.</li>
+      <li><code>npm run audit:answers</code>: passed.</li>
+      <li><code>stage-audit.json</code>: valid JSON.</li>
+    </ul>
+
+    <h2>Known Issues</h2>
+    <ul>
+      <li>The existing Vite large-chunk warning remains.</li>
+      <li>Autoregression and Context Window still need implementation repairs.</li>
+      <li>RAG, Grounding, and Hallucinations interactions remain generic until the next implementation pass.</li>
+    </ul>
+
+    <h2>Recommended Next Prompt</h2>
+    <p>Implement a v0.22.1 The Day Repeats repair pass. Do not add new Journey cards, games, generated PNG assets, heavy 3D libraries, dependencies, badge changes, progress-rule changes, checkpoint-randomization changes, Glossary Dojo changes, or Journey order changes. Keep the order: Autoregression, Context Window, RAG and Retrieval, Grounding, Hallucinations. Convert Autoregression and Context Window from the older slim schema to the richer lesson architecture with explicit core explanation, model lifecycle, durable-vs-temporary notes, prompt-vs-response/current-context notes, misconceptions, and clearer feedback. Preserve the strong RAG, Grounding, and Hallucinations distinctions while giving them more specific tiny interactions. Update coded SVG/HTML visuals so Autoregression shows choose-token -> append -> rerun, Context Window shows prompt/conversation/retrieved/response-so-far cards plus old context falling out, RAG keeps retrieval-plus-context-not-training, Grounding shows claim-to-evidence support, and Hallucinations shows fluent output outrunning support. Keep all text in HTML, keep visuals readable at 320px and 390px, and run <code>npm run typecheck</code>, <code>npm run build</code>, <code>npm run build:pages</code>, and <code>npm run audit:answers</code>.</p>
+  </main>
+</body>
+</html>

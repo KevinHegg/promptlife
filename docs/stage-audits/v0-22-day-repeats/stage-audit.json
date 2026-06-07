@@ -1,0 +1,433 @@
+{
+  "auditId": "v0-22-day-repeats",
+  "date": "2026-06-07",
+  "project": "Prompt Life",
+  "repo": "https://github.com/KevinHegg/promptlife",
+  "scope": {
+    "type": "documentation-only",
+    "liveCurriculumChanged": false,
+    "journeyOrderChanged": false,
+    "progressLogicChanged": false,
+    "checkpointRandomizationChanged": false,
+    "gamesChanged": false,
+    "generatedAssetsAdded": false,
+    "dependenciesChanged": false,
+    "badgeLogicChanged": false,
+    "glossaryDojoChanged": false
+  },
+  "stage": "The Day Repeats",
+  "stageDetails": {
+    "number": 5,
+    "id": "day-repeats",
+    "name": "The Day Repeats",
+    "navHint": "Context grows and expires",
+    "summary": "Response tokens accumulate; context expands and expires.",
+    "promptMoment": "The selected token is appended, retrieved context may be visible, then the model runs again.",
+    "focus": "How responses grow and context changes.",
+    "keyDistinction": "Context is temporary, not permanent memory.",
+    "intendedArc": [
+      "Sampling chooses one next response token.",
+      "Autoregression appends that token and runs the model again.",
+      "The context window grows, stays temporary, and can lose older material.",
+      "RAG can retrieve outside evidence and place it into context.",
+      "Grounding tries to keep fluent output tied to evidence.",
+      "Hallucinations happen when fluent output outruns support."
+    ]
+  },
+  "cards": [
+    {
+      "id": "autoregression",
+      "number": 23,
+      "title": "Autoregression",
+      "recommendation": "revise",
+      "contentPriority": "high",
+      "visualPriority": "high",
+      "interactionPriority": "high",
+      "needsMoreExplanation": true,
+      "needsLessExplanation": false,
+      "recommendedVisualType": "svg",
+      "recommendedTinyInteractions": [
+        "Tap-step append loop."
+      ],
+      "checkpointRecommendation": "Keep one randomized checkpoint; strengthen feedback after the copy/visual repair to reinforce next-token, append, repeat.",
+      "notes": "Strength: Correctly follows Sampling. Strength: Clearly states next token, append, repeat. Strength: Checkpoint targets the all-at-once misconception. Issue: Uses older slim lesson schema. Issue: No explicit durable-vs-temporary field. Issue: No explicit prompt-vs-response field. Issue: Visual does not show response-so-far becoming next-pass input. Issue: Tiny interaction needs more learner action."
+    },
+    {
+      "id": "context-window",
+      "number": 24,
+      "title": "Context Window",
+      "recommendation": "revise",
+      "contentPriority": "high",
+      "visualPriority": "high",
+      "interactionPriority": "high",
+      "needsMoreExplanation": true,
+      "needsLessExplanation": false,
+      "recommendedVisualType": "svg",
+      "recommendedTinyInteractions": [
+        "Push cards into a limited window and observe old cards falling out."
+      ],
+      "checkpointRecommendation": "Keep one randomized checkpoint; it already targets the permanent-memory misconception well.",
+      "notes": "Strength: Clear temporary-context definition. Strength: Checkpoint targets permanent-memory confusion. Strength: Correctly precedes RAG. Issue: Uses older slim lesson schema. Issue: No explicit durable-vs-temporary field. Issue: Visual does not clearly show cards falling out. Issue: Needs prompt, history, retrieved snippets, and response-so-far differentiated."
+    },
+    {
+      "id": "rag-retrieval",
+      "number": 25,
+      "title": "RAG and Retrieval",
+      "recommendation": "keep",
+      "contentPriority": "medium",
+      "visualPriority": "low",
+      "interactionPriority": "medium",
+      "needsMoreExplanation": false,
+      "needsLessExplanation": false,
+      "recommendedVisualType": "keep-current",
+      "recommendedTinyInteractions": [
+        "Tap through User question, Retriever, Retrieved cards, Context tray, Generated response."
+      ],
+      "checkpointRecommendation": "Keep one randomized checkpoint; it covers retrieval plus context, not training, truth guarantee, or consciousness.",
+      "notes": "Strength: Strong open-book AI mental model. Strength: Clearly says retrieval plus context, not training. Strength: Visual is readable at 320px and 390px. Strength: Checkpoint covers permanent learning, truth guarantee, and consciousness misconceptions. Issue: Tiny interaction reuses generic context animation. Issue: Could better show retrieved snippets as temporary context cards."
+    },
+    {
+      "id": "grounding",
+      "number": 26,
+      "title": "Grounding",
+      "recommendation": "keep",
+      "contentPriority": "medium",
+      "visualPriority": "medium",
+      "interactionPriority": "medium",
+      "needsMoreExplanation": false,
+      "needsLessExplanation": false,
+      "recommendedVisualType": "svg",
+      "recommendedTinyInteractions": [
+        "Match claims to evidence cards and leave unsupported claims unanchored."
+      ],
+      "checkpointRecommendation": "Keep one randomized checkpoint; it correctly targets evidence support rather than guaranteed truth.",
+      "notes": "Strength: Strong evidence-not-truth-guarantee distinction. Strength: Clear durable-vs-temporary note. Strength: Readable coded visual. Strength: Checkpoint targets truth, training, and consciousness misconceptions. Issue: Tiny interaction reuses generic context animation. Issue: Visual could show claim support versus unsupported claims more directly."
+    },
+    {
+      "id": "hallucinations",
+      "number": 27,
+      "title": "Hallucinations",
+      "recommendation": "keep",
+      "contentPriority": "medium",
+      "visualPriority": "medium",
+      "interactionPriority": "medium",
+      "needsMoreExplanation": false,
+      "needsLessExplanation": false,
+      "recommendedVisualType": "hybrid",
+      "recommendedTinyInteractions": [
+        "Mark which fluent claims lack support."
+      ],
+      "checkpointRecommendation": "Keep one randomized checkpoint; it correctly frames hallucinations as plausible unsupported output, not deception.",
+      "notes": "Strength: Strong fluency-not-evidence distinction. Strength: Avoids framing hallucinations as lying or malice. Strength: Readable coded visual. Strength: Checkpoint connects hallucination to grounding and rejects permanent-RAG-training confusion. Issue: Tiny interaction reuses generic risk sorting. Issue: Could ask learner to inspect missing supports under claims."
+    }
+  ],
+  "cardsAudited": [
+    {
+      "number": 23,
+      "id": "autoregression",
+      "title": "Autoregression",
+      "subtitle": "One token, append, repeat",
+      "visualAidId": "autoregression",
+      "terms": [
+        "autoregression",
+        "completion",
+        "generated token",
+        "response tokens",
+        "sampling",
+        "inference"
+      ],
+      "checkpoint": "How does an LLM normally generate text?",
+      "correctAnswer": "One token at a time",
+      "currentStrengths": [
+        "Correctly follows Sampling.",
+        "Clearly states next token, append, repeat.",
+        "Checkpoint targets the all-at-once misconception."
+      ],
+      "currentIssues": [
+        "Uses older slim lesson schema.",
+        "No explicit durable-vs-temporary field.",
+        "No explicit prompt-vs-response field.",
+        "Visual does not show response-so-far becoming next-pass input.",
+        "Tiny interaction needs more learner action."
+      ],
+      "recommendation": "revise",
+      "priority": "high",
+      "recommendedCodedAsset": "Coded SVG/HTML loop showing choose-token, append, rerun, and context growth.",
+      "recommendedImage2Asset": "none",
+      "recommendedTinyInteraction": "Tap-step append loop.",
+      "screenshots": [
+        "screenshots/autoregression-hero.png",
+        "screenshots/autoregression-visual-aid.png",
+        "screenshots/autoregression-core-idea.png",
+        "screenshots/autoregression-model-lifecycle.png",
+        "screenshots/autoregression-brain-bridge.png",
+        "screenshots/autoregression-tiny-interaction.png",
+        "screenshots/autoregression-checkpoint.png",
+        "screenshots/autoregression-wrong-feedback.png",
+        "screenshots/autoregression-correct-feedback.png",
+        "screenshots/autoregression-bottom-action.png",
+        "screenshots/autoregression-visual-aid-320.png",
+        "screenshots/autoregression-visual-aid-430.png"
+      ]
+    },
+    {
+      "number": 24,
+      "id": "context-window",
+      "title": "Context Window",
+      "subtitle": "Temporary working context",
+      "visualAidId": "context-window",
+      "terms": [
+        "context window",
+        "input context",
+        "prompt tokens",
+        "response tokens",
+        "rag",
+        "autoregression",
+        "inference"
+      ],
+      "checkpoint": "What can happen when the context window is full?",
+      "correctAnswer": "Older tokens may be truncated",
+      "currentStrengths": [
+        "Clear temporary-context definition.",
+        "Checkpoint targets permanent-memory confusion.",
+        "Correctly precedes RAG."
+      ],
+      "currentIssues": [
+        "Uses older slim lesson schema.",
+        "No explicit durable-vs-temporary field.",
+        "Visual does not clearly show cards falling out.",
+        "Needs prompt, history, retrieved snippets, and response-so-far differentiated."
+      ],
+      "recommendation": "revise",
+      "priority": "high",
+      "recommendedCodedAsset": "Coded SVG/HTML tray with visible card categories and old context falling out.",
+      "recommendedImage2Asset": "none",
+      "recommendedTinyInteraction": "Push cards into a limited window and observe old cards falling out.",
+      "screenshots": [
+        "screenshots/context-window-hero.png",
+        "screenshots/context-window-visual-aid.png",
+        "screenshots/context-window-core-idea.png",
+        "screenshots/context-window-model-lifecycle.png",
+        "screenshots/context-window-brain-bridge.png",
+        "screenshots/context-window-tiny-interaction.png",
+        "screenshots/context-window-checkpoint.png",
+        "screenshots/context-window-wrong-feedback.png",
+        "screenshots/context-window-correct-feedback.png",
+        "screenshots/context-window-bottom-action.png",
+        "screenshots/context-window-visual-aid-320.png",
+        "screenshots/context-window-visual-aid-430.png"
+      ]
+    },
+    {
+      "number": 25,
+      "id": "rag-retrieval",
+      "title": "RAG and Retrieval",
+      "subtitle": "Open-book AI",
+      "visualAidId": "rag-retrieval",
+      "terms": [
+        "rag",
+        "retrieval",
+        "grounding",
+        "context window",
+        "input context",
+        "prompt tokens",
+        "response tokens",
+        "inference",
+        "fine-tuning",
+        "training",
+        "hallucination"
+      ],
+      "checkpoint": "What does RAG usually do?",
+      "correctAnswer": "Retrieves outside information and places it into the current context",
+      "currentStrengths": [
+        "Strong open-book AI mental model.",
+        "Clearly says retrieval plus context, not training.",
+        "Visual is readable at 320px and 390px.",
+        "Checkpoint covers permanent learning, truth guarantee, and consciousness misconceptions."
+      ],
+      "currentIssues": [
+        "Tiny interaction reuses generic context animation.",
+        "Could better show retrieved snippets as temporary context cards."
+      ],
+      "recommendation": "keep-and-polish",
+      "priority": "medium",
+      "recommendedCodedAsset": "Keep current coded visual and add lane-highlight states.",
+      "recommendedImage2Asset": "none",
+      "recommendedTinyInteraction": "Tap through User question, Retriever, Retrieved cards, Context tray, Generated response.",
+      "screenshots": [
+        "screenshots/rag-retrieval-hero.png",
+        "screenshots/rag-retrieval-visual-aid.png",
+        "screenshots/rag-retrieval-core-idea.png",
+        "screenshots/rag-retrieval-model-lifecycle.png",
+        "screenshots/rag-retrieval-brain-bridge.png",
+        "screenshots/rag-retrieval-tiny-interaction.png",
+        "screenshots/rag-retrieval-checkpoint.png",
+        "screenshots/rag-retrieval-wrong-feedback.png",
+        "screenshots/rag-retrieval-correct-feedback.png",
+        "screenshots/rag-retrieval-bottom-action.png",
+        "screenshots/rag-retrieval-visual-aid-320.png",
+        "screenshots/rag-retrieval-visual-aid-430.png"
+      ]
+    },
+    {
+      "number": 26,
+      "id": "grounding",
+      "title": "Grounding",
+      "subtitle": "Tying answers to evidence",
+      "visualAidId": "grounding-evidence",
+      "terms": [
+        "grounding",
+        "rag",
+        "retrieval",
+        "context window",
+        "input context",
+        "citation",
+        "hallucination",
+        "inference"
+      ],
+      "checkpoint": "What does grounding try to do?",
+      "correctAnswer": "Connect an answer to available evidence",
+      "currentStrengths": [
+        "Strong evidence-not-truth-guarantee distinction.",
+        "Clear durable-vs-temporary note.",
+        "Readable coded visual.",
+        "Checkpoint targets truth, training, and consciousness misconceptions."
+      ],
+      "currentIssues": [
+        "Tiny interaction reuses generic context animation.",
+        "Visual could show claim support versus unsupported claims more directly."
+      ],
+      "recommendation": "keep-and-polish",
+      "priority": "medium",
+      "recommendedCodedAsset": "Coded claim-to-evidence support map.",
+      "recommendedImage2Asset": "none",
+      "recommendedTinyInteraction": "Match claims to evidence cards and leave unsupported claims unanchored.",
+      "screenshots": [
+        "screenshots/grounding-hero.png",
+        "screenshots/grounding-visual-aid.png",
+        "screenshots/grounding-core-idea.png",
+        "screenshots/grounding-model-lifecycle.png",
+        "screenshots/grounding-brain-bridge.png",
+        "screenshots/grounding-tiny-interaction.png",
+        "screenshots/grounding-checkpoint.png",
+        "screenshots/grounding-wrong-feedback.png",
+        "screenshots/grounding-correct-feedback.png",
+        "screenshots/grounding-bottom-action.png",
+        "screenshots/grounding-visual-aid-320.png",
+        "screenshots/grounding-visual-aid-430.png"
+      ]
+    },
+    {
+      "number": 27,
+      "id": "hallucinations",
+      "title": "Hallucinations",
+      "subtitle": "Fluent does not always mean grounded",
+      "visualAidId": "hallucination-bridge",
+      "terms": [
+        "hallucination",
+        "grounding",
+        "rag",
+        "logits",
+        "softmax",
+        "sampling",
+        "inference",
+        "uncertainty"
+      ],
+      "checkpoint": "Why can hallucinations happen?",
+      "correctAnswer": "The model can generate plausible text without enough grounding",
+      "currentStrengths": [
+        "Strong fluency-not-evidence distinction.",
+        "Avoids framing hallucinations as lying or malice.",
+        "Readable coded visual.",
+        "Checkpoint connects hallucination to grounding and rejects permanent-RAG-training confusion."
+      ],
+      "currentIssues": [
+        "Tiny interaction reuses generic risk sorting.",
+        "Could ask learner to inspect missing supports under claims."
+      ],
+      "recommendation": "keep-and-polish",
+      "priority": "medium",
+      "recommendedCodedAsset": "Coded bridge with supported and unsupported claims.",
+      "recommendedImage2Asset": "optional-later-textless-bridge-scene",
+      "recommendedTinyInteraction": "Mark which fluent claims lack support.",
+      "screenshots": [
+        "screenshots/hallucinations-hero.png",
+        "screenshots/hallucinations-visual-aid.png",
+        "screenshots/hallucinations-core-idea.png",
+        "screenshots/hallucinations-model-lifecycle.png",
+        "screenshots/hallucinations-brain-bridge.png",
+        "screenshots/hallucinations-tiny-interaction.png",
+        "screenshots/hallucinations-checkpoint.png",
+        "screenshots/hallucinations-wrong-feedback.png",
+        "screenshots/hallucinations-correct-feedback.png",
+        "screenshots/hallucinations-bottom-action.png",
+        "screenshots/hallucinations-visual-aid-320.png",
+        "screenshots/hallucinations-visual-aid-430.png"
+      ]
+    }
+  ],
+  "majorContentFindings": [
+    "The stage order is correct and the teaching arc is strong.",
+    "Autoregression and Context Window need richer architecture fields.",
+    "RAG is correctly dedicated and clearly framed as retrieval plus context, not training or permanent memory.",
+    "Grounding and Hallucinations are careful about evidence, truth, and intent.",
+    "The implementation pass should make the whole loop explicit across cards."
+  ],
+  "majorVisualFindings": [
+    "RAG, Grounding, and Hallucinations visuals are readable at 320px and 390px.",
+    "Autoregression and Context Window visuals are readable but too generic.",
+    "No horizontal overflow was detected in the screenshot manifest.",
+    "Bottom nav remains visible but did not hide required controls in captured states."
+  ],
+  "assetRecommendations": {
+    "image2": {
+      "requiredNow": [],
+      "optionalLater": [
+        {
+          "cardId": "hallucinations",
+          "description": "Textless ZenTron Origami bridge with missing supports, paired with HTML labels and alt text.",
+          "priority": "low"
+        }
+      ],
+      "deferUntilAfter": "v0.22.1 coded/SVG implementation pass"
+    },
+    "codedSvgOrHtml": [
+      "Autoregression loop with choose, append, rerun, and context growth.",
+      "Context Window tray with prompt, conversation, retrieved context, response-so-far, and old context falling out.",
+      "RAG lane highlight states on the existing Open-Book Retrieval visual.",
+      "Grounding claim-to-evidence map.",
+      "Hallucination bridge with supported and unsupported claims."
+    ],
+    "css3d": [
+      "No heavy 3D library.",
+      "Optional lightweight CSS tray for Context Window only."
+    ]
+  },
+  "screenshots": {
+    "count": 63,
+    "primaryViewport": "390x844",
+    "spotCheckViewports": [
+      "320x844",
+      "430x844"
+    ],
+    "manifest": "screenshots/_screenshot-manifest.json",
+    "progressSafety": "Temporary Chrome profile; lesson previews stayed at progress []",
+    "overflowFindings": {
+      "bodyOverflowX": 0,
+      "shellOverflowX": 0
+    }
+  },
+  "verification": {
+    "typecheck": "passed",
+    "build": "passed with existing Vite large-chunk warning",
+    "buildPages": "passed with existing Vite large-chunk warning",
+    "auditAnswers": "passed",
+    "jsonValidation": "passed"
+  },
+  "knownIssues": [
+    "Existing Vite large-chunk warning remains.",
+    "Autoregression and Context Window are still documented as needing live implementation repairs.",
+    "RAG, Grounding, and Hallucinations interactions remain generic until a future implementation pass."
+  ],
+  "recommendedNextImplementationPrompt": "Implement a v0.22.1 The Day Repeats repair pass. Do not add new Journey cards, games, generated PNG assets, heavy 3D libraries, dependencies, badge changes, progress-rule changes, checkpoint-randomization changes, Glossary Dojo changes, or Journey order changes. Keep the order: Autoregression, Context Window, RAG and Retrieval, Grounding, Hallucinations. Convert Autoregression and Context Window from the older slim schema to the richer lesson architecture with explicit core explanation, model lifecycle, durable-vs-temporary notes, prompt-vs-response/current-context notes, misconceptions, and clearer feedback. Preserve the strong RAG, Grounding, and Hallucinations distinctions while giving them more specific tiny interactions. Update coded SVG/HTML visuals so Autoregression shows choose-token -> append -> rerun, Context Window shows prompt/conversation/retrieved/response-so-far cards plus old context falling out, RAG keeps retrieval-plus-context-not-training, Grounding shows claim-to-evidence support, and Hallucinations shows fluent output outrunning support. Keep all text in HTML, keep visuals readable at 320px and 390px, and run npm run typecheck, npm run build, npm run build:pages, and npm run audit:answers."
+}

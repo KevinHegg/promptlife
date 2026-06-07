@@ -2,6 +2,162 @@
 
 Date: 2026-06-06
 
+## v0.22.1 The Day Repeats Implementation Pass
+
+### What Changed
+
+- Implemented the Day Repeats repair pass for Autoregression, Context Window, RAG and Retrieval, Grounding, and Hallucinations.
+- Kept Journey order unchanged: Autoregression -> Context Window -> RAG and Retrieval -> Grounding -> Hallucinations.
+- Upgraded Autoregression and Context Window to richer lesson architecture with lifecycle, durable-vs-temporary, prompt-vs-response, misconception, and feedback fields.
+- Replaced the generic Autoregression and Context Window coded visuals with concrete, mobile-readable SVG/HTML diagrams.
+- Added specific lesson interactions: `autoregression-loop`, `context-window-tray`, `rag-lane-highlight`, `grounding-claim-match`, and `hallucination-support-check`.
+- Added the `Response-so-far` glossary entry and placed it in the Glossary learning path at Prompt vs Response.
+- Bumped the visible app version to `v0.22.1`.
+- Preserved games, generated assets, dependencies, Journey progress rules, checkpoint randomization, Glossary Dojo logic, and the one-badge model.
+
+### Visual and Interaction Notes
+
+- Autoregression now shows the canonical `floor` token being chosen, appended, and used in the next context.
+- Context Window now uses a four-slot tray where the old message falls out.
+- RAG now highlights Prompt -> Retriever -> Notes -> Context tray -> Response.
+- Grounding now inspects whether generated claims actually match evidence.
+- Hallucinations now asks learners to mark a fluent claim that lacks support without implying intent or lying.
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed.
+- Mobile screenshot QA: zero horizontal overflow at 320px and 390px.
+- Preview-mode screenshot QA: `promptlife:v1:progress` stayed `[]`.
+
+### Screenshots and Report
+
+- `docs/stage-audits/v0-22-day-repeats/IMPLEMENTATION_REPORT_V0_22_1.md`
+- `docs/stage-audits/v0-22-day-repeats/IMAGE_ASSET_PLAN.md`
+- `docs/stage-audits/v0-22-day-repeats/TINY_INTERACTION_PLAN.md`
+- `docs/stage-audits/v0-22-day-repeats/prompt-life-v0-22-1-day-repeats-implementation-report.pdf`
+- `docs/stage-audits/v0-22-day-repeats/screenshots/v0-22-1-day-repeats-qa.json`
+- `docs/stage-audits/v0-22-day-repeats/screenshots/v0-22-1-autoregression-visual-390.png`
+- `docs/stage-audits/v0-22-day-repeats/screenshots/v0-22-1-context-window-320.png`
+- `docs/stage-audits/v0-22-day-repeats/screenshots/v0-22-1-rag-lane-response-390.png`
+- `docs/stage-audits/v0-22-day-repeats/screenshots/v0-22-1-grounding-unsupported-claim-390.png`
+- `docs/stage-audits/v0-22-day-repeats/screenshots/v0-22-1-hallucinations-support-check-390.png`
+
+### Known Issues
+
+- The existing Vite large-chunk warning remains.
+- Correct checkpoint feedback still includes the global `Insight unlocked.` prefix before lesson-specific feedback; this was not changed because it is global checkpoint behavior.
+- No generated Image 2 assets were added. Hallucinations remains the only optional future textless candidate after the coded support map stabilizes.
+
+## v0.22 Glossary Dojo V2 Question Design
+
+### What Changed
+
+- Repaired Glossary Dojo question formats so term-to-definition choices show definitions only and definition-to-term choices show term labels only.
+- Replaced the specified learner-facing neighborhood/model-map wording with short, plain helpers such as `Choose the best definition.` and `Choose the closest related term.`
+- Added learning-path-proximity distractor selection and frontier-aware round target selection so early rounds stay near the current glossary path before falling back to the full glossary.
+- Expanded stored Dojo rounds with source mode, repeat count, target terms, full question specs, per-round records, and completed-round counts.
+- Rebuilt the results panel around `Results from this round`, with calm mastery-over-time wording, Strengthened this round, Needs another look, Review missed questions, Repeat this round, Start next round, and Back to Play.
+- Preserved Journey cards, Journey progress, checkpoint randomization, badge criteria, generated assets, dependencies, games, and the one-badge model.
+
+### Question Type Fixes
+
+- `term_to_definition`: `What does [TERM] mean?`; four definition choices.
+- `definition_to_term`: `Which term matches this definition?`; the definition appears once above four term choices.
+- `confusable_pair` / `closest_concept`: term choices only with `Choose the closest related term.`
+- `stage_location`: short stage-label choices only when metadata supports it.
+- `relationship`: short statement choices only when metadata supports it.
+
+### Results and Practice Flow
+
+- Repeat round reuses the exact stored question specs from the last completed round and increments `repeatCount`.
+- Review missed creates a smaller round from only the missed question specs.
+- Correct feedback starts with `Insight strengthened.`
+- Wrong feedback identifies the represented wrong term when the selected choice maps to one.
+- Mastery remains localStorage-based and separate from Journey progress.
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed.
+- `git diff --check`: passed.
+- Browser QA captured 10 screenshots with zero horizontal overflow and zero Journey progress mutation in an isolated profile.
+
+### Screenshots and Report
+
+- `docs/play/GLOSSARY_DOJO_V2_QUESTION_DESIGN.md`
+- `docs/play/prompt-life-v0-22-glossary-dojo-v2-report.pdf`
+- `docs/play/screenshots/v0-22-dojo-v2-qa.json`
+- `docs/play/screenshots/v0-22-dojo-v2-term-to-definition-390.png`
+- `docs/play/screenshots/v0-22-dojo-v2-definition-to-term-390.png`
+- `docs/play/screenshots/v0-22-dojo-v2-wrong-feedback-390.png`
+- `docs/play/screenshots/v0-22-dojo-v2-correct-feedback-390.png`
+- `docs/play/screenshots/v0-22-dojo-v2-results-390.png`
+- `docs/play/screenshots/v0-22-dojo-v2-repeat-review-actions-390.png`
+- `docs/play/screenshots/v0-22-dojo-v2-review-missed-390.png`
+- `docs/play/screenshots/v0-22-dojo-v2-repeat-round-390.png`
+- `docs/play/screenshots/v0-22-dojo-v2-question-320.png`
+- `docs/play/screenshots/v0-22-dojo-v2-results-320.png`
+
+### Known Issues
+
+- Glossary definitions are reused directly, so some feedback still reads like `AI means AI is...`.
+- Relationship and stage-location questions depend on existing metadata and gracefully fall back when metadata is thin.
+- The existing Vite large-chunk warning remains.
+
+## v0.22 The Day Repeats Stage Audit
+
+### What Changed
+
+- Added a documentation-only audit package for Journey stage 5, The Day Repeats.
+- Audited the current live cards: Autoregression, Context Window, RAG and Retrieval, Grounding, and Hallucinations.
+- Captured 63 mobile screenshots across Journey/stage overview, lesson hero, visual aid, core idea, model lifecycle/detail, brain bridge, tiny interaction, checkpoint, feedback, bottom action, and 320px/430px spot checks.
+- Added `README.md`, `card-inventory.md`, `recommendations.md`, `screenshot-index.md`, `stage-audit.json`, screenshot artifacts, and an internal review PDF under `docs/stage-audits/v0-22-day-repeats/`.
+- Left live curriculum behavior unchanged: no Journey cards, Journey order, progress rules, checkpoint randomization, games, generated assets, dependencies, badge logic, or Glossary Dojo logic changed.
+
+### Major Findings
+
+- The stage order is strong: Autoregression -> Context Window -> RAG and Retrieval -> Grounding -> Hallucinations.
+- Autoregression and Context Window are accurate but still use the older slim lesson schema.
+- RAG and Retrieval is the strongest current card in the stage; it clearly teaches retrieval plus context, not training or permanent memory.
+- Grounding and Hallucinations handle evidence and risk carefully without fearmongering or hype.
+- The next implementation pass should make the loop more visible: one token chosen, appended, model runs again, context grows, older context can fall out, RAG can add evidence, grounding helps, and hallucinations remain possible.
+
+### Visual Findings
+
+- RAG, Grounding, and Hallucinations coded visuals remain readable at 320px and 390px.
+- Autoregression and Context Window visuals are readable but too generic for their teaching burden.
+- The screenshot manifest reports zero horizontal overflow and zero lesson-preview progress mutations.
+- No required Image 2 asset is recommended yet; Hallucinations is only an optional later textless bridge-scene candidate.
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed.
+- `stage-audit.json`: valid JSON.
+
+### Screenshots and Report
+
+- `docs/stage-audits/v0-22-day-repeats/screenshots/day-repeats-overview.png`
+- `docs/stage-audits/v0-22-day-repeats/screenshots/autoregression-visual-aid-320.png`
+- `docs/stage-audits/v0-22-day-repeats/screenshots/context-window-visual-aid-320.png`
+- `docs/stage-audits/v0-22-day-repeats/screenshots/rag-retrieval-visual-aid.png`
+- `docs/stage-audits/v0-22-day-repeats/screenshots/grounding-visual-aid-320.png`
+- `docs/stage-audits/v0-22-day-repeats/screenshots/hallucinations-visual-aid-320.png`
+- `docs/stage-audits/v0-22-day-repeats/prompt-life-v0-22-day-repeats-audit-report.pdf`
+
+### Known Issues
+
+- The existing Vite large-chunk warning remains.
+- Autoregression and Context Window still need live implementation repairs in a future v0.22.1 pass.
+- RAG, Grounding, and Hallucinations tiny interactions remain generic until the next implementation pass.
+
 ## v0.21.2 Decision Room Implementation Pass
 
 ### What Changed

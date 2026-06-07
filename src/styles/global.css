@@ -2284,6 +2284,211 @@ p {
   color: #effffd;
 }
 
+.day-repeat-demo {
+  overflow: hidden;
+}
+
+.day-repeat-demo .mini-insight {
+  margin: 0;
+  border-radius: 8px;
+  padding: 0.62rem 0.7rem;
+  background: rgba(223, 254, 250, 0.14);
+  color: #effffd;
+  font-weight: 850;
+}
+
+.day-repeat-step-row,
+.rag-lane-row,
+.claim-support-grid,
+.support-check-list {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.day-repeat-step-row {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.day-repeat-step-row button,
+.rag-lane-row button,
+.claim-support-grid button,
+.support-check-list button {
+  min-width: 0;
+  min-height: 44px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.12);
+  color: white;
+  font-weight: 900;
+  text-align: left;
+}
+
+.day-repeat-step-row button,
+.claim-support-grid button,
+.support-check-list button {
+  padding: 0.55rem 0.62rem;
+}
+
+.day-repeat-step-row button.active,
+.rag-lane-row button.active,
+.claim-support-grid button.active,
+.support-check-list button.active {
+  border-color: rgba(53, 230, 226, 0.82);
+  background: #dffefa;
+  color: var(--pl-indigo);
+}
+
+.autoregression-board,
+.context-window-limit,
+.fell-out-shelf,
+.evidence-map-card {
+  display: grid;
+  gap: 0.5rem;
+  min-width: 0;
+  border-radius: 8px;
+  padding: 0.72rem;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.context-label {
+  color: var(--pl-mint);
+  font-size: 0.72rem;
+  font-weight: 950;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.response-token-strip,
+.next-candidate-row,
+.context-slot-grid,
+.fell-out-shelf div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
+.response-token-strip span,
+.next-candidate-row span,
+.context-card,
+.fell-out-shelf span,
+.chosen-token-card,
+.generated-claim,
+.evidence-chip {
+  border-radius: 8px;
+  padding: 0.38rem 0.5rem;
+  background: rgba(255, 255, 255, 0.14);
+  color: white;
+  font-weight: 850;
+  overflow-wrap: anywhere;
+}
+
+.response-token-strip span.chosen,
+.chosen-token-card,
+.context-card.response,
+.context-card.prompt,
+.evidence-chip {
+  background: #dffefa;
+  color: var(--pl-indigo);
+}
+
+.next-candidate-row span {
+  border: 1px solid rgba(53, 230, 226, 0.42);
+}
+
+.context-window-limit > span,
+.fell-out-shelf strong {
+  color: var(--pl-mint);
+  font-weight: 950;
+}
+
+.context-slot-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.context-card {
+  min-height: 48px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+}
+
+.context-card.empty {
+  border: 1px dashed rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(238, 248, 255, 0.72);
+}
+
+.context-card.system,
+.context-card.retrieved {
+  background: rgba(255, 244, 222, 0.16);
+}
+
+.fell-out-shelf span {
+  color: #f7fbff;
+  background: rgba(255, 255, 255, 0.1);
+  text-decoration: line-through;
+}
+
+.rag-lane-row {
+  grid-template-columns: 1fr;
+}
+
+.rag-lane-row button {
+  display: grid;
+  grid-template-columns: 2rem minmax(0, 1fr);
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.5rem 0.58rem;
+}
+
+.rag-lane-row span {
+  display: grid;
+  place-items: center;
+  width: 1.65rem;
+  height: 1.65rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.18);
+  color: inherit;
+}
+
+.evidence-map-card {
+  grid-template-columns: 1fr;
+  text-align: center;
+}
+
+.support-line {
+  justify-self: center;
+  border-radius: 8px;
+  padding: 0.24rem 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.support-line.connected {
+  background: rgba(53, 230, 226, 0.22);
+  color: var(--pl-mint);
+}
+
+.support-line.missing {
+  background: rgba(255, 204, 112, 0.18);
+  color: #ffe5b0;
+}
+
+.support-check-list button {
+  display: grid;
+  gap: 0.22rem;
+}
+
+.support-check-list span {
+  color: inherit;
+  font-size: 0.82rem;
+  font-weight: 760;
+  opacity: 0.86;
+}
+
 .inference-mini-flow {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -4300,6 +4505,16 @@ p {
   line-height: 1.22;
 }
 
+.dojo-definition-card {
+  padding: 0.72rem;
+  border: 1px solid rgba(15, 168, 164, 0.24);
+  border-radius: 8px;
+  background: #effffd;
+  color: var(--pl-ink);
+  font-weight: 800;
+  line-height: 1.35;
+}
+
 .dojo-question-hint {
   color: var(--pl-ink-soft);
   font-size: 0.92rem;
@@ -4398,6 +4613,12 @@ p {
 
 .dojo-feedback p {
   margin: 0;
+}
+
+.dojo-practice-note {
+  color: var(--pl-ink-soft);
+  font-size: 0.9rem;
+  line-height: 1.35;
 }
 
 .dojo-action-row {

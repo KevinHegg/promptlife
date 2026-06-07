@@ -42,7 +42,7 @@ const HOME_ASSETS = {
   heroFallback: `${ASSET}/illustrations/scene-hero-feature-cloud@mobile.png`
 }
 // Bump this for each shipped app change; the Badge screen displays it under Start over.
-const APP_VERSION = '0.21.2'
+const APP_VERSION = '0.22.1'
 const STORAGE_KEYS = {
   lastLocation: 'promptlife:v1:lastLocation',
   lessonId: 'promptlife:v1:lessonId',
@@ -90,7 +90,7 @@ const GLOSSARY_LEARNING_GROUPS = [
   { firstLessonId: 'fine-tuning', termIds: ['fine-tuning', 'adapter'] },
   { firstLessonId: 'alignment', termIds: ['alignment', 'instruction-tuning', 'human-feedback-learning', 'rlhf', 'preference-optimization', 'policy', 'guardrail', 'evaluation'] },
   { firstLessonId: 'inference', termIds: ['inference', 'forward-pass'] },
-  { firstLessonId: 'prompt-response', termIds: ['prompt', 'response', 'prompt-tokens', 'response-tokens', 'generated-token', 'completion', 'input-context', 'decoding-step', 'model-output'] },
+  { firstLessonId: 'prompt-response', termIds: ['prompt', 'response', 'prompt-tokens', 'response-tokens', 'response-so-far', 'generated-token', 'completion', 'input-context', 'decoding-step', 'model-output'] },
   { firstLessonId: 'tokens', termIds: ['token', 'tokenizer', 'tokenization'] },
   { firstLessonId: 'token-ids', termIds: ['token-id'] },
   { firstLessonId: 'embeddings', termIds: ['embedding', 'embedding-table'] },
@@ -1486,6 +1486,11 @@ function MicroInteraction({ type }) {
   if (type === 'logits-raw-toggle') return <LogitsRawToggleInteraction />
   if (type === 'softmax-convert') return <SoftmaxConvertInteraction />
   if (type === 'sampling-probability-pick') return <SamplingProbabilityPickInteraction />
+  if (type === 'autoregression-loop') return <AutoregressionLoopInteraction />
+  if (type === 'context-window-tray') return <ContextWindowTrayInteraction />
+  if (type === 'rag-lane-highlight') return <RagLaneHighlightInteraction />
+  if (type === 'grounding-claim-match') return <GroundingClaimMatchInteraction />
+  if (type === 'hallucination-support-check') return <HallucinationSupportCheckInteraction />
   if (type === 'tokens') return <TokenCardsAnimation />
   if (type === 'embeddings') return <EmbeddingLookupAnimation />
   if (type === 'tensor') return <TensorBlockAnimation />
@@ -1565,6 +1570,228 @@ function PromptResponseLabelsInteraction() {
       </div>
       <p className="micro-feedback good" role="status">
         <strong>{current.label}:</strong> {active === 'context' ? 'The next run sees prompt plus response-so-far plus the appended token.' : 'This is one role inside the current context.'}
+      </p>
+    </div>
+  )
+}
+
+function AutoregressionLoopInteraction() {
+  const steps = [
+    {
+      id: 'start',
+      label: 'So far',
+      action: 'Choose token',
+      body: 'The current context contains the user prompt plus the response-so-far.'
+    },
+    {
+      id: 'chosen',
+      label: 'Token chosen',
+      action: 'Append token',
+      body: `"${canonicalPromptResponse.chosenNextToken}" is one generated response token, not the whole answer.`
+    },
+    {
+      id: 'appended',
+      label: 'Appended',
+      action: 'Run again',
+      body: 'The chosen token is appended to the temporary context.'
+    },
+    {
+      id: 'again',
+      label: 'Run again',
+      action: 'Reset loop',
+      body: 'The next forward pass sees the longer response-so-far and can choose another token.'
+    }
+  ]
+  const [step, setStep] = useState(0)
+  const current = steps[step]
+  const responseTokens = step >= 2
+    ? [...canonicalPromptResponse.responseSoFarTokens, canonicalPromptResponse.chosenNextToken]
+    : canonicalPromptResponse.responseSoFarTokens
+  const candidates = ['.', 'while', 'before']
+
+  return (
+    <div className="morning-interaction day-repeat-demo autoregression-loop-demo">
+      <div className="day-repeat-step-row" role="group" aria-label="Autoregression steps">
+        {steps.map((item, index) => (
+          <button
+            key={item.id}
+            className={step === index ? 'active' : ''}
+            onClick={() => setStep(index)}
+            aria-pressed={step === index}
+          >
+            {index + 1}. {item.label}
+          </button>
+        ))}
+      </div>
+      <div className="autoregression-board" aria-live="polite">
+        <span className="context-label">User prompt</span>
+        <p>{canonicalPromptResponse.userPrompt}</p>
+        <span className="context-label">Response-so-far</span>
+        <div className="response-token-strip">
+          {responseTokens.map((token, index) => (
+            <span key={`${token}-${index}`} className={token === canonicalPromptResponse.chosenNextToken ? 'chosen' : ''}>{token}</span>
+          ))}
+        </div>
+        {step >= 1 && <strong className="chosen-token-card">chosen token: {canonicalPromptResponse.chosenNextToken}</strong>}
+        {step >= 3 && (
+          <div className="next-candidate-row" aria-label="Next-token candidates after running again">
+            {candidates.map((candidate) => <span key={candidate}>{candidate}</span>)}
+          </div>
+        )}
+      </div>
+      <button className="morning-primary-action" onClick={() => setStep((step + 1) % steps.length)}>
+        {current.action}
+      </button>
+      <p className={step === steps.length - 1 ? 'micro-feedback good' : 'micro-feedback'} role="status">
+        {step === steps.length - 1
+          ? 'Insight strengthened. Autoregression means the response grows by choose, append, and repeat.'
+          : current.body}
+      </p>
+    </div>
+  )
+}
+
+function ContextWindowTrayInteraction() {
+  const cards = [
+    { id: 'old', label: 'Old message', shortLabel: 'Old msg', type: 'history' },
+    { id: 'system', label: 'System instruction', shortLabel: 'System', type: 'system' },
+    { id: 'prompt', label: 'User prompt', shortLabel: 'User', type: 'prompt' },
+    { id: 'retrieved', label: 'Retrieved note', shortLabel: 'RAG note', type: 'retrieved' },
+    { id: 'response', label: 'Response so far', shortLabel: 'So far', type: 'response' }
+  ]
+  const limit = 4
+  const [count, setCount] = useState(0)
+  const pushed = cards.slice(0, count)
+  const visible = pushed.slice(-limit)
+  const fallen = pushed.slice(0, Math.max(0, pushed.length - limit))
+  const nextCard = cards[count]
+
+  function pushNextCard() {
+    setCount(count >= cards.length ? 0 : count + 1)
+  }
+
+  return (
+    <div className="morning-interaction day-repeat-demo context-window-tray-demo">
+      <div className="context-window-limit" aria-live="polite">
+        <span>Four-slot context window</span>
+        <div className="context-slot-grid">
+          {Array.from({ length: limit }).map((_, index) => {
+            const card = visible[index]
+            return (
+              <span key={index} className={card ? `context-card ${card.type}` : 'context-card empty'}>
+                {card?.shortLabel ?? 'empty'}
+              </span>
+            )
+          })}
+        </div>
+      </div>
+      <div className="fell-out-shelf" aria-label="Cards outside the current context">
+        <strong>Fell out</strong>
+        <div>
+          {fallen.length
+            ? fallen.map((card) => <span key={card.id}>{card.label}</span>)
+            : <span>nothing yet</span>}
+        </div>
+      </div>
+      <button className="morning-primary-action" onClick={pushNextCard}>
+        {nextCard ? `Push: ${nextCard.label}` : 'Reset tray'}
+      </button>
+      <p className={fallen.length ? 'micro-feedback good' : 'micro-feedback'} role="status">
+        {fallen.length
+          ? 'Insight strengthened. The model can only use what remains visible in the current context.'
+          : 'Push cards into the tray. When the fifth card enters, the oldest one falls out.'}
+      </p>
+    </div>
+  )
+}
+
+function RagLaneHighlightInteraction() {
+  const lanes = [
+    { id: 'prompt', label: 'Prompt', body: 'The user question starts the run.' },
+    { id: 'retriever', label: 'Retriever', body: 'A retrieval system searches outside documents or records.' },
+    { id: 'notes', label: 'Notes', body: 'Relevant snippets are returned as retrieved context.' },
+    { id: 'context', label: 'Context tray', body: 'Retrieved notes become temporary input context, not permanent memory.' },
+    { id: 'response', label: 'Response', body: 'The LLM generates response tokens using fixed weights plus current context.' }
+  ]
+  const [activeId, setActiveId] = useState('prompt')
+  const active = lanes.find((lane) => lane.id === activeId) ?? lanes[0]
+
+  return (
+    <div className="morning-interaction day-repeat-demo rag-lane-demo">
+      <div className="rag-lane-row" role="group" aria-label="RAG retrieval lanes">
+        {lanes.map((lane, index) => (
+          <button key={lane.id} className={activeId === lane.id ? 'active' : ''} onClick={() => setActiveId(lane.id)} aria-pressed={activeId === lane.id}>
+            <span>{index + 1}</span>
+            {lane.label}
+          </button>
+        ))}
+      </div>
+      <p className="micro-feedback good" role="status">
+        <strong>{active.label}:</strong> {active.body}
+      </p>
+      {activeId === 'response' && <p className="mini-insight">Insight strengthened. RAG adds temporary evidence to context; it does not rewrite model weights.</p>}
+    </div>
+  )
+}
+
+function GroundingClaimMatchInteraction() {
+  const claims = [
+    { id: 'policy', label: 'The policy allows X.', evidence: 'Retrieved policy passage', supported: true },
+    { id: 'enrollment', label: 'Enrollment is 42.', evidence: 'Database result', supported: true },
+    { id: 'free', label: 'The service is always free.', evidence: 'No matching evidence', supported: false }
+  ]
+  const [activeId, setActiveId] = useState('policy')
+  const active = claims.find((claim) => claim.id === activeId) ?? claims[0]
+
+  return (
+    <div className="morning-interaction day-repeat-demo grounding-match-demo">
+      <div className="claim-support-grid" role="group" aria-label="Choose a generated claim to inspect">
+        {claims.map((claim) => (
+          <button key={claim.id} className={activeId === claim.id ? 'active' : ''} onClick={() => setActiveId(claim.id)} aria-pressed={activeId === claim.id}>
+            {claim.label}
+          </button>
+        ))}
+      </div>
+      <div className="evidence-map-card" aria-live="polite">
+        <span className="generated-claim">{active.label}</span>
+        <span className={active.supported ? 'support-line connected' : 'support-line missing'}>{active.supported ? 'connected to' : 'not supported by'}</span>
+        <span className="evidence-chip">{active.evidence}</span>
+      </div>
+      <p className={active.supported ? 'micro-feedback good' : 'micro-feedback'} role="status">
+        {active.supported
+          ? 'Insight strengthened. Grounding ties claims to evidence, but the evidence still needs review.'
+          : 'Not quite. A citation-looking answer is not automatically grounded; the evidence must actually support the claim.'}
+      </p>
+    </div>
+  )
+}
+
+function HallucinationSupportCheckInteraction() {
+  const claims = [
+    { id: 'supported', label: 'The retrieved policy mentions X.', note: 'Evidence pillar present', correct: false },
+    { id: 'unsupported', label: 'The policy was updated in 2027.', note: 'No matching evidence', correct: true },
+    { id: 'uncertain', label: 'Exceptions may exist.', note: 'Needs review, but not the missing-support claim here', correct: false }
+  ]
+  const [choice, setChoice] = useState(null)
+  const selected = claims.find((claim) => claim.id === choice)
+
+  return (
+    <div className="morning-interaction day-repeat-demo hallucination-support-demo">
+      <p className="micro-prompt">Which fluent claim needs evidence before you trust it?</p>
+      <div className="support-check-list" role="group" aria-label="Mark the claim with missing support">
+        {claims.map((claim) => (
+          <button key={claim.id} className={choice === claim.id ? 'active' : ''} onClick={() => setChoice(claim.id)} aria-pressed={choice === claim.id}>
+            <strong>{claim.label}</strong>
+            <span>{claim.note}</span>
+          </button>
+        ))}
+      </div>
+      <p className={selected?.correct ? 'micro-feedback good' : 'micro-feedback'} role="status">
+        {selected
+          ? selected.correct
+            ? 'Insight strengthened. A fluent claim can still need grounding or review.'
+            : 'Not quite. Hallucinations are not usually lies; they are unsupported or fabricated outputs from generation.'
+          : 'Tap the claim whose fluent wording outruns the available support.'}
       </p>
     </div>
   )

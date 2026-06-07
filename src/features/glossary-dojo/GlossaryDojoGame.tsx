@@ -22,6 +22,8 @@ export function GlossaryDojoGame({ onBack, onGlossary }: GlossaryDojoGameProps) 
     answerQuestion,
     nextQuestion,
     reset,
+    repeatRound,
+    reviewMissedRound,
     getFeedback
   } = dojo
   const feedback = useMemo(() => currentResult ? getFeedback(currentResult) : '', [currentResult, getFeedback])
@@ -38,8 +40,8 @@ export function GlossaryDojoGame({ onBack, onGlossary }: GlossaryDojoGameProps) 
         <button className="text-btn dojo-back" type="button" onClick={onBack}>Back to Play</button>
         <header className="dojo-hero">
           <p className="eyebrow">Glossary Dojo</p>
-          <h1 id="dojo-title" tabIndex={-1}>Practice the model map</h1>
-          <p className="lede small">Twelve calm prompts connect terms, definitions, relationships, and common mix-ups.</p>
+          <h1 id="dojo-title" tabIndex={-1}>Practice glossary terms</h1>
+          <p className="lede small">Twelve calm prompts build vocabulary for the model story.</p>
         </header>
 
         {!progress.storageAvailable && (
@@ -51,6 +53,8 @@ export function GlossaryDojoGame({ onBack, onGlossary }: GlossaryDojoGameProps) 
             progress={progress}
             termsById={termsById}
             onStartRound={startRound}
+            onRepeatRound={repeatRound}
+            onReviewMissed={reviewMissedRound}
             onReset={reset}
             onBack={onBack}
             onGlossary={onGlossary}
@@ -58,11 +62,11 @@ export function GlossaryDojoGame({ onBack, onGlossary }: GlossaryDojoGameProps) 
         ) : (
           <section className="dojo-panel" aria-labelledby="dojo-start-title">
             <h2 id="dojo-start-title">Ready for twelve terms?</h2>
-            <p>Every choice is a real glossary term or definition. The work is sorting the neighbors, not chasing points.</p>
+            <p>Every choice comes from the glossary. There are no points, timers, leaderboards, or failure states.</p>
             <div className="dojo-stat-grid" aria-label="Glossary Dojo practice totals">
-              <span><strong>{progress.roundsCompleted}</strong> rounds</span>
-              <span><strong>{progress.questionsAnswered}</strong> terms practiced</span>
-              <span><strong>{Object.values(progress.terms).filter((term) => term.mastered).length}</strong> mastered</span>
+              <span><strong>{progress.roundsAttempted}</strong> rounds</span>
+              <span><strong>{progress.totalQuestionsAnswered}</strong> questions</span>
+              <span><strong>{Object.values(progress.terms).filter((term) => term.mastered).length}</strong> mastered over time</span>
             </div>
             <button className="primary-btn" type="button" onClick={startRound} data-testid="glossary-dojo-start">
               Start 12-term round
@@ -84,7 +88,7 @@ export function GlossaryDojoGame({ onBack, onGlossary }: GlossaryDojoGameProps) 
       <button className="text-btn dojo-back" type="button" onClick={onBack}>Back to Play</button>
       <header className="dojo-hero compact">
         <p className="eyebrow">Glossary Dojo</p>
-        <h1 id="dojo-title" tabIndex={-1}>Practice the model map</h1>
+        <h1 id="dojo-title" tabIndex={-1}>Practice glossary terms</h1>
         <p className="dojo-roundline">Question {questionNumber} of {totalQuestions}</p>
         <div className="dojo-meter" aria-label={`${progressPercent}% of current Glossary Dojo round answered`}>
           <span style={{ width: `${progressPercent}%` }} />
@@ -94,10 +98,13 @@ export function GlossaryDojoGame({ onBack, onGlossary }: GlossaryDojoGameProps) 
       <section className="dojo-panel dojo-question-card" aria-labelledby="dojo-question-title">
         <span className="step-label">{currentQuestion.typeLabel}</span>
         <h2 id="dojo-question-title">{currentQuestion.prompt}</h2>
-        {targetTerm && (
-          <p className="dojo-question-hint">
-            Map the term without treating nearby ideas as interchangeable.
+        {currentQuestion.definitionText && (
+          <p className="dojo-definition-card" data-testid="glossary-dojo-definition">
+            {currentQuestion.definitionText}
           </p>
+        )}
+        {targetTerm && currentQuestion.helperText && (
+          <p className="dojo-question-hint">{currentQuestion.helperText}</p>
         )}
 
         <div className="dojo-answer-list" role="list" aria-label="Glossary Dojo answer choices">
@@ -149,7 +156,7 @@ export function GlossaryDojoGame({ onBack, onGlossary }: GlossaryDojoGameProps) 
         )}
 
         <div className="dojo-action-row">
-          {correctTerm && (
+          {correctTerm && currentAnswer && (
             <button className="secondary-btn" type="button" onClick={() => onGlossary(correctTerm.id)}>
               Open {correctTerm.label}
             </button>

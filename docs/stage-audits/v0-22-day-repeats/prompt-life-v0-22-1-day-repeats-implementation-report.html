@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prompt Life v0.22.1 Day Repeats Implementation Report</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #071650;
+      --muted: #4b5777;
+      --teal: #008f92;
+      --line: #d7def0;
+      --paper: #ffffff;
+      --soft: #f4f8fb;
+      --mint: #e7fbf7;
+      --amber: #fff2d8;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--soft);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.48;
+    }
+
+    main {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 36px 28px 48px;
+    }
+
+    header, section {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 24px;
+      margin: 0 0 18px;
+      break-inside: avoid;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      font-size: 2.25rem;
+      line-height: 1.05;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-size: 1.35rem;
+      margin-bottom: 12px;
+    }
+
+    h3 {
+      font-size: 1rem;
+      margin-bottom: 6px;
+    }
+
+    .eyebrow {
+      color: var(--teal);
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+    }
+
+    .lede {
+      color: var(--muted);
+      font-size: 1.06rem;
+      max-width: 760px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .note {
+      border-left: 4px solid var(--teal);
+      border-radius: 8px;
+      padding: 12px 14px;
+      background: var(--mint);
+      font-weight: 760;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 1.2rem;
+    }
+
+    li + li { margin-top: 0.32rem; }
+
+    code {
+      border-radius: 6px;
+      padding: 0.1rem 0.28rem;
+      background: #edf2ff;
+      color: #111a65;
+      font-weight: 750;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    th, td {
+      vertical-align: top;
+      text-align: left;
+      border-bottom: 1px solid var(--line);
+      padding: 8px 6px;
+    }
+
+    th {
+      color: var(--teal);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    figure {
+      margin: 0 0 16px;
+      break-inside: avoid;
+    }
+
+    figure img {
+      display: block;
+      width: 100%;
+      max-width: 390px;
+      height: auto;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: white;
+    }
+
+    figcaption {
+      max-width: 390px;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 0.84rem;
+    }
+
+    .screens {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      align-items: start;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      border-radius: 999px;
+      padding: 0 10px;
+      background: var(--amber);
+      color: #694300;
+      font-weight: 900;
+    }
+
+    @media print {
+      body { background: white; }
+      main { max-width: none; padding: 18px; }
+      header, section { box-shadow: none; }
+      .screens { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      figure img { max-width: 330px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">Prompt Life v0.22.1</p>
+      <h1>The Day Repeats Implementation Report</h1>
+      <p class="lede">This pass turns the Day Repeats stage into a concrete generation-and-evidence chain for mobile learners: choose one token, append it, run again, manage temporary context, retrieve evidence, ground claims, and watch for fluent unsupported output.</p>
+      <p class="status">Build passed. No generated PNG assets added.</p>
+    </header>
+
+    <section>
+      <h2>What Changed</h2>
+      <div class="grid">
+        <ul>
+          <li>Upgraded Autoregression and Context Window to richer lesson architecture.</li>
+          <li>Kept Journey order unchanged: Autoregression, Context Window, RAG, Grounding, Hallucinations.</li>
+          <li>Added five specific lesson interactions for the stage.</li>
+          <li>Reworked coded visuals for Autoregression, Context Window, Grounding, and Hallucinations.</li>
+        </ul>
+        <ul>
+          <li>Preserved games, progress rules, checkpoint randomization, badge logic, dependencies, and Glossary Dojo work.</li>
+          <li>Added the <code>Response-so-far</code> glossary entry.</li>
+          <li>Bumped the visible app version to <code>v0.22.1</code>.</li>
+          <li>Captured 320px and 390px screenshots with zero horizontal overflow.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>Stage Chain</h2>
+      <p class="note">sampling chooses one token -> token is appended -> model runs again -> response-so-far grows -> context window limits what remains visible -> RAG can add retrieved evidence -> grounding connects claims to evidence -> hallucinations happen when fluent output outruns support.</p>
+    </section>
+
+    <section>
+      <h2>Card Updates</h2>
+      <table>
+        <thead>
+          <tr><th>Card</th><th>New emphasis</th><th>Interaction</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Autoregression</td><td>Uses the pet-conflict example, chosen token <code>floor</code>, appended response-so-far, and repeated forward pass.</td><td><code>autoregression-loop</code></td></tr>
+          <tr><td>Context Window</td><td>Shows system, user, retrieved note, response-so-far, and old message as temporary context cards.</td><td><code>context-window-tray</code></td></tr>
+          <tr><td>RAG and Retrieval</td><td>Preserves open-book AI and adds lane highlighting from prompt to response.</td><td><code>rag-lane-highlight</code></td></tr>
+          <tr><td>Grounding</td><td>Makes claim-to-evidence support visible and warns that citation-looking output is not automatically grounded.</td><td><code>grounding-claim-match</code></td></tr>
+          <tr><td>Hallucinations</td><td>Frames hallucinations as unsupported/fabricated generation, not lying or intent.</td><td><code>hallucination-support-check</code></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Verification</h2>
+      <ul>
+        <li><code>npm run typecheck</code>: passed.</li>
+        <li><code>npm run build</code>: passed with the existing Vite large-chunk warning.</li>
+        <li><code>npm run build:pages</code>: passed with the existing Vite large-chunk warning.</li>
+        <li><code>npm run audit:answers</code>: passed.</li>
+        <li>Screenshot QA: 0 horizontal overflow at 320px and 390px.</li>
+        <li>Preview-mode screenshot QA: localStorage progress remained <code>[]</code>.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Screenshots</h2>
+      <div class="screens">
+        <figure>
+          <img src="screenshots/v0-22-1-day-repeats-overview-390.png" alt="Day Repeats Journey overview at 390px">
+          <figcaption>Journey overview keeps the Day Repeats order in place.</figcaption>
+        </figure>
+        <figure>
+          <img src="screenshots/v0-22-1-autoregression-visual-390.png" alt="Autoregression visual aid at 390px">
+          <figcaption>Autoregression now shows response-so-far, chosen token, next context, and repeat loop.</figcaption>
+        </figure>
+        <figure>
+          <img src="screenshots/v0-22-1-autoregression-interaction-final-390.png" alt="Autoregression interaction final state at 390px">
+          <figcaption>Tap-step loop ends with choose, append, and repeat feedback.</figcaption>
+        </figure>
+        <figure>
+          <img src="screenshots/v0-22-1-context-window-visual-390.png" alt="Context Window visual aid at 390px">
+          <figcaption>Context Window shows a four-slot temporary tray and an old card outside it.</figcaption>
+        </figure>
+        <figure>
+          <img src="screenshots/v0-22-1-context-window-320.png" alt="Context Window interaction at 320px">
+          <figcaption>The 320px tray remains readable after five cards are pushed.</figcaption>
+        </figure>
+        <figure>
+          <img src="screenshots/v0-22-1-rag-lane-response-390.png" alt="RAG lane response state at 390px">
+          <figcaption>RAG interaction highlights retrieval plus context, not weight updates.</figcaption>
+        </figure>
+        <figure>
+          <img src="screenshots/v0-22-1-grounding-unsupported-claim-390.png" alt="Grounding unsupported claim state at 390px">
+          <figcaption>Grounding shows the difference between a claim and matching evidence.</figcaption>
+        </figure>
+        <figure>
+          <img src="screenshots/v0-22-1-hallucinations-support-check-390.png" alt="Hallucinations support-check interaction at 390px">
+          <figcaption>Hallucinations asks learners to mark a fluent claim with missing support.</figcaption>
+        </figure>
+        <figure>
+          <img src="screenshots/v0-22-1-hallucinations-checkpoint-feedback-390.png" alt="Hallucinations checkpoint feedback at 390px">
+          <figcaption>Checkpoint choices remain randomized and feedback reinforces grounding/review.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section>
+      <h2>Known Issues</h2>
+      <ul>
+        <li>The existing Vite large-chunk warning remains.</li>
+        <li>Correct checkpoint feedback still includes the app's global <code>Insight unlocked.</code> prefix before lesson-specific feedback; this was left unchanged to avoid a global behavior change.</li>
+        <li>No generated Image 2 assets were added; Hallucinations remains the only optional future textless bridge candidate.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>
+
