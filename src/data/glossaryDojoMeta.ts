@@ -1,10 +1,98 @@
 export type GlossaryDojoTermMeta = {
   familyTags?: string[]
+  conceptClusters?: string[]
   lifecycleStage?: string
   curriculumStage?: string
   confusableWith?: string[]
   relationships?: string[]
   shortExplanation?: string
+}
+
+export const glossaryDojoConceptClusters: Record<string, string[]> = {
+  context: [
+    'input-context',
+    'context window',
+    'prompt',
+    'prompt-tokens',
+    'response-tokens',
+    'response-so-far',
+    'retrieval',
+    'system-prompt',
+    'memory',
+    'rag',
+    'forward-pass',
+    'in-context learning'
+  ],
+  tokenization: [
+    'token',
+    'tokenizer',
+    'tokenization',
+    'token-id',
+    'prompt-tokens',
+    'response-tokens',
+    'next-token',
+    'generated-token'
+  ],
+  representations: [
+    'embedding',
+    'embedding-table',
+    'vector',
+    'tensor',
+    'hidden state',
+    'activation',
+    'temporary-activation',
+    'feature',
+    'distributed-representation',
+    'representation',
+    'layer'
+  ],
+  decoding: [
+    'logits',
+    'softmax',
+    'probability',
+    'sampling',
+    'temperature',
+    'top-k',
+    'top-p',
+    'generated-token',
+    'next-token',
+    'decoding-step'
+  ],
+  training: [
+    'training',
+    'pretraining',
+    'fine-tuning',
+    'loss',
+    'weight-update',
+    'validation-data',
+    'overfitting',
+    'generalization',
+    'training-data'
+  ],
+  evidence: [
+    'rag',
+    'retrieval',
+    'grounding',
+    'citation',
+    'hallucination',
+    'uncertainty',
+    'human-review',
+    'source-review'
+  ],
+  'costs-governance': [
+    'environmental-footprint',
+    'energy-use',
+    'water-use',
+    'carbon-emissions',
+    'data-center',
+    'e-waste',
+    'privacy',
+    'governance',
+    'accountability',
+    'labor-disruption',
+    'deskilling',
+    'responsible-ai'
+  ]
 }
 
 export const glossaryDojoMeta: Record<string, GlossaryDojoTermMeta> = {
@@ -50,6 +138,7 @@ export const glossaryDojoMeta: Record<string, GlossaryDojoTermMeta> = {
   },
   training: {
     familyTags: ['durable-learning'],
+    conceptClusters: ['training'],
     lifecycleStage: 'training',
     curriculumStage: 'Before Morning',
     confusableWith: ['inference', 'fine-tuning', 'rag'],
@@ -58,6 +147,7 @@ export const glossaryDojoMeta: Record<string, GlossaryDojoTermMeta> = {
   },
   loss: {
     familyTags: ['durable-learning'],
+    conceptClusters: ['training'],
     lifecycleStage: 'training',
     curriculumStage: 'Before Morning',
     confusableWith: ['probability', 'confidence', 'evaluation'],
@@ -66,6 +156,7 @@ export const glossaryDojoMeta: Record<string, GlossaryDojoTermMeta> = {
   },
   weight: {
     familyTags: ['durable-learning', 'model-internals'],
+    conceptClusters: ['training', 'representations'],
     lifecycleStage: 'training and inference',
     curriculumStage: 'Before Morning',
     confusableWith: ['hidden state', 'memory', 'parameter'],
@@ -74,6 +165,7 @@ export const glossaryDojoMeta: Record<string, GlossaryDojoTermMeta> = {
   },
   'weight-update': {
     familyTags: ['durable-learning'],
+    conceptClusters: ['training'],
     lifecycleStage: 'training',
     curriculumStage: 'Before Morning',
     confusableWith: ['prompt', 'context window', 'inference'],
@@ -82,6 +174,7 @@ export const glossaryDojoMeta: Record<string, GlossaryDojoTermMeta> = {
   },
   pretraining: {
     familyTags: ['durable-learning'],
+    conceptClusters: ['training'],
     lifecycleStage: 'training',
     curriculumStage: 'Before Morning',
     confusableWith: ['fine-tuning', 'inference'],
@@ -90,6 +183,7 @@ export const glossaryDojoMeta: Record<string, GlossaryDojoTermMeta> = {
   },
   'fine-tuning': {
     familyTags: ['durable-learning'],
+    conceptClusters: ['training'],
     lifecycleStage: 'training',
     curriculumStage: 'Before Morning',
     confusableWith: ['prompt', 'rag', 'pretraining'],
@@ -98,6 +192,7 @@ export const glossaryDojoMeta: Record<string, GlossaryDojoTermMeta> = {
   },
   inference: {
     familyTags: ['runtime'],
+    conceptClusters: ['context'],
     lifecycleStage: 'inference',
     curriculumStage: 'Morning Commute',
     confusableWith: ['training', 'pretraining', 'fine-tuning'],
@@ -106,6 +201,7 @@ export const glossaryDojoMeta: Record<string, GlossaryDojoTermMeta> = {
   },
   prompt: {
     familyTags: ['runtime', 'context'],
+    conceptClusters: ['context'],
     lifecycleStage: 'inference',
     curriculumStage: 'Morning Commute',
     confusableWith: ['response', 'system-prompt', 'context window'],
@@ -114,6 +210,7 @@ export const glossaryDojoMeta: Record<string, GlossaryDojoTermMeta> = {
   },
   response: {
     familyTags: ['runtime', 'generation'],
+    conceptClusters: ['context'],
     lifecycleStage: 'response generation',
     curriculumStage: 'Morning Commute',
     confusableWith: ['prompt', 'completion'],
@@ -122,14 +219,16 @@ export const glossaryDojoMeta: Record<string, GlossaryDojoTermMeta> = {
   },
   'input-context': {
     familyTags: ['runtime', 'context'],
+    conceptClusters: ['context'],
     lifecycleStage: 'inference',
     curriculumStage: 'Morning Commute',
-    confusableWith: ['training-data', 'memory', 'context window'],
-    relationships: ['prompt-tokens', 'response-tokens', 'rag'],
+    confusableWith: ['context window', 'prompt', 'memory', 'system-prompt'],
+    relationships: ['prompt-tokens', 'response-tokens', 'response-so-far', 'retrieval', 'rag', 'forward-pass'],
     shortExplanation: 'Input context is everything currently visible to the model.'
   },
   token: {
     familyTags: ['tokens'],
+    conceptClusters: ['tokenization'],
     lifecycleStage: 'prompt processing',
     curriculumStage: 'Morning Commute',
     confusableWith: ['token-id', 'word'],
@@ -138,6 +237,7 @@ export const glossaryDojoMeta: Record<string, GlossaryDojoTermMeta> = {
   },
   'token-id': {
     familyTags: ['tokens'],
+    conceptClusters: ['tokenization'],
     lifecycleStage: 'prompt processing',
     curriculumStage: 'Morning Commute',
     confusableWith: ['token', 'embedding'],
@@ -146,6 +246,7 @@ export const glossaryDojoMeta: Record<string, GlossaryDojoTermMeta> = {
   },
   embedding: {
     familyTags: ['vectors', 'model-internals'],
+    conceptClusters: ['representations'],
     lifecycleStage: 'inference',
     curriculumStage: 'Morning Commute',
     confusableWith: ['hidden state', 'definition', 'memory'],
@@ -154,6 +255,7 @@ export const glossaryDojoMeta: Record<string, GlossaryDojoTermMeta> = {
   },
   vector: {
     familyTags: ['vectors', 'model-internals'],
+    conceptClusters: ['representations'],
     lifecycleStage: 'inference',
     curriculumStage: 'Morning Commute',
     confusableWith: ['tensor', 'embedding'],
@@ -162,6 +264,7 @@ export const glossaryDojoMeta: Record<string, GlossaryDojoTermMeta> = {
   },
   tensor: {
     familyTags: ['vectors', 'model-internals'],
+    conceptClusters: ['representations'],
     lifecycleStage: 'inference',
     curriculumStage: 'Morning Commute',
     confusableWith: ['vector', 'weight-tensor'],
@@ -170,6 +273,7 @@ export const glossaryDojoMeta: Record<string, GlossaryDojoTermMeta> = {
   },
   attention: {
     familyTags: ['transformer-layer'],
+    conceptClusters: ['representations'],
     lifecycleStage: 'forward pass',
     curriculumStage: 'Workday',
     confusableWith: ['human attention', 'MLP', 'hidden state'],
@@ -178,6 +282,7 @@ export const glossaryDojoMeta: Record<string, GlossaryDojoTermMeta> = {
   },
   MLP: {
     familyTags: ['transformer-layer'],
+    conceptClusters: ['representations'],
     lifecycleStage: 'forward pass',
     curriculumStage: 'Workday',
     confusableWith: ['attention', 'neural network'],
@@ -186,14 +291,16 @@ export const glossaryDojoMeta: Record<string, GlossaryDojoTermMeta> = {
   },
   'hidden state': {
     familyTags: ['transformer-layer', 'runtime'],
+    conceptClusters: ['representations'],
     lifecycleStage: 'forward pass',
     curriculumStage: 'Workday',
-    confusableWith: ['embedding', 'memory', 'weight'],
-    relationships: ['embedding', 'activation', 'forward-pass'],
+    confusableWith: ['embedding', 'memory', 'activation'],
+    relationships: ['embedding', 'activation', 'vector', 'tensor', 'layer', 'forward-pass'],
     shortExplanation: 'A hidden state is a temporary context-shaped vector inside a layer.'
   },
   logits: {
     familyTags: ['decoding'],
+    conceptClusters: ['decoding'],
     lifecycleStage: 'response generation',
     curriculumStage: 'Workday',
     confusableWith: ['probability', 'softmax'],
@@ -202,6 +309,7 @@ export const glossaryDojoMeta: Record<string, GlossaryDojoTermMeta> = {
   },
   softmax: {
     familyTags: ['decoding'],
+    conceptClusters: ['decoding'],
     lifecycleStage: 'response generation',
     curriculumStage: 'Workday',
     confusableWith: ['logits', 'sampling'],
@@ -210,6 +318,7 @@ export const glossaryDojoMeta: Record<string, GlossaryDojoTermMeta> = {
   },
   sampling: {
     familyTags: ['decoding'],
+    conceptClusters: ['decoding'],
     lifecycleStage: 'response generation',
     curriculumStage: 'Workday',
     confusableWith: ['softmax', 'temperature'],
@@ -218,6 +327,7 @@ export const glossaryDojoMeta: Record<string, GlossaryDojoTermMeta> = {
   },
   autoregression: {
     familyTags: ['generation'],
+    conceptClusters: ['decoding'],
     lifecycleStage: 'response generation',
     curriculumStage: 'Workday',
     confusableWith: ['completion', 'diffusion'],
@@ -226,6 +336,7 @@ export const glossaryDojoMeta: Record<string, GlossaryDojoTermMeta> = {
   },
   'context window': {
     familyTags: ['context', 'runtime'],
+    conceptClusters: ['context'],
     lifecycleStage: 'inference',
     curriculumStage: 'Workday',
     confusableWith: ['memory', 'training-data', 'rag'],
@@ -234,14 +345,16 @@ export const glossaryDojoMeta: Record<string, GlossaryDojoTermMeta> = {
   },
   rag: {
     familyTags: ['context', 'retrieval'],
+    conceptClusters: ['context', 'evidence'],
     lifecycleStage: 'inference',
     curriculumStage: 'Workday',
-    confusableWith: ['training', 'fine-tuning', 'memory'],
-    relationships: ['retrieval', 'grounding', 'context window'],
+    confusableWith: ['retrieval', 'grounding', 'fine-tuning', 'training'],
+    relationships: ['input-context', 'context window', 'prompt', 'retrieval', 'grounding'],
     shortExplanation: 'RAG retrieves outside information and places it into current context.'
   },
   retrieval: {
     familyTags: ['context', 'retrieval'],
+    conceptClusters: ['context', 'evidence'],
     lifecycleStage: 'inference',
     curriculumStage: 'Workday',
     confusableWith: ['training', 'memory'],
@@ -250,6 +363,7 @@ export const glossaryDojoMeta: Record<string, GlossaryDojoTermMeta> = {
   },
   grounding: {
     familyTags: ['context', 'risk-literacy'],
+    conceptClusters: ['evidence'],
     lifecycleStage: 'inference and review',
     curriculumStage: 'Decision Room',
     confusableWith: ['citation', 'truth', 'rag'],
@@ -258,6 +372,7 @@ export const glossaryDojoMeta: Record<string, GlossaryDojoTermMeta> = {
   },
   hallucination: {
     familyTags: ['risk-literacy'],
+    conceptClusters: ['evidence'],
     lifecycleStage: 'response generation and review',
     curriculumStage: 'Decision Room',
     confusableWith: ['lying', 'uncertainty'],
@@ -282,6 +397,7 @@ export const glossaryDojoMeta: Record<string, GlossaryDojoTermMeta> = {
   },
   'human-review': {
     familyTags: ['responsible-use'],
+    conceptClusters: ['evidence', 'costs-governance'],
     lifecycleStage: 'review',
     curriculumStage: 'New Dawn',
     confusableWith: ['evaluation', 'responsible-ai'],

@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Prompt Life v0.25.2 New Dawn Implementation Report</title>
+<style>
+  @page { size: letter; margin: 0.55in; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #06154f; line-height: 1.38; margin: 0; background: #fffdf8; }
+  h1 { font-size: 30px; margin: 0 0 6px; }
+  h2 { font-size: 18px; margin: 22px 0 8px; color: #0a0f70; break-after: avoid; }
+  h3 { font-size: 14px; margin: 14px 0 5px; color: #0a8f8b; break-after: avoid; }
+  p { margin: 0 0 8px; }
+  ul { margin: 5px 0 10px 20px; padding: 0; }
+  li { margin: 3px 0; }
+  table { width: 100%; border-collapse: collapse; margin: 8px 0 12px; font-size: 11px; }
+  th, td { border: 1px solid #cdd7ee; padding: 6px 7px; vertical-align: top; }
+  th { background: #eef8ff; text-align: left; }
+  .meta { color: #445071; font-weight: 700; margin-bottom: 18px; }
+  .callout { border-left: 4px solid #13b8b0; padding: 9px 11px; background: #eefdfa; margin: 10px 0; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px; }
+  .screenshot { break-inside: avoid; page-break-inside: avoid; margin: 14px 0 20px; padding: 10px; border: 1px solid #d8def0; border-radius: 8px; background: white; }
+  .screenshot h3 { margin-top: 0; }
+  .screenshot img { display: block; max-width: 100%; max-height: 8.2in; margin: 6px auto 0; border: 1px solid #dde5f4; border-radius: 8px; }
+  code { background: #f0f3fb; padding: 1px 4px; border-radius: 4px; }
+  .small { font-size: 11px; color: #445071; }
+</style>
+</head>
+<body>
+  <h1>Prompt Life v0.25.2 New Dawn Implementation Report</h1>
+  <p class="meta">Date: 2026-06-07 | Project: Prompt Life | Stage: New Dawn</p>
+  <div class="callout"><strong>Bottom line:</strong> The five existing New Dawn cards were polished with clearer coded visuals, diagnostic tiny interactions, a stronger final synthesis chain, and source-aware wording. No cards, games, generated PNG assets, dependencies, progress rules, checkpoint randomization, badge model, or Glossary Dojo behavior were changed.</div>
+
+  <h2>What Changed</h2>
+  <table><thead><tr><th>Card</th><th>Improvement</th></tr></thead><tbody><tr><td><strong>Benefits Worth Taking Seriously</strong></td><td>Benefit-tier coded visual, evidence-tier sort, new Benefits glossary term, safer checkpoint wording with human review.</td></tr><tr><td><strong>Human-Centered AI</strong></td><td>Accountability-flow visual and student-support-note scenario choice that keeps review and responsibility with people.</td></tr><tr><td><strong>Better AI Is a Choice</strong></td><td>Better-AI control panel and lever selection for an internal policy assistant scenario.</td></tr><tr><td><strong>Effective Prompting from Model Literacy</strong></td><td>Expanded context tray plus prompt-builder with audience/context, constraints, examples, evidence, uncertainty, format, and review.</td></tr><tr><td><strong>Model Literate Synthesis</strong></td><td>Full-chain map and tap-order capstone from prompt context through tokens, IDs, embeddings, hidden states, logits, probabilities, sampling, RAG/grounding, review, and accountability.</td></tr></tbody></table>
+
+  <h2>Files Changed</h2>
+  <ul><li><code>src/data/content.ts</code></li><li><code>src/main.tsx</code></li><li><code>src/components/VisualAids.tsx</code></li><li><code>src/styles/global.css</code></li><li><code>docs/REVIEW_NOTES.md</code></li><li><code>docs/stage-audits/v0-25-new-dawn/source-review.md</code></li><li><code>docs/stage-audits/v0-25-new-dawn/IMAGE_ASSET_PLAN.md</code></li><li><code>docs/stage-audits/v0-25-new-dawn/TINY_INTERACTION_PLAN.md</code></li><li><code>docs/stage-audits/v0-25-new-dawn/IMPLEMENTATION_REPORT_V0_25_2.md</code></li><li><code>docs/stage-audits/v0-25-new-dawn/implementation-screenshots/*</code></li><li><code>docs/stage-audits/v0-25-new-dawn/prompt-life-v0-25-2-new-dawn-implementation-report.html</code></li><li><code>docs/stage-audits/v0-25-new-dawn/prompt-life-v0-25-2-new-dawn-implementation-report.pdf</code></li></ul>
+
+  <h2>Visual Changes</h2>
+  <ul>
+    <li>Benefits uses evidence-tier buckets: useful now with review, plausible with safeguards, speculative/hype.</li>
+    <li>Human-Centered AI uses a concrete accountability flow.</li>
+    <li>Better AI uses a lever/control-panel visual.</li>
+    <li>Effective Prompting uses a richer context tray.</li>
+    <li>Synthesis uses a full-chain map rather than the previous generic map/compass/lantern visual.</li>
+  </ul>
+
+  <h2>Tiny Interactions</h2>
+  <ul>
+    <li><code>benefit-tier-sort</code>: sort claims by confidence.</li>
+    <li><code>human-centered-scenario</code>: choose the accountable deployment.</li>
+    <li><code>better-ai-levers</code>: select better design/governance levers.</li>
+    <li><code>prompt-builder</code>: build a better current-context prompt.</li>
+    <li><code>synthesis-chain</code>: put the prompt-to-accountability story in order.</li>
+  </ul>
+
+  <h2>Glossary Updates</h2>
+  <p>Added <strong>Benefits</strong>. Updated New Dawn learning-path grouping and key-term display priority so Benefits, Uncertainty, Source review, Human review, Model literacy, and final-chain terms appear sensibly without mobile chip overflow.</p>
+
+  <h2>Source Discipline</h2>
+  <p>No precise statistics or new external claims were added. Benefits and mitigations use cautious language such as can, may, with review, depends on, when appropriate, and should be evaluated.</p>
+
+  <h2>Badge and Synthesis</h2>
+  <p>The one-badge model remains: <strong>Prompt Life: Model Literate</strong>. The synthesis card now better prepares the learner for that badge by connecting machine mechanics with human review, governance, and accountability.</p>
+
+  <h2>Verification</h2>
+  <ul>
+    <li><code>npm run typecheck</code>: passed.</li>
+    <li><code>npm run build</code>: passed, with the existing Vite large-chunk warning.</li>
+    <li><code>npm run build:pages</code>: passed, with the existing Vite large-chunk warning.</li>
+    <li><code>npm run audit:answers</code>: passed. Journey checkpoints remain randomized by answer identity.</li>
+    <li>Screenshot manifest: 16 screenshots, 390px and 320px, horizontal overflow: false.</li>
+  </ul>
+
+  <h2>Known Issues</h2>
+  <ul>
+    <li>The app still has the existing Vite large bundle warning.</li>
+    <li>New Dawn remains internally source-reviewed but not learner-cited.</li>
+    <li>Tap/cycle interactions are used instead of drag-only controls for mobile and keyboard accessibility.</li>
+    <li>Image 2 asset generation should wait until the coded New Dawn relationships are reviewed.</li>
+  </ul>
+
+  <h2>Readiness</h2>
+  <p>New Dawn is ready for whole-app QA and game review. It is not yet ready for new Image 2 asset generation beyond planning.</p>
+
+  <h2>Screenshots</h2>
+  <section class="screenshot"><h3>New Dawn overview</h3><p class="small">New Dawn overview in Journey | no horizontal overflow detected</p><img src="implementation-screenshots/v0-25-2-new-dawn-overview-390.png" alt="New Dawn overview screenshot"></section>
+<section class="screenshot"><h3>Benefits visual</h3><p class="small">Benefits tier visual | no horizontal overflow detected</p><img src="implementation-screenshots/v0-25-2-benefits-visual-390.png" alt="Benefits visual screenshot"></section>
+<section class="screenshot"><h3>Benefits interaction</h3><p class="small">Benefits evidence-tier interaction success state | no horizontal overflow detected</p><img src="implementation-screenshots/v0-25-2-benefits-interaction-390.png" alt="Benefits interaction screenshot"></section>
+<section class="screenshot"><h3>Human-Centered AI visual</h3><p class="small">Human-centered accountability visual | no horizontal overflow detected</p><img src="implementation-screenshots/v0-25-2-human-centered-visual-390.png" alt="Human-Centered AI visual screenshot"></section>
+<section class="screenshot"><h3>Human-Centered AI interaction</h3><p class="small">Human-centered scenario correct feedback | no horizontal overflow detected</p><img src="implementation-screenshots/v0-25-2-human-centered-interaction-390.png" alt="Human-Centered AI interaction screenshot"></section>
+<section class="screenshot"><h3>Better AI visual</h3><p class="small">Better-AI control panel visual | no horizontal overflow detected</p><img src="implementation-screenshots/v0-25-2-better-ai-visual-390.png" alt="Better AI visual screenshot"></section>
+<section class="screenshot"><h3>Better AI interaction</h3><p class="small">Better-AI levers success state | no horizontal overflow detected</p><img src="implementation-screenshots/v0-25-2-better-ai-interaction-390.png" alt="Better AI interaction screenshot"></section>
+<section class="screenshot"><h3>Effective Prompting visual</h3><p class="small">Prompting context tray visual | no horizontal overflow detected</p><img src="implementation-screenshots/v0-25-2-prompting-visual-390.png" alt="Effective Prompting visual screenshot"></section>
+<section class="screenshot"><h3>Effective Prompting interaction</h3><p class="small">Prompt builder complete state with constraints and examples | no horizontal overflow detected</p><img src="implementation-screenshots/v0-25-2-prompting-interaction-390.png" alt="Effective Prompting interaction screenshot"></section>
+<section class="screenshot"><h3>Synthesis visual</h3><p class="small">Synthesis full-chain visual | no horizontal overflow detected</p><img src="implementation-screenshots/v0-25-2-synthesis-visual-390.png" alt="Synthesis visual screenshot"></section>
+<section class="screenshot"><h3>Synthesis interaction</h3><p class="small">Synthesis chain complete state | no horizontal overflow detected</p><img src="implementation-screenshots/v0-25-2-synthesis-interaction-390.png" alt="Synthesis interaction screenshot"></section>
+<section class="screenshot"><h3>Synthesis visual at 320px</h3><p class="small">Synthesis full-chain visual at 320px | no horizontal overflow detected</p><img src="implementation-screenshots/v0-25-2-synthesis-visual-320.png" alt="Synthesis visual at 320px screenshot"></section>
+<section class="screenshot"><h3>Synthesis interaction at 320px</h3><p class="small">Synthesis chain interaction at 320px | no horizontal overflow detected</p><img src="implementation-screenshots/v0-25-2-synthesis-interaction-320.png" alt="Synthesis interaction at 320px screenshot"></section>
+<section class="screenshot"><h3>Synthesis key takeaway at 320px</h3><p class="small">Synthesis key takeaway clearance at 320px | no horizontal overflow detected</p><img src="implementation-screenshots/v0-25-2-synthesis-key-takeaway-320.png" alt="Synthesis key takeaway at 320px screenshot"></section>
+<section class="screenshot"><h3>Synthesis final action</h3><p class="small">Synthesis final action clear of bottom nav | no horizontal overflow detected</p><img src="implementation-screenshots/v0-25-2-synthesis-final-action-390.png" alt="Synthesis final action screenshot"></section>
+<section class="screenshot"><h3>Badge single model</h3><p class="small">Badge screen still shows one badge model | no horizontal overflow detected</p><img src="implementation-screenshots/v0-25-2-badge-one-model-390.png" alt="Badge single model screenshot"></section>
+</body>
+</html>

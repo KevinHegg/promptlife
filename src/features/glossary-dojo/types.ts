@@ -36,7 +36,7 @@ export type GlossaryDojoQuestionType =
 export type GlossaryDojoOptionKind = 'term' | 'definition' | 'statement' | 'stage'
 export type GlossaryDojoRoundSourceMode = 'new_round' | 'repeat_round' | 'review_missed'
 export type GlossaryDojoRoundMode = 'normal' | 'repeat' | 'reviewMissed'
-export type GlossaryDojoDistractorSource = 'confusable' | 'related' | 'near' | 'medium' | 'far' | 'global'
+export type GlossaryDojoDistractorSource = 'confusable' | 'related' | 'cluster' | 'same-stage' | 'near' | 'medium' | 'far' | 'global'
 export type GlossaryDojoDistractorDistance = 'near' | 'medium' | 'far'
 
 export type GlossaryDojoOption = {

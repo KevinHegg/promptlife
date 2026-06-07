@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Prompt Life v0.24.3 Glossary Dojo Term Question Repair</title>
+  <style>
+    @page { size: letter; margin: 0.55in; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #07145f;
+      background: #fbfaf5;
+      line-height: 1.45;
+    }
+    h1, h2, h3 { color: #10116f; line-height: 1.08; margin: 0 0 0.18in; }
+    h1 { font-size: 28px; }
+    h2 { font-size: 18px; margin-top: 0.22in; border-top: 1px solid #dbe2ff; padding-top: 0.16in; }
+    p { margin: 0 0 0.12in; }
+    ul, ol { margin: 0 0 0.12in 0.2in; padding: 0; }
+    li { margin: 0 0 0.04in; }
+    code { color: #0b5963; font-weight: 700; }
+    .meta { color: #42506f; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; }
+    .hero {
+      padding: 0.26in;
+      border: 1px solid #d5dcff;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #ffffff 0%, #eefdf9 100%);
+      margin-bottom: 0.2in;
+    }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.16in; }
+    .checkgrid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.08in; margin: 0.12in 0; }
+    .check { border: 1px solid #b8efe9; background: #effdfa; border-radius: 10px; padding: 0.1in; font-weight: 800; color: #065c65; text-align: center; }
+    table { width: 100%; border-collapse: collapse; font-size: 11px; margin: 0.1in 0 0.16in; }
+    th, td { border: 1px solid #dbe2ff; padding: 6px 7px; vertical-align: top; }
+    th { background: #eef2ff; text-align: left; }
+    figure { break-inside: avoid; margin: 0; padding: 0.1in; border: 1px solid #dbe2ff; border-radius: 12px; background: #fff; }
+    figure img { display: block; width: 100%; height: auto; border: 1px solid #d7def8; border-radius: 10px; }
+    figcaption { margin-top: 0.07in; font-size: 11px; color: #354365; font-weight: 700; }
+    .screenshots { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.16in; }
+    .wide { grid-column: 1 / -1; }
+    .small { font-size: 11px; color: #42506f; }
+  </style>
+</head>
+<body>
+  <section class="hero">
+    <p class="meta">Prompt Life v0.24.3 · Generated 2026-06-07</p>
+    <h1>Glossary Dojo Term Question Repair</h1>
+    <p>Repaired Glossary Dojo term-question wording and distractor quality while preserving Journey progress, badge logic, games, generated assets, dependencies, and checkpoint randomization.</p>
+  </section>
+
+  <h2>What Changed</h2>
+  <ul>
+    <li><code>term_to_definition</code> now displays <code>TERM TO DESCRIPTION</code>, asks <code>What is [TERM]?</code>, and uses <code>Choose the best description.</code></li>
+    <li><code>definition_to_term</code> now displays <code>DESCRIPTION TO TERM</code> and asks <code>Which term matches this description?</code></li>
+    <li><code>closest_concept</code> now uses the less gamey label <code>RELATED IDEAS</code>.</li>
+    <li>Feedback now reads as natural descriptions: <code>Insight strengthened. [TERM] is...</code> and wrong answers identify the selected wrong term.</li>
+    <li>Visible app version is now <code>v0.24.3</code>.</li>
+  </ul>
+
+  <h2>Distractor Strategy</h2>
+  <p>Term questions now prefer closer conceptual neighbors before distant fallback choices: confusable, related, cluster, same-stage, near, medium, far, then global.</p>
+  <p>New concept clusters support context, tokenization, representations, decoding, training, evidence, and costs/governance.</p>
+
+  <h2>QA Examples</h2>
+  <table>
+    <thead><tr><th>Target</th><th>Prompt</th><th>Close distractors checked</th></tr></thead>
+    <tbody>
+      <tr><td>Input context</td><td>What is Input context?</td><td>Memory, Prompt, Context window</td></tr>
+      <tr><td>Tokenization</td><td>What is Tokenization?</td><td>Tokenizer, Token ID, Token</td></tr>
+      <tr><td>Hidden state</td><td>What is Hidden state?</td><td>Memory, Weight, Embedding</td></tr>
+      <tr><td>RAG</td><td>What is RAG?</td><td>Retrieval, Grounding, Training</td></tr>
+      <tr><td>Softmax</td><td>What is Softmax?</td><td>Logits, Sampling, Probability</td></tr>
+      <tr><td>Water use</td><td>What is Water use?</td><td>Data center, Energy use, Governance</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Verification</h2>
+  <div class="checkgrid">
+    <div class="check">typecheck passed</div>
+    <div class="check">build passed</div>
+    <div class="check">build:pages passed</div>
+    <div class="check">audit passed</div>
+  </div>
+  <p class="small">Both production builds still emit the existing Vite large-chunk warning.</p>
+
+  <h2>Screenshots</h2>
+  <div class="screenshots">
+    
+  <figure>
+    <img src="screenshots/v0-24-3-dojo-input-context-question-390.png" alt="Input context term-to-description question at 390px">
+    <figcaption>Input context term-to-description question at 390px</figcaption>
+  </figure>
+
+  <figure>
+    <img src="screenshots/v0-24-3-dojo-input-context-question-320.png" alt="Input context term-to-description question at 320px">
+    <figcaption>Input context term-to-description question at 320px</figcaption>
+  </figure>
+
+  <figure>
+    <img src="screenshots/v0-24-3-dojo-input-context-wrong-feedback-scrolled-390.png" alt="Wrong-answer feedback naming the selected wrong term">
+    <figcaption>Wrong-answer feedback naming the selected wrong term</figcaption>
+  </figure>
+
+  <figure>
+    <img src="screenshots/v0-24-3-dojo-input-context-correct-feedback-scrolled-390.png" alt="Correct-answer feedback beginning Insight strengthened">
+    <figcaption>Correct-answer feedback beginning Insight strengthened</figcaption>
+  </figure>
+
+  <figure>
+    <img src="screenshots/v0-24-3-dojo-tokenization-question-390.png" alt="Tokenization question with close tokenization distractors">
+    <figcaption>Tokenization question with close tokenization distractors</figcaption>
+  </figure>
+
+  <figure>
+    <img src="screenshots/v0-24-3-dojo-hidden-state-question-390.png" alt="Hidden state question with representation/confusable distractors">
+    <figcaption>Hidden state question with representation/confusable distractors</figcaption>
+  </figure>
+
+  <figure>
+    <img src="screenshots/v0-24-3-dojo-rag-question-390.png" alt="RAG question with retrieval/evidence distractors">
+    <figcaption>RAG question with retrieval/evidence distractors</figcaption>
+  </figure>
+  </div>
+
+  <h2>Known Issues</h2>
+  <ul>
+    <li>Archival v0.22/v0.19 Dojo docs and screenshots still show older wording as historical records.</li>
+    <li>Relationship and stage-location question families still depend on available metadata and can fall back when metadata is thin.</li>
+  </ul>
+</body>
+</html>

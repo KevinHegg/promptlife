@@ -81,12 +81,12 @@ export const visualAidCatalog = [
   { id: 'multimodal', title: 'Media Lane Map', subtitle: 'Input, representation, output', caption: 'Multimodal systems connect text, images, audio, video, and code through learned representations or linked components.', pattern: 'multimodal', objective: 'Show multiple media inputs and outputs without implying human-like perception.', callouts: [{ heading: 'Inputs', body: 'Text, image, audio, video, or code can enter the system.' }, { heading: 'Representation', body: 'The system encodes media into model-usable representations or linked spaces.' }, { heading: 'Outputs', body: 'Depending on the system, outputs may be answers, captions, images, audio, or code.' }, { heading: 'Limit', body: 'Multimodal processing is not human sensation or experience.' }], keyTakeaway: 'Multimodal means more than one media type, not human-like perception.', accessibleDescription: 'Inputs for text, image, audio, video, and code flow into a connected representation space, then to outputs such as caption, answer, image, audio, and code.', printNote: 'Short labels only; callouts explain the system boundary and metaphor limit.' },
   { id: 'perfect-storm', title: 'Storm Front', subtitle: 'Why LLMs arrived now', diagramCaption: 'Convergence, not one spark.', caption: 'Data, compute, storage, methods, labor, and incentives converged into modern LLM capability.', pattern: 'perfectStorm', variant: 'zen-garden-map', objective: 'Show convergence without implying one magic breakthrough.', callouts: [{ heading: 'Data', body: 'Human-created text, media, code, and documents supplied patterns.' }, { heading: 'Compute and storage', body: 'Hardware, data centers, datasets, and checkpoints made large-scale training practical.' }, { heading: 'Methods', body: 'Deep learning and transformer advances made the patterns usable.' }, { heading: 'Labor and incentives', body: 'Human evaluation work and market demand pushed systems into products.' }], keyTakeaway: 'Modern LLMs came from a convergence, not a single spark.', accessibleDescription: 'Six short ingredient chips labeled Data, Compute, Storage, Methods, Labor, and Incentives flow into a centered Modern LLM capability node.', printNote: 'Keep labels short and place the convergence takeaway in HTML below the diagram. Future PNG should be textless.' },
   { id: 'collective-intelligence-lantern', title: 'Borrowed Flames', subtitle: 'No creators, no model', caption: 'Human-created traces can become training data and model patterns, while rights and responsibility remain human questions.', pattern: 'collectiveLantern', variant: 'zen-garden-map', objective: 'Make human-created source traces visible without treating the model as humanity’s mind.', callouts: [{ heading: 'Human expression', body: 'Books, sites, code, art, journalism, forums, documentation, and research leave learnable traces.' }, { heading: 'Collection questions', body: 'Provenance, consent, copyright, attribution, and compensation matter.' }, { heading: 'Model limit', body: 'The model absorbs statistical patterns; it does not understand gratitude or responsibility.' }], keyTakeaway: 'The model did not create its abilities alone.', accessibleDescription: 'Human-created writing, code, art, research, forums, and documentation flow into training data, while a rights-question note stays outside the model mechanics.', printNote: 'Keep source labels short; callouts carry provenance, consent, copyright, attribution, and compensation details.' },
-  { id: 'benefits-tool-garden', title: 'Tool Garden', subtitle: 'Benefits without utopia', caption: 'AI is most useful when it amplifies human judgment, access, search, drafting, translation, and research support.', pattern: 'benefitsGarden', variant: 'zen-garden-map', objective: 'Separate real bounded benefits from utopian claims.', callouts: [{ heading: 'Demonstrated', body: 'Accessibility, translation support, summarization, search/RAG, drafting, and coding assistance can help under review.' }, { heading: 'Plausible', body: 'Tutoring support, research triage, brainstorming, and workflow support need context and evidence.' }, { heading: 'Speculative', body: 'Broad utopia or replacement claims should not be stated as fact.' }], keyTakeaway: 'Benefits can be real and still bounded.', accessibleDescription: 'A central human node is surrounded by tool shapes for access, search, draft, translate, code, and research.', printNote: 'Evidence-tier chips stay in HTML callouts below the scene.' },
+  { id: 'benefits-tool-garden', title: 'Benefit Tiers', subtitle: 'Benefits without utopia', caption: 'AI benefits are easiest to trust when claims are tiered by evidence, context, safeguards, and human review.', pattern: 'benefitsGarden', variant: 'zen-garden-map', objective: 'Separate useful reviewed benefits, plausible guarded benefits, and speculative hype.', callouts: [{ heading: 'Useful now with review', body: 'Accessibility, translation support, summarization, search/RAG, drafting, and coding assistance can help under human review.' }, { heading: 'Plausible with safeguards', body: 'Tutoring support, research triage, brainstorming, and workflow support should be evaluated in context.' }, { heading: 'Speculative / hype', body: 'Broad utopia, replacement, or no-cost claims should not be stated as fact.' }], keyTakeaway: 'Benefits can be real and still bounded.', accessibleDescription: 'Three benefit buckets sort claims into useful now with review, plausible with safeguards, and speculative or hype.', printNote: 'Evidence-tier chips stay in HTML callouts below the coded visual. No generated PNG in this pass.' },
   { id: 'costs-invisible-factory', title: 'Cost Ledger', subtitle: 'The answer is not weightless', caption: 'AI systems depend on infrastructure, human systems, and governance choices that need honest accounting.', pattern: 'costsFactory', variant: 'zen-garden-map', objective: 'Make AI costs visible as a ledger without inventing statistics or fear-heavy imagery.', callouts: [{ heading: 'Infrastructure', body: 'Energy, water, carbon, data centers, chips, and e-waste vary by system and workload.' }, { heading: 'Human systems', body: 'Labor disruption, deskilling, privacy, bias, and information pollution depend on deployment choices.' }, { heading: 'Power', body: 'Concentration of data, compute, and capital affects who benefits and who decides.' }], keyTakeaway: 'Costs vary, but they are real enough to count.', accessibleDescription: 'An AI answer points into a ledger with infrastructure, human systems, and power or governance categories.', printNote: 'No precise numbers in the visual; use cautious callouts.' },
-  { id: 'human-centered-ai-garden', title: 'Human Center', subtitle: 'Tools should serve dignity', caption: 'AI should support human dignity, learning, responsibility, creativity, relationships, and the common good.', pattern: 'humanGarden', variant: 'zen-garden-map', objective: 'Center people and accountability rather than model power.', callouts: [{ heading: 'Human judgment', body: 'People remain accountable for high-stakes decisions and institutional use.' }, { heading: 'Dignity', body: 'Speed, profit, and automation should not outrank persons, learning, or relationships.' }, { heading: 'Model limit', body: 'A model can sound ethical without moral understanding.' }], keyTakeaway: 'Powerful tools still need human purpose.', accessibleDescription: 'A human-centered garden sits in the middle while AI tool orbits remain outside the human circle.', printNote: 'Avoid robot imagery; the human center is the visual anchor.' },
-  { id: 'responsible-ai-forked-path', title: 'Forked Path', subtitle: 'Responsible AI is chosen', caption: 'AI outcomes are shaped by design, deployment, governance, incentives, and institutional choices.', pattern: 'responsiblePath', variant: 'zen-garden-map', objective: 'Show extractive and responsible paths without pretending governance is simple.', callouts: [{ heading: 'Technical choices', body: 'Smaller models, efficient inference, distillation, RAG, and better hardware use can fit some tasks.' }, { heading: 'Data choices', body: 'Provenance, consent, licensing, creator compensation, and privacy-preserving deployment matter.' }, { heading: 'Institutional choices', body: 'Human review, policy, labor transition planning, public-interest models, and independent evaluation shape outcomes.' }], keyTakeaway: 'Harms are shaped by choices, not destiny.', accessibleDescription: 'A path splits into extractive and responsible routes, with a human decision marker at the fork.', printNote: 'Keep the fork simple; mitigations stay in HTML callouts.' },
-  { id: 'prompting-context-tray', title: 'Context Tray', subtitle: 'Prompting steers this run', caption: 'Good prompts pack task, context, constraints, examples, evidence needs, uncertainty, review, and format into the current run.', pattern: 'promptingTray', variant: 'retrieval-shelf', objective: 'Show prompting as context design, not permanent teaching.', callouts: [{ heading: 'Prompt parts', body: 'Task, context, constraints, examples, and format shape the current input.' }, { heading: 'Evidence and uncertainty', body: 'Source needs, retrieved context, and uncertainty requests can improve reviewability.' }, { heading: 'Boundary', body: 'Prompting usually changes context, not weights.' }], keyTakeaway: 'Prompting is context design for one run.', accessibleDescription: 'Prompt component cards drop into a transparent context tray before one generated response leaves it.', printNote: 'Use short component labels inside the tray.' },
-  { id: 'synthesis-map-compass-lantern', title: 'Map, Compass, Lantern', subtitle: 'Mechanics plus judgment', caption: 'Model literacy connects training, inference, context, generation, RAG, grounding, benefits, costs, and responsibility.', pattern: 'synthesisMap', variant: 'zen-garden-map', objective: 'Close the Journey by connecting mechanics and human consequences.', callouts: [{ heading: 'Map', body: 'Training changes weights; inference uses weights; context steers the current run.' }, { heading: 'Compass', body: 'RAG and grounding can help, but humans still judge evidence and consequences.' }, { heading: 'Lantern', body: 'Benefits and costs are real; model-literate people ask better questions.' }], keyTakeaway: 'Mechanics matter, and humans remain responsible.', accessibleDescription: 'A learner uses a map, compass, and lantern to connect model mechanics with human responsibility.', printNote: 'This is the final synthesis visual; keep it calm and sparse.' },
+  { id: 'human-centered-ai-garden', title: 'Accountability Flow', subtitle: 'Tools should serve dignity', caption: 'A human-centered deployment treats AI output as support inside a decision context, then keeps review, governance, and accountable action with people.', pattern: 'humanGarden', variant: 'zen-garden-map', objective: 'Make human-centered AI concrete through a support-note accountability scenario.', callouts: [{ heading: 'Human judgment', body: 'People remain accountable for high-stakes decisions and institutional use.' }, { heading: 'Dignity', body: 'Speed, profit, and automation should not outrank persons, learning, or relationships.' }, { heading: 'Model limit', body: 'A model can sound ethical without moral understanding.' }], keyTakeaway: 'Powerful tools still need human purpose.', accessibleDescription: 'An AI summary moves into a decision context affecting people, then flows through human review and governance before accountable action.', printNote: 'Avoid robot imagery; accountability flow is the visual anchor.' },
+  { id: 'responsible-ai-forked-path', title: 'Better-AI Control Panel', subtitle: 'Responsible AI is chosen', caption: 'AI outcomes are shaped by design, deployment, governance, incentives, and institutional choices.', pattern: 'responsiblePath', variant: 'zen-garden-map', objective: 'Show practical design and governance levers without pretending governance is simple.', callouts: [{ heading: 'Technical choices', body: 'Smaller models, efficient inference, distillation, RAG, and better hardware use can fit some tasks.' }, { heading: 'Data choices', body: 'Provenance, consent, licensing, creator compensation, and privacy-preserving deployment matter.' }, { heading: 'Institutional choices', body: 'Human review, policy, labor transition planning, public-interest models, and independent evaluation shape outcomes.' }], keyTakeaway: 'Harms are shaped by choices, not destiny.', accessibleDescription: 'A compact control panel shows levers for provenance, privacy, efficient inference, RAG, review, evaluation, labor, sustainability, governance, and task fit.', printNote: 'Keep lever labels short; mitigations stay in HTML callouts.' },
+  { id: 'prompting-context-tray', title: 'Context Tray', subtitle: 'Prompting steers this run', caption: 'Good prompts pack task, context, constraints, examples, evidence needs, uncertainty, review, and format into the current run.', pattern: 'promptingTray', variant: 'retrieval-shelf', objective: 'Show prompting as context design, not permanent teaching.', callouts: [{ heading: 'Prompt parts', body: 'Task, context, constraints, examples, evidence needs, uncertainty, review, and format shape the current input.' }, { heading: 'Evidence and uncertainty', body: 'Source needs, retrieved context, and uncertainty requests can improve reviewability.' }, { heading: 'Boundary', body: 'Prompting usually changes context, not weights.' }], keyTakeaway: 'Prompting is context design for one run.', accessibleDescription: 'Prompt component cards drop into a transparent current context tray before one generated response leaves it.', printNote: 'Use short component labels inside the tray.' },
+  { id: 'synthesis-map-compass-lantern', title: 'Full Chain Map', subtitle: 'Mechanics plus judgment', caption: 'Model literacy connects prompt, tokens, IDs, embeddings, hidden states, logits, probabilities, sampling, append-and-repeat generation, RAG, grounding, review, and accountability.', pattern: 'synthesisMap', variant: 'zen-garden-map', objective: 'Close the Journey by connecting the machine chain with human consequences.', callouts: [{ heading: 'Machine chain', body: 'Prompt context becomes tokens and IDs, then embeddings, hidden states, logits, probabilities, and sampled response tokens.' }, { heading: 'Evidence chain', body: 'Context windows, RAG, and grounding can add evidence for this run, but they do not guarantee truth.' }, { heading: 'Human chain', body: 'Benefits, costs, review, governance, and accountability remain human responsibilities.' }], keyTakeaway: 'Mechanics matter, and humans remain responsible.', accessibleDescription: 'A full chain map moves from Prompt to Tokens, IDs, Embeds, States, Logits, Probs, Sample, Append, RAG, Review, and Accountability.', printNote: 'This is the final synthesis visual; keep it coded because exact labels and order matter.' },
   { id: 'risk', title: 'Risk Ledger', subtitle: 'Mechanisms, not magic', caption: 'Risk literacy separates practical, mechanism-based risks from myths about what models are.', pattern: 'risk', variant: 'zen-garden-map', objective: 'Separate concrete institutional risks from magical stories without doom or hype.', callouts: [{ heading: 'Real mechanisms', body: 'Privacy exposure, hallucinations, prompt injection, insecure tools, overreliance, and bias can cause practical harm.' }, { heading: 'Myths', body: 'Conscious chatbots, omniscient databases, secret self-training during every chat, and softmax stealing files are magical stories.' }, { heading: 'Human accountability', body: 'Institutions, vendors, policies, and affected communities shape how risks are prevented and reviewed.' }], keyTakeaway: 'Real AI risks usually come from data, context, tools, institutions, and overreliance, not model consciousness or magic.', accessibleDescription: 'A two-column ledger sorts real mechanism risks from myths or magical stories.', printNote: 'Keep column labels short; detailed claims stay in the lesson and interaction.' }
 ]
 
@@ -1251,26 +1251,44 @@ function CollectiveLanternSvg() {
 }
 
 function BenefitsGardenSvg() {
-  const tools = [
-    ['Access', 58, 56],
-    ['Search', 150, 36],
-    ['Draft', 242, 56],
-    ['Translate', 62, 146],
-    ['Code', 158, 166],
-    ['Research', 238, 146]
+  const buckets = [
+    {
+      title: ['Useful now', '+ review'],
+      x: 14,
+      tone: 'prompt',
+      chips: ['Access', 'Translate', 'Summarize', 'Search/RAG']
+    },
+    {
+      title: ['Plausible', '+ safeguards'],
+      x: 114,
+      tone: '',
+      chips: ['Tutoring', 'Triage', 'Workflow']
+    },
+    {
+      title: ['Speculative', '/ hype'],
+      x: 214,
+      tone: 'output',
+      chips: ['Solves all', 'Replaces judgment', 'No costs']
+    }
   ]
   return (
     <>
-      <circle className="aid-core" cx="160" cy="104" r="34" />
-      <Label x="138" y="110" className="tiny dark">Human</Label>
-      {tools.map(([label, x, y]) => (
-        <g key={label}>
-          <path className="aid-line" d={`M${x} ${y} L160 104`} />
-          <rect className="aid-paper-node" x={Number(x) - 32} y={Number(y) - 16} width="64" height="32" rx="8" />
-          <Label x={Number(x) - 22} y={Number(y) + 5} className="tiny dark">{label}</Label>
+      <Label x="93" y="24" className="tiny">Benefit confidence tiers</Label>
+      {buckets.map((bucket) => (
+        <g key={bucket.title.join(' ')}>
+          <rect className={bucket.tone ? `aid-box ${bucket.tone}` : 'aid-paper-node'} x={bucket.x} y="42" width="92" height="132" rx="10" />
+          <Label x={bucket.x + 12} y="64" className="micro dark">{bucket.title[0]}</Label>
+          <Label x={bucket.x + 12} y="78" className="micro dark">{bucket.title[1]}</Label>
+          {bucket.chips.map((chip, index) => (
+            <g key={chip}>
+              <rect className="aid-chip" x={bucket.x + 10} y={94 + index * 18} width="72" height="15" rx="6" />
+              <Label x={bucket.x + 16} y={105 + index * 18} className="micro dark">{chip}</Label>
+            </g>
+          ))}
         </g>
       ))}
-      <path className="aid-zen-ring alt" d="M44 184 C102 150, 220 150, 278 184" />
+      <path className="aid-zen-ring alt" d="M38 190 C108 174, 212 174, 282 190" />
+      <Label x="92" y="195" className="micro muted-text">Real help needs evidence + review</Label>
     </>
   )
 }
@@ -1324,86 +1342,130 @@ function CostsFactorySvg() {
 function HumanGardenSvg() {
   return (
     <>
-      <path className="aid-zen-ring" d="M60 108 C94 58, 226 58, 260 108 C226 158, 94 158, 60 108" />
-      <circle className="aid-core" cx="160" cy="106" r="34" />
-      <Label x="139" y="112" className="tiny dark">Person</Label>
-      {[
-        ['Dignity', 82, 70],
-        ['Learning', 238, 70],
-        ['Review', 84, 146],
-        ['Common', 236, 146]
-      ].map(([label, x, y]) => (
-        <g key={label}>
-          <rect className="aid-paper-node" x={Number(x) - 34} y={Number(y) - 15} width="68" height="30" rx="8" />
-          <Label x={Number(x) - 24} y={Number(y) + 5} className="tiny dark">{label}</Label>
-          <path className="aid-line" d={`M${x} ${y} L160 106`} />
-        </g>
-      ))}
-      <path className="aid-neon-path" d="M44 184 C116 160, 206 160, 276 184" />
+      <rect className="aid-box prompt" x="16" y="32" width="82" height="40" rx="9" />
+      <Label x="33" y="55" className="tiny dark">AI summary</Label>
+      <rect className="aid-paper-node" x="122" y="28" width="82" height="48" rx="9" />
+      <Label x="138" y="48" className="micro dark">Decision</Label>
+      <Label x="142" y="62" className="micro dark">context</Label>
+      <rect className="aid-box output" x="228" y="32" width="76" height="40" rx="9" />
+      <Label x="244" y="55" className="tiny dark">People</Label>
+      <path className="aid-neon-path" d="M98 52 H122" />
+      <path className="aid-neon-path" d="M204 52 H228" />
+      <path className="aid-neon-path" d="M266 72 C266 104, 224 110, 206 126" />
+      <rect className="aid-fixed-note" x="74" y="118" width="88" height="44" rx="9" />
+      <Label x="96" y="138" className="micro dark">Human</Label>
+      <Label x="96" y="152" className="micro dark">review</Label>
+      <rect className="aid-paper-node retriever" x="188" y="118" width="88" height="44" rx="9" />
+      <Label x="204" y="138" className="micro dark">Governance</Label>
+      <Label x="210" y="152" className="micro dark">+ action</Label>
+      <path className="aid-neon-path" d="M162 140 H188" />
+      <path className="aid-line" d="M56 72 C58 116, 70 132, 74 140" />
+      <path className="aid-zen-ring" d="M42 188 C94 164, 226 164, 278 188" />
     </>
   )
 }
 
 function ResponsiblePathSvg() {
+  const levers = [
+    ['Provenance', 22, 64, 74],
+    ['Privacy', 104, 64, 58],
+    ['Efficient', 170, 64, 64],
+    ['RAG', 242, 64, 42],
+    ['Review', 36, 102, 58],
+    ['Eval', 104, 102, 42],
+    ['Labor', 154, 102, 54],
+    ['Sustain', 216, 102, 58],
+    ['Govern', 112, 140, 70]
+  ]
   return (
     <>
-      <circle className="aid-callout" cx="70" cy="106" r="16" />
-      <Label x="64" y="112" className="tiny dark">?</Label>
-      <path className="aid-path" d="M84 106 C120 88, 142 72, 176 58 C214 42, 246 40, 286 52" />
-      <path className="aid-path thin" d="M84 106 C122 126, 146 144, 180 154 C218 166, 248 166, 288 154" />
-      <rect className="aid-paper-node" x="194" y="28" width="86" height="34" rx="8" />
-      <Label x="206" y="50" className="tiny dark">Extract</Label>
-      <rect className="aid-paper-node retriever" x="190" y="142" width="98" height="34" rx="8" />
-      <Label x="202" y="164" className="tiny dark">Responsible</Label>
-      <rect className="aid-fixed-note" x="22" y="34" width="92" height="34" rx="8" />
-      <Label x="36" y="56" className="tiny dark">Choices</Label>
+      <rect className="aid-paper-node" x="18" y="24" width="284" height="154" rx="12" />
+      <Label x="98" y="48" className="tiny dark">Better-AI control panel</Label>
+      {levers.map(([label, x, y, width]) => (
+        <g key={label}>
+          <rect className="aid-chip output" x={x} y={y} width={width} height="22" rx="7" />
+          <Label x={Number(x) + 7} y={Number(y) + 15} className="micro dark">{label}</Label>
+        </g>
+      ))}
+      <path className="aid-neon-path" d="M182 152 C210 160, 236 160, 264 150" />
+      <rect className="aid-fixed-note" x="222" y="134" width="72" height="32" rx="8" />
+      <Label x="237" y="154" className="micro dark">Task fit</Label>
     </>
   )
 }
 
 function PromptingTraySvg() {
   const parts = [
-    ['Task', 28, 36],
-    ['Context', 106, 28],
-    ['Examples', 196, 36],
-    ['Evidence', 44, 88],
-    ['Format', 208, 88]
+    ['Task', 22, 32],
+    ['Context', 88, 26],
+    ['Limits', 164, 32],
+    ['Example', 236, 26],
+    ['Evidence', 28, 86],
+    ['Uncertain', 104, 92],
+    ['Format', 190, 92],
+    ['Review', 252, 86]
   ]
   return (
     <>
       {parts.map(([label, x, y], index) => (
         <g key={label}>
-          <rect className={index % 2 ? 'aid-chip prompt' : 'aid-chip output'} x={x} y={y} width="78" height="28" rx="8" />
-          <Label x={Number(x) + 10} y={Number(y) + 19} className="tiny dark">{label}</Label>
-          <path className="aid-neon-path" d={`M${Number(x) + 39} ${Number(y) + 28} C132 116, 170 116, 160 130`} />
+          <rect className={index % 2 ? 'aid-chip prompt' : 'aid-chip output'} x={x} y={y} width={label === 'Uncertain' ? 70 : 58} height="22" rx="7" />
+          <Label x={Number(x) + 7} y={Number(y) + 15} className="micro dark">{label}</Label>
+          <path className="aid-neon-path" d={`M${Number(x) + 28} ${Number(y) + 22} C132 120, 184 120, 160 134`} />
         </g>
       ))}
-      <path className="aid-context-tray" d="M68 126 H218 L234 142 V172 H68 Z" />
-      <path className="aid-fold-line light" d="M218 126 V142 H234" />
-      <Label x="116" y="153" className="tiny">Context tray</Label>
-      <path className="aid-paper-node output" d="M246 132 H298 L306 142 V170 H246 Z" />
-      <Label x="254" y="154" className="tiny dark">Response</Label>
-      <path className="aid-neon-path" d="M234 150 C238 150, 242 150, 246 150" />
+      <path className="aid-context-tray" d="M58 132 H214 L232 148 V178 H58 Z" />
+      <path className="aid-fold-line light" d="M214 132 V148 H232" />
+      <Label x="104" y="154" className="tiny">Current context</Label>
+      <Label x="122" y="170" className="micro muted-text">this run</Label>
+      <path className="aid-paper-node output" d="M246 138 H298 L306 148 V176 H246 Z" />
+      <Label x="254" y="160" className="tiny dark">Response</Label>
+      <path className="aid-neon-path" d="M232 154 C238 154, 242 154, 246 154" />
     </>
   )
 }
 
 function SynthesisMapSvg() {
+  const nodes = [
+    ['Prompt', 16, 24],
+    ['Tokens', 90, 24],
+    ['IDs', 164, 24],
+    ['Embeds', 238, 24],
+    ['States', 16, 86],
+    ['Logits', 90, 86],
+    ['Probs', 164, 86],
+    ['Sample', 238, 86],
+    ['Append', 16, 148],
+    ['RAG', 90, 148],
+    ['Review', 164, 148],
+    ['Account.', 238, 148]
+  ]
+  const arrows = [
+    [72, 43, 90, 43],
+    [146, 43, 164, 43],
+    [220, 43, 238, 43],
+    [274, 62, 274, 86],
+    [238, 105, 220, 105],
+    [164, 105, 146, 105],
+    [90, 105, 72, 105],
+    [44, 124, 44, 148],
+    [72, 167, 90, 167],
+    [146, 167, 164, 167],
+    [220, 167, 238, 167]
+  ]
   return (
     <>
-      <path className="aid-paper-node" d="M28 50 H124 L138 64 V142 H28 Z" />
-      <path className="aid-fold-line" d="M124 50 V64 H138" />
-      <Label x="54" y="94" className="tiny dark">Map</Label>
-      <circle className="aid-core" cx="190" cy="96" r="32" />
-      <circle className="aid-callout" cx="190" cy="96" r="17" />
-      <path className="aid-select" d="M181 100 L198 88" />
-      <Label x="164" y="140" className="tiny">Compass</Label>
-      <path className="aid-paper-node output" d="M242 62 H292 L304 88 L292 132 H242 L230 88 Z" />
-      <Label x="244" y="101" className="tiny dark">Lantern</Label>
-      <path className="aid-neon-path" d="M138 96 C154 86, 162 86, 172 94" />
-      <path className="aid-neon-path" d="M208 96 C220 92, 224 92, 230 96" />
-      <rect className="aid-fixed-note" x="84" y="166" width="152" height="30" rx="8" />
-      <Label x="102" y="186" className="tiny dark">Mechanics + judgment</Label>
+      {arrows.map(([x1, y1, x2, y2], index) => (
+        <path key={index} className="aid-neon-path" d={`M${x1} ${y1} L${x2} ${y2}`} />
+      ))}
+      {nodes.map(([label, x, y], index) => (
+        <g key={label}>
+          <rect className={index < 8 ? 'aid-paper-node' : 'aid-box output'} x={x} y={y} width="56" height="38" rx="8" />
+          <Label x={Number(x) + 7} y={Number(y) + 23} className="micro dark">{label}</Label>
+        </g>
+      ))}
+      <path className="aid-zen-ring alt" d="M34 200 C102 184, 218 184, 286 200" />
+      <Label x="82" y="198" className="micro muted-text">Mechanics + human judgment</Label>
     </>
   )
 }

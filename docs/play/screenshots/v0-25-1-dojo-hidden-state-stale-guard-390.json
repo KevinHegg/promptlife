@@ -1,0 +1,38 @@
+{
+  "createdAt": "2026-06-07T19:23:58.705Z",
+  "label": "RELATED IDEAS",
+  "prompt": "Which idea is closest to Hidden state?",
+  "helper": "Choose the closest related term.",
+  "options": [
+    {
+      "text": "AEmbedding",
+      "kind": "term",
+      "represented": "embedding",
+      "source": "correct"
+    },
+    {
+      "text": "BLayer",
+      "kind": "term",
+      "represented": "layer",
+      "source": "confusable"
+    },
+    {
+      "text": "CMemory",
+      "kind": "term",
+      "represented": "memory",
+      "source": "confusable"
+    },
+    {
+      "text": "DActivation",
+      "kind": "term",
+      "represented": "activation",
+      "source": "confusable"
+    }
+  ],
+  "overflow": false,
+  "width": 390,
+  "hasLearningNeighborhood": false,
+  "hasNeighborOf": false,
+  "hasMapTheTerm": false,
+  "hasWhatDoes": false
+}

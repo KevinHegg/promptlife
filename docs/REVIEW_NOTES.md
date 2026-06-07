@@ -2,6 +2,147 @@
 
 Date: 2026-06-07
 
+## v0.25.1 Glossary Dojo Live Wording Purge
+
+### What Changed
+
+- Removed the stale learner-facing Glossary Dojo neighbor/neighborhood wording from current question generation.
+- Added a render-time Dojo copy guard so old saved rounds in `localStorage` fall back to safe wording.
+- Changed new normal Dojo rounds to use only `term_to_definition` and `definition_to_term` during this purge pass.
+- Kept `closest_concept` enabled only for explicit clean specs, stored clean specs, and deterministic QA.
+- Updated final Dojo templates for related, relationship, and stage-location question families.
+- Strengthened the Hidden state related-choice pool toward Embedding, Activation, Layer, Memory, and other representation terms.
+- Bumped the visible app version to `v0.25.1`.
+
+### Preserved
+
+- Journey cards, Journey order, Journey progress, badge logic, games, generated assets, dependencies, and checkpoint randomization were not changed.
+- Dojo remains independent from Journey progress.
+
+### Hidden State QA
+
+- Injected a stale saved `Hidden state` related question into localStorage.
+- Live UI displayed `Which idea is closest to Hidden state?`
+- Helper displayed `Choose the closest related term.`
+- Choices were terms only: Embedding, Layer, Memory, Activation.
+- No stale neighbor/neighborhood wording appeared.
+
+### Cache Note
+
+- When checking Dojo wording on GitHub Pages or iPhone Safari after this pass, use a cache-busting URL such as `?v=0251` or clear site data.
+- This note is for development/review only and is not shown to learners.
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed.
+- Built-output searches for the exact stale Dojo failure phrases returned 0 hits.
+
+### Screenshots And Report
+
+- `docs/play/GLOSSARY_DOJO_LIVE_WORDING_PURGE_V0_25_1.md`
+- `docs/play/prompt-life-v0-25-1-glossary-dojo-live-wording-purge-report.html`
+- `docs/play/prompt-life-v0-25-1-glossary-dojo-live-wording-purge-report.pdf`
+- `docs/play/screenshots/v0-25-1-glossary-dojo-hidden-state-wording-qa.json`
+- `docs/play/screenshots/v0-25-1-dojo-hidden-state-stale-guard-390.json`
+- `docs/play/screenshots/v0-25-1-dojo-hidden-state-stale-guard-390.png`
+
+### Known Issues
+
+- Historical Dojo docs and screenshots still preserve old wording as archival evidence.
+- The existing Vite large-chunk warning remains.
+
+## v0.24.3 Glossary Dojo Term Question Repair
+
+### What Changed
+
+- Repaired Glossary Dojo term-question wording so term prompts now use `What is [TERM]?` and `Choose the best description.`
+- Renamed learner-facing question labels to `TERM TO DESCRIPTION`, `DESCRIPTION TO TERM`, and `RELATED IDEAS`.
+- Added concept clusters and a closer distractor priority order so term questions prefer confusable, related, clustered, and same-stage terms before distant fallback terms.
+- Reworked Dojo feedback grammar so correct answers start with `Insight strengthened.` and wrong term-description answers name the selected wrong term.
+- Bumped the visible app version to `v0.24.3`.
+
+### Preserved
+
+- Journey cards, Journey order, Journey progress, badge logic, games, generated assets, dependencies, and checkpoint randomization were not changed.
+- Glossary Dojo still uses 12-question rounds, four choices, localStorage mastery tracking, Play/Glossary entry points, and no score/timer/leaderboard.
+
+### QA Examples
+
+- Input context: close distractors included Memory, Prompt, and Context window.
+- Tokenization: close distractors included Tokenizer, Token ID, and Token.
+- Hidden state: close distractors included Memory, Weight, and Embedding.
+- RAG: close distractors included Retrieval, Grounding, and Training.
+- Softmax: close distractors included Logits, Sampling, and Probability.
+- Water use: close distractors included Data center, Energy use, and Governance.
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed.
+
+### Screenshots And Report
+
+- `docs/play/GLOSSARY_DOJO_TERM_QUESTION_REPAIR_V0_24_3.md`
+- `docs/play/prompt-life-v0-24-3-glossary-dojo-term-question-repair-report.html`
+- `docs/play/prompt-life-v0-24-3-glossary-dojo-term-question-repair-report.pdf`
+- `docs/play/screenshots/v0-24-3-glossary-dojo-term-question-repair-qa.json`
+- `docs/play/screenshots/v0-24-3-glossary-dojo-term-question-repair-screenshots.json`
+- `docs/play/screenshots/v0-24-3-glossary-dojo-feedback-scroll-screenshots.json`
+
+### Known Issues
+
+- Historical v0.22/v0.19 Dojo docs and screenshots still contain old wording as archival records.
+- The existing Vite large-chunk warning remains.
+
+## v0.25 New Dawn Stage Audit
+
+### What Changed
+
+- Created an audit-only package for the `New Dawn` stage.
+- Audited five current New Dawn Journey cards:
+  - Benefits Worth Taking Seriously
+  - Human-Centered AI
+  - Better AI Is a Choice
+  - Effective Prompting from Model Literacy
+  - Model Literate Synthesis
+- Added stage audit docs, source review, recommendations, machine-readable JSON, screenshot index, and mobile screenshots under `docs/stage-audits/v0-25-new-dawn/`.
+- Captured 59 mobile screenshots using temporary headless Chrome profiles; user/browser progress was not changed.
+
+### Preserved
+
+- No live Journey card content, Journey order, games, generated PNG assets, dependencies, progress rules, checkpoint randomization, badge logic, or Glossary Dojo logic were changed.
+- The one-badge model remains `Prompt Life: Model Literate`.
+
+### Major Findings
+
+- New Dawn is correctly ordered and closes the Journey with benefits, human-centered values, responsible choices, prompting practice, and synthesis.
+- The copy is mostly strong and cautious; the next implementation pass should focus on clearer visuals and more diagnostic tiny interactions.
+- Model Literate Synthesis most needs a full-chain capstone interaction.
+- Better AI Is a Choice needs clearer lever categories so it does not feel list-heavy.
+- Human-Centered AI needs a concrete accountability scenario so it feels substantive rather than slogan-like.
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed.
+
+### Screenshots And Report
+
+- `docs/stage-audits/v0-25-new-dawn/README.md`
+- `docs/stage-audits/v0-25-new-dawn/card-inventory.md`
+- `docs/stage-audits/v0-25-new-dawn/recommendations.md`
+- `docs/stage-audits/v0-25-new-dawn/source-review.md`
+- `docs/stage-audits/v0-25-new-dawn/stage-audit.json`
+- `docs/stage-audits/v0-25-new-dawn/screenshot-index.md`
+- `docs/stage-audits/v0-25-new-dawn/screenshots/new-dawn-v0-25-screenshot-manifest.json`
+
 ## v0.24.1 Midnight Ledger Implementation Pass
 
 ### What Changed
@@ -2518,3 +2659,33 @@ Screenshot evidence:
 1. Add automated tests for Prompt Run step progression, reveal behavior, and reset clearing `promptRunProgress`.
 2. Add Watch and Challenge modes once the Practice spine is classroom-reviewed.
 3. Add richer visual feedback for the final ordering challenge without removing the keyboard-accessible Up/Down fallback.
+
+## v0.25.2 New Dawn Implementation Pass
+
+Date: 2026-06-07
+
+Updated the five existing New Dawn cards without adding cards, games, generated PNGs, dependencies, progress changes, checkpoint-randomization changes, Glossary Dojo changes, or badge changes.
+
+Changed:
+
+- Benefits Worth Taking Seriously now has a coded benefit-tier visual and a confidence-tier sorting interaction.
+- Human-Centered AI now uses a concrete accountability-flow visual and a student-support-note scenario choice.
+- Better AI Is a Choice now uses a coded control-panel visual and task-specific better-AI lever selection.
+- Effective Prompting from Model Literacy now uses a richer prompt/context tray and a prompt-builder interaction.
+- Model Literate Synthesis now uses a full-chain map and a tap-order synthesis interaction from prompt context to human accountability.
+- Added a concise `Benefits` glossary term and New Dawn glossary learning-path ordering updates.
+- Bumped the app version to `0.25.2`.
+
+Verification:
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed, with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed, with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed; Journey checkpoints remain randomized by answer identity.
+- Screenshot QA captured 16 implementation screenshots at 390px and 320px with no horizontal overflow in the manifest.
+- The final synthesis action was checked clear of the bottom nav.
+
+Known issues:
+
+- New Dawn remains internally source-reviewed but not learner-cited.
+- The benefit-tier interaction uses tap/cycle sorting rather than drag and drop for mobile accessibility.

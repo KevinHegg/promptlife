@@ -1,0 +1,19 @@
+{
+  "createdAt": "2026-06-07T18:26:48.889Z",
+  "records": [
+    {
+      "file": "v0-24-3-dojo-input-context-wrong-feedback-scrolled-390.png",
+      "qa": {
+        "feedback": "Not quite. That description is for Context window. Input context is everything currently visible to the model: prompt tokens, conversation history, retrieved documents, and already-generated response tokens.",
+        "overflow": false
+      }
+    },
+    {
+      "file": "v0-24-3-dojo-input-context-correct-feedback-scrolled-390.png",
+      "qa": {
+        "feedback": "Insight strengthened. Input context is everything currently visible to the model: prompt tokens, conversation history, retrieved documents, and already-generated response tokens.",
+        "overflow": false
+      }
+    }
+  ]
+}

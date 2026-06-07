@@ -1,0 +1,1186 @@
+{
+  "createdAt": "2026-06-07T18:11:39.738Z",
+  "baseUrl": "http://127.0.0.1:5173/",
+  "captureMethod": "Temporary headless Chrome profiles via CDP; Prompt Life localStorage was isolated from the user browser. Pass 1 captured Journey and Benefits screenshots; pass 2 captured remaining cards and QA metadata.",
+  "manifest": [
+    {
+      "file": "benefits-worth-taking-seriously-bottom-action-390.png",
+      "type": "card-state",
+      "width": 390,
+      "qa": {
+        "hasHorizontalOverflow": null,
+        "note": "Captured in first pass before manifest write; visually checked during audit."
+      }
+    },
+    {
+      "file": "benefits-worth-taking-seriously-brain-bridge-390.png",
+      "type": "card-state",
+      "width": 390,
+      "qa": {
+        "hasHorizontalOverflow": null,
+        "note": "Captured in first pass before manifest write; visually checked during audit."
+      }
+    },
+    {
+      "file": "benefits-worth-taking-seriously-checkpoint-390.png",
+      "type": "card-state",
+      "width": 390,
+      "qa": {
+        "hasHorizontalOverflow": null,
+        "note": "Captured in first pass before manifest write; visually checked during audit."
+      }
+    },
+    {
+      "file": "benefits-worth-taking-seriously-core-390.png",
+      "type": "card-state",
+      "width": 390,
+      "qa": {
+        "hasHorizontalOverflow": null,
+        "note": "Captured in first pass before manifest write; visually checked during audit."
+      }
+    },
+    {
+      "file": "benefits-worth-taking-seriously-correct-feedback-390.png",
+      "type": "card-state",
+      "width": 390,
+      "qa": {
+        "hasHorizontalOverflow": null,
+        "note": "Captured in first pass before manifest write; visually checked during audit."
+      }
+    },
+    {
+      "file": "benefits-worth-taking-seriously-hero-390.png",
+      "type": "card-state",
+      "width": 390,
+      "qa": {
+        "hasHorizontalOverflow": null,
+        "note": "Captured in first pass before manifest write; visually checked during audit."
+      }
+    },
+    {
+      "file": "benefits-worth-taking-seriously-interaction-390.png",
+      "type": "card-state",
+      "width": 390,
+      "qa": {
+        "hasHorizontalOverflow": null,
+        "note": "Captured in first pass before manifest write; visually checked during audit."
+      }
+    },
+    {
+      "file": "benefits-worth-taking-seriously-reflection-390.png",
+      "type": "card-state",
+      "width": 390,
+      "qa": {
+        "hasHorizontalOverflow": null,
+        "note": "Captured in first pass before manifest write; visually checked during audit."
+      }
+    },
+    {
+      "file": "benefits-worth-taking-seriously-visual-390.png",
+      "type": "card-state",
+      "width": 390,
+      "qa": {
+        "hasHorizontalOverflow": null,
+        "note": "Captured in first pass before manifest write; visually checked during audit."
+      }
+    },
+    {
+      "file": "benefits-worth-taking-seriously-wrong-feedback-390.png",
+      "type": "card-state",
+      "width": 390,
+      "qa": {
+        "hasHorizontalOverflow": null,
+        "note": "Captured in first pass before manifest write; visually checked during audit."
+      }
+    },
+    {
+      "file": "better-ai-choice-bottom-action-390.png",
+      "type": "bottom-action",
+      "card": "better-ai-choice",
+      "width": 390,
+      "qa": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "scrollTop": 3838,
+        "clientWidth": 388,
+        "scrollWidth": 388,
+        "hasHorizontalOverflow": false,
+        "visibleH1": "Better AI Is a Choice",
+        "feedback": "In ight unlocked: better AI i   haped by de ign and governance choice .",
+        "navRect": {
+          "top": 753,
+          "bottom": 835,
+          "height": 82
+        }
+      }
+    },
+    {
+      "file": "better-ai-choice-brain-bridge-390.png",
+      "type": "brain-bridge",
+      "card": "better-ai-choice",
+      "width": 390,
+      "qa": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "scrollTop": 2872,
+        "clientWidth": 388,
+        "scrollWidth": 388,
+        "hasHorizontalOverflow": false,
+        "visibleH1": "Better AI Is a Choice",
+        "feedback": null,
+        "navRect": {
+          "top": 753,
+          "bottom": 835,
+          "height": 82
+        }
+      }
+    },
+    {
+      "file": "better-ai-choice-checkpoint-390.png",
+      "type": "checkpoint",
+      "card": "better-ai-choice",
+      "width": 390,
+      "qa": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "scrollTop": 3723,
+        "clientWidth": 388,
+        "scrollWidth": 388,
+        "hasHorizontalOverflow": false,
+        "visibleH1": "Better AI Is a Choice",
+        "feedback": null,
+        "navRect": {
+          "top": 753,
+          "bottom": 835,
+          "height": 82
+        }
+      }
+    },
+    {
+      "file": "better-ai-choice-core-390.png",
+      "type": "core",
+      "card": "better-ai-choice",
+      "width": 390,
+      "qa": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "scrollTop": 1442,
+        "clientWidth": 388,
+        "scrollWidth": 388,
+        "hasHorizontalOverflow": false,
+        "visibleH1": "Better AI Is a Choice",
+        "feedback": null,
+        "navRect": {
+          "top": 753,
+          "bottom": 835,
+          "height": 82
+        }
+      }
+    },
+    {
+      "file": "better-ai-choice-correct-feedback-390.png",
+      "type": "correct-feedback",
+      "card": "better-ai-choice",
+      "width": 390,
+      "qa": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "scrollTop": 3723,
+        "clientWidth": 388,
+        "scrollWidth": 388,
+        "hasHorizontalOverflow": false,
+        "visibleH1": "Better AI Is a Choice",
+        "feedback": "In ight unlocked: better AI i   haped by de ign and governance choice .",
+        "navRect": {
+          "top": 753,
+          "bottom": 835,
+          "height": 82
+        }
+      }
+    },
+    {
+      "file": "better-ai-choice-hero-390.png",
+      "type": "card-hero",
+      "card": "better-ai-choice",
+      "width": 390,
+      "qa": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "scrollTop": 0,
+        "clientWidth": 388,
+        "scrollWidth": 388,
+        "hasHorizontalOverflow": false,
+        "visibleH1": "Better AI Is a Choice",
+        "feedback": null,
+        "navRect": {
+          "top": 753,
+          "bottom": 835,
+          "height": 82
+        }
+      }
+    },
+    {
+      "file": "better-ai-choice-interaction-390.png",
+      "type": "interaction",
+      "card": "better-ai-choice",
+      "width": 390,
+      "qa": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "scrollTop": 3200,
+        "clientWidth": 388,
+        "scrollWidth": 388,
+        "hasHorizontalOverflow": false,
+        "visibleH1": "Better AI Is a Choice",
+        "feedback": null,
+        "navRect": {
+          "top": 753,
+          "bottom": 835,
+          "height": 82
+        }
+      }
+    },
+    {
+      "file": "better-ai-choice-reflection-390.png",
+      "type": "reflection",
+      "card": "better-ai-choice",
+      "width": 390,
+      "qa": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "scrollTop": 3838,
+        "clientWidth": 388,
+        "scrollWidth": 388,
+        "hasHorizontalOverflow": false,
+        "visibleH1": "Better AI Is a Choice",
+        "feedback": "In ight unlocked: better AI i   haped by de ign and governance choice .",
+        "navRect": {
+          "top": 753,
+          "bottom": 835,
+          "height": 82
+        }
+      }
+    },
+    {
+      "file": "better-ai-choice-visual-390.png",
+      "type": "visual",
+      "card": "better-ai-choice",
+      "width": 390,
+      "qa": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "scrollTop": 546,
+        "clientWidth": 388,
+        "scrollWidth": 388,
+        "hasHorizontalOverflow": false,
+        "visibleH1": "Better AI Is a Choice",
+        "feedback": null,
+        "navRect": {
+          "top": 753,
+          "bottom": 835,
+          "height": 82
+        }
+      }
+    },
+    {
+      "file": "better-ai-choice-wrong-feedback-390.png",
+      "type": "wrong-feedback",
+      "card": "better-ai-choice",
+      "width": 390,
+      "qa": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "scrollTop": 3723,
+        "clientWidth": 388,
+        "scrollWidth": 388,
+        "hasHorizontalOverflow": false,
+        "visibleH1": "Better AI Is a Choice",
+        "feedback": "Not quite. Smaller ta k- pecific  y tem  may be better for  ome goal . Choo e another an wer to retry.",
+        "navRect": {
+          "top": 753,
+          "bottom": 835,
+          "height": 82
+        }
+      }
+    },
+    {
+      "file": "effective-prompting-literacy-bottom-action-390.png",
+      "type": "bottom-action",
+      "card": "effective-prompting-literacy",
+      "width": 390,
+      "qa": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "scrollTop": 3732,
+        "clientWidth": 388,
+        "scrollWidth": 388,
+        "hasHorizontalOverflow": false,
+        "visibleH1": "Effective Prompting from Model Literacy",
+        "feedback": "In ight unlocked: prompting i  context de ign.",
+        "navRect": {
+          "top": 753,
+          "bottom": 835,
+          "height": 82
+        }
+      }
+    },
+    {
+      "file": "effective-prompting-literacy-brain-bridge-390.png",
+      "type": "brain-bridge",
+      "card": "effective-prompting-literacy",
+      "width": 390,
+      "qa": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "scrollTop": 2763,
+        "clientWidth": 388,
+        "scrollWidth": 388,
+        "hasHorizontalOverflow": false,
+        "visibleH1": "Effective Prompting from Model Literacy",
+        "feedback": null,
+        "navRect": {
+          "top": 753,
+          "bottom": 835,
+          "height": 82
+        }
+      }
+    },
+    {
+      "file": "effective-prompting-literacy-checkpoint-320.png",
+      "type": "spot-check-320",
+      "card": "effective-prompting-literacy",
+      "width": 320,
+      "qa": {
+        "viewport": {
+          "width": 320,
+          "height": 844
+        },
+        "scrollTop": 3982,
+        "clientWidth": 318,
+        "scrollWidth": 318,
+        "hasHorizontalOverflow": false,
+        "visibleH1": "Effective Prompting from Model Literacy",
+        "feedback": null,
+        "navRect": {
+          "top": 753,
+          "bottom": 835,
+          "height": 82
+        }
+      }
+    },
+    {
+      "file": "effective-prompting-literacy-checkpoint-390.png",
+      "type": "checkpoint",
+      "card": "effective-prompting-literacy",
+      "width": 390,
+      "qa": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "scrollTop": 3616,
+        "clientWidth": 388,
+        "scrollWidth": 388,
+        "hasHorizontalOverflow": false,
+        "visibleH1": "Effective Prompting from Model Literacy",
+        "feedback": null,
+        "navRect": {
+          "top": 753,
+          "bottom": 835,
+          "height": 82
+        }
+      }
+    },
+    {
+      "file": "effective-prompting-literacy-core-390.png",
+      "type": "core",
+      "card": "effective-prompting-literacy",
+      "width": 390,
+      "qa": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "scrollTop": 1478,
+        "clientWidth": 388,
+        "scrollWidth": 388,
+        "hasHorizontalOverflow": false,
+        "visibleH1": "Effective Prompting from Model Literacy",
+        "feedback": null,
+        "navRect": {
+          "top": 753,
+          "bottom": 835,
+          "height": 82
+        }
+      }
+    },
+    {
+      "file": "effective-prompting-literacy-correct-feedback-390.png",
+      "type": "correct-feedback",
+      "card": "effective-prompting-literacy",
+      "width": 390,
+      "qa": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "scrollTop": 3616,
+        "clientWidth": 388,
+        "scrollWidth": 388,
+        "hasHorizontalOverflow": false,
+        "visibleH1": "Effective Prompting from Model Literacy",
+        "feedback": "In ight unlocked: prompting i  context de ign.",
+        "navRect": {
+          "top": 753,
+          "bottom": 835,
+          "height": 82
+        }
+      }
+    },
+    {
+      "file": "effective-prompting-literacy-hero-390.png",
+      "type": "card-hero",
+      "card": "effective-prompting-literacy",
+      "width": 390,
+      "qa": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "scrollTop": 0,
+        "clientWidth": 388,
+        "scrollWidth": 388,
+        "hasHorizontalOverflow": false,
+        "visibleH1": "Effective Prompting from Model Literacy",
+        "feedback": null,
+        "navRect": {
+          "top": 753,
+          "bottom": 835,
+          "height": 82
+        }
+      }
+    },
+    {
+      "file": "effective-prompting-literacy-interaction-390.png",
+      "type": "interaction",
+      "card": "effective-prompting-literacy",
+      "width": 390,
+      "qa": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "scrollTop": 3067,
+        "clientWidth": 388,
+        "scrollWidth": 388,
+        "hasHorizontalOverflow": false,
+        "visibleH1": "Effective Prompting from Model Literacy",
+        "feedback": null,
+        "navRect": {
+          "top": 753,
+          "bottom": 835,
+          "height": 82
+        }
+      }
+    },
+    {
+      "file": "effective-prompting-literacy-reflection-390.png",
+      "type": "reflection",
+      "card": "effective-prompting-literacy",
+      "width": 390,
+      "qa": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "scrollTop": 3732,
+        "clientWidth": 388,
+        "scrollWidth": 388,
+        "hasHorizontalOverflow": false,
+        "visibleH1": "Effective Prompting from Model Literacy",
+        "feedback": "In ight unlocked: prompting i  context de ign.",
+        "navRect": {
+          "top": 753,
+          "bottom": 835,
+          "height": 82
+        }
+      }
+    },
+    {
+      "file": "effective-prompting-literacy-visual-320.png",
+      "type": "spot-check-320",
+      "card": "effective-prompting-literacy",
+      "width": 320,
+      "qa": {
+        "viewport": {
+          "width": 320,
+          "height": 844
+        },
+        "scrollTop": 686,
+        "clientWidth": 318,
+        "scrollWidth": 318,
+        "hasHorizontalOverflow": false,
+        "visibleH1": "Effective Prompting from Model Literacy",
+        "feedback": null,
+        "navRect": {
+          "top": 753,
+          "bottom": 835,
+          "height": 82
+        }
+      }
+    },
+    {
+      "file": "effective-prompting-literacy-visual-390.png",
+      "type": "visual",
+      "card": "effective-prompting-literacy",
+      "width": 390,
+      "qa": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "scrollTop": 596,
+        "clientWidth": 388,
+        "scrollWidth": 388,
+        "hasHorizontalOverflow": false,
+        "visibleH1": "Effective Prompting from Model Literacy",
+        "feedback": null,
+        "navRect": {
+          "top": 753,
+          "bottom": 835,
+          "height": 82
+        }
+      }
+    },
+    {
+      "file": "effective-prompting-literacy-wrong-feedback-390.png",
+      "type": "wrong-feedback",
+      "card": "effective-prompting-literacy",
+      "width": 390,
+      "qa": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "scrollTop": 3616,
+        "clientWidth": 388,
+        "scrollWidth": 388,
+        "hasHorizontalOverflow": false,
+        "visibleH1": "Effective Prompting from Model Literacy",
+        "feedback": "Not quite. Prompting u ually doe  not train or fine-tune the model. Choo e another an wer to retry.",
+        "navRect": {
+          "top": 753,
+          "bottom": 835,
+          "height": 82
+        }
+      }
+    },
+    {
+      "file": "glossary-dojo-entry-still-loads-390.png",
+      "type": "regression",
+      "width": 390,
+      "qa": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "scrollTop": 0,
+        "clientWidth": 388,
+        "scrollWidth": 388,
+        "hasHorizontalOverflow": false,
+        "visibleH1": "Play to understand",
+        "feedback": null,
+        "navRect": {
+          "top": 753,
+          "bottom": 835,
+          "height": 82
+        }
+      }
+    },
+    {
+      "file": "home-assets-still-load-390.png",
+      "type": "regression",
+      "width": 390,
+      "qa": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "scrollTop": 0,
+        "clientWidth": 388,
+        "scrollWidth": 388,
+        "hasHorizontalOverflow": false,
+        "visibleH1": "Prompt Life",
+        "feedback": null,
+        "navRect": {
+          "top": 753,
+          "bottom": 835,
+          "height": 82
+        }
+      }
+    },
+    {
+      "file": "human-centered-ai-bottom-action-390.png",
+      "type": "bottom-action",
+      "card": "human-centered-ai",
+      "width": 390,
+      "qa": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "scrollTop": 3527,
+        "clientWidth": 388,
+        "scrollWidth": 388,
+        "hasHorizontalOverflow": false,
+        "visibleH1": "Human-Centered AI",
+        "feedback": "In ight unlocked: human-centered AI keep  re pon ibility with people.",
+        "navRect": {
+          "top": 753,
+          "bottom": 835,
+          "height": 82
+        }
+      }
+    },
+    {
+      "file": "human-centered-ai-brain-bridge-390.png",
+      "type": "brain-bridge",
+      "card": "human-centered-ai",
+      "width": 390,
+      "qa": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "scrollTop": 2739,
+        "clientWidth": 388,
+        "scrollWidth": 388,
+        "hasHorizontalOverflow": false,
+        "visibleH1": "Human-Centered AI",
+        "feedback": null,
+        "navRect": {
+          "top": 753,
+          "bottom": 835,
+          "height": 82
+        }
+      }
+    },
+    {
+      "file": "human-centered-ai-checkpoint-390.png",
+      "type": "checkpoint",
+      "card": "human-centered-ai",
+      "width": 390,
+      "qa": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "scrollTop": 3408,
+        "clientWidth": 388,
+        "scrollWidth": 388,
+        "hasHorizontalOverflow": false,
+        "visibleH1": "Human-Centered AI",
+        "feedback": null,
+        "navRect": {
+          "top": 753,
+          "bottom": 835,
+          "height": 82
+        }
+      }
+    },
+    {
+      "file": "human-centered-ai-core-390.png",
+      "type": "core",
+      "card": "human-centered-ai",
+      "width": 390,
+      "qa": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "scrollTop": 1431,
+        "clientWidth": 388,
+        "scrollWidth": 388,
+        "hasHorizontalOverflow": false,
+        "visibleH1": "Human-Centered AI",
+        "feedback": null,
+        "navRect": {
+          "top": 753,
+          "bottom": 835,
+          "height": 82
+        }
+      }
+    },
+    {
+      "file": "human-centered-ai-correct-feedback-390.png",
+      "type": "correct-feedback",
+      "card": "human-centered-ai",
+      "width": 390,
+      "qa": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "scrollTop": 3408,
+        "clientWidth": 388,
+        "scrollWidth": 388,
+        "hasHorizontalOverflow": false,
+        "visibleH1": "Human-Centered AI",
+        "feedback": "In ight unlocked: human-centered AI keep  re pon ibility with people.",
+        "navRect": {
+          "top": 753,
+          "bottom": 835,
+          "height": 82
+        }
+      }
+    },
+    {
+      "file": "human-centered-ai-hero-390.png",
+      "type": "card-hero",
+      "card": "human-centered-ai",
+      "width": 390,
+      "qa": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "scrollTop": 0,
+        "clientWidth": 388,
+        "scrollWidth": 388,
+        "hasHorizontalOverflow": false,
+        "visibleH1": "Human-Centered AI",
+        "feedback": null,
+        "navRect": {
+          "top": 753,
+          "bottom": 835,
+          "height": 82
+        }
+      }
+    },
+    {
+      "file": "human-centered-ai-interaction-390.png",
+      "type": "interaction",
+      "card": "human-centered-ai",
+      "width": 390,
+      "qa": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "scrollTop": 3020,
+        "clientWidth": 388,
+        "scrollWidth": 388,
+        "hasHorizontalOverflow": false,
+        "visibleH1": "Human-Centered AI",
+        "feedback": null,
+        "navRect": {
+          "top": 753,
+          "bottom": 835,
+          "height": 82
+        }
+      }
+    },
+    {
+      "file": "human-centered-ai-reflection-390.png",
+      "type": "reflection",
+      "card": "human-centered-ai",
+      "width": 390,
+      "qa": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "scrollTop": 3527,
+        "clientWidth": 388,
+        "scrollWidth": 388,
+        "hasHorizontalOverflow": false,
+        "visibleH1": "Human-Centered AI",
+        "feedback": "In ight unlocked: human-centered AI keep  re pon ibility with people.",
+        "navRect": {
+          "top": 753,
+          "bottom": 835,
+          "height": 82
+        }
+      }
+    },
+    {
+      "file": "human-centered-ai-visual-390.png",
+      "type": "visual",
+      "card": "human-centered-ai",
+      "width": 390,
+      "qa": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "scrollTop": 571,
+        "clientWidth": 388,
+        "scrollWidth": 388,
+        "hasHorizontalOverflow": false,
+        "visibleH1": "Human-Centered AI",
+        "feedback": null,
+        "navRect": {
+          "top": 753,
+          "bottom": 835,
+          "height": 82
+        }
+      }
+    },
+    {
+      "file": "human-centered-ai-wrong-feedback-390.png",
+      "type": "wrong-feedback",
+      "card": "human-centered-ai",
+      "width": 390,
+      "qa": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "scrollTop": 3408,
+        "clientWidth": 388,
+        "scrollWidth": 388,
+        "hasHorizontalOverflow": false,
+        "visibleH1": "Human-Centered AI",
+        "feedback": "Not quite. Speed i  not the  ame a  dignity, learning, or re pon ibility. Choo e another an wer to retry.",
+        "navRect": {
+          "top": 753,
+          "bottom": 835,
+          "height": 82
+        }
+      }
+    },
+    {
+      "file": "journey-top.png",
+      "type": "stage",
+      "width": 390,
+      "qa": {
+        "hasHorizontalOverflow": null,
+        "note": "Captured in first pass before manifest write; visually checked during audit."
+      }
+    },
+    {
+      "file": "model-literate-synthesis-bottom-action-390.png",
+      "type": "bottom-action",
+      "card": "model-literate-synthesis",
+      "width": 390,
+      "qa": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "scrollTop": 3810,
+        "clientWidth": 388,
+        "scrollWidth": 388,
+        "hasHorizontalOverflow": false,
+        "visibleH1": "Model Literate Synthesis",
+        "feedback": "In ight unlocked: model literacy join  mechani m with judgment.",
+        "navRect": {
+          "top": 753,
+          "bottom": 835,
+          "height": 82
+        }
+      }
+    },
+    {
+      "file": "model-literate-synthesis-brain-bridge-390.png",
+      "type": "brain-bridge",
+      "card": "model-literate-synthesis",
+      "width": 390,
+      "qa": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "scrollTop": 2777,
+        "clientWidth": 388,
+        "scrollWidth": 388,
+        "hasHorizontalOverflow": false,
+        "visibleH1": "Model Literate Synthesis",
+        "feedback": null,
+        "navRect": {
+          "top": 753,
+          "bottom": 835,
+          "height": 82
+        }
+      }
+    },
+    {
+      "file": "model-literate-synthesis-checkpoint-390.png",
+      "type": "checkpoint",
+      "card": "model-literate-synthesis",
+      "width": 390,
+      "qa": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "scrollTop": 3687,
+        "clientWidth": 388,
+        "scrollWidth": 388,
+        "hasHorizontalOverflow": false,
+        "visibleH1": "Model Literate Synthesis",
+        "feedback": null,
+        "navRect": {
+          "top": 753,
+          "bottom": 835,
+          "height": 82
+        }
+      }
+    },
+    {
+      "file": "model-literate-synthesis-core-390.png",
+      "type": "core",
+      "card": "model-literate-synthesis",
+      "width": 390,
+      "qa": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "scrollTop": 1471,
+        "clientWidth": 388,
+        "scrollWidth": 388,
+        "hasHorizontalOverflow": false,
+        "visibleH1": "Model Literate Synthesis",
+        "feedback": null,
+        "navRect": {
+          "top": 753,
+          "bottom": 835,
+          "height": 82
+        }
+      }
+    },
+    {
+      "file": "model-literate-synthesis-core-430.png",
+      "type": "spot-check-430",
+      "card": "model-literate-synthesis",
+      "width": 430,
+      "qa": {
+        "viewport": {
+          "width": 430,
+          "height": 844
+        },
+        "scrollTop": 1432,
+        "clientWidth": 428,
+        "scrollWidth": 428,
+        "hasHorizontalOverflow": false,
+        "visibleH1": "Model Literate Synthesis",
+        "feedback": null,
+        "navRect": {
+          "top": 753,
+          "bottom": 835,
+          "height": 82
+        }
+      }
+    },
+    {
+      "file": "model-literate-synthesis-correct-feedback-390.png",
+      "type": "correct-feedback",
+      "card": "model-literate-synthesis",
+      "width": 390,
+      "qa": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "scrollTop": 3687,
+        "clientWidth": 388,
+        "scrollWidth": 388,
+        "hasHorizontalOverflow": false,
+        "visibleH1": "Model Literate Synthesis",
+        "feedback": "In ight unlocked: model literacy join  mechani m with judgment.",
+        "navRect": {
+          "top": 753,
+          "bottom": 835,
+          "height": 82
+        }
+      }
+    },
+    {
+      "file": "model-literate-synthesis-hero-390.png",
+      "type": "card-hero",
+      "card": "model-literate-synthesis",
+      "width": 390,
+      "qa": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "scrollTop": 0,
+        "clientWidth": 388,
+        "scrollWidth": 388,
+        "hasHorizontalOverflow": false,
+        "visibleH1": "Model Literate Synthesis",
+        "feedback": null,
+        "navRect": {
+          "top": 753,
+          "bottom": 835,
+          "height": 82
+        }
+      }
+    },
+    {
+      "file": "model-literate-synthesis-interaction-390.png",
+      "type": "interaction",
+      "card": "model-literate-synthesis",
+      "width": 390,
+      "qa": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "scrollTop": 3058,
+        "clientWidth": 388,
+        "scrollWidth": 388,
+        "hasHorizontalOverflow": false,
+        "visibleH1": "Model Literate Synthesis",
+        "feedback": null,
+        "navRect": {
+          "top": 753,
+          "bottom": 835,
+          "height": 82
+        }
+      }
+    },
+    {
+      "file": "model-literate-synthesis-reflection-390.png",
+      "type": "reflection",
+      "card": "model-literate-synthesis",
+      "width": 390,
+      "qa": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "scrollTop": 3810,
+        "clientWidth": 388,
+        "scrollWidth": 388,
+        "hasHorizontalOverflow": false,
+        "visibleH1": "Model Literate Synthesis",
+        "feedback": "In ight unlocked: model literacy join  mechani m with judgment.",
+        "navRect": {
+          "top": 753,
+          "bottom": 835,
+          "height": 82
+        }
+      }
+    },
+    {
+      "file": "model-literate-synthesis-visual-320.png",
+      "type": "spot-check-320",
+      "card": "model-literate-synthesis",
+      "width": 320,
+      "qa": {
+        "viewport": {
+          "width": 320,
+          "height": 844
+        },
+        "scrollTop": 576,
+        "clientWidth": 318,
+        "scrollWidth": 318,
+        "hasHorizontalOverflow": false,
+        "visibleH1": "Model Literate Synthesis",
+        "feedback": null,
+        "navRect": {
+          "top": 753,
+          "bottom": 835,
+          "height": 82
+        }
+      }
+    },
+    {
+      "file": "model-literate-synthesis-visual-390.png",
+      "type": "visual",
+      "card": "model-literate-synthesis",
+      "width": 390,
+      "qa": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "scrollTop": 570,
+        "clientWidth": 388,
+        "scrollWidth": 388,
+        "hasHorizontalOverflow": false,
+        "visibleH1": "Model Literate Synthesis",
+        "feedback": null,
+        "navRect": {
+          "top": 753,
+          "bottom": 835,
+          "height": 82
+        }
+      }
+    },
+    {
+      "file": "model-literate-synthesis-wrong-feedback-390.png",
+      "type": "wrong-feedback",
+      "card": "model-literate-synthesis",
+      "width": 390,
+      "qa": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "scrollTop": 3687,
+        "clientWidth": 388,
+        "scrollWidth": 388,
+        "hasHorizontalOverflow": false,
+        "visibleH1": "Model Literate Synthesis",
+        "feedback": "Not quite. Fluency i  not wi dom. Choo e another an wer to retry.",
+        "navRect": {
+          "top": 753,
+          "bottom": 835,
+          "height": 82
+        }
+      }
+    },
+    {
+      "file": "new-dawn-overview.png",
+      "type": "stage",
+      "width": 390,
+      "qa": {
+        "hasHorizontalOverflow": null,
+        "note": "Captured in first pass before manifest write; visually checked during audit."
+      }
+    },
+    {
+      "file": "new-dawn-stage-link.png",
+      "type": "stage",
+      "width": 390,
+      "qa": {
+        "hasHorizontalOverflow": null,
+        "note": "Captured in first pass before manifest write; visually checked during audit."
+      }
+    }
+  ],
+  "totals": {
+    "screenshots": 59,
+    "pngs": 59,
+    "pass2Overflows": [],
+    "firstPassOverflowStatus": "No visual overflow observed in manual spot-check; machine overflow metadata was not written before pass 1 was interrupted at optional review-route capture."
+  }
+}

@@ -2349,6 +2349,150 @@ p {
   color: #effffd;
 }
 
+.new-dawn-interaction {
+  background:
+    linear-gradient(135deg, rgba(255, 244, 222, 0.14), transparent 42%),
+    linear-gradient(180deg, rgba(53, 230, 226, 0.12), transparent),
+    #081945;
+}
+
+.new-dawn-scenario-board,
+.prompt-draft-card,
+.synthesis-order-list {
+  display: grid;
+  gap: 0.45rem;
+  min-width: 0;
+  border-radius: 8px;
+  padding: 0.72rem;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.new-dawn-scenario-board {
+  grid-template-columns: 1fr;
+}
+
+.new-dawn-scenario-board span,
+.synthesis-order-list li {
+  min-width: 0;
+  border-radius: 8px;
+  padding: 0.5rem 0.58rem;
+  background: rgba(255, 255, 255, 0.12);
+  color: #f7fbff;
+  font-size: 0.82rem;
+  font-weight: 900;
+  line-height: 1.18;
+}
+
+.new-dawn-scenario-board span:nth-child(3),
+.new-dawn-scenario-board span:nth-child(4) {
+  background: rgba(223, 254, 250, 0.16);
+  color: #effffd;
+}
+
+.lever-panel,
+.prompt-part-grid,
+.synthesis-choice-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.45rem;
+  min-width: 0;
+}
+
+.lever-panel button,
+.prompt-part-grid button,
+.synthesis-choice-grid button {
+  min-width: 0;
+  min-height: 44px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 8px;
+  padding: 0.55rem 0.62rem;
+  background: rgba(255, 255, 255, 0.12);
+  color: white;
+  font-weight: 900;
+  line-height: 1.18;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+
+.lever-panel button.active,
+.prompt-part-grid button.active,
+.synthesis-choice-grid button.active {
+  border-color: rgba(53, 230, 226, 0.82);
+  background: #dffefa;
+  color: var(--pl-indigo);
+}
+
+.prompt-part-grid button:disabled,
+.synthesis-choice-grid button:disabled {
+  cursor: default;
+  opacity: 0.88;
+}
+
+.prompt-draft-card span {
+  color: var(--pl-mint);
+  font-size: 0.72rem;
+  font-weight: 950;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.prompt-draft-card p {
+  color: white;
+  font-weight: 850;
+  line-height: 1.35;
+}
+
+.synthesis-order-list {
+  margin: 0;
+  padding-left: 0.72rem;
+  list-style: none;
+}
+
+.synthesis-order-list li {
+  display: grid;
+  grid-template-columns: 1.8rem minmax(0, 1fr);
+  align-items: center;
+  gap: 0.45rem;
+  color: rgba(238, 248, 255, 0.74);
+}
+
+.synthesis-order-list li.active {
+  background: rgba(223, 254, 250, 0.16);
+  color: white;
+}
+
+.synthesis-order-list span {
+  display: grid;
+  place-items: center;
+  width: 1.55rem;
+  height: 1.55rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.18);
+  color: inherit;
+  font-size: 0.76rem;
+  font-weight: 950;
+}
+
+.synthesis-order-list strong {
+  min-width: 0;
+  color: inherit;
+  font-size: 0.82rem;
+  line-height: 1.18;
+  overflow-wrap: anywhere;
+}
+
+@media (min-width: 390px) {
+  .lever-panel,
+  .prompt-part-grid,
+  .synthesis-choice-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .new-dawn-scenario-board {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 .twilight-interaction {
   display: grid;
   gap: 0.8rem;

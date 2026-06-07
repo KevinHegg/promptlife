@@ -1,0 +1,342 @@
+{
+  "date": "2026-06-07T19:43:18.618Z",
+  "appUrl": "http://127.0.0.1:5173/?debug=1&v=0252-implementation",
+  "screenshots": [
+    {
+      "file": "docs/stage-audits/v0-25-new-dawn/implementation-screenshots/v0-25-2-new-dawn-overview-390.png",
+      "width": 390,
+      "height": 844,
+      "note": "New Dawn overview in Journey",
+      "qa": {
+        "title": "Prompt Life",
+        "url": "http://127.0.0.1:5173/?debug=1&v=0252-implementation",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "shellScrollTop": 7411,
+        "documentScrollWidth": 390,
+        "documentClientWidth": 390,
+        "shellScrollWidth": 388,
+        "shellClientWidth": 388,
+        "horizontalOverflow": false,
+        "focusedTag": "H1"
+      }
+    },
+    {
+      "file": "docs/stage-audits/v0-25-new-dawn/implementation-screenshots/v0-25-2-benefits-visual-390.png",
+      "width": 390,
+      "height": 844,
+      "note": "Benefits tier visual",
+      "qa": {
+        "title": "Prompt Life",
+        "url": "http://127.0.0.1:5173/?debug=1&v=0252-implementation",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "shellScrollTop": 573,
+        "documentScrollWidth": 390,
+        "documentClientWidth": 390,
+        "shellScrollWidth": 388,
+        "shellClientWidth": 388,
+        "horizontalOverflow": false,
+        "focusedTag": "H1"
+      }
+    },
+    {
+      "file": "docs/stage-audits/v0-25-new-dawn/implementation-screenshots/v0-25-2-benefits-interaction-390.png",
+      "width": 390,
+      "height": 844,
+      "note": "Benefits evidence-tier interaction success state",
+      "qa": {
+        "title": "Prompt Life",
+        "url": "http://127.0.0.1:5173/?debug=1&v=0252-implementation",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "shellScrollTop": 3171,
+        "documentScrollWidth": 390,
+        "documentClientWidth": 390,
+        "shellScrollWidth": 388,
+        "shellClientWidth": 388,
+        "horizontalOverflow": false,
+        "focusedTag": "H1"
+      }
+    },
+    {
+      "file": "docs/stage-audits/v0-25-new-dawn/implementation-screenshots/v0-25-2-human-centered-visual-390.png",
+      "width": 390,
+      "height": 844,
+      "note": "Human-centered accountability visual",
+      "qa": {
+        "title": "Prompt Life",
+        "url": "http://127.0.0.1:5173/?debug=1&v=0252-implementation",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "shellScrollTop": 598,
+        "documentScrollWidth": 390,
+        "documentClientWidth": 390,
+        "shellScrollWidth": 388,
+        "shellClientWidth": 388,
+        "horizontalOverflow": false,
+        "focusedTag": "H1"
+      }
+    },
+    {
+      "file": "docs/stage-audits/v0-25-new-dawn/implementation-screenshots/v0-25-2-human-centered-interaction-390.png",
+      "width": 390,
+      "height": 844,
+      "note": "Human-centered scenario correct feedback",
+      "qa": {
+        "title": "Prompt Life",
+        "url": "http://127.0.0.1:5173/?debug=1&v=0252-implementation",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "shellScrollTop": 3069,
+        "documentScrollWidth": 390,
+        "documentClientWidth": 390,
+        "shellScrollWidth": 388,
+        "shellClientWidth": 388,
+        "horizontalOverflow": false,
+        "focusedTag": "H1"
+      }
+    },
+    {
+      "file": "docs/stage-audits/v0-25-new-dawn/implementation-screenshots/v0-25-2-better-ai-visual-390.png",
+      "width": 390,
+      "height": 844,
+      "note": "Better-AI control panel visual",
+      "qa": {
+        "title": "Prompt Life",
+        "url": "http://127.0.0.1:5173/?debug=1&v=0252-implementation",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "shellScrollTop": 573,
+        "documentScrollWidth": 390,
+        "documentClientWidth": 390,
+        "shellScrollWidth": 388,
+        "shellClientWidth": 388,
+        "horizontalOverflow": false,
+        "focusedTag": "H1"
+      }
+    },
+    {
+      "file": "docs/stage-audits/v0-25-new-dawn/implementation-screenshots/v0-25-2-better-ai-interaction-390.png",
+      "width": 390,
+      "height": 844,
+      "note": "Better-AI levers success state",
+      "qa": {
+        "title": "Prompt Life",
+        "url": "http://127.0.0.1:5173/?debug=1&v=0252-implementation",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "shellScrollTop": 3227,
+        "documentScrollWidth": 390,
+        "documentClientWidth": 390,
+        "shellScrollWidth": 388,
+        "shellClientWidth": 388,
+        "horizontalOverflow": false,
+        "focusedTag": "H1"
+      }
+    },
+    {
+      "file": "docs/stage-audits/v0-25-new-dawn/implementation-screenshots/v0-25-2-prompting-visual-390.png",
+      "width": 390,
+      "height": 844,
+      "note": "Prompting context tray visual",
+      "qa": {
+        "title": "Prompt Life",
+        "url": "http://127.0.0.1:5173/?debug=1&v=0252-implementation",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "shellScrollTop": 622,
+        "documentScrollWidth": 390,
+        "documentClientWidth": 390,
+        "shellScrollWidth": 388,
+        "shellClientWidth": 388,
+        "horizontalOverflow": false,
+        "focusedTag": "H1"
+      }
+    },
+    {
+      "file": "docs/stage-audits/v0-25-new-dawn/implementation-screenshots/v0-25-2-synthesis-visual-390.png",
+      "width": 390,
+      "height": 844,
+      "note": "Synthesis full-chain visual",
+      "qa": {
+        "title": "Prompt Life",
+        "url": "http://127.0.0.1:5173/?debug=1&v=0252-implementation",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "shellScrollTop": 597,
+        "documentScrollWidth": 390,
+        "documentClientWidth": 390,
+        "shellScrollWidth": 388,
+        "shellClientWidth": 388,
+        "horizontalOverflow": false,
+        "focusedTag": "H1"
+      }
+    },
+    {
+      "file": "docs/stage-audits/v0-25-new-dawn/implementation-screenshots/v0-25-2-synthesis-interaction-390.png",
+      "width": 390,
+      "height": 844,
+      "note": "Synthesis chain complete state",
+      "qa": {
+        "title": "Prompt Life",
+        "url": "http://127.0.0.1:5173/?debug=1&v=0252-implementation",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "shellScrollTop": 3218,
+        "documentScrollWidth": 390,
+        "documentClientWidth": 390,
+        "shellScrollWidth": 388,
+        "shellClientWidth": 388,
+        "horizontalOverflow": false,
+        "focusedTag": "H1"
+      }
+    },
+    {
+      "file": "docs/stage-audits/v0-25-new-dawn/implementation-screenshots/v0-25-2-synthesis-visual-320.png",
+      "width": 320,
+      "height": 844,
+      "note": "Synthesis full-chain visual at 320px",
+      "qa": {
+        "title": "Prompt Life",
+        "url": "http://127.0.0.1:5173/?debug=1&v=0252-implementation",
+        "viewport": {
+          "width": 320,
+          "height": 844
+        },
+        "shellScrollTop": 574,
+        "documentScrollWidth": 320,
+        "documentClientWidth": 320,
+        "shellScrollWidth": 318,
+        "shellClientWidth": 318,
+        "horizontalOverflow": false,
+        "focusedTag": "H1"
+      }
+    },
+    {
+      "file": "docs/stage-audits/v0-25-new-dawn/implementation-screenshots/v0-25-2-synthesis-interaction-320.png",
+      "width": 320,
+      "height": 844,
+      "note": "Synthesis chain interaction at 320px",
+      "qa": {
+        "title": "Prompt Life",
+        "url": "http://127.0.0.1:5173/?debug=1&v=0252-implementation",
+        "viewport": {
+          "width": 320,
+          "height": 844
+        },
+        "shellScrollTop": 3509,
+        "documentScrollWidth": 320,
+        "documentClientWidth": 320,
+        "shellScrollWidth": 318,
+        "shellClientWidth": 318,
+        "horizontalOverflow": false,
+        "focusedTag": "H1"
+      }
+    },
+    {
+      "file": "docs/stage-audits/v0-25-new-dawn/implementation-screenshots/v0-25-2-badge-one-model-390.png",
+      "width": 390,
+      "height": 844,
+      "note": "Badge screen still shows one badge model",
+      "qa": {
+        "title": "Prompt Life",
+        "url": "http://127.0.0.1:5173/?debug=1&v=0252-implementation",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "shellScrollTop": 0,
+        "documentScrollWidth": 390,
+        "documentClientWidth": 390,
+        "shellScrollWidth": 388,
+        "shellClientWidth": 388,
+        "horizontalOverflow": false,
+        "focusedTag": "H1"
+      }
+    },
+    {
+      "file": "docs/stage-audits/v0-25-new-dawn/implementation-screenshots/v0-25-2-synthesis-key-takeaway-320.png",
+      "width": 320,
+      "height": 844,
+      "note": "Synthesis key takeaway clearance at 320px",
+      "qa": {
+        "viewport": {
+          "width": 320,
+          "height": 844
+        },
+        "shellScrollTop": 805,
+        "documentScrollWidth": 320,
+        "documentClientWidth": 320,
+        "shellScrollWidth": 318,
+        "shellClientWidth": 318,
+        "horizontalOverflow": false
+      }
+    },
+    {
+      "file": "docs/stage-audits/v0-25-new-dawn/implementation-screenshots/v0-25-2-synthesis-final-action-390.png",
+      "width": 390,
+      "height": 844,
+      "note": "Synthesis final action clear of bottom nav",
+      "qa": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "shellScrollTop": 4382,
+        "documentScrollWidth": 390,
+        "documentClientWidth": 390,
+        "shellScrollWidth": 388,
+        "shellClientWidth": 388,
+        "horizontalOverflow": false,
+        "finalActionClearOfNav": true,
+        "actionBottom": 655,
+        "navTop": 753
+      }
+    },
+    {
+      "file": "docs/stage-audits/v0-25-new-dawn/implementation-screenshots/v0-25-2-prompting-interaction-390.png",
+      "width": 390,
+      "height": 844,
+      "note": "Prompt builder complete state with constraints and examples",
+      "qa": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "shellScrollTop": 3094,
+        "documentScrollWidth": 390,
+        "documentClientWidth": 390,
+        "shellScrollWidth": 388,
+        "shellClientWidth": 388,
+        "horizontalOverflow": false,
+        "glossaryDrawerOpen": false
+      }
+    }
+  ],
+  "summary": {
+    "count": 16,
+    "anyHorizontalOverflow": false
+  },
+  "recaptured": "2026-06-07T19:45:36.494Z"
+}

@@ -1,0 +1,356 @@
+{
+  "createdAt": "2026-06-07T18:25:51.456Z",
+  "captures": [
+    {
+      "file": "v0-24-3-dojo-input-context-question-390.png",
+      "target": "input-context",
+      "state": "question",
+      "width": 390,
+      "qa": {
+        "prompt": "What is Input context?",
+        "helper": "Choose the best description.",
+        "feedback": "",
+        "optionTexts": [
+          "The limited amount of tokens or media the model can consider at once.",
+          "The input given to the model, including user text, system instructions, conversation history, retrieved material, or other context.",
+          "A durable store of information available later.",
+          "Everything currently visible to the model: prompt tokens, conversation history, retrieved documents, and already-generated response tokens."
+        ],
+        "optionSources": [
+          {
+            "represented": "context window",
+            "source": "confusable",
+            "distance": "far",
+            "correct": "false"
+          },
+          {
+            "represented": "prompt",
+            "source": "confusable",
+            "distance": "near",
+            "correct": "false"
+          },
+          {
+            "represented": "memory",
+            "source": "confusable",
+            "distance": "far",
+            "correct": "false"
+          },
+          {
+            "represented": "input-context",
+            "source": "",
+            "distance": "",
+            "correct": "true"
+          }
+        ],
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "scrollWidth": 388,
+        "clientWidth": 388,
+        "overflow": false
+      }
+    },
+    {
+      "file": "v0-24-3-dojo-input-context-wrong-feedback-390.png",
+      "target": "input-context",
+      "state": "wrong-feedback",
+      "width": 390,
+      "qa": {
+        "prompt": "What is Input context?",
+        "helper": "Choose the best description.",
+        "feedback": "Not quite. That description is for Context window. Input context is everything currently visible to the model: prompt tokens, conversation history, retrieved documents, and already-generated response tokens.",
+        "optionTexts": [
+          "The limited amount of tokens or media the model can consider at once.",
+          "The input given to the model, including user text, system instructions, conversation history, retrieved material, or other context.",
+          "A durable store of information available later.",
+          "Everything currently visible to the model: prompt tokens, conversation history, retrieved documents, and already-generated response tokens."
+        ],
+        "optionSources": [
+          {
+            "represented": "context window",
+            "source": "confusable",
+            "distance": "far",
+            "correct": "false"
+          },
+          {
+            "represented": "prompt",
+            "source": "confusable",
+            "distance": "near",
+            "correct": "false"
+          },
+          {
+            "represented": "memory",
+            "source": "confusable",
+            "distance": "far",
+            "correct": "false"
+          },
+          {
+            "represented": "input-context",
+            "source": "",
+            "distance": "",
+            "correct": "true"
+          }
+        ],
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "scrollWidth": 388,
+        "clientWidth": 388,
+        "overflow": false
+      }
+    },
+    {
+      "file": "v0-24-3-dojo-input-context-correct-feedback-390.png",
+      "target": "input-context",
+      "state": "correct-feedback",
+      "width": 390,
+      "qa": {
+        "prompt": "What is Input context?",
+        "helper": "Choose the best description.",
+        "feedback": "Insight strengthened. Input context is everything currently visible to the model: prompt tokens, conversation history, retrieved documents, and already-generated response tokens.",
+        "optionTexts": [
+          "The limited amount of tokens or media the model can consider at once.",
+          "A durable store of information available later.",
+          "Everything currently visible to the model: prompt tokens, conversation history, retrieved documents, and already-generated response tokens.",
+          "The input given to the model, including user text, system instructions, conversation history, retrieved material, or other context."
+        ],
+        "optionSources": [
+          {
+            "represented": "context window",
+            "source": "confusable",
+            "distance": "far",
+            "correct": "false"
+          },
+          {
+            "represented": "memory",
+            "source": "confusable",
+            "distance": "far",
+            "correct": "false"
+          },
+          {
+            "represented": "input-context",
+            "source": "",
+            "distance": "",
+            "correct": "true"
+          },
+          {
+            "represented": "prompt",
+            "source": "confusable",
+            "distance": "near",
+            "correct": "false"
+          }
+        ],
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "scrollWidth": 388,
+        "clientWidth": 388,
+        "overflow": false
+      }
+    },
+    {
+      "file": "v0-24-3-dojo-tokenization-question-390.png",
+      "target": "tokenization",
+      "state": "question",
+      "width": 390,
+      "qa": {
+        "prompt": "What is Tokenization?",
+        "helper": "Choose the best description.",
+        "feedback": "",
+        "optionTexts": [
+          "The step that splits text into model-readable tokens that can be represented as token IDs.",
+          "A model-readable chunk of text, such as a word, word piece, punctuation mark, space, or other tokenizer chunk.",
+          "The number assigned to a token so the model can look up its learned starting vector.",
+          "The rules and vocabulary that split text into tokens and map those tokens to IDs."
+        ],
+        "optionSources": [
+          {
+            "represented": "tokenization",
+            "source": "",
+            "distance": "",
+            "correct": "true"
+          },
+          {
+            "represented": "token",
+            "source": "related",
+            "distance": "near",
+            "correct": "false"
+          },
+          {
+            "represented": "token-id",
+            "source": "related",
+            "distance": "far",
+            "correct": "false"
+          },
+          {
+            "represented": "tokenizer",
+            "source": "related",
+            "distance": "far",
+            "correct": "false"
+          }
+        ],
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "scrollWidth": 388,
+        "clientWidth": 388,
+        "overflow": false
+      }
+    },
+    {
+      "file": "v0-24-3-dojo-hidden-state-question-390.png",
+      "target": "hidden state",
+      "state": "question",
+      "width": 390,
+      "qa": {
+        "prompt": "What is Hidden state?",
+        "helper": "Choose the best description.",
+        "feedback": "",
+        "optionTexts": [
+          "A temporary context-shaped internal vector for a token at a particular model layer.",
+          "A learned starting vector retrieved for a token ID.",
+          "A learned number inside the model that shapes how signals are transformed.",
+          "A durable store of information available later."
+        ],
+        "optionSources": [
+          {
+            "represented": "hidden state",
+            "source": "",
+            "distance": "",
+            "correct": "true"
+          },
+          {
+            "represented": "embedding",
+            "source": "confusable",
+            "distance": "far",
+            "correct": "false"
+          },
+          {
+            "represented": "weight",
+            "source": "confusable",
+            "distance": "far",
+            "correct": "false"
+          },
+          {
+            "represented": "memory",
+            "source": "confusable",
+            "distance": "far",
+            "correct": "false"
+          }
+        ],
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "scrollWidth": 388,
+        "clientWidth": 388,
+        "overflow": false
+      }
+    },
+    {
+      "file": "v0-24-3-dojo-rag-question-390.png",
+      "target": "rag",
+      "state": "question",
+      "width": 390,
+      "qa": {
+        "prompt": "What is RAG?",
+        "helper": "Choose the best description.",
+        "feedback": "",
+        "optionTexts": [
+          "Connecting a model response to available evidence, such as retrieved documents, cited sources, data, or tool results.",
+          "Finding external material and placing it into the current context for the model to use.",
+          "Retrieval-augmented generation: retrieving outside information and placing it into the model context before generation.",
+          "The durable process of updating weights from prediction error or another training signal."
+        ],
+        "optionSources": [
+          {
+            "represented": "grounding",
+            "source": "confusable",
+            "distance": "near",
+            "correct": "false"
+          },
+          {
+            "represented": "retrieval",
+            "source": "confusable",
+            "distance": "far",
+            "correct": "false"
+          },
+          {
+            "represented": "rag",
+            "source": "",
+            "distance": "",
+            "correct": "true"
+          },
+          {
+            "represented": "training",
+            "source": "confusable",
+            "distance": "far",
+            "correct": "false"
+          }
+        ],
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "scrollWidth": 388,
+        "clientWidth": 388,
+        "overflow": false
+      }
+    },
+    {
+      "file": "v0-24-3-dojo-input-context-question-320.png",
+      "target": "input-context",
+      "state": "question",
+      "width": 320,
+      "qa": {
+        "prompt": "What is Input context?",
+        "helper": "Choose the best description.",
+        "feedback": "",
+        "optionTexts": [
+          "Everything currently visible to the model: prompt tokens, conversation history, retrieved documents, and already-generated response tokens.",
+          "A durable store of information available later.",
+          "A high-priority instruction supplied by the AI system to steer behavior during the current run.",
+          "The input given to the model, including user text, system instructions, conversation history, retrieved material, or other context."
+        ],
+        "optionSources": [
+          {
+            "represented": "input-context",
+            "source": "",
+            "distance": "",
+            "correct": "true"
+          },
+          {
+            "represented": "memory",
+            "source": "confusable",
+            "distance": "far",
+            "correct": "false"
+          },
+          {
+            "represented": "system-prompt",
+            "source": "confusable",
+            "distance": "far",
+            "correct": "false"
+          },
+          {
+            "represented": "prompt",
+            "source": "confusable",
+            "distance": "near",
+            "correct": "false"
+          }
+        ],
+        "viewport": {
+          "width": 320,
+          "height": 844
+        },
+        "scrollWidth": 318,
+        "clientWidth": 318,
+        "overflow": false
+      }
+    }
+  ],
+  "overflowFiles": []
+}

@@ -4,17 +4,18 @@ Date: 2026-06-07
 
 ## Summary
 
-This pass repairs Glossary Dojo question shape and results language while preserving the existing non-competitive practice model: 12-question rounds, four choices, no timer, no score, no leaderboard, no failure state, localStorage mastery tracking, Play and Glossary entry points, Journey progress separation, reset integration, and precise wrong-answer feedback.
+This document describes the current Glossary Dojo question shape after the v0.24.3 term-question repair. Dojo preserves the existing non-competitive practice model: 12-question rounds, four choices, no timer, no score, no leaderboard, no failure state, localStorage mastery tracking, Play and Glossary entry points, Journey progress separation, reset integration, and precise wrong-answer feedback.
 
 ## Question Design Rules
 
-- `term_to_definition`: prompt is `What does [TERM] mean?`; choices are definitions only.
-- `definition_to_term`: prompt is `Which term matches this definition?`; the definition appears once above the choices; choices are term labels only.
-- `confusable_pair` and `closest_concept`: prompt asks for the closest related term; choices are term labels only; helper text is `Choose the closest related term.`
+- `term_to_definition`: type label is `TERM TO DESCRIPTION`; prompt is `What is [TERM]?`; choices are descriptions only; helper text is `Choose the best description.`
+- `definition_to_term`: type label is `DESCRIPTION TO TERM`; prompt is `Which term matches this description?`; the description appears once above the choices; choices are term labels only.
+- `confusable_pair` asks for the closest related term; choices are term labels only.
+- `closest_concept`: type label is `RELATED IDEAS`; prompt asks for the closest related term; choices are term labels only.
 - `stage_location`: prompt asks where a term fits in the model story; choices are short stage labels only.
 - `relationship`: prompt asks what statement best connects to the target term; choices are short relationship statements only.
 
-Removed the specified learner-facing neighborhood/model-map wording from Dojo prompts, helpers, and labels.
+Current source removes the retired learner-facing wording named in the v0.24.3 repair prompt.
 
 ## Round Mix
 
@@ -29,13 +30,18 @@ If a richer metadata question cannot be built safely, the engine falls back to a
 
 ## Distractor Strategy
 
-Distractors now follow glossary learning-path proximity:
+Term-to-description distractors prefer conceptually close ideas before farther glossary terms:
 
-- near: 2-5 positions away
-- medium: 6-12 positions away
-- far: elsewhere in the glossary
+- `confusable`
+- `related`
+- `cluster`
+- `same-stage`
+- `near`
+- `medium`
+- `far`
+- `global`
 
-The engine also consults related terms, shared family tags, and shared lifecycle/curriculum stage before falling back to the whole glossary. New-round target selection prioritizes the current learning-path frontier, recent missed terms, practiced-but-not-mastered terms, and then the next unpracticed learning-path window before global fallback.
+Concept clusters now support closer distractors for terms that learners often mix up, especially context, tokenization, representations, decoding, training, evidence, and costs/governance. The engine still uses glossary learning-path distance and stage metadata as fallbacks. New-round target selection still prioritizes the current learning-path frontier, recent missed terms, practiced-but-not-mastered terms, and then the next unpracticed learning-path window before global fallback.
 
 ## Stored Round Model
 
@@ -76,15 +82,15 @@ Actions available from results:
 
 Correct feedback:
 
-`Insight strengthened. [TERM] means [definition].`
+`Insight strengthened. [TERM] is [short description].`
 
 Wrong term-to-definition feedback:
 
-`Not quite. That definition is for [WRONG TERM]. [CORRECT TERM] means [definition].`
+`Not quite. That description is for [WRONG TERM]. [CORRECT TERM] is [short description].`
 
 Wrong definition-to-term feedback:
 
-`Not quite. [WRONG TERM] means [wrong definition]. The correct match is [CORRECT TERM]. [CORRECT TERM] means [definition].`
+`Not quite. [WRONG TERM] is [wrong description]. The correct match is [CORRECT TERM]. [CORRECT TERM] is [short description].`
 
 Closest/confusable feedback:
 
@@ -132,6 +138,6 @@ Screenshots:
 
 ## Known Limitations
 
-- Feedback still uses glossary definitions as written, so some sentences can read like `AI means AI is...`.
+- Feedback still uses glossary definitions as its source of truth, so a few descriptions may keep domain-specific phrasing from the glossary.
 - Relationship and stage-location questions depend on existing metadata; when metadata is thin, the engine falls back to simpler question types.
 - The production bundle still has the existing Vite large-chunk warning. No dependency or generated asset was added in this pass.

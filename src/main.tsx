@@ -42,7 +42,7 @@ const HOME_ASSETS = {
   heroFallback: `${ASSET}/illustrations/scene-hero-feature-cloud@mobile.png`
 }
 // Bump this for each shipped app change; the Badge screen displays it under Start over.
-const APP_VERSION = '0.24.1'
+const APP_VERSION = '0.25.2'
 const STORAGE_KEYS = {
   lastLocation: 'promptlife:v1:lastLocation',
   lessonId: 'promptlife:v1:lessonId',
@@ -115,10 +115,10 @@ const GLOSSARY_LEARNING_GROUPS = [
   { firstLessonId: 'collective-intelligence', termIds: ['collective-intelligence-term', 'source-review', 'data-provenance', 'consent', 'compensation', 'copyright'] },
   { firstLessonId: 'costs-we-must-count', termIds: ['environmental-footprint', 'energy-use', 'water-use', 'carbon-emissions', 'e-waste', 'labor-disruption', 'deskilling', 'bias', 'information-pollution'] },
   { firstLessonId: 'risk-myth', termIds: ['risk-literacy', 'prompt-injection', 'privacy', 'tool-use', 'overreliance', 'vendor-lock-in', 'concentration-of-power'] },
-  { firstLessonId: 'benefits-worth-taking-seriously', termIds: ['accessibility', 'translation', 'summarization'] },
+  { firstLessonId: 'benefits-worth-taking-seriously', termIds: ['benefits', 'accessibility', 'translation', 'summarization'] },
   { firstLessonId: 'human-centered-ai', termIds: ['human-centered-ai-term', 'dignity', 'accountability', 'common-good'] },
   { firstLessonId: 'better-ai-choice', termIds: ['responsible-ai', 'model-distillation', 'efficient-inference', 'governance'] },
-  { firstLessonId: 'effective-prompting-literacy', termIds: ['effective-prompting', 'human-review'] },
+  { firstLessonId: 'effective-prompting-literacy', termIds: ['effective-prompting', 'uncertainty', 'source-review', 'human-review'] },
   { firstLessonId: 'model-literate-synthesis', termIds: ['model-literacy'] },
   { firstLessonId: null, termIds: ['neural network', 'model-checkpoint'] }
 ]
@@ -249,6 +249,64 @@ const LESSON_TERM_DISPLAY_PRIORITY = {
     'vendor-lock-in',
     'concentration-of-power',
     'governance',
+    'accountability'
+  ],
+  'benefits-worth-taking-seriously': [
+    'benefits',
+    'accessibility',
+    'translation',
+    'summarization',
+    'rag',
+    'human-review',
+    'uncertainty',
+    'effective-prompting'
+  ],
+  'human-centered-ai': [
+    'human-centered-ai-term',
+    'dignity',
+    'accountability',
+    'common-good',
+    'human-review',
+    'governance',
+    'responsible-ai'
+  ],
+  'better-ai-choice': [
+    'responsible-ai',
+    'governance',
+    'data-provenance',
+    'privacy',
+    'efficient-inference',
+    'rag',
+    'human-review',
+    'accountability',
+    'model-distillation'
+  ],
+  'effective-prompting-literacy': [
+    'effective-prompting',
+    'prompt',
+    'input-context',
+    'context window',
+    'rag',
+    'grounding',
+    'uncertainty',
+    'source-review',
+    'human-review'
+  ],
+  'model-literate-synthesis': [
+    'model-literacy',
+    'prompt',
+    'token',
+    'token-id',
+    'embedding',
+    'hidden state',
+    'logits',
+    'softmax',
+    'sampling',
+    'response-tokens',
+    'context window',
+    'rag',
+    'grounding',
+    'human-review',
     'accountability'
   ]
 }
@@ -1470,6 +1528,11 @@ function MicroInteraction({ type }) {
   if (type === 'collective-human-questions') return <CollectiveHumanQuestionsInteraction />
   if (type === 'cost-ledger') return <CostLedgerInteraction />
   if (type === 'risk-myth-sort') return <RiskMythSortInteraction />
+  if (type === 'benefit-tier-sort') return <BenefitTierSortInteraction />
+  if (type === 'human-centered-scenario') return <HumanCenteredScenarioInteraction />
+  if (type === 'better-ai-levers') return <BetterAiLeversInteraction />
+  if (type === 'prompt-builder') return <PromptBuilderInteraction />
+  if (type === 'synthesis-chain') return <SynthesisChainInteraction />
   if (type === 'training') return <TrainingLoopAnimation />
   if (type === 'fine-tune') return <FineTuningPathAnimation />
   if (type === 'inference') return <InferenceTemporaryInteraction />
@@ -2696,6 +2759,232 @@ function RiskMythSortInteraction() {
       ]}
       insight="Real AI risks usually come from data, context, tools, institutions, and overreliance, not from model consciousness or magic."
     />
+  )
+}
+
+function BenefitTierSortInteraction() {
+  return (
+    <CycleSortInteraction
+      label="Sort benefit claims by confidence"
+      categories={['Useful now with review', 'Plausible with safeguards', 'Speculative / hype']}
+      successLabel="Insight strengthened"
+      items={[
+        { id: 'reviewed-assist', label: 'AI can assist drafts, search, translation, and access under human review.', category: 'Useful now with review' },
+        { id: 'automatic-education', label: 'AI will automatically solve education.', category: 'Speculative / hype' },
+        { id: 'human-judgment', label: 'AI has human judgment now.', category: 'Speculative / hype' },
+        { id: 'no-costs', label: 'AI benefits mean no costs matter.', category: 'Speculative / hype' }
+      ]}
+      insight="Benefits can be real and bounded when humans review evidence and context."
+    />
+  )
+}
+
+function HumanCenteredScenarioInteraction() {
+  const choices = [
+    { id: 'draft-review', label: 'Use summary as a draft; human reviews before action.', correct: true },
+    { id: 'auto-decide', label: 'Automatically decide support needs with no review.', correct: false },
+    { id: 'hide-limits', label: 'Hide model limitations from staff.', correct: false },
+    { id: 'fluency-proof', label: 'Treat fluent text as proof.', correct: false }
+  ]
+  const [choice, setChoice] = useState(null)
+  const selected = choices.find((item) => item.id === choice)
+
+  return (
+    <div className="morning-interaction new-dawn-interaction human-centered-scenario-demo">
+      <p className="micro-prompt">An AI tool helps summarize student support notes. Which deployment keeps people accountable?</p>
+      <div className="new-dawn-scenario-board" aria-hidden="true">
+        <span>AI summary</span>
+        <span>student support context</span>
+        <span>human review</span>
+        <span>accountable action</span>
+      </div>
+      <div className="morning-choice-row" role="group" aria-label="Choose the human-centered deployment">
+        {choices.map((item) => (
+          <button key={item.id} className={choice === item.id ? 'active' : ''} onClick={() => setChoice(item.id)} aria-pressed={choice === item.id}>
+            {item.label}
+          </button>
+        ))}
+      </div>
+      <p className={selected?.correct ? 'micro-feedback good' : 'micro-feedback'} role="status">
+        {selected
+          ? selected.correct
+            ? 'Insight strengthened. Human-centered AI keeps responsibility with people and institutions.'
+            : 'Not quite. Human-centered AI keeps limits, review, and accountability visible.'
+          : 'Choose the deployment pattern that treats the model output as support, not authority.'}
+      </p>
+    </div>
+  )
+}
+
+function BetterAiLeversInteraction() {
+  const levers = [
+    { id: 'rag', label: 'Use RAG over approved documents', good: true },
+    { id: 'privacy', label: 'Protect sensitive data', good: true },
+    { id: 'sources', label: 'Require source links and review', good: true },
+    { id: 'right-size', label: 'Choose a smaller task-fit model if adequate', good: true },
+    { id: 'monitor', label: 'Monitor errors', good: true },
+    { id: 'any-chatbot', label: 'Upload private data to any chatbot', good: false },
+    { id: 'bigger', label: 'Assume bigger is always better', good: false },
+    { id: 'no-accountability', label: 'Remove human accountability', good: false },
+    { id: 'ignore-provenance', label: 'Ignore data provenance', good: false }
+  ]
+  const [selectedIds, setSelectedIds] = useState([])
+  const selected = levers.filter((lever) => selectedIds.includes(lever.id))
+  const selectedBad = selected.filter((lever) => !lever.good)
+  const selectedGoodCount = selected.filter((lever) => lever.good).length
+  const complete = selectedGoodCount === levers.filter((lever) => lever.good).length && selectedBad.length === 0
+
+  function toggle(id) {
+    setSelectedIds((current) => current.includes(id)
+      ? current.filter((item) => item !== id)
+      : [...current, id])
+  }
+
+  return (
+    <div className="morning-interaction new-dawn-interaction better-ai-levers-demo">
+      <p className="micro-prompt">A department wants an AI assistant for internal policy questions. Tap the better-AI levers.</p>
+      <div className="lever-panel" role="group" aria-label="Better AI design and governance levers">
+        {levers.map((lever) => (
+          <button
+            key={lever.id}
+            className={selectedIds.includes(lever.id) ? 'active' : ''}
+            onClick={() => toggle(lever.id)}
+            aria-pressed={selectedIds.includes(lever.id)}
+          >
+            {lever.label}
+          </button>
+        ))}
+      </div>
+      <p className={complete ? 'micro-feedback good' : 'micro-feedback'} role="status">
+        {complete
+          ? 'Insight strengthened. Better AI is shaped by task-fit design, evidence, privacy, review, monitoring, and governance.'
+          : selectedBad.length
+            ? `Not quite. ${selectedBad[0].label} raises risk instead of reducing it.`
+            : selectedGoodCount
+              ? `${selectedGoodCount} useful lever${selectedGoodCount === 1 ? '' : 's'} selected. Keep looking for privacy, review, sources, task fit, and monitoring.`
+              : 'Start with choices that protect data, use approved evidence, keep review, and fit the task.'}
+      </p>
+    </div>
+  )
+}
+
+function PromptBuilderInteraction() {
+  const parts = [
+    { id: 'task', label: 'Task', add: 'Summarize this policy' },
+    { id: 'audience', label: 'Audience', add: 'for first-year students' },
+    { id: 'constraints', label: 'Constraints', add: 'using only the provided document' },
+    { id: 'examples', label: 'Examples', add: 'include one policy example if available' },
+    { id: 'format', label: 'Format', add: 'in five bullets' },
+    { id: 'evidence', label: 'Evidence', add: 'name the evidence you used' },
+    { id: 'uncertainty', label: 'Uncertainty', add: 'state uncertainty' },
+    { id: 'review', label: 'Review', add: 'flag anything that needs human review' }
+  ]
+  const [selectedIds, setSelectedIds] = useState(['task'])
+  const complete = parts.every((part) => selectedIds.includes(part.id))
+  const prompt = complete
+    ? 'Summarize this policy for first-year students in five bullets. Use only the provided document. Include one policy example if available. Name the evidence used. State uncertainty. Flag anything that needs human review.'
+    : selectedIds.length === 1
+      ? 'Summarize this.'
+      : `${parts.filter((part) => selectedIds.includes(part.id)).map((part) => part.add).join(' ')}.`
+
+  function toggle(id) {
+    if (id === 'task') return
+    setSelectedIds((current) => current.includes(id)
+      ? current.filter((item) => item !== id)
+      : [...current, id])
+  }
+
+  return (
+    <div className="morning-interaction new-dawn-interaction prompt-builder-demo">
+      <p className="micro-prompt">Build a better prompt by adding the missing context parts.</p>
+      <div className="prompt-draft-card" aria-live="polite">
+        <span>Current prompt</span>
+        <p>{prompt}</p>
+      </div>
+      <div className="prompt-part-grid" role="group" aria-label="Prompt parts to include">
+        {parts.map((part) => (
+          <button
+            key={part.id}
+            className={selectedIds.includes(part.id) ? 'active' : ''}
+            disabled={part.id === 'task'}
+            onClick={() => toggle(part.id)}
+            aria-pressed={selectedIds.includes(part.id)}
+          >
+            {part.label}
+          </button>
+        ))}
+      </div>
+      <p className={complete ? 'micro-feedback good' : 'micro-feedback'} role="status">
+        {complete
+          ? 'Insight strengthened. A good prompt builds useful context for this run; it does not rewrite model weights.'
+          : 'Add audience, constraints, examples, format, evidence, uncertainty, and review so the current context is clearer.'}
+      </p>
+    </div>
+  )
+}
+
+function SynthesisChainInteraction() {
+  const steps = [
+    { id: 'prompt', label: 'prompt enters context' },
+    { id: 'tokens', label: 'text becomes tokens and IDs' },
+    { id: 'states', label: 'embeddings become hidden states' },
+    { id: 'probabilities', label: 'logits become probabilities' },
+    { id: 'sample', label: 'one token is sampled' },
+    { id: 'append', label: 'token is appended and the model runs again' },
+    { id: 'evidence', label: 'RAG/grounding can add evidence' },
+    { id: 'accountability', label: 'humans review and remain accountable' }
+  ]
+  const [orderedIds, setOrderedIds] = useState([])
+  const [hint, setHint] = useState('Begin with what enters the model run.')
+  const complete = orderedIds.length === steps.length
+  const nextStep = steps[orderedIds.length]
+  const ordered = orderedIds.map((id) => steps.find((step) => step.id === id)).filter(Boolean)
+
+  function choose(id) {
+    if (orderedIds.includes(id) || complete) return
+    if (id !== nextStep.id) {
+      setHint(`That belongs later. Next, choose "${nextStep.label}."`)
+      return
+    }
+    setOrderedIds((current) => [...current, id])
+    const nextIndex = orderedIds.length + 1
+    setHint(nextIndex === steps.length
+      ? 'Insight strengthened. Model literacy means understanding both the machine chain and the human consequences.'
+      : `Good. Next comes "${steps[nextIndex].label}."`)
+  }
+
+  function reset() {
+    setOrderedIds([])
+    setHint('Begin with what enters the model run.')
+  }
+
+  return (
+    <div className="morning-interaction new-dawn-interaction synthesis-chain-demo">
+      <p className="micro-prompt">Put the model story in order.</p>
+      <ol className="synthesis-order-list" aria-label="Chosen model story order" aria-live="polite">
+        {steps.map((step, index) => (
+          <li key={step.id} className={orderedIds[index] === step.id ? 'active' : ''}>
+            <span>{index + 1}</span>
+            <strong>{ordered[index]?.label ?? 'waiting'}</strong>
+          </li>
+        ))}
+      </ol>
+      <div className="synthesis-choice-grid" role="group" aria-label="Tap model story steps in order">
+        {steps.map((step) => (
+          <button
+            key={step.id}
+            className={orderedIds.includes(step.id) ? 'active' : ''}
+            onClick={() => choose(step.id)}
+            disabled={orderedIds.includes(step.id)}
+            aria-pressed={orderedIds.includes(step.id)}
+          >
+            {step.label}
+          </button>
+        ))}
+      </div>
+      <button className="morning-primary-action" type="button" onClick={reset}>Reset chain</button>
+      <p className={complete ? 'micro-feedback good' : 'micro-feedback'} role="status">{hint}</p>
+    </div>
   )
 }
 

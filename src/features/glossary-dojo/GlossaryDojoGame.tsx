@@ -1,5 +1,6 @@
 import { useMemo } from 'react'
 import { GlossaryDojoSummary } from './GlossaryDojoSummary'
+import { getSafeGlossaryDojoQuestionCopy } from './engine'
 import { useGlossaryDojo } from './useGlossaryDojo'
 
 type GlossaryDojoGameProps = {
@@ -33,6 +34,18 @@ export function GlossaryDojoGame({ onBack, onGlossary }: GlossaryDojoGameProps) 
   const targetTermId = currentQuestion?.targetTermId
   const correctTerm = correctTermId ? termsById.get(correctTermId) : null
   const targetTerm = targetTermId ? termsById.get(targetTermId) : null
+  const safeQuestionCopy = useMemo(() => {
+    if (!currentQuestion) return null
+    return getSafeGlossaryDojoQuestionCopy({
+      type: currentQuestion.type,
+      targetLabel: targetTerm?.label ?? currentQuestion.targetTermId,
+      correctLabel: correctTerm?.label,
+      questionId: currentQuestion.id,
+      typeLabel: currentQuestion.typeLabel,
+      prompt: currentQuestion.prompt,
+      helperText: currentQuestion.helperText
+    })
+  }, [correctTerm?.label, currentQuestion, targetTerm?.label])
 
   if (!currentRound || !currentQuestion) {
     return (
@@ -100,15 +113,15 @@ export function GlossaryDojoGame({ onBack, onGlossary }: GlossaryDojoGameProps) 
       </header>
 
       <section className="dojo-panel dojo-question-card" aria-labelledby="dojo-question-title">
-        <span className="step-label">{currentQuestion.typeLabel}</span>
-        <h2 id="dojo-question-title">{currentQuestion.prompt}</h2>
+        <span className="step-label">{safeQuestionCopy?.typeLabel ?? currentQuestion.typeLabel}</span>
+        <h2 id="dojo-question-title">{safeQuestionCopy?.prompt ?? currentQuestion.prompt}</h2>
         {currentQuestion.definitionText && (
           <p className="dojo-definition-card" data-testid="glossary-dojo-definition">
             {currentQuestion.definitionText}
           </p>
         )}
         {targetTerm && currentQuestion.helperText && (
-          <p className="dojo-question-hint">{currentQuestion.helperText}</p>
+          <p className="dojo-question-hint">{safeQuestionCopy?.helperText ?? currentQuestion.helperText}</p>
         )}
 
         <div className="dojo-answer-list" role="list" aria-label="Glossary Dojo answer choices">

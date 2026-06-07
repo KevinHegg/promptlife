@@ -1,4 +1,8 @@
-import { glossaryDojoMeta, type GlossaryDojoTermMeta } from '../../data/glossaryDojoMeta'
+import {
+  glossaryDojoConceptClusters,
+  glossaryDojoMeta,
+  type GlossaryDojoTermMeta
+} from '../../data/glossaryDojoMeta'
 import { hashString, shuffleChoicesForQuestion } from '../../utils/choiceOrder'
 import { fingerprintTargetTermIds, isNormalSourceMode, modeFromSourceMode } from './rounds'
 import type {
@@ -31,32 +35,49 @@ const DEFAULT_ROUND_PATTERN: GlossaryDojoQuestionType[] = [
   'term_to_definition',
   'term_to_definition',
   'term_to_definition',
+  'term_to_definition',
   'definition_to_term',
   'definition_to_term',
   'definition_to_term',
   'definition_to_term',
   'definition_to_term',
-  'confusable_pair',
-  'stage_location'
+  'definition_to_term'
 ]
 
 const TYPE_LABELS: Record<GlossaryDojoQuestionType, string> = {
-  term_to_definition: 'Term to meaning',
-  definition_to_term: 'Meaning to term',
-  closest_concept: 'Closest idea',
+  term_to_definition: 'TERM TO DESCRIPTION',
+  definition_to_term: 'DESCRIPTION TO TERM',
+  closest_concept: 'RELATED IDEAS',
   confusable_pair: 'Easy mix-up',
-  relationship: 'Relationship',
-  stage_location: 'Model story'
+  relationship: 'RELATIONSHIP',
+  stage_location: 'WHERE IT FITS'
 }
 
 const HELPER_TEXT: Record<GlossaryDojoQuestionType, string> = {
-  term_to_definition: 'Choose the best definition.',
+  term_to_definition: 'Choose the best description.',
   definition_to_term: 'Choose the matching term.',
   closest_concept: 'Choose the closest related term.',
   confusable_pair: 'Choose the closest related term.',
-  relationship: 'Choose the relationship that best fits.',
-  stage_location: 'Choose where this idea fits in the journey.'
+  relationship: 'Choose the best relationship.',
+  stage_location: 'Choose the best location.'
 }
+
+const retiredPhrase = (...parts: string[]) => parts.join('')
+const retiredNeighborhood = retiredPhrase('neigh', 'borhood')
+const RETIRED_DOJO_COPY_PATTERNS = [
+  retiredPhrase('learning ', retiredNeighborhood),
+  retiredNeighborhood,
+  retiredPhrase('neighbor ', 'of'),
+  retiredPhrase('same learning ', retiredNeighborhood),
+  retiredPhrase('map ', 'the term'),
+  retiredPhrase('nearby ideas ', 'as interchangeable'),
+  retiredPhrase('term ', 'to meaning'),
+  retiredPhrase('meaning ', 'to term'),
+  retiredPhrase('what ', 'does'),
+  retiredPhrase('choose the best ', 'definition')
+]
+
+const warnedUnsafeQuestionCopy = new Set<string>()
 
 type QuestionSpec = {
   type: GlossaryDojoQuestionType
@@ -102,8 +123,104 @@ function termExplanation(term: GlossaryDojoTerm) {
   return term.shortExplanation ?? term.shortDefinition
 }
 
-function correctTermMeaning(term: GlossaryDojoTerm) {
-  return `${term.label} means ${termExplanation(term)}`
+function lowerInitial(value: string) {
+  if (!value) return value
+  if (/^A\s/.test(value)) return `a${value.slice(1)}`
+  if (/^An\s/.test(value)) return `an${value.slice(2)}`
+  if (/^The\s/.test(value)) return `the${value.slice(3)}`
+  if (!/^[A-Z][a-z]/.test(value)) return value
+  return `${value.charAt(0).toLowerCase()}${value.slice(1)}`
+}
+
+function escapeRegExp(value: string) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+}
+
+function descriptionBody(term: GlossaryDojoTerm) {
+  const text = cleanText(term.shortDefinition || termExplanation(term))
+  const names = [term.label, ...term.aliases]
+    .map(cleanText)
+    .filter(Boolean)
+    .sort((a, b) => b.length - a.length)
+
+  for (const name of names) {
+    const pattern = new RegExp(`^(?:an?\\s+|the\\s+)?${escapeRegExp(name)}\\s+(?:is|means|refers to)\\s+`, 'i')
+    if (pattern.test(text)) return lowerInitial(cleanText(text.replace(pattern, '')))
+  }
+
+  return lowerInitial(text)
+}
+
+function correctTermDescription(term: GlossaryDojoTerm) {
+  return `${term.label} is ${descriptionBody(term)}`
+}
+
+function containsRetiredDojoCopy(value = '') {
+  const lowered = lookupKey(value)
+  return RETIRED_DOJO_COPY_PATTERNS.some((pattern) => lowered.includes(pattern))
+}
+
+function shouldWarnUnsafeQuestionCopy() {
+  if (import.meta.env.DEV) return true
+  if (typeof window === 'undefined') return false
+  return window.location.search.includes('debug=1') || window.location.pathname.startsWith('/review')
+}
+
+function warnUnsafeQuestionCopy(questionId: string, type: GlossaryDojoQuestionType, field: string, value: string) {
+  if (!shouldWarnUnsafeQuestionCopy()) return
+  const warningKey = `${questionId}:${type}:${field}:${value}`
+  if (warnedUnsafeQuestionCopy.has(warningKey)) return
+  warnedUnsafeQuestionCopy.add(warningKey)
+  console.warn('[Glossary Dojo] Replaced retired learner-facing question copy.', {
+    questionId,
+    type,
+    field
+  })
+}
+
+function fallbackPromptForType(type: GlossaryDojoQuestionType, targetLabel: string, correctLabel?: string) {
+  if (type === 'term_to_definition') return `What is ${targetLabel}?`
+  if (type === 'definition_to_term') return 'Which term matches this description?'
+  if (type === 'relationship') return `How are ${targetLabel} and ${correctLabel ?? 'this idea'} related?`
+  if (type === 'stage_location') return `Where does ${targetLabel} fit in the model story?`
+  return `Which idea is closest to ${targetLabel}?`
+}
+
+function fallbackHelperForType(type: GlossaryDojoQuestionType) {
+  return HELPER_TEXT[type]
+}
+
+export function getSafeGlossaryDojoQuestionCopy({
+  type,
+  targetLabel,
+  correctLabel,
+  questionId,
+  typeLabel,
+  prompt,
+  helperText
+}: {
+  type: GlossaryDojoQuestionType
+  targetLabel: string
+  correctLabel?: string
+  questionId?: string
+  typeLabel: string
+  prompt: string
+  helperText: string
+}) {
+  const safeQuestionId = questionId ?? `${type}:${targetLabel}`
+  const typeLabelUnsafe = containsRetiredDojoCopy(typeLabel)
+  const promptUnsafe = containsRetiredDojoCopy(prompt)
+  const helperUnsafe = containsRetiredDojoCopy(helperText)
+
+  if (typeLabelUnsafe) warnUnsafeQuestionCopy(safeQuestionId, type, 'typeLabel', typeLabel)
+  if (promptUnsafe) warnUnsafeQuestionCopy(safeQuestionId, type, 'prompt', prompt)
+  if (helperUnsafe) warnUnsafeQuestionCopy(safeQuestionId, type, 'helperText', helperText)
+
+  return {
+    typeLabel: typeLabelUnsafe ? TYPE_LABELS[type] : typeLabel,
+    prompt: promptUnsafe ? fallbackPromptForType(type, targetLabel, correctLabel) : prompt,
+    helperText: helperUnsafe ? fallbackHelperForType(type) : helperText
+  }
 }
 
 function stableShuffle<T>(items: T[], seed: string, questionId: string) {
@@ -135,7 +252,7 @@ function termNameKeys(term: GlossaryDojoTerm) {
 function textRevealsTerm(text: string, term: GlossaryDojoTerm) {
   const cleaned = ` ${lookupKey(text)} `
   return termNameKeys(term).some((name) => {
-    const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+    const escaped = escapeRegExp(name)
     return new RegExp(`(^|[^a-z0-9-])${escaped}([^a-z0-9-]|$)`, 'i').test(cleaned)
   })
 }
@@ -225,6 +342,16 @@ function addDistractor(
   return true
 }
 
+function clusterIdsForTerm(term: GlossaryDojoTerm) {
+  const explicitClusters = term.conceptClusters ?? []
+  const inferredClusters = Object.entries(glossaryDojoConceptClusters)
+    .filter(([, ids]) => ids.includes(term.id))
+    .map(([cluster]) => cluster)
+  const clusters = [...new Set([...explicitClusters, ...inferredClusters])]
+  return [...new Set(clusters.flatMap((cluster) => glossaryDojoConceptClusters[cluster] ?? []))]
+    .filter((id) => id !== term.id)
+}
+
 function shuffledEligibleByIds(
   ids: string[],
   eligible: GlossaryDojoTerm[],
@@ -267,40 +394,48 @@ function candidateDistractors(
     seed,
     `${questionId}:related`
   )
+  const cluster = shuffledEligibleByIds(
+    clusterIdsForTerm(target),
+    eligible,
+    termsById,
+    seed,
+    `${questionId}:cluster`
+  )
   const byDistance = (slot: GlossaryDojoDistractorDistance) => eligible.filter((term) => {
     if (term.id === target.id || term.id === correct.id) return false
     if (!allowSameStage && slot !== 'far' && stageLabel(term) === stageLabel(target)) return false
     return distractorDistance(target, term).category === slot
   })
+  const sameStage = allowSameStage
+    ? stableShuffle(
+        eligible.filter((term) =>
+          stageLabel(term) === stageLabel(target) &&
+          term.id !== target.id &&
+          term.id !== correct.id
+        ),
+        seed,
+        `${questionId}:same-stage`
+      )
+    : []
 
   const picked: DistractorChoice[] = []
-  const slots: GlossaryDojoDistractorDistance[] = ['near', 'medium', 'far']
+  const addFromPool = (pool: GlossaryDojoTerm[], source: GlossaryDojoDistractorSource) => {
+    pool.forEach((term) => {
+      if (picked.length >= OPTION_COUNT - 1) return
+      addDistractor(picked, term, target, source)
+    })
+  }
 
-  slots.forEach((slot) => {
-    if (picked.length >= OPTION_COUNT - 1) return
-    const slotConfusable = confusable.filter((term) => distractorDistance(target, term).category === slot)
-    const slotRelated = related.filter((term) => distractorDistance(target, term).category === slot)
-    const slotProximity = stableShuffle(byDistance(slot), seed, `${questionId}:${slot}`)
-    const slotGlobal = stableShuffle(
-      eligible.filter((term) => distractorDistance(target, term).category === slot),
-      seed,
-      `${questionId}:${slot}:global`
-    )
-    const selected =
-      slotConfusable[0] ? { term: slotConfusable[0], source: 'confusable' as const } :
-      slotRelated[0] ? { term: slotRelated[0], source: 'related' as const } :
-      slotProximity[0] ? { term: slotProximity[0], source: slot } :
-      slotGlobal[0] ? { term: slotGlobal[0], source: 'global' as const } :
-      null
-
-    if (selected) addDistractor(picked, selected.term, target, selected.source)
-  })
+  addFromPool(confusable, 'confusable')
+  addFromPool(related, 'related')
+  addFromPool(cluster, 'cluster')
+  addFromPool(sameStage, 'same-stage')
+  addFromPool(stableShuffle(byDistance('near'), seed, `${questionId}:near`), 'near')
+  addFromPool(stableShuffle(byDistance('medium'), seed, `${questionId}:medium`), 'medium')
+  addFromPool(stableShuffle(byDistance('far'), seed, `${questionId}:far`), 'far')
 
   const global = stableShuffle(eligible, seed, `${questionId}:global-fill`)
-  global.forEach((term) => {
-    if (picked.length >= OPTION_COUNT - 1) return
-    addDistractor(picked, term, target, 'global')
-  })
+  addFromPool(global, 'global')
 
   return picked.slice(0, OPTION_COUNT - 1)
 }
@@ -467,29 +602,39 @@ function makeQuestion(
   if (!correctOption) return null
 
   const prompts: Record<GlossaryDojoQuestionType, string> = {
-    term_to_definition: `What does ${target.label} mean?`,
-    definition_to_term: 'Which term matches this definition?',
+    term_to_definition: `What is ${target.label}?`,
+    definition_to_term: 'Which term matches this description?',
     closest_concept: `Which idea is closest to ${target.label}?`,
     confusable_pair: `Which term is easiest to confuse with ${target.label}?`,
-    relationship: `How does ${target.label} relate to ${correct.label}?`,
+    relationship: `How are ${target.label} and ${correct.label} related?`,
     stage_location: `Where does ${target.label} fit in the model story?`
   }
 
   const explanations: Record<GlossaryDojoQuestionType, string> = {
-    term_to_definition: `${target.label} means ${termExplanation(target)}`,
-    definition_to_term: `${target.label} means ${termExplanation(target)}`,
+    term_to_definition: correctTermDescription(target),
+    definition_to_term: correctTermDescription(target),
     closest_concept: `${correct.label} is closest here because ${termExplanation(correct)}`,
     confusable_pair: `${target.label} is often mixed up with ${correct.label}; the contrast matters.`,
     relationship: `${target.label} connects to ${correct.label}: ${termExplanation(correct)}`,
     stage_location: `${target.label} fits in ${stageLabel(target)}.`
   }
 
+  const safeCopy = getSafeGlossaryDojoQuestionCopy({
+    type,
+    targetLabel: target.label,
+    correctLabel: correct.label,
+    questionId,
+    typeLabel: TYPE_LABELS[type],
+    prompt: prompts[type],
+    helperText: HELPER_TEXT[type]
+  })
+
   return {
     id: questionId,
     type,
-    typeLabel: TYPE_LABELS[type],
-    prompt: prompts[type],
-    helperText: HELPER_TEXT[type],
+    typeLabel: safeCopy.typeLabel,
+    prompt: safeCopy.prompt,
+    helperText: safeCopy.helperText,
     definitionText: type === 'definition_to_term' ? target.shortDefinition : undefined,
     targetTermId: target.id,
     correctTermId: correct.id,
@@ -897,19 +1042,19 @@ export function getGlossaryDojoFeedback(
   if (!correct) return question.explanation
 
   if (result.answer.isCorrect) {
-    return `Insight strengthened. ${correctTermMeaning(correct)}`
+    return `Insight strengthened. ${correctTermDescription(correct)}`
   }
 
   if (!selected) {
-    return `Not quite. That answer belongs to a different glossary idea. The correct match is ${correct.label}. ${correctTermMeaning(correct)}`
+    return `Not quite. That answer belongs to a different glossary idea. The correct match is ${correct.label}. ${correctTermDescription(correct)}`
   }
 
   if (question.type === 'term_to_definition') {
-    return `Not quite. That definition is for ${selected.label}. ${correctTermMeaning(correct)}`
+    return `Not quite. That description is for ${selected.label}. ${correctTermDescription(correct)}`
   }
 
   if (question.type === 'definition_to_term') {
-    return `Not quite. ${selected.label} means ${termExplanation(selected)} The correct match is ${correct.label}. ${correctTermMeaning(correct)}`
+    return `Not quite. ${correctTermDescription(selected)} The correct match is ${correct.label}. ${correctTermDescription(correct)}`
   }
 
   if (question.type === 'confusable_pair' || question.type === 'closest_concept') {
@@ -920,5 +1065,5 @@ export function getGlossaryDojoFeedback(
     return `Not quite. That answer belongs to a different part of the model story. The correct match is ${correct.label}. ${question.explanation}`
   }
 
-  return `Not quite. That answer belongs to a different glossary idea. The correct match is ${correct.label}. ${correctTermMeaning(correct)}`
+  return `Not quite. That answer belongs to a different glossary idea. The correct match is ${correct.label}. ${correctTermDescription(correct)}`
 }

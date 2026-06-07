@@ -1,0 +1,253 @@
+{
+  "createdAt": "2026-06-07T18:34:28.018Z",
+  "cases": [
+    {
+      "targetTermId": "input-context",
+      "targetLabel": "Input context",
+      "type": "term_to_definition",
+      "typeLabel": "TERM TO DESCRIPTION",
+      "prompt": "What is Input context?",
+      "helperText": "Choose the best description.",
+      "optionKind": "definition",
+      "choicesAreDescriptionsOnly": true,
+      "distractors": [
+        {
+          "termId": "system-prompt",
+          "label": "A high-priority instruction supplied by the AI system to steer behavior during the current run.",
+          "source": "confusable",
+          "distance": "far",
+          "learningPathDistance": 44,
+          "close": true
+        },
+        {
+          "termId": "context window",
+          "label": "The limited amount of tokens or media the model can consider at once.",
+          "source": "confusable",
+          "distance": "far",
+          "learningPathDistance": 65,
+          "close": true
+        },
+        {
+          "termId": "prompt",
+          "label": "The input given to the model, including user text, system instructions, conversation history, retrieved material, or other context.",
+          "source": "confusable",
+          "distance": "near",
+          "learningPathDistance": 5,
+          "close": true
+        }
+      ],
+      "closeDistractorCount": 3,
+      "correctFeedback": "Insight strengthened. Input context is everything currently visible to the model: prompt tokens, conversation history, retrieved documents, and already-generated response tokens.",
+      "wrongFeedback": "Not quite. That description is for System prompt. Input context is everything currently visible to the model: prompt tokens, conversation history, retrieved documents, and already-generated response tokens.",
+      "pass": true,
+      "failures": []
+    },
+    {
+      "targetTermId": "tokenization",
+      "targetLabel": "Tokenization",
+      "type": "term_to_definition",
+      "typeLabel": "TERM TO DESCRIPTION",
+      "prompt": "What is Tokenization?",
+      "helperText": "Choose the best description.",
+      "optionKind": "definition",
+      "choicesAreDescriptionsOnly": true,
+      "distractors": [
+        {
+          "termId": "tokenizer",
+          "label": "The rules and vocabulary that split text into tokens and map those tokens to IDs.",
+          "source": "related",
+          "distance": "far",
+          "learningPathDistance": 1,
+          "close": true
+        },
+        {
+          "termId": "token",
+          "label": "A model-readable chunk of text, such as a word, word piece, punctuation mark, space, or other tokenizer chunk.",
+          "source": "related",
+          "distance": "near",
+          "learningPathDistance": 2,
+          "close": true
+        },
+        {
+          "termId": "token-id",
+          "label": "The number assigned to a token so the model can look up its learned starting vector.",
+          "source": "related",
+          "distance": "far",
+          "learningPathDistance": 1,
+          "close": true
+        }
+      ],
+      "closeDistractorCount": 3,
+      "correctFeedback": "Insight strengthened. Tokenization is the step that splits text into model-readable tokens that can be represented as token IDs.",
+      "wrongFeedback": "Not quite. That description is for Tokenizer. Tokenization is the step that splits text into model-readable tokens that can be represented as token IDs.",
+      "pass": true,
+      "failures": []
+    },
+    {
+      "targetTermId": "hidden state",
+      "targetLabel": "Hidden state",
+      "type": "term_to_definition",
+      "typeLabel": "TERM TO DESCRIPTION",
+      "prompt": "What is Hidden state?",
+      "helperText": "Choose the best description.",
+      "optionKind": "definition",
+      "choicesAreDescriptionsOnly": true,
+      "distractors": [
+        {
+          "termId": "memory",
+          "label": "A durable store of information available later.",
+          "source": "confusable",
+          "distance": "far",
+          "learningPathDistance": 14,
+          "close": true
+        },
+        {
+          "termId": "embedding",
+          "label": "A learned starting vector retrieved for a token ID.",
+          "source": "confusable",
+          "distance": "far",
+          "learningPathDistance": 35,
+          "close": true
+        },
+        {
+          "termId": "weight",
+          "label": "A learned number inside the model that shapes how signals are transformed.",
+          "source": "confusable",
+          "distance": "far",
+          "learningPathDistance": 26,
+          "close": true
+        }
+      ],
+      "closeDistractorCount": 3,
+      "correctFeedback": "Insight strengthened. Hidden state is a temporary context-shaped internal vector for a token at a particular model layer.",
+      "wrongFeedback": "Not quite. That description is for Memory. Hidden state is a temporary context-shaped internal vector for a token at a particular model layer.",
+      "pass": true,
+      "failures": []
+    },
+    {
+      "targetTermId": "rag",
+      "targetLabel": "RAG",
+      "type": "term_to_definition",
+      "typeLabel": "TERM TO DESCRIPTION",
+      "prompt": "What is RAG?",
+      "helperText": "Choose the best description.",
+      "optionKind": "definition",
+      "choicesAreDescriptionsOnly": true,
+      "distractors": [
+        {
+          "termId": "grounding",
+          "label": "Connecting a model response to available evidence, such as retrieved documents, cited sources, data, or tool results.",
+          "source": "confusable",
+          "distance": "near",
+          "learningPathDistance": 2,
+          "close": true
+        },
+        {
+          "termId": "retrieval",
+          "label": "Finding external material and placing it into the current context for the model to use.",
+          "source": "confusable",
+          "distance": "far",
+          "learningPathDistance": 1,
+          "close": true
+        },
+        {
+          "termId": "fine-tuning",
+          "label": "Additional targeted training after broad pretraining.",
+          "source": "confusable",
+          "distance": "far",
+          "learningPathDistance": 37,
+          "close": true
+        }
+      ],
+      "closeDistractorCount": 3,
+      "correctFeedback": "Insight strengthened. RAG is retrieval-augmented generation: retrieving outside information and placing it into the model context before generation.",
+      "wrongFeedback": "Not quite. That description is for Grounding. RAG is retrieval-augmented generation: retrieving outside information and placing it into the model context before generation.",
+      "pass": true,
+      "failures": []
+    },
+    {
+      "targetTermId": "softmax",
+      "targetLabel": "Softmax",
+      "type": "term_to_definition",
+      "typeLabel": "TERM TO DESCRIPTION",
+      "prompt": "What is Softmax?",
+      "helperText": "Choose the best description.",
+      "optionKind": "definition",
+      "choicesAreDescriptionsOnly": true,
+      "distractors": [
+        {
+          "termId": "probability",
+          "label": "A model-assigned chance for a candidate next token, not a truth guarantee.",
+          "source": "related",
+          "distance": "far",
+          "learningPathDistance": 1,
+          "close": true
+        },
+        {
+          "termId": "sampling",
+          "label": "The decoding step that chooses one generated token from next-token probabilities.",
+          "source": "confusable",
+          "distance": "near",
+          "learningPathDistance": 2,
+          "close": true
+        },
+        {
+          "termId": "logits",
+          "label": "Raw scores for possible next tokens before probabilities.",
+          "source": "confusable",
+          "distance": "far",
+          "learningPathDistance": 1,
+          "close": true
+        }
+      ],
+      "closeDistractorCount": 3,
+      "correctFeedback": "Insight strengthened. Softmax is a function that turns next-token raw scores into probabilities that sum to one.",
+      "wrongFeedback": "Not quite. That description is for Probability. Softmax is a function that turns next-token raw scores into probabilities that sum to one.",
+      "pass": true,
+      "failures": []
+    },
+    {
+      "targetTermId": "water-use",
+      "targetLabel": "Water use",
+      "type": "term_to_definition",
+      "typeLabel": "TERM TO DESCRIPTION",
+      "prompt": "What is Water use?",
+      "helperText": "Choose the best description.",
+      "optionKind": "definition",
+      "choicesAreDescriptionsOnly": true,
+      "distractors": [
+        {
+          "termId": "governance",
+          "label": "The policies, processes, oversight, evaluation, and accountability structures that guide AI use.",
+          "source": "related",
+          "distance": "medium",
+          "learningPathDistance": 12,
+          "close": true
+        },
+        {
+          "termId": "energy-use",
+          "label": "The electricity required to train, run, cool, and support an AI system.",
+          "source": "related",
+          "distance": "far",
+          "learningPathDistance": 1,
+          "close": true
+        },
+        {
+          "termId": "data-center",
+          "label": "A facility that houses servers, networking, power, and cooling for digital services, including AI workloads.",
+          "source": "related",
+          "distance": "near",
+          "learningPathDistance": 2,
+          "close": true
+        }
+      ],
+      "closeDistractorCount": 3,
+      "correctFeedback": "Insight strengthened. Water use is water that may be used directly or indirectly for cooling and electricity generation around AI infrastructure.",
+      "wrongFeedback": "Not quite. That description is for Governance. Water use is water that may be used directly or indirectly for cooling and electricity generation around AI infrastructure.",
+      "pass": true,
+      "failures": []
+    }
+  ],
+  "failures": [],
+  "forbiddenSourcePhrases": []
+}

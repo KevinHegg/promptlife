@@ -1,0 +1,61 @@
+{
+  "createdAt": "2026-06-07T19:22:40.244Z",
+  "target": "hidden state",
+  "forcedCorrectTerm": "embedding",
+  "expectedPrompt": "Which idea is closest to Hidden state?",
+  "expectedHelper": "Choose the closest related term.",
+  "question": {
+    "type": "closest_concept",
+    "typeLabel": "RELATED IDEAS",
+    "prompt": "Which idea is closest to Hidden state?",
+    "helperText": "Choose the closest related term.",
+    "optionKind": "term",
+    "options": [
+      {
+        "label": "Layer",
+        "kind": "term",
+        "representedTermId": "layer",
+        "source": "confusable",
+        "distance": "near",
+        "learningPathDistance": 2,
+        "correct": false
+      },
+      {
+        "label": "Activation",
+        "kind": "term",
+        "representedTermId": "activation",
+        "source": "confusable",
+        "distance": "far",
+        "learningPathDistance": 29,
+        "correct": false
+      },
+      {
+        "label": "Embedding",
+        "kind": "term",
+        "representedTermId": "embedding",
+        "source": "correct",
+        "distance": "",
+        "learningPathDistance": 0,
+        "correct": true
+      },
+      {
+        "label": "Forward pass",
+        "kind": "term",
+        "representedTermId": "forward-pass",
+        "source": "confusable",
+        "distance": "far",
+        "learningPathDistance": 49,
+        "correct": false
+      }
+    ]
+  },
+  "staleStoredPromptFallback": {
+    "typeLabel": "RELATED IDEAS",
+    "prompt": "Which idea is closest to Hidden state?",
+    "helperText": "Choose the closest related term."
+  },
+  "closeChoiceCount": 4,
+  "preferredChoiceCount": 3,
+  "failures": [],
+  "pass": true
+}
