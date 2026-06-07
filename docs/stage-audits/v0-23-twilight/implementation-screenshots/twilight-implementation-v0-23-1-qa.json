@@ -1,0 +1,127 @@
+{
+  "checkedAt": "2026-06-07T16:24:19.599Z",
+  "appUrl": "http://127.0.0.1:5173/?debug=1&v=0233-twilight-implementation-final",
+  "screenshots": [
+    "diffusion-320.png",
+    "diffusion-interaction-390.png",
+    "diffusion-split-visual-390.png",
+    "how-ai-learns-matrix-390.png",
+    "how-ai-learns-sort-interaction-390.png",
+    "multimodal-interaction-390.png",
+    "multimodal-media-map-390.png",
+    "perfect-storm-320.png",
+    "perfect-storm-convergence-visual-390.png",
+    "perfect-storm-ingredient-interaction-390.png",
+    "twilight-overview-after-implementation-390.png"
+  ],
+  "lessons": {
+    "how-ai-learns": {
+      "expected": "How AI Learns",
+      "progressBefore": "[]",
+      "progressAfter": "[]",
+      "title": "How AI Learns",
+      "modeNote": "Previewing this card. Progress will not change.",
+      "terms": [
+        "Training",
+        "Pretraining",
+        "Fine-tuning",
+        "Adapter",
+        "Human feedback learning",
+        "In-context learning",
+        "RAG",
+        "Retrieval",
+        "Evaluation",
+        "Inference"
+      ],
+      "hasRicherCore": true,
+      "hasVisual": true,
+      "hasInteraction": true,
+      "keyTermsCollapsed": true,
+      "horizontalOverflow": false,
+      "keyTermsToggle": true
+    },
+    "diffusion": {
+      "expected": "Diffusion vs Autoregression",
+      "progressBefore": "[]",
+      "progressAfter": "[]",
+      "title": "Diffusion vs Autoregression",
+      "modeNote": "Previewing this card. Progress will not change.",
+      "terms": [
+        "Diffusion model",
+        "Autoregression",
+        "Generative AI",
+        "Sampling",
+        "Denoising"
+      ],
+      "hasRicherCore": true,
+      "hasVisual": true,
+      "hasInteraction": true,
+      "keyTermsCollapsed": true,
+      "horizontalOverflow": false,
+      "keyTermsToggle": true
+    },
+    "multimodal": {
+      "expected": "Multimodal AI",
+      "progressBefore": "[]",
+      "progressAfter": "[]",
+      "title": "Multimodal AI",
+      "modeNote": "Previewing this card. Progress will not change.",
+      "terms": [
+        "Multimodal AI",
+        "Representation",
+        "Embedding",
+        "Vector",
+        "Generative AI",
+        "Foundation model"
+      ],
+      "hasRicherCore": true,
+      "hasVisual": true,
+      "hasInteraction": true,
+      "keyTermsCollapsed": true,
+      "horizontalOverflow": false,
+      "keyTermsToggle": true
+    },
+    "perfect-storm": {
+      "expected": "The Perfect Storm",
+      "progressBefore": "[]",
+      "progressAfter": "[]",
+      "title": "The Perfect Storm",
+      "modeNote": "Previewing this card. Progress will not change.",
+      "terms": [
+        "Perfect storm",
+        "Training data",
+        "Compute",
+        "Storage",
+        "Deep learning",
+        "Human feedback labor",
+        "Economic incentives",
+        "Data center",
+        "Training"
+      ],
+      "hasRicherCore": true,
+      "hasVisual": true,
+      "hasInteraction": true,
+      "keyTermsCollapsed": true,
+      "horizontalOverflow": false,
+      "keyTermsToggle": true
+    }
+  },
+  "home": {
+    "heroSrc": "/assets/generated/home/home-hero-prompt-cloud.png",
+    "heroLoaded": true,
+    "markSrc": "/assets/generated/home/promptlife-mark.png",
+    "markLoaded": true,
+    "text": "A DAY IN THE LIFE OF A PROMPTPrompt LifeDemystifying LLMs in the AI era through clear explanations, useful metaphors, and a little play."
+  },
+  "visualAidReview": {
+    "hasAiLearns": true,
+    "hasDiffusion": true,
+    "hasMultimodal": true,
+    "hasPerfectStorm": true,
+    "horizontalOverflow": false
+  },
+  "glossaryDojoSpotCheck": {
+    "hasGlossaryDojo": true,
+    "hasPracticeChallenges": true
+  }
+}

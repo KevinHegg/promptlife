@@ -16,7 +16,8 @@ import {
   completeGlossaryDojoRound,
   loadGlossaryDojoProgress,
   recordGlossaryDojoAnswer,
-  saveGlossaryDojoProgress
+  saveGlossaryDojoProgress,
+  startGlossaryDojoRound
 } from './storage'
 import type { GlossaryDojoAnswerResult, GlossaryDojoRound } from './types'
 
@@ -50,11 +51,8 @@ export function useGlossaryDojo() {
       progress: latest,
       sourceMode: 'new_round'
     })
-    commit({
-      ...latest,
-      currentRound: round
-    })
-  }, [choiceSeed, commit, terms])
+    setProgress(startGlossaryDojoRound(latest, round))
+  }, [choiceSeed, terms])
 
   const repeatRound = useCallback(() => {
     const latest = loadGlossaryDojoProgress()
@@ -74,11 +72,8 @@ export function useGlossaryDojo() {
       questionSpecs: getQuestionSpecsFromRound(previous),
       repeatedFromRound: previous
     })
-    commit({
-      ...latest,
-      currentRound: round
-    })
-  }, [choiceSeed, commit, startRound, terms])
+    setProgress(startGlossaryDojoRound(latest, round))
+  }, [choiceSeed, startRound, terms])
 
   const reviewMissedRound = useCallback(() => {
     const latest = loadGlossaryDojoProgress()
@@ -97,11 +92,8 @@ export function useGlossaryDojo() {
       questionSpecs: specs,
       reviewFromRound: previous
     })
-    commit({
-      ...latest,
-      currentRound: round
-    })
-  }, [choiceSeed, commit, terms])
+    setProgress(startGlossaryDojoRound(latest, round))
+  }, [choiceSeed, terms])
 
   const answerQuestion = useCallback((optionId: string): GlossaryDojoAnswerResult | null => {
     if (!currentRound || !currentQuestion || currentAnswer) return null

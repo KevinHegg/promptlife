@@ -1,0 +1,86 @@
+{
+  "date": "2026-06-07",
+  "glossaryTermCount": 122,
+  "firstNormalFingerprint": "completion|deep-learning|embedding|generated-token|generative-ai|input-context|llm|machine-learning|model-output|response-so-far|tensor|weight",
+  "secondNormalFingerprint": "classical-machine-learning|distributed-representation|embedding|embedding-table|empiricism|llm|next-token|pretraining|prompt-tokens|response-so-far|symbolic-ai|weight",
+  "secondDiffersFromFirst": true,
+  "repeatRound": {
+    "current": "1",
+    "fingerprint": "classical-machine-learning|distributed-representation|embedding|embedding-table|empiricism|llm|next-token|pretraining|prompt-tokens|response-so-far|symbolic-ai|weight",
+    "prompt": "What does Prompt token mean?",
+    "repeatCount": "1",
+    "sourceMode": "repeat_round",
+    "targetCount": "12",
+    "total": "12",
+    "view": "question"
+  },
+  "repeatMatchesSecond": true,
+  "reviewMissedRound": {
+    "fingerprint": "classical-machine-learning",
+    "prompt": "Which term matches this definition?",
+    "repeatCount": "0",
+    "sourceMode": "review_missed",
+    "targetCount": "1",
+    "total": "1",
+    "view": "question"
+  },
+  "resetCheck": {
+    "hasActiveRound": false,
+    "hasSummary": false,
+    "text": "Back to PlayGlossary DojoPractice glossary termsTwelve calm prompts build vocabulary for the model story.Ready for twelve terms?Every choice comes from the glossary. There are no points, timers, leaderboards, or failure states.0 rounds0 questions0 mastered over timeStart 12-term round",
+    "view": "start"
+  },
+  "firstQuestionDistractors": [
+    {
+      "distance": "near",
+      "learningPathDistance": "3",
+      "representedTermId": "symbolic-ai",
+      "source": "near"
+    },
+    {
+      "distance": "medium",
+      "learningPathDistance": "7",
+      "representedTermId": "token",
+      "source": "medium"
+    },
+    {
+      "distance": "far",
+      "learningPathDistance": "15",
+      "representedTermId": "distributed-representation",
+      "source": "far"
+    }
+  ],
+  "secondQuestionDistractors": [
+    {
+      "distance": "medium",
+      "learningPathDistance": "12",
+      "representedTermId": "symbolic-ai",
+      "source": "medium"
+    },
+    {
+      "distance": "near",
+      "learningPathDistance": "2",
+      "representedTermId": "prompt",
+      "source": "related"
+    },
+    {
+      "distance": "far",
+      "learningPathDistance": "1",
+      "representedTermId": "response-tokens",
+      "source": "related"
+    }
+  ],
+  "narrowCheck": {
+    "lastSourceMode": "review_missed",
+    "overflow": false,
+    "scrollWidth": 320,
+    "textHasFixedCopy": true,
+    "view": "start",
+    "width": 320
+  },
+  "screenshots": [
+    "docs/play/screenshots/v0-22-1-dojo-round-strategy-review-missed-390.jpg",
+    "docs/play/screenshots/v0-22-1-dojo-round-strategy-results-390.jpg",
+    "docs/play/screenshots/v0-22-1-dojo-round-strategy-results-320.jpg"
+  ]
+}

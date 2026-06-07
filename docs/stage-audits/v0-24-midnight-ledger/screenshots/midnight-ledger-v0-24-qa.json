@@ -1,0 +1,143 @@
+{
+  "checkedAt": "2026-06-07T16:42:50.159Z",
+  "appUrl": "http://127.0.0.1:5173/?debug=1&v=024-midnight-audit",
+  "screenshots": [
+    "collective-intelligence-bottom-action-390.png",
+    "collective-intelligence-brain-bridge-390.png",
+    "collective-intelligence-checkpoint-390.png",
+    "collective-intelligence-core-390.png",
+    "collective-intelligence-correct-feedback-390.png",
+    "collective-intelligence-hero-390.png",
+    "collective-intelligence-interaction-390.png",
+    "collective-intelligence-source-caveat-review-390.png",
+    "collective-intelligence-visual-390.png",
+    "collective-intelligence-wrong-feedback-390.png",
+    "costs-we-must-count-320.png",
+    "costs-we-must-count-bottom-action-390.png",
+    "costs-we-must-count-brain-bridge-390.png",
+    "costs-we-must-count-checkpoint-390.png",
+    "costs-we-must-count-core-390.png",
+    "costs-we-must-count-correct-feedback-390.png",
+    "costs-we-must-count-hero-390.png",
+    "costs-we-must-count-interaction-390.png",
+    "costs-we-must-count-source-caveat-review-390.png",
+    "costs-we-must-count-visual-390.png",
+    "costs-we-must-count-wrong-feedback-390.png",
+    "journey-top.png",
+    "midnight-ledger-overview.png",
+    "midnight-ledger-stage-link.png",
+    "risk-myth-430.png",
+    "risk-myth-bottom-action-390.png",
+    "risk-myth-brain-bridge-390.png",
+    "risk-myth-checkpoint-390.png",
+    "risk-myth-core-390.png",
+    "risk-myth-correct-feedback-390.png",
+    "risk-myth-hero-390.png",
+    "risk-myth-interaction-390.png",
+    "risk-myth-source-caveat-review-390.png",
+    "risk-myth-visual-390.png",
+    "risk-myth-wrong-feedback-390.png"
+  ],
+  "lessons": {
+    "collective-intelligence": {
+      "progressBefore": "[]",
+      "progressAfter": "[]",
+      "title": "Collective Intelligence, Extracted",
+      "modeNote": "Previewing this card. Progress will not change.",
+      "visualTitle": "Borrowed Flames",
+      "terms": [
+        "Collective intelligence",
+        "Training data",
+        "Data provenance",
+        "Consent",
+        "Compensation",
+        "Copyright",
+        "Human feedback labor"
+      ],
+      "hasCorePanel": true,
+      "hasBrainBridge": true,
+      "interactionTitle": "Follow the borrowed flames",
+      "checkpoint": "What powers much of a model’s usefulness?",
+      "bottomAction": "Return to Journey",
+      "horizontalOverflow": false
+    },
+    "costs-we-must-count": {
+      "progressBefore": "[]",
+      "progressAfter": "[]",
+      "title": "Costs We Must Count",
+      "modeNote": "Previewing this card. Progress will not change.",
+      "visualTitle": "Invisible Factory",
+      "terms": [
+        "Environmental footprint",
+        "Energy use",
+        "Water use",
+        "Carbon emissions",
+        "Data center",
+        "E-waste",
+        "Copyright",
+        "Labor disruption",
+        "Deskilling",
+        "Privacy",
+        "Governance"
+      ],
+      "hasCorePanel": true,
+      "hasBrainBridge": true,
+      "interactionTitle": "Map the hidden factory",
+      "checkpoint": "Which statement is most responsible?",
+      "bottomAction": "Return to Journey",
+      "horizontalOverflow": false
+    },
+    "risk-myth": {
+      "progressBefore": "[]",
+      "progressAfter": "[]",
+      "title": "Risk vs Myth",
+      "modeNote": "Previewing this card. Progress will not change.",
+      "visualTitle": "Risk or Myth",
+      "terms": [
+        "Inference",
+        "Training",
+        "Context window",
+        "Privacy",
+        "Hallucination",
+        "Prompt Injection"
+      ],
+      "hasCorePanel": true,
+      "hasBrainBridge": true,
+      "interactionTitle": "Sort risk from myth",
+      "checkpoint": "Which is a real institutional risk?",
+      "bottomAction": "Return to Journey",
+      "horizontalOverflow": false
+    }
+  },
+  "viewportChecks": {
+    "costs-we-must-count-320": {
+      "width": 320,
+      "title": "Costs We Must Count",
+      "horizontalOverflow": false
+    },
+    "risk-myth-430": {
+      "width": 430,
+      "title": "Risk vs Myth",
+      "horizontalOverflow": false
+    }
+  },
+  "home": {
+    "heroLoaded": true,
+    "markLoaded": true,
+    "title": "Prompt Life"
+  },
+  "visualAidReview": {
+    "collective": true,
+    "costs": true,
+    "risk": true
+  },
+  "taxonomySpotCheck": {
+    "title": "Where LLMs Fit",
+    "visual": "AI Family Tree",
+    "hasInteraction": true
+  },
+  "glossaryDojoSpotCheck": {
+    "hasGlossaryDojo": true,
+    "hasPracticeChallenges": true
+  }
+}

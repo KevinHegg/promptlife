@@ -1,0 +1,75 @@
+{
+  "stage": "Midnight Ledger",
+  "version": "v0.24",
+  "date": "2026-06-07",
+  "notes": "Documentation-only audit. No live app curriculum changes were made.",
+  "cards": [
+    {
+      "id": "collective-intelligence",
+      "number": 32,
+      "title": "Collective Intelligence, Extracted",
+      "recommendation": "revise",
+      "contentPriority": "medium",
+      "visualPriority": "medium",
+      "interactionPriority": "high",
+      "sourcePriority": "high",
+      "needsMoreExplanation": true,
+      "needsLessExplanation": false,
+      "recommendedVisualType": "hybrid",
+      "recommendedTinyInteractions": ["sort-buckets: provenance / rights / return / uncertainty"],
+      "sourceReviewStatus": "source-needed",
+      "checkpointRecommendation": "Keep current checkpoint; feedback is strong.",
+      "notes": "Copy is cautious and useful. Current feature-cloud interaction is mismatched; visual label is cramped."
+    },
+    {
+      "id": "costs-we-must-count",
+      "number": 33,
+      "title": "Costs We Must Count",
+      "recommendation": "revise",
+      "contentPriority": "medium",
+      "visualPriority": "high",
+      "interactionPriority": "high",
+      "sourcePriority": "medium",
+      "needsMoreExplanation": false,
+      "needsLessExplanation": false,
+      "recommendedVisualType": "generated-png",
+      "recommendedTinyInteractions": ["tap-choice: ledger entries", "tap-multiple: cost varies by design and deployment"],
+      "sourceReviewStatus": "reviewed",
+      "checkpointRecommendation": "Keep current checkpoint; it avoids denial and doom.",
+      "notes": "Current copy is source-aware. Visual is cramped and repeats Power; interaction is a risk sorter rather than a cost ledger."
+    },
+    {
+      "id": "risk-myth",
+      "number": 34,
+      "title": "Risk vs Myth",
+      "recommendation": "revise",
+      "contentPriority": "high",
+      "visualPriority": "medium",
+      "interactionPriority": "medium",
+      "sourcePriority": "medium",
+      "needsMoreExplanation": true,
+      "needsLessExplanation": false,
+      "recommendedVisualType": "svg",
+      "recommendedTinyInteractions": ["risk-sort: real risk / myth with multiple items"],
+      "sourceReviewStatus": "reviewed",
+      "checkpointRecommendation": "Keep target misconception but improve specific wrong-answer feedback.",
+      "notes": "Belongs in Midnight Ledger. Needs rich lesson schema and mechanism-linked risks."
+    }
+  ],
+  "promptInjectionToolRisk": {
+    "presentAsStandaloneCard": false,
+    "currentPlacement": "Risk vs Myth and glossary",
+    "recommendation": "Keep inside Risk vs Myth for now unless a future tools/security pass warrants a dedicated card.",
+    "recommendedVisualTypeIfExpanded": "svg",
+    "recommendedInteractionIfExpanded": "scenario-choice"
+  },
+  "verification": {
+    "typecheck": "passed",
+    "build": "passed with existing Vite large-chunk warning",
+    "buildPages": "passed with existing Vite large-chunk warning",
+    "auditAnswers": "passed",
+    "progressChangedDuringPreviewQa": false,
+    "screenshotsCaptured": true
+  }
+}
+

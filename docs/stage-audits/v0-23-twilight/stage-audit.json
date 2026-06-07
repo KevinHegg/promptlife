@@ -1,0 +1,124 @@
+{
+  "version": "0.23",
+  "date": "2026-06-07",
+  "stage": {
+    "id": "twilight-landscape",
+    "name": "Twilight: The Wider Landscape",
+    "summary": "The day widens into other AI systems and why LLMs arrived now.",
+    "focus": "How LLMs fit into the larger AI landscape.",
+    "keyDistinction": "Not all generative AI works the same way."
+  },
+  "constraintsObserved": [
+    "documentation-only audit",
+    "no new Journey cards",
+    "no Journey order changes",
+    "no progress-rule changes",
+    "no checkpoint-randomization changes",
+    "no game changes",
+    "no generated PNG assets added",
+    "no dependency changes",
+    "one badge model preserved",
+    "Glossary Dojo left untouched"
+  ],
+  "cards": [
+    {
+      "number": 28,
+      "id": "how-ai-learns",
+      "title": "How AI Learns",
+      "recommendation": "revise",
+      "schemaDepth": "slim",
+      "visualAidId": "ai-learns",
+      "interactionType": "training",
+      "checkpointStatus": "strong",
+      "mainFinding": "Accurate durable-versus-temporary distinction, but the visual and interaction do not yet support the full learning-modes map."
+    },
+    {
+      "number": 29,
+      "id": "diffusion",
+      "title": "Diffusion vs Autoregression",
+      "recommendation": "revise-lightly",
+      "schemaDepth": "slim",
+      "visualAidId": "diffusion",
+      "interactionType": "diffusion",
+      "checkpointStatus": "strong",
+      "mainFinding": "Clear denoising definition, but the visual should compare denoising with autoregressive append-and-repeat."
+    },
+    {
+      "number": 30,
+      "id": "multimodal",
+      "title": "Multimodal AI",
+      "recommendation": "revise-lightly",
+      "schemaDepth": "slim",
+      "visualAidId": "multimodal",
+      "interactionType": "multimodal",
+      "checkpointStatus": "strong",
+      "mainFinding": "Clear definition, but the visual should avoid implying one simple shared vector space and should show more input/output combinations."
+    },
+    {
+      "number": 31,
+      "id": "perfect-storm",
+      "title": "The Perfect Storm",
+      "recommendation": "keep-and-polish",
+      "schemaDepth": "rich",
+      "visualAidId": "perfect-storm",
+      "interactionType": "cloud",
+      "checkpointStatus": "strong",
+      "mainFinding": "Strong content and visual, but the interaction falls back to a generic feature cloud instead of storm ingredients."
+    }
+  ],
+  "majorContentFindings": [
+    "The stage order is coherent and should remain unchanged.",
+    "The first three cards need richer lesson architecture to match current standards.",
+    "How AI Learns should function as a synthesis map, not a repeat of earlier training/RAG mechanics.",
+    "Diffusion and Multimodal should stay concise but sharper about their distinctions from LLM text generation.",
+    "The Perfect Storm is a strong bridge to Midnight Ledger but needs a better tiny interaction."
+  ],
+  "majorVisualFindings": [
+    "How AI Learns visual is readable but too thin.",
+    "Diffusion visual needs a side-by-side autoregression contrast.",
+    "Multimodal central label is tight and the shared-hub metaphor needs careful limits.",
+    "Perfect Storm visual is aligned and is the best future Image 2 candidate.",
+    "No screenshot showed a need for a heavy 3D library."
+  ],
+  "recommendedImage2Assets": [
+    {
+      "lessonId": "perfect-storm",
+      "priority": "recommended",
+      "description": "Textless ZenTron Origami convergence scene showing data, compute, methods, labor, and incentives flowing toward a model cloud."
+    },
+    {
+      "lessonId": "diffusion",
+      "priority": "optional-later",
+      "description": "Textless denoise-from-noise concept scene, only as support beside a coded comparison."
+    },
+    {
+      "lessonId": "multimodal",
+      "priority": "optional-later",
+      "description": "Textless media-hub support scene, after the coded input/output map is improved."
+    }
+  ],
+  "recommendedCodedAssets": [
+    "How AI Learns learning-modes matrix",
+    "Diffusion denoise-vs-append split diagram",
+    "Multimodal media input/representation/output map",
+    "Perfect Storm tap-lit convergence streams"
+  ],
+  "screenshots": {
+    "directory": "docs/stage-audits/v0-23-twilight/screenshots",
+    "count": 51,
+    "primaryWidth": 390,
+    "spotCheckWidths": [320, 430]
+  },
+  "verification": {
+    "typecheck": "passed",
+    "build": "passed with existing Vite large-chunk warning",
+    "buildPages": "passed with existing Vite large-chunk warning",
+    "auditAnswers": "passed"
+  },
+  "knownIssues": [
+    "The existing Vite large-chunk warning remains.",
+    "Some audit screenshots required clean headless Chrome capture because the in-app browser timed out on long Journey-page screenshots.",
+    "The live app still contains the Perfect Storm generic feature-cloud interaction; this audit intentionally did not change it."
+  ]
+}
+

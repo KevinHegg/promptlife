@@ -1,0 +1,380 @@
+{
+  "checkedAt": "2026-06-07T15:51:52.791Z",
+  "appUrl": "http://127.0.0.1:5173/?debug=1&v=0232-qa",
+  "journey": {
+    "320": {
+      "viewport": {
+        "width": 320,
+        "height": 780
+      },
+      "screenTitle": "Today in Prompt Life",
+      "helper": "All stages follow one prompt through the full day: before training, through inference, generation, evidence, risks, costs, and better human use.",
+      "firstStage": "Before Morning",
+      "firstLesson": "What Is an LLM?",
+      "hasPathView": false,
+      "hasPathButtons": false,
+      "hasPathFilterPanel": false,
+      "hasGuidedComparisons": false,
+      "hasTourFeaturePanel": false,
+      "hasCountCopy": false,
+      "stageCount": 8,
+      "gridTemplateColumns": "66.2812px 66.2969px 66.2812px 66.2969px",
+      "tiles": [
+        {
+          "text": "1Before MorningModel shaped before use",
+          "ariaLabel": "Jump to Before Morning. Model shaped before use",
+          "ariaCurrent": "step",
+          "rect": {
+            "x": 23,
+            "y": 281,
+            "width": 66,
+            "height": 99
+          },
+          "overflows": false,
+          "strongOverflows": true,
+          "smallOverflows": true
+        },
+        {
+          "text": "2Morning CommuteText becomes numbers",
+          "ariaLabel": "Jump to Morning Commute. Text becomes numbers",
+          "ariaCurrent": null,
+          "rect": {
+            "x": 92,
+            "y": 281,
+            "width": 66,
+            "height": 99
+          },
+          "overflows": false,
+          "strongOverflows": true,
+          "smallOverflows": true
+        },
+        {
+          "text": "3WorkdayLayers process context",
+          "ariaLabel": "Jump to Workday. Layers process context",
+          "ariaCurrent": null,
+          "rect": {
+            "x": 161,
+            "y": 281,
+            "width": 66,
+            "height": 99
+          },
+          "overflows": false,
+          "strongOverflows": false,
+          "smallOverflows": true
+        },
+        {
+          "text": "4Decision RoomOne token is chosen",
+          "ariaLabel": "Jump to Decision Room. One token is chosen",
+          "ariaCurrent": null,
+          "rect": {
+            "x": 231,
+            "y": 281,
+            "width": 66,
+            "height": 99
+          },
+          "overflows": false,
+          "strongOverflows": true,
+          "smallOverflows": true
+        },
+        {
+          "text": "5Day RepeatsContext grows + expires",
+          "ariaLabel": "Jump to The Day Repeats. Context grows and expires",
+          "ariaCurrent": null,
+          "rect": {
+            "x": 23,
+            "y": 383,
+            "width": 66,
+            "height": 99
+          },
+          "overflows": false,
+          "strongOverflows": true,
+          "smallOverflows": true
+        },
+        {
+          "text": "6TwilightWider AI landscape",
+          "ariaLabel": "Jump to Twilight: The Wider Landscape. Wider AI landscape",
+          "ariaCurrent": null,
+          "rect": {
+            "x": 92,
+            "y": 383,
+            "width": 66,
+            "height": 99
+          },
+          "overflows": false,
+          "strongOverflows": false,
+          "smallOverflows": true
+        },
+        {
+          "text": "7Midnight LedgerCosts and shadows",
+          "ariaLabel": "Jump to Midnight Ledger. Costs and shadows",
+          "ariaCurrent": null,
+          "rect": {
+            "x": 161,
+            "y": 383,
+            "width": 66,
+            "height": 99
+          },
+          "overflows": false,
+          "strongOverflows": true,
+          "smallOverflows": true
+        },
+        {
+          "text": "8New DawnBetter human use",
+          "ariaLabel": "Jump to New Dawn. Better human use",
+          "ariaCurrent": null,
+          "rect": {
+            "x": 231,
+            "y": 383,
+            "width": 66,
+            "height": 99
+          },
+          "overflows": false,
+          "strongOverflows": false,
+          "smallOverflows": true
+        }
+      ],
+      "horizontalOverflow": false
+    },
+    "390": {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "screenTitle": "Today in Prompt Life",
+      "helper": "All stages follow one prompt through the full day: before training, through inference, generation, evidence, risks, costs, and better human use.",
+      "firstStage": "Before Morning",
+      "firstLesson": "What Is an LLM?",
+      "hasPathView": false,
+      "hasPathButtons": false,
+      "hasPathFilterPanel": false,
+      "hasGuidedComparisons": false,
+      "hasTourFeaturePanel": false,
+      "hasCountCopy": false,
+      "stageCount": 8,
+      "gridTemplateColumns": "81.5469px 81.5625px 81.5469px 81.5625px",
+      "tiles": [
+        {
+          "text": "1Before MorningModel shaped before use",
+          "ariaLabel": "Jump to Before Morning. Model shaped before use",
+          "ariaCurrent": "step",
+          "rect": {
+            "x": 25,
+            "y": 226,
+            "width": 82,
+            "height": 91
+          },
+          "overflows": false,
+          "strongOverflows": false,
+          "smallOverflows": false
+        },
+        {
+          "text": "2Morning CommuteText becomes numbers",
+          "ariaLabel": "Jump to Morning Commute. Text becomes numbers",
+          "ariaCurrent": null,
+          "rect": {
+            "x": 111,
+            "y": 226,
+            "width": 82,
+            "height": 91
+          },
+          "overflows": false,
+          "strongOverflows": false,
+          "smallOverflows": false
+        },
+        {
+          "text": "3WorkdayLayers process context",
+          "ariaLabel": "Jump to Workday. Layers process context",
+          "ariaCurrent": null,
+          "rect": {
+            "x": 197,
+            "y": 226,
+            "width": 82,
+            "height": 91
+          },
+          "overflows": false,
+          "strongOverflows": false,
+          "smallOverflows": false
+        },
+        {
+          "text": "4Decision RoomOne token is chosen",
+          "ariaLabel": "Jump to Decision Room. One token is chosen",
+          "ariaCurrent": null,
+          "rect": {
+            "x": 283,
+            "y": 226,
+            "width": 82,
+            "height": 91
+          },
+          "overflows": false,
+          "strongOverflows": false,
+          "smallOverflows": false
+        },
+        {
+          "text": "5Day RepeatsContext grows + expires",
+          "ariaLabel": "Jump to The Day Repeats. Context grows and expires",
+          "ariaCurrent": null,
+          "rect": {
+            "x": 25,
+            "y": 321,
+            "width": 82,
+            "height": 91
+          },
+          "overflows": false,
+          "strongOverflows": false,
+          "smallOverflows": false
+        },
+        {
+          "text": "6TwilightWider AI landscape",
+          "ariaLabel": "Jump to Twilight: The Wider Landscape. Wider AI landscape",
+          "ariaCurrent": null,
+          "rect": {
+            "x": 111,
+            "y": 321,
+            "width": 82,
+            "height": 91
+          },
+          "overflows": false,
+          "strongOverflows": false,
+          "smallOverflows": false
+        },
+        {
+          "text": "7Midnight LedgerCosts and shadows",
+          "ariaLabel": "Jump to Midnight Ledger. Costs and shadows",
+          "ariaCurrent": null,
+          "rect": {
+            "x": 197,
+            "y": 321,
+            "width": 82,
+            "height": 91
+          },
+          "overflows": false,
+          "strongOverflows": false,
+          "smallOverflows": false
+        },
+        {
+          "text": "8New DawnBetter human use",
+          "ariaLabel": "Jump to New Dawn. Better human use",
+          "ariaCurrent": null,
+          "rect": {
+            "x": 283,
+            "y": 321,
+            "width": 82,
+            "height": 91
+          },
+          "overflows": false,
+          "strongOverflows": false,
+          "smallOverflows": false
+        }
+      ],
+      "horizontalOverflow": false
+    },
+    "nav390": {
+      "clicked": true,
+      "text": "Journey"
+    },
+    "bottomNavReturnsToTop": {
+      "clicked": true,
+      "beforeWait": 7427,
+      "afterWait": 0
+    },
+    "nav320": {
+      "clicked": true,
+      "text": "Journey"
+    }
+  },
+  "stageClicks": [
+    {
+      "ok": true,
+      "index": 0,
+      "clicked": "1Before MorningModel shaped before use",
+      "currentText": "1Before MorningModel shaped before use",
+      "shellScrollTop": 524
+    },
+    {
+      "ok": true,
+      "index": 1,
+      "clicked": "2Morning CommuteText becomes numbers",
+      "currentText": "2Morning CommuteText becomes numbers",
+      "shellScrollTop": 1976
+    },
+    {
+      "ok": true,
+      "index": 2,
+      "clicked": "3WorkdayLayers process context",
+      "currentText": "3WorkdayLayers process context",
+      "shellScrollTop": 3219
+    },
+    {
+      "ok": true,
+      "index": 3,
+      "clicked": "4Decision RoomOne token is chosen",
+      "currentText": "4Decision RoomOne token is chosen",
+      "shellScrollTop": 4051
+    },
+    {
+      "ok": true,
+      "index": 4,
+      "clicked": "5Day RepeatsContext grows + expires",
+      "currentText": "5Day RepeatsContext grows + expires",
+      "shellScrollTop": 4735
+    },
+    {
+      "ok": true,
+      "index": 5,
+      "clicked": "6TwilightWider AI landscape",
+      "currentText": "6TwilightWider AI landscape",
+      "shellScrollTop": 5722
+    },
+    {
+      "ok": true,
+      "index": 6,
+      "clicked": "7Midnight LedgerCosts and shadows",
+      "currentText": "7Midnight LedgerCosts and shadows",
+      "shellScrollTop": 6636
+    },
+    {
+      "ok": true,
+      "index": 7,
+      "clicked": "8New DawnBetter human use",
+      "currentText": "8New DawnBetter human use",
+      "shellScrollTop": 7427
+    }
+  ],
+  "play": {
+    "hasPromptRun": true,
+    "hasContextStack": true,
+    "hasAttentionWeave": true,
+    "hasTokenPipelineRelay": true,
+    "hasGlossaryDojo": true,
+    "hasHowAiLearns": true,
+    "hasGuidedComparisons": true
+  },
+  "badge": {
+    "title": "Prompt Life: Model Literate",
+    "hasOneBadgeCopy": true,
+    "hasMultipleBadgeLanguage": false,
+    "hasPathRequirementCopy": false,
+    "remainingCopy": [
+      "Complete the Journey checkpoints and practice activities to earn one confidence badge: Prompt Life: Model Literate.",
+      "This badge means you can explain what an LLM is, what it is not, and how a prompt becomes a response without treating the model as magic.",
+      "Remaining: 23 Journey checkpoints, 1 Prompt Run completion, and 1 synthesis card completion."
+    ]
+  },
+  "glossaryDojo": {
+    "start": {
+      "clicked": true,
+      "text": "Glossary DojoPractice terms, definitions, relationships, and common mix-ups.Action: Start a 12-term round.Teaches: The vocabulary map behind model literacy.Time: 4 minReadyStart round"
+    },
+    "state": {
+      "hasDojoTitle": true,
+      "hasRoundCopy": true,
+      "activeView": null
+    }
+  },
+  "screenshots": [
+    "journey-v0-23-2-top-390.png",
+    "journey-v0-23-2-stage-grid.png",
+    "journey-v0-23-2-top-320.png",
+    "badge-v0-23-2-single-badge-copy.png"
+  ]
+}

@@ -1,0 +1,200 @@
+{
+  "visual390": {
+    "width": 390,
+    "bodyWidth": 390,
+    "viewportWidth": 390,
+    "caption": "Convergence, not one spark.",
+    "keyTakeaway": "Key takeaway: Modern LLMs came from a convergence, not a single spark.",
+    "navTop": 753,
+    "canvas": {
+      "top": 46,
+      "bottom": 246,
+      "width": 305
+    },
+    "captionBottom": 271,
+    "keyBottom": 665,
+    "textTextOverlaps": [],
+    "containsOldSvgLabel": false,
+    "svgTexts": [
+      {
+        "text": "Data",
+        "x": 82,
+        "y": 69,
+        "width": 29,
+        "height": 15
+      },
+      {
+        "text": "Compute",
+        "x": 257,
+        "y": 69,
+        "width": 58,
+        "height": 15
+      },
+      {
+        "text": "Storage",
+        "x": 82,
+        "y": 105,
+        "width": 50,
+        "height": 15
+      },
+      {
+        "text": "Methods",
+        "x": 257,
+        "y": 105,
+        "width": 55,
+        "height": 15
+      },
+      {
+        "text": "Labor",
+        "x": 82,
+        "y": 141,
+        "width": 37,
+        "height": 15
+      },
+      {
+        "text": "Incentives",
+        "x": 252,
+        "y": 141,
+        "width": 66,
+        "height": 15
+      },
+      {
+        "text": "Modern LLM",
+        "x": 144,
+        "y": 187,
+        "width": 78,
+        "height": 15
+      },
+      {
+        "text": "capability",
+        "x": 159,
+        "y": 203,
+        "width": 63,
+        "height": 15
+      }
+    ]
+  },
+  "visual320": {
+    "width": 320,
+    "bodyWidth": 320,
+    "viewportWidth": 320,
+    "caption": "Convergence, not one spark.",
+    "keyTakeaway": "Key takeaway: Modern LLMs came from a convergence, not a single spark.",
+    "navTop": 753,
+    "canvas": {
+      "top": 22,
+      "bottom": 176,
+      "width": 235
+    },
+    "captionBottom": 201,
+    "keyBottom": 689,
+    "textTextOverlaps": [],
+    "containsOldSvgLabel": false,
+    "svgTexts": [
+      {
+        "text": "Data",
+        "x": 73,
+        "y": 40,
+        "width": 23,
+        "height": 11
+      },
+      {
+        "text": "Compute",
+        "x": 208,
+        "y": 40,
+        "width": 44,
+        "height": 11
+      },
+      {
+        "text": "Storage",
+        "x": 73,
+        "y": 67,
+        "width": 39,
+        "height": 11
+      },
+      {
+        "text": "Methods",
+        "x": 208,
+        "y": 67,
+        "width": 43,
+        "height": 11
+      },
+      {
+        "text": "Labor",
+        "x": 73,
+        "y": 95,
+        "width": 28,
+        "height": 11
+      },
+      {
+        "text": "Incentives",
+        "x": 204,
+        "y": 95,
+        "width": 51,
+        "height": 11
+      },
+      {
+        "text": "Modern LLM",
+        "x": 121,
+        "y": 130,
+        "width": 60,
+        "height": 11
+      },
+      {
+        "text": "capability",
+        "x": 132,
+        "y": 143,
+        "width": 48,
+        "height": 11
+      }
+    ]
+  },
+  "interaction390": {
+    "width": 390,
+    "bodyWidth": 390,
+    "viewportWidth": 390,
+    "activeButtonCount": 6,
+    "buttons": [
+      {
+        "text": "Data",
+        "active": true,
+        "pressed": "true",
+        "bottom": 346
+      },
+      {
+        "text": "Compute",
+        "active": true,
+        "pressed": "true",
+        "bottom": 346
+      },
+      {
+        "text": "Storage",
+        "active": true,
+        "pressed": "true",
+        "bottom": 399
+      },
+      {
+        "text": "Algorithms",
+        "active": true,
+        "pressed": "true",
+        "bottom": 399
+      },
+      {
+        "text": "Human labor",
+        "active": true,
+        "pressed": "true",
+        "bottom": 452
+      },
+      {
+        "text": "Incentives",
+        "active": true,
+        "pressed": "true",
+        "bottom": 452
+      }
+    ],
+    "feedback": "Incentives: Money, competition, institutional demand, and platform scale accelerated development. Insight strengthened. Modern LLMs came from convergence, not one magic breakthrough.",
+    "feedbackBottom": 635,
+    "navTop": 753,
+    "controlsAboveNav": true
+  }
+}

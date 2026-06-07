@@ -42,7 +42,7 @@ const HOME_ASSETS = {
   heroFallback: `${ASSET}/illustrations/scene-hero-feature-cloud@mobile.png`
 }
 // Bump this for each shipped app change; the Badge screen displays it under Start over.
-const APP_VERSION = '0.22.1'
+const APP_VERSION = '0.24.1'
 const STORAGE_KEYS = {
   lastLocation: 'promptlife:v1:lastLocation',
   lessonId: 'promptlife:v1:lessonId',
@@ -109,10 +109,12 @@ const GLOSSARY_LEARNING_GROUPS = [
   { firstLessonId: 'grounding', termIds: ['grounding', 'citation'] },
   { firstLessonId: 'hallucinations', termIds: ['hallucination', 'uncertainty'] },
   { firstLessonId: 'how-ai-learns', termIds: ['in-context learning'] },
-  { firstLessonId: 'perfect-storm', termIds: ['perfect-storm-term', 'human-feedback-labor', 'compute', 'data-center'] },
+  { firstLessonId: 'diffusion', termIds: ['denoising'] },
+  { firstLessonId: 'multimodal', termIds: ['representation'] },
+  { firstLessonId: 'perfect-storm', termIds: ['perfect-storm-term', 'human-feedback-labor', 'compute', 'storage', 'economic-incentives', 'data-center'] },
   { firstLessonId: 'collective-intelligence', termIds: ['collective-intelligence-term', 'source-review', 'data-provenance', 'consent', 'compensation', 'copyright'] },
-  { firstLessonId: 'costs-we-must-count', termIds: ['environmental-footprint', 'energy-use', 'water-use', 'carbon-emissions', 'e-waste', 'labor-disruption', 'deskilling'] },
-  { firstLessonId: 'risk-myth', termIds: ['prompt-injection', 'privacy'] },
+  { firstLessonId: 'costs-we-must-count', termIds: ['environmental-footprint', 'energy-use', 'water-use', 'carbon-emissions', 'e-waste', 'labor-disruption', 'deskilling', 'bias', 'information-pollution'] },
+  { firstLessonId: 'risk-myth', termIds: ['risk-literacy', 'prompt-injection', 'privacy', 'tool-use', 'overreliance', 'vendor-lock-in', 'concentration-of-power'] },
   { firstLessonId: 'benefits-worth-taking-seriously', termIds: ['accessibility', 'translation', 'summarization'] },
   { firstLessonId: 'human-centered-ai', termIds: ['human-centered-ai-term', 'dignity', 'accountability', 'common-good'] },
   { firstLessonId: 'better-ai-choice', termIds: ['responsible-ai', 'model-distillation', 'efficient-inference', 'governance'] },
@@ -214,15 +216,42 @@ const LESSON_TERM_DISPLAY_PRIORITY = {
     'temperature',
     'top-k',
     'top-p'
+  ],
+  'collective-intelligence': [
+    'collective-intelligence-term',
+    'training-data',
+    'data-provenance',
+    'consent',
+    'copyright',
+    'compensation',
+    'human-feedback-labor',
+    'accountability'
+  ],
+  'costs-we-must-count': [
+    'environmental-footprint',
+    'energy-use',
+    'water-use',
+    'carbon-emissions',
+    'data-center',
+    'e-waste',
+    'labor-disruption',
+    'deskilling',
+    'privacy',
+    'governance'
+  ],
+  'risk-myth': [
+    'risk-literacy',
+    'privacy',
+    'hallucination',
+    'prompt-injection',
+    'tool-use',
+    'overreliance',
+    'vendor-lock-in',
+    'concentration-of-power',
+    'governance',
+    'accountability'
   ]
 }
-const JOURNEY_FILTERS = [
-  { id: 'all', label: 'All' },
-  { id: 'essential', label: 'Essential' },
-  { id: 'deep', label: 'Deep' },
-  { id: 'ethics', label: 'Ethics' }
-]
-
 function prefersReducedMotion() {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches
 }
@@ -541,8 +570,6 @@ function App() {
             completed={completed}
             currentLessonId={nextOpenLesson.id}
             onOpenLesson={openLesson}
-            onTrace={() => openPlayFeature('trace-one-prompt')}
-            onLearningTour={() => openPlayFeature('how-ai-learns')}
           />
         )}
         {tab === 'learn' && (
@@ -714,22 +741,15 @@ function Pillar({ icon, label }) {
   )
 }
 
-function JourneyScreen({ completed, currentLessonId, onOpenLesson, onTrace, onLearningTour }) {
-  const [pathFilter, setPathFilter] = useState('all')
+function JourneyScreen({ completed, currentLessonId, onOpenLesson }) {
   const currentActId = lessons.find((lesson) => lesson.id === currentLessonId)?.act ?? acts[0].id
-  const visibleLessons = lessons.filter((lesson) => matchesJourneyPathFilter(lesson, pathFilter))
-  const visibleActs = acts.filter((act) => visibleLessons.some((lesson) => lesson.act === act.id))
+  const visibleLessons = lessons
+  const visibleActs = acts
   const [activeStageId, setActiveStageId] = useState(currentActId)
-  const activeFilter = JOURNEY_FILTERS.find((filter) => filter.id === pathFilter) ?? JOURNEY_FILTERS[0]
-  const filterSummary = pathFilter === 'all'
-    ? `Showing all ${visibleLessons.length} Journey cards across ${visibleActs.length} stages.`
-    : `Showing ${visibleLessons.length} ${activeFilter.label} cards across ${visibleActs.length} stages.`
 
   useEffect(() => {
-    setActiveStageId(visibleActs.some((act) => act.id === currentActId)
-      ? currentActId
-      : visibleActs[0]?.id ?? acts[0].id)
-  }, [currentActId, pathFilter])
+    setActiveStageId(currentActId)
+  }, [currentActId])
 
   function handleStageSelect(actId) {
     setActiveStageId(actId)
@@ -750,37 +770,7 @@ function JourneyScreen({ completed, currentLessonId, onOpenLesson, onTrace, onLe
         items={visibleActs}
         onStageSelect={handleStageSelect}
       />
-      <section className="path-filter-panel" aria-labelledby="journey-filter-title">
-        <div>
-          <p className="eyebrow">Path view</p>
-          <h2 id="journey-filter-title">Choose a path</h2>
-          <p>All cards follow the full day. Essential is the shortest path. Deep adds mechanics. Ethics follows costs, choices, and human consequences.</p>
-        </div>
-        <div className="segmented-control path-filter-control" aria-label="Filter Journey cards by path">
-          {JOURNEY_FILTERS.map((filter) => (
-            <button
-              key={filter.id}
-              className={pathFilter === filter.id ? 'active' : ''}
-              onClick={() => setPathFilter(filter.id)}
-              aria-pressed={pathFilter === filter.id}
-            >
-              {filter.label}
-            </button>
-          ))}
-        </div>
-        <p className="filter-summary" role="status">{filterSummary}</p>
-      </section>
-      <section className="tour-feature-panel" aria-labelledby="guided-tours-title">
-        <div>
-          <p className="eyebrow">Guided comparisons</p>
-          <h2 id="guided-tours-title">Run and compare</h2>
-          <p>Use these when the map feels abstract: one guides a prompt through the model, the other compares how AI systems learn.</p>
-        </div>
-        <div className="tour-actions">
-          <button className="secondary-btn" onClick={onTrace}>Prompt Run</button>
-          <button className="secondary-btn" onClick={onLearningTour}>How AI Learns</button>
-        </div>
-      </section>
+      <p className="journey-helper">All stages follow one prompt through the full day: before training, through inference, generation, evidence, risks, costs, and better human use.</p>
       <div className="journey-list">
         {visibleActs.map((act) => {
           const actLessons = visibleLessons.filter((lesson) => lesson.act === act.id)
@@ -842,11 +832,6 @@ function getPathLabel(pathType) {
   return labels[pathType] ?? 'Essential'
 }
 
-function matchesJourneyPathFilter(lesson, filterId) {
-  if (filterId === 'all') return true
-  return getPathLabel(lesson.pathType).toLowerCase() === filterId
-}
-
 function getReviewAction(lesson) {
   if (['how-ai-learns', 'risk-myth'].includes(lesson.id)) return 'revise'
   if (['history', 'pretraining', 'overfitting-generalization', 'layers', 'diffusion', 'multimodal'].includes(lesson.id)) return 'defer'
@@ -887,20 +872,27 @@ function scrollJourneyToTop(shell = document.querySelector<HTMLElement>('.pl-she
 }
 
 function StageTimeline({ currentActId, items = acts, onStageSelect = null }) {
+  const isJumpGrid = Boolean(onStageSelect)
+
   return (
-    <ol className="stage-timeline" aria-label="Prompt Life stages">
-      {items.map((act) => (
-        <li key={act.id} className={act.id === currentActId ? 'active' : ''}>
-          {onStageSelect ? (
+    <ol className={isJumpGrid ? 'stage-timeline stage-timeline-jump' : 'stage-timeline'} aria-label="Prompt Life stages">
+      {items.map((act) => {
+        const gridTitle = act.shortTitle ?? act.name
+        const gridSubtitle = act.gridSubtitle ?? act.navHint
+        const ariaLabel = act.ariaLabel ?? `Jump to ${act.name}. ${act.navHint}`
+
+        return (
+          <li key={act.id} className={act.id === currentActId ? 'active' : ''}>
+            {onStageSelect ? (
             <button
               className="stage-link"
               onClick={() => onStageSelect(act.id)}
               aria-current={act.id === currentActId ? 'step' : undefined}
-              aria-label={`Jump to ${act.name}. ${act.navHint}`}
+              aria-label={ariaLabel}
             >
               <span>{act.number}</span>
-              <strong>{act.name}</strong>
-              <small>{act.navHint}</small>
+              <strong>{gridTitle}</strong>
+              <small>{gridSubtitle}</small>
             </button>
           ) : (
             <>
@@ -908,8 +900,9 @@ function StageTimeline({ currentActId, items = acts, onStageSelect = null }) {
               <strong>{act.name}</strong>
             </>
           )}
-        </li>
-      ))}
+          </li>
+        )
+      })}
     </ol>
   )
 }
@@ -1470,6 +1463,13 @@ function MicroInteraction({ type }) {
   if (type === 'overfitting-curve') return <OverfittingCurveInteraction />
   if (type === 'fine-tuning-sort') return <FineTuningSortInteraction />
   if (type === 'alignment-groups') return <AlignmentGroupingInteraction />
+  if (type === 'learning-modes-sort') return <LearningModesSortInteraction />
+  if (type === 'diffusion-contrast') return <DiffusionContrastInteraction />
+  if (type === 'multimodal-map') return <MultimodalMapInteraction />
+  if (type === 'perfect-storm-ingredients') return <PerfectStormIngredientsInteraction />
+  if (type === 'collective-human-questions') return <CollectiveHumanQuestionsInteraction />
+  if (type === 'cost-ledger') return <CostLedgerInteraction />
+  if (type === 'risk-myth-sort') return <RiskMythSortInteraction />
   if (type === 'training') return <TrainingLoopAnimation />
   if (type === 'fine-tune') return <FineTuningPathAnimation />
   if (type === 'inference') return <InferenceTemporaryInteraction />
@@ -2483,7 +2483,223 @@ function AlignmentGroupingInteraction() {
   )
 }
 
-function CycleSortInteraction({ label, categories, items, insight }) {
+function LearningModesSortInteraction() {
+  return (
+    <CycleSortInteraction
+      label="Sort learning and steering methods"
+      categories={['Durable weight change', 'Temporary context steering', 'Retrieval/context', 'Evaluation/feedback']}
+      items={[
+        { id: 'pretraining', label: 'pretraining', category: 'Durable weight change' },
+        { id: 'fine-tuning', label: 'fine-tuning', category: 'Durable weight change' },
+        { id: 'adapter-training', label: 'adapter training', category: 'Durable weight change' },
+        { id: 'prompt-instruction', label: 'prompt instruction', category: 'Temporary context steering' },
+        { id: 'in-context-example', label: 'in-context example', category: 'Temporary context steering' },
+        { id: 'response-so-far', label: 'response-so-far', category: 'Temporary context steering' },
+        { id: 'rag-note', label: 'RAG note', category: 'Retrieval/context' },
+        { id: 'retrieved-document', label: 'retrieved document', category: 'Retrieval/context' },
+        { id: 'human-rating', label: 'human rating', category: 'Evaluation/feedback' },
+        { id: 'safety-test', label: 'safety test', category: 'Evaluation/feedback' }
+      ]}
+      insight="Not all useful AI behavior is durable learning; some of it is current-context steering."
+    />
+  )
+}
+
+function DiffusionContrastInteraction() {
+  const paths = {
+    token: {
+      label: 'Token path',
+      steps: ['score next token', 'choose token', 'append token', 'run again'],
+      feedback: 'Autoregression adds tokens. The response grows one chosen token at a time.'
+    },
+    denoise: {
+      label: 'Denoise path',
+      steps: ['noise', 'rough shape', 'clearer pattern', 'final output'],
+      feedback: 'Diffusion refines from noise. The output becomes clearer step by step.'
+    }
+  }
+  const [path, setPath] = useState('token')
+  const [step, setStep] = useState(0)
+  const current = paths[path]
+  const currentStep = current.steps[step]
+  const complete = step === current.steps.length - 1
+
+  function choosePath(nextPath) {
+    setPath(nextPath)
+    setStep(0)
+  }
+
+  return (
+    <div className="twilight-interaction diffusion-contrast-demo">
+      <div className="segmented-control wide" role="group" aria-label="Choose generation pattern">
+        {Object.entries(paths).map(([id, item]) => (
+          <button key={id} className={path === id ? 'active' : ''} onClick={() => choosePath(id)} aria-pressed={path === id}>
+            {item.label}
+          </button>
+        ))}
+      </div>
+      <div className={`diffusion-contrast-board is-${path}`} aria-live="polite">
+        {current.steps.map((item, index) => (
+          <span key={item} className={index <= step ? 'active' : ''}>{item}</span>
+        ))}
+      </div>
+      <button className="morning-primary-action" onClick={() => setStep((step + 1) % current.steps.length)}>
+        {complete ? 'Reset path' : `Show ${current.steps[step + 1]}`}
+      </button>
+      <p className={complete ? 'micro-feedback good' : 'micro-feedback'} role="status">
+        {complete ? `Insight strengthened. ${current.feedback}` : `Current step: ${currentStep}.`}
+      </p>
+    </div>
+  )
+}
+
+function MultimodalMapInteraction() {
+  const pairs = [
+    { id: 'image-caption', input: 'image', middle: 'visual representation', output: 'caption', detail: 'An image can be encoded, connected to language, and described in text.' },
+    { id: 'audio-transcript', input: 'audio', middle: 'sound representation', output: 'transcript', detail: 'Audio can be represented as patterns and converted into text.' },
+    { id: 'text-image', input: 'text prompt', middle: 'connected model space', output: 'generated image', detail: 'A prompt can steer a media generator toward an image output.' },
+    { id: 'chart-answer', input: 'chart + question', middle: 'linked representations', output: 'answer', detail: 'A system can combine an image-like input and a language question.' }
+  ]
+  const [activeId, setActiveId] = useState(pairs[0].id)
+  const active = pairs.find((pair) => pair.id === activeId) ?? pairs[0]
+
+  return (
+    <div className="twilight-interaction multimodal-map-demo">
+      <div className="media-match-row" role="group" aria-label="Match media modes to possible outputs">
+        {pairs.map((pair) => (
+          <button key={pair.id} className={activeId === pair.id ? 'active' : ''} onClick={() => setActiveId(pair.id)} aria-pressed={activeId === pair.id}>
+            <strong>{pair.input}</strong>
+            <span>{pair.output}</span>
+          </button>
+        ))}
+      </div>
+      <div className="media-flow-board" aria-live="polite">
+        <span>{active.input}</span>
+        <span>{active.middle}</span>
+        <span>{active.output}</span>
+      </div>
+      <p className="micro-feedback good" role="status">
+        Insight strengthened. {active.detail}
+      </p>
+    </div>
+  )
+}
+
+function PerfectStormIngredientsInteraction() {
+  const ingredients = [
+    { id: 'data', label: 'Data', detail: 'Human-created digital text, code, art, research, and conversation supplied patterns.' },
+    { id: 'compute', label: 'Compute', detail: 'Powerful hardware made large-scale training and inference practical.' },
+    { id: 'storage', label: 'Storage', detail: 'Large datasets, indexes, and model checkpoints require massive digital storage.' },
+    { id: 'methods', label: 'Algorithms', detail: 'Deep-learning and transformer methods made the patterns usable.' },
+    { id: 'labor', label: 'Human labor', detail: 'People created data, labeled outputs, evaluated responses, and shaped preferences.' },
+    { id: 'incentives', label: 'Incentives', detail: 'Money, competition, institutional demand, and platform scale accelerated development.' }
+  ]
+  const [activeIds, setActiveIds] = useState(['data'])
+  const lastActive = ingredients.find((item) => item.id === activeIds[activeIds.length - 1]) ?? ingredients[0]
+  const allActive = ingredients.every((item) => activeIds.includes(item.id))
+
+  function toggle(id) {
+    setActiveIds((current) => current.includes(id)
+      ? current.filter((item) => item !== id)
+      : [...current, id])
+  }
+
+  return (
+    <div className="twilight-interaction perfect-storm-demo">
+      <div className="storm-stream-board" aria-hidden="true">
+        {ingredients.map((item, index) => (
+          <span key={item.id} className={activeIds.includes(item.id) ? 'active' : ''} style={{ '--i': index } as React.CSSProperties} />
+        ))}
+        <strong>modern LLM capability</strong>
+      </div>
+      <div className="storm-ingredient-grid" role="group" aria-label="Tap storm ingredients">
+        {ingredients.map((item) => (
+          <button key={item.id} className={activeIds.includes(item.id) ? 'active' : ''} onClick={() => toggle(item.id)} aria-pressed={activeIds.includes(item.id)}>
+            {item.label}
+          </button>
+        ))}
+      </div>
+      <p className={allActive ? 'micro-feedback good' : 'micro-feedback'} role="status">
+        <strong>{lastActive.label}:</strong> {lastActive.detail}
+        {allActive && ' Insight strengthened. Modern LLMs came from convergence, not one magic breakthrough.'}
+      </p>
+    </div>
+  )
+}
+
+function CollectiveHumanQuestionsInteraction() {
+  return (
+    <CycleSortInteraction
+      label="Sort which items are human or institutional questions"
+      categories={['Human question', 'Model mechanics']}
+      successLabel="Insight strengthened"
+      items={[
+        { id: 'provenance', label: 'provenance', category: 'Human question' },
+        { id: 'consent', label: 'consent', category: 'Human question' },
+        { id: 'copyright', label: 'copyright', category: 'Human question' },
+        { id: 'compensation', label: 'compensation', category: 'Human question' },
+        { id: 'weights', label: 'model weights', category: 'Model mechanics' },
+        { id: 'tokens', label: 'prompt tokens', category: 'Model mechanics' }
+      ]}
+      insight="Human-created traces can shape models, but rights, attribution, consent, and compensation remain human and institutional questions."
+    />
+  )
+}
+
+function CostLedgerInteraction() {
+  const entries = [
+    { id: 'energy', label: 'Energy', detail: 'Energy use depends on model size, workload, hardware, data center, and electricity source.' },
+    { id: 'water', label: 'Water', detail: 'Water impact depends on cooling design, location, electricity generation, and workload.' },
+    { id: 'hardware', label: 'Hardware', detail: 'Chips, servers, networking, and e-waste carry material supply-chain costs.' },
+    { id: 'labor', label: 'Labor', detail: 'AI can reshape tasks, wages, working conditions, and skill development.' },
+    { id: 'privacy', label: 'Privacy', detail: 'Sensitive data can be exposed through prompts, logs, tools, or integrations.' },
+    { id: 'governance', label: 'Governance', detail: 'Institutions decide procurement, review, accountability, and acceptable use.' }
+  ]
+  const [active, setActive] = useState('energy')
+  const current = entries.find((entry) => entry.id === active) ?? entries[0]
+
+  return (
+    <div className="morning-interaction cost-ledger-demo">
+      <p className="micro-prompt">Tap a ledger entry to see what must be counted.</p>
+      <div className="morning-choice-row compact" role="group" aria-label="Cost ledger entries">
+        {entries.map((entry) => (
+          <button
+            key={entry.id}
+            className={active === entry.id ? 'active' : ''}
+            onClick={() => setActive(entry.id)}
+            aria-pressed={active === entry.id}
+          >
+            {entry.label}
+          </button>
+        ))}
+      </div>
+      <p className="micro-feedback good" role="status">
+        <strong>{current.label}:</strong> {current.detail}
+      </p>
+    </div>
+  )
+}
+
+function RiskMythSortInteraction() {
+  return (
+    <CycleSortInteraction
+      label="Sort each claim as real risk or myth"
+      categories={['Real risk', 'Myth']}
+      successLabel="Insight strengthened"
+      items={[
+        { id: 'private-records', label: 'Private student records in a public chatbot', category: 'Real risk' },
+        { id: 'conscious-chat', label: 'The model becomes conscious during the chat', category: 'Myth' },
+        { id: 'retrieved-attack', label: 'Malicious retrieved text overrides intended instructions', category: 'Real risk' },
+        { id: 'secret-training', label: 'The model permanently trains itself on every ordinary prompt', category: 'Myth' },
+        { id: 'overreliance-review', label: 'Overreliance weakens human review', category: 'Real risk' },
+        { id: 'softmax-files', label: 'Softmax steals files', category: 'Myth' }
+      ]}
+      insight="Real AI risks usually come from data, context, tools, institutions, and overreliance, not from model consciousness or magic."
+    />
+  )
+}
+
+function CycleSortInteraction({ label, categories, items, insight, successLabel = 'Insight unlocked' }) {
   const [assignments, setAssignments] = useState({})
   const allAssigned = items.every((item) => assignments[item.id])
   const allCorrect = items.every((item) => assignments[item.id] === item.category)
@@ -2524,7 +2740,7 @@ function CycleSortInteraction({ label, categories, items, insight }) {
           </div>
         ))}
       </div>
-      <p aria-live="polite">{allAssigned ? (allCorrect ? `Insight unlocked: ${insight}` : 'A few cards are still in the wrong group. Keep cycling.') : 'Tap each card until it lands in the best group.'}</p>
+      <p aria-live="polite">{allAssigned ? (allCorrect ? `${successLabel}. ${insight}` : 'A few cards are still in the wrong group. Keep cycling.') : 'Tap each card until it lands in the best group.'}</p>
     </div>
   )
 }
@@ -3444,8 +3660,9 @@ function BadgeScreen({
       </div>
       <section className="idea-panel">
         <h2>{unlocked ? 'Badge unlocked' : 'Badge criterion'}</h2>
+        <p>Complete the Journey checkpoints and practice activities to earn one confidence badge: Prompt Life: Model Literate.</p>
         <p>This badge means you can explain what an LLM is, what it is not, and how a prompt becomes a response without treating the model as magic.</p>
-        <p>{unlocked ? 'You met the learning threshold.' : `Remaining: ${lessonsNeeded} essential checkpoint${lessonsNeeded === 1 ? '' : 's'}, ${promptRunNeeded} Prompt Run completion${promptRunNeeded === 1 ? '' : 's'}, and ${synthesisNeeded} synthesis card completion${synthesisNeeded === 1 ? '' : 's'}.`}</p>
+        <p>{unlocked ? 'You met the learning threshold.' : `Remaining: ${lessonsNeeded} Journey checkpoint${lessonsNeeded === 1 ? '' : 's'}, ${promptRunNeeded} Prompt Run completion${promptRunNeeded === 1 ? '' : 's'}, and ${synthesisNeeded} synthesis card completion${synthesisNeeded === 1 ? '' : 's'}.`}</p>
       </section>
       <button className="primary-btn" onClick={copyShareText}>Copy share text</button>
       {copied && <p className="feedback good" role="status">Share text copied.</p>}

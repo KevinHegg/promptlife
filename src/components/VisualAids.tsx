@@ -76,18 +76,18 @@ export const visualAidCatalog = [
   { id: 'rag-retrieval', title: 'Open-Book Retrieval', subtitle: 'Retrieval plus context, not training', caption: 'Retrieved notes enter the context before response tokens are generated.', pattern: 'rag', variant: 'retrieval-shelf', objective: 'Show that RAG retrieves outside information and places it into context; it does not train the model.', callouts: [{ heading: 'Ask', body: 'The user prompt starts the run.' }, { heading: 'Retrieve', body: 'A search system finds relevant outside material.' }, { heading: 'Add to context', body: 'Retrieved notes become temporary context tokens.' }, { heading: 'Generate', body: 'The model still generates response tokens one at a time.' }, { heading: 'Weights stay fixed', body: 'RAG does not normally update model weights.' }], keyTakeaway: 'RAG is retrieval plus context, not training.', accessibleDescription: 'The RAG diagram moves from Prompt to Retriever to Notes, then into a Context tray and Generated response, with a separate fixed-weights note.', printNote: 'v0.10 pilot visual: paper-layer nodes, subtle neon retrieval path, HTML callouts, and a one-sentence takeaway.' },
   { id: 'grounding-evidence', title: 'Claim Support Map', subtitle: 'Tying answers to evidence', caption: 'Grounding asks whether generated claims are actually connected to available evidence.', pattern: 'groundingEvidence', variant: 'retrieval-shelf', objective: 'Show grounding as a claim-to-evidence support relationship, not a truth guarantee.', callouts: [{ heading: 'Claim', body: 'A generated answer can contain several claims.' }, { heading: 'Evidence', body: 'Retrieved passages, data, citations, or tool results can support some claims.' }, { heading: 'Support check', body: 'A citation-looking answer is not grounded unless the evidence actually matches the claim.' }, { heading: 'Limit', body: 'Grounding helps, but the evidence and its use still need review.' }], keyTakeaway: 'Grounding ties claims to evidence; it does not make every claim true.', accessibleDescription: 'Two generated claims are shown. One claim connects to a retrieved policy passage and data result. A second claim has a missing support line and is marked needs review.', printNote: 'Keep the claim/evidence labels short; detailed source review stays in HTML callouts.' },
   { id: 'hallucination-bridge', title: 'Unsupported Bridge', subtitle: 'Fluent is not always grounded', caption: 'A response can look smooth while one claim has support, another is uncertain, and another lacks evidence.', pattern: 'hallucinationBridge', variant: 'zen-garden-map', objective: 'Show hallucination as fluent generated output without enough evidence support, without implying lying or intent.', callouts: [{ heading: 'Fluent surface', body: 'The output may read smoothly and confidently.' }, { heading: 'Supported claim', body: 'One claim can be tied to evidence.' }, { heading: 'Missing support', body: 'Another claim may lack evidence, citation, or retrieved context.' }, { heading: 'Review', body: 'Grounding, uncertainty, and human review reduce risk but do not erase it.' }], keyTakeaway: 'Fluency is not evidence.', accessibleDescription: 'A smooth output bridge crosses the scene. One evidence pillar supports a claim, one support is marked uncertain, and one is missing, with a review note below.', printNote: 'Use short labels only; the not-lying distinction remains in lesson copy.' },
-  { id: 'ai-learns', title: 'Learning Modes', caption: 'Durable training, retrieval, and temporary steering change different things.', pattern: 'learns' },
-  { id: 'diffusion', title: 'Denoise, Not Append', caption: 'Diffusion refines noise step by step instead of generating text token by token.', pattern: 'diffusion' },
-  { id: 'multimodal', title: 'Shared Media Hub', caption: 'Different media types can connect through learned representations.', pattern: 'multimodal' },
-  { id: 'perfect-storm', title: 'Storm Front', subtitle: 'Why LLMs arrived now', caption: 'Data, compute, methods, labor, and incentives converged into modern LLM capability.', pattern: 'perfectStorm', variant: 'zen-garden-map', objective: 'Show convergence without implying one magic breakthrough.', callouts: [{ heading: 'Data', body: 'Human-created text, media, code, and documents supplied patterns.' }, { heading: 'Compute', body: 'Hardware, storage, and data centers made large-scale training possible.' }, { heading: 'Methods', body: 'Deep learning and transformer advances shaped the architecture.' }, { heading: 'Labor and incentives', body: 'Human evaluation work and market incentives pushed systems into products.' }], keyTakeaway: 'Modern LLMs came from a convergence, not a single spark.', accessibleDescription: 'Five streams labeled Data, Compute, Methods, Labor, and Incentives flow into a central model shape.', printNote: 'Keep labels short; detailed ingredients remain in HTML callouts.' },
-  { id: 'collective-intelligence-lantern', title: 'Borrowed Flames', subtitle: 'No creators, no model', caption: 'Model usefulness depends on patterns from human-created language, art, code, research, and culture.', pattern: 'collectiveLantern', variant: 'zen-garden-map', objective: 'Make human-created source traces visible without treating the model as humanity’s mind.', callouts: [{ heading: 'Human expression', body: 'Books, sites, code, art, journalism, forums, documentation, and research leave learnable traces.' }, { heading: 'Collection questions', body: 'Consent, transparency, provenance, copyright, and compensation matter.' }, { heading: 'Model limit', body: 'The model absorbs patterns statistically; it does not understand gratitude or responsibility.' }], keyTakeaway: 'The model did not create its abilities alone.', accessibleDescription: 'Small source cards light a paper lantern that sends a glow toward a model cloud.', printNote: 'No dense source labels inside the lantern; callouts carry the explanation.' },
+  { id: 'ai-learns', title: 'Learning Modes Matrix', subtitle: 'Durable change or current-run steering', caption: 'Training, fine-tuning, feedback, prompting, RAG, and evaluation affect different parts of an AI system.', pattern: 'learns', objective: 'Compare ways systems change, retrieve, or are steered without implying every useful response updates model weights.', callouts: [{ heading: 'Training', body: 'Pretraining and fine-tuning can durably update weights or adapter weights.' }, { heading: 'Prompting', body: 'Prompts and in-context examples steer the current run.' }, { heading: 'RAG', body: 'Retrieval adds outside material to context; it does not normally train the model.' }, { heading: 'Evaluation', body: 'Review and tests can help future systems when results feed development or training.' }], keyTakeaway: 'Not all useful AI behavior is durable learning.', accessibleDescription: 'A compact matrix compares training, fine-tuning, human feedback, prompting, RAG, and evaluation across weight changes, current context, future behavior, and timing.', printNote: 'Coded SVG only. Keep matrix labels short and put distinctions in HTML callouts.' },
+  { id: 'diffusion', title: 'Append Or Denoise', subtitle: 'Two generation patterns', caption: 'Autoregressive text generation appends tokens; diffusion-style generation refines noisy patterns.', pattern: 'diffusion', objective: 'Make LLM token-by-token generation visibly different from diffusion denoising.', callouts: [{ heading: 'Autoregression', body: 'The text response grows by choosing and appending one token at a time.' }, { heading: 'Diffusion', body: 'A noisy representation is refined step by step toward an output.' }, { heading: 'Both generative', body: 'Both can create new outputs, but the generation patterns differ.' }], keyTakeaway: 'Generative AI is not one mechanism.', accessibleDescription: 'A split diagram shows an autoregressive lane with token, append, token, append and a diffusion lane with noise, rough shape, clearer image, final.', printNote: 'Coded SVG only; no generated PNG yet because exact contrast labels matter.' },
+  { id: 'multimodal', title: 'Media Lane Map', subtitle: 'Input, representation, output', caption: 'Multimodal systems connect text, images, audio, video, and code through learned representations or linked components.', pattern: 'multimodal', objective: 'Show multiple media inputs and outputs without implying human-like perception.', callouts: [{ heading: 'Inputs', body: 'Text, image, audio, video, or code can enter the system.' }, { heading: 'Representation', body: 'The system encodes media into model-usable representations or linked spaces.' }, { heading: 'Outputs', body: 'Depending on the system, outputs may be answers, captions, images, audio, or code.' }, { heading: 'Limit', body: 'Multimodal processing is not human sensation or experience.' }], keyTakeaway: 'Multimodal means more than one media type, not human-like perception.', accessibleDescription: 'Inputs for text, image, audio, video, and code flow into a connected representation space, then to outputs such as caption, answer, image, audio, and code.', printNote: 'Short labels only; callouts explain the system boundary and metaphor limit.' },
+  { id: 'perfect-storm', title: 'Storm Front', subtitle: 'Why LLMs arrived now', diagramCaption: 'Convergence, not one spark.', caption: 'Data, compute, storage, methods, labor, and incentives converged into modern LLM capability.', pattern: 'perfectStorm', variant: 'zen-garden-map', objective: 'Show convergence without implying one magic breakthrough.', callouts: [{ heading: 'Data', body: 'Human-created text, media, code, and documents supplied patterns.' }, { heading: 'Compute and storage', body: 'Hardware, data centers, datasets, and checkpoints made large-scale training practical.' }, { heading: 'Methods', body: 'Deep learning and transformer advances made the patterns usable.' }, { heading: 'Labor and incentives', body: 'Human evaluation work and market demand pushed systems into products.' }], keyTakeaway: 'Modern LLMs came from a convergence, not a single spark.', accessibleDescription: 'Six short ingredient chips labeled Data, Compute, Storage, Methods, Labor, and Incentives flow into a centered Modern LLM capability node.', printNote: 'Keep labels short and place the convergence takeaway in HTML below the diagram. Future PNG should be textless.' },
+  { id: 'collective-intelligence-lantern', title: 'Borrowed Flames', subtitle: 'No creators, no model', caption: 'Human-created traces can become training data and model patterns, while rights and responsibility remain human questions.', pattern: 'collectiveLantern', variant: 'zen-garden-map', objective: 'Make human-created source traces visible without treating the model as humanity’s mind.', callouts: [{ heading: 'Human expression', body: 'Books, sites, code, art, journalism, forums, documentation, and research leave learnable traces.' }, { heading: 'Collection questions', body: 'Provenance, consent, copyright, attribution, and compensation matter.' }, { heading: 'Model limit', body: 'The model absorbs statistical patterns; it does not understand gratitude or responsibility.' }], keyTakeaway: 'The model did not create its abilities alone.', accessibleDescription: 'Human-created writing, code, art, research, forums, and documentation flow into training data, while a rights-question note stays outside the model mechanics.', printNote: 'Keep source labels short; callouts carry provenance, consent, copyright, attribution, and compensation details.' },
   { id: 'benefits-tool-garden', title: 'Tool Garden', subtitle: 'Benefits without utopia', caption: 'AI is most useful when it amplifies human judgment, access, search, drafting, translation, and research support.', pattern: 'benefitsGarden', variant: 'zen-garden-map', objective: 'Separate real bounded benefits from utopian claims.', callouts: [{ heading: 'Demonstrated', body: 'Accessibility, translation support, summarization, search/RAG, drafting, and coding assistance can help under review.' }, { heading: 'Plausible', body: 'Tutoring support, research triage, brainstorming, and workflow support need context and evidence.' }, { heading: 'Speculative', body: 'Broad utopia or replacement claims should not be stated as fact.' }], keyTakeaway: 'Benefits can be real and still bounded.', accessibleDescription: 'A central human node is surrounded by tool shapes for access, search, draft, translate, code, and research.', printNote: 'Evidence-tier chips stay in HTML callouts below the scene.' },
-  { id: 'costs-invisible-factory', title: 'Invisible Factory', subtitle: 'The answer is not weightless', caption: 'AI systems can carry physical, labor, privacy, cultural, and power costs that need honest accounting.', pattern: 'costsFactory', variant: 'zen-garden-map', objective: 'Make hidden costs visible without inventing statistics or fear-heavy imagery.', callouts: [{ heading: 'Infrastructure', body: 'Energy, water, carbon, data centers, chips, and e-waste vary by system and workload.' }, { heading: 'Human systems', body: 'Labor disruption, deskilling, privacy, bias, and information pollution depend on deployment choices.' }, { heading: 'Power', body: 'Concentration of data, compute, and capital affects who benefits and who decides.' }], keyTakeaway: 'Costs vary, but they are real enough to count.', accessibleDescription: 'A bright answer card connects to factory, power, water, data, labor, and policy nodes.', printNote: 'No precise numbers in the visual; use cautious callouts.' },
+  { id: 'costs-invisible-factory', title: 'Cost Ledger', subtitle: 'The answer is not weightless', caption: 'AI systems depend on infrastructure, human systems, and governance choices that need honest accounting.', pattern: 'costsFactory', variant: 'zen-garden-map', objective: 'Make AI costs visible as a ledger without inventing statistics or fear-heavy imagery.', callouts: [{ heading: 'Infrastructure', body: 'Energy, water, carbon, data centers, chips, and e-waste vary by system and workload.' }, { heading: 'Human systems', body: 'Labor disruption, deskilling, privacy, bias, and information pollution depend on deployment choices.' }, { heading: 'Power', body: 'Concentration of data, compute, and capital affects who benefits and who decides.' }], keyTakeaway: 'Costs vary, but they are real enough to count.', accessibleDescription: 'An AI answer points into a ledger with infrastructure, human systems, and power or governance categories.', printNote: 'No precise numbers in the visual; use cautious callouts.' },
   { id: 'human-centered-ai-garden', title: 'Human Center', subtitle: 'Tools should serve dignity', caption: 'AI should support human dignity, learning, responsibility, creativity, relationships, and the common good.', pattern: 'humanGarden', variant: 'zen-garden-map', objective: 'Center people and accountability rather than model power.', callouts: [{ heading: 'Human judgment', body: 'People remain accountable for high-stakes decisions and institutional use.' }, { heading: 'Dignity', body: 'Speed, profit, and automation should not outrank persons, learning, or relationships.' }, { heading: 'Model limit', body: 'A model can sound ethical without moral understanding.' }], keyTakeaway: 'Powerful tools still need human purpose.', accessibleDescription: 'A human-centered garden sits in the middle while AI tool orbits remain outside the human circle.', printNote: 'Avoid robot imagery; the human center is the visual anchor.' },
   { id: 'responsible-ai-forked-path', title: 'Forked Path', subtitle: 'Responsible AI is chosen', caption: 'AI outcomes are shaped by design, deployment, governance, incentives, and institutional choices.', pattern: 'responsiblePath', variant: 'zen-garden-map', objective: 'Show extractive and responsible paths without pretending governance is simple.', callouts: [{ heading: 'Technical choices', body: 'Smaller models, efficient inference, distillation, RAG, and better hardware use can fit some tasks.' }, { heading: 'Data choices', body: 'Provenance, consent, licensing, creator compensation, and privacy-preserving deployment matter.' }, { heading: 'Institutional choices', body: 'Human review, policy, labor transition planning, public-interest models, and independent evaluation shape outcomes.' }], keyTakeaway: 'Harms are shaped by choices, not destiny.', accessibleDescription: 'A path splits into extractive and responsible routes, with a human decision marker at the fork.', printNote: 'Keep the fork simple; mitigations stay in HTML callouts.' },
   { id: 'prompting-context-tray', title: 'Context Tray', subtitle: 'Prompting steers this run', caption: 'Good prompts pack task, context, constraints, examples, evidence needs, uncertainty, review, and format into the current run.', pattern: 'promptingTray', variant: 'retrieval-shelf', objective: 'Show prompting as context design, not permanent teaching.', callouts: [{ heading: 'Prompt parts', body: 'Task, context, constraints, examples, and format shape the current input.' }, { heading: 'Evidence and uncertainty', body: 'Source needs, retrieved context, and uncertainty requests can improve reviewability.' }, { heading: 'Boundary', body: 'Prompting usually changes context, not weights.' }], keyTakeaway: 'Prompting is context design for one run.', accessibleDescription: 'Prompt component cards drop into a transparent context tray before one generated response leaves it.', printNote: 'Use short component labels inside the tray.' },
   { id: 'synthesis-map-compass-lantern', title: 'Map, Compass, Lantern', subtitle: 'Mechanics plus judgment', caption: 'Model literacy connects training, inference, context, generation, RAG, grounding, benefits, costs, and responsibility.', pattern: 'synthesisMap', variant: 'zen-garden-map', objective: 'Close the Journey by connecting mechanics and human consequences.', callouts: [{ heading: 'Map', body: 'Training changes weights; inference uses weights; context steers the current run.' }, { heading: 'Compass', body: 'RAG and grounding can help, but humans still judge evidence and consequences.' }, { heading: 'Lantern', body: 'Benefits and costs are real; model-literate people ask better questions.' }], keyTakeaway: 'Mechanics matter, and humans remain responsible.', accessibleDescription: 'A learner uses a map, compass, and lantern to connect model mechanics with human responsibility.', printNote: 'This is the final synthesis visual; keep it calm and sparse.' },
-  { id: 'risk', title: 'Risk or Myth', caption: 'Clear mechanisms help separate practical risk from magical stories.', pattern: 'risk' }
+  { id: 'risk', title: 'Risk Ledger', subtitle: 'Mechanisms, not magic', caption: 'Risk literacy separates practical, mechanism-based risks from myths about what models are.', pattern: 'risk', variant: 'zen-garden-map', objective: 'Separate concrete institutional risks from magical stories without doom or hype.', callouts: [{ heading: 'Real mechanisms', body: 'Privacy exposure, hallucinations, prompt injection, insecure tools, overreliance, and bias can cause practical harm.' }, { heading: 'Myths', body: 'Conscious chatbots, omniscient databases, secret self-training during every chat, and softmax stealing files are magical stories.' }, { heading: 'Human accountability', body: 'Institutions, vendors, policies, and affected communities shape how risks are prevented and reviewed.' }], keyTakeaway: 'Real AI risks usually come from data, context, tools, institutions, and overreliance, not model consciousness or magic.', accessibleDescription: 'A two-column ledger sorts real mechanism risks from myths or magical stories.', printNote: 'Keep column labels short; detailed claims stay in the lesson and interaction.' }
 ]
 
 const aidById = Object.fromEntries(visualAidCatalog.map((aid) => [aid.id, aid]))
@@ -131,6 +131,7 @@ function VisualAidCard({ aid, headingId = undefined, compact = false }) {
   return (
     <figure className={className} aria-labelledby={headingId}>
       <DiagramScene aid={aid} variant={variant} />
+      {aid.diagramCaption && <p className="aid-diagram-caption">{aid.diagramCaption}</p>}
       <figcaption>
         <div className="aid-caption-copy">
           <strong>{aid.title}</strong>
@@ -1077,20 +1078,38 @@ function HallucinationBridgeSvg() {
 }
 
 function LearnsSvg() {
+  const rows = [
+    ['Training', 'yes', 'no', 'yes', 'before'],
+    ['Fine-tune', 'yes', 'no', 'yes', 'after'],
+    ['Feedback', 'maybe', 'no', 'yes', 'review'],
+    ['Prompt', 'no', 'yes', 'no', 'run'],
+    ['RAG', 'no', 'yes', 'no', 'run'],
+    ['Evaluate', 'no', 'no', 'maybe', 'review']
+  ]
+
   return (
     <>
-      {[
-        ['weights', 'durable', 26],
-        ['context', 'temporary', 118],
-        ['retrieval', 'open book', 210]
-      ].map(([top, bottom, x]) => (
-        <g key={top}>
-          <rect className="aid-box" x={x} y="62" width="78" height="74" rx="8" />
-          <Label x={Number(x) + 11} y="91" className="tiny">{top}</Label>
-          <Label x={Number(x) + 8} y="115" className="tiny muted-text">{bottom}</Label>
-        </g>
-      ))}
-      <Label x="98" y="178" className="tiny">change types</Label>
+      <rect className="aid-box muted" x="12" y="14" width="296" height="184" rx="10" />
+      <Label x="22" y="35" className="tiny">mode</Label>
+      <Label x="94" y="35" className="tiny">weights?</Label>
+      <Label x="156" y="35" className="tiny">context?</Label>
+      <Label x="224" y="35" className="tiny">future?</Label>
+      <Label x="276" y="35" className="tiny">when</Label>
+      {rows.map(([mode, weights, context, future, when], index) => {
+        const y = 50 + index * 23
+        return (
+          <g key={mode}>
+            <rect className={index < 3 ? 'aid-chip output' : index < 5 ? 'aid-chip prompt' : 'aid-chip'} x="18" y={y - 13} width="284" height="19" rx="6" opacity="0.92" />
+            <Label x="25" y={y} className={index < 5 ? 'tiny dark' : 'tiny'}>{mode}</Label>
+            <Label x="105" y={y} className={index < 5 ? 'tiny dark' : 'tiny'}>{weights}</Label>
+            <Label x="170" y={y} className={index < 5 ? 'tiny dark' : 'tiny'}>{context}</Label>
+            <Label x="238" y={y} className={index < 5 ? 'tiny dark' : 'tiny'}>{future}</Label>
+            <Label x="276" y={y} className={index < 5 ? 'tiny dark' : 'tiny'}>{when}</Label>
+          </g>
+        )
+      })}
+      <rect className="aid-chip prompt" x="72" y="176" width="176" height="22" rx="7" />
+      <Label x="88" y="191" className="tiny dark">ask what changed</Label>
     </>
   )
 }
@@ -1098,90 +1117,135 @@ function LearnsSvg() {
 function DiffusionSvg() {
   return (
     <>
-      {[0, 1, 2].map((step) => (
-        <g key={step} transform={`translate(${38 + step * 92}, 58)`}>
-          <rect className="aid-box muted" width="62" height="62" rx="8" />
-          {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((cell) => (
-            <rect key={cell} className={`aid-noise n-${step}`} x={9 + (cell % 3) * 17} y={9 + Math.floor(cell / 3) * 17} width="11" height="11" rx="3" />
-          ))}
+      <rect className="aid-box muted" x="14" y="22" width="292" height="72" rx="10" />
+      <Label x="24" y="43" className="tiny">Autoregression</Label>
+      {['A jealous', 'dog', 'floor'].map((token, index) => (
+        <g key={token}>
+          <rect className={index === 2 ? 'aid-chip output' : 'aid-chip'} x={36 + index * 78} y="58" width={index === 0 ? 66 : 48} height="24" rx="7" />
+          <Label x={44 + index * 78} y="75" className={index === 2 ? 'tiny dark' : 'tiny'}>{token}</Label>
+          {index < 2 && <Arrow x1={88 + index * 78} y1="70" x2={112 + index * 78} y2="70" />}
         </g>
       ))}
-      <Arrow x1="100" y1="89" x2="130" y2="89" />
-      <Arrow x1="192" y1="89" x2="222" y2="89" />
-      <Label x="112" y="166" className="tiny">denoise steps</Label>
+      <Label x="238" y="75" className="tiny">append</Label>
+
+      <rect className="aid-box muted" x="14" y="116" width="292" height="72" rx="10" />
+      <Label x="24" y="137" className="tiny">Diffusion</Label>
+      {['noise', 'rough', 'clear', 'final'].map((label, index) => (
+        <g key={label}>
+          <circle className={index < 2 ? 'aid-node' : 'aid-node selected'} cx={58 + index * 64} cy="158" r={18 - index * 2} opacity={0.95 - index * 0.12} />
+          <Label x={42 + index * 64} y="187" className="tiny">{label}</Label>
+          {index < 3 && <Arrow x1={76 + index * 64} y1="158" x2={96 + index * 64} y2="158" />}
+        </g>
+      ))}
+      <Label x="112" y="206" className="tiny">denoise and refine</Label>
     </>
   )
 }
 
 function MultimodalSvg() {
   const modes = [
-    ['text', 70, 62],
-    ['image', 232, 62],
-    ['audio', 70, 150],
-    ['video', 232, 150]
+    ['text', 20, 24],
+    ['image', 20, 60],
+    ['audio', 20, 96],
+    ['video', 20, 132],
+    ['code', 20, 168]
+  ]
+  const outputs = [
+    ['caption', 232, 24],
+    ['answer', 232, 60],
+    ['image', 232, 96],
+    ['audio', 232, 132],
+    ['code', 232, 168]
   ]
   return (
     <>
-      <circle className="aid-core" cx="160" cy="106" r="32" />
-      <Label x="137" y="111" className="tiny dark">shared</Label>
       {modes.map(([label, x, y]) => (
         <g key={label}>
-          <circle className="aid-node" cx={Number(x)} cy={Number(y)} r="24" />
-          <Label x={Number(x) - 17} y={Number(y) + 5} className="tiny">{label}</Label>
-          <path className="aid-line" d={`M${x} ${y} L160 106`} />
+          <rect className="aid-chip prompt" x={x} y={y} width="60" height="24" rx="7" />
+          <Label x={Number(x) + 12} y={Number(y) + 17} className="tiny dark">{label}</Label>
+          <path className="aid-line" d={`M80 ${Number(y) + 12} C104 ${Number(y) + 12}, 112 106, 130 106`} />
         </g>
       ))}
+      <rect className="aid-box output" x="126" y="72" width="76" height="62" rx="10" />
+      <Label x="145" y="96" className="tiny dark">shared</Label>
+      <Label x="148" y="114" className="tiny dark">space</Label>
+      {outputs.map(([label, x, y]) => (
+        <g key={label}>
+          <rect className="aid-chip output" x={x} y={y} width="64" height="24" rx="7" />
+          <Label x={Number(x) + 9} y={Number(y) + 17} className="tiny dark">{label}</Label>
+          <path className="aid-line" d={`M202 102 C218 102, 218 ${Number(y) + 12}, 232 ${Number(y) + 12}`} />
+        </g>
+      ))}
+      <Label x="92" y="204" className="tiny">media lanes, not human senses</Label>
     </>
   )
 }
 
 function PerfectStormSvg() {
-  const streams = [
-    ['Data', 18, 36, 112, 84],
-    ['Compute', 18, 142, 112, 122],
-    ['Methods', 220, 34, 192, 84],
-    ['Labor', 228, 142, 198, 122],
-    ['Incentives', 112, 20, 150, 70]
+  const ingredients = [
+    ['Data', 26, 18],
+    ['Compute', 212, 18],
+    ['Storage', 26, 56],
+    ['Methods', 212, 56],
+    ['Labor', 26, 94],
+    ['Incentives', 212, 94]
   ]
   return (
     <>
-      <circle className="aid-core" cx="160" cy="104" r="34" />
-      <Label x="145" y="110" className="tiny dark">LLM</Label>
-      {streams.map(([label, x, y, endX, endY], index) => (
+      <path className="aid-zen-ring" d="M46 186 C96 154, 224 154, 274 186" />
+      <path className="aid-zen-ring alt" d="M76 172 C118 150, 202 150, 244 172" />
+      <path className="aid-line" d="M112 31 H150" />
+      <path className="aid-line" d="M208 31 H170" />
+      <path className="aid-line" d="M112 69 H150" />
+      <path className="aid-line" d="M208 69 H170" />
+      <path className="aid-line" d="M112 107 H150" />
+      <path className="aid-line" d="M208 107 H170" />
+      <path className="aid-neon-path" d="M160 30 V126" />
+      <path className="aid-neon-path alt-path" d="M160 126 C160 134, 160 134, 160 142" />
+      {ingredients.map(([label, x, y]) => (
         <g key={label}>
-          <rect className="aid-paper-node" x={x} y={y} width={label === 'Incentives' ? 96 : 78} height="32" rx="8" />
-          <Label x={Number(x) + 10} y={Number(y) + 21} className="tiny dark">{label}</Label>
-          <path className={index % 2 ? 'aid-neon-path alt-path' : 'aid-neon-path'} d={`M${Number(x) + 39} ${Number(y) + 32} C${endX} ${endY}, ${endX} ${endY}, 160 104`} />
+          <rect className="aid-paper-node" x={x} y={y} width="82" height="26" rx="8" />
+          <Label x={Number(x) + (label === 'Incentives' ? 9 : 14)} y={Number(y) + 18} className="tiny dark">{label}</Label>
         </g>
       ))}
-      <path className="aid-zen-ring" d="M74 184 C118 158, 202 158, 248 184" />
+      <rect className="aid-box output" x="82" y="142" width="156" height="46" rx="12" />
+      <Label x="106" y="161" className="tiny dark">Modern LLM</Label>
+      <Label x="122" y="178" className="tiny dark">capability</Label>
     </>
   )
 }
 
 function CollectiveLanternSvg() {
   const sources = [
-    ['Books', 24, 40],
-    ['Code', 36, 136],
-    ['Art', 238, 40],
-    ['Research', 222, 136]
+    ['Writing', 24, 30],
+    ['Code', 24, 86],
+    ['Art', 24, 142],
+    ['Research', 230, 30],
+    ['Forums', 230, 86],
+    ['Docs', 230, 142]
   ]
   return (
     <>
-      <path className="aid-zen-ring" d="M68 178 C110 148, 206 148, 252 178" />
-      {sources.map(([label, x, y]) => (
-        <g key={label}>
-          <path className="aid-doc-card" d={`M${x} ${y} H${Number(x) + 56} L${Number(x) + 66} ${Number(y) + 10} V${Number(y) + 38} H${x} Z`} />
-          <Label x={Number(x) + 9} y={Number(y) + 25} className="tiny dark">{label}</Label>
-          <path className="aid-neon-path" d={`M${Number(x) + 32} ${Number(y) + 38} C122 96, 136 96, 160 106`} />
-        </g>
-      ))}
-      <path className="aid-paper-node output" d="M126 72 H194 L210 94 L194 136 H126 L110 94 Z" />
-      <Label x="134" y="101" className="tiny dark">Lantern</Label>
-      <circle className="aid-dot alt" cx="160" cy="106" r="13" />
-      <path className="aid-neon-path" d="M194 106 C224 100, 244 102, 278 116" />
-      <rect className="aid-box muted" x="246" y="96" width="50" height="38" rx="8" />
-      <Label x="258" y="120" className="tiny">Model</Label>
+      <path className="aid-zen-ring" d="M52 188 C94 154, 226 154, 268 188" />
+      {sources.map(([label, x, y], index) => {
+        const isLeft = Number(x) < 160
+        const lineStartX = isLeft ? Number(x) + 58 : Number(x)
+        const lineStartY = Number(y) + 18
+        const controlX = isLeft ? 112 : 208
+        return (
+          <g key={label}>
+            <path className="aid-doc-card" d={`M${x} ${y} H${Number(x) + 48} L${Number(x) + 58} ${Number(y) + 10} V${Number(y) + 34} H${x} Z`} />
+            <Label x={Number(x) + (label === 'Research' ? 4 : 7)} y={Number(y) + 22} className="tiny dark">{label}</Label>
+            <path className={index % 2 ? 'aid-neon-path alt-path' : 'aid-neon-path'} d={`M${lineStartX} ${lineStartY} C${controlX} ${lineStartY}, ${controlX} 92, 160 98`} />
+          </g>
+        )
+      })}
+      <rect className="aid-box output" x="110" y="74" width="100" height="48" rx="10" />
+      <Label x="124" y="94" className="tiny dark">Training</Label>
+      <Label x="138" y="111" className="tiny dark">data</Label>
+      <path className="aid-neon-path" d="M160 122 C160 136, 160 144, 160 156" />
+      <path className="aid-paper-node retriever" d="M94 156 H226 L238 168 V192 H94 Z" />
+      <Label x="116" y="175" className="tiny dark">rights questions</Label>
     </>
   )
 }
@@ -1212,27 +1276,47 @@ function BenefitsGardenSvg() {
 }
 
 function CostsFactorySvg() {
-  const costs = [
-    ['Power', 36, 48],
-    ['Water', 38, 132],
-    ['Data', 130, 34],
-    ['Labor', 224, 48],
-    ['Privacy', 218, 132],
-    ['Power', 122, 166]
+  const infra = [
+    ['Energy', 28, 92],
+    ['Water', 28, 122],
+    ['Chips', 28, 152],
+    ['E-waste', 28, 182]
+  ]
+  const human = [
+    ['Labor', 224, 92],
+    ['Privacy', 224, 122],
+    ['Skill', 224, 152],
+    ['Bias', 224, 182]
   ]
   return (
     <>
-      <rect className="aid-box output" x="122" y="82" width="76" height="42" rx="8" />
-      <Label x="140" y="109" className="tiny dark">Answer</Label>
-      {costs.map(([label, x, y], index) => (
-        <g key={`${label}-${index}`}>
-          <path className="aid-line" d={`M160 104 L${x} ${y}`} />
-          <rect className={index % 2 ? 'aid-paper-node retriever' : 'aid-paper-node'} x={Number(x) - 30} y={Number(y) - 15} width="60" height="30" rx="8" />
-          <Label x={Number(x) - 22} y={Number(y) + 5} className="tiny dark">{label}</Label>
+      <rect className="aid-box output" x="110" y="18" width="100" height="36" rx="9" />
+      <Label x="130" y="41" className="tiny dark">AI answer</Label>
+      <path className="aid-neon-path" d="M160 54 C160 70, 160 82, 160 94" />
+      <rect className="aid-paper-node" x="112" y="92" width="96" height="48" rx="10" />
+      <Label x="134" y="112" className="tiny dark">Cost</Label>
+      <Label x="132" y="129" className="tiny dark">ledger</Label>
+      <path className="aid-line" d="M112 116 H92" />
+      <path className="aid-line" d="M208 116 H228" />
+      <path className="aid-line" d="M160 140 V158" />
+      <rect className="aid-box prompt" x="12" y="66" width="88" height="132" rx="10" />
+      <Label x="28" y="84" className="tiny dark">Infra</Label>
+      {infra.map(([label, x, y]) => (
+        <g key={label}>
+          <rect className="aid-chip" x={x} y={y} width="58" height="20" rx="7" />
+          <Label x={Number(x) + 7} y={Number(y) + 14} className="micro dark">{label}</Label>
         </g>
       ))}
-      <path className="aid-fixed-note" d="M104 18 H212 L224 30 V50 H104 Z" />
-      <Label x="124" y="37" className="tiny dark">not weightless</Label>
+      <rect className="aid-box output" x="220" y="66" width="88" height="132" rx="10" />
+      <Label x="238" y="84" className="tiny dark">Human</Label>
+      {human.map(([label, x, y]) => (
+        <g key={label}>
+          <rect className="aid-chip" x={x} y={y} width="62" height="20" rx="7" />
+          <Label x={Number(x) + 7} y={Number(y) + 14} className="micro dark">{label}</Label>
+        </g>
+      ))}
+      <rect className="aid-fixed-note" x="96" y="160" width="128" height="34" rx="9" />
+      <Label x="126" y="181" className="tiny dark">Governance</Label>
     </>
   )
 }
@@ -1327,14 +1411,33 @@ function SynthesisMapSvg() {
 function RiskSvg() {
   return (
     <>
-      <rect className="aid-box prompt" x="30" y="52" width="122" height="52" rx="8" />
-      <rect className="aid-box output" x="168" y="52" width="122" height="52" rx="8" />
-      <Label x="58" y="82" className="dark">real risk</Label>
-      <Label x="204" y="82" className="dark">myth</Label>
-      {['privacy', 'over-trust', 'self-aware'].map((label, index) => (
+      <path className="aid-zen-ring" d="M54 188 C102 158, 218 158, 266 188" />
+      <rect className="aid-box prompt" x="16" y="26" width="136" height="160" rx="10" />
+      <rect className="aid-box output" x="168" y="26" width="136" height="160" rx="10" />
+      <Label x="44" y="48" className="tiny dark">Real risk</Label>
+      <Label x="190" y="48" className="tiny dark">Myth / magic</Label>
+      {[
+        ['Privacy', 32, 64],
+        ['Halluc.', 32, 92],
+        ['Prompt inj.', 32, 120],
+        ['Tool risk', 32, 148],
+        ['Overrely', 88, 92],
+        ['Bias', 88, 148]
+      ].map(([label, x, y]) => (
         <g key={label}>
-          <rect className={index === 2 ? 'aid-chip faded' : 'aid-chip'} x={44 + index * 82} y="138" width="72" height="34" rx="8" />
-          <Label x={51 + index * 82} y="160" className="tiny">{label}</Label>
+          <rect className="aid-chip" x={x} y={y} width={label === 'Prompt inj.' ? 82 : 54} height="22" rx="7" />
+          <Label x={Number(x) + 6} y={Number(y) + 15} className="micro dark">{label}</Label>
+        </g>
+      ))}
+      {[
+        ['Conscious', 182, 64],
+        ['Self-trains', 182, 92],
+        ['Omniscient', 182, 120],
+        ['Softmax files', 182, 148]
+      ].map(([label, x, y]) => (
+        <g key={label}>
+          <rect className="aid-chip faded" x={x} y={y} width="104" height="22" rx="7" />
+          <Label x={Number(x) + 7} y={Number(y) + 15} className="micro dark">{label}</Label>
         </g>
       ))}
     </>

@@ -84,6 +84,10 @@ export function GlossaryDojoGame({ onBack, onGlossary }: GlossaryDojoGameProps) 
       data-dojo-view="question"
       data-dojo-current={questionNumber}
       data-dojo-total={totalQuestions}
+      data-dojo-source-mode={currentRound.sourceMode}
+      data-dojo-repeat-count={currentRound.repeatCount}
+      data-dojo-round-fingerprint={currentRound.targetFingerprint}
+      data-dojo-target-count={currentRound.targetTermIds.length}
     >
       <button className="text-btn dojo-back" type="button" onClick={onBack}>Back to Play</button>
       <header className="dojo-hero compact">
@@ -132,6 +136,9 @@ export function GlossaryDojoGame({ onBack, onGlossary }: GlossaryDojoGameProps) 
                 data-dojo-correct={isCorrect ? 'true' : 'false'}
                 data-dojo-option-kind={option.kind}
                 data-dojo-represented-term-id={option.representedTermId ?? option.termId}
+                data-dojo-distractor-source={option.distractorSource ?? ''}
+                data-dojo-distractor-distance={option.distractorDistance ?? ''}
+                data-dojo-learning-path-distance={option.learningPathDistance ?? ''}
               >
                 <span className="dojo-option-letter" aria-hidden="true">{String.fromCharCode(65 + index)}</span>
                 <span className="dojo-option-copy">

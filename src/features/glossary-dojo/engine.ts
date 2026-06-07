@@ -1,8 +1,11 @@
 import { glossaryDojoMeta, type GlossaryDojoTermMeta } from '../../data/glossaryDojoMeta'
 import { hashString, shuffleChoicesForQuestion } from '../../utils/choiceOrder'
+import { fingerprintTargetTermIds, isNormalSourceMode, modeFromSourceMode } from './rounds'
 import type {
   GlossaryDojoAnswerResult,
   GlossaryDojoCompletedRound,
+  GlossaryDojoDistractorDistance,
+  GlossaryDojoDistractorSource,
   GlossaryDojoOption,
   GlossaryDojoOptionKind,
   GlossaryDojoProgress,
@@ -13,8 +16,10 @@ import type {
   GlossarySourceTerm
 } from './types'
 
-const ROUND_SIZE = 12
+export const GLOSSARY_DOJO_ROUND_SIZE = 12
+const ROUND_SIZE = GLOSSARY_DOJO_ROUND_SIZE
 const OPTION_COUNT = 4
+const ROUND_FINGERPRINT_RETRY_LIMIT = 20
 const BASIC_QUESTION_TYPES: GlossaryDojoQuestionType[] = [
   'term_to_definition',
   'definition_to_term'
@@ -57,6 +62,13 @@ type QuestionSpec = {
   type: GlossaryDojoQuestionType
   targetTermId: string
   correctTermId?: string
+}
+
+type DistractorChoice = {
+  term: GlossaryDojoTerm
+  source: GlossaryDojoDistractorSource
+  distance: GlossaryDojoDistractorDistance
+  learningPathDistance: number
 }
 
 function cleanText(value = '') {
@@ -114,6 +126,20 @@ function stageLabel(term: GlossaryDojoTerm) {
   return cleanText(term.curriculumStage ?? term.lifecycleStage ?? 'The model story')
 }
 
+function termNameKeys(term: GlossaryDojoTerm) {
+  return [term.label, term.id, ...term.aliases]
+    .map(lookupKey)
+    .filter((name) => name.length > 2)
+}
+
+function textRevealsTerm(text: string, term: GlossaryDojoTerm) {
+  const cleaned = ` ${lookupKey(text)} `
+  return termNameKeys(term).some((name) => {
+    const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+    return new RegExp(`(^|[^a-z0-9-])${escaped}([^a-z0-9-]|$)`, 'i').test(cleaned)
+  })
+}
+
 function addUnique<T extends { id: string }>(target: T[], candidates: T[], limit: number) {
   candidates.forEach((candidate) => {
     if (target.length >= limit) return
@@ -166,8 +192,54 @@ function distractorEligible(
   preferredIds: string[]
 ) {
   if (candidate.id === target.id || candidate.id === correct.id) return false
-  if (preferredIds.includes(candidate.id)) return true
-  return definitionKey(candidate) !== definitionKey(correct)
+  if (definitionKey(candidate) === definitionKey(correct)) return false
+  if (textRevealsTerm(candidate.shortDefinition, correct)) return false
+  return true
+}
+
+function distractorDistance(
+  target: GlossaryDojoTerm,
+  candidate: GlossaryDojoTerm
+): { category: GlossaryDojoDistractorDistance, distance: number } {
+  const distance = Math.abs(candidate.learningPathIndex - target.learningPathIndex)
+  if (distance >= 2 && distance <= 5) return { category: 'near', distance }
+  if (distance >= 6 && distance <= 12) return { category: 'medium', distance }
+  return { category: 'far', distance }
+}
+
+function addDistractor(
+  picked: DistractorChoice[],
+  candidate: GlossaryDojoTerm | null | undefined,
+  target: GlossaryDojoTerm,
+  source: GlossaryDojoDistractorSource
+) {
+  if (!candidate) return false
+  if (picked.some((item) => item.term.id === candidate.id)) return false
+  const distance = distractorDistance(target, candidate)
+  picked.push({
+    term: candidate,
+    source,
+    distance: distance.category,
+    learningPathDistance: distance.distance
+  })
+  return true
+}
+
+function shuffledEligibleByIds(
+  ids: string[],
+  eligible: GlossaryDojoTerm[],
+  termsById: Map<string, GlossaryDojoTerm>,
+  seed: string,
+  questionId: string
+) {
+  const eligibleIds = new Set(eligible.map((term) => term.id))
+  return stableShuffle(
+    ids
+      .map((id) => findTerm(termsById, id))
+      .filter((term): term is GlossaryDojoTerm => Boolean(term && eligibleIds.has(term.id))),
+    seed,
+    questionId
+  )
 }
 
 function candidateDistractors(
@@ -181,59 +253,54 @@ function candidateDistractors(
   allowSameStage = true
 ) {
   const eligible = terms.filter((term) => distractorEligible(target, correct, term, preferredIds))
-  const preferred = preferredIds
-    .map((id) => findTerm(termsById, id))
-    .filter((term): term is GlossaryDojoTerm => Boolean(term && eligible.some((item) => item.id === term.id)))
-
-  const byDistance = (min: number, max: number) => eligible.filter((term) => {
-    const distance = Math.abs(term.learningPathIndex - target.learningPathIndex)
-    return distance >= min && distance <= max
-  })
-
-  const near = stableShuffle(byDistance(2, 5), seed, `${questionId}:near`)
-  const medium = stableShuffle(byDistance(6, 12), seed, `${questionId}:medium`)
-  const related = stableShuffle(
-    [...(target.relationships ?? []), ...target.relatedTermIds, ...(target.confusableWith ?? [])]
-      .map((id) => findTerm(termsById, id))
-      .filter((term): term is GlossaryDojoTerm => Boolean(term && eligible.some((item) => item.id === term.id))),
+  const confusable = shuffledEligibleByIds(
+    [...(target.confusableWith ?? []), ...preferredIds],
+    eligible,
+    termsById,
+    seed,
+    `${questionId}:confusable`
+  )
+  const related = shuffledEligibleByIds(
+    [...(target.relationships ?? []), ...target.relatedTermIds],
+    eligible,
+    termsById,
     seed,
     `${questionId}:related`
   )
-  const sameFamily = stableShuffle(
-    eligible.filter((term) =>
-      Boolean(target.familyTags?.length) &&
-      Boolean(term.familyTags?.length) &&
-      target.familyTags?.some((tag) => term.familyTags?.includes(tag))
-    ),
-    seed,
-    `${questionId}:family`
-  )
-  const sameStage = allowSameStage
-    ? stableShuffle(
-        eligible.filter((term) =>
-          Boolean(target.curriculumStage) &&
-          term.curriculumStage === target.curriculumStage
-        ),
-        seed,
-        `${questionId}:stage`
-      )
-    : []
-  const far = stableShuffle(
-    eligible.filter((term) => Math.abs(term.learningPathIndex - target.learningPathIndex) > 12),
-    seed,
-    `${questionId}:far`
-  )
-  const global = stableShuffle(eligible, seed, `${questionId}:global`)
+  const byDistance = (slot: GlossaryDojoDistractorDistance) => eligible.filter((term) => {
+    if (term.id === target.id || term.id === correct.id) return false
+    if (!allowSameStage && slot !== 'far' && stageLabel(term) === stageLabel(target)) return false
+    return distractorDistance(target, term).category === slot
+  })
 
-  const picked: GlossaryDojoTerm[] = []
-  addUnique(picked, stableShuffle(preferred, seed, `${questionId}:preferred`), OPTION_COUNT - 1)
-  addUnique(picked, near, Math.min(1, OPTION_COUNT - 1))
-  addUnique(picked, medium, Math.min(2, OPTION_COUNT - 1))
-  addUnique(picked, related, OPTION_COUNT - 1)
-  addUnique(picked, sameFamily, OPTION_COUNT - 1)
-  addUnique(picked, sameStage, OPTION_COUNT - 1)
-  addUnique(picked, far, OPTION_COUNT - 1)
-  addUnique(picked, global, OPTION_COUNT - 1)
+  const picked: DistractorChoice[] = []
+  const slots: GlossaryDojoDistractorDistance[] = ['near', 'medium', 'far']
+
+  slots.forEach((slot) => {
+    if (picked.length >= OPTION_COUNT - 1) return
+    const slotConfusable = confusable.filter((term) => distractorDistance(target, term).category === slot)
+    const slotRelated = related.filter((term) => distractorDistance(target, term).category === slot)
+    const slotProximity = stableShuffle(byDistance(slot), seed, `${questionId}:${slot}`)
+    const slotGlobal = stableShuffle(
+      eligible.filter((term) => distractorDistance(target, term).category === slot),
+      seed,
+      `${questionId}:${slot}:global`
+    )
+    const selected =
+      slotConfusable[0] ? { term: slotConfusable[0], source: 'confusable' as const } :
+      slotRelated[0] ? { term: slotRelated[0], source: 'related' as const } :
+      slotProximity[0] ? { term: slotProximity[0], source: slot } :
+      slotGlobal[0] ? { term: slotGlobal[0], source: 'global' as const } :
+      null
+
+    if (selected) addDistractor(picked, selected.term, target, selected.source)
+  })
+
+  const global = stableShuffle(eligible, seed, `${questionId}:global-fill`)
+  global.forEach((term) => {
+    if (picked.length >= OPTION_COUNT - 1) return
+    addDistractor(picked, term, target, 'global')
+  })
 
   return picked.slice(0, OPTION_COUNT - 1)
 }
@@ -244,7 +311,8 @@ function makeOption(
   correct: GlossaryDojoTerm,
   kind: GlossaryDojoOptionKind,
   label: string,
-  detail?: string
+  detail?: string,
+  distractor?: Omit<DistractorChoice, 'term'>
 ): GlossaryDojoOption {
   return {
     id: `${questionId}:option:${compactId(`${kind}:${term.id}:${label}`)}`,
@@ -256,19 +324,25 @@ function makeOption(
     detail,
     kind,
     isCorrect: term.id === correct.id,
-    feedbackTermId: term.id
+    feedbackTermId: term.id,
+    distractorSource: distractor?.source,
+    distractorDistance: distractor?.distance,
+    learningPathDistance: distractor?.learningPathDistance
   }
 }
 
 function makeTermOptions(
   questionId: string,
   correct: GlossaryDojoTerm,
-  distractors: GlossaryDojoTerm[],
+  distractors: DistractorChoice[],
   seed: string
 ) {
-  const rawOptions = [correct, ...distractors]
-    .slice(0, OPTION_COUNT)
-    .map((term) => makeOption(questionId, term, correct, 'term', term.label))
+  const rawOptions = [
+    makeOption(questionId, correct, correct, 'term', correct.label),
+    ...distractors
+      .slice(0, OPTION_COUNT - 1)
+      .map((distractor) => makeOption(questionId, distractor.term, correct, 'term', distractor.term.label, undefined, distractor))
+  ]
 
   return stableShuffle(rawOptions, seed, questionId)
 }
@@ -276,12 +350,15 @@ function makeTermOptions(
 function makeDefinitionOptions(
   questionId: string,
   correct: GlossaryDojoTerm,
-  distractors: GlossaryDojoTerm[],
+  distractors: DistractorChoice[],
   seed: string
 ) {
-  const rawOptions = [correct, ...distractors]
-    .slice(0, OPTION_COUNT)
-    .map((term) => makeOption(questionId, term, correct, 'definition', term.shortDefinition))
+  const rawOptions = [
+    makeOption(questionId, correct, correct, 'definition', correct.shortDefinition),
+    ...distractors
+      .slice(0, OPTION_COUNT - 1)
+      .map((distractor) => makeOption(questionId, distractor.term, correct, 'definition', distractor.term.shortDefinition, undefined, distractor))
+  ]
 
   return stableShuffle(rawOptions, seed, questionId)
 }
@@ -325,12 +402,23 @@ function makeRelationshipOptions(
   questionId: string,
   target: GlossaryDojoTerm,
   correct: GlossaryDojoTerm,
-  distractors: GlossaryDojoTerm[],
+  distractors: DistractorChoice[],
   seed: string
 ) {
-  const rawOptions = [correct, ...distractors]
-    .slice(0, OPTION_COUNT)
-    .map((term) => makeOption(questionId, term, correct, 'statement', relationshipStatement(target, term)))
+  const rawOptions = [
+    makeOption(questionId, correct, correct, 'statement', relationshipStatement(target, correct)),
+    ...distractors
+      .slice(0, OPTION_COUNT - 1)
+      .map((distractor) => makeOption(
+        questionId,
+        distractor.term,
+        correct,
+        'statement',
+        relationshipStatement(target, distractor.term),
+        undefined,
+        distractor
+      ))
+  ]
 
   return stableShuffle(rawOptions, seed, questionId)
 }
@@ -463,13 +551,102 @@ function practicedCount(progress: GlossaryDojoProgress | null | undefined, termI
   return progress?.terms?.[termId]?.practiced ?? 0
 }
 
+function normalRoundFingerprintList(progress?: GlossaryDojoProgress | null) {
+  return [
+    ...(progress?.normalRoundFingerprints ?? []),
+    ...(progress?.roundHistory ?? [])
+      .filter((round) => round.mode === 'normal' || round.sourceMode === 'new_round')
+      .map((round) => round.targetFingerprint),
+    ...(progress?.perRound ?? [])
+      .filter((round) => round.mode === 'normal' || round.sourceMode === 'new_round')
+      .map((round) => round.targetFingerprint),
+    progress?.lastCompletedRound?.sourceMode === 'new_round' ? progress.lastCompletedRound.targetFingerprint : '',
+    progress?.currentRound?.sourceMode === 'new_round' ? progress.currentRound.targetFingerprint : ''
+  ].filter(Boolean)
+}
+
+function normalRoundFingerprintSet(progress?: GlossaryDojoProgress | null) {
+  return new Set(normalRoundFingerprintList(progress))
+}
+
+function replaceForFreshFingerprint(
+  picked: GlossaryDojoTerm[],
+  terms: GlossaryDojoTerm[],
+  avoidedFingerprints: Set<string>
+) {
+  const pickedIds = new Set(picked.map((term) => term.id))
+  const replacements = terms.filter((term) => !pickedIds.has(term.id))
+
+  for (let replaceIndex = picked.length - 1; replaceIndex >= 0; replaceIndex -= 1) {
+    for (const replacement of replacements) {
+      const next = [...picked]
+      next[replaceIndex] = replacement
+      const fingerprint = fingerprintTargetTermIds(next.map((term) => term.id))
+      if (!avoidedFingerprints.has(fingerprint)) return next
+    }
+  }
+
+  return picked
+}
+
+function pickRoundTargets(
+  terms: GlossaryDojoTerm[],
+  seed: string,
+  roundId: string,
+  progress?: GlossaryDojoProgress | null,
+  count = ROUND_SIZE
+) {
+  const sorted = [...terms].sort((a, b) => a.learningPathIndex - b.learningPathIndex)
+  const firstUnpracticedIndex = sorted.findIndex((term) => practicedCount(progress, term.id) === 0)
+  const frontierStart = Math.max(0, firstUnpracticedIndex === -1 ? 0 : firstUnpracticedIndex - 2)
+  const frontier = sorted.slice(frontierStart, frontierStart + Math.max(count * 3, 30))
+  const recentMissedIds = progress?.recentMistakes?.map((mistake) => mistake.termId) ?? []
+  const termsById = makeTermsById(terms)
+  const recentMissed = uniqueTerms(
+    [
+      ...recentMissedIds,
+      ...sorted
+        .filter((term) => progress?.terms?.[term.id]?.needsReview)
+        .map((term) => term.id)
+    ]
+      .map((id) => findTerm(termsById, id))
+      .filter((term): term is GlossaryDojoTerm => Boolean(term))
+  )
+  const practicedNotMastered = sorted.filter((term) => {
+    const termProgress = progress?.terms?.[term.id]
+    return Boolean(termProgress && termProgress.practiced > 0 && !termProgress.mastered)
+  })
+  const earlierReview = practicedNotMastered.filter((term) =>
+    firstUnpracticedIndex === -1 || term.learningPathIndex < firstUnpracticedIndex
+  )
+  const unpracticedFrontier = frontier.filter((term) => practicedCount(progress, term.id) === 0)
+  const unpracticed = sorted.filter((term) => practicedCount(progress, term.id) === 0)
+  const nextUnpracticed = unpracticed.slice(0, Math.max(count * 3, 36))
+  const masteredMaintenance = sorted.filter((term) => progress?.terms?.[term.id]?.mastered)
+  const picked: GlossaryDojoTerm[] = []
+  const hasReviewTerms = Boolean(recentMissed.length || earlierReview.length || practicedNotMastered.length)
+  const frontierLimit = Math.min(hasReviewTerms ? 8 : 10, count)
+
+  addUnique(picked, stableShuffle(unpracticedFrontier, seed, `${roundId}:frontier`), frontierLimit)
+  addUnique(picked, stableShuffle(earlierReview, seed, `${roundId}:earlier-review`), Math.min(frontierLimit + 2, count))
+  addUnique(picked, stableShuffle(recentMissed, seed, `${roundId}:missed`), Math.min(frontierLimit + 4, count))
+  addUnique(picked, stableShuffle(practicedNotMastered, seed, `${roundId}:not-mastered`), count)
+  addUnique(picked, stableShuffle(nextUnpracticed, seed, `${roundId}:next-unpracticed`), count)
+  addUnique(picked, stableShuffle(unpracticed, seed, `${roundId}:unpracticed`), count)
+  addUnique(picked, stableShuffle(masteredMaintenance, seed, `${roundId}:mastered`), count)
+  addUnique(picked, stableShuffle(sorted, seed, `${roundId}:all`), count)
+
+  return picked.slice(0, count)
+}
+
 function selectRoundTargets(
   terms: GlossaryDojoTerm[],
   seed: string,
   roundId: string,
   progress?: GlossaryDojoProgress | null,
   explicitTargetTermIds?: string[],
-  count = ROUND_SIZE
+  count = ROUND_SIZE,
+  sourceMode: GlossaryDojoRound['sourceMode'] = 'new_round'
 ) {
   const termsById = makeTermsById(terms)
   if (explicitTargetTermIds?.length) {
@@ -479,40 +656,27 @@ function selectRoundTargets(
       .slice(0, count)
   }
 
-  const sorted = [...terms].sort((a, b) => a.learningPathIndex - b.learningPathIndex)
-  const firstUnpracticedIndex = sorted.findIndex((term) => practicedCount(progress, term.id) === 0)
-  const frontierStart = Math.max(0, firstUnpracticedIndex === -1 ? 0 : firstUnpracticedIndex - 2)
-  const frontier = sorted.slice(frontierStart, frontierStart + Math.max(count * 2, 18))
-  const recentMissedIds = progress?.recentMistakes?.map((mistake) => mistake.termId) ?? []
-  const recentMissed = recentMissedIds
-    .map((id) => findTerm(termsById, id))
-    .filter((term): term is GlossaryDojoTerm => Boolean(term))
-  const practicedNotMastered = sorted.filter((term) => {
-    const termProgress = progress?.terms?.[term.id]
-    return Boolean(termProgress && termProgress.practiced > 0 && !termProgress.mastered)
-  })
-  const unpracticedFrontier = frontier.filter((term) => practicedCount(progress, term.id) === 0)
-  const unpracticed = sorted.filter((term) => practicedCount(progress, term.id) === 0)
-  const nextUnpracticed = unpracticed.slice(0, Math.max(count * 2, 24))
-  const masteredMaintenance = sorted.filter((term) => progress?.terms?.[term.id]?.mastered)
-  const picked: GlossaryDojoTerm[] = []
-
-  addUnique(picked, stableShuffle(unpracticedFrontier, seed, `${roundId}:frontier`), Math.min(8, count))
-  addUnique(picked, stableShuffle(recentMissed, seed, `${roundId}:missed`), Math.min(10, count))
-  addUnique(picked, stableShuffle(practicedNotMastered, seed, `${roundId}:not-mastered`), count)
-  addUnique(picked, stableShuffle(nextUnpracticed, seed, `${roundId}:next-unpracticed`), count)
-  addUnique(picked, stableShuffle(unpracticed, seed, `${roundId}:unpracticed`), count)
-  addUnique(picked, stableShuffle(masteredMaintenance, seed, `${roundId}:mastered`), count)
-  addUnique(picked, stableShuffle(sorted, seed, `${roundId}:all`), count)
-
-  const lastTargetSet = new Set(progress?.lastCompletedRound?.targetTermIds ?? [])
-  const sameAsLast = picked.length === lastTargetSet.size && picked.every((term) => lastTargetSet.has(term.id))
-  if (sameAsLast) {
-    const replacement = sorted.find((term) => !lastTargetSet.has(term.id))
-    if (replacement && picked.length) picked[picked.length - 1] = replacement
+  if (!isNormalSourceMode(sourceMode)) {
+    return pickRoundTargets(terms, seed, roundId, progress, count)
   }
 
-  return picked.slice(0, count)
+  const avoidedFingerprints = normalRoundFingerprintSet(progress)
+  let best = pickRoundTargets(terms, seed, roundId, progress, count)
+  let bestFingerprint = fingerprintTargetTermIds(best.map((term) => term.id))
+  if (!avoidedFingerprints.has(bestFingerprint)) return best
+
+  for (let attempt = 1; attempt <= ROUND_FINGERPRINT_RETRY_LIMIT; attempt += 1) {
+    const attemptSeed = `${seed}:round-attempt:${attempt}`
+    const attemptTargets = pickRoundTargets(terms, attemptSeed, `${roundId}:attempt:${attempt}`, progress, count)
+    const attemptFingerprint = fingerprintTargetTermIds(attemptTargets.map((term) => term.id))
+    if (!avoidedFingerprints.has(attemptFingerprint)) return attemptTargets
+    best = attemptTargets
+    bestFingerprint = attemptFingerprint
+  }
+
+  return avoidedFingerprints.has(bestFingerprint)
+    ? replaceForFreshFingerprint(best, terms, avoidedFingerprints).slice(0, count)
+    : best
 }
 
 function specsFromTargets(
@@ -597,7 +761,7 @@ export function buildGlossaryDojoRound({
   const requestedCount = sourceMode === 'review_missed'
     ? Math.max(1, Math.min(targetTermIds?.length ?? ROUND_SIZE, ROUND_SIZE))
     : ROUND_SIZE
-  const targets = selectRoundTargets(terms, seed, roundId, progress, targetTermIds, requestedCount)
+  const targets = selectRoundTargets(terms, seed, roundId, progress, targetTermIds, requestedCount, sourceMode)
   const specs = questionSpecs?.length
     ? questionSpecs
     : specsFromTargets(targets, sourceMode, seed, roundId)
@@ -609,20 +773,70 @@ export function buildGlossaryDojoRound({
   const orderedQuestions = questionSpecs?.length
     ? questions
     : stableShuffle(questions, seed, `${roundId}:question-order`)
+  const targetIds = orderedQuestions.map((question) => question.targetTermId)
+  const targetFingerprint = fingerprintTargetTermIds(targetIds)
+  const startedAt = new Date().toISOString()
+  const repeatedFromRoundId = repeatedFromRound?.id
+  const reviewFromRoundId = reviewFromRound?.id
 
   return {
     id: roundId,
     roundId,
     roundNumber,
-    createdAt: new Date().toISOString(),
+    createdAt: startedAt,
+    startedAt,
     currentIndex: 0,
-    targetTermIds: orderedQuestions.map((question) => question.targetTermId),
+    targetTermIds: targetIds,
+    targetFingerprint,
     sourceMode,
+    mode: modeFromSourceMode(sourceMode),
+    sourceRoundId: sourceMode === 'repeat_round'
+      ? repeatedFromRoundId
+      : sourceMode === 'review_missed'
+        ? reviewFromRoundId
+        : undefined,
     repeatCount: sourceMode === 'repeat_round' ? (repeatedFromRound?.repeatCount ?? 0) + 1 : 0,
-    repeatedFromRoundId: repeatedFromRound?.id,
-    reviewFromRoundId: reviewFromRound?.id,
+    repeatedFromRoundId,
+    reviewFromRoundId,
     questions: orderedQuestions,
     answers: []
+  }
+}
+
+export function buildGlossaryDojoDebugReport(
+  terms: GlossaryDojoTerm[],
+  progress: GlossaryDojoProgress,
+  round: GlossaryDojoRound | null = progress.currentRound
+) {
+  const normalFingerprints = normalRoundFingerprintList(progress)
+  const currentFingerprint = round?.targetFingerprint ?? ''
+  const currentDuplicate = Boolean(
+    currentFingerprint &&
+    round?.sourceMode === 'new_round' &&
+    normalFingerprints.filter((fingerprint) => fingerprint === currentFingerprint).length > 1
+  )
+  const sampleQuestion = round?.questions.find((question) =>
+    question.options.some((option) => !option.isCorrect && option.learningPathDistance !== undefined)
+  )
+
+  return {
+    glossaryTermCount: terms.length,
+    availableTermCount: terms.length,
+    roundSize: ROUND_SIZE,
+    approximateUniqueFullRounds: Math.floor(terms.length / ROUND_SIZE),
+    lastFiveNormalRoundFingerprints: normalFingerprints.slice(-5),
+    currentRoundIsDuplicate: currentDuplicate,
+    sampleDistractors: sampleQuestion
+      ? sampleQuestion.options
+          .filter((option) => !option.isCorrect)
+          .map((option) => ({
+            optionId: option.id,
+            representedTermId: option.representedTermId,
+            distractorSource: option.distractorSource,
+            distractorDistance: option.distractorDistance,
+            learningPathDistance: option.learningPathDistance
+          }))
+      : []
   }
 }
 

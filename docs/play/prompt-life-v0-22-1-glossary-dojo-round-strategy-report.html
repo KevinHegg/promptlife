@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prompt Life v0.22.1 Glossary Dojo Round Strategy Report</title>
+  <style>
+    :root {
+      color: #07124a;
+      background: #f7f5ef;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.45;
+    }
+    body {
+      margin: 0;
+      padding: 36px;
+      background: #f7f5ef;
+    }
+    main {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    h1, h2, h3 {
+      line-height: 1.1;
+      margin: 0 0 12px;
+    }
+    h1 {
+      font-size: 35px;
+    }
+    h2 {
+      margin-top: 28px;
+      font-size: 23px;
+    }
+    h3 {
+      font-size: 16px;
+    }
+    p {
+      margin: 0 0 12px;
+    }
+    ul {
+      margin: 0 0 16px;
+      padding-left: 22px;
+    }
+    li {
+      margin: 5px 0;
+    }
+    code {
+      padding: 2px 5px;
+      border-radius: 4px;
+      background: #e9f7f5;
+      color: #07124a;
+      overflow-wrap: anywhere;
+    }
+    .cover,
+    .card {
+      break-inside: avoid;
+      border: 1px solid #c8d6e5;
+      border-radius: 12px;
+      background: white;
+      box-shadow: 0 18px 45px rgba(7, 18, 74, 0.08);
+    }
+    .cover {
+      padding: 28px;
+    }
+    .card {
+      padding: 16px;
+    }
+    .eyebrow {
+      color: #008f9d;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .checks {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .check {
+      padding: 10px 12px;
+      border: 1px solid #bce6e3;
+      border-radius: 8px;
+      background: #f0fffc;
+      font-weight: 800;
+    }
+    .fingerprint {
+      display: block;
+      margin-top: 6px;
+      font-size: 12px;
+      line-height: 1.35;
+    }
+    .card img {
+      display: block;
+      width: 100%;
+      max-width: 390px;
+      height: auto;
+      margin: 10px auto 0;
+      border: 1px solid #d9e2ec;
+      border-radius: 8px;
+    }
+    .page-break {
+      break-before: page;
+    }
+    @media print {
+      body { padding: 22px; }
+      .cover, .card { box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="cover">
+      <p class="eyebrow">Prompt Life v0.22.1 pass, visible app v0.22.2</p>
+      <h1>Glossary Dojo Round Variety + Distractor Strategy</h1>
+      <p>Date: 2026-06-07</p>
+      <p>This report wraps the implementation summary, QA findings, and screenshots for the Glossary Dojo round-strategy pass.</p>
+    </section>
+
+    <section>
+      <h2>What Changed</h2>
+      <ul>
+        <li>Added normal-round target fingerprints so Start next round avoids exact repeated 12-term sets when possible.</li>
+        <li>Added Dojo round history and normal-round fingerprint storage with migration fallback for older saved progress.</li>
+        <li>Kept Repeat this round exact by reusing stored target terms and question specs.</li>
+        <li>Kept Review missed questions focused on missed specs from the most recent completed round.</li>
+        <li>Changed normal target selection to a frontier-and-review blend.</li>
+        <li>Made distractors inspectable as near, medium, and far learning-path choices with confusable/related metadata fallbacks.</li>
+        <li>Added small results action copy for fresh, repeat, and missed-review rounds.</li>
+        <li>Fixed one-question review summary wording: <code>1 question</code> and <code>Everything in this round strengthened.</code></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Counts And Strategy</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>Glossary Coverage</h3>
+          <ul>
+            <li>Total glossary terms counted: 122</li>
+            <li>Available Dojo terms after normalization: 122</li>
+            <li>Normal round size: 12</li>
+            <li>Approximate full-coverage cycle: 10 full rounds, plus 2 terms</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Round Modes</h3>
+          <ul>
+            <li><code>new_round</code>: fresh 12-term normal round when possible.</li>
+            <li><code>repeat_round</code>: same stored target set/question specs, incremented repeat count.</li>
+            <li><code>review_missed</code>: only missed question specs, shorter when needed.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h2>Verification</h2>
+      <div class="checks">
+        <div class="check">typecheck: passed</div>
+        <div class="check">build: passed</div>
+        <div class="check">build:pages: passed</div>
+        <div class="check">audit:answers: passed</div>
+        <div class="check">normal fingerprints: differed</div>
+        <div class="check">repeat fingerprint: matched</div>
+        <div class="check">review missed: 1 target</div>
+        <div class="check">320px overflow: none</div>
+      </div>
+      <p>Builds passed with the existing Vite large-chunk warning.</p>
+    </section>
+
+    <section>
+      <h2>QA Fingerprints</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>First Normal Round</h3>
+          <code class="fingerprint">completion|deep-learning|embedding|generated-token|generative-ai|input-context|llm|machine-learning|model-output|response-so-far|tensor|weight</code>
+        </article>
+        <article class="card">
+          <h3>Second Normal Round</h3>
+          <code class="fingerprint">classical-machine-learning|distributed-representation|embedding|embedding-table|empiricism|llm|next-token|pretraining|prompt-tokens|response-so-far|symbolic-ai|weight</code>
+        </article>
+        <article class="card">
+          <h3>Repeat Round</h3>
+          <p>Used the second normal fingerprint again with <code>sourceMode: repeat_round</code>, <code>targetCount: 12</code>, and <code>repeatCount: 1</code>.</p>
+        </article>
+        <article class="card">
+          <h3>Review Missed</h3>
+          <p>Started with <code>sourceMode: review_missed</code>, <code>targetCount: 1</code>, and <code>total: 1</code>.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="page-break">
+      <h2>Screenshots</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>Review Missed At 390px</h3>
+          <p>A focused one-question review round from the missed term.</p>
+          <img src="screenshots/v0-22-1-dojo-round-strategy-review-missed-390.jpg" alt="Glossary Dojo review missed round at 390px">
+        </article>
+        <article class="card">
+          <h3>Results Actions At 390px</h3>
+          <p>Shows fresh/repeat/review action copy near the buttons.</p>
+          <img src="screenshots/v0-22-1-dojo-round-strategy-results-390.jpg" alt="Glossary Dojo results action copy at 390px">
+        </article>
+        <article class="card">
+          <h3>Results At 320px</h3>
+          <p>Narrow-phone check with no horizontal overflow.</p>
+          <img src="screenshots/v0-22-1-dojo-round-strategy-results-320.jpg" alt="Glossary Dojo results action copy at 320px">
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h2>Known Issues</h2>
+      <ul>
+        <li>New normal rounds avoid exact repeated term sets when possible, but repeats are allowed after the practical glossary cycle is exhausted.</li>
+        <li>Relationship and stage-location question variety still depends on metadata coverage.</li>
+        <li>The existing Vite large-chunk warning remains.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Next Three Steps</h2>
+      <ul>
+        <li>Add a small developer-only test harness for Dojo round generation.</li>
+        <li>Continue enriching metadata for relationship and stage-location question variety.</li>
+        <li>Consider bundle splitting once the MVP curriculum stabilizes.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

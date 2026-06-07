@@ -45,11 +45,18 @@ export function GlossaryDojoSummary({
     .slice(0, 6)
 
   return (
-    <section className="dojo-panel dojo-summary" aria-labelledby="dojo-summary-title">
+    <section
+      className="dojo-panel dojo-summary"
+      aria-labelledby="dojo-summary-title"
+      data-dojo-last-source-mode={completedRound?.sourceMode ?? ''}
+      data-dojo-last-repeat-count={completedRound?.repeatCount ?? 0}
+      data-dojo-last-round-fingerprint={completedRound?.targetFingerprint ?? ''}
+      data-dojo-last-target-count={completedRound?.targetTermIds.length ?? 0}
+    >
       <p className="eyebrow">Glossary Dojo</p>
       <h2 id="dojo-summary-title">Results from this round</h2>
       <div className="dojo-stat-grid" aria-label="Glossary Dojo practice totals">
-        <span><strong>{questionCount}</strong> questions</span>
+        <span><strong>{questionCount}</strong> {questionCount === 1 ? 'question' : 'questions'}</span>
         <span><strong>{correctCount}</strong> correct</span>
         <span><strong>{missedCount}</strong> to review</span>
         <span><strong>{progress.roundsAttempted}</strong> round attempted</span>
@@ -89,7 +96,7 @@ export function GlossaryDojoSummary({
             ))}
           </div>
         ) : (
-          <p>All twelve strengthened. Start the next round when ready.</p>
+          <p>Everything in this round strengthened. Start the next round when ready.</p>
         )}
       </section>
 
@@ -107,11 +114,20 @@ export function GlossaryDojoSummary({
       )}
 
       <div className="dojo-action-row">
-        <button className="secondary-btn" type="button" onClick={onReviewMissed} disabled={!reviewTerms.length} data-testid="glossary-dojo-review-missed">
-          {reviewTerms.length ? 'Review missed questions' : 'No missed terms this round'}
-        </button>
-        <button className="secondary-btn" type="button" onClick={onRepeatRound} data-testid="glossary-dojo-repeat-round">Repeat this round</button>
-        <button className="primary-btn" type="button" onClick={onStartRound} data-testid="glossary-dojo-start">Start next round</button>
+        <div className="dojo-action-note">
+          <button className="primary-btn" type="button" onClick={onStartRound} data-testid="glossary-dojo-start">Start next round</button>
+          <span>Practice a fresh set of terms when possible.</span>
+        </div>
+        <div className="dojo-action-note">
+          <button className="secondary-btn" type="button" onClick={onRepeatRound} data-testid="glossary-dojo-repeat-round">Repeat this round</button>
+          <span>Use the same 12 terms again.</span>
+        </div>
+        <div className="dojo-action-note">
+          <button className="secondary-btn" type="button" onClick={onReviewMissed} disabled={!reviewTerms.length} data-testid="glossary-dojo-review-missed">
+            {reviewTerms.length ? 'Review missed questions' : 'No missed terms this round'}
+          </button>
+          <span>Focus only on terms that need another look.</span>
+        </div>
         <button className="secondary-btn" type="button" onClick={onBack}>Back to Play</button>
         <button className="secondary-btn danger" type="button" onClick={onReset}>Reset Dojo practice</button>
       </div>

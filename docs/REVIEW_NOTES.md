@@ -1,6 +1,436 @@
 # Review Notes
 
-Date: 2026-06-06
+Date: 2026-06-07
+
+## v0.24.1 Midnight Ledger Implementation Pass
+
+### What Changed
+
+- Implemented the three in-scope Midnight Ledger cards: `collective-intelligence`, `costs-we-must-count`, and `risk-myth`.
+- Repaired the coded Collective visual into a source-trace and rights-question map.
+- Replaced the Costs visual with a cautious ledger/infrastructure map.
+- Converted Risk vs Myth into the richer lesson schema and a mechanism-vs-myth visual.
+- Added the requested non-competitive tiny interactions:
+  - Collective: human/institutional questions vs model mechanics sort.
+  - Costs: tap ledger entries for energy, water, hardware, labor, privacy, and governance.
+  - Risk: six-claim real-risk/myth sort.
+- Added concise glossary support for risk literacy, tool use, overreliance, vendor lock-in, concentration of power, bias, and information pollution.
+- Bumped the visible app version to `v0.24.1`.
+
+### Preserved
+
+- Journey order, progress rules, checkpoint randomization, badge logic, generated PNG assets, dependencies, games, and Glossary Dojo logic were not changed.
+- Prompt Injection / Tool Risk remains inside Risk vs Myth and glossary support; no standalone Journey card was added.
+- The one-badge model remains unchanged.
+
+### Mobile QA
+
+- 390px: Midnight overview, Collective visual, Collective interaction, Costs visual, Costs interaction, Risk visual, Risk sort, and Risk checkpoint feedback were captured.
+- 320px: Costs and Risk visual spot checks showed no horizontal overflow.
+- Preview mode stayed active for the three Midnight cards; progress did not change.
+- Home generated assets still loaded.
+- Play still exposes Glossary Dojo.
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed; Risk vs Myth now audits as a four-choice randomized checkpoint.
+
+### Screenshots And Report
+
+- `docs/stage-audits/v0-24-midnight-ledger/IMPLEMENTATION_REPORT_V0_24_1.md`
+- `docs/stage-audits/v0-24-midnight-ledger/IMAGE_ASSET_PLAN.md`
+- `docs/stage-audits/v0-24-midnight-ledger/TINY_INTERACTION_PLAN.md`
+- `docs/stage-audits/v0-24-midnight-ledger/prompt-life-v0-24-1-midnight-ledger-implementation-report.html`
+- `docs/stage-audits/v0-24-midnight-ledger/prompt-life-v0-24-1-midnight-ledger-implementation-report.pdf`
+- `docs/stage-audits/v0-24-midnight-ledger/screenshots/v0-24-1-midnight-implementation-qa.json`
+
+### Known Issues
+
+- The existing Vite large-chunk warning remains.
+- Future Image 2 asset generation is ready for the Costs card only if the next pass wants a textless generated asset; this pass intentionally added no generated PNGs.
+
+## v0.23.4 Perfect Storm Visual Layout Repair
+
+### What Changed
+
+- Repaired the coded `Storm Front` visual for The Perfect Storm.
+- Replaced the cramped radial convergence SVG with a stacked two-column convergence layout.
+- Moved `Convergence, not one spark.` out of the SVG and into HTML below the diagram.
+- Kept the visual explanation as: data, compute, storage, methods, labor, and incentives converged into modern LLM capability.
+- Bumped the visible app version to `v0.23.5` because `v0.23.4` was already used for the New Dawn stage-tile label change.
+
+### Preserved
+
+- Journey order, Journey card content, progress rules, checkpoint randomization, badge logic, generated assets, dependencies, games, and Glossary Dojo were not changed.
+- The existing Perfect Storm tiny interaction remains a non-competitive tap-to-light ingredient activity.
+
+### Layout Chosen
+
+- Option B: stacked convergence.
+- Six ingredient chips flow through connector lines into one centered `Modern LLM capability` node.
+- The convergence takeaway appears as HTML caption text rather than as a label inside the SVG.
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed.
+- Browser/CDP QA at 390px: no SVG text overlaps, no horizontal overflow, old in-SVG convergence label removed, HTML caption present, key takeaway above bottom nav.
+- Browser/CDP QA at 320px: no SVG text overlaps, no horizontal overflow, full `Incentives` label fits, HTML caption present.
+- Interaction QA at 390px: all six ingredient buttons can be active, feedback shows the convergence insight, and controls remain above the bottom nav.
+
+### Screenshots And Report
+
+- `docs/stage-audits/v0-23-twilight/PERFECT_STORM_VISUAL_REPAIR_V0_23_4.md`
+- `docs/stage-audits/v0-23-twilight/prompt-life-v0-23-4-perfect-storm-visual-repair-report.html`
+- `docs/stage-audits/v0-23-twilight/prompt-life-v0-23-4-perfect-storm-visual-repair-report.pdf`
+- `docs/stage-audits/v0-23-twilight/visual-repair-screenshots/perfect-storm-visual-repair-v0-23-4-qa.json`
+- `docs/stage-audits/v0-23-twilight/visual-repair-screenshots/perfect-storm-visual-repair-cdp-390.jpg`
+- `docs/stage-audits/v0-23-twilight/visual-repair-screenshots/perfect-storm-visual-repair-cdp-320.jpg`
+- `docs/stage-audits/v0-23-twilight/visual-repair-screenshots/perfect-storm-interaction-repair-cdp-390.jpg`
+
+### Known Issues
+
+- The existing Vite large-chunk warning remains.
+
+## v0.23.4 New Dawn Stage Tile Label
+
+### What Changed
+
+- Changed the New Dawn Journey stage-grid subtitle from `Better human use` to `Human centered AI`.
+- Updated the New Dawn stage metadata so the grid subtitle, fallback nav hint, and accessible jump label stay aligned.
+- Bumped the visible app version to `v0.23.4`.
+
+### Preserved
+
+- Journey card content, Journey order, progress logic, badge logic, checkpoint randomization, games, generated assets, and dependencies were not changed.
+- The full stage name `New Dawn` and existing lesson titles remain unchanged.
+
+### Mobile QA
+
+- 390px: New Dawn tile shows `Human centered AI`; page width stayed at 390px; no horizontal overflow.
+- 320px: New Dawn tile shows `Human centered AI`; subtitle scroll width matched client width; no subtitle overflow.
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed.
+
+### Screenshots And Report
+
+- `docs/journey/NEW_DAWN_STAGE_TILE_LABEL_V0_23_4.md`
+- `docs/journey/prompt-life-v0-23-4-new-dawn-stage-tile-label-report.html`
+- `docs/journey/prompt-life-v0-23-4-new-dawn-stage-tile-label-report.pdf`
+- `docs/journey/screenshots/v0-23-4-new-dawn-label-390.jpg`
+- `docs/journey/screenshots/v0-23-4-new-dawn-label-320.jpg`
+
+### Known Issues
+
+- The existing Vite large-chunk warning remains.
+
+## v0.24 Midnight Ledger Stage Audit
+
+### What Changed
+
+- Added a documentation-only audit package for Journey stage 7, Midnight Ledger.
+- Audited the current live cards: Collective Intelligence, Extracted; Costs We Must Count; Risk vs Myth.
+- Confirmed Prompt Injection / Tool Risk is not currently a standalone Journey card; it appears inside Risk vs Myth and the glossary.
+- Captured 35 mobile screenshots across Journey/stage overview, lesson hero, visual aid, core idea, source-review caveat, Brain Bridge, tiny interaction, checkpoint, feedback, bottom action, and 320px/430px spot checks.
+- Added `README.md`, `card-inventory.md`, `recommendations.md`, `source-review.md`, `screenshot-index.md`, `stage-audit.json`, screenshot artifacts, QA JSON, and an internal PDF report under `docs/stage-audits/v0-24-midnight-ledger/`.
+- Left live curriculum behavior unchanged: no Journey cards, Journey order, progress rules, checkpoint randomization, games, generated assets, dependencies, badge logic, or Glossary Dojo logic changed.
+
+### Major Findings
+
+- The stage order is coherent: data/culture, infrastructure/cost, then risk literacy.
+- Collective Intelligence is cautious and does not claim all data was stolen, but it still needs a better provenance/rights/value interaction.
+- Costs We Must Count is source-aware and avoids unsourced precise statistics, but it most needs a better visual and tiny interaction.
+- Risk vs Myth belongs in Midnight Ledger, but should be converted to the richer lesson schema and made more mechanism-specific.
+- Prompt Injection / Tool Risk should stay inside Risk vs Myth for now unless a later tools/security pass warrants a standalone card.
+
+### Visual Findings
+
+- Costs We Must Count is the best future Image 2 candidate: a textless midnight ledger / data-center footprint scene with labels kept in HTML.
+- Collective Intelligence is a possible later hybrid/Image 2 candidate, but a coded SVG repair may be enough.
+- Risk vs Myth should remain coded SVG so the real-risk/myth mechanism labels stay precise.
+- The current Costs visual is cramped at 320px and repeats `Power`.
+- The current Collective visual has a cramped/clipped central `Lantern` label.
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed.
+- Browser QA confirmed Preview-mode progress stayed unchanged, Home generated assets loaded, Where LLMs Fit taxonomy still rendered, Midnight visual-aid review entries existed, and Glossary Dojo still appeared in Play.
+
+### Screenshots And Report
+
+- `docs/stage-audits/v0-24-midnight-ledger/README.md`
+- `docs/stage-audits/v0-24-midnight-ledger/card-inventory.md`
+- `docs/stage-audits/v0-24-midnight-ledger/recommendations.md`
+- `docs/stage-audits/v0-24-midnight-ledger/source-review.md`
+- `docs/stage-audits/v0-24-midnight-ledger/screenshot-index.md`
+- `docs/stage-audits/v0-24-midnight-ledger/stage-audit.json`
+- `docs/stage-audits/v0-24-midnight-ledger/prompt-life-v0-24-midnight-ledger-stage-audit-report.html`
+- `docs/stage-audits/v0-24-midnight-ledger/prompt-life-v0-24-midnight-ledger-stage-audit-report.pdf`
+- `docs/stage-audits/v0-24-midnight-ledger/screenshots/midnight-ledger-v0-24-qa.json`
+
+### Known Issues
+
+- The existing Vite large-chunk warning remains.
+- Collective Intelligence and Costs We Must Count have mismatched tiny interactions in the current app.
+- Risk vs Myth still uses a slimmer lesson schema.
+- No live fixes were made because this was an audit-only pass.
+
+## v0.23.3 Twilight Implementation (requested v0.23.1 pass)
+
+### What Changed
+
+- Upgraded the first three Twilight cards, How AI Learns, Diffusion vs Autoregression, and Multimodal AI, to the richer lesson schema.
+- Kept the Twilight Journey order unchanged: How AI Learns, Diffusion vs Autoregression, Multimodal AI, The Perfect Storm.
+- Reframed How AI Learns as a synthesis map of durable training, temporary context steering, retrieval/context, and evaluation/feedback.
+- Reworked Diffusion vs Autoregression around the simple contrast between append-one-token generation and denoise/refine generation.
+- Reworked Multimodal AI around media inputs, a bounded shared/connected representation space, and possible outputs.
+- Replaced The Perfect Storm's generic feature-cloud interaction with a storm-ingredients interaction.
+- Added glossary support for `Representation`, `Denoising`, `Storage`, and `Economic incentives`.
+- Bumped the visible app version to `v0.23.3`.
+
+### Visual And Interaction Changes
+
+- How AI Learns now uses a coded learning-modes matrix plus a learning-modes sort interaction.
+- Diffusion vs Autoregression now uses a coded split diagram plus a Token path / Denoise path stepper.
+- Multimodal AI now uses a coded media lane map plus input-output pairing states.
+- The Perfect Storm now uses coded convergence streams plus tappable Data, Compute, Storage, Algorithms, Human labor, and Incentives buttons.
+
+### Constraints Preserved
+
+- No Journey cards, Journey order, progress rules, badge logic, checkpoint randomization, games, generated PNG assets, heavy 3D libraries, dependencies, learner-facing PDF features, or Glossary Dojo behavior were changed.
+
+### Mobile QA
+
+- 390px screenshots confirmed the Twilight overview, all four updated visual/interaction areas, no horizontal overflow, and readable coded diagrams.
+- 320px screenshots confirmed Diffusion and Perfect Storm remain readable.
+- Preview-mode QA opened all four Twilight cards with `promptlife:v1:progress` staying `[]`.
+- Home generated hero and mark still load, including in the in-app browser.
+- Visual-aid review route detects Learning Modes Matrix, Append Or Denoise, Media Lane Map, and Storm Front.
+- Play still exposes Glossary Dojo and Practice challenges.
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed.
+
+### Screenshots And Reports
+
+- `docs/stage-audits/v0-23-twilight/IMPLEMENTATION_REPORT_V0_23_1.md`
+- `docs/stage-audits/v0-23-twilight/IMAGE_ASSET_PLAN.md`
+- `docs/stage-audits/v0-23-twilight/TINY_INTERACTION_PLAN.md`
+- `docs/stage-audits/v0-23-twilight/prompt-life-v0-23-1-twilight-implementation-report.html`
+- `docs/stage-audits/v0-23-twilight/prompt-life-v0-23-1-twilight-implementation-report.pdf`
+- `docs/stage-audits/v0-23-twilight/implementation-screenshots/twilight-implementation-v0-23-1-qa.json`
+- `docs/stage-audits/v0-23-twilight/implementation-screenshots/twilight-overview-after-implementation-390.png`
+- `docs/stage-audits/v0-23-twilight/implementation-screenshots/how-ai-learns-matrix-390.png`
+- `docs/stage-audits/v0-23-twilight/implementation-screenshots/how-ai-learns-sort-interaction-390.png`
+- `docs/stage-audits/v0-23-twilight/implementation-screenshots/diffusion-split-visual-390.png`
+- `docs/stage-audits/v0-23-twilight/implementation-screenshots/diffusion-interaction-390.png`
+- `docs/stage-audits/v0-23-twilight/implementation-screenshots/multimodal-media-map-390.png`
+- `docs/stage-audits/v0-23-twilight/implementation-screenshots/multimodal-interaction-390.png`
+- `docs/stage-audits/v0-23-twilight/implementation-screenshots/perfect-storm-convergence-visual-390.png`
+- `docs/stage-audits/v0-23-twilight/implementation-screenshots/perfect-storm-ingredient-interaction-390.png`
+- `docs/stage-audits/v0-23-twilight/implementation-screenshots/diffusion-320.png`
+- `docs/stage-audits/v0-23-twilight/implementation-screenshots/perfect-storm-320.png`
+
+### Known Issues
+
+- The existing Vite large-chunk warning remains.
+- The How AI Learns matrix is intentionally compact; a future iteration could make individual matrix rows expandable if learner testing calls for more space.
+- The Perfect Storm Image 2 asset is planned but intentionally not generated in this pass.
+
+## v0.23.2 Journey Simplification
+
+### What Changed
+
+- Removed the learner-facing Journey Path View block and its All, Essential, Deep, and Ethics filter buttons.
+- Removed Guided Comparisons from the Journey screen so Journey presents one coherent card sequence.
+- Kept the 8-stage jump grid with the compact v0.23.1 mobile labels and accessible stage labels.
+- Added a short Journey helper line: "All stages follow one prompt through the full day: before training, through inference, generation, evidence, risks, costs, and better human use."
+- Updated Badge copy to frame one confidence badge: `Prompt Life: Model Literate`.
+- Bumped the visible app version to `v0.23.2`.
+
+### What Remains
+
+- Path metadata remains available internally for review/audit routes and future reporting.
+- Guided comparison activities remain under Play, including Prompt Run and How AI Learns.
+- Journey card content, Journey order, checkpoint randomization, progress storage, badge logic, Glossary Dojo behavior, generated assets, dependencies, and games were not changed.
+
+### Mobile QA
+
+- 390px: Path View absent, path filter buttons absent, Guided Comparisons absent from Journey, 8 stage buttons visible, no horizontal overflow, all stage buttons scrolled correctly, Journey bottom nav returned to top.
+- 320px: Path View absent, path filter buttons absent, Guided Comparisons absent from Journey, 8 stage buttons visible, no horizontal overflow, no clipped tile text in screenshot review.
+- Play still contains Prompt Run, Context Stack, Attention Weave, Token Pipeline Relay, Glossary Dojo, How AI Learns, and Guided Comparisons.
+- Badge screen shows one-badge copy with no learner-facing path requirement language.
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed.
+
+### Screenshots and Report
+
+- `docs/journey/JOURNEY_SIMPLIFICATION_V0_23_2.md`
+- `docs/journey/screenshots/journey-simplification-v0-23-2-qa.json`
+- `docs/journey/screenshots/journey-v0-23-2-top-390.png`
+- `docs/journey/screenshots/journey-v0-23-2-top-320.png`
+- `docs/journey/screenshots/journey-v0-23-2-stage-grid.png`
+- `docs/journey/screenshots/badge-v0-23-2-single-badge-copy.png`
+
+### Known Issues
+
+- Badge copy is simplified, but the unlock threshold still uses the existing internal qualifying-lesson calculation. A future badge-logic pass should rename or simplify that internal threshold now that learner-facing paths are hidden.
+- The existing Vite large-chunk warning remains.
+
+## v0.23.1 Journey Stage Grid Label Polish
+
+### What Changed
+
+- Shortened display labels in the tappable 4x2 Journey stage grid while preserving full stage names elsewhere.
+- Added stage metadata fields for grid-only labels: `shortTitle`, `gridSubtitle`, and `ariaLabel`.
+- Updated `StageTimeline` so compact labels apply only to Journey jump tiles.
+- Kept section headers, lesson context, stage scroll behavior, active styling, Journey order, progress logic, badge logic, games, generated assets, dependencies, and checkpoint randomization unchanged.
+- Bumped the visible app version to `v0.23.1`.
+
+### Final Stage Grid Labels
+
+- 1 Before Morning - Model shaped before use
+- 2 Morning Commute - Text becomes numbers
+- 3 Workday - Layers process context
+- 4 Decision Room - One token is chosen
+- 5 Day Repeats - Context grows + expires
+- 6 Twilight - Wider AI landscape
+- 7 Midnight Ledger - Costs and shadows
+- 8 New Dawn - Better human use
+
+### Mobile QA
+
+- 320px: 4 columns, 8 tiles, no horizontal overflow, no clipped tile text, all tile taps scrolled to the correct section, Journey bottom nav returned to top.
+- 390px: 4 columns, 8 tiles, no horizontal overflow, no clipped tile text, all tile taps scrolled to the correct section, Journey bottom nav returned to top.
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed.
+
+### Screenshots and Report
+
+- `docs/journey/STAGE_GRID_LABELS_V0_23_1.md`
+- `docs/journey/stage-grid-labels-v0-23-1-qa.json`
+- `docs/journey/screenshots/v0-23-1-stage-grid-320.png`
+- `docs/journey/screenshots/v0-23-1-stage-grid-390.png`
+
+### Known Issues
+
+- The existing Vite large-chunk warning remains.
+
+## v0.23 Twilight Stage Audit
+
+### What Changed
+
+- Added a documentation-only audit package for Journey stage 6, Twilight: The Wider Landscape.
+- Audited the current live cards: How AI Learns, Diffusion vs Autoregression, Multimodal AI, and The Perfect Storm.
+- Captured 51 mobile screenshots across Journey/stage overview, lesson hero, visual aid, core idea, brain bridge, tiny interaction, checkpoint, feedback, bottom action, and 320px/430px spot checks.
+- Added `README.md`, `card-inventory.md`, `recommendations.md`, `screenshot-index.md`, `stage-audit.json`, screenshot artifacts, and an internal review report under `docs/stage-audits/v0-23-twilight/`.
+- Left live curriculum behavior unchanged: no Journey cards, Journey order, progress rules, checkpoint randomization, games, generated assets, dependencies, badge logic, or Glossary Dojo logic changed.
+
+### Major Findings
+
+- The Twilight stage order is coherent and should remain unchanged.
+- How AI Learns, Diffusion vs Autoregression, and Multimodal AI are accurate but still use the slimmer lesson architecture.
+- The Perfect Storm is the strongest Twilight card, but its tiny interaction currently falls back to a generic feature cloud instead of storm ingredients.
+- The next implementation pass should upgrade coded visuals and tiny interactions before adding generated assets.
+
+### Visual Findings
+
+- How AI Learns needs a learning-modes matrix.
+- Diffusion needs a denoise-vs-append contrast.
+- Multimodal needs a tighter media input/output representation map.
+- The Perfect Storm is the only recommended Image 2 candidate for this stage: a textless convergence scene with labels and callouts kept in HTML.
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed.
+
+### Screenshots and Report
+
+- `docs/stage-audits/v0-23-twilight/README.md`
+- `docs/stage-audits/v0-23-twilight/card-inventory.md`
+- `docs/stage-audits/v0-23-twilight/recommendations.md`
+- `docs/stage-audits/v0-23-twilight/screenshot-index.md`
+- `docs/stage-audits/v0-23-twilight/stage-audit.json`
+- `docs/stage-audits/v0-23-twilight/prompt-life-v0-23-twilight-stage-audit-report.pdf`
+
+### Known Issues
+
+- The existing Vite large-chunk warning remains.
+- Some long Journey-page screenshots required clean headless Chrome capture after the in-app browser timed out.
+- The live app still contains the Perfect Storm generic feature-cloud interaction because this audit intentionally did not implement curriculum changes.
+
+## v0.22.2 Glossary Dojo Round Variety Pass
+
+### What Changed
+
+- Added normal-round target fingerprints so Start next round avoids repeating exact 12-term sets when possible.
+- Added Dojo `roundHistory` and `normalRoundFingerprints` storage, with migration fallback from older stored rounds.
+- Kept Repeat this round exact by reusing stored target terms and question specs, and kept Review missed questions focused on the last round's missed specs.
+- Reworked normal target selection into a frontier-and-review blend: mostly unpracticed/current-path terms with practiced-not-mastered and missed terms mixed in when available.
+- Made the distractor strategy explicit: near, medium, and far learning-path slots with confusable/related metadata fallbacks.
+- Added developer-only distractor metadata on answer options and `buildGlossaryDojoDebugReport` for QA/reporting.
+- Added small results-screen action copy explaining fresh, repeat, and missed-review rounds without algorithm language.
+- Bumped the visible app version to `v0.22.2`.
+- Preserved Journey cards, Journey progress rules, badge criteria, games, generated assets, dependencies, and checkpoint randomization.
+
+### Storage And Reset
+
+- Dojo reset clears current round, last completed round, round history, normal fingerprints, repeat counts, mastery state, and missed-term state.
+- Existing Dojo resume behavior remains based on `currentRound`.
+- Normal fingerprints are stored only for normal rounds; repeat and review rounds are tracked in history but do not count as unique normal sets.
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed.
+- Browser QA confirmed normal-round fingerprint variety, exact repeat fingerprint reuse with `repeatCount: 1`, one-question review-missed behavior, Dojo reset clearing practice state, and no 320px horizontal overflow.
+
+### Screenshots And Report
+
+- `docs/play/GLOSSARY_DOJO_ROUND_STRATEGY_V0_22_1.md`
+- `docs/play/prompt-life-v0-22-1-glossary-dojo-round-strategy-report.pdf`
+- `docs/play/screenshots/v0-22-1-dojo-round-strategy-qa.json`
+- `docs/play/screenshots/v0-22-1-dojo-round-strategy-review-missed-390.jpg`
+- `docs/play/screenshots/v0-22-1-dojo-round-strategy-results-390.jpg`
+- `docs/play/screenshots/v0-22-1-dojo-round-strategy-results-320.jpg`
+
+### Known Issues
+
+- New normal rounds avoid exact repeated term sets when possible, but repeats are allowed after the practical glossary cycle is exhausted.
+- Relationship and stage-location question variety still depends on metadata coverage.
+- The existing Vite large-chunk warning remains.
 
 ## v0.22.1 The Day Repeats Implementation Pass
 

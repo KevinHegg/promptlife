@@ -34,6 +34,10 @@ export type GlossaryDojoQuestionType =
   | 'stage_location'
 
 export type GlossaryDojoOptionKind = 'term' | 'definition' | 'statement' | 'stage'
+export type GlossaryDojoRoundSourceMode = 'new_round' | 'repeat_round' | 'review_missed'
+export type GlossaryDojoRoundMode = 'normal' | 'repeat' | 'reviewMissed'
+export type GlossaryDojoDistractorSource = 'confusable' | 'related' | 'near' | 'medium' | 'far' | 'global'
+export type GlossaryDojoDistractorDistance = 'near' | 'medium' | 'far'
 
 export type GlossaryDojoOption = {
   id: string
@@ -46,6 +50,9 @@ export type GlossaryDojoOption = {
   kind: GlossaryDojoOptionKind
   isCorrect: boolean
   feedbackTermId?: string
+  distractorSource?: GlossaryDojoDistractorSource
+  distractorDistance?: GlossaryDojoDistractorDistance
+  learningPathDistance?: number
 }
 
 export type GlossaryDojoQuestion = {
@@ -86,10 +93,14 @@ export type GlossaryDojoRound = {
   roundNumber: number
   roundId: string
   createdAt: string
+  startedAt: string
   completedAt?: string
   currentIndex: number
   targetTermIds: string[]
-  sourceMode: 'new_round' | 'repeat_round' | 'review_missed'
+  targetFingerprint: string
+  sourceMode: GlossaryDojoRoundSourceMode
+  mode: GlossaryDojoRoundMode
+  sourceRoundId?: string
   repeatCount: number
   repeatedFromRoundId?: string
   reviewFromRoundId?: string
@@ -123,13 +134,17 @@ export type GlossaryDojoCompletedRound = {
   id: string
   roundNumber: number
   roundId: string
+  startedAt: string
   completedAt: string
   correctCount: number
   missedCount: number
-  sourceMode: GlossaryDojoRound['sourceMode']
+  sourceMode: GlossaryDojoRoundSourceMode
+  mode: GlossaryDojoRoundMode
+  sourceRoundId?: string
   repeatCount: number
   repeatedFromRoundId?: string
   reviewFromRoundId?: string
+  targetFingerprint: string
   targetTermIds: string[]
   questions: GlossaryDojoQuestion[]
   answers: GlossaryDojoAnswer[]
@@ -138,13 +153,35 @@ export type GlossaryDojoCompletedRound = {
 export type GlossaryDojoRoundRecord = {
   id: string
   roundNumber: number
+  startedAt: string
   completedAt: string
   correctCount: number
   missedCount: number
-  sourceMode: GlossaryDojoRound['sourceMode']
+  sourceMode: GlossaryDojoRoundSourceMode
+  mode: GlossaryDojoRoundMode
+  sourceRoundId?: string
   repeatCount: number
   repeatedFromRoundId?: string
   reviewFromRoundId?: string
+  targetFingerprint: string
+  targetTermIds: string[]
+}
+
+export type GlossaryDojoRoundHistoryRecord = {
+  id: string
+  roundNumber: number
+  roundId: string
+  startedAt: string
+  completedAt?: string
+  correctCount?: number
+  missedCount?: number
+  sourceMode: GlossaryDojoRoundSourceMode
+  mode: GlossaryDojoRoundMode
+  sourceRoundId?: string
+  repeatCount: number
+  repeatedFromRoundId?: string
+  reviewFromRoundId?: string
+  targetFingerprint: string
   targetTermIds: string[]
 }
 
@@ -157,6 +194,8 @@ export type GlossaryDojoProgress = {
   totalMissed: number
   recentMistakes: GlossaryDojoMistake[]
   perRound: GlossaryDojoRoundRecord[]
+  roundHistory: GlossaryDojoRoundHistoryRecord[]
+  normalRoundFingerprints: string[]
   terms: Record<string, GlossaryDojoTermProgress>
   currentRound: GlossaryDojoRound | null
   lastCompletedRound: GlossaryDojoCompletedRound | null

@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Prompt Life v0.23 Twilight Stage Audit</title>
+    <style>
+      :root {
+        --ink: #07124a;
+        --muted: #3d4a68;
+        --teal: #0fa8a4;
+        --violet: #7a5cff;
+        --paper: #fffdf8;
+        --mist: #eaf3f4;
+        --line: #d8deef;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        background: #f7f5ef;
+        color: var(--ink);
+        font-family: Arial, Helvetica, sans-serif;
+        line-height: 1.45;
+      }
+
+      main {
+        max-width: 920px;
+        margin: 0 auto;
+        padding: 36px 32px 56px;
+      }
+
+      header {
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 26px;
+        background: linear-gradient(135deg, rgba(255,255,255,.92), rgba(234,243,244,.78));
+      }
+
+      .eyebrow {
+        color: var(--teal);
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 8px 0 10px;
+        font-size: 34px;
+        line-height: 1.05;
+      }
+
+      h2 {
+        margin: 28px 0 10px;
+        font-size: 22px;
+      }
+
+      h3 {
+        margin: 18px 0 8px;
+        font-size: 17px;
+      }
+
+      p { margin: 0 0 10px; color: var(--muted); }
+
+      ul { margin: 8px 0 16px; padding-left: 22px; color: var(--muted); }
+      li { margin: 5px 0; }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .card {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: var(--paper);
+        padding: 16px;
+      }
+
+      .callout {
+        border-left: 4px solid var(--teal);
+        background: rgba(15, 168, 164, .08);
+        border-radius: 10px;
+        padding: 12px 14px;
+      }
+
+      .figure-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+        align-items: start;
+      }
+
+      figure {
+        margin: 0;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: white;
+        padding: 10px;
+        break-inside: avoid;
+      }
+
+      figure img {
+        display: block;
+        width: 100%;
+        border-radius: 8px;
+        border: 1px solid #e5e8f4;
+      }
+
+      figcaption {
+        margin-top: 8px;
+        font-size: 11px;
+        color: var(--muted);
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 10px 0 18px;
+        font-size: 13px;
+      }
+
+      th, td {
+        border: 1px solid var(--line);
+        padding: 8px;
+        text-align: left;
+        vertical-align: top;
+      }
+
+      th {
+        background: var(--mist);
+        color: var(--ink);
+      }
+
+      .page-break { break-before: page; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <div class="eyebrow">Prompt Life internal audit</div>
+        <h1>v0.23 Twilight: The Wider Landscape</h1>
+        <p>This documentation-only audit reviews the current Journey stage where learners widen from LLM mechanics into other AI systems and the conditions that made modern LLMs possible.</p>
+        <p><strong>Date:</strong> 2026-06-07. <strong>Cards:</strong> 28-31. <strong>Screenshots:</strong> 51 PNG captures.</p>
+      </header>
+
+      <section>
+        <h2>Executive Summary</h2>
+        <div class="callout">
+          <p>The Twilight stage is coherent and should stay in place. The first three cards are accurate but visually and architecturally thin. The Perfect Storm is strong, but its current tiny interaction is generic and should be replaced with storm-ingredient interaction states.</p>
+        </div>
+        <div class="grid">
+          <div class="card">
+            <h3>Major Content Findings</h3>
+            <ul>
+              <li>Keep the current stage order.</li>
+              <li>Convert the first three cards to the richer lesson schema.</li>
+              <li>Use How AI Learns as a synthesis map, not a repeat.</li>
+              <li>Keep Diffusion and Multimodal concise but sharper.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Major Visual Findings</h3>
+            <ul>
+              <li>How AI Learns needs a learning-modes matrix.</li>
+              <li>Diffusion needs a denoise-vs-append contrast.</li>
+              <li>Multimodal needs a tighter media input/output map.</li>
+              <li>Perfect Storm is the best future Image 2 candidate.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Cards Audited</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>No.</th>
+              <th>Card</th>
+              <th>Current state</th>
+              <th>Recommendation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>28</td>
+              <td>How AI Learns</td>
+              <td>Accurate durable/temporary distinction; visual and interaction are too generic.</td>
+              <td>Revise.</td>
+            </tr>
+            <tr>
+              <td>29</td>
+              <td>Diffusion vs Autoregression</td>
+              <td>Clear denoising idea; needs visible contrast with autoregressive text.</td>
+              <td>Revise lightly.</td>
+            </tr>
+            <tr>
+              <td>30</td>
+              <td>Multimodal AI</td>
+              <td>Good definition; visual risks oversimplifying shared representations.</td>
+              <td>Revise lightly.</td>
+            </tr>
+            <tr>
+              <td>31</td>
+              <td>The Perfect Storm</td>
+              <td>Strong rich-schema card; tiny interaction is mismatched.</td>
+              <td>Keep and polish.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="page-break">
+        <h2>Representative Screenshots</h2>
+        <div class="figure-grid">
+          <figure>
+            <img src="screenshots/twilight-overview-390.png" alt="Twilight stage overview at 390px">
+            <figcaption>Twilight stage overview at 390px.</figcaption>
+          </figure>
+          <figure>
+            <img src="screenshots/how-ai-learns-interaction-before-390.png" alt="How AI Learns interaction at 390px">
+            <figcaption>How AI Learns currently uses a training-loop interaction.</figcaption>
+          </figure>
+          <figure>
+            <img src="screenshots/diffusion-interaction-before-390.png" alt="Diffusion interaction at 390px">
+            <figcaption>Diffusion denoise interaction is clear, but lacks side-by-side comparison.</figcaption>
+          </figure>
+          <figure>
+            <img src="screenshots/multimodal-interaction-before-390.png" alt="Multimodal interaction at 390px">
+            <figcaption>Multimodal mixer is useful but should show more modes and output paths.</figcaption>
+          </figure>
+          <figure>
+            <img src="screenshots/perfect-storm-interaction-before-390.png" alt="Perfect Storm interaction at 390px">
+            <figcaption>Perfect Storm currently falls back to a generic feature-cloud interaction.</figcaption>
+          </figure>
+          <figure>
+            <img src="screenshots/perfect-storm-interaction-320.png" alt="Perfect Storm interaction at 320px">
+            <figcaption>320px spot check: readable, but concept mismatch remains.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="page-break">
+        <h2>Recommended Assets</h2>
+        <h3>Image 2</h3>
+        <p><strong>Recommended:</strong> The Perfect Storm textless ZenTron Origami convergence scene. Use the PNG only as atmosphere; keep labels and teaching copy in HTML.</p>
+        <p><strong>Not recommended yet:</strong> How AI Learns, Diffusion, and Multimodal should first receive coded SVG/HTML diagrams because exact labels and relationships matter.</p>
+        <h3>Coded SVG/CSS</h3>
+        <ul>
+          <li>How AI Learns: learning-modes matrix.</li>
+          <li>Diffusion: denoise-vs-append split diagram.</li>
+          <li>Multimodal: media input/representation/output map.</li>
+          <li>Perfect Storm: tap-lit convergence streams.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Verification</h2>
+        <ul>
+          <li><code>npm run typecheck</code>: passed.</li>
+          <li><code>npm run build</code>: passed with existing Vite large-chunk warning.</li>
+          <li><code>npm run build:pages</code>: passed with existing Vite large-chunk warning.</li>
+          <li><code>npm run audit:answers</code>: passed.</li>
+        </ul>
+        <h2>Known Issues</h2>
+        <ul>
+          <li>The existing Vite large-chunk warning remains.</li>
+          <li>The Perfect Storm interaction mismatch remains in the live app by design; this audit did not implement changes.</li>
+          <li>Long Journey-page screenshots needed clean headless Chrome capture after the in-app browser timed out.</li>
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>
+

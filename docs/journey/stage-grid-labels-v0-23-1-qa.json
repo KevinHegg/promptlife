@@ -1,0 +1,544 @@
+{
+  "expectedLabels": [
+    {
+      "number": "1",
+      "title": "Before Morning",
+      "subtitle": "Model shaped before use"
+    },
+    {
+      "number": "2",
+      "title": "Morning Commute",
+      "subtitle": "Text becomes numbers"
+    },
+    {
+      "number": "3",
+      "title": "Workday",
+      "subtitle": "Layers process context"
+    },
+    {
+      "number": "4",
+      "title": "Decision Room",
+      "subtitle": "One token is chosen"
+    },
+    {
+      "number": "5",
+      "title": "Day Repeats",
+      "subtitle": "Context grows + expires"
+    },
+    {
+      "number": "6",
+      "title": "Twilight",
+      "subtitle": "Wider AI landscape"
+    },
+    {
+      "number": "7",
+      "title": "Midnight Ledger",
+      "subtitle": "Costs and shadows"
+    },
+    {
+      "number": "8",
+      "title": "New Dawn",
+      "subtitle": "Better human use"
+    }
+  ],
+  "widths": {
+    "320": {
+      "initial": {
+        "viewportWidth": 320,
+        "tileCount": 8,
+        "gridColumnCount": 4,
+        "labels": [
+          {
+            "number": "1",
+            "title": "Before Morning",
+            "subtitle": "Model shaped before use",
+            "ariaLabel": "Jump to Before Morning. Model shaped before use",
+            "ariaCurrent": "step",
+            "buttonOverflowX": false,
+            "buttonOverflowY": false,
+            "titleOverflowX": false,
+            "subtitleOverflowX": false,
+            "rect": {
+              "x": 23.109375,
+              "y": 281.296875,
+              "width": 66.28125,
+              "height": 99.1875,
+              "right": 89.390625,
+              "bottom": 380.484375
+            }
+          },
+          {
+            "number": "2",
+            "title": "Morning Commute",
+            "subtitle": "Text becomes numbers",
+            "ariaLabel": "Jump to Morning Commute. Text becomes numbers",
+            "ariaCurrent": null,
+            "buttonOverflowX": false,
+            "buttonOverflowY": false,
+            "titleOverflowX": false,
+            "subtitleOverflowX": false,
+            "rect": {
+              "x": 92.265625,
+              "y": 281.296875,
+              "width": 66.296875,
+              "height": 99.1875,
+              "right": 158.5625,
+              "bottom": 380.484375
+            }
+          },
+          {
+            "number": "3",
+            "title": "Workday",
+            "subtitle": "Layers process context",
+            "ariaLabel": "Jump to Workday. Layers process context",
+            "ariaCurrent": null,
+            "buttonOverflowX": false,
+            "buttonOverflowY": false,
+            "titleOverflowX": false,
+            "subtitleOverflowX": false,
+            "rect": {
+              "x": 161.4375,
+              "y": 281.296875,
+              "width": 66.28125,
+              "height": 99.1875,
+              "right": 227.71875,
+              "bottom": 380.484375
+            }
+          },
+          {
+            "number": "4",
+            "title": "Decision Room",
+            "subtitle": "One token is chosen",
+            "ariaLabel": "Jump to Decision Room. One token is chosen",
+            "ariaCurrent": null,
+            "buttonOverflowX": false,
+            "buttonOverflowY": false,
+            "titleOverflowX": false,
+            "subtitleOverflowX": false,
+            "rect": {
+              "x": 230.59375,
+              "y": 281.296875,
+              "width": 66.296875,
+              "height": 99.1875,
+              "right": 296.890625,
+              "bottom": 380.484375
+            }
+          },
+          {
+            "number": "5",
+            "title": "Day Repeats",
+            "subtitle": "Context grows + expires",
+            "ariaLabel": "Jump to The Day Repeats. Context grows and expires",
+            "ariaCurrent": null,
+            "buttonOverflowX": false,
+            "buttonOverflowY": false,
+            "titleOverflowX": false,
+            "subtitleOverflowX": false,
+            "rect": {
+              "x": 23.109375,
+              "y": 383.359375,
+              "width": 66.28125,
+              "height": 99.1875,
+              "right": 89.390625,
+              "bottom": 482.546875
+            }
+          },
+          {
+            "number": "6",
+            "title": "Twilight",
+            "subtitle": "Wider AI landscape",
+            "ariaLabel": "Jump to Twilight: The Wider Landscape. Wider AI landscape",
+            "ariaCurrent": null,
+            "buttonOverflowX": false,
+            "buttonOverflowY": false,
+            "titleOverflowX": false,
+            "subtitleOverflowX": false,
+            "rect": {
+              "x": 92.265625,
+              "y": 383.359375,
+              "width": 66.296875,
+              "height": 99.1875,
+              "right": 158.5625,
+              "bottom": 482.546875
+            }
+          },
+          {
+            "number": "7",
+            "title": "Midnight Ledger",
+            "subtitle": "Costs and shadows",
+            "ariaLabel": "Jump to Midnight Ledger. Costs and shadows",
+            "ariaCurrent": null,
+            "buttonOverflowX": false,
+            "buttonOverflowY": false,
+            "titleOverflowX": false,
+            "subtitleOverflowX": false,
+            "rect": {
+              "x": 161.4375,
+              "y": 383.359375,
+              "width": 66.28125,
+              "height": 99.1875,
+              "right": 227.71875,
+              "bottom": 482.546875
+            }
+          },
+          {
+            "number": "8",
+            "title": "New Dawn",
+            "subtitle": "Better human use",
+            "ariaLabel": "Jump to New Dawn. Better human use",
+            "ariaCurrent": null,
+            "buttonOverflowX": false,
+            "buttonOverflowY": false,
+            "titleOverflowX": false,
+            "subtitleOverflowX": false,
+            "rect": {
+              "x": 230.59375,
+              "y": 383.359375,
+              "width": 66.296875,
+              "height": 99.1875,
+              "right": 296.890625,
+              "bottom": 482.546875
+            }
+          }
+        ],
+        "gridRect": {
+          "x": 15.390625,
+          "y": 273.578125,
+          "width": 289.21875,
+          "height": 216.6875,
+          "right": 304.609375,
+          "bottom": 490.265625
+        },
+        "documentOverflowX": false,
+        "activeLabel": "Jump to Before Morning. Model shaped before use"
+      },
+      "taps": [
+        {
+          "stageId": "before-morning",
+          "active": "Jump to Before Morning. Model shaped before use",
+          "heading": "Before Morning",
+          "sectionTopWithinShell": 141,
+          "sectionBottomWithinShell": 1649,
+          "sectionVisible": true,
+          "shellScrollTop": 1010
+        },
+        {
+          "stageId": "morning-commute",
+          "active": "Jump to Morning Commute. Text becomes numbers",
+          "heading": "Morning Commute",
+          "sectionTopWithinShell": 99,
+          "sectionBottomWithinShell": 1423,
+          "sectionVisible": true,
+          "shellScrollTop": 2576
+        },
+        {
+          "stageId": "workday",
+          "active": "Jump to Workday. Layers process context",
+          "heading": "Workday",
+          "sectionTopWithinShell": 43,
+          "sectionBottomWithinShell": 943,
+          "sectionVisible": true,
+          "shellScrollTop": 3972
+        },
+        {
+          "stageId": "decision-room",
+          "active": "Jump to Decision Room. One token is chosen",
+          "heading": "Decision Room",
+          "sectionTopWithinShell": 116,
+          "sectionBottomWithinShell": 909,
+          "sectionVisible": true,
+          "shellScrollTop": 4815
+        },
+        {
+          "stageId": "day-repeats",
+          "active": "Jump to The Day Repeats. Context grows and expires",
+          "heading": "The Day Repeats",
+          "sectionTopWithinShell": 16,
+          "sectionBottomWithinShell": 1126,
+          "sectionVisible": true,
+          "shellScrollTop": 5724
+        },
+        {
+          "stageId": "twilight-landscape",
+          "active": "Jump to Twilight: The Wider Landscape. Wider AI landscape",
+          "heading": "Twilight: The Wider Landscape",
+          "sectionTopWithinShell": 55,
+          "sectionBottomWithinShell": 1068,
+          "sectionVisible": true,
+          "shellScrollTop": 6811
+        },
+        {
+          "stageId": "midnight-ledger",
+          "active": "Jump to Midnight Ledger. Costs and shadows",
+          "heading": "Midnight Ledger",
+          "sectionTopWithinShell": 120,
+          "sectionBottomWithinShell": 1010,
+          "sectionVisible": true,
+          "shellScrollTop": 7775
+        },
+        {
+          "stageId": "new-dawn",
+          "active": "Jump to New Dawn. Better human use",
+          "heading": "New Dawn",
+          "sectionTopWithinShell": 149,
+          "sectionBottomWithinShell": 1343,
+          "sectionVisible": true,
+          "shellScrollTop": 8652
+        }
+      ],
+      "navReturn": {
+        "shellScrollTop": 0,
+        "titleTop": 54
+      }
+    },
+    "390": {
+      "initial": {
+        "viewportWidth": 390,
+        "tileCount": 8,
+        "gridColumnCount": 4,
+        "labels": [
+          {
+            "number": "1",
+            "title": "Before Morning",
+            "subtitle": "Model shaped before use",
+            "ariaLabel": "Jump to Before Morning. Model shaped before use",
+            "ariaCurrent": "step",
+            "buttonOverflowX": false,
+            "buttonOverflowY": false,
+            "titleOverflowX": false,
+            "subtitleOverflowX": false,
+            "rect": {
+              "x": 25.1875,
+              "y": 226.21875,
+              "width": 81.546875,
+              "height": 90.5,
+              "right": 106.734375,
+              "bottom": 316.71875
+            }
+          },
+          {
+            "number": "2",
+            "title": "Morning Commute",
+            "subtitle": "Text becomes numbers",
+            "ariaLabel": "Jump to Morning Commute. Text becomes numbers",
+            "ariaCurrent": null,
+            "buttonOverflowX": false,
+            "buttonOverflowY": false,
+            "titleOverflowX": false,
+            "subtitleOverflowX": false,
+            "rect": {
+              "x": 111.203125,
+              "y": 226.21875,
+              "width": 81.5625,
+              "height": 90.5,
+              "right": 192.765625,
+              "bottom": 316.71875
+            }
+          },
+          {
+            "number": "3",
+            "title": "Workday",
+            "subtitle": "Layers process context",
+            "ariaLabel": "Jump to Workday. Layers process context",
+            "ariaCurrent": null,
+            "buttonOverflowX": false,
+            "buttonOverflowY": false,
+            "titleOverflowX": false,
+            "subtitleOverflowX": false,
+            "rect": {
+              "x": 197.234375,
+              "y": 226.21875,
+              "width": 81.546875,
+              "height": 90.5,
+              "right": 278.78125,
+              "bottom": 316.71875
+            }
+          },
+          {
+            "number": "4",
+            "title": "Decision Room",
+            "subtitle": "One token is chosen",
+            "ariaLabel": "Jump to Decision Room. One token is chosen",
+            "ariaCurrent": null,
+            "buttonOverflowX": false,
+            "buttonOverflowY": false,
+            "titleOverflowX": false,
+            "subtitleOverflowX": false,
+            "rect": {
+              "x": 283.25,
+              "y": 226.21875,
+              "width": 81.5625,
+              "height": 90.5,
+              "right": 364.8125,
+              "bottom": 316.71875
+            }
+          },
+          {
+            "number": "5",
+            "title": "Day Repeats",
+            "subtitle": "Context grows + expires",
+            "ariaLabel": "Jump to The Day Repeats. Context grows and expires",
+            "ariaCurrent": null,
+            "buttonOverflowX": false,
+            "buttonOverflowY": false,
+            "titleOverflowX": false,
+            "subtitleOverflowX": false,
+            "rect": {
+              "x": 25.1875,
+              "y": 321.1875,
+              "width": 81.546875,
+              "height": 90.5,
+              "right": 106.734375,
+              "bottom": 411.6875
+            }
+          },
+          {
+            "number": "6",
+            "title": "Twilight",
+            "subtitle": "Wider AI landscape",
+            "ariaLabel": "Jump to Twilight: The Wider Landscape. Wider AI landscape",
+            "ariaCurrent": null,
+            "buttonOverflowX": false,
+            "buttonOverflowY": false,
+            "titleOverflowX": false,
+            "subtitleOverflowX": false,
+            "rect": {
+              "x": 111.203125,
+              "y": 321.1875,
+              "width": 81.5625,
+              "height": 90.5,
+              "right": 192.765625,
+              "bottom": 411.6875
+            }
+          },
+          {
+            "number": "7",
+            "title": "Midnight Ledger",
+            "subtitle": "Costs and shadows",
+            "ariaLabel": "Jump to Midnight Ledger. Costs and shadows",
+            "ariaCurrent": null,
+            "buttonOverflowX": false,
+            "buttonOverflowY": false,
+            "titleOverflowX": false,
+            "subtitleOverflowX": false,
+            "rect": {
+              "x": 197.234375,
+              "y": 321.1875,
+              "width": 81.546875,
+              "height": 90.5,
+              "right": 278.78125,
+              "bottom": 411.6875
+            }
+          },
+          {
+            "number": "8",
+            "title": "New Dawn",
+            "subtitle": "Better human use",
+            "ariaLabel": "Jump to New Dawn. Better human use",
+            "ariaCurrent": null,
+            "buttonOverflowX": false,
+            "buttonOverflowY": false,
+            "titleOverflowX": false,
+            "subtitleOverflowX": false,
+            "rect": {
+              "x": 283.25,
+              "y": 321.1875,
+              "width": 81.5625,
+              "height": 90.5,
+              "right": 364.8125,
+              "bottom": 411.6875
+            }
+          }
+        ],
+        "gridRect": {
+          "x": 15.390625,
+          "y": 216.421875,
+          "width": 359.21875,
+          "height": 205.0625,
+          "right": 374.609375,
+          "bottom": 421.484375
+        },
+        "documentOverflowX": false,
+        "activeLabel": "Jump to Before Morning. Model shaped before use"
+      },
+      "taps": [
+        {
+          "stageId": "before-morning",
+          "active": "Jump to Before Morning. Model shaped before use",
+          "heading": "Before Morning",
+          "sectionTopWithinShell": 95,
+          "sectionBottomWithinShell": 1532,
+          "sectionVisible": true,
+          "shellScrollTop": 869
+        },
+        {
+          "stageId": "morning-commute",
+          "active": "Jump to Morning Commute. Text becomes numbers",
+          "heading": "Morning Commute",
+          "sectionTopWithinShell": 80,
+          "sectionBottomWithinShell": 1307,
+          "sectionVisible": true,
+          "shellScrollTop": 2337
+        },
+        {
+          "stageId": "workday",
+          "active": "Jump to Workday. Layers process context",
+          "heading": "Workday",
+          "sectionTopWithinShell": 22,
+          "sectionBottomWithinShell": 838,
+          "sectionVisible": true,
+          "shellScrollTop": 3638
+        },
+        {
+          "stageId": "decision-room",
+          "active": "Jump to Decision Room. One token is chosen",
+          "heading": "Decision Room",
+          "sectionTopWithinShell": 66,
+          "sectionBottomWithinShell": 733,
+          "sectionVisible": true,
+          "shellScrollTop": 4426
+        },
+        {
+          "stageId": "day-repeats",
+          "active": "Jump to The Day Repeats. Context grows and expires",
+          "heading": "The Day Repeats",
+          "sectionTopWithinShell": 126,
+          "sectionBottomWithinShell": 1097,
+          "sectionVisible": true,
+          "shellScrollTop": 5049
+        },
+        {
+          "stageId": "twilight-landscape",
+          "active": "Jump to Twilight: The Wider Landscape. Wider AI landscape",
+          "heading": "Twilight: The Wider Landscape",
+          "sectionTopWithinShell": 22,
+          "sectionBottomWithinShell": 920,
+          "sectionVisible": true,
+          "shellScrollTop": 6140
+        },
+        {
+          "stageId": "midnight-ledger",
+          "active": "Jump to Midnight Ledger. Costs and shadows",
+          "heading": "Midnight Ledger",
+          "sectionTopWithinShell": 66,
+          "sectionBottomWithinShell": 841,
+          "sectionVisible": true,
+          "shellScrollTop": 7010
+        },
+        {
+          "stageId": "new-dawn",
+          "active": "Jump to New Dawn. Better human use",
+          "heading": "New Dawn",
+          "sectionTopWithinShell": 117,
+          "sectionBottomWithinShell": 1155,
+          "sectionVisible": true,
+          "shellScrollTop": 7750
+        }
+      ],
+      "navReturn": {
+        "shellScrollTop": 0,
+        "titleTop": 54
+      }
+    }
+  }
+}

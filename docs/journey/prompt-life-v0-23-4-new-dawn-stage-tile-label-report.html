@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Prompt Life v0.23.4 New Dawn Stage Tile Label</title>
+    <style>
+      :root {
+        color: #111a4f;
+        background: #f7fbff;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.45;
+      }
+
+      body {
+        margin: 0;
+        padding: 32px;
+      }
+
+      main {
+        max-width: 880px;
+        margin: 0 auto;
+      }
+
+      h1,
+      h2 {
+        color: #07146d;
+        line-height: 1.1;
+      }
+
+      h1 {
+        font-size: 32px;
+        margin: 0 0 8px;
+      }
+
+      h2 {
+        font-size: 20px;
+        margin: 28px 0 10px;
+      }
+
+      p {
+        margin: 0 0 12px;
+      }
+
+      ul {
+        margin: 0;
+        padding-left: 20px;
+      }
+
+      li {
+        margin: 5px 0;
+      }
+
+      code {
+        background: #eaf0ff;
+        border-radius: 5px;
+        color: #07146d;
+        padding: 2px 5px;
+      }
+
+      .meta {
+        color: #536079;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        margin-bottom: 24px;
+        text-transform: uppercase;
+      }
+
+      .panel {
+        background: #ffffff;
+        border: 1px solid #ccd7f2;
+        border-radius: 12px;
+        box-shadow: 0 18px 35px rgba(21, 38, 94, 0.08);
+        margin: 16px 0;
+        padding: 18px;
+      }
+
+      .before-after {
+        display: grid;
+        gap: 12px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .label-card {
+        border: 1px solid #d8e1f6;
+        border-radius: 10px;
+        padding: 14px;
+      }
+
+      .label-card strong {
+        display: block;
+        color: #576078;
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        margin-bottom: 8px;
+        text-transform: uppercase;
+      }
+
+      .label-card span {
+        color: #07146d;
+        font-size: 20px;
+        font-weight: 800;
+      }
+
+      .screenshots {
+        display: grid;
+        gap: 18px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      figure {
+        margin: 0;
+      }
+
+      figcaption {
+        color: #536079;
+        font-size: 13px;
+        margin-top: 8px;
+      }
+
+      img {
+        border: 1px solid #ccd7f2;
+        border-radius: 16px;
+        display: block;
+        height: auto;
+        max-width: 100%;
+      }
+
+      @media print {
+        body {
+          background: #ffffff;
+          padding: 24px;
+        }
+
+        .panel {
+          break-inside: avoid;
+          box-shadow: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p class="meta">Prompt Life v0.23.4 · 2026-06-07</p>
+      <h1>New Dawn Stage Tile Label</h1>
+      <p>Updated the Journey stage-grid subtitle for stage 8 so the mobile tile reads <code>Human centered AI</code>.</p>
+
+      <section class="panel">
+        <h2>Change</h2>
+        <div class="before-after">
+          <div class="label-card">
+            <strong>Before</strong>
+            <span>Better human use</span>
+          </div>
+          <div class="label-card">
+            <strong>After</strong>
+            <span>Human centered AI</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>What Changed</h2>
+        <ul>
+          <li>Changed the New Dawn grid subtitle to <code>Human centered AI</code>.</li>
+          <li>Aligned the fallback nav hint and aria label with the new subtitle.</li>
+          <li>Bumped the visible app version to <code>v0.23.4</code>.</li>
+        </ul>
+      </section>
+
+      <section class="panel">
+        <h2>Verification</h2>
+        <ul>
+          <li><code>npm run typecheck</code>: passed.</li>
+          <li><code>npm run build</code>: passed with the existing large-chunk warning.</li>
+          <li><code>npm run build:pages</code>: passed with the existing large-chunk warning.</li>
+          <li><code>npm run audit:answers</code>: passed.</li>
+          <li>320px and 390px browser QA: label visible, no horizontal overflow, no subtitle overflow.</li>
+        </ul>
+      </section>
+
+      <section class="panel">
+        <h2>Screenshots</h2>
+        <div class="screenshots">
+          <figure>
+            <img src="screenshots/v0-23-4-new-dawn-label-390.jpg" alt="390px Journey stage grid showing the New Dawn tile with the subtitle Human centered AI.">
+            <figcaption>390px Journey stage grid.</figcaption>
+          </figure>
+          <figure>
+            <img src="screenshots/v0-23-4-new-dawn-label-320.jpg" alt="320px Journey stage grid showing the New Dawn tile with the subtitle Human centered AI.">
+            <figcaption>320px Journey stage grid.</figcaption>
+          </figure>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

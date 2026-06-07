@@ -1,0 +1,102 @@
+{
+  "screenshots": [
+    "/Users/kevinhegg/Desktop/promptlife/docs/stage-audits/v0-24-midnight-ledger/screenshots/v0-24-1-midnight-ledger-overview-390.png",
+    "/Users/kevinhegg/Desktop/promptlife/docs/stage-audits/v0-24-midnight-ledger/screenshots/v0-24-1-collective-visual-390.png",
+    "/Users/kevinhegg/Desktop/promptlife/docs/stage-audits/v0-24-midnight-ledger/screenshots/v0-24-1-collective-interaction-390.png",
+    "/Users/kevinhegg/Desktop/promptlife/docs/stage-audits/v0-24-midnight-ledger/screenshots/v0-24-1-costs-ledger-visual-390.png",
+    "/Users/kevinhegg/Desktop/promptlife/docs/stage-audits/v0-24-midnight-ledger/screenshots/v0-24-1-costs-ledger-visual-320.png",
+    "/Users/kevinhegg/Desktop/promptlife/docs/stage-audits/v0-24-midnight-ledger/screenshots/v0-24-1-costs-ledger-interaction-390.png",
+    "/Users/kevinhegg/Desktop/promptlife/docs/stage-audits/v0-24-midnight-ledger/screenshots/v0-24-1-risk-visual-390.png",
+    "/Users/kevinhegg/Desktop/promptlife/docs/stage-audits/v0-24-midnight-ledger/screenshots/v0-24-1-risk-sort-interaction-390.png",
+    "/Users/kevinhegg/Desktop/promptlife/docs/stage-audits/v0-24-midnight-ledger/screenshots/v0-24-1-risk-checkpoint-feedback-390.png"
+  ],
+  "qa": {
+    "midnightOverview390": {
+      "h1": "Today in Prompt Life",
+      "mode": "",
+      "activeNav": "Journey",
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "horizontalOverflow": false,
+      "navBottom": 835,
+      "visualVisible": false,
+      "visualWidth": null
+    },
+    "collectiveVisual390": {
+      "h1": "Collective Intelligence, Extracted",
+      "mode": "Previewing this card. Progress will not change.",
+      "activeNav": "Journey",
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "horizontalOverflow": false,
+      "navBottom": 835,
+      "visualVisible": true,
+      "visualWidth": 325
+    },
+    "collectiveInteraction": "Insight strengthened. Human-created traces can shape models, but rights, attribution, consent, and compensation remain human and institutional questions.",
+    "costsVisual390": {
+      "h1": "Costs We Must Count",
+      "mode": "Previewing this card. Progress will not change.",
+      "activeNav": "Journey",
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "horizontalOverflow": false,
+      "navBottom": 835,
+      "visualVisible": true,
+      "visualWidth": 325
+    },
+    "costsVisual320": {
+      "h1": "Costs We Must Count",
+      "mode": "Previewing this card. Progress will not change.",
+      "activeNav": "Journey",
+      "scrollWidth": 320,
+      "clientWidth": 320,
+      "horizontalOverflow": false,
+      "navBottom": 835,
+      "visualVisible": true,
+      "visualWidth": 255
+    },
+    "costsInteraction": "Governance: Institutions decide procurement, review, accountability, and acceptable use.",
+    "riskVisual390": {
+      "h1": "Risk vs Myth",
+      "mode": "Previewing this card. Progress will not change.",
+      "activeNav": "Journey",
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "horizontalOverflow": false,
+      "navBottom": 835,
+      "visualVisible": true,
+      "visualWidth": 325
+    },
+    "riskInteraction": "Insight strengthened. Real AI risks usually come from data, context, tools, institutions, and overreliance, not from model consciousness or magic.",
+    "riskCheckpoint": "Insight unlocked. Privacy exposure is a practical risk caused by data, context, tools, and institutions.",
+    "riskVisual320": {
+      "h1": "Risk vs Myth",
+      "mode": "Previewing this card. Progress will not change.",
+      "activeNav": "Journey",
+      "scrollWidth": 320,
+      "clientWidth": 320,
+      "horizontalOverflow": false,
+      "navBottom": 835,
+      "visualVisible": true,
+      "visualWidth": 255
+    },
+    "homeAssets": [
+      {
+        "src": "http://127.0.0.1:5173/assets/generated/home/promptlife-mark.png",
+        "ok": true,
+        "width": 1254,
+        "height": 1254,
+        "alt": "Prompt Life mark: a prompt signal moving through a model cloud toward one response token"
+      },
+      {
+        "src": "http://127.0.0.1:5173/assets/generated/home/home-hero-prompt-cloud.png",
+        "ok": true,
+        "width": 1448,
+        "height": 1086,
+        "alt": "A prompt traveling through a glowing model cloud and emerging as one response token"
+      }
+    ],
+    "playGlossaryDojo": true
+  }
+}
