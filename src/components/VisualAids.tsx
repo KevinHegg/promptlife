@@ -49,14 +49,14 @@ function generatedAid(assetId, fields) {
 }
 
 export const visualAidCatalog = [
-  generatedAid('before-morning-llm-cloud', { id: 'before-morning-llm-cloud', title: 'Prompt to Prediction', subtitle: 'Score, choose, append, repeat', caption: 'A textless model-cloud scene is paired with HTML callouts for context, learned weights, one generated token, and append-repeat.' }),
+  generatedAid('before-morning-llm-cloud', { id: 'before-morning-llm-cloud', title: 'Prompt to Prediction', subtitle: 'Score, choose, append, repeat', caption: 'Current context enters the model, learned weights shape next-token probabilities, one token is generated, and the response grows token by token.' }),
   { id: 'ai-family-tree', title: 'AI Family Tree', subtitle: 'Where LLMs fit', caption: 'A clean taxonomy tree shows AI as the broad field, machine learning as one branch inside AI, and LLMs as one branch inside generative AI.', pattern: 'aiTopology', objective: 'Give learners a simple topology of AI categories before the history card introduces rules-first and learned-pattern traditions.', callouts: [{ heading: 'AI', body: 'AI is the broad field.' }, { heading: 'Machine learning', body: 'Machine learning systems learn patterns from data.' }, { heading: 'Deep learning', body: 'Deep learning is a neural-network branch of machine learning.' }, { heading: 'Generative AI', body: 'Generative AI creates new media, such as text, images, audio, code, or video.' }, { heading: 'LLMs', body: 'LLMs generate language/code; diffusion and multimodal systems are neighboring generative AI branches.' }], keyTakeaway: 'An LLM is one kind of generative AI inside the broader AI family.', accessibleDescription: 'A taxonomy tree starts at AI. One branch is Rule-based AI. Another branch is Machine learning, which splits into Classical ML and Deep learning. Deep learning splits into Other deep learning and Generative AI. Generative AI branches into LLMs, Diffusion, and Multimodal systems.', printNote: 'Coded SVG only; no generated PNG asset. Keep the taxonomy labels in SVG and the definitions in HTML callouts below the diagram.' },
   { id: 'traditions', title: 'Rules and Learned Patterns', subtitle: 'Two traditions, one modern toolkit', caption: 'Rules-first AI uses symbols and if-then logic; deep learning learns from examples by predicting, measuring loss, and updating weights.', pattern: 'traditions', objective: 'Contrast explicit rules with learned patterns without turning the diagram into a poster.', callouts: [{ heading: 'Rules', body: 'Symbolic systems use explicit if/then logic and symbols.' }, { heading: 'Examples', body: 'Loss is the training signal: it measures prediction error so weights can be adjusted.' }, { heading: 'Bridge', body: 'Modern systems often combine learned models with rules, retrieval, tools, filters, and policies.' }], keyTakeaway: 'Modern AI often blends learned patterns with hand-built rules and tools.', accessibleDescription: 'Two side-by-side panels compare rules, symbols, and if-then logic with examples, loss as a prediction-error signal, and weights, joined by a bridge labeled combine both.', printNote: 'Short panel labels only; explanatory comparison stays in HTML callouts.' },
   { id: 'training-loop', title: 'Training Loop', subtitle: 'Durable change happens at weight update', caption: 'Predict, compare, loss, update weights, repeat. Training changes weights.', pattern: 'training', objective: 'Show the sequence of training and make the durable weight-update step visually distinct.', callouts: [{ heading: 'Predict', body: 'The model predicts a target.' }, { heading: 'Compare', body: 'The prediction is compared with the target.' }, { heading: 'Loss', body: 'Loss measures error.' }, { heading: 'Update weights', body: 'Weight updates are the durable-change step.' }, { heading: 'Repeat', body: 'The loop repeats many times.' }], keyTakeaway: 'Training changes weights; ordinary inference does not.', accessibleDescription: 'A five-step loop moves from Predict to Compare to Loss to Update weights to Repeat, with Update weights highlighted.', printNote: 'Five nodes stay aligned at 320px and in exported review PDFs.' },
-  generatedAid('before-morning-pretraining-landscape', { id: 'before-morning-pretraining-landscape', title: 'Broad Pretraining', subtitle: 'Scale, not perfect recall', caption: 'A textless folded landscape is paired with HTML callouts for many examples, repeated updates, broad patterns, and the perfect-recall limit.' }),
+  generatedAid('before-morning-pretraining-landscape', { id: 'before-morning-pretraining-landscape', title: 'Broad Pretraining', subtitle: 'Scale, not perfect recall', caption: 'Many examples flow through the training loop. Repeated updates shape weights into broad patterns the model can use later. This does not make the model a perfect memory of its sources.' }),
   { id: 'overfitting-generalization', title: 'Overfitting vs Generalization', caption: 'Memorizing training examples is not the same as learning patterns that transfer to held-out examples.', pattern: 'overfitting', legend: ['Training examples are old dots the model fit during training.', 'Held-out examples are new dots used to test transfer.', 'The overfit curve traces old dots too tightly.', 'The generalizing curve is smoother and reaches new examples.'] },
-  generatedAid('before-morning-finetuning-path', { id: 'before-morning-finetuning-path', title: 'Fine-Tuning Path', subtitle: 'Durable adaptation after pretraining', caption: 'A textless targeted-path scene is paired with HTML callouts for pretrained base, targeted data, future responses, and durable adaptation.' }),
-  generatedAid('before-morning-alignment-garden', { id: 'before-morning-alignment-garden', title: 'Alignment Landscape', subtitle: 'Shaping behavior, not conscience', caption: 'A textless alignment garden is paired with HTML callouts for preferred behavior, guardrails, feedback and policies, and the no-conscience limit.' }),
+  generatedAid('before-morning-finetuning-path', { id: 'before-morning-finetuning-path', title: 'Fine-Tuning Path', subtitle: 'Durable adaptation after pretraining', caption: 'Fine-tuning starts from a pretrained base, adds targeted examples or preference data, and shapes future responses more durably than one prompt.' }),
+  generatedAid('before-morning-alignment-garden', { id: 'before-morning-alignment-garden', title: 'Alignment Landscape', subtitle: 'Shaping behavior, not conscience', caption: 'Alignment encourages preferred behavior, uses guardrails to reduce risky paths, and relies on feedback and policies without giving the model a conscience.' }),
   { id: 'inference-pass', title: 'Forward Pass', subtitle: 'Fixed weights, temporary activations', caption: 'Inference uses fixed weights to create temporary activations, hidden states, and next-token scores.', pattern: 'inference', objective: 'Make temporary inference state central while keeping durable weights visibly fixed.', callouts: [{ heading: 'Context', body: 'The current prompt, retrieved text, conversation, and response-so-far enter the run.' }, { heading: 'Fixed weights', body: 'The learned weights are used but not normally updated.' }, { heading: 'Temporary activations', body: 'The run creates temporary internal states that lead to next-token scores.' }, { heading: 'Next token', body: 'Decoding chooses one response token, then the loop can repeat.' }], keyTakeaway: 'Inference is a forward pass, not durable training.', accessibleDescription: 'The diagram sends current context through fixed weights into a central temporary activation tray, then toward next-token scores and one generated token.', printNote: 'Keep temporary activations as the largest central label; no generated PNG needed.' },
   { id: 'prompt-response', title: 'Prompt vs Response', subtitle: 'Given context versus generated tokens', caption: 'A complete user prompt is given; response-so-far and the next token are generated pieces of context.', pattern: 'promptResponse', objective: 'Separate the complete user prompt from response-so-far, next token, and the current context for the next run.', callouts: [{ heading: 'User prompt', body: `The complete request is: ${canonicalPromptResponse.userPrompt}` }, { heading: 'Response so far', body: `The model has already generated: ${canonicalPromptResponse.responseSoFar}.` }, { heading: 'Next token', body: `${canonicalPromptResponse.chosenNextToken} is appended to the response.` }, { heading: 'Current context', body: 'The next run sees prompt plus response-so-far plus the appended token.' }], keyTakeaway: 'Prompt is given; response tokens are generated and appended.', accessibleDescription: 'A compact three-row visual shows User prompt, Response so far, Next token, and then a current-context tray below them.', printNote: 'Coded SVG/HTML only; do not bake long text into the visual.' },
   { id: 'tokenization', title: 'Text to Tokens', subtitle: 'Uneven chunks, punctuation included', caption: 'Text is split into model-readable chunks before token IDs and embedding lookup.', pattern: 'token', objective: 'Show that tokens can be words, word pieces, punctuation, or other chunks.', callouts: [{ heading: 'Simplified split', body: 'A | jealous | dog | chased | a | startled | cat | across | the | kitchen | floor | .' }, { heading: 'Uneven chunks', body: 'Some tokenizers may split words or punctuation, such as start | led or floor | .' }, { heading: 'Teaching note', body: 'This app uses a simplified split; real tokenizer output can differ.' }], keyTakeaway: 'Tokens are model-readable chunks, not always human words.', accessibleDescription: 'The visual starts with a sentence, then shows simplified token chips and uneven examples for startled and floor punctuation.', printNote: 'Keep token chips wrapping; avoid dense tokenizer internals.' },
@@ -64,13 +64,13 @@ export const visualAidCatalog = [
   { id: 'embeddings', title: 'Embedding Lookup', subtitle: 'Durable table, temporary vector', caption: 'A token ID retrieves a learned starting vector from a durable embedding table.', pattern: 'vector', objective: 'Distinguish the durable learned table from the temporary vector retrieved for the current run.', callouts: [{ heading: 'Durable table', body: 'The embedding table was learned during training.' }, { heading: 'Temporary retrieval', body: 'Inference retrieves one row for the current context.' }, { heading: 'Starting vector', body: 'The retrieved vector starts the token in numerical space.' }, { heading: 'Hidden state later', body: 'Transformer layers later reshape it into context-shaped hidden states.' }], keyTakeaway: 'Embedding means learned starting vector, not dictionary definition.', accessibleDescription: 'ID 1576 points into a durable table, retrieves one temporary vector, and then a later hidden-state note sits downstream.', printNote: 'Best future Image 2 candidate, but this pass keeps a coded visual.' },
   { id: 'vectors', title: 'Feature Vector', subtitle: 'Teaching labels versus distributed features', caption: 'A vector is a list of numbers; real features are distributed rather than neat English sliders.', pattern: 'bars', objective: 'Let learners compare a simplified slider view with unlabeled distributed numerical features.', callouts: [{ heading: 'Teaching sliders', body: 'Labels such as animal-ish or tone are simplified for learning.' }, { heading: 'Distributed features', body: 'Real model features are spread across many dimensions.' }, { heading: 'Why vectors', body: 'Vectors let the model compute with fuzzy numerical relationships.' }], keyTakeaway: 'Vectors are useful because many fuzzy features can vary at once.', accessibleDescription: 'The visual contrasts labeled teaching sliders with unlabeled distributed bars and dots.', printNote: 'Do not imply each dimension has a clean human label.' },
   { id: 'tensors', title: 'Tensor Block', subtitle: 'Token axis plus feature axis', caption: 'Tensors organize many token vectors so model layers can process them.', pattern: 'tensor', objective: 'Show token positions, feature dimensions, and an optional batch note without a heavy 3D library.', callouts: [{ heading: 'Token axis', body: 'Each row can represent one visible token position.' }, { heading: 'Feature axis', body: 'Each column can represent one vector dimension.' }, { heading: 'Batch note', body: 'Systems may process shapes like batch x tokens x features.' }], keyTakeaway: 'Tensors are shaped numerical blocks, not mystery objects.', accessibleDescription: 'A lightweight axis diagram shows token labels down the side, feature labels across the top, and a translucent batch sheet behind the grid.', printNote: 'Readable at 320px; no new dependency or generated PNG.' },
-  { id: 'attention', title: 'Attention Weave', caption: 'Attention is weighted relevance between token positions.', pattern: 'attention' },
-  { id: 'mlp', title: 'MLP Reshape', caption: 'The MLP reshapes each token position feature vector.', pattern: 'mlp' },
-  { id: 'layers', title: 'Layer Stack', caption: 'Repeated blocks refine hidden states while carrying useful signal forward.', pattern: 'layers' },
-  { id: 'hidden-states', title: 'Temporary Hidden State', caption: 'Hidden states are context-shaped vectors created during a forward pass.', pattern: 'hidden' },
-  { id: 'logits', title: 'Raw Scores', caption: 'Logits are raw next-token scores before probabilities.', pattern: 'logits' },
-  { id: 'softmax', title: 'Softmax Funnel', caption: 'Softmax converts raw scores into probabilities that sum to one.', pattern: 'softmax' },
-  { id: 'sampling', title: 'Sample One Token', caption: 'Sampling chooses one token from the probability cloud.', pattern: 'sampling' },
+  { id: 'attention', title: 'Attention Weave', subtitle: 'Relevance, not awareness', caption: 'Attention assigns temporary relevance weights between token positions in the current context.', pattern: 'attention', objective: 'Use a concrete sentence to show that attention weights token relevance without implying awareness.', callouts: [{ heading: 'Current context', body: 'The visible tokens include dog, cat, because, it, and hissed.' }, { heading: 'Strong relation', body: 'In this sentence, it is most relevant to cat.' }, { heading: 'Weaker relation', body: 'dog is nearby and possible in other sentences, but it hissed points to cat here.' }, { heading: 'Limit', body: 'Attention computes relevance weights. It is not human awareness.' }], keyTakeaway: 'Attention is relevance between token positions, not consciousness.', accessibleDescription: 'The diagram shows token nodes dog, cat, because, it, and hissed. A strong arc connects it to cat, and a weaker arc connects it to dog, with a label saying relevance, not awareness.', printNote: 'Keep this coded SVG; token labels and exact relationships matter too much for a generated PNG.' },
+  { id: 'mlp', title: 'MLP Feature Workshop', subtitle: 'Same token, reshaped features', caption: 'After attention mixes across tokens, the MLP reshapes features within each token position.', pattern: 'mlp', objective: 'Show the attention-versus-MLP distinction: attention mixes token positions; MLP reshapes each token vector independently.', callouts: [{ heading: 'Attention first', body: 'Token positions can exchange current-context information.' }, { heading: 'Same position', body: 'The example token cat stays in the same position.' }, { heading: 'MLP reshape', body: 'Feature bars change for that token position.' }, { heading: 'Temporary values', body: 'The MLP has durable weights, but the feature values during inference are temporary activations.' }], keyTakeaway: 'Attention mixes across positions; the MLP reshapes features within a position.', accessibleDescription: 'The diagram shows an attention step where token positions exchange context, then one cat token moves into an MLP panel where its feature bars change from before to after.', printNote: 'Coded SVG only; no generated PNG or heavy 3D library.' },
+  { id: 'layers', title: 'Transformer Stack', subtitle: 'Repeated attention plus MLP', caption: 'Layers repeat attention and MLP transformations to refine temporary hidden states.', pattern: 'layers', objective: 'Show repeated transformer blocks without implying human thought steps.', callouts: [{ heading: 'Input states', body: 'Current-context hidden states enter the stack.' }, { heading: 'Repeated block', body: 'Each layer applies attention and an MLP, with residual paths and normalization helping signal flow.' }, { heading: 'Output states', body: 'Refined hidden states continue toward next-token scores.' }, { heading: 'Limit', body: 'Layers are repeated numerical transformations, not conscious reasoning steps.' }], keyTakeaway: 'Layers refine hidden states; they do not store permanent memory.', accessibleDescription: 'A vertical stack shows input hidden states moving through Layer 1, Layer 2, and Layer 3, each labeled attention plus MLP, then into output hidden states.', printNote: 'Light coded stack/inspector approach; no heavy 3D dependency.' },
+  { id: 'hidden-states', title: 'Hidden State Flow', subtitle: 'Temporary during this forward pass', caption: 'A token starts with an embedding and becomes context-shaped hidden states as it moves through layers.', pattern: 'hidden', objective: 'Contrast embedding, hidden state, weight, memory, and visible text without making hidden states mysterious.', callouts: [{ heading: 'Embedding', body: 'A learned starting vector is retrieved for a token ID.' }, { heading: 'Hidden states', body: 'Layers reshape that vector into temporary context-shaped states.' }, { heading: 'Scores later', body: 'Final hidden states help produce next-token scores.' }, { heading: 'Not memory', body: 'A hidden state is not visible text, permanent memory, or a stored fact.' }], keyTakeaway: 'Hidden states are temporary internal vectors shaped by current context.', accessibleDescription: 'A flow moves from Token ID to Embedding, then Layer 1 hidden state, Layer 2 hidden state, Final hidden state, and next-token scores. A side note contrasts durable weights with temporary hidden states and says memory is not what this is.', printNote: 'Keep this as a coded contrast diagram because labels are essential.' },
+  { id: 'logits', title: 'Raw Scoreboard', subtitle: 'Before probabilities', caption: 'The final hidden state feeds candidate next-token scores. These logits rank candidates, but they are raw scores, not probabilities or truth.', pattern: 'logits', objective: 'Show final hidden state becoming raw vocabulary scores before softmax.', callouts: [{ heading: 'Hidden state arrives', body: 'The final context-shaped vector reaches the output scoring step.' }, { heading: 'Candidates get scores', body: 'Possible next tokens such as floor, room, counter, and quantum receive raw logits.' }, { heading: 'Scores rank candidates', body: 'Higher score means stronger local candidate, not guaranteed truth.' }, { heading: 'Softmax comes next', body: 'Softmax converts raw scores into probabilities.' }], keyTakeaway: 'Logits are raw next-token scores, not probabilities and not truth.', accessibleDescription: 'The diagram starts with a final hidden state flowing into an output score panel. Candidate tokens floor, room, counter, and quantum have raw score bars from high to very low. A label says raw scores, not probabilities.', printNote: 'Coded SVG only; exact candidate labels and raw-score bars matter.' },
+  { id: 'softmax', title: 'Score to Probability', subtitle: 'Normalize before choosing', caption: 'Softmax converts raw logits into probabilities that sum to 100%. High probability means likely under the model, not guaranteed true.', pattern: 'softmax', objective: 'Show raw-score values becoming rounded probabilities that sum to one.', callouts: [{ heading: 'Logits go in', body: 'Raw scores such as 8.2, 5.1, 2.0, and -1.0 enter softmax.' }, { heading: 'Softmax converts', body: 'The function turns score differences into a probability distribution.' }, { heading: 'Probabilities come out', body: 'The rounded teaching values sum to 100%.' }, { heading: 'Not truth', body: 'Probability is about model likelihood, not evidence or correctness.' }], keyTakeaway: 'Softmax turns raw scores into probabilities; it does not verify truth.', accessibleDescription: 'The diagram shows raw logits for floor, room, counter, and quantum on the left, a softmax arrow in the middle, and probabilities of 86 percent, 12 percent, 2 percent, and about zero percent on the right with a sum equals 100 percent note.', printNote: 'Coded SVG only; values are rounded teaching numbers and should remain visible at 320px.' },
+  { id: 'sampling', title: 'Weighted Token Choice', subtitle: 'One token chosen', caption: 'Sampling chooses one next response token from probabilities. Probability is not truth: a low-probability token can still be possible, and a likely token can still be unsupported.', pattern: 'sampling', objective: 'Show probability weights and the single selected next token before autoregression repeats.', callouts: [{ heading: 'Probability candidates', body: 'floor is strongest, room is plausible, counter is weak, and quantum is barely likely in this context.' }, { heading: 'One token chosen', body: 'The decoding step chooses one next response token.' }, { heading: 'Append next', body: 'The chosen token is appended before the model runs again.' }, { heading: 'Not truth', body: 'A likely token can still be unsupported or wrong in a wider factual claim.' }], keyTakeaway: 'Sampling chooses one token from probabilities; probability is not truth.', accessibleDescription: 'The diagram shows weighted candidates floor at 86 percent, room at 12 percent, counter at 2 percent, and quantum at about zero percent. A highlighted selected-token card says floor and a note says one token chosen. Probability is not truth.', printNote: 'Coded SVG only; keep temperature/top-k/top-p out of the main visual.' },
   { id: 'autoregression', title: 'Append and Repeat', caption: 'The chosen token is appended, then the model runs again.', pattern: 'loop' },
   { id: 'context-window', title: 'Temporary Context Window', caption: 'Only visible context can influence the next token.', pattern: 'window' },
   { id: 'rag-retrieval', title: 'Open-Book Retrieval', subtitle: 'Retrieval plus context, not training', caption: 'Retrieved notes enter the context before response tokens are generated.', pattern: 'rag', variant: 'retrieval-shelf', objective: 'Show that RAG retrieves outside information and places it into context; it does not train the model.', callouts: [{ heading: 'Ask', body: 'The user prompt starts the run.' }, { heading: 'Retrieve', body: 'A search system finds relevant outside material.' }, { heading: 'Add to context', body: 'Retrieved notes become temporary context tokens.' }, { heading: 'Generate', body: 'The model still generates response tokens one at a time.' }, { heading: 'Weights stay fixed', body: 'RAG does not normally update model weights.' }], keyTakeaway: 'RAG is retrieval plus context, not training.', accessibleDescription: 'The RAG diagram moves from Prompt to Retriever to Notes, then into a Context tray and Generated response, with a separate fixed-weights note.', printNote: 'v0.10 pilot visual: paper-layer nodes, subtle neon retrieval path, HTML callouts, and a one-sentence takeaway.' },
@@ -174,7 +174,7 @@ function GeneratedImageScene({ aid, asset, variant }) {
         />
       ) : (
         <div className="generated-aid-fallback" role="note">
-          <strong>Visual asset unavailable.</strong>
+          <strong>Visual unavailable.</strong>
           <span>The callouts below still explain the concept.</span>
         </div>
       )}
@@ -698,33 +698,60 @@ function TensorSvg() {
 }
 
 function AttentionSvg() {
-  const points = [[52, 64], [122, 64], [192, 64], [262, 64], [122, 148], [222, 148]]
+  const points = [
+    ['dog', 48, 72],
+    ['cat', 112, 132],
+    ['because', 172, 76],
+    ['it', 224, 132],
+    ['hissed', 272, 76]
+  ]
   return (
     <>
-      <path className="aid-arc" d="M122 148 Q160 30 262 64" />
-      <path className="aid-arc alt" d="M222 148 Q164 96 52 64" />
-      {points.map(([x, y], index) => (
-        <g key={`${x}-${y}`}>
+      <rect className="aid-box prompt" x="18" y="18" width="284" height="28" rx="8" />
+      <Label x="38" y="37" className="tiny dark">dog chased cat because it hissed</Label>
+      <path className="aid-arc" d="M224 118 Q178 78 112 118" />
+      <path className="aid-arc alt" d="M224 118 Q140 24 48 58" opacity="0.44" />
+      {points.map(([label, x, y]) => (
+        <g key={label}>
           <circle className="aid-node" cx={x} cy={y} r="22" />
-          <Label x={x - 10} y={y + 5} className="tiny">t{index + 1}</Label>
+          <Label x={Number(x) - (String(label).length > 3 ? 20 : 10)} y={Number(y) + 5} className="tiny">{label}</Label>
         </g>
       ))}
-      <Label x="104" y="190" className="tiny">relevance weights</Label>
+      <rect className="aid-chip output" x="64" y="164" width="86" height="28" rx="8" />
+      <Label x="82" y="183" className="tiny dark">strong</Label>
+      <rect className="aid-chip prompt" x="166" y="164" width="90" height="28" rx="8" />
+      <Label x="184" y="183" className="tiny dark">weaker</Label>
+      <Label x="92" y="205" className="tiny">relevance, not awareness</Label>
     </>
   )
 }
 
 function MlpSvg() {
+  const before = [26, 42, 56, 34]
+  const after = [62, 28, 74, 48]
   return (
     <>
-      <rect className="aid-box prompt" x="28" y="82" width="70" height="44" rx="8" />
-      <Gear x={134} y={72} r={30} />
-      <Gear x={176} y={112} r={24} alt />
-      <rect className="aid-box output" x="228" y="82" width="70" height="44" rx="8" />
-      <Arrow x1="98" y1="104" x2="128" y2="104" />
-      <Arrow x1="200" y1="104" x2="228" y2="104" />
-      <Label x="38" y="108" className="tiny dark">token</Label>
-      <Label x="236" y="108" className="tiny dark">features</Label>
+      <rect className="aid-box muted" x="18" y="24" width="124" height="54" rx="8" />
+      <Label x="42" y="46" className="tiny">attention</Label>
+      <Label x="34" y="64" className="tiny muted-text">tokens exchange</Label>
+      <path className="aid-line" d="M34 92 C62 78, 92 78, 124 92" />
+      <path className="aid-line" d="M34 114 C72 132, 96 132, 124 114" />
+      <rect className="aid-chip output" x="34" y="132" width="48" height="26" rx="8" />
+      <Label x="45" y="150" className="tiny dark">cat</Label>
+      <rect className="aid-box" x="168" y="24" width="126" height="144" rx="10" />
+      <Label x="198" y="47" className="tiny">MLP</Label>
+      <Label x="180" y="65" className="tiny">same token</Label>
+      {before.map((height, index) => (
+        <rect key={`before-${index}`} className="aid-bar" x={184 + index * 12} y={118 - height} width="8" height={height} rx="3" opacity="0.55" />
+      ))}
+      {after.map((height, index) => (
+        <rect key={`after-${index}`} className="aid-bar horizontal" x={242 + index * 12} y={118 - height} width="8" height={height} rx="3" />
+      ))}
+      <Arrow x1="82" y1="145" x2="168" y2="112" />
+      <Arrow x1="224" y1="130" x2="242" y2="130" />
+      <Label x="180" y="146" className="tiny">before</Label>
+      <Label x="242" y="146" className="tiny">after</Label>
+      <Label x="84" y="192" className="tiny">feature bars reshaped</Label>
     </>
   )
 }
@@ -736,14 +763,17 @@ function Gear({ x, y, r, alt = false }) {
 function LayersSvg() {
   return (
     <>
-      {[0, 1, 2, 3].map((layer) => (
+      <rect className="aid-box prompt" x="86" y="18" width="148" height="28" rx="8" />
+      <Label x="111" y="37" className="tiny dark">input states</Label>
+      {[0, 1, 2].map((layer) => (
         <g key={layer}>
-          <rect className="aid-box" x={34 + layer * 62} y={56 + layer * 14} width="70" height="94" rx="8" />
-          <Label x={53 + layer * 62} y={102 + layer * 14} className="tiny">layer</Label>
+          <rect className="aid-box" x="70" y={58 + layer * 42} width="180" height="34" rx="8" />
+          <Label x="91" y={79 + layer * 42} className="tiny">Layer {layer + 1}: attn + MLP</Label>
         </g>
       ))}
-      <path className="aid-path thin" d="M22 170 C86 136, 136 138, 184 122 S260 90, 304 92" />
-      <Label x="112" y="192" className="tiny">carry forward</Label>
+      <rect className="aid-box output" x="86" y="184" width="148" height="24" rx="8" />
+      <Label x="110" y="201" className="tiny dark">output states</Label>
+      <path className="aid-path thin" d="M160 46 V184" />
     </>
   )
 }
@@ -751,65 +781,125 @@ function LayersSvg() {
 function HiddenSvg() {
   return (
     <>
-      <rect className="aid-chip prompt" x="42" y="42" width="94" height="38" rx="8" />
-      <rect className="aid-box muted" x="72" y="106" width="176" height="70" rx="10" />
-      {[0, 1, 2, 3, 4].map((bar) => (
-        <rect key={bar} className="aid-bar" x={96 + bar * 26} y={150 - bar * 8} width="16" height={26 + bar * 8} rx="4" />
+      {[
+        ['ID', 18, 60, 'prompt'],
+        ['Embed', 82, 60, 'output'],
+        ['L1', 170, 40, ''],
+        ['L2', 170, 100, ''],
+        ['Final', 238, 82, ''],
+        ['Scores', 232, 146, 'output']
+      ].map(([label, x, y, kind]) => (
+        <g key={label}>
+          <rect className={kind === 'prompt' ? 'aid-chip prompt' : kind === 'output' ? 'aid-chip output' : 'aid-box'} x={x} y={y} width={label === 'Embed' ? 62 : 58} height="30" rx="8" />
+          <Label x={Number(x) + 8} y={Number(y) + 20} className={kind ? 'tiny dark' : 'tiny'}>{label}</Label>
+        </g>
       ))}
-      <Arrow x1="89" y1="80" x2="120" y2="106" />
-      <Label x="54" y="66" className="tiny">embedding</Label>
-      <Label x="116" y="192" className="tiny">temp shape</Label>
+      <Arrow x1="76" y1="75" x2="82" y2="75" />
+      <Arrow x1="144" y1="75" x2="170" y2="55" />
+      <Arrow x1="198" y1="70" x2="198" y2="100" />
+      <Arrow x1="228" y1="115" x2="238" y2="98" />
+      <Arrow x1="266" y1="112" x2="260" y2="146" />
+      <rect className="aid-box muted" x="18" y="132" width="166" height="54" rx="8" />
+      <Label x="32" y="152" className="tiny">weight: durable</Label>
+      <Label x="32" y="171" className="tiny">state: temporary</Label>
+      <rect className="aid-chip prompt" x="190" y="18" width="104" height="24" rx="8" />
+      <Label x="205" y="35" className="tiny dark">not memory</Label>
+      <Label x="62" y="204" className="tiny">temporary during this forward pass</Label>
     </>
   )
 }
 
 function LogitsSvg() {
+  const rows = [
+    ['floor', '8.2', 124, 'high'],
+    ['room', '5.1', 84, 'med'],
+    ['counter', '2.0', 48, 'low'],
+    ['quantum', '-1.0', 18, 'v low']
+  ]
+
   return (
     <>
-      {[
-        ['floor', 114],
-        ['room', 72],
-        ['quantum', 28]
-      ].map(([label, width], index) => (
+      <rect className="aid-box prompt" x="16" y="22" width="96" height="36" rx="8" />
+      <Label x="28" y="45" className="tiny dark">hidden state</Label>
+      <Arrow x1="112" y1="40" x2="142" y2="40" />
+      <rect className="aid-box" x="144" y="20" width="78" height="40" rx="8" />
+      <Label x="161" y="45" className="tiny">score</Label>
+      <Arrow x1="222" y1="40" x2="252" y2="40" />
+      <rect className="aid-chip output" x="252" y="22" width="52" height="36" rx="8" />
+      <Label x="262" y="45" className="tiny dark">next?</Label>
+
+      {rows.map(([label, score, width, rank], index) => (
         <g key={label}>
-          <Label x="38" y={64 + index * 42} className="tiny">{label}</Label>
-          <rect className="aid-bar horizontal" x="106" y={48 + index * 42} width={width} height="22" rx="6" />
+          <Label x="28" y={84 + index * 25} className="tiny">{label}</Label>
+          <rect className="aid-box muted" x="96" y={70 + index * 25} width="154" height="15" rx="6" />
+          <rect className="aid-bar horizontal" x="96" y={70 + index * 25} width={width} height="15" rx="6" />
+          <text x="306" y={83 + index * 25} className="tiny" textAnchor="end">{score} {rank}</text>
         </g>
       ))}
-      <Label x="118" y="178" className="tiny">raw scores</Label>
+      <rect className="aid-chip prompt" x="72" y="174" width="176" height="25" rx="8" />
+      <Label x="90" y="191" className="tiny dark">raw scores, not probabilities</Label>
     </>
   )
 }
 
 function SoftmaxSvg() {
+  const rows = [
+    ['floor', '8.2', '86%', 86],
+    ['room', '5.1', '12%', 34],
+    ['counter', '2.0', '2%', 16],
+    ['quantum', '-1.0', '~0%', 6]
+  ]
+
   return (
     <>
-      <path className="aid-funnel" d="M52 42 H268 L198 116 V166 H122 V116 Z" />
-      <Label x="78" y="72" className="tiny">raw scores</Label>
-      <Label x="128" y="148" className="tiny">probabilities</Label>
-      <circle className="aid-dot" cx="104" cy="94" r="9" />
-      <circle className="aid-dot alt" cx="168" cy="94" r="9" />
-      <circle className="aid-dot" cx="230" cy="94" r="9" />
+      <Label x="28" y="26" className="tiny">logits</Label>
+      <Label x="210" y="26" className="tiny">probabilities</Label>
+      <path className="aid-funnel" d="M135 54 H184 L170 102 V152 H149 V102 Z" />
+      <Label x="137" y="87" className="tiny">soft</Label>
+      <Label x="139" y="106" className="tiny">max</Label>
+      {rows.map(([label, raw, probability, width], index) => (
+        <g key={label}>
+          <Label x="20" y={55 + index * 31} className="tiny">{label}</Label>
+          <rect className="aid-box muted" x="76" y={43 + index * 31} width="44" height="16" rx="5" />
+          <Label x="85" y={56 + index * 31} className="tiny">{raw}</Label>
+          <rect className="aid-box muted" x="204" y={43 + index * 31} width="86" height="16" rx="5" />
+          <rect className="aid-bar horizontal" x="204" y={43 + index * 31} width={width} height="16" rx="5" />
+          <Label x="294" y={56 + index * 31} className="tiny">{probability}</Label>
+        </g>
+      ))}
+      <rect className="aid-chip output" x="188" y="174" width="116" height="24" rx="8" />
+      <Label x="212" y="191" className="tiny dark">sum = 100%</Label>
+      <rect className="aid-chip prompt" x="22" y="174" width="148" height="24" rx="8" />
+      <Label x="40" y="191" className="tiny dark">probability != truth</Label>
     </>
   )
 }
 
 function SamplingSvg() {
+  const tokens = [
+    ['floor', '86%', 64, 58, 33, 'output'],
+    ['room', '12%', 158, 66, 23, ''],
+    ['counter', '2%', 234, 92, 17, ''],
+    ['quantum', '~0%', 174, 144, 13, '']
+  ]
+
   return (
     <>
-      {[
-        ['floor', 52, 70, 32],
-        ['room', 138, 58, 24],
-        ['tiles', 220, 78, 20],
-        ['quantum', 172, 132, 16]
-      ].map(([label, x, y, r]) => (
+      <rect className="aid-box prompt" x="18" y="16" width="284" height="42" rx="8" />
+      <Label x="48" y="35" className="tiny dark">A jealous dog chased a startled cat</Label>
+      <Label x="96" y="51" className="tiny dark">across the kitchen</Label>
+      {tokens.map(([label, probability, x, y, r, kind]) => (
         <g key={label}>
-          <circle className="aid-node" cx={Number(x)} cy={Number(y)} r={Number(r)} />
-          <Label x={Number(x) - 17} y={Number(y) + 5} className="tiny">{label}</Label>
+          <circle className={kind === 'output' ? 'aid-node selected' : 'aid-node'} cx={Number(x)} cy={Number(y)} r={Number(r)} />
+          <Label x={Number(x) - (String(label).length > 5 ? 26 : 18)} y={Number(y) + 3} className="tiny">{label}</Label>
+          <Label x={Number(x) - 13} y={Number(y) + 18} className="tiny muted-text">{probability}</Label>
         </g>
       ))}
-      <path className="aid-select" d="M52 70 L100 172 L140 108" />
-      <Label x="118" y="190" className="tiny">one token</Label>
+      <path className="aid-select" d="M64 91 C78 128, 98 154, 128 168" />
+      <rect className="aid-chip output" x="128" y="154" width="72" height="34" rx="8" />
+      <Label x="143" y="176" className="tiny dark">floor</Label>
+      <Label x="212" y="176" className="tiny">chosen token</Label>
+      <Label x="62" y="206" className="tiny">low probability is still possible</Label>
     </>
   )
 }

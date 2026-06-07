@@ -2,6 +2,252 @@
 
 Date: 2026-06-06
 
+## v0.21.2 Decision Room Implementation Pass
+
+### What Changed
+
+- Bumped the visible app version to `v0.21.2`.
+- Upgraded the existing Decision Room Journey cards: Logits, Softmax, and Sampling.
+- Kept the Journey order unchanged: Logits, Softmax, then Sampling.
+- Added richer lesson architecture fields for lifecycle, durable vs temporary state, prompt/response notes, misconceptions, relationships, and checkpoint feedback.
+- Replaced the older Decision Room visuals with coded SVG/HTML diagrams for raw scores, softmax probability conversion, and weighted token choice.
+- Added dedicated tiny interactions: `logits-raw-toggle`, `softmax-convert`, and `sampling-probability-pick`.
+- Improved Decision Room glossary support for Logits, Softmax, Probability, Sampling, Decoding step, Next token, Temperature, Top-k, and Top-p.
+- Added `IMAGE_ASSET_PLAN.md`, `TINY_INTERACTION_PLAN.md`, `IMPLEMENTATION_REPORT_V0_21_2.md`, refreshed screenshots, and a single PDF implementation report under `docs/stage-audits/v0-21-decision-room/`.
+- Left games, generated PNG assets, dependencies, Journey progress rules, badge criteria, checkpoint randomization, Journey order, and Glossary Dojo logic unchanged.
+
+### Card Improvements
+
+- Logits now teaches raw candidate next-token scores from the final hidden state, before probabilities and before choosing.
+- Softmax now teaches raw-score normalization into probabilities that sum to one.
+- Sampling now teaches the decoding choice, append boundary, and the distinction between probability and truth.
+- All three cards use the same Decision Room chain: hidden state -> logits -> softmax -> probabilities -> sampling -> one generated token.
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning after rerunning serially.
+- `npm run audit:answers`: passed.
+- Screenshot QA refreshed 320px and 390px captures; the manifest reports `overflowX: false`.
+
+### Screenshots and Report
+
+- `docs/stage-audits/v0-21-decision-room/screenshots/v0-21-2-decision-room-overview-390.png`
+- `docs/stage-audits/v0-21-decision-room/screenshots/v0-21-2-logits-raw-score-visual-390.png`
+- `docs/stage-audits/v0-21-decision-room/screenshots/v0-21-2-logits-interaction-390.png`
+- `docs/stage-audits/v0-21-decision-room/screenshots/v0-21-2-softmax-before-after-visual-390.png`
+- `docs/stage-audits/v0-21-decision-room/screenshots/v0-21-2-softmax-interaction-390.png`
+- `docs/stage-audits/v0-21-decision-room/screenshots/v0-21-2-sampling-weighted-visual-390.png`
+- `docs/stage-audits/v0-21-decision-room/screenshots/v0-21-2-sampling-interaction-390.png`
+- `docs/stage-audits/v0-21-decision-room/screenshots/v0-21-2-softmax-visual-320.png`
+- `docs/stage-audits/v0-21-decision-room/screenshots/v0-21-2-sampling-visual-320.png`
+- `docs/stage-audits/v0-21-decision-room/screenshots/v0-21-2-checkpoint-randomized-logits-390.png`
+- `docs/stage-audits/v0-21-decision-room/prompt-life-v0-21-2-decision-room-implementation-report.pdf`
+
+### Known Issues
+
+- The existing Vite large-chunk warning remains.
+- Top-k and top-p remain glossary-supported optional terms, not main-visual concepts.
+
+## v0.21.1 Generated Visual Copy Cleanup
+
+### What Changed
+
+- Bumped the visible app version to `v0.21.1`.
+- Removed internal asset-generation language from learner-facing generated visual captions and accessible descriptions.
+- Rewrote the generated-image-backed visual copy for What Is an LLM?, Pretraining, Fine-Tuning, and Alignment so each caption teaches the model concept rather than how the image was produced.
+- Updated the Pretraining callouts and key takeaway to emphasize broad durable pattern learning without implying perfect source recall.
+- Changed the generated visual fallback heading from `Visual asset unavailable.` to `Visual unavailable.`.
+- Added `docs/design/LEARNER_FACING_COPY_GUARDRAILS_V0_21_1.md` to keep future learner-facing copy free of production/process notes.
+- Preserved internal implementation metadata on the visual-aid review route, including asset filename, type, asset path, text-handling notes, and print/PDF notes.
+- Left Journey cards, Journey order, games, progress rules, checkpoint randomization, badge logic, dependencies, generated assets, and Decision Room implementation unchanged.
+
+### Phrases Removed From Learner-Facing Copy
+
+- `A textless model-cloud scene is paired with HTML callouts...`
+- `A textless folded landscape is paired with HTML callouts...`
+- `A textless targeted-path scene is paired with HTML callouts...`
+- `A textless alignment garden is paired with HTML callouts...`
+- `textless conceptual image`
+- `surrounding HTML callouts`
+- `Visual asset unavailable.`
+
+### New Pretraining Visual Copy
+
+Caption: `Many examples flow through the training loop. Repeated updates shape weights into broad patterns the model can use later. This does not make the model a perfect memory of its sources.`
+
+Callouts:
+
+- `Many examples flow`: Pretraining repeats the training loop across enormous collections of examples.
+- `Updates shape weights`: Prediction errors drive repeated weight updates during training.
+- `Broad patterns form`: The model learns statistical patterns that can help later prompts.
+- `Not perfect recall`: Pretraining does not store every source as a searchable memory.
+
+Key takeaway: `Pretraining builds broad capability, not perfect source recall.`
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed.
+- `git diff --check`: passed.
+- Screenshot QA used temporary Chrome profiles; `promptlife:v1:progress` stayed `[]`.
+- Learner visual screenshots reported `badLearnerCopy: false` and `overflowX: false`.
+
+### Screenshots and Report
+
+- `docs/design/screenshots/v0-21-1-what-is-llm-visual-390.png`
+- `docs/design/screenshots/v0-21-1-pretraining-visual-390.png`
+- `docs/design/screenshots/v0-21-1-pretraining-visual-320.png`
+- `docs/design/screenshots/v0-21-1-fine-tuning-visual-390.png`
+- `docs/design/screenshots/v0-21-1-alignment-visual-390.png`
+- `docs/design/screenshots/v0-21-1-visual-gallery-metadata-390.png`
+- `docs/design/screenshots/v0-21-1-visual-gallery-internal-metadata-390.png`
+- `docs/design/prompt-life-v0-21-1-generated-visual-copy-cleanup-report.pdf`
+
+### Known Issues
+
+- The Vite bundle still triggers the existing large-chunk warning.
+- The visual-aid review route intentionally still includes internal metadata; that route is for QA, not learner Journey use.
+
+## v0.21 Decision Room Stage Audit
+
+### What Changed
+
+- Added a documentation-only audit package at `docs/stage-audits/v0-21-decision-room/`.
+- Audited the current Decision Room cards: Logits, Softmax, and Sampling.
+- Captured 39 screenshots: required 390px Journey/card states plus 320px and 430px visual-aid spot checks.
+- Added `README.md`, `stage-audit.json`, `card-inventory.md`, `recommendations.md`, `screenshot-index.md`, screenshot manifest, and an internal PDF report source.
+- Left live curriculum, Journey order, progress logic, checkpoint randomization, generated PNG assets, games, dependencies, Glossary Dojo, badge logic, and visible app version unchanged.
+
+### Findings
+
+- Decision Room order is correct: Logits, Softmax, then Sampling.
+- All three cards still use older slim lesson fields and need richer lifecycle, durable/temporary, prompt/response, and misconception copy.
+- Probability-not-truth is present as the stage key distinction, but should be repeated directly in each card.
+- Logits needs the strongest interaction repair because it currently reuses the Softmax interaction.
+- No Image 2 asset is recommended for the next Decision Room pass; all three visuals should remain coded SVG/HTML.
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed.
+- Screenshot QA used a temporary Chrome profile and Preview mode; `promptlife:v1:progress` stayed `[]`.
+
+### Screenshots
+
+- `docs/stage-audits/v0-21-decision-room/screenshots/decision-room-overview.png`
+- `docs/stage-audits/v0-21-decision-room/screenshots/logits-visual-aid.png`
+- `docs/stage-audits/v0-21-decision-room/screenshots/softmax-visual-aid.png`
+- `docs/stage-audits/v0-21-decision-room/screenshots/sampling-visual-aid.png`
+- `docs/stage-audits/v0-21-decision-room/screenshots/sampling-tiny-interaction.png`
+- `docs/stage-audits/v0-21-decision-room/screenshots/softmax-visual-aid-320.png`
+
+## v0.20.1 Workday Visual + Interaction Repair
+
+### What Changed
+
+- Bumped the visible app version to `v0.20.1`.
+- Upgraded the existing Workday Journey cards: Attention, MLP, Layers, and Hidden States.
+- Added richer lesson architecture fields for lifecycle, durable vs temporary state, prompt/current-context notes, misconceptions, and checkpoint feedback.
+- Replaced the Workday coded visuals with clearer concept-specific diagrams: concrete attention relevance, MLP feature reshaping, repeated transformer layers, and hidden-state flow.
+- Added dedicated tiny interactions: `attention-relevance-connect`, `mlp-feature-toggle`, `layers-stack-inspect`, and `hidden-state-sort`.
+- Added a dedicated Hidden States sort exercise mapping so Hidden States no longer reuses the MLP exercise.
+- Added or improved glossary support for Workday terms including Relevance weight, Multi-layer perceptron, Feed-forward network, Transformer layer, Residual path, Normalization, and Temporary activation.
+- Added `IMAGE_ASSET_PLAN.md`, `TINY_INTERACTION_PLAN.md`, `IMPLEMENTATION_REPORT_V0_20_1.md`, screenshots, and a single PDF implementation report under `docs/stage-audits/v0-20-workday/`.
+- Left Journey order, Journey progress, badge logic, checkpoint randomization, generated PNG assets, new games, heavy dependencies, and Glossary Dojo logic unchanged.
+
+### Verification
+
+- Browser QA passed for the revised Workday overview and interactions at 390px.
+- 320px visual-aid spot checks passed for MLP, Layers, and Hidden States after label tightening.
+- Screenshot QA used Preview mode; `promptlife:v1:progress` stayed `[]`.
+- No horizontal overflow was detected in the screenshot manifest.
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed.
+
+### Screenshots
+
+- `docs/stage-audits/v0-20-workday/screenshots/v0-20-1-workday-overview-390.png`
+- `docs/stage-audits/v0-20-workday/screenshots/v0-20-1-attention-visual-390.png`
+- `docs/stage-audits/v0-20-workday/screenshots/v0-20-1-attention-interaction-feedback-390.png`
+- `docs/stage-audits/v0-20-workday/screenshots/v0-20-1-mlp-toggle-390.png`
+- `docs/stage-audits/v0-20-workday/screenshots/v0-20-1-layers-stack-inspector-390.png`
+- `docs/stage-audits/v0-20-workday/screenshots/v0-20-1-hidden-states-flow-390.png`
+- `docs/stage-audits/v0-20-workday/screenshots/v0-20-1-hidden-states-sort-390.png`
+- `docs/stage-audits/v0-20-workday/screenshots/v0-20-1-hidden-states-checkpoint-feedback-390.png`
+- `docs/stage-audits/v0-20-workday/screenshots/v0-20-1-mlp-visual-320.png`
+- `docs/stage-audits/v0-20-workday/screenshots/v0-20-1-layers-visual-320.png`
+- `docs/stage-audits/v0-20-workday/screenshots/v0-20-1-hidden-states-visual-320.png`
+
+## v0.19.3 Glossary Dojo Feedback Precision
+
+### What Changed
+
+- Bumped the visible app version to `v0.19.3`.
+- Added represented-term feedback metadata to Glossary Dojo answer choices so wrong feedback can name the glossary term behind the selected wrong answer.
+- Updated wrong-answer feedback to say `That definition is for [selected term]`, then name the correct term or correct match and give the short correct definition.
+- Updated correct-answer feedback to begin with `Insight strengthened.`
+- Added `data-testid="glossary-dojo-feedback"` and represented-term data attributes for QA.
+- Left Journey cards, Journey progress, badge criteria, Dojo mastery logic, games, generated assets, dependencies, and checkpoint randomization unchanged.
+- Added `docs/play/GLOSSARY_DOJO_FEEDBACK_V0_19_3.md` and a PDF report source.
+
+### Verification
+
+- Programmatic browser QA passed at 390px and 320px for `term_to_definition`, `definition_to_term`, `confusable_pair`, `relationship`, `stage_location`, and correct-answer feedback.
+- QA confirmed represented-term metadata on choices, `Your choice` and `Correct match` labels, `Open [correct term]`, visible `Next question`, and unchanged Journey progress in a temporary profile.
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed.
+
+### Screenshots
+
+- `docs/play/screenshots/v0-19-3-dojo-wrong-definition-feedback-390.png`
+- `docs/play/screenshots/v0-19-3-dojo-correct-feedback-390.png`
+- `docs/play/screenshots/v0-19-3-dojo-wrong-definition-feedback-320.png`
+
+## v0.20 Workday Stage Audit
+
+### What Changed
+
+- Added a documentation-only audit package at `docs/stage-audits/v0-20-workday/`.
+- Audited the current Workday cards: Attention, MLP, Layers, and Hidden States.
+- Captured 51 screenshots: required 390px Journey/card states plus 320px and 430px visual-aid spot checks.
+- Added `README.md`, `stage-audit.json`, `card-inventory.md`, `recommendations.md`, `screenshot-index.md`, screenshot manifest, and an internal PDF report source.
+- Left live curriculum, Journey order, progress logic, checkpoint randomization, generated PNG assets, games, dependencies, Glossary Dojo, badge logic, and visible app version unchanged.
+
+### Findings
+
+- Workday order is correct: Attention, MLP, Layers, then Hidden States.
+- All four cards still use older slim lesson fields and need richer lifecycle, durable/temporary, prompt/current-context, and misconception copy.
+- MLP and Hidden States are the highest-priority visual/interaction repair targets.
+- Attention must remain coded SVG because exact token relationships matter.
+- Layers is the best Workday candidate for lightweight CSS 3D; no Image 2 asset is recommended for the next pass.
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning. An earlier parallel run collided with `build:pages` while both tried to clean `dist`; rerunning `npm run build` by itself passed.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed.
+- Screenshot QA used temporary Preview-mode browser profiles; `promptlife:v1:progress` stayed `[]`.
+
+### Screenshots
+
+- `docs/stage-audits/v0-20-workday/screenshots/journey-top.png`
+- `docs/stage-audits/v0-20-workday/screenshots/workday-overview.png`
+- `docs/stage-audits/v0-20-workday/screenshots/attention-visual-aid.png`
+- `docs/stage-audits/v0-20-workday/screenshots/mlp-visual-aid-320.png`
+- `docs/stage-audits/v0-20-workday/screenshots/layers-visual-aid.png`
+- `docs/stage-audits/v0-20-workday/screenshots/hidden-states-core-idea.png`
+
 ## v0.19.2 Play Card Time Layout
 
 ### What Changed

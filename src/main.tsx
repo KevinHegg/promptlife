@@ -42,7 +42,7 @@ const HOME_ASSETS = {
   heroFallback: `${ASSET}/illustrations/scene-hero-feature-cloud@mobile.png`
 }
 // Bump this for each shipped app change; the Badge screen displays it under Start over.
-const APP_VERSION = '0.19.2'
+const APP_VERSION = '0.21.2'
 const STORAGE_KEYS = {
   lastLocation: 'promptlife:v1:lastLocation',
   lessonId: 'promptlife:v1:lessonId',
@@ -96,10 +96,10 @@ const GLOSSARY_LEARNING_GROUPS = [
   { firstLessonId: 'embeddings', termIds: ['embedding', 'embedding-table'] },
   { firstLessonId: 'vectors', termIds: ['vector', 'feature', 'distributed-representation'] },
   { firstLessonId: 'tensors', termIds: ['tensor', 'activation', 'weight-tensor'] },
-  { firstLessonId: 'attention', termIds: ['attention'] },
-  { firstLessonId: 'mlp', termIds: ['MLP'] },
-  { firstLessonId: 'layers', termIds: ['layer'] },
-  { firstLessonId: 'hidden-states', termIds: ['hidden state'] },
+  { firstLessonId: 'attention', termIds: ['attention', 'relevance-weight'] },
+  { firstLessonId: 'mlp', termIds: ['MLP', 'multi-layer-perceptron', 'feed-forward-network'] },
+  { firstLessonId: 'layers', termIds: ['layer', 'transformer-layer', 'residual-path', 'normalization'] },
+  { firstLessonId: 'hidden-states', termIds: ['hidden state', 'temporary-activation'] },
   { firstLessonId: 'logits', termIds: ['logits'] },
   { firstLessonId: 'softmax', termIds: ['softmax', 'probability'] },
   { firstLessonId: 'sampling', termIds: ['sampling', 'temperature', 'top-k', 'top-p'] },
@@ -150,6 +150,70 @@ const LESSON_TERM_DISPLAY_PRIORITY = {
     'classical-machine-learning',
     'rule-based-ai',
     'foundation-model'
+  ],
+  attention: [
+    'attention',
+    'relevance-weight',
+    'input-context',
+    'prompt-tokens',
+    'response-tokens',
+    'hidden state',
+    'layer'
+  ],
+  mlp: [
+    'MLP',
+    'multi-layer-perceptron',
+    'feed-forward-network',
+    'feature',
+    'attention',
+    'hidden state',
+    'input-context'
+  ],
+  layers: [
+    'layer',
+    'transformer-layer',
+    'attention',
+    'MLP',
+    'hidden state',
+    'residual-path',
+    'normalization'
+  ],
+  'hidden-states': [
+    'hidden state',
+    'temporary-activation',
+    'embedding',
+    'activation',
+    'weight',
+    'input-context',
+    'forward-pass',
+    'layer',
+    'inference'
+  ],
+  logits: [
+    'logits',
+    'hidden state',
+    'next-token',
+    'generated-token',
+    'softmax',
+    'probability'
+  ],
+  softmax: [
+    'softmax',
+    'logits',
+    'probability',
+    'sampling',
+    'decoding-step'
+  ],
+  sampling: [
+    'sampling',
+    'probability',
+    'generated-token',
+    'next-token',
+    'decoding-step',
+    'response-tokens',
+    'temperature',
+    'top-k',
+    'top-p'
   ]
 }
 const JOURNEY_FILTERS = [
@@ -1415,6 +1479,13 @@ function MicroInteraction({ type }) {
   if (type === 'embedding-lookup') return <EmbeddingLookupInteraction />
   if (type === 'vector-distribution') return <VectorDistributionInteraction />
   if (type === 'tensor-axis') return <TensorAxisInteraction />
+  if (type === 'attention-relevance-connect') return <AttentionRelevanceConnectInteraction />
+  if (type === 'mlp-feature-toggle') return <MlpFeatureToggleInteraction />
+  if (type === 'layers-stack-inspect') return <LayersStackInspectInteraction />
+  if (type === 'hidden-state-sort') return <HiddenStateSortInteraction />
+  if (type === 'logits-raw-toggle') return <LogitsRawToggleInteraction />
+  if (type === 'softmax-convert') return <SoftmaxConvertInteraction />
+  if (type === 'sampling-probability-pick') return <SamplingProbabilityPickInteraction />
   if (type === 'tokens') return <TokenCardsAnimation />
   if (type === 'embeddings') return <EmbeddingLookupAnimation />
   if (type === 'tensor') return <TensorBlockAnimation />
@@ -1678,6 +1749,291 @@ function TensorAxisInteraction() {
         </div>
       </div>
       <p className="micro-feedback good" role="status">Insight strengthened. {copy[axis]}</p>
+    </div>
+  )
+}
+
+function AttentionRelevanceConnectInteraction() {
+  const choices = [
+    { id: 'dog', label: 'dog', correct: false },
+    { id: 'cat', label: 'cat', correct: true }
+  ]
+  const [choice, setChoice] = useState(null)
+  const selected = choices.find((item) => item.id === choice)
+
+  return (
+    <div className="morning-interaction workday-interaction attention-connect-demo">
+      <p className="micro-prompt">Which earlier token helps interpret “it”?</p>
+      <div className="attention-sentence-strip" aria-label="Attention example sentence">
+        {['dog', 'cat', 'because', 'it', 'hissed'].map((token) => (
+          <span key={token} className={token === 'it' ? 'target' : token === selected?.id ? 'active' : ''}>{token}</span>
+        ))}
+      </div>
+      <div className="attention-relevance-lines" aria-hidden="true">
+        <span className={choice === 'cat' ? 'strong active' : 'strong'}>it to cat</span>
+        <span className={choice === 'dog' ? 'weak active' : 'weak'}>it to dog</span>
+      </div>
+      <div className="morning-choice-row compact" role="group" aria-label="Choose the referent for it">
+        {choices.map((item) => (
+          <button key={item.id} className={choice === item.id ? 'active' : ''} onClick={() => setChoice(item.id)} aria-pressed={choice === item.id}>
+            {item.label}
+          </button>
+        ))}
+      </div>
+      <p className={selected?.correct ? 'micro-feedback good' : 'micro-feedback'} role="status">
+        {selected
+          ? selected.correct
+            ? 'Insight strengthened. Attention can weight “cat” as more relevant to “it” in this context.'
+            : 'Not quite. “dog” is nearby and possible in other sentences, but here “it hissed” points more strongly to “cat.”'
+          : 'Tap the token that “it” most likely depends on.'}
+      </p>
+    </div>
+  )
+}
+
+function MlpFeatureToggleInteraction() {
+  const [mode, setMode] = useState('before')
+  const [answer, setAnswer] = useState(null)
+  const options = [
+    { id: 'feature-vector', label: 'The token’s feature vector', correct: true },
+    { id: 'memory', label: 'The model’s permanent memory', correct: false },
+    { id: 'token-id', label: 'The token ID', correct: false }
+  ]
+  const bars = mode === 'before' ? [38, 62, 44, 70, 48] : [74, 34, 82, 52, 66]
+  const selected = options.find((item) => item.id === answer)
+
+  return (
+    <div className="morning-interaction workday-interaction mlp-toggle-demo">
+      <div className="segmented-control mini" role="group" aria-label="Toggle MLP state">
+        <button className={mode === 'before' ? 'active' : ''} onClick={() => setMode('before')} aria-pressed={mode === 'before'}>Before MLP</button>
+        <button className={mode === 'after' ? 'active' : ''} onClick={() => setMode('after')} aria-pressed={mode === 'after'}>After MLP</button>
+      </div>
+      <div className="mlp-feature-card" aria-live="polite">
+        <strong>cat</strong>
+        <div className="mlp-feature-bars" aria-label={`${mode} MLP feature bars`}>
+          {bars.map((bar, index) => <span key={index} style={{ height: `${bar}%` }} />)}
+        </div>
+        <small>{mode === 'before' ? 'same token position' : 'reshaped features'}</small>
+      </div>
+      <p className="micro-prompt">What changed?</p>
+      <div className="morning-choice-row" role="group" aria-label="Choose what changed after MLP">
+        {options.map((item) => (
+          <button key={item.id} className={answer === item.id ? 'active' : ''} onClick={() => setAnswer(item.id)} aria-pressed={answer === item.id}>
+            {item.label}
+          </button>
+        ))}
+      </div>
+      <p className={selected?.correct ? 'micro-feedback good' : 'micro-feedback'} role="status">
+        {selected
+          ? selected.correct
+            ? 'Insight strengthened. The MLP reshapes features for a token position during the forward pass.'
+            : 'Not quite. The token ID and durable weights stay put; the temporary feature vector changes.'
+          : 'Toggle before and after, then choose what changed.'}
+      </p>
+    </div>
+  )
+}
+
+function LayersStackInspectInteraction() {
+  const steps = [
+    { id: 'layer-1', label: 'Layer 1', note: 'Attention mixes visible token positions; the MLP reshapes each token.' },
+    { id: 'layer-2', label: 'Layer 2', note: 'The refined hidden-state ribbon moves forward and is transformed again.' },
+    { id: 'layer-3', label: 'Layer 3', note: 'Repeated blocks keep refining temporary hidden states.' },
+    { id: 'final', label: 'Final', note: 'Final hidden states can be projected toward next-token scores.' }
+  ]
+  const [activeId, setActiveId] = useState('layer-1')
+  const activeIndex = Math.max(0, steps.findIndex((step) => step.id === activeId))
+  const active = steps[activeIndex]
+
+  return (
+    <div className="morning-interaction workday-interaction layers-inspect-demo">
+      <div className="morning-choice-row compact" role="group" aria-label="Inspect transformer layers">
+        {steps.map((step) => (
+          <button key={step.id} className={activeId === step.id ? 'active' : ''} onClick={() => setActiveId(step.id)} aria-pressed={activeId === step.id}>
+            {step.label}
+          </button>
+        ))}
+      </div>
+      <div className="layer-stack-mini" aria-label={`Inspecting ${active.label}`}>
+        <span className="state-label input">input hidden states</span>
+        {steps.slice(0, 3).map((step, index) => (
+          <div key={step.id} className={index === activeIndex ? 'active' : ''}>
+            <strong>{index + 1}</strong>
+            <small>attention + MLP</small>
+          </div>
+        ))}
+        <span className={activeId === 'final' ? 'state-label output active' : 'state-label output'}>output hidden states</span>
+        <i style={{ '--progress': `${Math.min(activeIndex, 3)}` } as React.CSSProperties} aria-hidden="true" />
+      </div>
+      <p className="micro-feedback good" role="status">
+        Insight strengthened. {active.note} Hidden states are refined, not permanently stored.
+      </p>
+    </div>
+  )
+}
+
+function HiddenStateSortInteraction() {
+  const buckets = ['Durable', 'Temporary', 'Not in this forward pass']
+  const items = [
+    { id: 'embedding-table', label: 'embedding table', bucket: 'Durable' },
+    { id: 'weight', label: 'weight', bucket: 'Durable' },
+    { id: 'hidden-state', label: 'hidden state', bucket: 'Temporary' },
+    { id: 'attention-pattern', label: 'attention pattern', bucket: 'Temporary' },
+    { id: 'current-context', label: 'current context', bucket: 'Temporary' },
+    { id: 'training-data', label: 'training data', bucket: 'Not in this forward pass' }
+  ]
+  const [placements, setPlacements] = useState({})
+  const placedCount = Object.keys(placements).length
+  const allPlaced = placedCount === items.length
+  const allCorrect = allPlaced && items.every((item) => placements[item.id] === item.bucket)
+
+  function cyclePlacement(itemId) {
+    setPlacements((current) => {
+      const existing = current[itemId]
+      const nextIndex = existing ? (buckets.indexOf(existing) + 1) % buckets.length : 0
+      return { ...current, [itemId]: buckets[nextIndex] }
+    })
+  }
+
+  return (
+    <div className="morning-interaction workday-interaction hidden-sort-demo">
+      <p className="micro-prompt">Tap each item to cycle its bucket.</p>
+      <div className="hidden-sort-items" aria-label="Sort hidden state concepts">
+        {items.map((item) => (
+          <button key={item.id} onClick={() => cyclePlacement(item.id)}>
+            <strong>{item.label}</strong>
+            <span>{placements[item.id] ?? 'choose bucket'}</span>
+          </button>
+        ))}
+      </div>
+      <div className="hidden-sort-buckets" aria-hidden="true">
+        {buckets.map((bucket) => (
+          <span key={bucket}>{bucket}</span>
+        ))}
+      </div>
+      <p className={allCorrect ? 'micro-feedback good' : 'micro-feedback'} role="status">
+        {allCorrect
+          ? 'Insight strengthened. Hidden states are temporary internal vectors shaped by the current context.'
+          : allPlaced
+            ? 'Not quite. Embedding table and weight are durable; hidden state, attention pattern, and current context are temporary; training data is outside this forward pass.'
+            : `${placedCount} of ${items.length} placed.`}
+      </p>
+    </div>
+  )
+}
+
+const decisionCandidates = [
+  { id: 'floor', label: 'floor', raw: '8.2', probability: '86%', level: 86, correct: true },
+  { id: 'room', label: 'room', raw: '5.1', probability: '12%', level: 34, plausible: true },
+  { id: 'counter', label: 'counter', raw: '2.0', probability: '2%', level: 18 },
+  { id: 'quantum', label: 'quantum', raw: '-1.0', probability: '~0%', level: 6 }
+]
+
+function LogitsRawToggleInteraction() {
+  const [mode, setMode] = useState('raw')
+  const isRaw = mode === 'raw'
+
+  return (
+    <div className="morning-interaction decision-interaction logits-toggle-demo">
+      <div className="segmented-control mini" role="group" aria-label="Toggle raw scores and probabilities">
+        <button className={isRaw ? 'active' : ''} onClick={() => setMode('raw')} aria-pressed={isRaw}>Raw scores</button>
+        <button className={!isRaw ? 'active' : ''} onClick={() => setMode('probabilities')} aria-pressed={!isRaw}>Probabilities?</button>
+      </div>
+      <div className="decision-score-list" aria-live="polite">
+        {decisionCandidates.map((candidate) => (
+          <span key={candidate.id}>
+            <strong>{candidate.label}</strong>
+            <i style={{ width: `${isRaw ? candidate.level : Math.max(8, Number.parseInt(candidate.probability, 10) || 4)}%` }} />
+            <em>{isRaw ? candidate.raw : candidate.probability}</em>
+          </span>
+        ))}
+      </div>
+      <p className={isRaw ? 'micro-feedback good' : 'micro-feedback'} role="status">
+        {isRaw
+          ? 'Insight strengthened. Logits are the before state: temporary raw scores for possible next tokens.'
+          : 'Softmax comes next. Probabilities are easier to sample from, but still are not truth guarantees.'}
+      </p>
+    </div>
+  )
+}
+
+function SoftmaxConvertInteraction() {
+  const [converted, setConverted] = useState(false)
+
+  return (
+    <div className="morning-interaction decision-interaction softmax-convert-demo">
+      <button className="morning-primary-action" onClick={() => setConverted((value) => !value)}>
+        {converted ? 'Show raw scores' : 'Apply softmax'}
+      </button>
+      <div className={converted ? 'softmax-conversion-board converted' : 'softmax-conversion-board'} aria-live="polite">
+        <div>
+          <strong>Before</strong>
+          {decisionCandidates.map((candidate) => (
+            <span key={`raw-${candidate.id}`}>
+              <b>{candidate.label}</b>
+              <em>{candidate.raw}</em>
+            </span>
+          ))}
+        </div>
+        <i aria-hidden="true">softmax</i>
+        <div>
+          <strong>After</strong>
+          {decisionCandidates.map((candidate) => (
+            <span key={`prob-${candidate.id}`} className={converted ? 'active' : ''}>
+              <b>{candidate.label}</b>
+              <em>{converted ? candidate.probability : '?'}</em>
+            </span>
+          ))}
+          <small>{converted ? 'sum = 100%' : 'tap to convert'}</small>
+        </div>
+      </div>
+      <p className={converted ? 'micro-feedback good' : 'micro-feedback'} role="status">
+        {converted
+          ? 'Insight strengthened. Softmax turns raw scores into probabilities that can be sampled. Probability is not truth.'
+          : 'Raw logits are not ready-to-sample probabilities yet.'}
+      </p>
+    </div>
+  )
+}
+
+function SamplingProbabilityPickInteraction() {
+  const [choice, setChoice] = useState(null)
+  const selected = decisionCandidates.find((candidate) => candidate.id === choice)
+
+  let feedback = 'Which token is most likely in this local context?'
+  let good = false
+  if (selected?.correct) {
+    good = true
+    feedback = 'Insight strengthened. “floor” has the highest probability in this local context. Probability is not truth.'
+  } else if (selected?.plausible) {
+    feedback = 'Close. “room” is plausible, but “floor” is more likely in this sentence.'
+  } else if (selected?.id === 'quantum') {
+    feedback = 'Not quite. “quantum” is in the vocabulary, but it is very unlikely in this local context.'
+  } else if (selected) {
+    feedback = 'Not quite. “counter” can be a token, but the local context points much more strongly to “floor.”'
+  }
+
+  return (
+    <div className="morning-interaction decision-interaction sampling-pick-demo">
+      <p className="micro-prompt">A jealous dog chased a startled cat across the kitchen...</p>
+      <div className="weighted-token-cloud" role="group" aria-label="Choose the most likely next token">
+        {decisionCandidates.map((candidate) => (
+          <button
+            key={candidate.id}
+            className={choice === candidate.id ? 'active' : ''}
+            onClick={() => setChoice(candidate.id)}
+            aria-pressed={choice === candidate.id}
+          >
+            <strong>{candidate.label}</strong>
+            <span>{candidate.probability}</span>
+          </button>
+        ))}
+      </div>
+      <div className="temperature-simple-toggle" aria-label="Temperature note">
+        <span>Focused: sharper probabilities</span>
+        <span>More varied: wider possibilities</span>
+      </div>
+      <p className={good ? 'micro-feedback good' : 'micro-feedback'} role="status">{feedback}</p>
     </div>
   )
 }

@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prompt Life v0.21.1 Generated Visual Copy Cleanup</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #111a4f;
+      --muted: #4c5876;
+      --line: #d8dded;
+      --paper: #fffdf8;
+      --teal: #008f92;
+      --violet: #7a5cff;
+      --soft: #eefcff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: #f5f8fb;
+      line-height: 1.45;
+    }
+    main {
+      width: min(100%, 980px);
+      margin: 0 auto;
+      padding: 28px;
+    }
+    section {
+      margin: 0 0 22px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--paper);
+      break-inside: avoid;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      margin-bottom: 8px;
+      font-size: 34px;
+      line-height: 1.08;
+    }
+    h2 {
+      margin-bottom: 10px;
+      font-size: 22px;
+    }
+    h3 {
+      margin-bottom: 8px;
+      font-size: 16px;
+      color: var(--teal);
+    }
+    p, li { font-size: 14px; }
+    code {
+      padding: 1px 4px;
+      border-radius: 5px;
+      background: #eef1fb;
+      color: #121e72;
+      font-size: 0.93em;
+    }
+    .lede {
+      color: var(--muted);
+      font-size: 16px;
+      font-weight: 700;
+    }
+    .eyebrow {
+      margin-bottom: 8px;
+      color: var(--teal);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin: 10px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+    .chips li {
+      padding: 6px 9px;
+      border: 1px solid #cfd7ec;
+      border-radius: 999px;
+      background: #fff;
+      color: #1e2a62;
+      font-weight: 800;
+    }
+    .quote-box {
+      margin: 10px 0 0;
+      padding: 12px 14px;
+      border-left: 4px solid var(--teal);
+      border-radius: 8px;
+      background: var(--soft);
+      font-weight: 750;
+    }
+    figure {
+      margin: 0;
+      break-inside: avoid;
+    }
+    figure img {
+      display: block;
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: white;
+    }
+    figcaption {
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 750;
+    }
+    .shot-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .shot-grid figure {
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+    }
+    .mobile-narrow img {
+      max-width: 320px;
+      margin: 0 auto;
+    }
+    .status-list strong {
+      color: var(--teal);
+    }
+    @media print {
+      body { background: white; }
+      main { padding: 16px; }
+      section { page-break-inside: avoid; }
+      .page-break { break-before: page; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <section>
+    <p class="eyebrow">Prompt Life v0.21.1</p>
+    <h1>Generated Visual Copy Cleanup</h1>
+    <p class="lede">This pass removes internal asset-generation language from learner-facing visual copy while preserving implementation metadata on review routes.</p>
+    <p>Date: June 6, 2026. Project: <code>KevinHegg/promptlife</code>.</p>
+  </section>
+
+  <section>
+    <h2>What Changed</h2>
+    <ul>
+      <li>Replaced generated-image-backed learner captions for What Is an LLM?, Pretraining, Fine-Tuning, and Alignment.</li>
+      <li>Updated generated visual accessible descriptions to describe the concept and image, not the production process.</li>
+      <li>Updated the Pretraining callouts and key takeaway to clarify broad durable pattern learning without perfect source recall.</li>
+      <li>Changed the learner fallback heading from <code>Visual asset unavailable.</code> to <code>Visual unavailable.</code>.</li>
+      <li>Bumped the visible app version to <code>v0.21.1</code>.</li>
+      <li>Added learner-facing copy guardrails for future visual and generated asset work.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Files Changed</h2>
+    <ul>
+      <li><code>src/components/VisualAids.tsx</code></li>
+      <li><code>src/data/visualAssets.ts</code></li>
+      <li><code>src/main.tsx</code></li>
+      <li><code>docs/REVIEW_NOTES.md</code></li>
+      <li><code>docs/design/LEARNER_FACING_COPY_GUARDRAILS_V0_21_1.md</code></li>
+      <li><code>docs/design/screenshots/v0-21-1-*.png</code></li>
+      <li><code>docs/design/screenshots/v0-21-1-screenshot-manifest.json</code></li>
+      <li><code>docs/design/prompt-life-v0-21-1-generated-visual-copy-cleanup-report.html</code></li>
+      <li><code>docs/design/prompt-life-v0-21-1-generated-visual-copy-cleanup-report.pdf</code></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Phrases Removed</h2>
+    <ul class="chips">
+      <li>A textless model-cloud scene is paired with HTML callouts</li>
+      <li>A textless folded landscape is paired with HTML callouts</li>
+      <li>A textless targeted-path scene is paired with HTML callouts</li>
+      <li>A textless alignment garden is paired with HTML callouts</li>
+      <li>textless conceptual image</li>
+      <li>surrounding HTML callouts</li>
+      <li>Visual asset unavailable.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>New Pretraining Copy</h2>
+    <h3>Caption</h3>
+    <p class="quote-box">Many examples flow through the training loop. Repeated updates shape weights into broad patterns the model can use later. This does not make the model a perfect memory of its sources.</p>
+    <h3>Callouts</h3>
+    <ul>
+      <li><strong>Many examples flow:</strong> Pretraining repeats the training loop across enormous collections of examples.</li>
+      <li><strong>Updates shape weights:</strong> Prediction errors drive repeated weight updates during training.</li>
+      <li><strong>Broad patterns form:</strong> The model learns statistical patterns that can help later prompts.</li>
+      <li><strong>Not perfect recall:</strong> Pretraining does not store every source as a searchable memory.</li>
+    </ul>
+    <h3>Key Takeaway</h3>
+    <p class="quote-box">Pretraining builds broad capability, not perfect source recall.</p>
+  </section>
+
+  <section>
+    <h2>Other Visual Copy Changes</h2>
+    <ul>
+      <li><strong>What Is an LLM?</strong> now explains current context, learned weights, next-token probabilities, generated token, and append-repeat.</li>
+      <li><strong>Fine-Tuning</strong> now explains pretrained base, targeted examples or preference data, and durable future response shaping.</li>
+      <li><strong>Alignment</strong> now explains preferred behavior, guardrails, feedback and policies, and the no-conscience limit.</li>
+      <li><strong>Review gallery</strong> still exposes asset metadata for QA and documentation.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Verification</h2>
+    <ul class="status-list">
+      <li><strong>Passed:</strong> <code>npm run typecheck</code></li>
+      <li><strong>Passed:</strong> <code>npm run build</code> with existing Vite large-chunk warning.</li>
+      <li><strong>Passed:</strong> <code>npm run build:pages</code> with existing Vite large-chunk warning.</li>
+      <li><strong>Passed:</strong> <code>npm run audit:answers</code></li>
+      <li><strong>Passed:</strong> <code>git diff --check</code></li>
+      <li><strong>Screenshot QA:</strong> learner visual panels reported <code>badLearnerCopy: false</code>, <code>overflowX: false</code>, and isolated progress storage <code>[]</code>.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Known Issues</h2>
+    <ul>
+      <li>The Vite large-chunk warning remains from the existing bundle shape.</li>
+      <li>The review route intentionally contains production metadata. That is correct for QA, but it should stay out of normal Journey screens.</li>
+    </ul>
+    <h2>Next Step</h2>
+    <p>The cleanup is complete. The next sensible product step is the Decision Room implementation pass, using coded visuals and revised lesson architecture without adding generated assets yet.</p>
+  </section>
+
+  <section class="page-break">
+    <h2>Screenshots</h2>
+    <div class="shot-grid">
+      <figure>
+        <img src="screenshots/v0-21-1-what-is-llm-visual-390.png" alt="What Is an LLM visual copy at 390 pixels wide">
+        <figcaption>What Is an LLM: learner-facing visual copy at 390px.</figcaption>
+      </figure>
+      <figure>
+        <img src="screenshots/v0-21-1-pretraining-visual-390.png" alt="Pretraining visual copy at 390 pixels wide">
+        <figcaption>Pretraining: cleaned caption, callouts, and key takeaway at 390px.</figcaption>
+      </figure>
+      <figure class="mobile-narrow">
+        <img src="screenshots/v0-21-1-pretraining-visual-320.png" alt="Pretraining visual copy at 320 pixels wide">
+        <figcaption>Pretraining: cleaned copy remains readable at 320px.</figcaption>
+      </figure>
+      <figure>
+        <img src="screenshots/v0-21-1-fine-tuning-visual-390.png" alt="Fine-Tuning visual copy at 390 pixels wide">
+        <figcaption>Fine-Tuning: learner-facing visual copy at 390px.</figcaption>
+      </figure>
+      <figure>
+        <img src="screenshots/v0-21-1-alignment-visual-390.png" alt="Alignment visual copy at 390 pixels wide">
+        <figcaption>Alignment: learner-facing visual copy at 390px.</figcaption>
+      </figure>
+      <figure>
+        <img src="screenshots/v0-21-1-visual-gallery-metadata-390.png" alt="Visual gallery metadata chips at 390 pixels wide">
+        <figcaption>Review gallery: asset filename/type metadata remains visible.</figcaption>
+      </figure>
+      <figure>
+        <img src="screenshots/v0-21-1-visual-gallery-internal-metadata-390.png" alt="Visual gallery internal metadata details at 390 pixels wide">
+        <figcaption>Review gallery: asset path, text handling, and print/PDF notes remain available for QA.</figcaption>
+      </figure>
+    </div>
+  </section>
+</main>
+</body>
+</html>

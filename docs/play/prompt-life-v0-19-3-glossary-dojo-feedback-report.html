@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Prompt Life v0.19.3 Glossary Dojo Feedback Report</title>
+    <style>
+      :root {
+        color: #111a4d;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.45;
+      }
+
+      body {
+        margin: 0;
+        background: #f7fbff;
+      }
+
+      main {
+        max-width: 860px;
+        margin: 0 auto;
+        padding: 40px 44px 56px;
+        background: #fff;
+      }
+
+      h1,
+      h2 {
+        color: #111177;
+        line-height: 1.08;
+      }
+
+      h1 {
+        margin: 0 0 8px;
+        font-size: 34px;
+      }
+
+      h2 {
+        margin: 28px 0 10px;
+        font-size: 20px;
+      }
+
+      p {
+        margin: 0 0 12px;
+      }
+
+      ul {
+        margin: 0;
+        padding-left: 20px;
+      }
+
+      li {
+        margin: 5px 0;
+      }
+
+      .meta {
+        color: #58627f;
+        font-size: 13px;
+        font-weight: 800;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .summary {
+        border: 1px solid #d8e1f2;
+        border-radius: 8px;
+        margin-top: 22px;
+        padding: 18px;
+        background: linear-gradient(180deg, #ffffff 0%, #f2fbfa 100%);
+      }
+
+      .screenshots {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+        align-items: start;
+      }
+
+      figure {
+        margin: 0;
+        break-inside: avoid;
+      }
+
+      img {
+        width: 100%;
+        border: 1px solid #d8e1f2;
+        border-radius: 8px;
+        box-shadow: 0 12px 24px rgba(7, 27, 111, 0.10);
+      }
+
+      figcaption {
+        margin-top: 8px;
+        color: #44506f;
+        font-size: 13px;
+        font-weight: 800;
+      }
+
+      code {
+        border-radius: 5px;
+        padding: 1px 5px;
+        background: #eef6ff;
+        color: #111177;
+        font-family: "SFMono-Regular", Consolas, monospace;
+        font-size: 0.92em;
+      }
+
+      @media print {
+        body {
+          background: #fff;
+        }
+
+        main {
+          padding: 22px 28px;
+        }
+
+        h1 {
+          font-size: 28px;
+        }
+
+        .screenshots {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p class="meta">Prompt Life v0.19.3 · 2026-06-06</p>
+      <h1>Glossary Dojo Feedback Precision</h1>
+      <p>This pass makes wrong-answer feedback identify which glossary term the selected wrong answer actually belongs to, while preserving Dojo mastery, Journey progress, badge criteria, games, dependencies, generated assets, and checkpoint randomization.</p>
+
+      <section class="summary" aria-labelledby="summary-title">
+        <h2 id="summary-title">What Changed</h2>
+        <ul>
+          <li>Each Dojo option now carries represented-term feedback metadata.</li>
+          <li>Wrong feedback says: <code>That definition is for [selected term]</code>, then names the correct term or correct match.</li>
+          <li>Correct feedback now begins with <code>Insight strengthened.</code></li>
+          <li>The feedback region and answer choices expose stable QA attributes.</li>
+        </ul>
+      </section>
+
+      <h2>Files Changed</h2>
+      <ul>
+        <li><code>src/features/glossary-dojo/types.ts</code></li>
+        <li><code>src/features/glossary-dojo/engine.ts</code></li>
+        <li><code>src/features/glossary-dojo/GlossaryDojoGame.tsx</code></li>
+        <li><code>src/main.tsx</code></li>
+        <li><code>docs/REVIEW_NOTES.md</code></li>
+        <li><code>docs/play/GLOSSARY_DOJO_FEEDBACK_V0_19_3.md</code></li>
+        <li><code>docs/play/screenshots/v0-19-3-glossary-dojo-feedback-qa.json</code></li>
+      </ul>
+
+      <h2>QA Result</h2>
+      <p>Programmatic browser QA passed at 390px and 320px. It checked wrong-answer feedback for <code>term_to_definition</code>, <code>definition_to_term</code>, <code>confusable_pair</code>, <code>relationship</code>, and <code>stage_location</code>, plus one correct-answer state. The trace reported zero failures.</p>
+
+      <h2>Verification</h2>
+      <ul>
+        <li><code>npm run typecheck</code>: passed.</li>
+        <li><code>npm run build</code>: passed with the existing Vite large-chunk warning.</li>
+        <li><code>npm run build:pages</code>: passed with the existing Vite large-chunk warning.</li>
+        <li><code>npm run audit:answers</code>: passed.</li>
+      </ul>
+
+      <h2>Screenshots</h2>
+      <div class="screenshots">
+        <figure>
+          <img src="screenshots/v0-19-3-dojo-wrong-definition-feedback-390.png" alt="Glossary Dojo wrong definition feedback at 390 pixels wide">
+          <figcaption>390px wrong definition feedback</figcaption>
+        </figure>
+        <figure>
+          <img src="screenshots/v0-19-3-dojo-correct-feedback-390.png" alt="Glossary Dojo correct feedback at 390 pixels wide">
+          <figcaption>390px correct feedback</figcaption>
+        </figure>
+        <figure>
+          <img src="screenshots/v0-19-3-dojo-wrong-definition-feedback-320.png" alt="Glossary Dojo wrong definition feedback at 320 pixels wide">
+          <figcaption>320px wrong definition feedback</figcaption>
+        </figure>
+      </div>
+
+      <h2>Known Issues</h2>
+      <p>Feedback uses the glossary short definition exactly as written, so some generated sentences can read like <code>RAG means RAG retrieves...</code>. That is a glossary wording cleanup opportunity, not a feedback attribution bug.</p>
+    </main>
+  </body>
+</html>

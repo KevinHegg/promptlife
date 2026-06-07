@@ -60,6 +60,10 @@ function termExplanation(term: GlossaryDojoTerm) {
   return term.shortExplanation ?? term.shortDefinition
 }
 
+function correctTermMeaning(term: GlossaryDojoTerm) {
+  return `${term.label} means ${termExplanation(term)}`
+}
+
 function stableShuffle<T>(items: T[], seed: string, questionId: string) {
   return shuffleChoicesForQuestion(questionId, items, seed)
 }
@@ -151,9 +155,14 @@ function makeOptions(
   const rawOptions: GlossaryDojoOption[] = terms.map((term) => ({
     id: `${questionId}:option:${compactId(term.id)}`,
     termId: term.id,
+    representedTermId: term.id,
     label: kind === 'definition' ? term.shortDefinition : term.label,
+    displayedLabel: kind === 'definition' ? term.shortDefinition : term.label,
+    displayedDefinition: term.shortDefinition,
     detail: kind === 'definition' ? term.label : term.shortDefinition,
-    kind
+    kind,
+    isCorrect: term.id === correct.id,
+    feedbackTermId: term.id
   }))
 
   return stableShuffle(rawOptions, seed, questionId)
@@ -324,6 +333,7 @@ export function evaluateGlossaryDojoAnswer(
   const selectedOption = question.options.find((option) => option.id === selectedOptionId)
   const correctOption = question.options.find((option) => option.id === question.correctOptionId)
   if (!selectedOption || !correctOption) return null
+  const selectedTermId = selectedOption.representedTermId ?? selectedOption.termId
 
   return {
     selectedOption,
@@ -331,7 +341,7 @@ export function evaluateGlossaryDojoAnswer(
     answer: {
       questionId: question.id,
       selectedOptionId,
-      selectedTermId: selectedOption.termId,
+      selectedTermId,
       correctTermId: question.correctTermId,
       targetTermId: question.targetTermId,
       isCorrect: selectedOption.id === question.correctOptionId,
@@ -345,31 +355,22 @@ export function getGlossaryDojoFeedback(
   result: GlossaryDojoAnswerResult,
   termsById: Map<string, GlossaryDojoTerm>
 ) {
-  const target = findTerm(termsById, question.targetTermId)
   const correct = findTerm(termsById, question.correctTermId)
-  const selected = findTerm(termsById, result.selectedOption.termId)
+  const selectedFeedbackTermId = result.selectedOption.feedbackTermId ??
+    result.selectedOption.representedTermId ??
+    result.selectedOption.termId
+  const selected = findTerm(termsById, selectedFeedbackTermId)
 
-  if (!target || !correct || !selected) return question.explanation
+  if (!correct) return question.explanation
 
   if (result.answer.isCorrect) {
-    return `Insight strengthened. ${question.explanation}`
+    return `Insight strengthened. ${correctTermMeaning(correct)}`
   }
 
-  if (question.type === 'term_to_definition') {
-    return `Not quite. That definition is for ${selected.label}. ${target.label} means ${termExplanation(target)}`
+  if (!selected) {
+    return `Not quite. That answer describes a different glossary term. The correct term is ${correct.label}. ${correctTermMeaning(correct)}`
   }
 
-  if (question.type === 'definition_to_term') {
-    return `Not quite. That definition is for ${target.label}. ${target.label} means ${termExplanation(target)}`
-  }
-
-  if (question.type === 'confusable_pair') {
-    return `Not quite. ${selected.label} is a real term, but the easy mix-up here is ${correct.label}. ${target.label} means ${termExplanation(target)}; ${correct.label} means ${termExplanation(correct)}`
-  }
-
-  if (question.type === 'stage_location') {
-    return `Not quite. ${selected.label} sits elsewhere in the map. ${correct.label} travels with ${target.label} in ${question.stageLabel ?? 'this learning neighborhood'}.`
-  }
-
-  return `Not quite. ${selected.label} is real, but ${correct.label} is the closer connection here. ${question.explanation}`
+  const correctionLabel = result.selectedOption.kind === 'definition' ? 'correct match' : 'correct term'
+  return `Not quite. That definition is for ${selected.label}. The ${correctionLabel} is ${correct.label}. ${correctTermMeaning(correct)}`
 }

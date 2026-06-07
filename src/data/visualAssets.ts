@@ -67,7 +67,7 @@ export const generatedVisualAssets: GeneratedVisualAsset[] = [
     visualType: 'generated-image',
     purpose: 'Show current context flowing through learned weights into one generated token.',
     alt: 'An abstract folded-paper prompt ribbon flows into a glowing model cloud, and one token-like bead exits.',
-    accessibilityDescription: 'A textless conceptual image shows a prompt ribbon entering a folded-paper model cloud and one token-like bead leaving it. The surrounding HTML callouts explain that context enters, learned weights shape probabilities, one token is generated, and the response grows one token at a time.',
+    accessibilityDescription: 'A prompt ribbon enters a folded-paper model cloud and one token-like bead leaves it. The explanation emphasizes that context enters, learned weights shape probabilities, one token is generated, and the response grows one token at a time.',
     callouts: [
       { heading: 'Context enters', body: 'The current prompt and response-so-far become the visible input for this run.' },
       { heading: 'Weights shape probabilities', body: 'Learned weights, built earlier during training, shape next-token scores.' },
@@ -86,14 +86,14 @@ export const generatedVisualAssets: GeneratedVisualAsset[] = [
     visualType: 'generated-image',
     purpose: 'Show broad data exposure shaping durable model weights before ordinary use.',
     alt: 'Streams of abstract paper fragments and light rain carve glowing paths into a folded-paper landscape.',
-    accessibilityDescription: 'A textless conceptual image shows many abstract paper fragments and light streams shaping a folded-paper landscape. The surrounding HTML callouts explain that many examples flow through training, repeated updates shape weights, broad patterns form before normal use, and this is not perfect source memory.',
+    accessibilityDescription: 'Many abstract paper fragments and light streams shape a folded-paper landscape. The explanation emphasizes that many examples flow through training, repeated updates shape weights, broad patterns form, and pretraining is not perfect source memory.',
     callouts: [
       { heading: 'Many examples flow', body: 'Pretraining repeats the training loop across enormous collections of examples.' },
       { heading: 'Updates shape weights', body: 'Prediction errors drive repeated weight updates during training.' },
-      { heading: 'Broad patterns form', body: 'The model develops grammar, style, associations, and task patterns before normal use.' },
-      { heading: 'Not perfect recall', body: 'Broad exposure does not make every source a searchable memory.' }
+      { heading: 'Broad patterns form', body: 'The model learns statistical patterns that can help later prompts.' },
+      { heading: 'Not perfect recall', body: 'Pretraining does not store every source as a searchable memory.' }
     ],
-    keyTakeaway: 'Pretraining builds broad capability, not perfect recall.',
+    keyTakeaway: 'Pretraining builds broad capability, not perfect source recall.',
     sourceNote
   },
   {
@@ -105,7 +105,7 @@ export const generatedVisualAssets: GeneratedVisualAsset[] = [
     visualType: 'generated-image',
     purpose: 'Show targeted training carving a more specific path through a pretrained model landscape.',
     alt: 'A glowing path is carved through a folded-paper terrain, guided by small blank example cards.',
-    accessibilityDescription: 'A textless conceptual image shows a glowing path crossing a folded-paper terrain with small blank example cards nearby. The surrounding HTML callouts explain that fine-tuning starts from a pretrained base, adds targeted examples or preference data, shapes future responses, and is more durable than one prompt.',
+    accessibilityDescription: 'A glowing path crosses a folded-paper terrain with small example cards nearby. The explanation emphasizes that fine-tuning starts from a pretrained base, adds targeted examples or preference data, shapes future responses, and is more durable than one prompt.',
     callouts: [
       { heading: 'Pretrained base', body: 'Fine-tuning begins with a model already shaped by broad pretraining.' },
       { heading: 'Targeted data', body: 'Examples, domain data, or preference data guide the additional training step.' },
@@ -124,7 +124,7 @@ export const generatedVisualAssets: GeneratedVisualAsset[] = [
     visualType: 'generated-image',
     purpose: 'Show alignment as guided behavior shaping, not moral understanding.',
     alt: 'A calm folded-paper zen garden contains a glowing path, soft guardrails, a compass-like light, and muted warning zones.',
-    accessibilityDescription: 'A textless conceptual image shows a calm folded-paper garden with a glowing path, soft guardrails, compass-like light, and muted warning zones. The surrounding HTML callouts explain that preferred behavior is encouraged, guardrails reduce risky paths, feedback and policies shape behavior, and the model does not gain conscience.',
+    accessibilityDescription: 'A calm folded-paper garden contains a glowing path, soft guardrails, compass-like light, and muted warning zones. The explanation emphasizes that preferred behavior is encouraged, guardrails reduce risky paths, feedback and policies shape behavior, and the model does not gain conscience.',
     callouts: [
       { heading: 'Preferred behavior', body: 'Training and system design can encourage more useful response patterns.' },
       { heading: 'Guardrails', body: 'Runtime safeguards can reduce risky paths during use.' },

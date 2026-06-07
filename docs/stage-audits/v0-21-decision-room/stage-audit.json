@@ -1,0 +1,67 @@
+{
+  "stage": "Decision Room",
+  "stageNumber": 4,
+  "date": "2026-06-06",
+  "scope": "documentation-only audit",
+  "cards": [
+    {
+      "id": "logits",
+      "number": 20,
+      "title": "Logits",
+      "recommendation": "revise",
+      "contentPriority": "high",
+      "visualPriority": "high",
+      "interactionPriority": "high",
+      "needsMoreExplanation": true,
+      "needsLessExplanation": false,
+      "recommendedVisualType": "svg",
+      "recommendedTinyInteractions": ["tap-choice", "toggle-state"],
+      "checkpointRecommendation": "Retarget checkpoint toward what logits are: raw next-token scores, not probabilities or truth scores.",
+      "notes": "Current card is accurate but thin. It reuses the softmax interaction and its checkpoint centers Softmax rather than Logits."
+    },
+    {
+      "id": "softmax",
+      "number": 21,
+      "title": "Softmax",
+      "recommendation": "revise",
+      "contentPriority": "high",
+      "visualPriority": "high",
+      "interactionPriority": "medium",
+      "needsMoreExplanation": true,
+      "needsLessExplanation": false,
+      "recommendedVisualType": "svg",
+      "recommendedTinyInteractions": ["toggle-state"],
+      "checkpointRecommendation": "Keep the current concept target, but make one distractor target the misconception that probability equals truth or confidence.",
+      "notes": "Current card says probabilities sum to one, but the visual does not show normalization or sum-to-one."
+    },
+    {
+      "id": "sampling",
+      "number": 22,
+      "title": "Sampling",
+      "recommendation": "revise",
+      "contentPriority": "medium",
+      "visualPriority": "medium",
+      "interactionPriority": "medium",
+      "needsMoreExplanation": true,
+      "needsLessExplanation": true,
+      "recommendedVisualType": "svg",
+      "recommendedTinyInteractions": ["next-token-pick"],
+      "checkpointRecommendation": "Keep the append-and-repeat checkpoint because it prepares The Day Repeats.",
+      "notes": "Sampling is the strongest current card in the stage, but top-k/top-p should stay light and probabilities should be visibly weighted."
+    }
+  ],
+  "stageRecommendations": {
+    "image2Assets": "none",
+    "svgAssets": ["logits", "softmax", "sampling"],
+    "css3dAssets": [],
+    "order": "correct",
+    "oneBadgeModel": "unchanged"
+  },
+  "verification": {
+    "typecheck": "passed",
+    "build": "passed with existing Vite large-chunk warning",
+    "buildPages": "passed with existing Vite large-chunk warning",
+    "auditAnswers": "passed",
+    "progressDuringScreenshotQa": "[]"
+  }
+}

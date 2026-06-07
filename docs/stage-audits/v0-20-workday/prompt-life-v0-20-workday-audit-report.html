@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Prompt Life v0.20 Workday Audit Report</title>
+    <style>
+      :root {
+        color: #111a4d;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.45;
+      }
+
+      body {
+        margin: 0;
+        background: #f7fbff;
+      }
+
+      main {
+        max-width: 920px;
+        margin: 0 auto;
+        padding: 38px 44px 54px;
+        background: #fff;
+      }
+
+      h1,
+      h2,
+      h3 {
+        color: #111177;
+        line-height: 1.1;
+      }
+
+      h1 {
+        margin: 0 0 8px;
+        font-size: 34px;
+      }
+
+      h2 {
+        margin: 28px 0 10px;
+        font-size: 21px;
+      }
+
+      h3 {
+        margin: 18px 0 8px;
+        font-size: 16px;
+      }
+
+      p {
+        margin: 0 0 12px;
+      }
+
+      ul {
+        margin: 0;
+        padding-left: 20px;
+      }
+
+      li {
+        margin: 5px 0;
+      }
+
+      .meta {
+        color: #58627f;
+        font-size: 13px;
+        font-weight: 800;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .summary {
+        border: 1px solid #d8e1f2;
+        border-radius: 8px;
+        margin-top: 22px;
+        padding: 18px;
+        background: linear-gradient(180deg, #ffffff 0%, #f2fbfa 100%);
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+        align-items: start;
+      }
+
+      figure {
+        margin: 0;
+        break-inside: avoid;
+      }
+
+      img {
+        width: 100%;
+        border: 1px solid #d8e1f2;
+        border-radius: 8px;
+        box-shadow: 0 12px 24px rgba(7, 27, 111, 0.10);
+      }
+
+      figcaption {
+        margin-top: 8px;
+        color: #44506f;
+        font-size: 13px;
+        font-weight: 800;
+      }
+
+      code {
+        border-radius: 5px;
+        padding: 1px 5px;
+        background: #eef6ff;
+        color: #111177;
+        font-family: "SFMono-Regular", Consolas, monospace;
+        font-size: 0.92em;
+      }
+
+      .page-break {
+        break-before: page;
+      }
+
+      @media print {
+        main {
+          padding: 22px 28px;
+        }
+
+        h1 {
+          font-size: 28px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p class="meta">Prompt Life internal report · v0.20 · June 6, 2026</p>
+      <h1>Workday Stage Audit</h1>
+      <p>This audit covers Journey stage 3: Attention, MLP, Layers, and Hidden States. It is documentation-only and did not alter the live curriculum.</p>
+
+      <section class="summary" aria-labelledby="summary-title">
+        <h2 id="summary-title">Summary</h2>
+        <ul>
+          <li>Stage order is correct: Attention -> MLP -> Layers -> Hidden States.</li>
+          <li>The cards need richer lesson architecture fields, especially durable/temporary and prompt/current-context notes.</li>
+          <li>MLP and Hidden States are the highest-priority visual and interaction repair targets.</li>
+          <li>No Image 2 asset is recommended for the next Workday pass; labels and relationships matter too much.</li>
+          <li>Layers is the best lightweight CSS 3D candidate.</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="verification-title">
+        <h2 id="verification-title">Verification</h2>
+        <ul>
+          <li><code>npm run typecheck</code>: passed.</li>
+          <li><code>npm run build</code>: passed with the existing Vite large-chunk warning.</li>
+          <li><code>npm run build:pages</code>: passed with the existing Vite large-chunk warning.</li>
+          <li><code>npm run audit:answers</code>: passed.</li>
+          <li>51 screenshots were captured in Preview mode; progress remained unchanged in the temporary profile.</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="screenshots-title" class="page-break">
+        <h2 id="screenshots-title">Representative Screenshots</h2>
+        <div class="grid">
+          <figure>
+            <img src="screenshots/workday-overview.png" alt="Workday stage overview in the Journey list at 390 pixels wide.">
+            <figcaption>Workday overview</figcaption>
+          </figure>
+          <figure>
+            <img src="screenshots/attention-visual-aid.png" alt="Attention visual aid showing token nodes and relevance arcs.">
+            <figcaption>Attention visual aid</figcaption>
+          </figure>
+          <figure>
+            <img src="screenshots/mlp-visual-aid-320.png" alt="MLP visual aid at 320 pixels wide showing a token, gears, and features.">
+            <figcaption>MLP visual aid at 320px</figcaption>
+          </figure>
+          <figure>
+            <img src="screenshots/layers-visual-aid.png" alt="Layers visual aid showing a stack of layer cards and carry-forward path.">
+            <figcaption>Layers visual aid</figcaption>
+          </figure>
+          <figure>
+            <img src="screenshots/hidden-states-core-idea.png" alt="Hidden States core idea panel explaining temporary context-shaped vectors.">
+            <figcaption>Hidden States core idea</figcaption>
+          </figure>
+          <figure>
+            <img src="screenshots/hidden-states-correct-feedback.png" alt="Hidden States checkpoint after selecting the correct answer.">
+            <figcaption>Hidden States checkpoint feedback</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section aria-labelledby="next-title" class="page-break">
+        <h2 id="next-title">Next Implementation Prompt</h2>
+        <p>Implement a v0.20.1 Workday visual/interaction repair pass. Do not add new Journey cards, games, generated PNGs, heavy 3D libraries, progress-rule changes, checkpoint-randomization changes, or extra badges. Keep the Workday order: Attention, MLP, Layers, Hidden States. Convert these four cards from the older slim schema to the richer lesson architecture by adding explicit core explanation, model lifecycle, durable-vs-temporary, prompt-vs-response/current-context notes, misconceptions, and clearer feedback. Update coded visuals so Attention uses a concrete token relationship, MLP shows per-token feature reshaping after attention, Layers shows repeated attention-plus-MLP blocks, and Hidden States contrasts embedding with temporary context-shaped hidden state. Add or revise tiny interactions using connect-nodes for Attention, toggle-state for MLP, lightweight stack inspect for Layers, and sort-buckets or toggle-state for Hidden States. Run <code>npm run typecheck</code>, <code>npm run build</code>, <code>npm run build:pages</code>, and <code>npm run audit:answers</code>.</p>
+      </section>
+    </main>
+  </body>
+</html>

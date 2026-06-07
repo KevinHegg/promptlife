@@ -1,0 +1,79 @@
+{
+  "stage": "Workday",
+  "version": "v0.20",
+  "status": "audit-only",
+  "date": "2026-06-06",
+  "cards": [
+    {
+      "id": "attention",
+      "number": 16,
+      "title": "Attention",
+      "recommendation": "revise",
+      "contentPriority": "medium",
+      "visualPriority": "high",
+      "interactionPriority": "high",
+      "needsMoreExplanation": true,
+      "needsLessExplanation": false,
+      "recommendedVisualType": "svg",
+      "recommendedTinyInteractions": ["connect-nodes"],
+      "checkpointRecommendation": "Keep the misconception target, but make feedback explicitly say current context can include prompt, retrieved text, and response-so-far tokens.",
+      "notes": "Correct concept and stage placement. Needs a token-to-token relevance visual using the actual sentence rather than generic t1-t6 nodes."
+    },
+    {
+      "id": "mlp",
+      "number": 17,
+      "title": "MLP",
+      "recommendation": "revise",
+      "contentPriority": "high",
+      "visualPriority": "high",
+      "interactionPriority": "high",
+      "needsMoreExplanation": true,
+      "needsLessExplanation": false,
+      "recommendedVisualType": "svg",
+      "recommendedTinyInteractions": ["toggle-state"],
+      "checkpointRecommendation": "Keep the correct answer but add a stronger distractor about mixing across token positions to test the attention/MLP distinction.",
+      "notes": "Needs a clearer expansion of multi-layer perceptron and a stronger visual showing per-token feature reshaping after attention."
+    },
+    {
+      "id": "layers",
+      "number": 18,
+      "title": "Layers",
+      "recommendation": "revise",
+      "contentPriority": "medium",
+      "visualPriority": "medium",
+      "interactionPriority": "medium",
+      "needsMoreExplanation": true,
+      "needsLessExplanation": false,
+      "recommendedVisualType": "css-3d",
+      "recommendedTinyInteractions": ["rotate / inspect 3D object"],
+      "checkpointRecommendation": "Keep hidden states as the target, but make feedback explain repeated attention-plus-MLP blocks and fixed weights during inference.",
+      "notes": "Belongs after MLP and before Hidden States. Best CSS 3D candidate in Workday because a stack can teach repeated blocks without heavy libraries."
+    },
+    {
+      "id": "hidden-states",
+      "number": 19,
+      "title": "Hidden States",
+      "recommendation": "revise",
+      "contentPriority": "high",
+      "visualPriority": "high",
+      "interactionPriority": "high",
+      "needsMoreExplanation": true,
+      "needsLessExplanation": false,
+      "recommendedVisualType": "hybrid",
+      "recommendedTinyInteractions": ["sort-buckets", "toggle-state"],
+      "checkpointRecommendation": "Keep the internal-numbers misconception target, but add answer feedback that separates hidden states from embeddings, weights, and memory.",
+      "notes": "Most abstract card in the stage. Needs a stronger embedding-to-hidden-state comparison and explicit temporary context-shaped language."
+    }
+  ],
+  "stageRecommendations": {
+    "cardsToKeep": ["attention", "mlp", "layers", "hidden-states"],
+    "cardsToMerge": [],
+    "cardsToCut": [],
+    "cardsOutOfOrder": [],
+    "highestPriorityCards": ["mlp", "hidden-states", "attention"],
+    "image2Candidates": [],
+    "mustRemainCoded": ["attention", "mlp", "hidden-states"],
+    "css3dCandidate": "layers",
+    "doNotChange": ["progress rules", "checkpoint randomization", "one badge model"]
+  }
+}

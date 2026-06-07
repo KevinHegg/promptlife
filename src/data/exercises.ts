@@ -386,6 +386,30 @@ export const exercises: Exercise[] = [
     completionKey: 'exercise:mlp-feature-reshape'
   },
   {
+    id: 'hidden-state-sort',
+    title: 'Hidden State Sort',
+    concept: 'Durable parameters versus temporary activations',
+    prompt: 'Hidden states are temporary vectors made during the current forward pass.',
+    goal: 'Separate durable model parts from temporary run state.',
+    actionVerb: 'Sort',
+    actionInstruction: 'Sort each item into Durable, Temporary, or Not in this forward pass.',
+    inputType: 'sort-buckets',
+    buckets: ['Durable', 'Temporary', 'Not in this forward pass'],
+    items: [
+      { id: 'embedding-table', label: 'embedding table', bucket: 'Durable' },
+      { id: 'weight', label: 'weight', bucket: 'Durable' },
+      { id: 'hidden-state', label: 'hidden state', bucket: 'Temporary' },
+      { id: 'attention-pattern', label: 'attention pattern', bucket: 'Temporary' },
+      { id: 'current-context', label: 'current context', bucket: 'Temporary' },
+      { id: 'training-data', label: 'training data', bucket: 'Not in this forward pass' }
+    ],
+    feedbackCorrect: 'Good. Hidden states are temporary internal vectors shaped by the current context.',
+    feedbackIncorrect: 'Embedding tables and weights are durable. Hidden states, attention patterns, and current context are temporary. Training data is outside this forward pass.',
+    insight: 'Hidden states are temporary activations, not memory or visible text.',
+    glossaryTerms: ['hidden state', 'activation', 'embedding', 'weight', 'forward pass'],
+    completionKey: 'exercise:hidden-state-sort'
+  },
+  {
     id: 'open-book-or-learned',
     title: 'Open Book or Learned?',
     concept: 'Weights, retrieved context, and temporary instructions',
@@ -454,7 +478,7 @@ export const lessonExerciseIds: Record<string, string> = {
   embeddings: 'prompt-or-response-label',
   attention: 'attention-relevance',
   mlp: 'mlp-feature-reshape',
-  'hidden-states': 'mlp-feature-reshape',
+  'hidden-states': 'hidden-state-sort',
   logits: 'softmax-funnel',
   softmax: 'softmax-funnel',
   sampling: 'pick-next-token',

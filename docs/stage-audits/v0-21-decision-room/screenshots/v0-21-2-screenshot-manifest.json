@@ -1,0 +1,158 @@
+{
+  "capturedAt": "2026-06-07T02:16:35.364Z",
+  "manifest": [
+    {
+      "file": "v0-21-2-decision-room-overview-390.png",
+      "width": 390,
+      "height": 964,
+      "state": "(() => {\n  localStorage.setItem('promptlife:v1:lastLocation', JSON.stringify('journey'));\n  localStorage.setItem('promptlife:v1:lessonId', JSON.stringify('logits'));\n  localStorage.setItem('promptlife:v1:progress', JSON.stringify([\"what-is-llm\",\"where-llms-fit\",\"history\",\"training\",\"pretraining\",\"overfitting-generalization\",\"fine-tuning\",\"alignment\",\"inference\",\"prompt-response\",\"tokens\",\"token-ids\",\"embeddings\",\"vectors\",\"tensors\",\"attention\",\"mlp\",\"layers\",\"hidden-states\"]));\n})()",
+      "scroll": "(() => {\n      const shell = document.querySelector('.pl-shell');\n      const target = document.getElementById('journey-section-title-decision-room');\n      if (shell && target) shell.scrollTop = Math.max(0, target.offsetTop - 20);\n    })()",
+      "path": "/Users/kevinhegg/Desktop/promptlife/docs/stage-audits/v0-21-decision-room/screenshots/v0-21-2-decision-room-overview-390.png",
+      "checks": {
+        "title": "Today in Prompt Life",
+        "text": "\n    Skip to contentMain pathToday in Prompt LifeFollow one prompt from before training through inference, generation, and model literacy.Jump to a  tage of the prompt’  day.1Before MorningModel  haped before u e2Morning CommuteText become  number 3WorkdayLayer  proce  context4Deci ion RoomOne token i  cho en5The Day Repeat Context grow  and expire 6Twilight: The Wider Land capeWider AI land cape7Midnight LedgerCo t  and  hadow 8New DawnBetter human u ePath viewChoo e a pathAll card  follow the full day. E ential i  the  horte t path. Deep add  mechanic . Ethic  follow  co t , choice , and human con equence .AllE entialDeepEthic Showing all 39 Journey card  acro  8  tage .Guided compari on Run and compareU e the e when the map feel  ab tract: one guide  a prompt through the model, the other compare  how AI  y tem  learn.Prompt RunHow AI Learn 1Before MorningThe model i   haped before your prompt arrive .The prompt ha  not arrived yet. The model i  being  haped before ordinary u e.Focu How weight  are  haped before ordinary u e.Keep clearTraining change  weight ; inference u e  them.1What I  an LLM?A learned next-token prediction  y temReview✓2Where LLM  FitAI → machine learning → g",
+        "scrollLeft": 0,
+        "overflowX": false,
+        "hasProbabilityNotTruth": false
+      }
+    },
+    {
+      "file": "v0-21-2-logits-raw-score-visual-390.png",
+      "width": 390,
+      "height": 964,
+      "state": "(() => {\n  localStorage.setItem('promptlife:v1:lastLocation', JSON.stringify('learn'));\n  localStorage.setItem('promptlife:v1:lessonId', JSON.stringify('logits'));\n  localStorage.setItem('promptlife:v1:progress', JSON.stringify([]));\n  localStorage.removeItem('promptlife:v1:choiceOrderSeed');\n})()",
+      "scroll": "(() => {\n      const shell = document.querySelector('.pl-shell');\n      const target = document.querySelector('.visual-aid-card');\n      if (shell && target) shell.scrollTop = Math.max(0, target.offsetTop - 16);\n    })()",
+      "path": "/Users/kevinhegg/Desktop/promptlife/docs/stage-audits/v0-21-decision-room/screenshots/v0-21-2-logits-raw-score-visual-390.png",
+      "checks": {
+        "title": "Logits",
+        "text": "\n    Skip to contentDeci ion Room20 / 391Before Morning2Morning Commute3Workday4Deci ion Room5The Day Repeat 6Twilight: The Wider Land cape7Midnight Ledger8New DawnLogit Raw next-token  core Logit  are raw  core  for po ible next token  before they are turned into probabilitie .Previewing thi  card. Progre  will not change.Vi ual aidWhat to picturehidden  tate corenext?floor8.2 highroom5.1 medcounter2.0 lowquantum-1.0 v lowraw  core , not probabilitie Raw ScoreboardBefore probabilitie The final hidden  tate feed  candidate next-token  core . The e logit  rank candidate , but they are raw  core , not probabilitie  or truth.1Hidden  tate arrive  The final context- haped vector reache  the output  coring  tep.2Candidate  get  core  Po ible next token   uch a  floor, room, counter, and quantum receive raw logit .3Score  rank candidate  Higher  core mean   tronger local candidate, not guaranteed truth.4Softmax come  next Softmax convert  raw  core  into probabilitie .Key takeaway: Logit  are raw next-token  core , not probabilitie  and not truth.Acce ible de cription: The diagram  tart  with a final hidden  tate flowing into an output  core panel. Candidate token  floor, room, counter, ",
+        "scrollLeft": 0,
+        "overflowX": false,
+        "hasProbabilityNotTruth": false
+      }
+    },
+    {
+      "file": "v0-21-2-logits-interaction-390.png",
+      "width": 390,
+      "height": 964,
+      "state": "(() => {\n  localStorage.setItem('promptlife:v1:lastLocation', JSON.stringify('learn'));\n  localStorage.setItem('promptlife:v1:lessonId', JSON.stringify('logits'));\n  localStorage.setItem('promptlife:v1:progress', JSON.stringify([]));\n  localStorage.removeItem('promptlife:v1:choiceOrderSeed');\n})()",
+      "click": "document.querySelector('.logits-raw-toggle-demo button')?.click()",
+      "scroll": "(() => {\n      const shell = document.querySelector('.pl-shell');\n      const target = document.querySelector('.interaction-card');\n      if (shell && target) shell.scrollTop = Math.max(0, target.offsetTop - 16);\n    })()",
+      "path": "/Users/kevinhegg/Desktop/promptlife/docs/stage-audits/v0-21-decision-room/screenshots/v0-21-2-logits-interaction-390.png",
+      "checks": {
+        "title": "Logits",
+        "text": "\n    Skip to contentDeci ion Room20 / 391Before Morning2Morning Commute3Workday4Deci ion Room5The Day Repeat 6Twilight: The Wider Land cape7Midnight Ledger8New DawnLogit Raw next-token  core Logit  are raw  core  for po ible next token  before they are turned into probabilitie .Previewing thi  card. Progre  will not change.Vi ual aidWhat to picturehidden  tate corenext?floor8.2 highroom5.1 medcounter2.0 lowquantum-1.0 v lowraw  core , not probabilitie Raw ScoreboardBefore probabilitie The final hidden  tate feed  candidate next-token  core . The e logit  rank candidate , but they are raw  core , not probabilitie  or truth.1Hidden  tate arrive  The final context- haped vector reache  the output  coring  tep.2Candidate  get  core  Po ible next token   uch a  floor, room, counter, and quantum receive raw logit .3Score  rank candidate  Higher  core mean   tronger local candidate, not guaranteed truth.4Softmax come  next Softmax convert  raw  core  into probabilitie .Key takeaway: Logit  are raw next-token  core , not probabilitie  and not truth.Acce ible de cription: The diagram  tart  with a final hidden  tate flowing into an output  core panel. Candidate token  floor, room, counter, ",
+        "scrollLeft": 0,
+        "overflowX": false,
+        "hasProbabilityNotTruth": false
+      }
+    },
+    {
+      "file": "v0-21-2-softmax-before-after-visual-390.png",
+      "width": 390,
+      "height": 964,
+      "state": "(() => {\n  localStorage.setItem('promptlife:v1:lastLocation', JSON.stringify('learn'));\n  localStorage.setItem('promptlife:v1:lessonId', JSON.stringify('softmax'));\n  localStorage.setItem('promptlife:v1:progress', JSON.stringify([]));\n  localStorage.removeItem('promptlife:v1:choiceOrderSeed');\n})()",
+      "scroll": "(() => {\n      const shell = document.querySelector('.pl-shell');\n      const target = document.querySelector('.visual-aid-card');\n      if (shell && target) shell.scrollTop = Math.max(0, target.offsetTop - 16);\n    })()",
+      "path": "/Users/kevinhegg/Desktop/promptlife/docs/stage-audits/v0-21-decision-room/screenshots/v0-21-2-softmax-before-after-visual-390.png",
+      "checks": {
+        "title": "Softmax",
+        "text": "\n    Skip to contentDeci ion Room21 / 391Before Morning2Morning Commute3Workday4Deci ion Room5The Day Repeat 6Twilight: The Wider Land cape7Midnight Ledger8New DawnSoftmaxScore  become probabilitie Softmax i  a function that turn  raw next-token  core  into probabilitie  that  um to one.Previewing thi  card. Progre  will not change.Vi ual aidWhat to picturelogit probabilitie oftmaxfloor8.286%room5.112%counter2.02%quantum-1.0~0% um = 100%probability != truthScore to ProbabilityNormalize before choo ingSoftmax convert  raw logit  into probabilitie  that  um to 100%. High probability mean  likely under the model, not guaranteed true.1Logit  go in Raw  core   uch a  8.2, 5.1, 2.0, and -1.0 enter  oftmax.2Softmax convert  The function turn   core difference  into a probability di tribution.3Probabilitie  come out The rounded teaching value   um to 100%.4Not truth Probability i  about model likelihood, not evidence or correctne .Key takeaway: Softmax turn  raw  core  into probabilitie ; it doe  not verify truth.Acce ible de cription: The diagram  how  raw logit  for floor, room, counter, and quantum on the left, a  oftmax arrow in the middle, and probabilitie  of 86 percent, 12 percent, ",
+        "scrollLeft": 0,
+        "overflowX": false,
+        "hasProbabilityNotTruth": true
+      }
+    },
+    {
+      "file": "v0-21-2-softmax-interaction-390.png",
+      "width": 390,
+      "height": 964,
+      "state": "(() => {\n  localStorage.setItem('promptlife:v1:lastLocation', JSON.stringify('learn'));\n  localStorage.setItem('promptlife:v1:lessonId', JSON.stringify('softmax'));\n  localStorage.setItem('promptlife:v1:progress', JSON.stringify([]));\n  localStorage.removeItem('promptlife:v1:choiceOrderSeed');\n})()",
+      "click": "document.querySelector('.softmax-convert-demo button')?.click()",
+      "scroll": "(() => {\n      const shell = document.querySelector('.pl-shell');\n      const target = document.querySelector('.interaction-card');\n      if (shell && target) shell.scrollTop = Math.max(0, target.offsetTop - 16);\n    })()",
+      "path": "/Users/kevinhegg/Desktop/promptlife/docs/stage-audits/v0-21-decision-room/screenshots/v0-21-2-softmax-interaction-390.png",
+      "checks": {
+        "title": "Softmax",
+        "text": "\n    Skip to contentDeci ion Room21 / 391Before Morning2Morning Commute3Workday4Deci ion Room5The Day Repeat 6Twilight: The Wider Land cape7Midnight Ledger8New DawnSoftmaxScore  become probabilitie Softmax i  a function that turn  raw next-token  core  into probabilitie  that  um to one.Previewing thi  card. Progre  will not change.Vi ual aidWhat to picturelogit probabilitie oftmaxfloor8.286%room5.112%counter2.02%quantum-1.0~0% um = 100%probability != truthScore to ProbabilityNormalize before choo ingSoftmax convert  raw logit  into probabilitie  that  um to 100%. High probability mean  likely under the model, not guaranteed true.1Logit  go in Raw  core   uch a  8.2, 5.1, 2.0, and -1.0 enter  oftmax.2Softmax convert  The function turn   core difference  into a probability di tribution.3Probabilitie  come out The rounded teaching value   um to 100%.4Not truth Probability i  about model likelihood, not evidence or correctne .Key takeaway: Softmax turn  raw  core  into probabilitie ; it doe  not verify truth.Acce ible de cription: The diagram  how  raw logit  for floor, room, counter, and quantum on the left, a  oftmax arrow in the middle, and probabilitie  of 86 percent, 12 percent, ",
+        "scrollLeft": 0,
+        "overflowX": false,
+        "hasProbabilityNotTruth": true
+      }
+    },
+    {
+      "file": "v0-21-2-sampling-weighted-visual-390.png",
+      "width": 390,
+      "height": 964,
+      "state": "(() => {\n  localStorage.setItem('promptlife:v1:lastLocation', JSON.stringify('learn'));\n  localStorage.setItem('promptlife:v1:lessonId', JSON.stringify('sampling'));\n  localStorage.setItem('promptlife:v1:progress', JSON.stringify([]));\n  localStorage.removeItem('promptlife:v1:choiceOrderSeed');\n})()",
+      "scroll": "(() => {\n      const shell = document.querySelector('.pl-shell');\n      const target = document.querySelector('.visual-aid-card');\n      if (shell && target) shell.scrollTop = Math.max(0, target.offsetTop - 16);\n    })()",
+      "path": "/Users/kevinhegg/Desktop/promptlife/docs/stage-audits/v0-21-decision-room/screenshots/v0-21-2-sampling-weighted-visual-390.png",
+      "checks": {
+        "title": "Sampling",
+        "text": "\n    Skip to contentDeci ion Room22 / 391Before Morning2Morning Commute3Workday4Deci ion Room5The Day Repeat 6Twilight: The Wider Land cape7Midnight Ledger8New DawnSamplingOne next token i  cho enSampling i  the decoding  tep that choo e  one next token from the probability di tribution.Previewing thi  card. Progre  will not change.Vi ual aidWhat to pictureA jealou  dog cha ed a  tartled catacro  the kitchenfloor86%room12%counter2%quantum~0%floorcho en tokenlow probability i   till po ibleWeighted Token ChoiceOne token cho enSampling choo e  one next re pon e token from probabilitie . Probability i  not truth: a low-probability token can  till be po ible, and a likely token can  till be un upported.1Probability candidate  floor i   tronge t, room i  plau ible, counter i  weak, and quantum i  barely likely in thi  context.2One token cho en The decoding  tep choo e  one next re pon e token.3Append next The cho en token i  appended before the model run  again.4Not truth A likely token can  till be un upported or wrong in a wider factual claim.Key takeaway: Sampling choo e  one token from probabilitie ; probability i  not truth.Acce ible de cription: The diagram  how  weighted candidat",
+        "scrollLeft": 0,
+        "overflowX": false,
+        "hasProbabilityNotTruth": true
+      }
+    },
+    {
+      "file": "v0-21-2-sampling-interaction-390.png",
+      "width": 390,
+      "height": 964,
+      "state": "(() => {\n  localStorage.setItem('promptlife:v1:lastLocation', JSON.stringify('learn'));\n  localStorage.setItem('promptlife:v1:lessonId', JSON.stringify('sampling'));\n  localStorage.setItem('promptlife:v1:progress', JSON.stringify([]));\n  localStorage.removeItem('promptlife:v1:choiceOrderSeed');\n})()",
+      "click": "Array.from(document.querySelectorAll('.sampling-probability-pick-demo .weighted-token-cloud button')).find((button) => button.textContent?.includes('floor'))?.click()",
+      "scroll": "(() => {\n      const shell = document.querySelector('.pl-shell');\n      const target = document.querySelector('.interaction-card');\n      if (shell && target) shell.scrollTop = Math.max(0, target.offsetTop - 16);\n    })()",
+      "path": "/Users/kevinhegg/Desktop/promptlife/docs/stage-audits/v0-21-decision-room/screenshots/v0-21-2-sampling-interaction-390.png",
+      "checks": {
+        "title": "Sampling",
+        "text": "\n    Skip to contentDeci ion Room22 / 391Before Morning2Morning Commute3Workday4Deci ion Room5The Day Repeat 6Twilight: The Wider Land cape7Midnight Ledger8New DawnSamplingOne next token i  cho enSampling i  the decoding  tep that choo e  one next token from the probability di tribution.Previewing thi  card. Progre  will not change.Vi ual aidWhat to pictureA jealou  dog cha ed a  tartled catacro  the kitchenfloor86%room12%counter2%quantum~0%floorcho en tokenlow probability i   till po ibleWeighted Token ChoiceOne token cho enSampling choo e  one next re pon e token from probabilitie . Probability i  not truth: a low-probability token can  till be po ible, and a likely token can  till be un upported.1Probability candidate  floor i   tronge t, room i  plau ible, counter i  weak, and quantum i  barely likely in thi  context.2One token cho en The decoding  tep choo e  one next re pon e token.3Append next The cho en token i  appended before the model run  again.4Not truth A likely token can  till be un upported or wrong in a wider factual claim.Key takeaway: Sampling choo e  one token from probabilitie ; probability i  not truth.Acce ible de cription: The diagram  how  weighted candidat",
+        "scrollLeft": 0,
+        "overflowX": false,
+        "hasProbabilityNotTruth": true
+      }
+    },
+    {
+      "file": "v0-21-2-softmax-visual-320.png",
+      "width": 320,
+      "height": 964,
+      "state": "(() => {\n  localStorage.setItem('promptlife:v1:lastLocation', JSON.stringify('learn'));\n  localStorage.setItem('promptlife:v1:lessonId', JSON.stringify('softmax'));\n  localStorage.setItem('promptlife:v1:progress', JSON.stringify([]));\n  localStorage.removeItem('promptlife:v1:choiceOrderSeed');\n})()",
+      "scroll": "(() => {\n      const shell = document.querySelector('.pl-shell');\n      const target = document.querySelector('.visual-aid-card');\n      if (shell && target) shell.scrollTop = Math.max(0, target.offsetTop - 16);\n    })()",
+      "path": "/Users/kevinhegg/Desktop/promptlife/docs/stage-audits/v0-21-decision-room/screenshots/v0-21-2-softmax-visual-320.png",
+      "checks": {
+        "title": "Softmax",
+        "text": "\n    Skip to contentDeci ion Room21 / 391Before Morning2Morning Commute3Workday4Deci ion Room5The Day Repeat 6Twilight: The Wider Land cape7Midnight Ledger8New DawnSoftmaxScore  become probabilitie Softmax i  a function that turn  raw next-token  core  into probabilitie  that  um to one.Previewing thi  card. Progre  will not change.Vi ual aidWhat to picturelogit probabilitie oftmaxfloor8.286%room5.112%counter2.02%quantum-1.0~0% um = 100%probability != truthScore to ProbabilityNormalize before choo ingSoftmax convert  raw logit  into probabilitie  that  um to 100%. High probability mean  likely under the model, not guaranteed true.1Logit  go in Raw  core   uch a  8.2, 5.1, 2.0, and -1.0 enter  oftmax.2Softmax convert  The function turn   core difference  into a probability di tribution.3Probabilitie  come out The rounded teaching value   um to 100%.4Not truth Probability i  about model likelihood, not evidence or correctne .Key takeaway: Softmax turn  raw  core  into probabilitie ; it doe  not verify truth.Acce ible de cription: The diagram  how  raw logit  for floor, room, counter, and quantum on the left, a  oftmax arrow in the middle, and probabilitie  of 86 percent, 12 percent, ",
+        "scrollLeft": 0,
+        "overflowX": false,
+        "hasProbabilityNotTruth": true
+      }
+    },
+    {
+      "file": "v0-21-2-sampling-visual-320.png",
+      "width": 320,
+      "height": 964,
+      "state": "(() => {\n  localStorage.setItem('promptlife:v1:lastLocation', JSON.stringify('learn'));\n  localStorage.setItem('promptlife:v1:lessonId', JSON.stringify('sampling'));\n  localStorage.setItem('promptlife:v1:progress', JSON.stringify([]));\n  localStorage.removeItem('promptlife:v1:choiceOrderSeed');\n})()",
+      "scroll": "(() => {\n      const shell = document.querySelector('.pl-shell');\n      const target = document.querySelector('.visual-aid-card');\n      if (shell && target) shell.scrollTop = Math.max(0, target.offsetTop - 16);\n    })()",
+      "path": "/Users/kevinhegg/Desktop/promptlife/docs/stage-audits/v0-21-decision-room/screenshots/v0-21-2-sampling-visual-320.png",
+      "checks": {
+        "title": "Sampling",
+        "text": "\n    Skip to contentDeci ion Room22 / 391Before Morning2Morning Commute3Workday4Deci ion Room5The Day Repeat 6Twilight: The Wider Land cape7Midnight Ledger8New DawnSamplingOne next token i  cho enSampling i  the decoding  tep that choo e  one next token from the probability di tribution.Previewing thi  card. Progre  will not change.Vi ual aidWhat to pictureA jealou  dog cha ed a  tartled catacro  the kitchenfloor86%room12%counter2%quantum~0%floorcho en tokenlow probability i   till po ibleWeighted Token ChoiceOne token cho enSampling choo e  one next re pon e token from probabilitie . Probability i  not truth: a low-probability token can  till be po ible, and a likely token can  till be un upported.1Probability candidate  floor i   tronge t, room i  plau ible, counter i  weak, and quantum i  barely likely in thi  context.2One token cho en The decoding  tep choo e  one next re pon e token.3Append next The cho en token i  appended before the model run  again.4Not truth A likely token can  till be un upported or wrong in a wider factual claim.Key takeaway: Sampling choo e  one token from probabilitie ; probability i  not truth.Acce ible de cription: The diagram  how  weighted candidat",
+        "scrollLeft": 0,
+        "overflowX": false,
+        "hasProbabilityNotTruth": true
+      }
+    },
+    {
+      "file": "v0-21-2-checkpoint-randomized-logits-390.png",
+      "width": 390,
+      "height": 964,
+      "state": "(() => {\n  localStorage.setItem('promptlife:v1:lastLocation', JSON.stringify('learn'));\n  localStorage.setItem('promptlife:v1:lessonId', JSON.stringify('logits'));\n  localStorage.setItem('promptlife:v1:progress', JSON.stringify([]));\n  localStorage.removeItem('promptlife:v1:choiceOrderSeed');\n})()",
+      "scroll": "(() => {\n      const shell = document.querySelector('.pl-shell');\n      const target = document.querySelector('.quiz-card');\n      if (shell && target) shell.scrollTop = Math.max(0, target.offsetTop - 16);\n    })()",
+      "path": "/Users/kevinhegg/Desktop/promptlife/docs/stage-audits/v0-21-decision-room/screenshots/v0-21-2-checkpoint-randomized-logits-390.png",
+      "checks": {
+        "title": "Logits",
+        "text": "\n    Skip to contentDeci ion Room20 / 391Before Morning2Morning Commute3Workday4Deci ion Room5The Day Repeat 6Twilight: The Wider Land cape7Midnight Ledger8New DawnLogit Raw next-token  core Logit  are raw  core  for po ible next token  before they are turned into probabilitie .Previewing thi  card. Progre  will not change.Vi ual aidWhat to picturehidden  tate corenext?floor8.2 highroom5.1 medcounter2.0 lowquantum-1.0 v lowraw  core , not probabilitie Raw ScoreboardBefore probabilitie The final hidden  tate feed  candidate next-token  core . The e logit  rank candidate , but they are raw  core , not probabilitie  or truth.1Hidden  tate arrive  The final context- haped vector reache  the output  coring  tep.2Candidate  get  core  Po ible next token   uch a  floor, room, counter, and quantum receive raw logit .3Score  rank candidate  Higher  core mean   tronger local candidate, not guaranteed truth.4Softmax come  next Softmax convert  raw  core  into probabilitie .Key takeaway: Logit  are raw next-token  core , not probabilitie  and not truth.Acce ible de cription: The diagram  tart  with a final hidden  tate flowing into an output  core panel. Candidate token  floor, room, counter, ",
+        "scrollLeft": 0,
+        "overflowX": false,
+        "hasProbabilityNotTruth": false
+      }
+    }
+  ]
+}

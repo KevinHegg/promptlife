@@ -123,6 +123,8 @@ export function GlossaryDojoGame({ onBack, onGlossary }: GlossaryDojoGameProps) 
                 data-testid="glossary-dojo-answer"
                 data-dojo-option-id={option.id}
                 data-dojo-correct={isCorrect ? 'true' : 'false'}
+                data-dojo-option-kind={option.kind}
+                data-dojo-represented-term-id={option.representedTermId ?? option.termId}
               >
                 <span className="dojo-option-letter" aria-hidden="true">{String.fromCharCode(65 + index)}</span>
                 <span className="dojo-option-copy">
@@ -137,7 +139,11 @@ export function GlossaryDojoGame({ onBack, onGlossary }: GlossaryDojoGameProps) 
         </div>
 
         {currentResult && (
-          <div className={currentResult.answer.isCorrect ? 'feedback good dojo-feedback' : 'feedback dojo-feedback'} role="status">
+          <div
+            className={currentResult.answer.isCorrect ? 'feedback good dojo-feedback' : 'feedback dojo-feedback'}
+            role="status"
+            data-testid="glossary-dojo-feedback"
+          >
             <p>{feedback}</p>
           </div>
         )}

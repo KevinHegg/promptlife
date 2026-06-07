@@ -36,9 +36,14 @@ export type GlossaryDojoOptionKind = 'term' | 'definition'
 export type GlossaryDojoOption = {
   id: string
   termId: string
+  representedTermId: string
   label: string
+  displayedLabel: string
+  displayedDefinition: string
   detail?: string
   kind: GlossaryDojoOptionKind
+  isCorrect: boolean
+  feedbackTermId?: string
 }
 
 export type GlossaryDojoQuestion = {

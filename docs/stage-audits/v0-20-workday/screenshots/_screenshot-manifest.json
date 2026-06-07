@@ -1,0 +1,154 @@
+{
+  "createdAt": "2026-06-06T23:26:24.882Z",
+  "viewport": "390x844 primary; 320/430 visual spot checks",
+  "screenshotCount": 51,
+  "cards": [
+    "attention",
+    "mlp",
+    "layers",
+    "hidden-states"
+  ],
+  "qa": [
+    {
+      "title": "Attention",
+      "mode": "Previewing this card. Progress will not change.",
+      "progress": "[]",
+      "answers": [
+        "Tokens currently in the context window",
+        "All text the model has ever seen",
+        "Only the newest generated token"
+      ]
+    },
+    {
+      "title": "MLP",
+      "mode": "Previewing this card. Progress will not change.",
+      "progress": "[]",
+      "answers": [
+        "Reads private files",
+        "Chooses the final answer directly",
+        "Reshapes per-token features"
+      ]
+    },
+    {
+      "title": "Layers",
+      "mode": "Previewing this card. Progress will not change.",
+      "progress": "[]",
+      "answers": [
+        "Hidden states",
+        "The app interface",
+        "Permanent user memory"
+      ]
+    },
+    {
+      "title": "Hidden States",
+      "mode": "Previewing this card. Progress will not change.",
+      "progress": "[]",
+      "answers": [
+        "It is a secret memory file",
+        "It is internal numbers, not visible text",
+        "It is encrypted English"
+      ]
+    },
+    {
+      "id": "attention",
+      "width": 320,
+      "title": "Attention",
+      "progress": "[]"
+    },
+    {
+      "id": "attention",
+      "width": 430,
+      "title": "Attention",
+      "progress": "[]"
+    },
+    {
+      "id": "mlp",
+      "width": 320,
+      "title": "MLP",
+      "progress": "[]"
+    },
+    {
+      "id": "mlp",
+      "width": 430,
+      "title": "MLP",
+      "progress": "[]"
+    },
+    {
+      "id": "layers",
+      "width": 320,
+      "title": "Layers",
+      "progress": "[]"
+    },
+    {
+      "id": "layers",
+      "width": 430,
+      "title": "Layers",
+      "progress": "[]"
+    },
+    {
+      "id": "hidden-states",
+      "width": 320,
+      "title": "Hidden States",
+      "progress": "[]"
+    },
+    {
+      "id": "hidden-states",
+      "width": 430,
+      "title": "Hidden States",
+      "progress": "[]"
+    }
+  ],
+  "files": [
+    "attention-bottom-action.png",
+    "attention-brain-bridge.png",
+    "attention-checkpoint.png",
+    "attention-core-idea.png",
+    "attention-correct-feedback.png",
+    "attention-hero.png",
+    "attention-model-lifecycle.png",
+    "attention-tiny-interaction.png",
+    "attention-visual-aid-320.png",
+    "attention-visual-aid-430.png",
+    "attention-visual-aid.png",
+    "attention-wrong-feedback.png",
+    "hidden-states-bottom-action.png",
+    "hidden-states-brain-bridge.png",
+    "hidden-states-checkpoint.png",
+    "hidden-states-core-idea.png",
+    "hidden-states-correct-feedback.png",
+    "hidden-states-hero.png",
+    "hidden-states-model-lifecycle.png",
+    "hidden-states-tiny-interaction.png",
+    "hidden-states-visual-aid-320.png",
+    "hidden-states-visual-aid-430.png",
+    "hidden-states-visual-aid.png",
+    "hidden-states-wrong-feedback.png",
+    "journey-top.png",
+    "layers-bottom-action.png",
+    "layers-brain-bridge.png",
+    "layers-checkpoint.png",
+    "layers-core-idea.png",
+    "layers-correct-feedback.png",
+    "layers-hero.png",
+    "layers-model-lifecycle.png",
+    "layers-tiny-interaction.png",
+    "layers-visual-aid-320.png",
+    "layers-visual-aid-430.png",
+    "layers-visual-aid.png",
+    "layers-wrong-feedback.png",
+    "mlp-bottom-action.png",
+    "mlp-brain-bridge.png",
+    "mlp-checkpoint.png",
+    "mlp-core-idea.png",
+    "mlp-correct-feedback.png",
+    "mlp-hero.png",
+    "mlp-model-lifecycle.png",
+    "mlp-tiny-interaction.png",
+    "mlp-visual-aid-320.png",
+    "mlp-visual-aid-430.png",
+    "mlp-visual-aid.png",
+    "mlp-wrong-feedback.png",
+    "workday-overview.png",
+    "workday-stage-link.png"
+  ]
+}

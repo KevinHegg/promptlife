@@ -1,0 +1,110 @@
+{
+  "capturedAt": "2026-06-07T01:52:43.780Z",
+  "results": [
+    {
+      "name": "v0-21-1-what-is-llm-visual-390.png",
+      "width": 390,
+      "height": 964,
+      "lessonId": "what-is-llm",
+      "url": "http://127.0.0.1:5173/?debug=1&v=0211-copy-cleanup",
+      "path": "docs/design/screenshots/v0-21-1-what-is-llm-visual-390.png",
+      "qa": {
+        "lessonTitle": "What Is an LLM?",
+        "visualText": "VISUAL AID\nWhat to picture\nPrompt to Prediction\nScore, choose, append, repeat\nCurrent context enters the model, learned weights shape next-token probabilities, one token is generated, and the response grows token by token.\n1\n\nContext enters The current prompt and response-so-far become the visible input for this run.\n\n2\n\nWeights shape probabilities Learned weights, built earlier during training, shape next-token scores.\n\n3\n\nOne token is generated The model chooses one response token from the probability cloud.\n\n4\n\nResponse grows That token is appended, then the model runs again.\n\nKey takeaway:\nAn LLM turns context into next-token probabilities.\n\nAccessible description: A prompt ribbon enters a folded-paper model cloud and one token-like bead leaves it. The explanation emphasizes that context enters, learned weights shape probabilities, one token is generated, and the response grows one token at a time.",
+        "progress": "[]",
+        "badLearnerCopy": false,
+        "overflowX": false
+      }
+    },
+    {
+      "name": "v0-21-1-pretraining-visual-390.png",
+      "width": 390,
+      "height": 964,
+      "lessonId": "pretraining",
+      "url": "http://127.0.0.1:5173/?debug=1&v=0211-copy-cleanup",
+      "path": "docs/design/screenshots/v0-21-1-pretraining-visual-390.png",
+      "qa": {
+        "lessonTitle": "Pretraining",
+        "visualText": "VISUAL AID\nWhat to picture\nBroad Pretraining\nScale, not perfect recall\nMany examples flow through the training loop. Repeated updates shape weights into broad patterns the model can use later. This does not make the model a perfect memory of its sources.\n1\n\nMany examples flow Pretraining repeats the training loop across enormous collections of examples.\n\n2\n\nUpdates shape weights Prediction errors drive repeated weight updates during training.\n\n3\n\nBroad patterns form The model learns statistical patterns that can help later prompts.\n\n4\n\nNot perfect recall Pretraining does not store every source as a searchable memory.\n\nKey takeaway:\nPretraining builds broad capability, not perfect source recall.\n\nAccessible description: Many abstract paper fragments and light streams shape a folded-paper landscape. The explanation emphasizes that many examples flow through training, repeated updates shape weights, broad patterns form, and pretraining is not perfect source memory.",
+        "progress": "[]",
+        "badLearnerCopy": false,
+        "overflowX": false
+      }
+    },
+    {
+      "name": "v0-21-1-pretraining-visual-320.png",
+      "width": 320,
+      "height": 964,
+      "lessonId": "pretraining",
+      "url": "http://127.0.0.1:5173/?debug=1&v=0211-copy-cleanup",
+      "path": "docs/design/screenshots/v0-21-1-pretraining-visual-320.png",
+      "qa": {
+        "lessonTitle": "Pretraining",
+        "visualText": "VISUAL AID\nWhat to picture\nBroad Pretraining\nScale, not perfect recall\nMany examples flow through the training loop. Repeated updates shape weights into broad patterns the model can use later. This does not make the model a perfect memory of its sources.\n1\n\nMany examples flow Pretraining repeats the training loop across enormous collections of examples.\n\n2\n\nUpdates shape weights Prediction errors drive repeated weight updates during training.\n\n3\n\nBroad patterns form The model learns statistical patterns that can help later prompts.\n\n4\n\nNot perfect recall Pretraining does not store every source as a searchable memory.\n\nKey takeaway:\nPretraining builds broad capability, not perfect source recall.\n\nAccessible description: Many abstract paper fragments and light streams shape a folded-paper landscape. The explanation emphasizes that many examples flow through training, repeated updates shape weights, broad patterns form, and pretraining is not perfect source memory.",
+        "progress": "[]",
+        "badLearnerCopy": false,
+        "overflowX": false
+      }
+    },
+    {
+      "name": "v0-21-1-fine-tuning-visual-390.png",
+      "width": 390,
+      "height": 964,
+      "lessonId": "fine-tuning",
+      "url": "http://127.0.0.1:5173/?debug=1&v=0211-copy-cleanup",
+      "path": "docs/design/screenshots/v0-21-1-fine-tuning-visual-390.png",
+      "qa": {
+        "lessonTitle": "Fine-Tuning",
+        "visualText": "VISUAL AID\nWhat to picture\nFine-Tuning Path\nDurable adaptation after pretraining\nFine-tuning starts from a pretrained base, adds targeted examples or preference data, and shapes future responses more durably than one prompt.\n1\n\nPretrained base Fine-tuning begins with a model already shaped by broad pretraining.\n\n2\n\nTargeted data Examples, domain data, or preference data guide the additional training step.\n\n3\n\nFuture responses The training changes how the model is likely to behave later.\n\n4\n\nMore than a prompt Fine-tuning is durable adaptation, unlike one temporary prompt or retrieved document.\n\nKey takeaway:\nFine-tuning adapts future behavior through additional training.\n\nAccessible description: A glowing path crosses a folded-paper terrain with small example cards nearby. The explanation emphasizes that fine-tuning starts from a pretrained base, adds targeted examples or preference data, shapes future responses, and is more durable than one prompt.",
+        "progress": "[]",
+        "badLearnerCopy": false,
+        "overflowX": false
+      }
+    },
+    {
+      "name": "v0-21-1-alignment-visual-390.png",
+      "width": 390,
+      "height": 964,
+      "lessonId": "alignment",
+      "url": "http://127.0.0.1:5173/?debug=1&v=0211-copy-cleanup",
+      "path": "docs/design/screenshots/v0-21-1-alignment-visual-390.png",
+      "qa": {
+        "lessonTitle": "Alignment",
+        "visualText": "VISUAL AID\nWhat to picture\nAlignment Landscape\nShaping behavior, not conscience\nAlignment encourages preferred behavior, uses guardrails to reduce risky paths, and relies on feedback and policies without giving the model a conscience.\n1\n\nPreferred behavior Training and system design can encourage more useful response patterns.\n\n2\n\nGuardrails Runtime safeguards can reduce risky paths during use.\n\n3\n\nFeedback and policies Human feedback, evaluations, policies, and filters can shape behavior.\n\n4\n\nNo conscience Alignment does not give the model moral understanding or a truth guarantee.\n\nKey takeaway:\nAlignment shapes behavior, but it is not magic morality.\n\nAccessible description: A calm folded-paper garden contains a glowing path, soft guardrails, compass-like light, and muted warning zones. The explanation emphasizes that preferred behavior is encouraged, guardrails reduce risky paths, feedback and policies shape behavior, and the model does not gain conscience.",
+        "progress": "[]",
+        "badLearnerCopy": false,
+        "overflowX": false
+      }
+    },
+    {
+      "name": "v0-21-1-visual-gallery-metadata-390.png",
+      "width": 390,
+      "height": 964,
+      "review": true,
+      "url": "http://127.0.0.1:5173/review/visual-aids#before-morning-pretraining-landscape",
+      "path": "docs/design/screenshots/v0-21-1-visual-gallery-metadata-390.png",
+      "qa": {
+        "title": "Visual Aid Gallery",
+        "url": "http://127.0.0.1:5173/review/visual-aids#before-morning-pretraining-landscape",
+        "progress": "[]",
+        "visibleText": "BEFORE-MORNING-PRETRAINING-LANDSCAPE\n\nBroad Pretraining\nLesson: Pretraining\nPattern: generatedImage\nVariant: generated-image\nAsset: before-morning-pretraining-landscape.png\nType: generated-image\nBroad Pretraining\nScale, not perfect recall\nMany examples flow through the training loop. Repeated updates shape weights into broad patterns the model can use later. This does not make the model a perfect memory of its sources.\n1\n\nMany examples flow Pretraining repeats the training loop across enormous collections of examples.\n\n2\n\nUpdates shape weights Prediction errors drive repeated weight updates during training.\n\n3\n\nBroad patterns form The model learns statistical patterns that can help later prompts.\n\n4\n\nNot perfect recall Pretraining does not store every source as a searchable memory.\n\nKey takeaway:\nPretraining builds broad capability, not perfect source recall.\n\nAccessible description: Many abstract paper fragments and light streams shape a folded-paper landscape. The explanation emphasizes that many examples flow through training, repeated updates shape weights, broad patterns form, and pretraining is not perfect source memory.\n\nLEARNING OBJECTIVE\nShow broad data exposure shaping durable model weights before ordinary use.\nASSET PATH\n/assets/generated/before-morning/before-morning-pretraining-landscape.png\nALT TEXT\nStreams of abstract paper fragments and light rain carve glowing ",
+        "hasInternalMetadata": false,
+        "overflowX": false
+      }
+    },
+    {
+      "name": "v0-21-1-visual-gallery-internal-metadata-390.png",
+      "width": 390,
+      "height": 964,
+      "review": true,
+      "url": "http://127.0.0.1:5173/review/visual-aids#before-morning-pretraining-landscape",
+      "path": "docs/design/screenshots/v0-21-1-visual-gallery-internal-metadata-390.png",
+      "qa": {
+        "progress": "[]",
+        "visibleText": "BEFORE-MORNING-PRETRAINING-LANDSCAPE\n\nBroad Pretraining\nLesson: Pretraining\nPattern: generatedImage\nVariant: generated-image\nAsset: before-morning-pretraining-landscape.png\nType: generated-image\nBroad Pretraining\nScale, not perfect recall\nMany examples flow through the training loop. Repeated updates shape weights into broad patterns the model can use later. This does not make the model a perfect memory of its sources.\n1\n\nMany examples flow Pretraining repeats the training loop across enormous collections of examples.\n\n2\n\nUpdates shape weights Prediction errors drive repeated weight updates during training.\n\n3\n\nBroad patterns form The model learns statistical patterns that can help later prompts.\n\n4\n\nNot perfect recall Pretraining does not store every source as a searchable memory.\n\nKey takeaway:\nPretraining builds broad capability, not perfect source recall.\n\nAccessible description: Many abstract paper fragments and light streams shape a folded-paper landscape. The explanation emphasizes that many examples flow through training, repeated updates shape weights, broad patterns form, and pretraining is not perfect source memory.\n\nLEARNING OBJECTIVE\nShow broad data exposure shaping durable model weights before ordinary use.\nASSET PATH\n/assets/generated/before-morning/before-morning-pretraining-landscape.png\nALT TEXT\nStreams of abstract paper fragments and light rain carve glowing paths into a folded-paper landscape.\nACCESSIBLE DESCRIPTION\nMany abstract paper fragments and light streams shape a folded-paper landscape. The explanation emphasizes that many examples flow through training, repeated updates shape weights, broad patterns form, and pretraining is not perfect source memory.\nMOBILE PREVIEW\nReview at 320px, 390px, and 430px; images must fit the paper frame and callouts must remain readable below the visual.\nTEXT HANDLING\nInstructional labels and callouts are HTML. The PNG remains textless concept art.\nPRINT/PDF NOTES\nProvided textless generated PNG. Instructional labels, callouts, captions, accessibility text, and key takeaways live in HTML/SVG/app code, not inside the image file.",
+        "hasInternalMetadata": true,
+        "overflowX": false
+      }
+    }
+  ]
+}

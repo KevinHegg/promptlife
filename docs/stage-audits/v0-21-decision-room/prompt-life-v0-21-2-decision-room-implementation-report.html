@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Prompt Life v0.21.2 Decision Room Implementation Report</title>
+    <style>
+      :root {
+        color: #10183f;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.42;
+      }
+
+      body {
+        margin: 0;
+        background: #f6f8fb;
+      }
+
+      main {
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 42px;
+      }
+
+      h1, h2, h3 {
+        color: #111a72;
+        line-height: 1.08;
+        margin: 0 0 12px;
+      }
+
+      h1 {
+        font-size: 34px;
+      }
+
+      h2 {
+        margin-top: 28px;
+        font-size: 22px;
+      }
+
+      h3 {
+        margin-top: 18px;
+        font-size: 16px;
+      }
+
+      p {
+        margin: 0 0 12px;
+      }
+
+      ul {
+        margin: 0 0 16px 22px;
+        padding: 0;
+      }
+
+      li {
+        margin: 5px 0;
+      }
+
+      code {
+        background: #eef2ff;
+        border-radius: 5px;
+        color: #111a72;
+        padding: 1px 5px;
+      }
+
+      .card {
+        background: white;
+        border: 1px solid #d8def0;
+        border-radius: 10px;
+        box-shadow: 0 14px 34px rgba(16, 24, 63, 0.08);
+        margin-bottom: 22px;
+        padding: 22px;
+      }
+
+      .eyebrow {
+        color: #008f99;
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.05em;
+        margin-bottom: 8px;
+        text-transform: uppercase;
+      }
+
+      .grid {
+        display: grid;
+        gap: 18px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      figure {
+        break-inside: avoid;
+        margin: 0;
+        padding: 0;
+      }
+
+      img {
+        background: #eef2f7;
+        border: 1px solid #d8def0;
+        border-radius: 8px;
+        display: block;
+        max-width: 100%;
+        width: 100%;
+      }
+
+      figcaption {
+        color: #3c496b;
+        font-size: 12px;
+        font-weight: 700;
+        margin-top: 7px;
+      }
+
+      .wide {
+        grid-column: 1 / -1;
+      }
+
+      .status {
+        display: grid;
+        gap: 7px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .status span {
+        background: #eafffb;
+        border-left: 4px solid #11b6b2;
+        border-radius: 7px;
+        font-weight: 800;
+        padding: 9px 10px;
+      }
+
+      @media print {
+        body {
+          background: white;
+        }
+
+        main {
+          padding: 28px;
+        }
+
+        .card {
+          box-shadow: none;
+        }
+
+        .page-break {
+          break-before: page;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="card">
+        <p class="eyebrow">Prompt Life</p>
+        <h1>v0.21.2 Decision Room Implementation Report</h1>
+        <p>Date: 2026-06-06</p>
+        <p>This pass upgrades the existing Logits, Softmax, and Sampling Journey cards while keeping Journey order, progress rules, checkpoint randomization, games, dependencies, generated assets, and the one-badge model unchanged.</p>
+      </section>
+
+      <section class="card">
+        <h2>What Changed</h2>
+        <ul>
+          <li>Bumped the visible app version to <code>0.21.2</code>.</li>
+          <li>Converted Logits, Softmax, and Sampling to the richer lesson architecture.</li>
+          <li>Added lifecycle, durable-vs-temporary, prompt-vs-response, misconception, relationship, and feedback copy.</li>
+          <li>Replaced the older Decision Room visuals with coded SVG/HTML diagrams.</li>
+          <li>Added dedicated tiny interactions: <code>logits-raw-toggle</code>, <code>softmax-convert</code>, and <code>sampling-probability-pick</code>.</li>
+          <li>Updated glossary support for Decision Room terms including probability, decoding step, next token, temperature, top-k, and top-p.</li>
+        </ul>
+
+        <h2>Verification</h2>
+        <div class="status">
+          <span>typecheck passed</span>
+          <span>build passed</span>
+          <span>build:pages passed</span>
+          <span>audit:answers passed</span>
+        </div>
+        <p>The existing Vite large-chunk warning remains. Screenshot QA at 320px and 390px reported no horizontal overflow.</p>
+      </section>
+
+      <section class="card">
+        <h2>Card Improvements</h2>
+        <h3>Logits</h3>
+        <p>Logits are taught as raw candidate next-token scores from the final hidden state, before probabilities and before choosing. The card now explicitly says logits are not probabilities, permanent memories, or truth scores.</p>
+        <h3>Softmax</h3>
+        <p>Softmax is taught as the conversion from raw scores to probabilities that sum to one. The card repeats that high probability means likely under the model, not guaranteed true.</p>
+        <h3>Sampling</h3>
+        <p>Sampling is taught as the decoding step that chooses one generated token from probabilities. The chosen token is appended before the model runs again, and probability is not truth.</p>
+      </section>
+
+      <section class="card page-break">
+        <h2>Screenshots</h2>
+        <div class="grid">
+          <figure>
+            <img src="screenshots/v0-21-2-decision-room-overview-390.png" alt="Decision Room Journey overview at 390 pixels wide">
+            <figcaption>Decision Room overview, 390px.</figcaption>
+          </figure>
+          <figure>
+            <img src="screenshots/v0-21-2-logits-raw-score-visual-390.png" alt="Logits visual aid at 390 pixels wide">
+            <figcaption>Logits raw score visual, 390px.</figcaption>
+          </figure>
+          <figure>
+            <img src="screenshots/v0-21-2-logits-interaction-390.png" alt="Logits tiny interaction at 390 pixels wide">
+            <figcaption>Logits tiny interaction, 390px.</figcaption>
+          </figure>
+          <figure>
+            <img src="screenshots/v0-21-2-softmax-before-after-visual-390.png" alt="Softmax visual aid at 390 pixels wide">
+            <figcaption>Softmax visual, 390px.</figcaption>
+          </figure>
+          <figure>
+            <img src="screenshots/v0-21-2-softmax-interaction-390.png" alt="Softmax tiny interaction at 390 pixels wide">
+            <figcaption>Softmax tiny interaction, 390px.</figcaption>
+          </figure>
+          <figure>
+            <img src="screenshots/v0-21-2-sampling-weighted-visual-390.png" alt="Sampling visual aid at 390 pixels wide">
+            <figcaption>Sampling visual, 390px.</figcaption>
+          </figure>
+          <figure>
+            <img src="screenshots/v0-21-2-sampling-interaction-390.png" alt="Sampling tiny interaction at 390 pixels wide">
+            <figcaption>Sampling tiny interaction, 390px.</figcaption>
+          </figure>
+          <figure>
+            <img src="screenshots/v0-21-2-softmax-visual-320.png" alt="Softmax visual aid at 320 pixels wide">
+            <figcaption>Softmax visual, 320px.</figcaption>
+          </figure>
+          <figure>
+            <img src="screenshots/v0-21-2-sampling-visual-320.png" alt="Sampling visual aid at 320 pixels wide">
+            <figcaption>Sampling visual, 320px.</figcaption>
+          </figure>
+          <figure>
+            <img src="screenshots/v0-21-2-checkpoint-randomized-logits-390.png" alt="Logits randomized checkpoint at 390 pixels wide">
+            <figcaption>Logits randomized checkpoint, 390px.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Readiness</h2>
+        <p>No Image 2 asset is recommended for Decision Room. The coded visuals are the right format because the exact labels, scores, probabilities, and truth-boundary language need to remain accessible. Before Morning, Morning Commute, Workday, and Decision Room are ready enough for the next stage audit/implementation pass: The Day Repeats.</p>
+      </section>
+    </main>
+  </body>
+</html>

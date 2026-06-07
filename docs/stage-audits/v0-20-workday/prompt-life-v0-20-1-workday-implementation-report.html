@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Prompt Life v0.20.1 Workday Implementation Report</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #11185a;
+        --muted: #4f5b82;
+        --line: #cfd6ee;
+        --soft: #eef7f5;
+        --accent: #06a7a9;
+        --violet: #7156ff;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        background: #f7fbfb;
+        color: var(--ink);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.5;
+      }
+
+      main {
+        max-width: 920px;
+        margin: 0 auto;
+        padding: 34px 28px 48px;
+      }
+
+      h1, h2, h3 { line-height: 1.12; }
+
+      h1 {
+        margin: 0 0 10px;
+        font-size: 34px;
+        color: #0b1164;
+      }
+
+      h2 {
+        margin: 30px 0 12px;
+        padding-top: 8px;
+        border-top: 1px solid var(--line);
+        font-size: 22px;
+      }
+
+      h3 {
+        margin: 22px 0 8px;
+        font-size: 17px;
+      }
+
+      p { margin: 0 0 11px; }
+
+      ul {
+        margin: 8px 0 16px;
+        padding-left: 20px;
+      }
+
+      li { margin: 4px 0; }
+
+      .kicker {
+        margin: 0 0 6px;
+        color: var(--accent);
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+      }
+
+      .summary {
+        padding: 18px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: white;
+        box-shadow: 0 14px 34px rgba(36, 48, 110, .08);
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .card {
+        padding: 16px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: white;
+      }
+
+      .shot {
+        break-inside: avoid;
+        margin: 18px 0 26px;
+        padding: 12px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: white;
+      }
+
+      .shot img {
+        width: 100%;
+        height: auto;
+        border: 1px solid #dbe3ef;
+        border-radius: 10px;
+        display: block;
+      }
+
+      .shot figcaption {
+        margin-top: 8px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .two-col-shots {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      code {
+        padding: 1px 4px;
+        border-radius: 5px;
+        background: #edf1ff;
+        color: #152081;
+      }
+
+      .result {
+        color: #0c6f54;
+        font-weight: 800;
+      }
+
+      .warn { color: #815b0b; }
+
+      @media print {
+        body { background: white; }
+        main { max-width: none; padding: 22px; }
+        .card, .summary, .shot { box-shadow: none; }
+        .shot, .card { break-inside: avoid; }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p class="kicker">Prompt Life</p>
+      <h1>v0.20.1 Workday Visual + Interaction Repair</h1>
+      <p class="summary">
+        This pass upgrades the Attention, MLP, Layers, and Hidden States Journey cards with richer lesson fields,
+        clearer coded visuals, dedicated tiny interactions, and glossary support. It keeps Journey order, progress,
+        checkpoint randomization, the one-badge model, games, dependencies, and generated assets unchanged.
+      </p>
+
+      <h2>What Changed</h2>
+      <div class="grid">
+        <section class="card">
+          <h3>Attention</h3>
+          <p>Concrete token relevance replaces abstract token nodes. The interaction asks which earlier token helps interpret "it."</p>
+        </section>
+        <section class="card">
+          <h3>MLP</h3>
+          <p>Feature bars show the same token position before and after per-token MLP reshaping.</p>
+        </section>
+        <section class="card">
+          <h3>Layers</h3>
+          <p>A repeated attention-plus-MLP stack shows refinement without implying human thought steps.</p>
+        </section>
+        <section class="card">
+          <h3>Hidden States</h3>
+          <p>A state-flow diagram and sort interaction distinguish durable weights from temporary activations.</p>
+        </section>
+      </div>
+
+      <h2>Files Changed</h2>
+      <ul>
+        <li><code>src/data/content.ts</code></li>
+        <li><code>src/data/exercises.ts</code></li>
+        <li><code>src/components/VisualAids.tsx</code></li>
+        <li><code>src/main.tsx</code></li>
+        <li><code>src/styles/global.css</code></li>
+        <li><code>docs/REVIEW_NOTES.md</code></li>
+        <li><code>docs/stage-audits/v0-20-workday/*</code> implementation docs, screenshots, and this report</li>
+      </ul>
+
+      <h2>Glossary Updates</h2>
+      <p>
+        Added or improved Attention, Relevance weight, MLP, Multi-layer perceptron, Feed-forward network,
+        Layer, Transformer layer, Residual path, Normalization, Hidden state, and Temporary activation.
+      </p>
+
+      <h2>Screenshots</h2>
+      <figure class="shot">
+        <img src="screenshots/v0-20-1-workday-overview-390.png" alt="Workday stage overview on a 390px mobile viewport" />
+        <figcaption>Workday overview at 390px.</figcaption>
+      </figure>
+      <div class="two-col-shots">
+        <figure class="shot">
+          <img src="screenshots/v0-20-1-attention-visual-390.png" alt="Attention visual showing token relevance arcs" />
+          <figcaption>Attention visual: relevance between token positions.</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="screenshots/v0-20-1-attention-interaction-feedback-390.png" alt="Attention interaction feedback after choosing the relevant token" />
+          <figcaption>Attention tiny interaction feedback.</figcaption>
+        </figure>
+      </div>
+      <div class="two-col-shots">
+        <figure class="shot">
+          <img src="screenshots/v0-20-1-mlp-toggle-390.png" alt="MLP before and after feature bars interaction" />
+          <figcaption>MLP feature toggle interaction.</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="screenshots/v0-20-1-layers-stack-inspector-390.png" alt="Layers stack inspector interaction" />
+          <figcaption>Layers stack inspector.</figcaption>
+        </figure>
+      </div>
+      <div class="two-col-shots">
+        <figure class="shot">
+          <img src="screenshots/v0-20-1-hidden-states-flow-390.png" alt="Hidden States visual showing temporary state flow" />
+          <figcaption>Hidden States flow visual.</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="screenshots/v0-20-1-hidden-states-sort-390.png" alt="Hidden States durable versus temporary sort interaction" />
+          <figcaption>Hidden States sort interaction.</figcaption>
+        </figure>
+      </div>
+      <div class="two-col-shots">
+        <figure class="shot">
+          <img src="screenshots/v0-20-1-mlp-visual-320.png" alt="MLP visual at 320px viewport" />
+          <figcaption>MLP visual at 320px.</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="screenshots/v0-20-1-layers-visual-320.png" alt="Layers visual at 320px viewport" />
+          <figcaption>Layers visual at 320px.</figcaption>
+        </figure>
+      </div>
+      <figure class="shot">
+        <img src="screenshots/v0-20-1-hidden-states-visual-320.png" alt="Hidden States visual at 320px viewport" />
+        <figcaption>Hidden States visual at 320px.</figcaption>
+      </figure>
+
+      <h2>Verification</h2>
+      <ul>
+        <li><code>npm run typecheck</code>: <span class="result">passed</span></li>
+        <li><code>npm run build</code>: <span class="result">passed</span> with the existing Vite large-chunk warning</li>
+        <li><code>npm run build:pages</code>: <span class="result">passed</span> with the existing Vite large-chunk warning</li>
+        <li><code>npm run audit:answers</code>: <span class="result">passed</span></li>
+        <li>Browser QA: <span class="result">passed</span> for captured 390px and 320px Workday states; no horizontal overflow was detected.</li>
+      </ul>
+
+      <h2>Known Issues</h2>
+      <ul>
+        <li class="warn">Long cards still require scrolling, and the bottom nav can appear at the bottom of tall screenshots. Required controls remain reachable.</li>
+        <li class="warn">The worktree also contains pre-existing uncommitted v0.19.3 Glossary Dojo feedback files that were not part of this pass.</li>
+        <li class="warn">Workday is not yet a strong Image 2 target. Coded diagrams remain the right teaching surface here.</li>
+      </ul>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,21 @@
+{
+  "createdAt": "2026-06-07T00:46:54.317Z",
+  "screenshots": [
+    "v0-20-1-workday-overview-390.png",
+    "v0-20-1-attention-visual-390.png",
+    "v0-20-1-attention-interaction-feedback-390.png",
+    "v0-20-1-mlp-toggle-390.png",
+    "v0-20-1-layers-stack-inspector-390.png",
+    "v0-20-1-hidden-states-flow-390.png",
+    "v0-20-1-hidden-states-sort-390.png",
+    "v0-20-1-hidden-states-checkpoint-feedback-390.png",
+    "v0-20-1-mlp-visual-320.png",
+    "v0-20-1-layers-visual-320.png",
+    "v0-20-1-hidden-states-visual-320.png"
+  ],
+  "checks": {
+    "previewProgress": "[]",
+    "previewProgressUnchanged": true,
+    "noHorizontalOverflow": true
+  }
+}

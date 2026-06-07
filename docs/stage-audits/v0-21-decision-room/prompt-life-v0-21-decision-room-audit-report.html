@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Prompt Life v0.21 Decision Room Audit</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #10165d;
+        --muted: #4e587d;
+        --line: #cfd7ee;
+        --soft: #eef8f6;
+        --accent: #07a6a6;
+        --violet: #7156ff;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: #f7fbfb;
+        color: var(--ink);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.5;
+      }
+      main { max-width: 930px; margin: 0 auto; padding: 34px 28px 52px; }
+      h1, h2, h3 { line-height: 1.14; }
+      h1 { margin: 0 0 10px; font-size: 34px; color: #0b1164; }
+      h2 { margin: 30px 0 12px; padding-top: 8px; border-top: 1px solid var(--line); font-size: 22px; }
+      h3 { margin: 18px 0 8px; font-size: 17px; }
+      p { margin: 0 0 11px; }
+      ul { margin: 8px 0 16px; padding-left: 20px; }
+      li { margin: 4px 0; }
+      code { padding: 1px 4px; border-radius: 5px; background: #edf1ff; color: #152081; }
+      .kicker { margin: 0 0 6px; color: var(--accent); font-size: 12px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+      .summary, .card, .shot { border: 1px solid var(--line); border-radius: 12px; background: white; box-shadow: 0 14px 34px rgba(36, 48, 110, .08); }
+      .summary { padding: 18px; }
+      .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+      .card { padding: 14px; }
+      .shot { break-inside: avoid; margin: 18px 0 26px; padding: 12px; }
+      .shot img { width: 100%; height: auto; border: 1px solid #dbe3ef; border-radius: 10px; display: block; }
+      .shot figcaption { margin-top: 8px; color: var(--muted); font-size: 13px; }
+      .two-col { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+      .result { color: #0c6f54; font-weight: 800; }
+      .warn { color: #815b0b; }
+      @media print {
+        body { background: white; }
+        main { max-width: none; padding: 22px; }
+        .summary, .card, .shot { box-shadow: none; }
+        .shot, .card { break-inside: avoid; }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p class="kicker">Prompt Life</p>
+      <h1>v0.21 Decision Room Stage Audit</h1>
+      <p class="summary">
+        Documentation-only audit of Logits, Softmax, and Sampling. The stage order is correct, but the next pass should strengthen
+        raw-score, probability-not-truth, and one-token decoding distinctions using coded SVG visuals and small non-competitive interactions.
+      </p>
+
+      <h2>Cards Audited</h2>
+      <div class="grid">
+        <section class="card">
+          <h3>Logits</h3>
+          <p>Accurate but thin. Needs its own raw-score visual and interaction.</p>
+        </section>
+        <section class="card">
+          <h3>Softmax</h3>
+          <p>Needs before/after values showing probabilities sum to one.</p>
+        </section>
+        <section class="card">
+          <h3>Sampling</h3>
+          <p>Strongest current bridge to append-and-repeat, but should show weighted probabilities.</p>
+        </section>
+      </div>
+
+      <h2>Major Findings</h2>
+      <ul>
+        <li>Decision Room still uses the older slim lesson schema.</li>
+        <li>Probabilities are not truth guarantees, but that distinction needs to appear directly in each card.</li>
+        <li>Logits and Softmax are textually distinct, but their interactions overlap.</li>
+        <li>No Image 2 assets are recommended. Use coded SVG/HTML for all three visuals.</li>
+        <li>Sampling should keep temperature simple and keep top-k/top-p mostly in glossary or optional deep copy.</li>
+      </ul>
+
+      <h2>Screenshots</h2>
+      <figure class="shot">
+        <img src="screenshots/decision-room-overview.png" alt="Decision Room stage overview at 390px" />
+        <figcaption>Decision Room overview at 390px.</figcaption>
+      </figure>
+      <div class="two-col">
+        <figure class="shot">
+          <img src="screenshots/logits-visual-aid.png" alt="Logits visual aid showing raw score bars" />
+          <figcaption>Logits current visual: readable, but too generic.</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="screenshots/softmax-visual-aid.png" alt="Softmax visual aid showing a funnel" />
+          <figcaption>Softmax current visual: needs explicit score-to-probability mapping.</figcaption>
+        </figure>
+      </div>
+      <div class="two-col">
+        <figure class="shot">
+          <img src="screenshots/sampling-visual-aid.png" alt="Sampling visual aid showing candidate token cloud" />
+          <figcaption>Sampling current visual: token cloud needs probability weights.</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="screenshots/sampling-tiny-interaction.png" alt="Sampling tiny interaction and checkpoint at 390px" />
+          <figcaption>Sampling tiny interaction: useful, but very easy.</figcaption>
+        </figure>
+      </div>
+      <div class="two-col">
+        <figure class="shot">
+          <img src="screenshots/logits-wrong-feedback.png" alt="Logits wrong answer feedback in Preview mode" />
+          <figcaption>Checkpoint feedback state in Preview mode.</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="screenshots/softmax-visual-aid-320.png" alt="Softmax visual aid at 320px" />
+          <figcaption>320px visual spot check.</figcaption>
+        </figure>
+      </div>
+
+      <h2>Verification</h2>
+      <ul>
+        <li><code>npm run typecheck</code>: <span class="result">passed</span></li>
+        <li><code>npm run build</code>: <span class="result">passed</span> with the existing Vite large-chunk warning</li>
+        <li><code>npm run build:pages</code>: <span class="result">passed</span> with the existing Vite large-chunk warning</li>
+        <li><code>npm run audit:answers</code>: <span class="result">passed</span></li>
+        <li>Screenshot QA: <span class="result">passed</span>; temporary profile progress stayed <code>[]</code>.</li>
+      </ul>
+
+      <h2>Known Issues</h2>
+      <ul>
+        <li class="warn">The worktree also contains pre-existing uncommitted v0.19.3 Glossary Dojo and v0.20.1 Workday files.</li>
+        <li class="warn">The in-app browser did not deliver nav click events reliably, so screenshots were captured with a temporary headless Chrome profile.</li>
+        <li class="warn">Bottom nav can appear over the bottom edge of tall screenshots, though controls remained reachable.</li>
+      </ul>
+    </main>
+  </body>
+</html>
