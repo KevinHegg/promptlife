@@ -1,0 +1,191 @@
+{
+  "version": "v0.26",
+  "date": "2026-06-07",
+  "scope": "Audit-only Play/Game pruning plan. No app behavior changed.",
+  "scoringScale": {
+    "default": "1 to 5, where 5 is strongest.",
+    "maintenanceBurden": "1 to 5, where 1 is low burden and 5 is high burden."
+  },
+  "activities": [
+    {
+      "id": "trace-one-prompt",
+      "title": "Prompt Run",
+      "recommendation": "revise",
+      "clarity": 4,
+      "instructionalValue": 5,
+      "misconceptionTargeting": 5,
+      "funFlow": 3,
+      "mobileFit": 4,
+      "replayValue": 3,
+      "maintenanceBurden": 4,
+      "badgeRelevance": 5,
+      "notes": "The strongest capstone for the day-in-the-life prompt story. It is also long and closer to an interactive worksheet than a small game.",
+      "recommendedNextAction": "Keep as the featured capstone; tighten copy and transitions, then make the prompt trace feel more continuous."
+    },
+    {
+      "id": "context-stack",
+      "title": "Context Stack",
+      "recommendation": "keep",
+      "clarity": 5,
+      "instructionalValue": 5,
+      "misconceptionTargeting": 5,
+      "funFlow": 4,
+      "mobileFit": 4,
+      "replayValue": 3,
+      "maintenanceBurden": 2,
+      "badgeRelevance": 3,
+      "notes": "A clean tactile model of limited context. It directly counters the memory misconception.",
+      "recommendedNextAction": "Keep in the final slate; later add optional RAG/evidence cards to strengthen the context-to-grounding bridge."
+    },
+    {
+      "id": "attention-weave",
+      "title": "Attention Weave",
+      "recommendation": "revise",
+      "clarity": 4,
+      "instructionalValue": 4,
+      "misconceptionTargeting": 5,
+      "funFlow": 3,
+      "mobileFit": 4,
+      "replayValue": 2,
+      "maintenanceBurden": 2,
+      "badgeRelevance": 2,
+      "notes": "Good concept and misconception target, but the current single-example arc drawing has limited replay depth.",
+      "recommendedNextAction": "Revise into Attention Match with several tiny sentence examples and immediate relation feedback."
+    },
+    {
+      "id": "token-relay",
+      "title": "Token Pipeline Relay",
+      "recommendation": "cut",
+      "clarity": 2,
+      "instructionalValue": 2,
+      "misconceptionTargeting": 2,
+      "funFlow": 3,
+      "mobileFit": 4,
+      "replayValue": 2,
+      "maintenanceBurden": 2,
+      "badgeRelevance": 1,
+      "notes": "Compact and mobile-friendly, but pass/transform/hold is too abstract for the core Prompt Life mental model.",
+      "recommendedNextAction": "Remove from the final Play slate or merge the useful determinism idea into Prompt Run sampling."
+    },
+    {
+      "id": "glossary-dojo",
+      "title": "Glossary Dojo",
+      "recommendation": "keep",
+      "clarity": 5,
+      "instructionalValue": 5,
+      "misconceptionTargeting": 5,
+      "funFlow": 4,
+      "mobileFit": 4,
+      "replayValue": 5,
+      "maintenanceBurden": 4,
+      "badgeRelevance": 2,
+      "notes": "The most mature practice system: 12-question rounds, glossary-sourced choices, non-competitive mastery, and precise feedback.",
+      "recommendedNextAction": "Keep. Continue wording and mobile feedback QA, but keep it independent from Journey progress."
+    },
+    {
+      "id": "how-ai-learns",
+      "title": "How AI Learns",
+      "recommendation": "merge",
+      "clarity": 4,
+      "instructionalValue": 4,
+      "misconceptionTargeting": 5,
+      "funFlow": 2,
+      "mobileFit": 4,
+      "replayValue": 2,
+      "maintenanceBurden": 3,
+      "badgeRelevance": 2,
+      "notes": "Important durable-versus-temporary content, but it behaves like a Journey companion rather than a Play game.",
+      "recommendedNextAction": "Merge its strongest distinctions into Journey review and Prompt Run support instead of keeping it as a final Play card."
+    }
+  ],
+  "recommendedFinalSlate": [
+    {
+      "id": "trace-one-prompt",
+      "title": "Prompt Run",
+      "sourceActivity": "Current activity, revised",
+      "learningObjective": "Trace one prompt through tokenization, embeddings, layers, logits, softmax, sampling, append, and repeat.",
+      "playerAction": "Label, connect, choose, append, and order the inference loop.",
+      "successCondition": "Learner completes the full prompt trace and distinguishes inference from training, memory, and consciousness myths.",
+      "wrongActionFeedback": "Explain the specific model move and point back to the correct step.",
+      "whyItBelongs": "It is the capstone for the day-in-the-life prompt story and the only current Play activity with full-loop coverage.",
+      "journeyStagesReinforced": ["Morning Commute", "Workday", "Decision Room", "Day Repeats"],
+      "approximateTime": "6-8 min after revision",
+      "countsAsPlayInsight": true,
+      "implementationDifficulty": "medium"
+    },
+    {
+      "id": "context-stack",
+      "title": "Context Stack",
+      "sourceActivity": "Current activity, kept",
+      "learningObjective": "Understand the context window as temporary visible input, not permanent memory.",
+      "playerAction": "Push cards into a limited context window and watch older cards fall out.",
+      "successCondition": "Request, example, and tone remain visible when the output card arrives.",
+      "wrongActionFeedback": "Name which important card fell out and why the model can no longer use it.",
+      "whyItBelongs": "It is the clearest small game and directly supports context, RAG, grounding, and hallucination literacy.",
+      "journeyStagesReinforced": ["Day Repeats"],
+      "approximateTime": "3 min",
+      "countsAsPlayInsight": true,
+      "implementationDifficulty": "low"
+    },
+    {
+      "id": "attention-match",
+      "title": "Attention Match",
+      "sourceActivity": "Revision of Attention Weave",
+      "learningObjective": "Understand attention as weighted relevance between token positions, not human attention or awareness.",
+      "playerAction": "Connect a target token to the source token or phrase it most depends on.",
+      "successCondition": "Learner correctly matches relevance links across several tiny sentence examples.",
+      "wrongActionFeedback": "Explain why the selected source is less relevant and why the correct source matters.",
+      "whyItBelongs": "Attention is a core mystery-reducing concept, but it needs a clearer diagnostic mechanic than the current single arc.",
+      "journeyStagesReinforced": ["Workday"],
+      "approximateTime": "3-4 min",
+      "countsAsPlayInsight": true,
+      "implementationDifficulty": "medium"
+    },
+    {
+      "id": "probability-picker",
+      "title": "Probability Picker",
+      "sourceActivity": "Future activity, not implemented in v0.26",
+      "learningObjective": "Understand logits, softmax, sampling, uncertainty, and why generation chooses one next token from probabilities.",
+      "playerAction": "Compare candidate next tokens, adjust a simple temperature control, and choose from probability-shaped options.",
+      "successCondition": "Learner predicts how probability shape changes likely next-token choices without treating the model as certain.",
+      "wrongActionFeedback": "Distinguish possible vocabulary tokens from probable tokens in the current context.",
+      "whyItBelongs": "Decision Room concepts currently need a stronger standalone practice activity.",
+      "journeyStagesReinforced": ["Decision Room"],
+      "approximateTime": "3-4 min",
+      "countsAsPlayInsight": true,
+      "implementationDifficulty": "medium"
+    },
+    {
+      "id": "glossary-dojo",
+      "title": "Glossary Dojo",
+      "sourceActivity": "Current activity, kept",
+      "learningObjective": "Build durable vocabulary for model literacy through definitions, relationships, and common mix-ups.",
+      "playerAction": "Answer 12 calm glossary questions with four choices and no scoring pressure.",
+      "successCondition": "Learner completes practice rounds and sees term-level feedback and mastery over time.",
+      "wrongActionFeedback": "Identify what term the wrong answer belongs to and restate the correct term's meaning.",
+      "whyItBelongs": "A vocabulary-rich app needs a replayable practice engine, and Dojo is already mature.",
+      "journeyStagesReinforced": ["All stages"],
+      "approximateTime": "4 min",
+      "countsAsPlayInsight": false,
+      "implementationDifficulty": "low for maintenance, high for major question-engine changes"
+    }
+  ],
+  "screenshots": {
+    "manifest": "docs/play/screenshots/v0-26-play-audit-screenshots.json",
+    "count": 17,
+    "qaSummary": "No horizontal overflow was reported in the captured 320px and 390px states."
+  },
+  "verification": {
+    "typecheck": "passed",
+    "build": "passed with existing Vite large-chunk warning",
+    "buildPages": "passed with existing Vite large-chunk warning",
+    "auditAnswers": "passed"
+  },
+  "knownIssues": [
+    "Existing Vite large-chunk warning remains.",
+    "Prompt Run is rich but long.",
+    "Token Pipeline Relay has weak conceptual fit.",
+    "How AI Learns duplicates Journey-style teaching.",
+    "Attention Weave needs more diagnostic replay value."
+  ]
+}

@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Prompt Life Play/Game Audit v0.26</title>
+<style>
+  :root { color-scheme: light; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #081459; background: #f7fbff; }
+  @page { size: Letter; margin: 0.45in; }
+  body { margin: 0; line-height: 1.45; font-size: 10.5pt; }
+  h1, h2, h3 { color: #101a77; line-height: 1.1; margin: 0 0 0.35rem; }
+  h1 { font-size: 30pt; }
+  h2 { font-size: 18pt; margin-top: 1.1rem; border-top: 1px solid #d9e0f7; padding-top: 0.75rem; }
+  h3 { font-size: 13pt; }
+  p { margin: 0.2rem 0 0.55rem; }
+  .cover { padding: 0.25rem 0 0.5rem; }
+  .kicker { color: #008f98; text-transform: uppercase; font-weight: 800; letter-spacing: 0.08em; font-size: 8pt; }
+  .summary-grid, .slate-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.45rem; margin: 0.55rem 0; }
+  .panel, .slate-card { background: #fff; border: 1px solid #d7def4; border-radius: 8px; padding: 0.65rem; box-shadow: 0 8px 20px rgba(17, 24, 88, 0.08); }
+  table { width: 100%; border-collapse: collapse; margin: 0.5rem 0 0.8rem; background: #fff; page-break-inside: avoid; }
+  th, td { border: 1px solid #d7def4; padding: 0.38rem; vertical-align: top; text-align: left; }
+  th { background: #edf7fb; color: #101a77; font-size: 8.5pt; }
+  td { font-size: 8.8pt; }
+  small { color: #4b597f; }
+  .badge { display: inline-block; border-radius: 999px; background: #e8f8f4; color: #0d5a57; border: 1px solid #b7eee4; padding: 0.1rem 0.4rem; font-weight: 800; text-transform: uppercase; font-size: 7.5pt; }
+  ul { margin: 0.2rem 0 0.8rem 1.1rem; padding: 0; }
+  li { margin: 0.16rem 0; }
+  .page-break { break-before: page; }
+  .screenshot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.55rem; align-items: start; }
+  figure { margin: 0; background: #fff; border: 1px solid #d7def4; border-radius: 8px; padding: 0.38rem; break-inside: avoid; }
+  img { width: 100%; height: auto; display: block; border-radius: 5px; border: 1px solid #edf0fa; }
+  figcaption { font-size: 8.2pt; margin-top: 0.25rem; color: #1c2a64; font-weight: 700; }
+  .footer-note { color: #4b597f; font-size: 8.5pt; }
+</style>
+</head>
+<body>
+<section class="cover">
+  <p class="kicker">Prompt Life audit report</p>
+  <h1>Play/Game Audit v0.26</h1>
+  <p>This PDF wraps the v0.26 audit summary, keep/revise/merge/cut recommendations, final slate proposal, verification results, and mobile screenshots in one place.</p>
+  <div class="summary-grid">
+    <section class="panel"><h3>Activities audited</h3><p>Prompt Run, Context Stack, Attention Weave, Token Pipeline Relay, Glossary Dojo, How AI Learns.</p></section>
+    <section class="panel"><h3>Strongest current games</h3><p>Glossary Dojo, Context Stack, and Prompt Run.</p></section>
+    <section class="panel"><h3>Weakest current games</h3><p>Token Pipeline Relay, How AI Learns as a Play card, and the current single-example Attention Weave.</p></section>
+    <section class="panel"><h3>Verification</h3><p>Typecheck, build, build:pages, and audit:answers passed. The existing Vite large-chunk warning remains.</p></section>
+  </div>
+</section>
+
+<section>
+  <h2>Keep / Revise / Merge / Cut</h2>
+  <table>
+    <thead><tr><th>Activity</th><th>Recommendation</th><th>Best next action</th></tr></thead>
+    <tbody>
+  <tr>
+    <td><strong>Prompt Run</strong></td>
+    <td><span class="badge">revise</span></td>
+    <td>Keep as the featured capstone; tighten copy and transitions, then make the prompt trace feel more continuous.</td>
+  </tr>
+  <tr>
+    <td><strong>Context Stack</strong></td>
+    <td><span class="badge">keep</span></td>
+    <td>Keep in the final slate; later add optional RAG/evidence cards to strengthen the context-to-grounding bridge.</td>
+  </tr>
+  <tr>
+    <td><strong>Attention Weave</strong></td>
+    <td><span class="badge">revise</span></td>
+    <td>Revise into Attention Match with several tiny sentence examples and immediate relation feedback.</td>
+  </tr>
+  <tr>
+    <td><strong>Token Pipeline Relay</strong></td>
+    <td><span class="badge">cut</span></td>
+    <td>Remove from the final Play slate or merge the useful determinism idea into Prompt Run sampling.</td>
+  </tr>
+  <tr>
+    <td><strong>Glossary Dojo</strong></td>
+    <td><span class="badge">keep</span></td>
+    <td>Keep. Continue wording and mobile feedback QA, but keep it independent from Journey progress.</td>
+  </tr>
+  <tr>
+    <td><strong>How AI Learns</strong></td>
+    <td><span class="badge">merge</span></td>
+    <td>Merge its strongest distinctions into Journey review and Prompt Run support instead of keeping it as a final Play card.</td>
+  </tr></tbody>
+  </table>
+
+  <h2>Score Matrix</h2>
+  <p class="footer-note">Scores are 1 to 5 where 5 is strongest. Maintenance burden is reversed: 1 is low burden and 5 is high burden.</p>
+  <table>
+    <thead><tr><th>Activity</th><th>Rec.</th><th>Clarity</th><th>Value</th><th>Misconception</th><th>Fun</th><th>Mobile</th><th>Replay</th><th>Burden</th><th>Badge</th></tr></thead>
+    <tbody>
+  <tr>
+    <td><strong>Prompt Run</strong><br><small>trace-one-prompt</small></td>
+    <td><span class="badge">revise</span></td>
+    <td>4</td>
+    <td>5</td>
+    <td>5</td>
+    <td>3</td>
+    <td>4</td>
+    <td>3</td>
+    <td>4</td>
+    <td>5</td>
+  </tr>
+  <tr>
+    <td><strong>Context Stack</strong><br><small>context-stack</small></td>
+    <td><span class="badge">keep</span></td>
+    <td>5</td>
+    <td>5</td>
+    <td>5</td>
+    <td>4</td>
+    <td>4</td>
+    <td>3</td>
+    <td>2</td>
+    <td>3</td>
+  </tr>
+  <tr>
+    <td><strong>Attention Weave</strong><br><small>attention-weave</small></td>
+    <td><span class="badge">revise</span></td>
+    <td>4</td>
+    <td>4</td>
+    <td>5</td>
+    <td>3</td>
+    <td>4</td>
+    <td>2</td>
+    <td>2</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td><strong>Token Pipeline Relay</strong><br><small>token-relay</small></td>
+    <td><span class="badge">cut</span></td>
+    <td>2</td>
+    <td>2</td>
+    <td>2</td>
+    <td>3</td>
+    <td>4</td>
+    <td>2</td>
+    <td>2</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td><strong>Glossary Dojo</strong><br><small>glossary-dojo</small></td>
+    <td><span class="badge">keep</span></td>
+    <td>5</td>
+    <td>5</td>
+    <td>5</td>
+    <td>4</td>
+    <td>4</td>
+    <td>5</td>
+    <td>4</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td><strong>How AI Learns</strong><br><small>how-ai-learns</small></td>
+    <td><span class="badge">merge</span></td>
+    <td>4</td>
+    <td>4</td>
+    <td>5</td>
+    <td>2</td>
+    <td>4</td>
+    <td>2</td>
+    <td>3</td>
+    <td>2</td>
+  </tr></tbody>
+  </table>
+</section>
+
+<section>
+  <h2>Recommended Final Slate</h2>
+  <div class="slate-grid">
+  <article class="slate-card">
+    <h3>Prompt Run</h3>
+    <p><strong>Objective:</strong> Trace one prompt through tokenization, embeddings, layers, logits, softmax, sampling, append, and repeat.</p>
+    <p><strong>Player action:</strong> Label, connect, choose, append, and order the inference loop.</p>
+    <p><strong>Why it belongs:</strong> It is the capstone for the day-in-the-life prompt story and the only current Play activity with full-loop coverage.</p>
+    <p><strong>Time:</strong> 6-8 min after revision | <strong>Play insight:</strong> yes</p>
+  </article>
+  <article class="slate-card">
+    <h3>Context Stack</h3>
+    <p><strong>Objective:</strong> Understand the context window as temporary visible input, not permanent memory.</p>
+    <p><strong>Player action:</strong> Push cards into a limited context window and watch older cards fall out.</p>
+    <p><strong>Why it belongs:</strong> It is the clearest small game and directly supports context, RAG, grounding, and hallucination literacy.</p>
+    <p><strong>Time:</strong> 3 min | <strong>Play insight:</strong> yes</p>
+  </article>
+  <article class="slate-card">
+    <h3>Attention Match</h3>
+    <p><strong>Objective:</strong> Understand attention as weighted relevance between token positions, not human attention or awareness.</p>
+    <p><strong>Player action:</strong> Connect a target token to the source token or phrase it most depends on.</p>
+    <p><strong>Why it belongs:</strong> Attention is a core mystery-reducing concept, but it needs a clearer diagnostic mechanic than the current single arc.</p>
+    <p><strong>Time:</strong> 3-4 min | <strong>Play insight:</strong> yes</p>
+  </article>
+  <article class="slate-card">
+    <h3>Probability Picker</h3>
+    <p><strong>Objective:</strong> Understand logits, softmax, sampling, uncertainty, and why generation chooses one next token from probabilities.</p>
+    <p><strong>Player action:</strong> Compare candidate next tokens, adjust a simple temperature control, and choose from probability-shaped options.</p>
+    <p><strong>Why it belongs:</strong> Decision Room concepts currently need a stronger standalone practice activity.</p>
+    <p><strong>Time:</strong> 3-4 min | <strong>Play insight:</strong> yes</p>
+  </article>
+  <article class="slate-card">
+    <h3>Glossary Dojo</h3>
+    <p><strong>Objective:</strong> Build durable vocabulary for model literacy through definitions, relationships, and common mix-ups.</p>
+    <p><strong>Player action:</strong> Answer 12 calm glossary questions with four choices and no scoring pressure.</p>
+    <p><strong>Why it belongs:</strong> A vocabulary-rich app needs a replayable practice engine, and Dojo is already mature.</p>
+    <p><strong>Time:</strong> 4 min | <strong>Play insight:</strong> no</p>
+  </article></div>
+</section>
+
+<section>
+  <h2>Known Issues</h2>
+  <ul><li>Existing Vite large-chunk warning remains.</li><li>Prompt Run is rich but long.</li><li>Token Pipeline Relay has weak conceptual fit.</li><li>How AI Learns duplicates Journey-style teaching.</li><li>Attention Weave needs more diagnostic replay value.</li></ul>
+  <h2>Recommended Next Prompt</h2>
+  <p>Implement a v0.26.1 Play Slate Simplification pass using the audit docs as source guidance: keep Dojo, keep Context Stack, revise Prompt Run, revise Attention Weave into Attention Match, cut or merge Token Pipeline Relay, and merge How AI Learns into Journey/Prompt Run support while preserving storage compatibility.</p>
+</section>
+
+<section class="page-break">
+  <h2>Screenshots</h2>
+  <p class="footer-note">Captured in a temporary Chrome profile against localhost. User progress was not changed. The manifest reported no horizontal overflow at 320px or 390px.</p>
+  <div class="screenshot-grid">
+    <figure>
+      <img src="screenshots/v0-26-play-audit-play-top-390.png" alt="Play page top at 390px">
+      <figcaption>Play page top at 390px<br><small>390x844; overflow: no</small></figcaption>
+    </figure>
+    <figure>
+      <img src="screenshots/v0-26-play-audit-play-practice-cards-390.png" alt="Practice challenge cards at 390px">
+      <figcaption>Practice challenge cards at 390px<br><small>390x844; overflow: no</small></figcaption>
+    </figure>
+    <figure>
+      <img src="screenshots/v0-26-play-audit-play-glossary-guided-cards-390.png" alt="Glossary and guided comparison cards at 390px">
+      <figcaption>Glossary and guided comparison cards at 390px<br><small>390x844; overflow: no</small></figcaption>
+    </figure>
+    <figure>
+      <img src="screenshots/v0-26-play-audit-play-top-320.png" alt="Play page top at 320px">
+      <figcaption>Play page top at 320px<br><small>320x844; overflow: no</small></figcaption>
+    </figure>
+    <figure>
+      <img src="screenshots/v0-26-play-audit-play-cards-320.png" alt="Play cards at 320px">
+      <figcaption>Play cards at 320px<br><small>320x844; overflow: no</small></figcaption>
+    </figure>
+    <figure>
+      <img src="screenshots/v0-26-play-audit-prompt-run-first-screen-390.png" alt="Prompt Run first screen">
+      <figcaption>Prompt Run first screen<br><small>390x844; overflow: no</small></figcaption>
+    </figure>
+    <figure>
+      <img src="screenshots/v0-26-play-audit-prompt-run-active-390.png" alt="Prompt Run hint state">
+      <figcaption>Prompt Run hint state<br><small>390x844; overflow: no</small></figcaption>
+    </figure>
+    <figure>
+      <img src="screenshots/v0-26-play-audit-context-stack-first-screen-390.png" alt="Context Stack first screen">
+      <figcaption>Context Stack first screen<br><small>390x844; overflow: no</small></figcaption>
+    </figure>
+    <figure>
+      <img src="screenshots/v0-26-play-audit-context-stack-active-390.png" alt="Context Stack active state">
+      <figcaption>Context Stack active state<br><small>390x844; overflow: no</small></figcaption>
+    </figure>
+    <figure>
+      <img src="screenshots/v0-26-play-audit-attention-weave-first-screen-390.png" alt="Attention Weave first screen">
+      <figcaption>Attention Weave first screen<br><small>390x844; overflow: no</small></figcaption>
+    </figure>
+    <figure>
+      <img src="screenshots/v0-26-play-audit-attention-weave-active-390.png" alt="Attention Weave active state">
+      <figcaption>Attention Weave active state<br><small>390x844; overflow: no</small></figcaption>
+    </figure>
+    <figure>
+      <img src="screenshots/v0-26-play-audit-token-pipeline-relay-first-screen-390.png" alt="Token Pipeline Relay first screen">
+      <figcaption>Token Pipeline Relay first screen<br><small>390x844; overflow: no</small></figcaption>
+    </figure>
+    <figure>
+      <img src="screenshots/v0-26-play-audit-token-pipeline-relay-active-390.png" alt="Token Pipeline Relay active state">
+      <figcaption>Token Pipeline Relay active state<br><small>390x844; overflow: no</small></figcaption>
+    </figure>
+    <figure>
+      <img src="screenshots/v0-26-play-audit-glossary-dojo-first-screen-390.png" alt="Glossary Dojo entry">
+      <figcaption>Glossary Dojo entry<br><small>390x844; overflow: no</small></figcaption>
+    </figure>
+    <figure>
+      <img src="screenshots/v0-26-play-audit-glossary-dojo-question-390.png" alt="Glossary Dojo question state">
+      <figcaption>Glossary Dojo question state<br><small>390x844; overflow: no</small></figcaption>
+    </figure>
+    <figure>
+      <img src="screenshots/v0-26-play-audit-glossary-dojo-active-390.png" alt="Glossary Dojo feedback state">
+      <figcaption>Glossary Dojo feedback state<br><small>390x844; overflow: no</small></figcaption>
+    </figure>
+    <figure>
+      <img src="screenshots/v0-26-play-audit-how-ai-learns-first-screen-390.png" alt="How AI Learns first screen">
+      <figcaption>How AI Learns first screen<br><small>390x844; overflow: no</small></figcaption>
+    </figure></div>
+</section>
+</body>
+</html>

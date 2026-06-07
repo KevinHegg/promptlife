@@ -1,0 +1,90 @@
+{
+  "capturedAt": "2026-06-07T22:02:20.867Z",
+  "baseUrl": "http://127.0.0.1:5173/?debug=1&v=0254-prompt-response-paging",
+  "shots": [
+    {
+      "name": "v0-25-4-prompt-response-visual-390",
+      "file": "/Users/kevinhegg/Desktop/promptlife/docs/reports/screenshots/v0-25-4-prompt-response-visual-390.png",
+      "url": "http://127.0.0.1:5173/?debug=1&v=0254-prompt-response-paging",
+      "heading": "Prompt vs Response",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "shellScrollTop": 548,
+      "shellScrollWidth": 388,
+      "shellClientWidth": 388,
+      "bodyScrollWidth": 390,
+      "rootScrollWidth": 390,
+      "horizontalOverflow": false,
+      "promptResponseVisible": true,
+      "checkpointVisible": false,
+      "pagerVisible": false,
+      "hasQuestionText": true,
+      "kind": "prompt-response visual"
+    },
+    {
+      "name": "v0-25-4-prompt-response-checkpoint-390",
+      "file": "/Users/kevinhegg/Desktop/promptlife/docs/reports/screenshots/v0-25-4-prompt-response-checkpoint-390.png",
+      "url": "http://127.0.0.1:5173/?debug=1&v=0254-prompt-response-paging",
+      "heading": "Prompt vs Response",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "shellScrollTop": 5854,
+      "shellScrollWidth": 388,
+      "shellClientWidth": 388,
+      "bodyScrollWidth": 390,
+      "rootScrollWidth": 390,
+      "horizontalOverflow": false,
+      "promptResponseVisible": false,
+      "checkpointVisible": true,
+      "pagerVisible": false,
+      "hasQuestionText": true,
+      "kind": "checkpoint single regression"
+    },
+    {
+      "name": "v0-25-4-prompt-response-visual-320",
+      "file": "/Users/kevinhegg/Desktop/promptlife/docs/reports/screenshots/v0-25-4-prompt-response-visual-320.png",
+      "url": "http://127.0.0.1:5173/?debug=1&v=0254-prompt-response-paging",
+      "heading": "Prompt vs Response",
+      "viewport": {
+        "width": 320,
+        "height": 844
+      },
+      "shellScrollTop": 557,
+      "shellScrollWidth": 318,
+      "shellClientWidth": 318,
+      "bodyScrollWidth": 320,
+      "rootScrollWidth": 320,
+      "horizontalOverflow": false,
+      "promptResponseVisible": true,
+      "checkpointVisible": false,
+      "pagerVisible": false,
+      "hasQuestionText": true,
+      "kind": "prompt-response visual"
+    },
+    {
+      "name": "v0-25-4-prompt-response-checkpoint-320",
+      "file": "/Users/kevinhegg/Desktop/promptlife/docs/reports/screenshots/v0-25-4-prompt-response-checkpoint-320.png",
+      "url": "http://127.0.0.1:5173/?debug=1&v=0254-prompt-response-paging",
+      "heading": "Prompt vs Response",
+      "viewport": {
+        "width": 320,
+        "height": 844
+      },
+      "shellScrollTop": 6352,
+      "shellScrollWidth": 318,
+      "shellClientWidth": 318,
+      "bodyScrollWidth": 320,
+      "rootScrollWidth": 320,
+      "horizontalOverflow": false,
+      "promptResponseVisible": false,
+      "checkpointVisible": true,
+      "pagerVisible": false,
+      "hasQuestionText": true,
+      "kind": "checkpoint single regression"
+    }
+  ]
+}

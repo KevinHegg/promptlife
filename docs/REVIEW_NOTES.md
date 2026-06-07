@@ -2,6 +2,121 @@
 
 Date: 2026-06-07
 
+## v0.25.4 Prompt vs Response Visual And Checkpoint Paging
+
+### What Changed
+
+- Repaired the coded `Prompt vs Response` visual aid into a taller stacked diagram.
+- The visual now separates:
+  - given prompt tokens,
+  - generated response-so-far tokens,
+  - a newly selected next token,
+  - and the updated context for the next run.
+- Replaced the cramped formula-style line with clearer labels and HTML callouts.
+- Added optional top-of-panel checkpoint paging support for multi-question lesson cards.
+- Preserved the existing single-question checkpoint shuffle key and single-question UI behavior.
+- Bumped the visible app version to `v0.25.4`.
+
+### Preserved
+
+- Badge logic, stage structure, Journey ordering, generated assets, dependencies, checkpoint answer randomization for current single-question cards, and Glossary Dojo behavior were not changed.
+
+### QA Notes
+
+- Source scan found no current production `quiz.questions` arrays; all current lesson cards use single-question `lesson.quiz` objects.
+- The new paging UI appears only when a lesson card provides more than one checkpoint question.
+- Existing single-question checkpoint rendering was regression-checked.
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+
+### Screenshots And Report
+
+- `docs/prompt-life-v0-25-4-prompt-vs-response-and-checkpoint-paging-report.md`
+- `docs/reports/prompt-life-v0-25-4-prompt-vs-response-and-checkpoint-paging-report.html`
+- `docs/reports/prompt-life-v0-25-4-prompt-vs-response-and-checkpoint-paging-report.pdf`
+- `docs/reports/screenshots/v0-25-4-prompt-response-paging-screenshots.json`
+
+### Known Issues
+
+- No current production lesson card contains multiple checkpoint questions, so the multi-question pager path still needs content-specific QA when the first multi-question card is added.
+- The existing Vite large-chunk warning remains.
+
+## v0.25.3 Fine-Tuning Brain Bridge Wording
+
+### What Changed
+
+- Changed the Fine-Tuning brain bridge wording from `house style` to `corporate norms`.
+- Updated the matching current glossary phrasing for Adapter so current learner-facing app copy no longer uses `house style`.
+- Bumped the visible app version to `v0.25.3`.
+
+### Preserved
+
+- Journey order, progress rules, badge logic, games, generated assets, dependencies, checkpoint randomization, and Glossary Dojo behavior were not changed.
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+
+### Screenshots And Report
+
+- `docs/reports/prompt-life-v0-25-3-wording-house-style-report.html`
+- `docs/reports/prompt-life-v0-25-3-wording-house-style-report.pdf`
+- `docs/reports/screenshots/v0-25-3-fine-tuning-corporate-norms-390.png`
+
+## v0.26 Play/Game Audit And Pruning Plan
+
+### What Changed
+
+- Created an audit-only Play/Game pruning package.
+- Audited all six current Play activities: Prompt Run, Context Stack, Attention Weave, Token Pipeline Relay, Glossary Dojo, and How AI Learns.
+- Added keep/revise/merge/cut recommendations and a recommended final 3 to 5 activity slate.
+- Added reusable Play design principles for future implementation passes.
+- Added a machine-readable audit JSON file.
+- Captured 17 mobile screenshots in a temporary Chrome profile so user progress was not changed.
+
+### Recommendations
+
+- Keep Glossary Dojo.
+- Keep Context Stack with small future polish.
+- Revise Prompt Run as the featured capstone.
+- Revise Attention Weave into a clearer Attention Match activity.
+- Cut or merge Token Pipeline Relay.
+- Merge How AI Learns into Journey/Prompt Run support rather than keeping it as a final Play card.
+
+### Preserved
+
+- No games, Journey cards, progress rules, badge logic, generated assets, dependencies, checkpoint randomization, or Glossary Dojo behavior were changed.
+- The one-badge model remains unchanged.
+- This pass did not bump the visible app version because it is documentation/audit only.
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed.
+
+### Screenshots And Report
+
+- `docs/play/PLAY_GAME_AUDIT_V0_26.md`
+- `docs/play/PLAY_DESIGN_PRINCIPLES_V0_26.md`
+- `docs/play/play-game-audit-v0-26.json`
+- `docs/play/screenshots/v0-26-play-audit-screenshots.json`
+- `docs/play/prompt-life-v0-26-play-game-audit-report.html`
+- `docs/play/prompt-life-v0-26-play-game-audit-report.pdf`
+
+### Known Issues
+
+- The existing Vite large-chunk warning remains.
+- Prompt Run is still long for a Play activity.
+- Token Pipeline Relay has weak conceptual fit.
+- How AI Learns duplicates Journey-style teaching.
+- Attention Weave needs more diagnostic replay value.
+
 ## v0.25.1 Glossary Dojo Live Wording Purge
 
 ### What Changed

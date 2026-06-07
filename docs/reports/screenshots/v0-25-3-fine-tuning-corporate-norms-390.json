@@ -1,0 +1,64 @@
+{
+  "capturedAt": "2026-06-07T20:41:47.921Z",
+  "screenshot": "/Users/kevinhegg/Desktop/promptlife/docs/reports/screenshots/v0-25-3-fine-tuning-corporate-norms-390.png",
+  "attempts": [
+    {
+      "scrollTop": 2554,
+      "targetTop": 359.921875,
+      "targetBottom": 406.296875
+    },
+    {
+      "scrollTop": 2554,
+      "targetTop": 359.921875,
+      "targetBottom": 406.296875
+    },
+    {
+      "scrollTop": 2554,
+      "targetTop": 359.921875,
+      "targetBottom": 406.296875
+    },
+    {
+      "scrollTop": 2554,
+      "targetTop": 359.921875,
+      "targetBottom": 406.296875
+    },
+    {
+      "scrollTop": 2554,
+      "targetTop": 359.921875,
+      "targetBottom": 406.296875
+    },
+    {
+      "scrollTop": 2554,
+      "targetTop": 359.921875,
+      "targetBottom": 406.296875
+    },
+    {
+      "scrollTop": 2554,
+      "targetTop": 359.921875,
+      "targetBottom": 406.296875
+    },
+    {
+      "scrollTop": 2554,
+      "targetTop": 359.921875,
+      "targetBottom": 406.296875
+    }
+  ],
+  "url": "http://127.0.0.1:5173/?debug=1&v=0253-corporate-norms",
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "hasCorporateNorms": true,
+  "hasHouseStyle": false,
+  "heading": "Fine-Tuning",
+  "visibleCorporateNorms": true,
+  "targetRect": {
+    "top": 359.921875,
+    "bottom": 406.296875,
+    "height": 46.375
+  },
+  "shellScrollTop": 2554,
+  "shellScrollWidth": 388,
+  "shellClientWidth": 388,
+  "horizontalOverflow": false
+}

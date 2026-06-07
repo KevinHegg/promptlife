@@ -1,0 +1,324 @@
+{
+  "capturedAt": "2026-06-07T20:10:38.768Z",
+  "baseUrl": "http://127.0.0.1:5173/?debug=1&v=026-play-audit",
+  "screenshots": [
+    {
+      "name": "play-top-390",
+      "file": "/Users/kevinhegg/Desktop/promptlife/docs/play/screenshots/v0-26-play-audit-play-top-390.png",
+      "url": "http://127.0.0.1:5173/?debug=1&v=026-play-audit",
+      "title": "Prompt Life",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "shellScrollTop": 0,
+      "bodyScrollWidth": 390,
+      "rootScrollWidth": 390,
+      "shellScrollWidth": 388,
+      "shellClientWidth": 388,
+      "activeHeading": "Play to understand",
+      "hasHorizontalOverflow": false,
+      "kind": "play-page-top"
+    },
+    {
+      "name": "play-practice-cards-390",
+      "file": "/Users/kevinhegg/Desktop/promptlife/docs/play/screenshots/v0-26-play-audit-play-practice-cards-390.png",
+      "url": "http://127.0.0.1:5173/?debug=1&v=026-play-audit",
+      "title": "Prompt Life",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "shellScrollTop": 480,
+      "bodyScrollWidth": 390,
+      "rootScrollWidth": 390,
+      "shellScrollWidth": 388,
+      "shellClientWidth": 388,
+      "activeHeading": "Play to understand",
+      "hasHorizontalOverflow": false,
+      "kind": "play-activity-cards"
+    },
+    {
+      "name": "play-glossary-guided-cards-390",
+      "file": "/Users/kevinhegg/Desktop/promptlife/docs/play/screenshots/v0-26-play-audit-play-glossary-guided-cards-390.png",
+      "url": "http://127.0.0.1:5173/?debug=1&v=026-play-audit",
+      "title": "Prompt Life",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "shellScrollTop": 910,
+      "bodyScrollWidth": 390,
+      "rootScrollWidth": 390,
+      "shellScrollWidth": 388,
+      "shellClientWidth": 388,
+      "activeHeading": "Play to understand",
+      "hasHorizontalOverflow": false,
+      "kind": "play-activity-cards"
+    },
+    {
+      "name": "play-top-320",
+      "file": "/Users/kevinhegg/Desktop/promptlife/docs/play/screenshots/v0-26-play-audit-play-top-320.png",
+      "url": "http://127.0.0.1:5173/?debug=1&v=026-play-audit",
+      "title": "Prompt Life",
+      "viewport": {
+        "width": 320,
+        "height": 844
+      },
+      "shellScrollTop": 0,
+      "bodyScrollWidth": 320,
+      "rootScrollWidth": 320,
+      "shellScrollWidth": 318,
+      "shellClientWidth": 318,
+      "activeHeading": "Play to understand",
+      "hasHorizontalOverflow": false,
+      "kind": "play-page-top"
+    },
+    {
+      "name": "play-cards-320",
+      "file": "/Users/kevinhegg/Desktop/promptlife/docs/play/screenshots/v0-26-play-audit-play-cards-320.png",
+      "url": "http://127.0.0.1:5173/?debug=1&v=026-play-audit",
+      "title": "Prompt Life",
+      "viewport": {
+        "width": 320,
+        "height": 844
+      },
+      "shellScrollTop": 520,
+      "bodyScrollWidth": 320,
+      "rootScrollWidth": 320,
+      "shellScrollWidth": 318,
+      "shellClientWidth": 318,
+      "activeHeading": "Play to understand",
+      "hasHorizontalOverflow": false,
+      "kind": "play-activity-cards"
+    },
+    {
+      "name": "prompt-run-first-screen-390",
+      "file": "/Users/kevinhegg/Desktop/promptlife/docs/play/screenshots/v0-26-play-audit-prompt-run-first-screen-390.png",
+      "url": "http://127.0.0.1:5173/?debug=1&v=026-play-audit",
+      "title": "Prompt Life",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "shellScrollTop": 0,
+      "bodyScrollWidth": 390,
+      "rootScrollWidth": 390,
+      "shellScrollWidth": 388,
+      "shellClientWidth": 388,
+      "activeHeading": "Prompt Run",
+      "hasHorizontalOverflow": false,
+      "kind": "game-first-screen",
+      "game": "Prompt Run"
+    },
+    {
+      "name": "prompt-run-active-390",
+      "file": "/Users/kevinhegg/Desktop/promptlife/docs/play/screenshots/v0-26-play-audit-prompt-run-active-390.png",
+      "url": "http://127.0.0.1:5173/?debug=1&v=026-play-audit",
+      "title": "Prompt Life",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "shellScrollTop": 0,
+      "bodyScrollWidth": 390,
+      "rootScrollWidth": 390,
+      "shellScrollWidth": 388,
+      "shellClientWidth": 388,
+      "activeHeading": "Prompt Run",
+      "hasHorizontalOverflow": false,
+      "kind": "game-active-state",
+      "game": "Prompt Run"
+    },
+    {
+      "name": "context-stack-first-screen-390",
+      "file": "/Users/kevinhegg/Desktop/promptlife/docs/play/screenshots/v0-26-play-audit-context-stack-first-screen-390.png",
+      "url": "http://127.0.0.1:5173/?debug=1&v=026-play-audit",
+      "title": "Prompt Life",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "shellScrollTop": 0,
+      "bodyScrollWidth": 390,
+      "rootScrollWidth": 390,
+      "shellScrollWidth": 388,
+      "shellClientWidth": 388,
+      "activeHeading": "Context Stack",
+      "hasHorizontalOverflow": false,
+      "kind": "game-first-screen",
+      "game": "Context Stack"
+    },
+    {
+      "name": "context-stack-active-390",
+      "file": "/Users/kevinhegg/Desktop/promptlife/docs/play/screenshots/v0-26-play-audit-context-stack-active-390.png",
+      "url": "http://127.0.0.1:5173/?debug=1&v=026-play-audit",
+      "title": "Prompt Life",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "shellScrollTop": 0,
+      "bodyScrollWidth": 390,
+      "rootScrollWidth": 390,
+      "shellScrollWidth": 388,
+      "shellClientWidth": 388,
+      "activeHeading": "Context Stack",
+      "hasHorizontalOverflow": false,
+      "kind": "game-active-state",
+      "game": "Context Stack"
+    },
+    {
+      "name": "attention-weave-first-screen-390",
+      "file": "/Users/kevinhegg/Desktop/promptlife/docs/play/screenshots/v0-26-play-audit-attention-weave-first-screen-390.png",
+      "url": "http://127.0.0.1:5173/?debug=1&v=026-play-audit",
+      "title": "Prompt Life",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "shellScrollTop": 0,
+      "bodyScrollWidth": 390,
+      "rootScrollWidth": 390,
+      "shellScrollWidth": 388,
+      "shellClientWidth": 388,
+      "activeHeading": "Attention Weave",
+      "hasHorizontalOverflow": false,
+      "kind": "game-first-screen",
+      "game": "Attention Weave"
+    },
+    {
+      "name": "attention-weave-active-390",
+      "file": "/Users/kevinhegg/Desktop/promptlife/docs/play/screenshots/v0-26-play-audit-attention-weave-active-390.png",
+      "url": "http://127.0.0.1:5173/?debug=1&v=026-play-audit",
+      "title": "Prompt Life",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "shellScrollTop": 0,
+      "bodyScrollWidth": 390,
+      "rootScrollWidth": 390,
+      "shellScrollWidth": 388,
+      "shellClientWidth": 388,
+      "activeHeading": "Attention Weave",
+      "hasHorizontalOverflow": false,
+      "kind": "game-active-state",
+      "game": "Attention Weave"
+    },
+    {
+      "name": "token-pipeline-relay-first-screen-390",
+      "file": "/Users/kevinhegg/Desktop/promptlife/docs/play/screenshots/v0-26-play-audit-token-pipeline-relay-first-screen-390.png",
+      "url": "http://127.0.0.1:5173/?debug=1&v=026-play-audit",
+      "title": "Prompt Life",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "shellScrollTop": 0,
+      "bodyScrollWidth": 390,
+      "rootScrollWidth": 390,
+      "shellScrollWidth": 388,
+      "shellClientWidth": 388,
+      "activeHeading": "Token Pipeline Relay",
+      "hasHorizontalOverflow": false,
+      "kind": "game-first-screen",
+      "game": "Token Pipeline Relay"
+    },
+    {
+      "name": "token-pipeline-relay-active-390",
+      "file": "/Users/kevinhegg/Desktop/promptlife/docs/play/screenshots/v0-26-play-audit-token-pipeline-relay-active-390.png",
+      "url": "http://127.0.0.1:5173/?debug=1&v=026-play-audit",
+      "title": "Prompt Life",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "shellScrollTop": 0,
+      "bodyScrollWidth": 390,
+      "rootScrollWidth": 390,
+      "shellScrollWidth": 388,
+      "shellClientWidth": 388,
+      "activeHeading": "Token Pipeline Relay",
+      "hasHorizontalOverflow": false,
+      "kind": "game-active-state",
+      "game": "Token Pipeline Relay"
+    },
+    {
+      "name": "glossary-dojo-first-screen-390",
+      "file": "/Users/kevinhegg/Desktop/promptlife/docs/play/screenshots/v0-26-play-audit-glossary-dojo-first-screen-390.png",
+      "url": "http://127.0.0.1:5173/?debug=1&v=026-play-audit",
+      "title": "Prompt Life",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "shellScrollTop": 0,
+      "bodyScrollWidth": 390,
+      "rootScrollWidth": 390,
+      "shellScrollWidth": 388,
+      "shellClientWidth": 388,
+      "activeHeading": "Practice glossary terms",
+      "hasHorizontalOverflow": false,
+      "kind": "game-first-screen",
+      "game": "Glossary Dojo"
+    },
+    {
+      "name": "glossary-dojo-question-390",
+      "file": "/Users/kevinhegg/Desktop/promptlife/docs/play/screenshots/v0-26-play-audit-glossary-dojo-question-390.png",
+      "url": "http://127.0.0.1:5173/?debug=1&v=026-play-audit",
+      "title": "Prompt Life",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "shellScrollTop": 0,
+      "bodyScrollWidth": 390,
+      "rootScrollWidth": 390,
+      "shellScrollWidth": 388,
+      "shellClientWidth": 388,
+      "activeHeading": "Practice glossary terms",
+      "hasHorizontalOverflow": false,
+      "kind": "game-question-state",
+      "game": "Glossary Dojo"
+    },
+    {
+      "name": "glossary-dojo-active-390",
+      "file": "/Users/kevinhegg/Desktop/promptlife/docs/play/screenshots/v0-26-play-audit-glossary-dojo-active-390.png",
+      "url": "http://127.0.0.1:5173/?debug=1&v=026-play-audit",
+      "title": "Prompt Life",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "shellScrollTop": 0,
+      "bodyScrollWidth": 390,
+      "rootScrollWidth": 390,
+      "shellScrollWidth": 388,
+      "shellClientWidth": 388,
+      "activeHeading": "Practice glossary terms",
+      "hasHorizontalOverflow": false,
+      "kind": "game-active-state",
+      "game": "Glossary Dojo"
+    },
+    {
+      "name": "how-ai-learns-first-screen-390",
+      "file": "/Users/kevinhegg/Desktop/promptlife/docs/play/screenshots/v0-26-play-audit-how-ai-learns-first-screen-390.png",
+      "url": "http://127.0.0.1:5173/?debug=1&v=026-play-audit",
+      "title": "Prompt Life",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "shellScrollTop": 0,
+      "bodyScrollWidth": 390,
+      "rootScrollWidth": 390,
+      "shellScrollWidth": 388,
+      "shellClientWidth": 388,
+      "activeHeading": "How AI Learns",
+      "hasHorizontalOverflow": false,
+      "kind": "game-first-screen",
+      "game": "How AI Learns"
+    }
+  ]
+}

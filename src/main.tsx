@@ -42,7 +42,7 @@ const HOME_ASSETS = {
   heroFallback: `${ASSET}/illustrations/scene-hero-feature-cloud@mobile.png`
 }
 // Bump this for each shipped app change; the Badge screen displays it under Start over.
-const APP_VERSION = '0.25.2'
+const APP_VERSION = '0.25.4'
 const STORAGE_KEYS = {
   lastLocation: 'promptlife:v1:lastLocation',
   lessonId: 'promptlife:v1:lessonId',
@@ -979,8 +979,9 @@ function SectionIntroCard({ act }) {
 }
 
 function LessonScreen({ lesson, mode, lessonIndex, totalLessons, reflection, onComplete, onNext, onReturnToJourney, onReflection, onGlossary }) {
-  const [choice, setChoice] = useState(null)
-  const [revealed, setRevealed] = useState(false)
+  const [checkpointIndex, setCheckpointIndex] = useState(0)
+  const [checkpointSelections, setCheckpointSelections] = useState({})
+  const [checkpointRevealed, setCheckpointRevealed] = useState({})
   const [continueHint, setContinueHint] = useState(false)
   const [draftReflection, setDraftReflection] = useState(reflection)
   const checkpointRef = useRef<HTMLElement | null>(null)
@@ -993,12 +994,24 @@ function LessonScreen({ lesson, mode, lessonIndex, totalLessons, reflection, onC
   const whyItMatters = lesson.whyItMatters ?? lesson.why
   const howItConnects = lesson.howItConnects ?? lesson.relationship
   const choiceOrderSeed = useMemo(() => getChoiceOrderSeed(), [])
+  const checkpointItems = useMemo(() => {
+    return Array.isArray(lesson.quiz?.questions) && lesson.quiz.questions.length ? lesson.quiz.questions : [lesson.quiz]
+  }, [lesson.quiz])
+  const activeCheckpointIndex = Math.min(checkpointIndex, checkpointItems.length - 1)
+  const activeQuiz = checkpointItems[activeCheckpointIndex] ?? lesson.quiz
+  const checkpointKey = activeQuiz?.id ?? `${activeCheckpointIndex}`
+  const checkpointChoiceOrderKey = checkpointItems.length === 1
+    ? `lesson:${lesson.id}:checkpoint`
+    : `lesson:${lesson.id}:checkpoint:${checkpointKey}`
   const checkpointChoices = useMemo(
-    () => buildQuizChoices(`lesson:${lesson.id}:checkpoint`, lesson.quiz, choiceOrderSeed),
-    [lesson.id, lesson.quiz, choiceOrderSeed]
+    () => buildQuizChoices(checkpointChoiceOrderKey, activeQuiz, choiceOrderSeed),
+    [checkpointChoiceOrderKey, activeQuiz, choiceOrderSeed]
   )
+  const choice = checkpointSelections[checkpointKey] ?? null
+  const revealed = Boolean(checkpointRevealed[checkpointKey])
   const selectedChoice = choice == null ? null : checkpointChoices.find((item) => item.id === choice) ?? null
   const isCorrect = Boolean(selectedChoice?.isCorrect)
+  const isLastCheckpointQuestion = activeCheckpointIndex >= checkpointItems.length - 1
   const relatedTerms = useMemo(() => {
     return lesson.terms
       .map((term) => findGlossaryTerm(term))
@@ -1006,8 +1019,9 @@ function LessonScreen({ lesson, mode, lessonIndex, totalLessons, reflection, onC
   }, [lesson.terms])
 
   useEffect(() => {
-    setChoice(null)
-    setRevealed(false)
+    setCheckpointIndex(0)
+    setCheckpointSelections({})
+    setCheckpointRevealed({})
     setContinueHint(false)
     setDraftReflection(mode === 'preview' ? '' : reflection)
   }, [lesson.id, mode, reflection])
@@ -1020,6 +1034,12 @@ function LessonScreen({ lesson, mode, lessonIndex, totalLessons, reflection, onC
     if (!isCorrect) {
       setContinueHint(true)
       checkpointRef.current?.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'center' })
+      return
+    }
+    if (!isLastCheckpointQuestion) {
+      setCheckpointIndex((index) => Math.min(index + 1, checkpointItems.length - 1))
+      setContinueHint(false)
+      checkpointRef.current?.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'start' })
       return
     }
     onComplete(lesson.id)
@@ -1091,17 +1111,18 @@ function LessonScreen({ lesson, mode, lessonIndex, totalLessons, reflection, onC
       </section>
 
       <section ref={checkpointRef} className="lesson-panel quiz-card" aria-labelledby="quiz-title">
-        <span className="step-label">Checkpoint</span>
         <Checkpoint
-          quiz={lesson.quiz}
+          quiz={activeQuiz}
           choices={checkpointChoices}
           selectedChoiceId={choice}
           setChoice={(choiceId) => {
-            setChoice(choiceId)
-            setRevealed(true)
+            setCheckpointSelections((selections) => ({ ...selections, [checkpointKey]: choiceId }))
+            setCheckpointRevealed((revealedMap) => ({ ...revealedMap, [checkpointKey]: true }))
             setContinueHint(false)
           }}
           revealed={revealed}
+          progress={checkpointItems.length > 1 ? { current: activeCheckpointIndex + 1, total: checkpointItems.length } : null}
+          onPrevious={activeCheckpointIndex > 0 ? () => setCheckpointIndex((index) => Math.max(0, index - 1)) : null}
         />
         {continueHint && (
           <p className="feedback" role="status">
@@ -1132,7 +1153,7 @@ function LessonScreen({ lesson, mode, lessonIndex, totalLessons, reflection, onC
       </section>
 
       <button className={isCorrect || !canUpdateProgress ? 'primary-btn sticky-action is-ready' : 'primary-btn sticky-action'} onClick={saveAndContinue}>
-        {!canUpdateProgress ? 'Return to Journey' : isCorrect ? (lessonIndex + 1 === totalLessons ? 'Finish and view badge' : 'Next lesson') : choice == null ? 'Answer checkpoint to continue' : 'Retry checkpoint to continue'}
+        {!canUpdateProgress ? 'Return to Journey' : isCorrect ? (!isLastCheckpointQuestion ? 'Next checkpoint question' : lessonIndex + 1 === totalLessons ? 'Finish and view badge' : 'Next lesson') : choice == null ? 'Answer checkpoint to continue' : 'Retry checkpoint to continue'}
       </button>
     </section>
   )
@@ -1352,15 +1373,36 @@ function groupGlossaryTermsBySection(items) {
   }, [])
 }
 
-function Checkpoint({ quiz, choices, selectedChoiceId, setChoice, revealed }) {
+function Checkpoint({ quiz, choices, selectedChoiceId, setChoice, revealed, progress = null, onPrevious = null }) {
   const selectedChoice = selectedChoiceId == null ? null : choices.find((item) => item.id === selectedChoiceId) ?? null
   const isCorrect = Boolean(selectedChoice?.isCorrect)
   const feedback = selectedChoice?.feedback ?? quiz.explain
   const feedbackHasLead = !isCorrect && typeof feedback === 'string' && feedback.startsWith('Not quite.')
   const feedbackHasCorrectLead = isCorrect && typeof feedback === 'string' && feedback.startsWith('Insight unlocked')
+  const hasProgress = Boolean(progress && progress.total > 1)
+  const isFinalQuestion = hasProgress && progress.current === progress.total
 
   return (
     <>
+      {hasProgress ? (
+        <div className="checkpoint-pager" aria-label={`Checkpoint question ${progress.current} of ${progress.total}`}>
+          <div className="checkpoint-pager-row">
+            <span className="step-label">Checkpoint</span>
+            <span className="checkpoint-count">Question {progress.current} of {progress.total}</span>
+          </div>
+          <div className="checkpoint-dots" aria-hidden="true">
+            {Array.from({ length: progress.total }, (_, index) => (
+              <span key={index} className={index + 1 <= progress.current ? 'active' : ''} />
+            ))}
+          </div>
+          <div className="checkpoint-pager-row">
+            {onPrevious ? <button className="text-btn checkpoint-back" type="button" onClick={onPrevious}>Previous question</button> : <span />}
+            {isFinalQuestion && <strong className="checkpoint-final">Final question</strong>}
+          </div>
+        </div>
+      ) : (
+        <span className="step-label">Checkpoint</span>
+      )}
       <h2 id="quiz-title">{quiz.question}</h2>
       <div className="answer-list" role="list">
         {choices.map((answer, index) => {
