@@ -1,0 +1,83 @@
+{
+  "version": "0.27.1",
+  "date": "2026-06-08",
+  "pass": "Attention Match v1",
+  "viewportChecks": [
+    {
+      "width": 390,
+      "height": 844,
+      "result": "passed",
+      "notes": "Start, source selection, wrong-arc feedback, happy completion, review-suggested completion, Play landing progress, and Badge page were captured without horizontal overflow."
+    },
+    {
+      "width": 320,
+      "height": 844,
+      "result": "passed",
+      "notes": "Active Attention Match start state fit without horizontal overflow; measured scrollWidth 320 and clientWidth 320."
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "v0-27-1-attention-match-start-390.png",
+      "viewport": "390x844",
+      "description": "Attention Match start state at 390px."
+    },
+    {
+      "file": "v0-27-1-attention-match-source-selection-390.png",
+      "viewport": "390x844",
+      "description": "Correct source selection with relevance arc and weight bars."
+    },
+    {
+      "file": "v0-27-1-attention-match-arc-feedback-390.png",
+      "viewport": "390x844",
+      "description": "Common-mix-up feedback with a weaker relevance arc."
+    },
+    {
+      "file": "v0-27-1-attention-match-completion-390.png",
+      "viewport": "390x844",
+      "description": "Completed Attention Match state."
+    },
+    {
+      "file": "v0-27-1-attention-match-review-suggested-390.png",
+      "viewport": "390x844",
+      "description": "Review-suggested completion state."
+    },
+    {
+      "file": "v0-27-1-attention-match-start-320.png",
+      "viewport": "320x844",
+      "description": "Attention Match start state at 320px."
+    },
+    {
+      "file": "v0-27-1-play-landing-attention-progress-390.png",
+      "viewport": "390x844",
+      "description": "Play landing showing Attention Match review-suggested progress."
+    },
+    {
+      "file": "v0-27-1-badge-attention-match-390.png",
+      "viewport": "390x844",
+      "description": "Badge page showing one completed or review-suggested Play challenge."
+    }
+  ],
+  "automation": {
+    "tool": "Bundled Playwright using local Chrome plus in-app Browser spot check",
+    "results": {
+      "happyStatus": "completed",
+      "happyAttempts": 1,
+      "happyCompletions": 1,
+      "reviewStatus": "review-suggested",
+      "reviewAttempts": 2,
+      "reviewCompletions": 2,
+      "playCardMentionsReview": true,
+      "badgeMentionedOneOfFive": true,
+      "resetClearedPlayStorage": true,
+      "resetClearedDojoStorage": true,
+      "smokeRoutesOpened": [
+        "Glossary Dojo",
+        "Context Stack",
+        "Probability Picker",
+        "Prompt Run",
+        "Attention Match"
+      ]
+    }
+  }
+}

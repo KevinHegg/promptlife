@@ -71,7 +71,7 @@ const HOME_ASSETS = {
   heroFallback: `${ASSET}/illustrations/scene-hero-feature-cloud@mobile.png`
 }
 // Bump this for each shipped app change; the Badge screen displays it under Start over.
-const APP_VERSION = '0.27.0'
+const APP_VERSION = '0.27.1'
 const STORAGE_KEYS = {
   lastLocation: 'promptlife:v1:lastLocation',
   lessonId: 'promptlife:v1:lessonId',
@@ -3362,15 +3362,6 @@ function PlayScreen({ gameId, gameInsights, traceComplete, promptRunProgress, le
     setGameId(item.routeId ?? item.id)
   }, [recordChallengeStart, setGameId])
 
-  const recordAttentionInsight = useCallback((legacyId) => {
-    onInsight(legacyId)
-    completeChallenge('attention-match', {
-      progressPct: 100,
-      outcome: 'You found the main idea: attention is relevance between token positions.',
-      misconceptionTags: ['attention-is-awareness']
-    })
-  }, [completeChallenge, onInsight])
-
   if (gameId === 'trace-one-prompt' || gameId === 'prompt-run') {
     return (
       <PromptRunScreen
@@ -3411,7 +3402,24 @@ function PlayScreen({ gameId, gameInsights, traceComplete, promptRunProgress, le
     )
   }
   if (gameId === 'attention-match' || gameId === 'attention-weave') {
-    return <AttentionWeave title="Attention Match" onBack={() => { refreshPlayProgress(); setGameId(null) }} onGlossary={onGlossary} onInsight={recordAttentionInsight} saved={gameInsights.includes('attention-weave')} />
+    return (
+      <AttentionMatch
+        onBack={() => { refreshPlayProgress(); setGameId(null) }}
+        onGlossary={onGlossary}
+        compatibilityNote={gameId === 'attention-weave' ? 'Attention Weave has moved into Attention Match. Your old route still opens the current challenge.' : ''}
+        onAttempt={() => {
+          recordChallengeStart('attention-match', {
+            outcome: 'Attention Match attempt started. Progress saved on this device.',
+            misconceptionTags: ['attention-is-not-awareness']
+          })
+        }}
+        onProgress={(outcome) => updateChallenge('attention-match', outcome)}
+        onComplete={(outcome) => {
+          onInsight('attention-weave')
+          completeChallenge('attention-match', outcome)
+        }}
+      />
+    )
   }
   if (gameId === 'glossary-dojo') {
     return (
@@ -3491,6 +3499,430 @@ function PlayScreen({ gameId, gameInsights, traceComplete, promptRunProgress, le
         </PlayChallengeBoard>
       </section>
     </section>
+  )
+}
+
+const attentionMatchRounds = [
+  {
+    id: 'cat-it',
+    title: 'Pronoun clue',
+    sentence: 'The cat hid under the bed because it was scared.',
+    instruction: 'Tap the earlier token or phrase that the target token depends on most.',
+    targetLabel: 'it',
+    sourceLabel: 'cat',
+    sourceType: 'token',
+    parts: [
+      { id: 'the', label: 'The' },
+      { id: 'cat', label: 'cat', role: 'source' },
+      { id: 'hid', label: 'hid' },
+      { id: 'under', label: 'under' },
+      { id: 'bed', label: 'the bed' },
+      { id: 'because', label: 'because' },
+      { id: 'it', label: 'it', role: 'target' },
+      { id: 'scared', label: 'was scared.' }
+    ],
+    choices: [
+      { id: 'cat', label: 'cat', kind: 'correct', weight: 92 },
+      { id: 'bed', label: 'the bed', kind: 'nearby', weight: 28, feedback: 'That token is nearby, but the clue points elsewhere.' },
+      { id: 'because', label: 'because', kind: 'nearby', weight: 18, feedback: 'A closer word is not always the best match. Try the word that explains the target token.' },
+      { id: 'hid', label: 'hid under', kind: 'weak', weight: 38, feedback: 'This choice reveals a common mix-up. The action matters, but the target depends most on who was scared.' }
+    ],
+    correctFeedback: "Good connection. In this sentence, 'it' depends most on 'cat.'"
+  },
+  {
+    id: 'trophy-heavy',
+    title: 'Clue word',
+    sentence: 'Maya put the trophy on the shelf because it was heavy.',
+    instruction: "Use the clue after the target token. Which earlier thing was heavy?",
+    targetLabel: 'it',
+    sourceLabel: 'trophy',
+    sourceType: 'token',
+    parts: [
+      { id: 'maya', label: 'Maya' },
+      { id: 'put', label: 'put' },
+      { id: 'trophy', label: 'the trophy', role: 'source' },
+      { id: 'shelf', label: 'on the shelf' },
+      { id: 'because', label: 'because' },
+      { id: 'it', label: 'it', role: 'target' },
+      { id: 'heavy', label: 'was heavy.' }
+    ],
+    choices: [
+      { id: 'trophy', label: 'the trophy', kind: 'correct', weight: 91 },
+      { id: 'shelf', label: 'the shelf', kind: 'nearby', weight: 32, feedback: "That token is nearby, but the clue 'heavy' points elsewhere." },
+      { id: 'maya', label: 'Maya', kind: 'weak', weight: 42, feedback: 'This choice reveals a common mix-up. Maya is part of the sentence, but the clue is about what was heavy.' },
+      { id: 'put', label: 'put', kind: 'weak', weight: 16, feedback: 'Attention is about relevance in this context, not just any nearby word.' }
+    ],
+    correctFeedback: "The clue 'heavy' points back to trophy."
+  },
+  {
+    id: 'student-she',
+    title: 'Action clue',
+    sentence: 'The professor praised the student after she solved the problem.',
+    instruction: 'Find the earlier person that the target token depends on.',
+    targetLabel: 'she',
+    sourceLabel: 'student',
+    sourceType: 'token',
+    parts: [
+      { id: 'professor', label: 'The professor' },
+      { id: 'praised', label: 'praised' },
+      { id: 'student', label: 'the student', role: 'source' },
+      { id: 'after', label: 'after' },
+      { id: 'she', label: 'she', role: 'target' },
+      { id: 'solved', label: 'solved the problem.' }
+    ],
+    choices: [
+      { id: 'student', label: 'the student', kind: 'correct', weight: 90 },
+      { id: 'professor', label: 'the professor', kind: 'weak', weight: 48, feedback: "This choice reveals a common mix-up. The professor praised, but the later action points to the student." },
+      { id: 'after', label: 'after', kind: 'nearby', weight: 18, feedback: 'A closer word is not always the best match. Try the person who solved the problem.' },
+      { id: 'problem', label: 'the problem', kind: 'weak', weight: 22, feedback: 'Attention is about relevance in this context, not awareness or intention.' }
+    ],
+    correctFeedback: "Here, the action 'solved the problem' points to the student."
+  },
+  {
+    id: 'slides-they',
+    title: 'Plural clue',
+    sentence: 'Before the lecture, the slides were updated, and they helped the class.',
+    instruction: 'Choose the earlier plural source that the target token uses.',
+    targetLabel: 'they',
+    sourceLabel: 'slides',
+    sourceType: 'token',
+    parts: [
+      { id: 'before', label: 'Before' },
+      { id: 'lecture', label: 'the lecture,' },
+      { id: 'slides', label: 'the slides', role: 'source' },
+      { id: 'updated', label: 'were updated,' },
+      { id: 'and', label: 'and' },
+      { id: 'they', label: 'they', role: 'target' },
+      { id: 'helped', label: 'helped the class.' }
+    ],
+    choices: [
+      { id: 'slides', label: 'the slides', kind: 'correct', weight: 91 },
+      { id: 'lecture', label: 'the lecture', kind: 'weak', weight: 34, feedback: "This choice reveals a common mix-up. 'Lecture' is nearby, but 'they' needs a plural source." },
+      { id: 'and', label: 'and', kind: 'nearby', weight: 12, feedback: 'That token is nearby, but the clue points elsewhere.' },
+      { id: 'updated', label: 'were updated', kind: 'weak', weight: 40, feedback: 'Try the word or phrase that explains the target token, not only the action around it.' }
+    ],
+    correctFeedback: "'They' depends on the earlier noun 'slides.'"
+  },
+  {
+    id: 'this-confident',
+    title: 'Phrase source',
+    sentence: 'The answer sounded confident, but this did not make it true.',
+    instruction: 'This time, the source is an earlier idea, not just one noun.',
+    targetLabel: 'this',
+    sourceLabel: 'sounded confident',
+    sourceType: 'phrase',
+    parts: [
+      { id: 'answer', label: 'The answer' },
+      { id: 'confident', label: 'sounded confident', role: 'source' },
+      { id: 'but', label: 'but' },
+      { id: 'this', label: 'this', role: 'target' },
+      { id: 'true', label: 'did not make it true.' }
+    ],
+    choices: [
+      { id: 'confident', label: 'sounded confident', kind: 'correct', weight: 89, tag: 'phrase-can-be-source' },
+      { id: 'but', label: 'but', kind: 'nearby', weight: 14, feedback: 'That token is nearby, but the clue points to the earlier idea.' },
+      { id: 'answer', label: 'the answer', kind: 'weak', weight: 52, feedback: 'This choice reveals a common mix-up. The noun matters, but the target points to the idea that it sounded confident.' },
+      { id: 'true', label: 'true', kind: 'weak', weight: 26, feedback: 'Attention is about relevance in this context. A later word is not the earlier source for this target.' }
+    ],
+    correctFeedback: "Good. The token 'this' points back to the earlier idea, not just one noun."
+  }
+]
+
+function getAttentionRoundTags(round, result) {
+  if (!result) return []
+  return uniqueList([
+    'attention-is-not-awareness',
+    'pronoun-reference-needs-context',
+    round.sourceType === 'phrase' || result.tag === 'phrase-can-be-source' ? 'phrase-can-be-source' : '',
+    result.nearest ? 'nearest-token-is-not-always-source' : '',
+    !result.ok ? 'nearest-token-is-not-always-source' : ''
+  ])
+}
+
+function getAttentionWeightRows(round, selectedChoice) {
+  if (!selectedChoice) return []
+  return [
+    {
+      label: 'Strong match',
+      value: selectedChoice.kind === 'correct' ? selectedChoice.weight : 88,
+      note: selectedChoice.kind === 'correct' ? selectedChoice.label : round.sourceLabel
+    },
+    {
+      label: 'Possible but weaker',
+      value: selectedChoice.kind === 'weak' ? selectedChoice.weight : 42,
+      note: selectedChoice.kind === 'weak' ? selectedChoice.label : 'related clue'
+    },
+    {
+      label: 'Nearby but not enough',
+      value: selectedChoice.kind === 'nearby' ? selectedChoice.weight : 24,
+      note: selectedChoice.kind === 'nearby' ? selectedChoice.label : 'closeness alone'
+    }
+  ]
+}
+
+function AttentionMatch({ onBack, onGlossary, onAttempt, onProgress, onComplete, compatibilityNote = '' }) {
+  const [roundIndex, setRoundIndex] = useState(0)
+  const [roundResults, setRoundResults] = useState([])
+  const [selectedId, setSelectedId] = useState(null)
+  const [completed, setCompleted] = useState(false)
+  const [feedback, setFeedback] = useState({
+    tone: 'neutral',
+    message: 'Choose the earlier token or phrase that best explains the highlighted target.'
+  })
+  const round = attentionMatchRounds[roundIndex]
+  const roundNumber = roundIndex + 1
+  const selectedChoice = round.choices.find((choice) => choice.id === selectedId) ?? null
+  const reviewCount = roundResults.filter((result) => !result.ok).length
+  const nearestCount = roundResults.filter((result) => result.nearest && !result.ok).length
+  const selectionMade = Boolean(selectedChoice)
+  const currentProgress = completed
+    ? 100
+    : Math.min(99, Math.round(((roundIndex + (selectionMade ? 0.75 : 0)) / attentionMatchRounds.length) * 100))
+  const reviewSuggested = reviewCount >= 2 || nearestCount >= 2
+  const status = completed
+    ? reviewSuggested ? 'review-suggested' : 'completed'
+    : 'in-progress'
+  const statusLabel = completed
+    ? reviewSuggested ? 'Review suggested' : 'Completed'
+    : `Round ${roundNumber} of ${attentionMatchRounds.length}`
+
+  function resetRound(nextRoundIndex = roundIndex) {
+    setRoundIndex(nextRoundIndex)
+    setSelectedId(null)
+    setFeedback({
+      tone: 'neutral',
+      message: nextRoundIndex === 4
+        ? 'The source can be a phrase or idea, not only one noun.'
+        : 'Choose the earlier token or phrase that best explains the highlighted target.'
+    })
+  }
+
+  function saveRoundResult(result) {
+    const nextResults = [
+      ...roundResults.filter((item) => item.roundId !== round.id),
+      result
+    ]
+    setRoundResults(nextResults)
+    onProgress({
+      status: 'in-progress',
+      progressPct: Math.min(99, Math.round(((roundIndex + 0.75) / attentionMatchRounds.length) * 100)),
+      outcome: result.ok ? 'Good connection. Attention Match progress saved.' : 'Review suggested. Attention Match progress saved.',
+      misconceptionTags: getAttentionRoundTags(round, result)
+    })
+    return nextResults
+  }
+
+  function chooseSource(choice) {
+    if (completed) return
+    setSelectedId(choice.id)
+    const ok = choice.kind === 'correct'
+    const result = {
+      roundId: round.id,
+      ok,
+      selectedId: choice.id,
+      nearest: choice.kind === 'nearby',
+      tag: 'tag' in choice ? choice.tag : undefined
+    }
+    saveRoundResult(result)
+    setFeedback({
+      tone: ok ? 'good' : 'review',
+      message: ok
+        ? round.correctFeedback
+        : choice.feedback ?? 'This choice reveals a common mix-up. Try the word or phrase that explains the target token.'
+    })
+  }
+
+  function getCurrentRoundResults() {
+    if (roundResults.some((result) => result.roundId === round.id)) return roundResults
+    if (!selectedChoice) return roundResults
+    return [
+      ...roundResults,
+      {
+        roundId: round.id,
+        ok: selectedChoice.kind === 'correct',
+        selectedId: selectedChoice.id,
+        nearest: selectedChoice.kind === 'nearby',
+        tag: 'tag' in selectedChoice ? selectedChoice.tag : undefined
+      }
+    ]
+  }
+
+  function finishChallenge(nextResults = roundResults) {
+    setRoundResults(nextResults)
+    const finalReviewCount = nextResults.filter((result) => !result.ok).length
+    const finalNearestCount = nextResults.filter((result) => result.nearest && !result.ok).length
+    const finalReviewSuggested = finalReviewCount >= 2 || finalNearestCount >= 2
+    const tags = uniqueList(nextResults.flatMap((result) => {
+      const completedRound = attentionMatchRounds.find((item) => item.id === result.roundId) ?? round
+      return getAttentionRoundTags(completedRound, result)
+    }))
+    setCompleted(true)
+    onComplete({
+      progressPct: 100,
+      reviewSuggested: finalReviewSuggested,
+      outcome: finalReviewSuggested
+        ? 'Completed. Review suggested. Closeness and relevance were mixed at least twice.'
+        : 'Completed. You matched target tokens to context clues.',
+      misconceptionTags: tags.length ? tags : [
+        'attention-is-not-awareness',
+        'nearest-token-is-not-always-source',
+        'pronoun-reference-needs-context',
+        'phrase-can-be-source'
+      ]
+    })
+  }
+
+  function goNext() {
+    if (!selectionMade) {
+      setFeedback({ tone: 'review', message: 'This choice reveals a common mix-up. Try the word or phrase that explains the target token.' })
+      return
+    }
+    if (roundIndex >= attentionMatchRounds.length - 1) {
+      finishChallenge(getCurrentRoundResults())
+      return
+    }
+    resetRound(roundIndex + 1)
+  }
+
+  function restartChallenge() {
+    onAttempt()
+    setRoundIndex(0)
+    setRoundResults([])
+    setSelectedId(null)
+    setCompleted(false)
+    setFeedback({ tone: 'neutral', message: 'New Attention Match attempt started. Progress saved on this device.' })
+  }
+
+  return (
+    <PlayChallengeShell
+      title="Attention Match"
+      titleId="attention-match-title"
+      eyebrow="Play challenge"
+      subtitle="Connect a target token to the earlier context it depends on."
+      onBack={onBack}
+      className="attention-match-screen"
+      data-attention-round={round.id}
+      headerChildren={
+        <>
+          <div className="attention-match-status-row">
+            <PlayStatusPill status={status} label={statusLabel} />
+            <span>{reviewCount} review signal{reviewCount === 1 ? '' : 's'}</span>
+          </div>
+          <PlayProgressRail value={currentProgress} label={`${currentProgress}% Attention Match progress`} />
+        </>
+      }
+    >
+      {compatibilityNote && !completed && (
+        <PlayFeedbackPanel className="attention-match-compatibility">
+          <p>{compatibilityNote}</p>
+        </PlayFeedbackPanel>
+      )}
+
+      {completed ? (
+        <PlayCompletionPanel
+          title={reviewSuggested ? 'Review suggested' : 'Insight unlocked'}
+          titleId="attention-match-completion-title"
+          className="attention-match-completion"
+        >
+          <p><strong>Completed.</strong> You connected target tokens to the context clues they depended on.</p>
+          {reviewSuggested ? (
+            <p>Review suggested. A closer word is not always the best match; attention is relevance in context.</p>
+          ) : (
+            <p>Good connection. Attention is weighted relevance between token positions, not awareness.</p>
+          )}
+          <PlayActionRow>
+            <button className="primary-btn" type="button" onClick={restartChallenge}>Try another match</button>
+            <button className="secondary-btn" type="button" onClick={onBack}>Back to Play</button>
+            <button className="text-btn" type="button" onClick={() => onGlossary('attention')}>Attention</button>
+          </PlayActionRow>
+        </PlayCompletionPanel>
+      ) : (
+        <>
+          <PlayChallengeBoard label="Attention Match board" className="attention-match-board">
+            <section className="attention-round-card" aria-labelledby="attention-round-title">
+              <span className="step-label">Round {roundNumber}</span>
+              <h2 id="attention-round-title">{round.title}</h2>
+              <p>{round.instruction}</p>
+              <div className="play-token-row" aria-label="Attention Match concepts">
+                <PlayTokenChip tone="prompt">context</PlayTokenChip>
+                <PlayTokenChip tone="probability">relevance</PlayTokenChip>
+                <PlayTokenChip tone="response">not awareness</PlayTokenChip>
+              </div>
+            </section>
+
+            <section className="attention-sentence-card" aria-labelledby="attention-sentence-title">
+              <h3 id="attention-sentence-title">Sentence</h3>
+              <div className="attention-sentence" aria-label={round.sentence}>
+                {round.parts.map((part) => (
+                  <span
+                    key={part.id}
+                    className={[
+                      'attention-token-chip',
+                      part.role === 'target' ? 'is-target' : '',
+                      part.role === 'source' && selectedChoice?.id === part.id ? 'is-selected-source' : ''
+                    ].filter(Boolean).join(' ')}
+                  >
+                    {part.label}
+                  </span>
+                ))}
+              </div>
+              <p className="attention-target-line">Target token: <strong>{round.targetLabel}</strong></p>
+            </section>
+
+            <section className="attention-source-card" aria-labelledby="attention-source-title">
+              <h3 id="attention-source-title">Source candidates</h3>
+              <div className="attention-source-list">
+                {round.choices.map((choice) => (
+                  <PlayChoiceButton
+                    key={choice.id}
+                    className="attention-source-choice"
+                    selected={selectedId === choice.id}
+                    onClick={() => chooseSource(choice)}
+                  >
+                    {choice.label}
+                  </PlayChoiceButton>
+                ))}
+              </div>
+            </section>
+
+            {selectedChoice && (
+              <section className="attention-arc-card" aria-label={`${selectedChoice.label} connected to ${round.targetLabel}`}>
+                <div className="attention-arc-rail">
+                  <span className={selectedChoice.kind === 'correct' ? 'attention-arc-chip is-source' : 'attention-arc-chip is-review'}>{selectedChoice.label}</span>
+                  <svg viewBox="0 0 220 82" aria-hidden="true" focusable="false">
+                    <path className={selectedChoice.kind === 'correct' ? 'is-good' : 'is-review'} d="M24 62 C70 12 150 12 196 62" />
+                    <circle cx="24" cy="62" r="5" />
+                    <circle cx="196" cy="62" r="5" />
+                  </svg>
+                  <span className="attention-arc-chip is-target">{round.targetLabel}</span>
+                </div>
+                <div className="attention-weight-list" aria-label="Simplified relevance weights">
+                  {getAttentionWeightRows(round, selectedChoice).map((row) => (
+                    <span key={row.label} className="attention-weight-row">
+                      <span><strong>{row.label}</strong><em>{row.note}</em></span>
+                      <span className="attention-weight-track"><span style={{ width: `${row.value}%` }} /></span>
+                    </span>
+                  ))}
+                </div>
+              </section>
+            )}
+          </PlayChallengeBoard>
+
+          <PlayFeedbackPanel tone={feedback.tone === 'good' ? 'good' : feedback.tone === 'review' ? 'review' : 'neutral'} className="attention-match-feedback">
+            <p>{feedback.message}</p>
+          </PlayFeedbackPanel>
+
+          <PlayActionRow className="attention-match-actions">
+            <button className="primary-btn" type="button" onClick={goNext} disabled={!selectionMade}>
+              {roundIndex >= attentionMatchRounds.length - 1 ? 'Complete match' : 'Next match'}
+            </button>
+            <button className="secondary-btn" type="button" onClick={() => resetRound()}>Reset round</button>
+            <button className="text-btn" type="button" onClick={() => onGlossary('attention')}>Attention</button>
+          </PlayActionRow>
+          <PlayScrollHint>More relevance below</PlayScrollHint>
+        </>
+      )}
+    </PlayChallengeShell>
   )
 }
 

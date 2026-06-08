@@ -5513,6 +5513,277 @@ p {
   color: var(--pl-purple);
 }
 
+.attention-match-screen {
+  display: grid;
+  gap: 0.9rem;
+  padding-bottom: calc(var(--pl-nav-height) + 4.5rem + env(safe-area-inset-bottom));
+}
+
+.attention-match-status-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.attention-match-status-row > span:last-child {
+  color: var(--pl-ink-soft);
+  font-size: 0.82rem;
+  font-weight: 900;
+}
+
+.attention-match-board {
+  gap: 0.72rem;
+  background:
+    radial-gradient(circle at 14% 8%, rgba(53, 230, 226, 0.12), transparent 5rem),
+    radial-gradient(circle at 88% 76%, rgba(122, 92, 255, 0.10), transparent 6rem),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.74), rgba(247, 251, 255, 0.94)),
+    var(--pl-surface-paper);
+}
+
+.attention-round-card,
+.attention-sentence-card,
+.attention-source-card,
+.attention-arc-card {
+  display: grid;
+  gap: 0.55rem;
+  min-width: 0;
+  padding: 0.78rem;
+  border: 1px solid rgba(18, 30, 114, 0.10);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.82);
+}
+
+.attention-round-card h2,
+.attention-round-card p,
+.attention-sentence-card h3,
+.attention-source-card h3,
+.attention-target-line,
+.attention-match-feedback p {
+  margin: 0;
+}
+
+.attention-round-card h2 {
+  color: var(--pl-indigo);
+  font-size: 1.15rem;
+  line-height: 1.16;
+}
+
+.attention-round-card p,
+.attention-target-line {
+  color: var(--pl-ink-soft);
+  font-size: 0.88rem;
+  line-height: 1.35;
+}
+
+.attention-sentence-card {
+  border-color: rgba(53, 230, 226, 0.30);
+  background: linear-gradient(180deg, rgba(238, 252, 255, 0.86), rgba(255, 255, 255, 0.9));
+}
+
+.attention-sentence-card h3,
+.attention-source-card h3 {
+  color: var(--pl-navy);
+  font-size: 0.95rem;
+  line-height: 1.2;
+}
+
+.attention-sentence {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.34rem;
+  min-width: 0;
+}
+
+.attention-token-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2rem;
+  max-width: 100%;
+  border: 1px solid rgba(188, 201, 242, 0.8);
+  border-radius: 8px;
+  padding: 0.28rem 0.5rem;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--pl-ink);
+  font-size: 0.82rem;
+  font-weight: 900;
+  line-height: 1.1;
+  overflow-wrap: anywhere;
+}
+
+.attention-token-chip.is-target {
+  border-color: rgba(18, 30, 114, 0.62);
+  background: var(--pl-indigo);
+  color: white;
+  box-shadow: 0 0 0 3px rgba(53, 230, 226, 0.18);
+}
+
+.attention-token-chip.is-selected-source {
+  border-color: rgba(15, 168, 164, 0.46);
+  background: #dcfbf7;
+  color: #045f5e;
+}
+
+.attention-source-card {
+  border-color: rgba(122, 92, 255, 0.20);
+  background: linear-gradient(180deg, rgba(248, 245, 255, 0.88), rgba(255, 255, 255, 0.92));
+}
+
+.attention-source-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+  gap: 0.48rem;
+  min-width: 0;
+}
+
+.attention-source-choice.play-choice-button {
+  display: block;
+  width: 100%;
+  padding: 0.68rem 0.62rem;
+  text-align: left;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+
+.attention-arc-card {
+  border-color: rgba(242, 184, 91, 0.32);
+  background: linear-gradient(180deg, rgba(255, 250, 238, 0.86), rgba(255, 255, 255, 0.9));
+}
+
+.attention-arc-rail {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(5.2rem, 7rem) minmax(0, 1fr);
+  align-items: end;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
+.attention-arc-rail svg {
+  width: 100%;
+  min-width: 0;
+  height: 4.2rem;
+  overflow: visible;
+}
+
+.attention-arc-rail path {
+  fill: none;
+  stroke-width: 5;
+  stroke-linecap: round;
+}
+
+.attention-arc-rail path.is-good {
+  stroke: var(--pl-teal);
+  filter: drop-shadow(0 0 5px rgba(53, 230, 226, 0.45));
+}
+
+.attention-arc-rail path.is-review {
+  stroke: var(--pl-amber);
+  filter: drop-shadow(0 0 5px rgba(242, 184, 91, 0.35));
+}
+
+.attention-arc-rail circle {
+  fill: var(--pl-navy);
+  stroke: white;
+  stroke-width: 2;
+}
+
+.attention-arc-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  min-height: 2.15rem;
+  border: 1px solid rgba(35, 67, 116, 0.16);
+  border-radius: 8px;
+  padding: 0.35rem 0.48rem;
+  background: white;
+  color: var(--pl-ink);
+  font-size: 0.78rem;
+  font-weight: 950;
+  line-height: 1.1;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.attention-arc-chip.is-source {
+  border-color: rgba(15, 168, 164, 0.42);
+  background: #dcfbf7;
+  color: #045f5e;
+}
+
+.attention-arc-chip.is-review {
+  border-color: rgba(242, 184, 91, 0.58);
+  background: #fff7e8;
+  color: #6b4000;
+}
+
+.attention-arc-chip.is-target {
+  border-color: rgba(18, 30, 114, 0.52);
+  background: var(--pl-indigo);
+  color: white;
+}
+
+.attention-weight-list {
+  display: grid;
+  gap: 0.42rem;
+  min-width: 0;
+}
+
+.attention-weight-row {
+  display: grid;
+  grid-template-columns: minmax(6.8rem, 0.82fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.attention-weight-row > span:first-child {
+  display: grid;
+  gap: 0.06rem;
+  min-width: 0;
+}
+
+.attention-weight-row strong {
+  color: var(--pl-navy);
+  font-size: 0.74rem;
+  line-height: 1.05;
+}
+
+.attention-weight-row em {
+  color: var(--pl-ink-soft);
+  font-size: 0.68rem;
+  font-style: normal;
+  font-weight: 850;
+  line-height: 1.05;
+  overflow-wrap: anywhere;
+}
+
+.attention-weight-track {
+  display: block;
+  min-width: 0;
+  height: 0.64rem;
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(18, 30, 114, 0.13);
+}
+
+.attention-weight-track span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--pl-teal), var(--pl-violet), var(--pl-amber));
+  transition: width 220ms ease;
+}
+
+.attention-match-actions {
+  padding-bottom: 0.5rem;
+}
+
+.attention-match-completion {
+  display: grid;
+  gap: 0.72rem;
+}
+
 .probability-picker-screen {
   display: grid;
   gap: 0.9rem;
@@ -6016,6 +6287,32 @@ p {
     padding: 0.65rem;
   }
 
+  .attention-round-card,
+  .attention-sentence-card,
+  .attention-source-card,
+  .attention-arc-card {
+    padding: 0.65rem;
+  }
+
+  .attention-token-chip,
+  .attention-arc-chip {
+    font-size: 0.74rem;
+  }
+
+  .attention-source-list {
+    grid-template-columns: 1fr;
+  }
+
+  .attention-arc-rail {
+    grid-template-columns: minmax(0, 1fr) minmax(4.5rem, 5.6rem) minmax(0, 1fr);
+    gap: 0.24rem;
+  }
+
+  .attention-weight-row {
+    grid-template-columns: minmax(5.7rem, 0.78fr) minmax(0, 1fr);
+    gap: 0.34rem;
+  }
+
   .context-stack-slot-grid {
     gap: 0.36rem;
   }
@@ -6066,6 +6363,7 @@ p {
   .play-scroll-hint span::after,
   .context-stack-card,
   .context-stack-slot,
+  .attention-weight-track span,
   .probability-bar-track span {
     transition: none;
     animation: none;

@@ -769,3 +769,109 @@
 - `docs/play/prompt-life-v0-27-0-probability-picker-v1-report.pdf`
 - `docs/play/screenshots/v0-27-0-probability-picker-v1-screenshots.json`
 - `docs/play/screenshots/v0-27-0-*.png`
+
+# 2026-06-08 - v0.27.1 Attention Match v1
+
+## Summary
+
+- Replaced the old Attention Weave compatibility interaction with a purpose-built five-round Attention Match challenge.
+- Kept the visible Play slate intact: Glossary Dojo, Attention Match, Probability Picker, Context Stack, and Prompt Run.
+- Kept Journey progress, badge criteria, checkpoint randomization, dependencies, generated assets, and existing games unchanged.
+- Bumped the app/package version to `0.27.1`.
+
+## What Changed
+
+- Updated the Attention Match route to render a shared Play challenge shell.
+- Added five tiny token-relevance rounds with highlighted target tokens and source candidates.
+- Added simple SVG relevance arcs after source selection.
+- Added simplified weight rows for strong match, possible but weaker, and nearby but not enough.
+- Added completion and review-suggested states that save through shared Play progress.
+- Updated legacy bridge behavior so old Attention Weave insight only fills empty shared progress and no longer overwrites newer Attention Match review status.
+- Added report screenshots, screenshot manifest, HTML report, and PDF report.
+
+## Learner-Facing Copy Changes
+
+- Challenge subtitle: `Connect a target token to the earlier context it depends on.`
+- Main prompt: `Choose the earlier token or phrase that best explains the highlighted target.`
+- Success copy includes: `Good connection.`
+- Review copy includes: `This choice reveals a common mix-up.` and `A closer word is not always the best match.`
+- Completion outcome: `Completed. You matched target tokens to context clues.`
+- Review outcome: `Completed. Review suggested. Closeness and relevance were mixed at least twice.`
+- Completion panel language avoids score, streak, timer, leaderboard, failure, or shaming language.
+
+## UI Cards, Screens, Scenes, And Routes Changed
+
+- Play landing Attention Match card metadata and icon.
+- Attention Match route.
+- Attention Match round board.
+- Attention Match source-candidate choices.
+- Attention Match SVG arc and weight feedback.
+- Attention Match completion panel.
+- Badge page Play progress display, through existing shared Play progress summaries.
+- Legacy Attention Weave compatibility path now opens the current Attention Match challenge.
+
+## LocalStorage Keys
+
+- Created/read/written: `promptlife.playChallenges.v1`.
+- Preserved/read independently by Glossary Dojo: `promptlife.glossaryDojo.v1`.
+- Preserved/read for bridge compatibility: `promptlife:v1:gameInsights`.
+- Preserved/read for bridge compatibility: `pl.gameInsights`.
+- Preserved/read for bridge compatibility: `promptlife:v1:traceComplete`.
+- Preserved/read for bridge compatibility: `pl.traceComplete`.
+- Preserved/read for bridge compatibility: `promptlife:v1:promptRunProgress`.
+- Preserved/read for bridge compatibility: `pl.promptRunProgress`.
+- Preserved/read for bridge compatibility: `promptlife:v1:learningTourComplete`.
+- Preserved/read for bridge compatibility: `pl.learningTourComplete`.
+- Reset QA confirmed the existing Start over flow clears shared Play progress and Glossary Dojo storage.
+
+## Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed. Total surfaces: 69; randomized surfaces: 46; excluded fixed-order surfaces: 23.
+- In-app Browser spot check: passed. Attention Match opened into the new shared-shell route and showed source candidates, arc feedback, and weight rows.
+- Playwright QA at 390px: passed. Completed a happy path with status `completed`, then a review path with status `review-suggested`; no horizontal overflow.
+- Playwright QA at 320px: passed. Active Attention Match start state measured `scrollWidth 320` and `clientWidth 320`.
+- Smoke routes opened at 390px: Glossary Dojo, Context Stack, Probability Picker, Prompt Run, and Attention Match.
+- Badge QA: passed. Badge page displayed `1 of 5 play challenges` after Attention Match progress.
+- Reset QA: passed. Start over cleared `promptlife.playChallenges.v1` and `promptlife.glossaryDojo.v1`.
+
+## Known Issues And Risks
+
+- Attention Match v1 uses fixed examples and simplified arcs/weights; it is a learning picture, not a literal attention-head visualization.
+- The old Attention Weave component remains in source for compatibility context but is no longer the normal Play route.
+- Prompt Run and Probability Picker remain good candidates for the next shared-shell refinement passes.
+
+## Recommended Next Passes
+
+1. Attention Match v2: add another small example set after phone testing.
+2. Prompt Run v2: streamline the capstone into a more continuous shared-shell experience.
+3. Probability Picker v2: add a clearer logits-to-softmax transformation view.
+
+## Reports And Screenshots
+
+- `docs/play/prompt-life-v0-27-1-attention-match-v1-report.html`
+- `docs/play/prompt-life-v0-27-1-attention-match-v1-report.pdf`
+- `docs/play/screenshots/v0-27-1-attention-match-v1-screenshots.json`
+- `docs/play/screenshots/v0-27-1-attention-match-start-390.png`
+- `docs/play/screenshots/v0-27-1-attention-match-source-selection-390.png`
+- `docs/play/screenshots/v0-27-1-attention-match-arc-feedback-390.png`
+- `docs/play/screenshots/v0-27-1-attention-match-completion-390.png`
+- `docs/play/screenshots/v0-27-1-attention-match-review-suggested-390.png`
+- `docs/play/screenshots/v0-27-1-attention-match-start-320.png`
+- `docs/play/screenshots/v0-27-1-play-landing-attention-progress-390.png`
+- `docs/play/screenshots/v0-27-1-badge-attention-match-390.png`
+
+## Files Changed
+
+- `package.json`
+- `package-lock.json`
+- `src/features/play/challengeRegistry.ts`
+- `src/main.tsx`
+- `src/styles/global.css`
+- `docs/play/PLAY_FOUNDATION_LOG.md`
+- `docs/play/prompt-life-v0-27-1-attention-match-v1-report.html`
+- `docs/play/prompt-life-v0-27-1-attention-match-v1-report.pdf`
+- `docs/play/screenshots/v0-27-1-attention-match-v1-screenshots.json`
+- `docs/play/screenshots/v0-27-1-*.png`

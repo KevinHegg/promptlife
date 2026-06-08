@@ -47,12 +47,12 @@ export const finalPlayChallengeRegistry: PlayChallengeMeta[] = [
     relatedLearningCards: ['Attention'],
     availability: 'available',
     routeId: 'attention-match',
-    image: '/assets/promptlife/illustrations/scene-attention-weave@mobile.png',
+    image: '/assets/promptlife/icons/png/icon-attention@48.png',
     action: 'Connect relevant tokens.',
     modelMove: 'Attention weights relate token positions in the current context.',
-    misconceptionTags: ['attention-is-awareness'],
+    misconceptionTags: ['attention-is-not-awareness', 'nearest-token-is-not-always-source', 'pronoun-reference-needs-context'],
     journeyStageRelationship: ['Attention'],
-    glossaryTermIds: ['attention', 'relevance-weight'],
+    glossaryTermIds: ['attention', 'relevance-weight', 'context', 'hidden state'],
     legacyProgressIds: ['attention-weave']
   },
   {
@@ -180,7 +180,7 @@ export const retiredPlayChallenges: PlayChallengeMeta[] = [
     routeId: 'attention-match',
     action: 'Renamed',
     modelMove: 'Preserved only for storage compatibility.',
-    misconceptionTags: ['attention-is-awareness'],
+    misconceptionTags: ['attention-is-not-awareness'],
     journeyStageRelationship: ['Attention'],
     glossaryTermIds: ['attention', 'relevance-weight']
   }
@@ -360,7 +360,9 @@ function bridgeLegacyProgress(meta: PlayChallengeMeta, base: PlayChallengeAttemp
     }
   }
 
-  if (oldInsightComplete) {
+  const hasSharedProgress = base.attempts > 0 || base.completions > 0 || base.bestProgressPct > 0 || base.status !== 'not-started'
+
+  if (oldInsightComplete && !hasSharedProgress) {
     return sanitizePlayChallengeAttempt({
       ...base,
       attempts: Math.max(base.attempts, 1),
