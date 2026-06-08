@@ -2,6 +2,30 @@
 
 Date: 2026-06-08
 
+## v0.27.5 Reflect Before Checkpoint Pass
+
+### What Changed
+
+- Moved the Reflect panel above the Checkpoint panel on lesson cards.
+- Kept the checkpoint count indicator at the top of the Checkpoint panel.
+- Changed the single-question post-checkpoint sticky action to `Next learning card`.
+- Kept `Next question` only for multi-question checkpoints that still have another checkpoint question.
+- Bumped the visible app/package version to `v0.27.5` and updated the README cache-busting example to `?v=0275`.
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed.
+- Browser QA on Where LLMs Fit: Reflect appeared before Checkpoint, checkpoint showed `1 of 1 question`, correct-answer state showed `Next learning card`, and no horizontal overflow was detected.
+
+### Screenshots And Report
+
+- `docs/journey/prompt-life-v0-27-5-reflect-checkpoint-report.html`
+- `docs/journey/prompt-life-v0-27-5-reflect-checkpoint-report.pdf`
+- `docs/journey/screenshots/v0-27-5-reflect-before-checkpoint-562.png`
+
 ## v0.27.4 Checkpoint Progress Label Pass
 
 ### What Changed

@@ -71,7 +71,7 @@ const HOME_ASSETS = {
   heroFallback: `${ASSET}/illustrations/scene-hero-feature-cloud@mobile.png`
 }
 // Bump this for each shipped app change; the Badge screen displays it under Start over.
-const APP_VERSION = '0.27.4'
+const APP_VERSION = '0.27.5'
 const STORAGE_KEYS = {
   lastLocation: 'promptlife:v1:lastLocation',
   lessonId: 'promptlife:v1:lessonId',
@@ -1143,27 +1143,6 @@ function LessonScreen({ lesson, mode, lessonIndex, totalLessons, reflection, onC
         <p>{lesson.interaction.copy}</p>
       </section>
 
-      <section ref={checkpointRef} className="lesson-panel quiz-card" aria-labelledby="quiz-title">
-        <Checkpoint
-          quiz={activeQuiz}
-          choices={checkpointChoices}
-          selectedChoiceId={choice}
-          setChoice={(choiceId) => {
-            setCheckpointSelections((selections) => ({ ...selections, [checkpointKey]: choiceId }))
-            setCheckpointRevealed((revealedMap) => ({ ...revealedMap, [checkpointKey]: true }))
-            setContinueHint(false)
-          }}
-          revealed={revealed}
-          progress={{ current: activeCheckpointIndex + 1, total: checkpointItems.length }}
-          onPrevious={activeCheckpointIndex > 0 ? () => setCheckpointIndex((index) => Math.max(0, index - 1)) : null}
-        />
-        {continueHint && (
-          <p className="feedback" role="status">
-            <strong>Try the checkpoint first.</strong> Choose the best answer, then the continue button will move you forward.
-          </p>
-        )}
-      </section>
-
       <section className="lesson-panel reflection-card" aria-labelledby="reflection-title">
         <span className="step-label">Reflect</span>
         <h2 id="reflection-title">Teach it back in one sentence.</h2>
@@ -1185,8 +1164,29 @@ function LessonScreen({ lesson, mode, lessonIndex, totalLessons, reflection, onC
         </label>
       </section>
 
+      <section ref={checkpointRef} className="lesson-panel quiz-card" aria-labelledby="quiz-title">
+        <Checkpoint
+          quiz={activeQuiz}
+          choices={checkpointChoices}
+          selectedChoiceId={choice}
+          setChoice={(choiceId) => {
+            setCheckpointSelections((selections) => ({ ...selections, [checkpointKey]: choiceId }))
+            setCheckpointRevealed((revealedMap) => ({ ...revealedMap, [checkpointKey]: true }))
+            setContinueHint(false)
+          }}
+          revealed={revealed}
+          progress={{ current: activeCheckpointIndex + 1, total: checkpointItems.length }}
+          onPrevious={activeCheckpointIndex > 0 ? () => setCheckpointIndex((index) => Math.max(0, index - 1)) : null}
+        />
+        {continueHint && (
+          <p className="feedback" role="status">
+            <strong>Try the checkpoint first.</strong> Choose the best answer, then the continue button will move you forward.
+          </p>
+        )}
+      </section>
+
       <button className={isCorrect || !canUpdateProgress ? 'primary-btn sticky-action is-ready' : 'primary-btn sticky-action'} onClick={saveAndContinue}>
-        {!canUpdateProgress ? 'Return to Journey' : isCorrect ? (isLastCheckpointQuestion && lessonIndex + 1 === totalLessons ? 'Finish and view badge' : 'Next question') : choice == null ? 'Answer checkpoint to continue' : 'Retry checkpoint to continue'}
+        {!canUpdateProgress ? 'Return to Journey' : isCorrect ? (!isLastCheckpointQuestion ? 'Next question' : lessonIndex + 1 === totalLessons ? 'Finish and view badge' : 'Next learning card') : choice == null ? 'Answer checkpoint to continue' : 'Retry checkpoint to continue'}
       </button>
     </section>
   )
