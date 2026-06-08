@@ -54,6 +54,9 @@ export type PlayChallengeMeta = {
   primaryActionLabel: string
   estimatedTime: string
   relatedJourneyStages: string[]
+  recommendedAfter: string
+  stageChips: string[]
+  relatedLearningCards?: string[]
   statusLabel?: string
   availability: PlayChallengeAvailability
   routeId?: string
@@ -74,6 +77,7 @@ export type PlayChallengeSummary = PlayChallengeMeta & {
   progressText: string
   attemptsText: string
   completionText: string
+  progressStats: string[]
   actionLabel: string
   disabled: boolean
 }

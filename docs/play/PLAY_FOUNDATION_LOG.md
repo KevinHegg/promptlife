@@ -1,5 +1,122 @@
 # Play Foundation Log
 
+## 2026-06-08 - v0.26.7 Play Landing Polish And Stage Mapping
+
+### Summary
+
+- Updated the Play landing header to `PLAY LAB`, `Play to learn`, and `Short, calm challenges that make model mechanics visible.`
+- Confirmed the Play landing has one unified `Play challenges` list and no Featured Activity section.
+- Reordered the visible Play challenge cards by recommended Journey readiness:
+  - Glossary Dojo
+  - Attention Match
+  - Probability Picker
+  - Context Stack
+  - Prompt Run
+- Added learner-facing stage mapping to each Play challenge card:
+  - recommended point in Journey
+  - compact stage chips
+  - related learning cards
+- Added compact saved-practice stats from shared Play progress and bridged legacy progress:
+  - `Played`
+  - `Best`
+  - `Last`
+  - `Mastered` or `Completed` where available
+- Kept Probability Picker as a disabled `Coming soon` Play challenge with no fake attempts or progress.
+- Added the existing softmax icon to Probability Picker so the card keeps the same two-column layout as the other Play challenge cards.
+- Removed learner-visible developer phrasing such as `final slate`, `Foundation pass`, and `Foundation ready` from app source.
+- Updated learner-facing Journey references from generic `card` to `learning card` where appropriate.
+- Updated Badge copy so Play progress is practice history and the single badge remains one coherent model-literacy journey.
+- Bumped the visible app version to `v0.26.7`.
+
+### Recommendations For The Next Pass
+
+- Implement Probability Picker as the next complete challenge using logits, softmax, sampling, and probability-is-not-truth feedback.
+- Build the purpose-made Attention Match activity so the route no longer depends on the older Attention Weave interaction.
+- Consider a compact Play progress debug panel after the remaining Play activities settle.
+
+### Challenges And Risks
+
+- The attached prompt requested `v0.26.4`, but the app was already at `v0.26.6`; this pass is recorded as `v0.26.7` to keep versioning monotonic.
+- Existing saved local progress can make status pills show `In progress` during QA. That is expected because Play progress is device-local.
+- The existing Vite large-chunk warning remains.
+
+### UI Cards, Screens, Scenes, And Routes Changed
+
+- Play landing page: title, subtitle, progress panel chips, section heading/helper, challenge order, challenge card metadata, and progress stats.
+- Glossary Dojo Play challenge card: now shows `Anytime`, `Glossary`, related learning cards, and Dojo-derived practice stats.
+- Attention Match Play challenge card: now appears second, maps to Stage 3 Workday, and keeps the compatibility route.
+- Probability Picker Play challenge card: now appears third, maps to Stage 4 Decision Room, remains disabled/coming soon, and uses the softmax icon.
+- Context Stack Play challenge card: now appears fourth and maps to Stage 5 Day Repeats plus RAG/Grounding learning cards.
+- Prompt Run Play challenge card: now appears last as the capstone and maps to Stages 2-5.
+- Retired Token Pipeline Relay and How AI Learns routes: compatibility copy now says the activity was retired from the main Play set.
+- Badge page: copy clarifies that Play progress is practice history and the badge is still one coherent model-literacy journey.
+- Review lesson-card route: visible title/copy now uses `Learning Cards`.
+
+### Learner-Facing Card Wording Changes
+
+- `Previewing this card. Progress will not change.` -> `Previewing this learning card. Progress will not change.`
+- `Reviewing a completed card.` -> `Reviewing a completed learning card.`
+- `synthesis card` -> `synthesis learning card`
+- `Lesson Cards` -> `Learning Cards`
+- `One accessible curriculum-review card per lesson` -> `One accessible curriculum-review learning card per lesson`
+- Play landing now uses `Play challenges` and `Play challenge card` metadata rather than final/foundation slate language.
+
+### LocalStorage Keys Created, Read, Migrated, Or Preserved
+
+- Read/displayed through shared Play summaries: `promptlife.playChallenges.v1`.
+- Preserved/read for legacy Context Stack insight compatibility: `promptlife:v1:gameInsights`.
+- Preserved/read for legacy Context Stack insight compatibility: `pl.gameInsights`.
+- Preserved/read for Prompt Run bridge compatibility: `promptlife:v1:promptRunProgress`.
+- Preserved/read for Prompt Run bridge compatibility: `pl.promptRunProgress`.
+- Preserved/read for Prompt Run bridge compatibility: `promptlife:v1:traceComplete`.
+- Preserved/read for Prompt Run bridge compatibility: `pl.traceComplete`.
+- Preserved/read for learning-tour bridge compatibility: `promptlife:v1:learningTourComplete`.
+- Preserved/read for learning-tour bridge compatibility: `pl.learningTourComplete`.
+- Preserved/read independently by Dojo: `promptlife.glossaryDojo.v1`.
+- Preserved: existing Journey, exercise, reflection, choice-order, and Prompt Run keys. No storage migration or progress reset was added.
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed.
+- Browser QA at 390px: passed. Play loaded, title read `Play to learn`, no Featured Activity section appeared, one unified list appeared, cards were sorted Glossary Dojo / Attention Match / Probability Picker / Context Stack / Prompt Run, stage mappings and stats were visible, Probability Picker was disabled as coming soon, retired cards were hidden, Glossary Dojo/Attention Match/Context Stack/Prompt Run opened, Badge loaded with `v0.26.7`, and no horizontal overflow was detected.
+- Browser QA at 320px: passed. Title, chips, stats, card text, bottom nav, and vertical scrolling remained usable with no horizontal overflow.
+- Reduced-motion support remains covered by existing `prefers-reduced-motion` CSS; this pass added no motion-dependent behavior.
+
+### Screenshots And Report
+
+- `docs/play/screenshots/v0-26-7-play-landing-390.png`
+- `docs/play/screenshots/v0-26-7-play-landing-320.png`
+- `docs/play/screenshots/v0-26-7-play-progress-card-390.png`
+- `docs/play/screenshots/v0-26-7-probability-coming-soon-390.png`
+- `docs/play/screenshots/v0-26-7-badge-390.png`
+- `docs/play/screenshots/v0-26-7-play-landing-polish-screenshots.json`
+- `docs/play/prompt-life-v0-26-7-play-landing-polish-report.html`
+- `docs/play/prompt-life-v0-26-7-play-landing-polish-report.pdf`
+
+### Files Changed
+
+- `README.md`
+- `package.json`
+- `package-lock.json`
+- `src/features/play/PlayChallengeComponents.tsx`
+- `src/features/play/challengeRegistry.ts`
+- `src/features/play/types.ts`
+- `src/main.tsx`
+- `src/styles/global.css`
+- `docs/REVIEW_NOTES.md`
+- `docs/play/PLAY_FOUNDATION_LOG.md`
+- `docs/play/screenshots/v0-26-7-play-landing-390.png`
+- `docs/play/screenshots/v0-26-7-play-landing-320.png`
+- `docs/play/screenshots/v0-26-7-play-progress-card-390.png`
+- `docs/play/screenshots/v0-26-7-probability-coming-soon-390.png`
+- `docs/play/screenshots/v0-26-7-badge-390.png`
+- `docs/play/screenshots/v0-26-7-play-landing-polish-screenshots.json`
+- `docs/play/prompt-life-v0-26-7-play-landing-polish-report.html`
+- `docs/play/prompt-life-v0-26-7-play-landing-polish-report.pdf`
+
 ## 2026-06-08 - v0.26.6 Context Stack v2
 
 ### Summary

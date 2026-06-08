@@ -5310,6 +5310,13 @@ p {
   min-width: 0;
 }
 
+.play-section-helper {
+  margin: -0.35rem 0 0;
+  color: var(--pl-ink-soft);
+  font-size: 0.86rem;
+  line-height: 1.35;
+}
+
 .play-status-pill {
   display: inline-flex;
   align-items: center;
@@ -5400,10 +5407,10 @@ p {
 }
 
 .play-card-topline {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 0.5rem;
+  display: grid;
+  align-items: start;
+  justify-items: start;
+  gap: 0.35rem;
   min-width: 0;
 }
 
@@ -5427,6 +5434,40 @@ p {
 .play-card-meta,
 .play-card-outcome {
   display: block;
+}
+
+.play-card-chip-row,
+.play-card-stat-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.32rem;
+  min-width: 0;
+}
+
+.play-stage-chip,
+.play-card-stat {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.55rem;
+  max-width: 100%;
+  border-radius: 999px;
+  padding: 0.16rem 0.48rem;
+  font-size: 0.72rem;
+  font-weight: 950;
+  line-height: 1.05;
+  white-space: normal;
+}
+
+.play-stage-chip {
+  border: 1px solid rgba(53, 230, 226, 0.58);
+  background: #eefcff;
+  color: #06494a;
+}
+
+.play-card-stat {
+  border: 1px solid rgba(188, 201, 242, 0.9);
+  background: #f5f7ff;
+  color: var(--pl-indigo);
 }
 
 .play-card-progress-row {

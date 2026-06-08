@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Prompt Life v0.26.7 Play Landing Polish Report</title>
+    <style>
+      @page {
+        size: Letter;
+        margin: 0.55in;
+      }
+
+      :root {
+        color-scheme: light;
+        --ink: #07145c;
+        --muted: #405173;
+        --teal: #00a6a6;
+        --violet: #7b58ff;
+        --paper: #f9fbff;
+        --line: #d6dced;
+        --soft: #eef7f6;
+        --warm: #fff7e9;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: #fff;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-size: 10.5pt;
+        line-height: 1.45;
+      }
+
+      h1,
+      h2,
+      h3 {
+        margin: 0;
+        line-height: 1.1;
+      }
+
+      h1 {
+        font-size: 27pt;
+      }
+
+      h2 {
+        margin-top: 22px;
+        font-size: 15pt;
+      }
+
+      h3 {
+        margin-top: 13px;
+        font-size: 11.5pt;
+      }
+
+      p {
+        margin: 7px 0 0;
+      }
+
+      ul,
+      ol {
+        margin: 8px 0 0 18px;
+        padding: 0;
+      }
+
+      li {
+        margin: 3px 0;
+      }
+
+      code {
+        color: #24315f;
+        background: #eef2ff;
+        border: 1px solid #dce4ff;
+        border-radius: 5px;
+        padding: 1px 4px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+        font-size: 9pt;
+      }
+
+      .hero {
+        padding: 20px;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background:
+          linear-gradient(135deg, rgba(0, 166, 166, 0.12), transparent 38%),
+          linear-gradient(315deg, rgba(123, 88, 255, 0.12), transparent 42%),
+          var(--paper);
+      }
+
+      .eyebrow {
+        color: var(--teal);
+        font-size: 9pt;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .lede {
+        max-width: 680px;
+        color: var(--muted);
+        font-size: 12pt;
+      }
+
+      .callout {
+        padding: 12px 14px;
+        border-left: 4px solid var(--teal);
+        border-radius: 10px;
+        background: var(--soft);
+      }
+
+      .warm {
+        background: var(--warm);
+        border-left-color: #d18400;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .card {
+        break-inside: avoid;
+        padding: 13px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: #fff;
+      }
+
+      .pill-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px;
+        margin-top: 9px;
+      }
+
+      .pill {
+        border: 1px solid #cfe9e6;
+        border-radius: 999px;
+        padding: 4px 8px;
+        color: #074d54;
+        background: #f4fffd;
+        font-size: 9pt;
+        font-weight: 750;
+      }
+
+      .screens {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+        align-items: start;
+      }
+
+      figure {
+        break-inside: avoid;
+        margin: 0;
+        padding: 10px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: #fbfdff;
+      }
+
+      figcaption {
+        margin-bottom: 7px;
+        color: var(--muted);
+        font-size: 8.5pt;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+
+      img {
+        display: block;
+        width: 100%;
+        height: auto;
+        border: 1px solid #d8e2f2;
+        border-radius: 10px;
+      }
+
+      .mono-list li {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+        font-size: 8.7pt;
+      }
+
+      .page-break {
+        break-before: page;
+      }
+
+      .small {
+        color: var(--muted);
+        font-size: 9pt;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="hero">
+      <p class="eyebrow">Prompt Life v0.26.7</p>
+      <h1>Play Landing Polish Report</h1>
+      <p class="lede">
+        The Play landing page now presents one coherent set of calm practice
+        challenges, sorted by Journey readiness and annotated with compact
+        stage mapping plus saved-practice stats.
+      </p>
+      <div class="pill-row" aria-label="Verification summary">
+        <span class="pill">typecheck passed</span>
+        <span class="pill">build passed</span>
+        <span class="pill">pages build passed</span>
+        <span class="pill">answer audit passed</span>
+        <span class="pill">320px QA passed</span>
+        <span class="pill">390px QA passed</span>
+      </div>
+    </section>
+
+    <h2>What Changed</h2>
+    <div class="grid">
+      <section class="card">
+        <h3>Landing Copy</h3>
+        <p>
+          Header now reads <code>PLAY LAB</code>, <code>Play to learn</code>,
+          and <code>Short, calm challenges that make model mechanics visible.</code>
+        </p>
+      </section>
+      <section class="card">
+        <h3>Unified Slate</h3>
+        <p>
+          The landing page uses one <code>Play challenges</code> list. No
+          Featured Activity section or developer-facing foundation/slate labels
+          remain in learner-visible source.
+        </p>
+      </section>
+      <section class="card">
+        <h3>Stage Mapping</h3>
+        <p>
+          Each challenge card now shows the recommended Journey point, compact
+          stage chips, related learning cards, action, time, status, and calm
+          saved-practice stats.
+        </p>
+      </section>
+      <section class="card">
+        <h3>Badge Copy</h3>
+        <p>
+          Badge copy now frames Play as practice history while preserving one
+          badge: <strong>Prompt Life: Model Literate</strong>.
+        </p>
+      </section>
+    </div>
+
+    <h2>Visible Challenge Order</h2>
+    <ol>
+      <li>Glossary Dojo: Anytime / Glossary.</li>
+      <li>Attention Match: after Stage 3, Workday.</li>
+      <li>Probability Picker: after Stage 4, Decision Room, coming soon.</li>
+      <li>Context Stack: after Stage 5, The Day Repeats.</li>
+      <li>Prompt Run: after Stage 5, capstone across Stages 2-5.</li>
+    </ol>
+
+    <h2>Copy Changes</h2>
+    <ul>
+      <li><code>Play to understand</code> -> <code>Play to learn</code>.</li>
+      <li><code>ZenTron Paper Lab</code> -> <code>PLAY LAB</code>.</li>
+      <li><code>Practice challenges</code> heading -> <code>Play challenges</code>.</li>
+      <li><code>Previewing this card</code> -> <code>Previewing this learning card</code>.</li>
+      <li><code>synthesis card</code> -> <code>synthesis learning card</code>.</li>
+      <li><code>Lesson Cards</code> -> <code>Learning Cards</code>.</li>
+    </ul>
+
+    <h2>LocalStorage</h2>
+    <ul class="mono-list">
+      <li>Read/displayed: promptlife.playChallenges.v1</li>
+      <li>Preserved legacy Context Stack keys: promptlife:v1:gameInsights, pl.gameInsights</li>
+      <li>Preserved Prompt Run bridge keys: promptlife:v1:promptRunProgress, pl.promptRunProgress</li>
+      <li>Preserved Prompt Run completion keys: promptlife:v1:traceComplete, pl.traceComplete</li>
+      <li>Preserved learning-tour bridge keys: promptlife:v1:learningTourComplete, pl.learningTourComplete</li>
+      <li>Preserved independent Dojo key: promptlife.glossaryDojo.v1</li>
+      <li>No storage migration, reset behavior, Journey progress, or badge logic change was added.</li>
+    </ul>
+
+    <h2>Verification</h2>
+    <div class="grid">
+      <section class="card">
+        <h3>Commands</h3>
+        <ul>
+          <li><code>npm run typecheck</code>: passed.</li>
+          <li><code>npm run build</code>: passed with existing Vite large-chunk warning.</li>
+          <li><code>npm run build:pages</code>: passed with existing Vite large-chunk warning.</li>
+          <li><code>npm run audit:answers</code>: passed.</li>
+        </ul>
+      </section>
+      <section class="card">
+        <h3>Mobile QA</h3>
+        <p>
+          390px and 320px checks passed: no horizontal overflow, title fit,
+          chips and stat rows wrapped cleanly, bottom nav remained usable, and
+          vertical scrolling was obvious.
+        </p>
+      </section>
+    </div>
+
+    <h2>Route QA</h2>
+    <p class="callout">
+      Glossary Dojo, Attention Match, Context Stack, and Prompt Run opened from
+      the Play landing page. Probability Picker stayed disabled as coming soon.
+      Token Pipeline Relay and How AI Learns were not visible as normal Play
+      cards. Badge loaded with <code>v0.26.7</code>.
+    </p>
+
+    <h2>Known Issues</h2>
+    <p class="callout warm">
+      Probability Picker remains coming soon. Attention Match still uses the
+      compatibility interaction underneath. The existing Vite large-chunk warning
+      remains.
+    </p>
+
+    <h2>Files Changed</h2>
+    <ul class="mono-list">
+      <li>README.md</li>
+      <li>package.json</li>
+      <li>package-lock.json</li>
+      <li>src/features/play/PlayChallengeComponents.tsx</li>
+      <li>src/features/play/challengeRegistry.ts</li>
+      <li>src/features/play/types.ts</li>
+      <li>src/main.tsx</li>
+      <li>src/styles/global.css</li>
+      <li>docs/REVIEW_NOTES.md</li>
+      <li>docs/play/PLAY_FOUNDATION_LOG.md</li>
+      <li>docs/play/screenshots/v0-26-7-play-landing-polish-screenshots.json</li>
+      <li>docs/play/prompt-life-v0-26-7-play-landing-polish-report.html</li>
+      <li>docs/play/prompt-life-v0-26-7-play-landing-polish-report.pdf</li>
+    </ul>
+
+    <section class="page-break">
+      <h2>Screenshots</h2>
+      <div class="screens">
+        <figure>
+          <figcaption>Play landing at 390px</figcaption>
+          <img src="screenshots/v0-26-7-play-landing-390.png" alt="Play landing page at 390 pixels wide." />
+        </figure>
+        <figure>
+          <figcaption>Play landing at 320px</figcaption>
+          <img src="screenshots/v0-26-7-play-landing-320.png" alt="Play landing page at 320 pixels wide." />
+        </figure>
+        <figure>
+          <figcaption>Existing progress card</figcaption>
+          <img src="screenshots/v0-26-7-play-progress-card-390.png" alt="Glossary Dojo card showing saved practice stats." />
+        </figure>
+        <figure>
+          <figcaption>Probability coming soon</figcaption>
+          <img src="screenshots/v0-26-7-probability-coming-soon-390.png" alt="Probability Picker card showing coming-soon status." />
+        </figure>
+        <figure>
+          <figcaption>Badge at 390px</figcaption>
+          <img src="screenshots/v0-26-7-badge-390.png" alt="Badge page showing v0.26.7 and practice-history copy." />
+        </figure>
+      </div>
+      <p class="small">
+        Screenshots were captured from the local Vite app using mobile viewport
+        sizes.
+      </p>
+    </section>
+  </body>
+</html>

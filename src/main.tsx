@@ -71,7 +71,7 @@ const HOME_ASSETS = {
   heroFallback: `${ASSET}/illustrations/scene-hero-feature-cloud@mobile.png`
 }
 // Bump this for each shipped app change; the Badge screen displays it under Start over.
-const APP_VERSION = '0.26.6'
+const APP_VERSION = '0.26.7'
 const STORAGE_KEYS = {
   lastLocation: 'promptlife:v1:lastLocation',
   lessonId: 'promptlife:v1:lessonId',
@@ -1092,8 +1092,8 @@ function LessonScreen({ lesson, mode, lessonIndex, totalLessons, reflection, onC
         <h1 id="lesson-title" tabIndex={-1}>{lesson.title}</h1>
         <p className="lede small">{lesson.subtitle}</p>
         <p className="lesson-definition">{definition}</p>
-        {mode === 'preview' && <p className="mode-note" role="status">Previewing this card. Progress will not change.</p>}
-        {mode === 'review' && <p className="mode-note" role="status">Reviewing a completed card.</p>}
+        {mode === 'preview' && <p className="mode-note" role="status">Previewing this learning card. Progress will not change.</p>}
+        {mode === 'review' && <p className="mode-note" role="status">Reviewing a completed learning card.</p>}
       </header>
 
       <section className="lesson-panel visual-aid-panel" aria-labelledby="visual-aid-title">
@@ -3455,9 +3455,9 @@ function PlayScreen({ gameId, gameInsights, traceComplete, promptRunProgress, le
   return (
     <section className="screen play-screen play-lab-screen" aria-labelledby="play-title">
       <ScreenHeader
-        kicker="ZenTron Paper Lab"
-        title="Play to understand"
-        subtitle="Short, calm challenges for tracing, placing, choosing, connecting, and naming model moves."
+        kicker="PLAY LAB"
+        title="Play to learn"
+        subtitle="Short, calm challenges that make model mechanics visible."
         titleId="play-title"
       />
       <PlayFeedbackPanel>
@@ -3466,17 +3466,18 @@ function PlayScreen({ gameId, gameInsights, traceComplete, promptRunProgress, le
           <PlayTokenChip tone="prompt">name</PlayTokenChip>
           <PlayTokenChip tone="context">place</PlayTokenChip>
           <PlayTokenChip tone="probability">choose</PlayTokenChip>
-          <PlayTokenChip tone="response">trace</PlayTokenChip>
           <PlayTokenChip>connect</PlayTokenChip>
+          <PlayTokenChip tone="response">trace</PlayTokenChip>
         </div>
       </PlayFeedbackPanel>
       <PlayProgressRail value={(completedFinalChallenges / FINAL_PLAY_CHALLENGE_COUNT) * 100} label={`${completedFinalChallenges} of ${FINAL_PLAY_CHALLENGE_COUNT} Play practice challenges complete or review suggested`} />
       <PlayScrollHint />
       <section className="play-section" aria-labelledby="practice-challenges-title">
         <div className="play-section-heading">
-          <h2 id="practice-challenges-title">Practice challenges</h2>
+          <h2 id="practice-challenges-title">Play challenges</h2>
           <PlayStatusPill status="in-progress" label="Practice set" />
         </div>
+        <p className="play-section-helper">Suggested order follows the Journey.</p>
         <PlayChallengeBoard label="Play practice challenges" className="play-slate-board">
           {challengeSummaries.map((challenge) => (
             <PlayChallengeCard key={challenge.id} item={challenge} onStart={startChallenge} />
@@ -3519,13 +3520,13 @@ function RetiredPlayChallengeScreen({ challenge, onBack, onOpenReplacement }) {
     <PlayChallengeShell
       title={challenge.title}
       titleId="retired-play-title"
-      eyebrow="Retired from final slate"
+      eyebrow="Retired from main Play set"
       subtitle={challenge.tenSecondExplanation}
       onBack={onBack}
     >
       <PlayCompletionPanel title="Preserved for compatibility">
         <p>{challenge.shortDescription}</p>
-        <p>Existing saved progress remains on this device, but this item is not presented as a final Play challenge.</p>
+        <p>This earlier activity has been retired from the main Play set. Your progress was not lost.</p>
       </PlayCompletionPanel>
       <PlayActionRow>
         {hasReplacement && <button className="primary-btn" type="button" onClick={onOpenReplacement}>Open Attention Match</button>}
@@ -4437,9 +4438,9 @@ function BadgeScreen({
       </div>
       <section className="idea-panel">
         <h2>{unlocked ? 'Badge unlocked' : 'Badge criterion'}</h2>
-        <p>Complete the required Journey path, Prompt Run, and the synthesis card to earn one confidence badge: Prompt Life: Model Literate. The other Play challenges are practice support.</p>
+        <p>Play progress is saved here as practice history. The badge remains one coherent model-literacy journey: complete the required Journey path, Prompt Run, and the synthesis learning card.</p>
         <p>This badge means you can explain what an LLM is, what it is not, and how a prompt becomes a response without treating the model as magic.</p>
-        <p>{unlocked ? 'You met the learning threshold.' : `Remaining: ${lessonsNeeded} Journey checkpoint${lessonsNeeded === 1 ? '' : 's'}, ${promptRunNeeded} Prompt Run completion${promptRunNeeded === 1 ? '' : 's'}, and ${synthesisNeeded} synthesis card completion${synthesisNeeded === 1 ? '' : 's'}.`}</p>
+        <p>{unlocked ? 'You met the learning threshold.' : `Remaining: ${lessonsNeeded} Journey checkpoint${lessonsNeeded === 1 ? '' : 's'}, ${promptRunNeeded} Prompt Run completion${promptRunNeeded === 1 ? '' : 's'}, and ${synthesisNeeded} synthesis learning card completion${synthesisNeeded === 1 ? '' : 's'}.`}</p>
       </section>
       <button className="primary-btn" onClick={copyShareText}>Copy share text</button>
       {copied && <p className="feedback good" role="status">Share text copied.</p>}
@@ -4474,8 +4475,8 @@ function ReviewLessonCards() {
     <main className="review-route lesson-review-route" aria-labelledby="review-title">
       <header className="review-cover">
         <p className="eyebrow">Prompt Life v{APP_VERSION}</p>
-        <h1 id="review-title" tabIndex={-1}>Lesson Cards</h1>
-        <p>One accessible curriculum-review card per lesson, built from current app data plus inventory notes and rubric scores.</p>
+        <h1 id="review-title" tabIndex={-1}>Learning Cards</h1>
+        <p>One accessible curriculum-review learning card per lesson, built from current app data plus inventory notes and rubric scores.</p>
       </header>
       {lessons.map((lesson, index) => {
         const profile = buildLessonReviewProfile(lesson)

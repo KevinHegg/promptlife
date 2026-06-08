@@ -2,6 +2,43 @@
 
 Date: 2026-06-08
 
+## v0.26.7 Play Landing Polish And Stage Mapping
+
+### What Changed
+
+- Updated the Play landing title to `Play to learn` with the shorter `PLAY LAB` header and subtitle.
+- Kept one unified `Play challenges` list and confirmed there is no Featured Activity section.
+- Reordered the Play challenge cards by learner readiness: Glossary Dojo, Attention Match, Probability Picker, Context Stack, Prompt Run.
+- Added recommended Journey point, compact stage chips, related learning cards, and calm progress/stat chips to each Play challenge card.
+- Kept Probability Picker disabled as `Coming soon` and added the existing softmax icon so its card layout stays clean.
+- Removed developer-facing Play wording from learner-visible source and changed Journey references from generic `card` to `learning card` where appropriate.
+- Updated Badge copy to frame Play progress as practice history while preserving the single `Prompt Life: Model Literate` badge model.
+- Bumped the visible app version to `v0.26.7` and updated the README cache-busting example to `?v=0267`.
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed.
+- Browser QA at 390px and 320px: Play loaded, title fit, one unified list appeared, card order was correct, stage chips and stat rows stayed inside cards, Probability Picker was disabled/coming soon, retired cards were hidden, Glossary Dojo/Attention Match/Context Stack/Prompt Run opened, Badge loaded with `v0.26.7`, and no horizontal overflow was detected.
+
+### Screenshots And Report
+
+- `docs/play/prompt-life-v0-26-7-play-landing-polish-report.html`
+- `docs/play/prompt-life-v0-26-7-play-landing-polish-report.pdf`
+- `docs/play/screenshots/v0-26-7-play-landing-390.png`
+- `docs/play/screenshots/v0-26-7-play-landing-320.png`
+- `docs/play/screenshots/v0-26-7-play-progress-card-390.png`
+- `docs/play/screenshots/v0-26-7-probability-coming-soon-390.png`
+- `docs/play/screenshots/v0-26-7-badge-390.png`
+
+### Known Issues
+
+- Probability Picker remains safely coming soon.
+- Attention Match still uses the existing compatibility interaction under the final label.
+- The existing Vite large-chunk warning remains.
+
 ## v0.26.6 Context Stack v2
 
 ### What Changed

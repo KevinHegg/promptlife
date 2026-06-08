@@ -16,7 +16,10 @@ export const finalPlayChallengeRegistry: PlayChallengeMeta[] = [
     tenSecondExplanation: 'A calm twelve-question round helps the vocabulary map settle without scores.',
     primaryActionLabel: 'Practice terms',
     estimatedTime: '4 min',
-    relatedJourneyStages: ['All stages'],
+    recommendedAfter: 'Anytime',
+    relatedJourneyStages: ['All stages', 'Glossary'],
+    stageChips: ['Anytime', 'Glossary'],
+    relatedLearningCards: ['All learning cards'],
     availability: 'available',
     routeId: 'glossary-dojo',
     image: '/assets/promptlife/icons/png/icon-glossary@48.png',
@@ -28,13 +31,56 @@ export const finalPlayChallengeRegistry: PlayChallengeMeta[] = [
     recordAttemptOnOpen: false
   },
   {
+    id: 'attention-match',
+    title: 'Attention Match',
+    shortDescription: 'Connect a token to what it depends on.',
+    tenSecondExplanation: 'Match a token to the earlier token position it depends on in the current context.',
+    primaryActionLabel: 'Open match',
+    estimatedTime: '3 min',
+    recommendedAfter: 'After Stage 3 · Workday',
+    relatedJourneyStages: ['Workday', 'Decision Room'],
+    stageChips: ['Stage 3', 'Workday'],
+    relatedLearningCards: ['Attention'],
+    availability: 'available',
+    routeId: 'attention-match',
+    image: '/assets/promptlife/illustrations/scene-attention-weave@mobile.png',
+    action: 'Connect relevant tokens.',
+    modelMove: 'Attention weights relate token positions in the current context.',
+    misconceptionTags: ['attention-is-awareness'],
+    journeyStageRelationship: ['Attention'],
+    glossaryTermIds: ['attention', 'relevance-weight'],
+    legacyProgressIds: ['attention-weave']
+  },
+  {
+    id: 'probability-picker',
+    title: 'Probability Picker',
+    shortDescription: 'Explore probability-shaped next-token choices.',
+    tenSecondExplanation: 'A future challenge will let you choose one next token from probabilities without treating probability as truth.',
+    primaryActionLabel: 'Coming soon',
+    estimatedTime: '3 min',
+    recommendedAfter: 'After Stage 4 · Decision Room',
+    relatedJourneyStages: ['Decision Room'],
+    stageChips: ['Stage 4', 'Decision Room'],
+    relatedLearningCards: ['Logits', 'Softmax', 'Sampling'],
+    availability: 'coming-soon',
+    image: '/assets/promptlife/icons/png/icon-softmax@48.png',
+    action: 'Choose one likely token.',
+    modelMove: 'Raw scores become probabilities, then sampling chooses one token.',
+    misconceptionTags: ['probability-is-truth', 'sampling-is-certainty'],
+    journeyStageRelationship: ['Logits', 'Softmax', 'Sampling'],
+    glossaryTermIds: ['logits', 'softmax', 'probability', 'sampling']
+  },
+  {
     id: 'context-stack',
     title: 'Context Stack',
     shortDescription: 'See what fits in context.',
     tenSecondExplanation: 'Push cards into a small tray and notice which older context falls out.',
     primaryActionLabel: 'Open stack',
     estimatedTime: '3 min',
-    relatedJourneyStages: ['The Day Repeats'],
+    recommendedAfter: 'After Stage 5 · The Day Repeats',
+    relatedJourneyStages: ['The Day Repeats', 'RAG and Retrieval', 'Grounding'],
+    stageChips: ['Stage 5', 'Day Repeats'],
+    relatedLearningCards: ['Context Window', 'RAG and Retrieval', 'Grounding'],
     availability: 'available',
     routeId: 'context-stack',
     image: '/assets/promptlife/illustrations/scene-context-stack@mobile.png',
@@ -45,28 +91,16 @@ export const finalPlayChallengeRegistry: PlayChallengeMeta[] = [
     glossaryTermIds: ['context window', 'input-context', 'memory', 'rag']
   },
   {
-    id: 'probability-picker',
-    title: 'Probability Picker',
-    shortDescription: 'Explore probability-shaped next-token choices.',
-    tenSecondExplanation: 'This slot is reserved for choosing one next token from probabilities without treating probability as truth.',
-    primaryActionLabel: 'Coming soon',
-    estimatedTime: '3 min',
-    relatedJourneyStages: ['Decision Room'],
-    availability: 'coming-soon',
-    action: 'Choose one likely token.',
-    modelMove: 'Raw scores become probabilities, then sampling chooses one token.',
-    misconceptionTags: ['probability-is-truth', 'sampling-is-certainty'],
-    journeyStageRelationship: ['Logits', 'Softmax', 'Sampling'],
-    glossaryTermIds: ['logits', 'softmax', 'probability', 'sampling']
-  },
-  {
     id: 'prompt-run',
     title: 'Prompt Run',
-    shortDescription: 'Capstone challenge: trace one prompt through the whole loop.',
+    shortDescription: 'Trace one prompt through the whole loop.',
     tenSecondExplanation: 'Trace the full inference loop from visible context to one selected and appended token.',
     primaryActionLabel: 'Start capstone',
     estimatedTime: '8-10 min',
-    relatedJourneyStages: ['Morning Commute', 'Workday', 'Decision Room', 'Day Repeats'],
+    recommendedAfter: 'After Stage 5 · The Day Repeats',
+    relatedJourneyStages: ['Morning Commute', 'Workday', 'Decision Room', 'The Day Repeats'],
+    stageChips: ['Stage 2-5', 'Capstone'],
+    relatedLearningCards: ['Prompt vs Response', 'Tokenization', 'Autoregression'],
     availability: 'available',
     routeId: 'trace-one-prompt',
     image: '/assets/promptlife/illustrations/scene-token-pipeline-relay@mobile.png',
@@ -75,24 +109,6 @@ export const finalPlayChallengeRegistry: PlayChallengeMeta[] = [
     misconceptionTags: ['inference-is-training', 'context-is-memory', 'next-token-magic'],
     journeyStageRelationship: ['Prompt vs Response', 'Tokenization', 'Autoregression'],
     glossaryTermIds: ['prompt', 'token', 'embedding', 'hidden state', 'logits', 'softmax', 'sampling', 'autoregression']
-  },
-  {
-    id: 'attention-match',
-    title: 'Attention Match',
-    shortDescription: 'Connect a token to what it depends on.',
-    tenSecondExplanation: 'This preview reuses the current weave task while framing the final challenge as token relevance matching.',
-    primaryActionLabel: 'Preview match',
-    estimatedTime: '3 min',
-    relatedJourneyStages: ['Workday'],
-    availability: 'foundation-ready',
-    routeId: 'attention-match',
-    image: '/assets/promptlife/illustrations/scene-attention-weave@mobile.png',
-    action: 'Connect relevant tokens.',
-    modelMove: 'Attention weights relate token positions in the current context.',
-    misconceptionTags: ['attention-is-awareness'],
-    journeyStageRelationship: ['Attention'],
-    glossaryTermIds: ['attention', 'relevance-weight'],
-    legacyProgressIds: ['attention-weave']
   }
 ]
 
@@ -100,11 +116,13 @@ export const retiredPlayChallenges: PlayChallengeMeta[] = [
   {
     id: 'token-relay',
     title: 'Token Pipeline Relay',
-    shortDescription: 'Retired from the final Play slate.',
+    shortDescription: 'Retired from the main Play set.',
     tenSecondExplanation: 'Its useful determinism idea belongs inside Prompt Run or Probability Picker later.',
     primaryActionLabel: 'Back to Play',
     estimatedTime: '3 min',
+    recommendedAfter: 'Compatibility only',
     relatedJourneyStages: ['Decision Room'],
+    stageChips: ['Retired'],
     availability: 'deprecated',
     routeId: 'token-relay',
     action: 'Retired',
@@ -116,11 +134,13 @@ export const retiredPlayChallenges: PlayChallengeMeta[] = [
   {
     id: 'how-ai-learns',
     title: 'How AI Learns',
-    shortDescription: 'Retired from the final Play slate.',
-    tenSecondExplanation: 'This content now belongs with Journey and review support instead of a final Play card.',
+    shortDescription: 'Retired from the main Play set.',
+    tenSecondExplanation: 'This content now belongs with Journey and review support instead of the main Play challenge list.',
     primaryActionLabel: 'Back to Play',
     estimatedTime: '5 min',
+    recommendedAfter: 'Compatibility only',
     relatedJourneyStages: ['Before Morning', 'The Day Repeats'],
+    stageChips: ['Retired'],
     availability: 'deprecated',
     routeId: 'how-ai-learns',
     action: 'Retired',
@@ -133,10 +153,12 @@ export const retiredPlayChallenges: PlayChallengeMeta[] = [
     id: 'attention-weave',
     title: 'Attention Weave',
     shortDescription: 'Renamed toward Attention Match.',
-    tenSecondExplanation: 'Old progress is bridged to the Attention Match foundation card.',
+    tenSecondExplanation: 'Old progress is bridged to the Attention Match Play challenge.',
     primaryActionLabel: 'Open Attention Match',
     estimatedTime: '3 min',
+    recommendedAfter: 'After Stage 3 · Workday',
     relatedJourneyStages: ['Workday'],
+    stageChips: ['Stage 3', 'Workday'],
     availability: 'deprecated',
     routeId: 'attention-match',
     action: 'Renamed',
@@ -164,8 +186,9 @@ type LegacyPlaySignals = {
     roundsCompleted?: number
     totalQuestionsAnswered?: number
     questionsAnswered?: number
+    totalCorrect?: number
     terms?: Record<string, { mastered?: boolean }>
-    lastCompletedRound?: { missedCount?: number } | null
+    lastCompletedRound?: { correctCount?: number; missedCount?: number; completedAt?: string } | null
   }
 }
 
@@ -176,6 +199,80 @@ function statusText(status: PlayChallengeStatus) {
   if (status === 'coming-soon') return 'Coming soon'
   if (status === 'retired') return 'Retired'
   return 'Ready'
+}
+
+function formatCountLabel(label: string, count: number) {
+  return `${label}: ${Math.max(0, count)}`
+}
+
+function formatLastPlayed(value?: string) {
+  if (!value) return 'Last: Not yet'
+  const then = new Date(value)
+  if (Number.isNaN(then.getTime())) return 'Last: Saved'
+  const now = new Date()
+  const sameDay = then.getFullYear() === now.getFullYear() && then.getMonth() === now.getMonth() && then.getDate() === now.getDate()
+  if (sameDay) return 'Last: Today'
+  const diffMs = now.getTime() - then.getTime()
+  const diffDays = Math.floor(diffMs / 86400000)
+  if (diffDays === 1) return 'Last: Yesterday'
+  if (diffDays > 1 && diffDays < 7) return `Last: ${diffDays} days ago`
+  return `Last: ${then.toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}`
+}
+
+function formatCompletions(count: number) {
+  if (count <= 0) return 'Completed: 0'
+  if (count === 1) return 'Completed once'
+  return `Completed: ${count}`
+}
+
+function formatBestLabel(meta: PlayChallengeMeta, attempt: PlayChallengeAttempt, legacy: LegacyPlaySignals = {}) {
+  if (meta.availability === 'coming-soon') return 'Best: Coming soon'
+
+  if (meta.id === 'glossary-dojo') {
+    const dojo = legacy.glossaryDojoProgress
+    const correct = dojo?.lastCompletedRound?.correctCount
+    const missed = dojo?.lastCompletedRound?.missedCount
+    if (typeof correct === 'number') return `Best: ${Math.max(0, correct)} of 12`
+    if (typeof missed === 'number') return `Best: ${Math.max(0, 12 - missed)} of 12`
+    if ((dojo?.totalCorrect ?? 0) > 0) return `Best: ${dojo?.totalCorrect} correct`
+  }
+
+  if (meta.id === 'prompt-run') {
+    const promptRun = legacy.promptRunProgress
+    const finalDone = Boolean(promptRun?.finalChallengeComplete || legacy.traceComplete)
+    const completedSteps = Math.min(13, (promptRun?.completedSteps?.length ?? 0) + (finalDone ? 1 : 0))
+    if (finalDone || completedSteps > 0) return `Best: ${completedSteps} of 13 steps`
+  }
+
+  if (meta.id === 'context-stack' && (attempt.status === 'completed' || attempt.status === 'review-suggested' || attempt.bestProgressPct >= 100)) {
+    return 'Best: Main idea found'
+  }
+
+  if (meta.id === 'attention-match' && (attempt.status === 'completed' || attempt.bestProgressPct >= 100)) {
+    return 'Best: Relations found'
+  }
+
+  if (attempt.bestProgressPct > 0) return `Best: ${attempt.bestProgressPct}% explored`
+  return 'Best: Not yet'
+}
+
+function buildProgressStats(meta: PlayChallengeMeta, attempt: PlayChallengeAttempt, legacy: LegacyPlaySignals = {}) {
+  if (meta.availability === 'coming-soon') return ['Coming soon']
+
+  const stats = [
+    formatCountLabel('Played', attempt.attempts),
+    formatBestLabel(meta, attempt, legacy),
+    formatLastPlayed(attempt.lastPlayedAt)
+  ]
+
+  if (meta.id === 'glossary-dojo') {
+    const mastered = Object.values(legacy.glossaryDojoProgress?.terms ?? {}).filter((term) => term.mastered).length
+    if (mastered > 0) stats.push(`Mastered: ${mastered} terms`)
+  } else if (attempt.completions > 0) {
+    stats.push(formatCompletions(attempt.completions))
+  }
+
+  return stats
 }
 
 function bridgeLegacyProgress(meta: PlayChallengeMeta, base: PlayChallengeAttempt, legacy: LegacyPlaySignals = {}): PlayChallengeAttempt {
@@ -215,6 +312,7 @@ function bridgeLegacyProgress(meta: PlayChallengeMeta, base: PlayChallengeAttemp
         completions: Math.max(base.completions, completed),
         bestProgressPct: Math.max(base.bestProgressPct, completed ? 100 : dojo?.currentRound ? 50 : answered ? 25 : 0),
         status: reviewSuggested ? 'review-suggested' : completed ? 'completed' : dojo?.currentRound ? 'in-progress' : 'not-started',
+        lastPlayedAt: base.lastPlayedAt ?? dojo?.lastCompletedRound?.completedAt,
         lastOutcome: completed
           ? reviewSuggested
             ? 'Completed a calm round; review suggested.'
@@ -272,10 +370,10 @@ export function buildPlayChallengeSummaries(
           ? `${bridged.bestProgressPct}%`
           : '0%'
     const attemptsText = bridged.attempts
-      ? `${bridged.attempts} attempt${bridged.attempts === 1 ? '' : 's'}`
-      : 'No attempts yet'
+      ? `Played ${bridged.attempts} time${bridged.attempts === 1 ? '' : 's'}`
+      : 'Played 0 times'
     const completionText = bridged.completions
-      ? `${bridged.completions} completion${bridged.completions === 1 ? '' : 's'}`
+      ? formatCompletions(bridged.completions)
       : 'Not completed'
     const disabled = meta.availability === 'coming-soon' || meta.availability === 'deprecated'
     const actionLabel = disabled
@@ -294,6 +392,7 @@ export function buildPlayChallengeSummaries(
       progressText,
       attemptsText,
       completionText,
+      progressStats: buildProgressStats(meta, bridged, legacy),
       actionLabel,
       disabled
     }

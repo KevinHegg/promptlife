@@ -1,0 +1,32 @@
+{
+  "version": "0.26.7",
+  "pass": "Play Landing Polish And Stage Mapping",
+  "captured": "2026-06-08",
+  "screenshots": [
+    {
+      "path": "docs/play/screenshots/v0-26-7-play-landing-390.png",
+      "viewport": "390x844",
+      "description": "Play landing page at 390px with unified Play challenges list."
+    },
+    {
+      "path": "docs/play/screenshots/v0-26-7-play-landing-320.png",
+      "viewport": "320x844",
+      "description": "Play landing page at 320px with compact title, chips, and stats."
+    },
+    {
+      "path": "docs/play/screenshots/v0-26-7-play-progress-card-390.png",
+      "viewport": "390x844",
+      "description": "Glossary Dojo challenge card showing existing saved progress stats."
+    },
+    {
+      "path": "docs/play/screenshots/v0-26-7-probability-coming-soon-390.png",
+      "viewport": "390x844",
+      "description": "Probability Picker challenge card showing coming-soon handling."
+    },
+    {
+      "path": "docs/play/screenshots/v0-26-7-badge-390.png",
+      "viewport": "390x844",
+      "description": "Badge page showing practice-history copy and v0.26.7."
+    }
+  ]
+}

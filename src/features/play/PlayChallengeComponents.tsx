@@ -144,16 +144,22 @@ export function PlayChallengeCard({ item, onStart }: { item: PlayChallengeSummar
           <PlayStatusPill status={item.status} label={item.statusText} />
         </span>
         <small id={`play-card-${item.id}-description`}>{item.shortDescription}</small>
-        <span className="play-card-explain"><b>10-second idea:</b> {item.tenSecondExplanation}</span>
-        <span className="play-card-meta"><b>Action:</b> {item.action}</span>
-        <span className="play-card-meta"><b>Model move:</b> {item.modelMove}</span>
-        <span className="play-card-meta play-card-time"><b>Time:</b> {item.estimatedTime}</span>
-        <span className="play-card-meta"><b>Path:</b> {item.relatedJourneyStages.join(', ')}</span>
-        <span className="play-card-progress-row">
-          <PlayProgressRail value={item.progress.bestProgressPct} label={`${item.title} progress ${item.progress.bestProgressPct}%`} />
-          <span>{item.progressText}</span>
+        <span className="play-card-meta"><b>Recommended:</b> {item.recommendedAfter}</span>
+        <span className="play-card-chip-row" aria-label={`${item.title} related Journey stages`}>
+          {item.stageChips.map((chip) => (
+            <span className="play-stage-chip" key={chip}>{chip}</span>
+          ))}
         </span>
-        <span className="play-card-meta">{item.attemptsText}. {item.completionText}.</span>
+        {item.relatedLearningCards?.length ? (
+          <span className="play-card-meta"><b>Learning cards:</b> {item.relatedLearningCards.join(', ')}</span>
+        ) : null}
+        <span className="play-card-meta"><b>Action:</b> {item.action}</span>
+        <span className="play-card-meta play-card-time"><b>Time:</b> {item.estimatedTime}</span>
+        <span className="play-card-stat-row" aria-label={`${item.title} saved practice stats`}>
+          {item.progressStats.map((stat) => (
+            <span className="play-card-stat" key={stat}>{stat}</span>
+          ))}
+        </span>
         {item.progress.lastOutcome && <span className="play-card-outcome">{item.progress.lastOutcome}</span>}
       </span>
       <span className="play-card-action">{item.actionLabel}</span>
