@@ -1,4 +1,9 @@
 import type { GlossaryDojoProgress, GlossaryDojoTerm } from './types'
+import {
+  PlayActionRow,
+  PlayCompletionPanel,
+  PlayFeedbackPanel
+} from '../play/PlayChallengeComponents'
 
 type GlossaryDojoSummaryProps = {
   progress: GlossaryDojoProgress
@@ -43,6 +48,7 @@ export function GlossaryDojoSummary({
     .filter(([, termProgress]) => termProgress.mastered)
     .map(([termId]) => termId)
     .slice(0, 6)
+  const completionTitle = missedCount > 0 ? 'Review suggested' : 'Round completed'
 
   return (
     <section
@@ -53,8 +59,10 @@ export function GlossaryDojoSummary({
       data-dojo-last-round-fingerprint={completedRound?.targetFingerprint ?? ''}
       data-dojo-last-target-count={completedRound?.targetTermIds.length ?? 0}
     >
-      <p className="eyebrow">Glossary Dojo</p>
-      <h2 id="dojo-summary-title">Results from this round</h2>
+      <PlayCompletionPanel title={completionTitle} titleId="dojo-summary-title" className="dojo-completion-panel">
+        <p><strong>Progress saved on this device.</strong> Round completed. {missedCount > 0 ? 'Review suggested for the concepts below.' : 'Good distinctions strengthened across this round.'}</p>
+      </PlayCompletionPanel>
+
       <div className="dojo-stat-grid" aria-label="Glossary Dojo practice totals">
         <span><strong>{questionCount}</strong> {questionCount === 1 ? 'question' : 'questions'}</span>
         <span><strong>{correctCount}</strong> correct</span>
@@ -63,12 +71,9 @@ export function GlossaryDojoSummary({
         <span><strong>{completedRound?.repeatCount ?? 0}</strong> repeated</span>
         <span><strong>{masteredCount}</strong> mastered over time</span>
       </div>
-      <p className="dojo-practice-note">
-        Mastery grows across rounds. One round is practice, not a final judgment.
-      </p>
-      <p className="dojo-practice-note">
-        A term is mastered after repeated correct practice across rounds.
-      </p>
+      <PlayFeedbackPanel tone={missedCount > 0 ? 'review' : 'good'}>
+        <p>Mastery grows across rounds. A term is mastered after repeated correct practice across rounds.</p>
+      </PlayFeedbackPanel>
 
       <section className="dojo-term-panel" aria-labelledby="dojo-strengthened-title">
         <h3 id="dojo-strengthened-title">Strengthened this round</h3>
@@ -113,9 +118,9 @@ export function GlossaryDojoSummary({
         </section>
       )}
 
-      <div className="dojo-action-row">
+      <PlayActionRow className="dojo-action-row">
         <div className="dojo-action-note">
-          <button className="primary-btn" type="button" onClick={onStartRound} data-testid="glossary-dojo-start">Start next round</button>
+          <button className="primary-btn" type="button" onClick={onStartRound} data-testid="glossary-dojo-start">Try another round</button>
           <span>Practice a fresh set of terms when possible.</span>
         </div>
         <div className="dojo-action-note">
@@ -124,13 +129,13 @@ export function GlossaryDojoSummary({
         </div>
         <div className="dojo-action-note">
           <button className="secondary-btn" type="button" onClick={onReviewMissed} disabled={!reviewTerms.length} data-testid="glossary-dojo-review-missed">
-            {reviewTerms.length ? 'Review missed questions' : 'No missed terms this round'}
+            {reviewTerms.length ? 'Review missed terms' : 'No missed terms this round'}
           </button>
           <span>Focus only on terms that need another look.</span>
         </div>
         <button className="secondary-btn" type="button" onClick={onBack}>Back to Play</button>
         <button className="secondary-btn danger" type="button" onClick={onReset}>Reset Dojo practice</button>
-      </div>
+      </PlayActionRow>
     </section>
   )
 }

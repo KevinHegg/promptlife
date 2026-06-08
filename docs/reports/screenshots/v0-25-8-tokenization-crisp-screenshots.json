@@ -1,0 +1,24 @@
+{
+  "url": "http://127.0.0.1:5173/review/visual-aids?debug=1&v=0258-tokenization-crisp#tokenization",
+  "captures": [
+    {
+      "canvasHeight": 404,
+      "hasHtmlDiagram": true,
+      "hasSvg": false,
+      "horizontalOverflow": false,
+      "sectionCount": 3,
+      "viewportWidth": 390,
+      "file": "/Users/kevinhegg/Desktop/promptlife/docs/reports/screenshots/v0-25-8-tokenization-crisp-390.png"
+    },
+    {
+      "canvasHeight": 391,
+      "hasHtmlDiagram": true,
+      "hasSvg": false,
+      "horizontalOverflow": false,
+      "sectionCount": 3,
+      "viewportWidth": 320,
+      "file": "/Users/kevinhegg/Desktop/promptlife/docs/reports/screenshots/v0-25-8-tokenization-crisp-320.png"
+    }
+  ],
+  "capturedAt": "2026-06-08T00:11:21.415Z"
+}

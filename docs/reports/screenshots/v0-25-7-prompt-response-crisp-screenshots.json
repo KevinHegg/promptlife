@@ -1,0 +1,34 @@
+{
+  "url": "http://127.0.0.1:5173/review/visual-aids?debug=1&v=0257-prompt-response-crisp#prompt-response",
+  "captures": [
+    {
+      "cardCount": 4,
+      "contextVisibleInsideCanvas": true,
+      "hasSvg": false,
+      "horizontalOverflow": false,
+      "targetRect": {
+        "height": 844,
+        "width": 358,
+        "x": 16,
+        "y": 0
+      },
+      "viewportWidth": 390,
+      "file": "/Users/kevinhegg/Desktop/promptlife/docs/reports/screenshots/v0-25-7-prompt-response-crisp-390.png"
+    },
+    {
+      "cardCount": 4,
+      "contextVisibleInsideCanvas": true,
+      "hasSvg": false,
+      "horizontalOverflow": false,
+      "targetRect": {
+        "height": 844,
+        "width": 288,
+        "x": 16,
+        "y": 0
+      },
+      "viewportWidth": 320,
+      "file": "/Users/kevinhegg/Desktop/promptlife/docs/reports/screenshots/v0-25-7-prompt-response-crisp-320.png"
+    }
+  ],
+  "capturedAt": "2026-06-08T00:06:42.014Z"
+}

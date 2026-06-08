@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Prompt Life v0.25.8 Tokenization Crisp Diagram Repair</title>
+    <style>
+      :root {
+        color: #07124a;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.45;
+      }
+
+      body {
+        margin: 0;
+        background: #f6fbff;
+      }
+
+      main {
+        max-width: 880px;
+        margin: 0 auto;
+        padding: 34px;
+      }
+
+      h1,
+      h2 {
+        line-height: 1.05;
+        margin: 0 0 12px;
+      }
+
+      h1 {
+        font-size: 32px;
+      }
+
+      h2 {
+        border-top: 1px solid #cdd8f0;
+        font-size: 20px;
+        margin-top: 26px;
+        padding-top: 18px;
+      }
+
+      p {
+        margin: 0 0 12px;
+      }
+
+      ul {
+        margin: 0 0 16px 20px;
+        padding: 0;
+      }
+
+      li {
+        margin: 4px 0;
+      }
+
+      code {
+        background: #eaf3ff;
+        border-radius: 5px;
+        padding: 1px 5px;
+      }
+
+      .lede {
+        color: #24345f;
+        font-size: 17px;
+      }
+
+      .status {
+        display: inline-block;
+        margin: 8px 0 18px;
+        border-radius: 999px;
+        background: #dbfbf8;
+        color: #005f5d;
+        font-weight: 800;
+        padding: 6px 11px;
+      }
+
+      .shot-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+        align-items: start;
+      }
+
+      figure {
+        margin: 0;
+        border: 1px solid #cdd8f0;
+        border-radius: 12px;
+        background: white;
+        padding: 12px;
+      }
+
+      figure img {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        border: 1px solid #d7e2f5;
+      }
+
+      figcaption {
+        color: #34446f;
+        font-size: 13px;
+        font-weight: 700;
+        margin-top: 8px;
+      }
+
+      @media print {
+        body {
+          background: white;
+        }
+
+        main {
+          padding: 20px;
+        }
+
+        .shot-grid {
+          gap: 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Prompt Life v0.25.8 Tokenization Crisp Diagram Repair</h1>
+      <p class="lede">Repaired the Text to Tokens visual so token chips and uneven split examples stay readable on mobile.</p>
+      <p class="status">Build, Pages build, typecheck, and answer audit passed.</p>
+
+      <h2>What Changed</h2>
+      <ul>
+        <li>Replaced the crowded Tokenization SVG layout with a coded HTML/CSS diagram.</li>
+        <li>Removed overlapping numbered annotation marks from inside the visual.</li>
+        <li>Reworked the diagram into Source text, Token stream, and Uneven examples sections.</li>
+        <li>Split the confusing final combined pill into readable rows for <code>startled</code> and <code>floor.</code>.</li>
+        <li>Bumped the visible app version to <code>v0.25.8</code>.</li>
+      </ul>
+
+      <h2>Files Changed</h2>
+      <ul>
+        <li><code>src/components/VisualAids.tsx</code></li>
+        <li><code>src/styles/global.css</code></li>
+        <li><code>src/main.tsx</code></li>
+        <li><code>docs/REVIEW_NOTES.md</code></li>
+        <li><code>docs/reports/screenshots/v0-25-8-tokenization-crisp-390.png</code></li>
+        <li><code>docs/reports/screenshots/v0-25-8-tokenization-crisp-320.png</code></li>
+        <li><code>docs/reports/screenshots/v0-25-8-tokenization-crisp-screenshots.json</code></li>
+      </ul>
+
+      <h2>Verification</h2>
+      <ul>
+        <li><code>npm run typecheck</code>: passed.</li>
+        <li><code>npm run build</code>: passed with the existing Vite large-chunk warning.</li>
+        <li><code>npm run build:pages</code>: passed with the existing Vite large-chunk warning.</li>
+        <li><code>npm run audit:answers</code>: passed.</li>
+        <li>Browser QA: token chips wrap inside their cards at 390px and 320px; no SVG fallback; no horizontal overflow.</li>
+      </ul>
+
+      <h2>Screenshots</h2>
+      <div class="shot-grid">
+        <figure>
+          <img src="screenshots/v0-25-8-tokenization-crisp-390.png" alt="Text to Tokens visual at 390px with source text, token stream, and uneven examples sections.">
+          <figcaption>390px review route capture</figcaption>
+        </figure>
+        <figure>
+          <img src="screenshots/v0-25-8-tokenization-crisp-320.png" alt="Text to Tokens visual at 320px with source text, token stream, and uneven examples sections.">
+          <figcaption>320px review route capture</figcaption>
+        </figure>
+      </div>
+
+      <h2>Known Issues</h2>
+      <p>No new known issue from this pass. The production build still reports the existing Vite large-chunk warning.</p>
+    </main>
+  </body>
+</html>

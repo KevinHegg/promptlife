@@ -2,6 +2,247 @@
 
 Date: 2026-06-07
 
+## v0.26.4 Main Branch Cache-Bust Release
+
+### What Changed
+
+- Bumped the visible app version to `v0.26.4` for iPhone/Safari cache verification.
+- Aligned `package.json` and `package-lock.json` metadata with the visible app version.
+- Updated the README cache-busting example to `?v=0264`.
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed.
+
+## v0.26.3 Glossary Dojo Shared Shell Wrap
+
+### What Changed
+
+- Wrapped Glossary Dojo start, question, feedback, and summary views in the shared Play Challenge Foundation presentation layer.
+- Added shared `PlayChallengeShell`, `PlayChallengeHeader`, `PlayStatusPill`, `PlayProgressRail`, `PlayFeedbackPanel`, `PlayCompletionPanel`, and `PlayActionRow` usage around the existing Dojo loop.
+- Preserved the existing 12-question rounds, engine, glossary data, close distractors, repeat rounds, review rounds, and Dojo progress store.
+- Updated visible feedback leads to `Good distinction.` and `This choice reveals a common mix-up.`
+- Updated summary language to `Round completed` / `Review suggested`.
+- Updated summary actions to `Try another round` and `Review missed terms`.
+- Kept shared Play attempt/completion tracking through `promptlife.playChallenges.v1`.
+- Bumped the visible app version to `v0.26.3`.
+
+### Preserved
+
+- Journey progress, badge unlock criteria, checkpoint randomization, generated assets, dependencies, and the core Glossary Dojo learning engine were not changed.
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed.
+- Browser QA at 390px: Dojo started, advanced, showed common-mix-up and good-distinction feedback, completed a round, wrote shared Play progress, Badge loaded, and reset cleared shared Play/Dojo keys.
+- Browser QA at 320px: Dojo question screen remained readable with no horizontal overflow.
+
+### Screenshots And Report
+
+- `docs/play/prompt-life-v0-26-3-glossary-dojo-shell-report.html`
+- `docs/play/prompt-life-v0-26-3-glossary-dojo-shell-report.pdf`
+- `docs/play/screenshots/v0-26-3-dojo-start-390.png`
+- `docs/play/screenshots/v0-26-3-dojo-common-mixup-feedback-scrolled-390.png`
+- `docs/play/screenshots/v0-26-3-dojo-good-distinction-feedback-390.png`
+- `docs/play/screenshots/v0-26-3-dojo-summary-390.png`
+- `docs/play/screenshots/v0-26-3-dojo-question-320.png`
+- `docs/play/screenshots/v0-26-3-badge-dojo-shell-390.png`
+- `docs/play/screenshots/v0-26-3-dojo-shell-screenshots.json`
+
+### Known Issues
+
+- The detailed Dojo engine feedback still produces older lead phrases internally; the visible UI strips those leads and adds the new calm feedback phrase.
+- The existing Vite large-chunk warning remains.
+
+## v0.26.2 Play Slate Simplification
+
+### What Changed
+
+- Confirmed the Play page uses the new Play Challenge Foundation registry and shows only five final or likely-final cards.
+- Tightened final slate card copy:
+  - Glossary Dojo: `Practice concept discrimination.`
+  - Context Stack: `See what fits in context.`
+  - Probability Picker: `Explore probability-shaped next-token choices.`
+  - Prompt Run: `Capstone challenge: trace one prompt through the whole loop.`
+  - Attention Match: `Connect a token to what it depends on.`
+- Changed Prompt Run's primary action to `Start capstone`.
+- Kept Token Pipeline Relay and How AI Learns out of the normal Play slate with retired compatibility handling preserved.
+- Bumped the visible app version to `v0.26.2`.
+
+### Preserved
+
+- Journey progress, badge unlock rules, localStorage compatibility, checkpoint randomization, dependencies, generated assets, and existing Play challenge mechanics were not changed.
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed.
+- Browser QA at 390px and 320px: Play showed exactly the five-card simplified slate; Glossary Dojo, Context Stack, Prompt Run, and Attention Match opened; Probability Picker remained safely disabled; Badge loaded at `v0.26.2`; no horizontal overflow.
+
+### Screenshots And Report
+
+- `docs/play/prompt-life-v0-26-2-play-slate-simplification-report.html`
+- `docs/play/prompt-life-v0-26-2-play-slate-simplification-report.pdf`
+- `docs/play/screenshots/v0-26-2-play-slate-390.png`
+- `docs/play/screenshots/v0-26-2-play-slate-320.png`
+- `docs/play/screenshots/v0-26-2-badge-play-slate-390.png`
+- `docs/play/screenshots/v0-26-2-play-slate-screenshots.json`
+
+### Known Issues
+
+- Probability Picker remains foundation-ready only.
+- Attention Match still uses the current Attention Weave interaction underneath.
+- The existing Vite large-chunk warning remains.
+
+## v0.26.1 Play Challenge Foundation
+
+### What Changed
+
+- Added the shared Play challenge model, versioned progress helpers, and reusable Play UI chassis.
+- Replaced the old Play page sections with the final slate: Glossary Dojo, Context Stack, Probability Picker, Prompt Run, and Attention Match.
+- Hid Token Pipeline Relay and How AI Learns from the normal Play slate while preserving compatibility metadata.
+- Reframed the current Attention Weave activity as the foundation version of Attention Match.
+- Connected Glossary Dojo, Context Stack, Prompt Run, and Attention Match to shared Play attempt/completion progress without changing Journey progress or badge unlock rules.
+- Updated Badge's Play stat to read final Play challenge completion slots and bumped the visible app version to `v0.26.1`.
+
+### Preserved
+
+- Journey order, Journey progress, badge unlock criteria, checkpoint randomization, generated assets, dependencies, and mature Glossary Dojo mastery storage were not changed.
+- Legacy Prompt Run, mini-game, learning-tour, and Glossary Dojo progress keys are bridged or preserved rather than wiped.
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning after a sequential rerun.
+- `npm run audit:answers`: passed.
+- Browser QA at 390px and 320px: Play, Badge, Glossary Dojo, and Prompt Run opened without horizontal overflow; deprecated Play items were absent from the final slate; reduced-motion emulation was respected.
+
+### Screenshots And Report
+
+- `docs/play/PLAY_FOUNDATION_LOG.md`
+- `docs/play/prompt-life-v0-26-1-play-foundation-report.html`
+- `docs/play/prompt-life-v0-26-1-play-foundation-report.pdf`
+- `docs/play/screenshots/v0-26-1-play-foundation-390.png`
+- `docs/play/screenshots/v0-26-1-play-foundation-320.png`
+- `docs/play/screenshots/v0-26-1-badge-play-foundation-390.png`
+- `docs/play/screenshots/v0-26-1-play-foundation-screenshots.json`
+
+### Known Issues
+
+- Probability Picker remains a disabled foundation-ready card until its full implementation pass.
+- Attention Match still uses the current Attention Weave interaction underneath.
+- The existing Vite large-chunk warning remains.
+- The first `build:pages` attempt was run in parallel with another build and hit a temporary `dist/assets` cleanup race; the sequential rerun passed.
+
+## v0.25.8 Tokenization Visual Crisp Diagram Repair
+
+### What Changed
+
+- Replaced the `Text to Tokens` SVG layout with a responsive coded HTML/CSS diagram.
+- Removed in-diagram annotation bubbles that overlapped token chips.
+- Reworked the visual into three readable sections:
+  - source text,
+  - token stream,
+  - uneven examples.
+- Split the messy `start | led floor | .` pill into two clear example rows: `startled` becomes `start` + `led`, and `floor.` becomes `floor` + `.`.
+- Overrode the review-gallery compact 16:9 visual rule for this card so the uneven-example rows remain visible.
+- Bumped the visible app version to `v0.25.8`.
+
+### Preserved
+
+- Journey order, badge logic, stage structure, generated assets, dependencies, checkpoint randomization, Glossary Dojo behavior, and lesson content were not changed.
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed.
+- Browser QA at 390px and 320px: token chips wrap inside their cards, uneven examples are readable, no SVG fallback, and no horizontal overflow.
+
+### Screenshots And Report
+
+- `docs/reports/prompt-life-v0-25-8-tokenization-crisp-diagram-report.html`
+- `docs/reports/prompt-life-v0-25-8-tokenization-crisp-diagram-report.pdf`
+- `docs/reports/screenshots/v0-25-8-tokenization-crisp-390.png`
+- `docs/reports/screenshots/v0-25-8-tokenization-crisp-320.png`
+- `docs/reports/screenshots/v0-25-8-tokenization-crisp-screenshots.json`
+
+## v0.25.7 Prompt vs Response Crisp Diagram Repair
+
+### What Changed
+
+- Replaced the `Prompt vs Response` SVG layout with a responsive coded HTML/CSS diagram.
+- Removed SVG-coordinate text and connector lines that caused alignment and overflow problems.
+- Changed the visual to four full-width stacked cards so shapes cannot slip out of their containers.
+- Overrode the review-gallery compact 16:9 visual rule for this card so the fourth `Updated context` row remains visible.
+- Kept four crisp lanes:
+  - given prompt,
+  - response so far,
+  - next token,
+  - updated context.
+- Token pills now wrap inside their own cards instead of slipping out of SVG containers.
+- Bumped the visible app version to `v0.25.7`.
+
+### Preserved
+
+- Journey order, badge logic, stage structure, generated assets, dependencies, checkpoint randomization, and Glossary Dojo behavior were not changed.
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed.
+- Browser QA at 390px and 320px: four cards visible, `Updated context` fully inside the canvas, no SVG fallback, and no horizontal overflow.
+
+### Screenshots And Report
+
+- `docs/reports/prompt-life-v0-25-7-prompt-response-crisp-diagram-report.html`
+- `docs/reports/prompt-life-v0-25-7-prompt-response-crisp-diagram-report.pdf`
+- `docs/reports/screenshots/v0-25-7-prompt-response-crisp-390.png`
+- `docs/reports/screenshots/v0-25-7-prompt-response-crisp-320.png`
+- `docs/reports/screenshots/v0-25-7-prompt-response-crisp-screenshots.json`
+
+## v0.25.5 Prompt vs Response Visual Clarity Repair
+
+### What Changed
+
+- Simplified the `Prompt vs Response` coded SVG again after browser review.
+- Increased the prompt-response visual height and removed numbered overlay bubbles.
+- Reduced long in-diagram wording and moved meaning into four clear lanes:
+  - given prompt,
+  - response so far,
+  - next token,
+  - updated context.
+- Kept all explanatory text in HTML callouts below the SVG.
+- Bumped the visible app version to `v0.25.5`.
+
+### Preserved
+
+- Journey order, badge logic, stage structure, generated assets, dependencies, checkpoint randomization, and Glossary Dojo behavior were not changed.
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+
+### Screenshots And Report
+
+- `docs/reports/prompt-life-v0-25-5-prompt-response-visual-clarity-report.html`
+- `docs/reports/prompt-life-v0-25-5-prompt-response-visual-clarity-report.pdf`
+- `docs/reports/screenshots/v0-25-5-prompt-response-visual-390.png`
+- `docs/reports/screenshots/v0-25-5-prompt-response-visual-320.png`
+
 ## v0.25.4 Prompt vs Response Visual And Checkpoint Paging
 
 ### What Changed

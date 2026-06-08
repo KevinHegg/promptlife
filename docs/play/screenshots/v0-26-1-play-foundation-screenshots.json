@@ -1,0 +1,135 @@
+{
+  "capturedAt": "2026-06-08T00:30:10.981Z",
+  "results": [
+    {
+      "width": 390,
+      "play": {
+        "width": 390,
+        "shellWidth": 390,
+        "h1": "Play to understand",
+        "cardTitles": [
+          "Glossary Dojo",
+          "Context Stack",
+          "Probability Picker",
+          "Prompt Run",
+          "Attention Match"
+        ],
+        "deprecatedVisible": [],
+        "bottomNav": [
+          {
+            "text": "Home",
+            "active": false
+          },
+          {
+            "text": "Journey",
+            "active": false
+          },
+          {
+            "text": "Play",
+            "active": true
+          },
+          {
+            "text": "Glossary",
+            "active": false
+          },
+          {
+            "text": "Badge",
+            "active": false
+          }
+        ],
+        "horizontalOverflow": false,
+        "reducedMotion": true,
+        "storageKeysPresent": [
+          "promptlife:v1:promptRunProgress"
+        ]
+      },
+      "playScreenshot": "/Users/kevinhegg/Desktop/promptlife/docs/play/screenshots/v0-26-1-play-foundation-390.png",
+      "dojoOpened": true,
+      "dojo": {
+        "opened": "Practice glossary terms",
+        "horizontalOverflow": false
+      },
+      "promptRunOpened": true,
+      "promptRun": {
+        "opened": "Prompt Run",
+        "horizontalOverflow": false
+      },
+      "probability": {
+        "found": true,
+        "disabled": true
+      },
+      "badge": {
+        "h1": "Prompt Life: Model Literate",
+        "version": "v0.26.1",
+        "horizontalOverflow": false,
+        "playStat": "0 of 5 play challenges"
+      },
+      "badgeScreenshot": "/Users/kevinhegg/Desktop/promptlife/docs/play/screenshots/v0-26-1-badge-play-foundation-390.png"
+    },
+    {
+      "width": 320,
+      "play": {
+        "width": 320,
+        "shellWidth": 320,
+        "h1": "Play to understand",
+        "cardTitles": [
+          "Glossary Dojo",
+          "Context Stack",
+          "Probability Picker",
+          "Prompt Run",
+          "Attention Match"
+        ],
+        "deprecatedVisible": [],
+        "bottomNav": [
+          {
+            "text": "Home",
+            "active": false
+          },
+          {
+            "text": "Journey",
+            "active": false
+          },
+          {
+            "text": "Play",
+            "active": true
+          },
+          {
+            "text": "Glossary",
+            "active": false
+          },
+          {
+            "text": "Badge",
+            "active": false
+          }
+        ],
+        "horizontalOverflow": false,
+        "reducedMotion": true,
+        "storageKeysPresent": [
+          "promptlife:v1:promptRunProgress"
+        ]
+      },
+      "playScreenshot": "/Users/kevinhegg/Desktop/promptlife/docs/play/screenshots/v0-26-1-play-foundation-320.png",
+      "dojoOpened": true,
+      "dojo": {
+        "opened": "Practice glossary terms",
+        "horizontalOverflow": false
+      },
+      "promptRunOpened": true,
+      "promptRun": {
+        "opened": "Prompt Run",
+        "horizontalOverflow": false
+      },
+      "probability": {
+        "found": true,
+        "disabled": true
+      },
+      "badge": {
+        "h1": "Prompt Life: Model Literate",
+        "version": "v0.26.1",
+        "horizontalOverflow": false,
+        "playStat": "0 of 5 play challenges"
+      },
+      "badgeScreenshot": null
+    }
+  ]
+}

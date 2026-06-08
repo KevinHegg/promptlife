@@ -1,0 +1,222 @@
+{
+  "capturedAt": "2026-06-08T00:46:05.093Z",
+  "results": [
+    {
+      "width": 390,
+      "play": {
+        "width": 390,
+        "shellWidth": 390,
+        "h1": "Play to understand",
+        "titles": [
+          "Glossary Dojo",
+          "Context Stack",
+          "Probability Picker",
+          "Prompt Run",
+          "Attention Match"
+        ],
+        "descriptions": [
+          "Practice concept discrimination.",
+          "See what fits in context.",
+          "Explore probability-shaped next-token choices.",
+          "Capstone challenge: trace one prompt through the whole loop.",
+          "Connect a token to what it depends on."
+        ],
+        "actions": [
+          "Practice terms",
+          "Open stack",
+          "Coming soon",
+          "Continue",
+          "Preview match"
+        ],
+        "deprecatedVisible": [],
+        "probabilityDisabled": true,
+        "promptRunText": "Prompt RunIn progressCapstone challenge: trace one prompt through the whole loop.10-second idea: Trace the full inference loop from visible context to one selected and appended token.Action: Label, connect, choose, append.Model move: Follow the prompt through tokenization, hidden states, probabilities, sampling, and append-repeat.Time: 8-10 minPath: Morning Commute, Workday, Decision Room, Day Repeats8%1 attempt. Not completed.1 Prompt Run steps saved.Continue",
+        "activeNav": "Play",
+        "horizontalOverflow": false,
+        "reducedMotion": true,
+        "storageKeysPresent": [
+          "promptlife:v1:exerciseProgress",
+          "promptlife:v1:gameInsights",
+          "promptlife:v1:lastLocation",
+          "promptlife:v1:learningTourComplete",
+          "promptlife:v1:lessonId",
+          "promptlife:v1:progress",
+          "promptlife:v1:promptRunProgress",
+          "promptlife:v1:reflections",
+          "promptlife:v1:traceComplete"
+        ]
+      },
+      "playScreenshot": "/Users/kevinhegg/Desktop/promptlife/docs/play/screenshots/v0-26-2-play-slate-390.png",
+      "checks": {
+        "glossaryDojo": {
+          "clicked": {
+            "found": true,
+            "disabled": false,
+            "h1": "Play to understand"
+          },
+          "state": {
+            "h1": "Practice glossary terms",
+            "horizontalOverflow": false
+          }
+        },
+        "contextStack": {
+          "clicked": {
+            "found": true,
+            "disabled": false,
+            "h1": "Play to understand"
+          },
+          "state": {
+            "h1": "Context Stack",
+            "horizontalOverflow": false
+          }
+        },
+        "promptRun": {
+          "clicked": {
+            "found": true,
+            "disabled": false,
+            "h1": "Play to understand"
+          },
+          "state": {
+            "h1": "Prompt Run",
+            "horizontalOverflow": false
+          }
+        },
+        "attentionMatch": {
+          "clicked": {
+            "found": true,
+            "disabled": false,
+            "h1": "Play to understand"
+          },
+          "state": {
+            "h1": "Attention Match",
+            "horizontalOverflow": false
+          }
+        },
+        "probabilityPicker": {
+          "clicked": {
+            "found": true,
+            "disabled": true,
+            "h1": "Play to understand"
+          },
+          "state": {
+            "h1": "Play to understand",
+            "horizontalOverflow": false
+          }
+        }
+      },
+      "badge": {
+        "h1": "Prompt Life: Model Literate",
+        "version": "v0.26.2",
+        "playStat": "0 of 5 play challenges",
+        "horizontalOverflow": false
+      },
+      "badgeScreenshot": "/Users/kevinhegg/Desktop/promptlife/docs/play/screenshots/v0-26-2-badge-play-slate-390.png"
+    },
+    {
+      "width": 320,
+      "play": {
+        "width": 320,
+        "shellWidth": 320,
+        "h1": "Play to understand",
+        "titles": [
+          "Glossary Dojo",
+          "Context Stack",
+          "Probability Picker",
+          "Prompt Run",
+          "Attention Match"
+        ],
+        "descriptions": [
+          "Practice concept discrimination.",
+          "See what fits in context.",
+          "Explore probability-shaped next-token choices.",
+          "Capstone challenge: trace one prompt through the whole loop.",
+          "Connect a token to what it depends on."
+        ],
+        "actions": [
+          "Practice terms",
+          "Open stack",
+          "Coming soon",
+          "Continue",
+          "Preview match"
+        ],
+        "deprecatedVisible": [],
+        "probabilityDisabled": true,
+        "promptRunText": "Prompt RunIn progressCapstone challenge: trace one prompt through the whole loop.10-second idea: Trace the full inference loop from visible context to one selected and appended token.Action: Label, connect, choose, append.Model move: Follow the prompt through tokenization, hidden states, probabilities, sampling, and append-repeat.Time: 8-10 minPath: Morning Commute, Workday, Decision Room, Day Repeats8%1 attempt. Not completed.1 Prompt Run steps saved.Continue",
+        "activeNav": "Play",
+        "horizontalOverflow": false,
+        "reducedMotion": true,
+        "storageKeysPresent": [
+          "promptlife:v1:exerciseProgress",
+          "promptlife:v1:gameInsights",
+          "promptlife:v1:lastLocation",
+          "promptlife:v1:learningTourComplete",
+          "promptlife:v1:lessonId",
+          "promptlife:v1:progress",
+          "promptlife:v1:promptRunProgress",
+          "promptlife:v1:reflections",
+          "promptlife:v1:traceComplete"
+        ]
+      },
+      "playScreenshot": "/Users/kevinhegg/Desktop/promptlife/docs/play/screenshots/v0-26-2-play-slate-320.png",
+      "checks": {
+        "glossaryDojo": {
+          "clicked": {
+            "found": true,
+            "disabled": false,
+            "h1": "Play to understand"
+          },
+          "state": {
+            "h1": "Practice glossary terms",
+            "horizontalOverflow": false
+          }
+        },
+        "contextStack": {
+          "clicked": {
+            "found": true,
+            "disabled": false,
+            "h1": "Play to understand"
+          },
+          "state": {
+            "h1": "Context Stack",
+            "horizontalOverflow": false
+          }
+        },
+        "promptRun": {
+          "clicked": {
+            "found": true,
+            "disabled": false,
+            "h1": "Play to understand"
+          },
+          "state": {
+            "h1": "Prompt Run",
+            "horizontalOverflow": false
+          }
+        },
+        "attentionMatch": {
+          "clicked": {
+            "found": true,
+            "disabled": false,
+            "h1": "Play to understand"
+          },
+          "state": {
+            "h1": "Attention Match",
+            "horizontalOverflow": false
+          }
+        },
+        "probabilityPicker": {
+          "clicked": {
+            "found": true,
+            "disabled": true,
+            "h1": "Play to understand"
+          },
+          "state": {
+            "h1": "Play to understand",
+            "horizontalOverflow": false
+          }
+        }
+      },
+      "badge": null,
+      "badgeScreenshot": null
+    }
+  ]
+}

@@ -29,6 +29,33 @@ import { attentionExample, canonicalPromptResponse } from './data/canonicalExamp
 import { getLessonSourceReview, sourceRegistry } from './data/sourceRegistry'
 import { GlossaryDojoGame } from './features/glossary-dojo/GlossaryDojoGame'
 import { GLOSSARY_DOJO_STORAGE_KEY, clearGlossaryDojoProgress, loadGlossaryDojoProgress } from './features/glossary-dojo/storage'
+import {
+  FINAL_PLAY_CHALLENGE_COUNT,
+  buildPlayChallengeSummaries,
+  finalPlayChallengeRegistry,
+  findRetiredPlayChallenge,
+  getCompletedFinalPlayCount
+} from './features/play/challengeRegistry'
+import {
+  PlayActionRow,
+  PlayChallengeBoard,
+  PlayChallengeCard,
+  PlayChallengeShell,
+  PlayCompletionPanel,
+  PlayFeedbackPanel,
+  PlayProgressRail,
+  PlayScrollHint,
+  PlayStatusPill,
+  PlayTokenChip
+} from './features/play/PlayChallengeComponents'
+import {
+  PLAY_CHALLENGE_STORAGE_KEY,
+  clearPlayChallengeProgress,
+  getPlayChallengeSummary,
+  loadPlayChallengeProgress,
+  markPlayChallengeCompleted,
+  recordPlayChallengeAttempt
+} from './features/play/storage'
 import { CHOICE_ORDER_SEED_KEY, buildQuizChoices, getChoiceOrderSeed } from './utils/choiceOrder'
 import './styles/global.css'
 
@@ -42,7 +69,7 @@ const HOME_ASSETS = {
   heroFallback: `${ASSET}/illustrations/scene-hero-feature-cloud@mobile.png`
 }
 // Bump this for each shipped app change; the Badge screen displays it under Start over.
-const APP_VERSION = '0.25.4'
+const APP_VERSION = '0.26.4'
 const STORAGE_KEYS = {
   lastLocation: 'promptlife:v1:lastLocation',
   lessonId: 'promptlife:v1:lessonId',
@@ -53,6 +80,7 @@ const STORAGE_KEYS = {
   promptRunProgress: 'promptlife:v1:promptRunProgress',
   traceComplete: 'promptlife:v1:traceComplete',
   learningTourComplete: 'promptlife:v1:learningTourComplete',
+  playChallenges: PLAY_CHALLENGE_STORAGE_KEY,
   choiceOrderSeed: CHOICE_ORDER_SEED_KEY,
   glossaryDojo: GLOSSARY_DOJO_STORAGE_KEY
 }
@@ -473,6 +501,7 @@ function App() {
       // Reset still updates in-memory state even when storage is unavailable.
     }
     clearGlossaryDojoProgress()
+    clearPlayChallengeProgress()
   }
 
   function resetProgress({ confirmReset = true } = {}) {
@@ -667,6 +696,7 @@ function App() {
             completed={completed}
             progress={progress}
             gameInsights={gameInsights}
+            traceComplete={traceComplete}
             reflections={reflections}
             exerciseProgress={exerciseProgress}
             promptRunProgress={promptRunProgress}
@@ -3289,11 +3319,73 @@ function FeatureCloudDemo() {
 }
 
 function PlayScreen({ gameId, gameInsights, traceComplete, promptRunProgress, learningTourComplete, exerciseProgress, setGameId, onGlossary, onInsight, onExerciseAttempt, onPromptRunAttempt, onTraceComplete, onLearningTourComplete }) {
-  if (gameId === 'trace-one-prompt') {
+  const [playProgress, setPlayProgress] = useState(() => loadPlayChallengeProgress())
+  const refreshPlayProgress = useCallback(() => setPlayProgress(loadPlayChallengeProgress()), [])
+  const dojoProgress = loadGlossaryDojoProgress()
+  const legacySignals = {
+    gameInsights,
+    traceComplete,
+    promptRunProgress,
+    learningTourComplete,
+    glossaryDojoProgress: dojoProgress
+  }
+  const challengeSummaries = buildPlayChallengeSummaries(playProgress, legacySignals, finalPlayChallengeRegistry)
+    .map((item) => ({
+      ...item,
+      image: item.image?.startsWith('/') ? `${BASE}${item.image}` : item.image
+    }))
+  const completedFinalChallenges = getCompletedFinalPlayCount(challengeSummaries)
+
+  const recordChallengeStart = useCallback((id, outcome = {}) => {
+    setPlayProgress(recordPlayChallengeAttempt(id, outcome))
+  }, [])
+
+  const completeChallenge = useCallback((id, outcome = {}) => {
+    setPlayProgress(markPlayChallengeCompleted(id, outcome))
+  }, [])
+
+  const startChallenge = useCallback((item) => {
+    if (item.disabled) return
+    if (item.recordAttemptOnOpen !== false) {
+      recordChallengeStart(item.id, {
+        progressPct: item.progress.bestProgressPct,
+        outcome: 'Practice started. Progress saved on this device.',
+        misconceptionTags: item.misconceptionTags
+      })
+    }
+    setGameId(item.routeId ?? item.id)
+  }, [recordChallengeStart, setGameId])
+
+  const recordContextInsight = useCallback((legacyId) => {
+    onInsight(legacyId)
+    completeChallenge('context-stack', {
+      progressPct: 100,
+      outcome: 'You found the main idea: context is temporary visible input.',
+      misconceptionTags: ['context-is-memory']
+    })
+  }, [completeChallenge, onInsight])
+
+  const recordAttentionInsight = useCallback((legacyId) => {
+    onInsight(legacyId)
+    completeChallenge('attention-match', {
+      progressPct: 100,
+      outcome: 'You found the main idea: attention is relevance between token positions.',
+      misconceptionTags: ['attention-is-awareness']
+    })
+  }, [completeChallenge, onInsight])
+
+  if (gameId === 'trace-one-prompt' || gameId === 'prompt-run') {
     return (
       <PromptRunScreen
         onBack={() => setGameId(null)}
-        onComplete={onTraceComplete}
+        onComplete={() => {
+          completeChallenge('prompt-run', {
+            progressPct: 100,
+            outcome: 'Completed without needing a score.',
+            misconceptionTags: ['inference-is-training', 'next-token-magic']
+          })
+          onTraceComplete()
+        }}
         saved={traceComplete}
         promptRunProgress={promptRunProgress}
         onPromptRunAttempt={onPromptRunAttempt}
@@ -3301,122 +3393,131 @@ function PlayScreen({ gameId, gameInsights, traceComplete, promptRunProgress, le
       />
     )
   }
-  if (gameId === 'how-ai-learns') return <HowAILearnsScreen onBack={() => setGameId(null)} onComplete={onLearningTourComplete} saved={learningTourComplete} exerciseProgress={exerciseProgress} onExerciseAttempt={onExerciseAttempt} onGlossary={onGlossary} />
-  if (gameId === 'context-stack') return <ContextStack onBack={() => setGameId(null)} onGlossary={onGlossary} onInsight={onInsight} saved={gameInsights.includes('context-stack')} />
-  if (gameId === 'attention-weave') return <AttentionWeave onBack={() => setGameId(null)} onGlossary={onGlossary} onInsight={onInsight} saved={gameInsights.includes('attention-weave')} />
-  if (gameId === 'token-relay') return <TokenRelay onBack={() => setGameId(null)} onGlossary={onGlossary} onInsight={onInsight} saved={gameInsights.includes('token-relay')} />
-  if (gameId === 'glossary-dojo') return <GlossaryDojoGame onBack={() => setGameId(null)} onGlossary={onGlossary} />
-
-  const promptRunDone = Boolean(promptRunProgress?.finalChallengeComplete || traceComplete)
-  const promptRunStarted = promptRunDone || (promptRunProgress?.completedSteps?.length ?? 0) > 0
-  const promptRunCount = (promptRunProgress?.completedSteps?.length ?? 0) + (promptRunProgress?.finalChallengeComplete ? 1 : 0)
-  const dojoProgress = loadGlossaryDojoProgress()
-  const dojoRoundInProgress = Boolean(dojoProgress.currentRound)
-  const dojoMasteredCount = Object.values(dojoProgress.terms).filter((term) => term.mastered).length
-  const sideChallenges = games.map((game) => {
-    const meta = {
-      'context-stack': { action: 'Push and observe what falls out.', concept: 'Context windows.', time: '3 min' },
-      'attention-weave': { action: 'Connect relevant tokens.', concept: 'Attention as relevance.', time: '3 min' },
-      'token-relay': { action: 'Toggle operators.', concept: 'Sequence, state, and determinism.', time: '3 min' }
-    }[game.id]
-    return { ...game, ...meta, saved: gameInsights.includes(game.id) }
-  })
-  const tourItems = [
-    {
-      id: 'how-ai-learns',
-      title: 'How AI Learns',
-      summary: 'Compare training, feedback, retrieval, and temporary in-context steering.',
-      image: `${ASSET}/illustrations/scene-training-rainstorm@mobile.png`,
-      action: 'Sort learning types.',
-      concept: 'Durable training vs temporary steering.',
-      time: '5 min',
-      saved: learningTourComplete
-    }
-  ]
-  const glossaryPractice = [
-    {
-      id: 'glossary-dojo',
-      title: 'Glossary Dojo',
-      summary: 'Practice terms, definitions, relationships, and common mix-ups.',
-      image: `${ASSET}/icons/png/icon-glossary@48.png`,
-      action: dojoRoundInProgress ? 'Resume the current 12-term round.' : 'Start a 12-term round.',
-      concept: 'The vocabulary map behind model literacy.',
-      time: '4 min',
-      saved: dojoRoundInProgress,
-      actionLabel: dojoRoundInProgress ? 'Resume round' : 'Start round',
-      progressText: dojoRoundInProgress
-        ? 'Round in progress'
-        : dojoProgress.questionsAnswered
-          ? `${dojoProgress.questionsAnswered} practiced; ${dojoMasteredCount} mastered`
-          : 'Ready'
-    }
-  ]
+  if (gameId === 'context-stack') {
+    return <ContextStack onBack={() => { refreshPlayProgress(); setGameId(null) }} onGlossary={onGlossary} onInsight={recordContextInsight} saved={gameInsights.includes('context-stack')} />
+  }
+  if (gameId === 'attention-match' || gameId === 'attention-weave') {
+    return <AttentionWeave title="Attention Match" onBack={() => { refreshPlayProgress(); setGameId(null) }} onGlossary={onGlossary} onInsight={recordAttentionInsight} saved={gameInsights.includes('attention-weave')} />
+  }
+  if (gameId === 'glossary-dojo') {
+    return (
+      <GlossaryDojoGame
+        onBack={() => { refreshPlayProgress(); setGameId(null) }}
+        onGlossary={onGlossary}
+        onAttempt={() => {
+          setPlayProgress(recordPlayChallengeAttempt('glossary-dojo', {
+            outcome: 'Progress saved on this device. Glossary Dojo round started.',
+            misconceptionTags: ['term-confusion']
+          }))
+        }}
+        onComplete={(round) => {
+          const reviewSuggested = Boolean(round?.missedCount && round.missedCount > 0)
+          setPlayProgress(markPlayChallengeCompleted('glossary-dojo', {
+            progressPct: 100,
+            reviewSuggested,
+            outcome: reviewSuggested
+              ? 'Round completed. Review suggested.'
+              : 'Round completed. Progress saved on this device.',
+            misconceptionTags: ['term-confusion']
+          }))
+        }}
+      />
+    )
+  }
+  if (gameId === 'probability-picker') {
+    return <FoundationReadyScreen onBack={() => setGameId(null)} onGlossary={onGlossary} />
+  }
+  const retiredChallenge = findRetiredPlayChallenge(gameId)
+  if (retiredChallenge) {
+    return (
+      <RetiredPlayChallengeScreen
+        challenge={retiredChallenge}
+        onBack={() => setGameId(null)}
+        onOpenReplacement={() => setGameId(retiredChallenge.routeId ?? null)}
+      />
+    )
+  }
 
   return (
-    <section className="screen play-screen" aria-labelledby="play-title">
+    <section className="screen play-screen play-lab-screen" aria-labelledby="play-title">
       <ScreenHeader
-        kicker="Play lab"
+        kicker="ZenTron Paper Lab"
         title="Play to understand"
-        subtitle="Small, calm challenges that make model mechanics visible through action and reflection."
+        subtitle="Short, calm challenges for tracing, placing, choosing, connecting, and naming model moves."
         titleId="play-title"
       />
-      <section className="play-section featured" aria-labelledby="featured-play-title">
-        <p className="eyebrow">Featured activity</p>
-        <PlayCard
-          featured
-          item={{
-            id: 'trace-one-prompt',
-            title: 'Prompt Run',
-            summary: 'Guide one prompt through the model.',
-            image: `${ASSET}/illustrations/scene-token-pipeline-relay@mobile.png`,
-            action: 'Label, connect, choose, append.',
-            concept: 'The full inference loop.',
-            time: '8-10 min',
-            saved: promptRunDone,
-            progressText: promptRunDone ? 'Complete' : promptRunStarted ? `${promptRunCount} of 13 steps` : 'Not started'
-          }}
-          onStart={() => setGameId('trace-one-prompt')}
-        />
-      </section>
-      <section className="play-section" aria-labelledby="side-challenges-title">
-        <h2 id="side-challenges-title">Practice challenges</h2>
-        <div className="game-list">
-          {sideChallenges.map((game) => <PlayCard key={game.id} item={game} onStart={() => setGameId(game.id)} />)}
+      <PlayFeedbackPanel>
+        <p><strong>Progress saved on this device.</strong> Play is practice, not a score. {completedFinalChallenges} of {FINAL_PLAY_CHALLENGE_COUNT} final challenge slots show saved completion or review progress.</p>
+        <div className="play-token-row" aria-label="Play action verbs">
+          <PlayTokenChip tone="prompt">name</PlayTokenChip>
+          <PlayTokenChip tone="context">place</PlayTokenChip>
+          <PlayTokenChip tone="probability">choose</PlayTokenChip>
+          <PlayTokenChip tone="response">trace</PlayTokenChip>
+          <PlayTokenChip>connect</PlayTokenChip>
         </div>
-      </section>
-      <section className="play-section" aria-labelledby="glossary-practice-title">
-        <h2 id="glossary-practice-title">Glossary practice</h2>
-        <div className="game-list">
-          {glossaryPractice.map((game) => <PlayCard key={game.id} item={game} onStart={() => setGameId(game.id)} />)}
+      </PlayFeedbackPanel>
+      <PlayProgressRail value={(completedFinalChallenges / FINAL_PLAY_CHALLENGE_COUNT) * 100} label={`${completedFinalChallenges} of ${FINAL_PLAY_CHALLENGE_COUNT} final Play challenges complete or review suggested`} />
+      <PlayScrollHint />
+      <section className="play-section" aria-labelledby="final-slate-title">
+        <div className="play-section-heading">
+          <h2 id="final-slate-title">Final challenge slate</h2>
+          <PlayStatusPill status="in-progress" label="Foundation pass" />
         </div>
-      </section>
-      <section className="play-section" aria-labelledby="tours-title">
-        <h2 id="tours-title">Guided comparisons</h2>
-        <div className="game-list">
-          {tourItems.map((game) => <PlayCard key={game.id} item={game} onStart={() => setGameId(game.id)} />)}
-        </div>
+        <PlayChallengeBoard label="Final Play challenge slate" className="play-slate-board">
+          {challengeSummaries.map((challenge) => (
+            <PlayChallengeCard key={challenge.id} item={challenge} onStart={startChallenge} />
+          ))}
+        </PlayChallengeBoard>
       </section>
     </section>
   )
 }
 
-function PlayCard({ item, onStart, featured = false }) {
-  const actionLabel = item.actionLabel ?? (item.saved ? 'Continue' : 'Start')
+function FoundationReadyScreen({ onBack, onGlossary }) {
   return (
-    <button className={featured ? 'play-card is-featured' : 'play-card'} onClick={onStart}>
-      <img src={item.image} alt="" aria-hidden="true" />
-      <span className="play-card-copy">
-        <strong>{item.title}</strong>
-        <small>{item.summary}</small>
-        <span className="play-card-meta"><b>Action:</b> {item.action}</span>
-        <span className="play-card-meta"><b>Teaches:</b> {item.concept}</span>
-        <span className="play-card-meta play-card-time"><span><b>Time:</b> {item.time}</span></span>
-      </span>
-      <span className="play-card-status">
-        <span className="mini-status">{item.progressText ?? (item.saved ? 'Complete' : 'Ready')}</span>
-        <span>{actionLabel}</span>
-      </span>
-    </button>
+    <PlayChallengeShell
+      title="Probability Picker"
+      titleId="probability-picker-title"
+      eyebrow="Foundation ready"
+      subtitle="This slot is ready for a future calm decoding challenge. The full game is not implemented in this pass."
+      onBack={onBack}
+    >
+      <PlayChallengeBoard label="Probability Picker foundation board" className="probability-foundation-board">
+        <PlayTokenChip tone="prompt">logits</PlayTokenChip>
+        <PlayTokenChip tone="probability">softmax</PlayTokenChip>
+        <PlayTokenChip tone="response">sample one token</PlayTokenChip>
+      </PlayChallengeBoard>
+      <PlayFeedbackPanel>
+        <p>Next pass: let learners choose one next token from probabilities and explain why probability is not truth.</p>
+      </PlayFeedbackPanel>
+      <PlayActionRow>
+        <button className="secondary-btn" type="button" onClick={() => onGlossary('logits')}>Logits</button>
+        <button className="secondary-btn" type="button" onClick={() => onGlossary('softmax')}>Softmax</button>
+        <button className="secondary-btn" type="button" onClick={() => onGlossary('sampling')}>Sampling</button>
+      </PlayActionRow>
+    </PlayChallengeShell>
+  )
+}
+
+function RetiredPlayChallengeScreen({ challenge, onBack, onOpenReplacement }) {
+  const hasReplacement = challenge.id === 'attention-weave'
+  return (
+    <PlayChallengeShell
+      title={challenge.title}
+      titleId="retired-play-title"
+      eyebrow="Retired from final slate"
+      subtitle={challenge.tenSecondExplanation}
+      onBack={onBack}
+    >
+      <PlayCompletionPanel title="Preserved for compatibility">
+        <p>{challenge.shortDescription}</p>
+        <p>Existing saved progress remains on this device, but this item is not presented as a final Play challenge.</p>
+      </PlayCompletionPanel>
+      <PlayActionRow>
+        {hasReplacement && <button className="primary-btn" type="button" onClick={onOpenReplacement}>Open Attention Match</button>}
+        <button className="secondary-btn" type="button" onClick={onBack}>Back to Play</button>
+      </PlayActionRow>
+    </PlayChallengeShell>
   )
 }
 
@@ -3664,7 +3765,7 @@ function ContextStack({ onBack, onGlossary, onInsight, saved }) {
   )
 }
 
-function AttentionWeave({ onBack, onGlossary, onInsight, saved }) {
+function AttentionWeave({ title = 'Attention Weave', onBack, onGlossary, onInsight, saved }) {
   const nodes = attentionExample.tokens
   const [selected, setSelected] = useState(null)
   const [links, setLinks] = useState([])
@@ -3690,9 +3791,9 @@ function AttentionWeave({ onBack, onGlossary, onInsight, saved }) {
 
   return (
     <section className="screen game-screen" aria-labelledby="attention-title">
-      <GameHeader title="Attention Weave" titleId="attention-title" onBack={onBack} />
+      <GameHeader title={title} titleId="attention-title" onBack={onBack} />
       <img className="game-hero" src={`${ASSET}/illustrations/scene-attention-weave@mobile.png`} alt="Token nodes connected by glowing attention arcs" />
-      <p className="lede small">Tap a source token, then a target token. In this sentence, connect <strong>it</strong> to the word it most likely depends on.</p>
+      <p className="lede small">Tap a source token, then a target token. This foundation version previews Attention Match by asking which token <strong>it</strong> depends on.</p>
       <InfoCallout title="Status">
         {selected == null ? 'Choose a source token.' : `Source selected: ${nodes[selected]}. Now choose a target token.`}
       </InfoCallout>
@@ -3943,6 +4044,7 @@ function BadgeScreen({
   completed,
   progress,
   gameInsights,
+  traceComplete,
   reflections,
   exerciseProgress,
   promptRunProgress,
@@ -3957,8 +4059,15 @@ function BadgeScreen({
   const [copied, setCopied] = useState(false)
   const reflectionCount = Object.values(reflections as Record<string, string>).filter((text) => text.trim().length > 0).length
   const completedExerciseCount = exerciseProgress?.completed?.length ?? 0
-  const promptRunDone = Boolean(promptRunProgress?.finalChallengeComplete)
+  const promptRunDone = Boolean(promptRunProgress?.finalChallengeComplete || traceComplete)
   const promptRunStepCount = (promptRunProgress?.completedSteps?.length ?? 0) + (promptRunDone ? 1 : 0)
+  const playChallengeSummaries = buildPlayChallengeSummaries(getPlayChallengeSummary(), {
+    gameInsights,
+    traceComplete,
+    promptRunProgress,
+    glossaryDojoProgress: loadGlossaryDojoProgress()
+  })
+  const completedPlayChallenges = getCompletedFinalPlayCount(playChallengeSummaries)
   const essentialLessons = lessons.filter((lesson) => getPathLabel(lesson.pathType) === 'Essential')
   const essentialCompleted = essentialLessons.filter((lesson) => completed.includes(lesson.id)).length
   const essentialTarget = Math.ceil(essentialLessons.length * 0.8)
@@ -3984,7 +4093,7 @@ function BadgeScreen({
       <div className="progress-meter" aria-label={`${progress}% lesson progress`}><span style={{ width: `${progress}%` }} /></div>
       <div className="badge-stats">
         <span><strong>{completed.length}</strong> of {lessons.length} lessons</span>
-        <span><strong>{gameInsights.length}</strong> of {games.length} play insights</span>
+        <span><strong>{completedPlayChallenges}</strong> of {FINAL_PLAY_CHALLENGE_COUNT} play challenges</span>
         <span><strong>{completedExerciseCount}</strong> of {exercises.length} exercises</span>
         <span><strong>{promptRunStepCount}</strong> of 13 Prompt Run</span>
         <span><strong>{reflectionCount}</strong> reflections</span>
@@ -3999,7 +4108,7 @@ function BadgeScreen({
       {copied && <p className="feedback good" role="status">Share text copied.</p>}
       <section className="settings-panel" aria-labelledby="reset-progress-title">
         <h2 id="reset-progress-title">Start over</h2>
-        <p>Progress is stored only on this device. Resetting clears Prompt Life lesson progress, exercise attempts, Prompt Run progress, Glossary Dojo practice, reflections, mini-game insights, tour progress, last location, and checkpoint answer order seed.</p>
+        <p>Progress is stored only on this device. Resetting clears Prompt Life lesson progress, exercise attempts, Prompt Run progress, Play challenge progress, Glossary Dojo practice, reflections, mini-game insights, tour progress, last location, and checkpoint answer order seed.</p>
         <button className="secondary-btn danger" onClick={onResetProgress}>Reset progress</button>
         {statusMessage && <p className="feedback good" role="status">{statusMessage}</p>}
       </section>

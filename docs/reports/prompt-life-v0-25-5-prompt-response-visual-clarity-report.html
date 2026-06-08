@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Prompt Life v0.25.5 Prompt Response Visual Clarity</title>
+<style>
+@page { size: Letter; margin: 0.45in; }
+body { margin: 0; color: #07145d; background: #f8fbff; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.45; }
+h1 { margin: 0 0 0.35rem; color: #101a77; font-size: 28px; line-height: 1.1; }
+h2 { margin: 1rem 0 0.35rem; color: #101a77; font-size: 18px; }
+p, li { font-size: 11.5px; }
+ul { margin-top: 0.25rem; padding-left: 1.15rem; }
+.kicker { color: #008f98; font-size: 10px; font-weight: 900; letter-spacing: 0.08em; text-transform: uppercase; }
+.card { margin: 0.75rem 0; padding: 0.75rem; background: white; border: 1px solid #d8def2; border-radius: 9px; box-shadow: 0 10px 24px rgba(17, 24, 88, 0.08); }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.65rem; align-items: start; }
+figure { margin: 0; padding: 0.45rem; background: white; border: 1px solid #d8def2; border-radius: 9px; break-inside: avoid; }
+img { width: 100%; display: block; border: 1px solid #edf0fa; border-radius: 6px; }
+figcaption { margin-top: 0.3rem; color: #26345f; font-size: 9.5px; font-weight: 800; }
+small { color: #53617f; }
+code { padding: 0.06rem 0.25rem; border-radius: 4px; background: #eef4ff; }
+</style>
+</head>
+<body>
+<p class="kicker">Prompt Life visual repair</p>
+<h1>v0.25.5 Prompt vs Response Visual Clarity</h1>
+<div class="card">
+<h2>What Changed</h2>
+<ul>
+<li>Increased the coded SVG height for the Prompt vs Response visual.</li>
+<li>Removed numbered overlay bubbles that crowded the content.</li>
+<li>Reduced long in-diagram text and split the visual into four clean lanes: Given Prompt, Response So Far, Next, and Updated Context.</li>
+<li>Kept longer explanations in HTML callouts below the SVG.</li>
+<li>Bumped the visible app version to <code>v0.25.5</code>.</li>
+</ul>
+</div>
+<div class="card">
+<h2>Verification</h2>
+<ul>
+<li><code>npm run typecheck</code>: passed.</li>
+<li><code>npm run build</code>: passed with the existing Vite large-chunk warning.</li>
+<li>In-app browser was refreshed to <code>?v=0255-prompt-response-clarity</code>; old prompt-response formula text was absent and no horizontal overflow was detected.</li>
+</ul>
+</div>
+<div class="grid"><figure><img src="screenshots/v0-25-5-prompt-response-visual-390.png" alt="Prompt vs Response visual at 390px"><figcaption>Prompt vs Response visual at 390px<br><small>overflow: no; old text present: no</small></figcaption></figure><figure><img src="screenshots/v0-25-5-prompt-response-visual-320.png" alt="Prompt vs Response visual at 320px"><figcaption>Prompt vs Response visual at 320px<br><small>overflow: no; old text present: no</small></figcaption></figure></div>
+</body>
+</html>

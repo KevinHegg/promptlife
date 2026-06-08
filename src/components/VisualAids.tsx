@@ -149,12 +149,141 @@ function VisualAidCard({ aid, headingId = undefined, compact = false }) {
 function DiagramScene({ aid, variant }) {
   const asset = getGeneratedAsset(aid)
   if (asset) return <GeneratedImageScene aid={aid} asset={asset} variant={variant} />
+  if (aid.id === 'prompt-response') {
+    return (
+      <div className={`aid-canvas aid-${aid.pattern} aid-variant-${variant} aid-html-canvas`} aria-hidden="true">
+        <PromptResponseDiagram />
+      </div>
+    )
+  }
+  if (aid.id === 'tokenization') {
+    return (
+      <div className={`aid-canvas aid-${aid.pattern} aid-variant-${variant} aid-html-canvas tokenization-html-canvas`} aria-hidden="true">
+        <TokenizationDiagram />
+      </div>
+    )
+  }
 
   return (
     <div className={`aid-canvas aid-${aid.pattern} aid-variant-${variant}`} aria-hidden="true">
-      <svg viewBox={aid.id === 'prompt-response' ? '0 0 320 280' : '0 0 320 210'} preserveAspectRatio="xMidYMid meet" focusable="false">
+      <svg viewBox={aid.id === 'prompt-response' ? '0 0 320 330' : '0 0 320 210'} preserveAspectRatio="xMidYMid meet" focusable="false">
         <VisualPattern aid={aid} />
       </svg>
+    </div>
+  )
+}
+
+function PromptResponseDiagram() {
+  return (
+    <div className="prompt-response-diagram">
+      <div className="pr-card pr-card-prompt">
+        <div className="pr-card-header">
+          <span className="pr-step-badge">1</span>
+          <span className="pr-card-title">
+            <strong>Given prompt</strong>
+            <em>provided before generation</em>
+          </span>
+        </div>
+        <div className="pr-token-row">
+          <span className="pr-token prompt">Describe</span>
+          <span className="pr-token prompt">two pets</span>
+          <span className="pr-token prompt">conflict</span>
+        </div>
+      </div>
+
+      <div className="pr-card pr-card-response">
+        <div className="pr-card-header">
+          <span className="pr-step-badge">2</span>
+          <span className="pr-card-title">
+            <strong>Response so far</strong>
+            <em>generated tokens</em>
+          </span>
+        </div>
+        <div className="pr-token-row">
+          <span className="pr-token response">A</span>
+          <span className="pr-token response">jealous</span>
+          <span className="pr-token response">dog</span>
+        </div>
+      </div>
+
+      <div className="pr-card pr-card-next">
+        <div className="pr-card-header">
+          <span className="pr-step-badge">3</span>
+          <span className="pr-card-title">
+            <strong>Next token</strong>
+            <em>newly selected</em>
+          </span>
+        </div>
+        <div className="pr-token-row">
+          <span className="pr-token response">chased</span>
+        </div>
+      </div>
+
+      <div className="pr-card pr-card-context">
+        <div className="pr-card-header">
+          <span className="pr-step-badge">4</span>
+          <span className="pr-card-title">
+            <strong>Updated context</strong>
+            <em>what the next run sees</em>
+          </span>
+        </div>
+        <div className="pr-token-row">
+          <span className="pr-token prompt">prompt</span>
+          <span className="pr-token response">A</span>
+          <span className="pr-token response">jealous</span>
+          <span className="pr-token response">dog</span>
+          <span className="pr-token response">chased</span>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function TokenizationDiagram() {
+  const simpleTokens = ['A', 'jealous', 'dog', 'chased', 'a', 'startled', 'cat', 'across', 'the', 'kitchen', 'floor', '.']
+
+  return (
+    <div className="tokenization-diagram">
+      <div className="tkn-card tkn-source">
+        <div className="tkn-card-header">
+          <strong>Source text</strong>
+          <em>human-readable sentence</em>
+        </div>
+        <p>A jealous dog chased a startled cat...</p>
+      </div>
+
+      <div className="tkn-card tkn-stream">
+        <div className="tkn-card-header">
+          <strong>Token stream</strong>
+          <em>model-readable chunks</em>
+        </div>
+        <div className="tkn-token-grid">
+          {simpleTokens.map((token, index) => (
+            <span className={token === '.' ? 'tkn-token punctuation' : 'tkn-token'} key={`${token}-${index}`}>{token}</span>
+          ))}
+        </div>
+      </div>
+
+      <div className="tkn-card tkn-uneven">
+        <div className="tkn-card-header">
+          <strong>Uneven examples</strong>
+          <em>tokens are not always words</em>
+        </div>
+        <div className="tkn-split-list">
+          <span className="tkn-split-label">startled</span>
+          <span className="tkn-split-arrow">becomes</span>
+          <span className="tkn-split-row">
+            <span className="tkn-token">start</span>
+            <span className="tkn-token">led</span>
+          </span>
+          <span className="tkn-split-label">floor.</span>
+          <span className="tkn-split-arrow">becomes</span>
+          <span className="tkn-split-row">
+            <span className="tkn-token">floor</span>
+            <span className="tkn-token punctuation">.</span>
+          </span>
+        </div>
+      </div>
     </div>
   )
 }
@@ -508,61 +637,55 @@ function InferenceSvg() {
 }
 
 function PromptResponseSvg() {
-  const promptTokens = [
-    ['Describe', 34, 72],
-    ['two', 104, 32],
-    ['pets', 140, 38],
-    ['in', 182, 26],
-    ['conflict', 212, 64]
+  const promptTokens: Array<{ token: string, x: number, width: number }> = [
+    { token: 'Describe', x: 48, width: 68 },
+    { token: 'two pets', x: 124, width: 62 },
+    { token: 'conflict', x: 194, width: 70 }
   ]
-  const responseTokens = [
-    ['A', 46, 26],
-    ['jealous', 76, 58],
-    ['dog', 138, 38]
+  const responseTokens: Array<{ token: string, x: number, width: number }> = [
+    { token: 'A', x: 44, width: 26 },
+    { token: 'jealous', x: 78, width: 56 },
+    { token: 'dog', x: 142, width: 38 }
   ]
   const updatedTokens: Array<{ token: string, x: number, width: number, kind: string }> = [
-    { token: 'prompt', x: 44, width: 54, kind: 'prompt' },
-    { token: 'A', x: 104, width: 24, kind: 'output' },
-    { token: 'jealous', x: 132, width: 56, kind: 'output' },
-    { token: 'dog', x: 192, width: 36, kind: 'output' },
-    { token: 'chased', x: 232, width: 58, kind: 'output' }
+    { token: 'prompt', x: 42, width: 56, kind: 'prompt' },
+    { token: 'A', x: 106, width: 26, kind: 'output' },
+    { token: 'jealous', x: 140, width: 56, kind: 'output' },
+    { token: 'dog', x: 204, width: 38, kind: 'output' },
+    { token: 'chased', x: 250, width: 58, kind: 'output' }
   ]
 
   return (
     <>
-      <rect className="aid-box prompt" x="16" y="16" width="288" height="70" rx="10" />
-      <Label x="30" y="38" className="tiny dark">Given prompt tokens</Label>
-      <Label x="30" y="56" className="micro dark">already provided to the model</Label>
-      {promptTokens.map(([token, x, width]) => (
+      <rect className="aid-box prompt" x="16" y="18" width="288" height="72" rx="12" />
+      <Label x="34" y="43" className="micro dark">1 GIVEN PROMPT</Label>
+      <Label x="34" y="62" className="tiny dark">provided before generation</Label>
+      {promptTokens.map(({ token, x, width }) => (
         <TokenChip key={`prompt-${token}`} token={token} x={x} y="62" width={width} kind="prompt" />
       ))}
 
-      <rect className="aid-box muted" x="16" y="106" width="184" height="68" rx="10" />
-      <Label x="30" y="128" className="tiny">Generated response so far</Label>
-      <Label x="30" y="146" className="micro muted-text">made one token at a time</Label>
-      {responseTokens.map(([token, x, width]) => (
-        <TokenChip key={`response-${token}`} token={token} x={x} y="150" width={width} />
+      <rect className="aid-box muted" x="16" y="116" width="184" height="78" rx="12" />
+      <Label x="34" y="141" className="micro">2 RESPONSE SO FAR</Label>
+      <Label x="34" y="160" className="tiny">generated tokens</Label>
+      {responseTokens.map(({ token, x, width }) => (
+        <TokenChip key={`response-${token}`} token={token} x={x} y="164" width={width} />
       ))}
 
-      <rect className="aid-box output" x="222" y="112" width="82" height="58" rx="10" />
-      <Label x="236" y="135" className="tiny dark">Next token</Label>
-      <Label x="240" y="156" className="tiny dark">chased</Label>
-      <Arrow x1="200" y1="140" x2="222" y2="140" />
+      <rect className="aid-box output" x="222" y="122" width="82" height="66" rx="12" />
+      <Label x="240" y="148" className="micro dark">3 NEXT</Label>
+      <TokenChip token="chased" x="237" y="158" width="56" />
+      <Arrow x1="200" y1="154" x2="222" y2="154" />
 
-      <rect className="aid-box prompt" x="16" y="202" width="288" height="62" rx="10" />
-      <Label x="30" y="224" className="tiny dark">Updated context for the next run</Label>
-      <Label x="30" y="242" className="micro dark">given prompt + generated response + new token</Label>
+      <rect className="aid-box prompt" x="16" y="236" width="288" height="76" rx="12" />
+      <Label x="34" y="261" className="micro dark">4 UPDATED CONTEXT</Label>
+      <Label x="34" y="280" className="tiny dark">what the next run sees</Label>
       {updatedTokens.map(({ token, x, width, kind }) => (
-        <TokenChip key={`updated-${token}`} token={token} x={x} y="246" width={width} kind={kind} />
+        <TokenChip key={`updated-${token}`} token={token} x={x} y="286" width={width} kind={kind} />
       ))}
 
-      <Arrow x1="160" y1="86" x2="160" y2="106" />
-      <Arrow x1="160" y1="174" x2="160" y2="202" />
-      <Arrow x1="264" y1="170" x2="264" y2="202" />
-      <Callout x="286" y="20">1</Callout>
-      <Callout x="190" y="102">2</Callout>
-      <Callout x="296" y="104">3</Callout>
-      <Callout x="286" y="196">4</Callout>
+      <Arrow x1="160" y1="90" x2="160" y2="116" />
+      <Arrow x1="160" y1="194" x2="160" y2="236" />
+      <Arrow x1="264" y1="188" x2="264" y2="236" />
     </>
   )
 }

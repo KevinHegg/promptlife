@@ -1,0 +1,116 @@
+{
+  "capturedAt": "2026-06-08T00:57:26.068Z",
+  "results": {
+    "width390": {
+      "playBefore": {
+        "h1": "Play to understand",
+        "horizontalOverflow": false
+      },
+      "start": {
+        "h1": "Practice glossary terms",
+        "h2": "Ready for twelve terms?",
+        "statusText": "Ready",
+        "progressLabel": "Glossary Dojo ready to start",
+        "horizontalOverflow": false
+      },
+      "questionStart": {
+        "h1": "Practice glossary terms",
+        "statusText": "Question 1 of 12",
+        "current": "1",
+        "total": "12",
+        "optionCount": 4,
+        "horizontalOverflow": false
+      },
+      "wrongFeedback": {
+        "feedback": "This choice reveals a common mix-up. Generative AI is AI systems that create new text, images, audio, code, video, or other media. The correct match is AI. AI is the broad field of building systems that perform tasks associated with intelligence.",
+        "horizontalOverflow": false
+      },
+      "wrongFeedbackScrolled": {
+        "feedback": "This choice reveals a common mix-up. That description is for Probability. Decoding step is the inference step that turns next-token scores into one chosen next token.",
+        "overflow": false,
+        "shellScrollTop": 394
+      },
+      "afterAdvance": {
+        "current": "2",
+        "statusText": "Question 2 of 12"
+      },
+      "correctFeedback": {
+        "feedback": "Good distinction. Decoding step is the inference step that turns next-token scores into one chosen next token.",
+        "horizontalOverflow": false
+      },
+      "summary": {
+        "h1": "Practice glossary terms",
+        "summaryTitle": "Review suggested",
+        "horizontalOverflow": false
+      },
+      "sharedProgress": {
+        "playChallenge": {
+          "attempts": 1,
+          "completions": 1,
+          "bestProgressPct": 100,
+          "status": "review-suggested",
+          "lastPlayedAt": "2026-06-08T00:57:22.288Z",
+          "completedAt": "2026-06-08T00:57:22.288Z",
+          "lastOutcome": "Round completed. Review suggested.",
+          "misconceptionTags": [
+            "term-confusion"
+          ],
+          "journeyStageRelationship": [],
+          "glossaryTermIds": []
+        },
+        "dojoTotals": {
+          "roundsAttempted": 1,
+          "roundsCompleted": 1,
+          "totalQuestionsAnswered": 12,
+          "lastMissedCount": 1
+        }
+      },
+      "badge": {
+        "h1": "Prompt Life: Model Literate",
+        "version": "v0.26.3",
+        "playStat": "1 of 5 play challenges",
+        "horizontalOverflow": false
+      },
+      "reset": {
+        "clicked": true,
+        "afterReset": {
+          "h1": "Prompt Life",
+          "keysAfter": [
+            "promptlife:v1:exerciseProgress",
+            "promptlife:v1:gameInsights",
+            "promptlife:v1:lastLocation",
+            "promptlife:v1:progress",
+            "promptlife:v1:promptRunProgress",
+            "promptlife:v1:reflections"
+          ],
+          "play": null,
+          "dojo": null,
+          "lastLocation": "\"home\"",
+          "horizontalOverflow": false
+        }
+      },
+      "screenshots": {
+        "start": "/Users/kevinhegg/Desktop/promptlife/docs/play/screenshots/v0-26-3-dojo-start-390.png",
+        "wrongFeedback": "/Users/kevinhegg/Desktop/promptlife/docs/play/screenshots/v0-26-3-dojo-common-mixup-feedback-390.png",
+        "correctFeedback": "/Users/kevinhegg/Desktop/promptlife/docs/play/screenshots/v0-26-3-dojo-good-distinction-feedback-390.png",
+        "summary": "/Users/kevinhegg/Desktop/promptlife/docs/play/screenshots/v0-26-3-dojo-summary-390.png",
+        "badge": "/Users/kevinhegg/Desktop/promptlife/docs/play/screenshots/v0-26-3-badge-dojo-shell-390.png",
+        "wrongFeedbackScrolled": "/Users/kevinhegg/Desktop/promptlife/docs/play/screenshots/v0-26-3-dojo-common-mixup-feedback-scrolled-390.png"
+      },
+      "correctFeedbackScrolled": {
+        "feedback": "Good distinction. Input context is everything currently visible to the model: prompt tokens, conversation history, retrieved documents, and already-generated response tokens.",
+        "overflow": false,
+        "shellScrollTop": 470
+      }
+    },
+    "width320": {
+      "question": {
+        "h1": "Practice glossary terms",
+        "statusText": "Question 1 of 12",
+        "optionCount": 4,
+        "horizontalOverflow": false
+      },
+      "screenshot": "/Users/kevinhegg/Desktop/promptlife/docs/play/screenshots/v0-26-3-dojo-question-320.png"
+    }
+  }
+}

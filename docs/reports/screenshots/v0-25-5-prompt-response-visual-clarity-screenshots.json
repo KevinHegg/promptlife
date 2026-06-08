@@ -1,0 +1,52 @@
+{
+  "capturedAt": "2026-06-07T22:19:54.272Z",
+  "baseUrl": "http://127.0.0.1:5173/?debug=1&v=0255-prompt-response-clarity",
+  "shots": [
+    {
+      "name": "v0-25-5-prompt-response-visual-390",
+      "file": "/Users/kevinhegg/Desktop/promptlife/docs/reports/screenshots/v0-25-5-prompt-response-visual-390.png",
+      "url": "http://127.0.0.1:5173/?debug=1&v=0255-prompt-response-clarity",
+      "heading": "Prompt vs Response",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "shellScrollTop": 544,
+      "shellScrollWidth": 388,
+      "shellClientWidth": 388,
+      "bodyScrollWidth": 390,
+      "rootScrollWidth": 390,
+      "horizontalOverflow": false,
+      "promptResponseVisible": true,
+      "svgBox": {
+        "width": 302.6875,
+        "height": 312.203125
+      },
+      "textCount": 19,
+      "hasOldText": false
+    },
+    {
+      "name": "v0-25-5-prompt-response-visual-320",
+      "file": "/Users/kevinhegg/Desktop/promptlife/docs/reports/screenshots/v0-25-5-prompt-response-visual-320.png",
+      "url": "http://127.0.0.1:5173/?debug=1&v=0255-prompt-response-clarity",
+      "heading": "Prompt vs Response",
+      "viewport": {
+        "width": 320,
+        "height": 844
+      },
+      "shellScrollTop": 545,
+      "shellScrollWidth": 318,
+      "shellClientWidth": 318,
+      "bodyScrollWidth": 320,
+      "rootScrollWidth": 320,
+      "horizontalOverflow": false,
+      "promptResponseVisible": true,
+      "svgBox": {
+        "width": 232.6875,
+        "height": 240.015625
+      },
+      "textCount": 19,
+      "hasOldText": false
+    }
+  ]
+}

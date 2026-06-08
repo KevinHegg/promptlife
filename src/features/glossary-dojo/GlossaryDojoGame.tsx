@@ -1,4 +1,11 @@
-import { useMemo } from 'react'
+import { useCallback, useEffect, useMemo, useRef } from 'react'
+import {
+  PlayActionRow,
+  PlayChallengeShell,
+  PlayFeedbackPanel,
+  PlayProgressRail,
+  PlayStatusPill
+} from '../play/PlayChallengeComponents'
 import { GlossaryDojoSummary } from './GlossaryDojoSummary'
 import { getSafeGlossaryDojoQuestionCopy } from './engine'
 import { useGlossaryDojo } from './useGlossaryDojo'
@@ -6,9 +13,23 @@ import { useGlossaryDojo } from './useGlossaryDojo'
 type GlossaryDojoGameProps = {
   onBack: () => void
   onGlossary: (termId: string) => void
+  onAttempt?: () => void
+  onComplete?: (round: { missedCount?: number } | null) => void
 }
 
-export function GlossaryDojoGame({ onBack, onGlossary }: GlossaryDojoGameProps) {
+function cleanFeedbackLead(copy: string) {
+  return copy
+    .replace(/^Insight strengthened\.\s*/i, '')
+    .replace(/^Not quite\.\s*/i, '')
+}
+
+function sourceModeLabel(sourceMode?: string) {
+  if (sourceMode === 'review_missed') return 'Review missed terms'
+  if (sourceMode === 'repeat_round') return 'Repeat round'
+  return 'New round'
+}
+
+export function GlossaryDojoGame({ onBack, onGlossary, onAttempt, onComplete }: GlossaryDojoGameProps) {
   const dojo = useGlossaryDojo()
   const {
     progress,
@@ -27,9 +48,18 @@ export function GlossaryDojoGame({ onBack, onGlossary }: GlossaryDojoGameProps) 
     reviewMissedRound,
     getFeedback
   } = dojo
+  const seenCompletedRoundRef = useRef(progress.lastCompletedRound?.id ?? null)
   const feedback = useMemo(() => currentResult ? getFeedback(currentResult) : '', [currentResult, getFeedback])
   const progressPercent = currentRound ? Math.round(((currentIndex + (currentAnswer ? 1 : 0)) / totalQuestions) * 100) : 0
   const questionNumber = currentIndex + 1
+  const masteredCount = Object.values(progress.terms).filter((term) => term.mastered).length
+  const lastMissedCount = progress.lastCompletedRound?.missedCount ?? 0
+  const startStatus: 'not-started' | 'completed' | 'review-suggested' = progress.lastCompletedRound
+    ? lastMissedCount > 0 ? 'review-suggested' : 'completed'
+    : 'not-started'
+  const startStatusLabel = progress.lastCompletedRound
+    ? lastMissedCount > 0 ? 'Review suggested' : 'Round completed'
+    : 'Ready'
   const correctTermId = currentQuestion?.correctTermId
   const targetTermId = currentQuestion?.targetTermId
   const correctTerm = correctTermId ? termsById.get(correctTermId) : null
@@ -46,28 +76,64 @@ export function GlossaryDojoGame({ onBack, onGlossary }: GlossaryDojoGameProps) 
       helperText: currentQuestion.helperText
     })
   }, [correctTerm?.label, currentQuestion, targetTerm?.label])
+  const feedbackDetail = currentResult ? cleanFeedbackLead(feedback) : ''
+  const startPracticeRound = useCallback(() => {
+    onAttempt?.()
+    startRound()
+  }, [onAttempt, startRound])
+  const repeatPracticeRound = useCallback(() => {
+    onAttempt?.()
+    repeatRound()
+  }, [onAttempt, repeatRound])
+  const reviewPracticeRound = useCallback(() => {
+    onAttempt?.()
+    reviewMissedRound()
+  }, [onAttempt, reviewMissedRound])
+
+  useEffect(() => {
+    const completed = progress.lastCompletedRound
+    if (!completed || completed.id === seenCompletedRoundRef.current) return
+    seenCompletedRoundRef.current = completed.id
+    onComplete?.(completed)
+  }, [onComplete, progress.lastCompletedRound])
 
   if (!currentRound || !currentQuestion) {
     return (
-      <section className="screen glossary-dojo-screen" aria-labelledby="dojo-title" data-dojo-view="start">
-        <button className="text-btn dojo-back" type="button" onClick={onBack}>Back to Play</button>
-        <header className="dojo-hero">
-          <p className="eyebrow">Glossary Dojo</p>
-          <h1 id="dojo-title" tabIndex={-1}>Practice glossary terms</h1>
-          <p className="lede small">Twelve calm prompts build vocabulary for the model story.</p>
-        </header>
+      <PlayChallengeShell
+        title="Practice glossary terms"
+        titleId="dojo-title"
+        eyebrow="Glossary Dojo"
+        subtitle="Twelve calm prompts build vocabulary for the model story."
+        onBack={onBack}
+        className="glossary-dojo-screen"
+        data-dojo-view="start"
+        headerChildren={
+          <>
+            <div className="dojo-foundation-status-row">
+              <PlayStatusPill status={startStatus} label={startStatusLabel} />
+              <span>Progress saved on this device.</span>
+            </div>
+            <PlayProgressRail
+              value={progress.lastCompletedRound ? 100 : 0}
+              label={progress.lastCompletedRound ? 'Last Glossary Dojo round completed' : 'Glossary Dojo ready to start'}
+            />
+          </>
+        }
+      >
 
         {!progress.storageAvailable && (
-          <p className="feedback" role="status">Storage is blocked, so Dojo practice will stay in this session only.</p>
+          <PlayFeedbackPanel tone="review">
+            <p>Storage is blocked, so Dojo practice will stay in this session only.</p>
+          </PlayFeedbackPanel>
         )}
 
         {progress.lastCompletedRound ? (
           <GlossaryDojoSummary
             progress={progress}
             termsById={termsById}
-            onStartRound={startRound}
-            onRepeatRound={repeatRound}
-            onReviewMissed={reviewMissedRound}
+            onStartRound={startPracticeRound}
+            onRepeatRound={repeatPracticeRound}
+            onReviewMissed={reviewPracticeRound}
             onReset={reset}
             onBack={onBack}
             onGlossary={onGlossary}
@@ -79,21 +145,30 @@ export function GlossaryDojoGame({ onBack, onGlossary }: GlossaryDojoGameProps) 
             <div className="dojo-stat-grid" aria-label="Glossary Dojo practice totals">
               <span><strong>{progress.roundsAttempted}</strong> rounds</span>
               <span><strong>{progress.totalQuestionsAnswered}</strong> questions</span>
-              <span><strong>{Object.values(progress.terms).filter((term) => term.mastered).length}</strong> mastered over time</span>
+              <span><strong>{masteredCount}</strong> mastered over time</span>
             </div>
-            <button className="primary-btn" type="button" onClick={startRound} data-testid="glossary-dojo-start">
-              Start 12-term round
-            </button>
+            <PlayFeedbackPanel>
+              <p>Progress saved on this device. A round is practice, not a score.</p>
+            </PlayFeedbackPanel>
+            <PlayActionRow className="dojo-action-row">
+              <button className="primary-btn" type="button" onClick={startPracticeRound} data-testid="glossary-dojo-start">
+                Start 12-term round
+              </button>
+            </PlayActionRow>
           </section>
         )}
-      </section>
+      </PlayChallengeShell>
     )
   }
 
   return (
-    <section
-      className="screen glossary-dojo-screen"
-      aria-labelledby="dojo-title"
+    <PlayChallengeShell
+      title="Practice glossary terms"
+      titleId="dojo-title"
+      eyebrow="Glossary Dojo"
+      subtitle={`${sourceModeLabel(currentRound.sourceMode)}. Choose the best glossary match, then use the feedback to sharpen the distinction.`}
+      onBack={onBack}
+      className="glossary-dojo-screen"
       data-dojo-view="question"
       data-dojo-current={questionNumber}
       data-dojo-total={totalQuestions}
@@ -101,17 +176,19 @@ export function GlossaryDojoGame({ onBack, onGlossary }: GlossaryDojoGameProps) 
       data-dojo-repeat-count={currentRound.repeatCount}
       data-dojo-round-fingerprint={currentRound.targetFingerprint}
       data-dojo-target-count={currentRound.targetTermIds.length}
+      headerChildren={
+        <>
+          <div className="dojo-foundation-status-row">
+            <PlayStatusPill status="in-progress" label={`Question ${questionNumber} of ${totalQuestions}`} />
+            <span>{currentRound.answers.length} answered</span>
+          </div>
+          <PlayProgressRail
+            value={progressPercent}
+            label={`${progressPercent}% of current Glossary Dojo round answered`}
+          />
+        </>
+      }
     >
-      <button className="text-btn dojo-back" type="button" onClick={onBack}>Back to Play</button>
-      <header className="dojo-hero compact">
-        <p className="eyebrow">Glossary Dojo</p>
-        <h1 id="dojo-title" tabIndex={-1}>Practice glossary terms</h1>
-        <p className="dojo-roundline">Question {questionNumber} of {totalQuestions}</p>
-        <div className="dojo-meter" aria-label={`${progressPercent}% of current Glossary Dojo round answered`}>
-          <span style={{ width: `${progressPercent}%` }} />
-        </div>
-      </header>
-
       <section className="dojo-panel dojo-question-card" aria-labelledby="dojo-question-title">
         <span className="step-label">{safeQuestionCopy?.typeLabel ?? currentQuestion.typeLabel}</span>
         <h2 id="dojo-question-title">{safeQuestionCopy?.prompt ?? currentQuestion.prompt}</h2>
@@ -166,16 +243,20 @@ export function GlossaryDojoGame({ onBack, onGlossary }: GlossaryDojoGameProps) 
         </div>
 
         {currentResult && (
-          <div
-            className={currentResult.answer.isCorrect ? 'feedback good dojo-feedback' : 'feedback dojo-feedback'}
-            role="status"
+          <PlayFeedbackPanel
+            tone={currentResult.answer.isCorrect ? 'good' : 'review'}
+            className="dojo-feedback"
             data-testid="glossary-dojo-feedback"
           >
-            <p>{feedback}</p>
-          </div>
+            <p>
+              <strong>{currentResult.answer.isCorrect ? 'Good distinction.' : 'This choice reveals a common mix-up.'}</strong>
+              {' '}
+              {feedbackDetail}
+            </p>
+          </PlayFeedbackPanel>
         )}
 
-        <div className="dojo-action-row">
+        <PlayActionRow className="dojo-action-row">
           {correctTerm && currentAnswer && (
             <button className="secondary-btn" type="button" onClick={() => onGlossary(correctTerm.id)}>
               Open {correctTerm.label}
@@ -184,8 +265,8 @@ export function GlossaryDojoGame({ onBack, onGlossary }: GlossaryDojoGameProps) 
           <button className="primary-btn" type="button" onClick={nextQuestion} disabled={!currentAnswer} data-testid="glossary-dojo-next">
             {questionNumber >= totalQuestions ? 'Finish round' : 'Next question'}
           </button>
-        </div>
+        </PlayActionRow>
       </section>
-    </section>
+    </PlayChallengeShell>
   )
 }

@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Prompt Life v0.26.3 Glossary Dojo Shell Report</title>
+    <style>
+      @page {
+        size: Letter;
+        margin: 0.55in;
+      }
+
+      :root {
+        color-scheme: light;
+        --ink: #07145c;
+        --muted: #405173;
+        --teal: #00a6a6;
+        --violet: #7b58ff;
+        --paper: #f9fbff;
+        --line: #d6dced;
+        --soft: #eef7f6;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: #fff;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-size: 10.5pt;
+        line-height: 1.45;
+      }
+
+      h1,
+      h2,
+      h3 {
+        margin: 0;
+        line-height: 1.1;
+      }
+
+      h1 {
+        font-size: 27pt;
+      }
+
+      h2 {
+        margin-top: 22px;
+        font-size: 15pt;
+      }
+
+      h3 {
+        margin-top: 13px;
+        font-size: 11.5pt;
+      }
+
+      p {
+        margin: 7px 0 0;
+      }
+
+      ul {
+        margin: 8px 0 0 18px;
+        padding: 0;
+      }
+
+      li {
+        margin: 3px 0;
+      }
+
+      code {
+        color: #24315f;
+        background: #eef2ff;
+        border: 1px solid #dce4ff;
+        border-radius: 5px;
+        padding: 1px 4px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+        font-size: 9pt;
+      }
+
+      .hero {
+        padding: 20px;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background:
+          linear-gradient(135deg, rgba(0, 166, 166, 0.12), transparent 38%),
+          linear-gradient(315deg, rgba(123, 88, 255, 0.12), transparent 42%),
+          var(--paper);
+      }
+
+      .eyebrow {
+        color: var(--teal);
+        font-size: 9pt;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .lede {
+        max-width: 660px;
+        color: var(--muted);
+        font-size: 12pt;
+      }
+
+      .callout {
+        padding: 12px 14px;
+        border-left: 4px solid var(--teal);
+        border-radius: 10px;
+        background: var(--soft);
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .card {
+        break-inside: avoid;
+        padding: 13px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: #fff;
+      }
+
+      .pill-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px;
+        margin-top: 9px;
+      }
+
+      .pill {
+        border: 1px solid #cfe9e6;
+        border-radius: 999px;
+        padding: 4px 8px;
+        color: #074d54;
+        background: #f4fffd;
+        font-size: 9pt;
+        font-weight: 750;
+      }
+
+      .screens {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+        align-items: start;
+      }
+
+      figure {
+        break-inside: avoid;
+        margin: 0;
+        padding: 10px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: #fbfdff;
+      }
+
+      figcaption {
+        margin-bottom: 7px;
+        color: var(--muted);
+        font-size: 8.5pt;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+
+      img {
+        display: block;
+        width: 100%;
+        height: auto;
+        border: 1px solid #d8e2f2;
+        border-radius: 10px;
+      }
+
+      .mono-list li {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+        font-size: 8.8pt;
+      }
+
+      .page-break {
+        break-before: page;
+      }
+
+      .small {
+        color: var(--muted);
+        font-size: 9pt;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="hero">
+      <p class="eyebrow">Prompt Life v0.26.3</p>
+      <h1>Glossary Dojo Shared Shell Report</h1>
+      <p class="lede">
+        Glossary Dojo now uses the shared Play Challenge Foundation shell,
+        progress, feedback, completion, and action components while preserving
+        its 12-question glossary learning loop.
+      </p>
+      <div class="pill-row" aria-label="Verification summary">
+        <span class="pill">typecheck passed</span>
+        <span class="pill">build passed</span>
+        <span class="pill">build:pages passed</span>
+        <span class="pill">audit:answers passed</span>
+        <span class="pill">320px QA</span>
+        <span class="pill">390px QA</span>
+        <span class="pill">reset checked</span>
+      </div>
+    </section>
+
+    <h2>1. Summary</h2>
+    <div class="callout">
+      <p>
+        Dojo keeps its quiz engine, glossary content, close distractors, repeat
+        rounds, review rounds, and existing progress store. The UI now sits on
+        the shared Play shell and writes attempt/completion summaries through
+        the shared Play progress key.
+      </p>
+    </div>
+    <ul>
+      <li>Wrapped start and question states with <code>PlayChallengeShell</code> and <code>PlayChallengeHeader</code>.</li>
+      <li>Added shared <code>PlayStatusPill</code> and <code>PlayProgressRail</code> for round status and question progress.</li>
+      <li>Replaced answer feedback with <code>PlayFeedbackPanel</code>.</li>
+      <li>Replaced summary lead with <code>PlayCompletionPanel</code>.</li>
+      <li>Updated visible feedback leads to <code>Good distinction.</code> and <code>This choice reveals a common mix-up.</code></li>
+      <li>Updated summary actions to <code>Try another round</code> and <code>Review missed terms</code>.</li>
+      <li>Bumped the app version to <code>v0.26.3</code>.</li>
+    </ul>
+
+    <h2>2. Recommendations For The Next Pass</h2>
+    <ul>
+      <li>Move Context Stack onto the same shared shell and completion-panel pattern.</li>
+      <li>Add a compact debug-only Play progress viewer after the storage shape stabilizes.</li>
+      <li>Build Probability Picker before replacing the Attention Match bridge.</li>
+    </ul>
+
+    <h2>3. Challenges And Risks</h2>
+    <ul>
+      <li>The Dojo engine still owns detailed feedback text; the UI strips older lead phrases and adds the new calm lead.</li>
+      <li>Dojo mastery remains in <code>promptlife.glossaryDojo.v1</code>; shared Play progress records attempt/completion summary only.</li>
+      <li>The existing Vite large-chunk warning remains.</li>
+    </ul>
+
+    <h2>4. UI Cards, Screens, Scenes, And Routes Changed</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Dojo Start</h3>
+        <p>Shared shell, status pill, progress rail, feedback panel, and shared action row.</p>
+      </div>
+      <div class="card">
+        <h3>Dojo Question</h3>
+        <p>Shared shell, question progress rail, status pill, and feedback panel.</p>
+      </div>
+      <div class="card">
+        <h3>Dojo Feedback</h3>
+        <p>Visible feedback starts with calm distinction/mix-up language.</p>
+      </div>
+      <div class="card">
+        <h3>Dojo Summary</h3>
+        <p>Completion panel shows <code>Round completed</code> or <code>Review suggested</code>.</p>
+      </div>
+      <div class="card">
+        <h3>Badge</h3>
+        <p>QA checked shared Dojo progress in the Badge play challenge count.</p>
+      </div>
+      <div class="card">
+        <h3>Reset</h3>
+        <p>QA confirmed reset clears shared Play and Dojo progress keys.</p>
+      </div>
+    </div>
+
+    <h2>5. LocalStorage Keys</h2>
+    <ul class="mono-list">
+      <li>Preserved/read/written: promptlife.playChallenges.v1</li>
+      <li>Preserved/read/written: promptlife.glossaryDojo.v1</li>
+      <li>Preserved/read for bridge compatibility: promptlife:v1:gameInsights</li>
+      <li>Preserved/read for bridge compatibility: pl.gameInsights</li>
+      <li>Preserved/read for bridge compatibility: promptlife:v1:promptRunProgress</li>
+      <li>Preserved/read for bridge compatibility: pl.promptRunProgress</li>
+      <li>Preserved/read for bridge compatibility: promptlife:v1:traceComplete</li>
+      <li>Preserved/read for bridge compatibility: pl.traceComplete</li>
+      <li>Preserved/read for bridge compatibility: promptlife:v1:learningTourComplete</li>
+      <li>Preserved/read for bridge compatibility: pl.learningTourComplete</li>
+      <li>Preserved: Journey, exercise, reflection, choice-order, and Prompt Run keys.</li>
+    </ul>
+
+    <h2>6. Verification</h2>
+    <ul>
+      <li><code>npm run typecheck</code>: passed.</li>
+      <li><code>npm run build</code>: passed with the existing Vite large-chunk warning.</li>
+      <li><code>npm run build:pages</code>: passed with the existing Vite large-chunk warning.</li>
+      <li><code>npm run audit:answers</code>: passed.</li>
+      <li>390px QA: Dojo opened, started, advanced, showed common-mix-up and good-distinction feedback, completed, wrote shared Play progress, loaded Badge, and reset cleared shared Play/Dojo keys.</li>
+      <li>320px QA: question screen showed <code>Question 1 of 12</code>, four answer choices, and no horizontal overflow.</li>
+    </ul>
+
+    <h2>7. Files Changed</h2>
+    <ul class="mono-list">
+      <li>src/features/play/PlayChallengeComponents.tsx</li>
+      <li>src/features/glossary-dojo/GlossaryDojoGame.tsx</li>
+      <li>src/features/glossary-dojo/GlossaryDojoSummary.tsx</li>
+      <li>src/main.tsx</li>
+      <li>src/styles/global.css</li>
+      <li>docs/play/PLAY_FOUNDATION_LOG.md</li>
+      <li>docs/REVIEW_NOTES.md</li>
+      <li>docs/play/screenshots/v0-26-3-dojo-shell-screenshots.json</li>
+      <li>docs/play/prompt-life-v0-26-3-glossary-dojo-shell-report.html</li>
+      <li>docs/play/prompt-life-v0-26-3-glossary-dojo-shell-report.pdf</li>
+    </ul>
+
+    <h2 class="page-break">Screenshots</h2>
+    <div class="screens">
+      <figure>
+        <figcaption>Dojo start, 390px</figcaption>
+        <img src="screenshots/v0-26-3-dojo-start-390.png" alt="Glossary Dojo start screen at 390px using the shared Play shell." />
+      </figure>
+      <figure>
+        <figcaption>Common mix-up feedback, 390px</figcaption>
+        <img src="screenshots/v0-26-3-dojo-common-mixup-feedback-scrolled-390.png" alt="Glossary Dojo feedback showing common mix-up language." />
+      </figure>
+      <figure>
+        <figcaption>Round summary, 390px</figcaption>
+        <img src="screenshots/v0-26-3-dojo-summary-390.png" alt="Glossary Dojo review-suggested summary screen." />
+      </figure>
+      <figure>
+        <figcaption>Dojo question, 320px</figcaption>
+        <img src="screenshots/v0-26-3-dojo-question-320.png" alt="Glossary Dojo question screen at 320px." />
+      </figure>
+      <figure>
+        <figcaption>Badge, 390px</figcaption>
+        <img src="screenshots/v0-26-3-badge-dojo-shell-390.png" alt="Badge page showing shared Play challenge count after Dojo progress." />
+      </figure>
+      <figure>
+        <figcaption>Good distinction feedback, 390px</figcaption>
+        <img src="screenshots/v0-26-3-dojo-good-distinction-feedback-390.png" alt="Glossary Dojo correct-answer feedback state." />
+      </figure>
+    </div>
+    <p class="small">
+      Screenshots were captured in isolated browser profiles so real user progress was not changed.
+    </p>
+  </body>
+</html>

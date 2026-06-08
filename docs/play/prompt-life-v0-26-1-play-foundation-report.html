@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Prompt Life v0.26.1 Play Challenge Foundation Report</title>
+    <style>
+      @page {
+        size: Letter;
+        margin: 0.55in;
+      }
+
+      :root {
+        color-scheme: light;
+        --ink: #07145c;
+        --muted: #405173;
+        --teal: #00a6a6;
+        --violet: #7b58ff;
+        --paper: #f9fbff;
+        --line: #d6dced;
+        --soft: #eef7f6;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: #fff;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-size: 10.5pt;
+        line-height: 1.45;
+      }
+
+      h1,
+      h2,
+      h3 {
+        margin: 0;
+        line-height: 1.1;
+      }
+
+      h1 {
+        font-size: 27pt;
+        letter-spacing: 0;
+      }
+
+      h2 {
+        margin-top: 22px;
+        font-size: 15pt;
+      }
+
+      h3 {
+        margin-top: 13px;
+        font-size: 11.5pt;
+      }
+
+      p {
+        margin: 7px 0 0;
+      }
+
+      ul {
+        margin: 8px 0 0 18px;
+        padding: 0;
+      }
+
+      li {
+        margin: 3px 0;
+      }
+
+      code {
+        color: #24315f;
+        background: #eef2ff;
+        border: 1px solid #dce4ff;
+        border-radius: 5px;
+        padding: 1px 4px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+        font-size: 9pt;
+      }
+
+      .hero {
+        padding: 20px;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background:
+          linear-gradient(135deg, rgba(0, 166, 166, 0.12), transparent 38%),
+          linear-gradient(315deg, rgba(123, 88, 255, 0.12), transparent 42%),
+          var(--paper);
+      }
+
+      .eyebrow {
+        color: var(--teal);
+        font-size: 9pt;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .lede {
+        max-width: 640px;
+        color: var(--muted);
+        font-size: 12pt;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .card {
+        break-inside: avoid;
+        padding: 13px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: #fff;
+      }
+
+      .callout {
+        padding: 12px 14px;
+        border-left: 4px solid var(--teal);
+        border-radius: 10px;
+        background: var(--soft);
+      }
+
+      .pill-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px;
+        margin-top: 9px;
+      }
+
+      .pill {
+        border: 1px solid #cfe9e6;
+        border-radius: 999px;
+        padding: 4px 8px;
+        color: #074d54;
+        background: #f4fffd;
+        font-size: 9pt;
+        font-weight: 750;
+      }
+
+      .screens {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+        align-items: start;
+      }
+
+      figure {
+        break-inside: avoid;
+        margin: 0;
+        padding: 10px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: #fbfdff;
+      }
+
+      figcaption {
+        margin-bottom: 7px;
+        color: var(--muted);
+        font-size: 8.5pt;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+
+      img {
+        display: block;
+        width: 100%;
+        height: auto;
+        border: 1px solid #d8e2f2;
+        border-radius: 10px;
+      }
+
+      .mono-list li {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+        font-size: 8.8pt;
+      }
+
+      .page-break {
+        break-before: page;
+      }
+
+      .small {
+        color: var(--muted);
+        font-size: 9pt;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="hero">
+      <p class="eyebrow">Prompt Life v0.26.1</p>
+      <h1>Play Challenge Foundation Report</h1>
+      <p class="lede">
+        A small foundation pass for calm, replayable Play challenges: shared model,
+        shared storage, shared UI chassis, final slate registry, and mobile QA.
+      </p>
+      <div class="pill-row" aria-label="Verification summary">
+        <span class="pill">typecheck passed</span>
+        <span class="pill">build passed</span>
+        <span class="pill">build:pages passed</span>
+        <span class="pill">audit:answers passed</span>
+        <span class="pill">320px QA</span>
+        <span class="pill">390px QA</span>
+      </div>
+    </section>
+
+    <h2>1. Summary</h2>
+    <div class="callout">
+      <p>
+        Play now has a consistent foundation for five final challenge slots:
+        Glossary Dojo, Context Stack, Probability Picker, Prompt Run, and
+        Attention Match. The pass tracks practice progress without scores,
+        leaderboards, streaks, or punitive states.
+      </p>
+    </div>
+    <ul>
+      <li>Added shared Play TypeScript types for challenge metadata, attempts, outcomes, and progress.</li>
+      <li>Added versioned localStorage helpers under <code>promptlife.playChallenges.v1</code>.</li>
+      <li>Added reusable Play UI components and the ZenTron Paper Lab style layer.</li>
+      <li>Replaced the old Play page sections with the final challenge slate.</li>
+      <li>Connected Glossary Dojo, Context Stack, Prompt Run, and Attention Match to shared Play progress while preserving their existing progress systems.</li>
+      <li>Moved Token Pipeline Relay and How AI Learns out of the normal final slate while keeping compatibility metadata.</li>
+      <li>Updated Badge's Play stat to show final-slate challenge completion slots, without changing badge unlock rules.</li>
+    </ul>
+
+    <h2>2. Recommendations For The Next Pass</h2>
+    <ul>
+      <li>Build Probability Picker next, focused on logits, softmax, sampling, and probability-is-not-truth feedback.</li>
+      <li>Turn Attention Match into a clearer replayable matching challenge rather than the current Attention Weave bridge.</li>
+      <li>Refactor the live Context Stack screen onto the new <code>PlayChallengeShell</code> and board primitives.</li>
+      <li>Add a small debug-only progress bridge panel if legacy/local Play state needs to be inspected.</li>
+    </ul>
+
+    <h2>3. Challenges And Risks</h2>
+    <ul>
+      <li>Legacy Play progress is split across multiple keys, so this pass bridges old progress rather than migrating or deleting it.</li>
+      <li>Glossary Dojo still owns its mature mastery storage. The shared Play key records starts and completions only.</li>
+      <li>Probability Picker is intentionally disabled as foundation-ready, so there is no fake completion state.</li>
+      <li>Attention Match still uses the existing Attention Weave interaction under a clearer final-slate name.</li>
+      <li>The existing Vite large-chunk warning remains.</li>
+    </ul>
+
+    <h2>4. UI Cards, Screens, Scenes, And Routes Changed</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Play Page</h3>
+        <p>New ZenTron Paper Lab header, calm progress panel, and final challenge slate.</p>
+      </div>
+      <div class="card">
+        <h3>Challenge Cards</h3>
+        <p>Status, attempts, completion state, progress rail, 10-second idea, model move, time, and related stages.</p>
+      </div>
+      <div class="card">
+        <h3>Glossary Dojo</h3>
+        <p>Start, repeat, review, and completion actions notify shared Play progress while preserving Dojo mastery.</p>
+      </div>
+      <div class="card">
+        <h3>Prompt Run</h3>
+        <p>Completion now marks the shared <code>prompt-run</code> challenge complete while keeping old Prompt Run progress.</p>
+      </div>
+      <div class="card">
+        <h3>Context Stack</h3>
+        <p>Insight unlock marks <code>context-stack</code> complete while preserving legacy game insight behavior.</p>
+      </div>
+      <div class="card">
+        <h3>Attention Match</h3>
+        <p>Current Attention Weave is reframed as the foundation version of the final Attention Match slot.</p>
+      </div>
+      <div class="card">
+        <h3>Probability Picker</h3>
+        <p>Added as a disabled foundation-ready card and placeholder route, without fake progress.</p>
+      </div>
+      <div class="card">
+        <h3>Badge</h3>
+        <p>Play stat now reads <code>0 of 5 play challenges</code> and reset copy names Play challenge progress.</p>
+      </div>
+    </div>
+
+    <h2>5. LocalStorage Keys</h2>
+    <ul class="mono-list">
+      <li>Created/read/written: promptlife.playChallenges.v1</li>
+      <li>Preserved/read for bridge compatibility: promptlife:v1:gameInsights</li>
+      <li>Preserved/read for bridge compatibility: pl.gameInsights</li>
+      <li>Preserved/read for bridge compatibility: promptlife:v1:promptRunProgress</li>
+      <li>Preserved/read for bridge compatibility: pl.promptRunProgress</li>
+      <li>Preserved/read for bridge compatibility: promptlife:v1:traceComplete</li>
+      <li>Preserved/read for bridge compatibility: pl.traceComplete</li>
+      <li>Preserved/read for bridge compatibility: promptlife:v1:learningTourComplete</li>
+      <li>Preserved/read for bridge compatibility: pl.learningTourComplete</li>
+      <li>Preserved/read independently by Dojo: promptlife.glossaryDojo.v1</li>
+      <li>Preserved: Journey, exercise, reflection, choice-order, and Prompt Run keys.</li>
+    </ul>
+
+    <h2>6. Verification</h2>
+    <ul>
+      <li><code>npm run typecheck</code>: passed.</li>
+      <li><code>npm run build</code>: passed with the existing Vite large-chunk warning.</li>
+      <li><code>npm run build:pages</code>: passed with the existing Vite large-chunk warning after a sequential rerun. A parallel first attempt hit a temporary <code>dist/assets</code> cleanup race.</li>
+      <li><code>npm run audit:answers</code>: passed.</li>
+      <li>390px QA: Play loaded, bottom nav worked, Glossary Dojo opened, Prompt Run opened, Badge loaded, deprecated final-slate items were absent, no horizontal overflow.</li>
+      <li>320px QA: same checks passed; reduced-motion emulation was respected; Probability Picker remained disabled as foundation-ready.</li>
+    </ul>
+
+    <h2>7. Files Changed</h2>
+    <ul class="mono-list">
+      <li>src/features/play/types.ts</li>
+      <li>src/features/play/storage.ts</li>
+      <li>src/features/play/challengeRegistry.ts</li>
+      <li>src/features/play/PlayChallengeComponents.tsx</li>
+      <li>src/features/glossary-dojo/GlossaryDojoGame.tsx</li>
+      <li>src/main.tsx</li>
+      <li>src/styles/global.css</li>
+      <li>docs/play/PLAY_FOUNDATION_LOG.md</li>
+      <li>docs/REVIEW_NOTES.md</li>
+      <li>docs/play/screenshots/v0-26-1-play-foundation-390.png</li>
+      <li>docs/play/screenshots/v0-26-1-play-foundation-320.png</li>
+      <li>docs/play/screenshots/v0-26-1-badge-play-foundation-390.png</li>
+      <li>docs/play/screenshots/v0-26-1-play-foundation-screenshots.json</li>
+      <li>docs/play/prompt-life-v0-26-1-play-foundation-report.html</li>
+      <li>docs/play/prompt-life-v0-26-1-play-foundation-report.pdf</li>
+    </ul>
+
+    <h2 class="page-break">Screenshots</h2>
+    <div class="screens">
+      <figure>
+        <figcaption>Play page, 390px</figcaption>
+        <img src="screenshots/v0-26-1-play-foundation-390.png" alt="Prompt Life Play page at 390px showing the final challenge slate." />
+      </figure>
+      <figure>
+        <figcaption>Play page, 320px</figcaption>
+        <img src="screenshots/v0-26-1-play-foundation-320.png" alt="Prompt Life Play page at 320px showing the final challenge slate." />
+      </figure>
+      <figure>
+        <figcaption>Badge page, 390px</figcaption>
+        <img src="screenshots/v0-26-1-badge-play-foundation-390.png" alt="Prompt Life Badge page at 390px showing play challenge progress." />
+      </figure>
+    </div>
+    <p class="small">
+      Screenshots were captured in an isolated browser profile so existing user progress was not changed during QA.
+    </p>
+  </body>
+</html>
