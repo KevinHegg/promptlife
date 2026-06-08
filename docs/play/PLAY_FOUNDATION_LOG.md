@@ -589,3 +589,83 @@
 - `src/main.tsx`
 - `src/styles/global.css`
 - `docs/play/PLAY_FOUNDATION_LOG.md`
+# 2026-06-08 - v0.26.8 Play Games UX + Mechanics Audit
+
+## Summary
+
+- Ran an audit/report pass on the current five visible Play challenges: Glossary Dojo, Attention Match, Probability Picker, Context Stack, and Prompt Run.
+- Did not change app source, game mechanics, Journey progress, badge rules, checkpoint randomization, dependencies, or generated assets.
+- Confirmed the current normal Play slate is exactly: Glossary Dojo, Attention Match, Probability Picker, Context Stack, Prompt Run.
+- Confirmed Token Pipeline Relay and How AI Learns remain hidden from the normal Play slate and preserved only through compatibility metadata.
+
+## Findings
+
+- Glossary Dojo is the strongest current loop: mature shared shell, 12-question rounds, precise feedback, replay/review paths, and independent Dojo mastery.
+- Context Stack is now a strong v2 challenge: shared shell, three-round context-window loop, retrieved-evidence round, shared Play storage writes, and clear misconception coverage.
+- Probability Picker is the largest functional gap: it is a coherent disabled coming-soon card but not a playable challenge.
+- Attention Match still runs on the old Attention Weave component and should be rebuilt as a purpose-built shared-shell token dependency match.
+- Prompt Run is still the correct capstone, but it should get a v2 flow pass because 13 steps can feel more like a long guided worksheet than a replayable challenge.
+
+## Recommended Next Passes
+
+1. Probability Picker v1: build the logits, softmax, probability, sampling, and uncertainty loop.
+2. Attention Match v1: replace the compatibility Attention Weave screen with a multi-example token relevance challenge.
+3. Prompt Run v2: make the capstone feel more continuous, lighter, and aligned with shared Play language.
+
+## UI Inspected
+
+- Play landing at 390px and 320px.
+- Glossary Dojo active round state.
+- Attention Match compatibility screen.
+- Probability Picker coming-soon card.
+- Context Stack first screen and lower board/actions state.
+- Prompt Run first screen and lower exercise/control state.
+- Badge page Play progress language.
+- Retired challenge handling in source for Token Pipeline Relay and How AI Learns.
+
+## Copy Issues Found
+
+- `Best:` stat wording remains mildly score-like in shared Play summaries.
+- Prompt Run and Attention Match still use `Back to games` while the current landing says Play challenges.
+- Attention Match still introduces `source token` and `target token` with minimal screen-level scaffolding.
+- Badge stats still say `0 of 5 play challenges`; the criterion copy clarifies Play is practice history, but the stat could be made less requirement-like later.
+- No punitive language, leaderboards, streaks, timers, or score emphasis were found in the normal Play surface.
+
+## Storage Keys
+
+- Read/displayed/written by Play foundation: `promptlife.playChallenges.v1`.
+- Preserved/read/written by Dojo: `promptlife.glossaryDojo.v1`.
+- Preserved/read by Prompt Run: `promptlife:v1:promptRunProgress` and legacy `pl.promptRunProgress`.
+- Preserved/read for old game insights: `promptlife:v1:gameInsights` and legacy `pl.gameInsights`.
+- Preserved/read for old flags: `promptlife:v1:traceComplete`, `promptlife:v1:learningTourComplete`, and their legacy `pl.*` counterparts.
+- Reset source confirms Start over/debug clear remove shared Play progress and Glossary Dojo practice.
+
+## Mobile QA
+
+- Browser QA at 390px: passed for Play landing, Glossary Dojo, Attention Match, Probability Picker card, Context Stack, Prompt Run, and Badge, with no horizontal overflow in captured states.
+- Browser QA at 320px: passed for Play landing, with no horizontal overflow. Cards are tall but vertically scrollable.
+- Route screenshots for Context Stack and Prompt Run were recaptured after the app settled at `scrollTop: 0`; initial mid-board captures were timing artifacts, not persistent route-scroll failures.
+- Reduced-motion support was source-inspected through `prefers-reduced-motion` CSS and shared animation utilities.
+
+## Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed. Total surfaces: 69; randomized surfaces: 46; excluded fixed-order surfaces: 23.
+
+## Reports And Screenshots
+
+- `docs/play/prompt-life-v0-26-8-play-games-audit-report.html`
+- `docs/play/prompt-life-v0-26-8-play-games-audit-report.pdf`
+- `docs/play/screenshots/v0-26-8-play-games-audit-screenshots.json`
+- `docs/play/screenshots/v0-26-8-play-games-audit-play-landing-390.png`
+- `docs/play/screenshots/v0-26-8-play-games-audit-play-landing-320.png`
+- `docs/play/screenshots/v0-26-8-play-games-audit-glossary-dojo-390.png`
+- `docs/play/screenshots/v0-26-8-play-games-audit-attention-match-390.png`
+- `docs/play/screenshots/v0-26-8-play-games-audit-probability-picker-card-390.png`
+- `docs/play/screenshots/v0-26-8-play-games-audit-context-stack-top-390.png`
+- `docs/play/screenshots/v0-26-8-play-games-audit-context-stack-390.png`
+- `docs/play/screenshots/v0-26-8-play-games-audit-prompt-run-top-390.png`
+- `docs/play/screenshots/v0-26-8-play-games-audit-prompt-run-390.png`
+- `docs/play/screenshots/v0-26-8-play-games-audit-badge-390.png`

@@ -1,0 +1,588 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Prompt Life v0.26.8 Play Games UX + Mechanics Audit</title>
+    <style>
+      @page {
+        size: Letter;
+        margin: 0.55in;
+      }
+
+      :root {
+        color-scheme: light;
+        --ink: #07145c;
+        --muted: #435377;
+        --teal: #00a6a6;
+        --violet: #7b58ff;
+        --paper: #f9fbff;
+        --line: #d6dced;
+        --soft: #eef7f6;
+        --warm: #fff7e9;
+        --risk: #fff0f3;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: #fff;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-size: 9.8pt;
+        line-height: 1.42;
+      }
+
+      h1,
+      h2,
+      h3 {
+        margin: 0;
+        line-height: 1.12;
+      }
+
+      h1 {
+        font-size: 27pt;
+      }
+
+      h2 {
+        margin-top: 20px;
+        font-size: 15pt;
+      }
+
+      h3 {
+        margin-top: 12px;
+        font-size: 11.5pt;
+      }
+
+      p {
+        margin: 7px 0 0;
+      }
+
+      ul,
+      ol {
+        margin: 8px 0 0 18px;
+        padding: 0;
+      }
+
+      li {
+        margin: 3px 0;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+        page-break-inside: auto;
+      }
+
+      th,
+      td {
+        border: 1px solid var(--line);
+        padding: 6px 7px;
+        vertical-align: top;
+        text-align: left;
+      }
+
+      th {
+        background: #eef2ff;
+        color: #101d6f;
+        font-size: 8.5pt;
+      }
+
+      td {
+        font-size: 8.5pt;
+      }
+
+      code {
+        color: #24315f;
+        background: #eef2ff;
+        border: 1px solid #dce4ff;
+        border-radius: 5px;
+        padding: 1px 4px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+        font-size: 8.7pt;
+      }
+
+      .hero {
+        padding: 20px;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background:
+          linear-gradient(135deg, rgba(0, 166, 166, 0.12), transparent 38%),
+          linear-gradient(315deg, rgba(123, 88, 255, 0.12), transparent 42%),
+          var(--paper);
+      }
+
+      .eyebrow {
+        color: var(--teal);
+        font-size: 9pt;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .lede {
+        max-width: 680px;
+        color: var(--muted);
+        font-size: 12pt;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        margin-top: 10px;
+      }
+
+      .card {
+        padding: 11px 12px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: #fff;
+      }
+
+      .callout {
+        padding: 11px 12px;
+        border-left: 4px solid var(--teal);
+        border-radius: 10px;
+        background: var(--soft);
+      }
+
+      .warm {
+        background: var(--warm);
+        border-left-color: #d18400;
+      }
+
+      .risk {
+        background: var(--risk);
+        border-left-color: #c94c65;
+      }
+
+      .score-note {
+        color: var(--muted);
+        font-size: 8.5pt;
+      }
+
+      .mono-list li {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+        font-size: 8.5pt;
+      }
+
+      .page-break {
+        break-before: page;
+      }
+
+      .screens {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 10px;
+      }
+
+      figure {
+        margin: 0;
+        break-inside: avoid;
+      }
+
+      figcaption {
+        margin-bottom: 5px;
+        color: var(--muted);
+        font-size: 8.5pt;
+        font-weight: 800;
+      }
+
+      img {
+        width: 100%;
+        max-height: 7.2in;
+        object-fit: contain;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="hero">
+      <p class="eyebrow">Prompt Life v0.26.8 audit</p>
+      <h1>Play Games UX + Mechanics Audit</h1>
+      <p class="lede">
+        Current-state audit of the five visible Play challenges: Glossary Dojo,
+        Attention Match, Probability Picker, Context Stack, and Prompt Run.
+        This pass did not implement gameplay changes.
+      </p>
+    </header>
+
+    <h2>Executive Findings</h2>
+    <div class="grid">
+      <section class="card">
+        <h3>Strongest Today</h3>
+        <p><strong>Glossary Dojo</strong> is the most complete loop. <strong>Context Stack</strong> is the clearest small model-mechanics game.</p>
+      </section>
+      <section class="card">
+        <h3>Needs A Build Pass</h3>
+        <p><strong>Probability Picker</strong> is still a placeholder, and <strong>Attention Match</strong> still uses the old Attention Weave mechanic.</p>
+      </section>
+      <section class="card">
+        <h3>Capstone Risk</h3>
+        <p><strong>Prompt Run</strong> remains instructionally essential, but it still feels closer to a long guided worksheet than a replayable challenge.</p>
+      </section>
+      <section class="card">
+        <h3>Mobile Result</h3>
+        <p>390px and 320px Play landing checks showed no horizontal overflow. Cards are tall at 320px, but vertical scrolling is obvious.</p>
+      </section>
+    </div>
+
+    <h2>Scope</h2>
+    <p>
+      Reviewed <code>src/features/play</code>, the challenge registry, shared
+      Play components, shared storage, Glossary Dojo integration, Context Stack,
+      Attention Match, Probability Picker, Prompt Run, Badge language, reset
+      behavior, and Play styles. Screenshots were captured from the local app at
+      <code>http://127.0.0.1:5173/?debug=1&amp;v=0268-play-audit</code>.
+    </p>
+    <p class="callout">
+      No Journey order, badge logic, checkpoint randomization, dependencies,
+      generated assets, or core game mechanics were changed in this pass.
+    </p>
+
+    <h2>Current Slate</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Challenge</th>
+          <th>Current route/component</th>
+          <th>Gameplay loop</th>
+          <th>Shared shell?</th>
+          <th>Shared storage?</th>
+          <th>Recommendation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Glossary Dojo</strong></td>
+          <td><code>GlossaryDojoGame</code> via <code>gameId === glossary-dojo</code></td>
+          <td>Start or resume a 12-question round; choose glossary matches; review feedback; repeat or review missed terms.</td>
+          <td>Yes: <code>PlayChallengeShell</code>, status pill, progress rail, feedback panel.</td>
+          <td>Yes for summary attempts/completions; Dojo mastery remains in <code>promptlife.glossaryDojo.v1</code>.</td>
+          <td>Keep. Preserve loop; polish only around stale state, mobile feedback, and copy.</td>
+        </tr>
+        <tr>
+          <td><strong>Attention Match</strong></td>
+          <td><code>AttentionWeave</code> rendered with title "Attention Match"</td>
+          <td>Tap one token, then another, to draw relevance arcs for one pronoun-style dependency.</td>
+          <td>No. Uses legacy <code>GameHeader</code>, <code>weave-board</code>, and old game patterns.</td>
+          <td>Completion bridges to <code>attention-match</code>; legacy <code>attention-weave</code> insight is preserved.</td>
+          <td>Rebuild as Attention Match v1 with several short dependency examples and shared Play shell.</td>
+        </tr>
+        <tr>
+          <td><strong>Probability Picker</strong></td>
+          <td>Disabled card in the normal slate; internal <code>FoundationReadyScreen</code> exists.</td>
+          <td>No playable loop yet. Card teaches the future slot: logits -> softmax -> sample one token.</td>
+          <td>Card uses shared component. Placeholder route uses shared shell but is not reachable from the disabled card.</td>
+          <td>No fake attempts or completions; reports <code>Coming soon</code>.</td>
+          <td>Build next. It fills the largest current mechanics gap: probability is not truth.</td>
+        </tr>
+        <tr>
+          <td><strong>Context Stack</strong></td>
+          <td><code>ContextStack</code> via <code>gameId === context-stack</code></td>
+          <td>Tap cards into a limited context window across three rounds; older cards fall out; retrieved evidence must enter context.</td>
+          <td>Yes: shared shell, status pill, progress rail, board, choice buttons, feedback, completion panel.</td>
+          <td>Yes: starts, progress, completions, review-suggested outcomes, and misconception tags write to <code>promptlife.playChallenges.v1</code>.</td>
+          <td>Keep. Small v2.1 polish later; not the next urgent rebuild.</td>
+        </tr>
+        <tr>
+          <td><strong>Prompt Run</strong></td>
+          <td><code>PromptRunScreen</code> via <code>trace-one-prompt</code> or <code>prompt-run</code></td>
+          <td>Walk through 12 steps plus final ordering challenge; each step uses an exercise before Continue unlocks.</td>
+          <td>No. Uses legacy <code>GameHeader</code>, ExerciseShell, and Prompt Run-specific progress UI.</td>
+          <td>Shared completion is written at final completion; detailed step progress remains in <code>promptlife:v1:promptRunProgress</code>.</td>
+          <td>Revise as Prompt Run v2 after Probability Picker and Attention Match.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Retired Handling</h2>
+    <p>
+      Token Pipeline Relay and How AI Learns are absent from the normal Play
+      slate. They remain in <code>retiredPlayChallenges</code> for compatibility.
+      If internal state sets <code>gameId</code> to one of those retired IDs, the
+      app renders a calm compatibility screen that says progress was not lost.
+      There is no visible normal Play card for either retired activity.
+    </p>
+
+    <h2>Score Matrix</h2>
+    <p class="score-note">
+      Scores are 1-5 where 5 is strongest, except maintenance burden where 1 is
+      low/easy and 5 is high/costly.
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>Challenge</th>
+          <th>Learning clarity</th>
+          <th>Mechanics fit</th>
+          <th>Misconception value</th>
+          <th>Mobile comfort</th>
+          <th>Replay value</th>
+          <th>Calm/fun factor</th>
+          <th>Badge relevance</th>
+          <th>Maintenance burden</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Glossary Dojo</td>
+          <td>5</td>
+          <td>5</td>
+          <td>5</td>
+          <td>4</td>
+          <td>5</td>
+          <td>4</td>
+          <td>2</td>
+          <td>4</td>
+        </tr>
+        <tr>
+          <td>Attention Match</td>
+          <td>3</td>
+          <td>3</td>
+          <td>4</td>
+          <td>3</td>
+          <td>2</td>
+          <td>3</td>
+          <td>2</td>
+          <td>2</td>
+        </tr>
+        <tr>
+          <td>Probability Picker</td>
+          <td>3</td>
+          <td>1</td>
+          <td>3</td>
+          <td>5</td>
+          <td>1</td>
+          <td>2</td>
+          <td>3</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>Context Stack</td>
+          <td>5</td>
+          <td>5</td>
+          <td>5</td>
+          <td>4</td>
+          <td>4</td>
+          <td>4</td>
+          <td>3</td>
+          <td>3</td>
+        </tr>
+        <tr>
+          <td>Prompt Run</td>
+          <td>4</td>
+          <td>3</td>
+          <td>5</td>
+          <td>3</td>
+          <td>2</td>
+          <td>3</td>
+          <td>5</td>
+          <td>4</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Game-By-Game Notes</h2>
+    <h3>Glossary Dojo - Keep</h3>
+    <p>
+      Dojo has the cleanest learning loop: real glossary terms, close
+      distractors, explicit feedback, repeat/review modes, and independent
+      mastery. It preserves old Dojo progress while also writing shared Play
+      summary progress. Mobile risk is mainly vertical: answer choices can run
+      under the bottom nav until the learner scrolls, but controls remain usable.
+    </p>
+
+    <h3>Attention Match - Rebuild</h3>
+    <p>
+      The concept is right, but the current action is one legacy Attention Weave
+      example. It should become a small set of sentence cards: choose a target
+      token, connect it to the most relevant prior token, then explain that
+      attention is relevance between positions, not awareness.
+    </p>
+
+    <h3>Probability Picker - Build</h3>
+    <p>
+      This is the most important empty slot. It should teach logits, softmax,
+      probabilities, sampling, uncertainty, and why likely does not mean true.
+      The current disabled card is coherent and does not create fake progress.
+    </p>
+
+    <h3>Context Stack - Keep</h3>
+    <p>
+      Context Stack now has a strong v2 loop: place cards, see overflow, keep
+      key context visible, and use retrieved evidence only after it enters the
+      window. It already uses the shared Play shell and storage helpers. Future
+      polish should focus on shorter card labels at 320px and slightly more
+      varied replay.
+    </p>
+
+    <h3>Prompt Run - Revise</h3>
+    <p>
+      Prompt Run carries the whole "day in the life of a prompt" story and
+      badge relevance. Its risk is experience shape: 13 steps plus exercises can
+      feel like a long lesson path. A v2 should make the prompt visibly move
+      through fewer stronger scenes, while keeping the same core distinctions.
+    </p>
+
+    <h2>Recommended Build Order</h2>
+    <ol>
+      <li><strong>Probability Picker v1.</strong> Fill the empty slate slot and teach the Decision Room mechanics that no current Play game practices directly.</li>
+      <li><strong>Attention Match v1.</strong> Replace the compatibility bridge with a purpose-built shared-shell challenge.</li>
+      <li><strong>Prompt Run v2.</strong> Keep the capstone but shorten the feel, add stronger continuity, and align it with shared Play language.</li>
+    </ol>
+    <p>
+      Context Stack no longer needs to be first because its v2 refactor is
+      already in place. A later Context Stack v2.1 pass can tune labels, replay,
+      and visual density.
+    </p>
+
+    <h2>Unified Play Interaction Language</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Pattern</th>
+          <th>Recommendation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Action verbs</td>
+          <td>Name, connect, choose, place, trace. Show these as practice moves, but keep the sentence after them concrete.</td>
+        </tr>
+        <tr>
+          <td>Status pills</td>
+          <td>Ready, In progress, Review suggested, Completed, Coming soon, Retired. Avoid score-like status labels.</td>
+        </tr>
+        <tr>
+          <td>Stat row</td>
+          <td>Played, Current, Progress saved, Review suggested, Completed. Replace future "Best" wording with "Progress" or "Last round" where possible.</td>
+        </tr>
+        <tr>
+          <td>Board zones</td>
+          <td>Use consistent zones: incoming/source, working/choice area, current tray/window, fell-out/history, feedback, reflection.</td>
+        </tr>
+        <tr>
+          <td>Cards/chips/trays</td>
+          <td>Cards are movable ideas; chips are terms or tokens; trays are temporary holding areas; rails show progress through a round, not performance.</td>
+        </tr>
+        <tr>
+          <td>Feedback panels</td>
+          <td>Correct: "Good distinction" or "Insight strengthened." Review: "This choice reveals a common mix-up." Completion: "Insight unlocked" or "Round completed."</td>
+        </tr>
+        <tr>
+          <td>Storage</td>
+          <td>Record attempts on meaningful start, update progress during rounds, complete only when an insight or round finishes, and preserve legacy keys by bridging summaries.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Learner-Facing Copy Issues Found</h2>
+    <ul>
+      <li><code>Best: Not yet</code>, <code>Best result</code>, and <code>Best: N of 12</code> are mild score-like remnants. Prefer <code>Progress</code>, <code>Last round</code>, or <code>Current</code>.</li>
+      <li><code>Back to games</code> appears on Prompt Run and Attention Match while the landing now says Play challenges. Prefer <code>Back to Play</code>.</li>
+      <li>Attention Match still says "source token" and "target token" before learners have much help in that screen. A rebuild should add a one-line setup.</li>
+      <li>Probability Picker has an internal coming-soon screen, but the visible disabled card is the only reachable placeholder from the normal slate.</li>
+      <li>Badge stats still say <code>0 of 5 play challenges</code>. The criterion panel clarifies Play is practice history, but a future pass could make the stat label even less requirement-like.</li>
+      <li>No punitive language, leaderboards, timers, streaks, or score emphasis were found in the normal Play surface.</li>
+    </ul>
+
+    <h2>Mobile QA</h2>
+    <ul>
+      <li>390px Play landing: no horizontal overflow; five-card slate renders in order.</li>
+      <li>320px Play landing: no horizontal overflow; cards are tall, but vertical scrolling is clear.</li>
+      <li>390px route checks: Glossary Dojo, Attention Match, Context Stack, Prompt Run, and Badge loaded without horizontal overflow in captured states.</li>
+      <li>Bottom nav stayed usable in captured states. Some lower controls require vertical scroll, which is expected in the current design.</li>
+      <li>Reduced-motion support is present in shared animation utilities and CSS via <code>prefers-reduced-motion</code>; this was source-inspected rather than browser-emulated in this pass.</li>
+    </ul>
+
+    <h2>Storage Audit</h2>
+    <ul>
+      <li>Created/read/written by Play foundation: <code>promptlife.playChallenges.v1</code>.</li>
+      <li>Preserved/read/written by Dojo: <code>promptlife.glossaryDojo.v1</code>.</li>
+      <li>Preserved/read by Prompt Run: <code>promptlife:v1:promptRunProgress</code> and legacy <code>pl.promptRunProgress</code>.</li>
+      <li>Preserved/read for old game insights: <code>promptlife:v1:gameInsights</code> and legacy <code>pl.gameInsights</code>.</li>
+      <li>Preserved/read for old flags: <code>promptlife:v1:traceComplete</code>, <code>promptlife:v1:learningTourComplete</code>, and their legacy <code>pl.*</code> counterparts.</li>
+      <li>Reset flow source confirms Play challenge progress and Glossary Dojo practice are cleared by the existing Start over/debug clear paths.</li>
+    </ul>
+
+    <h2>Verification</h2>
+    <ul>
+      <li><code>npm run typecheck</code>: passed.</li>
+      <li><code>npm run build</code>: passed with the existing Vite large-chunk warning.</li>
+      <li><code>npm run build:pages</code>: passed with the existing Vite large-chunk warning.</li>
+      <li><code>npm run audit:answers</code>: passed. Total surfaces: 69; randomized surfaces: 46; excluded fixed-order surfaces: 23.</li>
+    </ul>
+
+    <h2>Known Issues</h2>
+    <p class="callout warm">
+      The Vite production build still emits the existing large-chunk warning.
+      Probability Picker is not playable yet. Attention Match is still the
+      renamed legacy Attention Weave interaction. Prompt Run is accurate but
+      heavy for a Play experience.
+    </p>
+
+    <h2>Files Changed</h2>
+    <ul class="mono-list">
+      <li>docs/play/PLAY_FOUNDATION_LOG.md</li>
+      <li>docs/play/screenshots/v0-26-8-play-games-audit-screenshots.json</li>
+      <li>docs/play/screenshots/v0-26-8-play-games-audit-play-landing-390.png</li>
+      <li>docs/play/screenshots/v0-26-8-play-games-audit-play-landing-320.png</li>
+      <li>docs/play/screenshots/v0-26-8-play-games-audit-glossary-dojo-390.png</li>
+      <li>docs/play/screenshots/v0-26-8-play-games-audit-attention-match-390.png</li>
+      <li>docs/play/screenshots/v0-26-8-play-games-audit-probability-picker-card-390.png</li>
+      <li>docs/play/screenshots/v0-26-8-play-games-audit-context-stack-top-390.png</li>
+      <li>docs/play/screenshots/v0-26-8-play-games-audit-context-stack-390.png</li>
+      <li>docs/play/screenshots/v0-26-8-play-games-audit-prompt-run-top-390.png</li>
+      <li>docs/play/screenshots/v0-26-8-play-games-audit-prompt-run-390.png</li>
+      <li>docs/play/screenshots/v0-26-8-play-games-audit-badge-390.png</li>
+      <li>docs/play/prompt-life-v0-26-8-play-games-audit-report.html</li>
+      <li>docs/play/prompt-life-v0-26-8-play-games-audit-report.pdf</li>
+    </ul>
+
+    <section class="page-break">
+      <h2>Screenshots</h2>
+      <div class="screens">
+        <figure>
+          <figcaption>Play landing at 390px</figcaption>
+          <img src="screenshots/v0-26-8-play-games-audit-play-landing-390.png" alt="Play landing page at 390 pixels wide." />
+        </figure>
+        <figure>
+          <figcaption>Play landing at 320px</figcaption>
+          <img src="screenshots/v0-26-8-play-games-audit-play-landing-320.png" alt="Play landing page at 320 pixels wide." />
+        </figure>
+        <figure>
+          <figcaption>Glossary Dojo at 390px</figcaption>
+          <img src="screenshots/v0-26-8-play-games-audit-glossary-dojo-390.png" alt="Glossary Dojo active question at 390 pixels wide." />
+        </figure>
+        <figure>
+          <figcaption>Attention Match at 390px</figcaption>
+          <img src="screenshots/v0-26-8-play-games-audit-attention-match-390.png" alt="Attention Match token board at 390 pixels wide." />
+        </figure>
+        <figure>
+          <figcaption>Probability Picker card at 390px</figcaption>
+          <img src="screenshots/v0-26-8-play-games-audit-probability-picker-card-390.png" alt="Probability Picker coming soon card at 390 pixels wide." />
+        </figure>
+        <figure>
+          <figcaption>Context Stack top at 390px</figcaption>
+          <img src="screenshots/v0-26-8-play-games-audit-context-stack-top-390.png" alt="Context Stack first screen at 390 pixels wide." />
+        </figure>
+        <figure>
+          <figcaption>Prompt Run top at 390px</figcaption>
+          <img src="screenshots/v0-26-8-play-games-audit-prompt-run-top-390.png" alt="Prompt Run first screen at 390 pixels wide." />
+        </figure>
+        <figure>
+          <figcaption>Badge at 390px</figcaption>
+          <img src="screenshots/v0-26-8-play-games-audit-badge-390.png" alt="Badge page at 390 pixels wide." />
+        </figure>
+      </div>
+    </section>
+  </body>
+</html>

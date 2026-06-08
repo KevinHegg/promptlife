@@ -1,0 +1,72 @@
+{
+  "version": "0.26.8",
+  "audit": "Play Games UX + Mechanics Audit",
+  "capturedAt": "2026-06-08",
+  "baseUrl": "http://127.0.0.1:5173/?debug=1&v=0268-play-audit",
+  "viewportChecks": [
+    {
+      "width": 390,
+      "height": 844,
+      "horizontalOverflow": false,
+      "screenshot": "docs/play/screenshots/v0-26-8-play-games-audit-play-landing-390.png"
+    },
+    {
+      "width": 320,
+      "height": 844,
+      "horizontalOverflow": false,
+      "screenshot": "docs/play/screenshots/v0-26-8-play-games-audit-play-landing-320.png"
+    }
+  ],
+  "screenshots": [
+    {
+      "label": "Play landing at 390px",
+      "path": "docs/play/screenshots/v0-26-8-play-games-audit-play-landing-390.png",
+      "notes": "First viewport of the simplified Play landing."
+    },
+    {
+      "label": "Play landing at 320px",
+      "path": "docs/play/screenshots/v0-26-8-play-games-audit-play-landing-320.png",
+      "notes": "First viewport of the Play landing at the narrowest requested audit width."
+    },
+    {
+      "label": "Glossary Dojo at 390px",
+      "path": "docs/play/screenshots/v0-26-8-play-games-audit-glossary-dojo-390.png",
+      "notes": "Existing local state had an active round; screenshot captures a live question state."
+    },
+    {
+      "label": "Attention Match at 390px",
+      "path": "docs/play/screenshots/v0-26-8-play-games-audit-attention-match-390.png",
+      "notes": "Current Attention Match screen, still using the Attention Weave board."
+    },
+    {
+      "label": "Probability Picker card at 390px",
+      "path": "docs/play/screenshots/v0-26-8-play-games-audit-probability-picker-card-390.png",
+      "notes": "Reachable disabled coming-soon card; separate placeholder route is not exposed from the normal Play slate."
+    },
+    {
+      "label": "Context Stack top at 390px",
+      "path": "docs/play/screenshots/v0-26-8-play-games-audit-context-stack-top-390.png",
+      "notes": "Clean first screen after route settles at scrollTop 0."
+    },
+    {
+      "label": "Context Stack board controls at 390px",
+      "path": "docs/play/screenshots/v0-26-8-play-games-audit-context-stack-390.png",
+      "notes": "Board lower state showing current window, feedback, actions, and bottom nav clearance."
+    },
+    {
+      "label": "Prompt Run top at 390px",
+      "path": "docs/play/screenshots/v0-26-8-play-games-audit-prompt-run-top-390.png",
+      "notes": "Clean first screen after route settles at scrollTop 0."
+    },
+    {
+      "label": "Prompt Run controls at 390px",
+      "path": "docs/play/screenshots/v0-26-8-play-games-audit-prompt-run-390.png",
+      "notes": "Lower first-step state showing exercise controls, disabled continue, and bottom nav clearance."
+    },
+    {
+      "label": "Badge page at 390px",
+      "path": "docs/play/screenshots/v0-26-8-play-games-audit-badge-390.png",
+      "notes": "Badge stats and badge criterion language at 390px."
+    }
+  ]
+}
