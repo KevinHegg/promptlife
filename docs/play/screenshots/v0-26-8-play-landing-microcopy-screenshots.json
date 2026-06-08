@@ -1,0 +1,32 @@
+{
+  "version": "0.26.8",
+  "pass": "Play Landing Microcopy And Practice Move Cleanup",
+  "captured": "2026-06-08",
+  "screenshots": [
+    {
+      "path": "docs/play/screenshots/v0-26-8-play-landing-390.png",
+      "viewport": "390x844",
+      "description": "Play landing page at 390px after removing unlabeled top chips."
+    },
+    {
+      "path": "docs/play/screenshots/v0-26-8-play-landing-320.png",
+      "viewport": "320x844",
+      "description": "Play landing page at 320px with shorter progress panel and practice move lines."
+    },
+    {
+      "path": "docs/play/screenshots/v0-26-8-play-active-progress-card-390.png",
+      "viewport": "390x844",
+      "description": "Glossary Dojo challenge card showing active progress with Current and Last played stats."
+    },
+    {
+      "path": "docs/play/screenshots/v0-26-8-probability-coming-soon-390.png",
+      "viewport": "390x844",
+      "description": "Probability Picker challenge card showing practice move and coming-soon handling."
+    },
+    {
+      "path": "docs/play/screenshots/v0-26-8-badge-390.png",
+      "viewport": "390x844",
+      "description": "Badge page loaded with v0.26.8."
+    }
+  ]
+}

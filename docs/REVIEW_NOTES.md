@@ -2,6 +2,46 @@
 
 Date: 2026-06-08
 
+## v0.26.8 Play Landing Microcopy And Practice Move Cleanup
+
+### What Changed
+
+- Removed the unlabeled `name`, `place`, `choose`, `connect`, and `trace` chips from the Play progress panel.
+- Added the sentence `Each challenge practices one model-literacy move.` to the top Play progress panel.
+- Removed the decorative `Practice set` pill from the Play challenges heading.
+- Added clear `Practice move:` lines to every Play challenge card:
+  - Glossary Dojo: `Name concepts`
+  - Attention Match: `Connect token clues`
+  - Probability Picker: `Choose likely next tokens`
+  - Context Stack: `Place context cards`
+  - Prompt Run: `Trace the loop`
+- Cleaned saved-practice stats so active Glossary Dojo shows `Current: 4 correct` and `Last played: Today` instead of contradictory `Best` / `Last: Not yet` wording.
+- Bumped the visible app version to `v0.26.8` and updated the README cache-busting example to `?v=0268`.
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed.
+- Browser QA at 390px and 320px: Play loaded, top progress panel had no unlabeled verb chips, every challenge card showed a clear practice move, stat rows wrapped cleanly, Probability Picker remained coming soon, Glossary Dojo/Attention Match/Context Stack/Prompt Run opened, Badge loaded with `v0.26.8`, reset progress cleared shared Play and Dojo keys after confirmation, and no horizontal overflow was detected.
+
+### Screenshots And Report
+
+- `docs/play/prompt-life-v0-26-8-play-landing-microcopy-report.html`
+- `docs/play/prompt-life-v0-26-8-play-landing-microcopy-report.pdf`
+- `docs/play/screenshots/v0-26-8-play-landing-390.png`
+- `docs/play/screenshots/v0-26-8-play-landing-320.png`
+- `docs/play/screenshots/v0-26-8-play-active-progress-card-390.png`
+- `docs/play/screenshots/v0-26-8-probability-coming-soon-390.png`
+- `docs/play/screenshots/v0-26-8-badge-390.png`
+
+### Known Issues
+
+- Probability Picker remains safely coming soon.
+- Attention Match still uses the compatibility interaction underneath.
+- The existing Vite large-chunk warning remains.
+
 ## v0.26.7 Play Landing Polish And Stage Mapping
 
 ### What Changed

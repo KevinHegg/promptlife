@@ -53,6 +53,8 @@ export type PlayChallengeMeta = {
   tenSecondExplanation: string
   primaryActionLabel: string
   estimatedTime: string
+  practiceMove: string
+  shortMoveLabel: string
   relatedJourneyStages: string[]
   recommendedAfter: string
   stageChips: string[]

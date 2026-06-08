@@ -1,5 +1,121 @@
 # Play Foundation Log
 
+## 2026-06-08 - v0.26.8 Play Landing Microcopy And Practice Move Cleanup
+
+### Summary
+
+- Removed the unlabeled top progress-panel chips:
+  - `name`
+  - `place`
+  - `choose`
+  - `connect`
+  - `trace`
+- Added a short replacement sentence: `Each challenge practices one model-literacy move.`
+- Removed the decorative `Practice set` pill from the Play challenges heading.
+- Added explicit learner-facing practice moves to each Play challenge card:
+  - Glossary Dojo: `Practice move: Name concepts`
+  - Attention Match: `Practice move: Connect token clues`
+  - Probability Picker: `Practice move: Choose likely next tokens`
+  - Context Stack: `Practice move: Place context cards`
+  - Prompt Run: `Practice move: Trace the loop`
+- Cleaned stat language:
+  - active Glossary Dojo now shows `Current: N correct`
+  - date labels now say `Last played: Today`, `Last played: Yesterday`, or a compact date
+  - started-but-unscored challenges show `Current: Started`
+  - coming-soon challenges still show no fake attempts or fake best result
+- Kept Journey stage mapping, related learning cards, challenge order, badge rules, Journey progress, and Play storage behavior unchanged.
+- Bumped the visible app version to `v0.26.8`.
+
+### Recommendations For The Next Pass
+
+- Implement Probability Picker as the next complete challenge.
+- Replace the Attention Match compatibility interaction with a purpose-built final activity.
+- Consider shortening or hiding repeated `Practice started. Progress saved on this device.` outcomes on landing cards if they begin to feel noisy after more Play passes.
+
+### Challenges And Risks
+
+- Existing local QA progress can show some cards as `In progress`; this pass improves how that state reads but does not wipe or migrate progress.
+- Reset progress asks for confirmation. Automated reset QA needed to accept the confirm dialog before verifying key removal.
+- The existing Vite large-chunk warning remains.
+
+### UI Cards, Screens, Scenes, And Routes Changed
+
+- Play landing top progress panel: removed verb chips and added one calm explanatory sentence.
+- Play challenges heading: removed the `Practice set` pill.
+- Glossary Dojo challenge card: added `Practice move: Name concepts` and active-progress wording.
+- Attention Match challenge card: added `Practice move: Connect token clues`.
+- Probability Picker challenge card: added `Practice move: Choose likely next tokens`; coming-soon handling unchanged.
+- Context Stack challenge card: added `Practice move: Place context cards`.
+- Prompt Run challenge card: added `Practice move: Trace the loop`.
+- Badge page: QA only; no copy or badge logic changed in this pass.
+- Reset progress flow: QA only; no reset logic changed.
+
+### Learner-Facing Copy Changes
+
+- Removed unlabeled top chips: `name`, `place`, `choose`, `connect`, `trace`.
+- Added: `Each challenge practices one model-literacy move.`
+- Added `Practice move:` lines to all visible Play challenge cards.
+- Removed `Practice set` from the Play challenges heading area.
+- Changed `Last:` stat language to `Last played:`.
+- Changed active Glossary Dojo progress from best-style wording to `Current: N correct`.
+- Changed started-unscored progress to `Current: Started`.
+
+### LocalStorage Keys Created, Read, Migrated, Written, Or Preserved
+
+- Read/displayed through shared Play summaries: `promptlife.playChallenges.v1`.
+- Preserved/read for legacy Context Stack insight compatibility: `promptlife:v1:gameInsights`.
+- Preserved/read for legacy Context Stack insight compatibility: `pl.gameInsights`.
+- Preserved/read for Prompt Run bridge compatibility: `promptlife:v1:promptRunProgress`.
+- Preserved/read for Prompt Run bridge compatibility: `pl.promptRunProgress`.
+- Preserved/read for Prompt Run bridge compatibility: `promptlife:v1:traceComplete`.
+- Preserved/read for Prompt Run bridge compatibility: `pl.traceComplete`.
+- Preserved/read for learning-tour bridge compatibility: `promptlife:v1:learningTourComplete`.
+- Preserved/read for learning-tour bridge compatibility: `pl.learningTourComplete`.
+- Preserved/read independently by Dojo: `promptlife.glossaryDojo.v1`.
+- Reset QA verified that `promptlife.playChallenges.v1` and `promptlife.glossaryDojo.v1` clear after confirmation.
+- No storage migration, new storage key, Journey progress change, or badge logic change was added.
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed.
+- Browser QA at 390px: passed. Play loaded, top chips were removed, the progress panel was shorter, each challenge card showed a practice move, Glossary Dojo active stats were clear, Probability Picker remained coming soon, route smoke checks passed, Badge loaded with `v0.26.8`, and no horizontal overflow was detected.
+- Browser QA at 320px: passed. Top panel, challenge cards, stage chips, practice move lines, stat rows, vertical scrolling, and bottom nav remained usable with no horizontal overflow.
+- Isolated reset QA: passed after accepting the confirmation dialog; shared Play progress and Glossary Dojo progress were cleared.
+
+### Screenshots And Report
+
+- `docs/play/screenshots/v0-26-8-play-landing-390.png`
+- `docs/play/screenshots/v0-26-8-play-landing-320.png`
+- `docs/play/screenshots/v0-26-8-play-active-progress-card-390.png`
+- `docs/play/screenshots/v0-26-8-probability-coming-soon-390.png`
+- `docs/play/screenshots/v0-26-8-badge-390.png`
+- `docs/play/screenshots/v0-26-8-play-landing-microcopy-screenshots.json`
+- `docs/play/prompt-life-v0-26-8-play-landing-microcopy-report.html`
+- `docs/play/prompt-life-v0-26-8-play-landing-microcopy-report.pdf`
+
+### Files Changed
+
+- `README.md`
+- `package.json`
+- `package-lock.json`
+- `src/features/play/PlayChallengeComponents.tsx`
+- `src/features/play/challengeRegistry.ts`
+- `src/features/play/types.ts`
+- `src/main.tsx`
+- `docs/REVIEW_NOTES.md`
+- `docs/play/PLAY_FOUNDATION_LOG.md`
+- `docs/play/screenshots/v0-26-8-play-landing-390.png`
+- `docs/play/screenshots/v0-26-8-play-landing-320.png`
+- `docs/play/screenshots/v0-26-8-play-active-progress-card-390.png`
+- `docs/play/screenshots/v0-26-8-probability-coming-soon-390.png`
+- `docs/play/screenshots/v0-26-8-badge-390.png`
+- `docs/play/screenshots/v0-26-8-play-landing-microcopy-screenshots.json`
+- `docs/play/prompt-life-v0-26-8-play-landing-microcopy-report.html`
+- `docs/play/prompt-life-v0-26-8-play-landing-microcopy-report.pdf`
+
 ## 2026-06-08 - v0.26.7 Play Landing Polish And Stage Mapping
 
 ### Summary

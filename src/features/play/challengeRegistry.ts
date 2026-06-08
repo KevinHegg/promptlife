@@ -16,6 +16,8 @@ export const finalPlayChallengeRegistry: PlayChallengeMeta[] = [
     tenSecondExplanation: 'A calm twelve-question round helps the vocabulary map settle without scores.',
     primaryActionLabel: 'Practice terms',
     estimatedTime: '4 min',
+    practiceMove: 'Name concepts',
+    shortMoveLabel: 'Name',
     recommendedAfter: 'Anytime',
     relatedJourneyStages: ['All stages', 'Glossary'],
     stageChips: ['Anytime', 'Glossary'],
@@ -37,6 +39,8 @@ export const finalPlayChallengeRegistry: PlayChallengeMeta[] = [
     tenSecondExplanation: 'Match a token to the earlier token position it depends on in the current context.',
     primaryActionLabel: 'Open match',
     estimatedTime: '3 min',
+    practiceMove: 'Connect token clues',
+    shortMoveLabel: 'Connect',
     recommendedAfter: 'After Stage 3 · Workday',
     relatedJourneyStages: ['Workday', 'Decision Room'],
     stageChips: ['Stage 3', 'Workday'],
@@ -58,6 +62,8 @@ export const finalPlayChallengeRegistry: PlayChallengeMeta[] = [
     tenSecondExplanation: 'A future challenge will let you choose one next token from probabilities without treating probability as truth.',
     primaryActionLabel: 'Coming soon',
     estimatedTime: '3 min',
+    practiceMove: 'Choose likely next tokens',
+    shortMoveLabel: 'Choose',
     recommendedAfter: 'After Stage 4 · Decision Room',
     relatedJourneyStages: ['Decision Room'],
     stageChips: ['Stage 4', 'Decision Room'],
@@ -77,6 +83,8 @@ export const finalPlayChallengeRegistry: PlayChallengeMeta[] = [
     tenSecondExplanation: 'Push cards into a small tray and notice which older context falls out.',
     primaryActionLabel: 'Open stack',
     estimatedTime: '3 min',
+    practiceMove: 'Place context cards',
+    shortMoveLabel: 'Place',
     recommendedAfter: 'After Stage 5 · The Day Repeats',
     relatedJourneyStages: ['The Day Repeats', 'RAG and Retrieval', 'Grounding'],
     stageChips: ['Stage 5', 'Day Repeats'],
@@ -97,6 +105,8 @@ export const finalPlayChallengeRegistry: PlayChallengeMeta[] = [
     tenSecondExplanation: 'Trace the full inference loop from visible context to one selected and appended token.',
     primaryActionLabel: 'Start capstone',
     estimatedTime: '8-10 min',
+    practiceMove: 'Trace the loop',
+    shortMoveLabel: 'Trace',
     recommendedAfter: 'After Stage 5 · The Day Repeats',
     relatedJourneyStages: ['Morning Commute', 'Workday', 'Decision Room', 'The Day Repeats'],
     stageChips: ['Stage 2-5', 'Capstone'],
@@ -120,6 +130,8 @@ export const retiredPlayChallenges: PlayChallengeMeta[] = [
     tenSecondExplanation: 'Its useful determinism idea belongs inside Prompt Run or Probability Picker later.',
     primaryActionLabel: 'Back to Play',
     estimatedTime: '3 min',
+    practiceMove: 'Retired activity',
+    shortMoveLabel: 'Retired',
     recommendedAfter: 'Compatibility only',
     relatedJourneyStages: ['Decision Room'],
     stageChips: ['Retired'],
@@ -138,6 +150,8 @@ export const retiredPlayChallenges: PlayChallengeMeta[] = [
     tenSecondExplanation: 'This content now belongs with Journey and review support instead of the main Play challenge list.',
     primaryActionLabel: 'Back to Play',
     estimatedTime: '5 min',
+    practiceMove: 'Retired activity',
+    shortMoveLabel: 'Retired',
     recommendedAfter: 'Compatibility only',
     relatedJourneyStages: ['Before Morning', 'The Day Repeats'],
     stageChips: ['Retired'],
@@ -156,6 +170,8 @@ export const retiredPlayChallenges: PlayChallengeMeta[] = [
     tenSecondExplanation: 'Old progress is bridged to the Attention Match Play challenge.',
     primaryActionLabel: 'Open Attention Match',
     estimatedTime: '3 min',
+    practiceMove: 'Connect token clues',
+    shortMoveLabel: 'Connect',
     recommendedAfter: 'After Stage 3 · Workday',
     relatedJourneyStages: ['Workday'],
     stageChips: ['Stage 3', 'Workday'],
@@ -181,7 +197,7 @@ type LegacyPlaySignals = {
   }
   learningTourComplete?: boolean
   glossaryDojoProgress?: {
-    currentRound?: unknown
+    currentRound?: { startedAt?: string; answers?: Array<{ isCorrect?: boolean }> } | null
     roundsAttempted?: number
     roundsCompleted?: number
     totalQuestionsAnswered?: number
@@ -206,17 +222,17 @@ function formatCountLabel(label: string, count: number) {
 }
 
 function formatLastPlayed(value?: string) {
-  if (!value) return 'Last: Not yet'
+  if (!value) return 'Last played: Not yet'
   const then = new Date(value)
-  if (Number.isNaN(then.getTime())) return 'Last: Saved'
+  if (Number.isNaN(then.getTime())) return 'Last played: Saved'
   const now = new Date()
   const sameDay = then.getFullYear() === now.getFullYear() && then.getMonth() === now.getMonth() && then.getDate() === now.getDate()
-  if (sameDay) return 'Last: Today'
+  if (sameDay) return 'Last played: Today'
   const diffMs = now.getTime() - then.getTime()
   const diffDays = Math.floor(diffMs / 86400000)
-  if (diffDays === 1) return 'Last: Yesterday'
-  if (diffDays > 1 && diffDays < 7) return `Last: ${diffDays} days ago`
-  return `Last: ${then.toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}`
+  if (diffDays === 1) return 'Last played: Yesterday'
+  if (diffDays > 1 && diffDays < 7) return `Last played: ${diffDays} days ago`
+  return `Last played: ${then.toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}`
 }
 
 function formatCompletions(count: number) {
@@ -230,6 +246,10 @@ function formatBestLabel(meta: PlayChallengeMeta, attempt: PlayChallengeAttempt,
 
   if (meta.id === 'glossary-dojo') {
     const dojo = legacy.glossaryDojoProgress
+    if (dojo?.currentRound) {
+      const currentCorrect = (dojo.currentRound.answers ?? []).filter((answer) => answer.isCorrect).length
+      return `Current: ${currentCorrect} correct`
+    }
     const correct = dojo?.lastCompletedRound?.correctCount
     const missed = dojo?.lastCompletedRound?.missedCount
     if (typeof correct === 'number') return `Best: ${Math.max(0, correct)} of 12`
@@ -241,15 +261,19 @@ function formatBestLabel(meta: PlayChallengeMeta, attempt: PlayChallengeAttempt,
     const promptRun = legacy.promptRunProgress
     const finalDone = Boolean(promptRun?.finalChallengeComplete || legacy.traceComplete)
     const completedSteps = Math.min(13, (promptRun?.completedSteps?.length ?? 0) + (finalDone ? 1 : 0))
-    if (finalDone || completedSteps > 0) return `Best: ${completedSteps} of 13 steps`
+    if (finalDone || completedSteps > 0) return `Best result: ${completedSteps} of 13 steps`
   }
 
   if (meta.id === 'context-stack' && (attempt.status === 'completed' || attempt.status === 'review-suggested' || attempt.bestProgressPct >= 100)) {
-    return 'Best: Main idea found'
+    return 'Best result: Main idea found'
   }
 
   if (meta.id === 'attention-match' && (attempt.status === 'completed' || attempt.bestProgressPct >= 100)) {
-    return 'Best: Relations found'
+    return 'Best result: Relations found'
+  }
+
+  if (attempt.status === 'in-progress' && attempt.attempts > 0 && attempt.bestProgressPct === 0) {
+    return 'Current: Started'
   }
 
   if (attempt.bestProgressPct > 0) return `Best: ${attempt.bestProgressPct}% explored`
@@ -261,13 +285,20 @@ function buildProgressStats(meta: PlayChallengeMeta, attempt: PlayChallengeAttem
 
   const stats = [
     formatCountLabel('Played', attempt.attempts),
-    formatBestLabel(meta, attempt, legacy),
-    formatLastPlayed(attempt.lastPlayedAt)
+    formatBestLabel(meta, attempt, legacy)
   ]
+
+  if (attempt.lastPlayedAt) {
+    stats.push(formatLastPlayed(attempt.lastPlayedAt))
+  }
 
   if (meta.id === 'glossary-dojo') {
     const mastered = Object.values(legacy.glossaryDojoProgress?.terms ?? {}).filter((term) => term.mastered).length
     if (mastered > 0) stats.push(`Mastered: ${mastered} terms`)
+    const missed = legacy.glossaryDojoProgress?.lastCompletedRound?.missedCount ?? 0
+    if (!legacy.glossaryDojoProgress?.currentRound && missed > 0) {
+      stats.push(`Review: ${missed} term${missed === 1 ? '' : 's'}`)
+    }
   } else if (attempt.completions > 0) {
     stats.push(formatCompletions(attempt.completions))
   }
@@ -312,7 +343,7 @@ function bridgeLegacyProgress(meta: PlayChallengeMeta, base: PlayChallengeAttemp
         completions: Math.max(base.completions, completed),
         bestProgressPct: Math.max(base.bestProgressPct, completed ? 100 : dojo?.currentRound ? 50 : answered ? 25 : 0),
         status: reviewSuggested ? 'review-suggested' : completed ? 'completed' : dojo?.currentRound ? 'in-progress' : 'not-started',
-        lastPlayedAt: base.lastPlayedAt ?? dojo?.lastCompletedRound?.completedAt,
+        lastPlayedAt: base.lastPlayedAt ?? dojo?.currentRound?.startedAt ?? dojo?.lastCompletedRound?.completedAt,
         lastOutcome: completed
           ? reviewSuggested
             ? 'Completed a calm round; review suggested.'

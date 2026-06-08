@@ -144,6 +144,7 @@ export function PlayChallengeCard({ item, onStart }: { item: PlayChallengeSummar
           <PlayStatusPill status={item.status} label={item.statusText} />
         </span>
         <small id={`play-card-${item.id}-description`}>{item.shortDescription}</small>
+        <span className="play-card-meta play-card-practice-move"><b>Practice move:</b> {item.practiceMove}</span>
         <span className="play-card-meta"><b>Recommended:</b> {item.recommendedAfter}</span>
         <span className="play-card-chip-row" aria-label={`${item.title} related Journey stages`}>
           {item.stageChips.map((chip) => (

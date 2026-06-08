@@ -71,7 +71,7 @@ const HOME_ASSETS = {
   heroFallback: `${ASSET}/illustrations/scene-hero-feature-cloud@mobile.png`
 }
 // Bump this for each shipped app change; the Badge screen displays it under Start over.
-const APP_VERSION = '0.26.7'
+const APP_VERSION = '0.26.8'
 const STORAGE_KEYS = {
   lastLocation: 'promptlife:v1:lastLocation',
   lessonId: 'promptlife:v1:lessonId',
@@ -3462,20 +3462,13 @@ function PlayScreen({ gameId, gameInsights, traceComplete, promptRunProgress, le
       />
       <PlayFeedbackPanel>
         <p><strong>Progress saved on this device.</strong> Play is practice, not a score. {completedFinalChallenges} of {FINAL_PLAY_CHALLENGE_COUNT} practice challenges show saved completion or review progress.</p>
-        <div className="play-token-row" aria-label="Play action verbs">
-          <PlayTokenChip tone="prompt">name</PlayTokenChip>
-          <PlayTokenChip tone="context">place</PlayTokenChip>
-          <PlayTokenChip tone="probability">choose</PlayTokenChip>
-          <PlayTokenChip>connect</PlayTokenChip>
-          <PlayTokenChip tone="response">trace</PlayTokenChip>
-        </div>
+        <p>Each challenge practices one model-literacy move.</p>
       </PlayFeedbackPanel>
       <PlayProgressRail value={(completedFinalChallenges / FINAL_PLAY_CHALLENGE_COUNT) * 100} label={`${completedFinalChallenges} of ${FINAL_PLAY_CHALLENGE_COUNT} Play practice challenges complete or review suggested`} />
       <PlayScrollHint />
       <section className="play-section" aria-labelledby="practice-challenges-title">
         <div className="play-section-heading">
           <h2 id="practice-challenges-title">Play challenges</h2>
-          <PlayStatusPill status="in-progress" label="Practice set" />
         </div>
         <p className="play-section-helper">Suggested order follows the Journey.</p>
         <PlayChallengeBoard label="Play practice challenges" className="play-slate-board">
