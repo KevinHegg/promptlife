@@ -2,6 +2,71 @@
 
 Date: 2026-06-08
 
+## v0.27.4 Checkpoint Progress Label Pass
+
+### What Changed
+
+- Added a checkpoint progress indicator to the top of every lesson checkpoint panel.
+- Single-question checkpoints now show `1 of 1 question`; multi-question checkpoints use the same `X of N questions` pattern.
+- Changed the post-checkpoint sticky action from `Next lesson` / `Next checkpoint question` to `Next question`, except the final badge action remains `Finish and view badge`.
+- Bumped the visible app/package version to `v0.27.4` and updated the README cache-busting example to `?v=0274`.
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed.
+- Browser QA on Where LLMs Fit: checkpoint showed `1 of 1 question`, correct-answer state showed `Next question`, and no horizontal overflow was detected.
+
+### Screenshots And Report
+
+- `docs/journey/prompt-life-v0-27-4-checkpoint-progress-report.html`
+- `docs/journey/prompt-life-v0-27-4-checkpoint-progress-report.pdf`
+- `docs/journey/screenshots/v0-27-4-checkpoint-progress-562.png`
+
+## v0.27.3 Play Set Stabilization + Full-Slate QA
+
+### What Changed
+
+- Bumped the visible app/package version to `v0.27.3`.
+- Added a debug-only Play progress inspector below the Play list when `?debug=1` is present.
+- Cleaned Play progress stats so unplayed challenges show `Progress: Not started` instead of fake best-result language.
+- Removed remaining learner-facing Play copy that named competitive/failure framing.
+- Updated README, storage/reset docs, and Play mode docs so the current Play set is Glossary Dojo, Attention Match, Probability Picker, Context Stack, and Prompt Run.
+- Kept retired Token Pipeline Relay, older Attention Weave, and How AI Learns compatibility paths out of the normal Play landing.
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed.
+- Browser QA captured 11 states at 320px/390px, opened all five Play challenges, checked Badge Play completion, confirmed debug inspector visibility under `?debug=1`, and verified shared Play / Glossary Dojo reset behavior with no horizontal overflow.
+
+### Screenshots And Report
+
+- `docs/play/prompt-life-v0-27-3-play-set-stabilization-report.html`
+- `docs/play/prompt-life-v0-27-3-play-set-stabilization-report.pdf`
+- `docs/play/screenshots/v0-27-3-play-stabilization-screenshots.json`
+- `docs/play/screenshots/v0-27-3-play-landing-fresh-390.png`
+- `docs/play/screenshots/v0-27-3-play-landing-progress-390.png`
+- `docs/play/screenshots/v0-27-3-play-landing-fresh-320.png`
+- `docs/play/screenshots/v0-27-3-play-debug-inspector-390.png`
+- `docs/play/screenshots/v0-27-3-badge-play-completions-390.png`
+- `docs/play/screenshots/v0-27-3-play-after-reset-fresh-390.png`
+- `docs/play/screenshots/v0-27-3-active-glossary-dojo-390.png`
+- `docs/play/screenshots/v0-27-3-active-attention-match-390.png`
+- `docs/play/screenshots/v0-27-3-active-probability-picker-390.png`
+- `docs/play/screenshots/v0-27-3-active-context-stack-390.png`
+- `docs/play/screenshots/v0-27-3-active-prompt-run-390.png`
+
+### Known Issues
+
+- The existing Vite large-chunk warning remains.
+- Reset clears the shared Play and Glossary Dojo keys, then the app rewrites normal empty state keys as it reloads.
+- The debug inspector is intentionally compact and developer-facing.
+
 ## v0.26.8 Play Landing Microcopy And Practice Move Cleanup
 
 ### What Changed

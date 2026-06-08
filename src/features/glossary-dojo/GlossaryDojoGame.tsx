@@ -141,14 +141,14 @@ export function GlossaryDojoGame({ onBack, onGlossary, onAttempt, onComplete }: 
         ) : (
           <section className="dojo-panel" aria-labelledby="dojo-start-title">
             <h2 id="dojo-start-title">Ready for twelve terms?</h2>
-            <p>Every choice comes from the glossary. There are no points, timers, leaderboards, or failure states.</p>
+            <p>Every choice comes from the glossary. Take a calm round, compare terms, and review what needs another look.</p>
             <div className="dojo-stat-grid" aria-label="Glossary Dojo practice totals">
               <span><strong>{progress.roundsAttempted}</strong> rounds</span>
               <span><strong>{progress.totalQuestionsAnswered}</strong> questions</span>
               <span><strong>{masteredCount}</strong> mastered over time</span>
             </div>
             <PlayFeedbackPanel>
-              <p>Progress saved on this device. A round is practice, not a score.</p>
+              <p>Progress saved on this device. Repeat a round whenever another look would help.</p>
             </PlayFeedbackPanel>
             <PlayActionRow className="dojo-action-row">
               <button className="primary-btn" type="button" onClick={startPracticeRound} data-testid="glossary-dojo-start">

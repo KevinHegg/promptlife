@@ -1,0 +1,215 @@
+{
+  "generatedAt": "2026-06-08T13:00:15.316Z",
+  "appVersion": "0.27.3",
+  "baseUrl": "http://127.0.0.1:5174/",
+  "screenshots": [
+    {
+      "name": "v0-27-3-play-landing-fresh-390.png",
+      "path": "/Users/kevinhegg/Desktop/promptlife/docs/play/screenshots/v0-27-3-play-landing-fresh-390.png",
+      "label": "Play landing fresh state at 390px"
+    },
+    {
+      "name": "v0-27-3-play-landing-progress-390.png",
+      "path": "/Users/kevinhegg/Desktop/promptlife/docs/play/screenshots/v0-27-3-play-landing-progress-390.png",
+      "label": "Play landing with progress at 390px"
+    },
+    {
+      "name": "v0-27-3-play-landing-fresh-320.png",
+      "path": "/Users/kevinhegg/Desktop/promptlife/docs/play/screenshots/v0-27-3-play-landing-fresh-320.png",
+      "label": "Play landing fresh state at 320px"
+    },
+    {
+      "name": "v0-27-3-play-debug-inspector-390.png",
+      "path": "/Users/kevinhegg/Desktop/promptlife/docs/play/screenshots/v0-27-3-play-debug-inspector-390.png",
+      "label": "Debug Play progress inspector at 390px"
+    },
+    {
+      "name": "v0-27-3-badge-play-completions-390.png",
+      "path": "/Users/kevinhegg/Desktop/promptlife/docs/play/screenshots/v0-27-3-badge-play-completions-390.png",
+      "label": "Badge page after several Play completions at 390px"
+    },
+    {
+      "name": "v0-27-3-play-after-reset-fresh-390.png",
+      "path": "/Users/kevinhegg/Desktop/promptlife/docs/play/screenshots/v0-27-3-play-after-reset-fresh-390.png",
+      "label": "Reset/fresh Play state at 390px"
+    },
+    {
+      "name": "v0-27-3-active-glossary-dojo-390.png",
+      "path": "/Users/kevinhegg/Desktop/promptlife/docs/play/screenshots/v0-27-3-active-glossary-dojo-390.png",
+      "label": "Glossary Dojo active screen at 390px"
+    },
+    {
+      "name": "v0-27-3-active-attention-match-390.png",
+      "path": "/Users/kevinhegg/Desktop/promptlife/docs/play/screenshots/v0-27-3-active-attention-match-390.png",
+      "label": "Attention Match active screen at 390px"
+    },
+    {
+      "name": "v0-27-3-active-probability-picker-390.png",
+      "path": "/Users/kevinhegg/Desktop/promptlife/docs/play/screenshots/v0-27-3-active-probability-picker-390.png",
+      "label": "Probability Picker active screen at 390px"
+    },
+    {
+      "name": "v0-27-3-active-context-stack-390.png",
+      "path": "/Users/kevinhegg/Desktop/promptlife/docs/play/screenshots/v0-27-3-active-context-stack-390.png",
+      "label": "Context Stack active screen at 390px"
+    },
+    {
+      "name": "v0-27-3-active-prompt-run-390.png",
+      "path": "/Users/kevinhegg/Desktop/promptlife/docs/play/screenshots/v0-27-3-active-prompt-run-390.png",
+      "label": "Prompt Run active screen at 390px"
+    }
+  ],
+  "results": [
+    {
+      "name": "fresh Play landing at 390",
+      "ok": true,
+      "value": {
+        "cards": [
+          "Glossary Dojo",
+          "Attention Match",
+          "Probability Picker",
+          "Context Stack",
+          "Prompt Run"
+        ],
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "hasHorizontalOverflow": false,
+        "url": "http://127.0.0.1:5174/?v=0273-play-stabilization"
+      }
+    },
+    {
+      "name": "Play landing with progress at 390",
+      "ok": true,
+      "value": {
+        "cards": [
+          "Glossary Dojo",
+          "Attention Match",
+          "Probability Picker",
+          "Context Stack",
+          "Prompt Run"
+        ],
+        "firstStats": "Played: 2Best: 10 of 12Last played: TodayMastered: 1 termsReview: 2 terms",
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "hasHorizontalOverflow": false,
+        "url": "http://127.0.0.1:5174/?v=0273-play-stabilization"
+      }
+    },
+    {
+      "name": "fresh Play landing at 320",
+      "ok": true,
+      "value": {
+        "scrollWidth": 320,
+        "clientWidth": 320,
+        "hasHorizontalOverflow": false,
+        "url": "http://127.0.0.1:5174/?v=0273-play-stabilization"
+      }
+    },
+    {
+      "name": "debug Play inspector at 390",
+      "ok": true,
+      "value": {
+        "includesKey": true,
+        "includesAllChallenges": true,
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "hasHorizontalOverflow": false,
+        "url": "http://127.0.0.1:5174/?debug=1&v=0273-play-stabilization"
+      }
+    },
+    {
+      "name": "Badge after Play completions at 390",
+      "ok": true,
+      "value": {
+        "badgeStats": "18 of 39 lessons5 of 5 play challenges0 of 17 exercises13 of 13 Prompt Run0 reflections",
+        "version": "v0.27.3",
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "hasHorizontalOverflow": false,
+        "url": "http://127.0.0.1:5174/?v=0273-play-stabilization"
+      }
+    },
+    {
+      "name": "Reset clears Play and Dojo keys",
+      "ok": true,
+      "value": {
+        "remainingKeys": [
+          "promptlife:v1:exerciseProgress",
+          "promptlife:v1:gameInsights",
+          "promptlife:v1:lastLocation",
+          "promptlife:v1:progress",
+          "promptlife:v1:promptRunProgress",
+          "promptlife:v1:reflections",
+          "promptlife:v1:traceComplete"
+        ],
+        "cards": [
+          "Glossary Dojo",
+          "Attention Match",
+          "Probability Picker",
+          "Context Stack",
+          "Prompt Run"
+        ],
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "hasHorizontalOverflow": false,
+        "url": "http://127.0.0.1:5174/?debug=1&v=0273-play-stabilization"
+      }
+    },
+    {
+      "name": "Glossary Dojo opens",
+      "ok": true,
+      "value": {
+        "heading": "Practice glossary terms",
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "hasHorizontalOverflow": false,
+        "url": "http://127.0.0.1:5174/?v=0273-play-stabilization"
+      }
+    },
+    {
+      "name": "Attention Match opens",
+      "ok": true,
+      "value": {
+        "heading": "Attention Match",
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "hasHorizontalOverflow": false,
+        "url": "http://127.0.0.1:5174/?v=0273-play-stabilization"
+      }
+    },
+    {
+      "name": "Probability Picker opens",
+      "ok": true,
+      "value": {
+        "heading": "Probability Picker",
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "hasHorizontalOverflow": false,
+        "url": "http://127.0.0.1:5174/?v=0273-play-stabilization"
+      }
+    },
+    {
+      "name": "Context Stack opens",
+      "ok": true,
+      "value": {
+        "heading": "Context Stack",
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "hasHorizontalOverflow": false,
+        "url": "http://127.0.0.1:5174/?v=0273-play-stabilization"
+      }
+    },
+    {
+      "name": "Prompt Run opens",
+      "ok": true,
+      "value": {
+        "heading": "Prompt Run",
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "hasHorizontalOverflow": false,
+        "url": "http://127.0.0.1:5174/?v=0273-play-stabilization"
+      }
+    }
+  ],
+  "pass": true
+}

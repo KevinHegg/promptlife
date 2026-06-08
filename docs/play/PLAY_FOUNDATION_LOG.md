@@ -978,3 +978,104 @@
 - `docs/play/prompt-life-v0-27-2-prompt-run-v2-report.pdf`
 - `docs/play/screenshots/v0-27-2-prompt-run-v2-screenshots.json`
 - `docs/play/screenshots/v0-27-2-*.png`
+
+## 2026-06-08 - v0.27.3 Play Set Stabilization + Full-Slate QA
+
+### Summary
+
+- Bumped the app/package version to `0.27.3`.
+- Kept the visible Play set to exactly five challenges: Glossary Dojo, Attention Match, Probability Picker, Context Stack, and Prompt Run.
+- Added a debug-only Play progress inspector that appears only when `?debug=1` is present.
+- Cleaned progress-stat language so fresh challenges show `Progress: Not started`; meaningful completed/in-progress stats remain where available.
+- Replaced remaining learner-facing Play copy that named competitive or failure framing with calmer practice/review language.
+- Updated README, storage/reset docs, and Play mode docs so old Play items are not described as current.
+- Verified the previous v0.27.2 report exists and its PDF contains embedded image objects.
+
+### Recommendations For The Next Pass
+
+1. Add a small automated Play registry test that asserts the five visible challenge ids and order.
+2. Consider a focused accessibility pass on Play challenge table/rail labels now that the set is stable.
+3. Plan a bundle/code-splitting pass before v1 so the existing Vite large-chunk warning does not become background noise.
+
+### Challenges And Risks
+
+- Reset QA clears shared Play and Glossary Dojo keys, then the app immediately rewrites normal empty app state keys as it reloads. That is expected and was documented.
+- The debug inspector is compact by design; it is useful for diagnosis but not intended as a learner surface.
+- The existing Vite large-chunk warning remains.
+
+### UI Cards, Screens, Scenes, And Routes Changed
+
+- Play landing: progress panel copy and saved-practice stat wording.
+- Play landing: debug-only progress inspector under the challenge list when `?debug=1`.
+- Glossary Dojo start panel: calmer intro and saved-progress copy.
+- Badge screen: version now displays `v0.27.3`; badge logic unchanged.
+- README: current Play set, cache-busting version, reset language.
+- Storage/reset docs: shared Play and Glossary Dojo keys plus debug inspector behavior.
+- Play mode docs: current five-challenge Play set and retired compatibility handling.
+- Report artifacts: v0.27.3 HTML/PDF report with screenshots.
+
+### LocalStorage Keys Created, Read, Migrated, Or Preserved
+
+- Created/written/read by shared Play progress: `promptlife.playChallenges.v1`.
+- Read/bridged independently by Dojo: `promptlife.glossaryDojo.v1`.
+- Preserved/read for Journey and app state: `promptlife:v1:lastLocation`, `promptlife:v1:lessonId`, `promptlife:v1:progress`, `promptlife:v1:reflections`, `promptlife:v1:exerciseProgress`, `promptlife.choiceOrderSeed.v1`.
+- Preserved/read for legacy Play insight compatibility: `promptlife:v1:gameInsights`, `pl.gameInsights`.
+- Preserved/read for Prompt Run bridge compatibility: `promptlife:v1:promptRunProgress`, `pl.promptRunProgress`, `promptlife:v1:traceComplete`, `pl.traceComplete`.
+- Preserved/read for learning-tour compatibility: `promptlife:v1:learningTourComplete`, `pl.learningTourComplete`.
+- Reset QA confirmed `promptlife.playChallenges.v1` and `promptlife.glossaryDojo.v1` are removed.
+- No Journey progress rules, badge rules, or checkpoint randomization storage behavior changed.
+
+### Verification Commands Run
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed.
+- In-app browser check: passed. Play showed exactly Glossary Dojo, Attention Match, Probability Picker, Context Stack, Prompt Run; debug inspector appeared under `?debug=1`; no horizontal overflow.
+- Scripted browser QA: passed. Captured 11 screenshot states, opened all five Play challenges, checked Badge seeded Play completion, checked reset/fresh Play, and verified no horizontal overflow at 320px/390px.
+
+### Screenshots And Report
+
+- `docs/play/prompt-life-v0-27-3-play-set-stabilization-report.html`
+- `docs/play/prompt-life-v0-27-3-play-set-stabilization-report.pdf`
+- `docs/play/screenshots/v0-27-3-play-stabilization-screenshots.json`
+- `docs/play/screenshots/v0-27-3-play-landing-fresh-390.png`
+- `docs/play/screenshots/v0-27-3-play-landing-progress-390.png`
+- `docs/play/screenshots/v0-27-3-play-landing-fresh-320.png`
+- `docs/play/screenshots/v0-27-3-play-debug-inspector-390.png`
+- `docs/play/screenshots/v0-27-3-badge-play-completions-390.png`
+- `docs/play/screenshots/v0-27-3-play-after-reset-fresh-390.png`
+- `docs/play/screenshots/v0-27-3-active-glossary-dojo-390.png`
+- `docs/play/screenshots/v0-27-3-active-attention-match-390.png`
+- `docs/play/screenshots/v0-27-3-active-probability-picker-390.png`
+- `docs/play/screenshots/v0-27-3-active-context-stack-390.png`
+- `docs/play/screenshots/v0-27-3-active-prompt-run-390.png`
+
+### Files Changed
+
+- `README.md`
+- `docs/PLAY_MODE_V0_5.md`
+- `docs/REVIEW_NOTES.md`
+- `docs/STORAGE_AND_RESET.md`
+- `docs/play/PLAY_FOUNDATION_LOG.md`
+- `docs/play/prompt-life-v0-27-3-play-set-stabilization-report.html`
+- `docs/play/prompt-life-v0-27-3-play-set-stabilization-report.pdf`
+- `docs/play/screenshots/v0-27-3-play-stabilization-screenshots.json`
+- `docs/play/screenshots/v0-27-3-play-landing-fresh-390.png`
+- `docs/play/screenshots/v0-27-3-play-landing-progress-390.png`
+- `docs/play/screenshots/v0-27-3-play-landing-fresh-320.png`
+- `docs/play/screenshots/v0-27-3-play-debug-inspector-390.png`
+- `docs/play/screenshots/v0-27-3-badge-play-completions-390.png`
+- `docs/play/screenshots/v0-27-3-play-after-reset-fresh-390.png`
+- `docs/play/screenshots/v0-27-3-active-glossary-dojo-390.png`
+- `docs/play/screenshots/v0-27-3-active-attention-match-390.png`
+- `docs/play/screenshots/v0-27-3-active-probability-picker-390.png`
+- `docs/play/screenshots/v0-27-3-active-context-stack-390.png`
+- `docs/play/screenshots/v0-27-3-active-prompt-run-390.png`
+- `package.json`
+- `package-lock.json`
+- `src/features/glossary-dojo/GlossaryDojoGame.tsx`
+- `src/features/play/challengeRegistry.ts`
+- `src/features/play/storage.ts`
+- `src/main.tsx`
+- `src/styles/global.css`

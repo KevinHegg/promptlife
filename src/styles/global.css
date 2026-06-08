@@ -5488,6 +5488,116 @@ p {
   font-weight: 950;
 }
 
+.play-debug-inspector {
+  display: grid;
+  gap: 0.75rem;
+  min-width: 0;
+  border: 1px solid rgba(122, 92, 255, 0.28);
+  border-radius: var(--pl-card-radius);
+  padding: 0.85rem;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(246, 242, 255, 0.94)),
+    var(--pl-surface-paper);
+  box-shadow: var(--pl-shadow-paper);
+}
+
+.play-debug-inspector h2,
+.play-debug-inspector p {
+  margin: 0;
+}
+
+.play-debug-inspector details {
+  min-width: 0;
+  border: 1px solid rgba(35, 67, 116, 0.14);
+  border-radius: 8px;
+  padding: 0.65rem;
+  background: rgba(255, 255, 255, 0.76);
+}
+
+.play-debug-inspector summary {
+  color: var(--pl-navy);
+  font-weight: 950;
+  cursor: pointer;
+}
+
+.play-debug-inspector pre {
+  max-width: 100%;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  color: var(--pl-ink);
+  font-size: 0.72rem;
+  line-height: 1.35;
+}
+
+.play-debug-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.45rem;
+}
+
+.play-debug-summary-grid span,
+.play-debug-key-list li {
+  display: grid;
+  gap: 0.18rem;
+  min-width: 0;
+  border: 1px solid rgba(188, 201, 242, 0.78);
+  border-radius: 8px;
+  padding: 0.5rem;
+  background: rgba(245, 247, 255, 0.76);
+  color: var(--pl-ink-soft);
+  font-size: 0.72rem;
+  line-height: 1.25;
+}
+
+.play-debug-summary-grid strong,
+.play-debug-key-list strong {
+  color: var(--pl-navy);
+  font-size: 0.74rem;
+}
+
+.play-debug-table {
+  display: grid;
+  gap: 0.28rem;
+  margin-top: 0.55rem;
+  min-width: 0;
+  font-size: 0.7rem;
+  line-height: 1.18;
+}
+
+.play-debug-table [role="row"] {
+  display: grid;
+  grid-template-columns: minmax(4.8rem, 1.25fr) minmax(3.3rem, 0.8fr) repeat(3, minmax(2.1rem, 0.55fr));
+  gap: 0.22rem;
+  align-items: center;
+  min-width: 0;
+}
+
+.play-debug-table span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.play-debug-table-head {
+  color: var(--pl-indigo);
+  font-weight: 950;
+}
+
+.play-debug-key-list {
+  display: grid;
+  gap: 0.4rem;
+  padding: 0;
+  margin: 0.55rem 0 0;
+  list-style: none;
+}
+
+.play-debug-key-list code,
+.play-debug-key-list small {
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
 .play-action-row {
   display: flex;
   flex-wrap: wrap;

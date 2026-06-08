@@ -243,7 +243,7 @@ function formatCompletions(count: number) {
 }
 
 function formatBestLabel(meta: PlayChallengeMeta, attempt: PlayChallengeAttempt, legacy: LegacyPlaySignals = {}) {
-  if (meta.availability === 'coming-soon') return 'Best: Coming soon'
+  if (meta.availability === 'coming-soon') return 'Progress: Coming soon'
 
   if (meta.id === 'glossary-dojo') {
     const dojo = legacy.glossaryDojoProgress
@@ -284,8 +284,8 @@ function formatBestLabel(meta: PlayChallengeMeta, attempt: PlayChallengeAttempt,
     return 'Current: Started'
   }
 
-  if (attempt.bestProgressPct > 0) return `Best: ${attempt.bestProgressPct}% explored`
-  return 'Best: Not yet'
+  if (attempt.bestProgressPct > 0) return `Progress: ${attempt.bestProgressPct}% explored`
+  return 'Progress: Not started'
 }
 
 function buildProgressStats(meta: PlayChallengeMeta, attempt: PlayChallengeAttempt, legacy: LegacyPlaySignals = {}) {
@@ -333,7 +333,7 @@ function bridgeLegacyProgress(meta: PlayChallengeMeta, base: PlayChallengeAttemp
         completions: Math.max(base.completions, finalDone ? 1 : 0),
         bestProgressPct: Math.max(base.bestProgressPct, bestProgressPct),
         status: finalDone ? 'completed' : 'in-progress',
-        lastOutcome: finalDone ? 'Completed without needing a score.' : `${completedSteps} Prompt Run steps saved.`
+        lastOutcome: finalDone ? 'Completed through legacy Prompt Run progress.' : `${completedSteps} Prompt Run steps saved.`
       })
     }
   }
@@ -371,7 +371,7 @@ function bridgeLegacyProgress(meta: PlayChallengeMeta, base: PlayChallengeAttemp
       completions: Math.max(base.completions, 1),
       bestProgressPct: Math.max(base.bestProgressPct, 100),
       status: 'completed',
-      lastOutcome: 'Completed without needing a score.'
+      lastOutcome: 'Completed through earlier Play progress.'
     })
   }
 

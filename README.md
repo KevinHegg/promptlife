@@ -74,11 +74,11 @@ The repo also includes a GitHub Pages workflow. Pushes to `main` build the app w
 https://kevinhegg.github.io/promptlife/
 ```
 
-Developer cache note for iPhone testing: after a `main` deploy, use a hard refresh, clear site data, add a cache-busting query such as `?v=0268`, or confirm the visible app version on the Badge page.
+Developer cache note for iPhone testing: after a `main` deploy, use a hard refresh, clear site data, add a cache-busting query such as `?v=0274`, or confirm the visible app version on the Badge page.
 
 ## Reset Progress
 
-Progress is stored in this browser's `localStorage`, not cookies. Use the Badge screen's `Reset progress` button to start over on this device. Reset clears lessons, exercises, Prompt Run progress, reflections, mini-game insights, tours, and last location.
+Progress is stored in this browser's `localStorage`, not cookies. Use the Badge screen's `Reset progress` button to start over on this device. Reset clears lessons, exercises, shared Play challenge progress, Glossary Dojo practice, Prompt Run progress, reflections, legacy mini-game insights, tours, and last location.
 
 For local debugging, add `?debug=1` to the app URL and open the Badge screen to reveal progress tools. See [docs/STORAGE_AND_RESET.md](docs/STORAGE_AND_RESET.md) for the exact keys and reset behavior.
 
@@ -88,8 +88,8 @@ For local debugging, add `?debug=1` to the app URL and open the Badge screen to 
 - Mobile-first layout tuned for 390px width.
 - Simple navigation: Home, Journey, Play, Glossary, Badge.
 - Consistent lesson pattern: definition, where it happens, why it matters, relationship, metaphor, Brain Bridge, visual aid, tiny interaction, checkpoint, and reflection.
-- Reusable exercise system in Play, Prompt Run, and How AI Learns.
-- LocalStorage progress for completed lessons, exercises, game insights, reflections, and the current location.
+- Reusable exercise system in Journey, Play challenges, and Prompt Run.
+- LocalStorage progress for completed lessons, exercises, shared Play challenge practice, Glossary Dojo rounds, legacy game insights, reflections, and the current location.
 - Lightweight React/SVG/CSS concept animations with reduced-motion support.
 - Lightweight lesson visual aids plus review routes at `/review/lesson-cards` and `/review/visual-aids`.
 - Lesson-card PDF export through `npm run export:lesson-pdf` and inventory review export through `npm run export:lesson-cards`.
@@ -100,15 +100,14 @@ For local debugging, add `?debug=1` to the app URL and open the Badge screen to 
 - v0.14 Glossary A-Z/Learning path sorting and Journey path filters for Essential, Deep, and Ethics.
 - v0.15 eight-section Journey narrative with clickable stage links and late-day sections for Twilight, Midnight Ledger, and New Dawn.
 - HTML legend/callout visual aid system designed to stay readable in mobile and PDF review.
-- Play mode centered on Prompt Run, an interactive 12-step inference loop plus final ordering challenge.
-- Guided comparisons:
-  - Prompt Run
-  - How AI Learns
-- Glossary screen plus accessible glossary drawer.
-- Three reflection-centered mini-games:
+- Play mode with five calm practice challenges:
+  - Glossary Dojo
+  - Attention Match
+  - Probability Picker
   - Context Stack
-  - Attention Weave
-  - Token Pipeline Relay
+  - Prompt Run capstone
+- Glossary screen plus accessible glossary drawer.
+- Retired Play compatibility routes for earlier Attention Weave, Token Pipeline Relay, and How AI Learns states, kept so older saved progress is not lost.
 - Model Literate badge screen focused on progress and reflection rather than scores.
 - Accessibility basics: semantic HTML, visible focus states, image alt text, real buttons, and reduced-motion support.
 
@@ -116,4 +115,4 @@ For local debugging, add `?debug=1` to the app URL and open the Badge screen to 
 
 One screen, one idea. One interaction, one relationship. Keep text in HTML for accessibility. Use visual assets to reduce mystery, not to hide the explanation.
 
-See [docs/PRODUCT_BLUEPRINT.md](docs/PRODUCT_BLUEPRINT.md) for the learning architecture, [docs/CONTENT_REPAIR_V0_6.md](docs/CONTENT_REPAIR_V0_6.md) for the v0.6 repair pass, [docs/content-inventory/CONTENT_INVENTORY_V0_6.md](docs/content-inventory/CONTENT_INVENTORY_V0_6.md) for the current curriculum inventory, [docs/VISUAL_AIDS_V0_6.md](docs/VISUAL_AIDS_V0_6.md) for visual aids, [docs/PLAY_MODE_V0_5.md](docs/PLAY_MODE_V0_5.md) for Prompt Run, [docs/ANIMATION_SYSTEM.md](docs/ANIMATION_SYSTEM.md) for the concept animation approach, [docs/EXERCISE_SYSTEM.md](docs/EXERCISE_SYSTEM.md) for reusable exercises, and [docs/STORAGE_AND_RESET.md](docs/STORAGE_AND_RESET.md) for local progress storage.
+See [docs/PRODUCT_BLUEPRINT.md](docs/PRODUCT_BLUEPRINT.md) for the learning architecture, [docs/CONTENT_REPAIR_V0_6.md](docs/CONTENT_REPAIR_V0_6.md) for the v0.6 repair pass, [docs/content-inventory/CONTENT_INVENTORY_V0_6.md](docs/content-inventory/CONTENT_INVENTORY_V0_6.md) for the current curriculum inventory, [docs/VISUAL_AIDS_V0_6.md](docs/VISUAL_AIDS_V0_6.md) for visual aids, [docs/PLAY_MODE_V0_5.md](docs/PLAY_MODE_V0_5.md) for the current Play mode plus historical v0.5 notes, [docs/ANIMATION_SYSTEM.md](docs/ANIMATION_SYSTEM.md) for the concept animation approach, [docs/EXERCISE_SYSTEM.md](docs/EXERCISE_SYSTEM.md) for reusable exercises, and [docs/STORAGE_AND_RESET.md](docs/STORAGE_AND_RESET.md) for local progress storage.

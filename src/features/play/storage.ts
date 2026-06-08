@@ -206,7 +206,7 @@ export function markPlayChallengeCompleted(
         status,
         lastPlayedAt: completedAt,
         completedAt,
-        lastOutcome: outcome.outcome ?? (outcome.reviewSuggested ? 'Completed a calm round; review suggested.' : 'Completed without needing a score.'),
+        lastOutcome: outcome.outcome ?? (outcome.reviewSuggested ? 'Completed a calm round; review suggested.' : 'Practice completed. Progress saved on this device.'),
         misconceptionTags: mergeTags(previous.misconceptionTags, outcome.misconceptionTags)
       }
     }

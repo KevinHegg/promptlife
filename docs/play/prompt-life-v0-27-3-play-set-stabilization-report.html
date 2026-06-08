@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Prompt Life v0.27.3 Play Set Stabilization Report</title>
+  <style>
+    :root {
+      color: #07124a;
+      background: #f7f5ef;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.45;
+    }
+    body {
+      margin: 0;
+      padding: 28px;
+      background:
+        linear-gradient(132deg, transparent 0 58%, rgba(53, 230, 226, 0.14) 58.2% 58.55%, transparent 58.8%),
+        #f7f5ef;
+    }
+    main {
+      max-width: 980px;
+      margin: 0 auto;
+      display: grid;
+      gap: 18px;
+    }
+    section, figure {
+      margin: 0;
+      border: 1px solid rgba(18, 30, 114, 0.14);
+      border-radius: 10px;
+      padding: 18px;
+      background: rgba(255, 253, 248, 0.94);
+      box-shadow: 0 16px 42px rgba(7, 18, 74, 0.08);
+      break-inside: avoid;
+    }
+    h1, h2, h3, p, ul, ol {
+      margin-top: 0;
+    }
+    h1 {
+      margin-bottom: 8px;
+      font-size: 34px;
+      line-height: 1.05;
+      color: #121e72;
+    }
+    h2 {
+      margin-bottom: 8px;
+      color: #121e72;
+      font-size: 22px;
+    }
+    h3 {
+      margin-bottom: 6px;
+      color: #07124a;
+      font-size: 16px;
+    }
+    .eyebrow {
+      margin-bottom: 8px;
+      color: #0fa8a4;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .summary-grid, .qa-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .summary-grid span, .qa-grid span {
+      display: grid;
+      gap: 2px;
+      border: 1px solid rgba(188, 201, 242, 0.82);
+      border-radius: 8px;
+      padding: 10px;
+      background: #f5f7ff;
+    }
+    strong {
+      color: #07124a;
+    }
+    code {
+      color: #121e72;
+      overflow-wrap: anywhere;
+    }
+    ul, ol {
+      padding-left: 1.2rem;
+      margin-bottom: 0;
+    }
+    li + li {
+      margin-top: 4px;
+    }
+    .screenshot-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    figure {
+      padding: 12px;
+    }
+    figure img {
+      display: block;
+      width: 100%;
+      max-height: 760px;
+      object-fit: contain;
+      border-radius: 8px;
+      border: 1px solid rgba(18, 30, 114, 0.12);
+      background: white;
+    }
+    figcaption {
+      margin-top: 8px;
+      font-weight: 800;
+      color: #26345f;
+    }
+    @media print {
+      body { padding: 12px; }
+      main { max-width: none; }
+      section, figure { box-shadow: none; }
+      .screenshot-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      figure img { max-height: 650px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section>
+      <p class="eyebrow">Prompt Life v0.27.3</p>
+      <h1>Play Set Stabilization + Full-Slate QA</h1>
+      <p>This pass stabilizes the current five-challenge Play set, cleans progress language, adds a debug-only Play progress inspector, verifies localStorage behavior, and captures mobile QA screenshots.</p>
+      <div class="summary-grid">
+        <span><strong>Version</strong>0.27.3</span>
+        <span><strong>Play set</strong>Glossary Dojo, Attention Match, Probability Picker, Context Stack, Prompt Run</span>
+        <span><strong>Screenshot states</strong>11</span>
+        <span><strong>Smoke checks</strong>11 passed</span>
+      </div>
+    </section>
+
+    <section>
+      <h2>What Changed</h2>
+      <ul>
+        <li>Bumped app and package version from <code>0.27.2</code> to <code>0.27.3</code>.</li>
+        <li>Added a Play-screen debug inspector that appears only when <code>?debug=1</code> is present.</li>
+        <li>Cleaned Play progress language: fresh challenges now show <code>Progress: Not started</code> instead of a fake best result.</li>
+        <li>Removed remaining learner-facing Play wording that mentioned score, points, leaderboards, or failure-state framing.</li>
+        <li>Updated README, storage/reset docs, and Play mode docs so retired activities are no longer described as the current Play slate.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Play Landing Audit</h2>
+      <p>The visible Play landing shows one ordered list: Glossary Dojo, Attention Match, Probability Picker, Context Stack, Prompt Run. Token Pipeline Relay and How AI Learns are not prominent and remain compatibility-only. Attention Weave is preserved as a legacy route that opens Attention Match.</p>
+      <p>Fresh and progress states were checked at 390px, and a fresh state was checked at 320px. No horizontal overflow was detected.</p>
+    </section>
+
+    <section>
+      <h2>Progress + Storage QA</h2>
+      <ul>
+        <li>Read and displayed shared Play state from <code>promptlife.playChallenges.v1</code>.</li>
+        <li>Read and bridged Glossary Dojo state from <code>promptlife.glossaryDojo.v1</code>.</li>
+        <li>Preserved legacy bridge reads for <code>promptlife:v1:gameInsights</code>, <code>pl.gameInsights</code>, Prompt Run progress keys, trace-complete keys, and learning-tour compatibility keys.</li>
+        <li>Reset QA confirmed shared Play and Glossary Dojo keys are cleared. The app then rewrites normal default empty state keys as it reloads, which is expected.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Challenge Smoke Test</h2>
+      <div class="qa-grid">
+        <span><strong>Glossary Dojo</strong>Opened to <code>Practice glossary terms</code>.</span>
+        <span><strong>Attention Match</strong>Opened to active Attention Match challenge.</span>
+        <span><strong>Probability Picker</strong>Opened to active Probability Picker challenge.</span>
+        <span><strong>Context Stack</strong>Opened to active Context Stack challenge.</span>
+        <span><strong>Prompt Run</strong>Opened to Prompt Run v2 capstone.</span>
+        <span><strong>Badge</strong>Showed <code>5 of 5 play challenges</code> under seeded completion state.</span>
+      </div>
+    </section>
+
+    <section>
+      <h2>Prompt Run v2 Check</h2>
+      <p>Prompt Run opens as the capstone challenge with the six-station v2 structure. The 390px active-screen screenshot showed the header, station rail, first station, and bottom nav without horizontal overflow.</p>
+    </section>
+
+    <section>
+      <h2>Previous Report Check</h2>
+      <p>The v0.27.2 Prompt Run v2 report is present at <code>docs/play/prompt-life-v0-27-2-prompt-run-v2-report.pdf</code>. Its HTML references eight screenshot images, and the PDF contains image objects, so the previous screenshots are embedded.</p>
+    </section>
+
+    <section>
+      <h2>Verification</h2>
+      <ul>
+        <li><code>npm run typecheck</code>: passed.</li>
+        <li><code>npm run build</code>: passed with the existing Vite large-chunk warning.</li>
+        <li><code>npm run build:pages</code>: passed with the existing Vite large-chunk warning.</li>
+        <li><code>npm run audit:answers</code>: passed.</li>
+        <li>Browser QA: 11 screenshot/smoke states passed, with no horizontal overflow at 320px or 390px.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Known Issues</h2>
+      <ul>
+        <li>The existing Vite large-chunk warning remains.</li>
+        <li>Reset writes normal empty app state keys again after clearing; this is expected and unrelated to the shared Play / Dojo reset target.</li>
+        <li>The debug inspector is intentionally compact; it is a developer aid, not a learner-facing feature.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Screenshots</h2>
+      <div class="screenshot-grid">
+        <figure><img src="screenshots/v0-27-3-play-landing-fresh-390.png" alt="Play landing fresh state at 390 pixels wide" /><figcaption>Play landing fresh state at 390px</figcaption></figure>
+        <figure><img src="screenshots/v0-27-3-play-landing-progress-390.png" alt="Play landing with progress at 390 pixels wide" /><figcaption>Play landing with progress at 390px</figcaption></figure>
+        <figure><img src="screenshots/v0-27-3-play-landing-fresh-320.png" alt="Play landing fresh state at 320 pixels wide" /><figcaption>Play landing fresh state at 320px</figcaption></figure>
+        <figure><img src="screenshots/v0-27-3-play-debug-inspector-390.png" alt="Debug Play progress inspector at 390 pixels wide" /><figcaption>Debug Play progress inspector at 390px</figcaption></figure>
+        <figure><img src="screenshots/v0-27-3-badge-play-completions-390.png" alt="Badge page after several Play completions at 390 pixels wide" /><figcaption>Badge after several Play completions at 390px</figcaption></figure>
+        <figure><img src="screenshots/v0-27-3-play-after-reset-fresh-390.png" alt="Reset fresh Play state at 390 pixels wide" /><figcaption>Reset/fresh Play state at 390px</figcaption></figure>
+        <figure><img src="screenshots/v0-27-3-active-glossary-dojo-390.png" alt="Glossary Dojo active screen at 390 pixels wide" /><figcaption>Glossary Dojo active screen at 390px</figcaption></figure>
+        <figure><img src="screenshots/v0-27-3-active-attention-match-390.png" alt="Attention Match active screen at 390 pixels wide" /><figcaption>Attention Match active screen at 390px</figcaption></figure>
+        <figure><img src="screenshots/v0-27-3-active-probability-picker-390.png" alt="Probability Picker active screen at 390 pixels wide" /><figcaption>Probability Picker active screen at 390px</figcaption></figure>
+        <figure><img src="screenshots/v0-27-3-active-context-stack-390.png" alt="Context Stack active screen at 390 pixels wide" /><figcaption>Context Stack active screen at 390px</figcaption></figure>
+        <figure><img src="screenshots/v0-27-3-active-prompt-run-390.png" alt="Prompt Run active screen at 390 pixels wide" /><figcaption>Prompt Run active screen at 390px</figcaption></figure>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

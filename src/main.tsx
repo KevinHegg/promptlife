@@ -71,7 +71,7 @@ const HOME_ASSETS = {
   heroFallback: `${ASSET}/illustrations/scene-hero-feature-cloud@mobile.png`
 }
 // Bump this for each shipped app change; the Badge screen displays it under Start over.
-const APP_VERSION = '0.27.2'
+const APP_VERSION = '0.27.4'
 const STORAGE_KEYS = {
   lastLocation: 'promptlife:v1:lastLocation',
   lessonId: 'promptlife:v1:lessonId',
@@ -690,6 +690,7 @@ function App() {
             onPromptRunAttempt={recordPromptRunAttempt}
             onTraceComplete={() => setTraceComplete(true)}
             onLearningTourComplete={() => setLearningTourComplete(true)}
+            debugEnabled={debugEnabled}
           />
         )}
         {tab === 'glossary' && <GlossaryScreen onOpen={setDrawerTerm} onPractice={() => openPlayFeature('glossary-dojo')} />}
@@ -1153,7 +1154,7 @@ function LessonScreen({ lesson, mode, lessonIndex, totalLessons, reflection, onC
             setContinueHint(false)
           }}
           revealed={revealed}
-          progress={checkpointItems.length > 1 ? { current: activeCheckpointIndex + 1, total: checkpointItems.length } : null}
+          progress={{ current: activeCheckpointIndex + 1, total: checkpointItems.length }}
           onPrevious={activeCheckpointIndex > 0 ? () => setCheckpointIndex((index) => Math.max(0, index - 1)) : null}
         />
         {continueHint && (
@@ -1185,7 +1186,7 @@ function LessonScreen({ lesson, mode, lessonIndex, totalLessons, reflection, onC
       </section>
 
       <button className={isCorrect || !canUpdateProgress ? 'primary-btn sticky-action is-ready' : 'primary-btn sticky-action'} onClick={saveAndContinue}>
-        {!canUpdateProgress ? 'Return to Journey' : isCorrect ? (!isLastCheckpointQuestion ? 'Next checkpoint question' : lessonIndex + 1 === totalLessons ? 'Finish and view badge' : 'Next lesson') : choice == null ? 'Answer checkpoint to continue' : 'Retry checkpoint to continue'}
+        {!canUpdateProgress ? 'Return to Journey' : isCorrect ? (isLastCheckpointQuestion && lessonIndex + 1 === totalLessons ? 'Finish and view badge' : 'Next question') : choice == null ? 'Answer checkpoint to continue' : 'Retry checkpoint to continue'}
       </button>
     </section>
   )
@@ -1411,26 +1412,34 @@ function Checkpoint({ quiz, choices, selectedChoiceId, setChoice, revealed, prog
   const feedback = selectedChoice?.feedback ?? quiz.explain
   const feedbackHasLead = !isCorrect && typeof feedback === 'string' && feedback.startsWith('Not quite.')
   const feedbackHasCorrectLead = isCorrect && typeof feedback === 'string' && feedback.startsWith('Insight unlocked')
-  const hasProgress = Boolean(progress && progress.total > 1)
+  const hasProgress = Boolean(progress && progress.total >= 1)
+  const hasMultipleQuestions = Boolean(progress && progress.total > 1)
   const isFinalQuestion = hasProgress && progress.current === progress.total
+  const questionProgressLabel = hasProgress
+    ? `${progress.current} of ${progress.total} question${progress.total === 1 ? '' : 's'}`
+    : ''
 
   return (
     <>
       {hasProgress ? (
-        <div className="checkpoint-pager" aria-label={`Checkpoint question ${progress.current} of ${progress.total}`}>
+        <div className="checkpoint-pager" aria-label={`Checkpoint ${questionProgressLabel}`}>
           <div className="checkpoint-pager-row">
             <span className="step-label">Checkpoint</span>
-            <span className="checkpoint-count">Question {progress.current} of {progress.total}</span>
+            <span className="checkpoint-count">{questionProgressLabel}</span>
           </div>
-          <div className="checkpoint-dots" aria-hidden="true">
-            {Array.from({ length: progress.total }, (_, index) => (
-              <span key={index} className={index + 1 <= progress.current ? 'active' : ''} />
-            ))}
-          </div>
-          <div className="checkpoint-pager-row">
-            {onPrevious ? <button className="text-btn checkpoint-back" type="button" onClick={onPrevious}>Previous question</button> : <span />}
-            {isFinalQuestion && <strong className="checkpoint-final">Final question</strong>}
-          </div>
+          {hasMultipleQuestions && (
+            <div className="checkpoint-dots" aria-hidden="true">
+              {Array.from({ length: progress.total }, (_, index) => (
+                <span key={index} className={index + 1 <= progress.current ? 'active' : ''} />
+              ))}
+            </div>
+          )}
+          {(onPrevious || (hasMultipleQuestions && isFinalQuestion)) && (
+            <div className="checkpoint-pager-row">
+              {onPrevious ? <button className="text-btn checkpoint-back" type="button" onClick={onPrevious}>Previous question</button> : <span />}
+              {hasMultipleQuestions && isFinalQuestion && <strong className="checkpoint-final">Final question</strong>}
+            </div>
+          )}
         </div>
       ) : (
         <span className="step-label">Checkpoint</span>
@@ -3320,7 +3329,134 @@ function FeatureCloudDemo() {
   )
 }
 
-function PlayScreen({ gameId, gameInsights, traceComplete, promptRunProgress, learningTourComplete, exerciseProgress, setGameId, onGlossary, onInsight, onExerciseAttempt, onPromptRunAttempt, onTraceComplete, onLearningTourComplete }) {
+function getStorageKeyDebugState(key) {
+  try {
+    if (typeof localStorage === 'undefined') return { key, present: false, bytes: 0, preview: 'localStorage unavailable' }
+    const raw = localStorage.getItem(key)
+    if (raw === null) return { key, present: false, bytes: 0, preview: '' }
+    return {
+      key,
+      present: true,
+      bytes: raw.length,
+      preview: raw.length > 180 ? `${raw.slice(0, 180)}...` : raw
+    }
+  } catch (error) {
+    return {
+      key,
+      present: false,
+      bytes: 0,
+      preview: error instanceof Error ? error.message : 'Unable to inspect storage'
+    }
+  }
+}
+
+function buildPlayDebugSnapshot(playProgress, challengeSummaries, legacySignals) {
+  const keyGroups = [
+    ['Shared Play', STORAGE_KEYS.playChallenges],
+    ['Glossary Dojo', STORAGE_KEYS.glossaryDojo],
+    ['Journey progress', STORAGE_KEYS.progress],
+    ['Exercise progress', STORAGE_KEYS.exerciseProgress],
+    ['Legacy game insights', STORAGE_KEYS.gameInsights],
+    ['Legacy Prompt Run', STORAGE_KEYS.promptRunProgress],
+    ['Prompt Run completion flag', STORAGE_KEYS.traceComplete],
+    ['Learning tour compatibility', STORAGE_KEYS.learningTourComplete],
+    ['Legacy pl.gameInsights', LEGACY_STORAGE_KEYS.gameInsights],
+    ['Legacy pl.promptRunProgress', LEGACY_STORAGE_KEYS.promptRunProgress],
+    ['Legacy pl.traceComplete', LEGACY_STORAGE_KEYS.traceComplete],
+    ['Legacy pl.learningTourComplete', LEGACY_STORAGE_KEYS.learningTourComplete]
+  ]
+
+  return {
+    version: APP_VERSION,
+    sharedPlayStorage: {
+      key: STORAGE_KEYS.playChallenges,
+      version: playProgress.version,
+      storageAvailable: playProgress.storageAvailable,
+      storedChallengeIds: Object.keys(playProgress.challenges ?? {})
+    },
+    visibleChallenges: challengeSummaries.map((challenge) => ({
+      id: challenge.id,
+      status: challenge.status,
+      attempts: challenge.progress.attempts,
+      completions: challenge.progress.completions,
+      bestProgressPct: challenge.progress.bestProgressPct,
+      lastOutcome: challenge.progress.lastOutcome ?? '',
+      lastPlayedAt: challenge.progress.lastPlayedAt ?? '',
+      completedAt: challenge.progress.completedAt ?? ''
+    })),
+    legacyBridgeSignals: {
+      gameInsightIds: legacySignals.gameInsights ?? [],
+      traceComplete: Boolean(legacySignals.traceComplete),
+      promptRunCompletedSteps: legacySignals.promptRunProgress?.completedSteps?.length ?? 0,
+      promptRunFinalChallengeComplete: Boolean(legacySignals.promptRunProgress?.finalChallengeComplete),
+      learningTourComplete: Boolean(legacySignals.learningTourComplete),
+      glossaryDojoRoundsAttempted: legacySignals.glossaryDojoProgress?.roundsAttempted ?? 0,
+      glossaryDojoRoundsCompleted: legacySignals.glossaryDojoProgress?.roundsCompleted ?? 0
+    },
+    storageKeys: keyGroups.map(([label, key]) => ({
+      label,
+      ...getStorageKeyDebugState(key)
+    }))
+  }
+}
+
+function PlayProgressDebugInspector({ snapshot }) {
+  return (
+    <section className="play-debug-inspector" aria-labelledby="play-debug-inspector-title">
+      <div>
+        <p className="eyebrow">Debug only</p>
+        <h2 id="play-debug-inspector-title">Play progress inspector</h2>
+        <p>Visible because debug mode is on. This shows local practice state and legacy bridge signals without changing progress.</p>
+      </div>
+      <div className="play-debug-summary-grid">
+        <span><strong>App version</strong>{snapshot.version}</span>
+        <span><strong>Storage key</strong>{snapshot.sharedPlayStorage.key}</span>
+        <span><strong>Storage available</strong>{snapshot.sharedPlayStorage.storageAvailable ? 'yes' : 'no'}</span>
+        <span><strong>Stored ids</strong>{snapshot.sharedPlayStorage.storedChallengeIds.length || 0}</span>
+      </div>
+      <details open>
+        <summary>Visible Play challenges</summary>
+        <div className="play-debug-table" role="table" aria-label="Visible Play challenge progress">
+          <div role="row" className="play-debug-table-head">
+            <span role="columnheader">Challenge</span>
+            <span role="columnheader">Status</span>
+            <span role="columnheader">Tries</span>
+            <span role="columnheader">Done</span>
+            <span role="columnheader">Pct</span>
+          </div>
+          {snapshot.visibleChallenges.map((challenge) => (
+            <div role="row" key={challenge.id}>
+              <span role="cell">{challenge.id}</span>
+              <span role="cell">{challenge.status}</span>
+              <span role="cell">{challenge.attempts}</span>
+              <span role="cell">{challenge.completions}</span>
+              <span role="cell">{challenge.bestProgressPct}%</span>
+            </div>
+          ))}
+        </div>
+      </details>
+      <details>
+        <summary>localStorage keys</summary>
+        <ul className="play-debug-key-list">
+          {snapshot.storageKeys.map((item) => (
+            <li key={`${item.label}-${item.key}`}>
+              <strong>{item.label}</strong>
+              <code>{item.key}</code>
+              <span>{item.present ? `${item.bytes} bytes` : 'not present'}</span>
+              {item.preview && <small>{item.preview}</small>}
+            </li>
+          ))}
+        </ul>
+      </details>
+      <details>
+        <summary>Bridge signals</summary>
+        <pre>{JSON.stringify(snapshot.legacyBridgeSignals, null, 2)}</pre>
+      </details>
+    </section>
+  )
+}
+
+function PlayScreen({ gameId, gameInsights, traceComplete, promptRunProgress, learningTourComplete, exerciseProgress, setGameId, onGlossary, onInsight, onExerciseAttempt, onPromptRunAttempt, onTraceComplete, onLearningTourComplete, debugEnabled = false }) {
   const [playProgress, setPlayProgress] = useState(() => loadPlayChallengeProgress())
   const refreshPlayProgress = useCallback(() => setPlayProgress(loadPlayChallengeProgress()), [])
   const dojoProgress = loadGlossaryDojoProgress()
@@ -3337,6 +3473,7 @@ function PlayScreen({ gameId, gameInsights, traceComplete, promptRunProgress, le
       image: item.image?.startsWith('/') ? `${BASE}${item.image}` : item.image
     }))
   const completedFinalChallenges = getCompletedFinalPlayCount(challengeSummaries)
+  const playDebugSnapshot = debugEnabled ? buildPlayDebugSnapshot(playProgress, challengeSummaries, legacySignals) : null
 
   const recordChallengeStart = useCallback((id, outcome = {}) => {
     setPlayProgress(recordPlayChallengeAttempt(id, outcome))
@@ -3498,7 +3635,7 @@ function PlayScreen({ gameId, gameInsights, traceComplete, promptRunProgress, le
         titleId="play-title"
       />
       <PlayFeedbackPanel>
-        <p><strong>Progress saved on this device.</strong> Play is practice, not a score. {completedFinalChallenges} of {FINAL_PLAY_CHALLENGE_COUNT} practice challenges show saved completion or review progress.</p>
+        <p><strong>Progress saved on this device.</strong> {completedFinalChallenges} of {FINAL_PLAY_CHALLENGE_COUNT} practice challenges show saved completion or review progress.</p>
         <p>Each challenge practices one model-literacy move.</p>
       </PlayFeedbackPanel>
       <PlayProgressRail value={(completedFinalChallenges / FINAL_PLAY_CHALLENGE_COUNT) * 100} label={`${completedFinalChallenges} of ${FINAL_PLAY_CHALLENGE_COUNT} Play practice challenges complete or review suggested`} />
@@ -3514,6 +3651,7 @@ function PlayScreen({ gameId, gameInsights, traceComplete, promptRunProgress, le
           ))}
         </PlayChallengeBoard>
       </section>
+      {playDebugSnapshot && <PlayProgressDebugInspector snapshot={playDebugSnapshot} />}
     </section>
   )
 }

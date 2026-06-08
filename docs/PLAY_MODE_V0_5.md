@@ -1,93 +1,94 @@
-# Play Mode v0.5
+# Play Mode
 
-Date: 2026-06-01
+Date: 2026-06-08
+Current app version: v0.27.3
+
+This file started as the v0.5 Play plan. It now describes the current Play surface first, then keeps the older v0.5 structure as historical context only.
 
 ## Purpose
 
-v0.5 makes Play the interactive heart of Prompt Life. The goal is still model literacy, not competition: learners unlock insight through low-pressure actions, hints, retry, reveal, and reflection.
+Play is the low-pressure practice area for Prompt Life. It helps learners rehearse model-literacy moves through calm choices, comparisons, saved practice, and review.
 
-## Play Hierarchy
+Journey progress remains separate. Play can reinforce the concepts, but completing Play challenges is not required to advance through Journey cards.
 
-### Featured Activity
+## Current Play Set
 
-Prompt Run
+The visible Play landing shows one ordered list:
 
-- Subtitle: Guide one prompt through the model.
-- Action: Label, connect, choose, append.
-- Teaches: the full inference loop.
-- Estimated time: 8-10 min.
-- State: Not started, step count, or Complete.
+1. Glossary Dojo
+   - Purpose: Practice concept discrimination.
+   - Action: Choose, compare, review.
+   - Time: 4 min.
+   - Relationship: usable anytime across the full Journey.
 
-### Side Challenges
+2. Attention Match
+   - Purpose: Connect a token to what it depends on.
+   - Action: Connect relevant tokens.
+   - Time: 3 min.
+   - Relationship: after Workday / Attention.
 
-- Context Stack: Push and observe what falls out. Teaches context windows.
-- Attention Weave: Connect relevant tokens. Teaches attention as relevance.
-- Token Pipeline Relay: Toggle operators. Teaches sequence, state, and determinism.
+3. Probability Picker
+   - Purpose: Explore probability-shaped next-token choices.
+   - Action: Choose one likely token.
+   - Time: 3 min.
+   - Relationship: after Decision Room / Logits, Softmax, Sampling.
 
-### Tours
+4. Context Stack
+   - Purpose: See what fits in context.
+   - Action: Place, observe, reset.
+   - Time: 3 min.
+   - Relationship: after The Day Repeats / Context Window, RAG, Grounding.
 
-- How AI Learns: Sort learning types. Teaches durable training vs temporary steering.
+5. Prompt Run
+   - Purpose: Trace one prompt through the whole loop.
+   - Action: Trace the loop.
+   - Time: 5-7 min.
+   - Relationship: capstone for Morning Commute through The Day Repeats.
 
-## Prompt Run
+## Current Progress Model
 
-Prompt Run replaces the old Trace One Prompt lecture flow. The sample prompt is:
+Shared Play progress is stored in:
 
-`The dog chased the cat across the ...`
+- `promptlife.playChallenges.v1`
 
-The activity has 12 interactive steps plus a final synthesis challenge:
+Glossary Dojo keeps its own detailed round history in:
 
-1. Prompt or Response?
-2. Tokenizer
-3. Token IDs
-4. Embedding Lookup
-5. Tensor Stack
-6. Attention
-7. MLP Feature Reshape
-8. Hidden State
-9. Logits
-10. Softmax Funnel
-11. Sampling
-12. Append and Repeat
-13. Full Run Challenge: Put the run in order
+- `promptlife.glossaryDojo.v1`
 
-Each step uses the existing `ExerciseShell` pattern:
+Legacy keys are still read where useful so older local progress can bridge into the current Play summary:
 
-- Goal
-- Do this
-- Try area
-- Feedback
-- Why this matters
-- Hint
-- Show me
-
-Continue stays disabled until the learner answers correctly or uses Show me. Reveals allow progress without shame, while correct answers unlock insight.
-
-## Progress
-
-Prompt Run progress is stored in:
-
+- `promptlife:v1:gameInsights`
+- `pl.gameInsights`
 - `promptlife:v1:promptRunProgress`
+- `pl.promptRunProgress`
+- `promptlife:v1:traceComplete`
+- `pl.traceComplete`
+- `promptlife:v1:learningTourComplete`
+- `pl.learningTourComplete`
 
-It tracks completed steps, the final challenge, correct insights, revealed steps, attempts, and last answers. The older `promptlife:v1:traceComplete` flag remains as a compatibility/save marker.
+## Debug Inspector
 
-## Mini-Game Updates
+With `?debug=1`, the Play screen shows a debug-only progress inspector below the challenge list. It displays visible challenge status, shared Play storage metadata, legacy bridge signals, and localStorage key presence.
 
-Context Stack now asks learners to keep the request, example, and tone visible when the output card arrives. If an important card falls out, feedback names what was lost.
+The inspector is read-only.
 
-Attention Weave now uses the sentence `The dog chased the cat because it ran.` The correct challenge is connecting `it` to `cat`.
+## Retired Compatibility
 
-Token Pipeline Relay now has a target path: `pass to transform to hold to pass`. The insight unlocks only when the operator path matches.
+These earlier Play items are no longer visible on the normal Play landing:
+
+- Attention Weave
+- Token Pipeline Relay
+- How AI Learns
+
+They remain in compatibility metadata or legacy source so older saved states and direct routes do not strand learners.
 
 ## Accessibility Notes
 
-- Prompt Run steps use real buttons and the reusable exercise components.
-- Drag-like tasks keep the tap/button fallback.
-- Feedback is announced with live regions.
-- The exercise shell scrolls feedback into view after checking.
-- Extra bottom padding protects feedback and final controls from the fixed bottom nav.
-- Hints do not penalize the learner.
-- The implementation continues to respect `prefers-reduced-motion`.
+- Play challenges use semantic sections, real buttons, visible focus styles, and live feedback where appropriate.
+- Tap/click interactions have mobile-friendly targets.
+- Bottom-nav padding is included so final actions and feedback remain reachable.
+- The app continues to respect `prefers-reduced-motion`.
 
-## Future Modes
+## Historical v0.5 Notes
 
-Watch and Challenge modes are documented as future v0.6 work. v0.5 ships Practice first so every step is reviewable, accessible, and clear at 390px before adding alternate mode rules.
+The original v0.5 Play hierarchy had a Featured Activity, Side Challenges, and Tours. Prompt Run was the featured activity; Context Stack, Attention Weave, and Token Pipeline Relay were side challenges; How AI Learns was a tour. That hierarchy has been replaced by the current five-challenge Play set listed above.
