@@ -5513,8 +5513,238 @@ p {
   color: var(--pl-purple);
 }
 
-.probability-foundation-board {
-  grid-template-columns: 1fr;
+.probability-picker-screen {
+  display: grid;
+  gap: 0.9rem;
+  padding-bottom: calc(var(--pl-nav-height) + 4.5rem + env(safe-area-inset-bottom));
+}
+
+.probability-picker-status-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.probability-picker-status-row > span:last-child {
+  color: var(--pl-ink-soft);
+  font-size: 0.82rem;
+  font-weight: 900;
+}
+
+.probability-picker-board {
+  gap: 0.72rem;
+  background:
+    radial-gradient(circle at 13% 12%, rgba(242, 184, 91, 0.15), transparent 5rem),
+    radial-gradient(circle at 92% 68%, rgba(53, 230, 226, 0.11), transparent 6rem),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.74), rgba(247, 251, 255, 0.94)),
+    var(--pl-surface-paper);
+}
+
+.probability-round-card,
+.probability-bar-zone,
+.probability-action-zone {
+  display: grid;
+  gap: 0.55rem;
+  min-width: 0;
+  padding: 0.78rem;
+  border: 1px solid rgba(18, 30, 114, 0.10);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.probability-round-card h2,
+.probability-round-card p,
+.probability-bar-zone h3,
+.probability-action-zone h3,
+.temperature-note {
+  margin: 0;
+}
+
+.probability-round-card h2 {
+  color: var(--pl-indigo);
+  font-size: 1.15rem;
+  line-height: 1.16;
+}
+
+.probability-round-card p,
+.temperature-note {
+  color: var(--pl-ink-soft);
+  font-size: 0.88rem;
+  line-height: 1.35;
+}
+
+.probability-fragment {
+  display: grid;
+  gap: 0.24rem;
+  min-width: 0;
+  padding: 0.62rem;
+  border: 1px solid rgba(53, 230, 226, 0.34);
+  border-radius: 8px;
+  background: linear-gradient(135deg, rgba(238, 252, 255, 0.96), rgba(255, 255, 255, 0.84));
+}
+
+.probability-fragment span {
+  color: var(--pl-teal);
+  font-size: 0.68rem;
+  font-weight: 950;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.probability-fragment strong {
+  min-width: 0;
+  color: var(--pl-navy);
+  font-size: 0.98rem;
+  line-height: 1.22;
+  overflow-wrap: anywhere;
+}
+
+.probability-bar-zone,
+.probability-action-zone {
+  border-color: rgba(242, 184, 91, 0.32);
+  background: linear-gradient(180deg, rgba(255, 250, 238, 0.86), rgba(255, 255, 255, 0.9));
+}
+
+.probability-bar-zone h3,
+.probability-action-zone h3 {
+  color: var(--pl-navy);
+  font-size: 0.95rem;
+  line-height: 1.2;
+}
+
+.probability-token-list,
+.probability-action-list {
+  display: grid;
+  gap: 0.48rem;
+  min-width: 0;
+}
+
+.probability-token-button {
+  display: grid;
+  grid-template-columns: minmax(4.5rem, 0.92fr) minmax(0, 1.3fr) auto;
+  align-items: center;
+  gap: 0.48rem;
+  min-width: 0;
+  min-height: 54px;
+  border: 1px solid rgba(35, 67, 116, 0.16);
+  border-radius: 8px;
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.94);
+  color: var(--pl-ink);
+  text-align: left;
+}
+
+.probability-token-button:not(:disabled) {
+  cursor: pointer;
+}
+
+.probability-token-button:disabled {
+  opacity: 1;
+}
+
+.probability-token-button.is-selected {
+  border-color: rgba(122, 92, 255, 0.56);
+  background: #f4f0ff;
+  box-shadow: 0 0 0 2px rgba(122, 92, 255, 0.12);
+}
+
+.probability-token-main {
+  display: grid;
+  gap: 0.12rem;
+  min-width: 0;
+}
+
+.probability-token-main strong {
+  min-width: 0;
+  color: var(--pl-indigo);
+  font-size: 0.86rem;
+  font-weight: 950;
+  line-height: 1.1;
+  overflow-wrap: anywhere;
+}
+
+.probability-token-main small {
+  color: #58627f;
+  font-size: 0.68rem;
+  font-weight: 850;
+  line-height: 1.1;
+}
+
+.probability-bar-track {
+  display: block;
+  min-width: 0;
+  height: 0.72rem;
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(18, 30, 114, 0.13);
+}
+
+.probability-bar-track span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--pl-teal), var(--pl-violet), var(--pl-amber));
+  transition: width 220ms ease;
+}
+
+.probability-percent {
+  color: var(--pl-navy);
+  font-size: 0.78rem;
+  font-weight: 950;
+  white-space: nowrap;
+}
+
+.probability-action-button.play-choice-button {
+  display: block;
+  width: 100%;
+  padding: 0.7rem;
+  text-align: left;
+  line-height: 1.18;
+  overflow-wrap: anywhere;
+}
+
+.temperature-control {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.35rem;
+  min-width: 0;
+  padding: 0.25rem;
+  border: 1px solid rgba(35, 67, 116, 0.14);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.76);
+}
+
+.temperature-control button {
+  min-width: 0;
+  min-height: 42px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 0.4rem 0.25rem;
+  background: transparent;
+  color: var(--pl-ink-soft);
+  font-size: 0.78rem;
+  font-weight: 950;
+  line-height: 1.05;
+}
+
+.temperature-control button.active {
+  border-color: rgba(122, 92, 255, 0.42);
+  background: #f2eeff;
+  color: var(--pl-purple);
+}
+
+.probability-picker-feedback p {
+  margin: 0;
+}
+
+.probability-picker-actions {
+  padding-bottom: 0.5rem;
+}
+
+.probability-picker-completion {
+  display: grid;
+  gap: 0.72rem;
 }
 
 .context-stack-screen {
@@ -5799,13 +6029,44 @@ p {
   .context-stack-slot em {
     font-size: 0.74rem;
   }
+
+  .probability-round-card,
+  .probability-bar-zone,
+  .probability-action-zone {
+    padding: 0.65rem;
+  }
+
+  .probability-token-button {
+    grid-template-columns: minmax(3.85rem, 0.88fr) minmax(0, 1.1fr) auto;
+    gap: 0.34rem;
+    padding: 0.46rem;
+  }
+
+  .probability-token-main strong {
+    font-size: 0.8rem;
+  }
+
+  .probability-token-main small,
+  .probability-percent {
+    font-size: 0.66rem;
+  }
+
+  .temperature-control {
+    gap: 0.25rem;
+  }
+
+  .temperature-control button {
+    min-height: 40px;
+    font-size: 0.7rem;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .play-progress-rail span,
   .play-scroll-hint span::after,
   .context-stack-card,
-  .context-stack-slot {
+  .context-stack-slot,
+  .probability-bar-track span {
     transition: none;
     animation: none;
   }

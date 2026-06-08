@@ -71,7 +71,7 @@ const HOME_ASSETS = {
   heroFallback: `${ASSET}/illustrations/scene-hero-feature-cloud@mobile.png`
 }
 // Bump this for each shipped app change; the Badge screen displays it under Start over.
-const APP_VERSION = '0.26.8'
+const APP_VERSION = '0.27.0'
 const STORAGE_KEYS = {
   lastLocation: 'promptlife:v1:lastLocation',
   lessonId: 'promptlife:v1:lessonId',
@@ -3439,7 +3439,20 @@ function PlayScreen({ gameId, gameInsights, traceComplete, promptRunProgress, le
     )
   }
   if (gameId === 'probability-picker') {
-    return <FoundationReadyScreen onBack={() => setGameId(null)} onGlossary={onGlossary} />
+    return (
+      <ProbabilityPicker
+        onBack={() => { refreshPlayProgress(); setGameId(null) }}
+        onGlossary={onGlossary}
+        onAttempt={() => {
+          recordChallengeStart('probability-picker', {
+            outcome: 'Probability Picker attempt started. Progress saved on this device.',
+            misconceptionTags: ['probability-is-not-truth']
+          })
+        }}
+        onProgress={(outcome) => updateChallenge('probability-picker', outcome)}
+        onComplete={(outcome) => completeChallenge('probability-picker', outcome)}
+      />
+    )
   }
   const retiredChallenge = findRetiredPlayChallenge(gameId)
   if (retiredChallenge) {
@@ -3481,28 +3494,447 @@ function PlayScreen({ gameId, gameInsights, traceComplete, promptRunProgress, le
   )
 }
 
-function FoundationReadyScreen({ onBack, onGlossary }) {
+const probabilityPickerRounds = [
+  {
+    id: 'scores-to-probabilities',
+    title: 'From scores to probabilities',
+    fragment: 'The capital of France is',
+    instruction: 'Choose a likely next token. The bars show how raw scores become a probability-shaped set.',
+    kind: 'token-choice',
+    tokens: [
+      { id: 'paris', label: 'Paris', score: '+5.8', probability: 72, tone: 'good' },
+      { id: 'london', label: 'London', score: '+2.1', probability: 18, tone: 'review', tag: 'highest-is-not-always-best' },
+      { id: 'banana', label: 'banana', score: '-1.2', probability: 6, tone: 'review', tag: 'probability-is-not-truth' },
+      { id: 'beautiful', label: 'beautiful', score: '-2.0', probability: 4, tone: 'review', tag: 'sampling-can-vary' }
+    ],
+    successIds: ['paris'],
+    successFeedback: 'Good distinction. The highest-probability token often fits the context, but the model is still choosing from probabilities, not looking up truth.',
+    reviewFeedback: 'This choice reveals a common mix-up. Probability shows fit, not proof; here the context strongly points toward Paris.'
+  },
+  {
+    id: 'sampling-can-vary',
+    title: 'Sampling can vary',
+    fragment: 'The dog ran across the',
+    instruction: 'Pick a plausible continuation. More than one next token can reasonably fit.',
+    kind: 'token-choice',
+    tokens: [
+      { id: 'yard', label: 'yard', score: '+4.2', probability: 44, tone: 'good' },
+      { id: 'street', label: 'street', score: '+4.0', probability: 39, tone: 'good' },
+      { id: 'moon', label: 'moon', score: '+0.6', probability: 10, tone: 'review', tag: 'sampling-can-vary' },
+      { id: 'because', label: 'because', score: '-0.8', probability: 7, tone: 'review', tag: 'probability-is-not-truth' }
+    ],
+    successIds: ['yard', 'street'],
+    successFeedback: 'Good distinction. Sampling chooses from a shaped set, and multiple continuations can be reasonable.',
+    reviewFeedback: 'This choice reveals a common mix-up. Sampling can vary, but the next token still needs to fit the current context.'
+  },
+  {
+    id: 'probability-is-not-truth',
+    title: 'Probability is not truth',
+    fragment: 'The invented citation says the study was published in',
+    instruction: 'The bars can look confident. Choose the best model-literacy move.',
+    kind: 'evidence-choice',
+    tokens: [
+      { id: '2021', label: '2021', score: '+4.8', probability: 45 },
+      { id: 'nature', label: 'Nature', score: '+4.1', probability: 31 },
+      { id: 'october', label: 'October', score: '+2.6', probability: 16 },
+      { id: 'the', label: 'the', score: '+1.3', probability: 8 }
+    ],
+    actions: [
+      { id: 'highest', label: 'Pick the highest probability token', tone: 'review', tag: 'highest-is-not-always-best' },
+      { id: 'evidence-needed', label: 'Mark that evidence is needed', tone: 'good' },
+      { id: 'lower-temp', label: 'Lower the temperature and trust it', tone: 'review', tag: 'temperature-shapes-choice' },
+      { id: 'source', label: 'Treat the probability as a source', tone: 'review', tag: 'probability-is-not-truth' }
+    ],
+    successIds: ['evidence-needed'],
+    successFeedback: 'Good caution. Probability is about fit with context, not proof that a claim is true.',
+    reviewFeedback: 'This choice reveals a common mix-up. Probability shows fit, not proof. An invented citation needs evidence.'
+  },
+  {
+    id: 'temperature-shapes-choice',
+    title: 'Temperature shapes choice',
+    fragment: 'For a bedtime story, the dragon opened the',
+    instruction: 'Try the temperature control and watch the bars narrow or spread.',
+    kind: 'temperature',
+    temperatureSets: {
+      focused: [
+        { id: 'door', label: 'door', probability: 70 },
+        { id: 'map', label: 'map', probability: 18 },
+        { id: 'moonlit', label: 'moonlit', probability: 9 },
+        { id: 'spreadsheet', label: 'spreadsheet', probability: 3 }
+      ],
+      balanced: [
+        { id: 'door', label: 'door', probability: 46 },
+        { id: 'map', label: 'map', probability: 28 },
+        { id: 'moonlit', label: 'moonlit', probability: 20 },
+        { id: 'spreadsheet', label: 'spreadsheet', probability: 6 }
+      ],
+      exploratory: [
+        { id: 'door', label: 'door', probability: 30 },
+        { id: 'map', label: 'map', probability: 27 },
+        { id: 'moonlit', label: 'moonlit', probability: 25 },
+        { id: 'spreadsheet', label: 'spreadsheet', probability: 18 }
+      ]
+    }
+  }
+]
+
+const probabilityTemperatureLabels = {
+  focused: 'Focused',
+  balanced: 'Balanced',
+  exploratory: 'Exploratory'
+}
+
+function getProbabilityRoundTags(round, result) {
+  if (!result) return []
+  if (round.id === 'scores-to-probabilities') {
+    return result.ok ? ['sampling-can-vary'] : [result.tag ?? 'probability-is-not-truth']
+  }
+  if (round.id === 'sampling-can-vary') {
+    return result.ok ? ['sampling-can-vary'] : [result.tag ?? 'highest-is-not-always-best']
+  }
+  if (round.id === 'probability-is-not-truth') {
+    return result.ok ? ['evidence-needed-for-truth'] : [result.tag ?? 'probability-is-not-truth', 'evidence-needed-for-truth']
+  }
+  return ['temperature-shapes-choice']
+}
+
+function ProbabilityPicker({ onBack, onGlossary, onAttempt, onProgress, onComplete }) {
+  const [roundIndex, setRoundIndex] = useState(0)
+  const [roundResults, setRoundResults] = useState([])
+  const [selectedId, setSelectedId] = useState(null)
+  const [temperature, setTemperature] = useState('balanced')
+  const [temperatureTouched, setTemperatureTouched] = useState(false)
+  const [completed, setCompleted] = useState(false)
+  const [feedback, setFeedback] = useState({
+    tone: 'neutral',
+    message: 'Inspect the bars, then choose the next model-literacy move.'
+  })
+  const round = probabilityPickerRounds[roundIndex]
+  const roundNumber = roundIndex + 1
+  const selectionMade = round.kind === 'temperature' ? temperatureTouched : Boolean(selectedId)
+  const currentProgress = completed
+    ? 100
+    : Math.min(99, Math.round(((roundIndex + (selectionMade ? 0.75 : 0)) / probabilityPickerRounds.length) * 100))
+  const reviewCount = roundResults.filter((result) => !result.ok).length
+  const evidenceMissed = roundResults.some((result) => result.roundId === 'probability-is-not-truth' && !result.ok)
+  const status = completed
+    ? reviewCount >= 2 || evidenceMissed ? 'review-suggested' : 'completed'
+    : 'in-progress'
+  const statusLabel = completed
+    ? reviewCount >= 2 || evidenceMissed ? 'Review suggested' : 'Completed'
+    : `Round ${roundNumber} of ${probabilityPickerRounds.length}`
+  const visibleTokens = round.kind === 'temperature'
+    ? round.temperatureSets[temperature]
+    : round.tokens
+
+  function resetRound(nextRoundIndex = roundIndex) {
+    setRoundIndex(nextRoundIndex)
+    setSelectedId(null)
+    setTemperature('balanced')
+    setTemperatureTouched(false)
+    setFeedback({
+      tone: 'neutral',
+      message: nextRoundIndex === 2
+        ? 'Probability can sound confident without being verified.'
+        : nextRoundIndex === 3
+          ? 'Try Focused, Balanced, and Exploratory to see the distribution change.'
+          : 'Inspect the bars, then choose the next model-literacy move.'
+    })
+  }
+
+  function saveRoundResult(result) {
+    const nextResults = [
+      ...roundResults.filter((item) => item.roundId !== round.id),
+      result
+    ]
+    setRoundResults(nextResults)
+    onProgress({
+      status: 'in-progress',
+      progressPct: Math.min(99, Math.round(((roundIndex + 0.75) / probabilityPickerRounds.length) * 100)),
+      outcome: result.ok ? 'Good distinction. Probability Picker progress saved.' : 'Review suggested. Probability Picker progress saved.',
+      misconceptionTags: getProbabilityRoundTags(round, result)
+    })
+    return nextResults
+  }
+
+  function chooseToken(option) {
+    if (completed) return
+    setSelectedId(option.id)
+    const ok = round.successIds.includes(option.id)
+    const result = {
+      roundId: round.id,
+      ok,
+      selectedId: option.id,
+      tag: option.tag
+    }
+    saveRoundResult(result)
+    setFeedback({
+      tone: ok ? 'good' : 'review',
+      message: ok ? round.successFeedback : round.reviewFeedback
+    })
+  }
+
+  function chooseAction(action) {
+    if (completed) return
+    setSelectedId(action.id)
+    const ok = round.successIds.includes(action.id)
+    const result = {
+      roundId: round.id,
+      ok,
+      selectedId: action.id,
+      tag: action.tag
+    }
+    saveRoundResult(result)
+    setFeedback({
+      tone: ok ? 'good' : 'review',
+      message: ok ? round.successFeedback : round.reviewFeedback
+    })
+  }
+
+  function chooseTemperature(value) {
+    if (completed) return
+    setTemperature(value)
+    setTemperatureTouched(true)
+    const result = {
+      roundId: round.id,
+      ok: true,
+      selectedId: value,
+      tag: 'temperature-shapes-choice'
+    }
+    saveRoundResult(result)
+    setFeedback({
+      tone: 'good',
+      message: value === 'focused'
+        ? 'Focused settings narrow the choices. The most likely token gets more of the probability mass.'
+        : value === 'exploratory'
+          ? 'Exploratory settings spread the choices. Less likely tokens get more room to appear.'
+          : 'Balanced settings keep a middle path: still shaped, but not as narrow as focused.'
+    })
+  }
+
+  function getCurrentRoundResults() {
+    if (roundResults.some((result) => result.roundId === round.id)) return roundResults
+    if (round.kind === 'temperature' && temperatureTouched) {
+      return [
+        ...roundResults,
+        {
+          roundId: round.id,
+          ok: true,
+          selectedId: temperature,
+          tag: 'temperature-shapes-choice'
+        }
+      ]
+    }
+
+    const selectedToken = round.tokens?.find((token) => token.id === selectedId)
+    const selectedAction = round.actions?.find((action) => action.id === selectedId)
+    const selectedOption = selectedToken ?? selectedAction
+    if (!selectedOption || !round.successIds) return roundResults
+
+    return [
+      ...roundResults,
+      {
+        roundId: round.id,
+        ok: round.successIds.includes(selectedId),
+        selectedId,
+        tag: 'tag' in selectedOption ? selectedOption.tag : undefined
+      }
+    ]
+  }
+
+  function finishChallenge(nextResults = roundResults) {
+    setRoundResults(nextResults)
+    const finalReviewCount = nextResults.filter((result) => !result.ok).length
+    const finalEvidenceMissed = nextResults.some((result) => result.roundId === 'probability-is-not-truth' && !result.ok)
+    const reviewSuggested = finalReviewCount >= 2 || finalEvidenceMissed
+    const tags = uniqueList(nextResults.flatMap((result) => {
+      const completedRound = probabilityPickerRounds.find((item) => item.id === result.roundId) ?? round
+      return getProbabilityRoundTags(completedRound, result)
+    }))
+    setCompleted(true)
+    onComplete({
+      progressPct: 100,
+      reviewSuggested,
+      outcome: reviewSuggested
+        ? 'Completed. Review suggested. Likely and true were mixed at least once.'
+        : 'Completed. You saw why likely is not the same as true.',
+      misconceptionTags: tags.length ? tags : [
+        'probability-is-not-truth',
+        'highest-is-not-always-best',
+        'sampling-can-vary',
+        'temperature-shapes-choice',
+        'evidence-needed-for-truth'
+      ]
+    })
+  }
+
+  function goNext() {
+    if (!selectionMade) {
+      setFeedback({ tone: 'review', message: 'This choice reveals a common mix-up. Inspect the probabilities first, then choose a move.' })
+      return
+    }
+    if (roundIndex >= probabilityPickerRounds.length - 1) {
+      finishChallenge(getCurrentRoundResults())
+      return
+    }
+    resetRound(roundIndex + 1)
+  }
+
+  function restartChallenge() {
+    onAttempt()
+    setRoundIndex(0)
+    setRoundResults([])
+    setSelectedId(null)
+    setTemperature('balanced')
+    setTemperatureTouched(false)
+    setCompleted(false)
+    setFeedback({ tone: 'neutral', message: 'New Probability Picker attempt started. Progress saved on this device.' })
+  }
+
   return (
     <PlayChallengeShell
       title="Probability Picker"
       titleId="probability-picker-title"
-      eyebrow="Coming soon"
-      subtitle="This practice slot is reserved for a future calm decoding challenge. The full game is not implemented yet."
+      eyebrow="Play challenge"
+      subtitle="Choose from probabilities without treating likely as true."
       onBack={onBack}
+      className="probability-picker-screen"
+      data-probability-round={round.id}
+      headerChildren={
+        <>
+          <div className="probability-picker-status-row">
+            <PlayStatusPill status={status} label={statusLabel} />
+            <span>{reviewCount} review signal{reviewCount === 1 ? '' : 's'}</span>
+          </div>
+          <PlayProgressRail value={currentProgress} label={`${currentProgress}% Probability Picker progress`} />
+        </>
+      }
     >
-      <PlayChallengeBoard label="Probability Picker coming soon board" className="probability-foundation-board">
-        <PlayTokenChip tone="prompt">logits</PlayTokenChip>
-        <PlayTokenChip tone="probability">softmax</PlayTokenChip>
-        <PlayTokenChip tone="response">sample one token</PlayTokenChip>
-      </PlayChallengeBoard>
-      <PlayFeedbackPanel>
-        <p>Next pass: let learners choose one next token from probabilities and explain why probability is not truth.</p>
-      </PlayFeedbackPanel>
-      <PlayActionRow>
-        <button className="secondary-btn" type="button" onClick={() => onGlossary('logits')}>Logits</button>
-        <button className="secondary-btn" type="button" onClick={() => onGlossary('softmax')}>Softmax</button>
-        <button className="secondary-btn" type="button" onClick={() => onGlossary('sampling')}>Sampling</button>
-      </PlayActionRow>
+      {completed ? (
+        <PlayCompletionPanel
+          title={reviewCount >= 2 || evidenceMissed ? 'Review suggested' : 'Insight unlocked'}
+          titleId="probability-completion-title"
+          className="probability-picker-completion"
+        >
+          <p><strong>Completed.</strong> You saw candidate scores, probabilities, sampling, evidence caution, and temperature.</p>
+          {reviewCount >= 2 || evidenceMissed ? (
+            <p>Review suggested. Probability shows fit, not proof. Evidence is needed for truth claims.</p>
+          ) : (
+            <p>Good distinction. Sampling chooses from a shaped set, and likely is not the same as true.</p>
+          )}
+          <PlayActionRow>
+            <button className="primary-btn" type="button" onClick={restartChallenge}>Try another picker</button>
+            <button className="secondary-btn" type="button" onClick={onBack}>Back to Play</button>
+            <button className="text-btn" type="button" onClick={() => onGlossary('sampling')}>Sampling</button>
+          </PlayActionRow>
+        </PlayCompletionPanel>
+      ) : (
+        <>
+          <PlayChallengeBoard label="Probability Picker board" className="probability-picker-board">
+            <section className="probability-round-card" aria-labelledby="probability-round-title">
+              <span className="step-label">Round {roundNumber}</span>
+              <h2 id="probability-round-title">{round.title}</h2>
+              <p>{round.instruction}</p>
+              <div className="probability-fragment" aria-label="Prompt fragment">
+                <span>Prompt fragment</span>
+                <strong>{round.fragment}</strong>
+              </div>
+              <div className="play-token-row" aria-label="Probability Picker concepts">
+                <PlayTokenChip tone="prompt">logits</PlayTokenChip>
+                <PlayTokenChip tone="probability">softmax</PlayTokenChip>
+                <PlayTokenChip tone="response">sampling</PlayTokenChip>
+              </div>
+            </section>
+
+            <section className="probability-bar-zone" aria-labelledby="probability-bars-title">
+              <h3 id="probability-bars-title">Candidate set</h3>
+              <div className="probability-token-list">
+                {visibleTokens.map((token) => {
+                  const selected = selectedId === token.id
+                  return (
+                    <button
+                      key={token.id}
+                      type="button"
+                      className={selected ? 'probability-token-button is-selected' : 'probability-token-button'}
+                      onClick={() => round.kind === 'token-choice' ? chooseToken(token) : undefined}
+                      disabled={round.kind !== 'token-choice'}
+                      aria-pressed={selected}
+                    >
+                      <span className="probability-token-main">
+                        <strong>{token.label}</strong>
+                        {token.score && <small>raw score {token.score}</small>}
+                      </span>
+                      <span className="probability-bar-track" aria-label={`${token.label} probability ${token.probability}%`}>
+                        <span style={{ width: `${token.probability}%` }} />
+                      </span>
+                      <span className="probability-percent">{token.probability}%</span>
+                    </button>
+                  )
+                })}
+              </div>
+            </section>
+
+            {round.kind === 'evidence-choice' && (
+              <section className="probability-action-zone" aria-labelledby="probability-action-title">
+                <h3 id="probability-action-title">Best model-literacy move</h3>
+                <div className="probability-action-list">
+                  {round.actions.map((action) => (
+                    <PlayChoiceButton
+                      key={action.id}
+                      className="probability-action-button"
+                      selected={selectedId === action.id}
+                      onClick={() => chooseAction(action)}
+                    >
+                      {action.label}
+                    </PlayChoiceButton>
+                  ))}
+                </div>
+              </section>
+            )}
+
+            {round.kind === 'temperature' && (
+              <section className="probability-action-zone" aria-labelledby="temperature-control-title">
+                <h3 id="temperature-control-title">Temperature control</h3>
+                <div className="temperature-control" role="group" aria-label="Temperature setting">
+                  {Object.entries(probabilityTemperatureLabels).map(([value, label]) => (
+                    <button
+                      key={value}
+                      type="button"
+                      className={temperature === value ? 'active' : ''}
+                      onClick={() => chooseTemperature(value)}
+                      aria-pressed={temperature === value}
+                    >
+                      {label}
+                    </button>
+                  ))}
+                </div>
+                <p className="temperature-note">
+                  {temperature === 'focused'
+                    ? 'Focused settings narrow the choices.'
+                    : temperature === 'exploratory'
+                      ? 'Exploratory settings spread the choices.'
+                      : 'Balanced sits between narrow and spread.'}
+                </p>
+              </section>
+            )}
+          </PlayChallengeBoard>
+
+          <PlayFeedbackPanel tone={feedback.tone === 'good' ? 'good' : feedback.tone === 'review' ? 'review' : 'neutral'} className="probability-picker-feedback">
+            <p>{feedback.message}</p>
+          </PlayFeedbackPanel>
+
+          <PlayActionRow className="probability-picker-actions">
+            <button className="primary-btn" type="button" onClick={goNext} disabled={!selectionMade}>
+              {roundIndex >= probabilityPickerRounds.length - 1 ? 'Complete picker' : 'Next round'}
+            </button>
+            <button className="secondary-btn" type="button" onClick={() => resetRound()}>Reset round</button>
+            <button className="text-btn" type="button" onClick={() => onGlossary(round.id === 'temperature-shapes-choice' ? 'temperature' : round.id === 'probability-is-not-truth' ? 'grounding' : 'softmax')}>
+              {round.id === 'temperature-shapes-choice' ? 'Temperature' : round.id === 'probability-is-not-truth' ? 'Grounding' : 'Softmax'}
+            </button>
+          </PlayActionRow>
+          <PlayScrollHint>More probability below</PlayScrollHint>
+        </>
+      )}
     </PlayChallengeShell>
   )
 }

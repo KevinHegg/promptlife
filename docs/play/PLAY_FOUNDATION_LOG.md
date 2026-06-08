@@ -669,3 +669,103 @@
 - `docs/play/screenshots/v0-26-8-play-games-audit-prompt-run-top-390.png`
 - `docs/play/screenshots/v0-26-8-play-games-audit-prompt-run-390.png`
 - `docs/play/screenshots/v0-26-8-play-games-audit-badge-390.png`
+
+# 2026-06-08 - v0.27.0 Probability Picker v1
+
+## Summary
+
+- Promoted Probability Picker from a foundation-ready placeholder to an available four-round Play challenge.
+- Kept the visible Play slate intact: Glossary Dojo, Attention Match, Probability Picker, Context Stack, and Prompt Run.
+- Kept Journey progress, badge criteria, checkpoint randomization, dependencies, generated assets, and existing games unchanged.
+- Bumped the app/package version to `0.27.0`.
+
+## What Changed
+
+- Updated the Probability Picker Play card to `Ready` with the primary action `Open picker`.
+- Added a shared Play challenge route for Probability Picker.
+- Added four calm rounds: From scores to probabilities, Sampling can vary, Probability is not truth, and Temperature shapes choice.
+- Added completion and review-suggested states that save through shared Play progress.
+- Added mobile-first Probability Picker styling for candidate bars, evidence choices, temperature controls, feedback, and completion.
+- Added report screenshots, screenshot manifest, HTML report, and PDF report.
+
+## Learner-Facing Copy Changes
+
+- Play card purpose: `Explore probability-shaped next-token choices.`
+- Challenge subtitle: `Choose from probabilities without treating likely as true.`
+- Success outcome: `Completed. You saw why likely is not the same as true.`
+- Review outcome: `Completed. Review suggested. Likely and true were mixed at least once.`
+- Completion panel language avoids score, streak, timer, leaderboard, failure, or shaming language.
+
+## UI Cards, Screens, Scenes, And Routes Changed
+
+- Play landing Probability Picker card.
+- Probability Picker route.
+- Probability Picker round board.
+- Probability Picker feedback panel.
+- Probability Picker completion panel.
+- Badge page Play progress display, through existing shared Play progress summaries.
+
+## LocalStorage Keys
+
+- Created/read/written: `promptlife.playChallenges.v1`.
+- Preserved/read independently by Glossary Dojo: `promptlife.glossaryDojo.v1`.
+- Preserved/read for bridge compatibility: `promptlife:v1:gameInsights`.
+- Preserved/read for bridge compatibility: `pl.gameInsights`.
+- Preserved/read for bridge compatibility: `promptlife:v1:traceComplete`.
+- Preserved/read for bridge compatibility: `pl.traceComplete`.
+- Preserved/read for bridge compatibility: `promptlife:v1:promptRunProgress`.
+- Preserved/read for bridge compatibility: `pl.promptRunProgress`.
+- Preserved/read for bridge compatibility: `promptlife:v1:learningTourComplete`.
+- Preserved/read for bridge compatibility: `pl.learningTourComplete`.
+- Reset QA confirmed the existing Start over flow clears shared Play progress and Glossary Dojo storage.
+
+## Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed. Total surfaces: 69; randomized surfaces: 46; excluded fixed-order surfaces: 23.
+- Playwright QA at 390px: passed. Completed a happy path with status `completed`, then a review path with status `review-suggested`; no horizontal overflow.
+- Playwright QA at 320px: passed. Active Probability Picker start state measured `scrollWidth 320` and `clientWidth 320`.
+- Smoke routes opened at 390px: Glossary Dojo, Context Stack, Attention Match, Prompt Run, and Probability Picker.
+- Badge QA: passed. Badge page displayed `1 of 5 play challenges` after Probability Picker completion.
+- Reset QA: passed. Start over cleared `promptlife.playChallenges.v1` and `promptlife.glossaryDojo.v1`.
+
+## Known Issues And Risks
+
+- Probability Picker v1 uses fixed teaching examples, not a real sampling engine.
+- The temperature round demonstrates distribution shape with fixed bars; a future pass can add a richer logits-to-softmax transition.
+- Attention Match and Prompt Run remain good candidates for the next shared Play-shell refinement pass.
+
+## Recommended Next Passes
+
+1. Probability Picker v2: add a clearer logits-to-softmax transformation and replayable temperature comparisons.
+2. Attention Match v1: rebuild the older Attention Weave compatibility screen as a purpose-built shared-shell challenge.
+3. Prompt Run v2: streamline the capstone so the full loop feels more continuous and replayable.
+
+## Reports And Screenshots
+
+- `docs/play/prompt-life-v0-27-0-probability-picker-v1-report.html`
+- `docs/play/prompt-life-v0-27-0-probability-picker-v1-report.pdf`
+- `docs/play/screenshots/v0-27-0-probability-picker-v1-screenshots.json`
+- `docs/play/screenshots/v0-27-0-play-probability-card-start-390.png`
+- `docs/play/screenshots/v0-27-0-probability-picker-start-390.png`
+- `docs/play/screenshots/v0-27-0-probability-picker-bars-round-390.png`
+- `docs/play/screenshots/v0-27-0-probability-picker-evidence-feedback-390.png`
+- `docs/play/screenshots/v0-27-0-probability-picker-temperature-round-390.png`
+- `docs/play/screenshots/v0-27-0-probability-picker-review-completion-390.png`
+- `docs/play/screenshots/v0-27-0-probability-picker-start-320.png`
+- `docs/play/screenshots/v0-27-0-badge-probability-picker-390.png`
+
+## Files Changed
+
+- `package.json`
+- `package-lock.json`
+- `src/features/play/challengeRegistry.ts`
+- `src/main.tsx`
+- `src/styles/global.css`
+- `docs/play/PLAY_FOUNDATION_LOG.md`
+- `docs/play/prompt-life-v0-27-0-probability-picker-v1-report.html`
+- `docs/play/prompt-life-v0-27-0-probability-picker-v1-report.pdf`
+- `docs/play/screenshots/v0-27-0-probability-picker-v1-screenshots.json`
+- `docs/play/screenshots/v0-27-0-*.png`

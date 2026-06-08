@@ -59,8 +59,8 @@ export const finalPlayChallengeRegistry: PlayChallengeMeta[] = [
     id: 'probability-picker',
     title: 'Probability Picker',
     shortDescription: 'Explore probability-shaped next-token choices.',
-    tenSecondExplanation: 'A future challenge will let you choose one next token from probabilities without treating probability as truth.',
-    primaryActionLabel: 'Coming soon',
+    tenSecondExplanation: 'Choose next tokens from shaped probabilities while keeping likely separate from true.',
+    primaryActionLabel: 'Open picker',
     estimatedTime: '3 min',
     practiceMove: 'Choose likely next tokens',
     shortMoveLabel: 'Choose',
@@ -68,13 +68,14 @@ export const finalPlayChallengeRegistry: PlayChallengeMeta[] = [
     relatedJourneyStages: ['Decision Room'],
     stageChips: ['Stage 4', 'Decision Room'],
     relatedLearningCards: ['Logits', 'Softmax', 'Sampling'],
-    availability: 'coming-soon',
+    availability: 'available',
+    routeId: 'probability-picker',
     image: '/assets/promptlife/icons/png/icon-softmax@48.png',
     action: 'Choose one likely token.',
     modelMove: 'Raw scores become probabilities, then sampling chooses one token.',
-    misconceptionTags: ['probability-is-truth', 'sampling-is-certainty'],
+    misconceptionTags: ['probability-is-not-truth', 'highest-is-not-always-best', 'sampling-can-vary'],
     journeyStageRelationship: ['Logits', 'Softmax', 'Sampling'],
-    glossaryTermIds: ['logits', 'softmax', 'probability', 'sampling']
+    glossaryTermIds: ['logits', 'softmax', 'probability', 'sampling', 'temperature']
   },
   {
     id: 'context-stack',
@@ -266,6 +267,10 @@ function formatBestLabel(meta: PlayChallengeMeta, attempt: PlayChallengeAttempt,
 
   if (meta.id === 'context-stack' && (attempt.status === 'completed' || attempt.status === 'review-suggested' || attempt.bestProgressPct >= 100)) {
     return 'Best result: Main idea found'
+  }
+
+  if (meta.id === 'probability-picker' && (attempt.status === 'completed' || attempt.status === 'review-suggested' || attempt.bestProgressPct >= 100)) {
+    return 'Best result: Likely is not true'
   }
 
   if (meta.id === 'attention-match' && (attempt.status === 'completed' || attempt.bestProgressPct >= 100)) {
