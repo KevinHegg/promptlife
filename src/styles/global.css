@@ -5513,6 +5513,371 @@ p {
   color: var(--pl-purple);
 }
 
+.prompt-run-v2-screen {
+  display: grid;
+  gap: 0.9rem;
+  padding-bottom: calc(var(--pl-nav-height) + 4.5rem + env(safe-area-inset-bottom));
+}
+
+.prompt-run-v2-status-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.prompt-run-v2-status-row > span:last-child {
+  color: var(--pl-ink-soft);
+  font-size: 0.82rem;
+  font-weight: 900;
+}
+
+.prompt-run-v2-board {
+  gap: 0.72rem;
+  background:
+    radial-gradient(circle at 12% 8%, rgba(53, 230, 226, 0.12), transparent 5rem),
+    radial-gradient(circle at 92% 74%, rgba(242, 184, 91, 0.13), transparent 6rem),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.74), rgba(247, 251, 255, 0.94)),
+    var(--pl-surface-paper);
+}
+
+.prompt-run-day-rail {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 0.28rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.prompt-run-day-rail li {
+  display: grid;
+  justify-items: center;
+  gap: 0.22rem;
+  min-width: 0;
+  border: 1px solid rgba(18, 30, 114, 0.10);
+  border-radius: 8px;
+  padding: 0.34rem 0.18rem;
+  background: rgba(255, 255, 255, 0.78);
+  color: var(--pl-ink-soft);
+}
+
+.prompt-run-day-rail li.is-active {
+  border-color: rgba(53, 230, 226, 0.72);
+  background: #eafffb;
+  color: var(--pl-navy);
+  box-shadow: 0 0 0 3px rgba(53, 230, 226, 0.16);
+}
+
+.prompt-run-day-rail li.is-done {
+  border-color: rgba(122, 92, 255, 0.30);
+  background: #f5f0ff;
+}
+
+.prompt-run-day-rail span {
+  display: grid;
+  place-items: center;
+  width: 1.48rem;
+  height: 1.48rem;
+  border-radius: 50%;
+  background: #eef3ff;
+  color: var(--pl-indigo);
+  font-size: 0.76rem;
+  font-weight: 950;
+}
+
+.prompt-run-day-rail small {
+  max-width: 100%;
+  font-size: 0.58rem;
+  font-weight: 950;
+  line-height: 1.05;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.prompt-run-station-card,
+.prompt-run-choice-station,
+.prompt-run-token-station,
+.prompt-run-id-station,
+.prompt-run-layer-station,
+.prompt-run-probability-station,
+.prompt-run-append-station {
+  display: grid;
+  gap: 0.55rem;
+  min-width: 0;
+  padding: 0.78rem;
+  border: 1px solid rgba(18, 30, 114, 0.10);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.82);
+}
+
+.prompt-run-station-card {
+  border-color: rgba(53, 230, 226, 0.28);
+  background: linear-gradient(180deg, rgba(238, 252, 255, 0.86), rgba(255, 255, 255, 0.9));
+}
+
+.prompt-run-station-card h2,
+.prompt-run-station-card p,
+.prompt-run-choice-station h3,
+.prompt-run-token-station h3,
+.prompt-run-id-station h3,
+.prompt-run-layer-station h3,
+.prompt-run-probability-station h3,
+.prompt-run-append-station h3,
+.prompt-run-v2-feedback p {
+  margin: 0;
+}
+
+.prompt-run-station-card h2 {
+  color: var(--pl-indigo);
+  font-size: 1.18rem;
+  line-height: 1.16;
+}
+
+.prompt-run-station-card p,
+.prompt-run-station-instruction {
+  color: var(--pl-ink-soft);
+  font-size: 0.88rem;
+  line-height: 1.35;
+}
+
+.prompt-run-station-instruction {
+  margin: 0;
+  font-weight: 850;
+}
+
+.prompt-run-choice-station h3,
+.prompt-run-token-station h3,
+.prompt-run-id-station h3,
+.prompt-run-layer-station h3,
+.prompt-run-probability-station h3,
+.prompt-run-append-station h3 {
+  color: var(--pl-navy);
+  font-size: 0.95rem;
+  line-height: 1.2;
+}
+
+.prompt-run-context-split {
+  display: grid;
+  gap: 0.48rem;
+}
+
+.prompt-run-context-split span,
+.prompt-run-id-table span,
+.prompt-run-layer-rails span,
+.prompt-run-append-trays span {
+  display: grid;
+  gap: 0.18rem;
+  min-width: 0;
+  border: 1px solid rgba(188, 201, 242, 0.72);
+  border-radius: 8px;
+  padding: 0.58rem;
+  background: rgba(255, 255, 255, 0.88);
+}
+
+.prompt-run-context-split strong,
+.prompt-run-id-table strong,
+.prompt-run-layer-rails strong,
+.prompt-run-append-trays strong {
+  color: var(--pl-indigo);
+  font-size: 0.78rem;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.prompt-run-context-split small,
+.prompt-run-id-table small,
+.prompt-run-layer-rails small,
+.prompt-run-append-trays small {
+  color: var(--pl-ink);
+  font-size: 0.84rem;
+  font-weight: 850;
+  line-height: 1.26;
+  overflow-wrap: anywhere;
+}
+
+.prompt-run-choice-list {
+  display: grid;
+  gap: 0.48rem;
+}
+
+.prompt-run-v2-choice.play-choice-button {
+  display: block;
+  width: 100%;
+  padding: 0.68rem 0.62rem;
+  text-align: left;
+  line-height: 1.18;
+  overflow-wrap: anywhere;
+}
+
+.prompt-run-source-text,
+.prompt-run-fragment {
+  margin: 0;
+  border: 1px solid rgba(53, 230, 226, 0.34);
+  border-radius: 8px;
+  padding: 0.58rem;
+  background: #eefcff;
+  color: var(--pl-indigo);
+  font-weight: 900;
+  line-height: 1.28;
+}
+
+.prompt-run-sequence-tray {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.34rem;
+  min-height: 2.4rem;
+  border: 1px dashed rgba(18, 30, 114, 0.24);
+  border-radius: 8px;
+  padding: 0.48rem;
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.prompt-run-sequence-tray span,
+.prompt-run-token-bank button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2rem;
+  border: 1px solid rgba(53, 230, 226, 0.55);
+  border-radius: 8px;
+  padding: 0.28rem 0.52rem;
+  background: #eefcff;
+  color: var(--pl-indigo);
+  font-weight: 950;
+  line-height: 1.05;
+}
+
+.prompt-run-sequence-tray .is-placeholder {
+  border-style: dashed;
+  border-color: rgba(18, 30, 114, 0.18);
+  background: #f8fbff;
+  color: var(--pl-ink-soft);
+}
+
+.prompt-run-token-bank {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.42rem;
+}
+
+.prompt-run-token-bank button {
+  min-height: 44px;
+}
+
+.prompt-run-token-bank button.is-selected,
+.prompt-run-token-bank button:disabled {
+  border-color: rgba(122, 92, 255, 0.36);
+  background: #f0ecff;
+  color: var(--pl-purple);
+  opacity: 1;
+}
+
+.prompt-run-id-table {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.42rem;
+}
+
+.prompt-run-id-table span.is-target {
+  border-color: rgba(53, 230, 226, 0.70);
+  background: #eafffb;
+  box-shadow: 0 0 0 3px rgba(53, 230, 226, 0.14);
+}
+
+.prompt-run-layer-rails {
+  display: grid;
+  gap: 0.42rem;
+}
+
+.prompt-run-layer-rails span {
+  position: relative;
+  padding-left: 0.72rem;
+}
+
+.prompt-run-layer-rails span::before {
+  content: "";
+  position: absolute;
+  left: 0.22rem;
+  top: 0.6rem;
+  bottom: 0.6rem;
+  width: 0.18rem;
+  border-radius: 999px;
+  background: linear-gradient(180deg, var(--pl-teal), var(--pl-violet));
+}
+
+.prompt-run-probability-list {
+  display: grid;
+  gap: 0.46rem;
+}
+
+.prompt-run-probability-list > span {
+  display: grid;
+  grid-template-columns: minmax(3.6rem, 0.5fr) minmax(0, 1fr) 2.6rem;
+  align-items: center;
+  gap: 0.45rem;
+  min-width: 0;
+  border: 1px solid rgba(188, 201, 242, 0.62);
+  border-radius: 8px;
+  padding: 0.48rem;
+  background: rgba(255, 255, 255, 0.86);
+}
+
+.prompt-run-probability-list strong {
+  color: var(--pl-indigo);
+  font-size: 0.84rem;
+  line-height: 1.1;
+  overflow-wrap: anywhere;
+}
+
+.prompt-run-probability-list em {
+  color: var(--pl-ink-soft);
+  font-size: 0.78rem;
+  font-style: normal;
+  font-weight: 950;
+  text-align: right;
+}
+
+.prompt-run-probability-list .is-likely {
+  border-color: rgba(242, 184, 91, 0.58);
+  background: #fff8ec;
+}
+
+.prompt-run-probability-track {
+  display: block;
+  min-width: 0;
+  height: 0.66rem;
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(18, 30, 114, 0.13);
+}
+
+.prompt-run-probability-track span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--pl-teal), var(--pl-violet), var(--pl-amber));
+  transition: width 220ms ease;
+}
+
+.prompt-run-append-trays {
+  display: grid;
+  gap: 0.42rem;
+}
+
+.prompt-run-append-trays span.is-chosen {
+  border-color: rgba(242, 184, 91, 0.58);
+  background: #fff8ec;
+}
+
+.prompt-run-v2-actions {
+  padding-bottom: 0.5rem;
+}
+
+.prompt-run-v2-completion {
+  display: grid;
+  gap: 0.72rem;
+}
+
 .attention-match-screen {
   display: grid;
   gap: 0.9rem;
@@ -6280,6 +6645,60 @@ p {
     gap: 0.28rem;
   }
 
+  .prompt-run-day-rail {
+    gap: 0.2rem;
+  }
+
+  .prompt-run-day-rail li {
+    padding: 0.3rem 0.12rem;
+  }
+
+  .prompt-run-day-rail span {
+    width: 1.34rem;
+    height: 1.34rem;
+    font-size: 0.7rem;
+  }
+
+  .prompt-run-day-rail small {
+    font-size: 0.5rem;
+  }
+
+  .prompt-run-station-card,
+  .prompt-run-choice-station,
+  .prompt-run-token-station,
+  .prompt-run-id-station,
+  .prompt-run-layer-station,
+  .prompt-run-probability-station,
+  .prompt-run-append-station {
+    padding: 0.65rem;
+  }
+
+  .prompt-run-station-card h2 {
+    font-size: 1.08rem;
+  }
+
+  .prompt-run-id-table {
+    gap: 0.32rem;
+  }
+
+  .prompt-run-id-table span,
+  .prompt-run-layer-rails span,
+  .prompt-run-append-trays span,
+  .prompt-run-context-split span {
+    padding: 0.48rem;
+  }
+
+  .prompt-run-probability-list > span {
+    grid-template-columns: minmax(3.4rem, 0.55fr) minmax(0, 1fr) 2.3rem;
+    gap: 0.32rem;
+    padding: 0.42rem;
+  }
+
+  .prompt-run-probability-list strong,
+  .prompt-run-probability-list em {
+    font-size: 0.72rem;
+  }
+
   .context-stack-brief,
   .context-stack-zone,
   .context-window-zone,
@@ -6364,6 +6783,7 @@ p {
   .context-stack-card,
   .context-stack-slot,
   .attention-weight-track span,
+  .prompt-run-probability-track span,
   .probability-bar-track span {
     transition: none;
     animation: none;

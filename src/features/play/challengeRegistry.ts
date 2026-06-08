@@ -103,21 +103,21 @@ export const finalPlayChallengeRegistry: PlayChallengeMeta[] = [
     id: 'prompt-run',
     title: 'Prompt Run',
     shortDescription: 'Trace one prompt through the whole loop.',
-    tenSecondExplanation: 'Trace the full inference loop from visible context to one selected and appended token.',
+    tenSecondExplanation: 'Trace the full inference loop from prompt pieces to one selected and appended token.',
     primaryActionLabel: 'Start capstone',
-    estimatedTime: '8-10 min',
+    estimatedTime: '5-7 min',
     practiceMove: 'Trace the loop',
     shortMoveLabel: 'Trace',
     recommendedAfter: 'After Stage 5 · The Day Repeats',
     relatedJourneyStages: ['Morning Commute', 'Workday', 'Decision Room', 'The Day Repeats'],
     stageChips: ['Stage 2-5', 'Capstone'],
-    relatedLearningCards: ['Prompt vs Response', 'Tokenization', 'Autoregression'],
+    relatedLearningCards: ['Prompt vs Response', 'Tokenization', 'Token IDs', 'Embeddings', 'Hidden States', 'Logits', 'Softmax', 'Sampling', 'Autoregression'],
     availability: 'available',
     routeId: 'trace-one-prompt',
     image: '/assets/promptlife/illustrations/scene-token-pipeline-relay@mobile.png',
-    action: 'Label, connect, choose, append.',
-    modelMove: 'Follow the prompt through tokenization, hidden states, probabilities, sampling, and append-repeat.',
-    misconceptionTags: ['inference-is-training', 'context-is-memory', 'next-token-magic'],
+    action: 'Trace the loop.',
+    modelMove: 'Prompt, tokens, IDs, embeddings, hidden states, logits, probabilities, sampling, append, repeat.',
+    misconceptionTags: ['token-id-is-not-meaning', 'embedding-is-representation', 'probability-is-not-truth', 'one-token-at-a-time', 'context-grows-and-expires', 'model-does-not-remember-forever'],
     journeyStageRelationship: ['Prompt vs Response', 'Tokenization', 'Autoregression'],
     glossaryTermIds: ['prompt', 'token', 'embedding', 'hidden state', 'logits', 'softmax', 'sampling', 'autoregression']
   }
@@ -259,9 +259,12 @@ function formatBestLabel(meta: PlayChallengeMeta, attempt: PlayChallengeAttempt,
   }
 
   if (meta.id === 'prompt-run') {
+    if (attempt.status === 'completed' || attempt.status === 'review-suggested' || attempt.bestProgressPct >= 100) {
+      return 'Best result: Full loop traced'
+    }
     const promptRun = legacy.promptRunProgress
     const finalDone = Boolean(promptRun?.finalChallengeComplete || legacy.traceComplete)
-    const completedSteps = Math.min(13, (promptRun?.completedSteps?.length ?? 0) + (finalDone ? 1 : 0))
+    const completedSteps = finalDone ? 13 : Math.min(13, promptRun?.completedSteps?.length ?? 0)
     if (finalDone || completedSteps > 0) return `Best result: ${completedSteps} of 13 steps`
   }
 
@@ -315,6 +318,7 @@ function bridgeLegacyProgress(meta: PlayChallengeMeta, base: PlayChallengeAttemp
   const gameInsights = legacy.gameInsights ?? []
   const oldIds = [meta.id, ...(meta.legacyProgressIds ?? [])]
   const oldInsightComplete = oldIds.some((id) => gameInsights.includes(id))
+  const hasSharedProgress = base.attempts > 0 || base.completions > 0 || base.bestProgressPct > 0 || base.status !== 'not-started'
 
   if (meta.id === 'prompt-run') {
     const completedSteps = legacy.promptRunProgress?.completedSteps?.length ?? 0
@@ -322,7 +326,7 @@ function bridgeLegacyProgress(meta: PlayChallengeMeta, base: PlayChallengeAttemp
     const totalSteps = 13
     const bestProgressPct = finalDone ? 100 : Math.round((completedSteps / totalSteps) * 100)
     const attempts = Object.values(legacy.promptRunProgress?.attempts ?? {}).reduce((sum, count) => sum + Number(count || 0), 0)
-    if (finalDone || completedSteps > 0 || attempts > 0) {
+    if ((finalDone || completedSteps > 0 || attempts > 0) && !hasSharedProgress) {
       return sanitizePlayChallengeAttempt({
         ...base,
         attempts: Math.max(base.attempts, attempts || 1),
@@ -359,8 +363,6 @@ function bridgeLegacyProgress(meta: PlayChallengeMeta, base: PlayChallengeAttemp
       })
     }
   }
-
-  const hasSharedProgress = base.attempts > 0 || base.completions > 0 || base.bestProgressPct > 0 || base.status !== 'not-started'
 
   if (oldInsightComplete && !hasSharedProgress) {
     return sanitizePlayChallengeAttempt({

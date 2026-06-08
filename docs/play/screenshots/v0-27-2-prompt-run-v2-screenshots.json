@@ -1,0 +1,147 @@
+{
+  "version": "0.27.2",
+  "capturedAt": "2026-06-08T04:48:00.544Z",
+  "screenshots": [
+    "v0-27-2-prompt-run-start-390.png",
+    "v0-27-2-prompt-run-tokenization-390.png",
+    "v0-27-2-prompt-run-layer-station-390.png",
+    "v0-27-2-prompt-run-probability-station-390.png",
+    "v0-27-2-prompt-run-append-repeat-390.png",
+    "v0-27-2-prompt-run-completion-390.png",
+    "v0-27-2-prompt-run-review-suggested-390.png",
+    "v0-27-2-prompt-run-start-320.png",
+    "v0-27-2-play-landing-prompt-run-completed-390.png",
+    "v0-27-2-badge-prompt-run-390.png"
+  ],
+  "qa": {
+    "happy": {
+      "status": "completed",
+      "attempts": 1,
+      "completions": 1,
+      "bestProgressPct": 100,
+      "lastOutcome": "Completed. You traced the full inference loop.",
+      "traceComplete": true,
+      "finalChallengeComplete": true,
+      "completedSteps": 6,
+      "scrollWidth": 390,
+      "clientWidth": 390
+    },
+    "review": {
+      "status": "review-suggested",
+      "attempts": 1,
+      "completions": 1,
+      "bestProgressPct": 100,
+      "lastOutcome": "Completed. Review suggested. Revisit the loop pieces that felt slippery.",
+      "traceComplete": true,
+      "finalChallengeComplete": true,
+      "pageMentionsReviewSuggested": true
+    },
+    "playLanding": {
+      "cardNames": [
+        "Glossary Dojo",
+        "Attention Match",
+        "Probability Picker",
+        "Context Stack",
+        "Prompt Run"
+      ],
+      "promptRunCardMentionsCapstone": true,
+      "promptRunCardMentionsFullLoop": true,
+      "promptRunCardText": "Prompt Run\nCompleted\nTrace one prompt through the whole loop.\nPractice move: Trace the loop\nRecommended: After Stage 5 · The Day Repeats\nStage 2-5\nCapstone\nLearning cards: Prompt vs Response, Tokenization, Token IDs, Embeddings, Hidden States, Logits, Softmax, Sampling, Autoregression\nAction: Trace the loop.\nTime: 5-7 min\nPlayed: 1\nBest result: Full loop traced\nLast played: Today\nCompleted once\nCompleted. You traced the full inference loop.\nTry another round"
+    },
+    "smokeRoutes": [
+      "Practice glossary terms",
+      "Context Stack",
+      "Probability Picker",
+      "Attention Match"
+    ],
+    "badgeText": "0\nof 39 lessons\n1\nof 5 play challenges\n0\nof 17 exercises\n13\nof 13 Prompt Run\n0\nreflections",
+    "narrowDims": {
+      "scrollWidth": 320,
+      "clientWidth": 320,
+      "shellTop": 0,
+      "station": "separate-prompt-response"
+    },
+    "reset": {
+      "beforeResetState": {
+        "keys": [
+          "promptlife.playChallenges.v1",
+          "promptlife:v1:exerciseProgress",
+          "promptlife:v1:gameInsights",
+          "promptlife:v1:lastLocation",
+          "promptlife:v1:learningTourComplete",
+          "promptlife:v1:lessonId",
+          "promptlife:v1:progress",
+          "promptlife:v1:promptRunProgress",
+          "promptlife:v1:reflections",
+          "promptlife:v1:traceComplete"
+        ],
+        "shared": "{\"version\":1,\"challenges\":{\"prompt-run\":{\"attempts\":1,\"completions\":1,\"bestProgressPct\":100,\"status\":\"completed\",\"lastPlayedAt\":\"2026-06-08T04:47:58.605Z\",\"completedAt\":\"2026-06-08T04:47:58.605Z\",\"lastOutcome\":\"Completed. You traced the full inference loop.\",\"misconceptionTags\":[\"token-id-is-not-meaning\",\"embedding-is-representation\",\"probability-is-not-truth\",\"one-token-at-a-time\",\"context-grows-and-expires\",\"model-does-not-remember-forever\"],\"journeyStageRelationship\":[],\"glossaryTermIds\":[]}},\"storageAvailable\":true}",
+        "promptRun": {
+          "completedSteps": [
+            "prompt-run-prompt-response",
+            "prompt-run-tokenizer",
+            "prompt-run-token-ids",
+            "prompt-run-hidden-state",
+            "prompt-run-sampling",
+            "prompt-run-append-repeat"
+          ],
+          "finalChallengeComplete": true,
+          "insights": [
+            "prompt-run-prompt-response",
+            "prompt-run-tokenizer",
+            "prompt-run-token-ids",
+            "prompt-run-hidden-state",
+            "prompt-run-sampling",
+            "prompt-run-append-repeat",
+            "prompt-run-final-order"
+          ],
+          "revealedSteps": [],
+          "attempts": {
+            "prompt-run-prompt-response": 1,
+            "prompt-run-tokenizer": 1,
+            "prompt-run-token-ids": 1,
+            "prompt-run-hidden-state": 1,
+            "prompt-run-sampling": 1,
+            "prompt-run-append-repeat": 1,
+            "prompt-run-final-order": 1
+          },
+          "lastAnswers": {
+            "prompt-run-prompt-response": "given-vs-generated",
+            "prompt-run-tokenizer": "describe > two-pets > conflict",
+            "prompt-run-token-ids": "421",
+            "prompt-run-hidden-state": "temporary-hidden-states",
+            "prompt-run-sampling": "floor",
+            "prompt-run-append-repeat": "context-grew",
+            "prompt-run-final-order": "prompt-run-v2-full-loop-traced"
+          }
+        },
+        "traceComplete": true
+      },
+      "afterResetState": {
+        "keys": [
+          "promptlife:v1:exerciseProgress",
+          "promptlife:v1:gameInsights",
+          "promptlife:v1:lastLocation",
+          "promptlife:v1:progress",
+          "promptlife:v1:promptRunProgress",
+          "promptlife:v1:reflections",
+          "promptlife:v1:traceComplete"
+        ],
+        "shared": null,
+        "promptRun": {
+          "completedSteps": [],
+          "finalChallengeComplete": false,
+          "insights": [],
+          "revealedSteps": [],
+          "attempts": {},
+          "lastAnswers": {}
+        },
+        "traceComplete": false
+      },
+      "clearedSharedPlay": true,
+      "promptRunResetEmpty": true,
+      "traceCompleteResetFalse": true
+    },
+    "reducedMotion": true
+  }
+}

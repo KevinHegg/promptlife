@@ -875,3 +875,106 @@
 - `docs/play/prompt-life-v0-27-1-attention-match-v1-report.pdf`
 - `docs/play/screenshots/v0-27-1-attention-match-v1-screenshots.json`
 - `docs/play/screenshots/v0-27-1-*.png`
+
+# 2026-06-08 - v0.27.2 Prompt Run v2 Capstone Redesign
+
+## Summary
+
+- Rebuilt Prompt Run as a compact six-station capstone challenge using the shared Play foundation.
+- Kept the visible Play slate intact: Glossary Dojo, Attention Match, Probability Picker, Context Stack, and Prompt Run.
+- Kept Journey progress, badge criteria, checkpoint randomization, dependencies, generated assets, and other games unchanged.
+- Bumped the app/package version to `0.27.2`.
+
+## What Changed
+
+- Replaced the legacy 12-step Prompt Run route with six active stations:
+  Prompt, Tokens, IDs, Hidden, Probs, and Repeat.
+- Added shared-shell status, progress rail, feedback, action row, completion panel, and scroll hint.
+- Added station-specific interactions for prompt/response separation, simplified token order, token ID lookup, hidden-state carry, next-token probabilities, and append/repeat.
+- Added completion and review-suggested outcomes that save through shared Play progress.
+- Updated the Play card to show `5-7 min`, `Capstone`, `Trace the loop`, related stages 2-5, and expanded related learning cards.
+- Updated the Prompt Run legacy bridge so old completion can fill empty shared progress while newer shared progress stays authoritative.
+- Updated the Badge display so a completed Prompt Run shows `13 of 13 Prompt Run` even when v2 writes six station steps plus the legacy final-complete flag.
+- Added a game-launch scroll fix so opening a lower Play card snaps the challenge route to the top.
+
+## Learner-Facing Copy Changes
+
+- Challenge subtitle: `Trace one prompt through the full inference loop.`
+- Station labels: `Prompt`, `Tokens`, `IDs`, `Hidden`, `Probs`, `Repeat`.
+- Feedback includes: `Good trace.`, `This is the current context.`, `The text has become token pieces.`, `Token IDs are lookup numbers, not meanings by themselves.`, `Hidden states carry context-shaped information forward.`, `Probabilities shape the next choice.`, and `One token is appended, then the day repeats.`
+- Completion outcome: `Completed. You traced the full inference loop.`
+- Review outcome: `Completed. Review suggested. Revisit the loop pieces that felt slippery.`
+
+## UI Cards, Screens, Scenes, And Routes Changed
+
+- Play landing Prompt Run card.
+- Prompt Run route at `trace-one-prompt` / `prompt-run`.
+- Prompt Run station board.
+- Prompt Run completion and review-suggested panels.
+- Badge Prompt Run progress stat display.
+- Shared Play route-launch scroll behavior.
+
+## LocalStorage Keys
+
+- Created/read/written: `promptlife.playChallenges.v1`.
+- Read/written/preserved: `promptlife:v1:promptRunProgress`.
+- Read/written/preserved: `promptlife:v1:traceComplete`.
+- Preserved/read for bridge compatibility: `pl.promptRunProgress`.
+- Preserved/read for bridge compatibility: `pl.traceComplete`.
+- Preserved/read independently by Glossary Dojo: `promptlife.glossaryDojo.v1`.
+- Reset QA confirmed shared Play progress is removed, Prompt Run legacy progress is rewritten to an empty progress object, and trace completion resets to `false`.
+
+## Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed.
+- 390px QA: happy path completed with shared status `completed`, attempts `1`, completions `1`, and best progress `100`.
+- 390px QA: review path completed with shared status `review-suggested`.
+- 390px QA: Play landing showed Prompt Run as completed with `Best result: Full loop traced`.
+- 390px QA: Badge loaded and displayed `13 of 13 Prompt Run`.
+- 390px smoke routes opened: Glossary Dojo, Context Stack, Probability Picker, and Attention Match.
+- 320px QA: Prompt Run opened with `scrollWidth 320` and `clientWidth 320`.
+- Reduced-motion emulation returned `true`.
+
+## Known Issues And Risks
+
+- Prompt Run v2 uses simplified token boundaries, token IDs, probabilities, and hidden-state language for learning clarity; it is not a real model debugger.
+- The previous legacy 12-step exercise data remains in source for compatibility and historical progress shape.
+- The existing Vite large-chunk warning remains.
+
+## Recommended Next Passes
+
+1. Prompt Run v2.1: add one optional glossary drawer shortcut per station without adding length.
+2. Probability Picker v2: show a clearer logits-to-softmax transition.
+3. Play analytics QA: add a small automated regression script for shared Play progress keys.
+
+## Reports And Screenshots
+
+- `docs/play/prompt-life-v0-27-2-prompt-run-v2-report.html`
+- `docs/play/prompt-life-v0-27-2-prompt-run-v2-report.pdf`
+- `docs/play/screenshots/v0-27-2-prompt-run-v2-screenshots.json`
+- `docs/play/screenshots/v0-27-2-prompt-run-start-390.png`
+- `docs/play/screenshots/v0-27-2-prompt-run-tokenization-390.png`
+- `docs/play/screenshots/v0-27-2-prompt-run-layer-station-390.png`
+- `docs/play/screenshots/v0-27-2-prompt-run-probability-station-390.png`
+- `docs/play/screenshots/v0-27-2-prompt-run-append-repeat-390.png`
+- `docs/play/screenshots/v0-27-2-prompt-run-completion-390.png`
+- `docs/play/screenshots/v0-27-2-prompt-run-review-suggested-390.png`
+- `docs/play/screenshots/v0-27-2-prompt-run-start-320.png`
+- `docs/play/screenshots/v0-27-2-play-landing-prompt-run-completed-390.png`
+- `docs/play/screenshots/v0-27-2-badge-prompt-run-390.png`
+
+## Files Changed
+
+- `package.json`
+- `package-lock.json`
+- `src/features/play/challengeRegistry.ts`
+- `src/main.tsx`
+- `src/styles/global.css`
+- `docs/play/PLAY_FOUNDATION_LOG.md`
+- `docs/play/prompt-life-v0-27-2-prompt-run-v2-report.html`
+- `docs/play/prompt-life-v0-27-2-prompt-run-v2-report.pdf`
+- `docs/play/screenshots/v0-27-2-prompt-run-v2-screenshots.json`
+- `docs/play/screenshots/v0-27-2-*.png`
