@@ -60,7 +60,7 @@ export function PlayStatusPill({ status, label }: { status: PlayChallengeStatus,
     status === 'completed' ? 'Completed' :
     status === 'review-suggested' ? 'Review suggested' :
     status === 'in-progress' ? 'In progress' :
-    status === 'coming-soon' ? 'Foundation ready' :
+    status === 'coming-soon' ? 'Coming soon' :
     status === 'retired' ? 'Retired' :
     'Ready'
   )
@@ -93,9 +93,9 @@ export function PlayActionRow({ children, className = '', ...rowProps }: React.H
   return <div {...rowProps} className={`play-action-row ${className}`.trim()}>{children}</div>
 }
 
-export function PlayChoiceButton({ selected = false, children, ...props }: React.ButtonHTMLAttributes<HTMLButtonElement> & { selected?: boolean }) {
+export function PlayChoiceButton({ selected = false, className = '', children, ...props }: React.ButtonHTMLAttributes<HTMLButtonElement> & { selected?: boolean }) {
   return (
-    <button className={selected ? 'play-choice-button is-selected' : 'play-choice-button'} type="button" aria-pressed={selected} {...props}>
+    <button className={`${selected ? 'play-choice-button is-selected' : 'play-choice-button'} ${className}`.trim()} type="button" aria-pressed={selected} {...props}>
       {children}
     </button>
   )

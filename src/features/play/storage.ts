@@ -160,6 +160,31 @@ export function recordPlayChallengeAttempt(
   })
 }
 
+export function updatePlayChallengeProgress(
+  challengeId: PlayChallengeId,
+  outcome: PlayChallengeOutcome = {}
+): PlayChallengeProgress {
+  const progress = loadPlayChallengeProgress()
+  const previous = sanitizePlayChallengeAttempt(progress.challenges[challengeId])
+  const progressPct = clampProgress(outcome.progressPct ?? previous.bestProgressPct)
+  const status = outcome.status ?? (outcome.completed ? 'completed' : previous.status === 'not-started' ? 'in-progress' : previous.status)
+
+  return savePlayChallengeProgress({
+    ...progress,
+    challenges: {
+      ...progress.challenges,
+      [challengeId]: {
+        ...previous,
+        bestProgressPct: Math.max(previous.bestProgressPct, progressPct),
+        status,
+        lastPlayedAt: nowIso(),
+        lastOutcome: outcome.outcome ?? previous.lastOutcome,
+        misconceptionTags: mergeTags(previous.misconceptionTags, outcome.misconceptionTags)
+      }
+    }
+  })
+}
+
 export function markPlayChallengeCompleted(
   challengeId: PlayChallengeId,
   outcome: PlayChallengeOutcome = {}

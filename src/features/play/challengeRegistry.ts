@@ -80,7 +80,7 @@ export const finalPlayChallengeRegistry: PlayChallengeMeta[] = [
     id: 'attention-match',
     title: 'Attention Match',
     shortDescription: 'Connect a token to what it depends on.',
-    tenSecondExplanation: 'This foundation version reuses the current weave task while framing the final challenge as token relevance matching.',
+    tenSecondExplanation: 'This preview reuses the current weave task while framing the final challenge as token relevance matching.',
     primaryActionLabel: 'Preview match',
     estimatedTime: '3 min',
     relatedJourneyStages: ['Workday'],
@@ -173,7 +173,7 @@ function statusText(status: PlayChallengeStatus) {
   if (status === 'completed') return 'Completed'
   if (status === 'review-suggested') return 'Review suggested'
   if (status === 'in-progress') return 'In progress'
-  if (status === 'coming-soon') return 'Foundation ready'
+  if (status === 'coming-soon') return 'Coming soon'
   if (status === 'retired') return 'Retired'
   return 'Ready'
 }
@@ -265,7 +265,7 @@ export function buildPlayChallengeSummaries(
         ? 'retired'
         : bridged.status
     const progressText = status === 'coming-soon'
-      ? 'Foundation ready'
+      ? 'Coming soon'
       : status === 'retired'
         ? 'Preserved'
         : bridged.bestProgressPct > 0

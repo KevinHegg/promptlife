@@ -41,6 +41,7 @@ import {
   PlayChallengeBoard,
   PlayChallengeCard,
   PlayChallengeShell,
+  PlayChoiceButton,
   PlayCompletionPanel,
   PlayFeedbackPanel,
   PlayProgressRail,
@@ -54,7 +55,8 @@ import {
   getPlayChallengeSummary,
   loadPlayChallengeProgress,
   markPlayChallengeCompleted,
-  recordPlayChallengeAttempt
+  recordPlayChallengeAttempt,
+  updatePlayChallengeProgress
 } from './features/play/storage'
 import { CHOICE_ORDER_SEED_KEY, buildQuizChoices, getChoiceOrderSeed } from './utils/choiceOrder'
 import './styles/global.css'
@@ -69,7 +71,7 @@ const HOME_ASSETS = {
   heroFallback: `${ASSET}/illustrations/scene-hero-feature-cloud@mobile.png`
 }
 // Bump this for each shipped app change; the Badge screen displays it under Start over.
-const APP_VERSION = '0.26.5'
+const APP_VERSION = '0.26.6'
 const STORAGE_KEYS = {
   lastLocation: 'promptlife:v1:lastLocation',
   lessonId: 'promptlife:v1:lessonId',
@@ -3344,6 +3346,10 @@ function PlayScreen({ gameId, gameInsights, traceComplete, promptRunProgress, le
     setPlayProgress(markPlayChallengeCompleted(id, outcome))
   }, [])
 
+  const updateChallenge = useCallback((id, outcome = {}) => {
+    setPlayProgress(updatePlayChallengeProgress(id, outcome))
+  }, [])
+
   const startChallenge = useCallback((item) => {
     if (item.disabled) return
     if (item.recordAttemptOnOpen !== false) {
@@ -3355,15 +3361,6 @@ function PlayScreen({ gameId, gameInsights, traceComplete, promptRunProgress, le
     }
     setGameId(item.routeId ?? item.id)
   }, [recordChallengeStart, setGameId])
-
-  const recordContextInsight = useCallback((legacyId) => {
-    onInsight(legacyId)
-    completeChallenge('context-stack', {
-      progressPct: 100,
-      outcome: 'You found the main idea: context is temporary visible input.',
-      misconceptionTags: ['context-is-memory']
-    })
-  }, [completeChallenge, onInsight])
 
   const recordAttentionInsight = useCallback((legacyId) => {
     onInsight(legacyId)
@@ -3394,7 +3391,24 @@ function PlayScreen({ gameId, gameInsights, traceComplete, promptRunProgress, le
     )
   }
   if (gameId === 'context-stack') {
-    return <ContextStack onBack={() => { refreshPlayProgress(); setGameId(null) }} onGlossary={onGlossary} onInsight={recordContextInsight} saved={gameInsights.includes('context-stack')} />
+    return (
+      <ContextStack
+        onBack={() => { refreshPlayProgress(); setGameId(null) }}
+        onGlossary={onGlossary}
+        onAttempt={() => {
+          recordChallengeStart('context-stack', {
+            outcome: 'Context Stack attempt started. Progress saved on this device.',
+            misconceptionTags: ['context-is-not-memory']
+          })
+        }}
+        onProgress={(outcome) => updateChallenge('context-stack', outcome)}
+        onComplete={(outcome) => {
+          onInsight('context-stack')
+          completeChallenge('context-stack', outcome)
+        }}
+        saved={gameInsights.includes('context-stack')}
+      />
+    )
   }
   if (gameId === 'attention-match' || gameId === 'attention-weave') {
     return <AttentionWeave title="Attention Match" onBack={() => { refreshPlayProgress(); setGameId(null) }} onGlossary={onGlossary} onInsight={recordAttentionInsight} saved={gameInsights.includes('attention-weave')} />
@@ -3447,7 +3461,7 @@ function PlayScreen({ gameId, gameInsights, traceComplete, promptRunProgress, le
         titleId="play-title"
       />
       <PlayFeedbackPanel>
-        <p><strong>Progress saved on this device.</strong> Play is practice, not a score. {completedFinalChallenges} of {FINAL_PLAY_CHALLENGE_COUNT} final challenge slots show saved completion or review progress.</p>
+        <p><strong>Progress saved on this device.</strong> Play is practice, not a score. {completedFinalChallenges} of {FINAL_PLAY_CHALLENGE_COUNT} practice challenges show saved completion or review progress.</p>
         <div className="play-token-row" aria-label="Play action verbs">
           <PlayTokenChip tone="prompt">name</PlayTokenChip>
           <PlayTokenChip tone="context">place</PlayTokenChip>
@@ -3456,14 +3470,14 @@ function PlayScreen({ gameId, gameInsights, traceComplete, promptRunProgress, le
           <PlayTokenChip>connect</PlayTokenChip>
         </div>
       </PlayFeedbackPanel>
-      <PlayProgressRail value={(completedFinalChallenges / FINAL_PLAY_CHALLENGE_COUNT) * 100} label={`${completedFinalChallenges} of ${FINAL_PLAY_CHALLENGE_COUNT} final Play challenges complete or review suggested`} />
+      <PlayProgressRail value={(completedFinalChallenges / FINAL_PLAY_CHALLENGE_COUNT) * 100} label={`${completedFinalChallenges} of ${FINAL_PLAY_CHALLENGE_COUNT} Play practice challenges complete or review suggested`} />
       <PlayScrollHint />
-      <section className="play-section" aria-labelledby="final-slate-title">
+      <section className="play-section" aria-labelledby="practice-challenges-title">
         <div className="play-section-heading">
-          <h2 id="final-slate-title">Final challenge slate</h2>
-          <PlayStatusPill status="in-progress" label="Foundation pass" />
+          <h2 id="practice-challenges-title">Practice challenges</h2>
+          <PlayStatusPill status="in-progress" label="Practice set" />
         </div>
-        <PlayChallengeBoard label="Final Play challenge slate" className="play-slate-board">
+        <PlayChallengeBoard label="Play practice challenges" className="play-slate-board">
           {challengeSummaries.map((challenge) => (
             <PlayChallengeCard key={challenge.id} item={challenge} onStart={startChallenge} />
           ))}
@@ -3478,11 +3492,11 @@ function FoundationReadyScreen({ onBack, onGlossary }) {
     <PlayChallengeShell
       title="Probability Picker"
       titleId="probability-picker-title"
-      eyebrow="Foundation ready"
-      subtitle="This slot is ready for a future calm decoding challenge. The full game is not implemented in this pass."
+      eyebrow="Coming soon"
+      subtitle="This practice slot is reserved for a future calm decoding challenge. The full game is not implemented yet."
       onBack={onBack}
     >
-      <PlayChallengeBoard label="Probability Picker foundation board" className="probability-foundation-board">
+      <PlayChallengeBoard label="Probability Picker coming soon board" className="probability-foundation-board">
         <PlayTokenChip tone="prompt">logits</PlayTokenChip>
         <PlayTokenChip tone="probability">softmax</PlayTokenChip>
         <PlayTokenChip tone="response">sample one token</PlayTokenChip>
@@ -3720,48 +3734,371 @@ function GameHeader({ title, titleId = undefined, onBack, children = null }) {
   )
 }
 
-function ContextStack({ onBack, onGlossary, onInsight, saved }) {
-  const deck = ['System: helpful tutor', 'User: explain LLMs', 'Example: pet-conflict sentence', 'Tone: academic', 'Distractor: jokes', 'Output: three bullets']
-  const target = ['User: explain LLMs', 'Example: pet-conflict sentence', 'Tone: academic']
-  const [stack, setStack] = useState([])
-  const windowSize = 4
-  const visible = stack.slice(-windowSize)
-  const fallen = stack.slice(0, Math.max(0, stack.length - windowSize))
-  const hasTarget = target.every((card) => visible.includes(card))
-  const lostTarget = target.find((card) => fallen.includes(card))
+const contextStackRounds = [
+  {
+    id: 'basic-window',
+    title: 'Basic context window',
+    shortTitle: 'Last few cards fit',
+    objective: 'See that only the newest visible cards remain in the context window.',
+    instruction: 'Tap all six cards in order. Watch the oldest cards fall out when the fifth and sixth enter.',
+    checkLabel: 'Check visible cards',
+    windowSize: 4,
+    mode: 'add-all',
+    success: 'Good stack. You saw the window keep only the most recent visible cards.',
+    review: 'Add every card so the window has to make older context fall out.',
+    cards: [
+      { id: 'user-llm', label: 'User: explain LLMs', detail: 'original request', kind: 'prompt' },
+      { id: 'audience', label: 'Audience: smart beginner', detail: 'helpful context', kind: 'context' },
+      { id: 'tone-calm', label: 'Tone: calm', detail: 'style instruction', kind: 'context' },
+      { id: 'format-bullets', label: 'Format: three bullets', detail: 'output shape', kind: 'context' },
+      { id: 'picnic-note', label: 'Extra: picnic note', detail: 'irrelevant clutter', kind: 'distractor' },
+      { id: 'output-now', label: 'Output request: answer now', detail: 'final trigger', kind: 'response' }
+    ],
+    tags: ['context-is-not-memory']
+  },
+  {
+    id: 'detail-falls-out',
+    title: 'Important detail falls out',
+    shortTitle: 'Keep the key instruction',
+    objective: 'Keep the user goal, constraint, and evidence visible before the answer happens.',
+    instruction: 'Choose only the cards the model should still see. If clutter enters, a key instruction may fall out.',
+    checkLabel: 'Check kept context',
+    windowSize: 4,
+    requiredVisible: ['user-policy', 'constraint-numbers', 'evidence-review', 'output-summary'],
+    avoidVisible: ['snack-pref'],
+    success: 'Good stack. The goal, constraint, and evidence are visible together.',
+    review: 'Review suggested. A key instruction or evidence card fell out before the answer.',
+    cards: [
+      { id: 'user-policy', label: 'User: summarize policy', detail: 'task goal', kind: 'prompt' },
+      { id: 'constraint-numbers', label: 'Constraint: do not invent numbers', detail: 'important instruction', kind: 'context' },
+      { id: 'evidence-review', label: 'Evidence: review every year', detail: 'source detail', kind: 'context' },
+      { id: 'tone-concise', label: 'Tone: concise', detail: 'style only', kind: 'context' },
+      { id: 'snack-pref', label: 'Distractor: office snack preference', detail: 'crowds context', kind: 'distractor' },
+      { id: 'output-summary', label: 'Output request: answer now', detail: 'final trigger', kind: 'response' }
+    ],
+    tags: ['context-is-not-memory', 'irrelevant-context-crowding']
+  },
+  {
+    id: 'retrieval-enters-context',
+    title: 'Retrieved evidence enters context',
+    shortTitle: 'Open-book context',
+    objective: 'Use retrieved evidence only after it enters the current context window.',
+    instruction: 'Fit the user request and retrieved handbook facts into the window. Leave the rumor outside.',
+    checkLabel: 'Check retrieved context',
+    windowSize: 4,
+    requiredVisible: ['user-handbook', 'retrieved-refunds', 'retrieved-appeals', 'output-handbook'],
+    avoidVisible: ['forum-rumor'],
+    success: 'Good stack. Retrieved evidence helps because it entered context before the answer.',
+    review: 'Review suggested. Retrieved evidence helps only after it enters context, and clutter can crowd it out.',
+    cards: [
+      { id: 'user-handbook', label: 'User: answer using handbook', detail: 'task goal', kind: 'prompt' },
+      { id: 'retrieved-refunds', label: 'Retrieved: refunds close after 30 days', detail: 'handbook evidence', kind: 'retrieved' },
+      { id: 'retrieved-appeals', label: 'Retrieved: appeals use Form B', detail: 'handbook evidence', kind: 'retrieved' },
+      { id: 'forum-rumor', label: 'Distractor: old forum rumor', detail: 'unsupported clutter', kind: 'distractor' },
+      { id: 'format-one-sentence', label: 'Format: one sentence', detail: 'style instruction', kind: 'context' },
+      { id: 'output-handbook', label: 'Output request: answer now', detail: 'final trigger', kind: 'response' }
+    ],
+    tags: ['retrieval-must-enter-context', 'irrelevant-context-crowding']
+  }
+]
 
-  useEffect(() => {
-    if (hasTarget) onInsight('context-stack')
-  }, [hasTarget, onInsight])
+function uniqueList(list) {
+  return [...new Set(list.filter(Boolean))]
+}
+
+function getContextCard(round, cardId) {
+  return round.cards.find((card) => card.id === cardId)
+}
+
+function contextCardTone(card) {
+  if (card?.kind === 'prompt') return 'prompt'
+  if (card?.kind === 'response') return 'response'
+  if (card?.kind === 'retrieved') return 'context'
+  if (card?.kind === 'distractor') return 'probability'
+  return 'default'
+}
+
+function evaluateContextRound(round, visibleIds, fallenIds, stackIds) {
+  if (round.mode === 'add-all') {
+    if (stackIds.length < round.cards.length) {
+      return {
+        complete: false,
+        ok: false,
+        tone: 'neutral',
+        message: `Add ${round.cards.length - stackIds.length} more card${round.cards.length - stackIds.length === 1 ? '' : 's'} to make the window overflow.`
+      }
+    }
+    return {
+      complete: true,
+      ok: fallenIds.length > 0,
+      tone: 'good',
+      message: round.success,
+      tags: round.tags
+    }
+  }
+
+  const missing = (round.requiredVisible ?? []).filter((cardId) => !visibleIds.includes(cardId))
+  const clutter = (round.avoidVisible ?? []).filter((cardId) => visibleIds.includes(cardId))
+  const ok = missing.length === 0 && clutter.length === 0
+  const missingLabels = missing.map((cardId) => getContextCard(round, cardId)?.label ?? cardId)
+  const clutterLabels = clutter.map((cardId) => getContextCard(round, cardId)?.label ?? cardId)
+  const detail = ok
+    ? round.success
+    : `${round.review}${missingLabels.length ? ` Missing: ${missingLabels.join(', ')}.` : ''}${clutterLabels.length ? ` Clutter still visible: ${clutterLabels.join(', ')}.` : ''}`
+
+  return {
+    complete: true,
+    ok,
+    tone: ok ? 'good' : 'review',
+    message: detail,
+    tags: ok ? round.tags : uniqueList([...(round.tags ?? []), ...(missing.length ? ['context-is-not-memory'] : []), ...(clutter.length ? ['irrelevant-context-crowding'] : [])])
+  }
+}
+
+function ContextStack({ onBack, onGlossary, onAttempt, onProgress, onComplete, saved }) {
+  const [roundIndex, setRoundIndex] = useState(0)
+  const [stackIds, setStackIds] = useState([])
+  const [roundResults, setRoundResults] = useState([])
+  const [completed, setCompleted] = useState(false)
+  const [feedback, setFeedback] = useState({
+    tone: 'neutral',
+    message: saved
+      ? 'Progress saved from an earlier Context Stack round. Try the new three-round version whenever you like.'
+      : 'Tap a card to place it into the current context window.'
+  })
+  const round = contextStackRounds[roundIndex]
+  const windowSize = round.windowSize
+  const visibleIds = stackIds.slice(-windowSize)
+  const fallenIds = stackIds.slice(0, Math.max(0, stackIds.length - windowSize))
+  const visibleCards = visibleIds.map((cardId) => getContextCard(round, cardId)).filter(Boolean)
+  const fallenCards = fallenIds.map((cardId) => getContextCard(round, cardId)).filter(Boolean)
+  const availableCards = round.cards.filter((card) => !stackIds.includes(card.id))
+  const incomingCards = availableCards.filter((card) => card.kind !== 'retrieved')
+  const retrievedCards = availableCards.filter((card) => card.kind === 'retrieved')
+  const currentProgress = completed
+    ? 100
+    : Math.min(99, Math.round(((roundIndex + Math.min(0.85, stackIds.length / Math.max(1, round.cards.length))) / contextStackRounds.length) * 100))
+  const status = completed
+    ? roundResults.some((result) => !result.ok) ? 'review-suggested' : 'completed'
+    : 'in-progress'
+  const statusLabel = completed
+    ? roundResults.some((result) => !result.ok) ? 'Review suggested' : 'Completed'
+    : `Round ${roundIndex + 1} of ${contextStackRounds.length}`
+
+  function resetRound(nextRoundIndex = roundIndex) {
+    setRoundIndex(nextRoundIndex)
+    setStackIds([])
+    setFeedback({
+      tone: 'neutral',
+      message: nextRoundIndex === 2
+        ? 'Retrieved evidence helps only after it enters the current context.'
+        : 'Tap a card to place it into the current context window.'
+    })
+  }
+
+  function addCard(cardId) {
+    const card = getContextCard(round, cardId)
+    if (!card || stackIds.includes(cardId) || completed) return
+    const nextStack = [...stackIds, cardId]
+    const nextFallenId = nextStack.length > windowSize ? nextStack[nextStack.length - windowSize - 1] : null
+    setStackIds(nextStack)
+    setFeedback({
+      tone: 'neutral',
+      message: nextFallenId
+        ? `${card.label} is visible to the model now. ${getContextCard(round, nextFallenId)?.label ?? 'An earlier card'} fell out of the window.`
+        : `${card.label} is visible to the model now.`
+    })
+  }
+
+  function checkRound() {
+    const result = evaluateContextRound(round, visibleIds, fallenIds, stackIds)
+    setFeedback({ tone: result.tone, message: result.message })
+    if (!result.complete) return
+
+    const nextResults = [...roundResults.filter((item) => item.roundId !== round.id), { roundId: round.id, ok: result.ok, tags: result.tags ?? [] }]
+    setRoundResults(nextResults)
+    const nextProgress = Math.round(((roundIndex + 1) / contextStackRounds.length) * 100)
+    const tags = uniqueList(nextResults.flatMap((item) => item.tags ?? []))
+
+    if (roundIndex === contextStackRounds.length - 1) {
+      const reviewSuggested = nextResults.some((item) => !item.ok)
+      setCompleted(true)
+      onComplete({
+        progressPct: 100,
+        reviewSuggested,
+        outcome: reviewSuggested
+          ? 'Completed. Review suggested. A key instruction or retrieved evidence was missing at least once.'
+          : 'Completed. You saw how context can grow and expire.',
+        misconceptionTags: tags.length ? tags : ['context-is-not-memory', 'retrieval-must-enter-context']
+      })
+      return
+    }
+
+    onProgress({
+      status: 'in-progress',
+      progressPct: nextProgress,
+      outcome: result.ok
+        ? `Round ${roundIndex + 1} complete. Context Stack progress saved.`
+        : `Round ${roundIndex + 1} complete with review suggested.`,
+      misconceptionTags: result.tags ?? round.tags
+    })
+    resetRound(roundIndex + 1)
+  }
+
+  function restartChallenge() {
+    onAttempt()
+    setRoundIndex(0)
+    setStackIds([])
+    setRoundResults([])
+    setCompleted(false)
+    setFeedback({ tone: 'neutral', message: 'New Context Stack attempt started. Tap a card to place it into context.' })
+  }
 
   return (
-    <section className="screen game-screen" aria-labelledby="context-title">
-      <GameHeader title="Context Stack" titleId="context-title" onBack={onBack} />
-      <img className="game-hero" src={`${ASSET}/illustrations/scene-context-stack@mobile.png`} alt="Cards entering a limited context window" />
-      <p className="lede small">Push cards into a window that holds only the last {windowSize}. Older cards fall out of view.</p>
-      <InfoCallout title="Goal">Keep request, example, and tone visible when the final output card arrives.</InfoCallout>
-      <div className="context-window" aria-label="Visible context window">
-        {visible.length ? visible.map((card, index) => <span key={`${card}-${index}`}>{card}</span>) : <em>Window is empty.</em>}
-      </div>
-      <div className="fallen-row" aria-live="polite">
-        <strong>Fell out:</strong> {fallen.length ? fallen.join(' | ') : 'nothing yet'}
-        <small>{fallen.length ? 'The oldest card left because the window can only hold the newest visible context.' : 'Nothing has exceeded the context limit yet.'}</small>
-      </div>
-      <InsightNotice
-        active={hasTarget || saved}
-        activeText="Insight unlocked: the model cannot use what is no longer in context."
-        idleText={lostTarget ? `The model lost ${lostTarget} because it left the window.` : 'Push cards until request, example, and tone fit together.'}
-      />
-      <div className="deck-grid" aria-label="Deck of context cards">
-        {deck.map((card) => <button key={card} onClick={() => setStack((prev) => [...prev, card])}>{card}</button>)}
-      </div>
-      <div className="game-actions">
-        <button className="secondary-btn" onClick={() => setStack((prev) => prev.slice(0, -1))}>Pop</button>
-        <button className="secondary-btn" onClick={() => setStack([])}>Reset</button>
-        <button className="text-btn" onClick={() => onGlossary('context window')}>What is a context window?</button>
-      </div>
-      <GameReflection prompt="What did the model lose when the older card left the window?" />
-    </section>
+    <PlayChallengeShell
+      title="Context Stack"
+      titleId="context-title"
+      eyebrow="Play challenge"
+      subtitle="Visible now is not the same as remembered forever."
+      onBack={onBack}
+      className="context-stack-screen"
+      data-context-round={round.id}
+      headerChildren={
+        <>
+          <div className="context-stack-status-row">
+            <PlayStatusPill status={status} label={statusLabel} />
+            <span>{windowSize} context slots</span>
+          </div>
+          <PlayProgressRail value={currentProgress} label={`${currentProgress}% Context Stack progress`} />
+        </>
+      }
+    >
+      {completed ? (
+        <PlayCompletionPanel
+          title={roundResults.some((result) => !result.ok) ? 'Review suggested' : 'Insight unlocked'}
+          titleId="context-completion-title"
+          className="context-stack-completion"
+        >
+          <p><strong>Completed.</strong> You saw context grow, expire, and accept retrieved evidence only when it is placed into the current window.</p>
+          {roundResults.some((result) => !result.ok) ? (
+            <p>Review suggested. One or more rounds let key context fall out or left clutter visible.</p>
+          ) : (
+            <p>Good stack. The goal, constraint, and retrieved evidence were visible when they mattered.</p>
+          )}
+          <PlayActionRow>
+            <button className="primary-btn" type="button" onClick={restartChallenge}>Try another stack</button>
+            <button className="secondary-btn" type="button" onClick={onBack}>Back to Play</button>
+            <button className="text-btn" type="button" onClick={() => onGlossary('context window')}>Context window</button>
+          </PlayActionRow>
+        </PlayCompletionPanel>
+      ) : (
+        <>
+          <PlayChallengeBoard label="Context Stack board" className="context-stack-board">
+            <section className="context-stack-brief" aria-labelledby="context-round-title">
+              <span className="step-label">Round {roundIndex + 1}</span>
+              <h2 id="context-round-title">{round.title}</h2>
+              <p>{round.objective}</p>
+              <p>{round.instruction}</p>
+              <div className="play-token-row" aria-label="Context Stack concepts">
+                <PlayTokenChip tone="context">current context</PlayTokenChip>
+                <PlayTokenChip tone="prompt">user goal</PlayTokenChip>
+                <PlayTokenChip tone="response">answer trigger</PlayTokenChip>
+              </div>
+            </section>
+
+            <section className="context-stack-zone" aria-labelledby="context-incoming-title">
+              <h3 id="context-incoming-title">Incoming cards</h3>
+              <div className="context-card-grid">
+                {incomingCards.length ? incomingCards.map((card) => (
+                  <PlayChoiceButton
+                    key={card.id}
+                    className={`context-stack-card is-${card.kind}`}
+                    onClick={() => addCard(card.id)}
+                    selected={stackIds.includes(card.id)}
+                    data-testid="context-stack-card"
+                    data-context-card-id={card.id}
+                  >
+                    <strong>{card.label}</strong>
+                    <small>{card.detail}</small>
+                  </PlayChoiceButton>
+                )) : <p className="context-stack-empty">All incoming cards have been placed.</p>}
+              </div>
+            </section>
+
+            {retrievedCards.length > 0 && (
+              <section className="context-stack-zone is-retrieval" aria-labelledby="context-retrieval-title">
+                <h3 id="context-retrieval-title">Retrieved evidence tray</h3>
+                <p>Retrieved evidence helps only after it enters context.</p>
+                <div className="context-card-grid">
+                  {retrievedCards.map((card) => (
+                    <PlayChoiceButton
+                      key={card.id}
+                      className="context-stack-card is-retrieved"
+                      onClick={() => addCard(card.id)}
+                      selected={stackIds.includes(card.id)}
+                      data-testid="context-stack-card"
+                      data-context-card-id={card.id}
+                    >
+                      <strong>{card.label}</strong>
+                      <small>{card.detail}</small>
+                    </PlayChoiceButton>
+                  ))}
+                </div>
+              </section>
+            )}
+
+            <section className="context-window-zone" aria-labelledby="context-window-title">
+              <div>
+                <h3 id="context-window-title">Current context window</h3>
+                <p>The model can use what is visible here right now.</p>
+              </div>
+              <div className="context-stack-slot-grid" aria-label="Current context window slots">
+                {Array.from({ length: windowSize }).map((_, index) => {
+                  const card = visibleCards[index]
+                  return card ? (
+                    <span key={card.id} className={`context-stack-slot is-${card.kind}`}>
+                      <small>Slot {index + 1}</small>
+                      <strong>{card.label}</strong>
+                    </span>
+                  ) : (
+                    <span key={`empty-${index}`} className="context-stack-slot is-empty">
+                      <small>Slot {index + 1}</small>
+                      <em>empty</em>
+                    </span>
+                  )
+                })}
+              </div>
+            </section>
+
+            <section className="context-fell-zone" aria-labelledby="context-fell-title" aria-live="polite">
+              <h3 id="context-fell-title">Fell out / no longer visible</h3>
+              {fallenCards.length ? (
+                <div className="context-fell-list">
+                  {fallenCards.map((card) => (
+                    <span key={card.id}>{card.label}</span>
+                  ))}
+                </div>
+              ) : (
+                <p>No cards have fallen out yet.</p>
+              )}
+            </section>
+          </PlayChallengeBoard>
+
+          <PlayFeedbackPanel tone={feedback.tone === 'good' ? 'good' : feedback.tone === 'review' ? 'review' : 'neutral'} className="context-stack-feedback">
+            <p>{feedback.message}</p>
+          </PlayFeedbackPanel>
+
+          <PlayActionRow className="context-stack-actions">
+            <button className="primary-btn" type="button" onClick={checkRound}>{round.checkLabel}</button>
+            <button className="secondary-btn" type="button" onClick={() => resetRound()}>Reset round</button>
+            <button className="text-btn" type="button" onClick={() => onGlossary(roundIndex === 2 ? 'rag' : 'context window')}>
+              {roundIndex === 2 ? 'RAG in glossary' : 'Context window'}
+            </button>
+          </PlayActionRow>
+          <PlayScrollHint>More context below</PlayScrollHint>
+        </>
+      )}
+    </PlayChallengeShell>
   )
 }
 
@@ -3793,7 +4130,7 @@ function AttentionWeave({ title = 'Attention Weave', onBack, onGlossary, onInsig
     <section className="screen game-screen" aria-labelledby="attention-title">
       <GameHeader title={title} titleId="attention-title" onBack={onBack} />
       <img className="game-hero" src={`${ASSET}/illustrations/scene-attention-weave@mobile.png`} alt="Token nodes connected by glowing attention arcs" />
-      <p className="lede small">Tap a source token, then a target token. This foundation version previews Attention Match by asking which token <strong>it</strong> depends on.</p>
+      <p className="lede small">Tap a source token, then a target token. This preview asks which token <strong>it</strong> depends on.</p>
       <InfoCallout title="Status">
         {selected == null ? 'Choose a source token.' : `Source selected: ${nodes[selected]}. Now choose a target token.`}
       </InfoCallout>
@@ -4100,7 +4437,7 @@ function BadgeScreen({
       </div>
       <section className="idea-panel">
         <h2>{unlocked ? 'Badge unlocked' : 'Badge criterion'}</h2>
-        <p>Complete the Journey checkpoints and practice activities to earn one confidence badge: Prompt Life: Model Literate.</p>
+        <p>Complete the required Journey path, Prompt Run, and the synthesis card to earn one confidence badge: Prompt Life: Model Literate. The other Play challenges are practice support.</p>
         <p>This badge means you can explain what an LLM is, what it is not, and how a prompt becomes a response without treating the model as magic.</p>
         <p>{unlocked ? 'You met the learning threshold.' : `Remaining: ${lessonsNeeded} Journey checkpoint${lessonsNeeded === 1 ? '' : 's'}, ${promptRunNeeded} Prompt Run completion${promptRunNeeded === 1 ? '' : 's'}, and ${synthesisNeeded} synthesis card completion${synthesisNeeded === 1 ? '' : 's'}.`}</p>
       </section>

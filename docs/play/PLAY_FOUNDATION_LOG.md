@@ -1,5 +1,103 @@
 # Play Foundation Log
 
+## 2026-06-08 - v0.26.6 Context Stack v2
+
+### Summary
+
+- Refactored Context Stack onto the shared Play Challenge Foundation shell and board components.
+- Added a short three-round challenge:
+  - Round 1: Basic context window.
+  - Round 2: Important detail falls out.
+  - Round 3: Retrieved evidence enters context.
+- Added tap-to-move cards, a four-slot current context window, fell-out state, retrieved-evidence tray, calm feedback, review-suggested completion, and completion panel.
+- Tracked attempt start, per-round progress, completion, review suggestion, best progress, last outcome, and misconception tags through `promptlife.playChallenges.v1`.
+- Preserved legacy Context Stack insight/progress compatibility and did not make Context Stack required for Journey progress or the single badge.
+- Cleaned Play/Badge copy:
+  - `Final challenge slate` -> `Practice challenges` / `Play practice challenges`.
+  - `Foundation pass` -> `Practice set`.
+  - `Foundation ready` -> `Coming soon`.
+  - Badge copy now clarifies that Prompt Run and the required Journey path matter for the badge; other Play challenges are practice support.
+- Bumped the visible app version to `v0.26.6`.
+
+### Recommendations For The Next Pass
+
+- Build Probability Picker as the next complete Play challenge using logits, softmax, sampling, and probability-is-not-truth feedback.
+- Replace the Attention Match compatibility screen with a purpose-built token dependency matching activity.
+- Add a debug-only shared Play progress inspector once the remaining Play activities settle.
+
+### Challenges And Risks
+
+- The prompt requested `v0.26.4`, but the app was already at `v0.26.5`; this pass is recorded as `v0.26.6` to avoid a backward version step.
+- Context Stack now writes richer shared Play progress, while older insight keys remain preserved for compatibility.
+- The production bundle still has the existing Vite large-chunk warning.
+
+### UI Cards, Screens, Scenes, And Routes Changed
+
+- Play page: copy now presents the board as practice challenges, not a final/foundation slate.
+- Context Stack route/screen: replaced the earlier mini-game with the new three-round shared Play challenge.
+- Context Stack board scene: added incoming cards, current context window, fell-out/no-longer-visible cards, retrieved evidence tray for round 3, feedback, and completion states.
+- Probability Picker route/card: user-visible status now says `Coming soon`.
+- Attention Match route/card: removed `foundation version` learner-facing wording.
+- Badge page: copy no longer implies all five Play challenges are required for the single badge.
+- Reset progress: QA confirmed shared Play progress clears through the existing reset path.
+
+### LocalStorage Keys Created, Read, Migrated, Or Preserved
+
+- Read/written/updated: `promptlife.playChallenges.v1`.
+- Preserved/read/written for legacy Context Stack insight compatibility: `promptlife:v1:gameInsights`.
+- Preserved/read/written for legacy Context Stack insight compatibility: `pl.gameInsights`.
+- Preserved/read for Prompt Run bridge compatibility: `promptlife:v1:promptRunProgress`.
+- Preserved/read for Prompt Run bridge compatibility: `pl.promptRunProgress`.
+- Preserved/read for Prompt Run bridge compatibility: `promptlife:v1:traceComplete`.
+- Preserved/read for Prompt Run bridge compatibility: `pl.traceComplete`.
+- Preserved/read for learning-tour bridge compatibility: `promptlife:v1:learningTourComplete`.
+- Preserved/read for learning-tour bridge compatibility: `pl.learningTourComplete`.
+- Preserved independently by Dojo: `promptlife.glossaryDojo.v1`.
+- Preserved: existing Journey, exercise, reflection, choice-order, and Prompt Run keys. No old progress was wiped except through the existing explicit reset/debug-clear flows.
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed.
+- Browser QA at 390px: passed. Play loaded, Context Stack opened, Round 1/2/3 completed, review-suggested and completed outcomes were possible, attempts and completion updated in `promptlife.playChallenges.v1`, Badge loaded, reset cleared shared Play progress, Glossary Dojo still worked, Prompt Run opened, Probability Picker stayed safe, Attention Match opened, deprecated Token Pipeline Relay and How AI Learns stayed hidden, reduced-motion emulation worked, and no horizontal overflow was detected.
+- Browser QA at 320px: passed. Context Stack remained readable, touch targets were usable, the board scrolled vertically without horizontal overflow, and the bottom nav remained usable.
+
+### Screenshots And Report
+
+- `docs/play/screenshots/v0-26-6-play-page-390.png`
+- `docs/play/screenshots/v0-26-6-context-stack-start-390.png`
+- `docs/play/screenshots/v0-26-6-context-stack-active-390.png`
+- `docs/play/screenshots/v0-26-6-context-stack-completion-390.png`
+- `docs/play/screenshots/v0-26-6-context-stack-320.png`
+- `docs/play/screenshots/v0-26-6-badge-390.png`
+- `docs/play/screenshots/v0-26-6-context-stack-v2-screenshots.json`
+- `docs/play/prompt-life-v0-26-6-context-stack-v2-report.html`
+- `docs/play/prompt-life-v0-26-6-context-stack-v2-report.pdf`
+
+### Files Changed
+
+- `README.md`
+- `package.json`
+- `package-lock.json`
+- `src/features/play/PlayChallengeComponents.tsx`
+- `src/features/play/challengeRegistry.ts`
+- `src/features/play/storage.ts`
+- `src/main.tsx`
+- `src/styles/global.css`
+- `docs/REVIEW_NOTES.md`
+- `docs/play/PLAY_FOUNDATION_LOG.md`
+- `docs/play/screenshots/v0-26-6-play-page-390.png`
+- `docs/play/screenshots/v0-26-6-context-stack-start-390.png`
+- `docs/play/screenshots/v0-26-6-context-stack-active-390.png`
+- `docs/play/screenshots/v0-26-6-context-stack-completion-390.png`
+- `docs/play/screenshots/v0-26-6-context-stack-320.png`
+- `docs/play/screenshots/v0-26-6-badge-390.png`
+- `docs/play/screenshots/v0-26-6-context-stack-v2-screenshots.json`
+- `docs/play/prompt-life-v0-26-6-context-stack-v2-report.html`
+- `docs/play/prompt-life-v0-26-6-context-stack-v2-report.pdf`
+
 ## 2026-06-07 - v0.26.3 Glossary Dojo Shared Shell Wrap
 
 ### Summary

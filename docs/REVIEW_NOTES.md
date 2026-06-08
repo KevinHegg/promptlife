@@ -1,6 +1,43 @@
 # Review Notes
 
-Date: 2026-06-07
+Date: 2026-06-08
+
+## v0.26.6 Context Stack v2
+
+### What Changed
+
+- Rebuilt Context Stack as a three-round shared Play Challenge Foundation activity.
+- Added tap-to-move rounds for a basic context window, an important detail falling out, and retrieved evidence entering context.
+- Added current-window, incoming-card, fell-out, retrieved-evidence, feedback, and completion zones with mobile-first styling.
+- Connected Context Stack to `promptlife.playChallenges.v1` attempt, progress, completion, review-suggested, and misconception-tag updates.
+- Preserved legacy Context Stack insight/progress compatibility and did not change Journey progress or badge unlock rules.
+- Cleaned Play/Badge copy so learner-facing text says `Practice challenges`, `Practice set`, and `Coming soon` instead of foundation/slate wording.
+- Bumped the visible app version to `v0.26.6` and updated the README cache-busting example to `?v=0266`.
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed.
+- Mobile QA at 390px and 320px: Play loaded, Context Stack opened, all three rounds completed, review-suggested and completed outcomes were possible, shared attempts/completion updated, reset cleared shared Play progress, Glossary Dojo still worked, Prompt Run opened, Probability Picker remained safe, Attention Match opened, deprecated Play cards stayed hidden, reduced-motion emulation worked, and no horizontal overflow was detected.
+
+### Screenshots And Report
+
+- `docs/play/prompt-life-v0-26-6-context-stack-v2-report.html`
+- `docs/play/prompt-life-v0-26-6-context-stack-v2-report.pdf`
+- `docs/play/screenshots/v0-26-6-play-page-390.png`
+- `docs/play/screenshots/v0-26-6-context-stack-start-390.png`
+- `docs/play/screenshots/v0-26-6-context-stack-active-390.png`
+- `docs/play/screenshots/v0-26-6-context-stack-completion-390.png`
+- `docs/play/screenshots/v0-26-6-context-stack-320.png`
+- `docs/play/screenshots/v0-26-6-badge-390.png`
+
+### Known Issues
+
+- Probability Picker remains a safe coming-soon card.
+- Attention Match still uses the current compatibility route rather than a purpose-built final activity.
+- The existing Vite large-chunk warning remains.
 
 ## v0.26.5 Prompt Response Panel Padding
 
