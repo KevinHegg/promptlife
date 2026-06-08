@@ -1210,7 +1210,7 @@ p {
   overflow: hidden;
   border: 2px solid rgba(53, 230, 226, 0.72);
   border-radius: 12px;
-  padding: 0.52rem;
+  padding: 0.26rem 0.52rem;
   color: var(--pl-indigo);
   background: rgba(236, 250, 255, 0.96);
   box-shadow: 0 8px 18px rgba(7, 18, 74, 0.15);
@@ -1461,7 +1461,7 @@ p {
   .pr-card {
     border-radius: 10px;
     gap: 0.3rem;
-    padding: 0.46rem;
+    padding: 0.24rem 0.46rem;
   }
 
   .pr-card-header {

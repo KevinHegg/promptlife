@@ -74,7 +74,7 @@ The repo also includes a GitHub Pages workflow. Pushes to `main` build the app w
 https://kevinhegg.github.io/promptlife/
 ```
 
-Developer cache note for iPhone testing: after a `main` deploy, use a hard refresh, clear site data, add a cache-busting query such as `?v=0264`, or confirm the visible app version on the Badge page.
+Developer cache note for iPhone testing: after a `main` deploy, use a hard refresh, clear site data, add a cache-busting query such as `?v=0265`, or confirm the visible app version on the Badge page.
 
 ## Reset Progress
 

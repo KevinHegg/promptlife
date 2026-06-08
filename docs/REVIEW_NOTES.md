@@ -2,6 +2,28 @@
 
 Date: 2026-06-07
 
+## v0.26.5 Prompt Response Panel Padding
+
+### What Changed
+
+- Reduced the vertical padding inside the four `Prompt vs Response` visual panels by about half.
+- Kept the panel horizontal padding, four-row layout, Journey content, progress rules, and badge logic unchanged.
+- Bumped the visible app version to `v0.26.5` and updated the README cache-busting example to `?v=0265`.
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed.
+
+### Screenshots And Report
+
+- `docs/reports/prompt-life-v0-26-5-prompt-response-padding-report.html`
+- `docs/reports/prompt-life-v0-26-5-prompt-response-padding-report.pdf`
+- `docs/reports/screenshots/v0-26-5-prompt-response-padding-390.png`
+- `docs/reports/screenshots/v0-26-5-prompt-response-padding-320.png`
+
 ## v0.26.4 Main Branch Cache-Bust Release
 
 ### What Changed
