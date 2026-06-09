@@ -21,6 +21,7 @@ import {
 } from './components/ConceptAnimations'
 import { ExerciseShell } from './components/ExerciseSystem'
 import { VisualAid, VisualAidGallery, visualAidStyleVariants } from './components/VisualAids'
+import { FIRST_SIX_CHECKPOINT_BANK_V0279, hasV0279CheckpointBank } from './data/checkpointBankV0279'
 import { acts, games, glossary, learningModes, lessons } from './data/content'
 import { buildLessonReviewProfile, reviewRubricCategories } from './data/contentReview'
 import { emptyExerciseProgress, exerciseById, exercises, lessonExerciseIds } from './data/exercises'
@@ -71,7 +72,7 @@ const HOME_ASSETS = {
   heroFallback: `${ASSET}/illustrations/scene-hero-feature-cloud@mobile.png`
 }
 // Bump this for each shipped app change; the Badge screen displays it under Start over.
-const APP_VERSION = '0.27.6'
+const APP_VERSION = '0.27.9'
 const STORAGE_KEYS = {
   lastLocation: 'promptlife:v1:lastLocation',
   lessonId: 'promptlife:v1:lessonId',
@@ -344,6 +345,10 @@ function prefersReducedMotion() {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches
 }
 
+function makeCheckpointAttemptSeed() {
+  return `checkpoint-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 9)}`
+}
+
 function getReviewRoute() {
   const base = BASE || ''
   const path = base && window.location.pathname.startsWith(base)
@@ -353,6 +358,22 @@ function getReviewRoute() {
   if (path.startsWith('/review/visual-aids')) return 'visual-aids'
   if (path.startsWith('/review/style-guide')) return 'style-guide'
   return null
+}
+
+function shouldUseLegacyCheckpointBank() {
+  try {
+    const params = new URLSearchParams(window.location.search)
+    return params.get('legacyCheckpoints') === '1' || params.get('checkpointBank') === 'legacy'
+  } catch {
+    return false
+  }
+}
+
+function getActiveCheckpointQuiz(lesson, useLegacyBank = shouldUseLegacyCheckpointBank()) {
+  if (!useLegacyBank && hasV0279CheckpointBank(lesson.id)) {
+    return FIRST_SIX_CHECKPOINT_BANK_V0279[lesson.id]
+  }
+  return lesson.quiz
 }
 
 function getStored(key, fallback, legacyKey = null) {
@@ -1015,9 +1036,13 @@ function LessonScreen({ lesson, mode, lessonIndex, totalLessons, reflection, onC
   const [checkpointIndex, setCheckpointIndex] = useState(0)
   const [checkpointSelections, setCheckpointSelections] = useState({})
   const [checkpointRevealed, setCheckpointRevealed] = useState({})
+  const [checkpointAttemptedWrongChoiceIds, setCheckpointAttemptedWrongChoiceIds] = useState({})
+  const [checkpointCompletedQuestionIds, setCheckpointCompletedQuestionIds] = useState({})
+  const [checkpointAttemptSeed, setCheckpointAttemptSeed] = useState(() => makeCheckpointAttemptSeed())
   const [continueHint, setContinueHint] = useState(false)
   const [draftReflection, setDraftReflection] = useState(reflection)
   const checkpointRef = useRef<HTMLElement | null>(null)
+  const stickyActionRef = useRef<HTMLButtonElement | null>(null)
   const canUpdateProgress = mode === 'learn'
   const definition = lesson.oneSentenceDefinition ?? lesson.definition
   const coreExplanation = lesson.coreExplanation ?? lesson.definition
@@ -1027,12 +1052,18 @@ function LessonScreen({ lesson, mode, lessonIndex, totalLessons, reflection, onC
   const whyItMatters = lesson.whyItMatters ?? lesson.why
   const howItConnects = lesson.howItConnects ?? lesson.relationship
   const choiceOrderSeed = useMemo(() => getChoiceOrderSeed(), [])
+  const useLegacyCheckpointBank = useMemo(() => shouldUseLegacyCheckpointBank(), [])
+  const usesV0279CheckpointBank = !useLegacyCheckpointBank && hasV0279CheckpointBank(lesson.id)
+  const lessonCheckpointQuiz = useMemo(
+    () => getActiveCheckpointQuiz(lesson, useLegacyCheckpointBank),
+    [lesson, useLegacyCheckpointBank]
+  )
   const checkpointItems = useMemo(() => {
-    if (Array.isArray(lesson.quiz?.questions)) {
-      return lesson.quiz.questions.filter((question) => question?.choices?.length && question?.answer)
+    if (Array.isArray(lessonCheckpointQuiz?.questions)) {
+      return lessonCheckpointQuiz.questions.filter((question) => question?.choices?.length && question?.answer)
     }
-    return lesson.quiz?.choices?.length && lesson.quiz?.answer ? [lesson.quiz] : []
-  }, [lesson.quiz])
+    return lessonCheckpointQuiz?.choices?.length && lessonCheckpointQuiz?.answer ? [lessonCheckpointQuiz] : []
+  }, [lessonCheckpointQuiz])
   const hasCheckpointQuestions = checkpointItems.length > 0
   const activeCheckpointIndex = hasCheckpointQuestions ? Math.min(checkpointIndex, checkpointItems.length - 1) : 0
   const activeQuiz = hasCheckpointQuestions ? checkpointItems[activeCheckpointIndex] : null
@@ -1043,21 +1074,23 @@ function LessonScreen({ lesson, mode, lessonIndex, totalLessons, reflection, onC
     ? `lesson:${lesson.id}:checkpoint`
     : `lesson:${lesson.id}:checkpoint:${checkpointKey}`
   const checkpointChoices = useMemo(
-    () => activeQuiz ? buildQuizChoices(checkpointChoiceOrderKey, activeQuiz, choiceOrderSeed) : [],
-    [checkpointChoiceOrderKey, activeQuiz, choiceOrderSeed]
+    () => activeQuiz ? buildQuizChoices(checkpointChoiceOrderKey, activeQuiz, `${choiceOrderSeed}:${checkpointAttemptSeed}`) : [],
+    [checkpointChoiceOrderKey, activeQuiz, choiceOrderSeed, checkpointAttemptSeed]
   )
   const choice = hasCheckpointQuestions ? checkpointSelections[checkpointKey] ?? null : null
   const revealed = hasCheckpointQuestions && Boolean(checkpointRevealed[checkpointKey])
+  const attemptedWrongChoiceIds = hasCheckpointQuestions ? checkpointAttemptedWrongChoiceIds[checkpointKey] ?? [] : []
   const selectedChoice = choice == null ? null : checkpointChoices.find((item) => item.id === choice) ?? null
   const isCorrect = Boolean(selectedChoice?.isCorrect)
+  const isCurrentQuestionComplete = hasCheckpointQuestions && Boolean(checkpointCompletedQuestionIds[checkpointKey]) && isCorrect
   const isLastCheckpointQuestion = activeCheckpointIndex >= checkpointItems.length - 1
   const isFinalLesson = lessonIndex + 1 === totalLessons
-  const checkpointCanAdvance = !hasCheckpointQuestions || isCorrect
+  const checkpointCanAdvance = !hasCheckpointQuestions || isCurrentQuestionComplete
   const stickyActionLabel = !canUpdateProgress
     ? 'Return to Journey'
     : !hasCheckpointQuestions
       ? (isFinalLesson ? 'Finish and view badge' : 'Next learning card')
-      : isCorrect
+      : isCurrentQuestionComplete
         ? (!isLastCheckpointQuestion ? 'Next question' : isFinalLesson ? 'Finish and view badge' : 'Next learning card')
         : choice == null
           ? 'Answer checkpoint to continue'
@@ -1072,16 +1105,61 @@ function LessonScreen({ lesson, mode, lessonIndex, totalLessons, reflection, onC
     setCheckpointIndex(0)
     setCheckpointSelections({})
     setCheckpointRevealed({})
+    setCheckpointAttemptedWrongChoiceIds({})
+    setCheckpointCompletedQuestionIds({})
+    setCheckpointAttemptSeed(makeCheckpointAttemptSeed())
     setContinueHint(false)
     setDraftReflection(mode === 'preview' ? '' : reflection)
   }, [lesson.id, mode, reflection])
+
+  useEffect(() => {
+    if (!hasCheckpointQuestions || choice == null) return undefined
+    function clearDockOverlap() {
+      const action = stickyActionRef.current
+      if (!action) return
+      const navTop = document.querySelector('.bottom-nav')?.getBoundingClientRect().top ?? window.innerHeight
+      const actionBottom = action.getBoundingClientRect().bottom
+      const overlap = actionBottom - (navTop - 14)
+      if (overlap > 0) {
+        const scrollContainer = action.closest('.pl-shell')
+        if (scrollContainer) {
+          scrollContainer.scrollBy({ top: overlap, behavior: 'auto' })
+        } else {
+          window.scrollBy({ top: overlap, behavior: 'auto' })
+        }
+      }
+    }
+    const firstTimeoutId = window.setTimeout(clearDockOverlap, 80)
+    const secondTimeoutId = window.setTimeout(clearDockOverlap, 240)
+    return () => {
+      window.clearTimeout(firstTimeoutId)
+      window.clearTimeout(secondTimeoutId)
+    }
+  }, [choice, hasCheckpointQuestions, stickyActionLabel])
+
+  function selectCheckpointChoice(choiceId) {
+    const answer = checkpointChoices.find((item) => item.id === choiceId)
+    setCheckpointSelections((selections) => ({ ...selections, [checkpointKey]: choiceId }))
+    setCheckpointRevealed((revealedMap) => ({ ...revealedMap, [checkpointKey]: true }))
+    if (answer?.isCorrect) {
+      setCheckpointCompletedQuestionIds((completedMap) => ({ ...completedMap, [checkpointKey]: true }))
+    } else {
+      setCheckpointAttemptedWrongChoiceIds((attemptMap) => {
+        const previous = attemptMap[checkpointKey] ?? []
+        return previous.includes(choiceId)
+          ? attemptMap
+          : { ...attemptMap, [checkpointKey]: [...previous, choiceId] }
+      })
+    }
+    setContinueHint(false)
+  }
 
   function saveAndContinue() {
     if (!canUpdateProgress) {
       onReturnToJourney()
       return
     }
-    if (hasCheckpointQuestions && !isCorrect) {
+    if (hasCheckpointQuestions && !isCurrentQuestionComplete) {
       setContinueHint(true)
       checkpointRef.current?.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'center' })
       return
@@ -1110,6 +1188,7 @@ function LessonScreen({ lesson, mode, lessonIndex, totalLessons, reflection, onC
         <h1 id="lesson-title" tabIndex={-1}>{lesson.title}</h1>
         <p className="lede small">{lesson.subtitle}</p>
         <p className="lesson-definition">{definition}</p>
+        {usesV0279CheckpointBank && <p className="mode-note" role="status">Model-thinking checkpoint pilot active for development testing. Add ?legacyCheckpoints=1 for previous checkpoints.</p>}
         {mode === 'preview' && <p className="mode-note" role="status">Previewing this learning card. Progress will not change.</p>}
         {mode === 'review' && <p className="mode-note" role="status">Reviewing a completed learning card.</p>}
       </header>
@@ -1187,11 +1266,8 @@ function LessonScreen({ lesson, mode, lessonIndex, totalLessons, reflection, onC
             quiz={activeQuiz}
             choices={checkpointChoices}
             selectedChoiceId={choice}
-            setChoice={(choiceId) => {
-              setCheckpointSelections((selections) => ({ ...selections, [checkpointKey]: choiceId }))
-              setCheckpointRevealed((revealedMap) => ({ ...revealedMap, [checkpointKey]: true }))
-              setContinueHint(false)
-            }}
+            attemptedWrongChoiceIds={attemptedWrongChoiceIds}
+            setChoice={selectCheckpointChoice}
             revealed={revealed}
             progress={{ current: activeCheckpointIndex + 1, total: checkpointItems.length }}
             onPrevious={activeCheckpointIndex > 0 ? () => {
@@ -1207,7 +1283,7 @@ function LessonScreen({ lesson, mode, lessonIndex, totalLessons, reflection, onC
         </section>
       )}
 
-      <button className={checkpointCanAdvance || !canUpdateProgress ? 'primary-btn sticky-action is-ready' : 'primary-btn sticky-action'} onClick={saveAndContinue}>
+      <button ref={stickyActionRef} className={checkpointCanAdvance || !canUpdateProgress ? 'primary-btn sticky-action is-ready' : 'primary-btn sticky-action'} onClick={saveAndContinue}>
         {stickyActionLabel}
       </button>
     </section>
@@ -1428,7 +1504,7 @@ function groupGlossaryTermsBySection(items) {
   }, [])
 }
 
-function Checkpoint({ quiz, choices, selectedChoiceId, setChoice, revealed, progress = null, onPrevious = null }) {
+function Checkpoint({ quiz, choices, selectedChoiceId, attemptedWrongChoiceIds = [], setChoice, revealed, progress = null, onPrevious = null }) {
   const selectedChoice = selectedChoiceId == null ? null : choices.find((item) => item.id === selectedChoiceId) ?? null
   const isCorrect = Boolean(selectedChoice?.isCorrect)
   const feedback = selectedChoice?.feedback ?? quiz.explain
@@ -1438,7 +1514,11 @@ function Checkpoint({ quiz, choices, selectedChoiceId, setChoice, revealed, prog
     || feedback.startsWith('Not the best fit')
     || feedback.startsWith('Close,')
   )
-  const feedbackHasCorrectLead = isCorrect && typeof feedback === 'string' && feedback.startsWith('Insight unlocked')
+  const feedbackHasCorrectLead = isCorrect && typeof feedback === 'string' && (
+    feedback.startsWith('Insight unlocked')
+    || feedback.startsWith('Insight strengthened')
+    || feedback.startsWith('Good distinction')
+  )
   const hasProgress = Boolean(progress && progress.total >= 1)
   const hasMultipleQuestions = Boolean(progress && progress.total > 1)
   const isFinalQuestion = hasProgress && progress.current === progress.total
@@ -1475,13 +1555,15 @@ function Checkpoint({ quiz, choices, selectedChoiceId, setChoice, revealed, prog
       <div className="answer-list" role="list">
         {choices.map((answer, index) => {
           const selected = selectedChoiceId === answer.id
+          const attemptedWrong = attemptedWrongChoiceIds.includes(answer.id)
           const className = [
             'answer',
             selected ? 'is-selected' : '',
-            revealed && answer.isCorrect ? 'is-correct' : '',
-            revealed && selected && !answer.isCorrect ? 'is-wrong' : ''
+            selected && answer.isCorrect ? 'is-correct' : '',
+            revealed && selected && !answer.isCorrect ? 'is-wrong' : '',
+            !selected && attemptedWrong ? 'is-tried' : ''
           ].filter(Boolean).join(' ')
-          const optionLabel = `Answer ${String.fromCharCode(65 + index)}: ${answer.label}${revealed && answer.isCorrect ? '. Correct answer.' : ''}`
+          const optionLabel = `Answer ${String.fromCharCode(65 + index)}: ${answer.label}${selected && answer.isCorrect ? '. Correct answer.' : attemptedWrong ? '. Tried answer.' : ''}`
 
           return (
             <button

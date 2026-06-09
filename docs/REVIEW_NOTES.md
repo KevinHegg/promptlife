@@ -1,6 +1,157 @@
 # Review Notes
 
-Date: 2026-06-08
+Date: 2026-06-09
+
+## v0.27.9 First-Six Model-Thinking Checkpoints Live Pilot
+
+### What Changed
+
+- Revised the first-six model-thinking checkpoint bank using the human review notes.
+- Made the revised first-six checkpoint bank active by default for development testing.
+- Added an easy legacy fallback: `?legacyCheckpoints=1` or `?checkpointBank=legacy` restores the previous single-question checkpoints.
+- Kept the v0.27.7 full draft bank, v0.27.8 pilot bank, and current live checkpoint data intact.
+- Added `src/data/checkpointBankV0279.ts` as the generated runtime bank for the six revised learning cards.
+- Updated `buildQuizChoices` so object choices can carry stable `choiceId` values while older string-based checkpoints continue to work.
+- Extended `npm run audit:checkpoints` to validate the v0.27.9 active-development bank.
+- Bumped the visible app/package version to `v0.27.9` and updated the README cache-busting example to `?v=0279`.
+
+### Revised Bank Totals
+
+- Learning cards revised: 6.
+- Revised checkpoint questions: 19.
+- Answer choices: 76.
+- Wrong-answer distractors: 57.
+- Active by default for: `What Is an LLM?`, `Where LLMs Fit`, `Rationalists vs Empiricists`, `Training`, `Pretraining`, and `Overfitting and Generalization`.
+
+### Human Review Edits
+
+- `What Is an LLM?`: shortened Q1 correct answer, revised Q2 stem and answer, kept fluent-behavior-without-awareness framing.
+- `Where LLMs Fit`: changed to 3 questions, tightened denoising wording, shortened Q2 correct answer, and added the model-vs-product question.
+- `Rationalists vs Empiricists`: tightened Q1/Q3 correct answers and replaced the weak loss-as-retrieval distractor with a confidence/probability distractor.
+- `Training`: rewrote Q2 as a positive stem, replaced premature softmax/diffusion distractors, and kept the durable learning sequence.
+- `Pretraining`: removed conscious-recall wording from Q2, replaced the citation-list distractor, and clarified source-like output is not cited evidence.
+- `Overfitting and Generalization`: replaced RAG/context-window distractors and rewrote Q3 without fine-tuning as the main frame.
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed and includes checkpoint-bank validation.
+- `npm run audit:checkpoints`: passed; validates live checkpoints, v0.27.7 draft, v0.27.8 pilot, and v0.27.9 active-development bank.
+- Browser QA confirmed wrong answers do not reveal the correct answer, correct feedback uses stable choice IDs, `Next question` appears only when another checkpoint question remains, and final states use `Next learning card`.
+- Legacy fallback QA confirmed `?legacyCheckpoints=1` restores the previous `1 of 1 question` checkpoint and removes the pilot note.
+- 320px, 390px, and desktop screenshot QA confirmed no horizontal overflow. A dock-aware scroll repair keeps the continue button above the bottom nav in answered checkpoint states.
+- Fresh screenshots and DOM evidence are tracked in `docs/journey/checkpoints/v0-27-9-playwright-screenshot-evidence.json` and `docs/journey/checkpoints/v0-27-9-browser-qa-evidence.json`.
+
+### Files And Reports
+
+- `src/data/checkpointBankV0279.ts`
+- `docs/journey/checkpoints/checkpoint-question-bank-v0-27-9-first-six-revised.json`
+- `docs/journey/checkpoints/checkpoint-question-bank-v0-27-9-first-six-revised.md`
+- `docs/journey/checkpoints/v0-27-9-browser-qa-evidence.json`
+- `docs/journey/checkpoints/v0-27-9-playwright-screenshot-evidence.json`
+- `docs/journey/prompt-life-v0-27-9-first-six-checkpoint-revision-report.html`
+- `docs/journey/prompt-life-v0-27-9-first-six-checkpoint-revision-report.pdf`
+- `docs/journey/screenshots/v0-27-9-pw-what-is-llm-q1-390.png`
+- `docs/journey/screenshots/v0-27-9-pw-what-is-llm-q1-wrong-no-reveal-390.png`
+- `docs/journey/screenshots/v0-27-9-pw-what-is-llm-q1-correct-next-question-390.png`
+- `docs/journey/screenshots/v0-27-9-pw-what-is-llm-final-next-learning-card-390.png`
+- `docs/journey/screenshots/v0-27-9-pw-where-llms-fit-q1-390.png`
+- `docs/journey/screenshots/v0-27-9-pw-what-is-llm-q1-320.png`
+- `docs/journey/screenshots/v0-27-9-pw-what-is-llm-q1-desktop.png`
+- `scripts/generate-checkpoint-live-pilot-v0279.mjs`
+
+## v0.27.8 Model-Thinking Checkpoint Authoring Pilot
+
+### What Changed
+
+- Created a draft-only model-thinking checkpoint pilot for the first six Journey learning cards.
+- Rewrote the pilot stems away from curriculum recall and toward concrete model reasoning: mechanism in action, boundary distinctions, causal consequences, model traces, applied scenarios, misconception diagnosis, and human-use judgment.
+- Preserved the v0.27.7 full draft bank and did not make the v0.27.8 pilot live by default.
+- Added v0.27.8 pilot validation to `npm run audit:checkpoints`; `npm run audit:answers` inherits it through the checkpoint-bank audit.
+- Generated JSON, Markdown, HTML, and PDF review artifacts for the pilot.
+- Bumped the visible app/package version to `v0.27.8` and updated the README cache-busting example to `?v=0278`.
+
+### Pilot Totals
+
+- Learning cards covered: 6.
+- Pilot questions: 18.
+- Answer choices: 72.
+- Wrong-answer distractors: 54.
+- Model-thinking / applied / mechanism questions: 100%.
+- Direct-definition questions: 0%.
+- Status: `pilot-draft`; the pilot bank is not live in normal Journey mode.
+- Deep Research review file: no Deep Research review file was present in `docs/journey/checkpoints` when the report was generated, so the report includes a placeholder note.
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed and includes checkpoint-bank validation.
+- `npm run audit:checkpoints`: passed; validates live checkpoints, the v0.27.7 draft bank, and the v0.27.8 pilot bank.
+- Browser/manual preview QA: not applicable because `?checkpointPilot=1` was intentionally not implemented and the pilot bank is draft-only in this pass.
+
+### Files And Reports
+
+- `docs/journey/checkpoints/checkpoint-question-bank-v0-27-8-model-thinking-pilot.json`
+- `docs/journey/checkpoints/checkpoint-question-bank-v0-27-8-model-thinking-pilot.md`
+- `docs/journey/prompt-life-v0-27-8-model-thinking-checkpoint-pilot-report.html`
+- `docs/journey/prompt-life-v0-27-8-model-thinking-checkpoint-pilot-report.pdf`
+- `scripts/generate-checkpoint-pilot-v0278.mjs`
+
+## v0.27.7 Checkpoint Question Bank Draft + Renderer Repair
+
+### What Changed
+
+- Fixed the Journey checkpoint wrong-answer reveal bug: wrong answers no longer reveal or style the correct answer.
+- Added per-question attempted-wrong-choice tracking so previous misses can remain lightly marked while the correct answer stays hidden.
+- Tied checkpoint feedback and highlighting to stable choice IDs after shuffle, not visible A/B/C/D position.
+- Added a fresh per-attempt checkpoint shuffle seed layered on top of the stored choice-order seed, so a new review attempt may reshuffle without erasing durable completion.
+- Generated a draft-only checkpoint question bank for all 39 Journey learning cards.
+- Generated glossary learning-path order files for distractor review.
+- Added `npm run audit:checkpoints` and wired checkpoint-bank validation into `npm run audit:answers`.
+- Bumped the visible app/package version to `v0.27.7` and updated the README cache-busting example to `?v=0277`.
+
+### Draft Bank Totals
+
+- Cards covered: 39.
+- Draft questions: 136.
+- Answer choices: 544.
+- Wrong-answer distractors: 408.
+- Question-count distribution: 5 cards with 2 questions, 12 cards with 3 questions, 20 cards with 4 questions, and 2 cards with 5 questions.
+- Status: `review-draft`; the draft bank is not live in normal Journey mode.
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- `npm run audit:checkpoints`: passed.
+- `npm run audit:answers`: passed and includes checkpoint-bank validation.
+- Browser QA at 390px: wrong answers did not reveal the correct answer, a second wrong answer updated feedback for the selected choice, the correct answer revealed only after selection, and the final single-question action read `Next learning card`.
+- Browser QA at 320px: wrong-answer state did not horizontally overflow and the retry action could scroll clear of the bottom nav.
+- Browser QA at desktop width: checkpoint state fit without horizontal overflow and Journey core detail blocks stayed one full-width column.
+- Review reset QA: returning to completed `Alignment` opened a fresh visible checkpoint attempt with no selected choice, no tried choice, and no correct answer revealed, while durable review/completion state remained intact.
+- Multi-question runtime note: the new bank is draft-only in this pass, so live Journey still has one checkpoint question per card; multi-question behavior is validated structurally by the draft audit and remains to be browser-tested when the bank is wired into preview or learner mode.
+
+### Files And Reports
+
+- `docs/journey/checkpoints/checkpoint-question-bank-v0-27-7-draft.json`
+- `docs/journey/checkpoints/checkpoint-question-bank-v0-27-7-draft.md`
+- `docs/journey/checkpoints/glossary-learning-path-order-v0-27-7.json`
+- `docs/journey/checkpoints/glossary-learning-path-order-v0-27-7.md`
+- `docs/journey/prompt-life-v0-27-7-checkpoint-question-bank-review.html`
+- `docs/journey/prompt-life-v0-27-7-checkpoint-question-bank-review.pdf`
+- `docs/journey/screenshots/v0-27-7-checkpoint-before-390.png`
+- `docs/journey/screenshots/v0-27-7-checkpoint-wrong-no-reveal-390.png`
+- `docs/journey/screenshots/v0-27-7-checkpoint-second-wrong-390.png`
+- `docs/journey/screenshots/v0-27-7-checkpoint-correct-390.png`
+- `docs/journey/screenshots/v0-27-7-checkpoint-wrong-no-reveal-320.png`
+- `docs/journey/screenshots/v0-27-7-checkpoint-desktop.png`
+- `docs/journey/screenshots/v0-27-7-core-one-column-desktop.png`
+- `docs/journey/screenshots/v0-27-7-review-attempt-reset-390.png`
 
 ## v0.27.6 Journey Checkpoint Layout Repair
 

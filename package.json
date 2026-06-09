@@ -1,6 +1,6 @@
 {
   "name": "promptlife",
-  "version": "0.27.6",
+  "version": "0.27.9",
   "private": true,
   "type": "module",
   "scripts": {
@@ -9,6 +9,7 @@
     "build": "vite build",
     "build:pages": "GITHUB_PAGES=true vite build",
     "audit:answers": "node scripts/audit-answers.mjs",
+    "audit:checkpoints": "node scripts/audit-checkpoints.mjs",
     "preview": "vite preview --host 0.0.0.0",
     "export:lesson-pdf": "node scripts/export-lesson-pdf.mjs",
     "export:lesson-cards": "PROMPTLIFE_PDF_OUT=docs/content-inventory/prompt-life-lesson-cards-v0-9-3-visual-system.pdf node scripts/export-lesson-pdf.mjs"

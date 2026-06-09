@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prompt Life v0.27.8 Model-Thinking Checkpoint Pilot</title>
+  <style>
+    :root { color-scheme: light; --ink: #0f176d; --soft: #f6f8ff; --line: #cdd7f2; --teal: #008f95; --warn: #8a5a00; }
+    body { margin: 0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #111a44; background: #f4fbfb; line-height: 1.45; }
+    main { width: min(980px, calc(100% - 32px)); margin: 0 auto; padding: 28px 0 56px; }
+    h1, h2, h3, h4 { color: var(--ink); line-height: 1.1; }
+    h1 { font-size: clamp(2rem, 7vw, 4rem); margin-bottom: 0.3rem; }
+    h2 { margin-top: 2.25rem; }
+    .hero, .card, .question, .summary { background: rgba(255,255,255,0.92); border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 14px 40px rgba(17,26,114,0.08); padding: 18px; margin: 16px 0; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
+    .metric { background: var(--soft); border: 1px solid var(--line); border-radius: 10px; padding: 12px; }
+    .metric strong { display: block; font-size: 1.7rem; color: var(--ink); }
+    .muted, span { color: #4c5579; }
+    .stem { border-left: 4px solid var(--teal); padding-left: 12px; font-weight: 750; }
+    li { margin: 0.45rem 0; }
+    .correct { border-left: 4px solid var(--teal); padding-left: 10px; }
+    .wrong { border-left: 4px solid var(--warn); padding-left: 10px; }
+    code { background: #eef3ff; padding: 0.1rem 0.25rem; border-radius: 4px; }
+    @media print { body { background: white; } .card, .question, .hero, .summary { break-inside: avoid; box-shadow: none; } }
+  </style>
+</head>
+<body>
+<main>
+  <section class="hero">
+    <p class="muted">Prompt Life v0.27.8 · pilot-only, not live</p>
+    <h1>Model-Thinking Checkpoint Pilot</h1>
+    <p>Authoring shift: from questions about the curriculum to questions that make the learner think through what the model is doing.</p>
+  </section>
+  <section class="summary">
+    <h2>Executive Summary</h2>
+    <div class="grid">
+      <div class="metric"><strong>6</strong>pilot cards</div>
+      <div class="metric"><strong>18</strong>pilot questions</div>
+      <div class="metric"><strong>72</strong>choices</div>
+      <div class="metric"><strong>54</strong>distractors</div>
+      <div class="metric"><strong>100%</strong>model-thinking/applied</div>
+      <div class="metric"><strong>0%</strong>direct definition</div>
+    </div>
+    <p><strong>Status:</strong> pilot-only, not live. No normal Journey learner mode changes.</p>
+    <p><strong>Deep Research review file:</strong> No Deep Research review file was present in docs/journey/checkpoints at generation time.</p>
+  </section>
+  <section class="summary">
+    <h2>Authoring Standard</h2>
+    <p>From questions about the curriculum to questions that make the learner think through what the model is doing.</p>
+    <p>Distractors are misconception-first and glossary-near; every wrong choice includes feedback, represented misconception, represented term when applicable, source, and rationale.</p>
+  </section>
+  <section class="summary">
+    <h2>Before / After Examples</h2>
+    <ul><li><strong>What Is an LLM?</strong><br><span>v0.27.7:</span> Which description best fits What Is an LLM in this learning card?<br><span>v0.27.8:</span> When an LLM answers a prompt by generating one token at a time, what is the model doing at each step?</li><li><strong>Where LLMs Fit</strong><br><span>v0.27.7:</span> Which statement best explains Where LLMs Fit in this learning card?<br><span>v0.27.8:</span> A campus tool summarizes text with an LLM and another tool creates images by denoising noise. What does that comparison show?</li><li><strong>Rationalists vs Empiricists</strong><br><span>v0.27.7:</span> Which phrase best describes how LLMs use learned patterns rather than only hand-written rules?<br><span>v0.27.8:</span> If a system solves a task only by following hand-written if-then rules, how is it different from an LLM?</li><li><strong>Training</strong><br><span>v0.27.7:</span> What makes training different from inference?<br><span>v0.27.8:</span> During training, the model predicts a target token and gets it wrong. What makes that moment learning rather than ordinary inference?</li><li><strong>Pretraining</strong><br><span>v0.27.7:</span> During pretraining, what changes?<br><span>v0.27.8:</span> During pretraining, what signal teaches the model broad language patterns across many examples?</li><li><strong>Overfitting and Generalization</strong><br><span>v0.27.7:</span> Which is a sign of overfitting in Overfitting and Generalization?<br><span>v0.27.8:</span> A model gets every training example right but fails on new validation examples. What problem is showing up?</li></ul>
+  </section>
+  
+    <section class="card">
+      <h2>What Is an LLM?</h2>
+      <p class="muted">Stage 1. Before Morning · 2 pilot questions</p>
+      <h3>Learning-objective review</h3>
+      <p><strong>Primary:</strong> Reason that an LLM generates response tokens by using learned weights and current context, without implying awareness or perfect search.</p>
+      <p><strong>Mechanism/boundary:</strong> Inference uses fixed learned weights and temporary context to score, sample, append, and repeat next tokens.</p>
+      <p><strong>Related glossary:</strong> llm, prompt, response, token, weight, inference</p>
+      <p><strong>Nearby distractors:</strong> training, retrieval, memory, context window, probability</p>
+      <h3>Existing v0.27.7 draft questions</h3>
+      <ul><li><strong>revise</strong>: Which description best fits What Is an LLM in this learning card?<br><span>The v0.27.7 stem is too curriculum-centered or definition-like; it should make the learner reason through model behavior.</span></li><li><strong>revise</strong>: Which mechanism or distinction does What Is an LLM? most directly teach?<br><span>The v0.27.7 stem asks for the card mechanism generically; it should name a concrete model action or boundary.</span></li></ul>
+      <h3>Rewritten v0.27.8 pilot questions</h3>
+      
+        <article class="question">
+          <h4>pilot-what-is-llm-q1</h4>
+          <p><strong>mechanism in action</strong> · mechanism · mechanism terms: LLM, next token, context, learned weights</p>
+          <p class="stem">When an LLM answers a prompt by generating one token at a time, what is the model doing at each step?</p>
+          <ol>
+            <li class="correct"><strong>pilot-what-is-llm-q1-correct</strong>: Using learned weights and current context to score possible next tokens, choose one, append it, and run again. <em>Correct</em><br><span>Feedback: Good distinction. The model is using fixed learned weights and temporary context to make the next-token step.</span></li><li class="wrong"><strong>pilot-what-is-llm-q1-conscious-reader</strong>: Reading the prompt with conscious understanding before writing a complete answer.<br><span>Feedback: Not quite. That gives the model too much mind. Fluent behavior can happen without awareness.</span><br><span>Misconception: conscious mind vs fluent model behavior · Term: llm · Source: same-card</span><br><span>Rationale: Tempting because fluent text can sound like a human explanation.</span></li><li class="wrong"><strong>pilot-what-is-llm-q1-search-database</strong>: Searching all documents it has ever seen and copying the best passage.<br><span>Feedback: This choice reveals a common mix-up. A plain LLM generates from learned patterns and current context; retrieval is an added system step.</span><br><span>Misconception: search engine/database vs generative model · Term: retrieval · Source: author-created misconception</span><br><span>Rationale: Tempting because people often equate broad model knowledge with search.</span></li><li class="wrong"><strong>pilot-what-is-llm-q1-training-chat</strong>: Changing its weights every time the user sends a prompt.<br><span>Feedback: That would be true only if a separate training process updated weights. Ordinary inference usually leaves weights fixed.</span><br><span>Misconception: training vs inference · Term: training · Source: same-card</span><br><span>Rationale: Tempting because the model appears to adapt within a conversation.</span></li>
+          </ol>
+          <p><strong>Authoring note:</strong> Learners trace the actual score-sample-append loop instead of naming the card.</p>
+          <p><strong>Badge mastery:</strong> Supports the core badge distinction between inference, training, context, and next-token generation.</p>
+          <p><strong>Reviewer note:</strong> remain after human review</p>
+        </article>
+      
+        <article class="question">
+          <h4>pilot-what-is-llm-q2</h4>
+          <p><strong>misconception diagnosis</strong> · human-use-judgment · mechanism terms: LLM, fluent behavior, awareness, response tokens</p>
+          <p class="stem">A model gives a fluent explanation of a poem. What is the safest model-centered interpretation?</p>
+          <ol>
+            <li class="correct"><strong>pilot-what-is-llm-q2-correct</strong>: It generated likely response tokens from context and learned patterns; fluency does not prove awareness. <em>Correct</em><br><span>Feedback: Insight strengthened. This is the fluent-without-awareness boundary Prompt Life wants learners to hold.</span></li><li class="wrong"><strong>pilot-what-is-llm-q2-inner-experience</strong>: It must have inner experience because the explanation sounds human.<br><span>Feedback: Not quite. The model can imitate explanation without being a human reasoner.</span><br><span>Misconception: conscious mind vs fluent model behavior · Term: llm · Source: same-card</span><br><span>Rationale: Tempting because human-like language invites human-like interpretation.</span></li><li class="wrong"><strong>pilot-what-is-llm-q2-hidden-database</strong>: It looked up a hidden database record that contains the perfect interpretation.<br><span>Feedback: Close, but this describes retrieval or search better than a plain LLM forward pass.</span><br><span>Misconception: database lookup vs learned generation · Term: retrieval · Source: author-created misconception</span><br><span>Rationale: Tempting because polished answers can feel copied from a stored source.</span></li><li class="wrong"><strong>pilot-what-is-llm-q2-permanent-learning</strong>: The prompt permanently taught the model a new literary skill during that chat.<br><span>Feedback: That would require training. In a normal chat, the prompt can shape temporary context without durably updating weights.</span><br><span>Misconception: prompt/context change vs durable weight update · Term: weight-update · Source: same-card</span><br><span>Rationale: Tempting because the model may use earlier context in the same conversation.</span></li>
+          </ol>
+          <p><strong>Authoring note:</strong> Learners evaluate a real human interpretation trap: fluent output without inner awareness.</p>
+          <p><strong>Badge mastery:</strong> Supports demystification without hype or fear.</p>
+          <p><strong>Reviewer note:</strong> remain after human review</p>
+        </article>
+      
+    </section>
+  
+    <section class="card">
+      <h2>Where LLMs Fit</h2>
+      <p class="muted">Stage 1. Before Morning · 2 pilot questions</p>
+      <h3>Learning-objective review</h3>
+      <p><strong>Primary:</strong> Use the AI family map to reason about what kind of generative system an LLM is and what it is not.</p>
+      <p><strong>Mechanism/boundary:</strong> LLMs are deep-learning generative AI systems focused on language/code; diffusion is a different generative family.</p>
+      <p><strong>Related glossary:</strong> ai, machine-learning, deep-learning, generative-ai, llm, diffusion, multimodal, symbolic-ai, rule-based-ai, foundation-model</p>
+      <p><strong>Nearby distractors:</strong> rationalism, empiricism, loss, training</p>
+      <h3>Existing v0.27.7 draft questions</h3>
+      <ul><li><strong>revise</strong>: Which statement best explains Where LLMs Fit in this learning card?<br><span>The v0.27.7 stem is too curriculum-centered or definition-like; it should make the learner reason through model behavior.</span></li><li><strong>revise</strong>: Which mechanism or distinction does Where LLMs Fit most directly teach?<br><span>The v0.27.7 stem asks for the card mechanism generically; it should name a concrete model action or boundary.</span></li></ul>
+      <h3>Rewritten v0.27.8 pilot questions</h3>
+      
+        <article class="question">
+          <h4>pilot-where-llms-fit-q1</h4>
+          <p><strong>applied scenario</strong> · application · mechanism terms: generative AI, LLM, diffusion</p>
+          <p class="stem">A campus tool summarizes text with an LLM and another tool creates images by denoising noise. What does that comparison show?</p>
+          <ol>
+            <li class="correct"><strong>pilot-where-llms-fit-q1-correct</strong>: Both can be generative AI, but the LLM focuses on language/code while diffusion often generates by denoising media. <em>Correct</em><br><span>Feedback: Good distinction. Generative AI is a family; LLMs and diffusion models are different branches.</span></li><li class="wrong"><strong>pilot-where-llms-fit-q1-all-chatgpt</strong>: Both tools are LLMs because all generative AI works like ChatGPT.<br><span>Feedback: Not quite. An LLM is one kind of generative AI, not the whole category.</span><br><span>Misconception: LLM vs generative AI family · Term: generative-ai · Source: same-card</span><br><span>Rationale: Tempting because ChatGPT is many learners’ first example of generative AI.</span></li><li class="wrong"><strong>pilot-where-llms-fit-q1-text-only-ai</strong>: The image tool is not AI unless it generates text tokens.<br><span>Feedback: Close, but diffusion models can be AI without using the LLM next-token text loop.</span><br><span>Misconception: LLM output vs broader generative outputs · Term: diffusion · Source: same-card</span><br><span>Rationale: Tempting because this app starts with language models.</span></li><li class="wrong"><strong>pilot-where-llms-fit-q1-ai-ml-same</strong>: Machine learning and AI mean exactly the same thing, so the categories do not matter.<br><span>Feedback: This choice collapses useful categories. Machine learning is a major branch inside the broader AI landscape.</span><br><span>Misconception: AI vs machine learning category boundary · Term: machine-learning · Source: same-card</span><br><span>Rationale: Tempting because the terms are often used loosely in public discussion.</span></li>
+          </ol>
+          <p><strong>Authoring note:</strong> Learners compare two model families by mechanism and output type.</p>
+          <p><strong>Badge mastery:</strong> Prevents overgeneralizing LLM lessons to all AI systems.</p>
+          <p><strong>Reviewer note:</strong> remain after human review</p>
+        </article>
+      
+        <article class="question">
+          <h4>pilot-where-llms-fit-q2</h4>
+          <p><strong>boundary distinction</strong> · boundary · mechanism terms: AI, machine learning, deep learning, generative AI, LLM</p>
+          <p class="stem">When people say an LLM sits inside the broader AI family, which category map is most useful?</p>
+          <ol>
+            <li class="correct"><strong>pilot-where-llms-fit-q2-correct</strong>: AI is broad; machine learning learns from data; deep learning uses layered networks; generative AI creates outputs; LLMs generate language/code. <em>Correct</em><br><span>Feedback: Insight strengthened. The map keeps overlapping terms useful without making them interchangeable.</span></li><li class="wrong"><strong>pilot-where-llms-fit-q2-llm-parent</strong>: LLMs are the parent category that contains all AI systems.<br><span>Feedback: Not quite. LLMs are an important branch, not the root of the AI tree.</span><br><span>Misconception: all AI is an LLM · Term: ai · Source: same-card</span><br><span>Rationale: Tempting because LLMs currently dominate public attention.</span></li><li class="wrong"><strong>pilot-where-llms-fit-q2-rules-same</strong>: Symbolic/rule-based AI and learned models are identical because both run on computers.<br><span>Feedback: Close, but rule-based systems rely on explicit rules while learned models use patterns shaped from data.</span><br><span>Misconception: symbolic AI vs learned model boundary · Term: symbolic-ai · Source: same-card</span><br><span>Rationale: Tempting because both can be packaged inside the same software product.</span></li><li class="wrong"><strong>pilot-where-llms-fit-q2-diffusion-token-loop</strong>: Diffusion models and LLMs use the same next-token loop.<br><span>Feedback: This choice reveals a common mix-up. Diffusion often denoises patterns; LLM text generation is usually autoregressive.</span><br><span>Misconception: diffusion vs autoregressive language generation · Term: diffusion · Source: same-card</span><br><span>Rationale: Tempting because both are generative AI.</span></li>
+          </ol>
+          <p><strong>Authoring note:</strong> Learners build a category map they can use later when mechanisms diverge.</p>
+          <p><strong>Badge mastery:</strong> Supports risk literacy by avoiding one-size-fits-all AI claims.</p>
+          <p><strong>Reviewer note:</strong> remain after human review</p>
+        </article>
+      
+    </section>
+  
+    <section class="card">
+      <h2>Rationalists vs Empiricists</h2>
+      <p class="muted">Stage 1. Before Morning · 3 pilot questions</p>
+      <h3>Learning-objective review</h3>
+      <p><strong>Primary:</strong> Reason through the difference between explicit rules and learned weights, while recognizing that real AI products may combine both.</p>
+      <p><strong>Mechanism/boundary:</strong> Deep learning learns from examples by predicting, measuring loss, and adjusting weights; symbolic AI relies on explicit rules.</p>
+      <p><strong>Related glossary:</strong> rationalism, empiricism, symbolic-ai, deep-learning, training, loss, weight</p>
+      <p><strong>Nearby distractors:</strong> rule-based-ai, foundation-model, retrieval, fine-tuning, policy</p>
+      <h3>Existing v0.27.7 draft questions</h3>
+      <ul><li><strong>revise</strong>: Which phrase best describes how LLMs use learned patterns rather than only hand-written rules?<br><span>The boundary is right, but the stem should ask the learner to compare actual system behavior.</span></li><li><strong>revise</strong>: Which mechanism or distinction does Rationalists vs Empiricists most directly teach?<br><span>The v0.27.7 stem asks for the card mechanism generically; it should name a concrete model action or boundary.</span></li><li><strong>revise</strong>: Which common confusion does Rationalists vs Empiricists help learners avoid?<br><span>The misconception target is useful, but the stem should become an applied model-thinking scenario.</span></li></ul>
+      <h3>Rewritten v0.27.8 pilot questions</h3>
+      
+        <article class="question">
+          <h4>pilot-history-q1</h4>
+          <p><strong>boundary distinction</strong> · boundary · mechanism terms: rule-based AI, learned weights, LLM</p>
+          <p class="stem">If a system solves a task only by following hand-written if-then rules, how is it different from an LLM?</p>
+          <ol>
+            <li class="correct"><strong>pilot-history-q1-correct</strong>: The rule-based system applies explicit rules; an LLM’s fluency mostly comes from learned weights shaped by examples. <em>Correct</em><br><span>Feedback: Good distinction. LLMs mostly belong to the learned-patterns tradition, even when products around them use rules.</span></li><li class="wrong"><strong>pilot-history-q1-loss-every-task</strong>: The rule-based system updates weights from loss during every task.<br><span>Feedback: Not quite. Loss and weight updates belong to training learned models, not to a pure if-then rule system.</span><br><span>Misconception: symbolic rules vs training loop · Term: loss · Source: same-card</span><br><span>Rationale: Tempting because loss is nearby in the deep-learning explanation.</span></li><li class="wrong"><strong>pilot-history-q1-conscious-llm</strong>: The LLM has conscious reasoning, while the rule-based system has none.<br><span>Feedback: That gives the LLM too much inner life. The key boundary here is learned weights versus explicit rules.</span><br><span>Misconception: conscious reasoning vs learned behavior · Term: llm · Source: explicit-confusable</span><br><span>Rationale: Tempting because LLM language can sound like reasoning from the inside.</span></li><li class="wrong"><strong>pilot-history-q1-all-rulebooks</strong>: There is no difference; both are just fixed rulebooks.<br><span>Feedback: Close, but LLM behavior is not mainly written as explicit if-then rules; it is shaped by training.</span><br><span>Misconception: LLM as hand-coded rulebook · Term: symbolic-ai · Source: same-card</span><br><span>Rationale: Tempting because both systems can produce predictable outputs.</span></li>
+          </ol>
+          <p><strong>Authoring note:</strong> Learners compare two system designs rather than reciting intellectual history.</p>
+          <p><strong>Badge mastery:</strong> Builds the architecture boundary needed for later training/inference distinctions.</p>
+          <p><strong>Reviewer note:</strong> remain after human review</p>
+        </article>
+      
+        <article class="question">
+          <h4>pilot-history-q2</h4>
+          <p><strong>mechanism in action</strong> · mechanism · mechanism terms: deep learning, loss, weights</p>
+          <p class="stem">During deep-learning training, why does the system measure loss?</p>
+          <ol>
+            <li class="correct"><strong>pilot-history-q2-correct</strong>: Loss measures prediction error so an optimizer can adjust weights. <em>Correct</em><br><span>Feedback: Insight strengthened. Loss is the numerical training signal, not a feeling or truth meter.</span></li><li class="wrong"><strong>pilot-history-q2-moral-good</strong>: Loss tells the model whether a generated answer is morally good.<br><span>Feedback: Not quite. Loss is a numerical error signal; alignment and policy questions need additional methods.</span><br><span>Misconception: loss vs human value judgment · Term: loss · Source: same-card</span><br><span>Rationale: Tempting because loss sounds like a judgment word.</span></li><li class="wrong"><strong>pilot-history-q2-softmax-probability</strong>: Loss is the probability distribution used during sampling.<br><span>Feedback: Close, but probability helps choose outputs during generation; loss guides weight updates during training.</span><br><span>Misconception: loss vs probability/softmax · Term: probability · Source: nearby-stage</span><br><span>Rationale: Tempting because both involve numbers during model work.</span></li><li class="wrong"><strong>pilot-history-q2-retrieved-source</strong>: Loss is a retrieved source that gets added to context.<br><span>Feedback: That describes retrieval better. Loss belongs to training, not context insertion.</span><br><span>Misconception: training signal vs retrieval/context · Term: retrieval · Source: author-created misconception</span><br><span>Rationale: Tempting because later systems can add outside text before generation.</span></li>
+          </ol>
+          <p><strong>Authoring note:</strong> Learners identify the causal role of loss inside training.</p>
+          <p><strong>Badge mastery:</strong> Loss is needed for badge-worthy understanding of how weights change.</p>
+          <p><strong>Reviewer note:</strong> remain after human review</p>
+        </article>
+      
+        <article class="question">
+          <h4>pilot-history-q3</h4>
+          <p><strong>human-use judgment</strong> · human-use-judgment · mechanism terms: LLM, rules, retrieval, filters</p>
+          <p class="stem">A university AI app uses an LLM plus policy filters, retrieval, and hand-written rules. What should a model-literate user conclude?</p>
+          <ol>
+            <li class="correct"><strong>pilot-history-q3-correct</strong>: Modern systems can combine learned models with rules/tools; the LLM itself is still a learned pattern system. <em>Correct</em><br><span>Feedback: Good distinction. Products can be hybrid even when the central model is learned from data.</span></li><li class="wrong"><strong>pilot-history-q3-no-learning-if-rules</strong>: Any rule in the app means the LLM is no longer trained from data.<br><span>Feedback: Not quite. Rules can wrap or guide a learned model without erasing the learned weights inside it.</span><br><span>Misconception: hybrid system vs pure symbolic replacement · Term: rule-based-ai · Source: same-card</span><br><span>Rationale: Tempting because rule-based pieces can be visible in product behavior.</span></li><li class="wrong"><strong>pilot-history-q3-conscious-product</strong>: Any fluent answer means the app is consciously reasoning.<br><span>Feedback: This choice gives fluency too much mind. The app can combine tools and still lack conscious understanding.</span><br><span>Misconception: fluent behavior vs awareness · Term: llm · Source: explicit-confusable</span><br><span>Rationale: Tempting because the whole app may feel conversational.</span></li><li class="wrong"><strong>pilot-history-q3-use-finetunes</strong>: Retrieval or filters permanently fine-tune the model on every use.<br><span>Feedback: Close, but retrieval and filters can shape the current response without durably changing model weights.</span><br><span>Misconception: retrieval/filtering vs durable training · Term: fine-tuning · Source: nearby-stage</span><br><span>Rationale: Tempting because the app appears to adapt to local material.</span></li>
+          </ol>
+          <p><strong>Authoring note:</strong> Learners reason about real product stacks, not just model families.</p>
+          <p><strong>Badge mastery:</strong> Supports institutional AI literacy: model, wrapper, tool, and policy are not the same thing.</p>
+          <p><strong>Reviewer note:</strong> remain after human review</p>
+        </article>
+      
+    </section>
+  
+    <section class="card">
+      <h2>Training</h2>
+      <p class="muted">Stage 1. Before Morning · 4 pilot questions</p>
+      <h3>Learning-objective review</h3>
+      <p><strong>Primary:</strong> Trace training as the durable weight-changing loop and separate it from ordinary inference, sampling, retrieval, and context changes.</p>
+      <p><strong>Mechanism/boundary:</strong> Training uses examples and loss to update parameters; inference uses fixed weights and temporary activations.</p>
+      <p><strong>Related glossary:</strong> training, loss, weight, weight-update, parameter, training-data, inference, forward-pass</p>
+      <p><strong>Nearby distractors:</strong> pretraining, next-token, context window, rag, diffusion, softmax</p>
+      <h3>Existing v0.27.7 draft questions</h3>
+      <ul><li><strong>keep-core-revise-stem</strong>: What makes training different from inference?<br><span>The training/inference boundary is essential, but the pilot should ask about a concrete training moment.</span></li><li><strong>revise</strong>: Which mechanism or distinction does Training most directly teach?<br><span>The v0.27.7 stem asks for the card mechanism generically; it should name a concrete model action or boundary.</span></li><li><strong>revise</strong>: Which common confusion does Training help learners avoid?<br><span>The misconception target is useful, but the stem should become an applied model-thinking scenario.</span></li><li><strong>revise</strong>: How does Training connect to the prompt's Journey?<br><span>The relationship target is useful, but the stem should ask the learner to trace a concrete process.</span></li></ul>
+      <h3>Rewritten v0.27.8 pilot questions</h3>
+      
+        <article class="question">
+          <h4>pilot-training-q1</h4>
+          <p><strong>mechanism in action</strong> · mechanism · mechanism terms: training, loss, weight update</p>
+          <p class="stem">During training, the model predicts a target token and gets it wrong. What makes that moment learning rather than ordinary inference?</p>
+          <ol>
+            <li class="correct"><strong>pilot-training-q1-correct</strong>: The training process uses the loss signal to update weights. <em>Correct</em><br><span>Feedback: Good distinction. The durable weight update is what makes this training.</span></li><li class="wrong"><strong>pilot-training-q1-append-wrong-token</strong>: The model merely appends the wrong token to a live response.<br><span>Feedback: Not quite. Appending a response token is inference behavior; training uses loss to change weights.</span><br><span>Misconception: training vs autoregressive inference · Term: inference · Source: same-card</span><br><span>Rationale: Tempting because generation also chooses and appends tokens.</span></li><li class="wrong"><strong>pilot-training-q1-store-memory</strong>: The user prompt is stored as permanent memory.<br><span>Feedback: This choice reveals a common mix-up. Training updates weights; a prompt in context is temporary unless stored elsewhere.</span><br><span>Misconception: context vs permanent memory · Term: memory · Source: author-created misconception</span><br><span>Rationale: Tempting because chat context can feel remembered.</span></li><li class="wrong"><strong>pilot-training-q1-softmax-truth</strong>: Softmax turns the wrong answer into truth.<br><span>Feedback: Close, but softmax turns scores into probabilities; it does not make an answer true or update weights.</span><br><span>Misconception: probability vs truth · Term: softmax · Source: nearby-stage</span><br><span>Rationale: Tempting because softmax appears in the later probability step.</span></li>
+          </ol>
+          <p><strong>Authoring note:</strong> Learners locate the precise causal step that changes the model.</p>
+          <p><strong>Badge mastery:</strong> Core badge distinction: training changes weights; inference uses them.</p>
+          <p><strong>Reviewer note:</strong> remain after human review</p>
+        </article>
+      
+        <article class="question">
+          <h4>pilot-training-q2</h4>
+          <p><strong>boundary distinction</strong> · boundary · mechanism terms: chat inference, model weights, training</p>
+          <p class="stem">A student asks a chatbot one question. Unless a separate training process runs, what usually does not happen?</p>
+          <ol>
+            <li class="correct"><strong>pilot-training-q2-correct</strong>: The model’s weights are durably updated by that chat. <em>Correct</em><br><span>Feedback: Insight strengthened. Normal chat inference can use context, but it usually does not rewrite weights.</span></li><li class="wrong"><strong>pilot-training-q2-fixed-weights</strong>: The model uses its fixed weights to process the context.<br><span>Feedback: Not quite. That usually does happen during inference; the question asks what does not usually happen.</span><br><span>Misconception: confusing what does happen during inference with what does not · Term: inference · Source: same-card</span><br><span>Rationale: Tempting because this is part of ordinary model use.</span></li><li class="wrong"><strong>pilot-training-q2-hidden-states</strong>: Temporary hidden states form during the forward pass.<br><span>Feedback: Close, but temporary hidden states can form during inference. They are not durable weight updates.</span><br><span>Misconception: temporary activation vs durable learning · Term: hidden state · Source: nearby-stage</span><br><span>Rationale: Tempting because hidden states are internal model numbers.</span></li><li class="wrong"><strong>pilot-training-q2-score-tokens</strong>: The model scores possible next response tokens.<br><span>Feedback: That is ordinary generation behavior. It is not the durable training step.</span><br><span>Misconception: logits/sampling vs weight update · Term: logits · Source: nearby-stage</span><br><span>Rationale: Tempting because token scoring is also internal model work.</span></li>
+          </ol>
+          <p><strong>Authoring note:</strong> Learners reason from a familiar chat scenario to the durable/temporary boundary.</p>
+          <p><strong>Badge mastery:</strong> Reduces the myth that every user chat trains the base model.</p>
+          <p><strong>Reviewer note:</strong> remain after human review</p>
+        </article>
+      
+        <article class="question">
+          <h4>pilot-training-q3</h4>
+          <p><strong>causal consequence</strong> · causal-consequence · mechanism terms: training, parameters, inference</p>
+          <p class="stem">Why can training change how the model behaves tomorrow, while inference usually cannot?</p>
+          <ol>
+            <li class="correct"><strong>pilot-training-q3-correct</strong>: Training changes parameters that future runs reuse; inference uses temporary computations for the current run. <em>Correct</em><br><span>Feedback: Good distinction. Durable parameters carry forward; inference-time states usually do not.</span></li><li class="wrong"><strong>pilot-training-q3-inference-optimizer</strong>: Inference is where the optimizer changes weights.<br><span>Feedback: Not quite. Optimizer-driven weight updates belong to training, not ordinary inference.</span><br><span>Misconception: optimizer/weight update vs inference · Term: weight-update · Source: same-card</span><br><span>Rationale: Tempting because both training and inference run model computations.</span></li><li class="wrong"><strong>pilot-training-q3-visible-prompt</strong>: Training only changes the visible prompt text.<br><span>Feedback: Close, but prompt changes are temporary input changes; training changes the model’s learned numbers.</span><br><span>Misconception: prompt/context vs weights · Term: prompt · Source: nearby-stage</span><br><span>Rationale: Tempting because prompt text clearly changes a response.</span></li><li class="wrong"><strong>pilot-training-q3-guarantee-truth</strong>: Training guarantees every future answer is true.<br><span>Feedback: This choice overclaims. Training can improve behavior, but it does not guarantee truth.</span><br><span>Misconception: training improvement vs truth guarantee · Term: probability · Source: author-created misconception</span><br><span>Rationale: Tempting because training sounds like making the model better.</span></li>
+          </ol>
+          <p><strong>Authoring note:</strong> Learners connect durability to parameters reused by future inference.</p>
+          <p><strong>Badge mastery:</strong> Strengthens durable-versus-temporary literacy.</p>
+          <p><strong>Reviewer note:</strong> remain after human review</p>
+        </article>
+      
+        <article class="question">
+          <h4>pilot-training-q4</h4>
+          <p><strong>model trace</strong> · model-trace · mechanism terms: training loop, prediction, loss, weight update</p>
+          <p class="stem">In a training loop, which sequence is the durable learning path?</p>
+          <ol>
+            <li class="correct"><strong>pilot-training-q4-correct</strong>: Example -&gt; prediction -&gt; loss -&gt; weight update. <em>Correct</em><br><span>Feedback: Insight strengthened. That is the weight-changing path.</span></li><li class="wrong"><strong>pilot-training-q4-generation-loop</strong>: Prompt -&gt; response -&gt; append -&gt; next response token.<br><span>Feedback: Close, but that sequence describes inference/generation, not training.</span><br><span>Misconception: training loop vs autoregressive generation · Term: autoregression · Source: nearby-stage</span><br><span>Rationale: Tempting because this is the model’s generation loop.</span></li><li class="wrong"><strong>pilot-training-q4-rag-loop</strong>: Search -&gt; retrieved passage -&gt; context -&gt; answer.<br><span>Feedback: That describes RAG. It adds temporary context; it does not by itself update weights.</span><br><span>Misconception: training vs retrieval-augmented context · Term: rag · Source: nearby-stage</span><br><span>Rationale: Tempting because retrieval can improve answers.</span></li><li class="wrong"><strong>pilot-training-q4-diffusion-loop</strong>: Noise -&gt; denoise -&gt; image/video sample.<br><span>Feedback: Not quite. That is a diffusion-style generation story, not the training loop for weight updates.</span><br><span>Misconception: training vs diffusion generation · Term: diffusion · Source: nearby-stage</span><br><span>Rationale: Tempting because diffusion is another generative process.</span></li>
+          </ol>
+          <p><strong>Authoring note:</strong> Learners choose the path with the durable update, not another plausible AI sequence.</p>
+          <p><strong>Badge mastery:</strong> Prepares learners to distinguish training, RAG, diffusion, and autoregression later.</p>
+          <p><strong>Reviewer note:</strong> remain after human review</p>
+        </article>
+      
+    </section>
+  
+    <section class="card">
+      <h2>Pretraining</h2>
+      <p class="muted">Stage 1. Before Morning · 4 pilot questions</p>
+      <h3>Learning-objective review</h3>
+      <p><strong>Primary:</strong> Reason that pretraining is broad durable pattern learning from next-token prediction over large datasets, not perfect recall or live browsing.</p>
+      <p><strong>Mechanism/boundary:</strong> Pretraining repeats the training loop at large scale, changing weights before normal use.</p>
+      <p><strong>Related glossary:</strong> pretraining, training, training-data, weight, loss, next-token, inference</p>
+      <p><strong>Nearby distractors:</strong> weight-update, parameter, overfitting, generalization, validation-data, rag, fine-tuning</p>
+      <h3>Existing v0.27.7 draft questions</h3>
+      <ul><li><strong>keep-core-revise-stem</strong>: During pretraining, what changes?<br><span>The durable weight-change idea is correct, but the pilot should name the pretraining signal and model mechanism.</span></li><li><strong>revise</strong>: Which mechanism or distinction does Pretraining most directly teach?<br><span>The v0.27.7 stem asks for the card mechanism generically; it should name a concrete model action or boundary.</span></li><li><strong>revise</strong>: Which common confusion does Pretraining help learners avoid?<br><span>The misconception target is useful, but the stem should become an applied model-thinking scenario.</span></li><li><strong>revise</strong>: How does Pretraining connect to the prompt's Journey?<br><span>The relationship target is useful, but the stem should ask the learner to trace a concrete process.</span></li></ul>
+      <h3>Rewritten v0.27.8 pilot questions</h3>
+      
+        <article class="question">
+          <h4>pilot-pretraining-q1</h4>
+          <p><strong>mechanism in action</strong> · mechanism · mechanism terms: pretraining, next-token targets, loss, weights</p>
+          <p class="stem">During pretraining, what signal teaches the model broad language patterns across many examples?</p>
+          <ol>
+            <li class="correct"><strong>pilot-pretraining-q1-correct</strong>: Repeated prediction error/loss from next-token targets changes weights over many training steps. <em>Correct</em><br><span>Feedback: Good distinction. Pretraining scales the training loop across many examples.</span></li><li class="wrong"><strong>pilot-pretraining-q1-live-chat</strong>: A user conversation at deployment permanently rewrites the model.<br><span>Feedback: Not quite. Pretraining happens before normal use; an ordinary chat usually does not rewrite weights.</span><br><span>Misconception: pretraining vs inference · Term: inference · Source: same-card</span><br><span>Rationale: Tempting because the model can seem to adapt inside a chat.</span></li><li class="wrong"><strong>pilot-pretraining-q1-hand-rules</strong>: A human writes every rule the model will follow.<br><span>Feedback: Close, but pretraining is learned from examples, not a complete rulebook written by hand.</span><br><span>Misconception: learned patterns vs symbolic rules · Term: symbolic-ai · Source: nearby-stage</span><br><span>Rationale: Tempting because software often has hand-written rules.</span></li><li class="wrong"><strong>pilot-pretraining-q1-perfect-storage</strong>: The model perfectly stores each source document for later copying.<br><span>Feedback: This choice reveals a common mix-up. Pretraining shapes weights; it is not perfect document storage.</span><br><span>Misconception: pattern learning vs perfect source recall · Term: training-data · Source: same-card</span><br><span>Rationale: Tempting because source data influences the model.</span></li>
+          </ol>
+          <p><strong>Authoring note:</strong> Learners identify the training signal that builds broad capability.</p>
+          <p><strong>Badge mastery:</strong> Connects next-token prediction to durable weight learning.</p>
+          <p><strong>Reviewer note:</strong> remain after human review</p>
+        </article>
+      
+        <article class="question">
+          <h4>pilot-pretraining-q2</h4>
+          <p><strong>boundary distinction</strong> · boundary · mechanism terms: pretraining, weights, source recall</p>
+          <p class="stem">Why can pretraining create broad capability without making the model a perfect library of its sources?</p>
+          <ol>
+            <li class="correct"><strong>pilot-pretraining-q2-correct</strong>: It installs statistical patterns in weights, not exact conscious recall of every document. <em>Correct</em><br><span>Feedback: Insight strengthened. Pretraining can shape useful patterns without becoming a perfect library.</span></li><li class="wrong"><strong>pilot-pretraining-q2-private-files</strong>: Pretraining gives the model access to every private file on demand.<br><span>Feedback: Not quite. Training data exposure is not the same as access to every private file.</span><br><span>Misconception: training data vs universal file access · Term: training-data · Source: same-card</span><br><span>Rationale: Tempting because broad training data can sound like broad access.</span></li><li class="wrong"><strong>pilot-pretraining-q2-rag-same</strong>: Pretraining is the same as RAG inserting a document into context.<br><span>Feedback: Close, but RAG supplies temporary context during inference; pretraining durably changes weights before use.</span><br><span>Misconception: pretraining vs retrieval/context · Term: rag · Source: nearby-stage</span><br><span>Rationale: Tempting because both can bring outside information into answers.</span></li><li class="wrong"><strong>pilot-pretraining-q2-after-prompt</strong>: Pretraining happens only after a user asks a question.<br><span>Feedback: Pretraining happens before deployment. The user prompt later uses the pretrained weights.</span><br><span>Misconception: pretraining vs deployment-time inference · Term: inference · Source: same-card</span><br><span>Rationale: Tempting because learners see the model only during use.</span></li>
+          </ol>
+          <p><strong>Authoring note:</strong> Learners reason about what weights can and cannot contain.</p>
+          <p><strong>Badge mastery:</strong> Supports nuanced memory, privacy, and retrieval literacy.</p>
+          <p><strong>Reviewer note:</strong> remain after human review</p>
+        </article>
+      
+        <article class="question">
+          <h4>pilot-pretraining-q3</h4>
+          <p><strong>causal consequence</strong> · causal-consequence · mechanism terms: pretraining examples, weights, future prompts</p>
+          <p class="stem">If pretraining examples include many styles and task shapes, what can change inside the model?</p>
+          <ol>
+            <li class="correct"><strong>pilot-pretraining-q3-correct</strong>: Weights can shift so future prompts activate more useful language/code patterns. <em>Correct</em><br><span>Feedback: Good distinction. Pretraining changes reusable model structure before later prompts arrive.</span></li><li class="wrong"><strong>pilot-pretraining-q3-context-window</strong>: Only the current context window grows larger.<br><span>Feedback: Not quite. Context is temporary input; pretraining changes weights.</span><br><span>Misconception: pretraining weights vs context window · Term: context window · Source: nearby-stage</span><br><span>Rationale: Tempting because context also affects output.</span></li><li class="wrong"><strong>pilot-pretraining-q3-interface</strong>: Only the app’s button labels or interface change.<br><span>Feedback: This describes product UI changes, not the model’s learned parameters.</span><br><span>Misconception: model weights vs product interface · Term: foundation-model · Source: nearby-stage</span><br><span>Rationale: Tempting because users meet models through apps.</span></li><li class="wrong"><strong>pilot-pretraining-q3-citation-list</strong>: Only a citation list is attached to answers.<br><span>Feedback: Close, but citations are response/support features; pretraining changes learned model weights.</span><br><span>Misconception: pretraining vs citation/grounding · Term: citation · Source: nearby-stage</span><br><span>Rationale: Tempting because citations can make answers look knowledgeable.</span></li>
+          </ol>
+          <p><strong>Authoring note:</strong> Learners connect broad examples to future behavior through weights.</p>
+          <p><strong>Badge mastery:</strong> Builds a model-centered explanation for broad capability.</p>
+          <p><strong>Reviewer note:</strong> remain after human review</p>
+        </article>
+      
+        <article class="question">
+          <h4>pilot-pretraining-q4</h4>
+          <p><strong>misconception diagnosis</strong> · misconception-check · mechanism terms: pretraining, weights, retrieval, facts</p>
+          <p class="stem">A base model seems to know facts from public text. What is the model-literate explanation?</p>
+          <ol>
+            <li class="correct"><strong>pilot-pretraining-q4-correct</strong>: Pretraining shaped weights with patterns from data, so the model may generate fact-like text without retrieving the original page. <em>Correct</em><br><span>Feedback: Insight strengthened. Pretraining can support fact-like generation without live source lookup.</span></li><li class="wrong"><strong>pilot-pretraining-q4-web-browsing</strong>: It must be browsing the web by itself for every answer.<br><span>Feedback: Not quite. Some systems browse or retrieve, but a base model can also generate from pretrained weights.</span><br><span>Misconception: pretraining vs web retrieval · Term: retrieval · Source: nearby-stage</span><br><span>Rationale: Tempting because web search is a familiar way to know facts.</span></li><li class="wrong"><strong>pilot-pretraining-q4-conscious-memory</strong>: It must consciously remember reading those pages.<br><span>Feedback: That gives the model too much mind. It has learned weights, not conscious recollection.</span><br><span>Misconception: fluent fact-like output vs awareness · Term: llm · Source: author-created misconception</span><br><span>Rationale: Tempting because the output can sound like human memory.</span></li><li class="wrong"><strong>pilot-pretraining-q4-finetuning-all</strong>: Fine-tuning alone explains all broad knowledge.<br><span>Feedback: Close, but fine-tuning is targeted shaping after broad pretraining; it does not usually explain the whole foundation.</span><br><span>Misconception: pretraining vs fine-tuning · Term: fine-tuning · Source: nearby-stage</span><br><span>Rationale: Tempting because fine-tuning is another training phase.</span></li>
+          </ol>
+          <p><strong>Authoring note:</strong> Learners diagnose the common fact/source/retrieval confusion.</p>
+          <p><strong>Badge mastery:</strong> Supports source literacy without implying omniscience.</p>
+          <p><strong>Reviewer note:</strong> remain after human review</p>
+        </article>
+      
+    </section>
+  
+    <section class="card">
+      <h2>Overfitting and Generalization</h2>
+      <p class="muted">Stage 1. Before Morning · 3 pilot questions</p>
+      <h3>Learning-objective review</h3>
+      <p><strong>Primary:</strong> Diagnose when a model has fit training examples too narrowly and explain why held-out validation checks generalization.</p>
+      <p><strong>Mechanism/boundary:</strong> Overfitting installs brittle patterns into weights; generalization means learned patterns transfer to unseen examples.</p>
+      <p><strong>Related glossary:</strong> overfitting, generalization, validation-data, training-data, evaluation, training</p>
+      <p><strong>Nearby distractors:</strong> pretraining, fine-tuning, loss, context window, rag, inference</p>
+      <h3>Existing v0.27.7 draft questions</h3>
+      <ul><li><strong>keep-core-revise-stem</strong>: Which is a sign of overfitting in Overfitting and Generalization?<br><span>The overfitting sign is correct, but the pilot should use an applied train/validation scenario.</span></li><li><strong>revise</strong>: Which mechanism or distinction does Overfitting and Generalization most directly teach?<br><span>The v0.27.7 stem asks for the card mechanism generically; it should name a concrete model action or boundary.</span></li><li><strong>revise</strong>: Which common confusion does Overfitting and Generalization help learners avoid?<br><span>The misconception target is useful, but the stem should become an applied model-thinking scenario.</span></li></ul>
+      <h3>Rewritten v0.27.8 pilot questions</h3>
+      
+        <article class="question">
+          <h4>pilot-overfitting-generalization-q1</h4>
+          <p><strong>applied scenario</strong> · application · mechanism terms: training examples, validation examples, overfitting</p>
+          <p class="stem">A model gets every training example right but fails on new validation examples. What problem is showing up?</p>
+          <ol>
+            <li class="correct"><strong>pilot-overfitting-generalization-q1-correct</strong>: Overfitting: the model fit training examples too narrowly instead of learning patterns that generalize. <em>Correct</em><br><span>Feedback: Good diagnosis. The held-out examples reveal whether the pattern transfers.</span></li><li class="wrong"><strong>pilot-overfitting-generalization-q1-generalization</strong>: Generalization: the model is working well on unseen cases.<br><span>Feedback: Not quite. Generalization means good performance on new examples; this scenario shows the opposite.</span><br><span>Misconception: overfitting vs generalization · Term: generalization · Source: same-card</span><br><span>Rationale: Tempting because both terms describe training performance.</span></li><li class="wrong"><strong>pilot-overfitting-generalization-q1-rag</strong>: RAG: the model retrieved too many documents.<br><span>Feedback: This is not a retrieval problem. The issue is poor transfer from training examples to validation examples.</span><br><span>Misconception: evaluation failure vs retrieval system · Term: rag · Source: nearby-stage</span><br><span>Rationale: Tempting because retrieval can affect answer quality.</span></li><li class="wrong"><strong>pilot-overfitting-generalization-q1-inference</strong>: Inference: the model is simply generating one token at a time.<br><span>Feedback: Close, but inference is normal model use; overfitting is a training/evaluation failure mode.</span><br><span>Misconception: training/evaluation failure vs inference process · Term: inference · Source: nearby-stage</span><br><span>Rationale: Tempting because all later model use involves inference.</span></li>
+          </ol>
+          <p><strong>Authoring note:</strong> Learners diagnose overfitting from train/validation behavior.</p>
+          <p><strong>Badge mastery:</strong> Builds evaluation literacy: success on seen examples is not enough.</p>
+          <p><strong>Reviewer note:</strong> remain after human review</p>
+        </article>
+      
+        <article class="question">
+          <h4>pilot-overfitting-generalization-q2</h4>
+          <p><strong>human-use judgment</strong> · human-use-judgment · mechanism terms: held-out validation data, generalization</p>
+          <p class="stem">Why do model builders test on held-out validation data instead of only training examples?</p>
+          <ol>
+            <li class="correct"><strong>pilot-overfitting-generalization-q2-correct</strong>: Held-out data checks whether learned patterns work on examples the model did not train on. <em>Correct</em><br><span>Feedback: Insight strengthened. Validation is about transfer, not memorized training performance.</span></li><li class="wrong"><strong>pilot-overfitting-generalization-q2-context</strong>: Validation data is used only to expand the current context window.<br><span>Feedback: Not quite. Validation examples test the model; they are not just temporary prompt context.</span><br><span>Misconception: validation data vs context window · Term: context window · Source: nearby-stage</span><br><span>Rationale: Tempting because both involve examples supplied to a system.</span></li><li class="wrong"><strong>pilot-overfitting-generalization-q2-training-proves-all</strong>: Training examples alone prove the model will work everywhere.<br><span>Feedback: This choice reveals the exact overfitting risk. Seen examples are not enough evidence.</span><br><span>Misconception: training performance vs generalization · Term: training-data · Source: same-card</span><br><span>Rationale: Tempting because high training accuracy feels reassuring.</span></li><li class="wrong"><strong>pilot-overfitting-generalization-q2-loss-truth</strong>: A lower loss always proves every future answer is true.<br><span>Feedback: Close, but lower loss is not a truth guarantee, especially outside the tested distribution.</span><br><span>Misconception: loss/probability vs truth guarantee · Term: loss · Source: nearby-stage</span><br><span>Rationale: Tempting because lower loss often signals improvement.</span></li>
+          </ol>
+          <p><strong>Authoring note:</strong> Learners connect evaluation design to model behavior on new cases.</p>
+          <p><strong>Badge mastery:</strong> Supports responsible interpretation of AI benchmarks and claims.</p>
+          <p><strong>Reviewer note:</strong> remain after human review</p>
+        </article>
+      
+        <article class="question">
+          <h4>pilot-overfitting-generalization-q3</h4>
+          <p><strong>causal consequence</strong> · causal-consequence · mechanism terms: fine-tuning, generalization, overfitting</p>
+          <p class="stem">If fine-tuning makes a model excellent at one narrow template but worse on varied prompts, which boundary matters?</p>
+          <ol>
+            <li class="correct"><strong>pilot-overfitting-generalization-q3-correct</strong>: The model may have become too narrow; useful training should preserve generalization beyond the examples. <em>Correct</em><br><span>Feedback: Good distinction. Targeted training can help, but it can also make behavior brittle if it overfits.</span></li><li class="wrong"><strong>pilot-overfitting-generalization-q3-prompt-weights</strong>: This proves prompts permanently change weights during inference.<br><span>Feedback: Not quite. The scenario is about fine-tuning/training effects, not prompts rewriting weights during inference.</span><br><span>Misconception: prompt/context vs training weight changes · Term: prompt · Source: nearby-stage</span><br><span>Rationale: Tempting because prompts can change output behavior.</span></li><li class="wrong"><strong>pilot-overfitting-generalization-q3-symbolic-better</strong>: This proves a rule-based AI is always better than a learned model.<br><span>Feedback: This overgeneralizes. The issue is narrow training behavior, not proof that rules are always better.</span><br><span>Misconception: overfitting diagnosis vs symbolic superiority claim · Term: symbolic-ai · Source: nearby-stage</span><br><span>Rationale: Tempting because brittleness can make rules feel safer.</span></li><li class="wrong"><strong>pilot-overfitting-generalization-q3-refusal</strong>: This proves overfitting is just the model refusing to answer.<br><span>Feedback: Close, but overfitting is about brittle transfer from training examples, not simply a refusal behavior.</span><br><span>Misconception: overfitting vs refusal/guardrail behavior · Term: guardrail · Source: author-created misconception</span><br><span>Rationale: Tempting because poor behavior can show up as frustrating outputs.</span></li>
+          </ol>
+          <p><strong>Authoring note:</strong> Learners apply overfitting/generalization to targeted adaptation.</p>
+          <p><strong>Badge mastery:</strong> Connects training choices to trustworthy human use.</p>
+          <p><strong>Reviewer note:</strong> review by Deep Research for whether fine-tuning belongs here or later</p>
+        </article>
+      
+    </section>
+  
+  <section class="summary">
+    <h2>Deep Research Handoff</h2>
+    <p>Review this v0.27.8 Prompt Life model-thinking checkpoint pilot. For each of the first six Journey learning cards, evaluate whether the questions make the learner reason about the model rather than recall the curriculum. Check clarity, factual accuracy, distractor quality, misconception feedback, reading level, and badge-worthiness. Recommend edits, removals, and additions.</p>
+  </section>
+</main>
+</body>
+</html>

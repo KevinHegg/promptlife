@@ -9,6 +9,24 @@ export type NormalizedChoice = {
   feedback?: string
 }
 
+type QuizChoiceInput = string | {
+  choiceId?: string
+  id?: string
+  text?: string
+  label?: string
+}
+
+function getChoiceLabel(choice: QuizChoiceInput) {
+  return typeof choice === 'string'
+    ? choice
+    : choice.text ?? choice.label ?? ''
+}
+
+function getChoiceId(questionId: string, choice: QuizChoiceInput, index: number, label: string) {
+  if (typeof choice !== 'string') return choice.choiceId ?? choice.id ?? `${questionId}:${hashString(`${index}:${label}`).toString(36)}`
+  return `${questionId}:${hashString(`${index}:${label}`).toString(36)}`
+}
+
 function makeSeed() {
   return `choice-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`
 }
@@ -71,15 +89,19 @@ export function shuffleChoicesForQuestion<T>(questionId: string, choices: T[], s
 
 export function buildQuizChoices(
   questionId: string,
-  quiz: { choices: string[], answer: string, feedback?: Record<string, string> },
+  quiz: { choices: readonly QuizChoiceInput[], answer: string, correctChoiceId?: string, feedback?: Readonly<Record<string, string>> },
   seed: string
 ): NormalizedChoice[] {
-  const choices = quiz.choices.map((label, index) => ({
-    id: `${questionId}:${hashString(`${index}:${label}`).toString(36)}`,
-    label,
-    isCorrect: label === quiz.answer,
-    feedback: quiz.feedback?.[label]
-  }))
+  const choices = quiz.choices.map((choice, index) => {
+    const label = getChoiceLabel(choice)
+    const id = getChoiceId(questionId, choice, index, label)
+    return {
+      id,
+      label,
+      isCorrect: quiz.correctChoiceId ? id === quiz.correctChoiceId : label === quiz.answer,
+      feedback: quiz.feedback?.[id] ?? quiz.feedback?.[label]
+    }
+  })
 
   return shuffleChoicesForQuestion(questionId, choices, seed)
 }

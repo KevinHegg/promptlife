@@ -1,0 +1,41 @@
+{
+  "screenshots": [
+    "/Users/kevinhegg/Desktop/promptlife/docs/journey/screenshots/v0-27-9-pw-what-is-llm-q1-390.png",
+    "/Users/kevinhegg/Desktop/promptlife/docs/journey/screenshots/v0-27-9-pw-what-is-llm-q1-wrong-no-reveal-390.png",
+    "/Users/kevinhegg/Desktop/promptlife/docs/journey/screenshots/v0-27-9-pw-what-is-llm-q1-correct-next-question-390.png",
+    "/Users/kevinhegg/Desktop/promptlife/docs/journey/screenshots/v0-27-9-pw-what-is-llm-q2-390.png",
+    "/Users/kevinhegg/Desktop/promptlife/docs/journey/screenshots/v0-27-9-pw-what-is-llm-final-next-learning-card-390.png",
+    "/Users/kevinhegg/Desktop/promptlife/docs/journey/screenshots/v0-27-9-pw-where-llms-fit-q1-390.png",
+    "/Users/kevinhegg/Desktop/promptlife/docs/journey/screenshots/v0-27-9-pw-what-is-llm-q1-320.png",
+    "/Users/kevinhegg/Desktop/promptlife/docs/journey/screenshots/v0-27-9-pw-what-is-llm-q1-desktop.png"
+  ],
+  "finalState": {
+    "title": "What Is an LLM?",
+    "count": "2 of 2 questions",
+    "overflow": false,
+    "primary": "Next learning card",
+    "stickyBottom": 739,
+    "navTop": 753
+  },
+  "state390Where": {
+    "title": "Where LLMs Fit",
+    "count": "1 of 3 questions",
+    "question": "A campus tool summarizes text with an LLM, while another creates images by denoising a noisy pattern. What does that show?",
+    "overflow": false,
+    "primary": "Answer checkpoint to continue",
+    "stickyBottom": 656,
+    "navTop": 753
+  },
+  "state320": {
+    "title": "What Is an LLM?",
+    "count": "1 of 2 questions",
+    "overflow": false,
+    "width": 320
+  },
+  "stateDesktop": {
+    "title": "What Is an LLM?",
+    "count": "1 of 2 questions",
+    "overflow": false,
+    "width": 1024
+  }
+}

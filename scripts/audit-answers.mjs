@@ -274,3 +274,7 @@ console.log(`|---|---|---|---:|---|---|---|---|`)
 surfaces.forEach((surface) => {
   console.log(`| ${surface.id} | ${surface.activity} | ${surface.inputType} | ${surface.choiceCount} | ${surface.currentCorrectPositions.join(', ') || 'n/a'} | ${surface.randomized ? 'yes' : 'no'} | ${surface.shuffledCorrectPositions.join(', ') || 'n/a'} | ${surface.notes} |`)
 })
+
+const { auditCheckpointBank } = await import('./audit-checkpoints.mjs')
+const checkpointAudit = auditCheckpointBank()
+if (checkpointAudit.issues.length) process.exitCode = 1

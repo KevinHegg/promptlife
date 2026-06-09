@@ -2538,6 +2538,16 @@ p {
   background: #a9691b;
 }
 
+.answer.is-tried {
+  border-color: rgba(169, 105, 27, 0.42);
+  background: #fffaf1;
+  color: var(--pl-ink-soft);
+}
+
+.answer.is-tried span {
+  background: #8a6b35;
+}
+
 .feedback {
   margin-top: 0.8rem;
   border-left: 4px solid var(--pl-amber);
