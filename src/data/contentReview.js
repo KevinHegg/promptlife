@@ -97,7 +97,7 @@ const missingExplanationByLessonId = {
   history: 'Name one place rules still matter, such as policies, tool routing, or validation around learned models.',
   training: 'Show the loss signal and backprop update as the step that ordinary inference lacks.',
   pretraining: 'Clarify that broad datasets shape statistical patterns without guaranteeing source recall or truth.',
-  'overfitting-generalization': 'Show training examples and new examples together so the learner can see why held-out evaluation matters.',
+  'overfitting-generalization': 'Show training examples and validation examples together so the learner can see why set-aside evaluation matters.',
   'fine-tuning': 'Distinguish full fine-tuning, adapter-style updates, and instruction/policy tuning without adding too much detail.',
   alignment: 'Keep alignment framed as behavior shaping through training, policy, evaluation, and system design rather than moral agency.',
   inference: 'Make the forward pass tangible: fixed weights plus temporary activations produce one set of next-token scores.',

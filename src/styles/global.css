@@ -1036,6 +1036,11 @@ p {
   padding: 1rem;
 }
 
+.lesson-hero,
+.quiz-card {
+  scroll-margin-top: 0.75rem;
+}
+
 .lesson-panel h2 {
   margin-bottom: 0.55rem;
 }

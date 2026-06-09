@@ -1,0 +1,47 @@
+{
+  "capturedAt": "2026-06-09T22:46:46.782Z",
+  "results": [
+    {
+      "name": "normal-no-dev-note",
+      "normalNotes": []
+    },
+    {
+      "name": "debug-bank-note",
+      "debugNote": "Developer checkpoint bank: v0.27.11-all-active-dev"
+    },
+    {
+      "name": "next-question-scroll",
+      "count": "2 of 3 questions",
+      "quizTop": 12,
+      "question": "Why do model builders test on set-aside validation examples instead of only training examples?"
+    },
+    {
+      "name": "next-card-top",
+      "h1": "Fine-Tuning",
+      "titleTop": 234,
+      "shellScroll": 0
+    },
+    {
+      "name": "320-checkpoint",
+      "count": "1 of 5 questions",
+      "overflow": false
+    },
+    {
+      "name": "desktop-checkpoint",
+      "count": "1 of 5 questions",
+      "overflow": false
+    },
+    {
+      "name": "badge",
+      "h1": "Prompt Life: Model Literate"
+    },
+    {
+      "name": "play",
+      "h1": "Play to learn"
+    },
+    {
+      "name": "glossary",
+      "h1": "Glossary"
+    }
+  ]
+}

@@ -21,7 +21,7 @@ import {
 } from './components/ConceptAnimations'
 import { ExerciseShell } from './components/ExerciseSystem'
 import { VisualAid, VisualAidGallery, visualAidStyleVariants } from './components/VisualAids'
-import { ACTIVE_CHECKPOINT_BANK, FIRST_TWELVE_CHECKPOINT_BANK_V02710, hasV02710CheckpointBank } from './data/checkpointBankV02710'
+import { ACTIVE_CHECKPOINT_BANK, FULL_CHECKPOINT_BANK_V02711, hasV02711CheckpointBank } from './data/checkpointBankV02711'
 import { acts, games, glossary, learningModes, lessons } from './data/content'
 import { buildLessonReviewProfile, reviewRubricCategories } from './data/contentReview'
 import { emptyExerciseProgress, exerciseById, exercises, lessonExerciseIds } from './data/exercises'
@@ -72,7 +72,7 @@ const HOME_ASSETS = {
   heroFallback: `${ASSET}/illustrations/scene-hero-feature-cloud@mobile.png`
 }
 // Bump this for each shipped app change; the Badge screen displays it under Start over.
-const APP_VERSION = '0.27.10'
+const APP_VERSION = '0.27.11'
 const STORAGE_KEYS = {
   lastLocation: 'promptlife:v1:lastLocation',
   lessonId: 'promptlife:v1:lessonId',
@@ -417,8 +417,8 @@ function shouldShowCheckpointBankDebug() {
 }
 
 function getActiveCheckpointQuiz(lesson, useLegacyBank = shouldUseLegacyCheckpointBank()) {
-  if (!useLegacyBank && hasV02710CheckpointBank(lesson.id)) {
-    return FIRST_TWELVE_CHECKPOINT_BANK_V02710[lesson.id]
+  if (!useLegacyBank && hasV02711CheckpointBank(lesson.id)) {
+    return FULL_CHECKPOINT_BANK_V02711[lesson.id]
   }
   return lesson.quiz
 }
@@ -1088,8 +1088,8 @@ function LessonScreen({ lesson, mode, lessonIndex, totalLessons, reflection, onC
   const [checkpointAttemptSeed, setCheckpointAttemptSeed] = useState(() => makeCheckpointAttemptSeed())
   const [continueHint, setContinueHint] = useState(false)
   const [draftReflection, setDraftReflection] = useState(reflection)
-  const lessonTopRef = useRef<HTMLElement | null>(null)
-  const checkpointRef = useRef<HTMLElement | null>(null)
+  const learningCardTopRef = useRef<HTMLElement | null>(null)
+  const checkpointPanelRef = useRef<HTMLElement | null>(null)
   const stickyActionRef = useRef<HTMLButtonElement | null>(null)
   const pendingCheckpointScrollRef = useRef(false)
   const canUpdateProgress = mode === 'learn'
@@ -1103,7 +1103,7 @@ function LessonScreen({ lesson, mode, lessonIndex, totalLessons, reflection, onC
   const choiceOrderSeed = useMemo(() => getChoiceOrderSeed(), [])
   const useLegacyCheckpointBank = useMemo(() => shouldUseLegacyCheckpointBank(), [])
   const debugCheckpointBank = useMemo(() => shouldShowCheckpointBankDebug(), [])
-  const usesV02710CheckpointBank = !useLegacyCheckpointBank && hasV02710CheckpointBank(lesson.id)
+  const usesV02711CheckpointBank = !useLegacyCheckpointBank && hasV02711CheckpointBank(lesson.id)
   const lessonCheckpointQuiz = useMemo(
     () => getActiveCheckpointQuiz(lesson, useLegacyCheckpointBank),
     [lesson, useLegacyCheckpointBank]
@@ -1165,7 +1165,7 @@ function LessonScreen({ lesson, mode, lessonIndex, totalLessons, reflection, onC
 
   useEffect(() => {
     return requestStableLayout(() => {
-      scrollElementIntoAppView(lessonTopRef.current, { block: 'start', offset: 0, behavior: 'auto' })
+      scrollElementIntoAppView(learningCardTopRef.current, { block: 'start', offset: 0, behavior: 'auto' })
     })
   }, [lesson.id])
 
@@ -1173,7 +1173,7 @@ function LessonScreen({ lesson, mode, lessonIndex, totalLessons, reflection, onC
     if (!pendingCheckpointScrollRef.current) return undefined
     pendingCheckpointScrollRef.current = false
     return requestStableLayout(() => {
-      scrollElementIntoAppView(checkpointRef.current, { block: 'start', offset: 12, behavior: 'auto' })
+      scrollElementIntoAppView(checkpointPanelRef.current, { block: 'start', offset: 12, behavior: 'auto' })
       document.getElementById('quiz-title')?.focus?.({ preventScroll: true })
     })
   }, [activeCheckpointIndex, activeQuiz?.question])
@@ -1228,7 +1228,7 @@ function LessonScreen({ lesson, mode, lessonIndex, totalLessons, reflection, onC
     if (hasCheckpointQuestions && !isCurrentQuestionComplete) {
       setContinueHint(true)
       requestStableLayout(() => {
-        scrollElementIntoAppView(checkpointRef.current, { block: 'center' })
+        scrollElementIntoAppView(checkpointPanelRef.current, { block: 'center' })
       })
       return
     }
@@ -1244,7 +1244,7 @@ function LessonScreen({ lesson, mode, lessonIndex, totalLessons, reflection, onC
 
   return (
     <section className="screen lesson-screen" aria-labelledby="lesson-title">
-      <header ref={lessonTopRef} className="lesson-hero" aria-labelledby="lesson-title">
+      <header ref={learningCardTopRef} className="lesson-hero" aria-labelledby="lesson-title">
         <div className="lesson-progress-row">
           <span>{lesson.actLabel}</span>
           <span>{lessonIndex + 1} / {totalLessons}</span>
@@ -1256,8 +1256,8 @@ function LessonScreen({ lesson, mode, lessonIndex, totalLessons, reflection, onC
         <h1 id="lesson-title" tabIndex={-1}>{lesson.title}</h1>
         <p className="lede small">{lesson.subtitle}</p>
         <p className="lesson-definition">{definition}</p>
-        {debugCheckpointBank && usesV02710CheckpointBank && <p className="mode-note debug-note" role="status">Developer checkpoint bank: {ACTIVE_CHECKPOINT_BANK}</p>}
-        {mode === 'preview' && <p className="mode-note" role="status">Previewing this learning card. Progress will not change.</p>}
+        {debugCheckpointBank && usesV02711CheckpointBank && <p className="mode-note debug-note" role="status">Developer checkpoint bank: {ACTIVE_CHECKPOINT_BANK}</p>}
+        {debugCheckpointBank && mode === 'preview' && <p className="mode-note debug-note" role="status">Previewing this learning card. Progress will not change.</p>}
         {mode === 'review' && <p className="mode-note" role="status">Reviewing a completed learning card.</p>}
       </header>
 
@@ -1329,7 +1329,7 @@ function LessonScreen({ lesson, mode, lessonIndex, totalLessons, reflection, onC
       </section>
 
       {activeQuiz && (
-        <section ref={checkpointRef} className="lesson-panel quiz-card" aria-labelledby="quiz-title">
+        <section ref={checkpointPanelRef} className="lesson-panel quiz-card" aria-labelledby="quiz-title">
           <Checkpoint
             quiz={activeQuiz}
             choices={checkpointChoices}

@@ -376,7 +376,7 @@ export function DiagramKitOverfittingPlotExample() {
         y={194}
         items={[
           { label: 'train', kind: 'dot', tone: 'mint' },
-          { label: 'set-aside', kind: 'square', tone: 'amber' },
+          { label: 'validation', kind: 'square', tone: 'amber' },
           { label: 'overfit', kind: 'curve', tone: 'violet' },
           { label: 'smooth', kind: 'line', tone: 'success' }
         ]}

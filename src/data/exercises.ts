@@ -211,9 +211,9 @@ export const exercises: Exercise[] = [
     correctAnswer: 'overfitting',
     items: [
       { id: 'overfitting', label: 'Overfitting', detail: 'The model fit old examples too tightly and failed on new ones.', correct: true },
-      { id: 'good-generalization', label: 'Good generalization', detail: 'The model learned a pattern that transfers to unseen cases.', feedback: 'Good generalization would perform well on set-aside validation examples too.' }
+      { id: 'good-generalization', label: 'Good generalization', detail: 'The model learned a pattern that transfers to unseen cases.', feedback: 'Good generalization would perform well on validation examples not used in training too.' }
     ],
-    feedbackCorrect: 'Correct. Examples saved for testing reveal whether learning transfers.',
+    feedbackCorrect: 'Correct. Set-aside validation examples are saved for testing, not used to fit the model.',
     feedbackIncorrect: 'If performance is poor on examples saved for testing, the model may have fit old examples too narrowly.',
     insight: 'Evaluation needs unseen examples because memorizing old examples is not enough.',
     glossaryTerms: ['overfitting', 'generalization', 'validation data', 'evaluation'],

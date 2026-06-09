@@ -1,0 +1,63 @@
+{
+  "capturedAt": "2026-06-09T22:47:24.864Z",
+  "results": [
+    {
+      "lessonId": "embeddings",
+      "count": "1 of 2 questions",
+      "overflow": false
+    },
+    {
+      "lessonId": "attention",
+      "count": "1 of 4 questions",
+      "overflow": false
+    },
+    {
+      "lessonId": "what-is-llm",
+      "h1": "What Is an LLM?",
+      "count": "1 of 2 questions",
+      "overflow": false
+    },
+    {
+      "lessonId": "inference",
+      "h1": "Inference",
+      "count": "1 of 4 questions",
+      "overflow": false
+    },
+    {
+      "lessonId": "attention",
+      "h1": "Attention",
+      "count": "1 of 4 questions",
+      "overflow": false
+    },
+    {
+      "lessonId": "logits",
+      "h1": "Logits",
+      "count": "1 of 3 questions",
+      "overflow": false
+    },
+    {
+      "lessonId": "autoregression",
+      "h1": "Autoregression",
+      "count": "1 of 3 questions",
+      "overflow": false
+    },
+    {
+      "lessonId": "diffusion",
+      "h1": "Diffusion vs Autoregression",
+      "count": "1 of 3 questions",
+      "overflow": false
+    },
+    {
+      "lessonId": "costs-we-must-count",
+      "h1": "Costs We Must Count",
+      "count": "1 of 4 questions",
+      "overflow": false
+    },
+    {
+      "lessonId": "human-centered-ai",
+      "h1": "Human-Centered AI",
+      "count": "1 of 4 questions",
+      "overflow": false
+    }
+  ]
+}

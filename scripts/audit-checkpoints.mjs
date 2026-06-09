@@ -11,6 +11,8 @@ const revisedPath = path.join(root, 'docs/journey/checkpoints/checkpoint-questio
 const revisedSourcePath = path.join(root, 'src/data/checkpointBankV0279.ts')
 const activeDevPath = path.join(root, 'docs/journey/checkpoints/checkpoint-question-bank-v0-27-10-first-twelve-active-dev.json')
 const activeDevSourcePath = path.join(root, 'src/data/checkpointBankV02710.ts')
+const fullActiveDevPath = path.join(root, 'docs/journey/checkpoints/checkpoint-question-bank-v0-27-11-all-active-dev.json')
+const fullActiveDevSourcePath = path.join(root, 'src/data/checkpointBankV02711.ts')
 const activeDevLessonIds = [
   'what-is-llm',
   'where-llms-fit',
@@ -548,7 +550,7 @@ function auditActiveDevelopmentBank(filePath = activeDevPath) {
   forbiddenNormalUiStrings.forEach((text) => {
     if (mainSource.includes(text)) issues.push(`Normal UI forbidden string still present in src/main.tsx: ${text}`)
   })
-  ;['requestStableLayout', 'scrollElementIntoAppView', 'pendingCheckpointScrollRef', 'lessonTopRef', '.pl-shell'].forEach((needle) => {
+  ;['requestStableLayout', 'scrollElementIntoAppView', 'pendingCheckpointScrollRef', 'learningCardTopRef', 'checkpointPanelRef', '.pl-shell'].forEach((needle) => {
     if (!mainSource.includes(needle)) issues.push(`Scroll implementation audit missing ${needle}.`)
   })
   ;[
@@ -576,13 +578,163 @@ function auditActiveDevelopmentBank(filePath = activeDevPath) {
   }
 }
 
+function auditFullActiveDevelopmentBank(filePath = fullActiveDevPath) {
+  const issues = []
+  if (!fs.existsSync(filePath)) {
+    return { filePath, cardCount: 0, questionCount: 0, choiceCount: 0, distractorCount: 0, correctPositions: [], issues: [`Missing v0.27.11 full active-development bank: ${filePath}`] }
+  }
+
+  const bank = JSON.parse(fs.readFileSync(filePath, 'utf8'))
+  const draft = JSON.parse(fs.readFileSync(draftPath, 'utf8'))
+  const expectedLessonIds = (draft.cards ?? []).map((card) => card.learningCardId)
+  const questionIds = new Set()
+  const choiceIds = new Set()
+  const correctPositions = []
+  let questionCount = 0
+  let choiceCount = 0
+  let distractorCount = 0
+  let modelThinkingCount = 0
+  let directDefinitionCount = 0
+
+  if (bank.status !== 'active-development-pilot') issues.push(`v0.27.11 bank status should be active-development-pilot, found ${bank.status}.`)
+  if (bank.activeByDefault !== true) issues.push('v0.27.11 bank should be activeByDefault: true.')
+  if (bank.activeBankLabel !== 'v0.27.11-all-active-dev') issues.push(`v0.27.11 activeBankLabel mismatch: ${bank.activeBankLabel}.`)
+  if (!Array.isArray(bank.cards) || bank.cards.length !== 39) issues.push(`Expected 39 v0.27.11 active card entries, found ${bank.cards?.length ?? 0}.`)
+
+  const ids = (bank.cards ?? []).map((card) => card.learningCardId)
+  expectedLessonIds.forEach((id, index) => {
+    if (ids[index] !== id) issues.push(`v0.27.11 active card ${index + 1} should be ${id}, found ${ids[index] ?? 'missing'}.`)
+  })
+
+  if (!fs.existsSync(fullActiveDevSourcePath)) issues.push(`Missing runtime source bank: ${fullActiveDevSourcePath}`)
+  if (fs.existsSync(fullActiveDevSourcePath)) {
+    const sourceText = fs.readFileSync(fullActiveDevSourcePath, 'utf8')
+    if (!sourceText.includes('FULL_CHECKPOINT_BANK_V02711')) issues.push('Runtime source bank does not export FULL_CHECKPOINT_BANK_V02711.')
+    if (!sourceText.includes('hasV02711CheckpointBank')) issues.push('Runtime source bank does not export hasV02711CheckpointBank.')
+    if (sourceText.includes('FIRST_TWELVE_CHECKPOINT_BANK_V02710')) issues.push('v0.27.11 runtime source should not import/export the v0.27.10 runtime bank.')
+    if (heldOutPattern.test(sourceText)) issues.push('v0.27.11 runtime source still contains held-out/holdout learner wording.')
+  }
+
+  ;(bank.cards ?? []).forEach((card) => {
+    if (!Array.isArray(card.questions) || card.questions.length !== card.revisedQuestionCount) {
+      issues.push(`${card.learningCardId}: v0.27.11 question count mismatch.`)
+    }
+    if (card.learningCardId === 'overfitting-generalization') {
+      const objectiveText = [
+        card.learningObjectiveReview?.primaryLearningObjective,
+        ...(card.learningObjectiveReview?.secondaryObjectives ?? [])
+      ].join(' ')
+      if (!objectiveText.includes('kept out of training')) {
+        issues.push('Overfitting and Generalization objective does not explain that set-aside validation examples are kept out of training.')
+      }
+    }
+    ;(card.questions ?? []).forEach((question) => {
+      questionCount += 1
+      if (modelThinkingCategories.has(question.authoringCategory)) modelThinkingCount += 1
+      if (question.directDefinition) directDefinitionCount += 1
+      if (!question.questionId) issues.push(`${card.learningCardId}: v0.27.11 question missing stable questionId.`)
+      if (questionIds.has(question.questionId)) issues.push(`${question.questionId}: duplicate v0.27.11 questionId.`)
+      questionIds.add(question.questionId)
+      if (!question.question) issues.push(`${question.questionId}: missing v0.27.11 question text.`)
+      if (pilotBannedStemPatterns.some((pattern) => pattern.test(question.question))) {
+        issues.push(`${question.questionId}: banned vague stem: "${question.question}".`)
+      }
+      if (/\bAccording to this learning card\b|\bIn this learning card\b/i.test(question.question)) {
+        issues.push(`${question.questionId}: stem still uses card-referential wording: "${question.question}".`)
+      }
+      if (!questionNamesMechanism(question)) {
+        issues.push(`${question.questionId}: question does not name an explicit topic or mechanism from explicitMechanismTerms.`)
+      }
+      const learnerText = getQuestionLearnerText(question)
+      if (heldOutPattern.test(learnerText)) {
+        issues.push(`${question.questionId}: learner-facing v0.27.11 text still contains held-out/holdout wording.`)
+      }
+      if (!Array.isArray(question.choices) || question.choices.length !== 4) {
+        issues.push(`${question.questionId}: expected exactly 4 choices.`)
+      }
+      const correct = (question.choices ?? []).filter((choice) => choice.isCorrect)
+      if (correct.length !== 1) issues.push(`${question.questionId}: expected exactly 1 correct choice, found ${correct.length}.`)
+      if (correct[0]?.choiceId !== question.correctChoiceId) {
+        issues.push(`${question.questionId}: correctChoiceId does not match the correct choice.`)
+      }
+      if (!correct[0]?.feedback) issues.push(`${question.questionId}: correct choice missing success feedback.`)
+      const shuffled = shuffledChoicesForAudit(question, 'promptlife:v0.27.11:audit')
+      const correctPosition = shuffled.findIndex((choice) => choice.choiceId === question.correctChoiceId)
+      if (correctPosition >= 0) correctPositions.push(correctPosition + 1)
+
+      ;(question.choices ?? []).forEach((choice) => {
+        choiceCount += 1
+        if (!choice.choiceId) issues.push(`${question.questionId}: v0.27.11 choice missing stable choiceId.`)
+        if (choiceIds.has(choice.choiceId)) issues.push(`${choice.choiceId}: duplicate v0.27.11 choiceId.`)
+        choiceIds.add(choice.choiceId)
+        if (!choice.text) issues.push(`${choice.choiceId}: missing v0.27.11 choice text.`)
+        if (!choice.feedback) issues.push(`${choice.choiceId}: missing v0.27.11 feedback.`)
+        if (!choice.isCorrect) {
+          distractorCount += 1
+          if (!choice.representedMisconception) issues.push(`${choice.choiceId}: wrong v0.27.11 choice missing representedMisconception.`)
+          if (!choice.distractorSource) issues.push(`${choice.choiceId}: wrong v0.27.11 choice missing distractorSource.`)
+          if (choice.distractorSource && !allowedPilotSources.has(choice.distractorSource)) {
+            issues.push(`${choice.choiceId}: unsupported v0.27.11 distractorSource "${choice.distractorSource}".`)
+          }
+          if (!choice.distractorRationale) issues.push(`${choice.choiceId}: wrong v0.27.11 choice missing distractorRationale.`)
+        }
+      })
+    })
+  })
+
+  const mainSource = fs.readFileSync(path.join(root, 'src/main.tsx'), 'utf8')
+  const forbiddenNormalUiStrings = [
+    'Model-thinking checkpoint pilot active for development testing.',
+    'active for development testing',
+    'Add ?legacyCheckpoints=1 for previous checkpoints.'
+  ]
+  forbiddenNormalUiStrings.forEach((text) => {
+    if (mainSource.includes(text)) issues.push(`Normal UI forbidden string still present in src/main.tsx: ${text}`)
+  })
+  ;['requestStableLayout', 'scrollElementIntoAppView', 'pendingCheckpointScrollRef', 'learningCardTopRef', 'checkpointPanelRef', '.pl-shell'].forEach((needle) => {
+    if (!mainSource.includes(needle)) issues.push(`Scroll implementation audit missing ${needle}.`)
+  })
+  ;[
+    'src/data/content.ts',
+    'src/components/VisualAids.tsx',
+    'src/components/DiagramKit.tsx',
+    'src/data/exercises.ts'
+  ].flatMap((relativePath) => getUnexpectedHeldOutSourceLines(path.join(root, relativePath))).forEach((match) => {
+    issues.push(`Unexpected learner-facing held-out wording: ${match}`)
+  })
+
+  if (questionCount !== 136) issues.push(`Expected 136 v0.27.11 active questions, found ${questionCount}.`)
+  if (choiceCount !== 544) issues.push(`Expected 544 v0.27.11 choices, found ${choiceCount}.`)
+  if (distractorCount !== 408) issues.push(`Expected 408 v0.27.11 distractors, found ${distractorCount}.`)
+  if (questionCount && Math.round((modelThinkingCount / questionCount) * 100) < 70) {
+    issues.push(`Expected at least 70% model-thinking/application/mechanism questions, found ${Math.round((modelThinkingCount / questionCount) * 100)}%.`)
+  }
+  if (questionCount && Math.round((directDefinitionCount / questionCount) * 100) > 30) {
+    issues.push(`Expected at most 30% direct-definition questions, found ${Math.round((directDefinitionCount / questionCount) * 100)}%.`)
+  }
+  if (new Set(correctPositions).size < 2) issues.push('v0.27.11 correct answers all land in the same shuffled position for the audit seed.')
+
+  return {
+    filePath,
+    cardCount: bank.cards?.length ?? 0,
+    questionCount,
+    choiceCount,
+    distractorCount,
+    correctPositions,
+    modelThinkingCount,
+    directDefinitionCount,
+    issues
+  }
+}
+
 export function auditCheckpointBank({ write = true } = {}) {
   const live = auditLiveCheckpoints()
   const draft = auditDraftBank()
   const pilot = auditPilotBank()
   const revised = auditRevisedBank()
   const activeDevelopment = auditActiveDevelopmentBank()
-  const issues = [...live.issues, ...draft.issues, ...pilot.issues, ...revised.issues, ...activeDevelopment.issues]
+  const fullActiveDevelopment = auditFullActiveDevelopmentBank()
+  const issues = [...live.issues, ...draft.issues, ...pilot.issues, ...revised.issues, ...activeDevelopment.issues, ...fullActiveDevelopment.issues]
 
   if (write) {
     console.log('')
@@ -610,6 +762,13 @@ export function auditCheckpointBank({ write = true } = {}) {
     console.log(`v0.27.10 active-development choices: ${activeDevelopment.choiceCount}`)
     console.log(`v0.27.10 active-development wrong-answer distractors: ${activeDevelopment.distractorCount}`)
     console.log(`v0.27.10 audit-seed correct-answer positions: ${JSON.stringify(activeDevelopment.correctPositions)}`)
+    console.log(`v0.27.11 active-development cards: ${fullActiveDevelopment.cardCount}`)
+    console.log(`v0.27.11 active-development questions: ${fullActiveDevelopment.questionCount}`)
+    console.log(`v0.27.11 active-development choices: ${fullActiveDevelopment.choiceCount}`)
+    console.log(`v0.27.11 active-development wrong-answer distractors: ${fullActiveDevelopment.distractorCount}`)
+    console.log(`v0.27.11 model-thinking/application/mechanism questions: ${fullActiveDevelopment.modelThinkingCount}`)
+    console.log(`v0.27.11 direct-definition questions: ${fullActiveDevelopment.directDefinitionCount}`)
+    console.log(`v0.27.11 audit-seed correct-answer positions: ${JSON.stringify(fullActiveDevelopment.correctPositions)}`)
     if (issues.length) {
       console.log('')
       console.log('### Issues')

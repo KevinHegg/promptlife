@@ -2,6 +2,57 @@
 
 Date: 2026-06-09
 
+## v0.27.11 Full-Journey Checkpoint Bank And Scroll Hardening Pass
+
+### What Changed
+
+- Made the v0.27.11 full-Journey model-thinking checkpoint bank active by default for all 39 Journey learning cards.
+- Preserved the v0.27.7, v0.27.8, v0.27.9, and v0.27.10 checkpoint artifacts and kept the legacy single-question fallback available with `?legacyCheckpoints=1` or `?checkpointBank=legacy`.
+- Clarified set-aside validation examples in the Overfitting and Generalization card: "Set-aside validation examples are examples kept out of training so they can test whether the model learned a pattern that transfers."
+- Updated Overfitting visual/callout/interactions and checkpoint feedback so validation examples are described as saved for testing, not used to fit the model.
+- Removed normal learner-facing preview/developer checkpoint notes; the compact bank label now appears only with `?debug=1`.
+- Renamed the scroll refs to `learningCardTopRef` and `checkpointPanelRef`, kept stable layout callbacks, and added scroll margin for lesson/checkpoint targets.
+- Bumped the app/package version to `v0.27.11` and updated the README cache-busting example to `?v=02711`.
+
+### Active Bank Totals
+
+- Learning cards active by default: 39.
+- Active checkpoint questions: 136.
+- Answer choices: 544.
+- Wrong-answer distractors: 408.
+- Question-count shapes covered: 2, 3, 4, and 5 questions.
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed and includes checkpoint-bank validation.
+- `npm run audit:checkpoints`: passed and now validates the v0.27.11 all-card active-development bank.
+- Browser QA confirmed normal learner UI has no developer mode note, debug mode shows `Developer checkpoint bank: v0.27.11-all-active-dev`, `Next question` scrolls to the checkpoint panel, `Next learning card` returns to the next lesson top, 320px and desktop checkpoint screens have no horizontal overflow, and Badge/Play/Glossary still render.
+
+### Files And Reports
+
+- `src/main.tsx`
+- `src/data/checkpointBankV02711.ts`
+- `src/data/content.ts`
+- `src/data/contentReview.js`
+- `src/data/exercises.ts`
+- `src/components/VisualAids.tsx`
+- `src/components/DiagramKit.tsx`
+- `src/styles/global.css`
+- `scripts/audit-checkpoints.mjs`
+- `scripts/generate-checkpoint-bank-v02711.mjs`
+- `README.md`
+- `package.json` and `package-lock.json`
+- `docs/journey/checkpoints/checkpoint-question-bank-v0-27-11-all-active-dev.json`
+- `docs/journey/checkpoints/checkpoint-question-bank-v0-27-11-all-active-dev.md`
+- `docs/journey/prompt-life-v0-27-11-full-checkpoint-bank-review.html`
+- `docs/journey/prompt-life-v0-27-11-full-checkpoint-bank-review.pdf`
+- `docs/journey/checkpoints/screenshots/v0-27-11-*.png`
+- `docs/journey/checkpoints/v0-27-11-browser-qa-evidence.json`
+- `docs/journey/checkpoints/v0-27-11-count-and-stage-qa.json`
+
 ## v0.27.10 First-Twelve Checkpoint Cleanup And Authoring Pass
 
 ### What Changed
