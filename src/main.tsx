@@ -71,7 +71,7 @@ const HOME_ASSETS = {
   heroFallback: `${ASSET}/illustrations/scene-hero-feature-cloud@mobile.png`
 }
 // Bump this for each shipped app change; the Badge screen displays it under Start over.
-const APP_VERSION = '0.27.5'
+const APP_VERSION = '0.27.6'
 const STORAGE_KEYS = {
   lastLocation: 'promptlife:v1:lastLocation',
   lessonId: 'promptlife:v1:lessonId',
@@ -1028,23 +1028,40 @@ function LessonScreen({ lesson, mode, lessonIndex, totalLessons, reflection, onC
   const howItConnects = lesson.howItConnects ?? lesson.relationship
   const choiceOrderSeed = useMemo(() => getChoiceOrderSeed(), [])
   const checkpointItems = useMemo(() => {
-    return Array.isArray(lesson.quiz?.questions) && lesson.quiz.questions.length ? lesson.quiz.questions : [lesson.quiz]
+    if (Array.isArray(lesson.quiz?.questions)) {
+      return lesson.quiz.questions.filter((question) => question?.choices?.length && question?.answer)
+    }
+    return lesson.quiz?.choices?.length && lesson.quiz?.answer ? [lesson.quiz] : []
   }, [lesson.quiz])
-  const activeCheckpointIndex = Math.min(checkpointIndex, checkpointItems.length - 1)
-  const activeQuiz = checkpointItems[activeCheckpointIndex] ?? lesson.quiz
+  const hasCheckpointQuestions = checkpointItems.length > 0
+  const activeCheckpointIndex = hasCheckpointQuestions ? Math.min(checkpointIndex, checkpointItems.length - 1) : 0
+  const activeQuiz = hasCheckpointQuestions ? checkpointItems[activeCheckpointIndex] : null
   const checkpointKey = activeQuiz?.id ?? `${activeCheckpointIndex}`
-  const checkpointChoiceOrderKey = checkpointItems.length === 1
+  const checkpointChoiceOrderKey = !hasCheckpointQuestions
+    ? `lesson:${lesson.id}:checkpoint:none`
+    : checkpointItems.length === 1
     ? `lesson:${lesson.id}:checkpoint`
     : `lesson:${lesson.id}:checkpoint:${checkpointKey}`
   const checkpointChoices = useMemo(
-    () => buildQuizChoices(checkpointChoiceOrderKey, activeQuiz, choiceOrderSeed),
+    () => activeQuiz ? buildQuizChoices(checkpointChoiceOrderKey, activeQuiz, choiceOrderSeed) : [],
     [checkpointChoiceOrderKey, activeQuiz, choiceOrderSeed]
   )
-  const choice = checkpointSelections[checkpointKey] ?? null
-  const revealed = Boolean(checkpointRevealed[checkpointKey])
+  const choice = hasCheckpointQuestions ? checkpointSelections[checkpointKey] ?? null : null
+  const revealed = hasCheckpointQuestions && Boolean(checkpointRevealed[checkpointKey])
   const selectedChoice = choice == null ? null : checkpointChoices.find((item) => item.id === choice) ?? null
   const isCorrect = Boolean(selectedChoice?.isCorrect)
   const isLastCheckpointQuestion = activeCheckpointIndex >= checkpointItems.length - 1
+  const isFinalLesson = lessonIndex + 1 === totalLessons
+  const checkpointCanAdvance = !hasCheckpointQuestions || isCorrect
+  const stickyActionLabel = !canUpdateProgress
+    ? 'Return to Journey'
+    : !hasCheckpointQuestions
+      ? (isFinalLesson ? 'Finish and view badge' : 'Next learning card')
+      : isCorrect
+        ? (!isLastCheckpointQuestion ? 'Next question' : isFinalLesson ? 'Finish and view badge' : 'Next learning card')
+        : choice == null
+          ? 'Answer checkpoint to continue'
+          : 'Try another choice'
   const relatedTerms = useMemo(() => {
     return lesson.terms
       .map((term) => findGlossaryTerm(term))
@@ -1064,12 +1081,12 @@ function LessonScreen({ lesson, mode, lessonIndex, totalLessons, reflection, onC
       onReturnToJourney()
       return
     }
-    if (!isCorrect) {
+    if (hasCheckpointQuestions && !isCorrect) {
       setContinueHint(true)
       checkpointRef.current?.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'center' })
       return
     }
-    if (!isLastCheckpointQuestion) {
+    if (hasCheckpointQuestions && !isLastCheckpointQuestion) {
       setCheckpointIndex((index) => Math.min(index + 1, checkpointItems.length - 1))
       setContinueHint(false)
       checkpointRef.current?.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'start' })
@@ -1164,29 +1181,34 @@ function LessonScreen({ lesson, mode, lessonIndex, totalLessons, reflection, onC
         </label>
       </section>
 
-      <section ref={checkpointRef} className="lesson-panel quiz-card" aria-labelledby="quiz-title">
-        <Checkpoint
-          quiz={activeQuiz}
-          choices={checkpointChoices}
-          selectedChoiceId={choice}
-          setChoice={(choiceId) => {
-            setCheckpointSelections((selections) => ({ ...selections, [checkpointKey]: choiceId }))
-            setCheckpointRevealed((revealedMap) => ({ ...revealedMap, [checkpointKey]: true }))
-            setContinueHint(false)
-          }}
-          revealed={revealed}
-          progress={{ current: activeCheckpointIndex + 1, total: checkpointItems.length }}
-          onPrevious={activeCheckpointIndex > 0 ? () => setCheckpointIndex((index) => Math.max(0, index - 1)) : null}
-        />
-        {continueHint && (
-          <p className="feedback" role="status">
-            <strong>Try the checkpoint first.</strong> Choose the best answer, then the continue button will move you forward.
-          </p>
-        )}
-      </section>
+      {activeQuiz && (
+        <section ref={checkpointRef} className="lesson-panel quiz-card" aria-labelledby="quiz-title">
+          <Checkpoint
+            quiz={activeQuiz}
+            choices={checkpointChoices}
+            selectedChoiceId={choice}
+            setChoice={(choiceId) => {
+              setCheckpointSelections((selections) => ({ ...selections, [checkpointKey]: choiceId }))
+              setCheckpointRevealed((revealedMap) => ({ ...revealedMap, [checkpointKey]: true }))
+              setContinueHint(false)
+            }}
+            revealed={revealed}
+            progress={{ current: activeCheckpointIndex + 1, total: checkpointItems.length }}
+            onPrevious={activeCheckpointIndex > 0 ? () => {
+              setCheckpointIndex((index) => Math.max(0, index - 1))
+              setContinueHint(false)
+            } : null}
+          />
+          {continueHint && (
+            <p className="feedback" role="status">
+              <strong>Answer the checkpoint first.</strong> Choose the best answer, then the continue button will move you forward.
+            </p>
+          )}
+        </section>
+      )}
 
-      <button className={isCorrect || !canUpdateProgress ? 'primary-btn sticky-action is-ready' : 'primary-btn sticky-action'} onClick={saveAndContinue}>
-        {!canUpdateProgress ? 'Return to Journey' : isCorrect ? (!isLastCheckpointQuestion ? 'Next question' : lessonIndex + 1 === totalLessons ? 'Finish and view badge' : 'Next learning card') : choice == null ? 'Answer checkpoint to continue' : 'Retry checkpoint to continue'}
+      <button className={checkpointCanAdvance || !canUpdateProgress ? 'primary-btn sticky-action is-ready' : 'primary-btn sticky-action'} onClick={saveAndContinue}>
+        {stickyActionLabel}
       </button>
     </section>
   )
@@ -1410,7 +1432,12 @@ function Checkpoint({ quiz, choices, selectedChoiceId, setChoice, revealed, prog
   const selectedChoice = selectedChoiceId == null ? null : choices.find((item) => item.id === selectedChoiceId) ?? null
   const isCorrect = Boolean(selectedChoice?.isCorrect)
   const feedback = selectedChoice?.feedback ?? quiz.explain
-  const feedbackHasLead = !isCorrect && typeof feedback === 'string' && feedback.startsWith('Not quite.')
+  const feedbackHasLead = !isCorrect && typeof feedback === 'string' && (
+    feedback.startsWith('Not quite.')
+    || feedback.startsWith('This choice reveals')
+    || feedback.startsWith('Not the best fit')
+    || feedback.startsWith('Close,')
+  )
   const feedbackHasCorrectLead = isCorrect && typeof feedback === 'string' && feedback.startsWith('Insight unlocked')
   const hasProgress = Boolean(progress && progress.total >= 1)
   const hasMultipleQuestions = Boolean(progress && progress.total > 1)
@@ -1473,9 +1500,9 @@ function Checkpoint({ quiz, choices, selectedChoiceId, setChoice, revealed, prog
       {revealed && (
         <p className={isCorrect ? 'feedback good' : 'feedback'} role="status">
           {isCorrect && !feedbackHasCorrectLead && <strong>Insight unlocked.</strong>}
-          {!isCorrect && !feedbackHasLead && <strong>Not quite.</strong>}
+          {!isCorrect && !feedbackHasLead && <strong>This choice reveals a common mix-up.</strong>}
           {' '}{feedback}
-          {!isCorrect && <span> Choose another answer to retry.</span>}
+          {!isCorrect && <span> Try another choice.</span>}
         </p>
       )}
     </>

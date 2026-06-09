@@ -120,6 +120,15 @@ function getCurrentPositions(items, correctIds) {
     .filter(Boolean)
 }
 
+function getLessonQuizNodes(quizNode) {
+  if (!quizNode || !ts.isObjectLiteralExpression(quizNode)) return []
+  const questions = getProp(quizNode, 'questions')
+  if (questions && ts.isArrayLiteralExpression(questions)) {
+    return questions.elements.filter(ts.isObjectLiteralExpression)
+  }
+  return [quizNode]
+}
+
 function getLessonSurfaces() {
   const source = readSource('src/data/content.ts')
   const lessons = getVariable(source, 'lessons')
@@ -131,26 +140,36 @@ function getLessonSurfaces() {
     const title = getString(getProp(lessonNode, 'title'))
     const quiz = getProp(lessonNode, 'quiz')
     if (!id || !title || !quiz || !ts.isObjectLiteralExpression(quiz)) return []
-    const choices = getStringArray(getProp(quiz, 'choices'))
-    const answer = getString(getProp(quiz, 'answer'))
-    if (!choices.length || !answer) return []
-    const currentPosition = choices.indexOf(answer) + 1
-    const shuffled = shuffleChoicesForQuestion(`lesson:${id}:checkpoint`, choices.map((label, index) => ({
-      id: `${index}:${label}`,
-      label,
-      correct: label === answer
-    })), AUDIT_SEED)
-    const shuffledPositions = shuffled.map((choice, index) => choice.correct ? index + 1 : null).filter(Boolean)
-    return [{
-      id: `lesson:${id}`,
-      activity: title,
-      inputType: 'Journey checkpoint',
-      choiceCount: choices.length,
-      currentCorrectPositions: currentPosition ? [currentPosition] : [],
-      randomized: true,
-      shuffledCorrectPositions: shuffledPositions,
-      notes: 'Randomized. Correctness follows answer identity, not A/B/C/D position.'
-    }]
+    const quizNodes = getLessonQuizNodes(quiz)
+    return quizNodes.flatMap((questionNode, questionIndex) => {
+      const choices = getStringArray(getProp(questionNode, 'choices'))
+      const answer = getString(getProp(questionNode, 'answer'))
+      if (!choices.length || !answer) return []
+      const questionKey = getString(getProp(questionNode, 'id')) ?? `${questionIndex}`
+      const choiceOrderKey = quizNodes.length === 1
+        ? `lesson:${id}:checkpoint`
+        : `lesson:${id}:checkpoint:${questionKey}`
+      const surfaceId = quizNodes.length === 1
+        ? `lesson:${id}`
+        : `lesson:${id}:checkpoint:${questionKey}`
+      const currentPosition = choices.indexOf(answer) + 1
+      const shuffled = shuffleChoicesForQuestion(choiceOrderKey, choices.map((label, index) => ({
+        id: `${index}:${label}`,
+        label,
+        correct: label === answer
+      })), AUDIT_SEED)
+      const shuffledPositions = shuffled.map((choice, index) => choice.correct ? index + 1 : null).filter(Boolean)
+      return [{
+        id: surfaceId,
+        activity: quizNodes.length === 1 ? title : `${title} checkpoint ${questionIndex + 1}`,
+        inputType: 'Journey checkpoint',
+        choiceCount: choices.length,
+        currentCorrectPositions: currentPosition ? [currentPosition] : [],
+        randomized: true,
+        shuffledCorrectPositions: shuffledPositions,
+        notes: 'Randomized. Correctness follows answer identity, not A/B/C/D position.'
+      }]
+    })
   })
 }
 

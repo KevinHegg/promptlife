@@ -2,6 +2,42 @@
 
 Date: 2026-06-08
 
+## v0.27.6 Journey Checkpoint Layout Repair
+
+### What Changed
+
+- Forced Journey learning-card core-detail blocks to stay one-column/full-width at every viewport width.
+- Hardened `LessonScreen` checkpoint state for zero, one, or future multi-question checkpoint lists.
+- Kept wrong selections retryable; wrong-answer primary action now reads `Try another choice`.
+- Kept final single-question checkpoint completion on `Next learning card`; `Next question` remains reserved for future multi-question cards with another checkpoint remaining.
+- Added extra Journey bottom spacing using the existing bottom-nav height token and safe-area inset.
+- Updated `npm run audit:answers` so future `quiz.questions` arrays are audited per checkpoint question.
+- Bumped the visible app/package version to `v0.27.6` and updated the README cache-busting example to `?v=0276`.
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed; 69 total surfaces, 46 randomized, 23 fixed-order.
+- Browser QA: passed at 390px, 320px, and 900px. Journey detail blocks stayed one column, checkpoint choices did not overflow, wrong answers did not advance, correct answers showed `Next learning card`, and primary actions stayed clear of the bottom nav.
+- Current curriculum note: all 39 Journey cards currently have one checkpoint question, so the live `Next question` state could not be screenshot-tested.
+- Reset QA: the Badge debug control `Mark all lessons incomplete` reported `All lessons marked incomplete.` Full reset was not used.
+- Browser console errors observed: none.
+
+### Screenshots And Report
+
+- `docs/journey/prompt-life-v0-27-6-journey-checkpoint-layout-report.html`
+- `docs/journey/prompt-life-v0-27-6-journey-checkpoint-layout-report.pdf`
+- `docs/journey/screenshots/v0-27-6-journey-core-one-column-desktop.png`
+- `docs/journey/screenshots/v0-27-6-journey-core-one-column-390.png`
+- `docs/journey/screenshots/v0-27-6-checkpoint-before-390.png`
+- `docs/journey/screenshots/v0-27-6-checkpoint-wrong-390.png`
+- `docs/journey/screenshots/v0-27-6-checkpoint-correct-final-390.png`
+- `docs/journey/screenshots/v0-27-6-checkpoint-before-320.png`
+- `docs/journey/screenshots/v0-27-6-badge-smoke-390.png`
+- `docs/journey/screenshots/v0-27-6-play-smoke-390.png`
+
 ## v0.27.5 Reflect Before Checkpoint Pass
 
 ### What Changed

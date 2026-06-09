@@ -830,6 +830,10 @@ p {
   margin: 0;
 }
 
+.lesson-detail-grid {
+  grid-template-columns: 1fr;
+}
+
 .section-intro-card div,
 .lesson-detail-grid div,
 .brain-bridge dl div,
@@ -980,6 +984,8 @@ p {
 .lesson-screen {
   display: grid;
   gap: 0.9rem;
+  padding-bottom: calc(var(--pl-nav-height) + 5.25rem + var(--pl-bottom-safe-padding));
+  scroll-padding-bottom: calc(var(--pl-nav-height) + 5.5rem + var(--pl-bottom-safe-padding));
 }
 
 .lesson-hero {
@@ -2420,6 +2426,8 @@ p {
 
 .sticky-action {
   margin-top: 0.2rem;
+  margin-bottom: calc(var(--pl-nav-height) + 1.35rem + var(--pl-bottom-safe-padding));
+  scroll-margin-bottom: calc(var(--pl-nav-height) + 5.5rem + var(--pl-bottom-safe-padding));
 }
 
 .checkpoint-pager {
@@ -8696,7 +8704,6 @@ p {
     font-size: 3rem;
   }
 
-  .lesson-detail-grid,
   .brain-bridge dl,
   .section-intro-card dl,
   .review-lesson-grid {

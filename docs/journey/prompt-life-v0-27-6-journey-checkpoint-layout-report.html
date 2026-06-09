@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Prompt Life v0.27.6 Journey Checkpoint Layout Report</title>
+  <style>
+    :root { color: #07124a; background: #f7f5ef; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.45; }
+    body { margin: 0; padding: 28px; background: #f7f5ef; }
+    main { max-width: 920px; margin: 0 auto; display: grid; gap: 16px; }
+    section, figure { margin: 0; border: 1px solid rgba(18, 30, 114, 0.14); border-radius: 10px; padding: 18px; background: rgba(255, 253, 248, 0.94); box-shadow: 0 16px 42px rgba(7, 18, 74, 0.08); break-inside: avoid; }
+    h1, h2, p, ul { margin-top: 0; }
+    h1 { margin-bottom: 8px; color: #121e72; font-size: 34px; line-height: 1.05; }
+    h2 { color: #121e72; font-size: 21px; }
+    .eyebrow { margin-bottom: 8px; color: #0fa8a4; font-size: 12px; font-weight: 900; letter-spacing: 0.08em; text-transform: uppercase; }
+    code { color: #121e72; overflow-wrap: anywhere; }
+    li + li { margin-top: 4px; }
+    img { width: 100%; max-height: 820px; object-fit: contain; border: 1px solid rgba(18, 30, 114, 0.12); border-radius: 8px; background: white; }
+    figcaption { margin-top: 8px; color: #26345f; font-weight: 800; }
+    @media print { body { padding: 12px; } section, figure { box-shadow: none; } }
+  </style>
+</head>
+<body>
+  <main>
+    <section>
+      <p class="eyebrow">Prompt Life v0.27.6</p>
+      <h1>Journey Checkpoint Layout Repair</h1>
+      <p>This pass makes Journey learning-card concept blocks consistently one-column, hardens checkpoint flow for future multi-question cards, and keeps checkpoint actions clear of the mobile bottom nav.</p>
+    </section>
+    <section>
+      <h2>Summary</h2>
+      <ul>
+        <li>Forced the Journey learning-card core-detail blocks to remain one column at every viewport width.</li>
+        <li>Hardened the checkpoint state model for zero, one, or future multi-question learning cards.</li>
+        <li>Changed wrong-answer primary copy to Try another choice and kept single-question final flow on Next learning card.</li>
+        <li>Added extra Journey bottom spacing using the existing bottom-nav token and safe-area inset.</li>
+        <li>Bumped the visible app/package version to v0.27.6.</li>
+      </ul>
+    </section>
+    <section>
+      <h2>Recommendations Next Pass</h2>
+      <ul>
+        <li>Author one real two-question Journey card and one three-question QA fixture if multi-checkpoint learning is desired in content.</li>
+        <li>Add a small automated Journey checkpoint harness so multi-question behavior can be tested without editing curriculum data.</li>
+        <li>Consider extracting LessonScreen checkpoint logic into a small helper once multi-question cards become common.</li>
+      </ul>
+    </section>
+    <section>
+      <h2>Challenges And Risks</h2>
+      <ul>
+        <li>All 39 live Journey cards currently have exactly one checkpoint question, so the Next question state is code-verified but not live-screenshot-verified.</li>
+        <li>The browser read-only page scope did not expose localStorage, so full storage snapshot/restore was not available during QA.</li>
+        <li>The existing Vite large-chunk warning remains unchanged.</li>
+      </ul>
+    </section>
+    <section>
+      <h2>Journey Screens, Panels, Routes Changed</h2>
+      <ul>
+        <li>Journey learning-card core-detail panel layout.</li>
+        <li>Journey checkpoint panel state, progress label, and feedback copy.</li>
+        <li>Journey sticky primary action spacing and labels.</li>
+        <li>Badge page only reflects the new version number.</li>
+      </ul>
+    </section>
+    <section>
+      <h2>Learner-Facing Copy Changes</h2>
+      <ul>
+        <li>Wrong-answer sticky action now reads Try another choice.</li>
+        <li>The inline checkpoint hint now starts Answer the checkpoint first.</li>
+        <li>Wrong-answer feedback fallback now starts This choice reveals a common mix-up.</li>
+        <li>Single-question correct state continues to read Next learning card.</li>
+      </ul>
+    </section>
+    <section>
+      <h2>Checkpoint Data / Model / Logic Changes</h2>
+      <ul>
+        <li>LessonScreen now normalizes checkpointItems from quiz.questions when present, or from a single quiz object when not.</li>
+        <li>Zero-question cards can advance without rendering a broken checkpoint.</li>
+        <li>Progress labels use the actual checkpoint list length: X of N question(s).</li>
+        <li>Wrong selections reveal feedback but do not advance or complete the learning card.</li>
+        <li>The learning card completes only after the final checkpoint question is correct and the learner taps the primary action.</li>
+        <li>The answer audit now handles future quiz.questions arrays with stable per-question shuffle keys.</li>
+      </ul>
+    </section>
+    <section>
+      <h2>localStorage</h2>
+      <ul>
+        <li>Read/preserved: promptlife:v1:lastLocation, promptlife:v1:lessonId, promptlife:v1:progress, promptlife:v1:reflections, promptlife:v1:exerciseProgress, promptlife:v1:promptRunProgress, promptlife:v1:traceComplete, promptlife:v1:learningTourComplete, promptlife:v1:gameInsights, promptlife.playChallenges.v1, Glossary Dojo storage, and promptlife:v1:choiceOrderSeed.</li>
+        <li>Written during normal QA: Journey completion was exercised through the app, then the debug Journey-only reset control Mark all lessons incomplete was used.</li>
+        <li>Created/migrated: none.</li>
+        <li>Reset behavior: the narrow debug Journey reset reported All lessons marked incomplete. Full clear-all reset was not used.</li>
+      </ul>
+    </section>
+    <section>
+      <h2>Verification Commands</h2>
+      <ul>
+        <li>npm run typecheck: passed.</li>
+        <li>npm run build: passed with the existing Vite large-chunk warning.</li>
+        <li>npm run build:pages: passed with the existing Vite large-chunk warning.</li>
+        <li>npm run audit:answers: passed; 69 total surfaces, 46 randomized, 23 fixed-order.</li>
+      </ul>
+    </section>
+    <section>
+      <h2>Mobile QA</h2>
+      <ul>
+        <li>390px: one-column detail blocks passed; checkpoint before/wrong/correct states passed; primary action stayed above bottom nav.</li>
+        <li>320px: checkpoint fit without horizontal overflow; repeated wrong selections stayed on Try another choice; correct selection switched to Next learning card.</li>
+        <li>No browser console errors were observed.</li>
+      </ul>
+    </section>
+    <section>
+      <h2>Desktop / Laptop QA</h2>
+      <ul>
+        <li>900px viewport: Journey detail blocks stayed one column with matching x position and width.</li>
+        <li>No desktop horizontal overflow was detected.</li>
+      </ul>
+    </section>
+    <section>
+      <h2>Files Changed</h2>
+      <ul>
+        <li>src/main.tsx</li>
+        <li>src/styles/global.css</li>
+        <li>scripts/audit-answers.mjs</li>
+        <li>package.json</li>
+        <li>package-lock.json</li>
+        <li>README.md</li>
+        <li>docs/REVIEW_NOTES.md</li>
+        <li>docs/journey/prompt-life-v0-27-6-journey-checkpoint-layout-report.html</li>
+        <li>docs/journey/prompt-life-v0-27-6-journey-checkpoint-layout-report.pdf</li>
+        <li>docs/journey/screenshots/v0-27-6-*.png</li>
+      </ul>
+    </section>
+    <section>
+      <h2>Reports And Screenshots Created</h2>
+      <ul>
+        <li>This PDF report and matching HTML report were created in docs/journey/.</li>
+        <li>Screenshots were captured for desktop concept blocks, 390px concept blocks, 390px checkpoint before/wrong/correct, 320px checkpoint, Badge smoke, and Play smoke.</li>
+        <li>A live Next question screenshot was not created because no current Journey card has more than one checkpoint question.</li>
+      </ul>
+    </section>
+    <figure>
+      <img src="screenshots/v0-27-6-journey-core-one-column-desktop.png" alt="Desktop/laptop view: the Journey core-detail blocks remain one full-width row each." />
+      <figcaption>Desktop one-column concept blocks. Desktop/laptop view: the Journey core-detail blocks remain one full-width row each.</figcaption>
+    </figure>
+    <figure>
+      <img src="screenshots/v0-27-6-journey-core-one-column-390.png" alt="390px view: Model lifecycle, Where it happens, Durable or temporary, Prompt vs response, Why it matters, and Misconception corrected stack in one column." />
+      <figcaption>390px one-column concept blocks. 390px view: Model lifecycle, Where it happens, Durable or temporary, Prompt vs response, Why it matters, and Misconception corrected stack in one column.</figcaption>
+    </figure>
+    <figure>
+      <img src="screenshots/v0-27-6-checkpoint-before-390.png" alt="Checkpoint starts with 1 of 1 question and the primary action reads Answer checkpoint to continue." />
+      <figcaption>390px checkpoint before answer. Checkpoint starts with 1 of 1 question and the primary action reads Answer checkpoint to continue.</figcaption>
+    </figure>
+    <figure>
+      <img src="screenshots/v0-27-6-checkpoint-wrong-390.png" alt="Wrong-answer feedback is gentle and the primary action reads Try another choice." />
+      <figcaption>390px checkpoint after wrong answer. Wrong-answer feedback is gentle and the primary action reads Try another choice.</figcaption>
+    </figure>
+    <figure>
+      <img src="screenshots/v0-27-6-checkpoint-correct-final-390.png" alt="Correct single-question checkpoint shows Next learning card, not Next question." />
+      <figcaption>390px final correct checkpoint. Correct single-question checkpoint shows Next learning card, not Next question.</figcaption>
+    </figure>
+    <figure>
+      <img src="screenshots/v0-27-6-checkpoint-before-320.png" alt="320px view: checkpoint choices and primary action fit without horizontal overflow." />
+      <figcaption>320px checkpoint. 320px view: checkpoint choices and primary action fit without horizontal overflow.</figcaption>
+    </figure>
+    <figure>
+      <img src="screenshots/v0-27-6-badge-smoke-390.png" alt="Badge page smoke check with visible version v0.27.6." />
+      <figcaption>Badge smoke at 390px. Badge page smoke check with visible version v0.27.6.</figcaption>
+    </figure>
+    <figure>
+      <img src="screenshots/v0-27-6-play-smoke-390.png" alt="Play landing smoke check only; Journey work did not change Play behavior." />
+      <figcaption>Play smoke at 390px. Play landing smoke check only; Journey work did not change Play behavior.</figcaption>
+    </figure>
+  </main>
+</body>
+</html>
