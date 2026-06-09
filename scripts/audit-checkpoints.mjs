@@ -9,6 +9,22 @@ const draftPath = path.join(root, 'docs/journey/checkpoints/checkpoint-question-
 const pilotPath = path.join(root, 'docs/journey/checkpoints/checkpoint-question-bank-v0-27-8-model-thinking-pilot.json')
 const revisedPath = path.join(root, 'docs/journey/checkpoints/checkpoint-question-bank-v0-27-9-first-six-revised.json')
 const revisedSourcePath = path.join(root, 'src/data/checkpointBankV0279.ts')
+const activeDevPath = path.join(root, 'docs/journey/checkpoints/checkpoint-question-bank-v0-27-10-first-twelve-active-dev.json')
+const activeDevSourcePath = path.join(root, 'src/data/checkpointBankV02710.ts')
+const activeDevLessonIds = [
+  'what-is-llm',
+  'where-llms-fit',
+  'history',
+  'training',
+  'pretraining',
+  'overfitting-generalization',
+  'fine-tuning',
+  'alignment',
+  'inference',
+  'prompt-response',
+  'tokens',
+  'token-ids'
+]
 const vaguePatterns = [
   /^What is the best definition\??$/i,
   /^Which statement is most accurate\??$/i,
@@ -41,6 +57,7 @@ const allowedPilotSources = new Set([
   'explicit-confusable',
   'author-created misconception'
 ])
+const heldOutPattern = /\bheld[- ]out\b|\bholdout\b|\bheldout\b/i
 
 function hashString(value) {
   let hash = 2166136261
@@ -232,6 +249,41 @@ function questionNamesMechanism(question) {
   })
 }
 
+function getQuestionLearnerText(question) {
+  const choiceText = (question.choices ?? []).flatMap((choice) => [
+    choice.text,
+    choice.feedback,
+    choice.representedMisconception,
+    choice.distractorRationale
+  ])
+  const feedbackValues = question.feedback && typeof question.feedback === 'object'
+    ? Object.values(question.feedback)
+    : []
+  return [
+    question.question,
+    question.answer,
+    question.explain,
+    ...(question.explicitMechanismTerms ?? []),
+    ...feedbackValues,
+    ...choiceText
+  ].filter(Boolean).join('\n')
+}
+
+function getUnexpectedHeldOutSourceLines(filePath) {
+  if (!fs.existsSync(filePath)) return [`missing source file: ${filePath}`]
+  return fs.readFileSync(filePath, 'utf8')
+    .split('\n')
+    .map((line, index) => ({ line, lineNumber: index + 1 }))
+    .filter(({ line }) => heldOutPattern.test(line))
+    .filter(({ line }) => ![
+      "id: 'overfitting-held-out-check'",
+      "completionKey: 'exercise:overfitting-held-out-check'",
+      "'overfitting-generalization': 'overfitting-held-out-check'",
+      'dk-heldout-dot'
+    ].some((allowed) => line.includes(allowed)))
+    .map(({ line, lineNumber }) => `${path.relative(root, filePath)}:${lineNumber}: ${line.trim()}`)
+}
+
 function auditPilotBank(filePath = pilotPath) {
   const issues = []
   if (!fs.existsSync(filePath)) {
@@ -399,12 +451,138 @@ function auditRevisedBank(filePath = revisedPath) {
   }
 }
 
+function auditActiveDevelopmentBank(filePath = activeDevPath) {
+  const issues = []
+  if (!fs.existsSync(filePath)) {
+    return { filePath, cardCount: 0, questionCount: 0, choiceCount: 0, distractorCount: 0, correctPositions: [], issues: [`Missing active-development bank: ${filePath}`] }
+  }
+  const bank = JSON.parse(fs.readFileSync(filePath, 'utf8'))
+  const questionIds = new Set()
+  const choiceIds = new Set()
+  const correctPositions = []
+  let questionCount = 0
+  let choiceCount = 0
+  let distractorCount = 0
+
+  if (bank.status !== 'active-development-pilot') issues.push(`v0.27.10 bank status should be active-development-pilot, found ${bank.status}.`)
+  if (bank.activeByDefault !== true) issues.push('v0.27.10 bank should be activeByDefault: true.')
+  if (bank.activeBankLabel !== 'v0.27.10-first-twelve') issues.push(`v0.27.10 activeBankLabel mismatch: ${bank.activeBankLabel}.`)
+  if (!Array.isArray(bank.cards) || bank.cards.length !== 12) issues.push(`Expected 12 v0.27.10 active card entries, found ${bank.cards?.length ?? 0}.`)
+
+  const ids = (bank.cards ?? []).map((card) => card.learningCardId)
+  activeDevLessonIds.forEach((id, index) => {
+    if (ids[index] !== id) issues.push(`v0.27.10 active card ${index + 1} should be ${id}, found ${ids[index] ?? 'missing'}.`)
+  })
+
+  if (bank.summary?.remainingLegacySingleQuestionCards !== 27) {
+    issues.push(`Expected 27 remaining legacy single-question cards, found ${bank.summary?.remainingLegacySingleQuestionCards}.`)
+  }
+  if (!fs.existsSync(activeDevSourcePath)) issues.push(`Missing runtime source bank: ${activeDevSourcePath}`)
+  if (fs.existsSync(activeDevSourcePath)) {
+    const sourceText = fs.readFileSync(activeDevSourcePath, 'utf8')
+    if (!sourceText.includes('FIRST_TWELVE_CHECKPOINT_BANK_V02710')) issues.push('Runtime source bank does not export FIRST_TWELVE_CHECKPOINT_BANK_V02710.')
+    if (!sourceText.includes('hasV02710CheckpointBank')) issues.push('Runtime source bank does not export hasV02710CheckpointBank.')
+    if (sourceText.includes('FIRST_SIX_CHECKPOINT_BANK_V0279')) issues.push('v0.27.10 runtime source should not import/export the v0.27.9 runtime bank.')
+    if (heldOutPattern.test(sourceText)) issues.push('v0.27.10 runtime source still contains held-out/holdout learner wording.')
+  }
+
+  ;(bank.cards ?? []).forEach((card) => {
+    if (!Array.isArray(card.questions) || card.questions.length !== card.revisedQuestionCount) {
+      issues.push(`${card.learningCardId}: v0.27.10 question count mismatch.`)
+    }
+    ;(card.questions ?? []).forEach((question) => {
+      questionCount += 1
+      if (!question.questionId) issues.push(`${card.learningCardId}: v0.27.10 question missing stable questionId.`)
+      if (questionIds.has(question.questionId)) issues.push(`${question.questionId}: duplicate v0.27.10 questionId.`)
+      questionIds.add(question.questionId)
+      if (!question.question) issues.push(`${question.questionId}: missing v0.27.10 question text.`)
+      if (pilotBannedStemPatterns.some((pattern) => pattern.test(question.question))) {
+        issues.push(`${question.questionId}: banned vague stem: "${question.question}".`)
+      }
+      if (!questionNamesMechanism(question)) {
+        issues.push(`${question.questionId}: question does not name an explicit topic or mechanism from explicitMechanismTerms.`)
+      }
+      const learnerText = getQuestionLearnerText(question)
+      if (heldOutPattern.test(learnerText)) {
+        issues.push(`${question.questionId}: learner-facing active bank text still contains held-out/holdout wording.`)
+      }
+      if (!Array.isArray(question.choices) || question.choices.length !== 4) {
+        issues.push(`${question.questionId}: expected exactly 4 choices.`)
+      }
+      const correct = (question.choices ?? []).filter((choice) => choice.isCorrect)
+      if (correct.length !== 1) issues.push(`${question.questionId}: expected exactly 1 correct choice, found ${correct.length}.`)
+      if (correct[0]?.choiceId !== question.correctChoiceId) {
+        issues.push(`${question.questionId}: correctChoiceId does not match the correct choice.`)
+      }
+      if (!correct[0]?.feedback) issues.push(`${question.questionId}: correct choice missing success feedback.`)
+      const shuffled = shuffledChoicesForAudit(question, 'promptlife:v0.27.10:audit')
+      const correctPosition = shuffled.findIndex((choice) => choice.choiceId === question.correctChoiceId)
+      if (correctPosition >= 0) correctPositions.push(correctPosition + 1)
+
+      ;(question.choices ?? []).forEach((choice) => {
+        choiceCount += 1
+        if (!choice.choiceId) issues.push(`${question.questionId}: v0.27.10 choice missing stable choiceId.`)
+        if (choiceIds.has(choice.choiceId)) issues.push(`${choice.choiceId}: duplicate v0.27.10 choiceId.`)
+        choiceIds.add(choice.choiceId)
+        if (!choice.text) issues.push(`${choice.choiceId}: missing v0.27.10 choice text.`)
+        if (!choice.feedback) issues.push(`${choice.choiceId}: missing v0.27.10 feedback.`)
+        if (!choice.isCorrect) {
+          distractorCount += 1
+          if (!choice.representedMisconception) issues.push(`${choice.choiceId}: wrong v0.27.10 choice missing representedMisconception.`)
+          if (!choice.distractorSource) issues.push(`${choice.choiceId}: wrong v0.27.10 choice missing distractorSource.`)
+          if (choice.distractorSource && !allowedPilotSources.has(choice.distractorSource)) {
+            issues.push(`${choice.choiceId}: unsupported v0.27.10 distractorSource "${choice.distractorSource}".`)
+          }
+          if (!choice.distractorRationale) issues.push(`${choice.choiceId}: wrong v0.27.10 choice missing distractorRationale.`)
+        }
+      })
+    })
+  })
+
+  const mainSource = fs.readFileSync(path.join(root, 'src/main.tsx'), 'utf8')
+  const forbiddenNormalUiStrings = [
+    'Model-thinking checkpoint pilot active for development testing.',
+    'active for development testing',
+    'Add ?legacyCheckpoints=1 for previous checkpoints.'
+  ]
+  forbiddenNormalUiStrings.forEach((text) => {
+    if (mainSource.includes(text)) issues.push(`Normal UI forbidden string still present in src/main.tsx: ${text}`)
+  })
+  ;['requestStableLayout', 'scrollElementIntoAppView', 'pendingCheckpointScrollRef', 'lessonTopRef', '.pl-shell'].forEach((needle) => {
+    if (!mainSource.includes(needle)) issues.push(`Scroll implementation audit missing ${needle}.`)
+  })
+  ;[
+    'src/data/content.ts',
+    'src/components/VisualAids.tsx',
+    'src/components/DiagramKit.tsx',
+    'src/data/exercises.ts'
+  ].flatMap((relativePath) => getUnexpectedHeldOutSourceLines(path.join(root, relativePath))).forEach((match) => {
+    issues.push(`Unexpected learner-facing held-out wording: ${match}`)
+  })
+
+  if (questionCount !== 39) issues.push(`Expected 39 v0.27.10 active questions, found ${questionCount}.`)
+  if (choiceCount !== 156) issues.push(`Expected 156 v0.27.10 choices, found ${choiceCount}.`)
+  if (distractorCount !== 117) issues.push(`Expected 117 v0.27.10 distractors, found ${distractorCount}.`)
+  if (new Set(correctPositions).size < 2) issues.push('v0.27.10 correct answers all land in the same shuffled position for the audit seed.')
+
+  return {
+    filePath,
+    cardCount: bank.cards?.length ?? 0,
+    questionCount,
+    choiceCount,
+    distractorCount,
+    correctPositions,
+    issues
+  }
+}
+
 export function auditCheckpointBank({ write = true } = {}) {
   const live = auditLiveCheckpoints()
   const draft = auditDraftBank()
   const pilot = auditPilotBank()
   const revised = auditRevisedBank()
-  const issues = [...live.issues, ...draft.issues, ...pilot.issues, ...revised.issues]
+  const activeDevelopment = auditActiveDevelopmentBank()
+  const issues = [...live.issues, ...draft.issues, ...pilot.issues, ...revised.issues, ...activeDevelopment.issues]
 
   if (write) {
     console.log('')
@@ -427,6 +605,11 @@ export function auditCheckpointBank({ write = true } = {}) {
     console.log(`Revised active-development choices: ${revised.choiceCount}`)
     console.log(`Revised active-development wrong-answer distractors: ${revised.distractorCount}`)
     console.log(`Revised audit-seed correct-answer positions: ${JSON.stringify(revised.correctPositions)}`)
+    console.log(`v0.27.10 active-development cards: ${activeDevelopment.cardCount}`)
+    console.log(`v0.27.10 active-development questions: ${activeDevelopment.questionCount}`)
+    console.log(`v0.27.10 active-development choices: ${activeDevelopment.choiceCount}`)
+    console.log(`v0.27.10 active-development wrong-answer distractors: ${activeDevelopment.distractorCount}`)
+    console.log(`v0.27.10 audit-seed correct-answer positions: ${JSON.stringify(activeDevelopment.correctPositions)}`)
     if (issues.length) {
       console.log('')
       console.log('### Issues')
@@ -436,7 +619,7 @@ export function auditCheckpointBank({ write = true } = {}) {
     }
   }
 
-  return { live, draft, pilot, revised, issues }
+  return { live, draft, pilot, revised, activeDevelopment, issues }
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {

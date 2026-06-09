@@ -2,6 +2,53 @@
 
 Date: 2026-06-09
 
+## v0.27.10 First-Twelve Checkpoint Cleanup And Authoring Pass
+
+### What Changed
+
+- Made the v0.27.10 first-twelve model-thinking checkpoint bank active by default for the first 12 Journey learning cards.
+- Added the next six authored checkpoint sets after Overfitting and Generalization: Fine-Tuning, Alignment, Inference, Prompt vs Response, Tokenization, and Token IDs.
+- Kept the remaining 27 Journey cards on their legacy single-question checkpoints.
+- Kept the legacy fallback query parameters available: `?legacyCheckpoints=1` or `?checkpointBank=legacy`.
+- Removed the normal learner-facing development-testing/fallback note; debug mode can show only the compact active bank label.
+- Replaced visible held-out wording with learner-facing alternatives such as set-aside validation examples, examples saved for testing, and validation examples the model did not train on.
+- Repaired `Next question` and `Next learning card` scroll behavior with stable refs, shell-aware scrolling, and deterministic transition scrolls.
+- Bumped the app/package version to `v0.27.10` and updated the README cache-busting example to `?v=02710`.
+
+### Active Bank Totals
+
+- Learning cards active by default: 12.
+- Active checkpoint questions: 39.
+- Answer choices: 156.
+- Wrong-answer distractors: 117.
+- Remaining legacy single-question Journey cards: 27.
+
+### Verification
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed with the existing Vite large-chunk warning. A first parallel run collided with `dist` cleanup while `npm run build` was also running; the sequential rerun passed.
+- `npm run audit:answers`: passed and includes checkpoint-bank validation.
+- `npm run audit:checkpoints`: passed and now validates the v0.27.10 active first-twelve bank.
+- Browser QA confirmed no normal learner-facing forbidden development note, no visible held-out wording in active checked states, `Next question` scrolling to the checkpoint panel, `Next learning card` scrolling to the next title area, and legacy fallback restoring `1 of 1 question`.
+
+### Files And Reports
+
+- `src/main.tsx`
+- `src/data/checkpointBankV02710.ts`
+- `src/data/content.ts`
+- `src/data/exercises.ts`
+- `src/components/VisualAids.tsx`
+- `src/components/DiagramKit.tsx`
+- `scripts/generate-checkpoint-live-pilot-v02710.mjs`
+- `scripts/audit-checkpoints.mjs`
+- `docs/journey/checkpoints/checkpoint-question-bank-v0-27-10-first-twelve-active-dev.json`
+- `docs/journey/checkpoints/checkpoint-question-bank-v0-27-10-first-twelve-active-dev.md`
+- `docs/journey/checkpoints/v0-27-10-browser-qa-evidence.json`
+- `docs/journey/prompt-life-v0-27-10-first-twelve-checkpoint-authoring-report.html`
+- `docs/journey/prompt-life-v0-27-10-first-twelve-checkpoint-authoring-report.pdf`
+- `docs/journey/screenshots/v0-27-10-*.png`
+
 ## v0.27.9 First-Six Model-Thinking Checkpoints Live Pilot
 
 ### What Changed

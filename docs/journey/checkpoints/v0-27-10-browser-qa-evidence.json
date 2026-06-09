@@ -1,0 +1,240 @@
+{
+  "generatedAt": "2026-06-09T21:58:56.703Z",
+  "appVersion": "0.27.10",
+  "baseUrl": "http://127.0.0.1:5174/",
+  "screenshots": [
+    {
+      "label": "What Is an LLM Q1 at 390px",
+      "file": "docs/journey/screenshots/v0-27-10-what-is-llm-q1-390.png"
+    },
+    {
+      "label": "Wrong answer feedback does not reveal correct answer",
+      "file": "docs/journey/screenshots/v0-27-10-what-is-llm-q1-wrong-390.png"
+    },
+    {
+      "label": "Correct Q1 with Next question",
+      "file": "docs/journey/screenshots/v0-27-10-what-is-llm-q1-correct-next-question-390.png"
+    },
+    {
+      "label": "Next question scrolls checkpoint into view",
+      "file": "docs/journey/screenshots/v0-27-10-what-is-llm-q2-scrolled-390.png"
+    },
+    {
+      "label": "Final checkpoint shows Next learning card above nav",
+      "file": "docs/journey/screenshots/v0-27-10-what-is-llm-final-next-learning-card-390.png"
+    },
+    {
+      "label": "Next learning card opens next title area",
+      "file": "docs/journey/screenshots/v0-27-10-where-llms-fit-top-after-next-card-390.png"
+    },
+    {
+      "label": "Fine-Tuning newly authored checkpoint at 390px",
+      "file": "docs/journey/screenshots/v0-27-10-fine-tuning-checkpoint-390.png"
+    },
+    {
+      "label": "Alignment newly authored checkpoint at 320px",
+      "file": "docs/journey/screenshots/v0-27-10-alignment-checkpoint-320.png"
+    },
+    {
+      "label": "Legacy fallback restores single-question checkpoint",
+      "file": "docs/journey/screenshots/v0-27-10-legacy-fallback-390.png"
+    },
+    {
+      "label": "Inference newly authored checkpoint at desktop width",
+      "file": "docs/journey/screenshots/v0-27-10-inference-checkpoint-desktop.png"
+    },
+    {
+      "label": "Overfitting page with cleaned validation wording",
+      "file": "docs/journey/screenshots/v0-27-10-overfitting-clean-copy-390.png"
+    }
+  ],
+  "states": [
+    {
+      "name": "what-is-q1-initial-390",
+      "heading": "What Is an LLM?",
+      "h1Top": 233.953125,
+      "checkpointCount": "1 of 2 questions",
+      "question": "When an LLM answers a prompt by generating one token at a time, what is the model doing at each step?",
+      "stickyLabel": "Answer checkpoint to continue",
+      "shellScrollTop": 0,
+      "windowScrollY": 0,
+      "forbiddenDevNote": false,
+      "hasHeldOutVisible": false,
+      "quizTop": 4069.09375,
+      "quizBottom": 4595.375,
+      "stickyBottom": 4660.953125,
+      "navTop": 752.828125,
+      "bodyStart": "BEFORE MORNING\n1 / 39\n1\nBefore Morning\n2\nMorning Commute\n3\nWorkday\n4\nDecision Room\n5\nThe Day Repeats\n6\nTwilight: The Wider Landscape\n7\nMidnight Ledger\n8\nNew Dawn\nWhat Is an LLM?\n\nA learned next-token prediction system\n\nA large language model is a learned system that turns current context into probabilities for the next token.\n\nVISUAL AID\nWhat to picture\nPrompt to Prediction\nScore, choose, append, repeat\nCurrent conte"
+    },
+    {
+      "name": "what-is-q1-wrong-390",
+      "heading": "What Is an LLM?",
+      "h1Top": -3849.046875,
+      "checkpointCount": "1 of 2 questions",
+      "question": "When an LLM answers a prompt by generating one token at a time, what is the model doing at each step?",
+      "stickyLabel": "Try another choice",
+      "shellScrollTop": 4083,
+      "windowScrollY": 0,
+      "forbiddenDevNote": false,
+      "hasHeldOutVisible": false,
+      "quizTop": -13.90625,
+      "quizBottom": 673.15625,
+      "stickyBottom": 738.734375,
+      "navTop": 752.828125,
+      "bodyStart": "BEFORE MORNING\n1 / 39\n1\nBefore Morning\n2\nMorning Commute\n3\nWorkday\n4\nDecision Room\n5\nThe Day Repeats\n6\nTwilight: The Wider Landscape\n7\nMidnight Ledger\n8\nNew Dawn\nWhat Is an LLM?\n\nA learned next-token prediction system\n\nA large language model is a learned system that turns current context into probabilities for the next token.\n\nVISUAL AID\nWhat to picture\nPrompt to Prediction\nScore, choose, append, repeat\nCurrent conte"
+    },
+    {
+      "name": "what-is-q1-correct-390",
+      "heading": "What Is an LLM?",
+      "h1Top": -3849.046875,
+      "checkpointCount": "1 of 2 questions",
+      "question": "When an LLM answers a prompt by generating one token at a time, what is the model doing at each step?",
+      "stickyLabel": "Next question",
+      "shellScrollTop": 4083,
+      "windowScrollY": 0,
+      "forbiddenDevNote": false,
+      "hasHeldOutVisible": false,
+      "quizTop": -13.90625,
+      "quizBottom": 623.5625,
+      "stickyBottom": 689.140625,
+      "navTop": 752.828125,
+      "bodyStart": "BEFORE MORNING\n1 / 39\n1\nBefore Morning\n2\nMorning Commute\n3\nWorkday\n4\nDecision Room\n5\nThe Day Repeats\n6\nTwilight: The Wider Landscape\n7\nMidnight Ledger\n8\nNew Dawn\nWhat Is an LLM?\n\nA learned next-token prediction system\n\nA large language model is a learned system that turns current context into probabilities for the next token.\n\nVISUAL AID\nWhat to picture\nPrompt to Prediction\nScore, choose, append, repeat\nCurrent conte"
+    },
+    {
+      "name": "what-is-q2-after-next-question-390",
+      "heading": "What Is an LLM?",
+      "h1Top": -3823.046875,
+      "checkpointCount": "2 of 2 questions",
+      "question": "An LLM gives a fluent explanation of a poem. What should a model-literate learner conclude?",
+      "stickyLabel": "Answer checkpoint to continue",
+      "shellScrollTop": 4057,
+      "windowScrollY": 0,
+      "forbiddenDevNote": false,
+      "hasHeldOutVisible": false,
+      "quizTop": 12.09375,
+      "quizBottom": 587.359375,
+      "stickyBottom": 652.9375,
+      "navTop": 752.828125,
+      "bodyStart": "BEFORE MORNING\n1 / 39\n1\nBefore Morning\n2\nMorning Commute\n3\nWorkday\n4\nDecision Room\n5\nThe Day Repeats\n6\nTwilight: The Wider Landscape\n7\nMidnight Ledger\n8\nNew Dawn\nWhat Is an LLM?\n\nA learned next-token prediction system\n\nA large language model is a learned system that turns current context into probabilities for the next token.\n\nVISUAL AID\nWhat to picture\nPrompt to Prediction\nScore, choose, append, repeat\nCurrent conte"
+    },
+    {
+      "name": "what-is-final-390",
+      "heading": "What Is an LLM?",
+      "h1Top": -3848.046875,
+      "checkpointCount": "2 of 2 questions",
+      "question": "An LLM gives a fluent explanation of a poem. What should a model-literate learner conclude?",
+      "stickyLabel": "Next learning card",
+      "shellScrollTop": 4082,
+      "windowScrollY": 0,
+      "forbiddenDevNote": false,
+      "hasHeldOutVisible": false,
+      "quizTop": -12.90625,
+      "quizBottom": 673.546875,
+      "stickyBottom": 739.125,
+      "navTop": 752.828125,
+      "bodyStart": "BEFORE MORNING\n1 / 39\n1\nBefore Morning\n2\nMorning Commute\n3\nWorkday\n4\nDecision Room\n5\nThe Day Repeats\n6\nTwilight: The Wider Landscape\n7\nMidnight Ledger\n8\nNew Dawn\nWhat Is an LLM?\n\nA learned next-token prediction system\n\nA large language model is a learned system that turns current context into probabilities for the next token.\n\nVISUAL AID\nWhat to picture\nPrompt to Prediction\nScore, choose, append, repeat\nCurrent conte"
+    },
+    {
+      "name": "where-llms-fit-after-next-card-390",
+      "heading": "Where LLMs Fit",
+      "h1Top": 233.953125,
+      "checkpointCount": "1 of 3 questions",
+      "question": "A campus tool summarizes text with an LLM, while another creates images by denoising a noisy pattern. What does that show?",
+      "stickyLabel": "Answer checkpoint to continue",
+      "shellScrollTop": 0,
+      "windowScrollY": 0,
+      "forbiddenDevNote": false,
+      "hasHeldOutVisible": false,
+      "quizTop": 4259.90625,
+      "quizBottom": 4809.1875,
+      "stickyBottom": 4874.765625,
+      "navTop": 752.828125,
+      "bodyStart": "BEFORE MORNING\n2 / 39\n1\nBefore Morning\n2\nMorning Commute\n3\nWorkday\n4\nDecision Room\n5\nThe Day Repeats\n6\nTwilight: The Wider Landscape\n7\nMidnight Ledger\n8\nNew Dawn\nWhere LLMs Fit\n\nAI → machine learning → generative AI → LLMs\n\nA large language model is one kind of generative AI system, built with deep-learning methods inside the broader field of artificial intelligence.\n\nVISUAL AID\nWhat to picture\nAI\nRule-based AI\nMachi"
+    },
+    {
+      "name": "fine-tuning-q1-390",
+      "heading": "Fine-Tuning",
+      "h1Top": -3891.046875,
+      "checkpointCount": "1 of 3 questions",
+      "question": "A team wants a support assistant to answer in a durable house style across future conversations. Which move is closest to fine-tuning?",
+      "stickyLabel": "Return to Journey",
+      "shellScrollTop": 4125,
+      "windowScrollY": 0,
+      "forbiddenDevNote": false,
+      "hasHeldOutVisible": false,
+      "quizTop": 12.078125,
+      "quizBottom": 525.359375,
+      "stickyBottom": 590.9375,
+      "navTop": 752.828125,
+      "bodyStart": "BEFORE MORNING\n7 / 39\n1\nBefore Morning\n2\nMorning Commute\n3\nWorkday\n4\nDecision Room\n5\nThe Day Repeats\n6\nTwilight: The Wider Landscape\n7\nMidnight Ledger\n8\nNew Dawn\nFine-Tuning\n\nTargeted shaping after pretraining\n\nFine-tuning is additional training that adapts a pretrained model toward a task, domain, style, or preference.\n\nPreviewing this learning card. Progress will not change.\n\nVISUAL AID\nWhat to picture\nFine-Tuning "
+    },
+    {
+      "name": "alignment-q1-320",
+      "heading": "Alignment",
+      "h1Top": -4622.96875,
+      "checkpointCount": "1 of 4 questions",
+      "question": "An alignment-shaped assistant refuses a harmful request and follows a safer instruction instead. What should a model-literate learner conclude?",
+      "stickyLabel": "Return to Journey",
+      "shellScrollTop": 4816,
+      "windowScrollY": 0,
+      "forbiddenDevNote": false,
+      "hasHeldOutVisible": false,
+      "quizTop": 11.90625,
+      "quizBottom": 638.1875,
+      "stickyBottom": 703.765625,
+      "navTop": 752.828125,
+      "bodyStart": "BEFORE MORNING\n8 / 39\n1\nBefore Morning\n2\nMorning Commute\n3\nWorkday\n4\nDecision Room\n5\nThe Day Repeats\n6\nTwilight: The Wider Landscape\n7\nMidnight Ledger\n8\nNew Dawn\nAlignment\n\nShaping behavior toward human goals\n\nAlignment is the effort to shape AI behavior toward human instructions, preferences, safety boundaries, and values.\n\nPreviewing this learning card. Progress will not change.\n\nVISUAL AID\nWhat to picture\nAlignmen"
+    },
+    {
+      "name": "legacy-fallback-390",
+      "heading": "What Is an LLM?",
+      "h1Top": -3823.046875,
+      "checkpointCount": "1 of 1 question",
+      "question": "Which description is most accurate?",
+      "stickyLabel": "Answer checkpoint to continue",
+      "shellScrollTop": 4057,
+      "windowScrollY": 0,
+      "forbiddenDevNote": false,
+      "hasHeldOutVisible": false,
+      "quizTop": 12.09375,
+      "quizBottom": 412.796875,
+      "stickyBottom": 478.375,
+      "navTop": 752.828125,
+      "bodyStart": "BEFORE MORNING\n1 / 39\n1\nBefore Morning\n2\nMorning Commute\n3\nWorkday\n4\nDecision Room\n5\nThe Day Repeats\n6\nTwilight: The Wider Landscape\n7\nMidnight Ledger\n8\nNew Dawn\nWhat Is an LLM?\n\nA learned next-token prediction system\n\nA large language model is a learned system that turns current context into probabilities for the next token.\n\nVISUAL AID\nWhat to picture\nPrompt to Prediction\nScore, choose, append, repeat\nCurrent conte"
+    },
+    {
+      "name": "inference-q1-desktop",
+      "heading": "Inference",
+      "h1Top": -3376.078125,
+      "checkpointCount": "1 of 4 questions",
+      "question": "During ordinary inference, the current context enters the model. What changes temporarily, and what usually stays fixed?",
+      "stickyLabel": "Return to Journey",
+      "shellScrollTop": 3627,
+      "windowScrollY": 0,
+      "forbiddenDevNote": false,
+      "hasHeldOutVisible": false,
+      "quizTop": 78.71875,
+      "quizBottom": 546,
+      "stickyBottom": 611.578125,
+      "navTop": 808.828125,
+      "bodyStart": "MORNING COMMUTE\n9 / 39\n1\nBefore Morning\n2\nMorning Commute\n3\nWorkday\n4\nDecision Room\n5\nThe Day Repeats\n6\nTwilight: The Wider Landscape\n7\nMidnight Ledger\n8\nNew Dawn\nInference\n\nA forward pass, not a memory update\n\nInference is normal model use: fixed learned weights process the current context to produce scores for the next response token.\n\nPreviewing this learning card. Progress will not change.\n\nVISUAL AID\nWhat to pic"
+    },
+    {
+      "name": "overfitting-clean-copy-390",
+      "heading": "Overfitting and Generalization",
+      "h1Top": 233.953125,
+      "checkpointCount": "1 of 3 questions",
+      "question": "A model gets every training example right but fails on new validation examples. What problem is showing up?",
+      "stickyLabel": "Return to Journey",
+      "shellScrollTop": 0,
+      "windowScrollY": 0,
+      "forbiddenDevNote": false,
+      "hasHeldOutVisible": false,
+      "quizTop": 3850.234375,
+      "quizBottom": 4358.515625,
+      "stickyBottom": 4424.09375,
+      "navTop": 752.828125,
+      "bodyStart": "BEFORE MORNING\n6 / 39\n1\nBefore Morning\n2\nMorning Commute\n3\nWorkday\n4\nDecision Room\n5\nThe Day Repeats\n6\nTwilight: The Wider Landscape\n7\nMidnight Ledger\n8\nNew Dawn\nOverfitting and Generalization\n\nMemorizing examples versus learning patterns\n\nOverfitting happens when a model learns training examples too narrowly and performs poorly on new examples; generalization means learned patterns work beyond the examples seen duri"
+    }
+  ]
+}

@@ -376,7 +376,7 @@ export function DiagramKitOverfittingPlotExample() {
         y={194}
         items={[
           { label: 'train', kind: 'dot', tone: 'mint' },
-          { label: 'held-out', kind: 'square', tone: 'amber' },
+          { label: 'set-aside', kind: 'square', tone: 'amber' },
           { label: 'overfit', kind: 'curve', tone: 'violet' },
           { label: 'smooth', kind: 'line', tone: 'success' }
         ]}
@@ -432,7 +432,7 @@ export function DiagramKitGallery() {
           <DiagramScene label="Overfitting plot built from DiagramKit primitives">
             <DiagramKitOverfittingPlotExample />
           </DiagramScene>
-          <DiagramCaption>Training dots, held-out examples, and curves stay readable at 320px.</DiagramCaption>
+          <DiagramCaption>Training dots, set-aside validation examples, and curves stay readable at 320px.</DiagramCaption>
         </DiagramFrame>
       </div>
       <DiagramCallouts

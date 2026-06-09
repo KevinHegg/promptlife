@@ -36,11 +36,11 @@ npm run audit:answers
 npm run audit:checkpoints
 ```
 
-`audit:answers` checks answer randomization surfaces and also runs the checkpoint-bank audit. `audit:checkpoints` validates the live Journey checkpoints, the draft v0.27.7 checkpoint question bank review files, the draft-only v0.27.8 model-thinking checkpoint pilot, and the active-development v0.27.9 first-six checkpoint bank.
+`audit:answers` checks answer randomization surfaces and also runs the checkpoint-bank audit. `audit:checkpoints` validates the live Journey checkpoints, the draft v0.27.7 checkpoint question bank review files, the draft-only v0.27.8 model-thinking checkpoint pilot, the v0.27.9 first-six bank, and the active-development v0.27.10 first-twelve checkpoint bank.
 
 ## Checkpoint Bank Fallback
 
-The first six Journey learning cards use the v0.27.9 model-thinking checkpoint bank by default for development testing. To restore the previous single-question checkpoints, add either query parameter:
+The first twelve Journey learning cards use the v0.27.10 model-thinking checkpoint bank by default. The remaining 27 Journey cards still use their legacy single-question checkpoints. To restore the previous single-question checkpoints for every card, add either query parameter:
 
 ```text
 ?legacyCheckpoints=1
@@ -92,7 +92,7 @@ The repo also includes a GitHub Pages workflow. Pushes to `main` build the app w
 https://kevinhegg.github.io/promptlife/
 ```
 
-Developer cache note for iPhone testing: after a `main` deploy, use a hard refresh, clear site data, add a cache-busting query such as `?v=0279`, or confirm the visible app version on the Badge page.
+Developer cache note for iPhone testing: after a `main` deploy, use a hard refresh, clear site data, add a cache-busting query such as `?v=02710`, or confirm the visible app version on the Badge page.
 
 ## Reset Progress
 

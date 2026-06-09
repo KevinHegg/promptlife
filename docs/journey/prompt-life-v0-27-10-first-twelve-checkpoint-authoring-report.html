@@ -1,0 +1,596 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Prompt Life v0.27.10 First-Twelve Checkpoint Authoring Report</title>
+  <style>
+    body { font-family: Inter, system-ui, sans-serif; margin: 2rem; color: #07124a; line-height: 1.5; }
+    h1, h2, h3, h4 { color: #101a78; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    th, td { border: 1px solid #d9e2f3; padding: 0.55rem; vertical-align: top; }
+    th { background: #eef7f8; text-align: left; }
+    .card, .question { border: 1px solid #d9e2f3; border-radius: 8px; padding: 1rem; margin: 1rem 0; background: #fff; }
+    .correct { background: #effffd; }
+    .wrong { background: #fff8ef; }
+    li { margin: 0.45rem 0; padding: 0.4rem; border-radius: 6px; }
+    code { background: #eef3ff; padding: 0.1rem 0.25rem; border-radius: 4px; }
+    .qa-note { background: #effffd; border-left: 4px solid #08a9a9; padding: 0.75rem 1rem; border-radius: 8px; }
+    .screenshot-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+    figure { break-inside: avoid; margin: 0 0 1rem; border: 1px solid #d9e2f3; border-radius: 8px; padding: 0.65rem; background: #fff; }
+    figure img { width: 100%; height: auto; border-radius: 6px; border: 1px solid #d9e2f3; }
+    figcaption { font-size: 0.88rem; color: #34415f; margin-top: 0.45rem; }
+    .compact-table td, .compact-table th { font-size: 0.82rem; padding: 0.35rem; }
+  </style>
+</head>
+<body>
+  <h1>Prompt Life v0.27.10 First-Twelve Checkpoint Authoring Report</h1>
+  <h2>Executive summary</h2>
+  <ul>
+    <li>Version: 0.27.10-first-twelve-active-dev</li>
+    <li>Active bank: v0.27.10-first-twelve</li>
+    <li>First 12 Journey learning cards active by default; remaining 27 keep legacy single-question checkpoints.</li>
+    <li>Total active-development questions: 39; choices: 156; distractors: 117.</li>
+    <li>Normal learner UI must not show developer/fallback notes.</li>
+    <li>Held-out wording is replaced in active learner-facing copy.</li>
+    <li>Scroll behavior is repaired in runtime code for Next question and Next learning card.</li>
+  </ul>
+  <h2>Learner-facing copy cleanup</h2>
+  <ul>
+    <li>Removed normal learner UI note that mentioned development testing and legacy fallback parameters.</li>
+    <li>Replaced active-bank held-out wording with set-aside validation examples, new validation examples, or validation examples the model did not train on.</li>
+    <li>Legacy fallback instructions remain in README/docs/report only.</li>
+  </ul>
+  <h2>Scroll behavior implementation</h2>
+  <p>Runtime uses refs and requestAnimationFrame-timed scrolling. New learning cards scroll the app shell to the top/title area. Next question sets a pending scroll target and scrolls the checkpoint panel after the DOM updates. Reduced motion uses instant scrolling.</p>
+  <h2>First-six cleanup from v0.27.9</h2>
+  <p>The first-six logic is preserved. Overfitting and Generalization replaces unexplained held-out wording. Normal learner UI no longer shows a development-pilot note.</p>
+  <h2>Question counts</h2>
+  <table><thead><tr><th>Learning card</th><th>Questions</th><th>Rationale</th></tr></thead><tbody><tr><td>What Is an LLM?</td><td>2</td><td>What Is an LLM? keeps the reviewed v0.27.9 model-thinking question count for this first-twelve activation pass.</td></tr><tr><td>Where LLMs Fit</td><td>3</td><td>Where LLMs Fit keeps the reviewed v0.27.9 model-thinking question count for this first-twelve activation pass.</td></tr><tr><td>Rationalists vs Empiricists</td><td>3</td><td>Rationalists vs Empiricists keeps the reviewed v0.27.9 model-thinking question count for this first-twelve activation pass.</td></tr><tr><td>Training</td><td>4</td><td>Training keeps the reviewed v0.27.9 model-thinking question count for this first-twelve activation pass.</td></tr><tr><td>Pretraining</td><td>4</td><td>Pretraining keeps the reviewed v0.27.9 model-thinking question count for this first-twelve activation pass.</td></tr><tr><td>Overfitting and Generalization</td><td>3</td><td>Overfitting and Generalization keeps the reviewed v0.27.9 model-thinking question count for this first-twelve activation pass.</td></tr><tr><td>Fine-Tuning</td><td>3</td><td>Three questions cover the durable/temporary boundary, a product scenario, and the relationship to alignment without overloading a focused card.</td></tr><tr><td>Alignment</td><td>4</td><td>Four questions are warranted because alignment mixes durable training, runtime controls, evaluation, and human-use boundaries.</td></tr><tr><td>Inference</td><td>4</td><td>Four questions fit because inference is a dense gateway concept connecting fixed weights, temporary states, context, and generation.</td></tr><tr><td>Prompt vs Response</td><td>3</td><td>Three questions cover the given/generated boundary, append-and-repeat trace, and a common permanent-learning misconception.</td></tr><tr><td>Tokenization</td><td>3</td><td>Three questions cover chunk shape, representation sequence, and the token-versus-meaning misconception.</td></tr><tr><td>Token IDs</td><td>3</td><td>Three questions cover lookup-key mechanics, meaning misconception, and generated-token flow.</td></tr></tbody></table>
+  <h2>Next-six authoring details</h2>
+  
+    <section class="card">
+      <h3>Fine-Tuning</h3>
+      <p><strong>Lesson ID:</strong> fine-tuning · <strong>Stage:</strong> Before Morning · <strong>Questions:</strong> 3</p>
+      <p><strong>Primary:</strong> Distinguish durable fine-tuning from temporary prompt, RAG, and sampling-time steering.</p>
+      <p><strong>Boundary:</strong> Fine-tuning changes weights or adapter behavior for future runs; prompting and RAG shape the current context; sampling chooses a token during generation.</p>
+      <p><strong>Question-count rationale:</strong> Three questions cover the durable/temporary boundary, a product scenario, and the relationship to alignment without overloading a focused card.</p>
+      
+      <article class="question">
+        <h4>v02710-fine-tuning-q1</h4>
+        <p><strong>boundary distinction</strong> · boundary · mechanism terms: fine-tuning, prompt, RAG, sampling, future responses</p>
+        <p class="stem">A team wants a support assistant to answer in a durable house style across future conversations. Which move is closest to fine-tuning?</p>
+        <ol>
+      <li class="correct"><strong>v02710-fine-tuning-q1-correct</strong>: Run additional training that changes weights or adapter behavior for future responses. <em>Correct</em>
+        <br><span>Feedback: Good distinction. Fine-tuning is durable shaping after pretraining.</span>
+        
+      </li>
+      <li class="wrong"><strong>v02710-fine-tuning-q1-better-prompt</strong>: Write one clearer prompt for the current chat.
+        <br><span>Feedback: Not quite. A prompt can steer the current run, but fine-tuning changes future behavior through training.</span>
+        <br><span>Misconception: prompting vs durable fine-tuning · Term: prompt · Source: same-card</span><br><span>Rationale: Tempting because prompts can strongly steer one answer.</span>
+      </li>
+      <li class="wrong"><strong>v02710-fine-tuning-q1-rag</strong>: Retrieve one policy PDF into the current context.
+        <br><span>Feedback: Close, but RAG adds temporary context. Fine-tuning is a training process that durably shapes behavior.</span>
+        <br><span>Misconception: retrieval/context vs training · Term: RAG · Source: same-card</span><br><span>Rationale: Tempting because retrieved text can improve one answer.</span>
+      </li>
+      <li class="wrong"><strong>v02710-fine-tuning-q1-sampling</strong>: Sample the next token from the current probability cloud.
+        <br><span>Feedback: That describes decoding during inference. It chooses a token; it does not adapt the model for future runs.</span>
+        <br><span>Misconception: decoding vs training · Term: sampling · Source: same-card</span><br><span>Rationale: Tempting because sampling is part of response generation.</span>
+      </li></ol>
+      </article>
+      <article class="question">
+        <h4>v02710-fine-tuning-q2</h4>
+        <p><strong>applied scenario</strong> · application · mechanism terms: fine-tuning, base model, specialized assistant, weights</p>
+        <p class="stem">A base model is adapted on thousands of institution-specific examples, then later answers new users in that style. What changed most directly?</p>
+        <ol>
+      <li class="correct"><strong>v02710-fine-tuning-q2-correct</strong>: The adapted model’s weights or adapter behavior can carry that pattern into later inference runs. <em>Correct</em>
+        <br><span>Feedback: Insight strengthened. Fine-tuning makes a reusable model change, not just a one-chat hint.</span>
+        
+      </li>
+      <li class="wrong"><strong>v02710-fine-tuning-q2-context-only</strong>: Only the current context window got larger.
+        <br><span>Feedback: Not quite. A larger context window is temporary input space; fine-tuning changes reusable behavior.</span>
+        <br><span>Misconception: context window vs fine-tuned behavior · Term: context window · Source: nearby-stage</span><br><span>Rationale: Tempting because context can also carry institution-specific text.</span>
+      </li>
+      <li class="wrong"><strong>v02710-fine-tuning-q2-memory</strong>: The model became conscious of the institution’s norms.
+        <br><span>Feedback: That gives the model too much mind. The behavior can be shaped without conscious commitment to norms.</span>
+        <br><span>Misconception: mind/metaphor overreach · Term: alignment · Source: explicit-confusable</span><br><span>Rationale: Tempting because the assistant may sound norm-aware.</span>
+      </li>
+      <li class="wrong"><strong>v02710-fine-tuning-q2-rag-search</strong>: The model must search the institution’s files every time.
+        <br><span>Feedback: Close, but fine-tuning and retrieval are different. Retrieval may be added, but fine-tuned behavior can persist in weights or adapters.</span>
+        <br><span>Misconception: retrieval vs fine-tuning · Term: retrieval · Source: same-stage</span><br><span>Rationale: Tempting because many institutional assistants also use search.</span>
+      </li></ol>
+      </article>
+      <article class="question">
+        <h4>v02710-fine-tuning-q3</h4>
+        <p><strong>causal consequence</strong> · causal-consequence · mechanism terms: fine-tuning, alignment, future behavior, system prompt</p>
+        <p class="stem">If fine-tuning is used for alignment, what does that mean about future model behavior?</p>
+        <ol>
+      <li class="correct"><strong>v02710-fine-tuning-q3-correct</strong>: Training can make some instruction-following or preference patterns more likely in later responses. <em>Correct</em>
+        <br><span>Feedback: Good distinction. Fine-tuning can support alignment by durably shaping output patterns.</span>
+        
+      </li>
+      <li class="wrong"><strong>v02710-fine-tuning-q3-perfect-safety</strong>: Every future answer is guaranteed safe and true.
+        <br><span>Feedback: Not quite. Fine-tuning can improve behavior, but it does not guarantee truth or safety.</span>
+        <br><span>Misconception: alignment/fine-tuning as guarantee · Term: alignment · Source: nearby-stage</span><br><span>Rationale: Tempting because alignment sounds like solving behavior.</span>
+      </li>
+      <li class="wrong"><strong>v02710-fine-tuning-q3-system-prompt-only</strong>: Only the visible system prompt changed for one session.
+        <br><span>Feedback: Close, but a system prompt steers the current run. Fine-tuning is durable training.</span>
+        <br><span>Misconception: runtime steering vs durable training · Term: system prompt · Source: same-card</span><br><span>Rationale: Tempting because system prompts can steer behavior strongly.</span>
+      </li>
+      <li class="wrong"><strong>v02710-fine-tuning-q3-inner-values</strong>: The model acquired human values and moral agency.
+        <br><span>Feedback: That gives the model too much mind. Fine-tuning changes output patterns; it does not create moral agency.</span>
+        <br><span>Misconception: behavior shaping vs moral agency · Term: alignment · Source: explicit-confusable</span><br><span>Rationale: Tempting because aligned behavior can sound value-driven.</span>
+      </li></ol>
+      </article>
+    </section>
+    <section class="card">
+      <h3>Alignment</h3>
+      <p><strong>Lesson ID:</strong> alignment · <strong>Stage:</strong> Before Morning · <strong>Questions:</strong> 4</p>
+      <p><strong>Primary:</strong> Reason about alignment as behavior shaping across training, system design, evaluation, and runtime controls without mistaking it for conscience or guaranteed truth.</p>
+      <p><strong>Boundary:</strong> Alignment can use fine-tuning, preference optimization, system prompts, policies, filters, and evaluation; it shapes behavior but does not make the model morally aware.</p>
+      <p><strong>Question-count rationale:</strong> Four questions are warranted because alignment mixes durable training, runtime controls, evaluation, and human-use boundaries.</p>
+      
+      <article class="question">
+        <h4>v02710-alignment-q1</h4>
+        <p><strong>boundary distinction</strong> · boundary · mechanism terms: alignment, behavior, instructions, safety boundaries</p>
+        <p class="stem">An alignment-shaped assistant refuses a harmful request and follows a safer instruction instead. What should a model-literate learner conclude?</p>
+        <ol>
+      <li class="correct"><strong>v02710-alignment-q1-correct</strong>: Its behavior was shaped toward instructions and safety boundaries, but that does not prove moral understanding. <em>Correct</em>
+        <br><span>Feedback: Good distinction. Alignment shapes behavior; it is not magic morality.</span>
+        
+      </li>
+      <li class="wrong"><strong>v02710-alignment-q1-conscious</strong>: The model must understand morality the way a person does.
+        <br><span>Feedback: That gives the model too much mind. Refusal behavior can be shaped without human moral understanding.</span>
+        <br><span>Misconception: aligned behavior vs moral agency · Term: alignment · Source: same-card</span><br><span>Rationale: Tempting because refusals can sound principled.</span>
+      </li>
+      <li class="wrong"><strong>v02710-alignment-q1-truth</strong>: Every answer from the assistant is now guaranteed true.
+        <br><span>Feedback: Not quite. Alignment can shape behavior, but it does not guarantee factual truth.</span>
+        <br><span>Misconception: alignment vs truth guarantee · Term: truth · Source: nearby-stage</span><br><span>Rationale: Tempting because safer behavior can feel more trustworthy.</span>
+      </li>
+      <li class="wrong"><strong>v02710-alignment-q1-no-model</strong>: The LLM stopped using learned weights and became a rulebook.
+        <br><span>Feedback: Close, but an aligned product can still use a learned model plus rules, filters, or policies.</span>
+        <br><span>Misconception: alignment controls vs learned model · Term: rule-based AI · Source: explicit-confusable</span><br><span>Rationale: Tempting because aligned products may use rules or filters.</span>
+      </li></ol>
+      </article>
+      <article class="question">
+        <h4>v02710-alignment-q2</h4>
+        <p><strong>model trace</strong> · model-trace · mechanism terms: alignment, fine-tuning, system prompt, policy filter</p>
+        <p class="stem">A product uses instruction fine-tuning, a system prompt, and a policy filter around one LLM. Which alignment map is most useful?</p>
+        <ol>
+      <li class="correct"><strong>v02710-alignment-q2-correct</strong>: Some alignment changes can be durable training changes, while other controls steer or filter the current run. <em>Correct</em>
+        <br><span>Feedback: Insight strengthened. Alignment can happen through several layers, not one magic switch.</span>
+        
+      </li>
+      <li class="wrong"><strong>v02710-alignment-q2-all-weights</strong>: Every alignment layer permanently rewrites the model weights.
+        <br><span>Feedback: Not quite. Fine-tuning may change weights, but system prompts and filters can steer behavior at runtime.</span>
+        <br><span>Misconception: runtime control vs durable weight update · Term: weight update · Source: same-card</span><br><span>Rationale: Tempting because all layers affect visible behavior.</span>
+      </li>
+      <li class="wrong"><strong>v02710-alignment-q2-only-prompt</strong>: Alignment is only a better prompt typed by the user.
+        <br><span>Feedback: Close, but alignment can include training, policies, evaluation, and runtime controls beyond the user prompt.</span>
+        <br><span>Misconception: alignment vs user prompting only · Term: prompt · Source: nearby-stage</span><br><span>Rationale: Tempting because prompts are visible and powerful.</span>
+      </li>
+      <li class="wrong"><strong>v02710-alignment-q2-sampling-only</strong>: Alignment is the same thing as sampling the most probable token.
+        <br><span>Feedback: Sampling chooses a next token from probabilities. Alignment shapes or constrains behavior around that process.</span>
+        <br><span>Misconception: alignment vs decoding · Term: sampling · Source: nearby-stage</span><br><span>Rationale: Tempting because both affect the final response.</span>
+      </li></ol>
+      </article>
+      <article class="question">
+        <h4>v02710-alignment-q3</h4>
+        <p><strong>human-use judgment</strong> · human-use-judgment · mechanism terms: alignment, evaluation, human feedback, behavior</p>
+        <p class="stem">Why do teams evaluate aligned models with tests and human feedback after training or deployment?</p>
+        <ol>
+      <li class="correct"><strong>v02710-alignment-q3-correct</strong>: Because shaped behavior can still fail, drift, or create unexpected tradeoffs in new situations. <em>Correct</em>
+        <br><span>Feedback: Good distinction. Alignment needs evaluation; it is not a one-time guarantee.</span>
+        
+      </li>
+      <li class="wrong"><strong>v02710-alignment-q3-conscious-test</strong>: To check whether the model has developed a conscience.
+        <br><span>Feedback: Not quite. Evaluation checks behavior and outcomes, not inner conscience.</span>
+        <br><span>Misconception: evaluation vs consciousness · Term: evaluation · Source: same-card</span><br><span>Rationale: Tempting because evaluations judge behavior.</span>
+      </li>
+      <li class="wrong"><strong>v02710-alignment-q3-no-need</strong>: Because aligned models no longer need human review.
+        <br><span>Feedback: This choice overclaims. Aligned systems can still need review, monitoring, and accountability.</span>
+        <br><span>Misconception: alignment vs human review · Term: human review · Source: nearby-stage</span><br><span>Rationale: Tempting because alignment sounds like completion.</span>
+      </li>
+      <li class="wrong"><strong>v02710-alignment-q3-loss-only</strong>: Because lower training loss alone proves the model is safe.
+        <br><span>Feedback: Close, but loss alone is not a full safety or usefulness evaluation.</span>
+        <br><span>Misconception: loss vs safety/behavior evaluation · Term: loss · Source: nearby-stage</span><br><span>Rationale: Tempting because loss is an important training signal.</span>
+      </li></ol>
+      </article>
+      <article class="question">
+        <h4>v02710-alignment-q4</h4>
+        <p><strong>misconception diagnosis</strong> · misconception-check · mechanism terms: guardrail, policy, alignment, response</p>
+        <p class="stem">A guardrail blocks one unsafe response from reaching the user. What changed most directly?</p>
+        <ol>
+      <li class="correct"><strong>v02710-alignment-q4-correct</strong>: A policy or filter layer affected the visible response; that does not necessarily mean the model weights changed. <em>Correct</em>
+        <br><span>Feedback: Good distinction. Guardrails can be runtime controls around a model.</span>
+        
+      </li>
+      <li class="wrong"><strong>v02710-alignment-q4-finetune</strong>: The base model was definitely fine-tuned at that moment.
+        <br><span>Feedback: Not quite. A filter can block output during runtime without retraining the model.</span>
+        <br><span>Misconception: filtering vs fine-tuning · Term: fine-tuning · Source: same-card</span><br><span>Rationale: Tempting because both can change visible behavior.</span>
+      </li>
+      <li class="wrong"><strong>v02710-alignment-q4-truth</strong>: The response became guaranteed factual because it passed a guardrail.
+        <br><span>Feedback: Passing a guardrail is not the same as being true. Evidence and review can still matter.</span>
+        <br><span>Misconception: policy compliance vs truth · Term: truth · Source: author-created misconception</span><br><span>Rationale: Tempting because allowed output may feel approved.</span>
+      </li>
+      <li class="wrong"><strong>v02710-alignment-q4-awareness</strong>: The model realized the request was wrong.
+        <br><span>Feedback: That gives the model too much mind. The visible behavior can come from shaped model behavior or surrounding controls.</span>
+        <br><span>Misconception: guardrail behavior vs awareness · Term: llm · Source: explicit-confusable</span><br><span>Rationale: Tempting because the refusal may sound reflective.</span>
+      </li></ol>
+      </article>
+    </section>
+    <section class="card">
+      <h3>Inference</h3>
+      <p><strong>Lesson ID:</strong> inference · <strong>Stage:</strong> Morning Commute · <strong>Questions:</strong> 4</p>
+      <p><strong>Primary:</strong> Explain ordinary inference as fixed weights plus temporary context-shaped computation, not durable learning.</p>
+      <p><strong>Boundary:</strong> Inference uses learned weights to compute temporary internal states and next-token scores; it normally does not update weights or training data.</p>
+      <p><strong>Question-count rationale:</strong> Four questions fit because inference is a dense gateway concept connecting fixed weights, temporary states, context, and generation.</p>
+      
+      <article class="question">
+        <h4>v02710-inference-q1</h4>
+        <p><strong>mechanism in action</strong> · mechanism · mechanism terms: inference, current context, fixed weights, temporary activations</p>
+        <p class="stem">During ordinary inference, the current context enters the model. What changes temporarily, and what usually stays fixed?</p>
+        <ol>
+      <li class="correct"><strong>v02710-inference-q1-correct</strong>: Temporary activations and hidden states change; learned weights usually stay fixed. <em>Correct</em>
+        <br><span>Feedback: Good distinction. Inference uses the map without redrawing it.</span>
+        
+      </li>
+      <li class="wrong"><strong>v02710-inference-q1-weights-change</strong>: The learned weights change after every user prompt.
+        <br><span>Feedback: Not quite. Ordinary inference can use context, but it usually does not rewrite weights.</span>
+        <br><span>Misconception: inference vs training update · Term: training · Source: same-card</span><br><span>Rationale: Tempting because the model may adapt within a conversation.</span>
+      </li>
+      <li class="wrong"><strong>v02710-inference-q1-dataset</strong>: The training dataset changes to include the new prompt.
+        <br><span>Feedback: This choice reveals a common mix-up. A prompt can be current context without joining the training dataset.</span>
+        <br><span>Misconception: prompt/context vs training data · Term: training data · Source: same-card</span><br><span>Rationale: Tempting because prompts feel like new information.</span>
+      </li>
+      <li class="wrong"><strong>v02710-inference-q1-conscious</strong>: The model’s conscious attention shifts to the user’s intent.
+        <br><span>Feedback: That gives the model too much mind. Inference computes temporary vectors; it is not conscious attention.</span>
+        <br><span>Misconception: attention/activation vs awareness · Term: attention · Source: nearby-stage</span><br><span>Rationale: Tempting because the response may seem attentive.</span>
+      </li></ol>
+      </article>
+      <article class="question">
+        <h4>v02710-inference-q2</h4>
+        <p><strong>model trace</strong> · model-trace · mechanism terms: inference, forward pass, hidden state, logits, sampling</p>
+        <p class="stem">In one inference step, which trace best matches the model’s next-token path?</p>
+        <ol>
+      <li class="correct"><strong>v02710-inference-q2-correct</strong>: Context enters a forward pass, temporary states form, logits are produced, and sampling can choose a token. <em>Correct</em>
+        <br><span>Feedback: Insight strengthened. That is the live next-token path through inference.</span>
+        
+      </li>
+      <li class="wrong"><strong>v02710-inference-q2-training-loop</strong>: Example enters training, loss updates weights, and a future model checkpoint is saved.
+        <br><span>Feedback: Close, but that is a training path. Inference uses existing weights to produce the next-token scores.</span>
+        <br><span>Misconception: training loop vs inference trace · Term: training · Source: nearby-stage</span><br><span>Rationale: Tempting because it is also a model computation path.</span>
+      </li>
+      <li class="wrong"><strong>v02710-inference-q2-rag-loop</strong>: Retriever searches outside documents, then the model permanently learns the snippets.
+        <br><span>Feedback: Retrieval can add context before inference, but it does not by itself make the model permanently learn snippets.</span>
+        <br><span>Misconception: retrieval/context vs durable learning · Term: RAG · Source: nearby-stage</span><br><span>Rationale: Tempting because retrieval may happen before generation.</span>
+      </li>
+      <li class="wrong"><strong>v02710-inference-q2-tokenizer-only</strong>: Tokenizer splits text and the answer appears without model layers.
+        <br><span>Feedback: Tokenization prepares input, but inference still runs model layers to produce scores.</span>
+        <br><span>Misconception: tokenization vs model forward pass · Term: tokenization · Source: same-stage</span><br><span>Rationale: Tempting because tokenization is an early required step.</span>
+      </li></ol>
+      </article>
+      <article class="question">
+        <h4>v02710-inference-q3</h4>
+        <p><strong>applied scenario</strong> · application · mechanism terms: inference, conversation history, current context, weights</p>
+        <p class="stem">A chatbot remembers an earlier line in the same conversation and uses it in the next answer. What is the best model-level explanation?</p>
+        <ol>
+      <li class="correct"><strong>v02710-inference-q3-correct</strong>: The earlier line is still in the current context, so fixed weights can use it during inference. <em>Correct</em>
+        <br><span>Feedback: Good distinction. Context can feel like memory while still being temporary input.</span>
+        
+      </li>
+      <li class="wrong"><strong>v02710-inference-q3-weight-memory</strong>: The earlier line was written into the model’s weights.
+        <br><span>Feedback: Not quite. Same-conversation context is temporary input, not necessarily a weight update.</span>
+        <br><span>Misconception: context vs durable memory · Term: memory · Source: explicit-confusable</span><br><span>Rationale: Tempting because the model appears to remember.</span>
+      </li>
+      <li class="wrong"><strong>v02710-inference-q3-training-now</strong>: The chatbot fine-tuned itself on the earlier line.
+        <br><span>Feedback: Close, but adaptation within a context window is not the same as fine-tuning.</span>
+        <br><span>Misconception: ordinary inference vs fine-tuning · Term: fine-tuning · Source: same-stage</span><br><span>Rationale: Tempting because the answer adapts to the conversation.</span>
+      </li>
+      <li class="wrong"><strong>v02710-inference-q3-search-all</strong>: The model searched every document it was pretrained on.
+        <br><span>Feedback: This describes search better than ordinary inference. The model can use visible context without searching training sources.</span>
+        <br><span>Misconception: inference vs search/retrieval · Term: retrieval · Source: nearby-stage</span><br><span>Rationale: Tempting because the answer may include earlier information.</span>
+      </li></ol>
+      </article>
+      <article class="question">
+        <h4>v02710-inference-q4</h4>
+        <p><strong>causal consequence</strong> · causal-consequence · mechanism terms: inference, weights, future behavior, current run</p>
+        <p class="stem">If ordinary inference normally does not update weights, what follows for future conversations?</p>
+        <ol>
+      <li class="correct"><strong>v02710-inference-q4-correct</strong>: A useful answer now does not automatically teach the base model to behave differently tomorrow. <em>Correct</em>
+        <br><span>Feedback: Insight strengthened. Inference can be useful without being durable training.</span>
+        
+      </li>
+      <li class="wrong"><strong>v02710-inference-q4-auto-learn</strong>: Every good answer automatically becomes permanent skill.
+        <br><span>Feedback: Not quite. Durable skill changes require training or another model-update process.</span>
+        <br><span>Misconception: inference vs durable learning · Term: training · Source: same-card</span><br><span>Rationale: Tempting because the response looks like successful practice.</span>
+      </li>
+      <li class="wrong"><strong>v02710-inference-q4-no-context</strong>: The current prompt cannot affect the answer at all.
+        <br><span>Feedback: Close, but fixed weights can still respond differently to different current contexts.</span>
+        <br><span>Misconception: context influence vs weight update · Term: prompt · Source: same-card</span><br><span>Rationale: Tempting because weights stay fixed.</span>
+      </li>
+      <li class="wrong"><strong>v02710-inference-q4-no-risk</strong>: There is no need to review outputs because inference is temporary.
+        <br><span>Feedback: This choice overclaims. Temporary outputs can still affect people and decisions, so review can matter.</span>
+        <br><span>Misconception: temporary computation vs output risk · Term: human review · Source: nearby-stage</span><br><span>Rationale: Tempting because temporary sounds harmless.</span>
+      </li></ol>
+      </article>
+    </section>
+    <section class="card">
+      <h3>Prompt vs Response</h3>
+      <p><strong>Lesson ID:</strong> prompt-response · <strong>Stage:</strong> Morning Commute · <strong>Questions:</strong> 3</p>
+      <p><strong>Primary:</strong> Separate given prompt/context tokens from generated response tokens and explain append-and-repeat generation.</p>
+      <p><strong>Boundary:</strong> Prompt tokens are given; response tokens are generated one at a time, appended, and used as context for the next inference step.</p>
+      <p><strong>Question-count rationale:</strong> Three questions cover the given/generated boundary, append-and-repeat trace, and a common permanent-learning misconception.</p>
+      
+      <article class="question">
+        <h4>v02710-prompt-response-q1</h4>
+        <p><strong>boundary distinction</strong> · boundary · mechanism terms: prompt, response tokens, current context</p>
+        <p class="stem">A user gives a complete prompt, then the model begins writing response tokens. Which boundary matters most?</p>
+        <ol>
+      <li class="correct"><strong>v02710-prompt-response-q1-correct</strong>: Prompt tokens are given to the model; response tokens are generated and then appended to context. <em>Correct</em>
+        <br><span>Feedback: Good distinction. Prompt is given; response is generated and appended.</span>
+        
+      </li>
+      <li class="wrong"><strong>v02710-prompt-response-q1-all-user</strong>: Both prompt and response tokens were typed by the user.
+        <br><span>Feedback: Not quite. The user provides the prompt; the model generates response tokens.</span>
+        <br><span>Misconception: prompt vs generated response · Term: response · Source: same-card</span><br><span>Rationale: Tempting because both can appear together in the conversation transcript.</span>
+      </li>
+      <li class="wrong"><strong>v02710-prompt-response-q1-all-at-once</strong>: The model writes the whole response at once after reading the prompt.
+        <br><span>Feedback: Close, but the model generates response tokens step by step.</span>
+        <br><span>Misconception: autoregressive generation vs full answer at once · Term: autoregression · Source: same-card</span><br><span>Rationale: Tempting because the interface may show a smooth answer.</span>
+      </li>
+      <li class="wrong"><strong>v02710-prompt-response-q1-weight-update</strong>: Each response token permanently updates the model’s weights.
+        <br><span>Feedback: This choice reveals a common mix-up. Response tokens can shape the current run without updating weights.</span>
+        <br><span>Misconception: generated context vs durable training · Term: training · Source: nearby-stage</span><br><span>Rationale: Tempting because response-so-far shapes later tokens.</span>
+      </li></ol>
+      </article>
+      <article class="question">
+        <h4>v02710-prompt-response-q2</h4>
+        <p><strong>model trace</strong> · model-trace · mechanism terms: next token, append, context, runs again</p>
+        <p class="stem">After the model chooses one next response token, what does the next inference step see?</p>
+        <ol>
+      <li class="correct"><strong>v02710-prompt-response-q2-correct</strong>: The original prompt plus the response so far, including the newly appended token. <em>Correct</em>
+        <br><span>Feedback: Insight strengthened. The context grows as generated response tokens are appended.</span>
+        
+      </li>
+      <li class="wrong"><strong>v02710-prompt-response-q2-only-new-token</strong>: Only the newly chosen token, with the prompt removed.
+        <br><span>Feedback: Not quite. The next step can use the prompt and response-so-far that remain in context.</span>
+        <br><span>Misconception: context accumulation vs isolated token · Term: context window · Source: same-card</span><br><span>Rationale: Tempting because the new token is the most recent event.</span>
+      </li>
+      <li class="wrong"><strong>v02710-prompt-response-q2-weight-memory</strong>: A permanent memory of the token stored in model weights.
+        <br><span>Feedback: Close, but using a token later in the run is context, not a weight update.</span>
+        <br><span>Misconception: response-so-far vs weight memory · Term: weight · Source: nearby-stage</span><br><span>Rationale: Tempting because the model uses the new token later.</span>
+      </li>
+      <li class="wrong"><strong>v02710-prompt-response-q2-softmax-removed</strong>: No context, because softmax disappears after one token.
+        <br><span>Feedback: Softmax can help choose a token, but the chosen token can still be appended to the next context.</span>
+        <br><span>Misconception: decoding step vs context persistence · Term: softmax · Source: nearby-stage</span><br><span>Rationale: Tempting because softmax is a later token-choice mechanism.</span>
+      </li></ol>
+      </article>
+      <article class="question">
+        <h4>v02710-prompt-response-q3</h4>
+        <p><strong>misconception diagnosis</strong> · misconception-check · mechanism terms: response, prompt, training, current run</p>
+        <p class="stem">A generated response improves after the user adds a clarifying sentence. What changed most directly?</p>
+        <ol>
+      <li class="correct"><strong>v02710-prompt-response-q3-correct</strong>: The current prompt/context changed, so the next response tokens were generated from better input. <em>Correct</em>
+        <br><span>Feedback: Good distinction. Better context can improve the current response without training the model.</span>
+        
+      </li>
+      <li class="wrong"><strong>v02710-prompt-response-q3-finetuned</strong>: The model was fine-tuned by the clarifying sentence.
+        <br><span>Feedback: Not quite. A clarifying sentence can steer the current run; fine-tuning is additional training.</span>
+        <br><span>Misconception: prompt steering vs fine-tuning · Term: fine-tuning · Source: same-stage</span><br><span>Rationale: Tempting because the answer improves after feedback.</span>
+      </li>
+      <li class="wrong"><strong>v02710-prompt-response-q3-conscious</strong>: The model understood its mistake like a person and decided to improve.
+        <br><span>Feedback: That gives the model too much mind. Better output can come from better context.</span>
+        <br><span>Misconception: human revision vs generated behavior · Term: llm · Source: explicit-confusable</span><br><span>Rationale: Tempting because the interaction resembles human revision.</span>
+      </li>
+      <li class="wrong"><strong>v02710-prompt-response-q3-no-effect</strong>: Prompts cannot affect generated response tokens.
+        <br><span>Feedback: Close, but fixed weights still process different prompts into different response probabilities.</span>
+        <br><span>Misconception: prompt influence vs fixed weights · Term: prompt · Source: same-card</span><br><span>Rationale: Tempting because weights stay fixed during inference.</span>
+      </li></ol>
+      </article>
+    </section>
+    <section class="card">
+      <h3>Tokenization</h3>
+      <p><strong>Lesson ID:</strong> tokens · <strong>Stage:</strong> Morning Commute · <strong>Questions:</strong> 3</p>
+      <p><strong>Primary:</strong> Explain tokenization as the split from text into model-readable chunks that may not match human words.</p>
+      <p><strong>Boundary:</strong> Tokenization is a representation step before token IDs and embedding lookup; it does not update model weights or guarantee meaning.</p>
+      <p><strong>Question-count rationale:</strong> Three questions cover chunk shape, representation sequence, and the token-versus-meaning misconception.</p>
+      
+      <article class="question">
+        <h4>v02710-tokens-q1</h4>
+        <p><strong>applied scenario</strong> · application · mechanism terms: tokenizer, token, word piece, punctuation</p>
+        <p class="stem">A tokenizer splits “startled.” into pieces like “start”, “led”, and “.” What should that tell a learner?</p>
+        <ol>
+      <li class="correct"><strong>v02710-tokens-q1-correct</strong>: Tokens can be uneven text chunks, including word pieces and punctuation. <em>Correct</em>
+        <br><span>Feedback: Good distinction. Tokens are model-readable chunks, not always whole words.</span>
+        
+      </li>
+      <li class="wrong"><strong>v02710-tokens-q1-whole-word</strong>: Every token must be a complete dictionary word.
+        <br><span>Feedback: Not quite. Tokenizers can split words, punctuation, spaces, or other chunks.</span>
+        <br><span>Misconception: token vs word · Term: token · Source: same-card</span><br><span>Rationale: Tempting because many displayed tokens look word-like.</span>
+      </li>
+      <li class="wrong"><strong>v02710-tokens-q1-memory</strong>: Each token is a permanent memory stored in the model.
+        <br><span>Feedback: This choice reveals a common mix-up. A token is a representation chunk, not memory by itself.</span>
+        <br><span>Misconception: token vs memory · Term: memory · Source: author-created misconception</span><br><span>Rationale: Tempting because tokens are reused in later processing.</span>
+      </li>
+      <li class="wrong"><strong>v02710-tokens-q1-concept</strong>: Each token is exactly one human concept.
+        <br><span>Feedback: Close, but token boundaries do not perfectly match human concepts or meanings.</span>
+        <br><span>Misconception: token chunk vs meaning/concept · Term: embedding · Source: nearby-stage</span><br><span>Rationale: Tempting because tokens often carry meaning clues.</span>
+      </li></ol>
+      </article>
+      <article class="question">
+        <h4>v02710-tokens-q2</h4>
+        <p><strong>model trace</strong> · model-trace · mechanism terms: text, tokens, token IDs, embeddings</p>
+        <p class="stem">Before transformer layers process text, which tokens-to-IDs-to-embeddings path comes first?</p>
+        <ol>
+      <li class="correct"><strong>v02710-tokens-q2-correct</strong>: Text is split into tokens, tokens map to token IDs, and IDs look up embeddings. <em>Correct</em>
+        <br><span>Feedback: Insight strengthened. Tokenization starts the bridge from text to numerical computation.</span>
+        
+      </li>
+      <li class="wrong"><strong>v02710-tokens-q2-raw-english</strong>: Raw English sentences move through every layer without numerical representation.
+        <br><span>Feedback: Not quite. The model needs numerical representations, starting with tokens and IDs.</span>
+        <br><span>Misconception: raw text vs numerical representation · Term: tokenization · Source: same-card</span><br><span>Rationale: Tempting because users see text at the interface.</span>
+      </li>
+      <li class="wrong"><strong>v02710-tokens-q2-weights-first</strong>: Weights are rewritten before text becomes tokens.
+        <br><span>Feedback: Close, but tokenization prepares the input; it does not rewrite weights.</span>
+        <br><span>Misconception: tokenization vs training update · Term: weight · Source: nearby-stage</span><br><span>Rationale: Tempting because weights are central to the model.</span>
+      </li>
+      <li class="wrong"><strong>v02710-tokens-q2-response-first</strong>: The model generates the finished response before tokenization happens.
+        <br><span>Feedback: Generation also uses tokens. Text needs token representation before model layers can process it.</span>
+        <br><span>Misconception: generation order vs tokenization · Term: response · Source: same-stage</span><br><span>Rationale: Tempting because users notice the final text first.</span>
+      </li></ol>
+      </article>
+      <article class="question">
+        <h4>v02710-tokens-q3</h4>
+        <p><strong>boundary distinction</strong> · boundary · mechanism terms: prompt tokens, response tokens, tokenization</p>
+        <p class="stem">Both the user prompt and the generated response eventually appear as text. How does tokenization treat them?</p>
+        <ol>
+      <li class="correct"><strong>v02710-tokens-q3-correct</strong>: Prompt text and generated response text can both be represented as tokens. <em>Correct</em>
+        <br><span>Feedback: Good distinction. Tokenization applies to text entering and leaving the generation loop.</span>
+        
+      </li>
+      <li class="wrong"><strong>v02710-tokens-q3-prompt-only</strong>: Only prompt text becomes tokens; response text skips token IDs.
+        <br><span>Feedback: Not quite. Generated response tokens are token IDs before being displayed as text.</span>
+        <br><span>Misconception: prompt token vs response token · Term: response token · Source: same-card</span><br><span>Rationale: Tempting because the user sees the response as text.</span>
+      </li>
+      <li class="wrong"><strong>v02710-tokens-q3-response-only</strong>: Only response text becomes tokens; prompts stay as raw English.
+        <br><span>Feedback: Close, but prompts also need token representation before model processing.</span>
+        <br><span>Misconception: prompt token vs raw prompt · Term: prompt token · Source: same-card</span><br><span>Rationale: Tempting because prompts feel natural to humans.</span>
+      </li>
+      <li class="wrong"><strong>v02710-tokens-q3-training</strong>: Tokenizing either one permanently trains the model.
+        <br><span>Feedback: This choice reveals a common mix-up. Tokenization represents text; it does not update weights.</span>
+        <br><span>Misconception: tokenization vs training · Term: training · Source: nearby-stage</span><br><span>Rationale: Tempting because tokenization is a required model step.</span>
+      </li></ol>
+      </article>
+    </section>
+    <section class="card">
+      <h3>Token IDs</h3>
+      <p><strong>Lesson ID:</strong> token-ids · <strong>Stage:</strong> Morning Commute · <strong>Questions:</strong> 3</p>
+      <p><strong>Primary:</strong> Explain token IDs as lookup numbers that point from token chunks to learned embedding vectors, not meanings by themselves.</p>
+      <p><strong>Boundary:</strong> A token ID is a stable lookup key in a tokenizer/model setup; using it retrieves embeddings but does not guarantee truth or update weights.</p>
+      <p><strong>Question-count rationale:</strong> Three questions cover lookup-key mechanics, meaning misconception, and generated-token flow.</p>
+      
+      <article class="question">
+        <h4>v02710-token-ids-q1</h4>
+        <p><strong>mechanism in action</strong> · mechanism · mechanism terms: token ID, embedding table, lookup</p>
+        <p class="stem">After tokenization, the token “dog” maps to an integer ID. What does the model use that ID for next?</p>
+        <ol>
+      <li class="correct"><strong>v02710-token-ids-q1-correct</strong>: To look up a learned starting vector in the embedding table. <em>Correct</em>
+        <br><span>Feedback: Good distinction. The ID is a lookup key for an embedding vector.</span>
+        
+      </li>
+      <li class="wrong"><strong>v02710-token-ids-q1-meaning</strong>: To store the complete meaning of dog inside the number itself.
+        <br><span>Feedback: Not quite. The number itself is not the meaning; it points to learned numerical patterns.</span>
+        <br><span>Misconception: ID number vs learned meaning pattern · Term: token ID · Source: same-card</span><br><span>Rationale: Tempting because the ID consistently points to that token.</span>
+      </li>
+      <li class="wrong"><strong>v02710-token-ids-q1-memory</strong>: To permanently remember this user’s sentence.
+        <br><span>Feedback: This choice reveals a common mix-up. Token IDs represent chunks; they do not store a user memory.</span>
+        <br><span>Misconception: representation vs durable memory · Term: memory · Source: author-created misconception</span><br><span>Rationale: Tempting because IDs are reusable in model processing.</span>
+      </li>
+      <li class="wrong"><strong>v02710-token-ids-q1-skip</strong>: To skip embeddings and tensors entirely.
+        <br><span>Feedback: Close, but the ID is a lookup key; embeddings and tensors still carry numerical representation forward.</span>
+        <br><span>Misconception: token ID vs embedding/tensor pipeline · Term: embedding · Source: same-card</span><br><span>Rationale: Tempting because the ID is already numeric.</span>
+      </li></ol>
+      </article>
+      <article class="question">
+        <h4>v02710-token-ids-q2</h4>
+        <p><strong>boundary distinction</strong> · boundary · mechanism terms: token ID, meaning, embedding, number</p>
+        <p class="stem">A learner says “982 means cat because the ID is the meaning.” What correction is most model-literate?</p>
+        <ol>
+      <li class="correct"><strong>v02710-token-ids-q2-correct</strong>: 982 is a lookup number for a token; meaning comes from learned patterns around embeddings and model layers. <em>Correct</em>
+        <br><span>Feedback: Insight strengthened. The ID points into the system; it is not understanding by itself.</span>
+        
+      </li>
+      <li class="wrong"><strong>v02710-token-ids-q2-conscious</strong>: 982 means cat because the model consciously understands the number.
+        <br><span>Feedback: That gives the model too much mind. A lookup number does not imply conscious understanding.</span>
+        <br><span>Misconception: ID/meaning vs consciousness · Term: llm · Source: explicit-confusable</span><br><span>Rationale: Tempting because the model uses the ID fluently.</span>
+      </li>
+      <li class="wrong"><strong>v02710-token-ids-q2-truth</strong>: 982 guarantees every sentence about cats will be true.
+        <br><span>Feedback: Not quite. Token IDs do not guarantee factual output.</span>
+        <br><span>Misconception: token ID vs truth · Term: truth · Source: nearby-stage</span><br><span>Rationale: Tempting because the token has a stable identity.</span>
+      </li>
+      <li class="wrong"><strong>v02710-token-ids-q2-random-every-run</strong>: 982 is randomly redefined every time the user sends a prompt.
+        <br><span>Feedback: Close, but token ID mappings are fixed for a tokenizer/model setup; sampling randomness is a different step.</span>
+        <br><span>Misconception: stable tokenizer mapping vs per-run randomness · Term: tokenizer · Source: same-card</span><br><span>Rationale: Tempting because sampling can be random later.</span>
+      </li></ol>
+      </article>
+      <article class="question">
+        <h4>v02710-token-ids-q3</h4>
+        <p><strong>model trace</strong> · model-trace · mechanism terms: generated response token, token ID, displayed text, context</p>
+        <p class="stem">During generation, the model chooses a next response token ID before the user sees text. What happens after that?</p>
+        <ol>
+      <li class="correct"><strong>v02710-token-ids-q3-correct</strong>: The chosen ID can be displayed as text and appended as a response token in the current context. <em>Correct</em>
+        <br><span>Feedback: Good distinction. Generated tokens are IDs before they become visible text.</span>
+        
+      </li>
+      <li class="wrong"><strong>v02710-token-ids-q3-weight-update</strong>: The chosen ID permanently updates the model weights.
+        <br><span>Feedback: Not quite. The chosen token can affect the next context without changing weights.</span>
+        <br><span>Misconception: generated token vs training update · Term: weight · Source: nearby-stage</span><br><span>Rationale: Tempting because the token affects the next step.</span>
+      </li>
+      <li class="wrong"><strong>v02710-token-ids-q3-raw-word</strong>: The model skips IDs and chooses only raw human words.
+        <br><span>Feedback: Close, but the model works with token IDs before text is displayed.</span>
+        <br><span>Misconception: token IDs vs raw text generation · Term: token · Source: same-card</span><br><span>Rationale: Tempting because users see words on screen.</span>
+      </li>
+      <li class="wrong"><strong>v02710-token-ids-q3-retrieve-source</strong>: The ID retrieves the original training document for that word.
+        <br><span>Feedback: This describes retrieval better than token ID lookup. Token IDs point to token representations, not original documents.</span>
+        <br><span>Misconception: token ID lookup vs retrieval/source · Term: retrieval · Source: nearby-stage</span><br><span>Rationale: Tempting because lookup sounds like fetching a source.</span>
+      </li></ol>
+      </article>
+    </section>
+  <h2>Quality checklist</h2>
+  <ul>
+    <li>No vague “best definition” stems.</li>
+    <li>Questions name the mechanism/scenario explicitly.</li>
+    <li>Every question has 4 choices and exactly 1 correct answer.</li>
+    <li>Every wrong answer has feedback, misconception, source, and rationale.</li>
+    <li>Feedback maps by stable choiceId.</li>
+    <li>Runtime randomizes choice order and preserves no-reveal wrong answers.</li>
+    <li>Normal UI has no developer/fallback notes.</li>
+    <li>Learner-facing held-out wording is replaced or defined.</li>
+  </ul>
+
+  <h2>Verification and QA evidence</h2>
+  <p class="qa-note">Final v0.27.10 checks passed on June 9, 2026. The first twelve Journey cards use the active checkpoint bank by default; the remaining twenty-seven cards keep their legacy single-question checkpoints. The app version shown in runtime is <strong>0.27.10</strong>.</p>
+  <ul>
+    <li><code>npm run typecheck</code>: passed.</li>
+    <li><code>npm run build</code>: passed with the existing Vite large-chunk warning.</li>
+    <li><code>npm run build:pages</code>: passed with the existing Vite large-chunk warning. A first parallel run collided with <code>dist</code> cleanup while <code>npm run build</code> was also running; the sequential rerun passed.</li>
+    <li><code>npm run audit:answers</code>: passed and includes the checkpoint-bank audit.</li>
+    <li><code>npm run audit:checkpoints</code>: passed; it now validates the v0.27.10 active first-twelve bank.</li>
+  </ul>
+  <h2>Runtime QA summary</h2>
+  <ul>
+    <li>Normal learner UI does not show the old development-testing or fallback-parameter note.</li>
+    <li><code>Next question</code> scrolls the newly rendered checkpoint panel into view.</li>
+    <li><code>Next learning card</code> opens the next learning card at the title/top area.</li>
+    <li>Final checkpoint actions clear the bottom nav after the dock-aware pass.</li>
+    <li>The legacy fallback query restores the previous single-question checkpoint.</li>
+    <li>Learner-facing held-out wording is replaced. Preserved hits are identifier/CSS/report metadata only.</li>
+  </ul>
+  <table class="compact-table"><thead><tr><th>State</th><th>Heading</th><th>Count</th><th>Action</th><th>Forbidden note?</th><th>Held-out visible?</th><th>Quiz top</th><th>Nav top</th></tr></thead><tbody><tr><td>what-is-q1-initial-390</td><td>What Is an LLM?</td><td>1 of 2 questions</td><td>Answer checkpoint to continue</td><td>No</td><td>No</td><td>4069</td><td>753</td></tr>
+<tr><td>what-is-q1-wrong-390</td><td>What Is an LLM?</td><td>1 of 2 questions</td><td>Try another choice</td><td>No</td><td>No</td><td>-14</td><td>753</td></tr>
+<tr><td>what-is-q1-correct-390</td><td>What Is an LLM?</td><td>1 of 2 questions</td><td>Next question</td><td>No</td><td>No</td><td>-14</td><td>753</td></tr>
+<tr><td>what-is-q2-after-next-question-390</td><td>What Is an LLM?</td><td>2 of 2 questions</td><td>Answer checkpoint to continue</td><td>No</td><td>No</td><td>12</td><td>753</td></tr>
+<tr><td>what-is-final-390</td><td>What Is an LLM?</td><td>2 of 2 questions</td><td>Next learning card</td><td>No</td><td>No</td><td>-13</td><td>753</td></tr>
+<tr><td>where-llms-fit-after-next-card-390</td><td>Where LLMs Fit</td><td>1 of 3 questions</td><td>Answer checkpoint to continue</td><td>No</td><td>No</td><td>4260</td><td>753</td></tr>
+<tr><td>fine-tuning-q1-390</td><td>Fine-Tuning</td><td>1 of 3 questions</td><td>Return to Journey</td><td>No</td><td>No</td><td>12</td><td>753</td></tr>
+<tr><td>alignment-q1-320</td><td>Alignment</td><td>1 of 4 questions</td><td>Return to Journey</td><td>No</td><td>No</td><td>12</td><td>753</td></tr>
+<tr><td>legacy-fallback-390</td><td>What Is an LLM?</td><td>1 of 1 question</td><td>Answer checkpoint to continue</td><td>No</td><td>No</td><td>12</td><td>753</td></tr>
+<tr><td>inference-q1-desktop</td><td>Inference</td><td>1 of 4 questions</td><td>Return to Journey</td><td>No</td><td>No</td><td>79</td><td>809</td></tr>
+<tr><td>overfitting-clean-copy-390</td><td>Overfitting and Generalization</td><td>1 of 3 questions</td><td>Return to Journey</td><td>No</td><td>No</td><td>3850</td><td>753</td></tr></tbody></table>
+  <h2>Screenshot gallery</h2>
+  <div class="screenshot-grid"><figure><img src="screenshots/v0-27-10-what-is-llm-q1-390.png" alt="What Is an LLM Q1 at 390px"><figcaption>What Is an LLM Q1 at 390px</figcaption></figure>
+<figure><img src="screenshots/v0-27-10-what-is-llm-q1-wrong-390.png" alt="Wrong answer feedback does not reveal correct answer"><figcaption>Wrong answer feedback does not reveal correct answer</figcaption></figure>
+<figure><img src="screenshots/v0-27-10-what-is-llm-q1-correct-next-question-390.png" alt="Correct Q1 with Next question"><figcaption>Correct Q1 with Next question</figcaption></figure>
+<figure><img src="screenshots/v0-27-10-what-is-llm-q2-scrolled-390.png" alt="Next question scrolls checkpoint into view"><figcaption>Next question scrolls checkpoint into view</figcaption></figure>
+<figure><img src="screenshots/v0-27-10-what-is-llm-final-next-learning-card-390.png" alt="Final checkpoint shows Next learning card above nav"><figcaption>Final checkpoint shows Next learning card above nav</figcaption></figure>
+<figure><img src="screenshots/v0-27-10-where-llms-fit-top-after-next-card-390.png" alt="Next learning card opens next title area"><figcaption>Next learning card opens next title area</figcaption></figure>
+<figure><img src="screenshots/v0-27-10-fine-tuning-checkpoint-390.png" alt="Fine-Tuning newly authored checkpoint at 390px"><figcaption>Fine-Tuning newly authored checkpoint at 390px</figcaption></figure>
+<figure><img src="screenshots/v0-27-10-alignment-checkpoint-320.png" alt="Alignment newly authored checkpoint at 320px"><figcaption>Alignment newly authored checkpoint at 320px</figcaption></figure>
+<figure><img src="screenshots/v0-27-10-legacy-fallback-390.png" alt="Legacy fallback restores single-question checkpoint"><figcaption>Legacy fallback restores single-question checkpoint</figcaption></figure>
+<figure><img src="screenshots/v0-27-10-inference-checkpoint-desktop.png" alt="Inference newly authored checkpoint at desktop width"><figcaption>Inference newly authored checkpoint at desktop width</figcaption></figure>
+<figure><img src="screenshots/v0-27-10-overfitting-clean-copy-390.png" alt="Overfitting page with cleaned validation wording"><figcaption>Overfitting page with cleaned validation wording</figcaption></figure></div>
+
+  <h2>Deep Research handoff</h2>
+  <blockquote>Review the Prompt Life v0.27.10 first-twelve checkpoint bank. Focus especially on the newly authored next-six learning cards. Evaluate whether each question makes the learner reason about the model rather than recall the curriculum. Check clarity, factual accuracy, distractor quality, misconception feedback, reading level, jargon, and badge-worthiness. Recommend edits, removals, and additions.</blockquote>
+</body>
+</html>

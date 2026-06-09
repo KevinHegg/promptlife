@@ -21,7 +21,7 @@ import {
 } from './components/ConceptAnimations'
 import { ExerciseShell } from './components/ExerciseSystem'
 import { VisualAid, VisualAidGallery, visualAidStyleVariants } from './components/VisualAids'
-import { FIRST_SIX_CHECKPOINT_BANK_V0279, hasV0279CheckpointBank } from './data/checkpointBankV0279'
+import { ACTIVE_CHECKPOINT_BANK, FIRST_TWELVE_CHECKPOINT_BANK_V02710, hasV02710CheckpointBank } from './data/checkpointBankV02710'
 import { acts, games, glossary, learningModes, lessons } from './data/content'
 import { buildLessonReviewProfile, reviewRubricCategories } from './data/contentReview'
 import { emptyExerciseProgress, exerciseById, exercises, lessonExerciseIds } from './data/exercises'
@@ -72,7 +72,7 @@ const HOME_ASSETS = {
   heroFallback: `${ASSET}/illustrations/scene-hero-feature-cloud@mobile.png`
 }
 // Bump this for each shipped app change; the Badge screen displays it under Start over.
-const APP_VERSION = '0.27.9'
+const APP_VERSION = '0.27.10'
 const STORAGE_KEYS = {
   lastLocation: 'promptlife:v1:lastLocation',
   lessonId: 'promptlife:v1:lessonId',
@@ -345,6 +345,45 @@ function prefersReducedMotion() {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches
 }
 
+function requestStableLayout(callback: () => void) {
+  let secondFrameId = 0
+  let timeoutId = 0
+  const firstFrameId = window.requestAnimationFrame(() => {
+    secondFrameId = window.requestAnimationFrame(callback)
+    timeoutId = window.setTimeout(callback, 180)
+  })
+  return () => {
+    window.cancelAnimationFrame(firstFrameId)
+    window.cancelAnimationFrame(secondFrameId)
+    window.clearTimeout(timeoutId)
+  }
+}
+
+function scrollElementIntoAppView(
+  target: HTMLElement | null,
+  {
+    block = 'start',
+    offset = 12,
+    behavior = prefersReducedMotion() ? 'auto' : 'smooth'
+  }: { block?: 'start' | 'center', offset?: number, behavior?: ScrollBehavior } = {}
+) {
+  if (!target) return
+  const shell = target.closest<HTMLElement>('.pl-shell') ?? document.querySelector<HTMLElement>('.pl-shell')
+  if (!shell) {
+    target.scrollIntoView({ behavior, block })
+    return
+  }
+  const shellRect = shell.getBoundingClientRect()
+  const targetRect = target.getBoundingClientRect()
+  let top = shell.scrollTop + targetRect.top - shellRect.top
+  if (block === 'center') {
+    top -= Math.max(0, (shell.clientHeight - targetRect.height) / 2)
+  } else {
+    top -= offset
+  }
+  shell.scrollTo({ top: Math.max(0, top), behavior })
+}
+
 function makeCheckpointAttemptSeed() {
   return `checkpoint-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 9)}`
 }
@@ -369,9 +408,17 @@ function shouldUseLegacyCheckpointBank() {
   }
 }
 
+function shouldShowCheckpointBankDebug() {
+  try {
+    return new URLSearchParams(window.location.search).get('debug') === '1'
+  } catch {
+    return false
+  }
+}
+
 function getActiveCheckpointQuiz(lesson, useLegacyBank = shouldUseLegacyCheckpointBank()) {
-  if (!useLegacyBank && hasV0279CheckpointBank(lesson.id)) {
-    return FIRST_SIX_CHECKPOINT_BANK_V0279[lesson.id]
+  if (!useLegacyBank && hasV02710CheckpointBank(lesson.id)) {
+    return FIRST_TWELVE_CHECKPOINT_BANK_V02710[lesson.id]
   }
   return lesson.quiz
 }
@@ -438,7 +485,7 @@ function App() {
   const activeLessonMode = getLessonMode(activeLesson.id, lessonMode, completed, nextOpenLesson.id)
 
   useEffect(() => {
-    const frameId = requestAnimationFrame(() => {
+    const cancelScroll = requestStableLayout(() => {
       const shouldScrollJourneyTop = tab === 'journey' && journeyTopRequest !== handledJourneyTopRequestRef.current
       const journeyReturnActId = tab === 'journey' && !shouldScrollJourneyTop ? journeyReturnActRef.current : null
       if (journeyReturnActId) {
@@ -460,7 +507,7 @@ function App() {
         : document.querySelector<HTMLElement>('.screen h1[id]')
       focusTarget?.focus?.({ preventScroll: true })
     })
-    return () => cancelAnimationFrame(frameId)
+    return cancelScroll
   }, [tab, lessonId, lessonMode, gameId, journeyTopRequest])
 
   const completeLesson = useCallback((id) => {
@@ -635,6 +682,7 @@ function App() {
 
   function nextLesson() {
     const next = lessons[activeLessonIndex + 1]
+    scrollAppToTop(shellRef.current, 'auto')
     if (next) {
       setLessonId(next.id)
       setLessonMode('learn')
@@ -969,8 +1017,7 @@ function scrollToJourneySection(actId, shell = document.querySelector<HTMLElemen
   document.getElementById(`journey-section-title-${actId}`)?.focus?.({ preventScroll: true })
 }
 
-function scrollAppToTop(shell = document.querySelector<HTMLElement>('.pl-shell')) {
-  const behavior = prefersReducedMotion() ? 'auto' : 'smooth'
+function scrollAppToTop(shell = document.querySelector<HTMLElement>('.pl-shell'), behavior: ScrollBehavior = prefersReducedMotion() ? 'auto' : 'smooth') {
   if (shell) {
     shell.scrollTo({ top: 0, behavior })
     return
@@ -1041,8 +1088,10 @@ function LessonScreen({ lesson, mode, lessonIndex, totalLessons, reflection, onC
   const [checkpointAttemptSeed, setCheckpointAttemptSeed] = useState(() => makeCheckpointAttemptSeed())
   const [continueHint, setContinueHint] = useState(false)
   const [draftReflection, setDraftReflection] = useState(reflection)
+  const lessonTopRef = useRef<HTMLElement | null>(null)
   const checkpointRef = useRef<HTMLElement | null>(null)
   const stickyActionRef = useRef<HTMLButtonElement | null>(null)
+  const pendingCheckpointScrollRef = useRef(false)
   const canUpdateProgress = mode === 'learn'
   const definition = lesson.oneSentenceDefinition ?? lesson.definition
   const coreExplanation = lesson.coreExplanation ?? lesson.definition
@@ -1053,7 +1102,8 @@ function LessonScreen({ lesson, mode, lessonIndex, totalLessons, reflection, onC
   const howItConnects = lesson.howItConnects ?? lesson.relationship
   const choiceOrderSeed = useMemo(() => getChoiceOrderSeed(), [])
   const useLegacyCheckpointBank = useMemo(() => shouldUseLegacyCheckpointBank(), [])
-  const usesV0279CheckpointBank = !useLegacyCheckpointBank && hasV0279CheckpointBank(lesson.id)
+  const debugCheckpointBank = useMemo(() => shouldShowCheckpointBankDebug(), [])
+  const usesV02710CheckpointBank = !useLegacyCheckpointBank && hasV02710CheckpointBank(lesson.id)
   const lessonCheckpointQuiz = useMemo(
     () => getActiveCheckpointQuiz(lesson, useLegacyCheckpointBank),
     [lesson, useLegacyCheckpointBank]
@@ -1108,9 +1158,25 @@ function LessonScreen({ lesson, mode, lessonIndex, totalLessons, reflection, onC
     setCheckpointAttemptedWrongChoiceIds({})
     setCheckpointCompletedQuestionIds({})
     setCheckpointAttemptSeed(makeCheckpointAttemptSeed())
+    pendingCheckpointScrollRef.current = false
     setContinueHint(false)
     setDraftReflection(mode === 'preview' ? '' : reflection)
   }, [lesson.id, mode, reflection])
+
+  useEffect(() => {
+    return requestStableLayout(() => {
+      scrollElementIntoAppView(lessonTopRef.current, { block: 'start', offset: 0, behavior: 'auto' })
+    })
+  }, [lesson.id])
+
+  useEffect(() => {
+    if (!pendingCheckpointScrollRef.current) return undefined
+    pendingCheckpointScrollRef.current = false
+    return requestStableLayout(() => {
+      scrollElementIntoAppView(checkpointRef.current, { block: 'start', offset: 12, behavior: 'auto' })
+      document.getElementById('quiz-title')?.focus?.({ preventScroll: true })
+    })
+  }, [activeCheckpointIndex, activeQuiz?.question])
 
   useEffect(() => {
     if (!hasCheckpointQuestions || choice == null) return undefined
@@ -1161,13 +1227,15 @@ function LessonScreen({ lesson, mode, lessonIndex, totalLessons, reflection, onC
     }
     if (hasCheckpointQuestions && !isCurrentQuestionComplete) {
       setContinueHint(true)
-      checkpointRef.current?.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'center' })
+      requestStableLayout(() => {
+        scrollElementIntoAppView(checkpointRef.current, { block: 'center' })
+      })
       return
     }
     if (hasCheckpointQuestions && !isLastCheckpointQuestion) {
+      pendingCheckpointScrollRef.current = true
       setCheckpointIndex((index) => Math.min(index + 1, checkpointItems.length - 1))
       setContinueHint(false)
-      checkpointRef.current?.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'start' })
       return
     }
     onComplete(lesson.id)
@@ -1176,7 +1244,7 @@ function LessonScreen({ lesson, mode, lessonIndex, totalLessons, reflection, onC
 
   return (
     <section className="screen lesson-screen" aria-labelledby="lesson-title">
-      <header className="lesson-hero" aria-labelledby="lesson-title">
+      <header ref={lessonTopRef} className="lesson-hero" aria-labelledby="lesson-title">
         <div className="lesson-progress-row">
           <span>{lesson.actLabel}</span>
           <span>{lessonIndex + 1} / {totalLessons}</span>
@@ -1188,7 +1256,7 @@ function LessonScreen({ lesson, mode, lessonIndex, totalLessons, reflection, onC
         <h1 id="lesson-title" tabIndex={-1}>{lesson.title}</h1>
         <p className="lede small">{lesson.subtitle}</p>
         <p className="lesson-definition">{definition}</p>
-        {usesV0279CheckpointBank && <p className="mode-note" role="status">Model-thinking checkpoint pilot active for development testing. Add ?legacyCheckpoints=1 for previous checkpoints.</p>}
+        {debugCheckpointBank && usesV02710CheckpointBank && <p className="mode-note debug-note" role="status">Developer checkpoint bank: {ACTIVE_CHECKPOINT_BANK}</p>}
         {mode === 'preview' && <p className="mode-note" role="status">Previewing this learning card. Progress will not change.</p>}
         {mode === 'review' && <p className="mode-note" role="status">Reviewing a completed learning card.</p>}
       </header>
@@ -1271,6 +1339,7 @@ function LessonScreen({ lesson, mode, lessonIndex, totalLessons, reflection, onC
             revealed={revealed}
             progress={{ current: activeCheckpointIndex + 1, total: checkpointItems.length }}
             onPrevious={activeCheckpointIndex > 0 ? () => {
+              pendingCheckpointScrollRef.current = true
               setCheckpointIndex((index) => Math.max(0, index - 1))
               setContinueHint(false)
             } : null}
@@ -2675,10 +2744,10 @@ function OverfittingCurveInteraction() {
       </div>
       <div className={generalizing ? 'curve-card is-generalizing' : 'curve-card'} aria-live="polite">
         <span>training dots</span>
-        <span>held-out dots</span>
+        <span>set-aside dots</span>
         <strong>{generalizing ? 'New examples handled better' : 'Old examples traced too tightly'}</strong>
       </div>
-      <p>{generalizing ? 'Insight unlocked: evaluation needs held-out examples.' : 'This curve memorizes the answer key and misses the new cases.'}</p>
+      <p>{generalizing ? 'Insight unlocked: evaluation needs set-aside validation examples.' : 'This curve memorizes the answer key and misses the new cases.'}</p>
     </div>
   )
 }

@@ -201,20 +201,20 @@ export const exercises: Exercise[] = [
   },
   {
     id: 'overfitting-held-out-check',
-    title: 'Held-Out Check',
+    title: 'Validation Check',
     concept: 'Overfitting and generalization',
-    prompt: 'A model scores perfectly on training examples but poorly on held-out examples.',
+    prompt: 'A model scores perfectly on training examples but poorly on validation examples it did not train on.',
     goal: 'Choose what this result shows.',
     actionVerb: 'Toggle',
-    actionInstruction: 'Toggle to the interpretation that explains the held-out failure.',
+    actionInstruction: 'Toggle to the interpretation that explains the validation failure.',
     inputType: 'toggle-state',
     correctAnswer: 'overfitting',
     items: [
       { id: 'overfitting', label: 'Overfitting', detail: 'The model fit old examples too tightly and failed on new ones.', correct: true },
-      { id: 'good-generalization', label: 'Good generalization', detail: 'The model learned a pattern that transfers to unseen cases.', feedback: 'Good generalization would perform well on held-out examples too.' }
+      { id: 'good-generalization', label: 'Good generalization', detail: 'The model learned a pattern that transfers to unseen cases.', feedback: 'Good generalization would perform well on set-aside validation examples too.' }
     ],
-    feedbackCorrect: 'Correct. Held-out examples reveal whether learning transfers.',
-    feedbackIncorrect: 'If held-out performance is poor, the model may have fit old examples too narrowly.',
+    feedbackCorrect: 'Correct. Examples saved for testing reveal whether learning transfers.',
+    feedbackIncorrect: 'If performance is poor on examples saved for testing, the model may have fit old examples too narrowly.',
     insight: 'Evaluation needs unseen examples because memorizing old examples is not enough.',
     glossaryTerms: ['overfitting', 'generalization', 'validation data', 'evaluation'],
     completionKey: 'exercise:overfitting-held-out-check'
