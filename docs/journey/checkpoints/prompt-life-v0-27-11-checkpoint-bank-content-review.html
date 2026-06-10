@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Prompt Life v0.27.11 Checkpoint Bank Content Review</title>
+<style>
+  @page { size: Letter landscape; margin: 0.45in; }
+  * { box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #10194f; line-height: 1.35; margin: 0; background: #fbfffe; }
+  h1 { font-size: 26px; margin: 0 0 8px; color: #07106c; }
+  h2 { font-size: 18px; margin: 24px 0 8px; color: #07106c; break-after: avoid; }
+  p { margin: 0 0 8px; }
+  .meta { color: #4f5a79; font-size: 11px; margin-bottom: 12px; }
+  .callout { border-left: 5px solid #00a8b5; background: #eefdff; padding: 12px 14px; margin: 10px 0 14px; border-radius: 8px; }
+  table { width: 100%; border-collapse: collapse; table-layout: fixed; margin: 8px 0 16px; }
+  th, td { border: 1px solid #d2d8ee; padding: 6px 7px; vertical-align: top; font-size: 8.5px; }
+  th { background: #eef5ff; color: #07106c; text-align: left; }
+  td.num, th.num { width: 26px; text-align: right; font-variant-numeric: tabular-nums; }
+  .review-table th:nth-child(2), .review-table td:nth-child(2) { width: 112px; }
+  .review-table th:nth-child(3), .review-table td:nth-child(3) { width: 74px; }
+  .review-table th:nth-child(4), .review-table td:nth-child(4) { width: 128px; }
+  .review-table th:nth-child(5), .review-table td:nth-child(5) { width: 132px; }
+  .review-table th:nth-child(6), .review-table td:nth-child(6) { width: 170px; }
+  .review-table th:nth-child(7), .review-table td:nth-child(7) { width: 210px; }
+  .rec { font-weight: 800; color: #006b78; }
+  ol { margin: 6px 0 14px 20px; padding: 0; columns: 2; column-gap: 28px; }
+  li { margin: 0 0 5px; break-inside: avoid; font-size: 10.5px; }
+  .objective-table td, .objective-table th { font-size: 9px; }
+  .section-break { break-before: page; }
+</style>
+</head>
+<body>
+<h1>Prompt Life v0.27.11 Checkpoint Bank Content Review</h1>
+<p class="meta">Generated 2026-06-10T03:03:30.902Z. Source reviewed: docs/journey/prompt-life-v0-27-11-full-checkpoint-bank-review.pdf with structured bank docs/journey/checkpoints/checkpoint-question-bank-v0-27-11-all-active-dev.json.</p>
+<div class="callout"><strong>Final recommendation: needs revision before live.</strong> The bank is useful for development testing because all 39 cards now have coverage (136 questions, 544 choices, 408 distractors). It should not be treated as live-quality yet because cards 13-39 still show boilerplate objectives, formulaic stems, generic glossary distractors, and visually obvious correct-answer patterns.</div>
+<h2>Assessment Lens</h2>
+<p>The best checkpoint items make learners reason through a model event: what changed, what stayed fixed, which system layer acted, what evidence entered context, and which myth is being avoided. The weakest items ask learners to recognize lesson wording, especially stems like “Which common confusion does X help learners avoid?” or “How does X connect to the prompt’s Journey?”</p>
+<h2>Card-By-Card Review Table</h2>
+<table class="review-table">
+<thead><tr><th class="num">#</th><th>Learning card</th><th>Recommendation</th><th>Best 1-3 questions</th><th>Weakest question(s)</th><th>Suggested replacement question</th><th>Distractor / feedback / misconception notes</th><th>Objective rewrite</th></tr></thead>
+<tbody>
+<tr>
+  <td class="num">1</td>
+  <td><strong>What Is an LLM?</strong></td>
+  <td><span class="rec">Keep</span></td>
+  <td>Q1 next-token loop; Q2 fluency without awareness.</td>
+  <td>None major. Q2 correct answer is a little more precise than the distractors.</td>
+  <td>Optional: A campus user says the model “understood” a poem. Which explanation keeps the model boundary clear?</td>
+  <td><p><strong>Distractor:</strong> Keep hidden search, consciousness, and durable weight-change distractors; they are central myths.</p><p><strong>Feedback:</strong> Keep. The feedback reinforces fixed weights plus temporary context without shaming.</p><p><strong>Missing misconception:</strong> No major missing misconception for this first card.</p><p><strong>Better glossary-near distractor:</strong> Useful nearby distractors: search engine, database, memory, training.</p></td>
+  <td>Explain that an LLM uses learned weights plus current context to score and generate next tokens without implying awareness, search, or permanent learning.</td>
+</tr>
+<tr>
+  <td class="num">2</td>
+  <td><strong>Where LLMs Fit</strong></td>
+  <td><span class="rec">Keep / minor revise</span></td>
+  <td>Q1 LLM vs diffusion; Q3 model vs product wrapper.</td>
+  <td>Q2 is useful but checklist-like; the correct answer is visibly longer than the distractors.</td>
+  <td>A product has a search tool, safety layer, image generator, and LLM. Which part is the LLM, and which part is the broader AI product?</td>
+  <td><p><strong>Distractor:</strong> Make wrong choices similarly structured: “AI product = interface plus tools; LLM = one model inside it” as the correct boundary, with plausible swaps.</p><p><strong>Feedback:</strong> When learners pick “all AI is LLM,” explicitly say that AI is the broad category and LLMs are one branch.</p><p><strong>Missing misconception:</strong> Missing a direct “AI product/app is not the same as the model” question beyond Q3; keep that in future iterations.</p><p><strong>Better glossary-near distractor:</strong> Better nearby distractors: foundation model, AI product, diffusion model, symbolic AI.</p></td>
+  <td>Use the AI family map to distinguish AI, ML, deep learning, generative AI, LLMs, diffusion models, multimodal systems, and AI products.</td>
+</tr>
+<tr>
+  <td class="num">3</td>
+  <td><strong>Rationalists vs Empiricists</strong></td>
+  <td><span class="rec">Keep / minor revise</span></td>
+  <td>Q1 explicit rules vs learned weights; Q2 loss; Q3 hybrid systems.</td>
+  <td>Q3 correct answer is much longer and more nuanced than the distractors.</td>
+  <td>An app uses if-then policy checks before sending a prompt to an LLM. What should the learner infer about the product and the model inside it?</td>
+  <td><p><strong>Distractor:</strong> Balance Q3 with plausible hybrid distractors: “the rules are training data,” “the LLM became symbolic,” “retrieval rewrote weights.”</p><p><strong>Feedback:</strong> For wrong answers, name whether the learner confused rules, retrieval, policy, or learned weights.</p><p><strong>Missing misconception:</strong> Could better test that modern products often combine rules and learned models rather than replacing one tradition with the other.</p><p><strong>Better glossary-near distractor:</strong> Better nearby distractors: symbolic AI, rule-based AI, optimizer, loss, retrieval.</p></td>
+  <td>Compare rules-first AI and learned-pattern AI while recognizing that modern systems can combine rules, retrieval, policies, tools, and learned models.</td>
+</tr>
+<tr>
+  <td class="num">4</td>
+  <td><strong>Training</strong></td>
+  <td><span class="rec">Keep</span></td>
+  <td>Q1 loss-to-weight update; Q3 durable training vs temporary inference; Q4 loop order.</td>
+  <td>Q2 uses broad “usually true” wording, but the boundary is pedagogically useful.</td>
+  <td>Optional: A model gives a better answer after one clarifying prompt. What changed: weights, context, retrieved evidence, or loss?</td>
+  <td><p><strong>Distractor:</strong> Keep optimizer, inference, and prompt-only distractors. Add “RAG retrieved a document” in a later card, not here.</p><p><strong>Feedback:</strong> Keep; it explains why loss plus optimizer is the durable training signal.</p><p><strong>Missing misconception:</strong> No major gap; this card does the training/inference split well.</p><p><strong>Better glossary-near distractor:</strong> Useful nearby distractors: inference, loss, optimizer, weight update, context.</p></td>
+  <td>Trace training as example, prediction, loss, optimizer, weight update, repeat; separate durable training from inference, retrieval, sampling, and prompt changes.</td>
+</tr>
+<tr>
+  <td class="num">5</td>
+  <td><strong>Pretraining</strong></td>
+  <td><span class="rec">Revise minor</span></td>
+  <td>Q1 broad loss signal; Q2 broad capability without perfect library; Q4 hidden browsing myth.</td>
+  <td>Q4 correct answer is 2.48x the average distractor length, making it too easy by shape.</td>
+  <td>A base model gives fact-like text about public history. Which explanation is strongest: learned patterns in weights, live search, remembered pages, or RAG?</td>
+  <td><p><strong>Distractor:</strong> Replace one easy browsing/conscious-memory distractor with a close RAG/search distractor, because learners often conflate pretraining with retrieval.</p><p><strong>Feedback:</strong> If a learner chooses “search,” explain that pretraining is a past durable weight-shaping process, while search/retrieval is a current system action.</p><p><strong>Missing misconception:</strong> Add a question about pretraining not creating a perfect citation store.</p><p><strong>Better glossary-near distractor:</strong> Better nearby distractors: RAG, retrieval, memorization, corpus, embedding table.</p></td>
+  <td>Explain pretraining as broad durable pattern learning from many next-token targets, not perfect recall, live browsing, or a searchable archive.</td>
+</tr>
+<tr>
+  <td class="num">6</td>
+  <td><strong>Overfitting and Generalization</strong></td>
+  <td><span class="rec">Keep</span></td>
+  <td>Q1 train-good/validation-bad diagnosis; Q2 validation set purpose; Q3 narrow template transfer.</td>
+  <td>None major. The card is applied and fair.</td>
+  <td>Optional: A model performs well on practice prompts but fails when wording changes. What should the team check first?</td>
+  <td><p><strong>Distractor:</strong> Keep extra-training, context, and dataset-size myths. They are plausible enough.</p><p><strong>Feedback:</strong> Keep; feedback teaches transfer beyond memorized examples.</p><p><strong>Missing misconception:</strong> Could later add a misconception that more training always fixes generalization.</p><p><strong>Better glossary-near distractor:</strong> Better nearby distractors: validation set, training set, memorization, loss.</p></td>
+  <td>Diagnose overfitting and explain that set-aside validation examples are kept out of training to test transfer beyond examples used to fit weights.</td>
+</tr>
+<tr>
+  <td class="num">7</td>
+  <td><strong>Fine-Tuning</strong></td>
+  <td><span class="rec">Revise minor</span></td>
+  <td>Q1 durable adaptation; Q2 future inference behavior.</td>
+  <td>Q1 uses “house style”; change to “corporate norms” or “institutional style.” Q3 correct answer is longer than distractors.</td>
+  <td>A support assistant must follow corporate norms across future conversations. Which change is closest to fine-tuning?</td>
+  <td><p><strong>Distractor:</strong> Keep RAG/prompt/sampling distractors, but make one distractor an adapter update if the card teaches adapters.</p><p><strong>Feedback:</strong> Make feedback say whether the selected wrong choice is temporary context, retrieval, or generation-time sampling.</p><p><strong>Missing misconception:</strong> Could test fine-tuning vs system prompt more directly.</p><p><strong>Better glossary-near distractor:</strong> Better nearby distractors: adapter, system prompt, RAG, inference, alignment.</p></td>
+  <td>Distinguish fine-tuning or adapter training as durable post-pretraining adaptation from prompt, RAG, and sampling-time steering.</td>
+</tr>
+<tr>
+  <td class="num">8</td>
+  <td><strong>Alignment</strong></td>
+  <td><span class="rec">Revise minor</span></td>
+  <td>Q2 alignment controls across training/prompt/filter; Q4 guardrail vs weights.</td>
+  <td>Q1, Q2, and Q4 correct answers are long relative to distractors.</td>
+  <td>A policy filter blocks a harmful response after the model produced it. Which layer changed the visible output?</td>
+  <td><p><strong>Distractor:</strong> Add a close guardrail/policy vs model-weights distractor. Avoid only using “conscience” straw answers.</p><p><strong>Feedback:</strong> For wrong answers, distinguish behavior shaping, moral understanding, and product-level filtering.</p><p><strong>Missing misconception:</strong> Need one question on alignment not being conscience or guaranteed truth in an institutional deployment.</p><p><strong>Better glossary-near distractor:</strong> Better nearby distractors: guardrail, system prompt, policy filter, fine-tuning, preference tuning.</p></td>
+  <td>Reason about alignment as behavior shaping through training, prompts, policies, filters, evaluation, and deployment controls without treating it as conscience or truth guarantee.</td>
+</tr>
+<tr>
+  <td class="num">9</td>
+  <td><strong>Inference</strong></td>
+  <td><span class="rec">Keep</span></td>
+  <td>Q1 temporary states vs fixed weights; Q3 context vs memory; Q4 no automatic future learning.</td>
+  <td>Q2 lists many pipeline terms at once; it may overload first-time learners but is accurate.</td>
+  <td>Optional: A chat uses a sentence from earlier in the same conversation. What mechanism made that available?</td>
+  <td><p><strong>Distractor:</strong> Keep context, weight update, training, and retrieval confusions.</p><p><strong>Feedback:</strong> Keep, but make Q2 feedback step through “forward pass -&gt; logits -&gt; sampling” in one short sentence.</p><p><strong>Missing misconception:</strong> No major gap; this is one of the stronger boundary cards.</p><p><strong>Better glossary-near distractor:</strong> Better nearby distractors: hidden state, activation, weight, context window, training.</p></td>
+  <td>Explain inference as a forward pass using fixed weights and temporary context-shaped states, not durable learning.</td>
+</tr>
+<tr>
+  <td class="num">10</td>
+  <td><strong>Prompt vs Response</strong></td>
+  <td><span class="rec">Keep</span></td>
+  <td>Q1 given prompt vs generated response; Q2 append into next context.</td>
+  <td>Q3 is useful but comparatively easy.</td>
+  <td>A user adds a clarification and the next answer improves. What changed most directly: prompt/context, model weights, tokenizer, or pretraining data?</td>
+  <td><p><strong>Distractor:</strong> Keep durable-learning and hidden-source distractors.</p><p><strong>Feedback:</strong> Keep; it teaches response tokens are generated and appended.</p><p><strong>Missing misconception:</strong> Could later add system prompt vs user prompt as a separate product-level boundary.</p><p><strong>Better glossary-near distractor:</strong> Better nearby distractors: system prompt, context, response token, weight update.</p></td>
+  <td>Separate given prompt/context tokens from generated response tokens and explain that generated tokens are appended into the next inference context.</td>
+</tr>
+<tr>
+  <td class="num">11</td>
+  <td><strong>Tokenization</strong></td>
+  <td><span class="rec">Keep / minor revise</span></td>
+  <td>Q1 uneven chunks; Q2 text -&gt; tokens -&gt; IDs -&gt; embeddings path.</td>
+  <td>Q3 is almost a definition check and low difficulty.</td>
+  <td>Two models split the same sentence differently. What should a learner conclude about tokens and words?</td>
+  <td><p><strong>Distractor:</strong> Add “every word is exactly one token in every model” and “punctuation is always ignored.”</p><p><strong>Feedback:</strong> When learners pick word-based answers, explain that tokens are model-specific chunks, not natural words.</p><p><strong>Missing misconception:</strong> Tokenizer differences across models.</p><p><strong>Better glossary-near distractor:</strong> Better nearby distractors: word, token ID, vocabulary, embedding.</p></td>
+  <td>Explain tokenization as turning text into model-readable chunks that may be words, word pieces, punctuation, or other units before ID lookup.</td>
+</tr>
+<tr>
+  <td class="num">12</td>
+  <td><strong>Token IDs</strong></td>
+  <td><span class="rec">Keep</span></td>
+  <td>Q2 ID vs meaning; Q3 generated ID becomes visible/appended token.</td>
+  <td>Q1 is direct but appropriate for this stage.</td>
+  <td>Optional: A learner says token ID 982 “means cat.” What is the better explanation?</td>
+  <td><p><strong>Distractor:</strong> Keep truth, memory, retrieval distractors. Add embedding-row lookup where needed.</p><p><strong>Feedback:</strong> Keep; it handles lookup keys well.</p><p><strong>Missing misconception:</strong> No major gap.</p><p><strong>Better glossary-near distractor:</strong> Better nearby distractors: embedding, vocabulary, meaning, token.</p></td>
+  <td>Explain token IDs as lookup keys from token chunks to embedding rows, not meanings, memories, or source retrieval by themselves.</td>
+</tr>
+<tr>
+  <td class="num">13</td>
+  <td><strong>Embeddings</strong></td>
+  <td><span class="rec">Replace / substantial revise</span></td>
+  <td>Q1 contains the right core fact: learned starting vector for a token ID.</td>
+  <td>Both questions are boilerplate; Q2 only checks durable-data wording.</td>
+  <td>The token ID for “dog” looks up a vector before the sentence context is processed. What is that vector, and how is it different from a hidden state later in the model?</td>
+  <td><p><strong>Distractor:</strong> Replace “finished sentence” and “human memory” with hidden state, token ID, dictionary definition, and permanent memory.</p><p><strong>Feedback:</strong> Feedback should say: an embedding is the starting vector from a learned table; a hidden state is temporary and context-shaped.</p><p><strong>Missing misconception:</strong> Embedding vs hidden state is the key missing misconception.</p><p><strong>Better glossary-near distractor:</strong> Better nearby distractors: hidden state, token ID, weight, vocabulary row.</p></td>
+  <td>Distinguish an embedding as a learned starting vector retrieved from a durable embedding table from a temporary hidden state shaped by context.</td>
+</tr>
+<tr>
+  <td class="num">14</td>
+  <td><strong>Vectors</strong></td>
+  <td><span class="rec">Revise</span></td>
+  <td>Q1 embeddings and hidden states are vectors; Q3 dimension-label misconception.</td>
+  <td>Q2 uses generic stage framing and does not make learners reason through a model event.</td>
+  <td>A learner sees a long list of numbers representing a token. What makes it a vector, and why should they not read each dimension as a simple English label?</td>
+  <td><p><strong>Distractor:</strong> Replace “vectors are permanent chats” with scalar ID, tensor block, context window, or visible token.</p><p><strong>Feedback:</strong> Feedback should emphasize distributed features: meaning is spread across many dimensions.</p><p><strong>Missing misconception:</strong> Vector vs scalar token ID and vector vs tensor shape.</p><p><strong>Better glossary-near distractor:</strong> Better nearby distractors: scalar, tensor, embedding, hidden state.</p></td>
+  <td>Explain vectors as numerical representations with distributed features and distinguish vectors from scalar IDs, tensors, and human-readable labels.</td>
+</tr>
+<tr>
+  <td class="num">15</td>
+  <td><strong>Tensors</strong></td>
+  <td><span class="rec">Replace / substantial revise</span></td>
+  <td>Q1 organized block of numbers.</td>
+  <td>Q2 is generic; distractors like “distributed representation” are adjacent rather than clearly wrong.</td>
+  <td>A model processes a batch of token vectors arranged by token position and feature dimension. What makes this structure a tensor rather than a single vector?</td>
+  <td><p><strong>Distractor:</strong> Use vector, matrix, weight tensor, context window, and activation tensor instead of “word in dictionary” or “programmer rule.”</p><p><strong>Feedback:</strong> Feedback should teach shape: tensors organize numbers across dimensions such as tokens, features, layers, or batches.</p><p><strong>Missing misconception:</strong> Vector vs tensor; temporary activation tensor vs durable weight tensor.</p><p><strong>Better glossary-near distractor:</strong> Better nearby distractors: vector, matrix, activation, weight tensor.</p></td>
+  <td>Explain tensors as shaped numerical blocks that organize many token vectors and features for layer operations.</td>
+</tr>
+<tr>
+  <td class="num">16</td>
+  <td><strong>Attention</strong></td>
+  <td><span class="rec">Revise</span></td>
+  <td>Q1 relevance between token positions; Q4 place inside transformer layers.</td>
+  <td>Q2/Q3 repeat formulaic wording; system-prompt distractors are not strong.</td>
+  <td>In “the dog chased it,” the model gives one token more relevance when interpreting “it.” What is attention doing?</td>
+  <td><p><strong>Distractor:</strong> Use awareness, MLP feature reshaping, sampling choice, and hidden state as closer distractors.</p><p><strong>Feedback:</strong> Feedback should say attention is weighted relevance between positions, not human attention or awareness.</p><p><strong>Missing misconception:</strong> Attention vs MLP, and attention pattern vs learned attention weights.</p><p><strong>Better glossary-near distractor:</strong> Better nearby distractors: MLP, hidden state, relevance weight, sampling.</p></td>
+  <td>Explain attention as temporary weighted relevance between token positions that shapes hidden states, not human awareness or final token choice by itself.</td>
+</tr>
+<tr>
+  <td class="num">17</td>
+  <td><strong>MLP</strong></td>
+  <td><span class="rec">Revise</span></td>
+  <td>Q1 attention vs MLP contrast.</td>
+  <td>Q2/Q3 are formulaic; “reads private files” is too easy and unrelated.</td>
+  <td>After attention mixes information across positions, the model reshapes each token position’s feature vector. Which component is doing that?</td>
+  <td><p><strong>Distractor:</strong> Replace private-files with attention mixes positions, sampling chooses token, embedding starts vector, retrieval searches documents.</p><p><strong>Feedback:</strong> Feedback should diagnose whether the learner confused MLP with attention or sampling.</p><p><strong>Missing misconception:</strong> MLP as per-token feature reshaping vs attention as cross-position relevance.</p><p><strong>Better glossary-near distractor:</strong> Better nearby distractors: attention, hidden state, activation, sampling.</p></td>
+  <td>Explain the MLP as per-token feature reshaping inside each layer, distinct from attention mixing across token positions.</td>
+</tr>
+<tr>
+  <td class="num">18</td>
+  <td><strong>Layers</strong></td>
+  <td><span class="rec">Revise</span></td>
+  <td>Q1 temporary hidden states; Q3 not human thought steps.</td>
+  <td>Q2 marks MLP/feed-forward-like concepts as wrong even though they are layer components; Q4 correct answer is too long.</td>
+  <td>A transformer block repeats attention and MLP operations. What is being refined as the prompt moves through layers?</td>
+  <td><p><strong>Distractor:</strong> Do not use MLP/feed-forward as plain wrong answers. Use permanent memory, training data update, or interface layer.</p><p><strong>Feedback:</strong> Feedback should explain “layers are repeated transformations,” not human reasoning steps.</p><p><strong>Missing misconception:</strong> Layer component vs whole layer; durable weights vs temporary activations.</p><p><strong>Better glossary-near distractor:</strong> Better nearby distractors: attention, MLP, hidden state, activation, residual path.</p></td>
+  <td>Explain transformer layers as repeated attention-plus-MLP transformations that refine temporary hidden states without implying human thought steps.</td>
+</tr>
+<tr>
+  <td class="num">19</td>
+  <td><strong>Hidden States</strong></td>
+  <td><span class="rec">Revise</span></td>
+  <td>Q1 internal numerical state; Q3 not secret memories.</td>
+  <td>Q4 says “Embeddings start token vectors,” which is incomplete and not a hidden-state checkpoint.</td>
+  <td>The same token “bank” appears in two different sentences. Why can its later hidden state differ even if its starting embedding is the same?</td>
+  <td><p><strong>Distractor:</strong> Use embedding row, visible token, saved memory, and model weight as distractors.</p><p><strong>Feedback:</strong> Feedback should explicitly connect context and layers to hidden-state changes.</p><p><strong>Missing misconception:</strong> Hidden state vs embedding; hidden state vs memory.</p><p><strong>Better glossary-near distractor:</strong> Better nearby distractors: embedding, activation, context, memory, weight.</p></td>
+  <td>Distinguish hidden states as temporary context-shaped internal vectors created during inference from embeddings, weights, visible text, and memory.</td>
+</tr>
+<tr>
+  <td class="num">20</td>
+  <td><strong>Logits</strong></td>
+  <td><span class="rec">Revise</span></td>
+  <td>Q1 raw scores before probabilities; Q3 not truth scores.</td>
+  <td>Q2 is formulaic; several questions remain definition-like.</td>
+  <td>Before softmax, the model assigns raw scores to possible next tokens. What are those scores, and what are they not?</td>
+  <td><p><strong>Distractor:</strong> Use probability, truth score, sampled token, and embedding row as distractors.</p><p><strong>Feedback:</strong> Feedback should say logits are raw scores for candidate next tokens before probability conversion.</p><p><strong>Missing misconception:</strong> Logits vs probabilities vs truth.</p><p><strong>Better glossary-near distractor:</strong> Better nearby distractors: softmax, probability, sampling, truth score.</p></td>
+  <td>Explain logits as temporary raw next-token scores produced before softmax, not probabilities, truth scores, or complete answers.</td>
+</tr>
+<tr>
+  <td class="num">21</td>
+  <td><strong>Softmax</strong></td>
+  <td><span class="rec">Revise</span></td>
+  <td>Q1 converts raw scores to probabilities; Q3 truth/certainty myth.</td>
+  <td>Q2 is formulaic and does not force the learner to distinguish probability from truth.</td>
+  <td>A token gets the highest softmax probability, but the answer is factually unsupported. What does that reveal about probability?</td>
+  <td><p><strong>Distractor:</strong> Use sampling, truth checking, citation, and weight update as distractors.</p><p><strong>Feedback:</strong> Feedback should say probability is model preference under context, not evidence of truth.</p><p><strong>Missing misconception:</strong> Probability vs truth and softmax vs sampling.</p><p><strong>Better glossary-near distractor:</strong> Better nearby distractors: logits, probability distribution, sampling, calibration.</p></td>
+  <td>Explain softmax as converting logits into a next-token probability distribution, not choosing the token or proving truth.</td>
+</tr>
+<tr>
+  <td class="num">22</td>
+  <td><strong>Sampling</strong></td>
+  <td><span class="rec">Revise</span></td>
+  <td>Q1 append selected token; Q3 not whole response/permanent teaching.</td>
+  <td>Q4 answer “Softmax provides probabilities” is too terse and easy.</td>
+  <td>Softmax creates probabilities for “cat,” “dog,” and “car.” What does sampling do next?</td>
+  <td><p><strong>Distractor:</strong> Use softmax conversion, truth verification, weight update, and whole-answer writing as distractors.</p><p><strong>Feedback:</strong> Feedback should state the sequence: logits -&gt; softmax probabilities -&gt; sampling chooses one token -&gt; append.</p><p><strong>Missing misconception:</strong> Temperature/randomness and probability-shaped choice.</p><p><strong>Better glossary-near distractor:</strong> Better nearby distractors: softmax, token, probability, temperature.</p></td>
+  <td>Explain sampling as choosing one next token from probabilities during inference, after softmax and before append/repeat.</td>
+</tr>
+<tr>
+  <td class="num">23</td>
+  <td><strong>Autoregression</strong></td>
+  <td><span class="rec">Revise minor</span></td>
+  <td>Q1 append and run again; Q2 context not weights.</td>
+  <td>Q3 is formulaic but checks a useful misconception.</td>
+  <td>A model writes “The dog” and then generates “ran.” What does the next model run see?</td>
+  <td><p><strong>Distractor:</strong> Keep whole-response-at-once, weight update, and retrieval distractors.</p><p><strong>Feedback:</strong> Feedback should link append/repeat to context growth.</p><p><strong>Missing misconception:</strong> Old context can fall out as the context grows.</p><p><strong>Better glossary-near distractor:</strong> Better nearby distractors: context window, response-so-far, sampling, inference.</p></td>
+  <td>Explain autoregression as next token, append to context, run again, while weights usually remain unchanged and context grows.</td>
+</tr>
+<tr>
+  <td class="num">24</td>
+  <td><strong>Context Window</strong></td>
+  <td><span class="rec">Revise</span></td>
+  <td>Q1 outside context unavailable; Q3 not permanent memory.</td>
+  <td>Q4 “Autoregression makes response-so-far grow” is true but too partial.</td>
+  <td>A long chat exceeds the context window and early details drop out. What changed: temporary visible input, weights, memory, or training data?</td>
+  <td><p><strong>Distractor:</strong> Use permanent memory, weight update, guaranteed retrieval, and source deletion as distractors.</p><p><strong>Feedback:</strong> Feedback should say context is temporary visible input, not durable memory.</p><p><strong>Missing misconception:</strong> Context vs saved memory/profile and context vs RAG.</p><p><strong>Better glossary-near distractor:</strong> Better nearby distractors: memory, RAG, prompt, response-so-far, context length.</p></td>
+  <td>Explain the context window as temporary visible input space for the current run, not permanent memory, and show how autoregression and RAG compete for that space.</td>
+</tr>
+<tr>
+  <td class="num">25</td>
+  <td><strong>RAG and Retrieval</strong></td>
+  <td><span class="rec">Revise</span></td>
+  <td>Q1 retrieval into context; Q2 does not change weights; Q3 not training/permanent memory.</td>
+  <td>Q4 “RAG depends on the context window” is too terse.</td>
+  <td>A RAG system searches a course handbook, inserts two passages into the prompt, then the LLM answers. What changed most directly?</td>
+  <td><p><strong>Distractor:</strong> Add “the model searched every file or the open web by itself” as a close misconception.</p><p><strong>Feedback:</strong> Feedback should say retrieved snippets become prompt/context tokens; weights usually stay unchanged.</p><p><strong>Missing misconception:</strong> RAG source scope and retrieval quality limits.</p><p><strong>Better glossary-near distractor:</strong> Better nearby distractors: fine-tuning, memory, web search, grounding, citation.</p></td>
+  <td>Explain RAG as a retrieval system that places outside evidence into current context during inference, not training, omniscience, or permanent memory.</td>
+</tr>
+<tr>
+  <td class="num">26</td>
+  <td><strong>Grounding</strong></td>
+  <td><span class="rec">Revise</span></td>
+  <td>Q4 RAG evidence plus generated answer connection; Q3 citation-looking answer myth.</td>
+  <td>Q2 is formulaic; Q1 is close to a definition.</td>
+  <td>A retrieved passage says one thing, but the answer claims another. Why can grounding still fail?</td>
+  <td><p><strong>Distractor:</strong> Use citation, retrieved evidence, source review, and hallucination as closer distractors.</p><p><strong>Feedback:</strong> Feedback should distinguish “evidence available” from “answer stayed faithful to evidence.”</p><p><strong>Missing misconception:</strong> Grounding can fail if retrieval is poor or the model misuses retrieved context.</p><p><strong>Better glossary-near distractor:</strong> Better nearby distractors: citation, RAG, evidence, hallucination, truth guarantee.</p></td>
+  <td>Explain grounding as connecting generated claims to available evidence while recognizing that citations or retrieval do not guarantee truth.</td>
+</tr>
+<tr>
+  <td class="num">27</td>
+  <td><strong>Hallucinations</strong></td>
+  <td><span class="rec">Revise</span></td>
+  <td>Q1 plausible text without grounding; Q3 hallucination is not lying/malice.</td>
+  <td>Q2 and Q4 are formulaic; Q2 “output event during inference” is abstract.</td>
+  <td>The model invents a realistic article title and citation. What makes this a hallucination rather than proof of intent?</td>
+  <td><p><strong>Distractor:</strong> Use lying, browsing, permanent memory, and guaranteed truth distractors.</p><p><strong>Feedback:</strong> Feedback should say unsupported fluent generation is not evidence of intent or awareness.</p><p><strong>Missing misconception:</strong> Hallucination vs lying, and hallucination vs low-confidence output.</p><p><strong>Better glossary-near distractor:</strong> Better nearby distractors: grounding, citation, truth, inference, intent.</p></td>
+  <td>Explain hallucination as fluent generated output that lacks adequate support, not intentional lying, consciousness, or proof of malice.</td>
+</tr>
+<tr>
+  <td class="num">28</td>
+  <td><strong>How AI Learns</strong></td>
+  <td><span class="rec">Replace / substantial revise</span></td>
+  <td>Q1 durable fine-tuning; Q5 learned vs temporary context.</td>
+  <td>Q2 and Q4 are meta/curriculum checks rather than model reasoning.</td>
+  <td>Sort this action: “The user pastes a policy into the prompt and the answer follows it.” Is that durable training, temporary context use, RAG, or sampling?</td>
+  <td><p><strong>Distractor:</strong> Use in-context learning, RAG, adapter training, fine-tuning, and inference as close distractors.</p><p><strong>Feedback:</strong> Feedback should identify the specific learning-like mechanism chosen, not just say durable vs temporary.</p><p><strong>Missing misconception:</strong> In-context learning as behavior within context, not a durable weight update.</p><p><strong>Better glossary-near distractor:</strong> Better nearby distractors: in-context learning, adapter, RAG, fine-tuning, memory.</p></td>
+  <td>Compare ways AI systems appear to learn and separate durable weight/adaptor changes from temporary context use, retrieval, and in-context behavior.</td>
+</tr>
+<tr>
+  <td class="num">29</td>
+  <td><strong>Diffusion vs Autoregression</strong></td>
+  <td><span class="rec">Revise</span></td>
+  <td>Q1 text token append vs denoising from noise.</td>
+  <td>Q2 “both are generation-time processes” is vague and too easy.</td>
+  <td>One system repeatedly denoises an image; another appends one text token at a time. Which boundary is most accurate?</td>
+  <td><p><strong>Distractor:</strong> Use all-generative-AI-is-LLM, diffusion-is-bigger-LLM, and softmax-proves-truth distractors.</p><p><strong>Feedback:</strong> Feedback should name denoising vs autoregressive append/repeat.</p><p><strong>Missing misconception:</strong> Autoregression vs diffusion as different generation processes, not different levels of intelligence.</p><p><strong>Better glossary-near distractor:</strong> Better nearby distractors: autoregression, denoising, sampling, multimodal AI.</p></td>
+  <td>Distinguish autoregressive text generation from diffusion-style denoising and show that generative AI methods do not all work like ChatGPT.</td>
+</tr>
+<tr>
+  <td class="num">30</td>
+  <td><strong>Multimodal AI</strong></td>
+  <td><span class="rec">Revise</span></td>
+  <td>Q1 multiple media types; Q3 not human perception/feelings.</td>
+  <td>Q2 says ability comes from training and architecture but is too vague.</td>
+  <td>A model accepts an image and a text question, then answers in text. What makes the system multimodal?</td>
+  <td><p><strong>Distractor:</strong> Use “all media become English first,” “human-like seeing,” “RAG over images,” and “larger context window” as distractors.</p><p><strong>Feedback:</strong> Feedback should say multimodal means multiple media types are represented or processed together.</p><p><strong>Missing misconception:</strong> Multimodal input/output vs human perception.</p><p><strong>Better glossary-near distractor:</strong> Better nearby distractors: modality, embedding, vision model, LLM, diffusion.</p></td>
+  <td>Explain multimodal AI as systems that represent or process more than one media type together without implying human-like perception.</td>
+</tr>
+<tr>
+  <td class="num">31</td>
+  <td><strong>The Perfect Storm</strong></td>
+  <td><span class="rec">Revise</span></td>
+  <td>Q1 convergence not spark; Q4 broadens to data/labor/infrastructure.</td>
+  <td>Q2 is vague; Q4 correct answer is long and essay-like.</td>
+  <td>Which combination best explains why LLM capability accelerated: one new prompt trick, data plus compute plus methods plus labor plus incentives, or sudden consciousness?</td>
+  <td><p><strong>Distractor:</strong> Replace generic energy/model-checkpoint options with single-transformer-breakthrough, compute-only, data-only, and prompts-trained-themselves.</p><p><strong>Feedback:</strong> Feedback should reinforce convergence, not one magic spark.</p><p><strong>Missing misconception:</strong> Labor and incentives as ingredients, not just technical resources.</p><p><strong>Better glossary-near distractor:</strong> Better nearby distractors: compute, data, labor, methods, incentives, scaling.</p></td>
+  <td>Explain modern LLM capability as convergence among data, compute, storage, methods, labor, and incentives, not one magic breakthrough.</td>
+</tr>
+<tr>
+  <td class="num">32</td>
+  <td><strong>Collective Intelligence, Extracted</strong></td>
+  <td><span class="rec">Revise</span></td>
+  <td>Q1 human-created data powers usefulness.</td>
+  <td>Q2 and Q3 are too simple and generic.</td>
+  <td>A model gives useful patterns learned from many people’s writing. What should that make learners ask about data and labor?</td>
+  <td><p><strong>Distractor:</strong> Use “model created abilities alone,” “private current memory,” “current prompt only,” and “conscious insight” distractors.</p><p><strong>Feedback:</strong> Feedback should connect usefulness to human-created data without overstating exact source recall.</p><p><strong>Missing misconception:</strong> Provenance, consent, and compensation.</p><p><strong>Better glossary-near distractor:</strong> Better nearby distractors: training data, corpus, labor, provenance, weights.</p></td>
+  <td>Explain that much model usefulness comes from patterns in human-created data and labor, raising questions of provenance, consent, and compensation.</td>
+</tr>
+<tr>
+  <td class="num">33</td>
+  <td><strong>Costs We Must Count</strong></td>
+  <td><span class="rec">Revise</span></td>
+  <td>Q2 training infrastructure vs repeated inference/deployment costs; Q3 digital is not cost-free.</td>
+  <td>Q1 is broad and the correct answer is unsurprisingly cautious.</td>
+  <td>A campus wants AI tutoring at scale. Which cost mix should leaders count before deployment?</td>
+  <td><p><strong>Distractor:</strong> Balance benefits-only, digital-free, only-hardware, only-prompt-cost distractors.</p><p><strong>Feedback:</strong> Feedback should name whether the learner missed training, inference, labor, privacy, or institutional costs.</p><p><strong>Missing misconception:</strong> Repeated inference workloads and downstream institutional labor.</p><p><strong>Better glossary-near distractor:</strong> Better nearby distractors: inference cost, training cost, deployment, governance, energy.</p></td>
+  <td>Identify costs across training, inference, infrastructure, data, labor, privacy, and institutional deployment rather than treating digital systems as cost-free.</td>
+</tr>
+<tr>
+  <td class="num">34</td>
+  <td><strong>Risk vs Myth</strong></td>
+  <td><span class="rec">Revise</span></td>
+  <td>Q1 private data risk; Q3 sci-fi doom vs mind myth.</td>
+  <td>Q2 and Q4 are generic. “Softmax stealing files” is too silly.</td>
+  <td>A staff member pastes student records into a third-party tool. Which risk is real, and which fear would be a myth?</td>
+  <td><p><strong>Distractor:</strong> Replace softmax-stealing with vendor retention, tool permission, private-data upload, hallucinated source, and overreliance confusions.</p><p><strong>Feedback:</strong> Feedback should teach the operational risk, not just reject a myth.</p><p><strong>Missing misconception:</strong> Tool permissions, privacy policy, hallucinated citations, and overreliance.</p><p><strong>Better glossary-near distractor:</strong> Better nearby distractors: privacy, hallucination, guardrail, tool, vendor retention.</p></td>
+  <td>Separate practical institutional risks from myths, focusing on privacy, bias, unsupported claims, overreliance, governance, and non-conscious models.</td>
+</tr>
+<tr>
+  <td class="num">35</td>
+  <td><strong>Benefits Worth Taking Seriously</strong></td>
+  <td><span class="rec">Revise</span></td>
+  <td>Q1 bounded benefit under human review; Q2 trained weights plus context/tools/RAG/review.</td>
+  <td>Q1 correct answer is much longer and more cautious than the distractors.</td>
+  <td>Which benefit claim is both useful and bounded: “AI replaces judgment,” “AI can draft/translate/summarize with review,” or “AI guarantees access”?</td>
+  <td><p><strong>Distractor:</strong> Make wrong choices plausible but incomplete: reduces friction without review, expands access without bias checks, automates feedback without instructor oversight.</p><p><strong>Feedback:</strong> Feedback should reinforce bounded benefit, not hype or fear.</p><p><strong>Missing misconception:</strong> Accessibility and translation benefits with limits.</p><p><strong>Better glossary-near distractor:</strong> Better nearby distractors: retrieval, human review, accessibility, automation, overreliance.</p></td>
+  <td>Name realistic AI benefits such as drafting, access, translation, summarization, and search while keeping limits, costs, and human review visible.</td>
+</tr>
+<tr>
+  <td class="num">36</td>
+  <td><strong>Human-Centered AI</strong></td>
+  <td><span class="rec">Revise</span></td>
+  <td>Q1 human judgment/accountability; Q2 prompts cannot give moral understanding.</td>
+  <td>Q3 and Q4 are generic.</td>
+  <td>In a high-stakes advising workflow, what should remain with accountable humans even when AI drafts options?</td>
+  <td><p><strong>Distractor:</strong> Use automate-all-decisions, hide model limits, outsource accountability, and bigger-model-is-enough distractors.</p><p><strong>Feedback:</strong> Feedback should name accountability, appeal, oversight, and context.</p><p><strong>Missing misconception:</strong> Appeal paths, auditing, and escalation.</p><p><strong>Better glossary-near distractor:</strong> Better nearby distractors: accountability, oversight, automation, guardrail, policy.</p></td>
+  <td>Explain human-centered AI as keeping human judgment, accountability, oversight, appeal, and context at the center of AI-assisted decisions.</td>
+</tr>
+<tr>
+  <td class="num">37</td>
+  <td><strong>Better AI Is a Choice</strong></td>
+  <td><span class="rec">Revise</span></td>
+  <td>Q2 durable system choices vs workflow choices; Q3 harms not inevitable.</td>
+  <td>Q1 has obvious straw-man distractors.</td>
+  <td>A team wants fewer unsupported answers in a student-support bot. Which design choice helps without pretending risk disappears?</td>
+  <td><p><strong>Distractor:</strong> Replace “ignore provenance/remove accountability” with plausible but incomplete controls, such as only a longer prompt or only a larger model.</p><p><strong>Feedback:</strong> Feedback should identify design levers: data, retrieval, review, evaluation, policy, incentives.</p><p><strong>Missing misconception:</strong> Evaluation and governance as design choices.</p><p><strong>Better glossary-near distractor:</strong> Better nearby distractors: evaluation, governance, RAG, guardrail, human review.</p></td>
+  <td>Show that better AI outcomes depend on design, governance, incentives, evaluation, data choices, and human review, not inevitability.</td>
+</tr>
+<tr>
+  <td class="num">38</td>
+  <td><strong>Effective Prompting from Model Literacy</strong></td>
+  <td><span class="rec">Revise</span></td>
+  <td>Q1 prompt shapes current context; Q2 prompting does not change weights.</td>
+  <td>Q3 and Q4 are formulaic.</td>
+  <td>A prompt includes the task, audience, evidence, and constraints. What does that improve, and what does it not do?</td>
+  <td><p><strong>Distractor:</strong> Use permanent fine-tuning, truth guarantee, retrieval from all files, and hidden intent as distractors.</p><p><strong>Feedback:</strong> Feedback should say prompting shapes current context; it does not guarantee truth or update weights.</p><p><strong>Missing misconception:</strong> Prompting cannot create missing evidence or replace verification.</p><p><strong>Better glossary-near distractor:</strong> Better nearby distractors: context, system prompt, RAG, fine-tuning, grounding.</p></td>
+  <td>Use model literacy to prompt clearly: shape current context, provide evidence and constraints, and remember prompting is not magic, training, or truth guarantee.</td>
+</tr>
+<tr>
+  <td class="num">39</td>
+  <td><strong>Model Literate Synthesis</strong></td>
+  <td><span class="rec">Revise</span></td>
+  <td>Q1 mechanism plus responsibility; Q2 durable/context/retrieved/generated separation.</td>
+  <td>Q5 is inspirational, not a checkpoint; Q4 is meta.</td>
+  <td>A learner explains one answer from prompt to output. Which trace correctly separates prompt tokens, retrieved context, hidden states, logits, sampling, and human review?</td>
+  <td><p><strong>Distractor:</strong> Use fluency=wisdom, RAG=truth, prompt=training, and risk=myth as close synthesis errors.</p><p><strong>Feedback:</strong> Feedback should point to the exact boundary the learner mixed up.</p><p><strong>Missing misconception:</strong> Full prompt lifecycle trace that integrates mechanism, evidence, and responsibility.</p><p><strong>Better glossary-near distractor:</strong> Better nearby distractors: inference, RAG, grounding, hallucination, alignment, human review.</p></td>
+  <td>Synthesize the full prompt-to-response path and use it to make better human judgments about evidence, limits, risks, benefits, and accountability.</td>
+</tr></tbody>
+</table>
+<h2 class="section-break">Top 20 Question Edits</h2><ol><li>Embeddings Q2: replace generic stage/objective stem with an applied embedding-table lookup vs hidden-state scenario.</li><li>Tensors Q2: replace generic distinction question with a tensor-shape question using token and feature axes.</li><li>Hidden States Q4: replace incomplete “Embeddings start token vectors” with embedding-to-hidden-state transformation.</li><li>Sampling Q4: replace “Softmax provides probabilities” with a scenario asking what sampling does next.</li><li>RAG Q4: replace terse context-window dependency answer with retrieved-text-enters-context scenario.</li><li>Grounding Q2: replace formulaic distinction question with evidence-misuse or stale-retrieval scenario.</li><li>Hallucinations Q2: replace “output event during inference” with an unsupported fluent citation scenario.</li><li>How AI Learns Q2: replace generic durability check with applied durable-vs-temporary classification.</li><li>How AI Learns Q4: replace curriculum-connection item with prompt/RAG/fine-tune/sampled-token boundary scenario.</li><li>Diffusion Q2: replace vague “both are generation-time processes” with denoising vs token-append contrast.</li><li>Perfect Storm Q2: replace vague storm-durable-training item with convergence ingredient question.</li><li>Risk vs Myth Q2: replace generic risk-literacy item with a privacy/tool-permission institutional case.</li><li>Risk vs Myth Q4: replace curriculum-connection item with risk classification scenario.</li><li>Benefits Q1: shorten correct answer and make distractors plausible, not straw-man hype.</li><li>Layers Q2: stop using MLP/feed-forward as simply wrong; test repeated block structure instead.</li><li>Attention Q2: use pronoun/reference relevance case instead of generic distinction stem.</li><li>MLP Q3: rewrite as attention-vs-MLP applied boundary, not “which misconception” wording.</li><li>Pretraining Q4: shorten correct answer and make the RAG/search distractor closer.</li><li>Fine-Tuning Q1: change “house style” to “corporate norms” and keep durable-training focus.</li><li>Model Literate Synthesis Q5: replace inspirational statement with full-trace diagnostic scenario.</li></ol>
+<h2>Top 20 Distractor Edits</h2><ol><li>Replace recurring “It is mainly about X” distractors across cards 13-39 with misconception-first distractors.</li><li>Embeddings Q1: replace finished sentence / human memory with hidden state, token ID, dictionary definition, permanent memory.</li><li>Embeddings Q2: replace Tokenizer/Feature generic distractors with token ID lookup, hidden state, and context window.</li><li>Vectors Q2: avoid marking “embedding table” wrong without clarifying whether the row is a vector.</li><li>Tensors Q1: replace word/rule distractors with vector, matrix, weight tensor, context window.</li><li>Tensors Q2: avoid “distributed representation” unless the boundary is explicit.</li><li>Attention Q2/Q3: replace system prompt / response-so-far distractors with MLP, sampling, hidden state, awareness.</li><li>MLP Q1: replace “reads private files” with attention mixes positions, sampling chooses token, retrieval searches documents.</li><li>Layers Q2: do not use MLP/feed-forward as wrong; use interface layer, memory store, or training-data update.</li><li>Logits Q2: replace activation/vector generic distractors with probability, truth score, sampled token, embedding row.</li><li>Sampling Q4: replace completion/generated-token generic distractors with softmax, temperature, weight update, truth verification.</li><li>RAG Q2: use fine-tuning, permanent memory, all-files access, truth guarantee instead of generic training-data/system-prompt labels.</li><li>Grounding Q2: use citation, retrieved evidence, source review, hallucination instead of prompt/response-token generic labels.</li><li>How AI Learns Q4: use durable training, temporary context, retrieval, sampled token as close alternatives.</li><li>Diffusion Q2: use token append, denoising, all-generative-AI-is-LLM, truth guarantee as distractors.</li><li>Perfect Storm Q2: use one magic breakthrough, data-only, prompts-trained-themselves, compute-only.</li><li>Risk Q1: replace “softmax stealing files” with vendor retention, tool permission, private-data upload, hallucinated source.</li><li>Risk Q2: avoid human review/responsible AI as wrong answers unless the stem defines a sharper boundary.</li><li>Better AI Q1: replace obvious “ignore provenance/remove accountability” with plausible but incomplete controls.</li><li>Model Synthesis Q2: use mixed-up lifecycle explanations rather than isolated glossary labels.</li></ol>
+<h2 class="section-break">Top 10 Missing Questions</h2><ol><li>Embedding vs hidden state: learned starting vector vs temporary context-shaped internal vector.</li><li>Attention vs MLP: cross-token relevance vs per-token feature reshaping.</li><li>Logits -&gt; softmax -&gt; sampling: raw scores, probabilities, then one chosen token.</li><li>RAG source scope: retrieval searches connected sources/indexes, not all files or the web by itself.</li><li>Grounding failure: retrieved evidence can be poor, stale, irrelevant, or misused.</li><li>Hallucination vs lying: unsupported fluent output is not evidence of intent or malice.</li><li>Context window vs memory: temporary visible context vs saved profile/tool memory.</li><li>Diffusion denoising vs autoregressive append-repeat loop.</li><li>Guardrail/policy/tool wrapper vs model weights.</li><li>Full synthesis trace: prompt tokens -&gt; IDs -&gt; embeddings -&gt; layers -&gt; logits -&gt; softmax -&gt; sampling -&gt; append -&gt; evidence/human review.</li></ol>
+<h2>Top 10 Vague Or Curriculum-Centered Wordings</h2><ol><li>“A learner is tracing Embeddings. Which choice keeps the model mechanism clear?”</li><li>“During Morning Commute, what distinction should the learner keep clear about Embeddings?”</li><li>“During Morning Commute, what distinction should the learner keep clear about Tensors?”</li><li>“Which common confusion does Attention help learners avoid?”</li><li>“How does Layers connect to the prompt’s Journey?”</li><li>“During The Day Repeats, what distinction should the learner keep clear about Context Window?”</li><li>“How does RAG and Retrieval connect to the prompt’s Journey?”</li><li>“How does How AI Learns connect to the prompt’s Journey?”</li><li>“During Twilight: The Wider Landscape, what distinction should the learner keep clear about Diffusion vs Autoregression?”</li><li>“How does Risk vs Myth connect to the prompt’s Journey?”</li></ol>
+<h2>Top 10 Correct Answers Too Obvious By Length Or Style</h2><ol><li>Pretraining Q4: correct answer is 2.48x average wrong-answer length.</li><li>Benefits Q1: correct answer is 2.33x and carries the obviously safe phrase “under human review.”</li><li>Layers Q4: correct answer is 2.22x and more technical than generic distractors.</li><li>Diffusion Q1: correct answer is 2.09x and the only balanced two-branch answer.</li><li>RAG Q1: correct answer is 2.08x and all distractors are short myths.</li><li>Alignment Q4: correct answer is 2.04x and the only nuanced product-layer answer.</li><li>MLP Q3: correct answer is 2.04x and repeats “It corrects the misconception.”</li><li>Embeddings Q1: correct answer is 2.0x and the distractors are short/silly.</li><li>Hallucinations Q1: correct answer is 1.98x and distractors are cartoonish.</li><li>Grounding Q4: correct answer is 1.97x and distractors are generic labels.</li></ol>
+<h2 class="section-break">Revised Objective Table</h2>
+<table class="objective-table"><thead><tr><th class="num">#</th><th>Learning card</th><th>Revised objective</th></tr></thead><tbody><tr><td class="num">1</td><td><strong>What Is an LLM?</strong></td><td>Explain that an LLM uses learned weights plus current context to score and generate next tokens without implying awareness, search, or permanent learning.</td></tr><tr><td class="num">2</td><td><strong>Where LLMs Fit</strong></td><td>Use the AI family map to distinguish AI, ML, deep learning, generative AI, LLMs, diffusion models, multimodal systems, and AI products.</td></tr><tr><td class="num">3</td><td><strong>Rationalists vs Empiricists</strong></td><td>Compare rules-first AI and learned-pattern AI while recognizing that modern systems can combine rules, retrieval, policies, tools, and learned models.</td></tr><tr><td class="num">4</td><td><strong>Training</strong></td><td>Trace training as example, prediction, loss, optimizer, weight update, repeat; separate durable training from inference, retrieval, sampling, and prompt changes.</td></tr><tr><td class="num">5</td><td><strong>Pretraining</strong></td><td>Explain pretraining as broad durable pattern learning from many next-token targets, not perfect recall, live browsing, or a searchable archive.</td></tr><tr><td class="num">6</td><td><strong>Overfitting and Generalization</strong></td><td>Diagnose overfitting and explain that set-aside validation examples are kept out of training to test transfer beyond examples used to fit weights.</td></tr><tr><td class="num">7</td><td><strong>Fine-Tuning</strong></td><td>Distinguish fine-tuning or adapter training as durable post-pretraining adaptation from prompt, RAG, and sampling-time steering.</td></tr><tr><td class="num">8</td><td><strong>Alignment</strong></td><td>Reason about alignment as behavior shaping through training, prompts, policies, filters, evaluation, and deployment controls without treating it as conscience or truth guarantee.</td></tr><tr><td class="num">9</td><td><strong>Inference</strong></td><td>Explain inference as a forward pass using fixed weights and temporary context-shaped states, not durable learning.</td></tr><tr><td class="num">10</td><td><strong>Prompt vs Response</strong></td><td>Separate given prompt/context tokens from generated response tokens and explain that generated tokens are appended into the next inference context.</td></tr><tr><td class="num">11</td><td><strong>Tokenization</strong></td><td>Explain tokenization as turning text into model-readable chunks that may be words, word pieces, punctuation, or other units before ID lookup.</td></tr><tr><td class="num">12</td><td><strong>Token IDs</strong></td><td>Explain token IDs as lookup keys from token chunks to embedding rows, not meanings, memories, or source retrieval by themselves.</td></tr><tr><td class="num">13</td><td><strong>Embeddings</strong></td><td>Distinguish an embedding as a learned starting vector retrieved from a durable embedding table from a temporary hidden state shaped by context.</td></tr><tr><td class="num">14</td><td><strong>Vectors</strong></td><td>Explain vectors as numerical representations with distributed features and distinguish vectors from scalar IDs, tensors, and human-readable labels.</td></tr><tr><td class="num">15</td><td><strong>Tensors</strong></td><td>Explain tensors as shaped numerical blocks that organize many token vectors and features for layer operations.</td></tr><tr><td class="num">16</td><td><strong>Attention</strong></td><td>Explain attention as temporary weighted relevance between token positions that shapes hidden states, not human awareness or final token choice by itself.</td></tr><tr><td class="num">17</td><td><strong>MLP</strong></td><td>Explain the MLP as per-token feature reshaping inside each layer, distinct from attention mixing across token positions.</td></tr><tr><td class="num">18</td><td><strong>Layers</strong></td><td>Explain transformer layers as repeated attention-plus-MLP transformations that refine temporary hidden states without implying human thought steps.</td></tr><tr><td class="num">19</td><td><strong>Hidden States</strong></td><td>Distinguish hidden states as temporary context-shaped internal vectors created during inference from embeddings, weights, visible text, and memory.</td></tr><tr><td class="num">20</td><td><strong>Logits</strong></td><td>Explain logits as temporary raw next-token scores produced before softmax, not probabilities, truth scores, or complete answers.</td></tr><tr><td class="num">21</td><td><strong>Softmax</strong></td><td>Explain softmax as converting logits into a next-token probability distribution, not choosing the token or proving truth.</td></tr><tr><td class="num">22</td><td><strong>Sampling</strong></td><td>Explain sampling as choosing one next token from probabilities during inference, after softmax and before append/repeat.</td></tr><tr><td class="num">23</td><td><strong>Autoregression</strong></td><td>Explain autoregression as next token, append to context, run again, while weights usually remain unchanged and context grows.</td></tr><tr><td class="num">24</td><td><strong>Context Window</strong></td><td>Explain the context window as temporary visible input space for the current run, not permanent memory, and show how autoregression and RAG compete for that space.</td></tr><tr><td class="num">25</td><td><strong>RAG and Retrieval</strong></td><td>Explain RAG as a retrieval system that places outside evidence into current context during inference, not training, omniscience, or permanent memory.</td></tr><tr><td class="num">26</td><td><strong>Grounding</strong></td><td>Explain grounding as connecting generated claims to available evidence while recognizing that citations or retrieval do not guarantee truth.</td></tr><tr><td class="num">27</td><td><strong>Hallucinations</strong></td><td>Explain hallucination as fluent generated output that lacks adequate support, not intentional lying, consciousness, or proof of malice.</td></tr><tr><td class="num">28</td><td><strong>How AI Learns</strong></td><td>Compare ways AI systems appear to learn and separate durable weight/adaptor changes from temporary context use, retrieval, and in-context behavior.</td></tr><tr><td class="num">29</td><td><strong>Diffusion vs Autoregression</strong></td><td>Distinguish autoregressive text generation from diffusion-style denoising and show that generative AI methods do not all work like ChatGPT.</td></tr><tr><td class="num">30</td><td><strong>Multimodal AI</strong></td><td>Explain multimodal AI as systems that represent or process more than one media type together without implying human-like perception.</td></tr><tr><td class="num">31</td><td><strong>The Perfect Storm</strong></td><td>Explain modern LLM capability as convergence among data, compute, storage, methods, labor, and incentives, not one magic breakthrough.</td></tr><tr><td class="num">32</td><td><strong>Collective Intelligence, Extracted</strong></td><td>Explain that much model usefulness comes from patterns in human-created data and labor, raising questions of provenance, consent, and compensation.</td></tr><tr><td class="num">33</td><td><strong>Costs We Must Count</strong></td><td>Identify costs across training, inference, infrastructure, data, labor, privacy, and institutional deployment rather than treating digital systems as cost-free.</td></tr><tr><td class="num">34</td><td><strong>Risk vs Myth</strong></td><td>Separate practical institutional risks from myths, focusing on privacy, bias, unsupported claims, overreliance, governance, and non-conscious models.</td></tr><tr><td class="num">35</td><td><strong>Benefits Worth Taking Seriously</strong></td><td>Name realistic AI benefits such as drafting, access, translation, summarization, and search while keeping limits, costs, and human review visible.</td></tr><tr><td class="num">36</td><td><strong>Human-Centered AI</strong></td><td>Explain human-centered AI as keeping human judgment, accountability, oversight, appeal, and context at the center of AI-assisted decisions.</td></tr><tr><td class="num">37</td><td><strong>Better AI Is a Choice</strong></td><td>Show that better AI outcomes depend on design, governance, incentives, evaluation, data choices, and human review, not inevitability.</td></tr><tr><td class="num">38</td><td><strong>Effective Prompting from Model Literacy</strong></td><td>Use model literacy to prompt clearly: shape current context, provide evidence and constraints, and remember prompting is not magic, training, or truth guarantee.</td></tr><tr><td class="num">39</td><td><strong>Model Literate Synthesis</strong></td><td>Synthesize the full prompt-to-response path and use it to make better human judgments about evidence, limits, risks, benefits, and accountability.</td></tr></tbody></table>
+<h2>Final Recommendation</h2>
+<div class="callout"><strong>Needs revision before live.</strong> Keep the bank active for development testing if the goal is to exercise the UI, progress logic, feedback states, and badge confidence workflow. Before live learner use, revise the 27 promoted draft cards by replacing boilerplate objectives, converting formulaic stems into model-trace scenarios, and replacing generic glossary distractors with plausible misconception-first alternatives.</div>
+</body>
+</html>

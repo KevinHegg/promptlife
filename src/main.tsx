@@ -21,10 +21,10 @@ import {
 } from './components/ConceptAnimations'
 import { ExerciseShell } from './components/ExerciseSystem'
 import { VisualAid, VisualAidGallery, visualAidStyleVariants } from './components/VisualAids'
-import { ACTIVE_CHECKPOINT_BANK, FULL_CHECKPOINT_BANK_V02711, hasV02711CheckpointBank } from './data/checkpointBankV02711'
+import { FULL_CHECKPOINT_BANK_V02712, hasV02712CheckpointBank } from './data/checkpointBankV02712'
 import { acts, games, glossary, learningModes, lessons } from './data/content'
 import { buildLessonReviewProfile, reviewRubricCategories } from './data/contentReview'
-import { emptyExerciseProgress, exerciseById, exercises, lessonExerciseIds } from './data/exercises'
+import { emptyExerciseProgress, exerciseById, lessonExerciseIds } from './data/exercises'
 import { PROMPT_RUN_FINAL_ID, PROMPT_RUN_SAMPLE, emptyPromptRunProgress, promptRunFinalChallenge, promptRunSteps } from './data/promptRun'
 import { attentionExample, canonicalPromptResponse } from './data/canonicalExamples'
 import { getLessonSourceReview, sourceRegistry } from './data/sourceRegistry'
@@ -72,7 +72,7 @@ const HOME_ASSETS = {
   heroFallback: `${ASSET}/illustrations/scene-hero-feature-cloud@mobile.png`
 }
 // Bump this for each shipped app change; the Badge screen displays it under Start over.
-const APP_VERSION = '0.27.11'
+const APP_VERSION = '0.27.12'
 const STORAGE_KEYS = {
   lastLocation: 'promptlife:v1:lastLocation',
   lessonId: 'promptlife:v1:lessonId',
@@ -408,17 +408,9 @@ function shouldUseLegacyCheckpointBank() {
   }
 }
 
-function shouldShowCheckpointBankDebug() {
-  try {
-    return new URLSearchParams(window.location.search).get('debug') === '1'
-  } catch {
-    return false
-  }
-}
-
 function getActiveCheckpointQuiz(lesson, useLegacyBank = shouldUseLegacyCheckpointBank()) {
-  if (!useLegacyBank && hasV02711CheckpointBank(lesson.id)) {
-    return FULL_CHECKPOINT_BANK_V02711[lesson.id]
+  if (!useLegacyBank && hasV02712CheckpointBank(lesson.id)) {
+    return FULL_CHECKPOINT_BANK_V02712[lesson.id]
   }
   return lesson.quiz
 }
@@ -470,13 +462,6 @@ function App() {
   const [gameId, setGameId] = useState(null)
   const [drawerTerm, setDrawerTerm] = useState(null)
   const [statusMessage, setStatusMessage] = useState('')
-  const debugEnabled = useMemo(() => {
-    try {
-      return new URLSearchParams(window.location.search).get('debug') === '1'
-    } catch {
-      return false
-    }
-  }, [])
 
   const activeLesson = lessons.find((lesson) => lesson.id === lessonId) ?? lessons[0]
   const activeLessonIndex = Math.max(0, lessons.findIndex((lesson) => lesson.id === activeLesson.id))
@@ -592,63 +577,6 @@ function App() {
     setStatusMessage('Progress reset. You can begin again.')
   }
 
-  function markFirstLessonComplete() {
-    setCompleted([lessons[0].id])
-    setLessonId(lessons[1]?.id ?? lessons[0].id)
-    setLessonMode('learn')
-    setTab('journey')
-    setStatusMessage('First lesson marked complete for testing.')
-  }
-
-  function markAllLessonsIncomplete() {
-    setCompleted([])
-    setLessonId(lessons[0].id)
-    setLessonMode('learn')
-    setStatusMessage('All lessons marked incomplete.')
-  }
-
-  function unlockBadgeForTesting() {
-    const exerciseIds = exercises.map((exercise) => exercise.id)
-    setCompleted(lessons.map((lesson) => lesson.id))
-    setGameInsights(games.map((game) => game.id))
-    setExerciseProgress({
-      completed: exerciseIds,
-      attempts: Object.fromEntries(exerciseIds.map((id) => [id, 1])),
-      lastAnswers: {},
-      insights: exerciseIds
-    })
-    setPromptRunProgress({
-      completedSteps: promptRunSteps.map((step) => step.id),
-      finalChallengeComplete: true,
-      insights: [...promptRunSteps.map((step) => step.id), PROMPT_RUN_FINAL_ID],
-      revealedSteps: [],
-      attempts: Object.fromEntries([...promptRunSteps.map((step) => step.id), PROMPT_RUN_FINAL_ID].map((id) => [id, 1])),
-      lastAnswers: {}
-    })
-    setTraceComplete(true)
-    setLearningTourComplete(true)
-    setTab('badge')
-    setStatusMessage('Badge unlocked for visual testing.')
-  }
-
-  function clearAllPromptLifeKeysForDebug() {
-    if (!window.confirm('Start over? This will clear your Prompt Life progress on this device.')) return
-    clearPromptLifeStorage()
-    setTab('home')
-    setLessonId(lessons[0].id)
-    setCompleted([])
-    setReflections({})
-    setGameInsights([])
-    setExerciseProgress(emptyExerciseProgress())
-    setPromptRunProgress(emptyPromptRunProgress())
-    setTraceComplete(false)
-    setLearningTourComplete(false)
-    setGameId(null)
-    setLessonMode('learn')
-    setDrawerTerm(null)
-    setStatusMessage('Prompt Life saved progress keys cleared. Reload or reset progress to begin from a blank state.')
-  }
-
   function openLesson(id, mode = 'learn') {
     setLessonId(id)
     setLessonMode(mode)
@@ -759,7 +687,6 @@ function App() {
             onPromptRunAttempt={recordPromptRunAttempt}
             onTraceComplete={() => setTraceComplete(true)}
             onLearningTourComplete={() => setLearningTourComplete(true)}
-            debugEnabled={debugEnabled}
           />
         )}
         {tab === 'glossary' && <GlossaryScreen onOpen={setDrawerTerm} onPractice={() => openPlayFeature('glossary-dojo')} />}
@@ -770,15 +697,9 @@ function App() {
             gameInsights={gameInsights}
             traceComplete={traceComplete}
             reflections={reflections}
-            exerciseProgress={exerciseProgress}
             promptRunProgress={promptRunProgress}
             statusMessage={statusMessage}
-            debugEnabled={debugEnabled}
             onResetProgress={() => resetProgress()}
-            onMarkFirstLessonComplete={markFirstLessonComplete}
-            onMarkAllLessonsIncomplete={markAllLessonsIncomplete}
-            onUnlockBadge={unlockBadgeForTesting}
-            onClearAllPromptLifeKeys={clearAllPromptLifeKeysForDebug}
           />
         )}
       </main>
@@ -1102,8 +1023,6 @@ function LessonScreen({ lesson, mode, lessonIndex, totalLessons, reflection, onC
   const howItConnects = lesson.howItConnects ?? lesson.relationship
   const choiceOrderSeed = useMemo(() => getChoiceOrderSeed(), [])
   const useLegacyCheckpointBank = useMemo(() => shouldUseLegacyCheckpointBank(), [])
-  const debugCheckpointBank = useMemo(() => shouldShowCheckpointBankDebug(), [])
-  const usesV02711CheckpointBank = !useLegacyCheckpointBank && hasV02711CheckpointBank(lesson.id)
   const lessonCheckpointQuiz = useMemo(
     () => getActiveCheckpointQuiz(lesson, useLegacyCheckpointBank),
     [lesson, useLegacyCheckpointBank]
@@ -1256,8 +1175,6 @@ function LessonScreen({ lesson, mode, lessonIndex, totalLessons, reflection, onC
         <h1 id="lesson-title" tabIndex={-1}>{lesson.title}</h1>
         <p className="lede small">{lesson.subtitle}</p>
         <p className="lesson-definition">{definition}</p>
-        {debugCheckpointBank && usesV02711CheckpointBank && <p className="mode-note debug-note" role="status">Developer checkpoint bank: {ACTIVE_CHECKPOINT_BANK}</p>}
-        {debugCheckpointBank && mode === 'preview' && <p className="mode-note debug-note" role="status">Previewing this learning card. Progress will not change.</p>}
         {mode === 'review' && <p className="mode-note" role="status">Reviewing a completed learning card.</p>}
       </header>
 
@@ -3507,134 +3424,7 @@ function FeatureCloudDemo() {
   )
 }
 
-function getStorageKeyDebugState(key) {
-  try {
-    if (typeof localStorage === 'undefined') return { key, present: false, bytes: 0, preview: 'localStorage unavailable' }
-    const raw = localStorage.getItem(key)
-    if (raw === null) return { key, present: false, bytes: 0, preview: '' }
-    return {
-      key,
-      present: true,
-      bytes: raw.length,
-      preview: raw.length > 180 ? `${raw.slice(0, 180)}...` : raw
-    }
-  } catch (error) {
-    return {
-      key,
-      present: false,
-      bytes: 0,
-      preview: error instanceof Error ? error.message : 'Unable to inspect storage'
-    }
-  }
-}
-
-function buildPlayDebugSnapshot(playProgress, challengeSummaries, legacySignals) {
-  const keyGroups = [
-    ['Shared Play', STORAGE_KEYS.playChallenges],
-    ['Glossary Dojo', STORAGE_KEYS.glossaryDojo],
-    ['Journey progress', STORAGE_KEYS.progress],
-    ['Exercise progress', STORAGE_KEYS.exerciseProgress],
-    ['Legacy game insights', STORAGE_KEYS.gameInsights],
-    ['Legacy Prompt Run', STORAGE_KEYS.promptRunProgress],
-    ['Prompt Run completion flag', STORAGE_KEYS.traceComplete],
-    ['Learning tour compatibility', STORAGE_KEYS.learningTourComplete],
-    ['Legacy pl.gameInsights', LEGACY_STORAGE_KEYS.gameInsights],
-    ['Legacy pl.promptRunProgress', LEGACY_STORAGE_KEYS.promptRunProgress],
-    ['Legacy pl.traceComplete', LEGACY_STORAGE_KEYS.traceComplete],
-    ['Legacy pl.learningTourComplete', LEGACY_STORAGE_KEYS.learningTourComplete]
-  ]
-
-  return {
-    version: APP_VERSION,
-    sharedPlayStorage: {
-      key: STORAGE_KEYS.playChallenges,
-      version: playProgress.version,
-      storageAvailable: playProgress.storageAvailable,
-      storedChallengeIds: Object.keys(playProgress.challenges ?? {})
-    },
-    visibleChallenges: challengeSummaries.map((challenge) => ({
-      id: challenge.id,
-      status: challenge.status,
-      attempts: challenge.progress.attempts,
-      completions: challenge.progress.completions,
-      bestProgressPct: challenge.progress.bestProgressPct,
-      lastOutcome: challenge.progress.lastOutcome ?? '',
-      lastPlayedAt: challenge.progress.lastPlayedAt ?? '',
-      completedAt: challenge.progress.completedAt ?? ''
-    })),
-    legacyBridgeSignals: {
-      gameInsightIds: legacySignals.gameInsights ?? [],
-      traceComplete: Boolean(legacySignals.traceComplete),
-      promptRunCompletedSteps: legacySignals.promptRunProgress?.completedSteps?.length ?? 0,
-      promptRunFinalChallengeComplete: Boolean(legacySignals.promptRunProgress?.finalChallengeComplete),
-      learningTourComplete: Boolean(legacySignals.learningTourComplete),
-      glossaryDojoRoundsAttempted: legacySignals.glossaryDojoProgress?.roundsAttempted ?? 0,
-      glossaryDojoRoundsCompleted: legacySignals.glossaryDojoProgress?.roundsCompleted ?? 0
-    },
-    storageKeys: keyGroups.map(([label, key]) => ({
-      label,
-      ...getStorageKeyDebugState(key)
-    }))
-  }
-}
-
-function PlayProgressDebugInspector({ snapshot }) {
-  return (
-    <section className="play-debug-inspector" aria-labelledby="play-debug-inspector-title">
-      <div>
-        <p className="eyebrow">Debug only</p>
-        <h2 id="play-debug-inspector-title">Play progress inspector</h2>
-        <p>Visible because debug mode is on. This shows local practice state and legacy bridge signals without changing progress.</p>
-      </div>
-      <div className="play-debug-summary-grid">
-        <span><strong>App version</strong>{snapshot.version}</span>
-        <span><strong>Storage key</strong>{snapshot.sharedPlayStorage.key}</span>
-        <span><strong>Storage available</strong>{snapshot.sharedPlayStorage.storageAvailable ? 'yes' : 'no'}</span>
-        <span><strong>Stored ids</strong>{snapshot.sharedPlayStorage.storedChallengeIds.length || 0}</span>
-      </div>
-      <details open>
-        <summary>Visible Play challenges</summary>
-        <div className="play-debug-table" role="table" aria-label="Visible Play challenge progress">
-          <div role="row" className="play-debug-table-head">
-            <span role="columnheader">Challenge</span>
-            <span role="columnheader">Status</span>
-            <span role="columnheader">Tries</span>
-            <span role="columnheader">Done</span>
-            <span role="columnheader">Pct</span>
-          </div>
-          {snapshot.visibleChallenges.map((challenge) => (
-            <div role="row" key={challenge.id}>
-              <span role="cell">{challenge.id}</span>
-              <span role="cell">{challenge.status}</span>
-              <span role="cell">{challenge.attempts}</span>
-              <span role="cell">{challenge.completions}</span>
-              <span role="cell">{challenge.bestProgressPct}%</span>
-            </div>
-          ))}
-        </div>
-      </details>
-      <details>
-        <summary>localStorage keys</summary>
-        <ul className="play-debug-key-list">
-          {snapshot.storageKeys.map((item) => (
-            <li key={`${item.label}-${item.key}`}>
-              <strong>{item.label}</strong>
-              <code>{item.key}</code>
-              <span>{item.present ? `${item.bytes} bytes` : 'not present'}</span>
-              {item.preview && <small>{item.preview}</small>}
-            </li>
-          ))}
-        </ul>
-      </details>
-      <details>
-        <summary>Bridge signals</summary>
-        <pre>{JSON.stringify(snapshot.legacyBridgeSignals, null, 2)}</pre>
-      </details>
-    </section>
-  )
-}
-
-function PlayScreen({ gameId, gameInsights, traceComplete, promptRunProgress, learningTourComplete, exerciseProgress, setGameId, onGlossary, onInsight, onExerciseAttempt, onPromptRunAttempt, onTraceComplete, onLearningTourComplete, debugEnabled = false }) {
+function PlayScreen({ gameId, gameInsights, traceComplete, promptRunProgress, learningTourComplete, exerciseProgress, setGameId, onGlossary, onInsight, onExerciseAttempt, onPromptRunAttempt, onTraceComplete, onLearningTourComplete }) {
   const [playProgress, setPlayProgress] = useState(() => loadPlayChallengeProgress())
   const refreshPlayProgress = useCallback(() => setPlayProgress(loadPlayChallengeProgress()), [])
   const dojoProgress = loadGlossaryDojoProgress()
@@ -3651,7 +3441,6 @@ function PlayScreen({ gameId, gameInsights, traceComplete, promptRunProgress, le
       image: item.image?.startsWith('/') ? `${BASE}${item.image}` : item.image
     }))
   const completedFinalChallenges = getCompletedFinalPlayCount(challengeSummaries)
-  const playDebugSnapshot = debugEnabled ? buildPlayDebugSnapshot(playProgress, challengeSummaries, legacySignals) : null
 
   const recordChallengeStart = useCallback((id, outcome = {}) => {
     setPlayProgress(recordPlayChallengeAttempt(id, outcome))
@@ -3829,7 +3618,6 @@ function PlayScreen({ gameId, gameInsights, traceComplete, promptRunProgress, le
           ))}
         </PlayChallengeBoard>
       </section>
-      {playDebugSnapshot && <PlayProgressDebugInspector snapshot={playDebugSnapshot} />}
     </section>
   )
 }
@@ -6046,46 +5834,133 @@ function GlossaryDrawer({ termId, onOpen, onClose, onOpenLesson }) {
   )
 }
 
+const BADGE_LEARNING_OBJECTIVES = [
+  {
+    title: 'Model basics',
+    stages: ['Before Morning'],
+    lessonIds: ['what-is-llm', 'where-llms-fit', 'history'],
+    description: 'Distinguish LLMs from the wider AI family, products, databases, and minds.'
+  },
+  {
+    title: 'Training and inference',
+    stages: ['Before Morning', 'Morning Commute'],
+    lessonIds: ['training', 'pretraining', 'overfitting-generalization', 'fine-tuning', 'alignment', 'inference'],
+    description: 'Separate durable weight changes from temporary forward-pass computation.'
+  },
+  {
+    title: 'Prompt path',
+    stages: ['Morning Commute', 'Workday', 'Decision Room', 'Day Repeats'],
+    lessonIds: ['prompt-response', 'tokens', 'token-ids', 'embeddings', 'vectors', 'tensors', 'attention', 'mlp', 'layers', 'hidden-states', 'logits', 'softmax', 'sampling', 'autoregression'],
+    description: 'Trace a prompt through tokens, vectors, layers, scores, probabilities, and generated tokens.'
+  },
+  {
+    title: 'Context and grounding',
+    stages: ['Day Repeats'],
+    lessonIds: ['context-window', 'rag-retrieval', 'grounding', 'hallucinations'],
+    description: 'Explain temporary context, retrieval, evidence support, and why fluency can outrun support.'
+  },
+  {
+    title: 'Probability literacy',
+    stages: ['Decision Room', 'Day Repeats'],
+    lessonIds: ['logits', 'softmax', 'sampling', 'autoregression', 'hallucinations'],
+    description: 'Keep raw scores, probabilities, sampled tokens, and truth claims separate.'
+  },
+  {
+    title: 'Wider landscape',
+    stages: ['Twilight'],
+    lessonIds: ['how-ai-learns', 'diffusion', 'multimodal', 'perfect-storm'],
+    description: 'Compare LLMs with other AI systems and the conditions that made modern systems possible.'
+  },
+  {
+    title: 'Risk and myth literacy',
+    stages: ['Midnight Ledger'],
+    lessonIds: ['collective-intelligence', 'costs-we-must-count', 'risk-myth'],
+    description: 'Name real institutional risks without turning the model into a spooky agent.'
+  },
+  {
+    title: 'Human-centered use',
+    stages: ['New Dawn'],
+    lessonIds: ['benefits-worth-taking-seriously', 'human-centered-ai', 'better-ai-choice', 'effective-prompting-literacy', 'model-literate-synthesis'],
+    description: 'Use model literacy to make better choices about adoption, prompting, oversight, and responsibility.'
+  }
+]
+
+function badgeEvidenceStatus(completedCount, totalCount) {
+  if (completedCount <= 0) return 'Not started'
+  if (completedCount >= totalCount) return 'Evidence collected'
+  return 'In progress'
+}
+
+function latestIsoTimestamp(values) {
+  const dated = values
+    .filter(Boolean)
+    .map((value) => {
+      const date = new Date(String(value))
+      return Number.isNaN(date.getTime()) ? null : { iso: String(value), time: date.getTime() }
+    })
+    .filter(Boolean)
+    .sort((a, b) => a.time - b.time)
+  return dated.length ? dated[dated.length - 1].iso : ''
+}
+
+function formatBadgeActivityDate(value) {
+  if (!value) return 'No saved activity yet'
+  const date = new Date(value)
+  if (Number.isNaN(date.getTime())) return 'Saved activity found'
+  return date.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })
+}
+
 function BadgeScreen({
   completed,
   progress,
   gameInsights,
   traceComplete,
   reflections,
-  exerciseProgress,
   promptRunProgress,
   statusMessage,
-  debugEnabled,
-  onResetProgress,
-  onMarkFirstLessonComplete,
-  onMarkAllLessonsIncomplete,
-  onUnlockBadge,
-  onClearAllPromptLifeKeys
+  onResetProgress
 }) {
   const [copied, setCopied] = useState(false)
   const reflectionCount = Object.values(reflections as Record<string, string>).filter((text) => text.trim().length > 0).length
-  const completedExerciseCount = exerciseProgress?.completed?.length ?? 0
   const promptRunDone = Boolean(promptRunProgress?.finalChallengeComplete || traceComplete)
   const promptRunStepCount = promptRunDone ? 13 : (promptRunProgress?.completedSteps?.length ?? 0)
+  const dojoProgress = loadGlossaryDojoProgress()
   const playChallengeSummaries = buildPlayChallengeSummaries(getPlayChallengeSummary(), {
     gameInsights,
     traceComplete,
     promptRunProgress,
-    glossaryDojoProgress: loadGlossaryDojoProgress()
+    glossaryDojoProgress: dojoProgress
   })
   const completedPlayChallenges = getCompletedFinalPlayCount(playChallengeSummaries)
-  const essentialLessons = lessons.filter((lesson) => getPathLabel(lesson.pathType) === 'Essential')
-  const essentialCompleted = essentialLessons.filter((lesson) => completed.includes(lesson.id)).length
-  const essentialTarget = Math.ceil(essentialLessons.length * 0.8)
-  const synthesisDone = completed.includes('model-literate-synthesis')
-  const unlocked = essentialCompleted >= essentialTarget && promptRunDone && synthesisDone
-  const lessonsNeeded = Math.max(0, essentialTarget - essentialCompleted)
-  const promptRunNeeded = promptRunDone ? 0 : 1
-  const synthesisNeeded = synthesisDone ? 0 : 1
+  const completedStages = acts.filter((act) => {
+    const actLessons = lessons.filter((lesson) => lesson.act === act.id)
+    return actLessons.length > 0 && actLessons.every((lesson) => completed.includes(lesson.id))
+  }).length
+  const totalCheckpointQuestions = Object.values(FULL_CHECKPOINT_BANK_V02712).reduce((total, quiz: any) => {
+    return total + (Array.isArray(quiz?.questions) ? quiz.questions.length : 0)
+  }, 0)
+  const playPracticeAttempts = playChallengeSummaries.reduce((total, item) => total + (item.progress?.attempts ?? 0), 0)
+  const lastActivity = latestIsoTimestamp([
+    ...playChallengeSummaries.flatMap((item) => [item.progress?.lastPlayedAt, item.progress?.completedAt]),
+    dojoProgress?.currentRound?.startedAt,
+    dojoProgress?.lastCompletedRound?.completedAt
+  ])
+  const objectiveRows = BADGE_LEARNING_OBJECTIVES.map((objective) => {
+    const relatedLessons = objective.lessonIds
+      .map((id) => lessons.find((lesson) => lesson.id === id))
+      .filter(Boolean)
+    const completedCount = relatedLessons.filter((lesson) => completed.includes(lesson.id)).length
+    return {
+      ...objective,
+      completedCount,
+      totalCount: relatedLessons.length,
+      status: badgeEvidenceStatus(completedCount, relatedLessons.length)
+    }
+  })
 
   async function copyShareText() {
     try {
-      await navigator.clipboard?.writeText('Prompt Life: Model Literate. I can explain how a prompt becomes tokens, vectors, hidden states, probabilities, and one next token at a time.')
+      await navigator.clipboard?.writeText(`Prompt Life: Model Literate is under construction. My practice evidence: ${completed.length}/${lessons.length} learning cards, ${completedStages}/${acts.length} stages, and ${completedPlayChallenges}/${FINAL_PLAY_CHALLENGE_COUNT} Play challenges. No badge has been issued; human review is pending.`)
       setCopied(true)
     } catch {
       setCopied(false)
@@ -6094,24 +5969,75 @@ function BadgeScreen({
 
   return (
     <section className="screen badge-screen" aria-labelledby="badge-title">
-      <ScreenHeader kicker="Progress" title="Prompt Life: Model Literate" subtitle="Track your understanding of the prompt-to-response path." titleId="badge-title" />
-      <img className="badge-art" src={`${ASSET}/brand/model-literate-badge.svg`} alt="Model Literate badge" />
-      <div className="progress-meter" aria-label={`${progress}% lesson progress`}><span style={{ width: `${progress}%` }} /></div>
-      <div className="badge-stats">
-        <span><strong>{completed.length}</strong> of {lessons.length} lessons</span>
-        <span><strong>{completedPlayChallenges}</strong> of {FINAL_PLAY_CHALLENGE_COUNT} play challenges</span>
-        <span><strong>{completedExerciseCount}</strong> of {exercises.length} exercises</span>
-        <span><strong>{promptRunStepCount}</strong> of 13 Prompt Run</span>
-        <span><strong>{reflectionCount}</strong> reflections</span>
-      </div>
-      <section className="idea-panel">
-        <h2>{unlocked ? 'Badge unlocked' : 'Badge criterion'}</h2>
-        <p>Play progress is saved here as practice history. The badge remains one coherent model-literacy journey: complete the required Journey path, Prompt Run, and the synthesis learning card.</p>
-        <p>This badge means you can explain what an LLM is, what it is not, and how a prompt becomes a response without treating the model as magic.</p>
-        <p>{unlocked ? 'You met the learning threshold.' : `Remaining: ${lessonsNeeded} Journey checkpoint${lessonsNeeded === 1 ? '' : 's'}, ${promptRunNeeded} Prompt Run completion${promptRunNeeded === 1 ? '' : 's'}, and ${synthesisNeeded} synthesis learning card completion${synthesisNeeded === 1 ? '' : 's'}.`}</p>
+      <ScreenHeader kicker="Badge" title="Prompt Life: Model Literate" subtitle="Under construction while the evidence model is reviewed." titleId="badge-title" />
+      <section className="badge-status-card" aria-labelledby="badge-status-title">
+        <div className="badge-placeholder" aria-label="Draft badge visual placeholder">
+          <span>PL</span>
+          <strong>Model Literate</strong>
+          <small>Under construction · final visual pending</small>
+        </div>
+        <div className="badge-status-copy">
+          <span className="badge-status-pill">Under construction</span>
+          <h2 id="badge-status-title">Pending human review</h2>
+          <p>Prompt Life: Model Literate is under construction. The Journey, checkpoint bank, and evidence model are being tested before any badge is issued.</p>
+          <p>Your progress below is practice evidence, not an issued credential.</p>
+          <dl>
+            <div><dt>Issue status</dt><dd>Not yet issued</dd></div>
+            <div><dt>Human review status</dt><dd>Pending</dd></div>
+          </dl>
+        </div>
       </section>
-      <button className="primary-btn" onClick={copyShareText}>Copy share text</button>
-      {copied && <p className="feedback good" role="status">Share text copied.</p>}
+      <div className="progress-meter" aria-label={`${progress}% lesson progress`}><span style={{ width: `${progress}%` }} /></div>
+      <section className="badge-section" aria-labelledby="badge-evidence-title">
+        <p className="eyebrow">Practice evidence dashboard</p>
+        <h2 id="badge-evidence-title">Evidence collected on this device</h2>
+        <div className="badge-stats badge-evidence-grid">
+          <span><strong>{completed.length}</strong><small>of {lessons.length}</small><em>Journey learning cards completed</em></span>
+          <span><strong>{completedStages}</strong><small>of {acts.length}</small><em>Stages completed</em></span>
+          <span><strong>{completedPlayChallenges}</strong><small>of {FINAL_PLAY_CHALLENGE_COUNT}</small><em>Play challenges completed or reviewed</em></span>
+          <span><strong>{promptRunStepCount}</strong><small>of 13</small><em>Prompt Run steps saved</em></span>
+          <span><strong>--</strong><small>of {totalCheckpointQuestions}</small><em>Checkpoint questions mastered</em><p>Checkpoint mastery tracking is being refined.</p></span>
+          <span><strong>Pending</strong><small>human review</small><em>Badge review status</em></span>
+          <span><strong>{playPracticeAttempts}</strong><small>saved attempts</small><em>Optional practice history</em></span>
+          <span><strong>{reflectionCount}</strong><small>reflections</small><em>Reflection notes saved</em></span>
+          <span className="badge-wide-stat"><strong>{formatBadgeActivityDate(lastActivity)}</strong><small>last activity</small><em>Latest saved Play activity</em></span>
+        </div>
+      </section>
+
+      <section className="badge-section" aria-labelledby="badge-objectives-title">
+        <p className="eyebrow">Learning objectives in progress</p>
+        <h2 id="badge-objectives-title">Evidence map</h2>
+        <div className="badge-objective-list">
+          {objectiveRows.map((objective) => (
+            <article key={objective.title} className="badge-objective-card">
+              <div className="badge-objective-header">
+                <h3>{objective.title}</h3>
+                <span>{objective.status}</span>
+              </div>
+              <p>{objective.description}</p>
+              <div className="badge-objective-meta">
+                <small>{objective.completedCount} of {objective.totalCount} related cards</small>
+                <small>{objective.stages.join(', ')}</small>
+                <small>Human review: Pending review</small>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="idea-panel badge-criteria-panel" aria-labelledby="badge-criteria-title">
+        <p className="eyebrow">Draft badge criteria</p>
+        <h2 id="badge-criteria-title">Criteria are not final.</h2>
+        <ul>
+          <li>Complete the 39-card Journey and demonstrate checkpoint mastery across the full bank.</li>
+          <li>Complete or meaningfully review the five Play practice challenges.</li>
+          <li>Show synthesis evidence for model basics, training versus inference, prompt flow, context, grounding, probability, risk, and human-centered use.</li>
+          <li>Receive human review before any badge is issued.</li>
+        </ul>
+      </section>
+
+      <button className="primary-btn" onClick={copyShareText}>Copy practice summary</button>
+      {copied && <p className="feedback good" role="status">Practice summary copied.</p>}
       <section className="settings-panel" aria-labelledby="reset-progress-title">
         <h2 id="reset-progress-title">Start over</h2>
         <p>Progress is stored only on this device. Resetting clears Prompt Life lesson progress, exercise attempts, Prompt Run progress, Play challenge progress, Glossary Dojo practice, reflections, mini-game insights, tour progress, last location, and checkpoint answer order seed.</p>
@@ -6119,19 +6045,6 @@ function BadgeScreen({
         {statusMessage && <p className="feedback good" role="status">{statusMessage}</p>}
       </section>
       <p className="app-version" aria-label={`Prompt Life version ${APP_VERSION}`}>v{APP_VERSION}</p>
-      {debugEnabled && (
-        <section className="settings-panel debug-panel" aria-labelledby="debug-tools-title">
-          <p className="eyebrow">Debug mode</p>
-          <h2 id="debug-tools-title">Progress tools</h2>
-          <p>Visible in diagnostics mode. These tools only touch Prompt Life saved progress keys.</p>
-          <div className="debug-actions">
-            <button className="secondary-btn" onClick={onMarkFirstLessonComplete}>Mark first lesson complete</button>
-            <button className="secondary-btn" onClick={onMarkAllLessonsIncomplete}>Mark all lessons incomplete</button>
-            <button className="secondary-btn" onClick={onUnlockBadge}>Unlock badge for testing</button>
-            <button className="secondary-btn danger" onClick={onClearAllPromptLifeKeys}>Clear all Prompt Life keys</button>
-          </div>
-        </section>
-      )}
     </section>
   )
 }

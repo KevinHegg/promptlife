@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prompt Life v0.27.12 Badge Under Construction Report</title>
+  <style>
+    @page { size: Letter; margin: 0.48in; }
+    body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #11194f; background: #fbfffe; }
+    h1, h2, h3 { color: #0b1470; line-height: 1.15; }
+    h1 { margin: 0 0 8px; font-size: 30px; }
+    h2 { margin: 28px 0 10px; padding-top: 16px; border-top: 2px solid #dbe6f7; font-size: 21px; }
+    h3 { margin: 14px 0 6px; font-size: 16px; }
+    p, li, td, th { font-size: 12px; line-height: 1.45; }
+    .meta { color: #4e5b78; margin: 0 0 16px; }
+    .summary { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 16px 0; }
+    .summary div, .callout, table, figure { background: white; border: 1px solid #d9e4f3; border-radius: 10px; box-shadow: 0 8px 22px rgba(12, 25, 87, 0.08); }
+    .summary div { padding: 12px; }
+    .summary strong { display: block; color: #009ca8; font-size: 23px; }
+    .callout { padding: 12px 14px; border-left: 5px solid #10a9b4; }
+    ul { padding-left: 18px; }
+    table { border-collapse: collapse; width: 100%; overflow: hidden; }
+    th, td { border: 1px solid #d9e4f3; padding: 8px; vertical-align: top; text-align: left; }
+    th { background: #eef5ff; }
+    .checklist { columns: 2; column-gap: 24px; }
+    figure { margin: 16px 0; padding: 10px; break-inside: avoid; }
+    figure img { width: 100%; max-height: 720px; object-fit: contain; object-position: top center; border: 1px solid #d9e4f3; border-radius: 8px; background: #f8fbff; }
+    figcaption { margin-top: 8px; color: #4e5b78; font-size: 11px; font-weight: 700; }
+    code { background: #eef5ff; border: 1px solid #d5e3fa; border-radius: 5px; padding: 1px 4px; }
+  </style>
+</head>
+<body>
+  <h1>Prompt Life v0.27.12 Badge Under Construction Report</h1>
+  <p class="meta">Generated 2026-06-10T04:12:07.533Z. Scope: Badge page status, learner-copy boundary, evidence dashboard, docs, audits, and mobile QA.</p>
+
+  <section class="summary" aria-label="Report summary">
+    <div><strong>39</strong>Journey learning cards tracked</div>
+    <div><strong>136</strong>checkpoint questions available</div>
+    <div><strong>8</strong>learning objective categories shown</div>
+    <div><strong>5</strong>Play challenges counted as optional practice history</div>
+  </section>
+
+  <section class="callout">
+    <h2>Result</h2>
+    <p>Prompt Life: Model Literate now remains visible as a single badge concept, but the Badge page clearly says it is under construction, pending human review, and not yet issued. Progress is framed as practice evidence, not an issued credential.</p>
+  </section>
+
+  <h2>What Changed</h2>
+  <ul>
+    <li>Removed learner-facing development notes from lesson, Play, and Badge learner screens, including the visible checkpoint-bank label and Play progress inspector.</li>
+    <li>Rebuilt the Badge page around status, practice evidence, learning-objective evidence, and draft criteria.</li>
+    <li>Added a placeholder badge visual panel labeled under construction with final visual pending.</li>
+    <li>Added <code>docs/DEV_NOTES.md</code>, <code>docs/badge/BADGE_CRITERIA_DRAFT.md</code>, and <code>npm run audit:learner-copy</code>.</li>
+  </ul>
+
+  <h2>Badge Page Wording</h2>
+  <table>
+    <thead><tr><th>Area</th><th>Visible wording</th></tr></thead>
+    <tbody>
+      <tr><td>Status</td><td>Under construction; Pending human review; Not yet issued.</td></tr>
+      <tr><td>Main note</td><td>Prompt Life: Model Literate is under construction. The Journey, checkpoint bank, and evidence model are being tested before any badge is issued.</td></tr>
+      <tr><td>Evidence caveat</td><td>Your progress below is practice evidence, not an issued credential.</td></tr>
+      <tr><td>Criteria</td><td>Criteria are not final.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Evidence Fields</h2>
+  <ul>
+    <li>Journey learning cards completed / 39.</li>
+    <li>Stages completed / 8.</li>
+    <li>Play challenges completed or reviewed / 5.</li>
+    <li>Prompt Run steps saved / 13.</li>
+    <li>Checkpoint questions mastered / 136, with the note that checkpoint mastery tracking is being refined.</li>
+    <li>Human review status: Pending.</li>
+    <li>Optional practice attempts, reflections, and last saved Play activity when available.</li>
+  </ul>
+
+  <h2>Learning Objective Categories</h2>
+  <ol>
+    <li>Model basics.</li>
+    <li>Training and inference.</li>
+    <li>Prompt path.</li>
+    <li>Context and grounding.</li>
+    <li>Probability literacy.</li>
+    <li>Wider landscape.</li>
+    <li>Risk and myth literacy.</li>
+    <li>Human-centered use.</li>
+  </ol>
+
+  <h2>Verification</h2>
+  <table>
+    <thead><tr><th>Command / QA</th><th>Result</th></tr></thead>
+    <tbody>
+      <tr><td><code>npm run typecheck</code></td><td>Passed.</td></tr>
+      <tr><td><code>npm run build</code></td><td>Passed with existing Vite large-chunk warning.</td></tr>
+      <tr><td><code>npm run build:pages</code></td><td>Passed with existing Vite large-chunk warning.</td></tr>
+      <tr><td><code>npm run audit:answers</code></td><td>Passed.</td></tr>
+      <tr><td><code>npm run audit:checkpoints</code></td><td>Passed.</td></tr>
+      <tr><td><code>npm run audit:learner-copy</code></td><td>Passed; checked learner-facing source files.</td></tr>
+      <tr><td>Badge 390px</td><td>No forbidden learner-copy hits; no horizontal overflow; under-construction status present.</td></tr>
+      <tr><td>Badge 320px</td><td>No forbidden learner-copy hits; no horizontal overflow; eight objective cards present.</td></tr>
+      <tr><td>Journey checkpoint 390px</td><td>Checkpoint remains visible; question counter shown; no developer bank note.</td></tr>
+      <tr><td>Home / Play / Glossary smoke checks</td><td>No forbidden learner-copy hits and no horizontal overflow at 390px.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Screenshots</h2>
+  <figure><img src="screenshots/v0-27-12-badge-390.png" alt="Badge at 390px"><figcaption>Badge at 390px</figcaption></figure>
+<figure><img src="screenshots/v0-27-12-badge-320.png" alt="Badge at 320px"><figcaption>Badge at 320px</figcaption></figure>
+<figure><img src="screenshots/v0-27-12-journey-checkpoint-390.png" alt="Journey checkpoint at 390px"><figcaption>Journey checkpoint at 390px</figcaption></figure>
+
+  <h2>Known Issues</h2>
+  <ul>
+    <li>Checkpoint mastery is not yet persisted as a detailed evidence metric, so the Badge page intentionally does not claim a mastered-question number.</li>
+    <li>The final badge visual remains pending.</li>
+    <li>The build still emits the pre-existing large-chunk warning.</li>
+  </ul>
+</body>
+</html>

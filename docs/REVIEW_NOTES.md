@@ -2,6 +2,37 @@
 
 Date: 2026-06-09
 
+## v0.27.12 Full Checkpoint Bank Review Cleanup
+
+### What Changed
+
+- Made the v0.27.12 review-cleanup checkpoint bank active by default for all 39 Journey learning cards.
+- Replaced boilerplate learning objectives with specific model-literacy objectives across the full bank.
+- Kept stronger first-twelve questions where possible and applied targeted review edits, including the corporate norms fine-tuning wording and shorter category/boundary items.
+- Replaced the weaker cards 13-39 with scenario-style, model-trace, boundary, causal, human-use, and misconception-check questions.
+- Preserved the legacy single-question checkpoint fallback with `?legacyCheckpoints=1` or `?checkpointBank=legacy`.
+- Regenerated the full checkpoint bank JSON, Markdown, and PDF/HTML review packet for v0.27.12.
+- Bumped the visible app/package version to `v0.27.12`; use `?v=02712` for Safari cache checks after deploy.
+
+### Verification Notes
+
+- Structural preflight confirmed 39 cards, 136 questions, 544 choices, and 408 wrong-answer distractors.
+- Structural preflight found no boilerplate objectives, no vague `best definition` stems, no `Which common confusion...` stems, and no `A learner is tracing...` stems in the v0.27.12 bank.
+- Full command verification and browser QA were run after this entry was added; see the thread summary for command results.
+
+### Files Added Or Updated
+
+- `src/data/checkpointBankV02712.ts`
+- `src/main.tsx`
+- `scripts/audit-checkpoints.mjs`
+- `docs/journey/checkpoints/checkpoint-question-bank-v0-27-12-review-cleanup.json`
+- `docs/journey/checkpoints/checkpoint-question-bank-v0-27-12-review-cleanup.md`
+- `docs/journey/prompt-life-v0-27-12-full-checkpoint-bank-review.html`
+- `docs/journey/prompt-life-v0-27-12-full-checkpoint-bank-review.pdf`
+- `README.md`
+- `package.json`
+- `package-lock.json`
+
 ## v0.27.11 Full-Journey Checkpoint Bank And Scroll Hardening Pass
 
 ### What Changed
@@ -3555,3 +3586,28 @@ Known issues:
 
 - New Dawn remains internally source-reviewed but not learner-cited.
 - The benefit-tier interaction uses tap/cycle sorting rather than drag and drop for mobile accessibility.
+
+## v0.27.12 Badge Under Construction + Learner-Copy Boundary
+
+Date: 2026-06-10
+
+Updated the Badge page so it no longer presents Prompt Life: Model Literate as an issued credential. The page now states that the badge is under construction, pending human review, and not yet issued. Progress is framed as practice evidence saved on the current device.
+
+Changed:
+
+- Removed learner-facing checkpoint-bank, preview, Play-progress, and Badge diagnostic notes from normal app screens, including `?debug=1` learner flows.
+- Rebuilt the Badge page as an evidence dashboard: Journey cards completed, stages completed, Play challenges completed or reviewed, Prompt Run progress, checkpoint bank size with mastery-tracking caveat, optional practice attempts, reflections, last activity, and human review status.
+- Added a learning-objective evidence map for eight categories: model basics, training and inference, prompt path, context and grounding, probability literacy, wider landscape, risk and myth literacy, and human-centered use.
+- Added a draft badge criteria panel that clearly says criteria are not final.
+- Added `docs/DEV_NOTES.md` and `docs/badge/BADGE_CRITERIA_DRAFT.md`.
+- Added `npm run audit:learner-copy` to prevent developer-only strings from reappearing in learner-facing runtime source.
+
+Verification:
+
+- Required verification for this pass: `npm run typecheck`, `npm run build`, `npm run build:pages`, `npm run audit:answers`, `npm run audit:checkpoints`, and `npm run audit:learner-copy`.
+- Manual QA targets: Badge at 390px and 320px, Journey checkpoint at 390px, Home, Play, Glossary, and learner UI loaded with `?debug=1`.
+
+Known issues:
+
+- Checkpoint mastery is not yet persisted as a durable learner-evidence metric, so the Badge page correctly says mastery tracking is being refined.
+- Final badge visual remains pending; the Badge page uses a placeholder-style panel instead of issuing a finished credential.
