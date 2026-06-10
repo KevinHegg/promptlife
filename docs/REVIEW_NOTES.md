@@ -3611,3 +3611,23 @@ Known issues:
 
 - Checkpoint mastery is not yet persisted as a durable learner-evidence metric, so the Badge page correctly says mastery tracking is being refined.
 - Final badge visual remains pending; the Badge page uses a placeholder-style panel instead of issuing a finished credential.
+
+## v0.27.13 Badge PNG Visual Integration
+
+Date: 2026-06-10
+
+Changed:
+
+- Replaced the Badge page placeholder panel with the supplied Prompt Life: Model Literate PNG artwork.
+- Moved the badge artwork to the top of the Badge status card so the visual anchors the card before the under-construction evidence copy.
+- Kept status, human review, issue state, and evidence language as HTML text rather than relying on image text.
+- Bumped the visible app/package version to `v0.27.13`.
+
+Verification target:
+
+- Badge page at 390px and 320px should show the PNG at the top of the status card, with no horizontal overflow and with Under construction / Pending human review / Not yet issued still visible.
+
+Known issues:
+
+- Badge issuance remains pending human review.
+- The badge artwork contains text as part of the supplied visual, but the accessible status and credential language remain in HTML.

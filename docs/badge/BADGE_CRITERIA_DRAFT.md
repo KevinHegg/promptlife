@@ -1,6 +1,6 @@
 # Prompt Life: Model Literate Badge Criteria Draft
 
-Version: v0.27.12
+Version: v0.27.13
 
 Status: under construction. Criteria are not final.
 
@@ -14,7 +14,7 @@ Prompt Life: Model Literate is not yet issued. The Journey, checkpoint bank, and
 
 Human review status: pending.
 
-Final badge visual: pending final asset review. The app currently uses a placeholder-style badge panel on the Badge page.
+Badge visual: the supplied Prompt Life Model Literate PNG is integrated on the Badge page. Badge issuance is still pending human review.
 
 ## Draft Evidence Model
 

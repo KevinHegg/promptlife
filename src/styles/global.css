@@ -7801,42 +7801,24 @@ p {
 
 .badge-status-card {
   grid-template-columns: 1fr;
-  align-items: center;
+  align-items: start;
 }
 
-.badge-placeholder {
-  display: grid;
-  gap: 0.35rem;
-  place-items: center;
-  min-height: 11rem;
-  padding: 1rem;
-  border: 1px dashed rgba(18, 30, 114, 0.24);
-  border-radius: var(--pl-card-radius);
-  background:
-    radial-gradient(circle at 50% 20%, rgba(53, 230, 226, 0.24), transparent 4.5rem),
-    linear-gradient(145deg, #07124a, #122073 58%, #0e7f8e);
-  color: white;
-  text-align: center;
-}
-
-.badge-placeholder span {
+.badge-visual-panel {
   display: grid;
   place-items: center;
-  width: 4.6rem;
-  height: 4.6rem;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.14);
-  border: 2px solid rgba(53, 230, 226, 0.75);
-  box-shadow: 0 0 24px rgba(53, 230, 226, 0.28);
-  font-size: 1.55rem;
-  font-weight: 950;
+  padding: 0.35rem 0.25rem 0.15rem;
 }
 
-.badge-placeholder strong {
-  font-size: 1.05rem;
+.badge-status-image {
+  display: block;
+  width: min(100%, 18rem);
+  height: auto;
+  border-radius: 12px;
+  background: white;
+  box-shadow: 0 14px 30px rgba(7, 18, 74, 0.16);
 }
 
-.badge-placeholder small,
 .badge-status-copy dd,
 .badge-evidence-grid small,
 .badge-objective-meta small {
@@ -8008,12 +7990,6 @@ p {
   margin-top: 0.45rem;
   color: var(--pl-ink-soft);
   line-height: 1.38;
-}
-
-@media (min-width: 430px) {
-  .badge-status-card {
-    grid-template-columns: minmax(8.5rem, 0.85fr) minmax(0, 1fr);
-  }
 }
 
 .exercise-panel {

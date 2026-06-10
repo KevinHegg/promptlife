@@ -27,3 +27,11 @@ Recommended checks before shipping learner UI changes:
 - `npm run audit:learner-copy`
 
 Run `npm run audit:learner-copy` before shipping UI changes that might touch learner-facing copy.
+
+## v0.27.13 Badge PNG Integration
+
+The Badge page now uses `public/assets/promptlife/brand/model-literate-badge-v0-27-13.png` as the visible Prompt Life: Model Literate artwork. The image is decorative/supporting; status, issuance, evidence, and review language must remain in HTML so the page remains accessible and clear.
+
+Badge issuance status remains not yet issued.
+
+Human review status remains pending.

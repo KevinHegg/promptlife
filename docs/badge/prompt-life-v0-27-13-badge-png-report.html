@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prompt Life v0.27.13 Badge PNG Integration Report</title>
+  <style>
+    @page { size: Letter; margin: .48in; }
+    body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #11194f; background: #fbfffe; }
+    h1, h2 { color: #0b1470; line-height: 1.15; }
+    h1 { margin: 0 0 8px; font-size: 29px; }
+    h2 { margin: 24px 0 10px; padding-top: 14px; border-top: 2px solid #d9e4f3; font-size: 20px; }
+    p, li, td, th { font-size: 12px; line-height: 1.45; }
+    .meta { color: #506079; margin: 0 0 14px; }
+    .callout, table, figure { background: white; border: 1px solid #d9e4f3; border-radius: 10px; box-shadow: 0 8px 22px rgba(12,25,87,.08); }
+    .callout { padding: 12px 14px; border-left: 5px solid #10a9b4; }
+    table { border-collapse: collapse; width: 100%; overflow: hidden; }
+    th, td { border: 1px solid #d9e4f3; padding: 8px; text-align: left; vertical-align: top; }
+    th { background: #eef5ff; }
+    figure { margin: 16px 0; padding: 10px; break-inside: avoid; }
+    figure img { width: 100%; max-height: 720px; object-fit: contain; object-position: top center; border: 1px solid #d9e4f3; border-radius: 8px; background: #f8fbff; }
+    figcaption { margin-top: 8px; color: #506079; font-size: 11px; font-weight: 800; }
+    code { background: #eef5ff; border: 1px solid #d5e3fa; border-radius: 5px; padding: 1px 4px; }
+  </style>
+</head>
+<body>
+  <h1>Prompt Life v0.27.13 Badge PNG Integration Report</h1>
+  <p class="meta">Generated 2026-06-10T04:38:01.766Z after replacing the Badge placeholder with the supplied PNG.</p>
+
+  <section class="callout">
+    <p>The Badge status card now uses the supplied Prompt Life: Model Literate PNG at the top of the card. Under construction, pending human review, and not yet issued remain in accessible HTML text.</p>
+  </section>
+
+  <h2>Changes</h2>
+  <ul>
+    <li>Moved the supplied PNG into <code>public/assets/promptlife/brand/model-literate-badge-v0-27-13.png</code>.</li>
+    <li>Replaced the old placeholder element with an <code>img</code> element using descriptive alt text.</li>
+    <li>Removed the two-column Badge status card layout so the image remains at the top of the card.</li>
+    <li>Bumped the app/package version to <code>0.27.13</code>.</li>
+  </ul>
+
+  <h2>Verification</h2>
+  <table>
+    <thead><tr><th>Check</th><th>Result</th></tr></thead>
+    <tbody>
+      <tr><td><code>npm run typecheck</code></td><td>Passed.</td></tr>
+      <tr><td><code>npm run build</code></td><td>Passed with existing Vite large-chunk warning.</td></tr>
+      <tr><td><code>npm run build:pages</code></td><td>Passed with existing Vite large-chunk warning.</td></tr>
+      <tr><td><code>npm run audit:learner-copy</code></td><td>Passed.</td></tr>
+      <tr><td>Badge 390px</td><td>PNG loaded, image appears above copy, no horizontal overflow, version shows v0.27.13.</td></tr>
+      <tr><td>Badge 320px</td><td>PNG loaded, image appears above copy, no horizontal overflow, version shows v0.27.13.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Screenshots</h2>
+  <figure><img src="screenshots/v0-27-13-badge-png-390.png" alt="Badge PNG at 390px"><figcaption>Badge PNG at 390px</figcaption></figure>
+  <figure><img src="screenshots/v0-27-13-badge-png-320.png" alt="Badge PNG at 320px"><figcaption>Badge PNG at 320px</figcaption></figure>
+</body>
+</html>

@@ -72,7 +72,7 @@ const HOME_ASSETS = {
   heroFallback: `${ASSET}/illustrations/scene-hero-feature-cloud@mobile.png`
 }
 // Bump this for each shipped app change; the Badge screen displays it under Start over.
-const APP_VERSION = '0.27.12'
+const APP_VERSION = '0.27.13'
 const STORAGE_KEYS = {
   lastLocation: 'promptlife:v1:lastLocation',
   lessonId: 'promptlife:v1:lessonId',
@@ -5971,10 +5971,12 @@ function BadgeScreen({
     <section className="screen badge-screen" aria-labelledby="badge-title">
       <ScreenHeader kicker="Badge" title="Prompt Life: Model Literate" subtitle="Under construction while the evidence model is reviewed." titleId="badge-title" />
       <section className="badge-status-card" aria-labelledby="badge-status-title">
-        <div className="badge-placeholder" aria-label="Draft badge visual placeholder">
-          <span>PL</span>
-          <strong>Model Literate</strong>
-          <small>Under construction · final visual pending</small>
+        <div className="badge-visual-panel">
+          <img
+            className="badge-status-image"
+            src={`${ASSET}/brand/model-literate-badge-v0-27-13.png`}
+            alt="Prompt Life Model Literate LLM literacy badge artwork"
+          />
         </div>
         <div className="badge-status-copy">
           <span className="badge-status-pill">Under construction</span>
