@@ -7,7 +7,7 @@ const root = process.cwd()
 const explicitFiles = [
   'src/main.tsx',
   'src/data/content.ts',
-  'src/data/checkpointBankV02712.ts',
+  'src/data/checkpointBankV02714.ts',
   'src/styles/global.css'
 ]
 

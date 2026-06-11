@@ -1,0 +1,2102 @@
+{
+  "metadata": {
+    "version": "0.27.13-repair-starter",
+    "source": "prompt_life_v02712_checkpoint_bank.json",
+    "purpose": "Implementation-ready starter repair plan for Codex. Combines global repair directives with automated review flags from the extracted question bank.",
+    "total_questions_scanned": 136,
+    "flagged_questions": 109,
+    "question_type_counts": {
+      "mechanism": 17,
+      "human-use-judgment": 16,
+      "application": 16,
+      "boundary": 37,
+      "causal-consequence": 11,
+      "model-trace": 25,
+      "misconception-check": 14
+    }
+  },
+  "global_repairs": [
+    {
+      "repair_id": "G001",
+      "priority": "critical",
+      "action": "enforce",
+      "scope": "global",
+      "issue": "No debug/development/fallback notes in learner UI.",
+      "recommended_change": "Confirm no learner-facing UI contains legacyCheckpoints, checkpointBank=legacy, active-dev, development testing, debug, or fallback instructions. Keep reminders only in docs/DEV_NOTES.md, reports, or source comments.",
+      "implementation_instruction": "Run audit:learner-copy and add failing patterns if missing. Remove any visible debug bank indicator from Home/Journey/Play/Glossary/Badge."
+    },
+    {
+      "repair_id": "G002",
+      "priority": "critical",
+      "action": "enforce",
+      "scope": "global",
+      "issue": "Question bank needs implementation-ready review artifacts.",
+      "recommended_change": "Generate JSON, CSV, and PDF review packets with full question bank, repairs applied, question type distribution, and open review concerns.",
+      "implementation_instruction": "Regenerate docs/journey/checkpoints/checkpoint-question-bank-v0-27-13.json, .md, .csv and docs/journey/prompt-life-v0-27-13-checkpoint-bank-revision-report.pdf."
+    },
+    {
+      "repair_id": "G003",
+      "priority": "high",
+      "action": "audit",
+      "scope": "global",
+      "issue": "Question type balance should support badge validity.",
+      "recommended_change": "Maintain a mixture of mechanism, boundary, causal-consequence, applied scenario, human-use-judgment, misconception-check, and synthesis. Avoid too many same-type questions in a single card.",
+      "implementation_instruction": "Add a question-type distribution table by stage/card to the v0.27.13 report."
+    },
+    {
+      "repair_id": "G004",
+      "priority": "high",
+      "action": "audit",
+      "scope": "global",
+      "issue": "Correct answer should not be obvious by length/style.",
+      "recommended_change": "Run an answer-length bias audit. Review high-ratio items and balance answer choice length and specificity.",
+      "implementation_instruction": "Add audit warnings for correct answers >1.35× mean distractor length and >25 characters longer than average distractor."
+    },
+    {
+      "repair_id": "G005",
+      "priority": "high",
+      "action": "audit",
+      "scope": "global",
+      "issue": "Jargon timing and definitions.",
+      "recommended_change": "Review early use of RAG, retrieval, softmax, logits, diffusion, grounding, hallucination, and context window. Either explain or replace future-stage terms before they are taught.",
+      "implementation_instruction": "Add or update review notes per flagged item; do not remove useful glossary-near distractors if feedback makes the boundary clear."
+    },
+    {
+      "repair_id": "G006",
+      "priority": "medium",
+      "action": "audit",
+      "scope": "global",
+      "issue": "Distractors should be tempting but fair.",
+      "recommended_change": "Review distractors using absolute words such as must, every, always, guaranteed, definitely. Keep when they represent a real myth; otherwise make them less cartoonish.",
+      "implementation_instruction": "For obviously silly distractors, replace with a nearby glossary misconception and feedback that teaches the boundary."
+    },
+    {
+      "repair_id": "G007",
+      "priority": "medium",
+      "action": "audit",
+      "scope": "global",
+      "issue": "Set-aside validation examples must stay clear.",
+      "recommended_change": "Keep learner-facing wording: “set-aside validation examples are kept out of training and saved for testing.” Avoid unexplained held-out/holdout wording.",
+      "implementation_instruction": "Search for held-out/holdout and replace or define; validate with audit:learner-copy or audit:checkpoints."
+    },
+    {
+      "repair_id": "G008",
+      "priority": "high",
+      "action": "audit",
+      "scope": "global",
+      "issue": "Scroll behavior is part of assessment usability.",
+      "recommended_change": "Preserve reliable scroll-to-checkpoint and scroll-to-top behavior when advancing questions/cards; include mobile Safari QA.",
+      "implementation_instruction": "Do not regress v0.27.11 scroll fixes. Test 2-, 3-, 4-, and 5-question cards at 320px and 390px."
+    }
+  ],
+  "flagged_question_repairs": [
+    {
+      "repair_id": "R018",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 1,
+      "stage_title": "Before Morning",
+      "learning_card_code": "1.8",
+      "card_title": "Alignment",
+      "question_id": "V02710-ALIGNMENT-Q1",
+      "question_type": "boundary",
+      "current_stem": "An alignment-shaped assistant refuses a harmful request and follows a safer instruction instead. What should a model-literate learner conclude?",
+      "correct_choice_text": "Its behavior was shaped toward instructions and safety boundaries, but that does not prove moral understanding.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias",
+        "possibly_obvious_distractor"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete. Review “definitely/guaranteed/must” distractors; keep only if they represent a real public myth, otherwise make them more plausible.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R019",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 1,
+      "stage_title": "Before Morning",
+      "learning_card_code": "1.8",
+      "card_title": "Alignment",
+      "question_id": "V02710-ALIGNMENT-Q2",
+      "question_type": "model-trace",
+      "current_stem": "A product uses instruction fine-tuning, a system prompt, and a policy filter around one LLM. Which alignment map is most useful?",
+      "correct_choice_text": "Some alignment changes can be durable training changes, while other controls steer or filter the current run.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R020",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 1,
+      "stage_title": "Before Morning",
+      "learning_card_code": "1.8",
+      "card_title": "Alignment",
+      "question_id": "V02710-ALIGNMENT-Q3",
+      "question_type": "human-use-judgment",
+      "current_stem": "Why do teams evaluate aligned models with tests and human feedback after training or deployment?",
+      "correct_choice_text": "Because shaped behavior can still fail, drift, or create unexpected tradeoffs in new situations.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R021",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 1,
+      "stage_title": "Before Morning",
+      "learning_card_code": "1.8",
+      "card_title": "Alignment",
+      "question_id": "V02712-ALIGNMENT-Q4",
+      "question_type": "boundary",
+      "current_stem": "A guardrail blocks one unsafe response before the user sees it. What changed most directly?",
+      "correct_choice_text": "A policy or filter layer changed the visible output, not necessarily the model weights.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias",
+        "possibly_obvious_distractor"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete. Review “definitely/guaranteed/must” distractors; keep only if they represent a real public myth, otherwise make them more plausible.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R016",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 1,
+      "stage_title": "Before Morning",
+      "learning_card_code": "1.7",
+      "card_title": "Fine-Tuning",
+      "question_id": "V02710-FINE-TUNING-Q2",
+      "question_type": "application",
+      "current_stem": "A base model is adapted on thousands of institution-specific examples, then later answers new users in that style. What changed most directly?",
+      "correct_choice_text": "The adapted model’s weights or adapter behavior can carry that pattern into later inference runs.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R017",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 1,
+      "stage_title": "Before Morning",
+      "learning_card_code": "1.7",
+      "card_title": "Fine-Tuning",
+      "question_id": "V02710-FINE-TUNING-Q3",
+      "question_type": "causal-consequence",
+      "current_stem": "If fine-tuning is used for alignment, what does that mean about future model behavior?",
+      "correct_choice_text": "Training can make some instruction-following or preference patterns more likely in later responses.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias",
+        "possibly_obvious_distractor"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete. Review “definitely/guaranteed/must” distractors; keep only if they represent a real public myth, otherwise make them more plausible.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R015",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 1,
+      "stage_title": "Before Morning",
+      "learning_card_code": "1.7",
+      "card_title": "Fine-Tuning",
+      "question_id": "V02712-FINE-TUNING-Q1",
+      "question_type": "application",
+      "current_stem": "A team wants a support assistant to follow corporate norms across future conversations. Which move is closest to fine-tuning?",
+      "correct_choice_text": "Run additional training that changes weights or adapter behavior for later responses.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R013",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 1,
+      "stage_title": "Before Morning",
+      "learning_card_code": "1.6",
+      "card_title": "Overfitting and Generalization",
+      "question_id": "V0279-OVERFITTING-GENERALIZATION-Q1",
+      "question_type": "application",
+      "current_stem": "A model gets every training example right but fails on new validation examples. What problem is showing up?",
+      "correct_choice_text": "Overfitting: the model fit training examples too narrowly instead of learning patterns that generalize.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R014",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 1,
+      "stage_title": "Before Morning",
+      "learning_card_code": "1.6",
+      "card_title": "Overfitting and Generalization",
+      "question_id": "V0279-OVERFITTING-GENERALIZATION-Q3",
+      "question_type": "causal-consequence",
+      "current_stem": "A model trained heavily on one narrow answer template works on that template but struggles with varied new prompts. What should a model-literate learner suspect?",
+      "correct_choice_text": "It may have fit the narrow examples too closely instead of learning a pattern that generalizes.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias",
+        "possibly_obvious_distractor"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete. Review “definitely/guaranteed/must” distractors; keep only if they represent a real public myth, otherwise make them more plausible.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R012",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 1,
+      "stage_title": "Before Morning",
+      "learning_card_code": "1.5",
+      "card_title": "Pretraining",
+      "question_id": "V02712-PRETRAINING-Q4",
+      "question_type": "boundary",
+      "current_stem": "A base model gives fact-like text about a public topic before any retrieval tool is connected. Which pretraining explanation is strongest?",
+      "correct_choice_text": "Past training shaped weights with broad patterns; the output is not proof of live search or source lookup.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias",
+        "premature_jargon:retrieval"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete. Either replace future-stage jargon with plain language or add a brief explanation in the stem/feedback.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R009",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 1,
+      "stage_title": "Before Morning",
+      "learning_card_code": "1.5",
+      "card_title": "Pretraining",
+      "question_id": "V0279-PRETRAINING-Q1",
+      "question_type": "mechanism",
+      "current_stem": "During pretraining, what signal teaches the model broad language patterns across many examples?",
+      "correct_choice_text": "Repeated prediction error/loss from next-token targets changes weights over many training steps.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R010",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 1,
+      "stage_title": "Before Morning",
+      "learning_card_code": "1.5",
+      "card_title": "Pretraining",
+      "question_id": "V0279-PRETRAINING-Q2",
+      "question_type": "boundary",
+      "current_stem": "Why can pretraining create broad capability without making the model a perfect library of its sources?",
+      "correct_choice_text": "It shapes statistical patterns in weights; it does not create a searchable copy of every source.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R011",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 1,
+      "stage_title": "Before Morning",
+      "learning_card_code": "1.5",
+      "card_title": "Pretraining",
+      "question_id": "V0279-PRETRAINING-Q3",
+      "question_type": "causal-consequence",
+      "current_stem": "If pretraining examples include many styles and task shapes, what can change inside the model?",
+      "correct_choice_text": "Weights can shift so future prompts activate more useful language/code patterns.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R006",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 1,
+      "stage_title": "Before Morning",
+      "learning_card_code": "1.3",
+      "card_title": "Rationalists vs Empiricists",
+      "question_id": "V02712-HISTORY-Q3",
+      "question_type": "boundary",
+      "current_stem": "A university AI app combines an LLM, hand-written policy checks, and retrieval from a handbook. What should a model-literate user infer?",
+      "correct_choice_text": "The product combines learned patterns, rules, and tools; the LLM inside is still a learned-pattern model.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias",
+        "premature_jargon:retrieval"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete. Either replace future-stage jargon with plain language or add a brief explanation in the stem/feedback.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R005",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 1,
+      "stage_title": "Before Morning",
+      "learning_card_code": "1.3",
+      "card_title": "Rationalists vs Empiricists",
+      "question_id": "V0279-HISTORY-Q1",
+      "question_type": "boundary",
+      "current_stem": "If a system solves a task only by following hand-written if-then rules, how is it different from an LLM?",
+      "correct_choice_text": "The rule-based system applies explicit rules; an LLM’s fluency mostly comes from learned weights shaped by examples.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R007",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 1,
+      "stage_title": "Before Morning",
+      "learning_card_code": "1.4",
+      "card_title": "Training",
+      "question_id": "V0279-TRAINING-Q2",
+      "question_type": "boundary",
+      "current_stem": "A student asks a chatbot one question during ordinary use. Which statement is usually true?",
+      "correct_choice_text": "The model uses fixed weights and temporary context; the chat usually does not rewrite the weights.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R008",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 1,
+      "stage_title": "Before Morning",
+      "learning_card_code": "1.4",
+      "card_title": "Training",
+      "question_id": "V0279-TRAINING-Q3",
+      "question_type": "causal-consequence",
+      "current_stem": "Why can training change how the model behaves tomorrow, while inference usually cannot?",
+      "correct_choice_text": "Training changes parameters that future runs reuse; inference uses temporary computations for the current run.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R001",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 1,
+      "stage_title": "Before Morning",
+      "learning_card_code": "1.1",
+      "card_title": "What Is an LLM?",
+      "question_id": "V0279-WHAT-IS-LLM-Q1",
+      "question_type": "mechanism",
+      "current_stem": "When an LLM answers a prompt by generating one token at a time, what is the model doing at each step?",
+      "correct_choice_text": "It scores possible next tokens from the current context, selects one, appends it, and repeats.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R002",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 1,
+      "stage_title": "Before Morning",
+      "learning_card_code": "1.1",
+      "card_title": "What Is an LLM?",
+      "question_id": "V0279-WHAT-IS-LLM-Q2",
+      "question_type": "human-use-judgment",
+      "current_stem": "An LLM gives a fluent explanation of a poem. What should a model-literate learner conclude?",
+      "correct_choice_text": "It generated response tokens from context and learned patterns; fluency does not prove awareness.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R004",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 1,
+      "stage_title": "Before Morning",
+      "learning_card_code": "1.2",
+      "card_title": "Where LLMs Fit",
+      "question_id": "V02712-WHERE-LLMS-FIT-Q2",
+      "question_type": "boundary",
+      "current_stem": "A department uses the words AI, machine learning, generative AI, and LLM as if they mean the same thing. Which correction keeps the category map clear?",
+      "correct_choice_text": "AI is broad; machine learning learns from data; generative AI creates outputs; LLMs focus on language or code.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R003",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 1,
+      "stage_title": "Before Morning",
+      "learning_card_code": "1.2",
+      "card_title": "Where LLMs Fit",
+      "question_id": "V0279-WHERE-LLMS-FIT-Q1",
+      "question_type": "application",
+      "current_stem": "A campus tool summarizes text with an LLM, while another creates images by denoising a noisy pattern. What does that show?",
+      "correct_choice_text": "Generative AI is a family; LLMs and diffusion models are different branches.",
+      "issue_flags": [
+        "premature_jargon:diffusion"
+      ],
+      "recommended_change": "Either replace future-stage jargon with plain language or add a brief explanation in the stem/feedback.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R032",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 2,
+      "stage_title": "Morning Commute",
+      "learning_card_code": "2.5",
+      "card_title": "Embeddings",
+      "question_id": "V02712-EMBEDDINGS-Q2",
+      "question_type": "boundary",
+      "current_stem": "The same token starts with one embedding but appears in two different sentences. What can make its later internal vector differ?",
+      "correct_choice_text": "Context and layers reshape it into different temporary hidden states.",
+      "issue_flags": [
+        "premature_jargon:hidden state"
+      ],
+      "recommended_change": "Either replace future-stage jargon with plain language or add a brief explanation in the stem/feedback.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R022",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 2,
+      "stage_title": "Morning Commute",
+      "learning_card_code": "2.1",
+      "card_title": "Inference",
+      "question_id": "V02710-INFERENCE-Q1",
+      "question_type": "mechanism",
+      "current_stem": "During ordinary inference, the current context enters the model. What changes temporarily, and what usually stays fixed?",
+      "correct_choice_text": "Temporary activations and hidden states change; learned weights usually stay fixed.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias",
+        "premature_jargon:hidden state"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete. Either replace future-stage jargon with plain language or add a brief explanation in the stem/feedback.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R023",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 2,
+      "stage_title": "Morning Commute",
+      "learning_card_code": "2.1",
+      "card_title": "Inference",
+      "question_id": "V02710-INFERENCE-Q2",
+      "question_type": "model-trace",
+      "current_stem": "In one inference step, which trace best matches the model’s next-token path?",
+      "correct_choice_text": "Context enters a forward pass, temporary states form, logits are produced, and sampling can choose a token.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias",
+        "premature_jargon:logits,sampling"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete. Either replace future-stage jargon with plain language or add a brief explanation in the stem/feedback.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R024",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 2,
+      "stage_title": "Morning Commute",
+      "learning_card_code": "2.1",
+      "card_title": "Inference",
+      "question_id": "V02710-INFERENCE-Q3",
+      "question_type": "application",
+      "current_stem": "A chatbot remembers an earlier line in the same conversation and uses it in the next answer. What is the best model-level explanation?",
+      "correct_choice_text": "The earlier line is still in the current context, so fixed weights can use it during inference.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R025",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 2,
+      "stage_title": "Morning Commute",
+      "learning_card_code": "2.1",
+      "card_title": "Inference",
+      "question_id": "V02710-INFERENCE-Q4",
+      "question_type": "causal-consequence",
+      "current_stem": "If ordinary inference normally does not update weights, what follows for future conversations?",
+      "correct_choice_text": "A useful answer now does not automatically teach the base model to behave differently tomorrow.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R026",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 2,
+      "stage_title": "Morning Commute",
+      "learning_card_code": "2.2",
+      "card_title": "Prompt vs Response",
+      "question_id": "V02710-PROMPT-RESPONSE-Q1",
+      "question_type": "boundary",
+      "current_stem": "A user gives a complete prompt, then the model begins writing response tokens. Which boundary matters most?",
+      "correct_choice_text": "Prompt tokens are given to the model; response tokens are generated and then appended to context.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R027",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 2,
+      "stage_title": "Morning Commute",
+      "learning_card_code": "2.2",
+      "card_title": "Prompt vs Response",
+      "question_id": "V02710-PROMPT-RESPONSE-Q2",
+      "question_type": "model-trace",
+      "current_stem": "After the model chooses one next response token, what does the next inference step see?",
+      "correct_choice_text": "The original prompt plus the response so far, including the newly appended token.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R028",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 2,
+      "stage_title": "Morning Commute",
+      "learning_card_code": "2.2",
+      "card_title": "Prompt vs Response",
+      "question_id": "V02710-PROMPT-RESPONSE-Q3",
+      "question_type": "misconception-check",
+      "current_stem": "A generated response improves after the user adds a clarifying sentence. What changed most directly?",
+      "correct_choice_text": "The current prompt/context changed, so the next response tokens were generated from better input.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R035",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 2,
+      "stage_title": "Morning Commute",
+      "learning_card_code": "2.7",
+      "card_title": "Tensors",
+      "question_id": "V02712-TENSORS-Q1",
+      "question_type": "mechanism",
+      "current_stem": "A model processes many token vectors arranged by token position and feature dimension. What makes that structure a tensor?",
+      "correct_choice_text": "It is a shaped numerical block with dimensions the model operations can use.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R036",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 2,
+      "stage_title": "Morning Commute",
+      "learning_card_code": "2.7",
+      "card_title": "Tensors",
+      "question_id": "V02712-TENSORS-Q2",
+      "question_type": "boundary",
+      "current_stem": "During training, a weight tensor changes. During inference, an activation tensor appears briefly. Which distinction is most useful?",
+      "correct_choice_text": "Weight tensors can be durable learned parameters; activation tensors are temporary run-time values.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias",
+        "thin_wrong_feedback"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete. Expand short wrong-answer feedback so it explains the misconception boundary.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R030",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 2,
+      "stage_title": "Morning Commute",
+      "learning_card_code": "2.4",
+      "card_title": "Token IDs",
+      "question_id": "V02710-TOKEN-IDS-Q2",
+      "question_type": "boundary",
+      "current_stem": "A learner says “982 means cat because the ID is the meaning.” What correction is most model- literate?",
+      "correct_choice_text": "982 is a lookup number for a token; meaning comes from learned patterns around embeddings and model layers.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R031",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 2,
+      "stage_title": "Morning Commute",
+      "learning_card_code": "2.4",
+      "card_title": "Token IDs",
+      "question_id": "V02710-TOKEN-IDS-Q3",
+      "question_type": "model-trace",
+      "current_stem": "During generation, the model chooses a next response token ID before the user sees text. What happens after that?",
+      "correct_choice_text": "The chosen ID can be displayed as text and appended as a response token in the current context.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R029",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 2,
+      "stage_title": "Morning Commute",
+      "learning_card_code": "2.3",
+      "card_title": "Tokenization",
+      "question_id": "V02710-TOKENS-Q1",
+      "question_type": "application",
+      "current_stem": "A tokenizer splits “startled.” into pieces like “start”, “led”, and “.” What should that tell a learner?",
+      "correct_choice_text": "Tokens can be uneven text chunks, including word pieces and punctuation.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R033",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 2,
+      "stage_title": "Morning Commute",
+      "learning_card_code": "2.6",
+      "card_title": "Vectors",
+      "question_id": "V02712-VECTORS-Q2",
+      "question_type": "misconception-check",
+      "current_stem": "A vector dimension feels tempting to label as \"humor\" or \"truth.\" What should the learner remember?",
+      "correct_choice_text": "Features are distributed across many dimensions, not usually one clean human label per dimension.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias",
+        "thin_wrong_feedback"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete. Expand short wrong-answer feedback so it explains the misconception boundary.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R034",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 2,
+      "stage_title": "Morning Commute",
+      "learning_card_code": "2.6",
+      "card_title": "Vectors",
+      "question_id": "V02712-VECTORS-Q3",
+      "question_type": "boundary",
+      "current_stem": "An embedding row and a hidden state can both be vectors. Which boundary matters?",
+      "correct_choice_text": "One can be a durable learned parameter; the other is temporary during a model run.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias",
+        "premature_jargon:hidden state"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete. Either replace future-stage jargon with plain language or add a brief explanation in the stem/feedback.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R037",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 3,
+      "stage_title": "Workday",
+      "learning_card_code": "3.1",
+      "card_title": "Attention",
+      "question_id": "V02712-ATTENTION-Q2",
+      "question_type": "boundary",
+      "current_stem": "A learner says attention is permanent memory because it links words. What is the better boundary?",
+      "correct_choice_text": "Learned attention weights are durable, but the attention pattern for one prompt is temporary.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R038",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 3,
+      "stage_title": "Workday",
+      "learning_card_code": "3.1",
+      "card_title": "Attention",
+      "question_id": "V02712-ATTENTION-Q4",
+      "question_type": "model-trace",
+      "current_stem": "After tokens become vectors and tensors, where does attention fit in the workday stage?",
+      "correct_choice_text": "Inside transformer layers, helping shape temporary hidden states from the current context.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias",
+        "thin_wrong_feedback"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete. Expand short wrong-answer feedback so it explains the misconception boundary.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R043",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 3,
+      "stage_title": "Workday",
+      "learning_card_code": "3.4",
+      "card_title": "Hidden States",
+      "question_id": "V02712-HIDDEN-STATES-Q1",
+      "question_type": "application",
+      "current_stem": "The same token \"bank\" appears in two different sentences. Why can its later hidden state differ even if its starting embedding is similar?",
+      "correct_choice_text": "Context and layer operations shape a temporary vector for that token position.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R044",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 3,
+      "stage_title": "Workday",
+      "learning_card_code": "3.4",
+      "card_title": "Hidden States",
+      "question_id": "V02712-HIDDEN-STATES-Q2",
+      "question_type": "mechanism",
+      "current_stem": "What does \"hidden\" mean in hidden state?",
+      "correct_choice_text": "The state is internal numerical data, not visible text shown to the user.",
+      "issue_flags": [
+        "generic_stem_needs_mechanism",
+        "possible_correct_answer_length_bias",
+        "thin_wrong_feedback"
+      ],
+      "recommended_change": "Name the mechanism or scenario in the stem so it stands alone outside the learning card. Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete. Expand short wrong-answer feedback so it explains the misconception boundary.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R045",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 3,
+      "stage_title": "Workday",
+      "learning_card_code": "3.4",
+      "card_title": "Hidden States",
+      "question_id": "V02712-HIDDEN-STATES-Q4",
+      "question_type": "model-trace",
+      "current_stem": "Where do hidden states sit in the prompt's Journey?",
+      "correct_choice_text": "After embeddings enter layers, hidden states carry context-shaped internal information toward logits.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias",
+        "premature_jargon:logits"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete. Either replace future-stage jargon with plain language or add a brief explanation in the stem/feedback.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R040",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 3,
+      "stage_title": "Workday",
+      "learning_card_code": "3.3",
+      "card_title": "Layers",
+      "question_id": "V02712-LAYERS-Q2",
+      "question_type": "boundary",
+      "current_stem": "Layer weights are reused across many prompts, while hidden states appear for one run. Which boundary matters?",
+      "correct_choice_text": "Durable learned layer parameters are different from temporary layer activations.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R041",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 3,
+      "stage_title": "Workday",
+      "learning_card_code": "3.3",
+      "card_title": "Layers",
+      "question_id": "V02712-LAYERS-Q3",
+      "question_type": "misconception-check",
+      "current_stem": "A learner imagines each layer as a human-like thought step. What should replace that picture?",
+      "correct_choice_text": "Layers are repeated numerical transformations, not conscious reasoning steps.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R042",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 3,
+      "stage_title": "Workday",
+      "learning_card_code": "3.3",
+      "card_title": "Layers",
+      "question_id": "V02712-LAYERS-Q4",
+      "question_type": "model-trace",
+      "current_stem": "Why do residual paths and normalization matter in a simplified layer map?",
+      "correct_choice_text": "They help useful signal carry forward while attention and MLP transformations repeat.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R039",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 3,
+      "stage_title": "Workday",
+      "learning_card_code": "3.2",
+      "card_title": "MLP",
+      "question_id": "V02712-MLP-Q2",
+      "question_type": "boundary",
+      "current_stem": "The MLP has learned weights, but the feature values it produces during one answer are temporary. What does that mean?",
+      "correct_choice_text": "The learned MLP parameters persist; the activations for this prompt do not.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias",
+        "thin_wrong_feedback"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete. Expand short wrong-answer feedback so it explains the misconception boundary.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R050",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 4,
+      "stage_title": "Decision Room",
+      "learning_card_code": "4.3",
+      "card_title": "Sampling",
+      "question_id": "V02712-SAMPLING-Q3",
+      "question_type": "causal-consequence",
+      "current_stem": "Why can sampling make two runs with the same prompt produce different wording?",
+      "correct_choice_text": "Sampling can choose among probable tokens instead of always taking one fixed path.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R054",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 5,
+      "stage_title": "The Day Repeats",
+      "learning_card_code": "5.2",
+      "card_title": "Context Window",
+      "question_id": "V02712-CONTEXT-WINDOW-Q2",
+      "question_type": "boundary",
+      "current_stem": "Why is context not the same as memory?",
+      "correct_choice_text": "Context is the current visible input; memory would require a separate saved mechanism.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R056",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 5,
+      "stage_title": "The Day Repeats",
+      "learning_card_code": "5.2",
+      "card_title": "Context Window",
+      "question_id": "V02712-CONTEXT-WINDOW-Q4",
+      "question_type": "model-trace",
+      "current_stem": "Why does the response-so-far matter for the context window?",
+      "correct_choice_text": "Generated tokens are appended, so later steps can attend to earlier generated text.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias",
+        "thin_wrong_feedback"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete. Expand short wrong-answer feedback so it explains the misconception boundary.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R061",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 5,
+      "stage_title": "The Day Repeats",
+      "learning_card_code": "5.4",
+      "card_title": "Grounding",
+      "question_id": "V02712-GROUNDING-Q1",
+      "question_type": "application",
+      "current_stem": "A retrieved passage says one thing, but the answer claims another. Why can grounding still fail?",
+      "correct_choice_text": "Available evidence does not guarantee the generated answer stays connected to it.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R062",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 5,
+      "stage_title": "The Day Repeats",
+      "learning_card_code": "5.4",
+      "card_title": "Grounding",
+      "question_id": "V02712-GROUNDING-Q2",
+      "question_type": "mechanism",
+      "current_stem": "What does grounding try to connect?",
+      "correct_choice_text": "Generated claims to available evidence such as retrieved documents, data, or tool results.",
+      "issue_flags": [
+        "generic_stem_needs_mechanism",
+        "possible_correct_answer_length_bias",
+        "thin_wrong_feedback"
+      ],
+      "recommended_change": "Name the mechanism or scenario in the stem so it stands alone outside the learning card. Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete. Expand short wrong-answer feedback so it explains the misconception boundary.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R064",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 5,
+      "stage_title": "The Day Repeats",
+      "learning_card_code": "5.4",
+      "card_title": "Grounding",
+      "question_id": "V02712-GROUNDING-Q4",
+      "question_type": "boundary",
+      "current_stem": "How does grounding connect to RAG in a well-designed system?",
+      "correct_choice_text": "RAG can supply evidence; grounding checks whether the answer uses that evidence faithfully.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R068",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 5,
+      "stage_title": "The Day Repeats",
+      "learning_card_code": "5.5",
+      "card_title": "Hallucinations",
+      "question_id": "V02712-HALLUCINATIONS-Q4",
+      "question_type": "human-use-judgment",
+      "current_stem": "Which practice can reduce hallucination risk without pretending it disappears?",
+      "correct_choice_text": "Use relevant evidence, retrieval, constraints, and human review for important claims.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias",
+        "thin_wrong_feedback"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete. Expand short wrong-answer feedback so it explains the misconception boundary.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R059",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 5,
+      "stage_title": "The Day Repeats",
+      "learning_card_code": "5.3",
+      "card_title": "RAG and Retrieval",
+      "question_id": "V02712-RAG-RETRIEVAL-Q3",
+      "question_type": "boundary",
+      "current_stem": "Why is RAG not training?",
+      "correct_choice_text": "It supplies temporary context during inference rather than durably changing weights.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R060",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 5,
+      "stage_title": "The Day Repeats",
+      "learning_card_code": "5.3",
+      "card_title": "RAG and Retrieval",
+      "question_id": "V02712-RAG-RETRIEVAL-Q4",
+      "question_type": "causal-consequence",
+      "current_stem": "How can RAG reduce hallucinations without eliminating them?",
+      "correct_choice_text": "It gives the model better temporary evidence, but retrieval or generation can still fail.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias",
+        "thin_wrong_feedback"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete. Expand short wrong-answer feedback so it explains the misconception boundary.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R075",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 6,
+      "stage_title": "Twilight: The Wider Landscape",
+      "learning_card_code": "6.2",
+      "card_title": "Diffusion vs Autoregression",
+      "question_id": "V02712-DIFFUSION-Q3",
+      "question_type": "misconception-check",
+      "current_stem": "Why does this distinction help demystify generative AI?",
+      "correct_choice_text": "It shows that ChatGPT-style text generation is not how all generative systems work.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias",
+        "thin_wrong_feedback"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete. Expand short wrong-answer feedback so it explains the misconception boundary.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R072",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 6,
+      "stage_title": "Twilight: The Wider Landscape",
+      "learning_card_code": "6.1",
+      "card_title": "How AI Learns",
+      "question_id": "V02712-HOW-AI-LEARNS-Q5",
+      "question_type": "misconception-check",
+      "current_stem": "Why is the word \"learned\" tricky in How AI Learns conversations?",
+      "correct_choice_text": "People may use it for temporary context behavior even when weights did not change.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R076",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 6,
+      "stage_title": "Twilight: The Wider Landscape",
+      "learning_card_code": "6.3",
+      "card_title": "Multimodal AI",
+      "question_id": "V02712-MULTIMODAL-Q2",
+      "question_type": "boundary",
+      "current_stem": "Which boundary keeps multimodal AI from sounding magical?",
+      "correct_choice_text": "Media inputs are represented numerically and processed by model architecture; they are not human senses.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias",
+        "thin_wrong_feedback"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete. Expand short wrong-answer feedback so it explains the misconception boundary.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R077",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 6,
+      "stage_title": "Twilight: The Wider Landscape",
+      "learning_card_code": "6.3",
+      "card_title": "Multimodal AI",
+      "question_id": "V02712-MULTIMODAL-Q3",
+      "question_type": "model-trace",
+      "current_stem": "How can multimodal and diffusion systems relate?",
+      "correct_choice_text": "A larger AI product can combine different media models and generation methods.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R078",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 6,
+      "stage_title": "Twilight: The Wider Landscape",
+      "learning_card_code": "6.4",
+      "card_title": "The Perfect Storm",
+      "question_id": "V02712-PERFECT-STORM-Q2",
+      "question_type": "human-use-judgment",
+      "current_stem": "Why do labor and incentives belong beside data and compute in the Perfect Storm?",
+      "correct_choice_text": "Human work and market pressure helped turn methods into deployable products.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R080",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 6,
+      "stage_title": "Twilight: The Wider Landscape",
+      "learning_card_code": "6.4",
+      "card_title": "The Perfect Storm",
+      "question_id": "V02712-PERFECT-STORM-Q4",
+      "question_type": "model-trace",
+      "current_stem": "How does the Perfect Storm widen the Journey after model mechanics?",
+      "correct_choice_text": "It asks whose data, labor, infrastructure, and choices made the mechanics useful.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R082",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 7,
+      "stage_title": "Midnight Ledger",
+      "learning_card_code": "7.1",
+      "card_title": "Collective Intelligence, Extracted",
+      "question_id": "V02712-COLLECTIVE-INTELLIGENCE-Q2",
+      "question_type": "boundary",
+      "current_stem": "Why is \"extracted\" an important word here?",
+      "correct_choice_text": "It points to provenance, consent, compensation, and power around training data and labor.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R083",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 7,
+      "stage_title": "Midnight Ledger",
+      "learning_card_code": "7.1",
+      "card_title": "Collective Intelligence, Extracted",
+      "question_id": "V02712-COLLECTIVE-INTELLIGENCE-Q3",
+      "question_type": "model-trace",
+      "current_stem": "How does collective intelligence connect back to pretraining?",
+      "correct_choice_text": "Pretraining can durably shape weights from patterns in human- created data.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias",
+        "possibly_obvious_distractor",
+        "thin_wrong_feedback"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete. Expand short wrong-answer feedback so it explains the misconception boundary. Review “definitely/guaranteed/must” distractors; keep only if they represent a real public myth, otherwise make them more plausible.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R084",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 7,
+      "stage_title": "Midnight Ledger",
+      "learning_card_code": "7.2",
+      "card_title": "Costs We Must Count",
+      "question_id": "V02712-COSTS-WE-MUST-COUNT-Q1",
+      "question_type": "human-use-judgment",
+      "current_stem": "A campus wants AI tutoring at scale. Which cost mix should leaders count before deployment?",
+      "correct_choice_text": "Training, inference, infrastructure, privacy, labor, accessibility, and governance costs.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R087",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 7,
+      "stage_title": "Midnight Ledger",
+      "learning_card_code": "7.2",
+      "card_title": "Costs We Must Count",
+      "question_id": "V02712-COSTS-WE-MUST-COUNT-Q4",
+      "question_type": "human-use-judgment",
+      "current_stem": "How should Costs We Must Count shape benefit claims?",
+      "correct_choice_text": "Pair useful AI possibilities with what must be protected, redesigned, governed, or funded.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R090",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 7,
+      "stage_title": "Midnight Ledger",
+      "learning_card_code": "7.3",
+      "card_title": "Risk vs Myth",
+      "question_id": "V02712-RISK-MYTH-Q4",
+      "question_type": "human-use-judgment",
+      "current_stem": "Which response is best when a risk is real but a myth is also circulating?",
+      "correct_choice_text": "Name the concrete risk, reject the myth, and choose safeguards that match the system.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R091",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 8,
+      "stage_title": "New Dawn",
+      "learning_card_code": "8.1",
+      "card_title": "Benefits Worth Taking Seriously",
+      "question_id": "V02712-BENEFITS-WORTH-TAKING-SERIOUSLY-Q1",
+      "question_type": "human-use-judgment",
+      "current_stem": "Which Benefits Worth Taking Seriously claim is useful and bounded rather than hype?",
+      "correct_choice_text": "AI can assist drafting, translation, search, and access when humans review important outputs.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias",
+        "thin_wrong_feedback"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete. Expand short wrong-answer feedback so it explains the misconception boundary.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R092",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 8,
+      "stage_title": "New Dawn",
+      "learning_card_code": "8.1",
+      "card_title": "Benefits Worth Taking Seriously",
+      "question_id": "V02712-BENEFITS-WORTH-TAKING-SERIOUSLY-Q2",
+      "question_type": "model-trace",
+      "current_stem": "During use, where do many AI benefits come from?",
+      "correct_choice_text": "Trained weights working with temporary context, tools, retrieval, and human review.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias",
+        "thin_wrong_feedback"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete. Expand short wrong-answer feedback so it explains the misconception boundary.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R093",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 8,
+      "stage_title": "New Dawn",
+      "learning_card_code": "8.1",
+      "card_title": "Benefits Worth Taking Seriously",
+      "question_id": "V02712-BENEFITS-WORTH-TAKING-SERIOUSLY-Q3",
+      "question_type": "misconception-check",
+      "current_stem": "What misconception does this benefits card avoid?",
+      "correct_choice_text": "Taking benefits seriously does not require believing in imminent utopia.",
+      "issue_flags": [
+        "generic_stem_needs_mechanism",
+        "possible_correct_answer_length_bias"
+      ],
+      "recommended_change": "Name the mechanism or scenario in the stem so it stands alone outside the learning card. Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R098",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 8,
+      "stage_title": "New Dawn",
+      "learning_card_code": "8.3",
+      "card_title": "Better AI Is a Choice",
+      "question_id": "V02712-BETTER-AI-CHOICE-Q2",
+      "question_type": "boundary",
+      "current_stem": "Which choices can durably shape future AI behavior?",
+      "correct_choice_text": "Training data, fine-tuning, policies, evaluation standards, and incentives.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias",
+        "thin_wrong_feedback"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete. Expand short wrong-answer feedback so it explains the misconception boundary.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R100",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 8,
+      "stage_title": "New Dawn",
+      "learning_card_code": "8.3",
+      "card_title": "Better AI Is a Choice",
+      "question_id": "V02712-BETTER-AI-CHOICE-Q4",
+      "question_type": "model-trace",
+      "current_stem": "How do human-centered values become practical choices?",
+      "correct_choice_text": "Through design, policy, governance, evaluation, data choices, and incentives.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias",
+        "thin_wrong_feedback"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete. Expand short wrong-answer feedback so it explains the misconception boundary.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R102",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 8,
+      "stage_title": "New Dawn",
+      "learning_card_code": "8.4",
+      "card_title": "Effective Prompting from Model Literacy",
+      "question_id": "V02712-EFFECTIVE-PROMPTING-LITERACY-Q2",
+      "question_type": "misconception-check",
+      "current_stem": "Why is prompting not magic wording?",
+      "correct_choice_text": "It works by shaping input context, constraints, and examples for a probabilistic model.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias",
+        "thin_wrong_feedback"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete. Expand short wrong-answer feedback so it explains the misconception boundary.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R103",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 8,
+      "stage_title": "New Dawn",
+      "learning_card_code": "8.4",
+      "card_title": "Effective Prompting from Model Literacy",
+      "question_id": "V02712-EFFECTIVE-PROMPTING-LITERACY-Q3",
+      "question_type": "human-use-judgment",
+      "current_stem": "A user asks for a citation but provides no source and no retrieval tool is connected. What should model literacy suggest?",
+      "correct_choice_text": "Ask for sources or connect retrieval; do not treat citation- shaped output as enough.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias",
+        "thin_wrong_feedback"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete. Expand short wrong-answer feedback so it explains the misconception boundary.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R104",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 8,
+      "stage_title": "New Dawn",
+      "learning_card_code": "8.4",
+      "card_title": "Effective Prompting from Model Literacy",
+      "question_id": "V02712-EFFECTIVE-PROMPTING-LITERACY-Q4",
+      "question_type": "model-trace",
+      "current_stem": "How does effective prompting fit with human responsibility?",
+      "correct_choice_text": "It improves the current run while keeping review, evidence, and accountability visible.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R095",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 8,
+      "stage_title": "New Dawn",
+      "learning_card_code": "8.2",
+      "card_title": "Human-Centered AI",
+      "question_id": "V02712-HUMAN-CENTERED-AI-Q2",
+      "question_type": "boundary",
+      "current_stem": "Why can prompts alone not make a system human-centered?",
+      "correct_choice_text": "Prompts steer current behavior but do not by themselves create accountability, governance, or moral understanding.",
+      "issue_flags": [
+        "mixed_choice_length",
+        "possible_correct_answer_length_bias",
+        "thin_wrong_feedback"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete. Expand short wrong-answer feedback so it explains the misconception boundary.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R105",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 8,
+      "stage_title": "New Dawn",
+      "learning_card_code": "8.5",
+      "card_title": "Model Literate Synthesis",
+      "question_id": "V02712-MODEL-LITERATE-SYNTHESIS-Q1",
+      "question_type": "model-trace",
+      "current_stem": "A learner traces one answer from prompt to output. Which trace keeps the mechanism clear?",
+      "correct_choice_text": "Prompt tokens become IDs and embeddings, layers shape hidden states, logits become probabilities, sampling picks and appends tokens.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R106",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 8,
+      "stage_title": "New Dawn",
+      "learning_card_code": "8.5",
+      "card_title": "Model Literate Synthesis",
+      "question_id": "V02712-MODEL-LITERATE-SYNTHESIS-Q2",
+      "question_type": "boundary",
+      "current_stem": "A model-literate explanation separates durable, temporary, retrieved, and generated pieces. Which separation is strongest?",
+      "correct_choice_text": "Weights are durable; context and hidden states are temporary; retrieved evidence is inserted context; response tokens are generated.",
+      "issue_flags": [
+        "mixed_choice_length",
+        "possible_correct_answer_length_bias"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R107",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 8,
+      "stage_title": "New Dawn",
+      "learning_card_code": "8.5",
+      "card_title": "Model Literate Synthesis",
+      "question_id": "V02712-MODEL-LITERATE-SYNTHESIS-Q3",
+      "question_type": "human-use-judgment",
+      "current_stem": "In Model Literate Synthesis, what should learners do when fluency outruns support?",
+      "correct_choice_text": "Look for grounding, sources, uncertainty, and human review rather than treating fluency as wisdom.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias",
+        "thin_wrong_feedback"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete. Expand short wrong-answer feedback so it explains the misconception boundary.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R108",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 8,
+      "stage_title": "New Dawn",
+      "learning_card_code": "8.5",
+      "card_title": "Model Literate Synthesis",
+      "question_id": "V02712-MODEL-LITERATE-SYNTHESIS-Q4",
+      "question_type": "model-trace",
+      "current_stem": "How does the day-in-the-life through-line help final synthesis?",
+      "correct_choice_text": "It follows one prompt across training history, inference mechanics, evidence, risks, costs, and better human use.",
+      "issue_flags": [
+        "mixed_choice_length",
+        "possible_correct_answer_length_bias"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R109",
+      "priority": "high",
+      "action": "revise",
+      "stage_number": 8,
+      "stage_title": "New Dawn",
+      "learning_card_code": "8.5",
+      "card_title": "Model Literate Synthesis",
+      "question_id": "V02712-MODEL-LITERATE-SYNTHESIS-Q5",
+      "question_type": "human-use-judgment",
+      "current_stem": "What is the badge-level mental model Prompt Life wants to leave behind?",
+      "correct_choice_text": "LLMs are powerful pattern systems whose outputs need evidence, context awareness, and human responsibility.",
+      "issue_flags": [
+        "possible_correct_answer_length_bias"
+      ],
+      "recommended_change": "Shorten the correct answer or lengthen/tighten distractors so the correct choice is not obviously more complete.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R046",
+      "priority": "medium",
+      "action": "review",
+      "stage_number": 4,
+      "stage_title": "Decision Room",
+      "learning_card_code": "4.1",
+      "card_title": "Logits",
+      "question_id": "V02712-LOGITS-Q2",
+      "question_type": "boundary",
+      "current_stem": "A logit is high for a token that would make a false sentence. What should the learner conclude?",
+      "correct_choice_text": "A high logit is not a truth guarantee.",
+      "issue_flags": [
+        "thin_wrong_feedback"
+      ],
+      "recommended_change": "Expand short wrong-answer feedback so it explains the misconception boundary.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R049",
+      "priority": "medium",
+      "action": "review",
+      "stage_number": 4,
+      "stage_title": "Decision Room",
+      "learning_card_code": "4.3",
+      "card_title": "Sampling",
+      "question_id": "V02712-SAMPLING-Q1",
+      "question_type": "mechanism",
+      "current_stem": "Softmax creates probabilities for possible next tokens. What does sampling do next?",
+      "correct_choice_text": "It selects one next token from that probability-shaped set.",
+      "issue_flags": [
+        "thin_wrong_feedback"
+      ],
+      "recommended_change": "Expand short wrong-answer feedback so it explains the misconception boundary.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R051",
+      "priority": "medium",
+      "action": "review",
+      "stage_number": 4,
+      "stage_title": "Decision Room",
+      "learning_card_code": "4.3",
+      "card_title": "Sampling",
+      "question_id": "V02712-SAMPLING-Q4",
+      "question_type": "misconception-check",
+      "current_stem": "A learner says sampling writes the whole answer at once. What boundary fixes that misconception?",
+      "correct_choice_text": "Sampling chooses one next token; autoregression appends and repeats.",
+      "issue_flags": [
+        "thin_wrong_feedback"
+      ],
+      "recommended_change": "Expand short wrong-answer feedback so it explains the misconception boundary.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R047",
+      "priority": "medium",
+      "action": "review",
+      "stage_number": 4,
+      "stage_title": "Decision Room",
+      "learning_card_code": "4.2",
+      "card_title": "Softmax",
+      "question_id": "V02712-SOFTMAX-Q2",
+      "question_type": "boundary",
+      "current_stem": "A token gets the highest softmax probability, but the claim is unsupported. What does that reveal?",
+      "correct_choice_text": "Probability is a model preference under context, not proof of truth.",
+      "issue_flags": [
+        "thin_wrong_feedback"
+      ],
+      "recommended_change": "Expand short wrong-answer feedback so it explains the misconception boundary.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R048",
+      "priority": "medium",
+      "action": "review",
+      "stage_number": 4,
+      "stage_title": "Decision Room",
+      "learning_card_code": "4.2",
+      "card_title": "Softmax",
+      "question_id": "V02712-SOFTMAX-Q3",
+      "question_type": "model-trace",
+      "current_stem": "Where does softmax sit between logits and sampling?",
+      "correct_choice_text": "After logits and before the next-token choice.",
+      "issue_flags": [
+        "thin_wrong_feedback"
+      ],
+      "recommended_change": "Expand short wrong-answer feedback so it explains the misconception boundary.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R052",
+      "priority": "medium",
+      "action": "review",
+      "stage_number": 5,
+      "stage_title": "The Day Repeats",
+      "learning_card_code": "5.1",
+      "card_title": "Autoregression",
+      "question_id": "V02712-AUTOREGRESSION-Q1",
+      "question_type": "model-trace",
+      "current_stem": "In autoregression, a model writes \"The dog\" and then generates \"ran.\" What does the next model run see?",
+      "correct_choice_text": "The prompt plus the response so far, including the newly appended token.",
+      "issue_flags": [
+        "thin_wrong_feedback"
+      ],
+      "recommended_change": "Expand short wrong-answer feedback so it explains the misconception boundary.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R053",
+      "priority": "medium",
+      "action": "review",
+      "stage_number": 5,
+      "stage_title": "The Day Repeats",
+      "learning_card_code": "5.1",
+      "card_title": "Autoregression",
+      "question_id": "V02712-AUTOREGRESSION-Q2",
+      "question_type": "boundary",
+      "current_stem": "Autoregression updates the response-so-far during inference. What usually does not change?",
+      "correct_choice_text": "The model weights.",
+      "issue_flags": [
+        "thin_wrong_feedback"
+      ],
+      "recommended_change": "Expand short wrong-answer feedback so it explains the misconception boundary.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R055",
+      "priority": "medium",
+      "action": "review",
+      "stage_number": 5,
+      "stage_title": "The Day Repeats",
+      "learning_card_code": "5.2",
+      "card_title": "Context Window",
+      "question_id": "V02712-CONTEXT-WINDOW-Q3",
+      "question_type": "model-trace",
+      "current_stem": "RAG retrieves three passages before the LLM answers. Where do those passages usually go?",
+      "correct_choice_text": "Into the current context window as retrieved context.",
+      "issue_flags": [
+        "thin_wrong_feedback"
+      ],
+      "recommended_change": "Expand short wrong-answer feedback so it explains the misconception boundary.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R063",
+      "priority": "medium",
+      "action": "review",
+      "stage_number": 5,
+      "stage_title": "The Day Repeats",
+      "learning_card_code": "5.4",
+      "card_title": "Grounding",
+      "question_id": "V02712-GROUNDING-Q3",
+      "question_type": "misconception-check",
+      "current_stem": "A response includes a polished citation that the source list does not contain. What should a learner suspect?",
+      "correct_choice_text": "The citation may be generated text rather than grounded evidence.",
+      "issue_flags": [
+        "thin_wrong_feedback"
+      ],
+      "recommended_change": "Expand short wrong-answer feedback so it explains the misconception boundary.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R065",
+      "priority": "medium",
+      "action": "review",
+      "stage_number": 5,
+      "stage_title": "The Day Repeats",
+      "learning_card_code": "5.5",
+      "card_title": "Hallucinations",
+      "question_id": "V02712-HALLUCINATIONS-Q1",
+      "question_type": "application",
+      "current_stem": "The model invents a realistic article title and citation. What makes this a hallucination?",
+      "correct_choice_text": "The fluent output lacks adequate support from available evidence.",
+      "issue_flags": [
+        "thin_wrong_feedback"
+      ],
+      "recommended_change": "Expand short wrong-answer feedback so it explains the misconception boundary.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R066",
+      "priority": "medium",
+      "action": "review",
+      "stage_number": 5,
+      "stage_title": "The Day Repeats",
+      "learning_card_code": "5.5",
+      "card_title": "Hallucinations",
+      "question_id": "V02712-HALLUCINATIONS-Q2",
+      "question_type": "causal-consequence",
+      "current_stem": "Why can hallucinations happen in a next-token system?",
+      "correct_choice_text": "Fluent token choices can outrun evidence or grounding.",
+      "issue_flags": [
+        "thin_wrong_feedback"
+      ],
+      "recommended_change": "Expand short wrong-answer feedback so it explains the misconception boundary.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R067",
+      "priority": "medium",
+      "action": "review",
+      "stage_number": 5,
+      "stage_title": "The Day Repeats",
+      "learning_card_code": "5.5",
+      "card_title": "Hallucinations",
+      "question_id": "V02712-HALLUCINATIONS-Q3",
+      "question_type": "boundary",
+      "current_stem": "A hallucination is often confused with lying. Which boundary matters?",
+      "correct_choice_text": "Lying implies intent; hallucination describes unsupported output.",
+      "issue_flags": [
+        "thin_wrong_feedback"
+      ],
+      "recommended_change": "Expand short wrong-answer feedback so it explains the misconception boundary.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R057",
+      "priority": "medium",
+      "action": "review",
+      "stage_number": 5,
+      "stage_title": "The Day Repeats",
+      "learning_card_code": "5.3",
+      "card_title": "RAG and Retrieval",
+      "question_id": "V02712-RAG-RETRIEVAL-Q1",
+      "question_type": "application",
+      "current_stem": "A RAG system searches a course handbook, inserts two passages into the prompt, then the LLM answers. What changed most directly?",
+      "correct_choice_text": "Outside text was retrieved and placed into the current context.",
+      "issue_flags": [
+        "possibly_obvious_distractor"
+      ],
+      "recommended_change": "Review “definitely/guaranteed/must” distractors; keep only if they represent a real public myth, otherwise make them more plausible.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R058",
+      "priority": "medium",
+      "action": "review",
+      "stage_number": 5,
+      "stage_title": "The Day Repeats",
+      "learning_card_code": "5.3",
+      "card_title": "RAG and Retrieval",
+      "question_id": "V02712-RAG-RETRIEVAL-Q2",
+      "question_type": "boundary",
+      "current_stem": "Which source can a RAG system use?",
+      "correct_choice_text": "Sources connected to its retriever or index.",
+      "issue_flags": [
+        "thin_wrong_feedback"
+      ],
+      "recommended_change": "Expand short wrong-answer feedback so it explains the misconception boundary.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R073",
+      "priority": "medium",
+      "action": "review",
+      "stage_number": 6,
+      "stage_title": "Twilight: The Wider Landscape",
+      "learning_card_code": "6.2",
+      "card_title": "Diffusion vs Autoregression",
+      "question_id": "V02712-DIFFUSION-Q1",
+      "question_type": "boundary",
+      "current_stem": "In Diffusion vs Autoregression, one system appends text tokens and another denoises an image. Which boundary is most accurate?",
+      "correct_choice_text": "Autoregressive LLMs and diffusion models are different generative methods.",
+      "issue_flags": [
+        "thin_wrong_feedback"
+      ],
+      "recommended_change": "Expand short wrong-answer feedback so it explains the misconception boundary.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R074",
+      "priority": "medium",
+      "action": "review",
+      "stage_number": 6,
+      "stage_title": "Twilight: The Wider Landscape",
+      "learning_card_code": "6.2",
+      "card_title": "Diffusion vs Autoregression",
+      "question_id": "V02712-DIFFUSION-Q2",
+      "question_type": "mechanism",
+      "current_stem": "What is the key diffusion idea in this simplified map?",
+      "correct_choice_text": "Start with noise and iteratively denoise toward an output.",
+      "issue_flags": [
+        "thin_wrong_feedback"
+      ],
+      "recommended_change": "Expand short wrong-answer feedback so it explains the misconception boundary.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R069",
+      "priority": "medium",
+      "action": "review",
+      "stage_number": 6,
+      "stage_title": "Twilight: The Wider Landscape",
+      "learning_card_code": "6.1",
+      "card_title": "How AI Learns",
+      "question_id": "V02712-HOW-AI-LEARNS-Q1",
+      "question_type": "application",
+      "current_stem": "A team fine-tunes a support model on many reviewed examples. What usually changes?",
+      "correct_choice_text": "Weights or adapter behavior that can affect future inference runs.",
+      "issue_flags": [
+        "thin_wrong_feedback"
+      ],
+      "recommended_change": "Expand short wrong-answer feedback so it explains the misconception boundary.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R070",
+      "priority": "medium",
+      "action": "review",
+      "stage_number": 6,
+      "stage_title": "Twilight: The Wider Landscape",
+      "learning_card_code": "6.1",
+      "card_title": "How AI Learns",
+      "question_id": "V02712-HOW-AI-LEARNS-Q3",
+      "question_type": "model-trace",
+      "current_stem": "A RAG system retrieves a PDF passage and the model uses it. What did the system add?",
+      "correct_choice_text": "Outside information in the current context.",
+      "issue_flags": [
+        "thin_wrong_feedback"
+      ],
+      "recommended_change": "Expand short wrong-answer feedback so it explains the misconception boundary.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R071",
+      "priority": "medium",
+      "action": "review",
+      "stage_number": 6,
+      "stage_title": "Twilight: The Wider Landscape",
+      "learning_card_code": "6.1",
+      "card_title": "How AI Learns",
+      "question_id": "V02712-HOW-AI-LEARNS-Q4",
+      "question_type": "boundary",
+      "current_stem": "Which action belongs in the durable-learning bucket?",
+      "correct_choice_text": "Adapter training on task examples.",
+      "issue_flags": [
+        "generic_stem_needs_mechanism",
+        "thin_wrong_feedback"
+      ],
+      "recommended_change": "Name the mechanism or scenario in the stem so it stands alone outside the learning card. Expand short wrong-answer feedback so it explains the misconception boundary.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R079",
+      "priority": "medium",
+      "action": "review",
+      "stage_number": 6,
+      "stage_title": "Twilight: The Wider Landscape",
+      "learning_card_code": "6.4",
+      "card_title": "The Perfect Storm",
+      "question_id": "V02712-PERFECT-STORM-Q3",
+      "question_type": "misconception-check",
+      "current_stem": "What misconception does the storm-front metaphor correct?",
+      "correct_choice_text": "LLMs appeared because of convergence, not one magic breakthrough.",
+      "issue_flags": [
+        "generic_stem_needs_mechanism"
+      ],
+      "recommended_change": "Name the mechanism or scenario in the stem so it stands alone outside the learning card.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R081",
+      "priority": "medium",
+      "action": "review",
+      "stage_number": 7,
+      "stage_title": "Midnight Ledger",
+      "learning_card_code": "7.1",
+      "card_title": "Collective Intelligence, Extracted",
+      "question_id": "V02712-COLLECTIVE-INTELLIGENCE-Q1",
+      "question_type": "human-use-judgment",
+      "current_stem": "In Collective Intelligence, Extracted, a model gives useful patterns learned from many people's writing. What should learners ask?",
+      "correct_choice_text": "What human-created data and labor helped shape it.",
+      "issue_flags": [
+        "thin_wrong_feedback"
+      ],
+      "recommended_change": "Expand short wrong-answer feedback so it explains the misconception boundary.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R085",
+      "priority": "medium",
+      "action": "review",
+      "stage_number": 7,
+      "stage_title": "Midnight Ledger",
+      "learning_card_code": "7.2",
+      "card_title": "Costs We Must Count",
+      "question_id": "V02712-COSTS-WE-MUST-COUNT-Q2",
+      "question_type": "causal-consequence",
+      "current_stem": "Why can repeated inference workloads matter even after training is done?",
+      "correct_choice_text": "Each use can consume compute, energy, money, monitoring, and support.",
+      "issue_flags": [
+        "thin_wrong_feedback"
+      ],
+      "recommended_change": "Expand short wrong-answer feedback so it explains the misconception boundary.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R086",
+      "priority": "medium",
+      "action": "review",
+      "stage_number": 7,
+      "stage_title": "Midnight Ledger",
+      "learning_card_code": "7.2",
+      "card_title": "Costs We Must Count",
+      "question_id": "V02712-COSTS-WE-MUST-COUNT-Q3",
+      "question_type": "misconception-check",
+      "current_stem": "What misconception does Costs We Must Count correct with the phrase \"digital means weightless\"?",
+      "correct_choice_text": "It hides infrastructure, energy, labor, and policy costs.",
+      "issue_flags": [
+        "generic_stem_needs_mechanism",
+        "thin_wrong_feedback"
+      ],
+      "recommended_change": "Name the mechanism or scenario in the stem so it stands alone outside the learning card. Expand short wrong-answer feedback so it explains the misconception boundary.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R088",
+      "priority": "medium",
+      "action": "review",
+      "stage_number": 7,
+      "stage_title": "Midnight Ledger",
+      "learning_card_code": "7.3",
+      "card_title": "Risk vs Myth",
+      "question_id": "V02712-RISK-MYTH-Q1",
+      "question_type": "application",
+      "current_stem": "A staff member pastes student records into a third-party AI tool. Which risk is real?",
+      "correct_choice_text": "Private data may be exposed, retained, or used outside the intended context.",
+      "issue_flags": [
+        "thin_wrong_feedback"
+      ],
+      "recommended_change": "Expand short wrong-answer feedback so it explains the misconception boundary.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R089",
+      "priority": "medium",
+      "action": "review",
+      "stage_number": 7,
+      "stage_title": "Midnight Ledger",
+      "learning_card_code": "7.3",
+      "card_title": "Risk vs Myth",
+      "question_id": "V02712-RISK-MYTH-Q3",
+      "question_type": "boundary",
+      "current_stem": "What boundary separates hallucination risk from lying?",
+      "correct_choice_text": "Hallucination is unsupported output; lying implies intent.",
+      "issue_flags": [
+        "thin_wrong_feedback"
+      ],
+      "recommended_change": "Expand short wrong-answer feedback so it explains the misconception boundary.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R097",
+      "priority": "medium",
+      "action": "review",
+      "stage_number": 8,
+      "stage_title": "New Dawn",
+      "learning_card_code": "8.3",
+      "card_title": "Better AI Is a Choice",
+      "question_id": "V02712-BETTER-AI-CHOICE-Q1",
+      "question_type": "human-use-judgment",
+      "current_stem": "A team wants fewer unsupported answers in a student-support bot. Which design choice helps without pretending risk disappears?",
+      "correct_choice_text": "Use retrieval, evaluation, and human review when the task needs evidence.",
+      "issue_flags": [
+        "thin_wrong_feedback"
+      ],
+      "recommended_change": "Expand short wrong-answer feedback so it explains the misconception boundary.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R099",
+      "priority": "medium",
+      "action": "review",
+      "stage_number": 8,
+      "stage_title": "New Dawn",
+      "learning_card_code": "8.3",
+      "card_title": "Better AI Is a Choice",
+      "question_id": "V02712-BETTER-AI-CHOICE-Q3",
+      "question_type": "misconception-check",
+      "current_stem": "What misconception does \"better AI is a choice\" avoid?",
+      "correct_choice_text": "Harms are not inevitable just because the technology is useful.",
+      "issue_flags": [
+        "thin_wrong_feedback"
+      ],
+      "recommended_change": "Expand short wrong-answer feedback so it explains the misconception boundary.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R101",
+      "priority": "medium",
+      "action": "review",
+      "stage_number": 8,
+      "stage_title": "New Dawn",
+      "learning_card_code": "8.4",
+      "card_title": "Effective Prompting from Model Literacy",
+      "question_id": "V02712-EFFECTIVE-PROMPTING-LITERACY-Q1",
+      "question_type": "application",
+      "current_stem": "A prompt includes the task, audience, evidence, constraints, and output format. What does that improve?",
+      "correct_choice_text": "The current context the model uses for this run.",
+      "issue_flags": [
+        "thin_wrong_feedback"
+      ],
+      "recommended_change": "Expand short wrong-answer feedback so it explains the misconception boundary.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R094",
+      "priority": "medium",
+      "action": "review",
+      "stage_number": 8,
+      "stage_title": "New Dawn",
+      "learning_card_code": "8.2",
+      "card_title": "Human-Centered AI",
+      "question_id": "V02712-HUMAN-CENTERED-AI-Q1",
+      "question_type": "human-use-judgment",
+      "current_stem": "In Human-Centered AI, what should remain central in a high-stakes advising workflow even if AI drafts options?",
+      "correct_choice_text": "Human judgment, accountability, context, and an appeal path.",
+      "issue_flags": [
+        "thin_wrong_feedback"
+      ],
+      "recommended_change": "Expand short wrong-answer feedback so it explains the misconception boundary.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    },
+    {
+      "repair_id": "R096",
+      "priority": "medium",
+      "action": "review",
+      "stage_number": 8,
+      "stage_title": "New Dawn",
+      "learning_card_code": "8.2",
+      "card_title": "Human-Centered AI",
+      "question_id": "V02712-HUMAN-CENTERED-AI-Q4",
+      "question_type": "model-trace",
+      "current_stem": "How does human-centered AI connect to the prior costs and risks cards?",
+      "correct_choice_text": "It names the values and oversight that should guide tradeoffs.",
+      "issue_flags": [
+        "thin_wrong_feedback"
+      ],
+      "recommended_change": "Expand short wrong-answer feedback so it explains the misconception boundary.",
+      "implementation_instruction": "Codex should revise this question only if the issue is confirmed in source data; preserve stable IDs unless meaning changes, and create new IDs when replacing text meaningfully."
+    }
+  ],
+  "implementation_policy": {
+    "preserve_ids": "Preserve questionId/choiceId when wording is only clarified. Use new stable IDs when a question or option changes meaning.",
+    "correctness": "Every question must keep exactly 4 choices and exactly 1 correct answer.",
+    "feedback": "Wrong-answer feedback must teach the selected misconception without revealing the correct answer prematurely.",
+    "live_status": "Keep full bank active for development only; badge remains under construction pending human review.",
+    "reports": "Regenerate a full PDF review packet and JSON/CSV artifacts after changes."
+  }
+}

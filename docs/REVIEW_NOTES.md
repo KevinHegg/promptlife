@@ -1,5 +1,75 @@
 # Review Notes
 
+Date: 2026-06-10
+
+## v0.27.14 Checkpoint Feedback Naturalness And Human-Test Prep
+
+### What Changed
+
+- Generated the v0.27.14 active checkpoint bank from the v0.27.13 repaired bank.
+- Kept all 39 Journey cards and 136 questions active; no questions were added or removed.
+- Rewrote 334 wrong-answer feedback items to remove repeated boilerplate and speak more directly to the selected misconception.
+- Removed 334 repeated boilerplate feedback phrase occurrences; 0 remain in the generated v0.27.14 bank.
+- Reviewed the 56 answer-length warnings, resolving 41 and intentionally retaining 15 for human review where the answer carries a multi-part boundary.
+- Created the human-test packet for small testing, with the badge still under construction, pending human review, and not issued.
+- Bumped the visible app/package version to `v0.27.14`.
+
+### Verification Notes
+
+- Generator validation confirmed 39 cards, 136 questions, 544 choices, and 408 wrong-answer distractors.
+- Generated artifacts include the full checkpoint review PDF and the human-test packet PDF.
+- Command verification should include `npm run typecheck`, `npm run build`, `npm run build:pages`, `npm run audit:answers`, `npm run audit:checkpoints`, and `npm run audit:learner-copy`.
+
+### Files Added Or Updated
+
+- `src/data/checkpointBankV02714.ts`
+- `src/main.tsx`
+- `scripts/generate-checkpoint-bank-v02714.mjs`
+- `scripts/audit-checkpoints.mjs`
+- `scripts/audit-learner-copy.mjs`
+- `docs/journey/checkpoints/checkpoint-question-bank-v0-27-14.json`
+- `docs/journey/checkpoints/checkpoint-question-bank-v0-27-14.csv`
+- `docs/journey/checkpoints/checkpoint-question-bank-v0-27-14.md`
+- `docs/journey/checkpoints/checkpoint-bank-v0-27-14-choice-level.csv`
+- `docs/journey/checkpoints/checkpoint-bank-v0-27-14-repair-log.csv`
+- `docs/journey/prompt-life-v0-27-14-checkpoint-bank-human-test-review.html`
+- `docs/journey/prompt-life-v0-27-14-checkpoint-bank-human-test-review.pdf`
+- `docs/testing/prompt-life-v0-27-14-human-test-packet.md`
+- `docs/testing/prompt-life-v0-27-14-human-test-packet.pdf`
+
+## v0.27.13 Full Checkpoint Bank Repair Pass
+
+### What Changed
+
+- Generated a new v0.27.13 active checkpoint bank from the qreview JSON/CSV artifacts.
+- Kept all 39 Journey cards covered with 136 questions, 544 choices, and 408 wrong-answer distractors.
+- Preserved stable question and choice IDs where wording was clarified.
+- Revised confirmed generic stems, early jargon, obvious distractors, and short wrong-answer feedback.
+- Made the v0.27.13 bank active in the learner UI while preserving the legacy checkpoint fallback.
+- Kept Badge status unchanged: under construction, pending human review, and not yet issued.
+
+### Verification Notes
+
+- Generator validation confirmed exactly four choices and one correct answer for every question.
+- Generator learner-copy scan found no normal UI debug/fallback/query/active-bank notes.
+- Answer-length audit warnings dropped from 77 to 56; remaining items are documented for human review rather than hidden.
+- Full command verification should be run after generation: `npm run typecheck`, `npm run build`, `npm run build:pages`, `npm run audit:answers`, `npm run audit:checkpoints`, and `npm run audit:learner-copy`.
+
+### Files Added Or Updated
+
+- `src/data/checkpointBankV02713.ts`
+- `src/main.tsx`
+- `scripts/generate-checkpoint-bank-v02713.mjs`
+- `scripts/audit-checkpoints.mjs`
+- `scripts/audit-learner-copy.mjs`
+- `docs/journey/checkpoints/checkpoint-question-bank-v0-27-13.json`
+- `docs/journey/checkpoints/checkpoint-question-bank-v0-27-13.csv`
+- `docs/journey/checkpoints/checkpoint-question-bank-v0-27-13.md`
+- `docs/journey/checkpoints/checkpoint-bank-v0-27-13-choice-level.csv`
+- `docs/journey/checkpoints/checkpoint-bank-v0-27-13-repair-log.csv`
+- `docs/journey/prompt-life-v0-27-13-checkpoint-bank-revision-report.html`
+- `docs/journey/prompt-life-v0-27-13-checkpoint-bank-revision-report.pdf`
+
 Date: 2026-06-09
 
 ## v0.27.12 Full Checkpoint Bank Review Cleanup

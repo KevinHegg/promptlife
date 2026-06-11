@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Prompt Life v0.27.14 Human Test Packet</title>
+  <style>
+    @page { size: Letter; margin: .6in; }
+    body { color: #08124a; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.45; margin: 0; }
+    h1 { color: #111873; font-size: 30px; margin: 0 0 16px; }
+    h2 { border-top: 1px solid #d7e1f3; color: #111873; font-size: 18px; margin-top: 22px; padding-top: 14px; }
+    p, li { font-size: 12.5px; }
+    section { break-inside: avoid; }
+    ul { padding-left: 20px; }
+  </style>
+</head>
+<body><section><h1>Prompt Life v0.27.14 Human Test Packet</h1><p>
+Prompt Life is ready for <strong>small human testing</strong>, not badge issuance.</p>
+<p>Known status:</p>
+<ul><li>Badge: under construction</li><li>Human review: pending</li><li>Credential issue status: not yet issued</li><li>Active Journey cards: 39</li><li>Active checkpoint questions: 136</li><li>Checkpoint choices: 544</li></ul></section>
+<section><h2>Short Tester Instructions</h2><p>
+Use the app on a phone-sized screen if possible. Move through a few Journey cards, answer checkpoint questions naturally, and notice where the app helps you reason about the model instead of memorizing app wording.</p>
+<p>Please do not try to get a perfect run. Wrong choices are part of the test because they should teach without shaming.</p></section>
+<section><h2>What To Test</h2><p>
+- Whether each checkpoint question is understandable without rereading the whole card.
+- Whether the question makes you reason about an LLM mechanism, boundary, or human-use decision.
+- Whether one answer feels clearly best.
+- Whether wrong answers feel plausible rather than silly.
+- Whether feedback explains the misconception you selected.
+- Whether the feedback avoids revealing the correct answer too directly.
+- Whether mobile layout, scrolling, and bottom navigation stay comfortable.</p></section>
+<section><h2>Feedback To Collect</h2><p>
+For each confusing checkpoint, capture:</p>
+<ul><li>Learning card title.</li><li>Question text.</li><li>The answer you chose.</li><li>Why that answer seemed tempting.</li><li>Whether the feedback helped.</li><li>Any wording that felt too technical, too vague, too long, or unfair.</li></ul></section>
+<section><h2>Report Confusing Questions</h2><p>
+Mark a question as confusing if:</p>
+<ul><li>The stem depends on a phrase you do not yet know.</li><li>More than one answer seems equally defensible.</li><li>The question asks for app wording instead of model reasoning.</li><li>The scenario is too abstract to picture.</li></ul></section>
+<section><h2>Report Unfair Distractors</h2><p>
+Mark a distractor as unfair if:</p>
+<ul><li>It is obviously silly.</li><li>It uses a term before the app has taught it.</li><li>It is partly true in a way the feedback does not explain.</li><li>It is much shorter or much vaguer than the correct answer.</li></ul></section>
+<section><h2>Report Jargon</h2><p>
+Flag any use of terms such as logits, tensors, hidden states, grounding, RAG, inference, alignment, or autoregression when the question does not give enough context to understand them.</p></section>
+<section><h2>Report UI Friction</h2><p>
+Tell us if:</p>
+<ul><li>The checkpoint panel is hidden by the bottom nav.</li><li>The Next question or Next learning card button is hard to reach.</li><li>Answer text is too dense on a small screen.</li><li>Feedback appears too low, too late, or too long.</li></ul></section>
+<section><h2>Wrong-Answer Feedback Standard</h2><p>
+Wrong choices should feel instructive, not humiliating. A good wrong-answer response should:</p>
+<ul><li>Name the selected misconception.</li><li>Explain the boundary in plain language.</li><li>Stay calm.</li><li>Avoid language like failed, wrong, score, or streak.</li><li>Avoid giving away the correct answer too directly.</li></ul></section>
+<section><h2>Current Human-Review Focus</h2><p>
+- Feedback rewritten for naturalness: 334 items.
+- Boilerplate feedback occurrences removed: 334.
+- Answer-length warnings resolved: 41.
+- Answer-length warnings intentionally retained for human review: 15.</p></section>
+<section><h2>Final Reminder</h2><p>
+Prompt Life is being tested as a learning app and evidence model. The badge remains under construction until human review confirms the Journey, checkpoint bank, and evidence standard are credible.</p></section></body>
+</html>

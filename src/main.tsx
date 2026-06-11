@@ -21,7 +21,7 @@ import {
 } from './components/ConceptAnimations'
 import { ExerciseShell } from './components/ExerciseSystem'
 import { VisualAid, VisualAidGallery, visualAidStyleVariants } from './components/VisualAids'
-import { FULL_CHECKPOINT_BANK_V02712, hasV02712CheckpointBank } from './data/checkpointBankV02712'
+import { FULL_CHECKPOINT_BANK_V02714, hasV02714CheckpointBank } from './data/checkpointBankV02714'
 import { acts, games, glossary, learningModes, lessons } from './data/content'
 import { buildLessonReviewProfile, reviewRubricCategories } from './data/contentReview'
 import { emptyExerciseProgress, exerciseById, lessonExerciseIds } from './data/exercises'
@@ -72,7 +72,7 @@ const HOME_ASSETS = {
   heroFallback: `${ASSET}/illustrations/scene-hero-feature-cloud@mobile.png`
 }
 // Bump this for each shipped app change; the Badge screen displays it under Start over.
-const APP_VERSION = '0.27.13'
+const APP_VERSION = '0.27.14'
 const STORAGE_KEYS = {
   lastLocation: 'promptlife:v1:lastLocation',
   lessonId: 'promptlife:v1:lessonId',
@@ -409,8 +409,8 @@ function shouldUseLegacyCheckpointBank() {
 }
 
 function getActiveCheckpointQuiz(lesson, useLegacyBank = shouldUseLegacyCheckpointBank()) {
-  if (!useLegacyBank && hasV02712CheckpointBank(lesson.id)) {
-    return FULL_CHECKPOINT_BANK_V02712[lesson.id]
+  if (!useLegacyBank && hasV02714CheckpointBank(lesson.id)) {
+    return FULL_CHECKPOINT_BANK_V02714[lesson.id]
   }
   return lesson.quiz
 }
@@ -5936,7 +5936,7 @@ function BadgeScreen({
     const actLessons = lessons.filter((lesson) => lesson.act === act.id)
     return actLessons.length > 0 && actLessons.every((lesson) => completed.includes(lesson.id))
   }).length
-  const totalCheckpointQuestions = Object.values(FULL_CHECKPOINT_BANK_V02712).reduce((total, quiz: any) => {
+  const totalCheckpointQuestions = Object.values(FULL_CHECKPOINT_BANK_V02714).reduce((total, quiz: any) => {
     return total + (Array.isArray(quiz?.questions) ? quiz.questions.length : 0)
   }, 0)
   const playPracticeAttempts = playChallengeSummaries.reduce((total, item) => total + (item.progress?.attempts ?? 0), 0)
