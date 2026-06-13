@@ -1,0 +1,114 @@
+{
+  "smokeResults": {
+    "home": {
+      "url": "http://127.0.0.1:5174/?debug=1&v=0280",
+      "overflow": 0,
+      "metadataLeaks": false,
+      "bodyStart": "Skip to content\n\nA DAY IN THE LIFE OF A PROMPT\n\nPrompt Life\n\nDemystifying LLMs in the AI era through clear explanations, useful metaphors, and a little play.\n\nC"
+    },
+    "play": {
+      "url": "http://127.0.0.1:5174/?debug=1&v=0280",
+      "overflow": 0,
+      "metadataLeaks": false,
+      "bodyStart": "Skip to content\n\nPLAY LAB\n\nPlay to learn\n\nShort, calm challenges that make model mechanics visible.\n\nProgress saved on this device. 0 of 5 practice challenges s"
+    },
+    "glossary": {
+      "url": "http://127.0.0.1:5174/?debug=1&v=0280",
+      "overflow": 0,
+      "metadataLeaks": false,
+      "bodyStart": "Skip to content\n\nDEFINITIONS PLUS RELATIONSHIPS\n\nGlossary\n\nUse each term with its neighbor. That is where the mental model gets stable.\n\nPRACTICE MODE\n\nGlossary"
+    },
+    "badge": {
+      "url": "http://127.0.0.1:5174/?debug=1&v=0280",
+      "overflow": 0,
+      "metadataLeaks": false,
+      "bodyStart": "Skip to content\n\nBADGE\n\nPrompt Life: Model Literate\n\nUnder construction while the evidence model is reviewed.\n\nUnder construction\nPending human review\n\nPrompt L"
+    }
+  },
+  "stageResults": [
+    {
+      "index": 1,
+      "label": "Jump to Before Morning. Model shaped before use",
+      "expectedActId": "before-morning",
+      "focusedId": "journey-section-title-before-morning",
+      "shellScrollTop": 524,
+      "targetTopWithinShell": 12,
+      "title": "Before Morning",
+      "ok": true
+    },
+    {
+      "index": 2,
+      "label": "Jump to Morning Commute. Text becomes numbers",
+      "expectedActId": "morning-commute",
+      "focusedId": "journey-section-title-morning-commute",
+      "shellScrollTop": 1975,
+      "targetTopWithinShell": 13,
+      "title": "Morning Commute",
+      "ok": true
+    },
+    {
+      "index": 3,
+      "label": "Jump to Workday. Layers process context",
+      "expectedActId": "workday",
+      "focusedId": "journey-section-title-workday",
+      "shellScrollTop": 3129,
+      "targetTopWithinShell": 102,
+      "title": "Workday",
+      "ok": true
+    },
+    {
+      "index": 4,
+      "label": "Jump to Decision Room. One token is chosen",
+      "expectedActId": "decision-room",
+      "focusedId": "journey-section-title-decision-room",
+      "shellScrollTop": 3876,
+      "targetTopWithinShell": 187,
+      "title": "Decision Room",
+      "ok": true
+    },
+    {
+      "index": 5,
+      "label": "Jump to The Day Repeats. Context grows and expires",
+      "expectedActId": "day-repeats",
+      "focusedId": "journey-section-title-day-repeats",
+      "shellScrollTop": 4393,
+      "targetTopWithinShell": 354,
+      "title": "The Day Repeats",
+      "ok": true
+    },
+    {
+      "index": 6,
+      "label": "Jump to Twilight: The Wider Landscape. Wider AI landscape",
+      "expectedActId": "twilight-landscape",
+      "focusedId": "journey-section-title-twilight-landscape",
+      "shellScrollTop": 5187,
+      "targetTopWithinShell": 547,
+      "title": "Twilight: The Wider Landscape",
+      "ok": true
+    },
+    {
+      "index": 7,
+      "label": "Jump to Midnight Ledger. Costs and shadows",
+      "expectedActId": "midnight-ledger",
+      "focusedId": "journey-section-title-midnight-ledger",
+      "shellScrollTop": 5781,
+      "targetTopWithinShell": 849,
+      "title": "Midnight Ledger",
+      "ok": true
+    },
+    {
+      "index": 8,
+      "label": "Jump to New Dawn. Human centered AI",
+      "expectedActId": "new-dawn",
+      "focusedId": "journey-section-title-new-dawn",
+      "shellScrollTop": 6315,
+      "targetTopWithinShell": 1106,
+      "title": "New Dawn",
+      "ok": true
+    }
+  ],
+  "journeyOverflow": 0,
+  "overflow320": 0,
+  "overflowDesktop": 0,
+  "stageLinksAllOk": true
+}

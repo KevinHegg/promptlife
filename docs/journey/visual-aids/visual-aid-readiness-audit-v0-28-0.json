@@ -1,0 +1,179 @@
+{
+  "version": "0.28.0",
+  "status": "ok",
+  "checks": [
+    "every current visual aid has a canonical template",
+    "every visual aid has callouts and alt text",
+    "no visual has more than five estimated internal instructional labels",
+    "no known visual-aid CSS or inline SVG font size below 12px",
+    "no generated PNG is marked as an exact mechanism diagram",
+    "no exact mechanism visual is generated PNG only",
+    "no P0/P1 visual remains after readiness pass",
+    "no renderer/debug metadata labels in VisualAids.tsx",
+    "required v0.28.0 390px screenshots exist for all 39 visual aids"
+  ],
+  "heuristicNotes": [
+    "Internal label count is a curated estimate for explanatory labels. Repeated token examples are not counted as separate instructional labels.",
+    "Generated-image and exact-mechanism checks use the v0.28.0 readiness registry rather than computer vision.",
+    "Screenshot checks validate artifact presence; visual quality still requires human review."
+  ],
+  "issues": [],
+  "requiredScreenshots": [
+    {
+      "file": "before-morning-llm-cloud-390.png",
+      "exists": true
+    },
+    {
+      "file": "ai-family-tree-390.png",
+      "exists": true
+    },
+    {
+      "file": "traditions-390.png",
+      "exists": true
+    },
+    {
+      "file": "training-loop-390.png",
+      "exists": true
+    },
+    {
+      "file": "before-morning-pretraining-landscape-390.png",
+      "exists": true
+    },
+    {
+      "file": "overfitting-generalization-390.png",
+      "exists": true
+    },
+    {
+      "file": "before-morning-finetuning-path-390.png",
+      "exists": true
+    },
+    {
+      "file": "before-morning-alignment-garden-390.png",
+      "exists": true
+    },
+    {
+      "file": "inference-pass-390.png",
+      "exists": true
+    },
+    {
+      "file": "prompt-response-390.png",
+      "exists": true
+    },
+    {
+      "file": "tokenization-390.png",
+      "exists": true
+    },
+    {
+      "file": "token-ids-390.png",
+      "exists": true
+    },
+    {
+      "file": "embeddings-390.png",
+      "exists": true
+    },
+    {
+      "file": "vectors-390.png",
+      "exists": true
+    },
+    {
+      "file": "tensors-390.png",
+      "exists": true
+    },
+    {
+      "file": "attention-390.png",
+      "exists": true
+    },
+    {
+      "file": "mlp-390.png",
+      "exists": true
+    },
+    {
+      "file": "layers-390.png",
+      "exists": true
+    },
+    {
+      "file": "hidden-states-390.png",
+      "exists": true
+    },
+    {
+      "file": "logits-390.png",
+      "exists": true
+    },
+    {
+      "file": "softmax-390.png",
+      "exists": true
+    },
+    {
+      "file": "sampling-390.png",
+      "exists": true
+    },
+    {
+      "file": "autoregression-390.png",
+      "exists": true
+    },
+    {
+      "file": "context-window-390.png",
+      "exists": true
+    },
+    {
+      "file": "rag-retrieval-390.png",
+      "exists": true
+    },
+    {
+      "file": "grounding-evidence-390.png",
+      "exists": true
+    },
+    {
+      "file": "hallucination-bridge-390.png",
+      "exists": true
+    },
+    {
+      "file": "ai-learns-390.png",
+      "exists": true
+    },
+    {
+      "file": "diffusion-390.png",
+      "exists": true
+    },
+    {
+      "file": "multimodal-390.png",
+      "exists": true
+    },
+    {
+      "file": "perfect-storm-390.png",
+      "exists": true
+    },
+    {
+      "file": "collective-intelligence-lantern-390.png",
+      "exists": true
+    },
+    {
+      "file": "costs-invisible-factory-390.png",
+      "exists": true
+    },
+    {
+      "file": "risk-390.png",
+      "exists": true
+    },
+    {
+      "file": "benefits-tool-garden-390.png",
+      "exists": true
+    },
+    {
+      "file": "human-centered-ai-garden-390.png",
+      "exists": true
+    },
+    {
+      "file": "responsible-ai-forked-path-390.png",
+      "exists": true
+    },
+    {
+      "file": "prompting-context-tray-390.png",
+      "exists": true
+    },
+    {
+      "file": "synthesis-map-compass-lantern-390.png",
+      "exists": true
+    }
+  ]
+}

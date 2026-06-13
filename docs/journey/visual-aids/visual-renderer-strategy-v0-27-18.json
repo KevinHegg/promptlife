@@ -1,0 +1,132 @@
+{
+  "version": "0.27.18",
+  "generatedAt": "2026-06-12T17:15:49.772Z",
+  "strategies": [
+    {
+      "id": "generated-png-html-callouts",
+      "strategy": "Generated PNG image asset with HTML callouts",
+      "usedBy": [
+        "Prompt to Prediction",
+        "Broad Pretraining",
+        "Fine-Tuning Path",
+        "Alignment Landscape"
+      ],
+      "strengths": "Good for atmosphere, concept setting, and fear-reducing metaphor where exact labels are not required.",
+      "weaknesses": "Cannot safely carry exact instructional text, token positions, or mechanism boundaries.",
+      "recommendation": "Keep for atmospheric aids only. Do not use for exact mechanism diagrams.",
+      "status": "keep-with-limits"
+    },
+    {
+      "id": "inline-coded-svg",
+      "strategy": "Inline coded SVG",
+      "usedBy": [
+        "Forward Pass",
+        "Token IDs",
+        "Embeddings",
+        "Vectors",
+        "Tensors",
+        "Relevance Between Tokens",
+        "MLP",
+        "Layers",
+        "Hidden States",
+        "Logits",
+        "Softmax",
+        "Sampling",
+        "Autoregression",
+        "Context Window",
+        "RAG",
+        "Grounding",
+        "Hallucination",
+        "Diffusion",
+        "Multimodal",
+        "Perfect Storm",
+        "Twilight ethics/risk visuals"
+      ],
+      "strengths": "Best for exact relationships, arrows, token order, bars, boundaries, and accessibility-controlled labels.",
+      "weaknesses": "Can become cluttered quickly if too many labels are placed inside the SVG.",
+      "recommendation": "Preferred for model-mechanism diagrams, with strict label limits and HTML callouts for nuance.",
+      "status": "preferred-for-mechanisms"
+    },
+    {
+      "id": "html-css-diagram-card",
+      "strategy": "HTML/CSS diagram card",
+      "usedBy": [
+        "Prompt vs Response",
+        "Text to Tokens"
+      ],
+      "strengths": "Handles wrapping token chips and multi-row mobile layouts better than cramped SVG text.",
+      "weaknesses": "Needs careful fixed dimensions so rows do not drift or overflow.",
+      "recommendation": "Keep for text-heavy token/card layouts. Consider for future token-stream visuals.",
+      "status": "keep"
+    },
+    {
+      "id": "diagramkit-react-svg",
+      "strategy": "DiagramKit React SVG examples",
+      "usedBy": [
+        "AI Family Tree",
+        "Rules and Learned Patterns",
+        "Training Loop",
+        "Overfitting vs Generalization"
+      ],
+      "strengths": "Reusable coded primitives for taxonomy, loop, and comparison diagrams.",
+      "weaknesses": "Some early labels were smaller than the new readability standard and need continued mobile checks.",
+      "recommendation": "Keep, but follow the v0.27.18 minimum label-size rules.",
+      "status": "keep"
+    },
+    {
+      "id": "visual-aid-frame-html-callouts",
+      "strategy": "Shared visual aid frame with HTML caption, callouts, key takeaway, and accessible description",
+      "usedBy": [
+        "All 39 Journey visual aids"
+      ],
+      "strengths": "Strong shared grammar; keeps nuanced explanation accessible and readable below the diagram.",
+      "weaknesses": "Can feel repetitive if visual titles/captions are not specific.",
+      "recommendation": "Preferred wrapper for all Journey visual aids.",
+      "status": "preferred-wrapper"
+    },
+    {
+      "id": "metadata-chip-wrapper",
+      "strategy": "Renderer metadata chip wrapper",
+      "usedBy": [
+        "Former review-route visual aid cards"
+      ],
+      "strengths": "Useful for developers during audits.",
+      "weaknesses": "Clutters learner review and exposes implementation details like pattern, variant, callouts, and marker counts.",
+      "recommendation": "Deprecated from learner-facing UI. Keep renderer metadata in docs, JSON, and reports only.",
+      "status": "deprecated-for-ui"
+    },
+    {
+      "id": "custom-svg-primitives",
+      "strategy": "Custom SVG primitives",
+      "usedBy": [
+        "Label",
+        "Arrow",
+        "Callout",
+        "TokenChip",
+        "StepNode",
+        "diagram-specific bars/arcs/cards"
+      ],
+      "strengths": "Lightweight, dependency-free, and easy to tune for mobile.",
+      "weaknesses": "Inconsistent use can produce tiny text or unclear endpoint geometry.",
+      "recommendation": "Keep and consolidate into shared styles; avoid new one-off tiny labels.",
+      "status": "keep-and-standardize"
+    },
+    {
+      "id": "third-party-visualization",
+      "strategy": "Third-party visualization helper",
+      "usedBy": [],
+      "strengths": "None currently needed.",
+      "weaknesses": "Would add dependency weight and may reduce design control.",
+      "recommendation": "Do not introduce for current Journey visual aids.",
+      "status": "not-used"
+    }
+  ],
+  "preferredGoingForward": [
+    "visual-aid-frame-html-callouts",
+    "inline-coded-svg",
+    "html-css-diagram-card"
+  ],
+  "deprecated": [
+    "metadata-chip-wrapper"
+  ]
+}

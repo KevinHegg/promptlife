@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Prompt Life v0.27.18 Visual Renderer Readability Report</title>
+  <style>
+    :root { color-scheme: light; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #101a52; background: #f8fbff; }
+    body { margin: 0; padding: 32px; }
+    main { max-width: 1080px; margin: 0 auto; }
+    h1, h2, h3 { color: #101783; line-height: 1.08; }
+    h1 { font-size: 2.2rem; }
+    p, li { line-height: 1.52; }
+    table { width: 100%; border-collapse: collapse; background: #fff; font-size: 0.86rem; }
+    th, td { border: 1px solid #d9e3f7; padding: 10px; vertical-align: top; }
+    th { background: #eaf5ff; text-align: left; }
+    .metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 20px 0; }
+    .metric, .note, figure { background: #fff; border: 1px solid #d9e3f7; border-radius: 14px; padding: 14px; box-shadow: 0 10px 28px rgba(20,30,88,.06); }
+    .metric strong { display: block; font-size: 1.8rem; color: #0a7d87; }
+    .shots { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    figure { margin: 0; break-inside: avoid; }
+    img { width: 100%; display: block; border: 1px solid #edf1fb; border-radius: 10px; }
+    figcaption { margin-top: 8px; font-weight: 800; font-size: 0.84rem; }
+    code { background: #eef4ff; padding: 2px 5px; border-radius: 5px; }
+    @media print { body { padding: 18px; } .metrics { grid-template-columns: repeat(4, 1fr); } .shots { grid-template-columns: repeat(2, 1fr); } table { font-size: 0.72rem; } }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Prompt Life v0.27.18 Visual Renderer Readability Report</h1>
+  <p>Generated 2026-06-12T17:15:49.773Z. This pass removes learner-facing renderer metadata, raises label readability standards, rebuilds the Attention visual, and repairs the Decision Room mechanism sequence while preserving Journey, Play, checkpoints, progress, and the one-badge model.</p>
+
+  <section class="metrics">
+    <div class="metric"><strong>8</strong><span>renderer strategies found</span></div>
+    <div class="metric"><strong>4</strong><span>visual aids structurally changed</span></div>
+    <div class="metric"><strong>39</strong><span>visual aids affected by metadata cleanup</span></div>
+    <div class="metric"><strong>5</strong><span>remaining backlog items</span></div>
+  </section>
+
+  <h2>Executive Summary</h2>
+  <ul>
+    <li>Renderer strategies kept: generated PNG with HTML callouts, inline coded SVG, HTML/CSS diagram cards, DiagramKit SVG examples, shared visual-aid frame, and custom SVG primitives.</li>
+    <li>Deprecated for learner UI: renderer metadata chip wrapper.</li>
+    <li>Metadata UI removed from visual aid review cards: no Pattern, Variant, Callouts, Markers, renderer, or implementation chips.</li>
+    <li>Attention was renamed from Attention Weave to Relevance Between Tokens and rebuilt as a clean coded SVG.</li>
+    <li>Workday cluster status: MLP, Layers, and Hidden States were kept structurally but benefit from larger label standards and metadata removal.</li>
+    <li>Decision Room cluster status: Logits, Softmax, and Sampling now share floor, mat, kitchen, banana as candidate tokens and clearer captions.</li>
+  </ul>
+
+  <h2>Renderer Strategy Inventory</h2>
+  <table><thead><tr><th>Strategy</th><th>Status</th><th>Used by</th><th>Recommendation</th></tr></thead><tbody>
+    <tr>
+      <td>Generated PNG image asset with HTML callouts</td>
+      <td>keep-with-limits</td>
+      <td>Prompt to Prediction, Broad Pretraining, Fine-Tuning Path, Alignment Landscape</td>
+      <td>Keep for atmospheric aids only. Do not use for exact mechanism diagrams.</td>
+    </tr>
+  
+    <tr>
+      <td>Inline coded SVG</td>
+      <td>preferred-for-mechanisms</td>
+      <td>Forward Pass, Token IDs, Embeddings, Vectors, Tensors, Relevance Between Tokens, MLP, Layers, Hidden States, Logits, Softmax, Sampling, Autoregression, Context Window, RAG, Grounding, Hallucination, Diffusion, Multimodal, Perfect Storm, Twilight ethics/risk visuals</td>
+      <td>Preferred for model-mechanism diagrams, with strict label limits and HTML callouts for nuance.</td>
+    </tr>
+  
+    <tr>
+      <td>HTML/CSS diagram card</td>
+      <td>keep</td>
+      <td>Prompt vs Response, Text to Tokens</td>
+      <td>Keep for text-heavy token/card layouts. Consider for future token-stream visuals.</td>
+    </tr>
+  
+    <tr>
+      <td>DiagramKit React SVG examples</td>
+      <td>keep</td>
+      <td>AI Family Tree, Rules and Learned Patterns, Training Loop, Overfitting vs Generalization</td>
+      <td>Keep, but follow the v0.27.18 minimum label-size rules.</td>
+    </tr>
+  
+    <tr>
+      <td>Shared visual aid frame with HTML caption, callouts, key takeaway, and accessible description</td>
+      <td>preferred-wrapper</td>
+      <td>All 39 Journey visual aids</td>
+      <td>Preferred wrapper for all Journey visual aids.</td>
+    </tr>
+  
+    <tr>
+      <td>Renderer metadata chip wrapper</td>
+      <td>deprecated-for-ui</td>
+      <td>Former review-route visual aid cards</td>
+      <td>Deprecated from learner-facing UI. Keep renderer metadata in docs, JSON, and reports only.</td>
+    </tr>
+  
+    <tr>
+      <td>Custom SVG primitives</td>
+      <td>keep-and-standardize</td>
+      <td>Label, Arrow, Callout, TokenChip, StepNode, diagram-specific bars/arcs/cards</td>
+      <td>Keep and consolidate into shared styles; avoid new one-off tiny labels.</td>
+    </tr>
+  
+    <tr>
+      <td>Third-party visualization helper</td>
+      <td>not-used</td>
+      <td>None</td>
+      <td>Do not introduce for current Journey visual aids.</td>
+    </tr>
+  </tbody></table>
+
+  <h2>Attention Before / After</h2>
+  <div class="note">
+    <p><strong>Old issue summary:</strong> Attention Weave used legacy wording, visible renderer metadata cluttered the review screen, and the diagram carried too many competing labels.</p>
+    <p><strong>New diagram summary:</strong> Relevance Between Tokens uses six sentence chips, a highlighted target token, a highlighted source clue, one stronger arc, one weaker arc, and four HTML callouts below the visual.</p>
+  </div>
+  <section class="shots">
+    <figure><img src="../screenshots/v0-27-18/attention-390.png" alt="Attention visual at 390px" /><figcaption>Attention visual at 390px</figcaption></figure>
+    <figure><img src="../screenshots/v0-27-18/attention-320.png" alt="Attention visual at 320px" /><figcaption>Attention visual at 320px</figcaption></figure>
+  </section>
+
+  <h2>Cluster Status</h2>
+  <table><thead><tr><th>Visual</th><th>Current title</th><th>Status</th><th>Action</th></tr></thead><tbody>
+    <tr>
+      <td>Attention</td>
+      <td>Relevance Between Tokens</td>
+      <td>changed</td>
+      <td>Rebuilt coded SVG and replaced legacy Attention Weave title.</td>
+    </tr>
+  
+    <tr>
+      <td>MLP</td>
+      <td>MLP Feature Workshop</td>
+      <td>kept-with-readability-repair</td>
+      <td>Kept structure; larger label standard and metadata removal improve readability.</td>
+    </tr>
+  
+    <tr>
+      <td>Layers</td>
+      <td>Transformer Stack</td>
+      <td>kept-with-readability-repair</td>
+      <td>Kept repeated-block layout; larger labels and no metadata chips.</td>
+    </tr>
+  
+    <tr>
+      <td>Hidden States</td>
+      <td>Hidden State Flow</td>
+      <td>kept-with-readability-repair</td>
+      <td>Kept temporary-state flow; larger labels and no metadata chips.</td>
+    </tr>
+  
+    <tr>
+      <td>Logits</td>
+      <td>Raw Scoreboard</td>
+      <td>changed</td>
+      <td>Updated caption and token set; simplified raw-score labels.</td>
+    </tr>
+  
+    <tr>
+      <td>Softmax</td>
+      <td>Score to Probability</td>
+      <td>changed</td>
+      <td>Updated caption and token set; kept softmax separate from sampling.</td>
+    </tr>
+  
+    <tr>
+      <td>Sampling</td>
+      <td>Weighted Token Choice</td>
+      <td>changed</td>
+      <td>Replaced bubble cluster with readable probability bars and selected-token card.</td>
+    </tr>
+  </tbody></table>
+
+  <h2>Mechanism Screenshots</h2>
+  <section class="shots">
+    <figure><img src="../screenshots/v0-27-18/mlp-390.png" alt="MLP at 390px" /><figcaption>MLP at 390px</figcaption></figure>
+    <figure><img src="../screenshots/v0-27-18/layers-390.png" alt="Layers at 390px" /><figcaption>Layers at 390px</figcaption></figure>
+    <figure><img src="../screenshots/v0-27-18/hidden-states-390.png" alt="Hidden States at 390px" /><figcaption>Hidden States at 390px</figcaption></figure>
+    <figure><img src="../screenshots/v0-27-18/logits-390.png" alt="Logits at 390px" /><figcaption>Logits at 390px</figcaption></figure>
+    <figure><img src="../screenshots/v0-27-18/softmax-390.png" alt="Softmax at 390px" /><figcaption>Softmax at 390px</figcaption></figure>
+    <figure><img src="../screenshots/v0-27-18/sampling-390.png" alt="Sampling at 390px" /><figcaption>Sampling at 390px</figcaption></figure>
+    <figure><img src="../screenshots/v0-27-18/atmospheric-sample-390.png" alt="Atmospheric PNG sample at 390px" /><figcaption>Atmospheric PNG sample at 390px</figcaption></figure>
+    <figure><img src="../screenshots/v0-27-18/visual-aids-desktop.png" alt="Desktop visual aid sample" /><figcaption>Desktop visual aid sample</figcaption></figure>
+  </section>
+
+  <h2>Remaining Backlog</h2>
+  <ul><li><strong>Collective Intelligence, Extracted</strong>: future Image 2 atmospheric replacement (medium)</li><li><strong>Benefits Worth Taking Seriously</strong>: future Image 2 atmospheric replacement (medium)</li><li><strong>Costs We Must Count</strong>: future Image 2 atmospheric replacement (medium)</li><li><strong>Human-Centered AI</strong>: future Image 2 atmospheric replacement (medium)</li><li><strong>Responsible AI Control Panel</strong>: coded simplification/backlog from v0.27.15 (low)</li></ul>
+
+  <h2>Audit Results</h2>
+  <ul>
+    <li>Visual aid consistency: 0 numbered marker/list mismatches.</li>
+    <li>Visual aid readability: 0 readability issues.</li>
+    <li>Learner-copy audit: run in verification; no normal learner UI debug/developer labels expected.</li>
+    <li>Stage-link regression: verified by browser QA in this pass.</li>
+    <li>Mobile QA: 320px and 390px screenshots captured.</li>
+  </ul>
+</main>
+</body>
+</html>

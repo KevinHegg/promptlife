@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Prompt Life v0.27.16 Visual Aid Consistency Report</title>
+  <style>
+    :root { color: #081248; background: #f6fbff; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; padding: 36px; }
+    main { max-width: 980px; margin: 0 auto; }
+    h1 { color: #111a7a; font-size: 34px; line-height: 1.05; margin: 0 0 10px; }
+    h2 { color: #111a7a; margin-top: 32px; }
+    p, li { color: #17214d; line-height: 1.45; }
+    .lede { font-size: 18px; }
+    .summary { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 22px 0; }
+    .metric { border: 1px solid #cfd8f1; border-radius: 10px; padding: 12px; background: white; }
+    .metric strong { display: block; color: #00a9a7; font-size: 12px; text-transform: uppercase; }
+    .metric span { display: block; color: #111a7a; font-size: 24px; font-weight: 900; }
+    table { border-collapse: collapse; width: 100%; background: white; font-size: 12px; }
+    th, td { border: 1px solid #d8def2; padding: 7px; text-align: left; vertical-align: top; }
+    th { background: #edf8fa; color: #111a7a; }
+    .screens { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+    figure { margin: 0; border: 1px solid #d8def2; border-radius: 10px; padding: 10px; background: white; break-inside: avoid; }
+    img { display: block; width: 100%; height: auto; border-radius: 8px; }
+    figcaption { margin-top: 8px; color: #17214d; font-size: 12px; font-weight: 800; }
+    code { background: #eef3ff; padding: 1px 4px; border-radius: 4px; }
+    @media print {
+      body { padding: 18px; background: white; }
+      h2 { break-after: avoid; }
+      .summary { grid-template-columns: repeat(4, 1fr); }
+      .screens { grid-template-columns: repeat(2, 1fr); }
+      table { font-size: 10px; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <p><strong>Prompt Life</strong> · v0.27.16</p>
+  <h1>Journey Visual Aid Consistency Report</h1>
+  <p class="lede">This pass adds a reusable visual aid grammar and audits all 39 Journey visual aids for numbered marker/list consistency, mobile-safe callouts, and generated PNG boundaries.</p>
+
+  <section class="summary" aria-label="Report summary">
+    <div class="metric"><strong>Audited</strong><span>39</span></div>
+    <div class="metric"><strong>Mismatches</strong><span>0</span></div>
+    <div class="metric"><strong>Generated PNGs</strong><span>4</span></div>
+    <div class="metric"><strong>Coded aids</strong><span>35</span></div>
+  </section>
+
+  <h2>Grammar Summary</h2>
+  <p>Numbered callouts are now reserved for visuals with matching diagram markers. Generated PNG-backed and atmospheric/metaphorical visuals use unnumbered HTML callouts. Exact mechanism diagrams remain coded SVG/HTML.</p>
+
+  <h2>Top 10 Fixed Items</h2>
+  <ol><li>Added shared visual aid frame, diagram shell, caption, and callout-list grammar.</li><li>Added numbered-vs-bulleted callout rendering.</li><li>Changed generated PNG-backed scenes to unnumbered HTML callouts.</li><li>Added four chart markers to Overfitting vs Generalization.</li><li>Rewrote Overfitting callouts to remove stray Point 2 wording.</li><li>Added 1/2/3 badges to the Tokenization HTML diagram.</li><li>Added the fourth Token IDs marker for the lookup-key boundary.</li><li>Added the fourth Autoregression marker for run-again.</li><li>Added four Context Window markers for visible/limited/temporary/next-token use.</li><li>Added complete marker sets for Grounding and Hallucination evidence visuals.</li></ol>
+
+  <h2>Remaining Backlog</h2>
+  <ul><li>Collective Intelligence, Benefits, Costs, and Human-Centered AI remain good atmospheric Image 2 candidates.</li><li>Fine-Tuning Path can later receive coded overlay markers if learners need more explicit contrast with prompting/RAG.</li><li>Attention, MLP, Layers, Hidden States, Logits, Softmax, and Sampling are readable but should remain candidates for future precision polish.</li><li>No new PNGs were generated in this pass.</li></ul>
+
+  <h2>Image 2 Prompt Summary</h2>
+  <p>The prompt sheet recommends future atmospheric PNGs for Collective Intelligence, Benefits, Costs, and Human-Centered AI. It explicitly keeps exact mechanism visuals such as tokenization, vectors, tensors, RAG, grounding, logits, softmax, sampling, and context windows as coded SVG/HTML.</p>
+
+  <h2>39-Card Visual Aid Table</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Type</th>
+        <th>Callouts</th>
+        <th>Markers</th>
+        <th>Items</th>
+        <th>Status</th>
+        <th>Note</th>
+      </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>before-morning-llm-cloud</td>
+      <td>Prompt to Prediction</td>
+      <td>generated-image</td>
+      <td>bullets</td>
+      <td>0</td>
+      <td>4</td>
+      <td>ok</td>
+      <td>Textless PNG with HTML callouts.</td>
+    </tr>
+  
+    <tr>
+      <td>ai-family-tree</td>
+      <td>AI Family Tree</td>
+      <td>coded-svg</td>
+      <td>bullets</td>
+      <td>0</td>
+      <td>5</td>
+      <td>ok</td>
+      <td>Taxonomy labels are short; definitions stay below.</td>
+    </tr>
+  
+    <tr>
+      <td>traditions</td>
+      <td>Rules and Learned Patterns</td>
+      <td>coded-svg</td>
+      <td>bullets</td>
+      <td>0</td>
+      <td>3</td>
+      <td>ok</td>
+      <td>Concept comparison, not step markers.</td>
+    </tr>
+  
+    <tr>
+      <td>training-loop</td>
+      <td>Training Loop</td>
+      <td>coded-svg</td>
+      <td>numbered</td>
+      <td>5</td>
+      <td>5</td>
+      <td>ok</td>
+      <td>Five loop nodes have matching seals.</td>
+    </tr>
+  
+    <tr>
+      <td>before-morning-pretraining-landscape</td>
+      <td>Broad Pretraining</td>
+      <td>generated-image</td>
+      <td>bullets</td>
+      <td>0</td>
+      <td>4</td>
+      <td>ok</td>
+      <td>Textless PNG with HTML callouts.</td>
+    </tr>
+  
+    <tr>
+      <td>overfitting-generalization</td>
+      <td>Overfitting vs Generalization</td>
+      <td>coded-svg</td>
+      <td>numbered</td>
+      <td>4</td>
+      <td>4</td>
+      <td>ok</td>
+      <td>Training dots, validation dots, overfit curve, and smooth curve now match markers.</td>
+    </tr>
+  
+    <tr>
+      <td>before-morning-finetuning-path</td>
+      <td>Fine-Tuning Path</td>
+      <td>generated-image</td>
+      <td>bullets</td>
+      <td>0</td>
+      <td>4</td>
+      <td>ok</td>
+      <td>HTML callouts preserve durable adaptation versus prompt/RAG boundaries.</td>
+    </tr>
+  
+    <tr>
+      <td>before-morning-alignment-garden</td>
+      <td>Alignment Landscape</td>
+      <td>generated-image</td>
+      <td>bullets</td>
+      <td>0</td>
+      <td>4</td>
+      <td>ok</td>
+      <td>Textless PNG with behavior-shaping callouts.</td>
+    </tr>
+  
+    <tr>
+      <td>inference-pass</td>
+      <td>Forward Pass</td>
+      <td>coded-svg</td>
+      <td>numbered</td>
+      <td>4</td>
+      <td>4</td>
+      <td>ok</td>
+      <td>Context, fixed weights, temporary activations, next token.</td>
+    </tr>
+  
+    <tr>
+      <td>prompt-response</td>
+      <td>Prompt vs Response</td>
+      <td>coded-html</td>
+      <td>numbered</td>
+      <td>4</td>
+      <td>4</td>
+      <td>ok</td>
+      <td>Four stacked panels have matching badges.</td>
+    </tr>
+  
+    <tr>
+      <td>tokenization</td>
+      <td>Text to Tokens</td>
+      <td>coded-html</td>
+      <td>numbered</td>
+      <td>3</td>
+      <td>3</td>
+      <td>ok</td>
+      <td>Source, token stream, uneven examples have matching badges.</td>
+    </tr>
+  
+    <tr>
+      <td>token-ids</td>
+      <td>Token IDs</td>
+      <td>coded-svg</td>
+      <td>numbered</td>
+      <td>4</td>
+      <td>4</td>
+      <td>ok</td>
+      <td>Token, ID, embedding row, and limit markers match.</td>
+    </tr>
+  
+    <tr>
+      <td>embeddings</td>
+      <td>Embedding Lookup</td>
+      <td>coded-svg</td>
+      <td>numbered</td>
+      <td>4</td>
+      <td>4</td>
+      <td>ok</td>
+      <td>Durable table through hidden-later boundary.</td>
+    </tr>
+  
+    <tr>
+      <td>vectors</td>
+      <td>Feature Vector</td>
+      <td>coded-svg</td>
+      <td>numbered</td>
+      <td>3</td>
+      <td>3</td>
+      <td>ok</td>
+      <td>Teaching sliders, distributed features, vector usefulness.</td>
+    </tr>
+  
+    <tr>
+      <td>tensors</td>
+      <td>Tensor Block</td>
+      <td>coded-svg</td>
+      <td>numbered</td>
+      <td>3</td>
+      <td>3</td>
+      <td>ok</td>
+      <td>Token axis, feature axis, batch note.</td>
+    </tr>
+  
+    <tr>
+      <td>attention</td>
+      <td>Attention Weave</td>
+      <td>coded-svg</td>
+      <td>bullets</td>
+      <td>0</td>
+      <td>4</td>
+      <td>ok</td>
+      <td>Relationship diagram without numbered markers.</td>
+    </tr>
+  
+    <tr>
+      <td>mlp</td>
+      <td>MLP Feature Workshop</td>
+      <td>coded-svg</td>
+      <td>bullets</td>
+      <td>0</td>
+      <td>4</td>
+      <td>ok</td>
+      <td>Feature reshaping is described in bullets.</td>
+    </tr>
+  
+    <tr>
+      <td>layers</td>
+      <td>Transformer Stack</td>
+      <td>coded-svg</td>
+      <td>bullets</td>
+      <td>0</td>
+      <td>4</td>
+      <td>ok</td>
+      <td>Repeated layer structure is not a marker sequence.</td>
+    </tr>
+  
+    <tr>
+      <td>hidden-states</td>
+      <td>Hidden State Flow</td>
+      <td>coded-svg</td>
+      <td>bullets</td>
+      <td>0</td>
+      <td>4</td>
+      <td>ok</td>
+      <td>Flow labels stay short; definitions stay below.</td>
+    </tr>
+  
+    <tr>
+      <td>logits</td>
+      <td>Raw Scoreboard</td>
+      <td>coded-svg</td>
+      <td>bullets</td>
+      <td>0</td>
+      <td>4</td>
+      <td>ok</td>
+      <td>Raw-score bars are conceptual, not numbered steps.</td>
+    </tr>
+  
+    <tr>
+      <td>softmax</td>
+      <td>Score to Probability</td>
+      <td>coded-svg</td>
+      <td>bullets</td>
+      <td>0</td>
+      <td>4</td>
+      <td>ok</td>
+      <td>Function contrast remains unnumbered.</td>
+    </tr>
+  
+    <tr>
+      <td>sampling</td>
+      <td>Weighted Token Choice</td>
+      <td>coded-svg</td>
+      <td>bullets</td>
+      <td>0</td>
+      <td>4</td>
+      <td>ok</td>
+      <td>Probability bubble scene remains unnumbered.</td>
+    </tr>
+  
+    <tr>
+      <td>autoregression</td>
+      <td>Append and Repeat</td>
+      <td>coded-svg</td>
+      <td>numbered</td>
+      <td>4</td>
+      <td>4</td>
+      <td>ok</td>
+      <td>Response-so-far, token choice, append, run-again markers match.</td>
+    </tr>
+  
+    <tr>
+      <td>context-window</td>
+      <td>Temporary Context Window</td>
+      <td>coded-svg</td>
+      <td>numbered</td>
+      <td>4</td>
+      <td>4</td>
+      <td>ok</td>
+      <td>Visible context, capacity, temporary boundary, next-token use markers match.</td>
+    </tr>
+  
+    <tr>
+      <td>rag-retrieval</td>
+      <td>Open-Book Retrieval</td>
+      <td>coded-svg</td>
+      <td>numbered</td>
+      <td>5</td>
+      <td>5</td>
+      <td>ok</td>
+      <td>Prompt, retriever, notes, response, fixed weights.</td>
+    </tr>
+  
+    <tr>
+      <td>grounding-evidence</td>
+      <td>Claim Support Map</td>
+      <td>coded-svg</td>
+      <td>numbered</td>
+      <td>4</td>
+      <td>4</td>
+      <td>ok</td>
+      <td>Claim, evidence, support check, and review markers match.</td>
+    </tr>
+  
+    <tr>
+      <td>hallucination-bridge</td>
+      <td>Unsupported Bridge</td>
+      <td>coded-svg</td>
+      <td>numbered</td>
+      <td>4</td>
+      <td>4</td>
+      <td>ok</td>
+      <td>Fluent surface, supported claim, missing support, review markers match.</td>
+    </tr>
+  
+    <tr>
+      <td>ai-learns</td>
+      <td>Learning Modes Matrix</td>
+      <td>coded-svg</td>
+      <td>bullets</td>
+      <td>0</td>
+      <td>4</td>
+      <td>ok</td>
+      <td>Matrix distinctions are unnumbered.</td>
+    </tr>
+  
+    <tr>
+      <td>diffusion</td>
+      <td>Append Or Denoise</td>
+      <td>coded-svg</td>
+      <td>bullets</td>
+      <td>0</td>
+      <td>3</td>
+      <td>ok</td>
+      <td>Two-lane mechanism contrast remains unnumbered.</td>
+    </tr>
+  
+    <tr>
+      <td>multimodal</td>
+      <td>Media Lane Map</td>
+      <td>coded-svg</td>
+      <td>bullets</td>
+      <td>0</td>
+      <td>4</td>
+      <td>ok</td>
+      <td>Input/representation/output scene remains unnumbered.</td>
+    </tr>
+  
+    <tr>
+      <td>perfect-storm</td>
+      <td>Storm Front</td>
+      <td>coded-svg</td>
+      <td>bullets</td>
+      <td>0</td>
+      <td>4</td>
+      <td>ok</td>
+      <td>Convergence ingredients stay as short labels.</td>
+    </tr>
+  
+    <tr>
+      <td>collective-intelligence-lantern</td>
+      <td>Borrowed Flames</td>
+      <td>coded-svg</td>
+      <td>bullets</td>
+      <td>0</td>
+      <td>3</td>
+      <td>ok</td>
+      <td>Atmospheric candidate, currently coded.</td>
+    </tr>
+  
+    <tr>
+      <td>benefits-tool-garden</td>
+      <td>Benefit Tiers</td>
+      <td>coded-svg</td>
+      <td>bullets</td>
+      <td>0</td>
+      <td>3</td>
+      <td>ok</td>
+      <td>Tier labels stay in diagram; detail stays below.</td>
+    </tr>
+  
+    <tr>
+      <td>costs-invisible-factory</td>
+      <td>Cost Ledger</td>
+      <td>coded-svg</td>
+      <td>bullets</td>
+      <td>0</td>
+      <td>3</td>
+      <td>ok</td>
+      <td>Cost categories stay unnumbered.</td>
+    </tr>
+  
+    <tr>
+      <td>human-centered-ai-garden</td>
+      <td>Accountability Flow</td>
+      <td>coded-svg</td>
+      <td>bullets</td>
+      <td>0</td>
+      <td>3</td>
+      <td>ok</td>
+      <td>Accountability flow stays unnumbered.</td>
+    </tr>
+  
+    <tr>
+      <td>responsible-ai-forked-path</td>
+      <td>Better-AI Control Panel</td>
+      <td>coded-svg</td>
+      <td>bullets</td>
+      <td>0</td>
+      <td>3</td>
+      <td>ok</td>
+      <td>Lever panel stays unnumbered.</td>
+    </tr>
+  
+    <tr>
+      <td>prompting-context-tray</td>
+      <td>Context Tray</td>
+      <td>coded-svg</td>
+      <td>bullets</td>
+      <td>0</td>
+      <td>3</td>
+      <td>ok</td>
+      <td>Prompt-parts scene stays unnumbered.</td>
+    </tr>
+  
+    <tr>
+      <td>synthesis-map-compass-lantern</td>
+      <td>Full Chain Map</td>
+      <td>coded-svg</td>
+      <td>bullets</td>
+      <td>0</td>
+      <td>3</td>
+      <td>ok</td>
+      <td>Final synthesis map stays coded.</td>
+    </tr>
+  
+    <tr>
+      <td>risk</td>
+      <td>Risk Ledger</td>
+      <td>coded-svg</td>
+      <td>bullets</td>
+      <td>0</td>
+      <td>3</td>
+      <td>ok</td>
+      <td>Risk/myth ledger stays unnumbered.</td>
+    </tr>
+  </tbody>
+  </table>
+
+  <h2>Screenshot QA</h2>
+  <div class="screens">
+    <figure>
+      <img src="../screenshots/v0-27-16/v0-27-16-overfitting-390.png" alt="Overfitting at 390px" />
+      <figcaption>Overfitting at 390px</figcaption>
+    </figure>
+  
+    <figure>
+      <img src="../screenshots/v0-27-16/v0-27-16-finetuning-png-390.png" alt="Fine-tuning generated PNG at 390px" />
+      <figcaption>Fine-tuning generated PNG at 390px</figcaption>
+    </figure>
+  
+    <figure>
+      <img src="../screenshots/v0-27-16/v0-27-16-tokenization-390.png" alt="Tokenization at 390px" />
+      <figcaption>Tokenization at 390px</figcaption>
+    </figure>
+  
+    <figure>
+      <img src="../screenshots/v0-27-16/v0-27-16-vectors-390.png" alt="Vectors at 390px" />
+      <figcaption>Vectors at 390px</figcaption>
+    </figure>
+  
+    <figure>
+      <img src="../screenshots/v0-27-16/v0-27-16-generated-png-390.png" alt="Generated PNG example at 390px" />
+      <figcaption>Generated PNG example at 390px</figcaption>
+    </figure>
+  
+    <figure>
+      <img src="../screenshots/v0-27-16/v0-27-16-inference-coded-390.png" alt="Coded SVG example at 390px" />
+      <figcaption>Coded SVG example at 390px</figcaption>
+    </figure>
+  
+    <figure>
+      <img src="../screenshots/v0-27-16/v0-27-16-tokenization-320.png" alt="Tokenization at 320px" />
+      <figcaption>Tokenization at 320px</figcaption>
+    </figure>
+  
+    <figure>
+      <img src="../screenshots/v0-27-16/v0-27-16-overfitting-desktop.png" alt="Overfitting desktop sample" />
+      <figcaption>Overfitting desktop sample</figcaption>
+    </figure>
+  </div>
+</main>
+</body>
+</html>

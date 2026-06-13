@@ -470,21 +470,21 @@ export const lessons = [
     brainMetaphorLimit: 'The model is not choosing a new identity or values. Training changes output patterns.',
     brainBridge: brain('Like coaching someone to follow corporate norms.', 'The model is not choosing a new identity or values. Training changes output patterns.'),
     misconception: 'Prompting once is the same as fine-tuning.',
-    checkpoint: 'Which action is closest to fine-tuning?',
-    correctAnswer: 'Additional training that shapes future responses',
-    incorrectAnswers: ['Typing one better prompt', 'Retrieving one PDF into context', 'Sampling the next token'],
-    feedbackCorrect: 'Fine-tuning changes future behavior more durably than a single prompt.',
-    feedbackIncorrect: 'Prompting and RAG steer the current context; fine-tuning changes model behavior through training.',
+    checkpoint: 'Which intervention would create a durable model-side change?',
+    correctAnswer: 'Run additional training or adapter training on relevant examples',
+    incorrectAnswers: ['Paste the norms into one user prompt', 'Retrieve a policy page into the current context', 'Sample from a lower-temperature distribution'],
+    feedbackCorrect: 'Good distinction. This is the durable training-style move.',
+    feedbackIncorrect: 'Prompting, retrieval, and sampling can steer the current run without usually creating a durable model-side change.',
     interaction: { type: 'fine-tuning-sort', title: 'Sort the steering moves', copy: 'Fine-tuning is durable training. Prompting and RAG steer the current run. Sampling chooses the next token.' },
     quiz: {
-      question: 'Which action is closest to fine-tuning?',
-      choices: ['Additional training that shapes future responses', 'Typing one better prompt', 'Retrieving one PDF into context', 'Sampling the next token'],
-      answer: 'Additional training that shapes future responses',
-      explain: 'Fine-tuning changes future behavior more durably than a single prompt.',
+      question: 'A team wants a support assistant to follow corporate norms across future conversations. Which intervention would create a durable model-side change?',
+      choices: ['Sample from a lower-temperature distribution', 'Retrieve a policy page into the current context', 'Run additional training or adapter training on relevant examples so future responses carry the pattern', 'Paste the norms into one user prompt'],
+      answer: 'Run additional training or adapter training on relevant examples so future responses carry the pattern',
+      explain: 'Good distinction. This is the durable training-style move: future runs can carry the pattern, rather than only the current prompt or context.',
       feedback: {
-        'Typing one better prompt': 'Not quite. Prompting and RAG steer the current context; fine-tuning changes model behavior through training.',
-        'Retrieving one PDF into context': 'Not quite. Prompting and RAG steer the current context; fine-tuning changes model behavior through training.',
-        'Sampling the next token': 'Not quite. Prompting and RAG steer the current context; fine-tuning changes model behavior through training.'
+        'Sample from a lower-temperature distribution': 'Not quite. Temperature changes how the next token is sampled during generation; it does not train future behavior.',
+        'Retrieve a policy page into the current context': 'Close, but retrieved material helps only when it enters the current context. It does not by itself adapt the model for later conversations.',
+        'Paste the norms into one user prompt': 'A prompt can steer one current run, but it does not usually create a durable model-side change.'
       }
     }
   },

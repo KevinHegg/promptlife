@@ -371,6 +371,10 @@ export function DiagramKitOverfittingPlotExample() {
       {trainDots.map(([x, y]) => <circle key={`${x}-${y}`} className="dk-data-dot" cx={x} cy={y} r="6" />)}
       {newDots.map(([x, y]) => <rect key={`${x}-${y}`} className="dk-heldout-dot" x={x - 7} y={y - 7} width="14" height="14" rx="3" />)}
       <WarningZone x={43} y={42} width={70} height={24} label="too fitted" />
+      <CalloutSeal x={52} y={134} label="1" tone="paper" />
+      <CalloutSeal x={282} y={82} label="2" tone="amber" />
+      <CalloutSeal x={112} y={58} label="3" tone="violet" />
+      <CalloutSeal x={244} y={92} label="4" tone="success" />
       <LegendRow
         x={34}
         y={194}

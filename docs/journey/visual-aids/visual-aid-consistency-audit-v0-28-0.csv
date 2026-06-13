@@ -1,0 +1,40 @@
+id,title,template,visualType,markerCount,calloutCount,status,issue,note
+before-morning-llm-cloud,Prompt to Prediction,Atmospheric Scene,generated-image,0,4,ok,,Atmospheric hero supports the opening idea; exact mechanics are carried by HTML callouts.
+ai-family-tree,AI Family Tree,Taxonomy Map,coded-svg,0,4,ok,,Readable taxonomy; keep definitions below rather than adding dense labels.
+traditions,Rules and Learned Patterns,Comparison Board,coded-svg,0,3,ok,,Comparison is clear; loss is supported by glossary and callout.
+training-loop,Training Loop,Mechanism Flow,coded-svg,5,5,ok,,The durable weight-update step is visible and numbered.
+before-morning-pretraining-landscape,Broad Pretraining,Atmospheric Scene,generated-image,0,4,ok,,Atmospheric scale works; exact training details remain in callouts.
+overfitting-generalization,Overfitting vs Generalization,Comparison Board,coded-svg,4,4,ok,,Chart is testable but should be watched for label readability and validation-example clarity.
+before-morning-finetuning-path,Fine-Tuning Path,Atmospheric Scene,generated-image,0,4,ok,,"Atmospheric path is acceptable, but a later coded comparison board would clarify durable versus temporary steering."
+before-morning-alignment-garden,Alignment Landscape,Atmospheric Scene,generated-image,0,4,ok,,Textless metaphor is suitable; conscience boundary is in callouts.
+inference-pass,Forward Pass,Mechanism Flow,coded-svg,4,4,ok,,Fixed weights and temporary activations are visually separated.
+prompt-response,Prompt vs Response,Mechanism Flow,coded-html,4,4,ok,,Recent stacked layout is readable and testable.
+tokenization,Text to Tokens,Mechanism Flow,coded-html,3,3,ok,,HTML token rows make uneven chunks readable after prior repair.
+token-ids,Token IDs,Mechanism Flow,coded-svg,4,4,ok,,Lookup chain is direct and marker/callout mapping passes.
+embeddings,Embedding Lookup,Mechanism Flow,coded-svg,4,4,ok,,Durable table and temporary retrieval boundary is visible.
+vectors,Feature Vector,Comparison Board,coded-svg,3,3,ok,,Teaching sliders are useful; distributed features may still look abstract and should be watched.
+tensors,Tensor Block,Taxonomy Map,coded-svg,3,3,ok,,"Readable enough, but batch sheet and axes should be watched on 320px."
+attention,Relevance Between Tokens,Comparison Board,coded-svg,0,4,ok,,v0.27.18 rebuild is readable; watch arc endpoints on 320px.
+mlp,MLP Feature Workshop,Comparison Board,coded-svg,0,4,ok,,Readable enough for testing after label-size repair.
+layers,Transformer Stack,Mechanism Flow,coded-svg,0,4,ok,,Stack is compact and testable.
+hidden-states,Hidden State Flow,Mechanism Flow,coded-svg,0,4,ok,,Temporary state flow is acceptable after label repair.
+logits,Raw Scoreboard,Probability Bars,coded-svg,0,4,ok,,Shared token set and bars are clear.
+softmax,Score to Probability,Probability Bars,coded-svg,0,4,ok,,Probability conversion is clear and separated from selection.
+sampling,Weighted Token Choice,Probability Bars,coded-svg,0,4,ok,,v0.27.18 bar layout fixed previous crowding.
+autoregression,Append and Repeat,Mechanism Flow,coded-svg,4,4,ok,,Numbered repeat cycle is readable.
+context-window,Temporary Context Window,Context Tray / Stack,coded-svg,4,4,ok,,Bounded tray is clear.
+rag-retrieval,Open-Book Retrieval,Context Tray / Stack,coded-svg,5,5,ok,,Open-book retrieval flow is clear and numbered.
+grounding-evidence,Claim Support Map,Context Tray / Stack,coded-svg,4,4,ok,,Claim-to-evidence support map is readable.
+hallucination-bridge,Unsupported Bridge,Comparison Board,coded-svg,4,4,ok,,Support/missing-support metaphor is testable.
+ai-learns,Learning Modes Matrix,Comparison Board,coded-svg,0,4,ok,,Matrix is conceptually useful but dense; acceptable for testing if callouts carry the nuance.
+diffusion,Append Or Denoise,Comparison Board,coded-svg,0,3,ok,,Two-lane contrast is clear.
+multimodal,Media Lane Map,Taxonomy Map,coded-svg,0,4,ok,,Many media icons can become dense; still testable with short labels.
+perfect-storm,Storm Front,Atmospheric Scene,coded-svg,0,4,ok,,Recent convergence layout is readable.
+collective-intelligence-lantern,Borrowed Flames,Atmospheric Scene,coded-svg,0,3,ok,,Current coded social/ethics visual is testable but should become a stronger atmospheric scene later.
+costs-invisible-factory,Cost Ledger,Atmospheric Scene,coded-svg,0,3,ok,,Ledger is acceptable but can feel cramped; later image should show hidden infrastructure without fake numbers.
+risk,Risk Ledger,Taxonomy Map,coded-svg,0,3,ok,,Two-column ledger is appropriate.
+benefits-tool-garden,Benefit Tiers,Atmospheric Scene,coded-svg,0,3,ok,,Tier visual is testable; later atmospheric scene should avoid hype pyramid vibes.
+human-centered-ai-garden,Accountability Flow,Atmospheric Scene,coded-svg,0,3,ok,,Accountability flow is testable; later art should center human judgment with no generic robot imagery.
+responsible-ai-forked-path,Better-AI Control Panel,Taxonomy Map,coded-svg,0,3,ok,,Lever panel is useful but dense; acceptable as a testable taxonomy of choices.
+prompting-context-tray,Context Tray,Context Tray / Stack,coded-svg,0,3,ok,,Context-tray metaphor is strong and aligned with the Journey.
+synthesis-map-compass-lantern,Full Chain Map,Taxonomy Map,coded-svg,0,3,ok,,Capstone map is inherently dense; acceptable for human testing but a later synthesis redesign should reduce nodes.

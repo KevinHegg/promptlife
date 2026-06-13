@@ -1,6 +1,192 @@
 # Review Notes
 
+Date: 2026-06-13
+
+## v0.28.0 Journey Visual Aid Readiness Pass For Human Testing
+
+### What Changed
+
+- Added the six canonical visual-aid templates to the visual aid style guide: Atmospheric Scene, Mechanism Flow, Comparison Board, Context Tray / Stack, Probability Bars, and Taxonomy Map.
+- Created a v0.28.0 human-readability rubric for all 39 Journey visual aids with seven scores: five-second clarity, mobile readability, single-idea focus, mechanism accuracy, caption/callout support, style consistency, and misconception repair.
+- Classified every visual by template, priority before/after, status, Image 2 suitability, coded/SVG requirement, mobile risks, and tester notes.
+- Generated 390px screenshots for all 39 visual aids and additional 320px/desktop/smoke QA screenshots.
+- Created a full human-test visual review packet and tester feedback sheet.
+- Strengthened `npm run audit:visual-aids` so it checks template coverage, captions, alt text, estimated label counts, generated-image/mechanism boundaries, remaining P0/P1 status, metadata strings, screenshot coverage, and numbered callout consistency.
+- Bumped the visible app/package version to `v0.28.0`.
+
+### Verification Notes
+
+- Visual aid readiness summary: 39 visuals reviewed; before review P0/P1 count was 18; after review P0/P1 count is 0.
+- Template distribution: Atmospheric Scene 9, Mechanism Flow 9, Comparison Board 8, Context Tray / Stack 4, Probability Bars 3, Taxonomy Map 6.
+- `npm run audit:visual-aids` passed with 39 aids, 0 numbered callout mismatches, and 0 readiness issues.
+- Browser QA captured all visual-aid screenshots at 390px, representative 320px visual screenshots, desktop review screenshot, Home/Play/Glossary/Badge smoke screenshots, and verified all eight Journey stage links.
+
+### Files Added Or Updated
+
+- `scripts/visual-aid-readiness-data-v0280.mjs`
+- `scripts/generate-visual-aid-readiness-v0280.mjs`
+- `scripts/audit-visual-aids.mjs`
+- `docs/journey/visual-aids/VISUAL_AID_STYLE_GUIDE.md`
+- `docs/journey/visual-aids/visual-aid-readiness-rubric-v0-28-0.json`
+- `docs/journey/visual-aids/visual-aid-readiness-rubric-v0-28-0.csv`
+- `docs/journey/visual-aids/visual-aid-readiness-rubric-v0-28-0.md`
+- `docs/journey/visual-aids/prompt-life-v0-28-0-visual-aid-human-test-review.html`
+- `docs/journey/visual-aids/prompt-life-v0-28-0-visual-aid-human-test-review.pdf`
+- `docs/journey/visual-aids/prompt-life-v0-28-0-visual-aid-readiness-report.html`
+- `docs/journey/visual-aids/prompt-life-v0-28-0-visual-aid-readiness-report.pdf`
+- `docs/testing/prompt-life-v0-28-0-visual-aid-human-feedback.md`
+- `docs/testing/prompt-life-v0-28-0-visual-aid-human-feedback.pdf`
+- `docs/journey/screenshots/v0-28-0/`
+- `src/main.tsx`
+- `package.json`
+- `package-lock.json`
+
+## v0.27.18 Visual Aid Renderer Consolidation And Readability Repair
+
+### What Changed
+
+- Removed renderer/debug metadata chips from the visual-aid review UI so learners no longer see Pattern, Variant, Callouts, Markers, renderer names, or implementation labels.
+- Renamed the Attention visual from `Attention Weave` to `Relevance Between Tokens`.
+- Rebuilt the Attention coded SVG around sentence chips, target/source clues, one strong relevance arc, one weak arc, and learner-facing HTML callouts.
+- Raised visual-aid label-size conventions and removed the review-route font compression that made visual captions and SVG labels too small.
+- Updated Logits, Softmax, and Sampling to use a shared candidate-token set: floor, mat, kitchen, banana.
+- Repaired Sampling from a crowded bubble cluster into readable probability bars plus one selected-token card.
+- Added v0.27.18 renderer strategy inventory, readability audit outputs, screenshots, and visual renderer/readability report.
+- Bumped the visible app/package version to `v0.27.18`.
+
+### Verification Notes
+
+- `npm run audit:visual-aids` now emits v0.27.18 consistency and readability audit files.
+- Visual aid audit passed with 39 aids, 0 numbered marker mismatches, and 0 readability issues.
+- Browser QA confirmed no metadata leaks, no horizontal overflow at 390px/320px, and all eight Journey stage links still focus the expected section.
+- `npm run typecheck`, `npm run build`, `npm run build:pages`, `npm run audit:answers`, `npm run audit:checkpoints`, `npm run audit:question-clues`, `npm run audit:learner-copy`, and `npm run audit:visual-aids` passed or completed. The existing Vite large-chunk warning remains.
+
+### Files Added Or Updated
+
+- `src/components/VisualAids.tsx`
+- `src/styles/global.css`
+- `src/main.tsx`
+- `package.json`
+- `package-lock.json`
+- `scripts/audit-visual-aids.mjs`
+- `scripts/generate-visual-aid-renderer-v02718.mjs`
+- `docs/journey/visual-aids/VISUAL_AID_STYLE_GUIDE.md`
+- `docs/journey/visual-aids/visual-renderer-strategy-v0-27-18.md`
+- `docs/journey/visual-aids/visual-renderer-strategy-v0-27-18.json`
+- `docs/journey/visual-aids/visual-aid-readability-audit-v0-27-18.json`
+- `docs/journey/visual-aids/visual-aid-readability-audit-v0-27-18.md`
+- `docs/journey/visual-aids/prompt-life-v0-27-18-visual-renderer-readability-report.html`
+- `docs/journey/visual-aids/prompt-life-v0-27-18-visual-renderer-readability-report.pdf`
+- `docs/journey/screenshots/v0-27-18/`
+
 Date: 2026-06-10
+
+## v0.27.17 Journey Visual Aid Quality Pass 1
+
+### What Changed
+
+- Inspected all 39 visual-aid catalog entries and deeply reviewed the 12 priority visuals named for this pass.
+- Repaired the Fine-Tuning HTML caption/callouts so durable adaptation is clearly separated from prompt steering, RAG/context, and sampling.
+- Redrew the coded Attention, MLP, Layers, Hidden States, Logits, Softmax, and Sampling visuals for clearer mobile model-mechanism boundaries.
+- Kept Collective Intelligence, Benefits, Costs, and Human-Centered AI stable in the learner UI while preparing them as future Image 2 candidates.
+- Created the v0.27.17 Image 2 prompt sheet and visual-aid quality backlog.
+- Bumped the visible app/package version to `v0.27.17`.
+
+### Verification Notes
+
+- Mechanism visuals remain coded SVG/HTML; no generated PNG assets were added.
+- The pass preserves Journey order, Play, checkpoint questions, progress rules, and the one-badge model.
+- Full command verification and screenshot capture are tracked in the v0.27.17 visual-aid quality pass report.
+
+### Files Added Or Updated
+
+- `src/components/VisualAids.tsx`
+- `src/main.tsx`
+- `package.json`
+- `package-lock.json`
+- `docs/journey/visual-aids/image-2-visual-prompts-v0-27-17.md`
+- `docs/journey/visual-aids/visual-aid-quality-backlog-v0-27-17.json`
+- `docs/journey/visual-aids/visual-aid-quality-backlog-v0-27-17.csv`
+- `docs/journey/visual-aids/prompt-life-v0-27-17-visual-aid-quality-pass-1-report.html`
+- `docs/journey/visual-aids/prompt-life-v0-27-17-visual-aid-quality-pass-1-report.pdf`
+
+## v0.27.16 Journey Visual Aid Consistency System
+
+### What Changed
+
+- Added a shared visual-aid frame/caption/callout grammar so diagrams can render either numbered marker callouts or unnumbered conceptual callouts.
+- Added `npm run audit:visual-aids`, which emits JSON, CSV, and Markdown consistency reports for all 39 Journey visual aids.
+- Repaired priority marker mismatches for Overfitting/Generalization, Tokenization, Token IDs, Autoregression, Context Window, Grounding, and Hallucination visuals.
+- Converted generated PNG-backed and atmospheric/metaphorical aids to unnumbered HTML callouts so they no longer imply missing diagram markers.
+- Created the v0.27.16 visual aid style guide and Image 2 prompt sheet.
+- Bumped the visible app/package version to `v0.27.16`.
+
+### Verification Notes
+
+- `npm run typecheck` passed after the renderer and marker changes.
+- `npm run audit:visual-aids` passed with 39 aids and 0 numbered marker/list mismatches.
+- Mobile/browser screenshots and final report PDF are captured in `docs/journey/visual-aids/` and `docs/journey/screenshots/v0-27-16/`.
+
+### Files Added Or Updated
+
+- `src/components/VisualAids.tsx`
+- `src/components/DiagramKit.tsx`
+- `src/styles/global.css`
+- `src/main.tsx`
+- `package.json`
+- `package-lock.json`
+- `scripts/audit-visual-aids.mjs`
+- `docs/journey/visual-aids/VISUAL_AID_STYLE_GUIDE.md`
+- `docs/journey/visual-aids/image-2-visual-prompts-v0-27-16.md`
+- `docs/journey/visual-aids/visual-aid-consistency-audit-v0-27-16.json`
+- `docs/journey/visual-aids/visual-aid-consistency-audit-v0-27-16.csv`
+- `docs/journey/visual-aids/visual-aid-consistency-audit-v0-27-16.md`
+
+## v0.27.15 Checkpoint Clue Repair, Visual Audit, And Live Stage Links
+
+### What Changed
+
+- Generated the v0.27.15 active checkpoint bank from the v0.27.14 human-test bank.
+- Kept all 39 Journey cards and 136 questions active; no questions were added or removed.
+- Repaired the Fine-Tuning checkpoint so the stem no longer asks for the answer term and the correct choice uses the approved durable model-side change wording.
+- Reduced one additional clue in the Sampling card by changing the correct answer from term-first wording to decoder-centered wording.
+- Added `npm run audit:question-clues` for informational term-echo, answer-length, and vague-stem review.
+- Made the stage map at the top of learning cards tappable and keyboard-accessible; stage links open the first lesson in each stage without changing progress.
+- Relabeled the tiny Inference visual output from `floor` to `token`.
+- Created the v0.27.15 visual-aid inventory and audit report with screenshots for all 39 Journey visual aids.
+- Bumped the visible app/package version to `v0.27.15`.
+
+### Verification Notes
+
+- Generator validation confirmed 39 cards, 136 questions, 544 choices, and 408 wrong-answer distractors.
+- Browser QA confirmed Stage 1, Stage 3, and Stage 8 links open the intended first learning cards; all eight stage links were mapped.
+- Browser QA at 320px, 390px, and desktop width found no horizontal overflow in the Fine-Tuning checkpoint view.
+- Home, Journey, Play, Glossary, and Badge smoke tests passed at 390px with bottom nav visible.
+- Command verification includes `npm run typecheck`, `npm run build`, `npm run build:pages`, `npm run audit:answers`, `npm run audit:checkpoints`, `npm run audit:question-clues`, and `npm run audit:learner-copy`.
+
+### Files Added Or Updated
+
+- `src/data/checkpointBankV02715.ts`
+- `src/main.tsx`
+- `src/data/content.ts`
+- `src/components/VisualAids.tsx`
+- `src/styles/global.css`
+- `scripts/generate-checkpoint-bank-v02715.mjs`
+- `scripts/audit-checkpoints.mjs`
+- `scripts/audit-learner-copy.mjs`
+- `scripts/audit-question-clues.mjs`
+- `docs/journey/checkpoints/checkpoint-question-bank-v0-27-15.json`
+- `docs/journey/checkpoints/checkpoint-question-bank-v0-27-15.csv`
+- `docs/journey/checkpoints/checkpoint-question-bank-v0-27-15.md`
+- `docs/journey/checkpoints/checkpoint-bank-v0-27-15-choice-level.csv`
+- `docs/journey/checkpoints/checkpoint-bank-v0-27-15-repair-log.csv`
+- `docs/journey/checkpoints/question-clue-audit-v0-27-15.md`
+- `docs/journey/visual-aids/visual-aid-inventory-v0-27-15.json`
+- `docs/journey/visual-aids/visual-aid-inventory-v0-27-15.csv`
+- `docs/journey/visual-aids/prompt-life-v0-27-15-visual-aid-audit.html`
+- `docs/journey/visual-aids/prompt-life-v0-27-15-visual-aid-audit.pdf`
+- `docs/journey/prompt-life-v0-27-15-checkpoint-visual-nav-report.html`
+- `docs/journey/prompt-life-v0-27-15-checkpoint-visual-nav-report.pdf`
 
 ## v0.27.14 Checkpoint Feedback Naturalness And Human-Test Prep
 

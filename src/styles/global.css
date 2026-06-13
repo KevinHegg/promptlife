@@ -618,6 +618,22 @@ p {
   padding: 0.45rem 0.28rem;
 }
 
+.stage-timeline-live .stage-link {
+  cursor: pointer;
+}
+
+.stage-timeline-compact-links {
+  gap: 0.18rem;
+  padding: 0.38rem;
+}
+
+.stage-timeline-compact-links .stage-link {
+  min-height: 3.2rem;
+  align-content: center;
+  gap: 0.12rem;
+  padding: 0.3rem 0.12rem 0.34rem;
+}
+
 .stage-timeline span {
   width: 1.6rem;
   height: 1.6rem;
@@ -645,6 +661,17 @@ p {
   font-size: 0.52rem;
   font-weight: 750;
   line-height: 1.12;
+}
+
+.stage-timeline-compact-links span {
+  width: 1.35rem;
+  height: 1.35rem;
+  font-size: 0.68rem;
+}
+
+.stage-timeline-compact-links strong {
+  font-size: 0.54rem;
+  line-height: 1.08;
 }
 
 .stage-timeline-jump strong {
@@ -724,6 +751,29 @@ p {
     display: block;
     font-size: 0.5rem;
     line-height: 1.08;
+  }
+
+  .stage-timeline-compact-links:not(.stage-timeline-jump) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.14rem;
+    padding: 0.3rem;
+  }
+
+  .stage-timeline-compact-links:not(.stage-timeline-jump) .stage-link {
+    min-height: 3.05rem;
+    padding: 0.24rem 0.08rem 0.28rem;
+  }
+
+  .stage-timeline-compact-links:not(.stage-timeline-jump) span {
+    width: 1.16rem;
+    height: 1.16rem;
+    font-size: 0.62rem;
+  }
+
+  .stage-timeline-compact-links:not(.stage-timeline-jump) strong {
+    display: block;
+    font-size: 0.45rem;
+    line-height: 1.04;
   }
 }
 
@@ -1365,9 +1415,39 @@ p {
 }
 
 .tkn-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.42rem;
+  min-width: 0;
+}
+
+.tkn-card-header > span:last-child {
   display: grid;
   gap: 0.06rem;
   min-width: 0;
+}
+
+.tkn-step-badge {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 1.38rem;
+  height: 1.38rem;
+  border-radius: 999px;
+  color: white;
+  background: var(--pl-indigo);
+  font-size: 0.68rem;
+  font-weight: 950;
+  line-height: 1;
+}
+
+.tkn-stream .tkn-step-badge {
+  color: var(--pl-indigo);
+  background: #35e6e2;
+}
+
+.tkn-uneven .tkn-step-badge {
+  background: #a45f00;
 }
 
 .tkn-card-header strong,
@@ -1504,6 +1584,16 @@ p {
     border-radius: 10px;
     gap: 0.32rem;
     padding: 0.48rem;
+  }
+
+  .tkn-card-header {
+    gap: 0.34rem;
+  }
+
+  .tkn-step-badge {
+    width: 1.24rem;
+    height: 1.24rem;
+    font-size: 0.62rem;
   }
 
   .tkn-token-grid {
@@ -1719,11 +1809,11 @@ p {
 }
 
 .visual-aid .tiny {
-  font-size: 13px;
+  font-size: 13.5px;
 }
 
 .visual-aid .micro {
-  font-size: 10.5px;
+  font-size: 12.2px;
   font-weight: 850;
 }
 
@@ -1889,7 +1979,7 @@ p {
 .visual-aid .dk-label,
 .diagram-kit-frame .dk-label {
   fill: #EEF8FF;
-  font-size: 11px;
+  font-size: 12.5px;
   font-weight: 900;
   letter-spacing: 0;
 }
@@ -1902,7 +1992,7 @@ p {
 
 .visual-aid .dk-label-small,
 .diagram-kit-frame .dk-label-small {
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .visual-aid .dk-label-dark,
@@ -2117,7 +2207,7 @@ p {
 .visual-aid .dk-taxonomy-label,
 .diagram-kit-frame .dk-taxonomy-label {
   fill: var(--pl-indigo);
-  font-size: 10.1px;
+  font-size: 12px;
   font-weight: 950;
   letter-spacing: 0;
 }
@@ -2187,6 +2277,11 @@ p {
   min-width: 0;
 }
 
+.aid-legend.is-bullets li {
+  grid-template-columns: 0.9rem minmax(0, 1fr);
+  gap: 0.34rem;
+}
+
 .aid-legend li > span {
   display: grid;
   place-items: center;
@@ -2199,6 +2294,15 @@ p {
   font-size: 0.72rem;
   font-weight: 900;
   line-height: 1;
+}
+
+.aid-legend.is-bullets li > span {
+  width: 0.48rem;
+  height: 0.48rem;
+  margin-top: 0.36rem;
+  border: 0;
+  background: linear-gradient(135deg, var(--pl-teal), var(--pl-violet));
+  box-shadow: 0 0 0 4px rgba(53, 230, 226, 0.12);
 }
 
 .aid-legend p {
@@ -8978,10 +9082,9 @@ p {
   }
 
   .lesson-review-route .visual-aid .tiny {
-    font-size: 11px;
+    font-size: 12.5px;
   }
 
-  .lesson-review-route .visual-aid figcaption,
   .lesson-review-route .review-lesson-grid dd,
   .lesson-review-route .review-lesson-grid dt,
   .lesson-review-route .review-meta-row span,
@@ -8993,6 +9096,8 @@ p {
 
   .lesson-review-route .visual-aid figcaption {
     display: block;
+    font-size: 0.82rem;
+    line-height: 1.28;
     white-space: normal;
     overflow-wrap: anywhere;
   }
@@ -9007,10 +9112,21 @@ p {
     gap: 0.035in;
   }
 
+  .lesson-review-route .aid-legend.is-bullets li {
+    grid-template-columns: 0.1in minmax(0, 1fr);
+  }
+
   .lesson-review-route .aid-legend li > span {
     width: 0.14in;
     height: 0.14in;
     font-size: 0.42rem;
+  }
+
+  .lesson-review-route .aid-legend.is-bullets li > span {
+    width: 0.055in;
+    height: 0.055in;
+    margin-top: 0.035in;
+    box-shadow: none;
   }
 
   .lesson-review-route .aid-legend p {

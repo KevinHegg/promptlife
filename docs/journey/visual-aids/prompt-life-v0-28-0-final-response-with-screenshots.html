@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Prompt Life v0.28.0 Final Response With Screenshots</title>
+<style>
+  :root { font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #101a52; background: #f7fbff; }
+  body { margin: 0; padding: 28px; }
+  main { max-width: 1080px; margin: 0 auto; }
+  h1, h2 { color: #101783; line-height: 1.08; }
+  p, li { line-height: 1.48; }
+  .metrics { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 10px; margin: 18px 0; }
+  .card, figure, .metrics div { background: #fff; border: 1px solid #d9e3f7; border-radius: 14px; padding: 14px; box-shadow: 0 10px 28px rgba(20,30,88,.06); break-inside: avoid; }
+  .metrics strong { display: block; color: #087f8c; font-size: 1.6rem; }
+  .grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; }
+  img { width: 100%; display: block; border-radius: 10px; border: 1px solid #edf1fb; }
+  figcaption { margin-top: 8px; font-weight: 800; color: #293a64; }
+  code { background: #eef4ff; padding: 2px 5px; border-radius: 5px; }
+  @media print { body { padding: 16px; } .grid { grid-template-columns: repeat(2,1fr); } }
+</style>
+</head>
+<body>
+<main>
+  <h1>Prompt Life v0.28.0 Visual Aid Readiness Pass</h1>
+  <p><strong>Generated June 13, 2026.</strong> This packet wraps the final response and representative screenshots for the Journey visual-aid human-testing pass.</p>
+  <section class="metrics">
+    <div><strong>39</strong><span>visual aids reviewed</span></div>
+    <div><strong>18</strong><span>P0/P1 before</span></div>
+    <div><strong>0</strong><span>P0/P1 after</span></div>
+    <div><strong>6</strong><span>templates used</span></div>
+  </section>
+  <section class="card">
+    <h2>Summary</h2>
+    <ul>
+      <li>Added six canonical visual templates to the style guide.</li>
+      <li>Scored all 39 Journey visual aids using a seven-part human-readability rubric.</li>
+      <li>Marked 13 visuals as temporary but acceptable for small human testing.</li>
+      <li>Created the full visual-aid human-test review PDF and feedback sheet PDF.</li>
+      <li>Updated <code>audit:visual-aids</code> to catch readiness issues, not just marker mismatches.</li>
+      <li>Bumped the app/package version to <code>0.28.0</code>.</li>
+    </ul>
+  </section>
+  <section class="card">
+    <h2>Template Distribution</h2>
+    <ul><li><strong>Atmospheric Scene</strong>: 9</li><li><strong>Taxonomy Map</strong>: 6</li><li><strong>Comparison Board</strong>: 8</li><li><strong>Mechanism Flow</strong>: 9</li><li><strong>Probability Bars</strong>: 3</li><li><strong>Context Tray / Stack</strong>: 4</li></ul>
+  </section>
+  <section class="card">
+    <h2>Human-Testing Watch List</h2>
+    <ul><li><strong>Full Chain Map</strong> (24/35): This is the top later-coded redesign candidate; testers should flag overload.</li><li><strong>Borrowed Flames</strong> (25/35): Avoid cramming source labels; social meaning belongs in callouts.</li><li><strong>Cost Ledger</strong> (25/35): No fake statistics; keep categories in HTML.</li><li><strong>Benefit Tiers</strong> (25/35): Avoid implying all benefits are proven or automatic.</li><li><strong>Accountability Flow</strong> (25/35): Avoid generic AI-person imagery that implies the model has agency.</li><li><strong>Learning Modes Matrix</strong> (26/35): Watch whether matrix labels feel too small at 320px.</li><li><strong>Media Lane Map</strong> (26/35): Reduce nodes later if testers call it busy.</li><li><strong>Better-AI Control Panel</strong> (26/35): Panel may feel dense; testers should flag unreadable lever labels.</li><li><strong>Fine-Tuning Path</strong> (27/35): Tester should check whether the metaphor needs a stronger coded comparison later.</li><li><strong>Feature Vector</strong> (27/35): Distributed side may feel abstract; tester feedback should guide simplification.</li></ul>
+  </section>
+  <h2>Representative Screenshots</h2>
+  <section class="grid">
+    <figure><img src="../screenshots/v0-28-0/attention-390.png" alt="Attention visual at 390px" /><figcaption>Attention / Relevance Between Tokens, 390px</figcaption></figure>
+    <figure><img src="../screenshots/v0-28-0/attention-320.png" alt="Attention visual at 320px" /><figcaption>Attention, 320px</figcaption></figure>
+    <figure><img src="../screenshots/v0-28-0/tokenization-390.png" alt="Tokenization visual at 390px" /><figcaption>Mechanism Flow: Tokenization</figcaption></figure>
+    <figure><img src="../screenshots/v0-28-0/context-window-390.png" alt="Context Window visual at 390px" /><figcaption>Context Tray / Stack</figcaption></figure>
+    <figure><img src="../screenshots/v0-28-0/sampling-390.png" alt="Sampling visual at 390px" /><figcaption>Probability Bars: Sampling</figcaption></figure>
+    <figure><img src="../screenshots/v0-28-0/ai-family-tree-390.png" alt="AI Family Tree visual at 390px" /><figcaption>Taxonomy Map: AI Family Tree</figcaption></figure>
+    <figure><img src="../screenshots/v0-28-0/before-morning-llm-cloud-390.png" alt="Prompt to Prediction visual at 390px" /><figcaption>Atmospheric Scene</figcaption></figure>
+    <figure><img src="../screenshots/v0-28-0/synthesis-map-compass-lantern-390.png" alt="Model Literate Synthesis visual at 390px" /><figcaption>Top watch-list visual: Full Chain Map</figcaption></figure>
+    <figure><img src="../screenshots/v0-28-0/play-smoke-390.png" alt="Play smoke screenshot" /><figcaption>Play smoke</figcaption></figure>
+    <figure><img src="../screenshots/v0-28-0/badge-smoke-390.png" alt="Badge smoke screenshot" /><figcaption>Badge smoke</figcaption></figure>
+  </section>
+</main>
+</body>
+</html>

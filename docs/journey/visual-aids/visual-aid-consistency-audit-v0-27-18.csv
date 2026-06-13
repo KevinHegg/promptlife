@@ -1,0 +1,40 @@
+id,title,visualType,calloutStyle,markerCount,calloutCount,status,issue,note
+before-morning-llm-cloud,Prompt to Prediction,generated-image,bullets,0,4,ok,,Textless PNG with HTML callouts.
+ai-family-tree,AI Family Tree,coded-svg,bullets,0,5,ok,,Taxonomy labels are short; definitions stay below.
+traditions,Rules and Learned Patterns,coded-svg,bullets,0,3,ok,,"Concept comparison, not step markers."
+training-loop,Training Loop,coded-svg,numbered,5,5,ok,,Five loop nodes have matching seals.
+before-morning-pretraining-landscape,Broad Pretraining,generated-image,bullets,0,4,ok,,Textless PNG with HTML callouts.
+overfitting-generalization,Overfitting vs Generalization,coded-svg,numbered,4,4,ok,,"Training dots, validation dots, overfit curve, and smooth curve now match markers."
+before-morning-finetuning-path,Fine-Tuning Path,generated-image,bullets,0,4,ok,,"HTML callouts preserve durable adaptation versus prompt, RAG/context, and sampling boundaries."
+before-morning-alignment-garden,Alignment Landscape,generated-image,bullets,0,4,ok,,Textless PNG with behavior-shaping callouts.
+inference-pass,Forward Pass,coded-svg,numbered,4,4,ok,,"Context, fixed weights, temporary activations, next token."
+prompt-response,Prompt vs Response,coded-html,numbered,4,4,ok,,Four stacked panels have matching badges.
+tokenization,Text to Tokens,coded-html,numbered,3,3,ok,,"Source, token stream, uneven examples have matching badges."
+token-ids,Token IDs,coded-svg,numbered,4,4,ok,,"Token, ID, embedding row, and limit markers match."
+embeddings,Embedding Lookup,coded-svg,numbered,4,4,ok,,Durable table through hidden-later boundary.
+vectors,Feature Vector,coded-svg,numbered,3,3,ok,,"Teaching sliders, distributed features, vector usefulness."
+tensors,Tensor Block,coded-svg,numbered,3,3,ok,,"Token axis, feature axis, batch note."
+attention,Relevance Between Tokens,coded-svg,bullets,0,4,ok,,Target/source relevance diagram without numbered markers.
+mlp,MLP Feature Workshop,coded-svg,bullets,0,4,ok,,Attention-mixing versus per-token reshaping contrast is unnumbered.
+layers,Transformer Stack,coded-svg,bullets,0,4,ok,,Repeated transformer-block structure is not a marker sequence.
+hidden-states,Hidden State Flow,coded-svg,bullets,0,4,ok,,Flow labels contrast temporary states with durable weights.
+logits,Raw Scoreboard,coded-svg,bullets,0,4,ok,,"Raw-score bars are conceptual, not probabilities or truth."
+softmax,Score to Probability,coded-svg,bullets,0,4,ok,,Softmax normalization stays separate from sampling.
+sampling,Weighted Token Choice,coded-svg,bullets,0,4,ok,,Probability bubble scene keeps fit-is-not-proof in HTML callouts.
+autoregression,Append and Repeat,coded-svg,numbered,4,4,ok,,"Response-so-far, token choice, append, run-again markers match."
+context-window,Temporary Context Window,coded-svg,numbered,4,4,ok,,"Visible context, capacity, temporary boundary, next-token use markers match."
+rag-retrieval,Open-Book Retrieval,coded-svg,numbered,5,5,ok,,"Prompt, retriever, notes, response, fixed weights."
+grounding-evidence,Claim Support Map,coded-svg,numbered,4,4,ok,,"Claim, evidence, support check, and review markers match."
+hallucination-bridge,Unsupported Bridge,coded-svg,numbered,4,4,ok,,"Fluent surface, supported claim, missing support, review markers match."
+ai-learns,Learning Modes Matrix,coded-svg,bullets,0,4,ok,,Matrix distinctions are unnumbered.
+diffusion,Append Or Denoise,coded-svg,bullets,0,3,ok,,Two-lane mechanism contrast remains unnumbered.
+multimodal,Media Lane Map,coded-svg,bullets,0,4,ok,,Input/representation/output scene remains unnumbered.
+perfect-storm,Storm Front,coded-svg,bullets,0,4,ok,,Convergence ingredients stay as short labels.
+collective-intelligence-lantern,Borrowed Flames,coded-svg,bullets,0,3,ok,,"Atmospheric candidate, currently coded."
+benefits-tool-garden,Benefit Tiers,coded-svg,bullets,0,3,ok,,Tier labels stay in diagram; detail stays below.
+costs-invisible-factory,Cost Ledger,coded-svg,bullets,0,3,ok,,Cost categories stay unnumbered.
+human-centered-ai-garden,Accountability Flow,coded-svg,bullets,0,3,ok,,Accountability flow stays unnumbered.
+responsible-ai-forked-path,Better-AI Control Panel,coded-svg,bullets,0,3,ok,,Lever panel stays unnumbered.
+prompting-context-tray,Context Tray,coded-svg,bullets,0,3,ok,,Prompt-parts scene stays unnumbered.
+synthesis-map-compass-lantern,Full Chain Map,coded-svg,bullets,0,3,ok,,Final synthesis map stays coded.
+risk,Risk Ledger,coded-svg,bullets,0,3,ok,,Risk/myth ledger stays unnumbered.

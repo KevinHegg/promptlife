@@ -1,0 +1,54 @@
+{
+  "version": "0.27.18",
+  "status": "ok",
+  "checks": [
+    "no renderer metadata labels in VisualAids.tsx",
+    "no deprecated Attention Weave visual title in current catalog",
+    "no known visual-aid CSS font-size below 12px",
+    "no inline SVG fontSize below 12px",
+    "required v0.27.18 screenshots exist for priority visuals"
+  ],
+  "issues": [],
+  "requiredScreenshots": [
+    {
+      "file": "attention-390.png",
+      "exists": true
+    },
+    {
+      "file": "attention-320.png",
+      "exists": true
+    },
+    {
+      "file": "mlp-390.png",
+      "exists": true
+    },
+    {
+      "file": "layers-390.png",
+      "exists": true
+    },
+    {
+      "file": "hidden-states-390.png",
+      "exists": true
+    },
+    {
+      "file": "logits-390.png",
+      "exists": true
+    },
+    {
+      "file": "softmax-390.png",
+      "exists": true
+    },
+    {
+      "file": "sampling-390.png",
+      "exists": true
+    },
+    {
+      "file": "atmospheric-sample-390.png",
+      "exists": true
+    },
+    {
+      "file": "visual-aids-desktop.png",
+      "exists": true
+    }
+  ]
+}
