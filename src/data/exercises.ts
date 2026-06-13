@@ -257,7 +257,7 @@ export const exercises: Exercise[] = [
       { id: 'human-feedback-learning', label: 'human feedback learning', bucket: 'Durable shaping' },
       { id: 'preference-optimization', label: 'preference optimization', bucket: 'Durable shaping' },
       { id: 'system-prompt', label: 'system prompt', bucket: 'Runtime steering' },
-      { id: 'policy-filter', label: 'policy filter', bucket: 'Runtime steering' },
+      { id: 'runtime-policy-filter', label: 'policy filter', bucket: 'Runtime steering' },
       { id: 'tool-rule', label: 'tool rule', bucket: 'Runtime steering' },
       { id: 'safety-test', label: 'safety test', bucket: 'Evaluation' },
       { id: 'red-team-review', label: 'red-team review', bucket: 'Evaluation' }

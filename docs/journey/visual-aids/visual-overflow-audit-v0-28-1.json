@@ -1,0 +1,1597 @@
+{
+  "version": "0.28.1",
+  "generatedAt": "2026-06-13T18:50:10.163Z",
+  "status": "pass",
+  "widths": [
+    320,
+    390
+  ],
+  "visualAidCount": 39,
+  "summary": {
+    "pageOverflowIssues": 0,
+    "visualRowIssues": 0,
+    "templateIssues": 0,
+    "longSvgLabelIssues": 0,
+    "tinySvgLabelIssues": 0,
+    "clippingIssues": 0,
+    "navOverlapIssues": false
+  },
+  "results": [
+    {
+      "width": 320,
+      "pageHorizontalOverflow": 0,
+      "navPresent": false,
+      "navOverlap": false,
+      "visualRows": [
+        {
+          "id": "before-morning-llm-cloud",
+          "template": "Atmospheric Scene",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 4
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 0,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "ai-family-tree",
+          "template": "Taxonomy Map",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 10,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "traditions",
+          "template": "Comparison Board",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 9,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "training-loop",
+          "template": "Mechanism Flow",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 11,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "before-morning-pretraining-landscape",
+          "template": "Atmospheric Scene",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 0,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "overfitting-generalization",
+          "template": "Comparison Board",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 9,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "before-morning-finetuning-path",
+          "template": "Comparison Board",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 15,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "before-morning-alignment-garden",
+          "template": "Atmospheric Scene",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 0,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "inference-pass",
+          "template": "Mechanism Flow",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 10,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "prompt-response",
+          "template": "Mechanism Flow",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 0,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "tokenization",
+          "template": "Mechanism Flow",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 0,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "token-ids",
+          "template": "Mechanism Flow",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 17,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "embeddings",
+          "template": "Mechanism Flow",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 12,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "vectors",
+          "template": "Comparison Board",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 10,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "tensors",
+          "template": "Taxonomy Map",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 9,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "attention",
+          "template": "Mechanism Flow",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 9,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "mlp",
+          "template": "Comparison Board",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 11,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "layers",
+          "template": "Mechanism Flow",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 11,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "hidden-states",
+          "template": "Mechanism Flow",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 8,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "logits",
+          "template": "Probability Bars",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 12,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "softmax",
+          "template": "Probability Bars",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 17,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "sampling",
+          "template": "Probability Bars",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 11,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "autoregression",
+          "template": "Mechanism Flow",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 11,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "context-window",
+          "template": "Context Tray / Stack",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 13,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "rag-retrieval",
+          "template": "Context Tray / Stack",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 11,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "grounding-evidence",
+          "template": "Context Tray / Stack",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 10,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "hallucination-bridge",
+          "template": "Comparison Board",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 11,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "ai-learns",
+          "template": "Comparison Board",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 14,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "diffusion",
+          "template": "Comparison Board",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 11,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "multimodal",
+          "template": "Taxonomy Map",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 7,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "perfect-storm",
+          "template": "Taxonomy Map",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 8,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "collective-intelligence-lantern",
+          "template": "Taxonomy Map",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 4,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "benefits-tool-garden",
+          "template": "Taxonomy Map",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 7,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "costs-invisible-factory",
+          "template": "Taxonomy Map",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 6,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "human-centered-ai-garden",
+          "template": "Taxonomy Map",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 7,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "responsible-ai-forked-path",
+          "template": "Taxonomy Map",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 7,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "prompting-context-tray",
+          "template": "Context Tray / Stack",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 11,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "synthesis-map-compass-lantern",
+          "template": "Taxonomy Map",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 13,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "risk",
+          "template": "Taxonomy Map",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 12,
+          "generatedImageHasAlt": true,
+          "issues": []
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "pageHorizontalOverflow": 0,
+      "navPresent": false,
+      "navOverlap": false,
+      "visualRows": [
+        {
+          "id": "before-morning-llm-cloud",
+          "template": "Atmospheric Scene",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 4
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 0,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "ai-family-tree",
+          "template": "Taxonomy Map",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 10,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "traditions",
+          "template": "Comparison Board",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 9,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "training-loop",
+          "template": "Mechanism Flow",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 11,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "before-morning-pretraining-landscape",
+          "template": "Atmospheric Scene",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 0,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "overfitting-generalization",
+          "template": "Comparison Board",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 9,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "before-morning-finetuning-path",
+          "template": "Comparison Board",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 15,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "before-morning-alignment-garden",
+          "template": "Atmospheric Scene",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 0,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "inference-pass",
+          "template": "Mechanism Flow",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 10,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "prompt-response",
+          "template": "Mechanism Flow",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 0,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "tokenization",
+          "template": "Mechanism Flow",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 0,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "token-ids",
+          "template": "Mechanism Flow",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 17,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "embeddings",
+          "template": "Mechanism Flow",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 12,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "vectors",
+          "template": "Comparison Board",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 10,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "tensors",
+          "template": "Taxonomy Map",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 9,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "attention",
+          "template": "Mechanism Flow",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 9,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "mlp",
+          "template": "Comparison Board",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 11,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "layers",
+          "template": "Mechanism Flow",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 11,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "hidden-states",
+          "template": "Mechanism Flow",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 8,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "logits",
+          "template": "Probability Bars",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 12,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "softmax",
+          "template": "Probability Bars",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 17,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "sampling",
+          "template": "Probability Bars",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 11,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "autoregression",
+          "template": "Mechanism Flow",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 11,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "context-window",
+          "template": "Context Tray / Stack",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 13,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "rag-retrieval",
+          "template": "Context Tray / Stack",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 11,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "grounding-evidence",
+          "template": "Context Tray / Stack",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 10,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "hallucination-bridge",
+          "template": "Comparison Board",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 11,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "ai-learns",
+          "template": "Comparison Board",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 14,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "diffusion",
+          "template": "Comparison Board",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 11,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "multimodal",
+          "template": "Taxonomy Map",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 7,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "perfect-storm",
+          "template": "Taxonomy Map",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 8,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "collective-intelligence-lantern",
+          "template": "Taxonomy Map",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 4,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "benefits-tool-garden",
+          "template": "Taxonomy Map",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 7,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "costs-invisible-factory",
+          "template": "Taxonomy Map",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 6,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "human-centered-ai-garden",
+          "template": "Taxonomy Map",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 7,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "responsible-ai-forked-path",
+          "template": "Taxonomy Map",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 7,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "prompting-context-tray",
+          "template": "Context Tray / Stack",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 11,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "synthesis-map-compass-lantern",
+          "template": "Taxonomy Map",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 13,
+          "generatedImageHasAlt": true,
+          "issues": []
+        },
+        {
+          "id": "risk",
+          "template": "Taxonomy Map",
+          "templateOk": true,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "svgLabelCount": 12,
+          "generatedImageHasAlt": true,
+          "issues": []
+        }
+      ]
+    }
+  ]
+}

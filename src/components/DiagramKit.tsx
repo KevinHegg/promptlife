@@ -300,7 +300,7 @@ export function DiagramKitAiFamilyTreeExample() {
       <TaxonomyBox x={158} y={55} width={142} height={24} label="Machine learning" tone="mint" emphasis />
       <TaxonomyBox x={40} y={92} width={106} height={24} label="Classical ML" tone="paper" />
       <TaxonomyBox x={176} y={92} width={118} height={24} label="Deep learning" tone="mint" emphasis />
-      <TaxonomyBox x={28} y={129} width={132} height={24} label="Other deep learning" tone="muted" />
+      <TaxonomyBox x={28} y={129} width={132} height={24} label="Other deep nets" tone="muted" />
       <TaxonomyBox x={176} y={129} width={118} height={24} label="Generative AI" tone="amber" emphasis />
       <TaxonomyBox x={88} y={168} width={54} height={22} label="LLMs" tone="paper" />
       <TaxonomyBox x={150} y={168} width={70} height={22} label="Diffusion" tone="paper" />
@@ -373,7 +373,7 @@ export function DiagramKitOverfittingPlotExample() {
       <WarningZone x={43} y={42} width={70} height={24} label="too fitted" />
       <CalloutSeal x={52} y={134} label="1" tone="paper" />
       <CalloutSeal x={282} y={82} label="2" tone="amber" />
-      <CalloutSeal x={112} y={58} label="3" tone="violet" />
+      <CalloutSeal x={130} y={58} label="3" tone="violet" />
       <CalloutSeal x={244} y={92} label="4" tone="success" />
       <LegendRow
         x={34}
@@ -382,7 +382,7 @@ export function DiagramKitOverfittingPlotExample() {
           { label: 'train', kind: 'dot', tone: 'mint' },
           { label: 'validation', kind: 'square', tone: 'amber' },
           { label: 'overfit', kind: 'curve', tone: 'violet' },
-          { label: 'smooth', kind: 'line', tone: 'success' }
+          { label: 'gen', kind: 'line', tone: 'success' }
         ]}
       />
     </>

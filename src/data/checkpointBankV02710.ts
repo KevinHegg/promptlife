@@ -739,9 +739,9 @@ export const FIRST_TWELVE_CHECKPOINT_BANK_V02710 = {
         ],
         "answer": "Its behavior was shaped toward instructions and safety boundaries, but that does not prove moral understanding.",
         "correctChoiceId": "v02710-alignment-q1-correct",
-        "explain": "Good distinction. Alignment shapes behavior; it is not magic morality.",
+        "explain": "Good distinction. Alignment shapes behavior; it is not built-in morality.",
         "feedback": {
-          "v02710-alignment-q1-correct": "Good distinction. Alignment shapes behavior; it is not magic morality.",
+          "v02710-alignment-q1-correct": "Good distinction. Alignment shapes behavior; it is not built-in morality.",
           "v02710-alignment-q1-conscious": "That gives the model too much mind. Refusal behavior can be shaped without human moral understanding.",
           "v02710-alignment-q1-truth": "Not quite. Alignment can shape behavior, but it does not guarantee factual truth.",
           "v02710-alignment-q1-no-model": "Close, but an aligned product can still use a learned model plus rules, filters, or policies."
@@ -770,9 +770,9 @@ export const FIRST_TWELVE_CHECKPOINT_BANK_V02710 = {
         ],
         "answer": "Some alignment changes can be durable training changes, while other controls steer or filter the current run.",
         "correctChoiceId": "v02710-alignment-q2-correct",
-        "explain": "Insight strengthened. Alignment can happen through several layers, not one magic switch.",
+        "explain": "Insight strengthened. Alignment can happen through several layers, not one switch.",
         "feedback": {
-          "v02710-alignment-q2-correct": "Insight strengthened. Alignment can happen through several layers, not one magic switch.",
+          "v02710-alignment-q2-correct": "Insight strengthened. Alignment can happen through several layers, not one switch.",
           "v02710-alignment-q2-all-weights": "Not quite. Fine-tuning may change weights, but system prompts and filters can steer behavior at runtime.",
           "v02710-alignment-q2-only-prompt": "Close, but alignment can include training, policies, evaluation, and runtime controls beyond the user prompt.",
           "v02710-alignment-q2-sampling-only": "Sampling chooses a next token from probabilities. Alignment shapes or constrains behavior around that process."

@@ -1,0 +1,2372 @@
+{
+  "version": "0.28.2",
+  "generatedAt": "2026-06-13T21:33:45.465Z",
+  "status": "pass",
+  "routeChecked": "learner Journey lesson route",
+  "widths": [
+    320,
+    390
+  ],
+  "visualAidCount": 39,
+  "summary": {
+    "pageOverflowIssues": 0,
+    "visualRowIssues": 0,
+    "longSvgLabelIssues": 0,
+    "tinySvgLabelIssues": 0,
+    "clippingIssues": 0,
+    "svgOverlapIssues": 0,
+    "navOverlapIssues": 0
+  },
+  "results": [
+    {
+      "width": 320,
+      "rows": [
+        {
+          "width": 320,
+          "route": "learner",
+          "learningCardId": "what-is-llm",
+          "expectedVisualId": "before-morning-llm-cloud",
+          "actualVisualId": "before-morning-llm-cloud",
+          "lessonTitle": "What Is an LLM?",
+          "template": "Atmospheric Scene",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 4
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 0,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "What Is an LLM?",
+          "currentVisualTitle": "Prompt to Prediction",
+          "issues": []
+        },
+        {
+          "width": 320,
+          "route": "learner",
+          "learningCardId": "where-llms-fit",
+          "expectedVisualId": "ai-family-tree",
+          "actualVisualId": "ai-family-tree",
+          "lessonTitle": "Where LLMs Fit",
+          "template": "Taxonomy Map",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 10,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Where LLMs Fit",
+          "currentVisualTitle": "AI Family Tree",
+          "issues": []
+        },
+        {
+          "width": 320,
+          "route": "learner",
+          "learningCardId": "history",
+          "expectedVisualId": "traditions",
+          "actualVisualId": "traditions",
+          "lessonTitle": "Rationalists vs Empiricists",
+          "template": "Comparison Board",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 9,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Rationalists vs Empiricists",
+          "currentVisualTitle": "Rules and Learned Patterns",
+          "issues": []
+        },
+        {
+          "width": 320,
+          "route": "learner",
+          "learningCardId": "training",
+          "expectedVisualId": "training-loop",
+          "actualVisualId": "training-loop",
+          "lessonTitle": "Training",
+          "template": "Mechanism Flow",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 11,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Training",
+          "currentVisualTitle": "Training Loop",
+          "issues": []
+        },
+        {
+          "width": 320,
+          "route": "learner",
+          "learningCardId": "pretraining",
+          "expectedVisualId": "before-morning-pretraining-landscape",
+          "actualVisualId": "before-morning-pretraining-landscape",
+          "lessonTitle": "Pretraining",
+          "template": "Atmospheric Scene",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 4
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 0,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Pretraining",
+          "currentVisualTitle": "Broad Pretraining",
+          "issues": []
+        },
+        {
+          "width": 320,
+          "route": "learner",
+          "learningCardId": "overfitting-generalization",
+          "expectedVisualId": "overfitting-generalization",
+          "actualVisualId": "overfitting-generalization",
+          "lessonTitle": "Overfitting and Generalization",
+          "template": "Comparison Board",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 9,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Overfitting and Generalization",
+          "currentVisualTitle": "Overfitting vs Generalization",
+          "issues": []
+        },
+        {
+          "width": 320,
+          "route": "learner",
+          "learningCardId": "fine-tuning",
+          "expectedVisualId": "before-morning-finetuning-path",
+          "actualVisualId": "before-morning-finetuning-path",
+          "lessonTitle": "Fine-Tuning",
+          "template": "Comparison Board",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 15,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Fine-Tuning",
+          "currentVisualTitle": "Fine-Tuning Path",
+          "issues": []
+        },
+        {
+          "width": 320,
+          "route": "learner",
+          "learningCardId": "alignment",
+          "expectedVisualId": "before-morning-alignment-garden",
+          "actualVisualId": "before-morning-alignment-garden",
+          "lessonTitle": "Alignment",
+          "template": "Atmospheric Scene",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 4
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 0,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Alignment",
+          "currentVisualTitle": "Alignment Landscape",
+          "issues": []
+        },
+        {
+          "width": 320,
+          "route": "learner",
+          "learningCardId": "inference",
+          "expectedVisualId": "inference-pass",
+          "actualVisualId": "inference-pass",
+          "lessonTitle": "Inference",
+          "template": "Mechanism Flow",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 10,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Inference",
+          "currentVisualTitle": "Forward Pass",
+          "issues": []
+        },
+        {
+          "width": 320,
+          "route": "learner",
+          "learningCardId": "prompt-response",
+          "expectedVisualId": "prompt-response",
+          "actualVisualId": "prompt-response",
+          "lessonTitle": "Prompt vs Response",
+          "template": "Mechanism Flow",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 0,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Prompt vs Response",
+          "currentVisualTitle": "Prompt vs Response",
+          "issues": []
+        },
+        {
+          "width": 320,
+          "route": "learner",
+          "learningCardId": "tokens",
+          "expectedVisualId": "tokenization",
+          "actualVisualId": "tokenization",
+          "lessonTitle": "Tokenization",
+          "template": "Mechanism Flow",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 0,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Tokenization",
+          "currentVisualTitle": "Text to Tokens",
+          "issues": []
+        },
+        {
+          "width": 320,
+          "route": "learner",
+          "learningCardId": "token-ids",
+          "expectedVisualId": "token-ids",
+          "actualVisualId": "token-ids",
+          "lessonTitle": "Token IDs",
+          "template": "Mechanism Flow",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 17,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Token IDs",
+          "currentVisualTitle": "Token IDs",
+          "issues": []
+        },
+        {
+          "width": 320,
+          "route": "learner",
+          "learningCardId": "embeddings",
+          "expectedVisualId": "embeddings",
+          "actualVisualId": "embeddings",
+          "lessonTitle": "Embeddings",
+          "template": "Mechanism Flow",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 12,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Embeddings",
+          "currentVisualTitle": "Embedding Lookup",
+          "issues": []
+        },
+        {
+          "width": 320,
+          "route": "learner",
+          "learningCardId": "vectors",
+          "expectedVisualId": "vectors",
+          "actualVisualId": "vectors",
+          "lessonTitle": "Vectors",
+          "template": "Comparison Board",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 10,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Vectors",
+          "currentVisualTitle": "Feature Vector",
+          "issues": []
+        },
+        {
+          "width": 320,
+          "route": "learner",
+          "learningCardId": "tensors",
+          "expectedVisualId": "tensors",
+          "actualVisualId": "tensors",
+          "lessonTitle": "Tensors",
+          "template": "Taxonomy Map",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 9,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Tensors",
+          "currentVisualTitle": "Tensor Block",
+          "issues": []
+        },
+        {
+          "width": 320,
+          "route": "learner",
+          "learningCardId": "attention",
+          "expectedVisualId": "attention",
+          "actualVisualId": "attention",
+          "lessonTitle": "Attention",
+          "template": "Mechanism Flow",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 9,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Attention",
+          "currentVisualTitle": "Relevance Between Tokens",
+          "issues": []
+        },
+        {
+          "width": 320,
+          "route": "learner",
+          "learningCardId": "mlp",
+          "expectedVisualId": "mlp",
+          "actualVisualId": "mlp",
+          "lessonTitle": "MLP",
+          "template": "Comparison Board",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 11,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "MLP",
+          "currentVisualTitle": "MLP Feature Workshop",
+          "issues": []
+        },
+        {
+          "width": 320,
+          "route": "learner",
+          "learningCardId": "layers",
+          "expectedVisualId": "layers",
+          "actualVisualId": "layers",
+          "lessonTitle": "Layers",
+          "template": "Mechanism Flow",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 11,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Layers",
+          "currentVisualTitle": "Transformer Stack",
+          "issues": []
+        },
+        {
+          "width": 320,
+          "route": "learner",
+          "learningCardId": "hidden-states",
+          "expectedVisualId": "hidden-states",
+          "actualVisualId": "hidden-states",
+          "lessonTitle": "Hidden States",
+          "template": "Mechanism Flow",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 8,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Hidden States",
+          "currentVisualTitle": "Hidden State Flow",
+          "issues": []
+        },
+        {
+          "width": 320,
+          "route": "learner",
+          "learningCardId": "logits",
+          "expectedVisualId": "logits",
+          "actualVisualId": "logits",
+          "lessonTitle": "Logits",
+          "template": "Probability Bars",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 12,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Logits",
+          "currentVisualTitle": "Raw Scoreboard",
+          "issues": []
+        },
+        {
+          "width": 320,
+          "route": "learner",
+          "learningCardId": "softmax",
+          "expectedVisualId": "softmax",
+          "actualVisualId": "softmax",
+          "lessonTitle": "Softmax",
+          "template": "Probability Bars",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 17,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Softmax",
+          "currentVisualTitle": "Score to Probability",
+          "issues": []
+        },
+        {
+          "width": 320,
+          "route": "learner",
+          "learningCardId": "sampling",
+          "expectedVisualId": "sampling",
+          "actualVisualId": "sampling",
+          "lessonTitle": "Sampling",
+          "template": "Probability Bars",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 11,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Sampling",
+          "currentVisualTitle": "Weighted Token Choice",
+          "issues": []
+        },
+        {
+          "width": 320,
+          "route": "learner",
+          "learningCardId": "autoregression",
+          "expectedVisualId": "autoregression",
+          "actualVisualId": "autoregression",
+          "lessonTitle": "Autoregression",
+          "template": "Mechanism Flow",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 11,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Autoregression",
+          "currentVisualTitle": "Append and Repeat",
+          "issues": []
+        },
+        {
+          "width": 320,
+          "route": "learner",
+          "learningCardId": "context-window",
+          "expectedVisualId": "context-window",
+          "actualVisualId": "context-window",
+          "lessonTitle": "Context Window",
+          "template": "Context Tray / Stack",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 13,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Context Window",
+          "currentVisualTitle": "Temporary Context Window",
+          "issues": []
+        },
+        {
+          "width": 320,
+          "route": "learner",
+          "learningCardId": "rag-retrieval",
+          "expectedVisualId": "rag-retrieval",
+          "actualVisualId": "rag-retrieval",
+          "lessonTitle": "RAG and Retrieval",
+          "template": "Context Tray / Stack",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 11,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "RAG and Retrieval",
+          "currentVisualTitle": "Open-Book Retrieval",
+          "issues": []
+        },
+        {
+          "width": 320,
+          "route": "learner",
+          "learningCardId": "grounding",
+          "expectedVisualId": "grounding-evidence",
+          "actualVisualId": "grounding-evidence",
+          "lessonTitle": "Grounding",
+          "template": "Context Tray / Stack",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 10,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Grounding",
+          "currentVisualTitle": "Claim Support Map",
+          "issues": []
+        },
+        {
+          "width": 320,
+          "route": "learner",
+          "learningCardId": "hallucinations",
+          "expectedVisualId": "hallucination-bridge",
+          "actualVisualId": "hallucination-bridge",
+          "lessonTitle": "Hallucinations",
+          "template": "Comparison Board",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 11,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Hallucinations",
+          "currentVisualTitle": "Unsupported Bridge",
+          "issues": []
+        },
+        {
+          "width": 320,
+          "route": "learner",
+          "learningCardId": "how-ai-learns",
+          "expectedVisualId": "ai-learns",
+          "actualVisualId": "ai-learns",
+          "lessonTitle": "How AI Learns",
+          "template": "Comparison Board",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 14,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "How AI Learns",
+          "currentVisualTitle": "Learning Modes Matrix",
+          "issues": []
+        },
+        {
+          "width": 320,
+          "route": "learner",
+          "learningCardId": "diffusion",
+          "expectedVisualId": "diffusion",
+          "actualVisualId": "diffusion",
+          "lessonTitle": "Diffusion vs Autoregression",
+          "template": "Comparison Board",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 11,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Diffusion vs Autoregression",
+          "currentVisualTitle": "Append Or Denoise",
+          "issues": []
+        },
+        {
+          "width": 320,
+          "route": "learner",
+          "learningCardId": "multimodal",
+          "expectedVisualId": "multimodal",
+          "actualVisualId": "multimodal",
+          "lessonTitle": "Multimodal AI",
+          "template": "Taxonomy Map",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 7,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Multimodal AI",
+          "currentVisualTitle": "Media Lane Map",
+          "issues": []
+        },
+        {
+          "width": 320,
+          "route": "learner",
+          "learningCardId": "perfect-storm",
+          "expectedVisualId": "perfect-storm",
+          "actualVisualId": "perfect-storm",
+          "lessonTitle": "The Perfect Storm",
+          "template": "Taxonomy Map",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 8,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "The Perfect Storm",
+          "currentVisualTitle": "Storm Front",
+          "issues": []
+        },
+        {
+          "width": 320,
+          "route": "learner",
+          "learningCardId": "collective-intelligence",
+          "expectedVisualId": "collective-intelligence-lantern",
+          "actualVisualId": "collective-intelligence-lantern",
+          "lessonTitle": "Collective Intelligence, Extracted",
+          "template": "Taxonomy Map",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 4,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Collective Intelligence, Extracted",
+          "currentVisualTitle": "Borrowed Flames",
+          "issues": []
+        },
+        {
+          "width": 320,
+          "route": "learner",
+          "learningCardId": "costs-we-must-count",
+          "expectedVisualId": "costs-invisible-factory",
+          "actualVisualId": "costs-invisible-factory",
+          "lessonTitle": "Costs We Must Count",
+          "template": "Taxonomy Map",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 6,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Costs We Must Count",
+          "currentVisualTitle": "Cost Ledger",
+          "issues": []
+        },
+        {
+          "width": 320,
+          "route": "learner",
+          "learningCardId": "risk-myth",
+          "expectedVisualId": "risk",
+          "actualVisualId": "risk",
+          "lessonTitle": "Risk vs Myth",
+          "template": "Taxonomy Map",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 12,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Risk vs Myth",
+          "currentVisualTitle": "Risk Ledger",
+          "issues": []
+        },
+        {
+          "width": 320,
+          "route": "learner",
+          "learningCardId": "benefits-worth-taking-seriously",
+          "expectedVisualId": "benefits-tool-garden",
+          "actualVisualId": "benefits-tool-garden",
+          "lessonTitle": "Benefits Worth Taking Seriously",
+          "template": "Taxonomy Map",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 7,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Benefits Worth Taking Seriously",
+          "currentVisualTitle": "Benefit Tiers",
+          "issues": []
+        },
+        {
+          "width": 320,
+          "route": "learner",
+          "learningCardId": "human-centered-ai",
+          "expectedVisualId": "human-centered-ai-garden",
+          "actualVisualId": "human-centered-ai-garden",
+          "lessonTitle": "Human-Centered AI",
+          "template": "Taxonomy Map",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 7,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Human-Centered AI",
+          "currentVisualTitle": "Accountability Flow",
+          "issues": []
+        },
+        {
+          "width": 320,
+          "route": "learner",
+          "learningCardId": "better-ai-choice",
+          "expectedVisualId": "responsible-ai-forked-path",
+          "actualVisualId": "responsible-ai-forked-path",
+          "lessonTitle": "Better AI Is a Choice",
+          "template": "Taxonomy Map",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 7,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Better AI Is a Choice",
+          "currentVisualTitle": "Better-AI Control Panel",
+          "issues": []
+        },
+        {
+          "width": 320,
+          "route": "learner",
+          "learningCardId": "effective-prompting-literacy",
+          "expectedVisualId": "prompting-context-tray",
+          "actualVisualId": "prompting-context-tray",
+          "lessonTitle": "Effective Prompting from Model Literacy",
+          "template": "Context Tray / Stack",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 11,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Effective Prompting from Model Literacy",
+          "currentVisualTitle": "Context Tray",
+          "issues": []
+        },
+        {
+          "width": 320,
+          "route": "learner",
+          "learningCardId": "model-literate-synthesis",
+          "expectedVisualId": "synthesis-map-compass-lantern",
+          "actualVisualId": "synthesis-map-compass-lantern",
+          "lessonTitle": "Model Literate Synthesis",
+          "template": "Taxonomy Map",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 13,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Model Literate Synthesis",
+          "currentVisualTitle": "Full Chain Map",
+          "issues": []
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "rows": [
+        {
+          "width": 390,
+          "route": "learner",
+          "learningCardId": "what-is-llm",
+          "expectedVisualId": "before-morning-llm-cloud",
+          "actualVisualId": "before-morning-llm-cloud",
+          "lessonTitle": "What Is an LLM?",
+          "template": "Atmospheric Scene",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 4
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 0,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "What Is an LLM?",
+          "currentVisualTitle": "Prompt to Prediction",
+          "issues": []
+        },
+        {
+          "width": 390,
+          "route": "learner",
+          "learningCardId": "where-llms-fit",
+          "expectedVisualId": "ai-family-tree",
+          "actualVisualId": "ai-family-tree",
+          "lessonTitle": "Where LLMs Fit",
+          "template": "Taxonomy Map",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 10,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Where LLMs Fit",
+          "currentVisualTitle": "AI Family Tree",
+          "issues": []
+        },
+        {
+          "width": 390,
+          "route": "learner",
+          "learningCardId": "history",
+          "expectedVisualId": "traditions",
+          "actualVisualId": "traditions",
+          "lessonTitle": "Rationalists vs Empiricists",
+          "template": "Comparison Board",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 9,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Rationalists vs Empiricists",
+          "currentVisualTitle": "Rules and Learned Patterns",
+          "issues": []
+        },
+        {
+          "width": 390,
+          "route": "learner",
+          "learningCardId": "training",
+          "expectedVisualId": "training-loop",
+          "actualVisualId": "training-loop",
+          "lessonTitle": "Training",
+          "template": "Mechanism Flow",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 11,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Training",
+          "currentVisualTitle": "Training Loop",
+          "issues": []
+        },
+        {
+          "width": 390,
+          "route": "learner",
+          "learningCardId": "pretraining",
+          "expectedVisualId": "before-morning-pretraining-landscape",
+          "actualVisualId": "before-morning-pretraining-landscape",
+          "lessonTitle": "Pretraining",
+          "template": "Atmospheric Scene",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 4
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 0,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Pretraining",
+          "currentVisualTitle": "Broad Pretraining",
+          "issues": []
+        },
+        {
+          "width": 390,
+          "route": "learner",
+          "learningCardId": "overfitting-generalization",
+          "expectedVisualId": "overfitting-generalization",
+          "actualVisualId": "overfitting-generalization",
+          "lessonTitle": "Overfitting and Generalization",
+          "template": "Comparison Board",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 9,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Overfitting and Generalization",
+          "currentVisualTitle": "Overfitting vs Generalization",
+          "issues": []
+        },
+        {
+          "width": 390,
+          "route": "learner",
+          "learningCardId": "fine-tuning",
+          "expectedVisualId": "before-morning-finetuning-path",
+          "actualVisualId": "before-morning-finetuning-path",
+          "lessonTitle": "Fine-Tuning",
+          "template": "Comparison Board",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 15,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Fine-Tuning",
+          "currentVisualTitle": "Fine-Tuning Path",
+          "issues": []
+        },
+        {
+          "width": 390,
+          "route": "learner",
+          "learningCardId": "alignment",
+          "expectedVisualId": "before-morning-alignment-garden",
+          "actualVisualId": "before-morning-alignment-garden",
+          "lessonTitle": "Alignment",
+          "template": "Atmospheric Scene",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 4
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 0,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Alignment",
+          "currentVisualTitle": "Alignment Landscape",
+          "issues": []
+        },
+        {
+          "width": 390,
+          "route": "learner",
+          "learningCardId": "inference",
+          "expectedVisualId": "inference-pass",
+          "actualVisualId": "inference-pass",
+          "lessonTitle": "Inference",
+          "template": "Mechanism Flow",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 10,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Inference",
+          "currentVisualTitle": "Forward Pass",
+          "issues": []
+        },
+        {
+          "width": 390,
+          "route": "learner",
+          "learningCardId": "prompt-response",
+          "expectedVisualId": "prompt-response",
+          "actualVisualId": "prompt-response",
+          "lessonTitle": "Prompt vs Response",
+          "template": "Mechanism Flow",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 0,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Prompt vs Response",
+          "currentVisualTitle": "Prompt vs Response",
+          "issues": []
+        },
+        {
+          "width": 390,
+          "route": "learner",
+          "learningCardId": "tokens",
+          "expectedVisualId": "tokenization",
+          "actualVisualId": "tokenization",
+          "lessonTitle": "Tokenization",
+          "template": "Mechanism Flow",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 0,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Tokenization",
+          "currentVisualTitle": "Text to Tokens",
+          "issues": []
+        },
+        {
+          "width": 390,
+          "route": "learner",
+          "learningCardId": "token-ids",
+          "expectedVisualId": "token-ids",
+          "actualVisualId": "token-ids",
+          "lessonTitle": "Token IDs",
+          "template": "Mechanism Flow",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 17,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Token IDs",
+          "currentVisualTitle": "Token IDs",
+          "issues": []
+        },
+        {
+          "width": 390,
+          "route": "learner",
+          "learningCardId": "embeddings",
+          "expectedVisualId": "embeddings",
+          "actualVisualId": "embeddings",
+          "lessonTitle": "Embeddings",
+          "template": "Mechanism Flow",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 12,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Embeddings",
+          "currentVisualTitle": "Embedding Lookup",
+          "issues": []
+        },
+        {
+          "width": 390,
+          "route": "learner",
+          "learningCardId": "vectors",
+          "expectedVisualId": "vectors",
+          "actualVisualId": "vectors",
+          "lessonTitle": "Vectors",
+          "template": "Comparison Board",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 10,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Vectors",
+          "currentVisualTitle": "Feature Vector",
+          "issues": []
+        },
+        {
+          "width": 390,
+          "route": "learner",
+          "learningCardId": "tensors",
+          "expectedVisualId": "tensors",
+          "actualVisualId": "tensors",
+          "lessonTitle": "Tensors",
+          "template": "Taxonomy Map",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 9,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Tensors",
+          "currentVisualTitle": "Tensor Block",
+          "issues": []
+        },
+        {
+          "width": 390,
+          "route": "learner",
+          "learningCardId": "attention",
+          "expectedVisualId": "attention",
+          "actualVisualId": "attention",
+          "lessonTitle": "Attention",
+          "template": "Mechanism Flow",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 9,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Attention",
+          "currentVisualTitle": "Relevance Between Tokens",
+          "issues": []
+        },
+        {
+          "width": 390,
+          "route": "learner",
+          "learningCardId": "mlp",
+          "expectedVisualId": "mlp",
+          "actualVisualId": "mlp",
+          "lessonTitle": "MLP",
+          "template": "Comparison Board",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 11,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "MLP",
+          "currentVisualTitle": "MLP Feature Workshop",
+          "issues": []
+        },
+        {
+          "width": 390,
+          "route": "learner",
+          "learningCardId": "layers",
+          "expectedVisualId": "layers",
+          "actualVisualId": "layers",
+          "lessonTitle": "Layers",
+          "template": "Mechanism Flow",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 11,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Layers",
+          "currentVisualTitle": "Transformer Stack",
+          "issues": []
+        },
+        {
+          "width": 390,
+          "route": "learner",
+          "learningCardId": "hidden-states",
+          "expectedVisualId": "hidden-states",
+          "actualVisualId": "hidden-states",
+          "lessonTitle": "Hidden States",
+          "template": "Mechanism Flow",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 8,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Hidden States",
+          "currentVisualTitle": "Hidden State Flow",
+          "issues": []
+        },
+        {
+          "width": 390,
+          "route": "learner",
+          "learningCardId": "logits",
+          "expectedVisualId": "logits",
+          "actualVisualId": "logits",
+          "lessonTitle": "Logits",
+          "template": "Probability Bars",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 12,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Logits",
+          "currentVisualTitle": "Raw Scoreboard",
+          "issues": []
+        },
+        {
+          "width": 390,
+          "route": "learner",
+          "learningCardId": "softmax",
+          "expectedVisualId": "softmax",
+          "actualVisualId": "softmax",
+          "lessonTitle": "Softmax",
+          "template": "Probability Bars",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 17,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Softmax",
+          "currentVisualTitle": "Score to Probability",
+          "issues": []
+        },
+        {
+          "width": 390,
+          "route": "learner",
+          "learningCardId": "sampling",
+          "expectedVisualId": "sampling",
+          "actualVisualId": "sampling",
+          "lessonTitle": "Sampling",
+          "template": "Probability Bars",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 11,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Sampling",
+          "currentVisualTitle": "Weighted Token Choice",
+          "issues": []
+        },
+        {
+          "width": 390,
+          "route": "learner",
+          "learningCardId": "autoregression",
+          "expectedVisualId": "autoregression",
+          "actualVisualId": "autoregression",
+          "lessonTitle": "Autoregression",
+          "template": "Mechanism Flow",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 11,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Autoregression",
+          "currentVisualTitle": "Append and Repeat",
+          "issues": []
+        },
+        {
+          "width": 390,
+          "route": "learner",
+          "learningCardId": "context-window",
+          "expectedVisualId": "context-window",
+          "actualVisualId": "context-window",
+          "lessonTitle": "Context Window",
+          "template": "Context Tray / Stack",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 13,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Context Window",
+          "currentVisualTitle": "Temporary Context Window",
+          "issues": []
+        },
+        {
+          "width": 390,
+          "route": "learner",
+          "learningCardId": "rag-retrieval",
+          "expectedVisualId": "rag-retrieval",
+          "actualVisualId": "rag-retrieval",
+          "lessonTitle": "RAG and Retrieval",
+          "template": "Context Tray / Stack",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 11,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "RAG and Retrieval",
+          "currentVisualTitle": "Open-Book Retrieval",
+          "issues": []
+        },
+        {
+          "width": 390,
+          "route": "learner",
+          "learningCardId": "grounding",
+          "expectedVisualId": "grounding-evidence",
+          "actualVisualId": "grounding-evidence",
+          "lessonTitle": "Grounding",
+          "template": "Context Tray / Stack",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 10,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Grounding",
+          "currentVisualTitle": "Claim Support Map",
+          "issues": []
+        },
+        {
+          "width": 390,
+          "route": "learner",
+          "learningCardId": "hallucinations",
+          "expectedVisualId": "hallucination-bridge",
+          "actualVisualId": "hallucination-bridge",
+          "lessonTitle": "Hallucinations",
+          "template": "Comparison Board",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 11,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Hallucinations",
+          "currentVisualTitle": "Unsupported Bridge",
+          "issues": []
+        },
+        {
+          "width": 390,
+          "route": "learner",
+          "learningCardId": "how-ai-learns",
+          "expectedVisualId": "ai-learns",
+          "actualVisualId": "ai-learns",
+          "lessonTitle": "How AI Learns",
+          "template": "Comparison Board",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 14,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "How AI Learns",
+          "currentVisualTitle": "Learning Modes Matrix",
+          "issues": []
+        },
+        {
+          "width": 390,
+          "route": "learner",
+          "learningCardId": "diffusion",
+          "expectedVisualId": "diffusion",
+          "actualVisualId": "diffusion",
+          "lessonTitle": "Diffusion vs Autoregression",
+          "template": "Comparison Board",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 11,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Diffusion vs Autoregression",
+          "currentVisualTitle": "Append Or Denoise",
+          "issues": []
+        },
+        {
+          "width": 390,
+          "route": "learner",
+          "learningCardId": "multimodal",
+          "expectedVisualId": "multimodal",
+          "actualVisualId": "multimodal",
+          "lessonTitle": "Multimodal AI",
+          "template": "Taxonomy Map",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 7,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Multimodal AI",
+          "currentVisualTitle": "Media Lane Map",
+          "issues": []
+        },
+        {
+          "width": 390,
+          "route": "learner",
+          "learningCardId": "perfect-storm",
+          "expectedVisualId": "perfect-storm",
+          "actualVisualId": "perfect-storm",
+          "lessonTitle": "The Perfect Storm",
+          "template": "Taxonomy Map",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 8,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "The Perfect Storm",
+          "currentVisualTitle": "Storm Front",
+          "issues": []
+        },
+        {
+          "width": 390,
+          "route": "learner",
+          "learningCardId": "collective-intelligence",
+          "expectedVisualId": "collective-intelligence-lantern",
+          "actualVisualId": "collective-intelligence-lantern",
+          "lessonTitle": "Collective Intelligence, Extracted",
+          "template": "Taxonomy Map",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 4,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Collective Intelligence, Extracted",
+          "currentVisualTitle": "Borrowed Flames",
+          "issues": []
+        },
+        {
+          "width": 390,
+          "route": "learner",
+          "learningCardId": "costs-we-must-count",
+          "expectedVisualId": "costs-invisible-factory",
+          "actualVisualId": "costs-invisible-factory",
+          "lessonTitle": "Costs We Must Count",
+          "template": "Taxonomy Map",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 6,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Costs We Must Count",
+          "currentVisualTitle": "Cost Ledger",
+          "issues": []
+        },
+        {
+          "width": 390,
+          "route": "learner",
+          "learningCardId": "risk-myth",
+          "expectedVisualId": "risk",
+          "actualVisualId": "risk",
+          "lessonTitle": "Risk vs Myth",
+          "template": "Taxonomy Map",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 12,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Risk vs Myth",
+          "currentVisualTitle": "Risk Ledger",
+          "issues": []
+        },
+        {
+          "width": 390,
+          "route": "learner",
+          "learningCardId": "benefits-worth-taking-seriously",
+          "expectedVisualId": "benefits-tool-garden",
+          "actualVisualId": "benefits-tool-garden",
+          "lessonTitle": "Benefits Worth Taking Seriously",
+          "template": "Taxonomy Map",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 7,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Benefits Worth Taking Seriously",
+          "currentVisualTitle": "Benefit Tiers",
+          "issues": []
+        },
+        {
+          "width": 390,
+          "route": "learner",
+          "learningCardId": "human-centered-ai",
+          "expectedVisualId": "human-centered-ai-garden",
+          "actualVisualId": "human-centered-ai-garden",
+          "lessonTitle": "Human-Centered AI",
+          "template": "Taxonomy Map",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 7,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Human-Centered AI",
+          "currentVisualTitle": "Accountability Flow",
+          "issues": []
+        },
+        {
+          "width": 390,
+          "route": "learner",
+          "learningCardId": "better-ai-choice",
+          "expectedVisualId": "responsible-ai-forked-path",
+          "actualVisualId": "responsible-ai-forked-path",
+          "lessonTitle": "Better AI Is a Choice",
+          "template": "Taxonomy Map",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 7,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Better AI Is a Choice",
+          "currentVisualTitle": "Better-AI Control Panel",
+          "issues": []
+        },
+        {
+          "width": 390,
+          "route": "learner",
+          "learningCardId": "effective-prompting-literacy",
+          "expectedVisualId": "prompting-context-tray",
+          "actualVisualId": "prompting-context-tray",
+          "lessonTitle": "Effective Prompting from Model Literacy",
+          "template": "Context Tray / Stack",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 11,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Effective Prompting from Model Literacy",
+          "currentVisualTitle": "Context Tray",
+          "issues": []
+        },
+        {
+          "width": 390,
+          "route": "learner",
+          "learningCardId": "model-literate-synthesis",
+          "expectedVisualId": "synthesis-map-compass-lantern",
+          "actualVisualId": "synthesis-map-compass-lantern",
+          "lessonTitle": "Model Literate Synthesis",
+          "template": "Taxonomy Map",
+          "pageHorizontalOverflow": 0,
+          "figureOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "canvasOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clippedHtml": [],
+          "longSvgLabels": [],
+          "tinySvgLabels": [],
+          "clippedSvgLabels": [],
+          "overlappingSvgLabels": [],
+          "svgLabelCount": 13,
+          "generatedImageHasAlt": true,
+          "navPresent": true,
+          "navOverlap": false,
+          "learningCardTitle": "Model Literate Synthesis",
+          "currentVisualTitle": "Full Chain Map",
+          "issues": []
+        }
+      ]
+    }
+  ]
+}

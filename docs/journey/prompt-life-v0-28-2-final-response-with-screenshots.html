@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Prompt Life v0.28.2 Final Response</title>
+<style>
+  body { font-family: Inter, Arial, sans-serif; margin: 34px; color: #08144f; line-height: 1.45; }
+  h1, h2, h3 { color: #101a7a; }
+  .card { border: 1px solid #d7def2; border-radius: 10px; padding: 16px; margin: 0 0 16px; break-inside: avoid; }
+  .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .metric { background: #f7fbff; border: 1px solid #dbe6f7; border-radius: 8px; padding: 11px; }
+  ul { margin-top: 6px; }
+  figure { margin: 0 0 14px; break-inside: avoid; }
+  img { width: 100%; max-height: 560px; object-fit: contain; border: 1px solid #d7def2; border-radius: 8px; background: #f8fbff; }
+  figcaption { font-size: 12px; font-weight: 800; color: #33406d; margin-top: 4px; }
+  .shot-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+</style>
+</head>
+<body>
+<h1>Prompt Life v0.28.2 Final Response</h1>
+<section class="card">
+  <h2>Summary</h2>
+  <p>Implemented v0.28.2 Visual Overflow Hardening + Journey Exercise Audit. The app version is now <strong>v0.28.2</strong>. The hardened visual overflow audit now checks actual learner Journey routes at 320px and 390px. A new exercise audit inventories and screenshot-checks all 39 Journey interactions.</p>
+</section>
+<section class="card grid">
+  <div class="metric"><strong>Visual overflow status</strong><br>pass; 0 visual row issues remain.</div>
+  <div class="metric"><strong>Journey exercises</strong><br>39 inventoried; 0 audit issues remain.</div>
+  <div class="metric"><strong>Exercise priority counts</strong><br>P0 0, P1 0, P2 6, P3 33</div>
+  <div class="metric"><strong>Readiness</strong><br>Ready for small human testing, with six P2 interactions to watch.</div>
+</section>
+<section class="card">
+  <h2>What Changed</h2>
+  <ul>
+    <li>Fixed learner-route visual label/marker overflow in Overfitting, Softmax, Context Window, Grounding, Hallucinations, and Collective Intelligence.</li>
+    <li>Moved former temporary visuals Overfitting vs Generalization, Feature Vector, and Tensor Block to fixed/testable status.</li>
+    <li>Added <code>npm run audit:exercises</code> and generated JSON, CSV, Markdown, HTML, PDF, and screenshots.</li>
+    <li>Repaired mobile interaction layout in Token IDs, Attention, Inference, MLP, Diffusion, Human-Centered AI, and Synthesis.</li>
+    <li>Fixed the alignment exercise internal item id collision risk while preserving learner-facing copy.</li>
+  </ul>
+</section>
+<section class="card">
+  <h2>Verification</h2>
+  <ul>
+    <li><code>npm run typecheck</code>: passed.</li>
+    <li><code>npm run build</code>: passed with existing Vite large-chunk warning.</li>
+    <li><code>npm run build:pages</code>: passed with existing Vite large-chunk warning.</li>
+    <li><code>npm run audit:answers</code>, <code>audit:checkpoints</code>, <code>audit:learner-copy</code>, <code>audit:language</code>, <code>audit:visual-aids</code>, <code>audit:visual-overflow</code>, and <code>audit:exercises</code>: passed.</li>
+    <li><code>npm run audit:question-clues</code>: completed with existing warning counts for human review.</li>
+    <li>In-app browser smoke QA: Home, Journey, Play, Glossary, and Badge navigated with no horizontal overflow; Badge showed the PNG and v0.28.2.</li>
+  </ul>
+</section>
+<section class="card">
+  <h2>Screenshots</h2>
+  <div class="shot-grid">
+  <figure><img src="file:///Users/kevinhegg/Desktop/promptlife/docs/journey/screenshots/v0-28-2/overfitting-generalization-320.png" alt="Overfitting visual, 320px"><figcaption>Overfitting visual, 320px</figcaption></figure>
+<figure><img src="file:///Users/kevinhegg/Desktop/promptlife/docs/journey/screenshots/v0-28-2/softmax-320.png" alt="Softmax visual, 320px"><figcaption>Softmax visual, 320px</figcaption></figure>
+<figure><img src="file:///Users/kevinhegg/Desktop/promptlife/docs/journey/screenshots/v0-28-2/context-window-320.png" alt="Context Window visual, 320px"><figcaption>Context Window visual, 320px</figcaption></figure>
+<figure><img src="file:///Users/kevinhegg/Desktop/promptlife/docs/journey/screenshots/v0-28-2/grounding-evidence-320.png" alt="Grounding visual, 320px"><figcaption>Grounding visual, 320px</figcaption></figure>
+<figure><img src="file:///Users/kevinhegg/Desktop/promptlife/docs/journey/screenshots/v0-28-2/hallucination-bridge-320.png" alt="Hallucination visual, 320px"><figcaption>Hallucination visual, 320px</figcaption></figure>
+<figure><img src="file:///Users/kevinhegg/Desktop/promptlife/docs/journey/screenshots/v0-28-2/collective-intelligence-lantern-320.png" alt="Collective Intelligence visual, 320px"><figcaption>Collective Intelligence visual, 320px</figcaption></figure>
+<figure><img src="file:///Users/kevinhegg/Desktop/promptlife/docs/journey/exercises/screenshots/v0-28-2/12-token-ids-390.png" alt="Token IDs interaction, 390px"><figcaption>Token IDs interaction, 390px</figcaption></figure>
+<figure><img src="file:///Users/kevinhegg/Desktop/promptlife/docs/journey/exercises/screenshots/v0-28-2/16-attention-320.png" alt="Attention interaction, 320px"><figcaption>Attention interaction, 320px</figcaption></figure>
+<figure><img src="file:///Users/kevinhegg/Desktop/promptlife/docs/journey/exercises/screenshots/v0-28-2/29-diffusion-320.png" alt="Diffusion interaction, 320px"><figcaption>Diffusion interaction, 320px</figcaption></figure>
+<figure><img src="file:///Users/kevinhegg/Desktop/promptlife/docs/journey/exercises/screenshots/v0-28-2/39-model-literate-synthesis-320.png" alt="Synthesis interaction, 320px"><figcaption>Synthesis interaction, 320px</figcaption></figure>
+<figure><img src="file:///Users/kevinhegg/Desktop/promptlife/docs/journey/screenshots/v0-28-2/badge-smoke-390.png" alt="Badge page smoke, 390px"><figcaption>Badge page smoke, 390px</figcaption></figure>
+  </div>
+</section>
+</body>
+</html>

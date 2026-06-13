@@ -34,7 +34,8 @@ const forbiddenPatterns = [
   ['visible debug-mode explanation', /Visible because debug mode/i],
   ['Badge unlocked', /Badge unlocked/i],
   ['Badge criterion', /Badge criterion/i],
-  ['Unlock badge for testing', /Unlock badge for testing/i]
+  ['Unlock badge for testing', /Unlock badge for testing/i],
+  ['banned model-mystery wording', /\bmagic(?:al|ally)?\b/i]
 ]
 
 function walk(dir) {

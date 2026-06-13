@@ -737,9 +737,9 @@ export const FULL_CHECKPOINT_BANK_V02712 = {
         ],
         "answer": "Its behavior was shaped toward instructions and safety boundaries, but that does not prove moral understanding.",
         "correctChoiceId": "v02710-alignment-q1-correct",
-        "explain": "Good distinction. Alignment shapes behavior; it is not magic morality.",
+        "explain": "Good distinction. Alignment shapes behavior; it is not built-in morality.",
         "feedback": {
-          "v02710-alignment-q1-correct": "Good distinction. Alignment shapes behavior; it is not magic morality.",
+          "v02710-alignment-q1-correct": "Good distinction. Alignment shapes behavior; it is not built-in morality.",
           "v02710-alignment-q1-conscious": "That gives the model too much mind. Refusal behavior can be shaped without human moral understanding.",
           "v02710-alignment-q1-truth": "Not quite. Alignment can shape behavior, but it does not guarantee factual truth.",
           "v02710-alignment-q1-no-model": "Close, but an aligned product can still use a learned model plus rules, filters, or policies."
@@ -768,9 +768,9 @@ export const FULL_CHECKPOINT_BANK_V02712 = {
         ],
         "answer": "Some alignment changes can be durable training changes, while other controls steer or filter the current run.",
         "correctChoiceId": "v02710-alignment-q2-correct",
-        "explain": "Insight strengthened. Alignment can happen through several layers, not one magic switch.",
+        "explain": "Insight strengthened. Alignment can happen through several layers, not one switch.",
         "feedback": {
-          "v02710-alignment-q2-correct": "Insight strengthened. Alignment can happen through several layers, not one magic switch.",
+          "v02710-alignment-q2-correct": "Insight strengthened. Alignment can happen through several layers, not one switch.",
           "v02710-alignment-q2-all-weights": "Not quite. Fine-tuning may change weights, but system prompts and filters can steer behavior at runtime.",
           "v02710-alignment-q2-only-prompt": "Close, but alignment can include training, policies, evaluation, and runtime controls beyond the user prompt.",
           "v02710-alignment-q2-sampling-only": "Sampling chooses a next token from probabilities. Alignment shapes or constrains behavior around that process."
@@ -1831,9 +1831,9 @@ export const FULL_CHECKPOINT_BANK_V02712 = {
         ],
         "answer": "They help useful signal carry forward while attention and MLP transformations repeat.",
         "correctChoiceId": "v02712-layers-q4-correct",
-        "explain": "Insight strengthened. The layer stack is a pattern of transformations, not one single operation.",
+        "explain": "Insight strengthened. The layer stack is a pattern of transformations, not one operation.",
         "feedback": {
-          "v02712-layers-q4-correct": "Insight strengthened. The layer stack is a pattern of transformations, not one single operation.",
+          "v02712-layers-q4-correct": "Insight strengthened. The layer stack is a pattern of transformations, not one operation.",
           "v02712-layers-q4-2-sampling": "Sampling happens after the layer stack produces next-token scores.",
           "v02712-layers-q4-3-rag": "Retrieval indexes are outside the transformer layer operations.",
           "v02712-layers-q4-4-training": "Training updates weights; ordinary layer flow does not."
@@ -2479,7 +2479,7 @@ export const FULL_CHECKPOINT_BANK_V02712 = {
         "feedback": {
           "v02712-context-window-q3-correct": "Insight strengthened. Retrieved text becomes input the model can attend to during inference.",
           "v02712-context-window-q3-2-fine-tuning": "Retrieval is not fine-tuning.",
-          "v02712-context-window-q3-3-web-search": "RAG uses a retrieval system; the model is not magically browsing all files.",
+          "v02712-context-window-q3-3-web-search": "RAG uses a retrieval system; the model is not automatically browsing all files.",
           "v02712-context-window-q3-4-softmax": "Softmax is probability conversion, not evidence storage."
         }
       },
@@ -2541,9 +2541,9 @@ export const FULL_CHECKPOINT_BANK_V02712 = {
         ],
         "answer": "Outside text was retrieved and placed into the current context.",
         "correctChoiceId": "v02712-rag-retrieval-q1-correct",
-        "explain": "Insight strengthened. RAG is retrieval plus context, not magical knowing.",
+        "explain": "Insight strengthened. RAG is retrieval plus context, not hidden knowing.",
         "feedback": {
-          "v02712-rag-retrieval-q1-correct": "Insight strengthened. RAG is retrieval plus context, not magical knowing.",
+          "v02712-rag-retrieval-q1-correct": "Insight strengthened. RAG is retrieval plus context, not hidden knowing.",
           "v02712-rag-retrieval-q1-2-fine-tuning": "That would require training or adaptation, not ordinary RAG.",
           "v02712-rag-retrieval-q1-3-consciousness": "Retrieval is a system process, not awareness.",
           "v02712-rag-retrieval-q1-4-truth-guarantee": "Retrieved text can help, but it can be poor or misused."
@@ -3191,7 +3191,7 @@ export const FULL_CHECKPOINT_BANK_V02712 = {
       },
       {
         "id": "v02712-multimodal-q2",
-        "question": "Which boundary keeps multimodal AI from sounding magical?",
+        "question": "Which boundary keeps multimodal AI from sounding automatic?",
         "choices": [
           {
             "choiceId": "v02712-multimodal-q2-correct",
@@ -3273,7 +3273,7 @@ export const FULL_CHECKPOINT_BANK_V02712 = {
           },
           {
             "choiceId": "v02712-perfect-storm-q1-4-consciousness",
-            "text": "The model woke up once it crossed a magic size."
+            "text": "The model woke up once it crossed a threshold size."
           }
         ],
         "answer": "Data, compute, storage, methods, labor, and incentives converged.",
@@ -3323,7 +3323,7 @@ export const FULL_CHECKPOINT_BANK_V02712 = {
         "choices": [
           {
             "choiceId": "v02712-perfect-storm-q3-correct",
-            "text": "LLMs appeared because of convergence, not one magic breakthrough."
+            "text": "LLMs appeared because of convergence, not one event."
           },
           {
             "choiceId": "v02712-perfect-storm-q3-2-consciousness",
@@ -3338,7 +3338,7 @@ export const FULL_CHECKPOINT_BANK_V02712 = {
             "text": "LLMs appeared because prompts trained themselves."
           }
         ],
-        "answer": "LLMs appeared because of convergence, not one magic breakthrough.",
+        "answer": "LLMs appeared because of convergence, not one event.",
         "correctChoiceId": "v02712-perfect-storm-q3-correct",
         "explain": "Insight strengthened. The model is less mysterious when the ingredients are visible.",
         "feedback": {
@@ -3666,7 +3666,7 @@ export const FULL_CHECKPOINT_BANK_V02712 = {
         "feedback": {
           "v02712-risk-myth-q2-correct": "Good practice. Tool permissions and data flows are concrete risks.",
           "v02712-risk-myth-q2-2-moral-agency": "Risk assessment should start with system behavior and governance.",
-          "v02712-risk-myth-q2-3-memory": "Retention depends on system design and policy, not magic memory.",
+          "v02712-risk-myth-q2-3-memory": "Retention depends on system design and policy, not automatic memory.",
           "v02712-risk-myth-q2-4-myth": "Practical risks can be immediate and ordinary."
         }
       },
@@ -3984,9 +3984,9 @@ export const FULL_CHECKPOINT_BANK_V02712 = {
         ],
         "answer": "Use retrieval, evaluation, and human review when the task needs evidence.",
         "correctChoiceId": "v02712-better-ai-choice-q1-correct",
-        "explain": "Insight strengthened. Better AI comes from design choices and review, not one magic fix.",
+        "explain": "Insight strengthened. Better AI comes from design choices and review, not one fix.",
         "feedback": {
-          "v02712-better-ai-choice-q1-correct": "Insight strengthened. Better AI comes from design choices and review, not one magic fix.",
+          "v02712-better-ai-choice-q1-correct": "Insight strengthened. Better AI comes from design choices and review, not one fix.",
           "v02712-better-ai-choice-q1-2-prompt": "A prompt can help, but evaluation and review still matter.",
           "v02712-better-ai-choice-q1-3-scale": "Scale does not replace governance.",
           "v02712-better-ai-choice-q1-4-rag": "Evidence-sensitive tasks often need grounded context."
@@ -4122,7 +4122,7 @@ export const FULL_CHECKPOINT_BANK_V02712 = {
       },
       {
         "id": "v02712-effective-prompting-literacy-q2",
-        "question": "Why is prompting not magic wording?",
+        "question": "Why is prompting not special wording?",
         "choices": [
           {
             "choiceId": "v02712-effective-prompting-literacy-q2-correct",
@@ -4143,9 +4143,9 @@ export const FULL_CHECKPOINT_BANK_V02712 = {
         ],
         "answer": "It works by shaping input context, constraints, and examples for a probabilistic model.",
         "correctChoiceId": "v02712-effective-prompting-literacy-q2-correct",
-        "explain": "Good boundary. Better prompts help the model use context; they do not cast spells.",
+        "explain": "Good boundary. Better prompts help the model use context; they do not bypass the model mechanics.",
         "feedback": {
-          "v02712-effective-prompting-literacy-q2-correct": "Good boundary. Better prompts help the model use context; they do not cast spells.",
+          "v02712-effective-prompting-literacy-q2-correct": "Good boundary. Better prompts help the model use context; they do not bypass the model mechanics.",
           "v02712-effective-prompting-literacy-q2-2-training": "Durable teaching requires training or adaptation.",
           "v02712-effective-prompting-literacy-q2-3-truth": "Truth still depends on evidence and review.",
           "v02712-effective-prompting-literacy-q2-4-consciousness": "Prompt responsiveness is not awareness."
@@ -4240,9 +4240,9 @@ export const FULL_CHECKPOINT_BANK_V02712 = {
         ],
         "answer": "Prompt tokens become IDs and embeddings, layers shape hidden states, logits become probabilities, sampling picks and appends tokens.",
         "correctChoiceId": "v02712-model-literate-synthesis-q1-correct",
-        "explain": "Insight strengthened. The synthesis follows the model path without turning it into magic.",
+        "explain": "Insight strengthened. The synthesis follows the model path without turning it into an unexplained shortcut.",
         "feedback": {
-          "v02712-model-literate-synthesis-q1-correct": "Insight strengthened. The synthesis follows the model path without turning it into magic.",
+          "v02712-model-literate-synthesis-q1-correct": "Insight strengthened. The synthesis follows the model path without turning it into an unexplained shortcut.",
           "v02712-model-literate-synthesis-q1-2-consciousness": "That skips the next-token mechanism and adds awareness.",
           "v02712-model-literate-synthesis-q1-3-training": "Prompting usually changes context, not durable weights.",
           "v02712-model-literate-synthesis-q1-4-grounding": "Those are different parts of a system and generation process."

@@ -1,11 +1,11 @@
 import { access, mkdir, readFile, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { VERSION, visualAidReadinessBriefs, visualAidTemplates } from './visual-aid-readiness-data-v0280.mjs'
+import { VERSION, visualAidReadinessBriefs, visualAidTemplates } from './visual-aid-readiness-data-v0282.mjs'
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const outDir = path.join(root, 'docs', 'journey', 'visual-aids')
-const screenshotDir = path.join(root, 'docs', 'journey', 'screenshots', 'v0-28-0')
+const screenshotDir = path.join(root, 'docs', 'journey', 'screenshots', 'v0-28-2')
 const sourcePath = path.join(root, 'src', 'components', 'VisualAids.tsx')
 const cssPath = path.join(root, 'src', 'styles', 'global.css')
 
@@ -49,7 +49,7 @@ async function readCatalogIds() {
 
 function renderConsistencyMarkdown(summary, rows) {
   const lines = [
-    '# Prompt Life Visual Aid Consistency Audit v0.28.0',
+    '# Prompt Life Visual Aid Consistency Audit v0.28.2',
     '',
     `Generated: ${new Date().toISOString()}`,
     '',
@@ -69,7 +69,7 @@ function renderConsistencyMarkdown(summary, rows) {
 
 function renderReadinessMarkdown(readiness) {
   const lines = [
-    '# Prompt Life Visual Aid Readiness Audit v0.28.0',
+    '# Prompt Life Visual Aid Readiness Audit v0.28.2',
     '',
     `Generated: ${new Date().toISOString()}`,
     '',
@@ -160,9 +160,9 @@ async function main() {
     ...consistencyRows.map((row) => consistencyCsvHeader.map((key) => csvEscape(row[key])).join(','))
   ].join('\n')
 
-  await writeFile(path.join(outDir, 'visual-aid-consistency-audit-v0-28-0.json'), `${JSON.stringify(consistencyPayload, null, 2)}\n`)
-  await writeFile(path.join(outDir, 'visual-aid-consistency-audit-v0-28-0.csv'), `${consistencyCsv}\n`)
-  await writeFile(path.join(outDir, 'visual-aid-consistency-audit-v0-28-0.md'), renderConsistencyMarkdown(summary, consistencyRows))
+  await writeFile(path.join(outDir, 'visual-aid-consistency-audit-v0-28-2.json'), `${JSON.stringify(consistencyPayload, null, 2)}\n`)
+  await writeFile(path.join(outDir, 'visual-aid-consistency-audit-v0-28-2.csv'), `${consistencyCsv}\n`)
+  await writeFile(path.join(outDir, 'visual-aid-consistency-audit-v0-28-2.md'), renderConsistencyMarkdown(summary, consistencyRows))
 
   const metadataTerms = ['Pattern:', 'Variant:', 'Markers:', 'Callouts:', 'Renderer:', 'Implementation:', 'visual aid id']
   const metadataLeaks = metadataTerms.filter((term) => source.includes(term))
@@ -182,8 +182,8 @@ async function main() {
   }
 
   const readinessIssues = [
-    ...missingFromConfig.map((id) => `current catalog visual aid has no v0.28.0 readiness brief: ${id}`),
-    ...missingFromSource.map((id) => `v0.28.0 readiness brief does not exist in current catalog: ${id}`),
+    ...missingFromConfig.map((id) => `current catalog visual aid has no v0.28.2 readiness brief: ${id}`),
+    ...missingFromSource.map((id) => `v0.28.2 readiness brief does not exist in current catalog: ${id}`),
     ...visualAidReadinessBriefs.filter((brief) => !templateNames.has(brief.selectedCanonicalTemplate)).map((brief) => `missing or unknown template: ${brief.currentVisualId}`),
     ...visualAidReadinessBriefs.filter((brief) => !brief.calloutsBelowVisual?.length).map((brief) => `missing callouts: ${brief.currentVisualId}`),
     ...visualAidReadinessBriefs.filter((brief) => !brief.altText).map((brief) => `missing alt text: ${brief.currentVisualId}`),
@@ -195,7 +195,7 @@ async function main() {
     ...deprecatedCurrentTitles.map((id) => `deprecated Attention Weave title remains for current visual: ${id}`),
     ...tinyCssMatches.map((size) => `visual-aid CSS font-size below 12px: ${size}px`),
     ...inlineTinyText.map((size) => `inline SVG font size below 12px: ${size}px`),
-    ...requiredScreenshots.filter((shot) => !shot.exists).map((shot) => `required v0.28.0 screenshot missing: ${shot.file}`)
+    ...requiredScreenshots.filter((shot) => !shot.exists).map((shot) => `required v0.28.2 screenshot missing: ${shot.file}`)
   ]
 
   const readiness = {
@@ -210,19 +210,19 @@ async function main() {
       'no exact mechanism visual is generated PNG only',
       'no P0/P1 visual remains after readiness pass',
       'no renderer/debug metadata labels in VisualAids.tsx',
-      'required v0.28.0 390px screenshots exist for all 39 visual aids'
+      'required v0.28.2 390px screenshots exist for all 39 visual aids'
     ],
     heuristicNotes: [
       'Internal label count is a curated estimate for explanatory labels. Repeated token examples are not counted as separate instructional labels.',
-      'Generated-image and exact-mechanism checks use the v0.28.0 readiness registry rather than computer vision.',
+      'Generated-image and exact-mechanism checks use the v0.28.2 readiness registry rather than computer vision.',
       'Screenshot checks validate artifact presence; visual quality still requires human review.'
     ],
     issues: readinessIssues,
     requiredScreenshots
   }
 
-  await writeFile(path.join(outDir, 'visual-aid-readiness-audit-v0-28-0.json'), `${JSON.stringify(readiness, null, 2)}\n`)
-  await writeFile(path.join(outDir, 'visual-aid-readiness-audit-v0-28-0.md'), renderReadinessMarkdown(readiness))
+  await writeFile(path.join(outDir, 'visual-aid-readiness-audit-v0-28-2.json'), `${JSON.stringify(readiness, null, 2)}\n`)
+  await writeFile(path.join(outDir, 'visual-aid-readiness-audit-v0-28-2.md'), renderReadinessMarkdown(readiness))
 
   if (summary.missingFromConfig.length || summary.missingFromSource.length || mismatches || readinessIssues.length) {
     console.error(JSON.stringify({ summary, readiness }, null, 2))

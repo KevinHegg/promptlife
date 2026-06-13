@@ -1,4 +1,4 @@
-# Prompt Life Visual Aid Style Guide v0.28.0
+# Prompt Life Visual Aid Style Guide v0.28.1
 
 Prompt Life visual aids should make model mechanics less mysterious without becoming dense posters. The core rule is simple: short labels live in the diagram; definitions, limits, and nuance live in accessible HTML callouts.
 
@@ -44,6 +44,19 @@ Generated PNGs must not contain tiny instructional text. Keep labels, captions, 
 ## Canonical Templates
 
 Use these six templates going forward. New visual ideas should first choose one of these patterns before inventing a custom layout.
+
+## v0.28.1 Hard Reset Rules
+
+- Every Journey visual must declare exactly one of the six canonical templates.
+- Put short labels inside diagrams; put explanations, limits, and nuance in HTML callouts.
+- Do not place paragraph text inside SVGs or generated images.
+- Keep in-diagram instructional labels to five or fewer unless the extra labels are repeated token examples.
+- Keep essential SVG text at 12px or larger, with 13px to 14px preferred.
+- Keep every SVG label to 18 characters or fewer when possible.
+- Use coded SVG/HTML for exact mechanisms, comparisons, probabilities, context trays, and taxonomies.
+- Use generated PNGs only for textless atmospheric concepts.
+- Check 320px and 390px before shipping; no clipped pills, no horizontal overflow, and no labels crossing connectors.
+- Avoid language that makes model behavior sound mysterious or supernatural; explain the mechanism or the boundary instead.
 
 ### 1. Atmospheric Scene
 

@@ -131,7 +131,7 @@ export const generatedVisualAssets: GeneratedVisualAsset[] = [
       { heading: 'Feedback and policies', body: 'Human feedback, evaluations, policies, and filters can shape behavior.' },
       { heading: 'No conscience', body: 'Alignment does not give the model moral understanding or a truth guarantee.' }
     ],
-    keyTakeaway: 'Alignment shapes behavior, but it is not magic morality.',
+    keyTakeaway: 'Alignment shapes behavior, but it is not built-in morality.',
     sourceNote
   }
 ]

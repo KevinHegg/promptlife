@@ -739,9 +739,9 @@ export const FULL_CHECKPOINT_BANK_V02711 = {
         ],
         "answer": "Its behavior was shaped toward instructions and safety boundaries, but that does not prove moral understanding.",
         "correctChoiceId": "v02710-alignment-q1-correct",
-        "explain": "Good distinction. Alignment shapes behavior; it is not magic morality.",
+        "explain": "Good distinction. Alignment shapes behavior; it is not built-in morality.",
         "feedback": {
-          "v02710-alignment-q1-correct": "Good distinction. Alignment shapes behavior; it is not magic morality.",
+          "v02710-alignment-q1-correct": "Good distinction. Alignment shapes behavior; it is not built-in morality.",
           "v02710-alignment-q1-conscious": "That gives the model too much mind. Refusal behavior can be shaped without human moral understanding.",
           "v02710-alignment-q1-truth": "Not quite. Alignment can shape behavior, but it does not guarantee factual truth.",
           "v02710-alignment-q1-no-model": "Close, but an aligned product can still use a learned model plus rules, filters, or policies."
@@ -770,9 +770,9 @@ export const FULL_CHECKPOINT_BANK_V02711 = {
         ],
         "answer": "Some alignment changes can be durable training changes, while other controls steer or filter the current run.",
         "correctChoiceId": "v02710-alignment-q2-correct",
-        "explain": "Insight strengthened. Alignment can happen through several layers, not one magic switch.",
+        "explain": "Insight strengthened. Alignment can happen through several layers, not one switch.",
         "feedback": {
-          "v02710-alignment-q2-correct": "Insight strengthened. Alignment can happen through several layers, not one magic switch.",
+          "v02710-alignment-q2-correct": "Insight strengthened. Alignment can happen through several layers, not one switch.",
           "v02710-alignment-q2-all-weights": "Not quite. Fine-tuning may change weights, but system prompts and filters can steer behavior at runtime.",
           "v02710-alignment-q2-only-prompt": "Close, but alignment can include training, policies, evaluation, and runtime controls beyond the user prompt.",
           "v02710-alignment-q2-sampling-only": "Sampling chooses a next token from probabilities. Alignment shapes or constrains behavior around that process."
@@ -3267,7 +3267,7 @@ export const FULL_CHECKPOINT_BANK_V02711 = {
           },
           {
             "choiceId": "v02711-perfect-storm-q1-2-compute",
-            "text": "One magic breakthrough happened"
+            "text": "One event happened"
           },
           {
             "choiceId": "v02711-perfect-storm-q1-3-llm",
@@ -3280,9 +3280,9 @@ export const FULL_CHECKPOINT_BANK_V02711 = {
         ],
         "answer": "Data, compute, methods, labor, and incentives converged",
         "correctChoiceId": "v02711-perfect-storm-q1-correct",
-        "explain": "Insight unlocked: LLMs came from a convergence, not a single magic moment.",
+        "explain": "Insight unlocked: LLMs came from a convergence, not a single event.",
         "feedback": {
-          "v02711-perfect-storm-q1-correct": "Insight unlocked: LLMs came from a convergence, not a single magic moment.",
+          "v02711-perfect-storm-q1-correct": "Insight unlocked: LLMs came from a convergence, not a single event.",
           "v02711-perfect-storm-q1-2-compute": "Not quite. The transformer mattered, but the larger storm included data, compute, methods, labor, and incentives.",
           "v02711-perfect-storm-q1-3-llm": "Not quite. LLMs are trained systems, not conscious softmax machines.",
           "v02711-perfect-storm-q1-4-training": "Not quite. Prompting shapes current context; it does not explain why LLMs became possible."
@@ -3325,7 +3325,7 @@ export const FULL_CHECKPOINT_BANK_V02711 = {
         "choices": [
           {
             "choiceId": "v02711-perfect-storm-q3-correct",
-            "text": "It corrects the misconception: LLMs appeared because of one magic breakthrough."
+            "text": "It corrects the misconception: LLMs appeared because of one event."
           },
           {
             "choiceId": "v02711-perfect-storm-q3-2-energy-use",
@@ -3340,7 +3340,7 @@ export const FULL_CHECKPOINT_BANK_V02711 = {
             "text": "It is mainly about Model Checkpoint, not the mechanism named in The Perfect Storm."
           }
         ],
-        "answer": "It corrects the misconception: LLMs appeared because of one magic breakthrough.",
+        "answer": "It corrects the misconception: LLMs appeared because of one event.",
         "correctChoiceId": "v02711-perfect-storm-q3-correct",
         "explain": "Good distinction. The Perfect Storm is clearer when that misconception is separated from the mechanism.",
         "feedback": {
@@ -4159,7 +4159,7 @@ export const FULL_CHECKPOINT_BANK_V02711 = {
         "choices": [
           {
             "choiceId": "v02711-effective-prompting-literacy-q3-correct",
-            "text": "It corrects the misconception: Prompting is magic wording or permanent teaching."
+            "text": "It corrects the misconception: Prompting is special wording or permanent teaching."
           },
           {
             "choiceId": "v02711-effective-prompting-literacy-q3-2-memory",
@@ -4174,7 +4174,7 @@ export const FULL_CHECKPOINT_BANK_V02711 = {
             "text": "It is input text that existed before generation began."
           }
         ],
-        "answer": "It corrects the misconception: Prompting is magic wording or permanent teaching.",
+        "answer": "It corrects the misconception: Prompting is special wording or permanent teaching.",
         "correctChoiceId": "v02711-effective-prompting-literacy-q3-correct",
         "explain": "Good distinction. Effective Prompting from Model Literacy is clearer when that misconception is separated from the mechanism.",
         "feedback": {

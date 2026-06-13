@@ -1,0 +1,1206 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Prompt Life v0.28.1 All Visual Aids Review</title>
+  <style>
+    :root { color-scheme: light; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #101a52; background: #f7fbff; }
+    body { margin: 0; padding: 28px; }
+    main { max-width: 1120px; margin: 0 auto; }
+    h1, h2, h3 { color: #101783; line-height: 1.08; }
+    h1 { font-size: 2.15rem; margin-bottom: 6px; }
+    p, li, dd, dt { line-height: 1.48; }
+    .lede { font-size: 1.04rem; color: #33446f; }
+    .metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 18px 0 28px; }
+    .metrics div, .brief-card, figure, table, .panel { background: #fff; border: 1px solid #d9e3f7; border-radius: 14px; box-shadow: 0 10px 28px rgba(20,30,88,.06); }
+    .metrics div { padding: 14px; }
+    .metrics strong { display: block; font-size: 1.75rem; color: #087f8c; }
+    table { width: 100%; border-collapse: collapse; overflow: hidden; }
+    th, td { border: 1px solid #d9e3f7; padding: 9px; text-align: left; vertical-align: top; font-size: .84rem; }
+    th { background: #eaf5ff; }
+    .brief-grid { display: grid; gap: 16px; }
+    .brief-card { padding: 16px; break-inside: avoid; }
+    .brief-head { display: grid; gap: 4px; margin-bottom: 12px; }
+    .brief-head span { color: #009a9a; font-weight: 900; text-transform: uppercase; font-size: .78rem; }
+    .brief-head strong { font-size: 1.2rem; color: #101783; }
+    .brief-head em { color: #455578; font-style: normal; font-weight: 800; }
+    figure { margin: 0 0 12px; padding: 12px; break-inside: avoid; }
+    figure img { width: 100%; display: block; border-radius: 10px; border: 1px solid #edf1fb; }
+    figcaption { margin-top: 8px; font-size: .82rem; font-weight: 800; color: #28385f; }
+    .shot-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; align-items: start; }
+    .issue { background: #effafa; border-left: 4px solid #00a7a7; padding: 10px 12px; border-radius: 10px; font-weight: 800; color: #174653; }
+    dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin: 0; }
+    dl div { background: #f7fbff; border: 1px solid #e1eaf8; border-radius: 10px; padding: 8px; }
+    dt { color: #009a9a; font-size: .72rem; font-weight: 900; text-transform: uppercase; }
+    dd { margin: 3px 0 0; font-size: .86rem; }
+    .shots { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+    code { background: #eef4ff; padding: 2px 5px; border-radius: 5px; }
+    @media print {
+      body { padding: 16px; }
+      .metrics { grid-template-columns: repeat(4, 1fr); }
+      .shots { grid-template-columns: repeat(3, 1fr); }
+      .shot-pair { grid-template-columns: 1fr 1fr; }
+      table { font-size: .72rem; }
+      dl { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Prompt Life v0.28.1 All Visual Aids Review</h1>
+    <p class="lede">Generated 2026-06-13T18:48:56.794Z for Prompt Life v0.28.1.</p>
+    
+      <p class="lede">This packet lets reviewers inspect all 39 Journey visual aids without clicking through the app. It includes each card's 390px screenshot, 320px overflow check where captured, template, concept, misconception, caption/callouts, score, priority, and tester note.</p>
+      
+    <section class="metrics">
+      <div><strong>39</strong><span>visual aids scored</span></div>
+      <div><strong>18</strong><span>P0/P1 before</span></div>
+      <div><strong>0</strong><span>P0/P1 after</span></div>
+      <div><strong>6</strong><span>templates used</span></div>
+    </section>
+  
+      <h2>Six Canonical Templates</h2>
+      <table><thead><tr><th>Template</th><th>Purpose</th><th>Allowed</th><th>Not allowed</th></tr></thead><tbody>
+    <tr>
+      <td>Atmospheric Scene</td>
+      <td>Big-picture, humane, social, ethical, or metaphorical concepts.</td>
+      <td>Image 2 atmospheric PNG; textless image; HTML caption/callouts outside the image</td>
+      <td>exact mechanics; required arrows; axes; probabilities; small labels</td>
+    </tr>
+  
+    <tr>
+      <td>Mechanism Flow</td>
+      <td>A process unfolding over steps.</td>
+      <td>coded SVG/HTML; 3-5 numbered steps; clear arrows or rails; one action per step</td>
+      <td>dense poster layouts; unclear marker/callout mapping</td>
+    </tr>
+  
+    <tr>
+      <td>Comparison Board</td>
+      <td>A boundary between nearby concepts.</td>
+      <td>two or three columns; short labels; HTML callouts for nuance</td>
+      <td>paragraph text inside the diagram; decorative comparisons without a boundary</td>
+    </tr>
+  
+    <tr>
+      <td>Context Tray / Stack</td>
+      <td>What is visible now, what falls out, and what retrieval adds.</td>
+      <td>cards/chips entering a bounded tray; temporary context boundary; optional falls-out area</td>
+      <td>tiny text; permanent-memory implications</td>
+    </tr>
+  
+    <tr>
+      <td>Probability Bars</td>
+      <td>Scores, probabilities, sampling, and uncertainty.</td>
+      <td>consistent token candidates; readable bars; likely-is-not-proof caption</td>
+      <td>truth-meter language; tiny probability labels</td>
+    </tr>
+  
+    <tr>
+      <td>Taxonomy Map</td>
+      <td>Relationships among families, layers, risks, benefits, or actors.</td>
+      <td>grouped nodes; few lines; short labels</td>
+      <td>dense webs; everything-at-once dashboards</td>
+    </tr>
+  </tbody></table>
+      <h2>Top 10 Visuals To Watch</h2>
+      <ol><li><strong>Feature Vector</strong> (Vectors, 27/35): Distributed side may feel abstract; tester feedback should guide simplification.</li><li><strong>Tensor Block</strong> (Tensors, 27/35): Axis labels must stay outside crowded cells.</li><li><strong>Overfitting vs Generalization</strong> (Overfitting and Generalization, 28/35): Validation markers must remain readable at 320px.</li><li><strong>Text to Tokens</strong> (Tokenization, 30/35): Long token rows must wrap without horizontal overflow.</li><li><strong>MLP Feature Workshop</strong> (MLP, 30/35): Avoid adding feature names to the bars.</li><li><strong>Transformer Stack</strong> (Layers, 30/35): Keep block text short; no layer-by-layer story.</li><li><strong>Hidden State Flow</strong> (Hidden States, 30/35): Keep embedding and hidden-state labels visibly distinct.</li><li><strong>Alignment Landscape</strong> (Alignment, 31/35): Avoid morality imagery that makes the model seem conscious.</li><li><strong>Borrowed Flames</strong> (Collective Intelligence, Extracted, 31/35): Later atmospheric image could improve warmth, but current coded flow is readable.</li><li><strong>Cost Ledger</strong> (Costs We Must Count, 31/35): Later atmospheric image could improve tone; no numbers should be added.</li></ol>
+      <h2>All Journey Visual Aids</h2>
+      <section class="brief-grid">
+    <article class="brief-card" id="before-morning-llm-cloud">
+      <div class="brief-head">
+        <span>Stage 1: Before Morning</span>
+        <strong>1. What Is an LLM?</strong>
+        <em>Atmospheric Scene · 34/35 · P3 keep · keep</em>
+      </div>
+      <div class="shot-pair">
+        <figure>
+          <img src="../screenshots/v0-28-1/before-morning-llm-cloud-390.png" alt="390px screenshot of Prompt to Prediction" />
+          <figcaption>390px: Prompt to Prediction</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/v0-28-1/before-morning-llm-cloud-320.png" alt="320px screenshot of Prompt to Prediction" />
+          <figcaption>320px overflow spot-check</figcaption>
+        </figure>
+      </div>
+      <p class="issue">Atmospheric hero supports the opening idea; exact mechanics are carried by HTML callouts.</p>
+      <dl>
+        <div><dt>Learning objective</dt><dd>Recognize an LLM as a learned next-token prediction system rather than a mind, database, or rulebook.</dd></div>
+        <div><dt>One concept</dt><dd>Context enters, learned weights shape probabilities, and one response token is generated.</dd></div>
+        <div><dt>Misconception corrected</dt><dd>An LLM is a conscious reader or live database.</dd></div>
+        <div><dt>Caption/callouts</dt><dd>Current context enters the model. Learned weights shape next-token probabilities. One token is generated and appended. Ordinary inference does not rewrite weights.</dd></div>
+        <div><dt>Allowed in-visual labels</dt><dd>None; keep text in HTML.</dd></div>
+        <div><dt>Alt text</dt><dd>A prompt entering a glowing folded-paper feature cloud before one response token emerges.</dd></div>
+        <div><dt>Tester note</dt><dd>Ask whether the opening visual reduces mystery without implying hidden powers.</dd></div>
+      </dl>
+    </article>
+  
+    <article class="brief-card" id="ai-family-tree">
+      <div class="brief-head">
+        <span>Stage 1: Before Morning</span>
+        <strong>2. Where LLMs Fit</strong>
+        <em>Taxonomy Map · 34/35 · P3 keep · keep</em>
+      </div>
+      <div class="shot-pair">
+        <figure>
+          <img src="../screenshots/v0-28-1/ai-family-tree-390.png" alt="390px screenshot of AI Family Tree" />
+          <figcaption>390px: AI Family Tree</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/v0-28-1/ai-family-tree-320.png" alt="320px screenshot of AI Family Tree" />
+          <figcaption>320px overflow spot-check</figcaption>
+        </figure>
+      </div>
+      <p class="issue">Readable taxonomy; keep definitions below rather than adding dense labels.</p>
+      <dl>
+        <div><dt>Learning objective</dt><dd>Place LLMs inside AI, machine learning, deep learning, and generative AI without treating those terms as synonyms.</dd></div>
+        <div><dt>One concept</dt><dd>LLMs are one branch inside a larger AI family.</dd></div>
+        <div><dt>Misconception corrected</dt><dd>All AI is an LLM, or all generative AI works like ChatGPT.</dd></div>
+        <div><dt>Caption/callouts</dt><dd>AI is the broad field. Machine learning learns patterns from data. Generative AI creates media. LLMs are a language/code branch.</dd></div>
+        <div><dt>Allowed in-visual labels</dt><dd>AI, Machine learning, Deep learning, Generative AI, LLMs</dd></div>
+        <div><dt>Alt text</dt><dd>A compact AI family tree showing LLMs as one branch of generative AI.</dd></div>
+        <div><dt>Tester note</dt><dd>Ask whether the map prevents using AI, ML, generative AI, and LLM interchangeably.</dd></div>
+      </dl>
+    </article>
+  
+    <article class="brief-card" id="traditions">
+      <div class="brief-head">
+        <span>Stage 1: Before Morning</span>
+        <strong>3. Rationalists vs Empiricists</strong>
+        <em>Comparison Board · 33/35 · P3 keep · keep</em>
+      </div>
+      <div class="shot-pair">
+        <figure>
+          <img src="../screenshots/v0-28-1/traditions-390.png" alt="390px screenshot of Rules and Learned Patterns" />
+          <figcaption>390px: Rules and Learned Patterns</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/v0-28-1/traditions-320.png" alt="320px screenshot of Rules and Learned Patterns" />
+          <figcaption>320px overflow spot-check</figcaption>
+        </figure>
+      </div>
+      <p class="issue">Comparison is clear; loss is supported by glossary and callout.</p>
+      <dl>
+        <div><dt>Learning objective</dt><dd>Compare rules-first systems with learned-pattern systems and hybrids.</dd></div>
+        <div><dt>One concept</dt><dd>Explicit rules and learned examples are different traditions that modern systems may combine.</dd></div>
+        <div><dt>Misconception corrected</dt><dd>Deep learning is just a giant hand-written rulebook.</dd></div>
+        <div><dt>Caption/callouts</dt><dd>Rules use explicit if/then logic. Learned systems use examples, loss, and weights. Modern tools often combine methods.</dd></div>
+        <div><dt>Allowed in-visual labels</dt><dd>Rules, Examples, Loss, Weights, Hybrid</dd></div>
+        <div><dt>Alt text</dt><dd>Two panels compare rule-based AI with learned-pattern systems and a hybrid bridge.</dd></div>
+        <div><dt>Tester note</dt><dd>Watch whether learners understand loss as a training signal.</dd></div>
+      </dl>
+    </article>
+  
+    <article class="brief-card" id="training-loop">
+      <div class="brief-head">
+        <span>Stage 1: Before Morning</span>
+        <strong>4. Training</strong>
+        <em>Mechanism Flow · 34/35 · P3 keep · keep</em>
+      </div>
+      <div class="shot-pair">
+        <figure>
+          <img src="../screenshots/v0-28-1/training-loop-390.png" alt="390px screenshot of Training Loop" />
+          <figcaption>390px: Training Loop</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/v0-28-1/training-loop-320.png" alt="320px screenshot of Training Loop" />
+          <figcaption>320px overflow spot-check</figcaption>
+        </figure>
+      </div>
+      <p class="issue">The durable weight-update step is visible and numbered.</p>
+      <dl>
+        <div><dt>Learning objective</dt><dd>Trace training as prediction, loss, and durable weight updates.</dd></div>
+        <div><dt>One concept</dt><dd>Training changes weights through repeated prediction-error updates.</dd></div>
+        <div><dt>Misconception corrected</dt><dd>A normal prompt trains the model permanently.</dd></div>
+        <div><dt>Caption/callouts</dt><dd>Predict a target. Compare with target. Loss measures error. Weight update is durable. Repeat many times.</dd></div>
+        <div><dt>Allowed in-visual labels</dt><dd>Predict, Compare, Loss, Update weights, Repeat</dd></div>
+        <div><dt>Alt text</dt><dd>A five-step training loop with weight update highlighted as durable change.</dd></div>
+        <div><dt>Tester note</dt><dd>Ask whether update weights is the clearly durable step.</dd></div>
+      </dl>
+    </article>
+  
+    <article class="brief-card" id="before-morning-pretraining-landscape">
+      <div class="brief-head">
+        <span>Stage 1: Before Morning</span>
+        <strong>5. Pretraining</strong>
+        <em>Atmospheric Scene · 32/35 · P3 keep · keep</em>
+      </div>
+      <div class="shot-pair">
+        <figure>
+          <img src="../screenshots/v0-28-1/before-morning-pretraining-landscape-390.png" alt="390px screenshot of Broad Pretraining" />
+          <figcaption>390px: Broad Pretraining</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/v0-28-1/before-morning-pretraining-landscape-320.png" alt="320px screenshot of Broad Pretraining" />
+          <figcaption>320px overflow spot-check</figcaption>
+        </figure>
+      </div>
+      <p class="issue">Atmospheric scale works; exact training details remain in callouts.</p>
+      <dl>
+        <div><dt>Learning objective</dt><dd>Explain pretraining as broad weight-shaping from many examples, not perfect source recall.</dd></div>
+        <div><dt>One concept</dt><dd>Many examples shape durable weights into broad reusable patterns.</dd></div>
+        <div><dt>Misconception corrected</dt><dd>Pretraining stores a perfect copy of sources.</dd></div>
+        <div><dt>Caption/callouts</dt><dd>Many examples flow through training. Repeated updates shape weights. Patterns become reusable later. Pretraining is not perfect memory.</dd></div>
+        <div><dt>Allowed in-visual labels</dt><dd>None; keep text in HTML.</dd></div>
+        <div><dt>Alt text</dt><dd>A broad folded-paper landscape suggesting many training examples shaping a model before use.</dd></div>
+        <div><dt>Tester note</dt><dd>Ask whether the visual suggests scale without memorization.</dd></div>
+      </dl>
+    </article>
+  
+    <article class="brief-card" id="overfitting-generalization">
+      <div class="brief-head">
+        <span>Stage 1: Before Morning</span>
+        <strong>6. Overfitting and Generalization</strong>
+        <em>Comparison Board · 28/35 · P2 acceptable but improvable · temporary</em>
+      </div>
+      <div class="shot-pair">
+        <figure>
+          <img src="../screenshots/v0-28-1/overfitting-generalization-390.png" alt="390px screenshot of Overfitting vs Generalization" />
+          <figcaption>390px: Overfitting vs Generalization</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/v0-28-1/overfitting-generalization-320.png" alt="320px screenshot of Overfitting vs Generalization" />
+          <figcaption>320px overflow spot-check</figcaption>
+        </figure>
+      </div>
+      <p class="issue">Chart is testable but should be watched for label readability and validation-example clarity.</p>
+      <dl>
+        <div><dt>Learning objective</dt><dd>Distinguish memorizing training examples from learning patterns that transfer to set-aside validation examples.</dd></div>
+        <div><dt>One concept</dt><dd>A smoother pattern can transfer better than a curve that hugs old training dots.</dd></div>
+        <div><dt>Misconception corrected</dt><dd>Doing well on training examples proves generalization.</dd></div>
+        <div><dt>Caption/callouts</dt><dd>Training dots were fit. Validation examples were held out. Overfit curve hugs old dots. Generalizing curve reaches new examples better.</dd></div>
+        <div><dt>Allowed in-visual labels</dt><dd>Training, Validation, Overfit, Generalizes</dd></div>
+        <div><dt>Alt text</dt><dd>A plot comparing a jagged overfit curve with a smoother generalizing curve and set-aside validation examples.</dd></div>
+        <div><dt>Tester note</dt><dd>Ask whether set-aside validation examples are clear.</dd></div>
+      </dl>
+    </article>
+  
+    <article class="brief-card" id="before-morning-finetuning-path">
+      <div class="brief-head">
+        <span>Stage 1: Before Morning</span>
+        <strong>7. Fine-Tuning</strong>
+        <em>Comparison Board · 32/35 · P3 keep · fixed</em>
+      </div>
+      <div class="shot-pair">
+        <figure>
+          <img src="../screenshots/v0-28-1/before-morning-finetuning-path-390.png" alt="390px screenshot of Fine-Tuning Path" />
+          <figcaption>390px: Fine-Tuning Path</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/v0-28-1/before-morning-finetuning-path-320.png" alt="320px screenshot of Fine-Tuning Path" />
+          <figcaption>320px overflow spot-check</figcaption>
+        </figure>
+      </div>
+      <p class="issue">Rebuilt from generated metaphor into a coded comparison board separating durable adaptation from current-run steering.</p>
+      <dl>
+        <div><dt>Learning objective</dt><dd>Separate durable fine-tuning or adapters from prompt, RAG, and sampling behavior during one run.</dd></div>
+        <div><dt>One concept</dt><dd>Fine-tuning can shape future behavior; prompt/RAG/sampling steer the current run.</dd></div>
+        <div><dt>Misconception corrected</dt><dd>Prompting once is the same as fine-tuning.</dd></div>
+        <div><dt>Caption/callouts</dt><dd>Fine-tuning can durably adapt future behavior. Prompting steers this run. RAG adds temporary context. Sampling still happens during inference.</dd></div>
+        <div><dt>Allowed in-visual labels</dt><dd>Fine-tune, Prompt, RAG, Sampling</dd></div>
+        <div><dt>Alt text</dt><dd>A four-column comparison board separates fine-tuning from prompt steering, RAG context, and sampling.</dd></div>
+        <div><dt>Tester note</dt><dd>Ask whether durable/current-run boundary is clear after five seconds.</dd></div>
+      </dl>
+    </article>
+  
+    <article class="brief-card" id="before-morning-alignment-garden">
+      <div class="brief-head">
+        <span>Stage 1: Before Morning</span>
+        <strong>8. Alignment</strong>
+        <em>Atmospheric Scene · 31/35 · P3 keep · keep</em>
+      </div>
+      <div class="shot-pair">
+        <figure>
+          <img src="../screenshots/v0-28-1/before-morning-alignment-garden-390.png" alt="390px screenshot of Alignment Landscape" />
+          <figcaption>390px: Alignment Landscape</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/v0-28-1/before-morning-alignment-garden-320.png" alt="320px screenshot of Alignment Landscape" />
+          <figcaption>320px overflow spot-check</figcaption>
+        </figure>
+      </div>
+      <p class="issue">Textless metaphor is suitable; conscience boundary is in callouts.</p>
+      <dl>
+        <div><dt>Learning objective</dt><dd>Explain alignment as behavior shaping, feedback, policy, and guardrails, not conscience.</dd></div>
+        <div><dt>One concept</dt><dd>Alignment changes behavior patterns or system controls without giving moral understanding.</dd></div>
+        <div><dt>Misconception corrected</dt><dd>Alignment gives the model a conscience.</dd></div>
+        <div><dt>Caption/callouts</dt><dd>Preferred behavior can be encouraged. Guardrails and policies shape outputs. Feedback can guide training or evaluation. The model does not gain conscience.</dd></div>
+        <div><dt>Allowed in-visual labels</dt><dd>None; keep text in HTML.</dd></div>
+        <div><dt>Alt text</dt><dd>A folded garden landscape representing behavior shaping and safer paths without text.</dd></div>
+        <div><dt>Tester note</dt><dd>Ask whether the visual feels like behavior shaping rather than moral awakening.</dd></div>
+      </dl>
+    </article>
+  
+    <article class="brief-card" id="inference-pass">
+      <div class="brief-head">
+        <span>Stage 2: Morning Commute</span>
+        <strong>9. Inference</strong>
+        <em>Mechanism Flow · 33/35 · P3 keep · keep</em>
+      </div>
+      <div class="shot-pair">
+        <figure>
+          <img src="../screenshots/v0-28-1/inference-pass-390.png" alt="390px screenshot of Forward Pass" />
+          <figcaption>390px: Forward Pass</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/v0-28-1/inference-pass-320.png" alt="320px screenshot of Forward Pass" />
+          <figcaption>320px overflow spot-check</figcaption>
+        </figure>
+      </div>
+      <p class="issue">Fixed weights and temporary activations are visually separated.</p>
+      <dl>
+        <div><dt>Learning objective</dt><dd>Trace inference as a forward pass using fixed weights and temporary internal states.</dd></div>
+        <div><dt>One concept</dt><dd>Inference uses weights but normally does not update them.</dd></div>
+        <div><dt>Misconception corrected</dt><dd>Every response permanently teaches the model.</dd></div>
+        <div><dt>Caption/callouts</dt><dd>Current context enters. Weights are used, not normally updated. Temporary activations form. One next token is selected.</dd></div>
+        <div><dt>Allowed in-visual labels</dt><dd>Context, Fixed weights, Temporary activations, Next token</dd></div>
+        <div><dt>Alt text</dt><dd>Current context flows through fixed weights and temporary activations toward next-token scores and a token.</dd></div>
+        <div><dt>Tester note</dt><dd>Ask whether fixed versus temporary is visible.</dd></div>
+      </dl>
+    </article>
+  
+    <article class="brief-card" id="prompt-response">
+      <div class="brief-head">
+        <span>Stage 2: Morning Commute</span>
+        <strong>10. Prompt vs Response</strong>
+        <em>Mechanism Flow · 33/35 · P3 keep · fixed</em>
+      </div>
+      <div class="shot-pair">
+        <figure>
+          <img src="../screenshots/v0-28-1/prompt-response-390.png" alt="390px screenshot of Prompt vs Response" />
+          <figcaption>390px: Prompt vs Response</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/v0-28-1/prompt-response-320.png" alt="320px screenshot of Prompt vs Response" />
+          <figcaption>320px overflow spot-check</figcaption>
+        </figure>
+      </div>
+      <p class="issue">Recent stacked layout is readable and testable.</p>
+      <dl>
+        <div><dt>Learning objective</dt><dd>Separate given prompt tokens from generated response tokens and the updated context for the next run.</dd></div>
+        <div><dt>One concept</dt><dd>Prompt is provided; response tokens are generated and appended.</dd></div>
+        <div><dt>Misconception corrected</dt><dd>The model writes the whole answer at once.</dd></div>
+        <div><dt>Caption/callouts</dt><dd>The prompt is already provided. Response-so-far was generated. The next token is appended. Next run sees updated context.</dd></div>
+        <div><dt>Allowed in-visual labels</dt><dd>Given prompt, Response so far, Next token, Updated context</dd></div>
+        <div><dt>Alt text</dt><dd>Four stacked panels show prompt, response so far, next token, and updated context.</dd></div>
+        <div><dt>Tester note</dt><dd>Ask whether the fourth updated-context row is clear.</dd></div>
+      </dl>
+    </article>
+  
+    <article class="brief-card" id="tokenization">
+      <div class="brief-head">
+        <span>Stage 2: Morning Commute</span>
+        <strong>11. Tokenization</strong>
+        <em>Mechanism Flow · 30/35 · P2 acceptable but improvable · fixed</em>
+      </div>
+      <div class="shot-pair">
+        <figure>
+          <img src="../screenshots/v0-28-1/tokenization-390.png" alt="390px screenshot of Text to Tokens" />
+          <figcaption>390px: Text to Tokens</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/v0-28-1/tokenization-320.png" alt="320px screenshot of Text to Tokens" />
+          <figcaption>320px overflow spot-check</figcaption>
+        </figure>
+      </div>
+      <p class="issue">HTML token rows make uneven chunks readable after prior repair.</p>
+      <dl>
+        <div><dt>Learning objective</dt><dd>Show that tokens can be words, pieces, punctuation, or other chunks.</dd></div>
+        <div><dt>One concept</dt><dd>Text becomes uneven model-readable chunks.</dd></div>
+        <div><dt>Misconception corrected</dt><dd>Every token is exactly one word.</dd></div>
+        <div><dt>Caption/callouts</dt><dd>Simplified split shows readable chunks. Real tokenizers may split words. Punctuation can be its own token.</dd></div>
+        <div><dt>Allowed in-visual labels</dt><dd>Source text, Token stream, Uneven examples</dd></div>
+        <div><dt>Alt text</dt><dd>A sentence becomes token chips, then uneven examples split a word and punctuation.</dd></div>
+        <div><dt>Tester note</dt><dd>Ask whether floor plus punctuation is understandable.</dd></div>
+      </dl>
+    </article>
+  
+    <article class="brief-card" id="token-ids">
+      <div class="brief-head">
+        <span>Stage 2: Morning Commute</span>
+        <strong>12. Token IDs</strong>
+        <em>Mechanism Flow · 32/35 · P3 keep · keep</em>
+      </div>
+      <div class="shot-pair">
+        <figure>
+          <img src="../screenshots/v0-28-1/token-ids-390.png" alt="390px screenshot of Token IDs" />
+          <figcaption>390px: Token IDs</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/v0-28-1/token-ids-320.png" alt="320px screenshot of Token IDs" />
+          <figcaption>320px overflow spot-check</figcaption>
+        </figure>
+      </div>
+      <p class="issue">Lookup chain is direct and marker/callout mapping passes.</p>
+      <dl>
+        <div><dt>Learning objective</dt><dd>Separate token text, numeric token ID, and embedding-table lookup row.</dd></div>
+        <div><dt>One concept</dt><dd>Token IDs are lookup keys, not meaning.</dd></div>
+        <div><dt>Misconception corrected</dt><dd>The number itself contains the meaning.</dd></div>
+        <div><dt>Caption/callouts</dt><dd>Tokens are text chunks. IDs are lookup numbers. IDs select rows. The number is not meaning.</dd></div>
+        <div><dt>Allowed in-visual labels</dt><dd>Token, ID, Table row, Lookup key</dd></div>
+        <div><dt>Alt text</dt><dd>Token cards connect to numeric ID cards and then to embedding table rows.</dd></div>
+        <div><dt>Tester note</dt><dd>Ask whether ID versus meaning is clear.</dd></div>
+      </dl>
+    </article>
+  
+    <article class="brief-card" id="embeddings">
+      <div class="brief-head">
+        <span>Stage 2: Morning Commute</span>
+        <strong>13. Embeddings</strong>
+        <em>Mechanism Flow · 32/35 · P3 keep · keep</em>
+      </div>
+      <div class="shot-pair">
+        <figure>
+          <img src="../screenshots/v0-28-1/embeddings-390.png" alt="390px screenshot of Embedding Lookup" />
+          <figcaption>390px: Embedding Lookup</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/v0-28-1/embeddings-320.png" alt="320px screenshot of Embedding Lookup" />
+          <figcaption>320px overflow spot-check</figcaption>
+        </figure>
+      </div>
+      <p class="issue">Durable table and temporary retrieval boundary is visible.</p>
+      <dl>
+        <div><dt>Learning objective</dt><dd>Explain embedding as a token’s learned starting vector retrieved from a durable table.</dd></div>
+        <div><dt>One concept</dt><dd>A token ID retrieves a learned starting vector.</dd></div>
+        <div><dt>Misconception corrected</dt><dd>Embedding means a dictionary definition or a hidden memory.</dd></div>
+        <div><dt>Caption/callouts</dt><dd>The table was learned during training. The current run retrieves a row. That row is a starting vector. Hidden states come later.</dd></div>
+        <div><dt>Allowed in-visual labels</dt><dd>ID, Durable table, Row, Hidden later</dd></div>
+        <div><dt>Alt text</dt><dd>A token ID points into a durable table and retrieves a temporary starting vector.</dd></div>
+        <div><dt>Tester note</dt><dd>Ask whether durable table versus temporary vector is clear.</dd></div>
+      </dl>
+    </article>
+  
+    <article class="brief-card" id="vectors">
+      <div class="brief-head">
+        <span>Stage 2: Morning Commute</span>
+        <strong>14. Vectors</strong>
+        <em>Comparison Board · 27/35 · P2 acceptable but improvable · temporary</em>
+      </div>
+      <div class="shot-pair">
+        <figure>
+          <img src="../screenshots/v0-28-1/vectors-390.png" alt="390px screenshot of Feature Vector" />
+          <figcaption>390px: Feature Vector</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/v0-28-1/vectors-320.png" alt="320px screenshot of Feature Vector" />
+          <figcaption>320px overflow spot-check</figcaption>
+        </figure>
+      </div>
+      <p class="issue">Teaching sliders are useful; distributed features may still look abstract and should be watched.</p>
+      <dl>
+        <div><dt>Learning objective</dt><dd>Explain vectors as lists of numbers with distributed features rather than neat English meanings per dimension.</dd></div>
+        <div><dt>One concept</dt><dd>Many fuzzy numerical features vary at once.</dd></div>
+        <div><dt>Misconception corrected</dt><dd>Each vector dimension has a simple human label.</dd></div>
+        <div><dt>Caption/callouts</dt><dd>Teaching labels are simplified. Real features are distributed. Vectors support fuzzy computation.</dd></div>
+        <div><dt>Allowed in-visual labels</dt><dd>Teaching sliders, Distributed, Unlabeled</dd></div>
+        <div><dt>Alt text</dt><dd>Labeled teaching sliders are contrasted with unlabeled distributed numerical bars.</dd></div>
+        <div><dt>Tester note</dt><dd>Ask whether the distributed side helps or just looks decorative.</dd></div>
+      </dl>
+    </article>
+  
+    <article class="brief-card" id="tensors">
+      <div class="brief-head">
+        <span>Stage 2: Morning Commute</span>
+        <strong>15. Tensors</strong>
+        <em>Taxonomy Map · 27/35 · P2 acceptable but improvable · temporary</em>
+      </div>
+      <div class="shot-pair">
+        <figure>
+          <img src="../screenshots/v0-28-1/tensors-390.png" alt="390px screenshot of Tensor Block" />
+          <figcaption>390px: Tensor Block</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/v0-28-1/tensors-320.png" alt="320px screenshot of Tensor Block" />
+          <figcaption>320px overflow spot-check</figcaption>
+        </figure>
+      </div>
+      <p class="issue">Readable enough, but batch sheet and axes should be watched on 320px.</p>
+      <dl>
+        <div><dt>Learning objective</dt><dd>Show tensors as shaped numerical blocks that organize many vectors.</dd></div>
+        <div><dt>One concept</dt><dd>A tensor can arrange token positions and feature dimensions together.</dd></div>
+        <div><dt>Misconception corrected</dt><dd>A tensor is a mysterious object rather than a shaped block of numbers.</dd></div>
+        <div><dt>Caption/callouts</dt><dd>Rows can represent token positions. Columns can represent feature dimensions. Systems may process batches.</dd></div>
+        <div><dt>Allowed in-visual labels</dt><dd>Tokens, Features, Batch sheet</dd></div>
+        <div><dt>Alt text</dt><dd>A grid block shows token rows, feature columns, and a faint batch sheet.</dd></div>
+        <div><dt>Tester note</dt><dd>Ask whether the batch sheet clarifies or distracts.</dd></div>
+      </dl>
+    </article>
+  
+    <article class="brief-card" id="attention">
+      <div class="brief-head">
+        <span>Stage 3: Workday</span>
+        <strong>16. Attention</strong>
+        <em>Comparison Board · 34/35 · P3 keep · fixed</em>
+      </div>
+      <div class="shot-pair">
+        <figure>
+          <img src="../screenshots/v0-28-1/attention-390.png" alt="390px screenshot of Relevance Between Tokens" />
+          <figcaption>390px: Relevance Between Tokens</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/v0-28-1/attention-320.png" alt="320px screenshot of Relevance Between Tokens" />
+          <figcaption>320px overflow spot-check</figcaption>
+        </figure>
+      </div>
+      <p class="issue">v0.27.18 rebuild is readable; watch arc endpoints on 320px.</p>
+      <dl>
+        <div><dt>Learning objective</dt><dd>Explain attention as weighted relevance between token positions, not awareness.</dd></div>
+        <div><dt>One concept</dt><dd>The target token uses one source clue more strongly than another.</dd></div>
+        <div><dt>Misconception corrected</dt><dd>Attention means human attention or consciousness.</dd></div>
+        <div><dt>Caption/callouts</dt><dd>"it" is the token being updated. "cat" fits the local sentence relationship. Attention changes relevance weights. Attention is calculation, not awareness.</dd></div>
+        <div><dt>Allowed in-visual labels</dt><dd>Target token, Stronger clue, Weaker clue</dd></div>
+        <div><dt>Alt text</dt><dd>Sentence chips show it connected strongly to cat and weakly to dog by relevance arcs.</dd></div>
+        <div><dt>Tester note</dt><dd>Ask whether not-awareness is clear without clutter.</dd></div>
+      </dl>
+    </article>
+  
+    <article class="brief-card" id="mlp">
+      <div class="brief-head">
+        <span>Stage 3: Workday</span>
+        <strong>17. MLP</strong>
+        <em>Comparison Board · 30/35 · P2 acceptable but improvable · fixed</em>
+      </div>
+      <div class="shot-pair">
+        <figure>
+          <img src="../screenshots/v0-28-1/mlp-390.png" alt="390px screenshot of MLP Feature Workshop" />
+          <figcaption>390px: MLP Feature Workshop</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/v0-28-1/mlp-320.png" alt="320px screenshot of MLP Feature Workshop" />
+          <figcaption>320px overflow spot-check</figcaption>
+        </figure>
+      </div>
+      <p class="issue">Readable enough for testing after label-size repair.</p>
+      <dl>
+        <div><dt>Learning objective</dt><dd>Contrast attention mixing across token positions with MLP reshaping features within each position.</dd></div>
+        <div><dt>One concept</dt><dd>The MLP reshapes one token position’s features.</dd></div>
+        <div><dt>Misconception corrected</dt><dd>The MLP is another cross-token attention step or human reasoning center.</dd></div>
+        <div><dt>Caption/callouts</dt><dd>Attention mixes positions. The token position stays the same. MLP changes feature bars. Values are temporary activations.</dd></div>
+        <div><dt>Allowed in-visual labels</dt><dd>Attention, Same position, MLP, Reshaped</dd></div>
+        <div><dt>Alt text</dt><dd>Attention mixing is contrasted with a cat token entering an MLP and leaving with reshaped feature bars.</dd></div>
+        <div><dt>Tester note</dt><dd>Ask whether attention versus MLP is separable.</dd></div>
+      </dl>
+    </article>
+  
+    <article class="brief-card" id="layers">
+      <div class="brief-head">
+        <span>Stage 3: Workday</span>
+        <strong>18. Layers</strong>
+        <em>Mechanism Flow · 30/35 · P2 acceptable but improvable · fixed</em>
+      </div>
+      <div class="shot-pair">
+        <figure>
+          <img src="../screenshots/v0-28-1/layers-390.png" alt="390px screenshot of Transformer Stack" />
+          <figcaption>390px: Transformer Stack</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/v0-28-1/layers-320.png" alt="320px screenshot of Transformer Stack" />
+          <figcaption>320px overflow spot-check</figcaption>
+        </figure>
+      </div>
+      <p class="issue">Stack is compact and testable.</p>
+      <dl>
+        <div><dt>Learning objective</dt><dd>Show repeated transformer blocks refining temporary hidden states without implying conscious thinking steps.</dd></div>
+        <div><dt>One concept</dt><dd>Layers repeat attention and MLP transformations.</dd></div>
+        <div><dt>Misconception corrected</dt><dd>Layers are human-like thought steps or permanent memory slots.</dd></div>
+        <div><dt>Caption/callouts</dt><dd>Hidden states enter. Each block applies attention and MLP. States are refined toward scores. Layers are numerical transformations.</dd></div>
+        <div><dt>Allowed in-visual labels</dt><dd>Input states, Attention + MLP, Refined states</dd></div>
+        <div><dt>Alt text</dt><dd>Input hidden states move through repeated transformer blocks toward refined states.</dd></div>
+        <div><dt>Tester note</dt><dd>Ask whether it feels mechanical rather than human-thought-like.</dd></div>
+      </dl>
+    </article>
+  
+    <article class="brief-card" id="hidden-states">
+      <div class="brief-head">
+        <span>Stage 3: Workday</span>
+        <strong>19. Hidden States</strong>
+        <em>Mechanism Flow · 30/35 · P2 acceptable but improvable · fixed</em>
+      </div>
+      <div class="shot-pair">
+        <figure>
+          <img src="../screenshots/v0-28-1/hidden-states-390.png" alt="390px screenshot of Hidden State Flow" />
+          <figcaption>390px: Hidden State Flow</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/v0-28-1/hidden-states-320.png" alt="320px screenshot of Hidden State Flow" />
+          <figcaption>320px overflow spot-check</figcaption>
+        </figure>
+      </div>
+      <p class="issue">Temporary state flow is acceptable after label repair.</p>
+      <dl>
+        <div><dt>Learning objective</dt><dd>Contrast learned starting embeddings with temporary context-shaped hidden states.</dd></div>
+        <div><dt>One concept</dt><dd>Hidden states are temporary vectors shaped by context during the run.</dd></div>
+        <div><dt>Misconception corrected</dt><dd>Hidden states are durable memory or citations.</dd></div>
+        <div><dt>Caption/callouts</dt><dd>Embedding starts the token. Layers reshape it using context. Hidden state is temporary. Weights remain durable separately.</dd></div>
+        <div><dt>Allowed in-visual labels</dt><dd>Embed, Layer, Hidden state, Temporary</dd></div>
+        <div><dt>Alt text</dt><dd>A token starts as an embedding and becomes temporary hidden states through layers.</dd></div>
+        <div><dt>Tester note</dt><dd>Ask whether hidden state sounds temporary, not memory.</dd></div>
+      </dl>
+    </article>
+  
+    <article class="brief-card" id="logits">
+      <div class="brief-head">
+        <span>Stage 4: Decision Room</span>
+        <strong>20. Logits</strong>
+        <em>Probability Bars · 34/35 · P3 keep · fixed</em>
+      </div>
+      <div class="shot-pair">
+        <figure>
+          <img src="../screenshots/v0-28-1/logits-390.png" alt="390px screenshot of Raw Scoreboard" />
+          <figcaption>390px: Raw Scoreboard</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/v0-28-1/logits-320.png" alt="320px screenshot of Raw Scoreboard" />
+          <figcaption>320px overflow spot-check</figcaption>
+        </figure>
+      </div>
+      <p class="issue">Shared token set and bars are clear.</p>
+      <dl>
+        <div><dt>Learning objective</dt><dd>Explain logits as raw next-token scores before probability conversion.</dd></div>
+        <div><dt>One concept</dt><dd>Candidate next tokens receive raw scores.</dd></div>
+        <div><dt>Misconception corrected</dt><dd>A high logit is already a probability or truth score.</dd></div>
+        <div><dt>Caption/callouts</dt><dd>Hidden state reaches output scoring. Candidates get raw logits. Scores rank candidates locally. Softmax comes next.</dd></div>
+        <div><dt>Allowed in-visual labels</dt><dd>floor, mat, kitchen, banana, raw scores</dd></div>
+        <div><dt>Alt text</dt><dd>Raw score bars compare floor, mat, kitchen, and banana before probability conversion.</dd></div>
+        <div><dt>Tester note</dt><dd>Ask whether raw-score versus probability is clear.</dd></div>
+      </dl>
+    </article>
+  
+    <article class="brief-card" id="softmax">
+      <div class="brief-head">
+        <span>Stage 4: Decision Room</span>
+        <strong>21. Softmax</strong>
+        <em>Probability Bars · 34/35 · P3 keep · fixed</em>
+      </div>
+      <div class="shot-pair">
+        <figure>
+          <img src="../screenshots/v0-28-1/softmax-390.png" alt="390px screenshot of Score to Probability" />
+          <figcaption>390px: Score to Probability</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/v0-28-1/softmax-320.png" alt="320px screenshot of Score to Probability" />
+          <figcaption>320px overflow spot-check</figcaption>
+        </figure>
+      </div>
+      <p class="issue">Probability conversion is clear and separated from selection.</p>
+      <dl>
+        <div><dt>Learning objective</dt><dd>Show softmax turning raw scores into probabilities that sum to one.</dd></div>
+        <div><dt>One concept</dt><dd>Scores become a probability distribution.</dd></div>
+        <div><dt>Misconception corrected</dt><dd>Softmax chooses the token or verifies truth.</dd></div>
+        <div><dt>Caption/callouts</dt><dd>Scores enter softmax. Probabilities sum to one. Likely does not mean true. Sampling happens after this.</dd></div>
+        <div><dt>Allowed in-visual labels</dt><dd>floor, mat, kitchen, banana, 100% total</dd></div>
+        <div><dt>Alt text</dt><dd>Candidate tokens become probability bars that sum to one after softmax.</dd></div>
+        <div><dt>Tester note</dt><dd>Ask whether learners see that softmax does not choose.</dd></div>
+      </dl>
+    </article>
+  
+    <article class="brief-card" id="sampling">
+      <div class="brief-head">
+        <span>Stage 4: Decision Room</span>
+        <strong>22. Sampling</strong>
+        <em>Probability Bars · 34/35 · P3 keep · fixed</em>
+      </div>
+      <div class="shot-pair">
+        <figure>
+          <img src="../screenshots/v0-28-1/sampling-390.png" alt="390px screenshot of Weighted Token Choice" />
+          <figcaption>390px: Weighted Token Choice</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/v0-28-1/sampling-320.png" alt="320px screenshot of Weighted Token Choice" />
+          <figcaption>320px overflow spot-check</figcaption>
+        </figure>
+      </div>
+      <p class="issue">v0.27.18 bar layout fixed previous crowding.</p>
+      <dl>
+        <div><dt>Learning objective</dt><dd>Explain sampling as choosing one next token from probability-shaped options.</dd></div>
+        <div><dt>One concept</dt><dd>One token is selected from a probability distribution.</dd></div>
+        <div><dt>Misconception corrected</dt><dd>The most likely token is guaranteed true or always selected.</dd></div>
+        <div><dt>Caption/callouts</dt><dd>Probabilities shape options. Sampling selects one token. Less likely tokens can still appear. Likely is not proof.</dd></div>
+        <div><dt>Allowed in-visual labels</dt><dd>floor, mat, kitchen, banana, chosen</dd></div>
+        <div><dt>Alt text</dt><dd>Probability bars lead to one selected next-token card.</dd></div>
+        <div><dt>Tester note</dt><dd>Ask whether likely-not-true lands.</dd></div>
+      </dl>
+    </article>
+  
+    <article class="brief-card" id="autoregression">
+      <div class="brief-head">
+        <span>Stage 5: The Day Repeats</span>
+        <strong>23. Autoregression</strong>
+        <em>Mechanism Flow · 33/35 · P3 keep · keep</em>
+      </div>
+      <div class="shot-pair">
+        <figure>
+          <img src="../screenshots/v0-28-1/autoregression-390.png" alt="390px screenshot of Append and Repeat" />
+          <figcaption>390px: Append and Repeat</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/v0-28-1/autoregression-320.png" alt="320px screenshot of Append and Repeat" />
+          <figcaption>320px overflow spot-check</figcaption>
+        </figure>
+      </div>
+      <p class="issue">Numbered repeat cycle is readable.</p>
+      <dl>
+        <div><dt>Learning objective</dt><dd>Trace autoregressive generation as choose one token, append it, and run again.</dd></div>
+        <div><dt>One concept</dt><dd>Generation repeats one token at a time.</dd></div>
+        <div><dt>Misconception corrected</dt><dd>The model writes the whole answer in one hidden burst.</dd></div>
+        <div><dt>Caption/callouts</dt><dd>Response so far is visible context. One token is chosen. That token is appended. The model runs again.</dd></div>
+        <div><dt>Allowed in-visual labels</dt><dd>Response so far, Choose token, Append, Run again</dd></div>
+        <div><dt>Alt text</dt><dd>A four-step loop shows one token chosen, appended, and fed into the next run.</dd></div>
+        <div><dt>Tester note</dt><dd>Ask whether append-repeat is clear.</dd></div>
+      </dl>
+    </article>
+  
+    <article class="brief-card" id="context-window">
+      <div class="brief-head">
+        <span>Stage 5: The Day Repeats</span>
+        <strong>24. Context Window</strong>
+        <em>Context Tray / Stack · 34/35 · P3 keep · keep</em>
+      </div>
+      <div class="shot-pair">
+        <figure>
+          <img src="../screenshots/v0-28-1/context-window-390.png" alt="390px screenshot of Temporary Context Window" />
+          <figcaption>390px: Temporary Context Window</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/v0-28-1/context-window-320.png" alt="320px screenshot of Temporary Context Window" />
+          <figcaption>320px overflow spot-check</figcaption>
+        </figure>
+      </div>
+      <p class="issue">Bounded tray is clear.</p>
+      <dl>
+        <div><dt>Learning objective</dt><dd>Explain context window as temporary visible input, not permanent memory.</dd></div>
+        <div><dt>One concept</dt><dd>Only visible context is available; old context can fall out.</dd></div>
+        <div><dt>Misconception corrected</dt><dd>Context window is permanent memory.</dd></div>
+        <div><dt>Caption/callouts</dt><dd>Visible context is temporary. Capacity is limited. Old content can fall out. The next run uses what remains visible.</dd></div>
+        <div><dt>Allowed in-visual labels</dt><dd>Visible now, Capacity, Falls out, Next run</dd></div>
+        <div><dt>Alt text</dt><dd>A bounded context tray shows cards inside, capacity, and older cards falling out.</dd></div>
+        <div><dt>Tester note</dt><dd>Ask whether context versus memory is repaired.</dd></div>
+      </dl>
+    </article>
+  
+    <article class="brief-card" id="rag-retrieval">
+      <div class="brief-head">
+        <span>Stage 5: The Day Repeats</span>
+        <strong>25. RAG and Retrieval</strong>
+        <em>Context Tray / Stack · 34/35 · P3 keep · keep</em>
+      </div>
+      <div class="shot-pair">
+        <figure>
+          <img src="../screenshots/v0-28-1/rag-retrieval-390.png" alt="390px screenshot of Open-Book Retrieval" />
+          <figcaption>390px: Open-Book Retrieval</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/v0-28-1/rag-retrieval-320.png" alt="320px screenshot of Open-Book Retrieval" />
+          <figcaption>320px overflow spot-check</figcaption>
+        </figure>
+      </div>
+      <p class="issue">Open-book retrieval flow is clear and numbered.</p>
+      <dl>
+        <div><dt>Learning objective</dt><dd>Explain RAG as retrieval plus temporary context, not training or permanent memory.</dd></div>
+        <div><dt>One concept</dt><dd>Retrieved snippets are inserted into current context before generation.</dd></div>
+        <div><dt>Misconception corrected</dt><dd>RAG means the model permanently learned the documents or searched by itself.</dd></div>
+        <div><dt>Caption/callouts</dt><dd>User prompt starts the search step. Retriever finds relevant notes. Retrieved notes enter context. Response is still generated token by token. Weights stay fixed.</dd></div>
+        <div><dt>Allowed in-visual labels</dt><dd>Prompt, Retriever, Notes, Context tray, Response</dd></div>
+        <div><dt>Alt text</dt><dd>A prompt sends a retriever to notes, then retrieved cards enter a context tray before response generation.</dd></div>
+        <div><dt>Tester note</dt><dd>Ask whether RAG is not training.</dd></div>
+      </dl>
+    </article>
+  
+    <article class="brief-card" id="grounding-evidence">
+      <div class="brief-head">
+        <span>Stage 5: The Day Repeats</span>
+        <strong>26. Grounding</strong>
+        <em>Context Tray / Stack · 32/35 · P3 keep · keep</em>
+      </div>
+      <div class="shot-pair">
+        <figure>
+          <img src="../screenshots/v0-28-1/grounding-evidence-390.png" alt="390px screenshot of Claim Support Map" />
+          <figcaption>390px: Claim Support Map</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/v0-28-1/grounding-evidence-320.png" alt="320px screenshot of Claim Support Map" />
+          <figcaption>320px overflow spot-check</figcaption>
+        </figure>
+      </div>
+      <p class="issue">Claim-to-evidence support map is readable.</p>
+      <dl>
+        <div><dt>Learning objective</dt><dd>Explain grounding as connecting claims to available evidence without guaranteeing truth.</dd></div>
+        <div><dt>One concept</dt><dd>A claim is stronger when it is supported by matching evidence.</dd></div>
+        <div><dt>Misconception corrected</dt><dd>A citation-looking answer is automatically true.</dd></div>
+        <div><dt>Caption/callouts</dt><dd>Generated answers contain claims. Evidence can support claims. The support must actually match. Review still matters.</dd></div>
+        <div><dt>Allowed in-visual labels</dt><dd>Claim, Evidence, Support check, Review</dd></div>
+        <div><dt>Alt text</dt><dd>Generated claims connect to evidence cards, with one missing support line marked for review.</dd></div>
+        <div><dt>Tester note</dt><dd>Ask whether grounding is helpful but not a truth guarantee.</dd></div>
+      </dl>
+    </article>
+  
+    <article class="brief-card" id="hallucination-bridge">
+      <div class="brief-head">
+        <span>Stage 5: The Day Repeats</span>
+        <strong>27. Hallucinations</strong>
+        <em>Comparison Board · 32/35 · P3 keep · keep</em>
+      </div>
+      <div class="shot-pair">
+        <figure>
+          <img src="../screenshots/v0-28-1/hallucination-bridge-390.png" alt="390px screenshot of Unsupported Bridge" />
+          <figcaption>390px: Unsupported Bridge</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/v0-28-1/hallucination-bridge-320.png" alt="320px screenshot of Unsupported Bridge" />
+          <figcaption>320px overflow spot-check</figcaption>
+        </figure>
+      </div>
+      <p class="issue">Support/missing-support metaphor is testable.</p>
+      <dl>
+        <div><dt>Learning objective</dt><dd>Explain hallucination as fluent generated output outrunning support, not intentional lying.</dd></div>
+        <div><dt>One concept</dt><dd>Fluent output can contain claims with weak or missing support.</dd></div>
+        <div><dt>Misconception corrected</dt><dd>A hallucination means the model is lying on purpose.</dd></div>
+        <div><dt>Caption/callouts</dt><dd>The output can read smoothly. Some claims may be supported. Some claims may lack support. Review reduces risk.</dd></div>
+        <div><dt>Allowed in-visual labels</dt><dd>Fluent output, Supported, Missing support, Review</dd></div>
+        <div><dt>Alt text</dt><dd>A smooth output bridge has one supported claim and one unsupported span needing review.</dd></div>
+        <div><dt>Tester note</dt><dd>Ask whether hallucination differs from lying.</dd></div>
+      </dl>
+    </article>
+  
+    <article class="brief-card" id="ai-learns">
+      <div class="brief-head">
+        <span>Stage 6: Twilight: The Wider Landscape</span>
+        <strong>28. How AI Learns</strong>
+        <em>Comparison Board · 32/35 · P3 keep · fixed</em>
+      </div>
+      <div class="shot-pair">
+        <figure>
+          <img src="../screenshots/v0-28-1/ai-learns-390.png" alt="390px screenshot of Learning Modes Matrix" />
+          <figcaption>390px: Learning Modes Matrix</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/v0-28-1/ai-learns-320.png" alt="320px screenshot of Learning Modes Matrix" />
+          <figcaption>320px overflow spot-check</figcaption>
+        </figure>
+      </div>
+      <p class="issue">Simplified from dense matrix into four mode cards: training, fine-tune, RAG, and prompt.</p>
+      <dl>
+        <div><dt>Learning objective</dt><dd>Compare durable learning, current-run steering, retrieval, and evaluation without treating all useful behavior as training.</dd></div>
+        <div><dt>One concept</dt><dd>Different system changes happen at different times and places.</dd></div>
+        <div><dt>Misconception corrected</dt><dd>Every useful answer means the model learned permanently.</dd></div>
+        <div><dt>Caption/callouts</dt><dd>Training/fine-tuning can update weights. Prompting steers current context. RAG retrieves temporary context. Evaluation may inform future changes.</dd></div>
+        <div><dt>Allowed in-visual labels</dt><dd>Training, Fine-tune, RAG, Prompt</dd></div>
+        <div><dt>Alt text</dt><dd>Four mode cards compare durable training and fine-tuning with current-run RAG and prompting.</dd></div>
+        <div><dt>Tester note</dt><dd>Ask whether learners can say which modes change weights.</dd></div>
+      </dl>
+    </article>
+  
+    <article class="brief-card" id="diffusion">
+      <div class="brief-head">
+        <span>Stage 6: Twilight: The Wider Landscape</span>
+        <strong>29. Diffusion vs Autoregression</strong>
+        <em>Comparison Board · 32/35 · P3 keep · keep</em>
+      </div>
+      <div class="shot-pair">
+        <figure>
+          <img src="../screenshots/v0-28-1/diffusion-390.png" alt="390px screenshot of Append Or Denoise" />
+          <figcaption>390px: Append Or Denoise</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/v0-28-1/diffusion-320.png" alt="320px screenshot of Append Or Denoise" />
+          <figcaption>320px overflow spot-check</figcaption>
+        </figure>
+      </div>
+      <p class="issue">Two-lane contrast is clear.</p>
+      <dl>
+        <div><dt>Learning objective</dt><dd>Distinguish autoregressive token generation from diffusion-style denoising.</dd></div>
+        <div><dt>One concept</dt><dd>Autoregression appends tokens; diffusion refines noise.</dd></div>
+        <div><dt>Misconception corrected</dt><dd>All generative AI works like ChatGPT.</dd></div>
+        <div><dt>Caption/callouts</dt><dd>Text grows one token at a time. Diffusion refines noisy patterns. Both generate outputs but differ mechanically.</dd></div>
+        <div><dt>Allowed in-visual labels</dt><dd>Append tokens, Denoise pattern, Both generative</dd></div>
+        <div><dt>Alt text</dt><dd>One lane appends text tokens while another lane denoises a noisy pattern into an output.</dd></div>
+        <div><dt>Tester note</dt><dd>Ask whether diffusion and autoregression feel distinct.</dd></div>
+      </dl>
+    </article>
+  
+    <article class="brief-card" id="multimodal">
+      <div class="brief-head">
+        <span>Stage 6: Twilight: The Wider Landscape</span>
+        <strong>30. Multimodal AI</strong>
+        <em>Taxonomy Map · 32/35 · P3 keep · fixed</em>
+      </div>
+      <div class="shot-pair">
+        <figure>
+          <img src="../screenshots/v0-28-1/multimodal-390.png" alt="390px screenshot of Media Lane Map" />
+          <figcaption>390px: Media Lane Map</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/v0-28-1/multimodal-320.png" alt="320px screenshot of Media Lane Map" />
+          <figcaption>320px overflow spot-check</figcaption>
+        </figure>
+      </div>
+      <p class="issue">Reduced from many media inputs/outputs to three lanes flowing through shared representation and output.</p>
+      <dl>
+        <div><dt>Learning objective</dt><dd>Explain multimodal AI as systems that process or represent multiple media types together.</dd></div>
+        <div><dt>One concept</dt><dd>Text, image, and audio can connect through learned representations or linked components.</dd></div>
+        <div><dt>Misconception corrected</dt><dd>Multimodal means human-like perception.</dd></div>
+        <div><dt>Caption/callouts</dt><dd>Multiple media can enter. Systems encode media into usable representations. Outputs depend on the system. Processing is not human sensation.</dd></div>
+        <div><dt>Allowed in-visual labels</dt><dd>Text, Image, Audio, Shared space, Output</dd></div>
+        <div><dt>Alt text</dt><dd>Three media lanes for text, image, and audio connect through a shared representation area to an output.</dd></div>
+        <div><dt>Tester note</dt><dd>Ask whether it teaches multimodal without implying human senses.</dd></div>
+      </dl>
+    </article>
+  
+    <article class="brief-card" id="perfect-storm">
+      <div class="brief-head">
+        <span>Stage 6: Twilight: The Wider Landscape</span>
+        <strong>31. The Perfect Storm</strong>
+        <em>Taxonomy Map · 32/35 · P3 keep · fixed</em>
+      </div>
+      <div class="shot-pair">
+        <figure>
+          <img src="../screenshots/v0-28-1/perfect-storm-390.png" alt="390px screenshot of Storm Front" />
+          <figcaption>390px: Storm Front</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/v0-28-1/perfect-storm-320.png" alt="320px screenshot of Storm Front" />
+          <figcaption>320px overflow spot-check</figcaption>
+        </figure>
+      </div>
+      <p class="issue">Convergence layout remains readable, with short ingredient labels and caption below the diagram.</p>
+      <dl>
+        <div><dt>Learning objective</dt><dd>Explain modern LLM capability as convergence, not one unexplained event.</dd></div>
+        <div><dt>One concept</dt><dd>Data, compute, storage, methods, labor, and incentives converged.</dd></div>
+        <div><dt>Misconception corrected</dt><dd>One spark or one algorithm explains modern LLMs.</dd></div>
+        <div><dt>Caption/callouts</dt><dd>Human-created data supplied patterns. Compute and storage made scale practical. Methods made patterns usable. Labor and incentives moved systems into products.</dd></div>
+        <div><dt>Allowed in-visual labels</dt><dd>Data, Compute, Storage, Methods, Labor, Incentives</dd></div>
+        <div><dt>Alt text</dt><dd>Six ingredients converge into a modern LLM capability node.</dd></div>
+        <div><dt>Tester note</dt><dd>Ask whether convergence, not spark, is obvious.</dd></div>
+      </dl>
+    </article>
+  
+    <article class="brief-card" id="collective-intelligence-lantern">
+      <div class="brief-head">
+        <span>Stage 7: Midnight Ledger</span>
+        <strong>32. Collective Intelligence, Extracted</strong>
+        <em>Taxonomy Map · 31/35 · P3 keep · fixed</em>
+      </div>
+      <div class="shot-pair">
+        <figure>
+          <img src="../screenshots/v0-28-1/collective-intelligence-lantern-390.png" alt="390px screenshot of Borrowed Flames" />
+          <figcaption>390px: Borrowed Flames</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/v0-28-1/collective-intelligence-lantern-320.png" alt="320px screenshot of Borrowed Flames" />
+          <figcaption>320px overflow spot-check</figcaption>
+        </figure>
+      </div>
+      <p class="issue">Simplified to human work -> training data -> model patterns -> provenance questions.</p>
+      <dl>
+        <div><dt>Learning objective</dt><dd>Show that model capability depends on human-created traces while rights and provenance remain human questions.</dd></div>
+        <div><dt>One concept</dt><dd>Human expression powers patterns; accountability remains human.</dd></div>
+        <div><dt>Misconception corrected</dt><dd>The model created its abilities alone.</dd></div>
+        <div><dt>Caption/callouts</dt><dd>Human expression leaves learnable traces. Provenance, consent, copyright, and compensation matter. The model absorbs patterns without responsibility.</dd></div>
+        <div><dt>Allowed in-visual labels</dt><dd>Human work, Training data, Patterns, Provenance</dd></div>
+        <div><dt>Alt text</dt><dd>A simple flow connects human work to training data, model patterns, and provenance questions.</dd></div>
+        <div><dt>Tester note</dt><dd>Ask whether it raises provenance without feeling accusatory or decorative.</dd></div>
+      </dl>
+    </article>
+  
+    <article class="brief-card" id="costs-invisible-factory">
+      <div class="brief-head">
+        <span>Stage 7: Midnight Ledger</span>
+        <strong>33. Costs We Must Count</strong>
+        <em>Taxonomy Map · 31/35 · P3 keep · fixed</em>
+      </div>
+      <div class="shot-pair">
+        <figure>
+          <img src="../screenshots/v0-28-1/costs-invisible-factory-390.png" alt="390px screenshot of Cost Ledger" />
+          <figcaption>390px: Cost Ledger</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/v0-28-1/costs-invisible-factory-320.png" alt="320px screenshot of Cost Ledger" />
+          <figcaption>320px overflow spot-check</figcaption>
+        </figure>
+      </div>
+      <p class="issue">Simplified into five cost categories with no fake statistics or cramped dashboard.</p>
+      <dl>
+        <div><dt>Learning objective</dt><dd>Make physical, social, cultural, and ethical costs visible without exaggeration.</dd></div>
+        <div><dt>One concept</dt><dd>Instant answers have infrastructure and institutional costs.</dd></div>
+        <div><dt>Misconception corrected</dt><dd>Digital systems are weightless or cost-free.</dd></div>
+        <div><dt>Caption/callouts</dt><dd>Infrastructure costs vary by system and workload. Human systems and privacy matter. Power and governance shape who benefits.</dd></div>
+        <div><dt>Allowed in-visual labels</dt><dd>Compute, Energy/water, Labor, Privacy, Institutional</dd></div>
+        <div><dt>Alt text</dt><dd>An AI answer connects to five cost categories: compute, energy and water, labor, privacy, and institutional risk.</dd></div>
+        <div><dt>Tester note</dt><dd>Ask whether costs feel countable without fearmongering.</dd></div>
+      </dl>
+    </article>
+  
+    <article class="brief-card" id="risk">
+      <div class="brief-head">
+        <span>Stage 7: Midnight Ledger</span>
+        <strong>34. Risk vs Myth</strong>
+        <em>Taxonomy Map · 31/35 · P3 keep · keep</em>
+      </div>
+      <div class="shot-pair">
+        <figure>
+          <img src="../screenshots/v0-28-1/risk-390.png" alt="390px screenshot of Risk Ledger" />
+          <figcaption>390px: Risk Ledger</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/v0-28-1/risk-320.png" alt="320px screenshot of Risk Ledger" />
+          <figcaption>320px overflow spot-check</figcaption>
+        </figure>
+      </div>
+      <p class="issue">Two-column ledger is appropriate.</p>
+      <dl>
+        <div><dt>Learning objective</dt><dd>Separate practical mechanism-based risks from myths about consciousness, omniscience, or hidden model powers.</dd></div>
+        <div><dt>One concept</dt><dd>Real risks come from data, context, tools, and institutions.</dd></div>
+        <div><dt>Misconception corrected</dt><dd>Risk mainly means sci-fi doom or conscious chatbots.</dd></div>
+        <div><dt>Caption/callouts</dt><dd>Privacy, hallucination, tools, and overreliance are real mechanisms. Conscious bots and secret self-training are myths. Institutions shape prevention and review.</dd></div>
+        <div><dt>Allowed in-visual labels</dt><dd>Real mechanisms, Myths, Human accountability</dd></div>
+        <div><dt>Alt text</dt><dd>A two-column ledger sorts practical mechanism risks from unsupported myths.</dd></div>
+        <div><dt>Tester note</dt><dd>Ask whether risk feels practical rather than spooky.</dd></div>
+      </dl>
+    </article>
+  
+    <article class="brief-card" id="benefits-tool-garden">
+      <div class="brief-head">
+        <span>Stage 8: New Dawn</span>
+        <strong>35. Benefits Worth Taking Seriously</strong>
+        <em>Taxonomy Map · 31/35 · P3 keep · fixed</em>
+      </div>
+      <div class="shot-pair">
+        <figure>
+          <img src="../screenshots/v0-28-1/benefits-tool-garden-390.png" alt="390px screenshot of Benefit Tiers" />
+          <figcaption>390px: Benefit Tiers</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/v0-28-1/benefits-tool-garden-320.png" alt="320px screenshot of Benefit Tiers" />
+          <figcaption>320px overflow spot-check</figcaption>
+        </figure>
+      </div>
+      <p class="issue">Simplified to bounded benefit chips with human review rather than a dense tier chart.</p>
+      <dl>
+        <div><dt>Learning objective</dt><dd>Separate real bounded benefits from speculative hype while preserving human review.</dd></div>
+        <div><dt>One concept</dt><dd>Benefits can be real, useful, and still bounded.</dd></div>
+        <div><dt>Misconception corrected</dt><dd>Taking benefits seriously requires utopian hype.</dd></div>
+        <div><dt>Caption/callouts</dt><dd>Some uses are useful now with review. Some are plausible with safeguards. Speculative claims need evidence.</dd></div>
+        <div><dt>Allowed in-visual labels</dt><dd>Draft, Translate, Summarize, Access, Review</dd></div>
+        <div><dt>Alt text</dt><dd>Bounded benefit chips for drafting, translation, summarization, access, and review sit inside a calm benefit map.</dd></div>
+        <div><dt>Tester note</dt><dd>Ask whether benefits feel bounded, not hype.</dd></div>
+      </dl>
+    </article>
+  
+    <article class="brief-card" id="human-centered-ai-garden">
+      <div class="brief-head">
+        <span>Stage 8: New Dawn</span>
+        <strong>36. Human-Centered AI</strong>
+        <em>Taxonomy Map · 31/35 · P3 keep · fixed</em>
+      </div>
+      <div class="shot-pair">
+        <figure>
+          <img src="../screenshots/v0-28-1/human-centered-ai-garden-390.png" alt="390px screenshot of Accountability Flow" />
+          <figcaption>390px: Accountability Flow</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/v0-28-1/human-centered-ai-garden-320.png" alt="320px screenshot of Accountability Flow" />
+          <figcaption>320px overflow spot-check</figcaption>
+        </figure>
+      </div>
+      <p class="issue">Recentered human judgment and made review, appeal, and governance visible.</p>
+      <dl>
+        <div><dt>Learning objective</dt><dd>Keep dignity, judgment, governance, and accountability central in AI deployment.</dd></div>
+        <div><dt>One concept</dt><dd>AI output should support people inside accountable decision contexts.</dd></div>
+        <div><dt>Misconception corrected</dt><dd>If AI is powerful, it should decide.</dd></div>
+        <div><dt>Caption/callouts</dt><dd>People remain accountable. Dignity outranks speed or automation. The model can sound ethical without moral understanding.</dd></div>
+        <div><dt>Allowed in-visual labels</dt><dd>AI tool, Human judgment, People, Review, Appeal, Governance</dd></div>
+        <div><dt>Alt text</dt><dd>Human judgment sits at the center while an AI tool supports, people are affected, and review, appeal, and governance remain visible.</dd></div>
+        <div><dt>Tester note</dt><dd>Ask whether human responsibility is visually central.</dd></div>
+      </dl>
+    </article>
+  
+    <article class="brief-card" id="responsible-ai-forked-path">
+      <div class="brief-head">
+        <span>Stage 8: New Dawn</span>
+        <strong>37. Better AI Is a Choice</strong>
+        <em>Taxonomy Map · 32/35 · P3 keep · fixed</em>
+      </div>
+      <div class="shot-pair">
+        <figure>
+          <img src="../screenshots/v0-28-1/responsible-ai-forked-path-390.png" alt="390px screenshot of Better-AI Control Panel" />
+          <figcaption>390px: Better-AI Control Panel</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/v0-28-1/responsible-ai-forked-path-320.png" alt="320px screenshot of Better-AI Control Panel" />
+          <figcaption>320px overflow spot-check</figcaption>
+        </figure>
+      </div>
+      <p class="issue">Reduced dense lever panel to data, evaluation, policy, human review, and incentives.</p>
+      <dl>
+        <div><dt>Learning objective</dt><dd>Show that outcomes are shaped by design, deployment, governance, and incentives.</dd></div>
+        <div><dt>One concept</dt><dd>Better AI depends on human choices about data, evaluation, policy, review, and incentives.</dd></div>
+        <div><dt>Misconception corrected</dt><dd>Harms are inevitable if the technology is useful.</dd></div>
+        <div><dt>Caption/callouts</dt><dd>Technical choices can fit the task. Data provenance and consent matter. Institutional review and evaluation shape outcomes.</dd></div>
+        <div><dt>Allowed in-visual labels</dt><dd>Data, Evaluation, Policy, Review, Incentives</dd></div>
+        <div><dt>Alt text</dt><dd>A compact better-AI lever panel shows data, evaluation, policy, human review, and incentives.</dd></div>
+        <div><dt>Tester note</dt><dd>Ask which lever group they remember after five seconds.</dd></div>
+      </dl>
+    </article>
+  
+    <article class="brief-card" id="prompting-context-tray">
+      <div class="brief-head">
+        <span>Stage 8: New Dawn</span>
+        <strong>38. Effective Prompting from Model Literacy</strong>
+        <em>Context Tray / Stack · 33/35 · P3 keep · keep</em>
+      </div>
+      <div class="shot-pair">
+        <figure>
+          <img src="../screenshots/v0-28-1/prompting-context-tray-390.png" alt="390px screenshot of Context Tray" />
+          <figcaption>390px: Context Tray</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/v0-28-1/prompting-context-tray-320.png" alt="320px screenshot of Context Tray" />
+          <figcaption>320px overflow spot-check</figcaption>
+        </figure>
+      </div>
+      <p class="issue">Context-tray metaphor is strong and aligned with the Journey.</p>
+      <dl>
+        <div><dt>Learning objective</dt><dd>Show effective prompting as context design for one run, not permanent teaching.</dd></div>
+        <div><dt>One concept</dt><dd>Prompt parts are packed into the current context tray.</dd></div>
+        <div><dt>Misconception corrected</dt><dd>Prompting is special wording or fine-tuning.</dd></div>
+        <div><dt>Caption/callouts</dt><dd>Prompt parts shape current input. Evidence and uncertainty improve reviewability. Prompting usually changes context, not weights.</dd></div>
+        <div><dt>Allowed in-visual labels</dt><dd>Task, Context, Evidence, Format, Review</dd></div>
+        <div><dt>Alt text</dt><dd>Prompt component cards drop into a transparent current context tray before one generated response leaves it.</dd></div>
+        <div><dt>Tester note</dt><dd>Ask whether prompting feels temporary.</dd></div>
+      </dl>
+    </article>
+  
+    <article class="brief-card" id="synthesis-map-compass-lantern">
+      <div class="brief-head">
+        <span>Stage 8: New Dawn</span>
+        <strong>39. Model Literate Synthesis</strong>
+        <em>Taxonomy Map · 31/35 · P3 keep · fixed</em>
+      </div>
+      <div class="shot-pair">
+        <figure>
+          <img src="../screenshots/v0-28-1/synthesis-map-compass-lantern-390.png" alt="390px screenshot of Full Chain Map" />
+          <figcaption>390px: Full Chain Map</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/v0-28-1/synthesis-map-compass-lantern-320.png" alt="320px screenshot of Full Chain Map" />
+          <figcaption>320px overflow spot-check</figcaption>
+        </figure>
+      </div>
+      <p class="issue">Split dense capstone map into three lanes: mechanics, evidence, and responsibility.</p>
+      <dl>
+        <div><dt>Learning objective</dt><dd>Connect mechanics, evidence, review, and human accountability into a durable mental model.</dd></div>
+        <div><dt>One concept</dt><dd>Mechanics matter, and humans remain responsible.</dd></div>
+        <div><dt>Misconception corrected</dt><dd>Fluency equals understanding or wisdom.</dd></div>
+        <div><dt>Caption/callouts</dt><dd>Prompt becomes tokens, states, scores, probabilities, and sampled response tokens. RAG and grounding can add evidence but not truth guarantees. Benefits, costs, review, governance, and accountability remain human responsibilities.</dd></div>
+        <div><dt>Allowed in-visual labels</dt><dd>Mechanics, Evidence, Responsibility</dd></div>
+        <div><dt>Alt text</dt><dd>A three-lane synthesis map groups model mechanics, evidence checking, and human responsibility.</dd></div>
+        <div><dt>Tester note</dt><dd>Ask what one idea they retain from the capstone visual.</dd></div>
+      </dl>
+    </article>
+  </section>
+    
+  </main>
+</body>
+</html>

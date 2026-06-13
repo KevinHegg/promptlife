@@ -209,7 +209,7 @@ export const promptRunSteps: PromptRunStep[] = [
       ],
       correctActions: ['tokens-features', 'batch-tokens-features', 'single-number'],
       incorrectActions: {
-        'single-number-first': 'A tensor is an organized block of many numbers, not one single number.'
+        'single-number-first': 'A tensor is an organized block of many numbers, not one number.'
       },
       feedbackCorrect: 'Good. Token vectors form a tokens x features block, with batch as an optional outer dimension.',
       feedbackIncorrect: 'A tensor is an organized block of many numbers, not one word or one single number.',
@@ -491,9 +491,9 @@ export const promptRunFinalChallenge: Exercise = {
     'append-before-sampling': 'The token is appended after sampling chooses it.',
     'attention-after-consciousness': 'Attention is learned relevance weighting, not consciousness or awareness.'
   },
-  feedbackCorrect: 'Good. You ordered a prompt-to-response loop without adding training, permanent memory, or magic.',
+  feedbackCorrect: 'Good. You ordered a prompt-to-response loop without adding training, permanent memory, or an unexplained shortcut.',
   feedbackIncorrect: 'Check the decoding order: logits come before softmax, softmax comes before sampling, and the chosen token is appended before the next run.',
-  insight: 'A prompt becomes a response through repeated forward passes, not magic.',
+  insight: 'A prompt becomes a response through repeated forward passes, not an unexplained shortcut.',
   glossaryTerms: ['inference', 'token', 'embedding', 'attention', 'MLP', 'hidden state', 'logits', 'softmax', 'sampling', 'autoregression'],
   completionKey: 'prompt-run:final-order'
 }

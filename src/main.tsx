@@ -72,7 +72,7 @@ const HOME_ASSETS = {
   heroFallback: `${ASSET}/illustrations/scene-hero-feature-cloud@mobile.png`
 }
 // Bump this for each shipped app change; the Badge screen displays it under Start over.
-const APP_VERSION = '0.28.0'
+const APP_VERSION = '0.28.2'
 const STORAGE_KEYS = {
   lastLocation: 'promptlife:v1:lastLocation',
   lessonId: 'promptlife:v1:lessonId',
@@ -800,7 +800,7 @@ function HomeScreen({ progress, nextLessonTitle, statusMessage, onStart, onJourn
 
       <section className="idea-panel" aria-labelledby="big-idea">
         <h2 id="big-idea">Big idea</h2>
-        <p>An LLM is not a mind, a database, or magic. It is a learned prediction system that turns context into likely next tokens.</p>
+        <p>An LLM is not a mind, a database, or an unexplained shortcut. It is a learned prediction system that turns context into likely next tokens.</p>
       </section>
 
       <div className="quick-actions" aria-label="Quick actions">
@@ -1771,7 +1771,7 @@ function MicroInteraction({ type }) {
 
 function InferenceTemporaryInteraction() {
   const choices = [
-    { id: 'activations', label: 'Temporary activations', correct: true },
+    { id: 'activations', label: 'Activations', correct: true },
     { id: 'weights', label: 'Model weights', correct: false },
     { id: 'dataset', label: 'Training dataset', correct: false }
   ]
@@ -2285,7 +2285,7 @@ function MlpFeatureToggleInteraction() {
   const [answer, setAnswer] = useState(null)
   const options = [
     { id: 'feature-vector', label: 'The token’s feature vector', correct: true },
-    { id: 'memory', label: 'The model’s permanent memory', correct: false },
+    { id: 'memory', label: 'Permanent memory', correct: false },
     { id: 'token-id', label: 'The token ID', correct: false }
   ]
   const bars = mode === 'before' ? [38, 62, 44, 70, 48] : [74, 34, 82, 52, 66]
@@ -2883,7 +2883,7 @@ function PerfectStormIngredientsInteraction() {
       </div>
       <p className={allActive ? 'micro-feedback good' : 'micro-feedback'} role="status">
         <strong>{lastActive.label}:</strong> {lastActive.detail}
-        {allActive && ' Insight strengthened. Modern LLMs came from convergence, not one magic breakthrough.'}
+        {allActive && ' Insight strengthened. Modern LLMs came from convergence, not one event.'}
       </p>
     </div>
   )
@@ -2956,7 +2956,7 @@ function RiskMythSortInteraction() {
         { id: 'overreliance-review', label: 'Overreliance weakens human review', category: 'Real risk' },
         { id: 'softmax-files', label: 'Softmax steals files', category: 'Myth' }
       ]}
-      insight="Real AI risks usually come from data, context, tools, institutions, and overreliance, not from model consciousness or magic."
+      insight="Real AI risks usually come from data, context, tools, institutions, and overreliance, not from model consciousness or an unexplained shortcut."
     />
   )
 }
@@ -2981,7 +2981,7 @@ function BenefitTierSortInteraction() {
 function HumanCenteredScenarioInteraction() {
   const choices = [
     { id: 'draft-review', label: 'Use summary as a draft; human reviews before action.', correct: true },
-    { id: 'auto-decide', label: 'Automatically decide support needs with no review.', correct: false },
+    { id: 'auto-decide', label: 'Auto-decide with no review.', correct: false },
     { id: 'hide-limits', label: 'Hide model limitations from staff.', correct: false },
     { id: 'fluency-proof', label: 'Treat fluent text as proof.', correct: false }
   ]
@@ -4653,7 +4653,7 @@ const promptRunStations = [
       {
         id: 'retrieved-truth',
         label: 'A retrieved truth record.',
-        feedback: 'This choice reveals a common mix-up. The model is processing context, not retrieving truth by magic.'
+        feedback: 'This choice reveals a common mix-up. The model is processing context, not retrieving truth by an unexplained shortcut.'
       }
     ]
   },
@@ -4926,7 +4926,7 @@ function PromptRunScreen({ onBack, onAttempt, onProgress, onComplete, saved, pro
           {reviewSuggested ? (
             <p>Review suggested. Token IDs, probability, and context growth are the spots worth revisiting.</p>
           ) : (
-            <p>Good trace. The model is not retrieving truth by magic; it is running a forward pass and choosing one next token at a time.</p>
+            <p>Good trace. The model is not retrieving truth by an unexplained shortcut; it is running a forward pass and choosing one next token at a time.</p>
           )}
           <PlayActionRow>
             <button className="primary-btn" type="button" onClick={restartChallenge}>Trace another run</button>

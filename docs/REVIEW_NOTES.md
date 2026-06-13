@@ -2,6 +2,57 @@
 
 Date: 2026-06-13
 
+## v0.28.1 Language Cleanup And Visual Aid Hard Reset
+
+### What Changed
+
+- Removed the banned model-mystery wording from current learner-facing source/docs and added `npm run audit:language`.
+- Added `npm run audit:visual-overflow` to check the visual-aid review route at 320px and 390px for horizontal overflow, unknown templates, clipped labels, tiny SVG text, long SVG labels, and generated-image alt text.
+- Updated all 39 Journey visual-aid registry rows to use one of the six canonical templates.
+- Rebuilt or simplified 19 visual aids for the hard reset: Fine-Tuning Path, Prompt vs Response, Text to Tokens, Relevance Between Tokens, MLP Feature Workshop, Transformer Stack, Hidden State Flow, Raw Scoreboard, Score to Probability, Weighted Token Choice, Learning Modes Matrix, Media Lane Map, Storm Front, Borrowed Flames, Cost Ledger, Benefit Tiers, Accountability Flow, Better-AI Control Panel, and Full Chain Map.
+- Kept all instructional text in HTML callouts/captions where possible and shortened in-diagram labels to reduce overflow risk.
+- Captured all 39 visual aids at both 390px and 320px, plus Home/Journey/Play/Glossary/Badge smoke screenshots and a desktop gallery screenshot.
+- Generated the v0.28.1 readiness report, all-visuals review packet, visual-overflow audit, visual-aid audit outputs, and human feedback sheet.
+- Bumped the visible app/package version to `v0.28.1`.
+
+### Verification Notes
+
+- Visual aid readiness summary: 39 visuals reviewed; before reset P0/P1 count was 18; after reset P0/P1 count is 0.
+- Template distribution: Atmospheric Scene 3, Mechanism Flow 9, Comparison Board 9, Context Tray / Stack 4, Probability Bars 3, Taxonomy Map 11.
+- Remaining temporary-but-testable visuals: Overfitting vs Generalization, Feature Vector, and Tensor Block.
+- `npm run typecheck`, `npm run build`, `npm run build:pages`, `npm run audit:answers`, `npm run audit:checkpoints`, `npm run audit:question-clues`, `npm run audit:learner-copy`, `npm run audit:language`, `npm run audit:visual-aids`, and `npm run audit:visual-overflow` passed or completed.
+- The existing Vite large-chunk warning remains on production builds.
+- Browser QA confirmed Badge image/version, Play, Glossary, and Journey stage grid/stage labels have no horizontal overflow. Journey exposes all eight stage jump buttons with meaningful aria labels.
+
+### Files Added Or Updated
+
+- `scripts/audit-language.mjs`
+- `scripts/audit-visual-overflow.mjs`
+- `scripts/capture-visual-aid-screenshots-v0281.mjs`
+- `scripts/visual-aid-readiness-data-v0281.mjs`
+- `scripts/generate-visual-aid-readiness-v0281.mjs`
+- `scripts/audit-visual-aids.mjs`
+- `scripts/audit-learner-copy.mjs`
+- `docs/journey/visual-aids/VISUAL_AID_STYLE_GUIDE.md`
+- `docs/journey/visual-aids/visual-overflow-audit-v0-28-1.json`
+- `docs/journey/visual-aids/visual-overflow-audit-v0-28-1.md`
+- `docs/journey/visual-aids/prompt-life-v0-28-1-visual-aid-readiness-report.html`
+- `docs/journey/visual-aids/prompt-life-v0-28-1-visual-aid-readiness-report.pdf`
+- `docs/journey/visual-aids/prompt-life-v0-28-1-all-visual-aids-review.html`
+- `docs/journey/visual-aids/prompt-life-v0-28-1-all-visual-aids-review.pdf`
+- `docs/testing/prompt-life-v0-28-1-visual-aid-human-feedback.md`
+- `docs/testing/prompt-life-v0-28-1-visual-aid-human-feedback.pdf`
+- `docs/journey/screenshots/v0-28-1/`
+- `src/components/VisualAids.tsx`
+- `src/components/DiagramKit.tsx`
+- `src/data/content.ts`
+- `src/data/promptRun.ts`
+- `src/data/visualAssets.ts`
+- `src/data/checkpointBankV02710.ts` through `src/data/checkpointBankV02715.ts`
+- `src/main.tsx`
+- `package.json`
+- `package-lock.json`
+
 ## v0.28.0 Journey Visual Aid Readiness Pass For Human Testing
 
 ### What Changed
@@ -2303,7 +2354,7 @@ Key takeaway: `Pretraining builds broad capability, not perfect source recall.`
 - Eyebrow: `A DAY IN THE LIFE OF A PROMPT`
 - Title: `Prompt Life`
 - Tagline: `Demystifying LLMs in the AI era through clear explanations, useful metaphors, and a little play.`
-- Big idea: `An LLM is not a mind, a database, or magic. It is a learned prediction system that turns context into likely next tokens.`
+- Big idea: `An LLM is not a mind, a database, or an unexplained shortcut. It is a learned prediction system that turns context into likely next tokens.`
 
 ### Verification
 
@@ -2347,7 +2398,7 @@ Key takeaway: `Pretraining builds broad capability, not perfect source recall.`
 - Title: `Prompt Life`
 - Prominent subhead: `Demystifying LLMs`
 - Tagline: `Demystifying LLMs in the AI era through clear explanations, useful metaphors, and a little play.`
-- Big idea: `An LLM is not a mind, a database, or magic. It is a learned prediction system that turns context into likely next tokens.`
+- Big idea: `An LLM is not a mind, a database, or an unexplained shortcut. It is a learned prediction system that turns context into likely next tokens.`
 
 ### Verification
 
@@ -2973,7 +3024,7 @@ When testing deployed visual assets on iPhone/GitHub Pages, use a cache-busting 
 - `Costs We Must Count`: counts physical, social, cultural, and ethical costs without inventing statistics.
 - `Human-Centered AI`: centers dignity, learning, responsibility, creativity, relationships, and common good.
 - `Better AI Is a Choice`: frames design, policy, governance, and incentives as changeable.
-- `Effective Prompting from Model Literacy`: shows prompting as context shaping, not magic wording or weight change.
+- `Effective Prompting from Model Literacy`: shows prompting as context shaping, not special wording or weight change.
 - `Model Literate Synthesis`: ties mechanics and human consequences into a final teach-back.
 
 ### Proposed Visual Assets
@@ -3887,3 +3938,50 @@ Known issues:
 
 - Badge issuance remains pending human review.
 - The badge artwork contains text as part of the supplied visual, but the accessible status and credential language remain in HTML.
+
+## v0.28.2 Visual Overflow Hardening + Journey Exercise Audit
+
+Date: 2026-06-13
+
+Changed:
+
+- Bumped the app/package version to `v0.28.2`.
+- Hardened `npm run audit:visual-overflow` so it checks every real learner Journey lesson route at 320px and 390px, not only the visual-aid review route.
+- Repaired visual spacing in Overfitting vs Generalization, Softmax, Context Window, Grounding, Hallucinations, and Collective Intelligence so SVG labels and callout markers no longer collide.
+- Marked the former temporary visuals Overfitting vs Generalization, Feature Vector, and Tensor Block as fixed/testable in the v0.28.2 visual readiness registry.
+- Added `npm run audit:exercises` with a Journey exercise inventory, mobile screenshots, and PDF review exports.
+- Fixed Journey interaction mobile layout issues in Token IDs, Attention, Inference, MLP, Diffusion, Human-Centered AI, and the final synthesis chain.
+- Fixed the alignment exercise data id collision risk by renaming the internal item id to `runtime-policy-filter` while keeping the learner-facing label `policy filter`.
+
+Verification:
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed, with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed, with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed.
+- `npm run audit:checkpoints`: passed.
+- `npm run audit:question-clues`: completed with the existing warning report.
+- `npm run audit:learner-copy`: passed.
+- `npm run audit:language`: passed.
+- `npm run audit:visual-aids`: passed.
+- `npm run audit:visual-overflow`: passed; 39 learner-route visual aids checked at 320px and 390px.
+- `npm run audit:exercises`: passed; 39 Journey interactions inventoried and screenshot-reviewed.
+- In-app browser smoke QA: Home, Journey, Play, Glossary, and Badge navigated with no horizontal overflow; Play showed 5 cards, Glossary showed 134 terms, Badge showed the badge PNG and `v0.28.2`.
+
+Artifacts:
+
+- `docs/journey/visual-aids/visual-overflow-audit-v0-28-2.json`
+- `docs/journey/visual-aids/visual-overflow-audit-v0-28-2.md`
+- `docs/journey/exercises/journey-exercise-inventory-v0-28-2.json`
+- `docs/journey/exercises/journey-exercise-inventory-v0-28-2.csv`
+- `docs/journey/exercises/journey-exercise-inventory-v0-28-2.md`
+- `docs/journey/exercises/prompt-life-v0-28-2-journey-exercise-review.html`
+- `docs/journey/exercises/prompt-life-v0-28-2-journey-exercise-review.pdf`
+- `docs/journey/prompt-life-v0-28-2-visual-overflow-and-exercise-audit-report.html`
+- `docs/journey/prompt-life-v0-28-2-visual-overflow-and-exercise-audit-report.pdf`
+
+Known issues:
+
+- Six Journey interactions remain P2 watch items for human testing: What Is an LLM?, Vectors, Tensors, Collective Intelligence, Benefits Worth Taking Seriously, and Model Literate Synthesis.
+- The Vite production build still emits the existing large-chunk warning.
+- `audit:question-clues` still reports warning candidates for human review; it does not fail the build.

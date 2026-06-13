@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Prompt Life v0.28.1 Visual Aid Readiness Report</title>
+  <style>
+    :root { color-scheme: light; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #101a52; background: #f7fbff; }
+    body { margin: 0; padding: 28px; }
+    main { max-width: 1120px; margin: 0 auto; }
+    h1, h2, h3 { color: #101783; line-height: 1.08; }
+    h1 { font-size: 2.15rem; margin-bottom: 6px; }
+    p, li, dd, dt { line-height: 1.48; }
+    .lede { font-size: 1.04rem; color: #33446f; }
+    .metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 18px 0 28px; }
+    .metrics div, .brief-card, figure, table, .panel { background: #fff; border: 1px solid #d9e3f7; border-radius: 14px; box-shadow: 0 10px 28px rgba(20,30,88,.06); }
+    .metrics div { padding: 14px; }
+    .metrics strong { display: block; font-size: 1.75rem; color: #087f8c; }
+    table { width: 100%; border-collapse: collapse; overflow: hidden; }
+    th, td { border: 1px solid #d9e3f7; padding: 9px; text-align: left; vertical-align: top; font-size: .84rem; }
+    th { background: #eaf5ff; }
+    .brief-grid { display: grid; gap: 16px; }
+    .brief-card { padding: 16px; break-inside: avoid; }
+    .brief-head { display: grid; gap: 4px; margin-bottom: 12px; }
+    .brief-head span { color: #009a9a; font-weight: 900; text-transform: uppercase; font-size: .78rem; }
+    .brief-head strong { font-size: 1.2rem; color: #101783; }
+    .brief-head em { color: #455578; font-style: normal; font-weight: 800; }
+    figure { margin: 0 0 12px; padding: 12px; break-inside: avoid; }
+    figure img { width: 100%; display: block; border-radius: 10px; border: 1px solid #edf1fb; }
+    figcaption { margin-top: 8px; font-size: .82rem; font-weight: 800; color: #28385f; }
+    .shot-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; align-items: start; }
+    .issue { background: #effafa; border-left: 4px solid #00a7a7; padding: 10px 12px; border-radius: 10px; font-weight: 800; color: #174653; }
+    dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin: 0; }
+    dl div { background: #f7fbff; border: 1px solid #e1eaf8; border-radius: 10px; padding: 8px; }
+    dt { color: #009a9a; font-size: .72rem; font-weight: 900; text-transform: uppercase; }
+    dd { margin: 3px 0 0; font-size: .86rem; }
+    .shots { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+    code { background: #eef4ff; padding: 2px 5px; border-radius: 5px; }
+    @media print {
+      body { padding: 16px; }
+      .metrics { grid-template-columns: repeat(4, 1fr); }
+      .shots { grid-template-columns: repeat(3, 1fr); }
+      .shot-pair { grid-template-columns: 1fr 1fr; }
+      table { font-size: .72rem; }
+      dl { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Prompt Life v0.28.1 Visual Aid Readiness Report</h1>
+    <p class="lede">Generated 2026-06-13T18:48:56.795Z for Prompt Life v0.28.1.</p>
+    
+      <p class="lede">This readiness pass reclassifies all Journey visual aids against a human-readability rubric, applies the six-template strategy, and verifies that no P0/P1 visual remains for small human testing.</p>
+      
+    <section class="metrics">
+      <div><strong>39</strong><span>visual aids scored</span></div>
+      <div><strong>18</strong><span>P0/P1 before</span></div>
+      <div><strong>0</strong><span>P0/P1 after</span></div>
+      <div><strong>6</strong><span>templates used</span></div>
+    </section>
+  
+      <h2>Overflow Audit</h2><p><strong>pass</strong>: checked 39 visual aids at 320px and 390px. Issues found: 0.</p>
+      <h2>Summary Of Changes</h2>
+      <ul>
+        <li>Added six canonical visual-aid templates to the style guide.</li>
+        <li>Scored all 39 Journey visual aids with a seven-part human-readability rubric.</li>
+        <li>Created a full all-visuals review packet and tester feedback sheet.</li>
+        <li>Strengthened <code>audit:visual-aids</code> to check templates, captions, alt text, label estimates, generated/mechanism boundaries, P0/P1 status, metadata strings, and screenshot coverage.</li>
+        <li>Bumped app/package version to 0.28.1.</li>
+      </ul>
+      <h2>P0/P1 Before And After</h2>
+      <table><thead><tr><th>Priority</th><th>Before</th><th>After</th></tr></thead><tbody>
+        <tr><td>P0</td><td>0</td><td>0</td></tr><tr><td>P1</td><td>18</td><td>0</td></tr><tr><td>P2</td><td>8</td><td>7</td></tr><tr><td>P3</td><td>13</td><td>32</td></tr>
+      </tbody></table>
+      <h2>Template Distribution</h2>
+      <ul><li><strong>Atmospheric Scene</strong>: 3</li><li><strong>Taxonomy Map</strong>: 11</li><li><strong>Comparison Board</strong>: 9</li><li><strong>Mechanism Flow</strong>: 9</li><li><strong>Probability Bars</strong>: 3</li><li><strong>Context Tray / Stack</strong>: 4</li></ul>
+      <h2>Visuals Fixed For Testing</h2>
+      <ul><li>Fine-Tuning Path</li><li>Prompt vs Response</li><li>Text to Tokens</li><li>Relevance Between Tokens</li><li>MLP Feature Workshop</li><li>Transformer Stack</li><li>Hidden State Flow</li><li>Raw Scoreboard</li><li>Score to Probability</li><li>Weighted Token Choice</li><li>Learning Modes Matrix</li><li>Media Lane Map</li><li>Storm Front</li><li>Borrowed Flames</li><li>Cost Ledger</li><li>Benefit Tiers</li><li>Accountability Flow</li><li>Better-AI Control Panel</li><li>Full Chain Map</li></ul>
+      <h2>Temporary But Acceptable For Testing</h2>
+      <ul><li>Overfitting vs Generalization</li><li>Feature Vector</li><li>Tensor Block</li></ul>
+      <h2>Recommended Later Image 2 Replacements</h2>
+      <ul><li>Prompt to Prediction</li><li>Broad Pretraining</li><li>Alignment Landscape</li><li>Borrowed Flames</li><li>Cost Ledger</li><li>Benefit Tiers</li><li>Accountability Flow</li></ul>
+      <h2>Must Remain Coded SVG/HTML</h2>
+      <ul><li>AI Family Tree</li><li>Rules and Learned Patterns</li><li>Training Loop</li><li>Overfitting vs Generalization</li><li>Fine-Tuning Path</li><li>Forward Pass</li><li>Prompt vs Response</li><li>Text to Tokens</li><li>Token IDs</li><li>Embedding Lookup</li><li>Feature Vector</li><li>Tensor Block</li><li>Relevance Between Tokens</li><li>MLP Feature Workshop</li><li>Transformer Stack</li><li>Hidden State Flow</li><li>Raw Scoreboard</li><li>Score to Probability</li><li>Weighted Token Choice</li><li>Append and Repeat</li><li>Temporary Context Window</li><li>Open-Book Retrieval</li><li>Claim Support Map</li><li>Unsupported Bridge</li><li>Learning Modes Matrix</li><li>Append Or Denoise</li><li>Media Lane Map</li><li>Storm Front</li><li>Risk Ledger</li><li>Better-AI Control Panel</li><li>Context Tray</li><li>Full Chain Map</li></ul>
+      <h2>Screenshots</h2>
+      <section class="shots">
+    <figure><img src="../screenshots/v0-28-1/before-morning-llm-cloud-390.png" alt="Prompt to Prediction screenshot" /><figcaption>Prompt to Prediction</figcaption></figure>
+  
+    <figure><img src="../screenshots/v0-28-1/ai-family-tree-390.png" alt="AI Family Tree screenshot" /><figcaption>AI Family Tree</figcaption></figure>
+  
+    <figure><img src="../screenshots/v0-28-1/traditions-390.png" alt="Rules and Learned Patterns screenshot" /><figcaption>Rules and Learned Patterns</figcaption></figure>
+  
+    <figure><img src="../screenshots/v0-28-1/training-loop-390.png" alt="Training Loop screenshot" /><figcaption>Training Loop</figcaption></figure>
+  
+    <figure><img src="../screenshots/v0-28-1/before-morning-pretraining-landscape-390.png" alt="Broad Pretraining screenshot" /><figcaption>Broad Pretraining</figcaption></figure>
+  
+    <figure><img src="../screenshots/v0-28-1/overfitting-generalization-390.png" alt="Overfitting vs Generalization screenshot" /><figcaption>Overfitting vs Generalization</figcaption></figure>
+  
+    <figure><img src="../screenshots/v0-28-1/before-morning-finetuning-path-390.png" alt="Fine-Tuning Path screenshot" /><figcaption>Fine-Tuning Path</figcaption></figure>
+  
+    <figure><img src="../screenshots/v0-28-1/before-morning-alignment-garden-390.png" alt="Alignment Landscape screenshot" /><figcaption>Alignment Landscape</figcaption></figure>
+  
+    <figure><img src="../screenshots/v0-28-1/inference-pass-390.png" alt="Forward Pass screenshot" /><figcaption>Forward Pass</figcaption></figure>
+  
+    <figure><img src="../screenshots/v0-28-1/prompt-response-390.png" alt="Prompt vs Response screenshot" /><figcaption>Prompt vs Response</figcaption></figure>
+  
+    <figure><img src="../screenshots/v0-28-1/tokenization-390.png" alt="Text to Tokens screenshot" /><figcaption>Text to Tokens</figcaption></figure>
+  
+    <figure><img src="../screenshots/v0-28-1/token-ids-390.png" alt="Token IDs screenshot" /><figcaption>Token IDs</figcaption></figure>
+  </section>
+      <h2>Human Testing Recommendation</h2>
+      <p><strong>ready for small human testing</strong>. No P0/P1 visual remains after the readiness classification. Several visuals remain intentionally temporary and should be watched closely during testing.</p>
+    
+  </main>
+</body>
+</html>
