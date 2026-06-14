@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Prompt Life v0.28.5 Visual Strategy Reset Report</title>
+  <style>
+    :root {
+      color: #07124a;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      word-break: normal;
+      overflow-wrap: normal;
+      hyphens: none;
+    }
+    body { margin: 0; padding: 32px; background: #f7fbff; }
+    h1 { margin: 0 0 8px; font-size: 30px; line-height: 1.05; }
+    h2 { margin: 0 0 12px; font-size: 18px; }
+    p, li { line-height: 1.45; }
+    .lede { max-width: 840px; color: #29385f; }
+    .metrics { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin: 18px 0; }
+    .metric, .panel, table {
+      background: white;
+      border: 1px solid #cfd8ef;
+      border-radius: 12px;
+      box-shadow: 0 10px 28px rgba(7, 18, 74, 0.08);
+    }
+    .metric { padding: 14px; }
+    .metric strong { display: block; font-size: 26px; }
+    .metric span { color: #009f9c; font-size: 11px; font-weight: 900; text-transform: uppercase; }
+    .panel { padding: 18px; margin: 18px 0; }
+    table { width: 100%; border-collapse: collapse; margin: 18px 0; overflow: hidden; }
+    th, td { vertical-align: top; padding: 10px; border-bottom: 1px solid #e1e7f6; font-size: 11px; line-height: 1.35; }
+    th { text-align: left; color: #009f9c; text-transform: uppercase; font-size: 9px; letter-spacing: 0.04em; }
+    td span { color: #4f5b7a; font-size: 10px; font-weight: 800; }
+    code { color: #121e72; }
+    @media print {
+      body { padding: 20px; background: white; }
+      .panel, tr { break-inside: avoid; page-break-inside: avoid; }
+      .metrics { grid-template-columns: repeat(5, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <h1>Prompt Life v0.28.5 Visual Strategy Reset Report</h1>
+  <p class="lede">Generated 2026-06-14T03:11:44.091Z. This pass does not redesign Journey visuals. It assigns each of the 39 visual aids to a final strategy lane: Image 2 concept card, coded mechanism mini-diagram, HTML comparison board, or callout-only removal/simplification.</p>
+
+  <section class="metrics">
+    <div class="metric"><strong>39</strong><span>Cards triaged</span></div>
+    <div class="metric"><strong>12</strong><span>Image 2</span></div>
+    <div class="metric"><strong>17</strong><span>Coded</span></div>
+    <div class="metric"><strong>8</strong><span>HTML boards</span></div>
+    <div class="metric"><strong>2</strong><span>Remove/simplify</span></div>
+  </section>
+
+  <section class="panel">
+    <h2>Strategy Summary</h2>
+    <p>Use Image 2 where beauty, atmosphere, and metaphor carry the teaching. Use coded mini-diagrams only where exact relationships matter. Use HTML comparison boards for boundary distinctions. Remove visuals when the diagram adds clutter, fake precision, or more labels than insight.</p>
+  </section>
+
+  <section>
+    <h2>39-Card Triage Table</h2>
+    <table>
+      <thead>
+        <tr><th>Stage</th><th>Card</th><th>Current visual</th><th>Current problem</th><th>Recommendation</th><th>Priority</th><th>Next action</th></tr>
+      </thead>
+      <tbody>
+    <tr>
+      <td>Before Morning</td>
+      <td>What Is an LLM?</td>
+      <td>Prompt to Prediction<br><span>generated-image</span></td>
+      <td>Opening visual is useful, but it should be treated as a polished conceptual image, not a mechanics diagram.</td>
+      <td><strong>Image 2 Concept Card</strong><br>This card needs to reduce mystery and set tone; exact next-token mechanics are better handled by HTML callouts.</td>
+      <td>P1 before human testing</td>
+      <td>Keep or regenerate as a textless Image 2 concept card showing prompt input, learned model cloud, and one token emerging.</td>
+    </tr>
+  
+    <tr>
+      <td>Before Morning</td>
+      <td>Where LLMs Fit</td>
+      <td>AI Family Tree<br><span>coded-svg</span></td>
+      <td>The family-tree relationship is exact enough that a generated image could blur category boundaries.</td>
+      <td><strong>Coded Mechanism Mini-Diagram</strong><br>Learners must see nested/related categories clearly: AI, machine learning, deep learning, generative AI, LLMs, diffusion, and multimodal.</td>
+      <td>P2 keep through testing</td>
+      <td>Keep as a coded minimal branch/taxonomy visual with short labels and tap-to-reveal explanations.</td>
+    </tr>
+  
+    <tr>
+      <td>Before Morning</td>
+      <td>Rationalists vs Empiricists</td>
+      <td>Rules and Learned Patterns<br><span>coded-svg</span></td>
+      <td>The concept is a boundary between rules-first AI, learned patterns, and hybrids.</td>
+      <td><strong>HTML Comparison Board</strong><br>A simple board teaches the distinction better than a decorative image or flowchart.</td>
+      <td>P2 keep through testing</td>
+      <td>Keep as an HTML comparison board; keep loss explanation in callouts/glossary, not inside the board.</td>
+    </tr>
+  
+    <tr>
+      <td>Before Morning</td>
+      <td>Training</td>
+      <td>Training Loop<br><span>coded-svg</span></td>
+      <td>Training depends on exact step order and the durable weight-update distinction.</td>
+      <td><strong>Coded Mechanism Mini-Diagram</strong><br>Prediction, loss, optimizer, and weight update must remain mechanically controlled.</td>
+      <td>P2 keep through testing</td>
+      <td>Keep a coded 4-5 step loop with one highlighted durable weight-update step.</td>
+    </tr>
+  
+    <tr>
+      <td>Before Morning</td>
+      <td>Pretraining</td>
+      <td>Broad Pretraining<br><span>generated-image</span></td>
+      <td>Scale and broad pattern learning are conceptual; exact mechanics belong in callouts.</td>
+      <td><strong>Image 2 Concept Card</strong><br>A polished static image can show many examples shaping a model without implying perfect memory.</td>
+      <td>P1 before human testing</td>
+      <td>Use a textless Image 2 concept card showing many blank paper streams shaping a model horizon.</td>
+    </tr>
+  
+    <tr>
+      <td>Before Morning</td>
+      <td>Overfitting and Generalization</td>
+      <td>Overfitting vs Generalization<br><span>coded-svg</span></td>
+      <td>The current plot is readable but still risks feeling like a math chart before learners need one.</td>
+      <td><strong>HTML Comparison Board</strong><br>The key boundary is training-fit versus validation transfer; a board with one small curve example is enough.</td>
+      <td>P2 keep through testing</td>
+      <td>Keep or convert to an HTML comparison board: memorizes old examples versus transfers to set-aside examples.</td>
+    </tr>
+  
+    <tr>
+      <td>Before Morning</td>
+      <td>Fine-Tuning</td>
+      <td>Durable vs Temporary Steering<br><span>coded-html</span></td>
+      <td>This card is a durable-versus-temporary boundary, not an atmospheric concept.</td>
+      <td><strong>HTML Comparison Board</strong><br>Fine-tuning must be separated from prompting, retrieval, and sampling with high precision.</td>
+      <td>P1 before human testing</td>
+      <td>Lock as an HTML comparison board with durable update on one side and current-run steering on the other.</td>
+    </tr>
+  
+    <tr>
+      <td>Before Morning</td>
+      <td>Alignment</td>
+      <td>Alignment Landscape<br><span>generated-image</span></td>
+      <td>Behavior shaping is conceptual and social; a coded mechanism can imply false precision.</td>
+      <td><strong>Image 2 Concept Card</strong><br>Image 2 can carry the calm behavior-shaping metaphor while HTML callouts state the conscience boundary.</td>
+      <td>P1 before human testing</td>
+      <td>Use a textless Image 2 concept card; keep alignment-versus-conscience language in HTML callouts.</td>
+    </tr>
+  
+    <tr>
+      <td>Morning Commute</td>
+      <td>Inference</td>
+      <td>Forward Pass<br><span>coded-html</span></td>
+      <td>Inference requires the fixed-weights versus temporary-activation distinction.</td>
+      <td><strong>Coded Mechanism Mini-Diagram</strong><br>Exact flow matters: context enters, fixed weights are used, temporary values form, scores emerge, next token is selected.</td>
+      <td>P2 keep through testing</td>
+      <td>Keep as a coded vertical mechanism strip with no paragraph text in the diagram.</td>
+    </tr>
+  
+    <tr>
+      <td>Morning Commute</td>
+      <td>Prompt vs Response</td>
+      <td>Prompt vs Response<br><span>coded-html</span></td>
+      <td>Prompt/response must show generated tokens being appended to context.</td>
+      <td><strong>Coded Mechanism Mini-Diagram</strong><br>This is one of the core mental models; static art would blur given input versus generated output.</td>
+      <td>P1 before human testing</td>
+      <td>Keep the crisp stacked coded layout: prompt, response so far, next token, updated context.</td>
+    </tr>
+  
+    <tr>
+      <td>Morning Commute</td>
+      <td>Tokenization</td>
+      <td>Text to Tokens<br><span>coded-html</span></td>
+      <td>Tokenization needs exact chips and uneven splits without awkward wrapping.</td>
+      <td><strong>Coded Mechanism Mini-Diagram</strong><br>Learners must see tokens are not always words.</td>
+      <td>P1 before human testing</td>
+      <td>Keep as coded token chips with short labels and wrapped rows.</td>
+    </tr>
+  
+    <tr>
+      <td>Morning Commute</td>
+      <td>Token IDs</td>
+      <td>Token IDs<br><span>coded-svg</span></td>
+      <td>Token ID lookup is an exact mapping, not a metaphor.</td>
+      <td><strong>Coded Mechanism Mini-Diagram</strong><br>The visual must separate surface text, token chunk, ID, and later vector lookup.</td>
+      <td>P2 keep through testing</td>
+      <td>Keep a coded lookup mini-diagram with chips and IDs only.</td>
+    </tr>
+  
+    <tr>
+      <td>Morning Commute</td>
+      <td>Embeddings</td>
+      <td>Embedding Lookup<br><span>coded-svg</span></td>
+      <td>Embedding is often confused with hidden state, so the lookup boundary must stay explicit.</td>
+      <td><strong>Coded Mechanism Mini-Diagram</strong><br>A coded table/tray can show learned starting vector without implying current-context shaping.</td>
+      <td>P2 keep through testing</td>
+      <td>Keep coded lookup: token ID enters a learned table and returns a starting vector.</td>
+    </tr>
+  
+    <tr>
+      <td>Morning Commute</td>
+      <td>Vectors</td>
+      <td>Feature Vector<br><span>coded-html</span></td>
+      <td>The current feature-vector visual risks fake precision and may add little beyond the text.</td>
+      <td><strong>No Visual Needed / Text Callout Only</strong><br>For this audience, a concise callout can say vector equals ordered numbers carrying learned features without requiring a diagram.</td>
+      <td>P0 before human testing</td>
+      <td>Remove or replace with a text callout only; if retained later, use one simple row of numbered chips with no axes.</td>
+    </tr>
+  
+    <tr>
+      <td>Morning Commute</td>
+      <td>Tensors</td>
+      <td>Tensor Block<br><span>coded-html</span></td>
+      <td>The tensor block can look like an arbitrary grid and may create more confusion than clarity.</td>
+      <td><strong>No Visual Needed / Text Callout Only</strong><br>The minimum learning objective is that tensors are shaped arrays; callouts can do that without a fake geometry.</td>
+      <td>P0 before human testing</td>
+      <td>Remove or replace with a callout-only explanation; defer any coded tensor shape until after learner feedback.</td>
+    </tr>
+  
+    <tr>
+      <td>Workday</td>
+      <td>Attention</td>
+      <td>Relevance Between Tokens<br><span>coded-html</span></td>
+      <td>Attention must remain weighted token-to-token relevance, not human awareness.</td>
+      <td><strong>Coded Mechanism Mini-Diagram</strong><br>Exact token arcs and weights should be controlled in code.</td>
+      <td>P1 before human testing</td>
+      <td>Keep a coded token-arc mini-diagram with 1-3 word labels and no long text.</td>
+    </tr>
+  
+    <tr>
+      <td>Workday</td>
+      <td>MLP</td>
+      <td>Attention vs MLP<br><span>coded-html</span></td>
+      <td>The lesson depends on distinguishing attention from MLP behavior.</td>
+      <td><strong>HTML Comparison Board</strong><br>A board can compare across-token relevance with per-token feature reshaping.</td>
+      <td>P1 before human testing</td>
+      <td>Keep as an HTML comparison board: Attention connects positions; MLP reshapes each token.</td>
+    </tr>
+  
+    <tr>
+      <td>Workday</td>
+      <td>Layers</td>
+      <td>Transformer Layer Strip<br><span>coded-html</span></td>
+      <td>Layer order and carry-forward behavior are exact enough to keep coded.</td>
+      <td><strong>Coded Mechanism Mini-Diagram</strong><br>A minimal strip can show repeated transformations without dense wiring.</td>
+      <td>P2 keep through testing</td>
+      <td>Keep coded vertical strip; do not add internal layer math.</td>
+    </tr>
+  
+    <tr>
+      <td>Workday</td>
+      <td>Hidden States</td>
+      <td>Embedding, Hidden State, Weight<br><span>coded-html</span></td>
+      <td>The card teaches a three-way distinction: embedding, hidden state, and weight.</td>
+      <td><strong>HTML Comparison Board</strong><br>A comparison board is clearer than a flowchart.</td>
+      <td>P1 before human testing</td>
+      <td>Keep as HTML comparison board with short headings and detailed callouts below.</td>
+    </tr>
+  
+    <tr>
+      <td>Decision Room</td>
+      <td>Logits</td>
+      <td>Raw Scoreboard<br><span>coded-svg</span></td>
+      <td>Raw scores need visual precision and must not look like probabilities or truth.</td>
+      <td><strong>Coded Mechanism Mini-Diagram</strong><br>Probability bars/scores require controlled values.</td>
+      <td>P2 keep through testing</td>
+      <td>Keep coded raw-score bars with HTML callout saying scores are not probabilities.</td>
+    </tr>
+  
+    <tr>
+      <td>Decision Room</td>
+      <td>Softmax</td>
+      <td>Score to Probability<br><span>coded-svg</span></td>
+      <td>Softmax is a precise conversion from raw scores to probabilities.</td>
+      <td><strong>Coded Mechanism Mini-Diagram</strong><br>Exact score-to-probability relationship should stay coded.</td>
+      <td>P2 keep through testing</td>
+      <td>Keep coded transformation visual with the same token set as logits/sampling.</td>
+    </tr>
+  
+    <tr>
+      <td>Decision Room</td>
+      <td>Sampling</td>
+      <td>Weighted Token Choice<br><span>coded-svg</span></td>
+      <td>Sampling must separate probability from truth and from the final choice.</td>
+      <td><strong>Coded Mechanism Mini-Diagram</strong><br>The learner needs controlled probability bars and one selected next token.</td>
+      <td>P2 keep through testing</td>
+      <td>Keep coded probability bars plus one selected token; no exact tiny numbers required.</td>
+    </tr>
+  
+    <tr>
+      <td>The Day Repeats</td>
+      <td>Autoregression</td>
+      <td>Append and Repeat<br><span>coded-svg</span></td>
+      <td>Append-and-repeat is core process mechanics.</td>
+      <td><strong>Coded Mechanism Mini-Diagram</strong><br>A coded mini-diagram can show next token, append, run again, context grows.</td>
+      <td>P2 keep through testing</td>
+      <td>Keep coded repeat loop with four short steps.</td>
+    </tr>
+  
+    <tr>
+      <td>The Day Repeats</td>
+      <td>Context Window</td>
+      <td>Temporary Context Window<br><span>coded-html</span></td>
+      <td>Context window is a temporary boundary; it must not look like permanent memory.</td>
+      <td><strong>Coded Mechanism Mini-Diagram</strong><br>A coded tray/stack can show what fits and what falls out.</td>
+      <td>P1 before human testing</td>
+      <td>Keep coded tray with visible limit and fall-out area.</td>
+    </tr>
+  
+    <tr>
+      <td>The Day Repeats</td>
+      <td>RAG and Retrieval</td>
+      <td>Open-Book Retrieval<br><span>coded-svg</span></td>
+      <td>RAG is retrieval plus context, not model learning.</td>
+      <td><strong>Coded Mechanism Mini-Diagram</strong><br>The outside-document search step and current-context insertion need exact control.</td>
+      <td>P1 before human testing</td>
+      <td>Keep coded retrieval shelf/tray: user prompt, retriever, retrieved cards, context tray, generated response.</td>
+    </tr>
+  
+    <tr>
+      <td>The Day Repeats</td>
+      <td>Grounding</td>
+      <td>Claim Support Map<br><span>coded-svg</span></td>
+      <td>Grounding must show claim-to-evidence support without guaranteeing truth.</td>
+      <td><strong>Coded Mechanism Mini-Diagram</strong><br>Support lines, missing support, and review markers need careful control.</td>
+      <td>P1 before human testing</td>
+      <td>Keep coded claim/evidence support map with sparse labels.</td>
+    </tr>
+  
+    <tr>
+      <td>The Day Repeats</td>
+      <td>Hallucinations</td>
+      <td>Unsupported Bridge<br><span>coded-svg</span></td>
+      <td>The key distinction is fluent supported output versus fluent unsupported output.</td>
+      <td><strong>HTML Comparison Board</strong><br>A comparison board can teach hallucination versus lying without spooky imagery.</td>
+      <td>P1 before human testing</td>
+      <td>Use/keep HTML comparison board: supported claim, unsupported claim, review.</td>
+    </tr>
+  
+    <tr>
+      <td>Twilight: The Wider Landscape</td>
+      <td>How AI Learns</td>
+      <td>Learning Modes Matrix<br><span>coded-svg</span></td>
+      <td>This card compares modes; a flowchart invites false sequence thinking.</td>
+      <td><strong>HTML Comparison Board</strong><br>Training, fine-tuning, RAG, prompting, and evaluation should be shown as categories, not steps in one process.</td>
+      <td>P1 before human testing</td>
+      <td>Use/keep HTML comparison board with durable change versus current-run support.</td>
+    </tr>
+  
+    <tr>
+      <td>Twilight: The Wider Landscape</td>
+      <td>Diffusion vs Autoregression</td>
+      <td>Append Or Denoise<br><span>coded-svg</span></td>
+      <td>The lesson is a boundary between autoregressive text and diffusion denoising.</td>
+      <td><strong>HTML Comparison Board</strong><br>A two-lane comparison board is clearer than a generative art scene.</td>
+      <td>P1 before human testing</td>
+      <td>Keep HTML comparison board: append tokens versus denoise pattern.</td>
+    </tr>
+  
+    <tr>
+      <td>Twilight: The Wider Landscape</td>
+      <td>Multimodal AI</td>
+      <td>Media Lane Map<br><span>coded-svg</span></td>
+      <td>The current media-lane map is serviceable but still feels diagrammatic and may not need exact wiring.</td>
+      <td><strong>Image 2 Concept Card</strong><br>Multimodal is a conceptual family idea; Image 2 can show multiple media streams represented together while HTML explains boundaries.</td>
+      <td>P0 before human testing</td>
+      <td>Replace with textless Image 2 concept card showing text, image, audio, and video-like paper forms entering one shared representation field.</td>
+    </tr>
+  
+    <tr>
+      <td>Twilight: The Wider Landscape</td>
+      <td>The Perfect Storm</td>
+      <td>Storm Front<br><span>coded-svg</span></td>
+      <td>Convergence diagrams have repeatedly created label/alignment pressure on mobile.</td>
+      <td><strong>Image 2 Concept Card</strong><br>A conceptual storm-front image can show convergence while callouts name data, compute, storage, methods, labor, and incentives.</td>
+      <td>P0 before human testing</td>
+      <td>Replace with Image 2 concept card; keep all ingredient labels in HTML callouts.</td>
+    </tr>
+  
+    <tr>
+      <td>Midnight Ledger</td>
+      <td>Collective Intelligence, Extracted</td>
+      <td>Borrowed Flames<br><span>coded-svg</span></td>
+      <td>The concept is cultural and provenance-focused; coded nodes feel thin.</td>
+      <td><strong>Image 2 Concept Card</strong><br>Image 2 can make human-created traces and rights/provenance questions feel concrete without fake mechanics.</td>
+      <td>P1 before human testing</td>
+      <td>Replace or supplement with a textless Image 2 lantern/source-traces concept card.</td>
+    </tr>
+  
+    <tr>
+      <td>Midnight Ledger</td>
+      <td>Costs We Must Count</td>
+      <td>Cost Ledger<br><span>coded-svg</span></td>
+      <td>Cost ledgers risk fake dashboard language and false precision.</td>
+      <td><strong>Image 2 Concept Card</strong><br>A static concept image can show hidden infrastructure and institutional costs without invented metrics.</td>
+      <td>P0 before human testing</td>
+      <td>Replace with a textless Image 2 infrastructure/ledger scene; keep cost categories in HTML.</td>
+    </tr>
+  
+    <tr>
+      <td>Midnight Ledger</td>
+      <td>Risk vs Myth</td>
+      <td>Risk Ledger<br><span>coded-svg</span></td>
+      <td>Risk visuals can easily become spooky or too ledger-like.</td>
+      <td><strong>Image 2 Concept Card</strong><br>A polished concept image can separate real-world grounded risk from myth while callouts do the exact sorting.</td>
+      <td>P0 before human testing</td>
+      <td>Replace with textless Image 2 concept card showing a grounded path beside misty myth shapes; keep labels outside.</td>
+    </tr>
+  
+    <tr>
+      <td>New Dawn</td>
+      <td>Benefits Worth Taking Seriously</td>
+      <td>Benefit Tiers<br><span>coded-svg</span></td>
+      <td>Benefit chips are readable but feel utilitarian for a hope/bounds lesson.</td>
+      <td><strong>Image 2 Concept Card</strong><br>A calm tool-garden image can convey useful bounded benefit without hype.</td>
+      <td>P1 before human testing</td>
+      <td>Replace with textless Image 2 tool-garden concept card and keep benefit tiers in HTML.</td>
+    </tr>
+  
+    <tr>
+      <td>New Dawn</td>
+      <td>Human-Centered AI</td>
+      <td>Accountability Flow<br><span>coded-svg</span></td>
+      <td>Accountability flow is accurate but visually administrative.</td>
+      <td><strong>Image 2 Concept Card</strong><br>A humane concept image can put dignity, review, and accountable action at the center.</td>
+      <td>P1 before human testing</td>
+      <td>Replace with textless Image 2 human-centered decision-support scene; callouts carry governance specifics.</td>
+    </tr>
+  
+    <tr>
+      <td>New Dawn</td>
+      <td>Better AI Is a Choice</td>
+      <td>Better-AI Control Panel<br><span>coded-svg</span></td>
+      <td>Lever panels can feel like a fake control dashboard.</td>
+      <td><strong>Image 2 Concept Card</strong><br>The lesson is about human choices and governance, so a concept image plus callouts is stronger.</td>
+      <td>P1 before human testing</td>
+      <td>Replace with Image 2 forked-path/control-choice scene; keep data, evaluation, policy, review, and incentives in HTML.</td>
+    </tr>
+  
+    <tr>
+      <td>New Dawn</td>
+      <td>Effective Prompting from Model Literacy</td>
+      <td>Context Tray<br><span>coded-svg</span></td>
+      <td>Prompting depends on context packing, evidence, format, and review in one run.</td>
+      <td><strong>Coded Mechanism Mini-Diagram</strong><br>The context tray is exact and should remain coded.</td>
+      <td>P2 keep through testing</td>
+      <td>Keep coded tray/stack visual with short prompt-part chips.</td>
+    </tr>
+  
+    <tr>
+      <td>New Dawn</td>
+      <td>Model Literate Synthesis</td>
+      <td>Model Literacy Board<br><span>coded-html</span></td>
+      <td>The capstone board remains abstract and can feel like a summary dashboard.</td>
+      <td><strong>Image 2 Concept Card</strong><br>A final concept image can integrate mechanics, evidence, and human responsibility while HTML callouts stay precise.</td>
+      <td>P0 before human testing</td>
+      <td>Replace with textless Image 2 compass/lantern/map concept card; keep three synthesis callouts below.</td>
+    </tr>
+  </tbody>
+    </table>
+  </section>
+
+  
+    <section class="panel">
+      <h2>Image 2 Candidate List</h2>
+      <ol>
+        <li><strong>What Is an LLM?</strong>: Keep or regenerate as a textless Image 2 concept card showing prompt input, learned model cloud, and one token emerging.</li><li><strong>Pretraining</strong>: Use a textless Image 2 concept card showing many blank paper streams shaping a model horizon.</li><li><strong>Alignment</strong>: Use a textless Image 2 concept card; keep alignment-versus-conscience language in HTML callouts.</li><li><strong>Multimodal AI</strong>: Replace with textless Image 2 concept card showing text, image, audio, and video-like paper forms entering one shared representation field.</li><li><strong>The Perfect Storm</strong>: Replace with Image 2 concept card; keep all ingredient labels in HTML callouts.</li><li><strong>Collective Intelligence, Extracted</strong>: Replace or supplement with a textless Image 2 lantern/source-traces concept card.</li><li><strong>Costs We Must Count</strong>: Replace with a textless Image 2 infrastructure/ledger scene; keep cost categories in HTML.</li><li><strong>Risk vs Myth</strong>: Replace with textless Image 2 concept card showing a grounded path beside misty myth shapes; keep labels outside.</li><li><strong>Benefits Worth Taking Seriously</strong>: Replace with textless Image 2 tool-garden concept card and keep benefit tiers in HTML.</li><li><strong>Human-Centered AI</strong>: Replace with textless Image 2 human-centered decision-support scene; callouts carry governance specifics.</li><li><strong>Better AI Is a Choice</strong>: Replace with Image 2 forked-path/control-choice scene; keep data, evaluation, policy, review, and incentives in HTML.</li><li><strong>Model Literate Synthesis</strong>: Replace with textless Image 2 compass/lantern/map concept card; keep three synthesis callouts below.</li>
+      </ol>
+    </section>
+  
+  
+    <section class="panel">
+      <h2>Coded Mechanic List</h2>
+      <ol>
+        <li><strong>Where LLMs Fit</strong>: Keep as a coded minimal branch/taxonomy visual with short labels and tap-to-reveal explanations.</li><li><strong>Training</strong>: Keep a coded 4-5 step loop with one highlighted durable weight-update step.</li><li><strong>Inference</strong>: Keep as a coded vertical mechanism strip with no paragraph text in the diagram.</li><li><strong>Prompt vs Response</strong>: Keep the crisp stacked coded layout: prompt, response so far, next token, updated context.</li><li><strong>Tokenization</strong>: Keep as coded token chips with short labels and wrapped rows.</li><li><strong>Token IDs</strong>: Keep a coded lookup mini-diagram with chips and IDs only.</li><li><strong>Embeddings</strong>: Keep coded lookup: token ID enters a learned table and returns a starting vector.</li><li><strong>Attention</strong>: Keep a coded token-arc mini-diagram with 1-3 word labels and no long text.</li><li><strong>Layers</strong>: Keep coded vertical strip; do not add internal layer math.</li><li><strong>Logits</strong>: Keep coded raw-score bars with HTML callout saying scores are not probabilities.</li><li><strong>Softmax</strong>: Keep coded transformation visual with the same token set as logits/sampling.</li><li><strong>Sampling</strong>: Keep coded probability bars plus one selected token; no exact tiny numbers required.</li><li><strong>Autoregression</strong>: Keep coded repeat loop with four short steps.</li><li><strong>Context Window</strong>: Keep coded tray with visible limit and fall-out area.</li><li><strong>RAG and Retrieval</strong>: Keep coded retrieval shelf/tray: user prompt, retriever, retrieved cards, context tray, generated response.</li><li><strong>Grounding</strong>: Keep coded claim/evidence support map with sparse labels.</li><li><strong>Effective Prompting from Model Literacy</strong>: Keep coded tray/stack visual with short prompt-part chips.</li>
+      </ol>
+    </section>
+  
+  
+    <section class="panel">
+      <h2>HTML Comparison Board List</h2>
+      <ol>
+        <li><strong>Rationalists vs Empiricists</strong>: Keep as an HTML comparison board; keep loss explanation in callouts/glossary, not inside the board.</li><li><strong>Overfitting and Generalization</strong>: Keep or convert to an HTML comparison board: memorizes old examples versus transfers to set-aside examples.</li><li><strong>Fine-Tuning</strong>: Lock as an HTML comparison board with durable update on one side and current-run steering on the other.</li><li><strong>MLP</strong>: Keep as an HTML comparison board: Attention connects positions; MLP reshapes each token.</li><li><strong>Hidden States</strong>: Keep as HTML comparison board with short headings and detailed callouts below.</li><li><strong>Hallucinations</strong>: Use/keep HTML comparison board: supported claim, unsupported claim, review.</li><li><strong>How AI Learns</strong>: Use/keep HTML comparison board with durable change versus current-run support.</li><li><strong>Diffusion vs Autoregression</strong>: Keep HTML comparison board: append tokens versus denoise pattern.</li>
+      </ol>
+    </section>
+  
+  
+    <section class="panel">
+      <h2>Removal / Simplification Candidates</h2>
+      <ol>
+        <li><strong>Vectors</strong>: Remove or replace with a text callout only; if retained later, use one simple row of numbered chips with no axes.</li><li><strong>Tensors</strong>: Remove or replace with a callout-only explanation; defer any coded tensor shape until after learner feedback.</li>
+      </ol>
+    </section>
+  
+  
+    <section class="panel">
+      <h2>Top 10 Visuals To Change Before Human Testing</h2>
+      <ol>
+        <li><strong>Vectors</strong>: Remove or replace with a text callout only; if retained later, use one simple row of numbered chips with no axes.</li><li><strong>Tensors</strong>: Remove or replace with a callout-only explanation; defer any coded tensor shape until after learner feedback.</li><li><strong>Multimodal AI</strong>: Replace with textless Image 2 concept card showing text, image, audio, and video-like paper forms entering one shared representation field.</li><li><strong>The Perfect Storm</strong>: Replace with Image 2 concept card; keep all ingredient labels in HTML callouts.</li><li><strong>Costs We Must Count</strong>: Replace with a textless Image 2 infrastructure/ledger scene; keep cost categories in HTML.</li><li><strong>Risk vs Myth</strong>: Replace with textless Image 2 concept card showing a grounded path beside misty myth shapes; keep labels outside.</li><li><strong>Model Literate Synthesis</strong>: Replace with textless Image 2 compass/lantern/map concept card; keep three synthesis callouts below.</li><li><strong>What Is an LLM?</strong>: Keep or regenerate as a textless Image 2 concept card showing prompt input, learned model cloud, and one token emerging.</li><li><strong>Attention</strong>: Keep a coded token-arc mini-diagram with 1-3 word labels and no long text.</li><li><strong>Grounding</strong>: Keep coded claim/evidence support map with sparse labels.</li>
+      </ol>
+    </section>
+  
+
+  <section class="panel">
+    <h2>Image 2 Prompt Packet Summary</h2>
+    <p>The companion prompt packet includes 12 production prompts with purpose, negative prompt, aspect ratio, style, embedded-text decision, HTML callouts, alt text, and acceptance criteria. Embedded text is disallowed for this batch unless a later human verification step approves a specific generated asset.</p>
+  </section>
+</body>
+</html>

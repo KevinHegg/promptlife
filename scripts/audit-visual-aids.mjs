@@ -1,18 +1,32 @@
 import { access, mkdir, readFile, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { VERSION, visualAidReadinessBriefs, visualAidTemplates } from './visual-aid-readiness-data-v0282.mjs'
+import { VERSION, visualAidReadinessBriefs, visualAidTemplates } from './visual-aid-readiness-data-v0283.mjs'
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const outDir = path.join(root, 'docs', 'journey', 'visual-aids')
-const screenshotDir = path.join(root, 'docs', 'journey', 'screenshots', 'v0-28-2')
+const screenshotDir = path.join(root, 'docs', 'journey', 'screenshots', 'v0-28-3')
 const sourcePath = path.join(root, 'src', 'components', 'VisualAids.tsx')
 const cssPath = path.join(root, 'src', 'styles', 'global.css')
+const flowchartReplacementIds = [
+  'before-morning-finetuning-path',
+  'inference-pass',
+  'attention',
+  'mlp',
+  'layers',
+  'hidden-states',
+  'vectors',
+  'tensors',
+  'context-window',
+  'synthesis-map-compass-lantern'
+]
+const handSpecifiedTemplates = new Set(['Vertical Mechanism Strip', 'Boundary Board', 'Tray / Stack / Bars'])
 
 const numberedVisualAidMarkers = {
   'training-loop': 5,
   'overfitting-generalization': 4,
-  'inference-pass': 4,
+  'before-morning-finetuning-path': 4,
+  'inference-pass': 5,
   'prompt-response': 4,
   tokenization: 3,
   'token-ids': 4,
@@ -20,7 +34,7 @@ const numberedVisualAidMarkers = {
   vectors: 3,
   tensors: 3,
   autoregression: 4,
-  'context-window': 4,
+  'context-window': 3,
   'rag-retrieval': 5,
   'grounding-evidence': 4,
   'hallucination-bridge': 4
@@ -49,7 +63,7 @@ async function readCatalogIds() {
 
 function renderConsistencyMarkdown(summary, rows) {
   const lines = [
-    '# Prompt Life Visual Aid Consistency Audit v0.28.2',
+    '# Prompt Life Visual Aid Consistency Audit v0.28.3',
     '',
     `Generated: ${new Date().toISOString()}`,
     '',
@@ -69,7 +83,7 @@ function renderConsistencyMarkdown(summary, rows) {
 
 function renderReadinessMarkdown(readiness) {
   const lines = [
-    '# Prompt Life Visual Aid Readiness Audit v0.28.2',
+    '# Prompt Life Visual Aid Readiness Audit v0.28.3',
     '',
     `Generated: ${new Date().toISOString()}`,
     '',
@@ -99,6 +113,28 @@ function renderReadinessMarkdown(readiness) {
   lines.push('', '## Required Screenshots', '')
   for (const screenshot of readiness.requiredScreenshots) {
     lines.push(`- ${screenshot.file}: ${screenshot.exists ? 'present' : 'missing'}`)
+  }
+
+  return `${lines.join('\n')}\n`
+}
+
+function renderFlowchartReplacementMarkdown(payload) {
+  const lines = [
+    '# Prompt Life Flowchart Replacement Audit v0.28.3',
+    '',
+    `Generated: ${payload.generatedAt}`,
+    '',
+    `Status: ${payload.status}`,
+    `Target visuals: ${payload.summary.totalTargets}`,
+    `Targets replaced: ${payload.summary.replacedTargets}`,
+    `Issues: ${payload.summary.issueCount}`,
+    '',
+    '| Visual aid | New template | Type | Labels | Status | Issue |',
+    '| --- | --- | --- | ---: | --- | --- |'
+  ]
+
+  for (const row of payload.rows) {
+    lines.push(`| ${row.id} | ${row.template} | ${row.visualType} | ${row.internalLabelCount} | ${row.status} | ${row.issues.join('; ') || 'ok'} |`)
   }
 
   return `${lines.join('\n')}\n`
@@ -160,9 +196,9 @@ async function main() {
     ...consistencyRows.map((row) => consistencyCsvHeader.map((key) => csvEscape(row[key])).join(','))
   ].join('\n')
 
-  await writeFile(path.join(outDir, 'visual-aid-consistency-audit-v0-28-2.json'), `${JSON.stringify(consistencyPayload, null, 2)}\n`)
-  await writeFile(path.join(outDir, 'visual-aid-consistency-audit-v0-28-2.csv'), `${consistencyCsv}\n`)
-  await writeFile(path.join(outDir, 'visual-aid-consistency-audit-v0-28-2.md'), renderConsistencyMarkdown(summary, consistencyRows))
+  await writeFile(path.join(outDir, 'visual-aid-consistency-audit-v0-28-3.json'), `${JSON.stringify(consistencyPayload, null, 2)}\n`)
+  await writeFile(path.join(outDir, 'visual-aid-consistency-audit-v0-28-3.csv'), `${consistencyCsv}\n`)
+  await writeFile(path.join(outDir, 'visual-aid-consistency-audit-v0-28-3.md'), renderConsistencyMarkdown(summary, consistencyRows))
 
   const metadataTerms = ['Pattern:', 'Variant:', 'Markers:', 'Callouts:', 'Renderer:', 'Implementation:', 'visual aid id']
   const metadataLeaks = metadataTerms.filter((term) => source.includes(term))
@@ -182,8 +218,8 @@ async function main() {
   }
 
   const readinessIssues = [
-    ...missingFromConfig.map((id) => `current catalog visual aid has no v0.28.2 readiness brief: ${id}`),
-    ...missingFromSource.map((id) => `v0.28.2 readiness brief does not exist in current catalog: ${id}`),
+    ...missingFromConfig.map((id) => `current catalog visual aid has no v0.28.3 readiness brief: ${id}`),
+    ...missingFromSource.map((id) => `v0.28.3 readiness brief does not exist in current catalog: ${id}`),
     ...visualAidReadinessBriefs.filter((brief) => !templateNames.has(brief.selectedCanonicalTemplate)).map((brief) => `missing or unknown template: ${brief.currentVisualId}`),
     ...visualAidReadinessBriefs.filter((brief) => !brief.calloutsBelowVisual?.length).map((brief) => `missing callouts: ${brief.currentVisualId}`),
     ...visualAidReadinessBriefs.filter((brief) => !brief.altText).map((brief) => `missing alt text: ${brief.currentVisualId}`),
@@ -195,8 +231,63 @@ async function main() {
     ...deprecatedCurrentTitles.map((id) => `deprecated Attention Weave title remains for current visual: ${id}`),
     ...tinyCssMatches.map((size) => `visual-aid CSS font-size below 12px: ${size}px`),
     ...inlineTinyText.map((size) => `inline SVG font size below 12px: ${size}px`),
-    ...requiredScreenshots.filter((shot) => !shot.exists).map((shot) => `required v0.28.2 screenshot missing: ${shot.file}`)
+    ...requiredScreenshots.filter((shot) => !shot.exists).map((shot) => `required v0.28.3 screenshot missing: ${shot.file}`)
   ]
+
+  const flowchartRows = flowchartReplacementIds.map((id) => {
+    const brief = visualAidReadinessBriefs.find((item) => item.currentVisualId === id)
+    const issues = []
+    if (!brief) {
+      issues.push('missing readiness brief')
+      return {
+        id,
+        title: '',
+        template: '',
+        visualType: '',
+        internalLabelCount: 0,
+        status: 'fix',
+        issues
+      }
+    }
+    if (!handSpecifiedTemplates.has(brief.selectedCanonicalTemplate)) issues.push(`not a v0.28.3 hand-specified template: ${brief.selectedCanonicalTemplate}`)
+    if (brief.currentVisualType === 'generated-image') issues.push('target exact-mechanism visual uses generated image')
+    if (brief.internalLabelCountEstimate > 5) issues.push(`${brief.internalLabelCountEstimate} internal labels`)
+    if (!source.includes(`'${id}'`)) issues.push('target id missing from source')
+    if (!source.includes('handSpecifiedTemplateVisualIds') || !source.includes(`'${id}'`)) issues.push('target not registered for hand-specified HTML renderer')
+    return {
+      id,
+      title: brief.currentVisualTitle,
+      template: brief.selectedCanonicalTemplate,
+      visualType: brief.currentVisualType,
+      internalLabelCount: brief.internalLabelCountEstimate,
+      status: issues.length ? 'fix' : 'ok',
+      issues
+    }
+  })
+  const freeFormFlowchartClassHits = [...source.matchAll(/className=["'`][^"'`]*(?:flowchart|flow-chart)[^"'`]*/gi)].map((match) => match[0])
+  const flowchartIssues = [
+    ...flowchartRows.flatMap((row) => row.issues.map((issue) => `${row.id}: ${issue}`)),
+    ...freeFormFlowchartClassHits.map((hit) => `free-form flowchart class remains: ${hit}`)
+  ]
+  const flowchartAudit = {
+    version: VERSION,
+    generatedAt: new Date().toISOString(),
+    status: flowchartIssues.length ? 'fix' : 'ok',
+    summary: {
+      totalTargets: flowchartReplacementIds.length,
+      replacedTargets: flowchartRows.filter((row) => row.status === 'ok').length,
+      issueCount: flowchartIssues.length
+    },
+    checks: [
+      'target visuals use Vertical Mechanism Strip, Boundary Board, or Tray / Stack / Bars',
+      'target exact-mechanism visuals are not generated PNG only',
+      'target internal label estimates stay at five or fewer',
+      'target ids are registered for hand-specified HTML rendering',
+      'no explicit free-form flowchart class remains in VisualAids.tsx'
+    ],
+    rows: flowchartRows,
+    issues: flowchartIssues
+  }
 
   const readiness = {
     version: VERSION,
@@ -210,22 +301,24 @@ async function main() {
       'no exact mechanism visual is generated PNG only',
       'no P0/P1 visual remains after readiness pass',
       'no renderer/debug metadata labels in VisualAids.tsx',
-      'required v0.28.2 390px screenshots exist for all 39 visual aids'
+      'required v0.28.3 390px screenshots exist for all 39 visual aids'
     ],
     heuristicNotes: [
       'Internal label count is a curated estimate for explanatory labels. Repeated token examples are not counted as separate instructional labels.',
-      'Generated-image and exact-mechanism checks use the v0.28.2 readiness registry rather than computer vision.',
+      'Generated-image and exact-mechanism checks use the v0.28.3 readiness registry rather than computer vision.',
       'Screenshot checks validate artifact presence; visual quality still requires human review.'
     ],
     issues: readinessIssues,
     requiredScreenshots
   }
 
-  await writeFile(path.join(outDir, 'visual-aid-readiness-audit-v0-28-2.json'), `${JSON.stringify(readiness, null, 2)}\n`)
-  await writeFile(path.join(outDir, 'visual-aid-readiness-audit-v0-28-2.md'), renderReadinessMarkdown(readiness))
+  await writeFile(path.join(outDir, 'visual-aid-readiness-audit-v0-28-3.json'), `${JSON.stringify(readiness, null, 2)}\n`)
+  await writeFile(path.join(outDir, 'visual-aid-readiness-audit-v0-28-3.md'), renderReadinessMarkdown(readiness))
+  await writeFile(path.join(outDir, 'flowchart-replacement-audit-v0-28-3.json'), `${JSON.stringify(flowchartAudit, null, 2)}\n`)
+  await writeFile(path.join(outDir, 'flowchart-replacement-audit-v0-28-3.md'), renderFlowchartReplacementMarkdown(flowchartAudit))
 
-  if (summary.missingFromConfig.length || summary.missingFromSource.length || mismatches || readinessIssues.length) {
-    console.error(JSON.stringify({ summary, readiness }, null, 2))
+  if (summary.missingFromConfig.length || summary.missingFromSource.length || mismatches || readinessIssues.length || flowchartIssues.length) {
+    console.error(JSON.stringify({ summary, readiness, flowchartAudit }, null, 2))
     process.exit(1)
   }
 

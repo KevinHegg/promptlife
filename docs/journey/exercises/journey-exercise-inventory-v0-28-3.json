@@ -1,0 +1,4150 @@
+{
+  "version": "0.28.3",
+  "generatedAt": "2026-06-14T21:26:36.561Z",
+  "status": "pass",
+  "readinessJudgment": "Ready for small human testing, with six P2 interactions to watch.",
+  "summary": {
+    "total": 39,
+    "typeDistribution": {
+      "tap-step": 6,
+      "tap-reveal": 4,
+      "sort-buckets": 8,
+      "toggle-choice": 1,
+      "tap-choice": 3,
+      "label-pieces": 1,
+      "match-lookup": 1,
+      "tap-lookup": 1,
+      "toggle-view": 3,
+      "tap-axis": 1,
+      "connect-nodes": 2,
+      "tap-transform": 1,
+      "tap-stack": 1,
+      "tap-multiple": 3,
+      "tap-compare": 1,
+      "match-lanes": 1,
+      "order-sequence": 1
+    },
+    "priorityCounts": {
+      "P0": 0,
+      "P1": 0,
+      "P2": 6,
+      "P3": 33
+    },
+    "stageDistribution": {
+      "Before Morning": 8,
+      "Morning Commute": 7,
+      "Workday": 4,
+      "Decision Room": 3,
+      "The Day Repeats": 5,
+      "Twilight: The Wider Landscape": 4,
+      "Midnight Ledger": 3,
+      "New Dawn": 5
+    },
+    "issues": 0,
+    "fixedExerciseNotes": [
+      "Renamed the alignment exercise data item id from policy-filter to runtime-policy-filter while preserving the visible label \"policy filter\"; this removes a same-exercise id collision risk without changing learner copy."
+    ],
+    "deferredExercises": [
+      "What Is an LLM?",
+      "Vectors",
+      "Tensors",
+      "Collective Intelligence, Extracted",
+      "Benefits Worth Taking Seriously",
+      "Model Literate Synthesis"
+    ],
+    "cutOrMoveToPlay": []
+  },
+  "rows": [
+    {
+      "version": "0.28.3",
+      "learningCardNumber": 1,
+      "learningCardId": "what-is-llm",
+      "learningCardTitle": "What Is an LLM?",
+      "stageNumber": 1,
+      "stageTitle": "Before Morning",
+      "interactionType": "prompt-trace",
+      "interactionTitle": "Tap through one prompt",
+      "interactionCopy": "Context enters, a next-token cloud appears, floor is chosen, then the appended response becomes the next context.",
+      "exerciseType": "tap-step",
+      "expectedLearnerAction": "Tap through context, probability, chosen token, and updated context.",
+      "answerModel": "ordered mechanism sequence",
+      "feedbackBehavior": "Step-specific insight text after each tap.",
+      "completionCondition": "Final step reveals updated context.",
+      "randomized": "fixed order",
+      "fixedOrderReason": "Journey micro-interactions teach a sequence or boundary; randomization belongs to checkpoint choices, not these visual practice panels.",
+      "progressWrites": "none; Journey progress is controlled by checkpoint/reflection flow, not micro-interaction play.",
+      "localStorageKeys": [],
+      "scores": {
+        "objectiveFit": 4,
+        "mechanicClarity": 4,
+        "misconceptionValue": 4,
+        "feedbackQuality": 4,
+        "mobileUsability": 4,
+        "replayReviewValue": 3,
+        "cognitiveLoad": 4,
+        "total": 27
+      },
+      "priority": "P2",
+      "recommendation": "Keep for human testing; watch for clarity and replay value.",
+      "issues": [],
+      "rendered": {
+        "320": {
+          "width": 320,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "1. Context",
+              "width": 223.21875,
+              "height": 48
+            },
+            {
+              "text": "2. Token cloud",
+              "width": 223.21875,
+              "height": 48
+            },
+            {
+              "text": "3. Chosen",
+              "width": 223.21875,
+              "height": 48
+            },
+            {
+              "text": "4. Appended",
+              "width": 223.21875,
+              "height": 48
+            }
+          ],
+          "navOverlap": false
+        },
+        "390": {
+          "width": 390,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "1. Context",
+              "width": 293.21875,
+              "height": 48
+            },
+            {
+              "text": "2. Token cloud",
+              "width": 293.21875,
+              "height": 48
+            },
+            {
+              "text": "3. Chosen",
+              "width": 293.21875,
+              "height": 48
+            },
+            {
+              "text": "4. Appended",
+              "width": 293.21875,
+              "height": 48
+            }
+          ],
+          "navOverlap": false
+        }
+      }
+    },
+    {
+      "version": "0.28.3",
+      "learningCardNumber": 2,
+      "learningCardId": "where-llms-fit",
+      "learningCardTitle": "Where LLMs Fit",
+      "stageNumber": 1,
+      "stageTitle": "Before Morning",
+      "interactionType": "ai-topology",
+      "interactionTitle": "Tap a branch",
+      "interactionCopy": "Reveal what each branch means in the AI family tree.",
+      "exerciseType": "tap-reveal",
+      "expectedLearnerAction": "Tap category branches in the AI family tree.",
+      "answerModel": "stateful reveal",
+      "feedbackBehavior": "Branch-specific one-sentence explanation.",
+      "completionCondition": "At least one branch explanation is revealed.",
+      "randomized": "fixed order",
+      "fixedOrderReason": "Journey micro-interactions teach a sequence or boundary; randomization belongs to checkpoint choices, not these visual practice panels.",
+      "progressWrites": "none; Journey progress is controlled by checkpoint/reflection flow, not micro-interaction play.",
+      "localStorageKeys": [],
+      "scores": {
+        "objectiveFit": 5,
+        "mechanicClarity": 5,
+        "misconceptionValue": 5,
+        "feedbackQuality": 5,
+        "mobileUsability": 5,
+        "replayReviewValue": 4,
+        "cognitiveLoad": 5,
+        "total": 34
+      },
+      "priority": "P3",
+      "recommendation": "Keep for human testing.",
+      "issues": [],
+      "rendered": {
+        "320": {
+          "width": 320,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "AI",
+              "width": 217.625,
+              "height": 40
+            },
+            {
+              "text": "Rule-based AI",
+              "width": 208.8125,
+              "height": 40
+            },
+            {
+              "text": "Machine learning",
+              "width": 208.8125,
+              "height": 40
+            },
+            {
+              "text": "Classical ML",
+              "width": 200.015625,
+              "height": 40
+            },
+            {
+              "text": "Deep learning",
+              "width": 200.015625,
+              "height": 40
+            },
+            {
+              "text": "Generative AI",
+              "width": 191.21875,
+              "height": 40
+            },
+            {
+              "text": "LLMs",
+              "width": 182.421875,
+              "height": 38
+            },
+            {
+              "text": "Diffusion",
+              "width": 182.421875,
+              "height": 38
+            },
+            {
+              "text": "Multimodal",
+              "width": 182.421875,
+              "height": 38
+            },
+            {
+              "text": "Other deep learning",
+              "width": 191.21875,
+              "height": 40
+            }
+          ],
+          "navOverlap": false
+        },
+        "390": {
+          "width": 390,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "AI",
+              "width": 287.625,
+              "height": 40
+            },
+            {
+              "text": "Rule-based AI",
+              "width": 278.8125,
+              "height": 40
+            },
+            {
+              "text": "Machine learning",
+              "width": 278.8125,
+              "height": 40
+            },
+            {
+              "text": "Classical ML",
+              "width": 270.015625,
+              "height": 40
+            },
+            {
+              "text": "Deep learning",
+              "width": 270.015625,
+              "height": 40
+            },
+            {
+              "text": "Generative AI",
+              "width": 261.21875,
+              "height": 40
+            },
+            {
+              "text": "LLMs",
+              "width": 252.421875,
+              "height": 38
+            },
+            {
+              "text": "Diffusion",
+              "width": 252.421875,
+              "height": 38
+            },
+            {
+              "text": "Multimodal",
+              "width": 252.421875,
+              "height": 38
+            },
+            {
+              "text": "Other deep learning",
+              "width": 261.21875,
+              "height": 40
+            }
+          ],
+          "navOverlap": false
+        }
+      }
+    },
+    {
+      "version": "0.28.3",
+      "learningCardNumber": 3,
+      "learningCardId": "history",
+      "learningCardTitle": "Rationalists vs Empiricists",
+      "stageNumber": 1,
+      "stageTitle": "Before Morning",
+      "interactionType": "traditions-sort",
+      "interactionTitle": "Sort rules and patterns",
+      "interactionCopy": "Some ingredients are explicit rules, some are learned patterns, and many real systems combine both.",
+      "exerciseType": "sort-buckets",
+      "expectedLearnerAction": "Classify rules, learned patterns, and hybrid ingredients.",
+      "answerModel": "stable category mapping",
+      "feedbackBehavior": "Correctness highlighting plus summary insight.",
+      "completionCondition": "All visible chips are assigned to buckets.",
+      "randomized": "fixed order",
+      "fixedOrderReason": "Journey micro-interactions teach a sequence or boundary; randomization belongs to checkpoint choices, not these visual practice panels.",
+      "progressWrites": "none; Journey progress is controlled by checkpoint/reflection flow, not micro-interaction play.",
+      "localStorageKeys": [],
+      "scores": {
+        "objectiveFit": 5,
+        "mechanicClarity": 5,
+        "misconceptionValue": 5,
+        "feedbackQuality": 5,
+        "mobileUsability": 5,
+        "replayReviewValue": 4,
+        "cognitiveLoad": 5,
+        "total": 34
+      },
+      "priority": "P3",
+      "recommendation": "Keep for human testing.",
+      "issues": [],
+      "rendered": {
+        "320": {
+          "width": 320,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "if/then policyTap to sort",
+              "width": 223.21875,
+              "height": 48
+            },
+            {
+              "text": "model weightsTap to sort",
+              "width": 223.21875,
+              "height": 48
+            },
+            {
+              "text": "RAG searchTap to sort",
+              "width": 223.21875,
+              "height": 48
+            },
+            {
+              "text": "safety filterTap to sort",
+              "width": 223.21875,
+              "height": 48
+            },
+            {
+              "text": "grammar patternTap to sort",
+              "width": 223.21875,
+              "height": 48
+            },
+            {
+              "text": "tool call ruleTap to sort",
+              "width": 223.21875,
+              "height": 48
+            }
+          ],
+          "navOverlap": false
+        },
+        "390": {
+          "width": 390,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "if/then policyTap to sort",
+              "width": 293.21875,
+              "height": 48
+            },
+            {
+              "text": "model weightsTap to sort",
+              "width": 293.21875,
+              "height": 48
+            },
+            {
+              "text": "RAG searchTap to sort",
+              "width": 293.21875,
+              "height": 48
+            },
+            {
+              "text": "safety filterTap to sort",
+              "width": 293.21875,
+              "height": 48
+            },
+            {
+              "text": "grammar patternTap to sort",
+              "width": 293.21875,
+              "height": 48
+            },
+            {
+              "text": "tool call ruleTap to sort",
+              "width": 293.21875,
+              "height": 48
+            }
+          ],
+          "navOverlap": false
+        }
+      }
+    },
+    {
+      "version": "0.28.3",
+      "learningCardNumber": 4,
+      "learningCardId": "training",
+      "learningCardTitle": "Training",
+      "stageNumber": 1,
+      "stageTitle": "Before Morning",
+      "interactionType": "training-steps",
+      "interactionTitle": "Tap through the training loop",
+      "interactionCopy": "Predict, compare, loss, update weights. The update is the durable learning step.",
+      "exerciseType": "tap-step",
+      "expectedLearnerAction": "Tap each step in the training loop.",
+      "answerModel": "ordered mechanism sequence",
+      "feedbackBehavior": "Durable-update explanation.",
+      "completionCondition": "Update weights step is selected or sequence is completed.",
+      "randomized": "fixed order",
+      "fixedOrderReason": "Journey micro-interactions teach a sequence or boundary; randomization belongs to checkpoint choices, not these visual practice panels.",
+      "progressWrites": "none; Journey progress is controlled by checkpoint/reflection flow, not micro-interaction play.",
+      "localStorageKeys": [],
+      "scores": {
+        "objectiveFit": 5,
+        "mechanicClarity": 5,
+        "misconceptionValue": 5,
+        "feedbackQuality": 5,
+        "mobileUsability": 5,
+        "replayReviewValue": 4,
+        "cognitiveLoad": 5,
+        "total": 34
+      },
+      "priority": "P3",
+      "recommendation": "Keep for human testing.",
+      "issues": [],
+      "rendered": {
+        "320": {
+          "width": 320,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "Predict",
+              "width": 223.21875,
+              "height": 48
+            },
+            {
+              "text": "Compare",
+              "width": 223.21875,
+              "height": 48
+            },
+            {
+              "text": "Loss",
+              "width": 223.21875,
+              "height": 48
+            },
+            {
+              "text": "Update weights",
+              "width": 223.21875,
+              "height": 48
+            }
+          ],
+          "navOverlap": false
+        },
+        "390": {
+          "width": 390,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "Predict",
+              "width": 293.21875,
+              "height": 48
+            },
+            {
+              "text": "Compare",
+              "width": 293.21875,
+              "height": 48
+            },
+            {
+              "text": "Loss",
+              "width": 293.21875,
+              "height": 48
+            },
+            {
+              "text": "Update weights",
+              "width": 293.21875,
+              "height": 48
+            }
+          ],
+          "navOverlap": false
+        }
+      }
+    },
+    {
+      "version": "0.28.3",
+      "learningCardNumber": 5,
+      "learningCardId": "pretraining",
+      "learningCardTitle": "Pretraining",
+      "stageNumber": 1,
+      "stageTitle": "Before Morning",
+      "interactionType": "pretraining-toggle",
+      "interactionTitle": "Pattern learning or recall?",
+      "interactionCopy": "Pretraining is broad durable pattern learning, not a perfect memory of every source.",
+      "exerciseType": "toggle-choice",
+      "expectedLearnerAction": "Toggle between broad pattern learning and perfect recall.",
+      "answerModel": "one best state with boundary feedback",
+      "feedbackBehavior": "Boundary feedback against perfect-memory myth.",
+      "completionCondition": "Broad pattern learning state is selected.",
+      "randomized": "fixed order",
+      "fixedOrderReason": "Journey micro-interactions teach a sequence or boundary; randomization belongs to checkpoint choices, not these visual practice panels.",
+      "progressWrites": "none; Journey progress is controlled by checkpoint/reflection flow, not micro-interaction play.",
+      "localStorageKeys": [],
+      "scores": {
+        "objectiveFit": 5,
+        "mechanicClarity": 5,
+        "misconceptionValue": 5,
+        "feedbackQuality": 5,
+        "mobileUsability": 5,
+        "replayReviewValue": 4,
+        "cognitiveLoad": 5,
+        "total": 34
+      },
+      "priority": "P3",
+      "recommendation": "Keep for human testing.",
+      "issues": [],
+      "rendered": {
+        "320": {
+          "width": 320,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "Broad pattern learning",
+              "width": 223.21875,
+              "height": 48
+            },
+            {
+              "text": "Perfect recall myth",
+              "width": 223.21875,
+              "height": 48
+            }
+          ],
+          "navOverlap": false
+        },
+        "390": {
+          "width": 390,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "Broad pattern learning",
+              "width": 293.21875,
+              "height": 48
+            },
+            {
+              "text": "Perfect recall myth",
+              "width": 293.21875,
+              "height": 48
+            }
+          ],
+          "navOverlap": false
+        }
+      }
+    },
+    {
+      "version": "0.28.3",
+      "learningCardNumber": 6,
+      "learningCardId": "overfitting-generalization",
+      "learningCardTitle": "Overfitting and Generalization",
+      "stageNumber": 1,
+      "stageTitle": "Before Morning",
+      "interactionType": "overfitting-curve",
+      "interactionTitle": "Choose the better curve",
+      "interactionCopy": "The smoother curve may miss a few old dots, but it carries the pattern to validation examples not used in training.",
+      "exerciseType": "tap-choice",
+      "expectedLearnerAction": "Choose the curve that generalizes better.",
+      "answerModel": "stateful reveal",
+      "feedbackBehavior": "Validation-example feedback.",
+      "completionCondition": "Generalizing curve is selected.",
+      "randomized": "fixed order",
+      "fixedOrderReason": "Journey micro-interactions teach a sequence or boundary; randomization belongs to checkpoint choices, not these visual practice panels.",
+      "progressWrites": "none; Journey progress is controlled by checkpoint/reflection flow, not micro-interaction play.",
+      "localStorageKeys": [],
+      "scores": {
+        "objectiveFit": 5,
+        "mechanicClarity": 5,
+        "misconceptionValue": 5,
+        "feedbackQuality": 5,
+        "mobileUsability": 5,
+        "replayReviewValue": 4,
+        "cognitiveLoad": 5,
+        "total": 34
+      },
+      "priority": "P3",
+      "recommendation": "Keep for human testing.",
+      "issues": [],
+      "rendered": {
+        "320": {
+          "width": 320,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "Overfit curve",
+              "width": 223.21875,
+              "height": 48
+            },
+            {
+              "text": "Generalizing curve",
+              "width": 223.21875,
+              "height": 48
+            }
+          ],
+          "navOverlap": false
+        },
+        "390": {
+          "width": 390,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "Overfit curve",
+              "width": 293.21875,
+              "height": 48
+            },
+            {
+              "text": "Generalizing curve",
+              "width": 293.21875,
+              "height": 48
+            }
+          ],
+          "navOverlap": false
+        }
+      }
+    },
+    {
+      "version": "0.28.3",
+      "learningCardNumber": 7,
+      "learningCardId": "fine-tuning",
+      "learningCardTitle": "Fine-Tuning",
+      "stageNumber": 1,
+      "stageTitle": "Before Morning",
+      "interactionType": "fine-tuning-sort",
+      "interactionTitle": "Sort the steering moves",
+      "interactionCopy": "Fine-tuning is durable training. Prompting and RAG steer the current run. Sampling chooses the next token.",
+      "exerciseType": "sort-buckets",
+      "expectedLearnerAction": "Sort durable training, temporary context, and decoding moves.",
+      "answerModel": "stable category mapping",
+      "feedbackBehavior": "Bucket-specific correction.",
+      "completionCondition": "Each steering move is assigned.",
+      "randomized": "fixed order",
+      "fixedOrderReason": "Journey micro-interactions teach a sequence or boundary; randomization belongs to checkpoint choices, not these visual practice panels.",
+      "progressWrites": "none; Journey progress is controlled by checkpoint/reflection flow, not micro-interaction play.",
+      "localStorageKeys": [],
+      "scores": {
+        "objectiveFit": 5,
+        "mechanicClarity": 5,
+        "misconceptionValue": 5,
+        "feedbackQuality": 5,
+        "mobileUsability": 5,
+        "replayReviewValue": 4,
+        "cognitiveLoad": 5,
+        "total": 34
+      },
+      "priority": "P3",
+      "recommendation": "Keep for human testing.",
+      "issues": [],
+      "rendered": {
+        "320": {
+          "width": 320,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "fine-tuning examplesTap to sort",
+              "width": 223.21875,
+              "height": 48
+            },
+            {
+              "text": "prompt instructionsTap to sort",
+              "width": 223.21875,
+              "height": 48
+            },
+            {
+              "text": "retrieved PDFTap to sort",
+              "width": 223.21875,
+              "height": 48
+            },
+            {
+              "text": "sampling next tokenTap to sort",
+              "width": 223.21875,
+              "height": 48
+            },
+            {
+              "text": "adapter weightsTap to sort",
+              "width": 223.21875,
+              "height": 48
+            }
+          ],
+          "navOverlap": false
+        },
+        "390": {
+          "width": 390,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "fine-tuning examplesTap to sort",
+              "width": 293.21875,
+              "height": 48
+            },
+            {
+              "text": "prompt instructionsTap to sort",
+              "width": 293.21875,
+              "height": 48
+            },
+            {
+              "text": "retrieved PDFTap to sort",
+              "width": 293.21875,
+              "height": 48
+            },
+            {
+              "text": "sampling next tokenTap to sort",
+              "width": 293.21875,
+              "height": 48
+            },
+            {
+              "text": "adapter weightsTap to sort",
+              "width": 293.21875,
+              "height": 48
+            }
+          ],
+          "navOverlap": false
+        }
+      }
+    },
+    {
+      "version": "0.28.3",
+      "learningCardNumber": 8,
+      "learningCardId": "alignment",
+      "learningCardTitle": "Alignment",
+      "stageNumber": 1,
+      "stageTitle": "Before Morning",
+      "interactionType": "alignment-groups",
+      "interactionTitle": "Group the alignment methods",
+      "interactionCopy": "Alignment can use durable shaping, runtime steering, and evaluation. It shapes behavior, not moral agency.",
+      "exerciseType": "sort-buckets",
+      "expectedLearnerAction": "Group alignment methods by durable shaping, runtime steering, and evaluation.",
+      "answerModel": "stateful reveal",
+      "feedbackBehavior": "Method-group summary.",
+      "completionCondition": "Each method is assigned.",
+      "randomized": "fixed order",
+      "fixedOrderReason": "Journey micro-interactions teach a sequence or boundary; randomization belongs to checkpoint choices, not these visual practice panels.",
+      "progressWrites": "none; Journey progress is controlled by checkpoint/reflection flow, not micro-interaction play.",
+      "localStorageKeys": [],
+      "scores": {
+        "objectiveFit": 5,
+        "mechanicClarity": 5,
+        "misconceptionValue": 5,
+        "feedbackQuality": 5,
+        "mobileUsability": 5,
+        "replayReviewValue": 4,
+        "cognitiveLoad": 5,
+        "total": 34
+      },
+      "priority": "P3",
+      "recommendation": "Keep for human testing.",
+      "issues": [],
+      "rendered": {
+        "320": {
+          "width": 320,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "instruction tuningTap to sort",
+              "width": 223.21875,
+              "height": 48
+            },
+            {
+              "text": "human feedback learningTap to sort",
+              "width": 223.21875,
+              "height": 48
+            },
+            {
+              "text": "preference optimizationTap to sort",
+              "width": 223.21875,
+              "height": 48
+            },
+            {
+              "text": "system promptTap to sort",
+              "width": 223.21875,
+              "height": 48
+            },
+            {
+              "text": "policy filterTap to sort",
+              "width": 223.21875,
+              "height": 48
+            },
+            {
+              "text": "tool ruleTap to sort",
+              "width": 223.21875,
+              "height": 48
+            },
+            {
+              "text": "safety testTap to sort",
+              "width": 223.21875,
+              "height": 48
+            },
+            {
+              "text": "red-team reviewTap to sort",
+              "width": 223.21875,
+              "height": 48
+            }
+          ],
+          "navOverlap": false
+        },
+        "390": {
+          "width": 390,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "instruction tuningTap to sort",
+              "width": 293.21875,
+              "height": 48
+            },
+            {
+              "text": "human feedback learningTap to sort",
+              "width": 293.21875,
+              "height": 48
+            },
+            {
+              "text": "preference optimizationTap to sort",
+              "width": 293.21875,
+              "height": 48
+            },
+            {
+              "text": "system promptTap to sort",
+              "width": 293.21875,
+              "height": 48
+            },
+            {
+              "text": "policy filterTap to sort",
+              "width": 293.21875,
+              "height": 48
+            },
+            {
+              "text": "tool ruleTap to sort",
+              "width": 293.21875,
+              "height": 48
+            },
+            {
+              "text": "safety testTap to sort",
+              "width": 293.21875,
+              "height": 48
+            },
+            {
+              "text": "red-team reviewTap to sort",
+              "width": 293.21875,
+              "height": 48
+            }
+          ],
+          "navOverlap": false
+        }
+      }
+    },
+    {
+      "version": "0.28.3",
+      "learningCardNumber": 9,
+      "learningCardId": "inference",
+      "learningCardTitle": "Inference",
+      "stageNumber": 2,
+      "stageTitle": "Morning Commute",
+      "interactionType": "inference",
+      "interactionTitle": "Walk the forward pass",
+      "interactionCopy": "The current context moves through the model. Temporary activations change, but durable weights do not.",
+      "exerciseType": "tap-step",
+      "expectedLearnerAction": "Walk the forward pass from context to next token.",
+      "answerModel": "stateful reveal",
+      "feedbackBehavior": "Temporary-versus-durable feedback.",
+      "completionCondition": "Forward-pass path is completed.",
+      "randomized": "fixed order",
+      "fixedOrderReason": "Journey micro-interactions teach a sequence or boundary; randomization belongs to checkpoint choices, not these visual practice panels.",
+      "progressWrites": "none; Journey progress is controlled by checkpoint/reflection flow, not micro-interaction play.",
+      "localStorageKeys": [],
+      "scores": {
+        "objectiveFit": 5,
+        "mechanicClarity": 5,
+        "misconceptionValue": 5,
+        "feedbackQuality": 5,
+        "mobileUsability": 5,
+        "replayReviewValue": 4,
+        "cognitiveLoad": 5,
+        "total": 34
+      },
+      "priority": "P3",
+      "recommendation": "Keep for human testing.",
+      "issues": [],
+      "rendered": {
+        "320": {
+          "width": 320,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "Activations",
+              "width": 223.21875,
+              "height": 46
+            },
+            {
+              "text": "Model weights",
+              "width": 223.21875,
+              "height": 46
+            },
+            {
+              "text": "Training dataset",
+              "width": 223.21875,
+              "height": 46
+            }
+          ],
+          "navOverlap": false
+        },
+        "390": {
+          "width": 390,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "Activations",
+              "width": 293.21875,
+              "height": 46
+            },
+            {
+              "text": "Model weights",
+              "width": 293.21875,
+              "height": 46
+            },
+            {
+              "text": "Training dataset",
+              "width": 293.21875,
+              "height": 46
+            }
+          ],
+          "navOverlap": false
+        }
+      }
+    },
+    {
+      "version": "0.28.3",
+      "learningCardNumber": 10,
+      "learningCardId": "prompt-response",
+      "learningCardTitle": "Prompt vs Response",
+      "stageNumber": 2,
+      "stageTitle": "Morning Commute",
+      "interactionType": "prompt-response-labels",
+      "interactionTitle": "Label the context pieces",
+      "interactionCopy": "Tap each row to see prompt, response so far, next token, and current context stay distinct.",
+      "exerciseType": "label-pieces",
+      "expectedLearnerAction": "Tap rows that separate prompt, response so far, next token, and updated context.",
+      "answerModel": "stateful reveal",
+      "feedbackBehavior": "Row-specific explanation.",
+      "completionCondition": "All four rows can be inspected.",
+      "randomized": "fixed order",
+      "fixedOrderReason": "Journey micro-interactions teach a sequence or boundary; randomization belongs to checkpoint choices, not these visual practice panels.",
+      "progressWrites": "none; Journey progress is controlled by checkpoint/reflection flow, not micro-interaction play.",
+      "localStorageKeys": [],
+      "scores": {
+        "objectiveFit": 5,
+        "mechanicClarity": 5,
+        "misconceptionValue": 5,
+        "feedbackQuality": 5,
+        "mobileUsability": 5,
+        "replayReviewValue": 4,
+        "cognitiveLoad": 5,
+        "total": 34
+      },
+      "priority": "P3",
+      "recommendation": "Keep for human testing.",
+      "issues": [],
+      "rendered": {
+        "320": {
+          "width": 320,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "PromptGive me one sentence with two household pets in conflict.",
+              "width": 223.21875,
+              "height": 112
+            },
+            {
+              "text": "Response so farA jealous dog chased a startled cat across the kitchen",
+              "width": 223.21875,
+              "height": 94
+            },
+            {
+              "text": "Next tokenfloor",
+              "width": 223.21875,
+              "height": 46
+            },
+            {
+              "text": "Current contextUser prompt + response so far + floor",
+              "width": 223.21875,
+              "height": 58
+            }
+          ],
+          "navOverlap": false
+        },
+        "390": {
+          "width": 390,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "PromptGive me one sentence with two household pets in conflict.",
+              "width": 293.21875,
+              "height": 76
+            },
+            {
+              "text": "Response so farA jealous dog chased a startled cat across the kitchen",
+              "width": 293.21875,
+              "height": 76
+            },
+            {
+              "text": "Next tokenfloor",
+              "width": 293.21875,
+              "height": 46
+            },
+            {
+              "text": "Current contextUser prompt + response so far + floor",
+              "width": 293.21875,
+              "height": 58
+            }
+          ],
+          "navOverlap": false
+        }
+      }
+    },
+    {
+      "version": "0.28.3",
+      "learningCardNumber": 11,
+      "learningCardId": "tokens",
+      "learningCardTitle": "Tokenization",
+      "stageNumber": 2,
+      "stageTitle": "Morning Commute",
+      "interactionType": "tokenization-split",
+      "interactionTitle": "Split the sentence",
+      "interactionCopy": "Tap once for token cards, then show uneven chunks and punctuation.",
+      "exerciseType": "tap-reveal",
+      "expectedLearnerAction": "Reveal token cards and uneven chunks.",
+      "answerModel": "stateful reveal",
+      "feedbackBehavior": "Token boundary feedback.",
+      "completionCondition": "Uneven examples are shown.",
+      "randomized": "fixed order",
+      "fixedOrderReason": "Journey micro-interactions teach a sequence or boundary; randomization belongs to checkpoint choices, not these visual practice panels.",
+      "progressWrites": "none; Journey progress is controlled by checkpoint/reflection flow, not micro-interaction play.",
+      "localStorageKeys": [],
+      "scores": {
+        "objectiveFit": 5,
+        "mechanicClarity": 5,
+        "misconceptionValue": 5,
+        "feedbackQuality": 5,
+        "mobileUsability": 5,
+        "replayReviewValue": 4,
+        "cognitiveLoad": 5,
+        "total": 34
+      },
+      "priority": "P3",
+      "recommendation": "Keep for human testing.",
+      "issues": [],
+      "rendered": {
+        "320": {
+          "width": 320,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "Show token cards",
+              "width": 223.21875,
+              "height": 46
+            }
+          ],
+          "navOverlap": false
+        },
+        "390": {
+          "width": 390,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "Show token cards",
+              "width": 293.21875,
+              "height": 46
+            }
+          ],
+          "navOverlap": false
+        }
+      }
+    },
+    {
+      "version": "0.28.3",
+      "learningCardNumber": 12,
+      "learningCardId": "token-ids",
+      "learningCardTitle": "Token IDs",
+      "stageNumber": 2,
+      "stageTitle": "Morning Commute",
+      "interactionType": "token-id-lookup",
+      "interactionTitle": "Match token to ID",
+      "interactionCopy": "Match dog, cat, and floor to their lookup numbers and table rows.",
+      "exerciseType": "match-lookup",
+      "expectedLearnerAction": "Match token text to token IDs and table rows.",
+      "answerModel": "stateful reveal",
+      "feedbackBehavior": "ID-is-not-meaning feedback.",
+      "completionCondition": "Lookup relationship is revealed.",
+      "randomized": "fixed order",
+      "fixedOrderReason": "Journey micro-interactions teach a sequence or boundary; randomization belongs to checkpoint choices, not these visual practice panels.",
+      "progressWrites": "none; Journey progress is controlled by checkpoint/reflection flow, not micro-interaction play.",
+      "localStorageKeys": [],
+      "scores": {
+        "objectiveFit": 5,
+        "mechanicClarity": 5,
+        "misconceptionValue": 5,
+        "feedbackQuality": 5,
+        "mobileUsability": 5,
+        "replayReviewValue": 4,
+        "cognitiveLoad": 5,
+        "total": 34
+      },
+      "priority": "P3",
+      "recommendation": "Keep for human testing.",
+      "issues": [],
+      "rendered": {
+        "320": {
+          "width": 320,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "dog",
+              "width": 108.015625,
+              "height": 46
+            },
+            {
+              "text": "cat",
+              "width": 108.015625,
+              "height": 46
+            },
+            {
+              "text": "floor",
+              "width": 108.015625,
+              "height": 46
+            },
+            {
+              "text": "ID 421",
+              "width": 69.609375,
+              "height": 50.90625
+            },
+            {
+              "text": "ID 982",
+              "width": 69.609375,
+              "height": 50.90625
+            },
+            {
+              "text": "ID 1576",
+              "width": 69.625,
+              "height": 50.90625
+            }
+          ],
+          "navOverlap": false
+        },
+        "390": {
+          "width": 390,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "dog",
+              "width": 143.015625,
+              "height": 46
+            },
+            {
+              "text": "cat",
+              "width": 143.015625,
+              "height": 46
+            },
+            {
+              "text": "floor",
+              "width": 143.015625,
+              "height": 46
+            },
+            {
+              "text": "ID 421",
+              "width": 92.9375,
+              "height": 46
+            },
+            {
+              "text": "ID 982",
+              "width": 92.953125,
+              "height": 46
+            },
+            {
+              "text": "ID 1576",
+              "width": 92.9375,
+              "height": 46
+            }
+          ],
+          "navOverlap": false
+        }
+      }
+    },
+    {
+      "version": "0.28.3",
+      "learningCardNumber": 13,
+      "learningCardId": "embeddings",
+      "learningCardTitle": "Embeddings",
+      "stageNumber": 2,
+      "stageTitle": "Morning Commute",
+      "interactionType": "embedding-lookup",
+      "interactionTitle": "Look up a starting vector",
+      "interactionCopy": "Tap a token ID to retrieve its embedding row and notice what is durable versus temporary.",
+      "exerciseType": "tap-lookup",
+      "expectedLearnerAction": "Tap a token ID to retrieve its embedding row.",
+      "answerModel": "stateful reveal",
+      "feedbackBehavior": "Durable embedding versus temporary hidden-state feedback.",
+      "completionCondition": "Embedding row is shown.",
+      "randomized": "fixed order",
+      "fixedOrderReason": "Journey micro-interactions teach a sequence or boundary; randomization belongs to checkpoint choices, not these visual practice panels.",
+      "progressWrites": "none; Journey progress is controlled by checkpoint/reflection flow, not micro-interaction play.",
+      "localStorageKeys": [],
+      "scores": {
+        "objectiveFit": 5,
+        "mechanicClarity": 5,
+        "misconceptionValue": 5,
+        "feedbackQuality": 5,
+        "mobileUsability": 5,
+        "replayReviewValue": 4,
+        "cognitiveLoad": 5,
+        "total": 34
+      },
+      "priority": "P3",
+      "recommendation": "Keep for human testing.",
+      "issues": [],
+      "rendered": {
+        "320": {
+          "width": 320,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "dog to 421",
+              "width": 108.015625,
+              "height": 46
+            },
+            {
+              "text": "cat to 982",
+              "width": 108.015625,
+              "height": 46
+            },
+            {
+              "text": "floor to 1576",
+              "width": 108.015625,
+              "height": 46
+            }
+          ],
+          "navOverlap": false
+        },
+        "390": {
+          "width": 390,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "dog to 421",
+              "width": 143.015625,
+              "height": 46
+            },
+            {
+              "text": "cat to 982",
+              "width": 143.015625,
+              "height": 46
+            },
+            {
+              "text": "floor to 1576",
+              "width": 143.015625,
+              "height": 46
+            }
+          ],
+          "navOverlap": false
+        }
+      }
+    },
+    {
+      "version": "0.28.3",
+      "learningCardNumber": 14,
+      "learningCardId": "vectors",
+      "learningCardTitle": "Vectors",
+      "stageNumber": 2,
+      "stageTitle": "Morning Commute",
+      "interactionType": "vector-distribution",
+      "interactionTitle": "Toggle vector views",
+      "interactionCopy": "Compare a simplified teaching view with the messier distributed view real models use.",
+      "exerciseType": "toggle-view",
+      "expectedLearnerAction": "Switch between teaching sliders and distributed feature bars.",
+      "answerModel": "stateful reveal",
+      "feedbackBehavior": "Dimension-label limit feedback.",
+      "completionCondition": "Distributed view is shown.",
+      "randomized": "fixed order",
+      "fixedOrderReason": "Journey micro-interactions teach a sequence or boundary; randomization belongs to checkpoint choices, not these visual practice panels.",
+      "progressWrites": "none; Journey progress is controlled by checkpoint/reflection flow, not micro-interaction play.",
+      "localStorageKeys": [],
+      "scores": {
+        "objectiveFit": 4,
+        "mechanicClarity": 4,
+        "misconceptionValue": 4,
+        "feedbackQuality": 4,
+        "mobileUsability": 4,
+        "replayReviewValue": 3,
+        "cognitiveLoad": 4,
+        "total": 27
+      },
+      "priority": "P2",
+      "recommendation": "Keep for human testing; watch for clarity and replay value.",
+      "issues": [],
+      "rendered": {
+        "320": {
+          "width": 320,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "Teaching sliders",
+              "width": 108.015625,
+              "height": 50.90625
+            },
+            {
+              "text": "Real-ish pattern",
+              "width": 108.015625,
+              "height": 50.90625
+            }
+          ],
+          "navOverlap": false
+        },
+        "390": {
+          "width": 390,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "Teaching sliders",
+              "width": 143.015625,
+              "height": 50.90625
+            },
+            {
+              "text": "Real-ish pattern",
+              "width": 143.015625,
+              "height": 50.90625
+            }
+          ],
+          "navOverlap": false
+        }
+      }
+    },
+    {
+      "version": "0.28.3",
+      "learningCardNumber": 15,
+      "learningCardId": "tensors",
+      "learningCardTitle": "Tensors",
+      "stageNumber": 2,
+      "stageTitle": "Morning Commute",
+      "interactionType": "tensor-axis",
+      "interactionTitle": "Inspect the axes",
+      "interactionCopy": "Tap token axis, feature axis, and batch note to see how vectors become a shaped block.",
+      "exerciseType": "tap-axis",
+      "expectedLearnerAction": "Inspect token axis, feature axis, and batch sheet.",
+      "answerModel": "stateful reveal",
+      "feedbackBehavior": "Axis-specific explanation.",
+      "completionCondition": "All axis notes can be viewed.",
+      "randomized": "fixed order",
+      "fixedOrderReason": "Journey micro-interactions teach a sequence or boundary; randomization belongs to checkpoint choices, not these visual practice panels.",
+      "progressWrites": "none; Journey progress is controlled by checkpoint/reflection flow, not micro-interaction play.",
+      "localStorageKeys": [],
+      "scores": {
+        "objectiveFit": 4,
+        "mechanicClarity": 4,
+        "misconceptionValue": 4,
+        "feedbackQuality": 4,
+        "mobileUsability": 4,
+        "replayReviewValue": 3,
+        "cognitiveLoad": 4,
+        "total": 27
+      },
+      "priority": "P2",
+      "recommendation": "Keep for human testing; watch for clarity and replay value.",
+      "issues": [],
+      "rendered": {
+        "320": {
+          "width": 320,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "Token axis",
+              "width": 108.015625,
+              "height": 46
+            },
+            {
+              "text": "Feature axis",
+              "width": 108.015625,
+              "height": 46
+            },
+            {
+              "text": "Batch note",
+              "width": 108.015625,
+              "height": 46
+            }
+          ],
+          "navOverlap": false
+        },
+        "390": {
+          "width": 390,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "Token axis",
+              "width": 143.015625,
+              "height": 46
+            },
+            {
+              "text": "Feature axis",
+              "width": 143.015625,
+              "height": 46
+            },
+            {
+              "text": "Batch note",
+              "width": 143.015625,
+              "height": 46
+            }
+          ],
+          "navOverlap": false
+        }
+      }
+    },
+    {
+      "version": "0.28.3",
+      "learningCardNumber": 16,
+      "learningCardId": "attention",
+      "learningCardTitle": "Attention",
+      "stageNumber": 3,
+      "stageTitle": "Workday",
+      "interactionType": "attention-relevance-connect",
+      "interactionTitle": "Connect the pronoun",
+      "interactionCopy": "Choose which earlier token helps interpret “it.” Attention is relevance, not awareness.",
+      "exerciseType": "connect-nodes",
+      "expectedLearnerAction": "Connect pronoun token to the most relevant source token.",
+      "answerModel": "target-to-source relationship",
+      "feedbackBehavior": "Relevance-not-awareness feedback.",
+      "completionCondition": "A source token is selected.",
+      "randomized": "fixed order",
+      "fixedOrderReason": "Journey micro-interactions teach a sequence or boundary; randomization belongs to checkpoint choices, not these visual practice panels.",
+      "progressWrites": "none; Journey progress is controlled by checkpoint/reflection flow, not micro-interaction play.",
+      "localStorageKeys": [],
+      "scores": {
+        "objectiveFit": 5,
+        "mechanicClarity": 5,
+        "misconceptionValue": 5,
+        "feedbackQuality": 5,
+        "mobileUsability": 5,
+        "replayReviewValue": 4,
+        "cognitiveLoad": 5,
+        "total": 34
+      },
+      "priority": "P3",
+      "recommendation": "Keep for human testing.",
+      "issues": [],
+      "rendered": {
+        "320": {
+          "width": 320,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "dog",
+              "width": 108.015625,
+              "height": 46
+            },
+            {
+              "text": "cat",
+              "width": 108.015625,
+              "height": 46
+            }
+          ],
+          "navOverlap": false
+        },
+        "390": {
+          "width": 390,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "dog",
+              "width": 143.015625,
+              "height": 46
+            },
+            {
+              "text": "cat",
+              "width": 143.015625,
+              "height": 46
+            }
+          ],
+          "navOverlap": false
+        }
+      }
+    },
+    {
+      "version": "0.28.3",
+      "learningCardNumber": 17,
+      "learningCardId": "mlp",
+      "learningCardTitle": "MLP",
+      "stageNumber": 3,
+      "stageTitle": "Workday",
+      "interactionType": "mlp-feature-toggle",
+      "interactionTitle": "Before and after MLP",
+      "interactionCopy": "Toggle the same token position before and after the MLP. The feature vector changes; the token ID and weights do not.",
+      "exerciseType": "toggle-view",
+      "expectedLearnerAction": "Toggle same token before and after MLP.",
+      "answerModel": "one best state with boundary feedback",
+      "feedbackBehavior": "Feature reshaping feedback.",
+      "completionCondition": "After-MLP state is shown.",
+      "randomized": "fixed order",
+      "fixedOrderReason": "Journey micro-interactions teach a sequence or boundary; randomization belongs to checkpoint choices, not these visual practice panels.",
+      "progressWrites": "none; Journey progress is controlled by checkpoint/reflection flow, not micro-interaction play.",
+      "localStorageKeys": [],
+      "scores": {
+        "objectiveFit": 5,
+        "mechanicClarity": 5,
+        "misconceptionValue": 5,
+        "feedbackQuality": 5,
+        "mobileUsability": 5,
+        "replayReviewValue": 4,
+        "cognitiveLoad": 5,
+        "total": 34
+      },
+      "priority": "P3",
+      "recommendation": "Keep for human testing.",
+      "issues": [],
+      "rendered": {
+        "320": {
+          "width": 320,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "Before MLP",
+              "width": 108.015625,
+              "height": 50.90625
+            },
+            {
+              "text": "After MLP",
+              "width": 108.015625,
+              "height": 50.90625
+            },
+            {
+              "text": "The token’s feature vector",
+              "width": 223.21875,
+              "height": 46
+            },
+            {
+              "text": "Permanent memory",
+              "width": 223.21875,
+              "height": 46
+            },
+            {
+              "text": "The token ID",
+              "width": 223.21875,
+              "height": 46
+            }
+          ],
+          "navOverlap": false
+        },
+        "390": {
+          "width": 390,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "Before MLP",
+              "width": 143.015625,
+              "height": 42
+            },
+            {
+              "text": "After MLP",
+              "width": 143.015625,
+              "height": 42
+            },
+            {
+              "text": "The token’s feature vector",
+              "width": 293.21875,
+              "height": 46
+            },
+            {
+              "text": "Permanent memory",
+              "width": 293.21875,
+              "height": 46
+            },
+            {
+              "text": "The token ID",
+              "width": 293.21875,
+              "height": 46
+            }
+          ],
+          "navOverlap": false
+        }
+      }
+    },
+    {
+      "version": "0.28.3",
+      "learningCardNumber": 18,
+      "learningCardId": "layers",
+      "learningCardTitle": "Layers",
+      "stageNumber": 3,
+      "stageTitle": "Workday",
+      "interactionType": "layers-stack-inspect",
+      "interactionTitle": "Inspect the stack",
+      "interactionCopy": "Tap a layer to watch the same hidden-state ribbon move forward through repeated attention and MLP blocks.",
+      "exerciseType": "tap-step",
+      "expectedLearnerAction": "Tap layers in a transformer stack.",
+      "answerModel": "stateful reveal",
+      "feedbackBehavior": "Repeated numerical transformation feedback.",
+      "completionCondition": "A layer detail is shown.",
+      "randomized": "fixed order",
+      "fixedOrderReason": "Journey micro-interactions teach a sequence or boundary; randomization belongs to checkpoint choices, not these visual practice panels.",
+      "progressWrites": "none; Journey progress is controlled by checkpoint/reflection flow, not micro-interaction play.",
+      "localStorageKeys": [],
+      "scores": {
+        "objectiveFit": 5,
+        "mechanicClarity": 5,
+        "misconceptionValue": 5,
+        "feedbackQuality": 5,
+        "mobileUsability": 5,
+        "replayReviewValue": 4,
+        "cognitiveLoad": 5,
+        "total": 34
+      },
+      "priority": "P3",
+      "recommendation": "Keep for human testing.",
+      "issues": [],
+      "rendered": {
+        "320": {
+          "width": 320,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "Layer 1",
+              "width": 108.015625,
+              "height": 46
+            },
+            {
+              "text": "Layer 2",
+              "width": 108.015625,
+              "height": 46
+            },
+            {
+              "text": "Layer 3",
+              "width": 108.015625,
+              "height": 46
+            },
+            {
+              "text": "Final",
+              "width": 108.015625,
+              "height": 46
+            }
+          ],
+          "navOverlap": false
+        },
+        "390": {
+          "width": 390,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "Layer 1",
+              "width": 143.015625,
+              "height": 46
+            },
+            {
+              "text": "Layer 2",
+              "width": 143.015625,
+              "height": 46
+            },
+            {
+              "text": "Layer 3",
+              "width": 143.015625,
+              "height": 46
+            },
+            {
+              "text": "Final",
+              "width": 143.015625,
+              "height": 46
+            }
+          ],
+          "navOverlap": false
+        }
+      }
+    },
+    {
+      "version": "0.28.3",
+      "learningCardNumber": 19,
+      "learningCardId": "hidden-states",
+      "learningCardTitle": "Hidden States",
+      "stageNumber": 3,
+      "stageTitle": "Workday",
+      "interactionType": "hidden-state-sort",
+      "interactionTitle": "Durable or temporary?",
+      "interactionCopy": "Sort model parts by whether they persist as learned parameters, appear temporarily during this run, or sit outside the current forward pass.",
+      "exerciseType": "sort-buckets",
+      "expectedLearnerAction": "Sort durable, temporary, and outside-forward-pass items.",
+      "answerModel": "stable category mapping",
+      "feedbackBehavior": "Temporary hidden-state feedback.",
+      "completionCondition": "Each item is assigned.",
+      "randomized": "fixed order",
+      "fixedOrderReason": "Journey micro-interactions teach a sequence or boundary; randomization belongs to checkpoint choices, not these visual practice panels.",
+      "progressWrites": "none; Journey progress is controlled by checkpoint/reflection flow, not micro-interaction play.",
+      "localStorageKeys": [],
+      "scores": {
+        "objectiveFit": 5,
+        "mechanicClarity": 5,
+        "misconceptionValue": 5,
+        "feedbackQuality": 5,
+        "mobileUsability": 5,
+        "replayReviewValue": 4,
+        "cognitiveLoad": 5,
+        "total": 34
+      },
+      "priority": "P3",
+      "recommendation": "Keep for human testing.",
+      "issues": [],
+      "rendered": {
+        "320": {
+          "width": 320,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "embedding tablechoose bucket",
+              "width": 223.21875,
+              "height": 49.59375
+            },
+            {
+              "text": "weightchoose bucket",
+              "width": 223.21875,
+              "height": 49.59375
+            },
+            {
+              "text": "hidden statechoose bucket",
+              "width": 223.21875,
+              "height": 49.59375
+            },
+            {
+              "text": "attention patternchoose bucket",
+              "width": 223.21875,
+              "height": 49.59375
+            },
+            {
+              "text": "current contextchoose bucket",
+              "width": 223.21875,
+              "height": 49.59375
+            },
+            {
+              "text": "training datachoose bucket",
+              "width": 223.21875,
+              "height": 49.59375
+            }
+          ],
+          "navOverlap": false
+        },
+        "390": {
+          "width": 390,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "embedding tablechoose bucket",
+              "width": 293.21875,
+              "height": 49.59375
+            },
+            {
+              "text": "weightchoose bucket",
+              "width": 293.21875,
+              "height": 49.59375
+            },
+            {
+              "text": "hidden statechoose bucket",
+              "width": 293.21875,
+              "height": 49.59375
+            },
+            {
+              "text": "attention patternchoose bucket",
+              "width": 293.21875,
+              "height": 49.59375
+            },
+            {
+              "text": "current contextchoose bucket",
+              "width": 293.21875,
+              "height": 49.59375
+            },
+            {
+              "text": "training datachoose bucket",
+              "width": 293.21875,
+              "height": 49.59375
+            }
+          ],
+          "navOverlap": false
+        }
+      }
+    },
+    {
+      "version": "0.28.3",
+      "learningCardNumber": 20,
+      "learningCardId": "logits",
+      "learningCardTitle": "Logits",
+      "stageNumber": 4,
+      "stageTitle": "Decision Room",
+      "interactionType": "logits-raw-toggle",
+      "interactionTitle": "Raw scores or probabilities?",
+      "interactionCopy": "Toggle the display and notice that logits are the before state: raw scores, not probabilities or truth.",
+      "exerciseType": "toggle-view",
+      "expectedLearnerAction": "Toggle raw scores and probability-ready framing.",
+      "answerModel": "one best state with boundary feedback",
+      "feedbackBehavior": "Logits-are-not-probabilities feedback.",
+      "completionCondition": "Raw-score state is visible.",
+      "randomized": "fixed order",
+      "fixedOrderReason": "Journey micro-interactions teach a sequence or boundary; randomization belongs to checkpoint choices, not these visual practice panels.",
+      "progressWrites": "none; Journey progress is controlled by checkpoint/reflection flow, not micro-interaction play.",
+      "localStorageKeys": [],
+      "scores": {
+        "objectiveFit": 5,
+        "mechanicClarity": 5,
+        "misconceptionValue": 5,
+        "feedbackQuality": 5,
+        "mobileUsability": 5,
+        "replayReviewValue": 4,
+        "cognitiveLoad": 5,
+        "total": 34
+      },
+      "priority": "P3",
+      "recommendation": "Keep for human testing.",
+      "issues": [],
+      "rendered": {
+        "320": {
+          "width": 320,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "Raw scores",
+              "width": 108.015625,
+              "height": 50.90625
+            },
+            {
+              "text": "Probs?",
+              "width": 108.015625,
+              "height": 50.90625
+            }
+          ],
+          "navOverlap": false
+        },
+        "390": {
+          "width": 390,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "Raw scores",
+              "width": 143.015625,
+              "height": 42
+            },
+            {
+              "text": "Probs?",
+              "width": 143.015625,
+              "height": 42
+            }
+          ],
+          "navOverlap": false
+        }
+      }
+    },
+    {
+      "version": "0.28.3",
+      "learningCardNumber": 21,
+      "learningCardId": "softmax",
+      "learningCardTitle": "Softmax",
+      "stageNumber": 4,
+      "stageTitle": "Decision Room",
+      "interactionType": "softmax-convert",
+      "interactionTitle": "Convert the scores",
+      "interactionCopy": "Tap softmax to turn raw logits into probabilities that sum to 100%. Probability is still not truth.",
+      "exerciseType": "tap-transform",
+      "expectedLearnerAction": "Convert raw scores into probabilities.",
+      "answerModel": "stateful reveal",
+      "feedbackBehavior": "Probability-not-truth feedback.",
+      "completionCondition": "Softmax conversion is shown.",
+      "randomized": "fixed order",
+      "fixedOrderReason": "Journey micro-interactions teach a sequence or boundary; randomization belongs to checkpoint choices, not these visual practice panels.",
+      "progressWrites": "none; Journey progress is controlled by checkpoint/reflection flow, not micro-interaction play.",
+      "localStorageKeys": [],
+      "scores": {
+        "objectiveFit": 5,
+        "mechanicClarity": 5,
+        "misconceptionValue": 5,
+        "feedbackQuality": 5,
+        "mobileUsability": 5,
+        "replayReviewValue": 4,
+        "cognitiveLoad": 5,
+        "total": 34
+      },
+      "priority": "P3",
+      "recommendation": "Keep for human testing.",
+      "issues": [],
+      "rendered": {
+        "320": {
+          "width": 320,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "Apply softmax",
+              "width": 223.21875,
+              "height": 46
+            }
+          ],
+          "navOverlap": false
+        },
+        "390": {
+          "width": 390,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "Apply softmax",
+              "width": 293.21875,
+              "height": 46
+            }
+          ],
+          "navOverlap": false
+        }
+      }
+    },
+    {
+      "version": "0.28.3",
+      "learningCardNumber": 22,
+      "learningCardId": "sampling",
+      "learningCardTitle": "Sampling",
+      "stageNumber": 4,
+      "stageTitle": "Decision Room",
+      "interactionType": "sampling-probability-pick",
+      "interactionTitle": "Choose from the probability cloud",
+      "interactionCopy": "Pick the most likely next token from the local context. Probability is not truth; a likely token can still be unsupported in other situations.",
+      "exerciseType": "tap-choice",
+      "expectedLearnerAction": "Choose a next token from probability-shaped candidates.",
+      "answerModel": "one best applied choice",
+      "feedbackBehavior": "Sampling uncertainty feedback.",
+      "completionCondition": "A candidate token is selected.",
+      "randomized": "fixed options with learner choice",
+      "fixedOrderReason": "Journey micro-interactions teach a sequence or boundary; randomization belongs to checkpoint choices, not these visual practice panels.",
+      "progressWrites": "none; Journey progress is controlled by checkpoint/reflection flow, not micro-interaction play.",
+      "localStorageKeys": [],
+      "scores": {
+        "objectiveFit": 5,
+        "mechanicClarity": 5,
+        "misconceptionValue": 5,
+        "feedbackQuality": 5,
+        "mobileUsability": 5,
+        "replayReviewValue": 4,
+        "cognitiveLoad": 5,
+        "total": 34
+      },
+      "priority": "P3",
+      "recommendation": "Keep for human testing.",
+      "issues": [],
+      "rendered": {
+        "320": {
+          "width": 320,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "floor86%",
+              "width": 107.609375,
+              "height": 65.59375
+            },
+            {
+              "text": "room12%",
+              "width": 107.609375,
+              "height": 65.59375
+            },
+            {
+              "text": "counter2%",
+              "width": 107.609375,
+              "height": 65.59375
+            },
+            {
+              "text": "quantum~0%",
+              "width": 107.609375,
+              "height": 65.59375
+            }
+          ],
+          "navOverlap": false
+        },
+        "390": {
+          "width": 390,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "floor86%",
+              "width": 142.609375,
+              "height": 65.59375
+            },
+            {
+              "text": "room12%",
+              "width": 142.609375,
+              "height": 65.59375
+            },
+            {
+              "text": "counter2%",
+              "width": 142.609375,
+              "height": 65.59375
+            },
+            {
+              "text": "quantum~0%",
+              "width": 142.609375,
+              "height": 65.59375
+            }
+          ],
+          "navOverlap": false
+        }
+      }
+    },
+    {
+      "version": "0.28.3",
+      "learningCardNumber": 23,
+      "learningCardId": "autoregression",
+      "learningCardTitle": "Autoregression",
+      "stageNumber": 5,
+      "stageTitle": "The Day Repeats",
+      "interactionType": "autoregression-loop",
+      "interactionTitle": "Tap-step append loop",
+      "interactionCopy": "Tap through choose token, append, and run again to see how the response-so-far grows.",
+      "exerciseType": "tap-step",
+      "expectedLearnerAction": "Step through choose, append, run again.",
+      "answerModel": "ordered mechanism sequence",
+      "feedbackBehavior": "Append-and-repeat feedback.",
+      "completionCondition": "Loop reaches the repeated run state.",
+      "randomized": "fixed order",
+      "fixedOrderReason": "Journey micro-interactions teach a sequence or boundary; randomization belongs to checkpoint choices, not these visual practice panels.",
+      "progressWrites": "none; Journey progress is controlled by checkpoint/reflection flow, not micro-interaction play.",
+      "localStorageKeys": [],
+      "scores": {
+        "objectiveFit": 5,
+        "mechanicClarity": 5,
+        "misconceptionValue": 5,
+        "feedbackQuality": 5,
+        "mobileUsability": 5,
+        "replayReviewValue": 4,
+        "cognitiveLoad": 5,
+        "total": 34
+      },
+      "priority": "P3",
+      "recommendation": "Keep for human testing.",
+      "issues": [],
+      "rendered": {
+        "320": {
+          "width": 320,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "1. So far",
+              "width": 108.015625,
+              "height": 55.59375
+            },
+            {
+              "text": "2. Token chosen",
+              "width": 108.015625,
+              "height": 55.59375
+            },
+            {
+              "text": "3. Appended",
+              "width": 108.015625,
+              "height": 55.59375
+            },
+            {
+              "text": "4. Run again",
+              "width": 108.015625,
+              "height": 55.59375
+            },
+            {
+              "text": "Choose token",
+              "width": 223.21875,
+              "height": 46
+            }
+          ],
+          "navOverlap": false
+        },
+        "390": {
+          "width": 390,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "1. So far",
+              "width": 143.015625,
+              "height": 55.59375
+            },
+            {
+              "text": "2. Token chosen",
+              "width": 143.015625,
+              "height": 55.59375
+            },
+            {
+              "text": "3. Appended",
+              "width": 143.015625,
+              "height": 44
+            },
+            {
+              "text": "4. Run again",
+              "width": 143.015625,
+              "height": 44
+            },
+            {
+              "text": "Choose token",
+              "width": 293.21875,
+              "height": 46
+            }
+          ],
+          "navOverlap": false
+        }
+      }
+    },
+    {
+      "version": "0.28.3",
+      "learningCardNumber": 24,
+      "learningCardId": "context-window",
+      "learningCardTitle": "Context Window",
+      "stageNumber": 5,
+      "stageTitle": "The Day Repeats",
+      "interactionType": "context-window-tray",
+      "interactionTitle": "Push the context cards",
+      "interactionCopy": "Tap cards into a four-slot window and watch the oldest card fall out.",
+      "exerciseType": "tap-stack",
+      "expectedLearnerAction": "Push cards into a bounded context tray.",
+      "answerModel": "stateful reveal",
+      "feedbackBehavior": "Temporary-window feedback.",
+      "completionCondition": "A card falls out after the window fills.",
+      "randomized": "fixed order",
+      "fixedOrderReason": "Journey micro-interactions teach a sequence or boundary; randomization belongs to checkpoint choices, not these visual practice panels.",
+      "progressWrites": "none; Journey progress is controlled by checkpoint/reflection flow, not micro-interaction play.",
+      "localStorageKeys": [],
+      "scores": {
+        "objectiveFit": 5,
+        "mechanicClarity": 5,
+        "misconceptionValue": 5,
+        "feedbackQuality": 5,
+        "mobileUsability": 5,
+        "replayReviewValue": 4,
+        "cognitiveLoad": 5,
+        "total": 34
+      },
+      "priority": "P3",
+      "recommendation": "Keep for human testing.",
+      "issues": [],
+      "rendered": {
+        "320": {
+          "width": 320,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "Push: Old message",
+              "width": 223.21875,
+              "height": 46
+            }
+          ],
+          "navOverlap": false
+        },
+        "390": {
+          "width": 390,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "Push: Old message",
+              "width": 293.21875,
+              "height": 46
+            }
+          ],
+          "navOverlap": false
+        }
+      }
+    },
+    {
+      "version": "0.28.3",
+      "learningCardNumber": 25,
+      "learningCardId": "rag-retrieval",
+      "learningCardTitle": "RAG and Retrieval",
+      "stageNumber": 5,
+      "stageTitle": "The Day Repeats",
+      "interactionType": "rag-lane-highlight",
+      "interactionTitle": "Trace the retrieval lanes",
+      "interactionCopy": "Tap prompt, retriever, notes, context tray, and response to see retrieval plus context, not training.",
+      "exerciseType": "tap-step",
+      "expectedLearnerAction": "Trace prompt, retriever, retrieved notes, context tray, and response.",
+      "answerModel": "stateful reveal",
+      "feedbackBehavior": "Retrieval-plus-context feedback.",
+      "completionCondition": "All retrieval lanes can be highlighted.",
+      "randomized": "fixed order",
+      "fixedOrderReason": "Journey micro-interactions teach a sequence or boundary; randomization belongs to checkpoint choices, not these visual practice panels.",
+      "progressWrites": "none; Journey progress is controlled by checkpoint/reflection flow, not micro-interaction play.",
+      "localStorageKeys": [],
+      "scores": {
+        "objectiveFit": 5,
+        "mechanicClarity": 5,
+        "misconceptionValue": 5,
+        "feedbackQuality": 5,
+        "mobileUsability": 5,
+        "replayReviewValue": 4,
+        "cognitiveLoad": 5,
+        "total": 34
+      },
+      "priority": "P3",
+      "recommendation": "Keep for human testing.",
+      "issues": [],
+      "rendered": {
+        "320": {
+          "width": 320,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "1Prompt",
+              "width": 223.21875,
+              "height": 44.390625
+            },
+            {
+              "text": "2Retriever",
+              "width": 223.21875,
+              "height": 44.390625
+            },
+            {
+              "text": "3Notes",
+              "width": 223.21875,
+              "height": 44.390625
+            },
+            {
+              "text": "4Context tray",
+              "width": 223.21875,
+              "height": 44.390625
+            },
+            {
+              "text": "5Response",
+              "width": 223.21875,
+              "height": 44.390625
+            }
+          ],
+          "navOverlap": false
+        },
+        "390": {
+          "width": 390,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "1Prompt",
+              "width": 293.21875,
+              "height": 44.390625
+            },
+            {
+              "text": "2Retriever",
+              "width": 293.21875,
+              "height": 44.390625
+            },
+            {
+              "text": "3Notes",
+              "width": 293.21875,
+              "height": 44.390625
+            },
+            {
+              "text": "4Context tray",
+              "width": 293.21875,
+              "height": 44.390625
+            },
+            {
+              "text": "5Response",
+              "width": 293.21875,
+              "height": 44.390625
+            }
+          ],
+          "navOverlap": false
+        }
+      }
+    },
+    {
+      "version": "0.28.3",
+      "learningCardNumber": 26,
+      "learningCardId": "grounding",
+      "learningCardTitle": "Grounding",
+      "stageNumber": 5,
+      "stageTitle": "The Day Repeats",
+      "interactionType": "grounding-claim-match",
+      "interactionTitle": "Match claims to evidence",
+      "interactionCopy": "Connect supported claims to evidence and leave unsupported claims unanchored.",
+      "exerciseType": "connect-nodes",
+      "expectedLearnerAction": "Connect claims to supporting evidence.",
+      "answerModel": "target-to-source relationship",
+      "feedbackBehavior": "Evidence-match feedback.",
+      "completionCondition": "Supported and unsupported claims are visible.",
+      "randomized": "fixed order",
+      "fixedOrderReason": "Journey micro-interactions teach a sequence or boundary; randomization belongs to checkpoint choices, not these visual practice panels.",
+      "progressWrites": "none; Journey progress is controlled by checkpoint/reflection flow, not micro-interaction play.",
+      "localStorageKeys": [],
+      "scores": {
+        "objectiveFit": 5,
+        "mechanicClarity": 5,
+        "misconceptionValue": 5,
+        "feedbackQuality": 5,
+        "mobileUsability": 5,
+        "replayReviewValue": 4,
+        "cognitiveLoad": 5,
+        "total": 34
+      },
+      "priority": "P3",
+      "recommendation": "Keep for human testing.",
+      "issues": [],
+      "rendered": {
+        "320": {
+          "width": 320,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "The policy allows X.",
+              "width": 223.21875,
+              "height": 44
+            },
+            {
+              "text": "Enrollment is 42.",
+              "width": 223.21875,
+              "height": 44
+            },
+            {
+              "text": "The service is always free.",
+              "width": 223.21875,
+              "height": 55.59375
+            }
+          ],
+          "navOverlap": false
+        },
+        "390": {
+          "width": 390,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "The policy allows X.",
+              "width": 293.21875,
+              "height": 44
+            },
+            {
+              "text": "Enrollment is 42.",
+              "width": 293.21875,
+              "height": 44
+            },
+            {
+              "text": "The service is always free.",
+              "width": 293.21875,
+              "height": 44
+            }
+          ],
+          "navOverlap": false
+        }
+      }
+    },
+    {
+      "version": "0.28.3",
+      "learningCardNumber": 27,
+      "learningCardId": "hallucinations",
+      "learningCardTitle": "Hallucinations",
+      "stageNumber": 5,
+      "stageTitle": "The Day Repeats",
+      "interactionType": "hallucination-support-check",
+      "interactionTitle": "Mark missing supports",
+      "interactionCopy": "Read three fluent claims and mark the ones that need evidence.",
+      "exerciseType": "tap-multiple",
+      "expectedLearnerAction": "Mark fluent claims that need evidence.",
+      "answerModel": "multi-select applied judgment",
+      "feedbackBehavior": "Unsupported-output feedback.",
+      "completionCondition": "Unsupported claims are marked.",
+      "randomized": "fixed order",
+      "fixedOrderReason": "Journey micro-interactions teach a sequence or boundary; randomization belongs to checkpoint choices, not these visual practice panels.",
+      "progressWrites": "none; Journey progress is controlled by checkpoint/reflection flow, not micro-interaction play.",
+      "localStorageKeys": [],
+      "scores": {
+        "objectiveFit": 5,
+        "mechanicClarity": 5,
+        "misconceptionValue": 5,
+        "feedbackQuality": 5,
+        "mobileUsability": 5,
+        "replayReviewValue": 4,
+        "cognitiveLoad": 5,
+        "total": 34
+      },
+      "priority": "P3",
+      "recommendation": "Keep for human testing.",
+      "issues": [],
+      "rendered": {
+        "320": {
+          "width": 320,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "The retrieved policy mentions X.Evidence pillar present",
+              "width": 223.21875,
+              "height": 75.109375
+            },
+            {
+              "text": "The policy was updated in 2027.No matching evidence",
+              "width": 223.21875,
+              "height": 75.109375
+            },
+            {
+              "text": "Exceptions may exist.Needs review, but not the missing-support claim here",
+              "width": 223.21875,
+              "height": 73.109375
+            }
+          ],
+          "navOverlap": false
+        },
+        "390": {
+          "width": 390,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "The retrieved policy mentions X.Evidence pillar present",
+              "width": 293.21875,
+              "height": 57.109375
+            },
+            {
+              "text": "The policy was updated in 2027.No matching evidence",
+              "width": 293.21875,
+              "height": 57.109375
+            },
+            {
+              "text": "Exceptions may exist.Needs review, but not the missing-support claim here",
+              "width": 293.21875,
+              "height": 73.109375
+            }
+          ],
+          "navOverlap": false
+        }
+      }
+    },
+    {
+      "version": "0.28.3",
+      "learningCardNumber": 28,
+      "learningCardId": "how-ai-learns",
+      "learningCardTitle": "How AI Learns",
+      "stageNumber": 6,
+      "stageTitle": "Twilight: The Wider Landscape",
+      "interactionType": "learning-modes-sort",
+      "interactionTitle": "Sort the learning modes",
+      "interactionCopy": "Durable update, temporary steering, retrieval, and evaluation solve different problems.",
+      "exerciseType": "sort-buckets",
+      "expectedLearnerAction": "Sort durable update, temporary steering, retrieval, and evaluation modes.",
+      "answerModel": "stable category mapping",
+      "feedbackBehavior": "What-changed feedback.",
+      "completionCondition": "Each mode is assigned.",
+      "randomized": "fixed order",
+      "fixedOrderReason": "Journey micro-interactions teach a sequence or boundary; randomization belongs to checkpoint choices, not these visual practice panels.",
+      "progressWrites": "none; Journey progress is controlled by checkpoint/reflection flow, not micro-interaction play.",
+      "localStorageKeys": [],
+      "scores": {
+        "objectiveFit": 5,
+        "mechanicClarity": 5,
+        "misconceptionValue": 5,
+        "feedbackQuality": 5,
+        "mobileUsability": 5,
+        "replayReviewValue": 4,
+        "cognitiveLoad": 5,
+        "total": 34
+      },
+      "priority": "P3",
+      "recommendation": "Keep for human testing.",
+      "issues": [],
+      "rendered": {
+        "320": {
+          "width": 320,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "pretrainingTap to sort",
+              "width": 223.21875,
+              "height": 48
+            },
+            {
+              "text": "fine-tuningTap to sort",
+              "width": 223.21875,
+              "height": 48
+            },
+            {
+              "text": "adapter trainingTap to sort",
+              "width": 223.21875,
+              "height": 48
+            },
+            {
+              "text": "prompt instructionTap to sort",
+              "width": 223.21875,
+              "height": 48
+            },
+            {
+              "text": "in-context exampleTap to sort",
+              "width": 223.21875,
+              "height": 48
+            },
+            {
+              "text": "response-so-farTap to sort",
+              "width": 223.21875,
+              "height": 48
+            },
+            {
+              "text": "RAG noteTap to sort",
+              "width": 223.21875,
+              "height": 48
+            },
+            {
+              "text": "retrieved documentTap to sort",
+              "width": 223.21875,
+              "height": 48
+            },
+            {
+              "text": "human ratingTap to sort",
+              "width": 223.21875,
+              "height": 48
+            },
+            {
+              "text": "safety testTap to sort",
+              "width": 223.21875,
+              "height": 48
+            }
+          ],
+          "navOverlap": false
+        },
+        "390": {
+          "width": 390,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "pretrainingTap to sort",
+              "width": 293.21875,
+              "height": 48
+            },
+            {
+              "text": "fine-tuningTap to sort",
+              "width": 293.21875,
+              "height": 48
+            },
+            {
+              "text": "adapter trainingTap to sort",
+              "width": 293.21875,
+              "height": 48
+            },
+            {
+              "text": "prompt instructionTap to sort",
+              "width": 293.21875,
+              "height": 48
+            },
+            {
+              "text": "in-context exampleTap to sort",
+              "width": 293.21875,
+              "height": 48
+            },
+            {
+              "text": "response-so-farTap to sort",
+              "width": 293.21875,
+              "height": 48
+            },
+            {
+              "text": "RAG noteTap to sort",
+              "width": 293.21875,
+              "height": 48
+            },
+            {
+              "text": "retrieved documentTap to sort",
+              "width": 293.21875,
+              "height": 48
+            },
+            {
+              "text": "human ratingTap to sort",
+              "width": 293.21875,
+              "height": 48
+            },
+            {
+              "text": "safety testTap to sort",
+              "width": 293.21875,
+              "height": 48
+            }
+          ],
+          "navOverlap": false
+        }
+      }
+    },
+    {
+      "version": "0.28.3",
+      "learningCardNumber": 29,
+      "learningCardId": "diffusion",
+      "learningCardTitle": "Diffusion vs Autoregression",
+      "stageNumber": 6,
+      "stageTitle": "Twilight: The Wider Landscape",
+      "interactionType": "diffusion-contrast",
+      "interactionTitle": "Step through two loops",
+      "interactionCopy": "Tap Token path or Denoise path to compare append-and-repeat with denoise-and-refine.",
+      "exerciseType": "tap-compare",
+      "expectedLearnerAction": "Step through token append path and denoise path.",
+      "answerModel": "stateful reveal",
+      "feedbackBehavior": "Autoregression-versus-diffusion feedback.",
+      "completionCondition": "Both paths can be compared.",
+      "randomized": "fixed order",
+      "fixedOrderReason": "Journey micro-interactions teach a sequence or boundary; randomization belongs to checkpoint choices, not these visual practice panels.",
+      "progressWrites": "none; Journey progress is controlled by checkpoint/reflection flow, not micro-interaction play.",
+      "localStorageKeys": [],
+      "scores": {
+        "objectiveFit": 5,
+        "mechanicClarity": 5,
+        "misconceptionValue": 5,
+        "feedbackQuality": 5,
+        "mobileUsability": 5,
+        "replayReviewValue": 4,
+        "cognitiveLoad": 5,
+        "total": 34
+      },
+      "priority": "P3",
+      "recommendation": "Keep for human testing.",
+      "issues": [],
+      "rendered": {
+        "320": {
+          "width": 320,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "Token path",
+              "width": 223.21875,
+              "height": 48
+            },
+            {
+              "text": "Denoise path",
+              "width": 223.21875,
+              "height": 48
+            },
+            {
+              "text": "Show choose token",
+              "width": 223.21875,
+              "height": 46
+            }
+          ],
+          "navOverlap": false
+        },
+        "390": {
+          "width": 390,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "Token path",
+              "width": 293.21875,
+              "height": 48
+            },
+            {
+              "text": "Denoise path",
+              "width": 293.21875,
+              "height": 48
+            },
+            {
+              "text": "Show choose token",
+              "width": 293.21875,
+              "height": 46
+            }
+          ],
+          "navOverlap": false
+        }
+      }
+    },
+    {
+      "version": "0.28.3",
+      "learningCardNumber": 30,
+      "learningCardId": "multimodal",
+      "learningCardTitle": "Multimodal AI",
+      "stageNumber": 6,
+      "stageTitle": "Twilight: The Wider Landscape",
+      "interactionType": "multimodal-map",
+      "interactionTitle": "Match media lanes",
+      "interactionCopy": "Tap an input-output pair to see how different media can be represented or connected.",
+      "exerciseType": "match-lanes",
+      "expectedLearnerAction": "Match media inputs and outputs.",
+      "answerModel": "stateful reveal",
+      "feedbackBehavior": "Representation-not-human-senses feedback.",
+      "completionCondition": "A media lane pair is selected.",
+      "randomized": "fixed order",
+      "fixedOrderReason": "Journey micro-interactions teach a sequence or boundary; randomization belongs to checkpoint choices, not these visual practice panels.",
+      "progressWrites": "none; Journey progress is controlled by checkpoint/reflection flow, not micro-interaction play.",
+      "localStorageKeys": [],
+      "scores": {
+        "objectiveFit": 5,
+        "mechanicClarity": 5,
+        "misconceptionValue": 5,
+        "feedbackQuality": 5,
+        "mobileUsability": 5,
+        "replayReviewValue": 4,
+        "cognitiveLoad": 5,
+        "total": 34
+      },
+      "priority": "P3",
+      "recommendation": "Keep for human testing.",
+      "issues": [],
+      "rendered": {
+        "320": {
+          "width": 320,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "imagecaption",
+              "width": 108.015625,
+              "height": 46
+            },
+            {
+              "text": "audiotranscript",
+              "width": 108.015625,
+              "height": 46
+            },
+            {
+              "text": "text promptgenerated image",
+              "width": 108.015625,
+              "height": 72.875
+            },
+            {
+              "text": "chart + questionanswer",
+              "width": 108.015625,
+              "height": 72.875
+            }
+          ],
+          "navOverlap": false
+        },
+        "390": {
+          "width": 390,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "imagecaption",
+              "width": 143.015625,
+              "height": 46
+            },
+            {
+              "text": "audiotranscript",
+              "width": 143.015625,
+              "height": 46
+            },
+            {
+              "text": "text promptgenerated image",
+              "width": 143.015625,
+              "height": 57.875
+            },
+            {
+              "text": "chart + questionanswer",
+              "width": 143.015625,
+              "height": 57.875
+            }
+          ],
+          "navOverlap": false
+        }
+      }
+    },
+    {
+      "version": "0.28.3",
+      "learningCardNumber": 31,
+      "learningCardId": "perfect-storm",
+      "learningCardTitle": "The Perfect Storm",
+      "stageNumber": 6,
+      "stageTitle": "Twilight: The Wider Landscape",
+      "interactionType": "perfect-storm-ingredients",
+      "interactionTitle": "Tap storm ingredients",
+      "interactionCopy": "Tap each stream to see why capability came from many converging conditions, not one mysterious spark.",
+      "exerciseType": "tap-reveal",
+      "expectedLearnerAction": "Tap converging ingredient streams.",
+      "answerModel": "stateful reveal",
+      "feedbackBehavior": "Convergence-not-spark feedback.",
+      "completionCondition": "Ingredient explanation is revealed.",
+      "randomized": "fixed order",
+      "fixedOrderReason": "Journey micro-interactions teach a sequence or boundary; randomization belongs to checkpoint choices, not these visual practice panels.",
+      "progressWrites": "none; Journey progress is controlled by checkpoint/reflection flow, not micro-interaction play.",
+      "localStorageKeys": [],
+      "scores": {
+        "objectiveFit": 5,
+        "mechanicClarity": 5,
+        "misconceptionValue": 5,
+        "feedbackQuality": 5,
+        "mobileUsability": 5,
+        "replayReviewValue": 4,
+        "cognitiveLoad": 5,
+        "total": 34
+      },
+      "priority": "P3",
+      "recommendation": "Keep for human testing.",
+      "issues": [],
+      "rendered": {
+        "320": {
+          "width": 320,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "Data",
+              "width": 108.015625,
+              "height": 46
+            },
+            {
+              "text": "Compute",
+              "width": 108.015625,
+              "height": 46
+            },
+            {
+              "text": "Storage",
+              "width": 108.015625,
+              "height": 46
+            },
+            {
+              "text": "Algorithms",
+              "width": 108.015625,
+              "height": 46
+            },
+            {
+              "text": "Human labor",
+              "width": 108.015625,
+              "height": 46
+            },
+            {
+              "text": "Incentives",
+              "width": 108.015625,
+              "height": 46
+            }
+          ],
+          "navOverlap": false
+        },
+        "390": {
+          "width": 390,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "Data",
+              "width": 143.015625,
+              "height": 46
+            },
+            {
+              "text": "Compute",
+              "width": 143.015625,
+              "height": 46
+            },
+            {
+              "text": "Storage",
+              "width": 143.015625,
+              "height": 46
+            },
+            {
+              "text": "Algorithms",
+              "width": 143.015625,
+              "height": 46
+            },
+            {
+              "text": "Human labor",
+              "width": 143.015625,
+              "height": 46
+            },
+            {
+              "text": "Incentives",
+              "width": 143.015625,
+              "height": 46
+            }
+          ],
+          "navOverlap": false
+        }
+      }
+    },
+    {
+      "version": "0.28.3",
+      "learningCardNumber": 32,
+      "learningCardId": "collective-intelligence",
+      "learningCardTitle": "Collective Intelligence, Extracted",
+      "stageNumber": 7,
+      "stageTitle": "Midnight Ledger",
+      "interactionType": "collective-human-questions",
+      "interactionTitle": "Which questions stay human?",
+      "interactionCopy": "Sort rights and source questions away from model mechanics.",
+      "exerciseType": "sort-buckets",
+      "expectedLearnerAction": "Sort human-rights questions away from model mechanics.",
+      "answerModel": "stateful reveal",
+      "feedbackBehavior": "Accountability feedback.",
+      "completionCondition": "Questions are classified.",
+      "randomized": "fixed order",
+      "fixedOrderReason": "Journey micro-interactions teach a sequence or boundary; randomization belongs to checkpoint choices, not these visual practice panels.",
+      "progressWrites": "none; Journey progress is controlled by checkpoint/reflection flow, not micro-interaction play.",
+      "localStorageKeys": [],
+      "scores": {
+        "objectiveFit": 4,
+        "mechanicClarity": 4,
+        "misconceptionValue": 4,
+        "feedbackQuality": 4,
+        "mobileUsability": 4,
+        "replayReviewValue": 3,
+        "cognitiveLoad": 4,
+        "total": 27
+      },
+      "priority": "P2",
+      "recommendation": "Keep for human testing; watch for clarity and replay value.",
+      "issues": [],
+      "rendered": {
+        "320": {
+          "width": 320,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "provenanceTap to sort",
+              "width": 223.21875,
+              "height": 48
+            },
+            {
+              "text": "consentTap to sort",
+              "width": 223.21875,
+              "height": 48
+            },
+            {
+              "text": "copyrightTap to sort",
+              "width": 223.21875,
+              "height": 48
+            },
+            {
+              "text": "compensationTap to sort",
+              "width": 223.21875,
+              "height": 48
+            },
+            {
+              "text": "model weightsTap to sort",
+              "width": 223.21875,
+              "height": 48
+            },
+            {
+              "text": "prompt tokensTap to sort",
+              "width": 223.21875,
+              "height": 48
+            }
+          ],
+          "navOverlap": false
+        },
+        "390": {
+          "width": 390,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "provenanceTap to sort",
+              "width": 293.21875,
+              "height": 48
+            },
+            {
+              "text": "consentTap to sort",
+              "width": 293.21875,
+              "height": 48
+            },
+            {
+              "text": "copyrightTap to sort",
+              "width": 293.21875,
+              "height": 48
+            },
+            {
+              "text": "compensationTap to sort",
+              "width": 293.21875,
+              "height": 48
+            },
+            {
+              "text": "model weightsTap to sort",
+              "width": 293.21875,
+              "height": 48
+            },
+            {
+              "text": "prompt tokensTap to sort",
+              "width": 293.21875,
+              "height": 48
+            }
+          ],
+          "navOverlap": false
+        }
+      }
+    },
+    {
+      "version": "0.28.3",
+      "learningCardNumber": 33,
+      "learningCardId": "costs-we-must-count",
+      "learningCardTitle": "Costs We Must Count",
+      "stageNumber": 7,
+      "stageTitle": "Midnight Ledger",
+      "interactionType": "cost-ledger",
+      "interactionTitle": "Tap the cost ledger",
+      "interactionCopy": "Tap a ledger entry to see what responsible AI literacy has to count.",
+      "exerciseType": "tap-reveal",
+      "expectedLearnerAction": "Tap cost ledger entries.",
+      "answerModel": "stateful reveal",
+      "feedbackBehavior": "Countable-cost feedback.",
+      "completionCondition": "Cost category explanation is revealed.",
+      "randomized": "fixed order",
+      "fixedOrderReason": "Journey micro-interactions teach a sequence or boundary; randomization belongs to checkpoint choices, not these visual practice panels.",
+      "progressWrites": "none; Journey progress is controlled by checkpoint/reflection flow, not micro-interaction play.",
+      "localStorageKeys": [],
+      "scores": {
+        "objectiveFit": 5,
+        "mechanicClarity": 5,
+        "misconceptionValue": 5,
+        "feedbackQuality": 5,
+        "mobileUsability": 5,
+        "replayReviewValue": 4,
+        "cognitiveLoad": 5,
+        "total": 34
+      },
+      "priority": "P3",
+      "recommendation": "Keep for human testing.",
+      "issues": [],
+      "rendered": {
+        "320": {
+          "width": 320,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "Energy",
+              "width": 108.015625,
+              "height": 46
+            },
+            {
+              "text": "Water",
+              "width": 108.015625,
+              "height": 46
+            },
+            {
+              "text": "Hardware",
+              "width": 108.015625,
+              "height": 46
+            },
+            {
+              "text": "Labor",
+              "width": 108.015625,
+              "height": 46
+            },
+            {
+              "text": "Privacy",
+              "width": 108.015625,
+              "height": 46
+            },
+            {
+              "text": "Governance",
+              "width": 108.015625,
+              "height": 46
+            }
+          ],
+          "navOverlap": false
+        },
+        "390": {
+          "width": 390,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "Energy",
+              "width": 143.015625,
+              "height": 46
+            },
+            {
+              "text": "Water",
+              "width": 143.015625,
+              "height": 46
+            },
+            {
+              "text": "Hardware",
+              "width": 143.015625,
+              "height": 46
+            },
+            {
+              "text": "Labor",
+              "width": 143.015625,
+              "height": 46
+            },
+            {
+              "text": "Privacy",
+              "width": 143.015625,
+              "height": 46
+            },
+            {
+              "text": "Governance",
+              "width": 143.015625,
+              "height": 46
+            }
+          ],
+          "navOverlap": false
+        }
+      }
+    },
+    {
+      "version": "0.28.3",
+      "learningCardNumber": 34,
+      "learningCardId": "risk-myth",
+      "learningCardTitle": "Risk vs Myth",
+      "stageNumber": 7,
+      "stageTitle": "Midnight Ledger",
+      "interactionType": "risk-myth-sort",
+      "interactionTitle": "Sort risk from myth",
+      "interactionCopy": "Sort each claim as a real mechanism risk or an unsupported story.",
+      "exerciseType": "sort-buckets",
+      "expectedLearnerAction": "Sort practical risks from myths.",
+      "answerModel": "stable category mapping",
+      "feedbackBehavior": "Mechanism-risk feedback.",
+      "completionCondition": "Claims are assigned.",
+      "randomized": "fixed order",
+      "fixedOrderReason": "Journey micro-interactions teach a sequence or boundary; randomization belongs to checkpoint choices, not these visual practice panels.",
+      "progressWrites": "none; Journey progress is controlled by checkpoint/reflection flow, not micro-interaction play.",
+      "localStorageKeys": [],
+      "scores": {
+        "objectiveFit": 5,
+        "mechanicClarity": 5,
+        "misconceptionValue": 5,
+        "feedbackQuality": 5,
+        "mobileUsability": 5,
+        "replayReviewValue": 4,
+        "cognitiveLoad": 5,
+        "total": 34
+      },
+      "priority": "P3",
+      "recommendation": "Keep for human testing.",
+      "issues": [],
+      "rendered": {
+        "320": {
+          "width": 320,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "Private student records in a public chatbotTap to sort",
+              "width": 223.21875,
+              "height": 59.515625
+            },
+            {
+              "text": "The model becomes conscious during the chatTap to sort",
+              "width": 223.21875,
+              "height": 59.515625
+            },
+            {
+              "text": "Malicious retrieved text overrides intended instructionsTap to sort",
+              "width": 223.21875,
+              "height": 77.515625
+            },
+            {
+              "text": "The model permanently trains itself on every ordinary promptTap to sort",
+              "width": 223.21875,
+              "height": 77.515625
+            },
+            {
+              "text": "Overreliance weakens human reviewTap to sort",
+              "width": 223.21875,
+              "height": 59.515625
+            },
+            {
+              "text": "Softmax steals filesTap to sort",
+              "width": 223.21875,
+              "height": 48
+            }
+          ],
+          "navOverlap": false
+        },
+        "390": {
+          "width": 390,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "Private student records in a public chatbotTap to sort",
+              "width": 293.21875,
+              "height": 59.515625
+            },
+            {
+              "text": "The model becomes conscious during the chatTap to sort",
+              "width": 293.21875,
+              "height": 59.515625
+            },
+            {
+              "text": "Malicious retrieved text overrides intended instructionsTap to sort",
+              "width": 293.21875,
+              "height": 59.515625
+            },
+            {
+              "text": "The model permanently trains itself on every ordinary promptTap to sort",
+              "width": 293.21875,
+              "height": 59.515625
+            },
+            {
+              "text": "Overreliance weakens human reviewTap to sort",
+              "width": 293.21875,
+              "height": 59.515625
+            },
+            {
+              "text": "Softmax steals filesTap to sort",
+              "width": 293.21875,
+              "height": 48
+            }
+          ],
+          "navOverlap": false
+        }
+      }
+    },
+    {
+      "version": "0.28.3",
+      "learningCardNumber": 35,
+      "learningCardId": "benefits-worth-taking-seriously",
+      "learningCardTitle": "Benefits Worth Taking Seriously",
+      "stageNumber": 8,
+      "stageTitle": "New Dawn",
+      "interactionType": "benefit-tier-sort",
+      "interactionTitle": "Sort benefit strength",
+      "interactionCopy": "Sort benefit claims by confidence: useful now with review, plausible with safeguards, or speculative hype.",
+      "exerciseType": "sort-buckets",
+      "expectedLearnerAction": "Sort benefit claims by evidence strength.",
+      "answerModel": "stable category mapping",
+      "feedbackBehavior": "Bounded-benefit feedback.",
+      "completionCondition": "Claims are assigned.",
+      "randomized": "fixed order",
+      "fixedOrderReason": "Journey micro-interactions teach a sequence or boundary; randomization belongs to checkpoint choices, not these visual practice panels.",
+      "progressWrites": "none; Journey progress is controlled by checkpoint/reflection flow, not micro-interaction play.",
+      "localStorageKeys": [],
+      "scores": {
+        "objectiveFit": 4,
+        "mechanicClarity": 4,
+        "misconceptionValue": 5,
+        "feedbackQuality": 4,
+        "mobileUsability": 4,
+        "replayReviewValue": 3,
+        "cognitiveLoad": 4,
+        "total": 28
+      },
+      "priority": "P2",
+      "recommendation": "Keep for human testing; watch for clarity and replay value.",
+      "issues": [],
+      "rendered": {
+        "320": {
+          "width": 320,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "AI can assist drafts, search, translation, and access under human review.Tap to ",
+              "width": 223.21875,
+              "height": 95.515625
+            },
+            {
+              "text": "AI will automatically solve education.Tap to sort",
+              "width": 223.21875,
+              "height": 59.515625
+            },
+            {
+              "text": "AI has human judgment now.Tap to sort",
+              "width": 223.21875,
+              "height": 59.515625
+            },
+            {
+              "text": "AI benefits mean no costs matter.Tap to sort",
+              "width": 223.21875,
+              "height": 59.515625
+            }
+          ],
+          "navOverlap": false
+        },
+        "390": {
+          "width": 390,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "AI can assist drafts, search, translation, and access under human review.Tap to ",
+              "width": 293.21875,
+              "height": 77.515625
+            },
+            {
+              "text": "AI will automatically solve education.Tap to sort",
+              "width": 293.21875,
+              "height": 59.515625
+            },
+            {
+              "text": "AI has human judgment now.Tap to sort",
+              "width": 293.21875,
+              "height": 48
+            },
+            {
+              "text": "AI benefits mean no costs matter.Tap to sort",
+              "width": 293.21875,
+              "height": 48
+            }
+          ],
+          "navOverlap": false
+        }
+      }
+    },
+    {
+      "version": "0.28.3",
+      "learningCardNumber": 36,
+      "learningCardId": "human-centered-ai",
+      "learningCardTitle": "Human-Centered AI",
+      "stageNumber": 8,
+      "stageTitle": "New Dawn",
+      "interactionType": "human-centered-scenario",
+      "interactionTitle": "Center the human purpose",
+      "interactionCopy": "Choose the deployment that keeps people, review, and institutional accountability visible.",
+      "exerciseType": "tap-choice",
+      "expectedLearnerAction": "Choose the more human-centered deployment.",
+      "answerModel": "stateful reveal",
+      "feedbackBehavior": "Review-and-accountability feedback.",
+      "completionCondition": "Accountable deployment is selected.",
+      "randomized": "fixed order",
+      "fixedOrderReason": "Journey micro-interactions teach a sequence or boundary; randomization belongs to checkpoint choices, not these visual practice panels.",
+      "progressWrites": "none; Journey progress is controlled by checkpoint/reflection flow, not micro-interaction play.",
+      "localStorageKeys": [],
+      "scores": {
+        "objectiveFit": 5,
+        "mechanicClarity": 5,
+        "misconceptionValue": 5,
+        "feedbackQuality": 5,
+        "mobileUsability": 5,
+        "replayReviewValue": 4,
+        "cognitiveLoad": 5,
+        "total": 34
+      },
+      "priority": "P3",
+      "recommendation": "Keep for human testing.",
+      "issues": [],
+      "rendered": {
+        "320": {
+          "width": 320,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "Use summary as a draft; human reviews before action.",
+              "width": 223.21875,
+              "height": 58
+            },
+            {
+              "text": "Auto-decide with no review.",
+              "width": 223.21875,
+              "height": 46
+            },
+            {
+              "text": "Hide model limitations from staff.",
+              "width": 223.21875,
+              "height": 46
+            },
+            {
+              "text": "Treat fluent text as proof.",
+              "width": 223.21875,
+              "height": 46
+            }
+          ],
+          "navOverlap": false
+        },
+        "390": {
+          "width": 390,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "Use summary as a draft; human reviews before action.",
+              "width": 293.21875,
+              "height": 46
+            },
+            {
+              "text": "Auto-decide with no review.",
+              "width": 293.21875,
+              "height": 46
+            },
+            {
+              "text": "Hide model limitations from staff.",
+              "width": 293.21875,
+              "height": 46
+            },
+            {
+              "text": "Treat fluent text as proof.",
+              "width": 293.21875,
+              "height": 46
+            }
+          ],
+          "navOverlap": false
+        }
+      }
+    },
+    {
+      "version": "0.28.3",
+      "learningCardNumber": 37,
+      "learningCardId": "better-ai-choice",
+      "learningCardTitle": "Better AI Is a Choice",
+      "stageNumber": 8,
+      "stageTitle": "New Dawn",
+      "interactionType": "better-ai-levers",
+      "interactionTitle": "Choose the better path",
+      "interactionCopy": "Tap the design and governance levers that reduce risk or cost for an internal policy assistant.",
+      "exerciseType": "tap-multiple",
+      "expectedLearnerAction": "Choose design and governance levers.",
+      "answerModel": "multi-select applied judgment",
+      "feedbackBehavior": "Design-choice feedback.",
+      "completionCondition": "Useful levers are selected.",
+      "randomized": "fixed options with learner choice",
+      "fixedOrderReason": "Journey micro-interactions teach a sequence or boundary; randomization belongs to checkpoint choices, not these visual practice panels.",
+      "progressWrites": "none; Journey progress is controlled by checkpoint/reflection flow, not micro-interaction play.",
+      "localStorageKeys": [],
+      "scores": {
+        "objectiveFit": 5,
+        "mechanicClarity": 5,
+        "misconceptionValue": 5,
+        "feedbackQuality": 5,
+        "mobileUsability": 5,
+        "replayReviewValue": 4,
+        "cognitiveLoad": 5,
+        "total": 34
+      },
+      "priority": "P3",
+      "recommendation": "Keep for human testing.",
+      "issues": [],
+      "rendered": {
+        "320": {
+          "width": 320,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "Use RAG over approved documents",
+              "width": 223.21875,
+              "height": 57.34375
+            },
+            {
+              "text": "Protect sensitive data",
+              "width": 223.21875,
+              "height": 44
+            },
+            {
+              "text": "Require source links and review",
+              "width": 223.21875,
+              "height": 57.34375
+            },
+            {
+              "text": "Choose a smaller task-fit model if adequate",
+              "width": 223.21875,
+              "height": 57.34375
+            },
+            {
+              "text": "Monitor errors",
+              "width": 223.21875,
+              "height": 44
+            },
+            {
+              "text": "Upload private data to any chatbot",
+              "width": 223.21875,
+              "height": 57.34375
+            },
+            {
+              "text": "Assume bigger is always better",
+              "width": 223.21875,
+              "height": 57.34375
+            },
+            {
+              "text": "Remove human accountability",
+              "width": 223.21875,
+              "height": 57.34375
+            },
+            {
+              "text": "Ignore data provenance",
+              "width": 223.21875,
+              "height": 44
+            }
+          ],
+          "navOverlap": false
+        },
+        "390": {
+          "width": 390,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "Use RAG over approved documents",
+              "width": 143.015625,
+              "height": 76.21875
+            },
+            {
+              "text": "Protect sensitive data",
+              "width": 143.015625,
+              "height": 76.21875
+            },
+            {
+              "text": "Require source links and review",
+              "width": 143.015625,
+              "height": 95.09375
+            },
+            {
+              "text": "Choose a smaller task-fit model if adequate",
+              "width": 143.015625,
+              "height": 95.09375
+            },
+            {
+              "text": "Monitor errors",
+              "width": 143.015625,
+              "height": 76.21875
+            },
+            {
+              "text": "Upload private data to any chatbot",
+              "width": 143.015625,
+              "height": 76.21875
+            },
+            {
+              "text": "Assume bigger is always better",
+              "width": 143.015625,
+              "height": 76.21875
+            },
+            {
+              "text": "Remove human accountability",
+              "width": 143.015625,
+              "height": 76.21875
+            },
+            {
+              "text": "Ignore data provenance",
+              "width": 143.015625,
+              "height": 57.34375
+            }
+          ],
+          "navOverlap": false
+        }
+      }
+    },
+    {
+      "version": "0.28.3",
+      "learningCardNumber": 38,
+      "learningCardId": "effective-prompting-literacy",
+      "learningCardTitle": "Effective Prompting from Model Literacy",
+      "stageNumber": 8,
+      "stageTitle": "New Dawn",
+      "interactionType": "prompt-builder",
+      "interactionTitle": "Pack the context tray",
+      "interactionCopy": "Build a better prompt by adding task, audience/context, constraints, examples, evidence, uncertainty, format, and review cues.",
+      "exerciseType": "tap-multiple",
+      "expectedLearnerAction": "Pack a context tray with prompt ingredients.",
+      "answerModel": "multi-select applied judgment",
+      "feedbackBehavior": "Context-design feedback.",
+      "completionCondition": "Prompt tray is completed.",
+      "randomized": "fixed options with learner choice",
+      "fixedOrderReason": "Journey micro-interactions teach a sequence or boundary; randomization belongs to checkpoint choices, not these visual practice panels.",
+      "progressWrites": "none; Journey progress is controlled by checkpoint/reflection flow, not micro-interaction play.",
+      "localStorageKeys": [],
+      "scores": {
+        "objectiveFit": 5,
+        "mechanicClarity": 5,
+        "misconceptionValue": 5,
+        "feedbackQuality": 5,
+        "mobileUsability": 5,
+        "replayReviewValue": 4,
+        "cognitiveLoad": 5,
+        "total": 34
+      },
+      "priority": "P3",
+      "recommendation": "Keep for human testing.",
+      "issues": [],
+      "rendered": {
+        "320": {
+          "width": 320,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "Task",
+              "width": 223.21875,
+              "height": 44
+            },
+            {
+              "text": "Audience",
+              "width": 223.21875,
+              "height": 44
+            },
+            {
+              "text": "Constraints",
+              "width": 223.21875,
+              "height": 44
+            },
+            {
+              "text": "Examples",
+              "width": 223.21875,
+              "height": 44
+            },
+            {
+              "text": "Format",
+              "width": 223.21875,
+              "height": 44
+            },
+            {
+              "text": "Evidence",
+              "width": 223.21875,
+              "height": 44
+            },
+            {
+              "text": "Uncertainty",
+              "width": 223.21875,
+              "height": 44
+            },
+            {
+              "text": "Review",
+              "width": 223.21875,
+              "height": 44
+            }
+          ],
+          "navOverlap": false
+        },
+        "390": {
+          "width": 390,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "Task",
+              "width": 143.015625,
+              "height": 44
+            },
+            {
+              "text": "Audience",
+              "width": 143.015625,
+              "height": 44
+            },
+            {
+              "text": "Constraints",
+              "width": 143.015625,
+              "height": 44
+            },
+            {
+              "text": "Examples",
+              "width": 143.015625,
+              "height": 44
+            },
+            {
+              "text": "Format",
+              "width": 143.015625,
+              "height": 44
+            },
+            {
+              "text": "Evidence",
+              "width": 143.015625,
+              "height": 44
+            },
+            {
+              "text": "Uncertainty",
+              "width": 143.015625,
+              "height": 44
+            },
+            {
+              "text": "Review",
+              "width": 143.015625,
+              "height": 44
+            }
+          ],
+          "navOverlap": false
+        }
+      }
+    },
+    {
+      "version": "0.28.3",
+      "learningCardNumber": 39,
+      "learningCardId": "model-literate-synthesis",
+      "learningCardTitle": "Model Literate Synthesis",
+      "stageNumber": 8,
+      "stageTitle": "New Dawn",
+      "interactionType": "synthesis-chain",
+      "interactionTitle": "Light the map",
+      "interactionCopy": "Put the model story in order, from prompt context to human accountability.",
+      "exerciseType": "order-sequence",
+      "expectedLearnerAction": "Put the model-literacy chain in order.",
+      "answerModel": "stateful reveal",
+      "feedbackBehavior": "Mechanics-to-accountability feedback.",
+      "completionCondition": "All chain steps are ordered.",
+      "randomized": "fixed order",
+      "fixedOrderReason": "Journey micro-interactions teach a sequence or boundary; randomization belongs to checkpoint choices, not these visual practice panels.",
+      "progressWrites": "none; Journey progress is controlled by checkpoint/reflection flow, not micro-interaction play.",
+      "localStorageKeys": [],
+      "scores": {
+        "objectiveFit": 4,
+        "mechanicClarity": 4,
+        "misconceptionValue": 4,
+        "feedbackQuality": 4,
+        "mobileUsability": 4,
+        "replayReviewValue": 3,
+        "cognitiveLoad": 4,
+        "total": 27
+      },
+      "priority": "P2",
+      "recommendation": "Keep for human testing; watch for clarity and replay value.",
+      "issues": [],
+      "rendered": {
+        "320": {
+          "width": 320,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "prompt enters context",
+              "width": 223.21875,
+              "height": 44
+            },
+            {
+              "text": "text becomes tokens and IDs",
+              "width": 223.21875,
+              "height": 57.34375
+            },
+            {
+              "text": "embeddings become hidden states",
+              "width": 223.21875,
+              "height": 57.34375
+            },
+            {
+              "text": "logits become probabilities",
+              "width": 223.21875,
+              "height": 57.34375
+            },
+            {
+              "text": "one token is sampled",
+              "width": 223.21875,
+              "height": 44
+            },
+            {
+              "text": "token is appended and the model runs again",
+              "width": 223.21875,
+              "height": 57.34375
+            },
+            {
+              "text": "RAG/grounding can add evidence",
+              "width": 223.21875,
+              "height": 57.34375
+            },
+            {
+              "text": "humans review and remain accountable",
+              "width": 223.21875,
+              "height": 57.34375
+            },
+            {
+              "text": "Reset chain",
+              "width": 223.21875,
+              "height": 46
+            }
+          ],
+          "navOverlap": false
+        },
+        "390": {
+          "width": 390,
+          "pageHorizontalOverflow": 0,
+          "panelOverflow": {
+            "x": 0,
+            "y": 0
+          },
+          "clipped": [],
+          "buttons": [
+            {
+              "text": "prompt enters context",
+              "width": 143.015625,
+              "height": 57.34375
+            },
+            {
+              "text": "text becomes tokens and IDs",
+              "width": 143.015625,
+              "height": 57.34375
+            },
+            {
+              "text": "embeddings become hidden states",
+              "width": 143.015625,
+              "height": 76.21875
+            },
+            {
+              "text": "logits become probabilities",
+              "width": 143.015625,
+              "height": 76.21875
+            },
+            {
+              "text": "one token is sampled",
+              "width": 143.015625,
+              "height": 95.09375
+            },
+            {
+              "text": "token is appended and the model runs again",
+              "width": 143.015625,
+              "height": 95.09375
+            },
+            {
+              "text": "RAG/grounding can add evidence",
+              "width": 143.015625,
+              "height": 95.09375
+            },
+            {
+              "text": "humans review and remain accountable",
+              "width": 143.015625,
+              "height": 95.09375
+            },
+            {
+              "text": "Reset chain",
+              "width": 293.21875,
+              "height": 46
+            }
+          ],
+          "navOverlap": false
+        }
+      }
+    }
+  ]
+}

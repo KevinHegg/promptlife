@@ -4,16 +4,16 @@ import { mkdir, writeFile } from 'node:fs/promises'
 import fs from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
-import { visualAidReadinessBriefs } from './visual-aid-readiness-data-v0282.mjs'
+import { visualAidReadinessBriefs } from './visual-aid-readiness-data-v0283.mjs'
 
 const root = process.cwd()
-const version = '0.28.2'
+const version = '0.28.3'
 const port = Number(process.env.PROMPTLIFE_AUDIT_PORT ?? 5191)
 const baseUrl = `http://127.0.0.1:${port}`
 const outDir = path.join(root, 'docs', 'journey', 'visual-aids')
-const failureDir = path.join(root, 'docs', 'journey', 'screenshots', 'v0-28-2', 'overflow-failures')
-const jsonPath = path.join(outDir, 'visual-overflow-audit-v0-28-2.json')
-const mdPath = path.join(outDir, 'visual-overflow-audit-v0-28-2.md')
+const failureDir = path.join(root, 'docs', 'journey', 'screenshots', 'v0-28-3', 'overflow-failures')
+const jsonPath = path.join(outDir, 'visual-overflow-audit-v0-28-3.json')
+const mdPath = path.join(outDir, 'visual-overflow-audit-v0-28-3.md')
 const widths = [320, 390]
 const chromeCandidates = [
   process.env.CHROME_PATH,
@@ -73,7 +73,7 @@ async function stopServer(child) {
 
 async function openLesson(page, width, brief) {
   await page.setViewportSize({ width, height: 980 })
-  await page.goto(`${baseUrl}/?debug=1&v=0282-overflow-${width}-${brief.learningCardId}`, { waitUntil: 'networkidle' })
+  await page.goto(`${baseUrl}/?debug=1&v=0283-overflow-${width}-${brief.learningCardId}`, { waitUntil: 'networkidle' })
   await page.evaluate(({ lessonId }) => {
     window.localStorage.setItem('promptlife:v1:lastLocation', JSON.stringify('learn'))
     window.localStorage.setItem('promptlife:v1:lessonId', JSON.stringify(lessonId))
@@ -99,7 +99,12 @@ async function inspectLesson(page, width, brief) {
     const actualVisualId = figure
       ? Array.from(figure.classList).find((className) => className.startsWith('visual-aid-') && className !== 'visual-aid-card')?.replace('visual-aid-', '') || ''
       : ''
-    const template = figure?.getAttribute('data-template') || ''
+	    const template = figure?.getAttribute('data-template') || ''
+	    const freeFormFlowchartClass = figure ? Array.from(figure.querySelectorAll('[class*="flowchart"], [class*="flow-chart"]')).map((element) => element.className?.toString() || element.tagName.toLowerCase()) : []
+	    const handSpecifiedTemplates = ['Vertical Mechanism Strip', 'Boundary Board', 'Tray / Stack / Bars']
+	    const paragraphTextInsideVisualShapes = figure && handSpecifiedTemplates.includes(template)
+	      ? Array.from(figure.querySelectorAll('.aid-canvas p')).map((element) => element.textContent?.trim().replace(/\s+/g, ' ').slice(0, 100) || '').filter(Boolean)
+	      : []
     const figureOverflow = figure ? {
       x: figure.scrollWidth - figure.clientWidth,
       y: figure.scrollHeight - figure.clientHeight
@@ -168,12 +173,15 @@ async function inspectLesson(page, width, brief) {
       learningCardId,
       expectedVisualId,
       actualVisualId,
-      lessonTitle,
-      template,
-      pageHorizontalOverflow,
-      figureOverflow,
-      canvasOverflow,
-      clippedHtml,
+	      lessonTitle,
+	      template,
+	      missingTemplateType: !template,
+	      freeFormFlowchartClass,
+	      pageHorizontalOverflow,
+	      figureOverflow,
+	      canvasOverflow,
+	      clippedHtml,
+	      paragraphTextInsideVisualShapes,
       longSvgLabels: svgTexts.filter((item) => item.text.length > 18).map((item) => item.text),
       tinySvgLabels: svgTexts.filter((item) => item.text && item.fontSize < 12).map((item) => ({ text: item.text, fontSize: item.fontSize })),
       clippedSvgLabels: svgTexts.filter((item) => item.outsideCanvas).map((item) => item.text),
@@ -188,11 +196,14 @@ async function inspectLesson(page, width, brief) {
 
 function rowIssues(row) {
   return [
-    row.actualVisualId && row.actualVisualId !== row.expectedVisualId ? `expected ${row.expectedVisualId}, rendered ${row.actualVisualId}` : '',
-    row.pageHorizontalOverflow > 2 ? `page horizontal overflow ${row.pageHorizontalOverflow}px` : '',
+	    row.actualVisualId && row.actualVisualId !== row.expectedVisualId ? `expected ${row.expectedVisualId}, rendered ${row.actualVisualId}` : '',
+	    row.missingTemplateType ? 'visual missing template type' : '',
+	    row.freeFormFlowchartClass.length ? `${row.freeFormFlowchartClass.length} free-form flowchart class hit(s)` : '',
+	    row.pageHorizontalOverflow > 2 ? `page horizontal overflow ${row.pageHorizontalOverflow}px` : '',
     row.figureOverflow.x > 2 ? `figure horizontal overflow ${row.figureOverflow.x}px` : '',
     row.canvasOverflow.x > 2 ? `canvas horizontal overflow ${row.canvasOverflow.x}px` : '',
-    row.clippedHtml.length ? `${row.clippedHtml.length} clipped HTML element(s)` : '',
+	    row.clippedHtml.length ? `${row.clippedHtml.length} clipped HTML element(s)` : '',
+	    row.paragraphTextInsideVisualShapes.length ? `${row.paragraphTextInsideVisualShapes.length} paragraph text block(s) inside hand-specified diagram` : '',
     row.longSvgLabels.length ? `${row.longSvgLabels.length} SVG label(s) over 18 chars` : '',
     row.tinySvgLabels.length ? `${row.tinySvgLabels.length} SVG label(s) under 12px` : '',
     row.clippedSvgLabels.length ? `${row.clippedSvgLabels.length} SVG label(s) outside canvas` : '',
@@ -205,7 +216,7 @@ function rowIssues(row) {
 
 function renderMarkdown(payload) {
   const lines = [
-    '# Prompt Life Visual Overflow Audit v0.28.2',
+    '# Prompt Life Visual Overflow Audit v0.28.3',
     '',
     `Generated: ${payload.generatedAt}`,
     '',

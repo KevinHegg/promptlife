@@ -2,6 +2,7 @@ import React from 'react'
 import { canonicalPromptResponse } from '../data/canonicalExamples'
 import { lessons } from '../data/content'
 import { generatedVisualAssetById } from '../data/visualAssets'
+import { publicAssetPath } from '../utils/assetPath'
 import {
   DiagramKitAiFamilyTreeExample,
   DiagramKitGallery,
@@ -23,7 +24,7 @@ const numberedVisualAidMarkers = {
   'training-loop': 5,
   'overfitting-generalization': 4,
   'before-morning-finetuning-path': 4,
-  'inference-pass': 4,
+  'inference-pass': 5,
   'prompt-response': 4,
   'tokenization': 3,
   'token-ids': 4,
@@ -31,7 +32,7 @@ const numberedVisualAidMarkers = {
   vectors: 3,
   tensors: 3,
   autoregression: 4,
-  'context-window': 4,
+  'context-window': 3,
   'rag-retrieval': 5,
   'grounding-evidence': 4,
   'hallucination-bridge': 4,
@@ -45,24 +46,24 @@ const visualAidTemplateById = {
   'training-loop': 'Mechanism Flow',
   'before-morning-pretraining-landscape': 'Atmospheric Scene',
   'overfitting-generalization': 'Comparison Board',
-  'before-morning-finetuning-path': 'Comparison Board',
+  'before-morning-finetuning-path': 'Boundary Board',
   'before-morning-alignment-garden': 'Atmospheric Scene',
-  'inference-pass': 'Mechanism Flow',
+  'inference-pass': 'Vertical Mechanism Strip',
   'prompt-response': 'Mechanism Flow',
   tokenization: 'Mechanism Flow',
   'token-ids': 'Mechanism Flow',
   embeddings: 'Mechanism Flow',
-  vectors: 'Comparison Board',
-  tensors: 'Taxonomy Map',
-  attention: 'Mechanism Flow',
-  mlp: 'Comparison Board',
-  layers: 'Mechanism Flow',
-  'hidden-states': 'Mechanism Flow',
+  vectors: 'Tray / Stack / Bars',
+  tensors: 'Tray / Stack / Bars',
+  attention: 'Boundary Board',
+  mlp: 'Boundary Board',
+  layers: 'Vertical Mechanism Strip',
+  'hidden-states': 'Boundary Board',
   logits: 'Probability Bars',
   softmax: 'Probability Bars',
   sampling: 'Probability Bars',
   autoregression: 'Mechanism Flow',
-  'context-window': 'Context Tray / Stack',
+  'context-window': 'Tray / Stack / Bars',
   'rag-retrieval': 'Context Tray / Stack',
   'grounding-evidence': 'Context Tray / Stack',
   'hallucination-bridge': 'Comparison Board',
@@ -76,9 +77,22 @@ const visualAidTemplateById = {
   'human-centered-ai-garden': 'Taxonomy Map',
   'responsible-ai-forked-path': 'Taxonomy Map',
   'prompting-context-tray': 'Context Tray / Stack',
-  'synthesis-map-compass-lantern': 'Taxonomy Map',
+  'synthesis-map-compass-lantern': 'Boundary Board',
   risk: 'Taxonomy Map'
 }
+
+const handSpecifiedTemplateVisualIds = new Set([
+  'before-morning-finetuning-path',
+  'inference-pass',
+  'attention',
+  'mlp',
+  'layers',
+  'hidden-states',
+  'vectors',
+  'tensors',
+  'context-window',
+  'synthesis-map-compass-lantern'
+])
 
 function getVisualAidTemplate(aid) {
   return visualAidTemplateById[aid.id] ?? 'Mechanism Flow'
@@ -96,6 +110,75 @@ function getVisualAidVariant(aid) {
 
 function getGeneratedAsset(aid) {
   return aid.generatedAssetId ? generatedVisualAssetById[aid.generatedAssetId] : null
+}
+
+const journeyVisualAssetManifestUrl = publicAssetPath('assets/journey-visuals/v0-28/manifest.json')
+let journeyVisualAssetManifestCache = undefined
+let journeyVisualAssetManifestPromise = null
+
+function loadJourneyVisualAssetManifest() {
+  if (journeyVisualAssetManifestCache !== undefined) return Promise.resolve(journeyVisualAssetManifestCache)
+  if (journeyVisualAssetManifestPromise) return journeyVisualAssetManifestPromise
+  if (typeof window === 'undefined' || typeof window.fetch !== 'function') {
+    journeyVisualAssetManifestCache = null
+    return Promise.resolve(null)
+  }
+
+  journeyVisualAssetManifestPromise = window.fetch(journeyVisualAssetManifestUrl)
+    .then((response) => (response.ok ? response.json() : null))
+    .then((manifest) => {
+      journeyVisualAssetManifestCache = manifest
+      return manifest
+    })
+    .catch(() => {
+      journeyVisualAssetManifestCache = null
+      return null
+    })
+
+  return journeyVisualAssetManifestPromise
+}
+
+function useJourneyVisualAsset(cardId) {
+  const [manifest, setManifest] = React.useState(journeyVisualAssetManifestCache)
+
+  React.useEffect(() => {
+    let cancelled = false
+    loadJourneyVisualAssetManifest().then((nextManifest) => {
+      if (!cancelled) setManifest(nextManifest)
+    })
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
+  if (!cardId || !manifest?.assets?.length) return null
+  return manifest.assets.find((asset) => asset.cardId === cardId) ?? null
+}
+
+function manifestAssetPath(assetPath) {
+  return publicAssetPath(String(assetPath ?? '').replace(/^\//, ''))
+}
+
+function shouldRenderJourneyVisualAsset(asset) {
+  return asset?.status === 'live'
+}
+
+function getJourneyVisualAssetCallouts(asset) {
+  return (asset?.callouts ?? []).map((callout, index) => ({
+    number: index + 1,
+    heading: callout.label ?? `Detail ${index + 1}`,
+    body: callout.text
+  }))
+}
+
+function getJourneyVisualDisplayAid(aid, asset) {
+  return {
+    ...aid,
+    title: asset.title ?? aid.title,
+    caption: asset.caption ?? aid.caption,
+    accessibleDescription: asset.alt ?? aid.accessibleDescription,
+    printNote: asset.notes ?? aid.printNote
+  }
 }
 
 function generatedAid(assetId, fields) {
@@ -122,24 +205,24 @@ export const visualAidCatalog = [
   { id: 'training-loop', title: 'Training Loop', subtitle: 'Durable change happens at weight update', caption: 'Predict, compare, loss, update weights, repeat. Training changes weights.', pattern: 'training', objective: 'Show the sequence of training and make the durable weight-update step visually distinct.', callouts: [{ heading: 'Predict', body: 'The model predicts a target.' }, { heading: 'Compare', body: 'The prediction is compared with the target.' }, { heading: 'Loss', body: 'Loss measures error.' }, { heading: 'Update weights', body: 'Weight updates are the durable-change step.' }, { heading: 'Repeat', body: 'The loop repeats many times.' }], keyTakeaway: 'Training changes weights; ordinary inference does not.', accessibleDescription: 'A five-step loop moves from Predict to Compare to Loss to Update weights to Repeat, with Update weights highlighted.', printNote: 'Five nodes stay aligned at 320px and in exported review PDFs.' },
   generatedAid('before-morning-pretraining-landscape', { id: 'before-morning-pretraining-landscape', title: 'Broad Pretraining', subtitle: 'Scale, not perfect recall', caption: 'Many examples flow through the training loop. Repeated updates shape weights into broad patterns the model can use later. This does not make the model a perfect memory of its sources.' }),
   { id: 'overfitting-generalization', title: 'Overfitting vs Generalization', caption: 'Memorizing training examples is not the same as learning patterns that transfer to set-aside validation examples.', pattern: 'overfitting', callouts: [{ heading: 'Training examples', body: 'Old dots are examples the model fit during training.' }, { heading: 'Validation examples', body: 'Set-aside examples are kept out of training to test transfer.' }, { heading: 'Overfit curve', body: 'The overfit curve traces old dots too tightly.' }, { heading: 'Generalizing curve', body: 'The smoother curve reaches new examples better.' }], keyTakeaway: 'A model should learn transferable patterns, not just memorize the training dots.', accessibleDescription: 'A plot shows training dots, set-aside validation squares, a jagged overfit curve, and a smoother generalizing curve with numbered markers one through four.', printNote: 'Coded SVG only; the marker numbers must match the four HTML callouts.' },
-  { id: 'before-morning-finetuning-path', title: 'Fine-Tuning Path', subtitle: 'Durable adaptation, not current-run steering', caption: 'Fine-tuning can durably adapt model behavior through additional training or adapters; prompts, RAG, and sampling steer only the current run.', pattern: 'fineTuningCompare', objective: 'Separate durable fine-tuning or adapters from prompt, retrieval, and sampling behavior during one run.', callouts: [{ heading: 'Durable adaptation', body: 'Additional training or adapters can change how future runs behave.' }, { heading: 'Prompt steering', body: 'A prompt can steer this run without changing weights.' }, { heading: 'RAG and context', body: 'Retrieved text can enter the current context without training the model.' }, { heading: 'Sampling later', body: 'Decoding still chooses one next token from probabilities during inference.' }], keyTakeaway: 'Fine-tuning changes future behavior; prompting, RAG, and sampling operate during the current run.', accessibleDescription: 'A four-column comparison board separates fine-tuning and adapters from prompt steering, RAG context, and sampling during one inference run.', printNote: 'Coded comparison board; all durable-versus-temporary details stay in HTML callouts.' },
+  { id: 'before-morning-finetuning-path', title: 'Durable vs Temporary Steering', subtitle: 'Fine-tuning is not prompting', caption: 'Fine-tuning or adapters can shape future responses. Prompting, retrieval, and sampling shape the current run.', pattern: 'fineTuningCompare', objective: 'Separate durable fine-tuning or adapters from prompt, retrieval, and sampling behavior during one run.', callouts: [{ heading: 'Durable adaptation', body: 'Additional training or adapters can carry a pattern into later runs.' }, { heading: 'Prompting', body: 'A prompt steers the current context.' }, { heading: 'Retrieval', body: 'Outside material helps only after it enters context.' }, { heading: 'Sampling', body: 'Sampling chooses one next token; it does not train the model.' }], keyTakeaway: 'Fine-tuning can shape future behavior; prompting, retrieval, and sampling shape this run.', accessibleDescription: 'A four-column boundary board separates train or adapt, prompt, retrieve, and sample. The board distinguishes future patterns, current context, outside evidence, and next-token choice.', printNote: 'Coded Boundary Board; all durable-versus-temporary details stay in HTML callouts.' },
   generatedAid('before-morning-alignment-garden', { id: 'before-morning-alignment-garden', title: 'Alignment Landscape', subtitle: 'Shaping behavior, not conscience', caption: 'Alignment encourages preferred behavior, uses guardrails to reduce risky paths, and relies on feedback and policies without giving the model a conscience.' }),
-  { id: 'inference-pass', title: 'Forward Pass', subtitle: 'Fixed weights, temporary activations', caption: 'Inference uses fixed weights to create temporary activations, hidden states, and next-token scores.', pattern: 'inference', objective: 'Make temporary inference state central while keeping durable weights visibly fixed.', callouts: [{ heading: 'Context', body: 'The current prompt, retrieved text, conversation, and response-so-far enter the run.' }, { heading: 'Fixed weights', body: 'The learned weights are used but not normally updated.' }, { heading: 'Temporary activations', body: 'The run creates temporary internal states that lead to next-token scores.' }, { heading: 'Next token', body: 'Decoding chooses one response token, then the loop can repeat.' }], keyTakeaway: 'Inference is a forward pass, not durable training.', accessibleDescription: 'The diagram sends current context through fixed weights into a central temporary activation tray, then toward next-token scores and one generated token.', printNote: 'Keep temporary activations as the largest central label; no generated PNG needed.' },
+  { id: 'inference-pass', title: 'Forward Pass', subtitle: 'Fixed weights, temporary activations', caption: 'Inference uses fixed learned weights and current context to produce next-token scores.', pattern: 'inference', objective: 'Trace inference as a forward pass using fixed learned weights and temporary internal values.', callouts: [{ heading: 'Context', body: 'What the model can currently use.' }, { heading: 'Fixed weights', body: 'Learned numbers from training.' }, { heading: 'Temporary activations', body: 'Internal values created for this run.' }, { heading: 'Scores', body: 'Raw next-token scores.' }, { heading: 'Next token', body: 'One token is selected and appended.' }], keyTakeaway: 'Inference uses weights without normally updating them.', accessibleDescription: 'A five-row vertical mechanism strip moves from context to fixed weights, temporary activations, scores, and next token.', printNote: 'Coded Vertical Mechanism Strip; fixed and temporary states are separated by row labels and HTML callouts.' },
   { id: 'prompt-response', title: 'Prompt vs Response', subtitle: 'Given context versus generated tokens', caption: 'Prompt tokens are given to the model; response tokens are generated one at a time and appended to the next context.', pattern: 'promptResponse', objective: 'Separate the complete user prompt from response-so-far, next token, and the current context for the next run.', callouts: [{ heading: 'Given prompt', body: 'The request "Describe two pets in conflict" is already provided input.' }, { heading: 'Generated response', body: 'The response-so-far "A jealous dog" was generated by the model.' }, { heading: 'Next token', body: 'The newly selected token "chased" is appended to the response.' }, { heading: 'Updated context', body: 'The next run sees prompt plus response so far plus the new token.' }], keyTakeaway: 'Prompt is given; response tokens are generated and appended.', accessibleDescription: 'A roomier stacked visual shows given prompt tokens, generated response-so-far tokens, a separate newly selected next token, and an updated-context tray that combines them for the next run.', printNote: 'Coded SVG/HTML only; do not bake long text into the visual.' },
   { id: 'tokenization', title: 'Text to Tokens', subtitle: 'Uneven chunks, punctuation included', caption: 'Text is split into model-readable chunks before token IDs and embedding lookup.', pattern: 'token', objective: 'Show that tokens can be words, word pieces, punctuation, or other chunks.', callouts: [{ heading: 'Simplified split', body: 'A | jealous | dog | chased | a | startled | cat | across | the | kitchen | floor | .' }, { heading: 'Uneven chunks', body: 'Some tokenizers may split words or punctuation, such as start | led or floor | .' }, { heading: 'Teaching note', body: 'This app uses a simplified split; real tokenizer output can differ.' }], keyTakeaway: 'Tokens are model-readable chunks, not always human words.', accessibleDescription: 'The visual starts with a sentence, then shows simplified token chips and uneven examples for startled and floor punctuation.', printNote: 'Keep token chips wrapping; avoid dense tokenizer internals.' },
   { id: 'token-ids', title: 'Token IDs', subtitle: 'Lookup keys, not meaning', caption: 'Each token gets a lookup number that points to an embedding-table row.', pattern: 'ids', objective: 'Separate the token string, its numeric ID, and the embedding row the ID selects.', callouts: [{ heading: 'Token', body: 'dog, cat, and floor are text chunks.' }, { heading: 'ID', body: '421, 982, and 1576 are lookup keys.' }, { heading: 'Embedding row', body: 'The ID points to the learned starting vector row.' }, { heading: 'Limit', body: 'The number itself is not the meaning.' }], keyTakeaway: 'Token IDs point; they do not understand.', accessibleDescription: 'Three token cards connect to ID cards, which connect to highlighted rows in an embedding table.', printNote: 'Coded visual only because the exact labels matter.' },
   { id: 'embeddings', title: 'Embedding Lookup', subtitle: 'Durable table, temporary vector', caption: 'A token ID retrieves a learned starting vector from a durable embedding table.', pattern: 'vector', objective: 'Distinguish the durable learned table from the temporary vector retrieved for the current run.', callouts: [{ heading: 'Durable table', body: 'The embedding table was learned during training.' }, { heading: 'Temporary retrieval', body: 'Inference retrieves one row for the current context.' }, { heading: 'Starting vector', body: 'The retrieved vector starts the token in numerical space.' }, { heading: 'Hidden state later', body: 'Transformer layers later reshape it into context-shaped hidden states.' }], keyTakeaway: 'Embedding means learned starting vector, not dictionary definition.', accessibleDescription: 'ID 1576 points into a durable table, retrieves one temporary vector, and then a later hidden-state note sits downstream.', printNote: 'Best future Image 2 candidate, but this pass keeps a coded visual.' },
-  { id: 'vectors', title: 'Feature Vector', subtitle: 'Teaching labels versus distributed features', caption: 'A vector is a list of numbers; real features are distributed rather than neat English sliders.', pattern: 'bars', objective: 'Let learners compare a simplified slider view with unlabeled distributed numerical features.', callouts: [{ heading: 'Teaching sliders', body: 'Labels such as animal-ish or tone are simplified for learning.' }, { heading: 'Distributed features', body: 'Real model features are spread across many dimensions.' }, { heading: 'Why vectors', body: 'Vectors let the model compute with fuzzy numerical relationships.' }], keyTakeaway: 'Vectors are useful because many fuzzy features can vary at once.', accessibleDescription: 'The visual contrasts labeled teaching sliders with unlabeled distributed bars and dots.', printNote: 'Do not imply each dimension has a clean human label.' },
-  { id: 'tensors', title: 'Tensor Block', subtitle: 'Token axis plus feature axis', caption: 'Tensors organize many token vectors so model layers can process them.', pattern: 'tensor', objective: 'Show token positions, feature dimensions, and an optional batch note without a heavy 3D library.', callouts: [{ heading: 'Token axis', body: 'Each row can represent one visible token position.' }, { heading: 'Feature axis', body: 'Each column can represent one vector dimension.' }, { heading: 'Batch note', body: 'Systems may process shapes like batch x tokens x features.' }], keyTakeaway: 'Tensors are shaped numerical blocks, not mystery objects.', accessibleDescription: 'A lightweight axis diagram shows token labels down the side, feature labels across the top, and a translucent batch sheet behind the grid.', printNote: 'Readable at 320px; no new dependency or generated PNG.' },
-  { id: 'attention', title: 'Relevance Between Tokens', subtitle: 'Weighted relevance, not awareness', caption: 'Attention assigns temporary relevance weights between token positions. It is not awareness.', pattern: 'attention', objective: 'Use a concrete sentence to show that attention weights token relevance without implying awareness.', callouts: [{ heading: 'Target token', body: '"it" is the token being updated.' }, { heading: 'Source clue', body: '"cat" fits the local sentence relationship.' }, { heading: 'Weighted relevance', body: 'Attention changes how strongly one token position uses information from another.' }, { heading: 'Limit', body: 'Attention is calculation over positions, not awareness.' }], keyTakeaway: 'Attention is weighted relevance between token positions, not consciousness.', accessibleDescription: 'The diagram shows sentence chips for dog, chased, cat, because, it, and hissed. The target token it is highlighted, the source token cat is highlighted, and a stronger arc connects it to cat while a fainter arc connects it to dog.', printNote: 'Keep this coded SVG; token labels and exact relationships matter too much for a generated PNG.' },
-  { id: 'mlp', title: 'MLP Feature Workshop', subtitle: 'Same token, reshaped features', caption: 'After attention mixes across token positions, the MLP reshapes features within each token position.', pattern: 'mlp', objective: 'Show the attention-versus-MLP distinction: attention mixes token positions; MLP reshapes each token vector independently.', callouts: [{ heading: 'Attention mixes', body: 'Attention lets token positions pull in context from other positions.' }, { heading: 'Same position', body: 'The example token cat stays in its own position as it enters the MLP.' }, { heading: 'MLP reshapes', body: 'The feature bars change inside that token position.' }, { heading: 'Temporary values', body: 'The MLP uses durable weights, but the feature values in this run are temporary activations.' }], keyTakeaway: 'Attention mixes across positions; the MLP reshapes features within one position.', accessibleDescription: 'The diagram contrasts an attention panel where token positions exchange context with an MLP panel where the cat token stays in place while feature bars change from before to after.', printNote: 'Coded SVG only; no generated PNG or heavy 3D library.' },
-  { id: 'layers', title: 'Transformer Stack', subtitle: 'Repeated attention plus MLP', caption: 'Layers repeat attention and MLP transformations to refine temporary hidden states.', pattern: 'layers', objective: 'Show repeated transformer blocks without implying human thought steps.', callouts: [{ heading: 'Input states', body: 'Current-context hidden states enter the stack.' }, { heading: 'Repeated block', body: 'Each layer applies attention and an MLP to the temporary states.' }, { heading: 'Refined states', body: 'The states keep changing as they move toward next-token scores.' }, { heading: 'Limit', body: 'Layers are repeated numerical transformations, not conscious reasoning steps.' }], keyTakeaway: 'Layers refine hidden states during the run; they do not store permanent memory.', accessibleDescription: 'A vertical stack shows input hidden states moving through three transformer blocks, each labeled attention plus MLP, then into refined output states for next-token scoring.', printNote: 'Light coded stack/inspector approach; no heavy 3D dependency.' },
-  { id: 'hidden-states', title: 'Hidden State Flow', subtitle: 'Temporary during this forward pass', caption: 'A token starts with an embedding and becomes context-shaped hidden states as it moves through layers.', pattern: 'hidden', objective: 'Contrast embedding, hidden state, weight, memory, and visible text without making hidden states mysterious.', callouts: [{ heading: 'Embedding', body: 'A token ID retrieves a learned starting vector.' }, { heading: 'Hidden states', body: 'Layers reshape that vector into temporary context-shaped states.' }, { heading: 'Scores later', body: 'Final hidden states help produce raw next-token scores.' }, { heading: 'Not memory', body: 'A hidden state is not visible text, permanent memory, or a stored fact.' }], keyTakeaway: 'Hidden states are temporary internal vectors shaped by current context.', accessibleDescription: 'A flow moves from token ID to embedding, then through two temporary hidden-state panels toward final scores. A separate weight note says weights are durable and states are temporary.', printNote: 'Keep this as a coded contrast diagram because labels are essential.' },
+  { id: 'vectors', title: 'Feature Vector', subtitle: 'Many numbers at once', caption: 'A vector represents something with many numbers at once.', pattern: 'bars', objective: 'Show a vector as a distributed list of numerical features, not one neat meaning slot.', callouts: [{ heading: 'Not one slot', body: 'Meaning is not stored in one neat dimension.' }, { heading: 'Distributed features', body: 'Useful patterns are spread across many values.' }, { heading: 'Model-readable', body: 'Vectors let the model compute with text-like inputs.' }], keyTakeaway: 'A vector carries distributed numerical features.', accessibleDescription: 'A horizontal vector strip contains shaded cells with a short label that says features are spread out.', printNote: 'Coded Tray / Stack / Bars visual; do not imply each dimension has a clean human label.' },
+  { id: 'tensors', title: 'Tensor Block', subtitle: 'Rows, columns, and batches', caption: 'A tensor is a shaped block of numbers, often holding many token vectors at once.', pattern: 'tensor', objective: 'Show tensors as shaped numerical blocks that organize many vectors for computation.', callouts: [{ heading: 'Vector', body: 'One list of numbers.' }, { heading: 'Tensor', body: 'Many vectors arranged in a shape.' }, { heading: 'Shape matters', body: 'Rows, columns, and batches organize computation.' }], keyTakeaway: 'Tensors are shaped blocks of numbers.', accessibleDescription: 'A small stacked grid labels tokens, features, and batch as the three organizing directions of a tensor.', printNote: 'Coded Tray / Stack / Bars visual; keep the grid readable at 320px.' },
+  { id: 'attention', title: 'Relevance Between Tokens', subtitle: 'Weighted relevance, not awareness', caption: 'Attention weights relevance between token positions. It is not awareness.', pattern: 'attention', objective: 'Use a concrete sentence to show that attention weights token relevance without implying awareness.', callouts: [{ heading: 'Target token', body: '"it" is the token being updated.' }, { heading: 'Strong clue', body: '"cat" fits the local sentence relationship.' }, { heading: 'Weaker clue', body: '"dog" is nearby context but less useful here.' }, { heading: 'Limit', body: 'Attention is calculation over positions, not consciousness.' }], keyTakeaway: 'Attention is weighted relevance between token positions, not consciousness.', accessibleDescription: 'Sentence chips show dog, saw, cat, because, it, and hissed. The target token it connects strongly to cat and faintly to dog.', printNote: 'Coded Boundary Board with SVG arcs only; token labels remain HTML.' },
+  { id: 'mlp', title: 'Attention vs MLP', subtitle: 'Mix positions or reshape features', caption: 'Attention mixes information across token positions. The MLP reshapes each token position’s features.', pattern: 'mlp', objective: 'Show the attention-versus-MLP distinction: attention mixes token positions; MLP reshapes each token vector independently.', callouts: [{ heading: 'Attention', body: 'Asks which positions matter to this token.' }, { heading: 'MLP', body: 'Transforms the token’s feature vector at that position.' }, { heading: 'Together', body: 'Both help update hidden states inside a layer.' }], keyTakeaway: 'Attention mixes positions; MLP reshapes features.', accessibleDescription: 'A two-column boundary board compares attention, which mixes positions, with MLP, which reshapes features.', printNote: 'Coded Boundary Board; no generated PNG or heavy 3D library.' },
+  { id: 'layers', title: 'Transformer Layer Strip', subtitle: 'Refine, then repeat', caption: 'A transformer layer refines hidden states; many layers repeat the same kind of update.', pattern: 'layers', objective: 'Show a transformer layer as repeated hidden-state refinement without implying human thought steps.', callouts: [{ heading: 'Hidden states', body: 'Temporary internal vectors.' }, { heading: 'Attention', body: 'Mixes relevant token-position information.' }, { heading: 'MLP', body: 'Reshapes features.' }, { heading: 'Repeat', body: 'Later layers refine the representation again.' }], keyTakeaway: 'Layers refine hidden states during the run; they do not store permanent memory.', accessibleDescription: 'A five-row vertical mechanism strip moves from hidden states to attention, MLP, updated states, and repeat layer.', printNote: 'Coded Vertical Mechanism Strip; no heavy 3D dependency.' },
+  { id: 'hidden-states', title: 'Embedding, Hidden State, Weight', subtitle: 'Temporary is not durable', caption: 'A hidden state is temporary and context-shaped. It is not the same as an embedding or a durable weight.', pattern: 'hidden', objective: 'Contrast embedding, hidden state, and weight without making hidden states mysterious.', callouts: [{ heading: 'Embedding', body: 'The learned starting vector for a token ID.' }, { heading: 'Hidden state', body: 'The token’s temporary representation after context processing.' }, { heading: 'Weight', body: 'Learned model parameter reused across runs.' }], keyTakeaway: 'Hidden states are temporary internal vectors shaped by current context.', accessibleDescription: 'A three-column comparison board separates embedding as a starting vector, hidden state as context-shaped, and weight as a durable parameter.', printNote: 'Coded Boundary Board; keep the temporary-versus-durable distinction in the callouts.' },
   { id: 'logits', title: 'Raw Scoreboard', subtitle: 'Before probabilities', caption: 'Logits are raw next-token scores before probabilities.', pattern: 'logits', objective: 'Show final hidden state becoming raw vocabulary scores before softmax.', callouts: [{ heading: 'Hidden state arrives', body: 'The final context-shaped vector reaches the output scoring step.' }, { heading: 'Candidates get scores', body: 'Possible next tokens such as floor, mat, kitchen, and banana receive raw logits.' }, { heading: 'Scores rank candidates', body: 'Higher score means a stronger local candidate in this context.' }, { heading: 'Softmax comes next', body: 'Softmax converts raw scores into probabilities.' }], keyTakeaway: 'Logits are raw next-token scores, not probabilities.', accessibleDescription: 'The diagram starts with a final hidden state flowing into raw score bars for floor, mat, kitchen, and banana. The bars show candidate scores before probability conversion.', printNote: 'Coded SVG only; exact candidate labels and raw-score bars matter.' },
   { id: 'softmax', title: 'Score to Probability', subtitle: 'Normalize before choosing', caption: 'Softmax turns raw scores into probabilities that sum to one.', pattern: 'softmax', objective: 'Show raw-score values becoming rounded probabilities that sum to one.', callouts: [{ heading: 'Logits go in', body: 'Raw scores for floor, mat, kitchen, and banana enter softmax.' }, { heading: 'Softmax converts', body: 'The function turns score differences into a probability distribution; it does not pick the next token.' }, { heading: 'Probabilities come out', body: 'The rounded teaching values sum to 100%.' }, { heading: 'Sampling comes next', body: 'The probability distribution is ready for a separate choice step.' }], keyTakeaway: 'Softmax normalizes raw scores; sampling chooses later.', accessibleDescription: 'The diagram shows raw score bars for floor, mat, kitchen, and banana on the left, a softmax step in the middle, and probabilities on the right that sum to 100 percent.', printNote: 'Coded SVG only; values are rounded teaching numbers and should remain visible at 320px.' },
   { id: 'sampling', title: 'Weighted Token Choice', subtitle: 'One token chosen', caption: 'Sampling chooses one next token from the probability-shaped options. Likely is not the same as true.', pattern: 'sampling', objective: 'Show probability weights and the single selected next token before autoregression repeats.', callouts: [{ heading: 'Probability candidates', body: 'floor is strongest, mat is plausible, kitchen is weaker, and banana is unlikely in this context.' }, { heading: 'One token chosen', body: 'The decoding step chooses one next response token.' }, { heading: 'Append next', body: 'The chosen token is appended before the model runs again.' }, { heading: 'Fit is not proof', body: 'A likely token can fit the model pattern and still need evidence in a factual claim.' }], keyTakeaway: 'Sampling chooses one token from probabilities; likely is not the same as true.', accessibleDescription: 'The diagram shows weighted candidates floor, mat, kitchen, and banana. One selected-token card says floor, showing that sampling chooses a single next token from probability-shaped options.', printNote: 'Coded SVG only; keep temperature/top-k/top-p out of the main visual.' },
   { id: 'autoregression', title: 'Append and Repeat', subtitle: 'One token, append, run again', caption: `The chosen token "${canonicalPromptResponse.chosenNextToken}" is appended to the response-so-far, then the model runs again.`, pattern: 'loop', objective: 'Make the autoregressive loop concrete: choose one token, append it, run the model again, and grow the response.', callouts: [{ heading: 'Response so far', body: `The model has generated: ${canonicalPromptResponse.responseSoFar}.` }, { heading: 'Choose token', body: `Sampling chooses one next token, here "${canonicalPromptResponse.chosenNextToken}".` }, { heading: 'Append', body: 'The chosen token becomes part of the temporary current context.' }, { heading: 'Run again', body: 'The next forward pass sees the longer response-so-far and chooses again.' }], keyTakeaway: 'Autoregression is choose, append, repeat; it is not permanent learning.', accessibleDescription: 'A concrete loop shows the user prompt, response so far, the chosen token floor, the updated context, and the steps choose token, append, run again, and response grows.', printNote: 'Coded SVG only; keep the token example and step labels readable at 320px.' },
-  { id: 'context-window', title: 'Temporary Context Window', subtitle: 'Limited visible input', caption: 'Only the cards still inside the context tray can influence the next token.', pattern: 'window', objective: 'Show the context window as temporary capacity: system, user, retrieved, and response-so-far cards can fit, while old context can fall out.', callouts: [{ heading: 'Visible now', body: 'System instructions, the user prompt, retrieved notes, and response-so-far may all be current context.' }, { heading: 'Limited tray', body: 'When the tray fills, older material can fall out or need summarizing by the surrounding system.' }, { heading: 'Temporary', body: 'Context can feel like memory, but it does not normally update weights or create permanent memory.' }, { heading: 'Next token', body: 'The model can use only what remains visible in the current run.' }], keyTakeaway: 'Context is temporary visible input, not durable memory.', accessibleDescription: 'A four-slot context tray contains system, user prompt, retrieved note, and response-so-far cards, while an old message sits outside the tray as fallen-out context.', printNote: 'Use short card labels in SVG and the fuller explanation in HTML callouts.' },
+  { id: 'context-window', title: 'Temporary Context Window', subtitle: 'Limited visible input', caption: 'The context window is the limited visible workspace for the current run.', pattern: 'window', objective: 'Show the context window as temporary capacity: current cards can shape the next token, old context can fall out, and retrieved material helps only after entering context.', callouts: [{ heading: 'Visible now', body: 'Only current context can shape the next token.' }, { heading: 'Falls out', body: 'Old content can stop being visible.' }, { heading: 'Retrieved material', body: 'Outside evidence helps only after it enters context.' }], keyTakeaway: 'Context is temporary visible input, not durable memory.', accessibleDescription: 'A bounded context tray holds four visible cards, an old card sits outside as fallen-out context, and a retrieved card is entering the tray.', printNote: 'Coded Tray / Stack / Bars visual; use short card labels and put the fuller explanation in HTML callouts.' },
   { id: 'rag-retrieval', title: 'Open-Book Retrieval', subtitle: 'Retrieval plus context, not training', caption: 'Retrieved notes enter the context before response tokens are generated.', pattern: 'rag', variant: 'retrieval-shelf', objective: 'Show that RAG retrieves outside information and places it into context; it does not train the model.', callouts: [{ heading: 'Ask', body: 'The user prompt starts the run.' }, { heading: 'Retrieve', body: 'A search system finds relevant outside material.' }, { heading: 'Add to context', body: 'Retrieved notes become temporary context tokens.' }, { heading: 'Generate', body: 'The model still generates response tokens one at a time.' }, { heading: 'Weights stay fixed', body: 'RAG does not normally update model weights.' }], keyTakeaway: 'RAG is retrieval plus context, not training.', accessibleDescription: 'The RAG diagram moves from Prompt to Retriever to Notes, then into a Context tray and Generated response, with a separate fixed-weights note.', printNote: 'v0.10 pilot visual: paper-layer nodes, subtle neon retrieval path, HTML callouts, and a one-sentence takeaway.' },
   { id: 'grounding-evidence', title: 'Claim Support Map', subtitle: 'Tying answers to evidence', caption: 'Grounding asks whether generated claims are actually connected to available evidence.', pattern: 'groundingEvidence', variant: 'retrieval-shelf', objective: 'Show grounding as a claim-to-evidence support relationship, not a truth guarantee.', callouts: [{ heading: 'Claim', body: 'A generated answer can contain several claims.' }, { heading: 'Evidence', body: 'Retrieved passages, data, citations, or tool results can support some claims.' }, { heading: 'Support check', body: 'A citation-looking answer is not grounded unless the evidence actually matches the claim.' }, { heading: 'Limit', body: 'Grounding helps, but the evidence and its use still need review.' }], keyTakeaway: 'Grounding ties claims to evidence; it does not make every claim true.', accessibleDescription: 'Two generated claims are shown. One claim connects to a retrieved policy passage and data result. A second claim has a missing support line and is marked needs review.', printNote: 'Keep the claim/evidence labels short; detailed source review stays in HTML callouts.' },
   { id: 'hallucination-bridge', title: 'Unsupported Bridge', subtitle: 'Fluent is not always grounded', caption: 'A response can look smooth while one claim has support, another is uncertain, and another lacks evidence.', pattern: 'hallucinationBridge', variant: 'zen-garden-map', objective: 'Show hallucination as fluent generated output without enough evidence support, without implying lying or intent.', callouts: [{ heading: 'Fluent surface', body: 'The output may read smoothly and confidently.' }, { heading: 'Supported claim', body: 'One claim can be tied to evidence.' }, { heading: 'Missing support', body: 'Another claim may lack evidence, citation, or retrieved context.' }, { heading: 'Review', body: 'Grounding, uncertainty, and human review reduce risk but do not erase it.' }], keyTakeaway: 'Fluency is not evidence.', accessibleDescription: 'A smooth output bridge crosses the scene. One evidence pillar supports a claim, one support is marked uncertain, and one is missing, with a review note below.', printNote: 'Use short labels only; the not-lying distinction remains in lesson copy.' },
@@ -153,7 +236,7 @@ export const visualAidCatalog = [
   { id: 'human-centered-ai-garden', title: 'Accountability Flow', subtitle: 'Tools should serve dignity', caption: 'A human-centered deployment treats AI output as support inside a decision context, then keeps review, governance, and accountable action with people.', pattern: 'humanGarden', variant: 'zen-garden-map', objective: 'Make human-centered AI concrete through a support-note accountability scenario.', callouts: [{ heading: 'Human judgment', body: 'People remain accountable for high-stakes decisions and institutional use.' }, { heading: 'Dignity', body: 'Speed, profit, and automation should not outrank persons, learning, or relationships.' }, { heading: 'Model limit', body: 'A model can sound ethical without moral understanding.' }], keyTakeaway: 'Powerful tools still need human purpose.', accessibleDescription: 'An AI summary moves into a decision context affecting people, then flows through human review and governance before accountable action.', printNote: 'Avoid robot imagery; accountability flow is the visual anchor.' },
   { id: 'responsible-ai-forked-path', title: 'Better-AI Control Panel', subtitle: 'Responsible AI is chosen', caption: 'AI outcomes are shaped by design, deployment, governance, incentives, and institutional choices.', pattern: 'responsiblePath', variant: 'zen-garden-map', objective: 'Show practical design and governance levers without pretending governance is simple.', callouts: [{ heading: 'Technical choices', body: 'Smaller models, efficient inference, distillation, RAG, and better hardware use can fit some tasks.' }, { heading: 'Data choices', body: 'Provenance, consent, licensing, creator compensation, and privacy-preserving deployment matter.' }, { heading: 'Institutional choices', body: 'Human review, policy, labor transition planning, public-interest models, and independent evaluation shape outcomes.' }], keyTakeaway: 'Harms are shaped by choices, not destiny.', accessibleDescription: 'A compact control panel shows levers for provenance, privacy, efficient inference, RAG, review, evaluation, labor, sustainability, governance, and task fit.', printNote: 'Keep lever labels short; mitigations stay in HTML callouts.' },
   { id: 'prompting-context-tray', title: 'Context Tray', subtitle: 'Prompting steers this run', caption: 'Good prompts pack task, context, constraints, examples, evidence needs, uncertainty, review, and format into the current run.', pattern: 'promptingTray', variant: 'retrieval-shelf', objective: 'Show prompting as context design, not permanent teaching.', callouts: [{ heading: 'Prompt parts', body: 'Task, context, constraints, examples, evidence needs, uncertainty, review, and format shape the current input.' }, { heading: 'Evidence and uncertainty', body: 'Source needs, retrieved context, and uncertainty requests can improve reviewability.' }, { heading: 'Boundary', body: 'Prompting usually changes context, not weights.' }], keyTakeaway: 'Prompting is context design for one run.', accessibleDescription: 'Prompt component cards drop into a transparent current context tray before one generated response leaves it.', printNote: 'Use short component labels inside the tray.' },
-  { id: 'synthesis-map-compass-lantern', title: 'Full Chain Map', subtitle: 'Mechanics plus judgment', caption: 'Model literacy connects prompt, tokens, IDs, embeddings, hidden states, logits, probabilities, sampling, append-and-repeat generation, RAG, grounding, review, and accountability.', pattern: 'synthesisMap', variant: 'zen-garden-map', objective: 'Close the Journey by connecting the machine chain with human consequences.', callouts: [{ heading: 'Machine chain', body: 'Prompt context becomes tokens and IDs, then embeddings, hidden states, logits, probabilities, and sampled response tokens.' }, { heading: 'Evidence chain', body: 'Context windows, RAG, and grounding can add evidence for this run, but they do not guarantee truth.' }, { heading: 'Human chain', body: 'Benefits, costs, review, governance, and accountability remain human responsibilities.' }], keyTakeaway: 'Mechanics matter, and humans remain responsible.', accessibleDescription: 'A full chain map moves from Prompt to Tokens, IDs, Embeds, States, Logits, Probs, Sample, Append, RAG, Review, and Accountability.', printNote: 'This is the final synthesis visual; keep it coded because exact labels and order matter.' },
+  { id: 'synthesis-map-compass-lantern', title: 'Model Literacy Board', subtitle: 'Mechanics plus judgment', caption: 'Model literacy connects how the system works with how humans should use it.', pattern: 'synthesisMap', variant: 'zen-garden-map', objective: 'Connect mechanics, evidence checking, and human accountability into a durable mental model.', callouts: [{ heading: 'Mechanics', body: 'Prompts become tokens, scores, probabilities, and generated tokens.' }, { heading: 'Evidence', body: 'Fluent output still needs checking.' }, { heading: 'Responsibility', body: 'Humans remain accountable for use, review, and decisions.' }], keyTakeaway: 'Mechanics matter, and humans remain responsible.', accessibleDescription: 'A three-lane synthesis board groups model mechanics, evidence checking, and human responsibility.', printNote: 'Coded Boundary Board; keep the final synthesis simple enough for phone review.' },
   { id: 'risk', title: 'Risk Ledger', subtitle: 'Mechanisms, not myth', caption: 'Risk literacy separates practical, mechanism-based risks from myths about what models are.', pattern: 'risk', variant: 'zen-garden-map', objective: 'Separate concrete institutional risks from unsupported claims without doom or hype.', callouts: [{ heading: 'Real mechanisms', body: 'Privacy exposure, hallucinations, prompt injection, insecure tools, overreliance, and bias can cause practical harm.' }, { heading: 'Myths', body: 'Conscious chatbots, omniscient databases, secret self-training during every chat, and softmax stealing files are unsupported claims.' }, { heading: 'Human accountability', body: 'Institutions, vendors, policies, and affected communities shape how risks are prevented and reviewed.' }], keyTakeaway: 'Real AI risks usually come from data, context, tools, institutions, and overreliance, not model consciousness or an unexplained shortcut.', accessibleDescription: 'A two-column ledger sorts real mechanism risks from myths or unsupported claims.', printNote: 'Keep column labels short; detailed claims stay in the lesson and interaction.' }
 ]
 
@@ -194,25 +277,30 @@ export function VisualAid({ id, headingId = undefined, compact = false }) {
 }
 
 function VisualAidCard({ aid, headingId = undefined, compact = false }) {
-  const callouts = getCallouts(aid)
-  const variant = getVisualAidVariant(aid)
-  const calloutStyle = getCalloutStyle(aid, callouts)
-  const markerCount = getMarkerCount(aid)
+  const lesson = lessonByVisualAidId[aid.id]
+  const journeyAsset = useJourneyVisualAsset(lesson?.id)
+  const useJourneyAsset = shouldRenderJourneyVisualAsset(journeyAsset)
+  const displayAid = useJourneyAsset ? getJourneyVisualDisplayAid(aid, journeyAsset) : aid
+  const callouts = useJourneyAsset ? getJourneyVisualAssetCallouts(journeyAsset) : getCallouts(aid)
+  const variant = useJourneyAsset ? 'generated-image' : getVisualAidVariant(aid)
+  const calloutStyle = useJourneyAsset ? 'bullets' : getCalloutStyle(aid, callouts)
+  const markerCount = useJourneyAsset ? 0 : getMarkerCount(aid)
   return (
-    <VisualAidFrame aid={aid} headingId={headingId} compact={compact} variant={variant} calloutStyle={calloutStyle} markerCount={markerCount}>
-      <DiagramScene aid={aid} variant={variant} />
-      {aid.diagramCaption && <p className="aid-diagram-caption">{aid.diagramCaption}</p>}
-      <VisualAidCaption aid={aid} callouts={callouts} calloutStyle={calloutStyle} />
+    <VisualAidFrame aid={displayAid} headingId={headingId} compact={compact} variant={variant} calloutStyle={calloutStyle} markerCount={markerCount} hasJourneyAsset={useJourneyAsset}>
+      <DiagramScene aid={aid} variant={variant} journeyAsset={useJourneyAsset ? journeyAsset : null} />
+      {!useJourneyAsset && aid.diagramCaption && <p className="aid-diagram-caption">{aid.diagramCaption}</p>}
+      <VisualAidCaption aid={displayAid} callouts={callouts} calloutStyle={calloutStyle} />
     </VisualAidFrame>
   )
 }
 
-function VisualAidFrame({ aid, headingId = undefined, compact = false, variant, calloutStyle, markerCount, children }) {
+function VisualAidFrame({ aid, headingId = undefined, compact = false, variant, calloutStyle, markerCount, hasJourneyAsset = false, children }) {
   const asset = getGeneratedAsset(aid)
   const className = [
     'visual-aid',
     'visual-aid-card',
-    asset ? 'has-generated-asset' : '',
+    asset || hasJourneyAsset ? 'has-generated-asset' : '',
+    hasJourneyAsset ? 'has-journey-visual-asset' : '',
     compact ? 'compact' : '',
     `variant-${variant}`,
     `visual-aid-${aid.id}`
@@ -253,7 +341,12 @@ function VisualAidCanvas({ aid, variant, className = '', children }) {
   )
 }
 
-function DiagramScene({ aid, variant }) {
+function DiagramScene({ aid, variant, journeyAsset = null }) {
+  if (journeyAsset) return <JourneyVisualAssetScene aid={aid} asset={journeyAsset} variant={variant} />
+  return <CodedDiagramScene aid={aid} variant={variant} />
+}
+
+function CodedDiagramScene({ aid, variant }) {
   const asset = getGeneratedAsset(aid)
   if (asset) return <GeneratedImageScene aid={aid} asset={asset} variant={variant} />
   if (aid.id === 'prompt-response') {
@@ -267,6 +360,13 @@ function DiagramScene({ aid, variant }) {
     return (
       <VisualAidCanvas aid={aid} variant={variant} className="aid-html-canvas tokenization-html-canvas">
         <TokenizationDiagram />
+      </VisualAidCanvas>
+    )
+  }
+  if (handSpecifiedTemplateVisualIds.has(aid.id)) {
+    return (
+      <VisualAidCanvas aid={aid} variant={variant} className="aid-html-canvas aid-template-canvas">
+        <HandSpecifiedVisual aid={aid} />
       </VisualAidCanvas>
     )
   }
@@ -286,60 +386,60 @@ function PromptResponseDiagram() {
       <div className="pr-card pr-card-prompt">
         <div className="pr-card-header">
           <span className="pr-step-badge">1</span>
-          <span className="pr-card-title">
+          <span className="visual-label visual-node-label pr-card-title">
             <strong>Given prompt</strong>
-            <em>provided before generation</em>
+            <em>given first</em>
           </span>
         </div>
         <div className="pr-token-row">
-          <span className="pr-token prompt">Describe</span>
-          <span className="pr-token prompt">two pets</span>
-          <span className="pr-token prompt">conflict</span>
+          <span className="visual-label visual-chip pr-token prompt">Describe</span>
+          <span className="visual-label visual-chip pr-token prompt">two pets</span>
+          <span className="visual-label visual-chip pr-token prompt">conflict</span>
         </div>
       </div>
 
       <div className="pr-card pr-card-response">
         <div className="pr-card-header">
           <span className="pr-step-badge">2</span>
-          <span className="pr-card-title">
+          <span className="visual-label visual-node-label pr-card-title">
             <strong>Response so far</strong>
             <em>generated tokens</em>
           </span>
         </div>
         <div className="pr-token-row">
-          <span className="pr-token response">A</span>
-          <span className="pr-token response">jealous</span>
-          <span className="pr-token response">dog</span>
+          <span className="visual-label visual-chip pr-token response">A</span>
+          <span className="visual-label visual-chip pr-token response">jealous</span>
+          <span className="visual-label visual-chip pr-token response">dog</span>
         </div>
       </div>
 
       <div className="pr-card pr-card-next">
         <div className="pr-card-header">
           <span className="pr-step-badge">3</span>
-          <span className="pr-card-title">
+          <span className="visual-label visual-node-label pr-card-title">
             <strong>Next token</strong>
             <em>newly selected</em>
           </span>
         </div>
         <div className="pr-token-row">
-          <span className="pr-token response">chased</span>
+          <span className="visual-label visual-chip pr-token response">chased</span>
         </div>
       </div>
 
       <div className="pr-card pr-card-context">
         <div className="pr-card-header">
           <span className="pr-step-badge">4</span>
-          <span className="pr-card-title">
+          <span className="visual-label visual-node-label pr-card-title">
             <strong>Updated context</strong>
-            <em>what the next run sees</em>
+            <em>next run sees</em>
           </span>
         </div>
         <div className="pr-token-row">
-          <span className="pr-token prompt">prompt</span>
-          <span className="pr-token response">A</span>
-          <span className="pr-token response">jealous</span>
-          <span className="pr-token response">dog</span>
-          <span className="pr-token response">chased</span>
+          <span className="visual-label visual-chip pr-token prompt">prompt</span>
+          <span className="visual-label visual-chip pr-token response">A</span>
+          <span className="visual-label visual-chip pr-token response">jealous</span>
+          <span className="visual-label visual-chip pr-token response">dog</span>
+          <span className="visual-label visual-chip pr-token response">chased</span>
         </div>
       </div>
     </div>
@@ -354,25 +454,27 @@ function TokenizationDiagram() {
       <div className="tkn-card tkn-source">
         <div className="tkn-card-header">
           <span className="tkn-step-badge">1</span>
-          <span>
+          <span className="visual-label visual-node-label">
             <strong>Source text</strong>
-            <em>human-readable sentence</em>
+            <em>sentence</em>
           </span>
         </div>
-        <p>A jealous dog chased a startled cat...</p>
+        <div className="tkn-source-row">
+          <span className="visual-label visual-chip tkn-source-phrase">A jealous dog...</span>
+        </div>
       </div>
 
       <div className="tkn-card tkn-stream">
         <div className="tkn-card-header">
           <span className="tkn-step-badge">2</span>
-          <span>
+          <span className="visual-label visual-node-label">
             <strong>Token stream</strong>
-            <em>model-readable chunks</em>
+            <em>token chunks</em>
           </span>
         </div>
         <div className="tkn-token-grid">
           {simpleTokens.map((token, index) => (
-            <span className={token === '.' ? 'tkn-token punctuation' : 'tkn-token'} key={`${token}-${index}`}>{token}</span>
+            <span className={token === '.' ? 'visual-label visual-chip tkn-token punctuation' : 'visual-label visual-chip tkn-token'} key={`${token}-${index}`}>{token}</span>
           ))}
         </div>
       </div>
@@ -380,27 +482,286 @@ function TokenizationDiagram() {
       <div className="tkn-card tkn-uneven">
         <div className="tkn-card-header">
           <span className="tkn-step-badge">3</span>
-          <span>
+          <span className="visual-label visual-node-label">
             <strong>Uneven examples</strong>
-            <em>tokens are not always words</em>
+            <em>not always words</em>
           </span>
         </div>
         <div className="tkn-split-list">
-          <span className="tkn-split-label">startled</span>
-          <span className="tkn-split-arrow">becomes</span>
+          <span className="visual-label tkn-split-label">startled</span>
+          <span className="visual-label tkn-split-arrow">becomes</span>
           <span className="tkn-split-row">
-            <span className="tkn-token">start</span>
-            <span className="tkn-token">led</span>
+            <span className="visual-label visual-chip tkn-token">start</span>
+            <span className="visual-label visual-chip tkn-token">led</span>
           </span>
-          <span className="tkn-split-label">floor.</span>
-          <span className="tkn-split-arrow">becomes</span>
+          <span className="visual-label tkn-split-label">floor.</span>
+          <span className="visual-label tkn-split-arrow">becomes</span>
           <span className="tkn-split-row">
-            <span className="tkn-token">floor</span>
-            <span className="tkn-token punctuation">.</span>
+            <span className="visual-label visual-chip tkn-token">floor</span>
+            <span className="visual-label visual-chip tkn-token punctuation">.</span>
           </span>
         </div>
       </div>
     </div>
+  )
+}
+
+function VisualStepBadge({ children, tone = 'default' }) {
+  return <span className={`visual-step-badge tone-${tone}`}>{children}</span>
+}
+
+function VisualMiniLabel({ children, tone = 'paper' }) {
+  return <span className={`visual-label visual-node-label visual-mini-label tone-${tone}`}>{children}</span>
+}
+
+function VisualMechanismStrip({ rows }) {
+  return (
+    <div className="visual-mechanism-strip">
+      {rows.map((row, index) => (
+        <div className={`visual-strip-row tone-${row.tone ?? 'paper'}`} key={row.label}>
+          <VisualStepBadge tone={row.tone ?? 'default'}>{index + 1}</VisualStepBadge>
+          <VisualMiniLabel tone={row.tone ?? 'paper'}>{row.label}</VisualMiniLabel>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function VisualBoundaryBoard({ columns, className = '', numbered = false }) {
+  return (
+    <div className={`visual-boundary-board columns-${columns.length} ${className}`.trim()} style={{ '--column-count': columns.length } as React.CSSProperties}>
+      {columns.map((column, index) => (
+        <div className={`visual-boundary-column tone-${column.tone ?? 'paper'}`} key={column.title}>
+          <div className="visual-boundary-heading">
+            {numbered && <VisualStepBadge tone={column.tone ?? 'default'}>{index + 1}</VisualStepBadge>}
+            <VisualMiniLabel tone={column.tone ?? 'paper'}>{column.title}</VisualMiniLabel>
+          </div>
+          {column.label && <span className="visual-label visual-chip visual-boundary-value">{column.label}</span>}
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function VisualTray({ cards, outsideCard, enteringCard }) {
+  return (
+    <div className="visual-tray-board">
+      <div className="visual-tray-entry">
+        {enteringCard && <span className="visual-label visual-chip visual-tray-card entering">{enteringCard}</span>}
+      </div>
+      <div className="visual-tray-shell">
+        <span className="visual-label visual-node-label visual-tray-title">Current context</span>
+        <div className="visual-tray-card-grid">
+          {cards.map((card) => (
+            <span className={`visual-label visual-chip visual-tray-card ${card.tone ?? ''}`.trim()} key={card.label}>{card.label}</span>
+          ))}
+        </div>
+      </div>
+      {outsideCard && (
+        <div className="visual-tray-outside">
+          <span className="visual-label visual-chip visual-tray-card outside">{outsideCard}</span>
+          <span className="visual-label visual-tray-note">fell out</span>
+        </div>
+      )}
+    </div>
+  )
+}
+
+function VisualProbabilityBars({ rows }) {
+  return (
+    <div className="visual-probability-bars">
+      {rows.map((row) => (
+        <div className="visual-probability-row" key={row.label}>
+          <span className="visual-label visual-node-label">{row.label}</span>
+          <span className="visual-probability-track"><i style={{ width: `${row.value}%` }} /></span>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function HandSpecifiedVisual({ aid }) {
+  switch (aid.id) {
+    case 'before-morning-finetuning-path':
+      return <FineTuneBoundaryBoard />
+    case 'inference-pass':
+      return <InferenceStrip />
+    case 'attention':
+      return <AttentionRelevanceBoard />
+    case 'mlp':
+      return <MlpBoundaryBoard />
+    case 'layers':
+      return <LayersStrip />
+    case 'hidden-states':
+      return <HiddenStateBoundaryBoard />
+    case 'vectors':
+      return <VectorBarsBoard />
+    case 'tensors':
+      return <TensorStackBoard />
+    case 'context-window':
+      return <ContextWindowTray />
+    case 'synthesis-map-compass-lantern':
+      return <SynthesisBoundaryBoard />
+    default:
+      return <VisualMechanismStrip rows={[{ label: aid.title }]} />
+  }
+}
+
+function FineTuneBoundaryBoard() {
+  return (
+    <VisualBoundaryBoard
+      numbered
+      columns={[
+        { title: 'Train / adapt', label: 'future pattern', tone: 'output' },
+        { title: 'Prompt', label: 'current context', tone: 'prompt' },
+        { title: 'Retrieve', label: 'outside evidence', tone: 'mint' },
+        { title: 'Sample', label: 'next token', tone: 'amber' }
+      ]}
+    />
+  )
+}
+
+function InferenceStrip() {
+  return (
+    <VisualMechanismStrip
+      rows={[
+        { label: 'Context', tone: 'prompt' },
+        { label: 'Fixed weights', tone: 'paper' },
+        { label: 'Activations', tone: 'mint' },
+        { label: 'Scores', tone: 'violet' },
+        { label: 'Next token', tone: 'output' }
+      ]}
+    />
+  )
+}
+
+function AttentionRelevanceBoard() {
+  const tokens = [
+    { label: 'dog', role: 'weak' },
+    { label: 'saw' },
+    { label: 'cat', role: 'source' },
+    { label: 'because' },
+    { label: 'it', role: 'target' },
+    { label: 'hissed' }
+  ]
+  return (
+    <div className="visual-attention-board">
+      <svg viewBox="0 0 320 128" preserveAspectRatio="none" focusable="false" aria-hidden="true">
+        <path className="visual-attention-arc strong" d="M236 54 C210 12, 138 12, 126 54" />
+        <path className="visual-attention-arc weak" d="M236 72 C202 124, 50 124, 36 72" />
+      </svg>
+      <div className="visual-attention-token-row">
+        {tokens.map((token) => (
+          <span className={`visual-token-chip role-${token.role ?? 'plain'}`} key={token.label}>{token.label}</span>
+        ))}
+      </div>
+      <div className="visual-attention-legend">
+        <span><i className="legend-line strong" /> cat clue</span>
+        <span><i className="legend-line weak" /> dog context</span>
+      </div>
+    </div>
+  )
+}
+
+function MlpBoundaryBoard() {
+  return (
+    <VisualBoundaryBoard
+      className="two-column"
+      columns={[
+        { title: 'Attention', label: 'mixes positions', tone: 'prompt' },
+        { title: 'MLP', label: 'reshapes features', tone: 'output' }
+      ]}
+    />
+  )
+}
+
+function LayersStrip() {
+  return (
+    <VisualMechanismStrip
+      rows={[
+        { label: 'Hidden states', tone: 'paper' },
+        { label: 'Attention', tone: 'prompt' },
+        { label: 'MLP', tone: 'output' },
+        { label: 'Updated states', tone: 'mint' },
+        { label: 'Repeat layer', tone: 'violet' }
+      ]}
+    />
+  )
+}
+
+function HiddenStateBoundaryBoard() {
+  return (
+    <VisualBoundaryBoard
+      className="hidden-state-board"
+      columns={[
+        { title: 'Embedding', label: 'starting vector', tone: 'prompt' },
+        { title: 'Hidden state', label: 'context-shaped', tone: 'mint' },
+        { title: 'Weight', label: 'durable', tone: 'amber' }
+      ]}
+    />
+  )
+}
+
+function VectorBarsBoard() {
+  const cells = [28, 58, 42, 76, 35, 64, 48, 70]
+  return (
+    <div className="visual-vector-board">
+      <div className="visual-vector-cells" aria-hidden="true">
+        {cells.map((height, index) => (
+          <span key={index} style={{ '--cell-height': `${height}%` } as React.CSSProperties} />
+        ))}
+      </div>
+      <VisualMiniLabel tone="mint">
+        <span>features</span>
+        <span>spread out</span>
+      </VisualMiniLabel>
+    </div>
+  )
+}
+
+function TensorStackBoard() {
+  return (
+    <div className="visual-tensor-board">
+      <div className="visual-tensor-stack" aria-hidden="true">
+        <span className="tensor-sheet back" />
+        <span className="tensor-sheet mid" />
+        <span className="tensor-sheet front">
+          {Array.from({ length: 20 }, (_, index) => <i key={index} />)}
+        </span>
+      </div>
+      <div className="visual-tensor-labels">
+        <VisualMiniLabel tone="prompt">tokens</VisualMiniLabel>
+        <VisualMiniLabel tone="mint">features</VisualMiniLabel>
+        <VisualMiniLabel tone="amber">batch</VisualMiniLabel>
+      </div>
+    </div>
+  )
+}
+
+function ContextWindowTray() {
+  return (
+    <VisualTray
+      enteringCard="Retrieved"
+      outsideCard="Old card"
+      cards={[
+        { label: 'System', tone: 'prompt' },
+        { label: 'User', tone: 'output' },
+        { label: 'Evidence', tone: 'mint' },
+        { label: 'So far', tone: 'amber' }
+      ]}
+    />
+  )
+}
+
+function SynthesisBoundaryBoard() {
+  return (
+    <VisualBoundaryBoard
+      columns={[
+        { title: 'Model', label: 'how it works', tone: 'prompt' },
+        { title: 'Evidence', label: 'what supports it', tone: 'mint' },
+        { title: 'Human role', label: 'who decides', tone: 'amber' }
+      ]}
+    />
   )
 }
 
@@ -419,16 +780,39 @@ function GeneratedImageScene({ aid, asset, variant }) {
           onError={() => setImageFailed(true)}
         />
       ) : (
-        <div className="generated-aid-fallback" role="note">
-          <strong>Visual unavailable.</strong>
-          <span>The callouts below still explain the concept.</span>
+        <div className="generated-aid-quiet-frame" aria-hidden="true">
+          <span />
+          <span />
+          <span />
         </div>
       )}
     </div>
   )
 }
 
+function JourneyVisualAssetScene({ aid, asset, variant }) {
+  const [imageFailed, setImageFailed] = React.useState(false)
+  if (imageFailed) return <CodedDiagramScene aid={aid} variant={getVisualAidVariant(aid)} />
+
+  return (
+    <div className={`aid-canvas generated-aid-canvas journey-visual-asset-canvas aid-${aid.pattern} aid-variant-${variant}`}>
+      <img
+        className="generated-aid-image journey-visual-asset-image"
+        src={manifestAssetPath(asset.assetPath)}
+        alt={asset.alt}
+        loading="lazy"
+        decoding="async"
+        onError={() => setImageFailed(true)}
+      />
+    </div>
+  )
+}
+
 function VisualAidCallouts({ callouts, style }) {
+  return <VisualCalloutList callouts={callouts} style={style} />
+}
+
+function VisualCalloutList({ callouts, style }) {
   if (!callouts?.length) return null
   const ListTag = style === 'numbered' ? 'ol' : 'ul'
 
@@ -437,7 +821,7 @@ function VisualAidCallouts({ callouts, style }) {
       {callouts.map((callout) => (
         <li key={`${callout.number}-${callout.heading}`}>
           <span aria-hidden="true">{style === 'numbered' ? callout.number : ''}</span>
-          <p><strong>{callout.heading}</strong> {callout.body}</p>
+          <p className="visual-callout-body"><strong className="visual-callout-title">{callout.heading}</strong> {callout.body}</p>
         </li>
       ))}
     </ListTag>
@@ -1080,7 +1464,7 @@ function HiddenSvg() {
     <>
       {[
         ['ID', 18, 40, 44, 'prompt'],
-        ['Embed', 76, 40, 62, 'output'],
+        ['Embedding', 70, 40, 86, 'output'],
         ['Hidden 1', 178, 28, 72, ''],
         ['Hidden 2', 178, 88, 72, ''],
         ['Scores', 234, 150, 64, 'output']
@@ -1090,8 +1474,8 @@ function HiddenSvg() {
           <Label x={Number(x) + 8} y={Number(y) + 20} className={kind ? 'tiny dark' : 'tiny'}>{label}</Label>
         </g>
       ))}
-      <Arrow x1="62" y1="55" x2="76" y2="55" />
-      <Arrow x1="154" y1="55" x2="178" y2="43" />
+      <Arrow x1="62" y1="55" x2="70" y2="55" />
+      <Arrow x1="156" y1="55" x2="178" y2="43" />
       <Arrow x1="214" y1="58" x2="214" y2="88" />
       <Arrow x1="232" y1="118" x2="248" y2="150" />
       <rect className="aid-box muted" x="18" y="130" width="172" height="58" rx="9" />

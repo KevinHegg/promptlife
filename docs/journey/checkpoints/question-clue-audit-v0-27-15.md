@@ -1,6 +1,6 @@
 # Prompt Life v0.27.15 Question Clue Audit
 
-Generated: 2026-06-13T21:32:09.841Z
+Generated: 2026-06-14T21:24:53.785Z
 
 This audit is informational. It flags correct answers that repeat mechanism terms from the stem, plus length and vague-stem warnings. The v0.27.15 repair log records which candidates were changed or intentionally retained.
 

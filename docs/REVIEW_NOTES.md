@@ -2,6 +2,83 @@
 
 Date: 2026-06-13
 
+## v0.28.4 Typography, Word-Wrap, And Visual Text Guardrails
+
+### What Changed
+
+- Removed unsafe arbitrary word wrapping from current app CSS and added explicit visual-label guardrail classes.
+- Added `.visual-label`, `.visual-chip`, `.visual-node-label`, `.visual-callout-title`, and `.visual-callout-body` rules using natural wrapping, normal word breaks, and no hyphenation.
+- Shortened risky internal labels in Prompt vs Response, Tokenization, Inference, and Model Literate Synthesis.
+- Moved longer timing/context wording into captions and HTML callouts instead of diagram panels.
+- Added `npm run audit:word-wrap`.
+- Created the v0.28.4 word-wrap guardrails report packet with 320px and 390px screenshots.
+- Bumped the visible app/package version to `v0.28.4`.
+
+### Verification Notes
+
+- `npm run audit:word-wrap` passed with 0 unsafe CSS patterns, 0 known bad split strings, 0 long internal labels, and 0 diagram paragraphs.
+- Full verification suite results are tracked in the final response for this pass.
+
+### Files Added Or Updated
+
+- `scripts/audit-word-wrap.mjs`
+- `scripts/capture-word-wrap-screenshots-v0284.mjs`
+- `scripts/generate-word-wrap-report-v0284.mjs`
+- `docs/journey/visual-aids/word-wrap-audit-v0-28-4.json`
+- `docs/journey/visual-aids/word-wrap-audit-v0-28-4.md`
+- `docs/journey/visual-aids/prompt-life-v0-28-4-word-wrap-guardrails-report.html`
+- `docs/journey/visual-aids/prompt-life-v0-28-4-word-wrap-guardrails-report.pdf`
+- `docs/journey/screenshots/v0-28-4-word-wrap/`
+- `src/components/VisualAids.tsx`
+- `src/styles/global.css`
+- `src/main.tsx`
+- `package.json`
+- `package-lock.json`
+
+## v0.28.3 Flowchart Visual Replacement
+
+### What Changed
+
+- Replaced the ten target flowchart-like Journey visuals with hand-specified mobile diagrams using `Vertical Mechanism Strip`, `Boundary Board`, and `Tray / Stack / Bars`.
+- Added shared visual components for mechanism strips, boundary boards, trays, probability bars, mini labels, step badges, and callout lists.
+- Updated Fine-Tuning, Inference, Attention, MLP, Layers, Hidden States, Vectors, Tensors, Context Window, and Model Literate Synthesis so captions/callouts carry the teaching burden and diagrams stay short.
+- Added a v0.28.3 flowchart replacement audit and report packet with 320px and 390px screenshots for the ten target visuals.
+- Bumped the visible app/package version to `v0.28.3`.
+
+### Verification Notes
+
+- `npm run typecheck` passed.
+- `npm run build` passed with the existing Vite large-chunk warning.
+- `npm run build:pages` passed with the existing Vite large-chunk warning.
+- `npm run audit:answers` passed.
+- `npm run audit:checkpoints` passed.
+- `npm run audit:question-clues` completed with existing non-failing diagnostics: 36 term-echo candidates, 43 answer-length warnings, and 0 vague-stem warnings.
+- `npm run audit:learner-copy` passed.
+- `npm run audit:language` passed.
+- `npm run audit:visual-aids` passed with 39 aids, 0 mismatches, and 0 readiness issues.
+- `npm run audit:visual-overflow` passed across 39 learner-route visual aids at 320px and 390px.
+- `npm run audit:exercises` passed and exported the v0.28.3 Journey exercise review packet.
+- Browser QA passed at 390px and 320px for all ten replacement visuals: coded template canvases render, no flowchart classes are present, and no horizontal overflow was detected.
+- Badge screen browser QA confirmed the visible version label is `v0.28.3`.
+
+### Files Added Or Updated
+
+- `scripts/visual-aid-readiness-data-v0283.mjs`
+- `scripts/capture-visual-aid-screenshots-v0283.mjs`
+- `scripts/generate-flowchart-replacement-report-v0283.mjs`
+- `scripts/audit-visual-aids.mjs`
+- `scripts/audit-visual-overflow.mjs`
+- `scripts/audit-exercises.mjs`
+- `docs/journey/visual-aids/flowchart-replacement-audit-v0-28-3.json`
+- `docs/journey/visual-aids/flowchart-replacement-audit-v0-28-3.md`
+- `docs/journey/visual-aids/prompt-life-v0-28-3-flowchart-replacement-report.html`
+- `docs/journey/visual-aids/prompt-life-v0-28-3-flowchart-replacement-report.pdf`
+- `docs/journey/screenshots/v0-28-3/`
+- `src/components/VisualAids.tsx`
+- `src/styles/global.css`
+- `package.json`
+- `package-lock.json`
+
 ## v0.28.1 Language Cleanup And Visual Aid Hard Reset
 
 ### What Changed
@@ -3985,3 +4062,201 @@ Known issues:
 - Six Journey interactions remain P2 watch items for human testing: What Is an LLM?, Vectors, Tensors, Collective Intelligence, Benefits Worth Taking Seriously, and Model Literate Synthesis.
 - The Vite production build still emits the existing large-chunk warning.
 - `audit:question-clues` still reports warning candidates for human review; it does not fail the build.
+
+## v0.28.4 Typography, Word-Wrap, and Visual Text Guardrails
+
+Date: 2026-06-13
+
+Changed:
+
+- Bumped the app/package version to `v0.28.4`.
+- Removed unsafe visual/prose wrapping patterns from current source, replacing `overflow-wrap: anywhere` with safer natural wrapping defaults.
+- Added shared visual text classes: `.visual-label`, `.visual-chip`, `.visual-node-label`, `.visual-callout-title`, and `.visual-callout-body`.
+- Shortened internal diagram labels so visual text wraps at spaces only and does not rely on forced word breaks.
+- Moved or preserved longer explanations in captions/callouts below visuals instead of inside small diagram shapes.
+- Added `npm run audit:word-wrap` to catch unsafe wrapping CSS, known bad split strings, long internal visual labels, and paragraph text inside diagram bodies.
+- Folded the same word-wrap guardrail into `npm run audit:visual-aids`.
+- Regenerated the v0.28.4 word-wrap guardrails report and screenshots.
+
+Verification:
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed, with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed, with the existing Vite large-chunk warning.
+- `npm run audit:answers`: passed.
+- `npm run audit:checkpoints`: passed.
+- `npm run audit:question-clues`: completed with existing diagnostics: 36 term-echo candidates, 43 answer-length warnings, 0 vague-stem warnings.
+- `npm run audit:learner-copy`: passed.
+- `npm run audit:language`: passed.
+- `npm run audit:visual-aids`: passed; 39 aids, 0 mismatches, 0 readiness issues; now also runs the word-wrap guardrail.
+- `npm run audit:visual-overflow`: passed; 39 learner-route visual aids checked at 320px and 390px.
+- `npm run audit:exercises`: passed; 39 Journey interactions inventoried and exported to review PDFs.
+- `npm run audit:word-wrap`: passed; 72 files checked, 0 unsafe CSS hits, 0 known bad splits, 0 long internal labels, 0 diagram paragraphs.
+- In-app browser QA at 390px and 320px checked 374 visual label elements per width with no label overflow, no unsafe label wrapping styles, and no horizontal page overflow.
+
+Artifacts:
+
+- `docs/journey/visual-aids/word-wrap-audit-v0-28-4.json`
+- `docs/journey/visual-aids/word-wrap-audit-v0-28-4.md`
+- `docs/journey/visual-aids/prompt-life-v0-28-4-word-wrap-guardrails-report.html`
+- `docs/journey/visual-aids/prompt-life-v0-28-4-word-wrap-guardrails-report.pdf`
+- `docs/journey/screenshots/v0-28-4-word-wrap/`
+
+Known issues:
+
+- The Vite production build still emits the existing large-chunk warning.
+- `audit:question-clues` remains a diagnostic audit with candidates for human review rather than a failing check.
+- Some v0.28.3 audit artifacts are still regenerated by older visual/exercise report scripts whose filenames have not yet been version-renamed.
+
+## v0.28.5 Visual Aid Strategy Reset
+
+Date: 2026-06-13
+
+Changed:
+
+- Bumped the app/package version to `v0.28.5`.
+- Created a 39-card visual-aid strategy that assigns each Journey card to one of four lanes: Image 2 Concept Card, Coded Mechanism Mini-Diagram, HTML Comparison Board, or No Visual Needed / Text Callout Only.
+- Created a production prompt packet for the Image 2 candidates without generating or adding new PNG assets.
+- Created HTML/PDF strategy reset report artifacts.
+- Kept Journey visuals, checkpoint questions, Play, Badge status, and learner UI behavior unchanged.
+
+Strategy counts:
+
+- Image 2 Concept Card: 12.
+- Coded Mechanism Mini-Diagram: 17.
+- HTML Comparison Board: 8.
+- No Visual Needed / Text Callout Only: 2.
+- P0 before human testing: 7.
+- P1 before human testing: 19.
+
+Top before-human-testing recommendations:
+
+- Remove/simplify Vectors and Tensors into callouts unless learner testing proves a visual is needed.
+- Replace Multimodal AI, The Perfect Storm, Costs We Must Count, Risk vs Myth, and Model Literate Synthesis with Image 2 concept cards plus HTML callouts.
+- Keep Prompt vs Response, Tokenization, Attention, Context Window, RAG, and Grounding as controlled coded mechanics.
+- Keep Fine-Tuning, MLP, Hidden States, How AI Learns, Diffusion, and Hallucinations as HTML comparison boards.
+
+Verification:
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed, with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed, with the existing Vite large-chunk warning.
+- `npm run audit:learner-copy`: passed.
+- `npm run audit:language`: passed.
+- `npm run audit:visual-aids`: passed; 39 aids, 0 mismatches, 0 readiness issues; includes the word-wrap guardrail.
+- `npm run audit:word-wrap`: passed; 73 files checked, 0 unsafe CSS hits, 0 known bad splits, 0 long internal labels, 0 diagram paragraphs.
+
+Artifacts:
+
+- `docs/journey/visual-aids/visual-aid-strategy-v0-28-5.json`
+- `docs/journey/visual-aids/visual-aid-strategy-v0-28-5.csv`
+- `docs/journey/visual-aids/visual-aid-strategy-v0-28-5.md`
+- `docs/journey/visual-aids/image-2-production-prompts-v0-28-5.md`
+- `docs/journey/visual-aids/prompt-life-v0-28-5-visual-strategy-reset-report.html`
+- `docs/journey/visual-aids/prompt-life-v0-28-5-visual-strategy-reset-report.pdf`
+
+Known issues:
+
+- This pass is a strategy reset only; it does not replace or remove the in-app visuals yet.
+- The Vite production build still emits the existing large-chunk warning.
+
+## v0.28.6 Journey Visual Asset Intake System
+
+Date: 2026-06-13
+
+Changed:
+
+- Bumped the app/package version to `v0.28.6`.
+- Created the Journey visual asset folder structure under `public/assets/journey-visuals/v0-28/`.
+- Added a public manifest with 12 pending Image 2 concept-card entries.
+- Added renderer support for manifest-backed Journey visual assets:
+  - `pending-asset` keeps the existing coded/generated visual active.
+  - `pending-placeholder` can show the clean learner-facing placeholder “Visual update pending.”
+  - `live` can render the optimized manifest image with manifest caption/callouts.
+- Added `npm run audit:visual-assets`.
+- Added visual asset intake documentation and a v0.28.6 report.
+
+Verification:
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed, with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed, with the existing Vite large-chunk warning.
+- `npm run audit:visual-assets`: passed; 12 manifest entries checked, 0 live assets, 12 pending assets.
+- `npm run audit:learner-copy`: passed.
+- `npm run audit:language`: passed.
+- `npm run audit:visual-aids`: passed; 39 aids, 0 mismatches, 0 readiness issues; includes the word-wrap guardrail.
+
+Artifacts:
+
+- `public/assets/journey-visuals/v0-28/manifest.json`
+- `public/assets/journey-visuals/v0-28/source/.gitkeep`
+- `public/assets/journey-visuals/v0-28/optimized/.gitkeep`
+- `public/assets/journey-visuals/v0-28/thumbnails/.gitkeep`
+- `docs/journey/visual-aids/VISUAL_ASSET_INTAKE.md`
+- `docs/journey/visual-aids/visual-asset-audit-v0-28-6.json`
+- `docs/journey/visual-aids/visual-asset-audit-v0-28-6.md`
+- `docs/journey/visual-aids/prompt-life-v0-28-6-visual-asset-intake-report.html`
+- `docs/journey/visual-aids/prompt-life-v0-28-6-visual-asset-intake-report.pdf`
+
+Known issues:
+
+- No Journey Image 2 replacement assets are live yet; all new manifest entries are intentionally `pending-asset`.
+- The Vite production build still emits the existing large-chunk warning.
+
+## v0.28.7 Image 2 Replacement Batch 1
+
+Date: 2026-06-14
+
+Changed:
+
+- Bumped the app/package version to `v0.28.7`.
+- Integrated the provided Image 2 asset for `Collective Intelligence, Extracted`.
+- Created optimized and thumbnail files for `collective-intelligence.png`.
+- Updated `public/assets/journey-visuals/v0-28/manifest.json`:
+  - 12 total manifest entries.
+  - 1 live asset: `Collective Intelligence, Extracted`.
+  - 11 missing assets that preserve their current coded/generated visuals.
+  - 0 rejected assets.
+  - 0 pending assets.
+- Updated the Journey visual renderer so only `live` manifest assets render in normal learner mode.
+- Added runtime fallback from a failed live Image 2 load back to the existing coded/generated visual.
+- Applied preflight label fixes:
+  - Fine-Tuning uses `Retrieve`, not `Find`.
+  - Hidden States uses `Embedding`; the helper label under `Weight` was shortened to `durable` to preserve 320px layout.
+  - Attention token chips now read `dog | saw | cat | because | it | hissed`.
+- Updated `npm run audit:visual-assets` for `missing` and `rejected` asset states and v0.28.7 audit output.
+- Captured Batch 1 screenshots at 320px, 390px, and desktop where applicable.
+
+Verification:
+
+- `npm run typecheck`: passed.
+- `npm run build`: passed, with the existing Vite large-chunk warning.
+- `npm run build:pages`: passed, with the existing Vite large-chunk warning.
+- `npm run audit:visual-assets`: passed; 12 entries checked, 1 live, 0 pending.
+- `npm run audit:visual-aids`: passed; 39 aids, 0 mismatches, 0 readiness issues.
+- `npm run audit:visual-overflow`: passed; 39 learner-route visual aids checked at 320px and 390px.
+- `npm run audit:word-wrap`: passed; 77 files checked, 0 unsafe CSS hits, 0 known bad splits, 0 long internal labels, 0 diagram paragraphs.
+- `npm run audit:learner-copy`: passed.
+- `npm run audit:language`: passed.
+- `npm run audit:answers`: passed.
+- `npm run audit:checkpoints`: passed.
+- `npm run audit:question-clues`: completed with existing diagnostics: 36 term-echo candidates, 43 answer-length warnings, 0 vague-stem warnings.
+- `npm run audit:exercises`: passed; 39 Journey interactions inventoried and exported to review PDFs.
+
+Artifacts:
+
+- `public/assets/journey-visuals/v0-28/source/collective-intelligence.png`
+- `public/assets/journey-visuals/v0-28/optimized/collective-intelligence.png`
+- `public/assets/journey-visuals/v0-28/thumbnails/collective-intelligence.png`
+- `docs/journey/visual-aids/visual-asset-audit-v0-28-7.json`
+- `docs/journey/visual-aids/visual-asset-audit-v0-28-7.md`
+- `docs/journey/visual-aids/prompt-life-v0-28-7-verification-results.json`
+- `docs/journey/visual-aids/prompt-life-v0-28-7-image2-replacement-batch-1-report.html`
+- `docs/journey/visual-aids/prompt-life-v0-28-7-image2-replacement-batch-1-report.pdf`
+- `docs/journey/screenshots/v0-28-7-image2-batch-1/`
+
+Known issues:
+
+- The other 11 Image 2 concept-card candidates are still missing production assets and intentionally keep their current visuals.
+- The Vite production build still emits the existing large-chunk warning.
+- `audit:question-clues` remains a diagnostic audit with candidates for human review rather than a failing check.

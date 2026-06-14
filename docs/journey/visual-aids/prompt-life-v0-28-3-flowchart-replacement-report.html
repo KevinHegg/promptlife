@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Prompt Life v0.28.3 Flowchart Replacement Report</title>
+  <style>
+    :root { color: #07124a; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; padding: 32px; background: #f8fbff; }
+    h1 { margin: 0 0 8px; font-size: 30px; line-height: 1.05; }
+    h2 { margin: 0 0 12px; font-size: 18px; }
+    p { max-width: 760px; line-height: 1.48; }
+    .summary, table, .shot-card { margin: 18px 0; padding: 18px; border: 1px solid #cfd8ef; border-radius: 12px; background: white; box-shadow: 0 10px 28px rgba(7, 18, 74, 0.08); }
+    .summary ul { margin: 0; padding-left: 20px; line-height: 1.55; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { vertical-align: top; padding: 10px; border-bottom: 1px solid #e1e7f6; font-size: 12px; line-height: 1.35; }
+    th { color: #009f9c; text-align: left; text-transform: uppercase; font-size: 10px; letter-spacing: 0.04em; }
+    td span { display: block; margin-bottom: 4px; }
+    .shot-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    figure { margin: 0; }
+    img { display: block; width: 100%; border: 1px solid #cfd8ef; border-radius: 10px; background: #eef7ff; }
+    figcaption, .missing-shot { margin-top: 6px; color: #4f5b7a; font-size: 12px; font-weight: 800; }
+    .missing-shot { padding: 36px 12px; border: 1px dashed #9aa8ca; border-radius: 10px; text-align: center; }
+    @media print {
+      body { padding: 20px; background: white; }
+      .shot-card { break-inside: avoid; page-break-inside: avoid; }
+      table { break-inside: auto; }
+      tr { break-inside: avoid; page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <h1>Prompt Life v0.28.3 Flowchart Replacement Report</h1>
+  <p>Generated 2026-06-14T00:22:42.590Z. This packet documents the hand-specified mobile diagrams that replaced the target flowchart-like Journey visuals.</p>
+  <section class="summary">
+    <h2>Summary</h2>
+    <ul>
+      <li>Visuals changed: 10</li>
+      <li>Flowchart-like target visuals replaced: 10</li>
+      <li>Templates used: Boundary Board, Vertical Mechanism Strip, Tray / Stack / Bars</li>
+      <li>Flowchart replacement audit: ok</li>
+      <li>Visual overflow audit: pass</li>
+    </ul>
+  </section>
+  <section>
+    <h2>Before / After Table</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Visual</th>
+          <th>Old issue</th>
+          <th>New template</th>
+          <th>New title</th>
+          <th>New caption</th>
+          <th>New callouts</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>Fine-Tuning</td>
+        <td>Dense durable/current-run comparison risked reading like a flowchart.</td>
+        <td>Boundary Board</td>
+        <td>Durable vs Temporary Steering</td>
+        <td>Fine-tuning or adapters can shape future responses. Prompting, retrieval, and sampling shape the current run.</td>
+        <td><span>Additional training or adapters can carry a pattern into later runs.</span><span>A prompt steers the current context.</span><span>Outside material helps only after it enters context.</span><span>Sampling chooses one next token; it does not train the model.</span></td>
+      </tr>
+    
+      <tr>
+        <td>Inference</td>
+        <td>Multiple boxes and arrows made fixed weights versus temporary activations feel cramped.</td>
+        <td>Vertical Mechanism Strip</td>
+        <td>Forward Pass</td>
+        <td>Inference uses fixed learned weights and current context to produce next-token scores.</td>
+        <td><span>What the model can currently use.</span><span>Learned numbers from training.</span><span>Internal values created for this run.</span><span>Raw next-token scores.</span><span>One token is selected and appended.</span></td>
+      </tr>
+    
+      <tr>
+        <td>Attention</td>
+        <td>SVG labels and arcs were vulnerable to endpoint drift on narrow screens.</td>
+        <td>Boundary Board</td>
+        <td>Relevance Between Tokens</td>
+        <td>Attention weights relevance between token positions. It is not awareness.</td>
+        <td><span>&quot;it&quot; is the token being updated.</span><span>&quot;cat&quot; fits the local sentence relationship.</span><span>&quot;dog&quot; is nearby context but less useful here.</span><span>Attention is calculation over positions, not consciousness.</span></td>
+      </tr>
+    
+      <tr>
+        <td>MLP</td>
+        <td>Workshop-style visual tried to show too much mechanism inside one small panel.</td>
+        <td>Boundary Board</td>
+        <td>Attention vs MLP</td>
+        <td>Attention mixes information across token positions. The MLP reshapes each token position’s features.</td>
+        <td><span>Asks which positions matter to this token.</span><span>Transforms the token’s feature vector at that position.</span><span>Both help update hidden states inside a layer.</span></td>
+      </tr>
+    
+      <tr>
+        <td>Layers</td>
+        <td>Stack flow compressed repeated layer behavior into small labels.</td>
+        <td>Vertical Mechanism Strip</td>
+        <td>Transformer Layer Strip</td>
+        <td>A transformer layer refines hidden states; many layers repeat the same kind of update.</td>
+        <td><span>Temporary internal vectors.</span><span>Mixes relevant token-position information.</span><span>Reshapes features.</span><span>Later layers refine the representation again.</span></td>
+      </tr>
+    
+      <tr>
+        <td>Hidden States</td>
+        <td>State-flow diagram blurred embedding, hidden state, and durable weight boundaries.</td>
+        <td>Boundary Board</td>
+        <td>Embedding, Hidden State, Weight</td>
+        <td>A hidden state is temporary and context-shaped. It is not the same as an embedding or a durable weight.</td>
+        <td><span>The learned starting vector for a token ID.</span><span>The token’s temporary representation after context processing.</span><span>Learned model parameter reused across runs.</span></td>
+      </tr>
+    
+      <tr>
+        <td>Vectors</td>
+        <td>Teaching-slider comparison risked implying each vector dimension has a neat human label.</td>
+        <td>Tray / Stack / Bars</td>
+        <td>Feature Vector</td>
+        <td>A vector represents something with many numbers at once.</td>
+        <td><span>Meaning is not stored in one neat dimension.</span><span>Useful patterns are spread across many values.</span><span>Vectors let the model compute with text-like inputs.</span></td>
+      </tr>
+    
+      <tr>
+        <td>Tensors</td>
+        <td>Axis-heavy grid carried more labels than the mobile diagram needed.</td>
+        <td>Tray / Stack / Bars</td>
+        <td>Tensor Block</td>
+        <td>A tensor is a shaped block of numbers, often holding many token vectors at once.</td>
+        <td><span>One list of numbers.</span><span>Many vectors arranged in a shape.</span><span>Rows, columns, and batches organize computation.</span></td>
+      </tr>
+    
+      <tr>
+        <td>Context Window</td>
+        <td>Tray metaphor worked, but SVG labels and markers added avoidable density.</td>
+        <td>Tray / Stack / Bars</td>
+        <td>Temporary Context Window</td>
+        <td>The context window is the limited visible workspace for the current run.</td>
+        <td><span>Only current context can shape the next token.</span><span>Old content can stop being visible.</span><span>Outside evidence helps only after it enters context.</span></td>
+      </tr>
+    
+      <tr>
+        <td>Model Literate Synthesis</td>
+        <td>Full-chain map tried to recap too many mechanisms at once.</td>
+        <td>Boundary Board</td>
+        <td>Model Literacy Board</td>
+        <td>Model literacy connects how the system works with how humans should use it.</td>
+        <td><span>Prompts become tokens, scores, probabilities, and generated tokens.</span><span>Fluent output still needs checking.</span><span>Humans remain accountable for use, review, and decisions.</span></td>
+      </tr>
+    </tbody>
+    </table>
+  </section>
+  <section>
+    <h2>Screenshots</h2>
+    
+    <section class="shot-card">
+      <h2>Fine-Tuning: Durable vs Temporary Steering</h2>
+      <div class="shot-grid">
+        <figure><img src="../screenshots/v0-28-3/before-morning-finetuning-path-320.png" alt="before-morning-finetuning-path at 320px"><figcaption>320px</figcaption></figure>
+        <figure><img src="../screenshots/v0-28-3/before-morning-finetuning-path-390.png" alt="before-morning-finetuning-path at 390px"><figcaption>390px</figcaption></figure>
+      </div>
+    </section>
+  
+    <section class="shot-card">
+      <h2>Inference: Forward Pass</h2>
+      <div class="shot-grid">
+        <figure><img src="../screenshots/v0-28-3/inference-pass-320.png" alt="inference-pass at 320px"><figcaption>320px</figcaption></figure>
+        <figure><img src="../screenshots/v0-28-3/inference-pass-390.png" alt="inference-pass at 390px"><figcaption>390px</figcaption></figure>
+      </div>
+    </section>
+  
+    <section class="shot-card">
+      <h2>Attention: Relevance Between Tokens</h2>
+      <div class="shot-grid">
+        <figure><img src="../screenshots/v0-28-3/attention-320.png" alt="attention at 320px"><figcaption>320px</figcaption></figure>
+        <figure><img src="../screenshots/v0-28-3/attention-390.png" alt="attention at 390px"><figcaption>390px</figcaption></figure>
+      </div>
+    </section>
+  
+    <section class="shot-card">
+      <h2>MLP: Attention vs MLP</h2>
+      <div class="shot-grid">
+        <figure><img src="../screenshots/v0-28-3/mlp-320.png" alt="mlp at 320px"><figcaption>320px</figcaption></figure>
+        <figure><img src="../screenshots/v0-28-3/mlp-390.png" alt="mlp at 390px"><figcaption>390px</figcaption></figure>
+      </div>
+    </section>
+  
+    <section class="shot-card">
+      <h2>Layers: Transformer Layer Strip</h2>
+      <div class="shot-grid">
+        <figure><img src="../screenshots/v0-28-3/layers-320.png" alt="layers at 320px"><figcaption>320px</figcaption></figure>
+        <figure><img src="../screenshots/v0-28-3/layers-390.png" alt="layers at 390px"><figcaption>390px</figcaption></figure>
+      </div>
+    </section>
+  
+    <section class="shot-card">
+      <h2>Hidden States: Embedding, Hidden State, Weight</h2>
+      <div class="shot-grid">
+        <figure><img src="../screenshots/v0-28-3/hidden-states-320.png" alt="hidden-states at 320px"><figcaption>320px</figcaption></figure>
+        <figure><img src="../screenshots/v0-28-3/hidden-states-390.png" alt="hidden-states at 390px"><figcaption>390px</figcaption></figure>
+      </div>
+    </section>
+  
+    <section class="shot-card">
+      <h2>Vectors: Feature Vector</h2>
+      <div class="shot-grid">
+        <figure><img src="../screenshots/v0-28-3/vectors-320.png" alt="vectors at 320px"><figcaption>320px</figcaption></figure>
+        <figure><img src="../screenshots/v0-28-3/vectors-390.png" alt="vectors at 390px"><figcaption>390px</figcaption></figure>
+      </div>
+    </section>
+  
+    <section class="shot-card">
+      <h2>Tensors: Tensor Block</h2>
+      <div class="shot-grid">
+        <figure><img src="../screenshots/v0-28-3/tensors-320.png" alt="tensors at 320px"><figcaption>320px</figcaption></figure>
+        <figure><img src="../screenshots/v0-28-3/tensors-390.png" alt="tensors at 390px"><figcaption>390px</figcaption></figure>
+      </div>
+    </section>
+  
+    <section class="shot-card">
+      <h2>Context Window: Temporary Context Window</h2>
+      <div class="shot-grid">
+        <figure><img src="../screenshots/v0-28-3/context-window-320.png" alt="context-window at 320px"><figcaption>320px</figcaption></figure>
+        <figure><img src="../screenshots/v0-28-3/context-window-390.png" alt="context-window at 390px"><figcaption>390px</figcaption></figure>
+      </div>
+    </section>
+  
+    <section class="shot-card">
+      <h2>Model Literate Synthesis: Model Literacy Board</h2>
+      <div class="shot-grid">
+        <figure><img src="../screenshots/v0-28-3/synthesis-map-compass-lantern-320.png" alt="synthesis-map-compass-lantern at 320px"><figcaption>320px</figcaption></figure>
+        <figure><img src="../screenshots/v0-28-3/synthesis-map-compass-lantern-390.png" alt="synthesis-map-compass-lantern at 390px"><figcaption>390px</figcaption></figure>
+      </div>
+    </section>
+  
+  </section>
+  <section class="summary">
+    <h2>Remaining Concerns</h2>
+    <p>The ten target visuals now use hand-specified mobile templates. Remaining acceptable-for-testing concerns are pedagogical rather than overflow related: testers should still report whether the vector and tensor visuals feel too abstract, and whether the final synthesis board is memorable enough after simplification.</p>
+  </section>
+</body>
+</html>

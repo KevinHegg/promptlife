@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Prompt Life v0.28.7 Image 2 Replacement Batch 1 Report</title>
+  <style>
+    :root {
+      color: #07124a;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      word-break: normal;
+      overflow-wrap: normal;
+      hyphens: none;
+    }
+    body { margin: 0; padding: 32px; background: #f6fbff; }
+    h1 { margin: 0 0 8px; font-size: 30px; line-height: 1.08; }
+    h2 { margin: 0 0 12px; font-size: 18px; }
+    h3 { margin: 0 0 8px; font-size: 14px; }
+    p, li { line-height: 1.45; }
+    .lede { max-width: 900px; color: #2d3b62; }
+    .metrics { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin: 18px 0; }
+    .metric, .panel, table, .shot {
+      background: white;
+      border: 1px solid #cdd7ef;
+      border-radius: 12px;
+      box-shadow: 0 10px 26px rgba(7, 18, 74, 0.08);
+    }
+    .metric { padding: 14px; }
+    .metric strong { display: block; font-size: 26px; line-height: 1; }
+    .metric span, th, .eyebrow { color: #009f9c; font-size: 10px; font-weight: 900; letter-spacing: 0.04em; text-transform: uppercase; }
+    .panel { padding: 18px; margin: 18px 0; }
+    table { width: 100%; border-collapse: collapse; margin: 12px 0; overflow: hidden; }
+    th, td { vertical-align: top; padding: 9px; border-bottom: 1px solid #e1e7f6; font-size: 10.5px; line-height: 1.35; }
+    th { text-align: left; }
+    code { color: #121e72; font-size: 10px; }
+    .status { display: inline-flex; padding: 4px 7px; border-radius: 999px; font-weight: 900; background: #eef7ff; }
+    .status-live { background: #dffaf2; color: #065f4e; }
+    .status-missing { background: #fff4de; color: #704800; }
+    .status-rejected { background: #ffe4e6; color: #8a1124; }
+    .shot-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .shot { margin: 0; padding: 10px; break-inside: avoid; }
+    .shot img { display: block; width: 100%; height: auto; border-radius: 8px; border: 1px solid #d8e2f4; }
+    .shot figcaption, .shot span { display: block; margin-top: 8px; color: #334366; font-size: 11px; line-height: 1.35; }
+    .missing { min-height: 120px; display: grid; place-content: center; text-align: center; }
+    @media print {
+      body { padding: 20px; background: white; }
+      .panel, tr, .shot { break-inside: avoid; page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <h1>Prompt Life v0.28.7 Image 2 Replacement Batch 1</h1>
+  <p class="lede">Generated 2026-06-14T21:27:24.800Z. This pass integrates verified Image 2 concept-card assets only when optimized and thumbnail files exist and the asset passes manifest/audit checks. Missing or unverified entries keep their current coded/generated visuals in normal learner mode.</p>
+
+  <section class="metrics">
+    <div class="metric"><strong>12</strong><span>Manifest entries</span></div>
+    <div class="metric"><strong>1</strong><span>Assets found</span></div>
+    <div class="metric"><strong>1</strong><span>Live</span></div>
+    <div class="metric"><strong>11</strong><span>Missing</span></div>
+    <div class="metric"><strong>0</strong><span>Rejected</span></div>
+  </section>
+
+  <section class="panel">
+    <p class="eyebrow">Summary</p>
+    <h2>One Image 2 asset went live</h2>
+    <p><strong>Collective Intelligence, Extracted</strong> now renders the verified Image 2 concept card from the v0-28 optimized asset folder. Eleven manifest candidates remain marked <code>missing</code>, so their current visuals stay active. No normal learner-facing pending placeholder is rendered in this pass.</p>
+  </section>
+
+  <section class="panel">
+    <p class="eyebrow">Preflight</p>
+    <h2>Label Corrections</h2>
+    <ul><li>Fine-Tuning boundary board label changed from Find to Retrieve.</li><li>Hidden States boundary board uses Embedding. The legacy SVG fallback was also updated from Embed to Embedding.</li><li>Attention token sentence now reads dog | saw | cat | because | it | hissed.</li></ul>
+  </section>
+
+  <section class="panel">
+    <p class="eyebrow">Manifest</p>
+    <h2>Batch 1 Asset Status</h2>
+    <table>
+      <thead><tr><th>Stage</th><th>Card</th><th>Status</th><th>Size</th><th>Text Check</th><th>Notes</th><th>Audit</th></tr></thead>
+      <tbody>
+      <tr>
+        <td>1</td>
+        <td><strong>What Is an LLM?</strong><br><code>what-is-llm</code></td>
+        <td><span class="status status-missing">missing</span></td>
+        <td>n/a<br>n/a</td>
+        <td>textless / not live</td>
+        <td>missing optimized asset and thumbnail as of v0.28.7</td>
+        <td>ok</td>
+      </tr>
+    
+      <tr>
+        <td>1</td>
+        <td><strong>Pretraining</strong><br><code>pretraining</code></td>
+        <td><span class="status status-missing">missing</span></td>
+        <td>n/a<br>n/a</td>
+        <td>textless / not live</td>
+        <td>missing optimized asset and thumbnail as of v0.28.7</td>
+        <td>ok</td>
+      </tr>
+    
+      <tr>
+        <td>1</td>
+        <td><strong>Alignment</strong><br><code>alignment</code></td>
+        <td><span class="status status-missing">missing</span></td>
+        <td>n/a<br>n/a</td>
+        <td>textless / not live</td>
+        <td>missing optimized asset and thumbnail as of v0.28.7</td>
+        <td>ok</td>
+      </tr>
+    
+      <tr>
+        <td>6</td>
+        <td><strong>Multimodal AI</strong><br><code>multimodal</code></td>
+        <td><span class="status status-missing">missing</span></td>
+        <td>n/a<br>n/a</td>
+        <td>textless / not live</td>
+        <td>missing optimized asset and thumbnail as of v0.28.7</td>
+        <td>ok</td>
+      </tr>
+    
+      <tr>
+        <td>6</td>
+        <td><strong>The Perfect Storm</strong><br><code>perfect-storm</code></td>
+        <td><span class="status status-missing">missing</span></td>
+        <td>n/a<br>n/a</td>
+        <td>textless / not live</td>
+        <td>missing optimized asset and thumbnail as of v0.28.7</td>
+        <td>ok</td>
+      </tr>
+    
+      <tr>
+        <td>7</td>
+        <td><strong>Collective Intelligence, Extracted</strong><br><code>collective-intelligence</code></td>
+        <td><span class="status status-live">live</span></td>
+        <td>1448x1086<br>2192 KB</td>
+        <td>verified</td>
+        <td>Accepted live in v0.28.7. Text check: no readable embedded text; abstract source traces are symbolic texture. Uses HTML caption and callouts for all instructional language.</td>
+        <td>ok</td>
+      </tr>
+    
+      <tr>
+        <td>7</td>
+        <td><strong>Costs We Must Count</strong><br><code>costs-we-must-count</code></td>
+        <td><span class="status status-missing">missing</span></td>
+        <td>n/a<br>n/a</td>
+        <td>textless / not live</td>
+        <td>missing optimized asset and thumbnail as of v0.28.7</td>
+        <td>ok</td>
+      </tr>
+    
+      <tr>
+        <td>7</td>
+        <td><strong>Risk vs Myth</strong><br><code>risk-myth</code></td>
+        <td><span class="status status-missing">missing</span></td>
+        <td>n/a<br>n/a</td>
+        <td>textless / not live</td>
+        <td>missing optimized asset and thumbnail as of v0.28.7</td>
+        <td>ok</td>
+      </tr>
+    
+      <tr>
+        <td>8</td>
+        <td><strong>Benefits Worth Taking Seriously</strong><br><code>benefits-worth-taking-seriously</code></td>
+        <td><span class="status status-missing">missing</span></td>
+        <td>n/a<br>n/a</td>
+        <td>textless / not live</td>
+        <td>missing optimized asset and thumbnail as of v0.28.7</td>
+        <td>ok</td>
+      </tr>
+    
+      <tr>
+        <td>8</td>
+        <td><strong>Human-Centered AI</strong><br><code>human-centered-ai</code></td>
+        <td><span class="status status-missing">missing</span></td>
+        <td>n/a<br>n/a</td>
+        <td>textless / not live</td>
+        <td>missing optimized asset and thumbnail as of v0.28.7</td>
+        <td>ok</td>
+      </tr>
+    
+      <tr>
+        <td>8</td>
+        <td><strong>Better AI Is a Choice</strong><br><code>better-ai-choice</code></td>
+        <td><span class="status status-missing">missing</span></td>
+        <td>n/a<br>n/a</td>
+        <td>textless / not live</td>
+        <td>missing optimized asset and thumbnail as of v0.28.7</td>
+        <td>ok</td>
+      </tr>
+    
+      <tr>
+        <td>8</td>
+        <td><strong>Model Literate Synthesis</strong><br><code>model-literate-synthesis</code></td>
+        <td><span class="status status-missing">missing</span></td>
+        <td>n/a<br>n/a</td>
+        <td>textless / not live</td>
+        <td>missing optimized asset and thumbnail as of v0.28.7</td>
+        <td>ok</td>
+      </tr>
+    </tbody>
+    </table>
+  </section>
+
+  <section class="panel">
+    <p class="eyebrow">Screenshots</p>
+    <h2>Before / After and Mobile QA</h2>
+    <div class="shot-grid">
+      <figure class="shot">
+        <img src="../screenshots/v0-28-3/collective-intelligence-lantern-390.png" alt="Before screenshot of the coded Collective Intelligence visual at 390px">
+        <figcaption>Before: coded Collective Intelligence visual from v0.28.3 at 390px.</figcaption>
+      </figure>
+      
+    <figure class="shot">
+      <img src="../screenshots/v0-28-7-image2-batch-1/collective-intelligence-image2-390.png" alt="After: Image 2 Collective Intelligence visual at 390px.">
+      <figcaption>After: Image 2 Collective Intelligence visual at 390px.</figcaption>
+    </figure>
+  
+      
+    <figure class="shot">
+      <img src="../screenshots/v0-28-7-image2-batch-1/collective-intelligence-image2-320.png" alt="After: Image 2 Collective Intelligence visual at 320px.">
+      <figcaption>After: Image 2 Collective Intelligence visual at 320px.</figcaption>
+    </figure>
+  
+      
+    <figure class="shot">
+      <img src="../screenshots/v0-28-7-image2-batch-1/collective-intelligence-image2-desktop-1024.png" alt="After: Image 2 Collective Intelligence visual on desktop.">
+      <figcaption>After: Image 2 Collective Intelligence visual on desktop.</figcaption>
+    </figure>
+  
+      
+    <figure class="shot">
+      <img src="../screenshots/v0-28-7-image2-batch-1/journey-card-collective-intelligence-390-fullpage.png" alt="Journey card smoke: Collective Intelligence live asset.">
+      <figcaption>Journey card smoke: Collective Intelligence live asset.</figcaption>
+    </figure>
+  
+      
+    <figure class="shot">
+      <img src="../screenshots/v0-28-7-image2-batch-1/missing-asset-current-visual-perfect-storm-390.png" alt="Missing asset smoke: Perfect Storm keeps the current visual.">
+      <figcaption>Missing asset smoke: Perfect Storm keeps the current visual.</figcaption>
+    </figure>
+  
+      
+    <figure class="shot">
+      <img src="../screenshots/v0-28-7-image2-batch-1/badge-smoke-390.png" alt="Badge smoke screenshot.">
+      <figcaption>Badge smoke screenshot.</figcaption>
+    </figure>
+  
+      
+    <figure class="shot">
+      <img src="../screenshots/v0-28-7-image2-batch-1/play-smoke-390.png" alt="Play smoke screenshot.">
+      <figcaption>Play smoke screenshot.</figcaption>
+    </figure>
+  
+      
+    <figure class="shot">
+      <img src="../screenshots/v0-28-7-image2-batch-1/glossary-smoke-390.png" alt="Glossary smoke screenshot.">
+      <figcaption>Glossary smoke screenshot.</figcaption>
+    </figure>
+  
+    </div>
+  </section>
+
+  <section class="panel">
+    <p class="eyebrow">Verification</p>
+    <h2>Command Results</h2>
+    
+    <table>
+      <thead><tr><th>Command</th><th>Status</th><th>Notes</th></tr></thead>
+      <tbody>
+        
+          <tr>
+            <td><code>npm run typecheck</code></td>
+            <td>pass</td>
+            <td>&gt; promptlife@0.28.7 typecheck
+&gt; tsc --noEmit</td>
+          </tr>
+        
+          <tr>
+            <td><code>npm run build</code></td>
+            <td>pass</td>
+            <td>&gt; promptlife@0.28.7 build
+&gt; vite build
+
+vite v8.0.14 building client environment for production...
+[2Ktransforming...✓ 39 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                     1.03 kB │ gzip:   0.47 kB
+dist/assets/index-DMxoEmxG.css    151.39 kB │ gzip:  29.10 kB
+dist/assets/index-b963uE7X.js   1,078.36 kB │ gzip: 262.25 kB
+
+✓ built in 265ms
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.</td>
+          </tr>
+        
+          <tr>
+            <td><code>npm run build:pages</code></td>
+            <td>pass</td>
+            <td>&gt; promptlife@0.28.7 build:pages
+&gt; GITHUB_PAGES=true vite build
+
+vite v8.0.14 building client environment for production...
+[2Ktransforming...✓ 39 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                     1.05 kB │ gzip:   0.47 kB
+dist/assets/index-DMxoEmxG.css    151.39 kB │ gzip:  29.10 kB
+dist/assets/index-BpsMqR3_.js   1,078.40 kB │ gzip: 262.26 kB
+
+✓ built in 167ms
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.</td>
+          </tr>
+        
+          <tr>
+            <td><code>npm run audit:visual-assets</code></td>
+            <td>pass</td>
+            <td>&gt; promptlife@0.28.7 audit:visual-assets
+&gt; node scripts/audit-visual-assets.mjs
+
+Visual asset audit passed. Checked 12 manifest entries; live assets: 1; pending assets: 0.</td>
+          </tr>
+        
+          <tr>
+            <td><code>npm run audit:visual-aids</code></td>
+            <td>pass</td>
+            <td>&gt; promptlife@0.28.7 audit:visual-aids
+&gt; node scripts/audit-visual-aids.mjs &amp;&amp; node scripts/audit-word-wrap.mjs
+
+Visual aid audit passed: 39 aids, 0 mismatches, 0 readiness issues.
+Word-wrap audit pass.
+Checked 77 files.
+Unsafe CSS: 0
+Known bad splits: 0
+Long internal labels: 0
+Diagram paragraphs: 0</td>
+          </tr>
+        
+          <tr>
+            <td><code>npm run audit:visual-overflow</code></td>
+            <td>pass</td>
+            <td>&gt; promptlife@0.28.7 audit:visual-overflow
+&gt; node scripts/audit-visual-overflow.mjs
+
+Visual overflow audit passed. Checked 39 learner-route visual aids at 320px and 390px.</td>
+          </tr>
+        
+          <tr>
+            <td><code>npm run audit:word-wrap</code></td>
+            <td>pass</td>
+            <td>&gt; promptlife@0.28.7 audit:word-wrap
+&gt; node scripts/audit-word-wrap.mjs
+
+Word-wrap audit pass.
+Checked 77 files.
+Unsafe CSS: 0
+Known bad splits: 0
+Long internal labels: 0
+Diagram paragraphs: 0</td>
+          </tr>
+        
+          <tr>
+            <td><code>npm run audit:learner-copy</code></td>
+            <td>pass</td>
+            <td>&gt; promptlife@0.28.7 audit:learner-copy
+&gt; node scripts/audit-learner-copy.mjs
+
+Learner-copy audit passed. Checked 19 learner-facing source files.</td>
+          </tr>
+        
+          <tr>
+            <td><code>npm run audit:language</code></td>
+            <td>pass</td>
+            <td>&gt; promptlife@0.28.7 audit:language
+&gt; node scripts/audit-language.mjs
+
+Language audit passed. Checked 61 current source/docs files for banned wording.</td>
+          </tr>
+        
+          <tr>
+            <td><code>npm run audit:answers</code></td>
+            <td>pass</td>
+            <td>uestions: 0%
+Revised active-development cards: 6
+Revised active-development questions: 19
+Revised active-development choices: 76
+Revised active-development wrong-answer distractors: 57
+Revised audit-seed correct-answer positions: [4,3,1,4,2,3,1,2,4,1,4,1,1,3,4,3,3,2,2]
+v0.27.10 active-development cards: 12
+v0.27.10 active-development questions: 39
+v0.27.10 active-development choices: 156
+v0.27.10 active-development wrong-answer distractors: 117
+v0.27.10 audit-seed correct-answer positions: [4,1,3,4,2,2,4,3,4,3,3,3,4,3,4,2,4,2,1,2,1,2,4,1,1,4,1,1,4,3,4,4,4,1,1,1,3,3,1]
+v0.27.15 active-development cards: 39
+v0.27.15 active-development questions: 136
+v0.27.15 active-development choices: 544
+v0.27.15 active-development wrong-answer distractors: 408
+v0.27.15 model-thinking/application/mechanism questions: 136
+v0.27.15 direct-definition questions: 0
+v0.27.15 audit-seed correct-answer positions: [4,1,2,2,1,4,4,1,2,2,2,4,3,1,1,3,4,2,2,1,3,2,4,1,3,3,2,4,3,3,4,3,2,1,4,1,2,2,2,1,4,1,1,4,2,4,1,1,3,4,2,1,3,2,3,3,4,4,3,3,4,2,1,3,1,1,2,4,2,2,1,2,1,4,4,3,2,4,3,1,4,3,4,2,3,3,2,3,2,1,1,4,3,4,4,1,4,3,1,4,4,3,4,4,2,3,4,2,2,2,2,3,1,1,1,4,3,4,3,2,3,1,2,1,1,4,1,2,1,4,1,1,2,3,1,2]
+Checkpoint audit passed.</td>
+          </tr>
+        
+          <tr>
+            <td><code>npm run audit:checkpoints</code></td>
+            <td>pass</td>
+            <td>uestions: 0%
+Revised active-development cards: 6
+Revised active-development questions: 19
+Revised active-development choices: 76
+Revised active-development wrong-answer distractors: 57
+Revised audit-seed correct-answer positions: [4,3,1,4,2,3,1,2,4,1,4,1,1,3,4,3,3,2,2]
+v0.27.10 active-development cards: 12
+v0.27.10 active-development questions: 39
+v0.27.10 active-development choices: 156
+v0.27.10 active-development wrong-answer distractors: 117
+v0.27.10 audit-seed correct-answer positions: [4,1,3,4,2,2,4,3,4,3,3,3,4,3,4,2,4,2,1,2,1,2,4,1,1,4,1,1,4,3,4,4,4,1,1,1,3,3,1]
+v0.27.15 active-development cards: 39
+v0.27.15 active-development questions: 136
+v0.27.15 active-development choices: 544
+v0.27.15 active-development wrong-answer distractors: 408
+v0.27.15 model-thinking/application/mechanism questions: 136
+v0.27.15 direct-definition questions: 0
+v0.27.15 audit-seed correct-answer positions: [4,1,2,2,1,4,4,1,2,2,2,4,3,1,1,3,4,2,2,1,3,2,4,1,3,3,2,4,3,3,4,3,2,1,4,1,2,2,2,1,4,1,1,4,2,4,1,1,3,4,2,1,3,2,3,3,4,4,3,3,4,2,1,3,1,1,2,4,2,2,1,2,1,4,4,3,2,4,3,1,4,3,4,2,3,3,2,3,2,1,1,4,3,4,4,1,4,3,1,4,4,3,4,4,2,3,4,2,2,2,2,3,1,1,1,4,3,4,3,2,3,1,2,1,1,4,1,2,1,4,1,1,2,3,1,2]
+Checkpoint audit passed.</td>
+          </tr>
+        
+          <tr>
+            <td><code>npm run audit:question-clues</code></td>
+            <td>pass</td>
+            <td>&gt; promptlife@0.28.7 audit:question-clues
+&gt; node scripts/audit-question-clues.mjs
+
+Question-clue audit completed.
+Term-echo candidates: 36
+Answer-length warnings: 43
+Vague-stem warnings: 0
+Wrote docs/journey/checkpoints/question-clue-audit-v0-27-15.md</td>
+          </tr>
+        
+          <tr>
+            <td><code>npm run audit:exercises</code></td>
+            <td>pass</td>
+            <td>&gt; promptlife@0.28.7 audit:exercises
+&gt; node scripts/audit-exercises.mjs
+
+Exercise audit passed. Inventoried 39 Journey interactions and exported review PDFs.</td>
+          </tr>
+        
+      </tbody>
+    </table>
+  
+  </section>
+
+  <section class="panel">
+    <p class="eyebrow">Backlog</p>
+    <h2>Remaining Visual Strategy Backlog</h2>
+    <p>P0 before human testing remains: Multimodal AI, The Perfect Storm, Costs We Must Count, Risk vs Myth, and Model Literate Synthesis. P1 remains: What Is an LLM?, Pretraining, Alignment, Benefits Worth Taking Seriously, Human-Centered AI, and Better AI Is a Choice. Collective Intelligence is now live and should be reviewed with learners for concept clarity.</p>
+  </section>
+</body>
+</html>

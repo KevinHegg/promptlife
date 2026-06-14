@@ -846,7 +846,7 @@ function writeReviewHtml(bank, glossaryOrder) {
     table { width: 100%; border-collapse: collapse; font-size: 12px; }
     th, td { border: 1px solid rgba(18,30,114,.16); padding: 6px; vertical-align: top; }
     th { background: #eef7f8; color: #121e72; }
-    code { color: #121e72; overflow-wrap: anywhere; }
+    code { color: #121e72; overflow-wrap: normal; }
     li + li { margin-top: 6px; }
     @media print { body { padding: 12px; } section, article { box-shadow: none; } }
   </style>

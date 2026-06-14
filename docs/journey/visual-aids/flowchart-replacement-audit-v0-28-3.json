@@ -1,0 +1,110 @@
+{
+  "version": "0.28.3",
+  "generatedAt": "2026-06-14T21:23:15.005Z",
+  "status": "ok",
+  "summary": {
+    "totalTargets": 10,
+    "replacedTargets": 10,
+    "issueCount": 0
+  },
+  "checks": [
+    "target visuals use Vertical Mechanism Strip, Boundary Board, or Tray / Stack / Bars",
+    "target exact-mechanism visuals are not generated PNG only",
+    "target internal label estimates stay at five or fewer",
+    "target ids are registered for hand-specified HTML rendering",
+    "no explicit free-form flowchart class remains in VisualAids.tsx"
+  ],
+  "rows": [
+    {
+      "id": "before-morning-finetuning-path",
+      "title": "Durable vs Temporary Steering",
+      "template": "Boundary Board",
+      "visualType": "coded-html",
+      "internalLabelCount": 4,
+      "status": "ok",
+      "issues": []
+    },
+    {
+      "id": "inference-pass",
+      "title": "Forward Pass",
+      "template": "Vertical Mechanism Strip",
+      "visualType": "coded-html",
+      "internalLabelCount": 5,
+      "status": "ok",
+      "issues": []
+    },
+    {
+      "id": "attention",
+      "title": "Relevance Between Tokens",
+      "template": "Boundary Board",
+      "visualType": "coded-html",
+      "internalLabelCount": 5,
+      "status": "ok",
+      "issues": []
+    },
+    {
+      "id": "mlp",
+      "title": "Attention vs MLP",
+      "template": "Boundary Board",
+      "visualType": "coded-html",
+      "internalLabelCount": 2,
+      "status": "ok",
+      "issues": []
+    },
+    {
+      "id": "layers",
+      "title": "Transformer Layer Strip",
+      "template": "Vertical Mechanism Strip",
+      "visualType": "coded-html",
+      "internalLabelCount": 5,
+      "status": "ok",
+      "issues": []
+    },
+    {
+      "id": "hidden-states",
+      "title": "Embedding, Hidden State, Weight",
+      "template": "Boundary Board",
+      "visualType": "coded-html",
+      "internalLabelCount": 3,
+      "status": "ok",
+      "issues": []
+    },
+    {
+      "id": "vectors",
+      "title": "Feature Vector",
+      "template": "Tray / Stack / Bars",
+      "visualType": "coded-html",
+      "internalLabelCount": 1,
+      "status": "ok",
+      "issues": []
+    },
+    {
+      "id": "tensors",
+      "title": "Tensor Block",
+      "template": "Tray / Stack / Bars",
+      "visualType": "coded-html",
+      "internalLabelCount": 3,
+      "status": "ok",
+      "issues": []
+    },
+    {
+      "id": "context-window",
+      "title": "Temporary Context Window",
+      "template": "Tray / Stack / Bars",
+      "visualType": "coded-html",
+      "internalLabelCount": 5,
+      "status": "ok",
+      "issues": []
+    },
+    {
+      "id": "synthesis-map-compass-lantern",
+      "title": "Model Literacy Board",
+      "template": "Boundary Board",
+      "visualType": "coded-html",
+      "internalLabelCount": 3,
+      "status": "ok",
+      "issues": []
+    }
+  ],
+  "issues": []
+}

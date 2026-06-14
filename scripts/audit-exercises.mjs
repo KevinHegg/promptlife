@@ -6,12 +6,12 @@ import path from 'node:path'
 import process from 'node:process'
 
 const root = process.cwd()
-const version = '0.28.2'
+const version = '0.28.3'
 const port = Number(process.env.PROMPTLIFE_EXERCISE_AUDIT_PORT ?? 5193)
 const baseUrl = `http://127.0.0.1:${port}`
 const docsDir = path.join(root, 'docs', 'journey', 'exercises')
-const screenshotDir = path.join(docsDir, 'screenshots', 'v0-28-2')
-const visualOverflowPath = path.join(root, 'docs', 'journey', 'visual-aids', 'visual-overflow-audit-v0-28-2.json')
+const screenshotDir = path.join(docsDir, 'screenshots', 'v0-28-3')
+const visualOverflowPath = path.join(root, 'docs', 'journey', 'visual-aids', 'visual-overflow-audit-v0-28-3.json')
 const chromeCandidates = [
   process.env.CHROME_PATH,
   '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
@@ -267,7 +267,7 @@ function auditExerciseData(source) {
 
 async function openLesson(page, width, lessonId) {
   await page.setViewportSize({ width, height: 980 })
-  await page.goto(`${baseUrl}/?debug=1&v=0282-exercise-${width}-${lessonId}`, { waitUntil: 'networkidle' })
+  await page.goto(`${baseUrl}/?debug=1&v=0283-exercise-${width}-${lessonId}`, { waitUntil: 'networkidle' })
   await page.evaluate((activeLessonId) => {
     window.localStorage.setItem('promptlife:v1:lastLocation', JSON.stringify('learn'))
     window.localStorage.setItem('promptlife:v1:lessonId', JSON.stringify(activeLessonId))
@@ -343,7 +343,7 @@ function panelIssues(rendered, row) {
 
 function renderInventoryMarkdown(payload) {
   const lines = [
-    '# Prompt Life Journey Exercise Inventory v0.28.2',
+    '# Prompt Life Journey Exercise Inventory v0.28.3',
     '',
     `Generated: ${payload.generatedAt}`,
     '',
@@ -379,8 +379,8 @@ function renderReviewHtml(payload, visualPayload) {
       <p><strong>Recommendation:</strong> ${escapeHtml(row.recommendation)}</p>
       ${row.issues.length ? `<p class="issue"><strong>Issues:</strong> ${row.issues.map(escapeHtml).join('; ')}</p>` : '<p class="pass">No P0/P1 issue found.</p>'}
       <div class="shots">
-        <figure><img src="screenshots/v0-28-2/${row.learningCardNumber}-${row.learningCardId}-320.png" alt="320px interaction screenshot for ${escapeHtml(row.learningCardTitle)}"><figcaption>320px</figcaption></figure>
-        <figure><img src="screenshots/v0-28-2/${row.learningCardNumber}-${row.learningCardId}-390.png" alt="390px interaction screenshot for ${escapeHtml(row.learningCardTitle)}"><figcaption>390px</figcaption></figure>
+        <figure><img src="screenshots/v0-28-3/${row.learningCardNumber}-${row.learningCardId}-320.png" alt="320px interaction screenshot for ${escapeHtml(row.learningCardTitle)}"><figcaption>320px</figcaption></figure>
+        <figure><img src="screenshots/v0-28-3/${row.learningCardNumber}-${row.learningCardId}-390.png" alt="390px interaction screenshot for ${escapeHtml(row.learningCardTitle)}"><figcaption>390px</figcaption></figure>
       </div>
     </section>
   `).join('\n')
@@ -389,7 +389,7 @@ function renderReviewHtml(payload, visualPayload) {
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Prompt Life v0.28.2 Journey Exercise Review</title>
+  <title>Prompt Life v0.28.3 Journey Exercise Review</title>
   <style>
     body { font-family: Inter, Arial, sans-serif; color: #07155f; margin: 32px; line-height: 1.45; }
     h1, h2, h3 { color: #101a7a; }
@@ -405,7 +405,7 @@ function renderReviewHtml(payload, visualPayload) {
   </style>
 </head>
 <body>
-  <h1>Prompt Life v0.28.2 Journey Exercise Review</h1>
+  <h1>Prompt Life v0.28.3 Journey Exercise Review</h1>
   <section class="summary">
     <p><strong>Generated:</strong> ${payload.generatedAt}</p>
     <p><strong>Status:</strong> ${payload.status}</p>
@@ -426,7 +426,7 @@ function renderCombinedHtml(payload, visualPayload) {
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Prompt Life v0.28.2 Visual Overflow and Exercise Audit Report</title>
+  <title>Prompt Life v0.28.3 Visual Overflow and Exercise Audit Report</title>
   <style>
     body { font-family: Inter, Arial, sans-serif; color: #07155f; margin: 36px; line-height: 1.5; }
     h1, h2 { color: #101a7a; }
@@ -439,7 +439,7 @@ function renderCombinedHtml(payload, visualPayload) {
   </style>
 </head>
 <body>
-  <h1>Prompt Life v0.28.2 Visual Overflow and Exercise Audit Report</h1>
+  <h1>Prompt Life v0.28.3 Visual Overflow and Exercise Audit Report</h1>
   <section>
     <p><strong>Generated:</strong> ${payload.generatedAt}</p>
     <p><strong>Readiness judgment:</strong> ${payload.readinessJudgment}</p>
@@ -543,9 +543,9 @@ async function main() {
       rows
     }
 
-    const inventoryJson = path.join(docsDir, 'journey-exercise-inventory-v0-28-2.json')
-    const inventoryCsv = path.join(docsDir, 'journey-exercise-inventory-v0-28-2.csv')
-    const inventoryMd = path.join(docsDir, 'journey-exercise-inventory-v0-28-2.md')
+    const inventoryJson = path.join(docsDir, 'journey-exercise-inventory-v0-28-3.json')
+    const inventoryCsv = path.join(docsDir, 'journey-exercise-inventory-v0-28-3.csv')
+    const inventoryMd = path.join(docsDir, 'journey-exercise-inventory-v0-28-3.md')
     const csvHeader = [
       'learningCardNumber', 'stageTitle', 'learningCardId', 'learningCardTitle', 'interactionType', 'interactionTitle',
       'exerciseType', 'expectedLearnerAction', 'answerModel', 'feedbackBehavior', 'completionCondition', 'priority', 'recommendation'
@@ -559,10 +559,10 @@ async function main() {
       visualPayload = JSON.parse(await readFile(visualOverflowPath, 'utf8'))
     }
 
-    const reviewHtml = path.join(docsDir, 'prompt-life-v0-28-2-journey-exercise-review.html')
-    const reviewPdf = path.join(docsDir, 'prompt-life-v0-28-2-journey-exercise-review.pdf')
-    const combinedHtml = path.join(root, 'docs', 'journey', 'prompt-life-v0-28-2-visual-overflow-and-exercise-audit-report.html')
-    const combinedPdf = path.join(root, 'docs', 'journey', 'prompt-life-v0-28-2-visual-overflow-and-exercise-audit-report.pdf')
+    const reviewHtml = path.join(docsDir, 'prompt-life-v0-28-3-journey-exercise-review.html')
+    const reviewPdf = path.join(docsDir, 'prompt-life-v0-28-3-journey-exercise-review.pdf')
+    const combinedHtml = path.join(root, 'docs', 'journey', 'prompt-life-v0-28-3-visual-overflow-and-exercise-audit-report.html')
+    const combinedPdf = path.join(root, 'docs', 'journey', 'prompt-life-v0-28-3-visual-overflow-and-exercise-audit-report.pdf')
     await writeFile(reviewHtml, renderReviewHtml(payload, visualPayload))
     await writeFile(combinedHtml, renderCombinedHtml(payload, visualPayload))
     await writePdfFromHtml(browser, reviewHtml, reviewPdf)

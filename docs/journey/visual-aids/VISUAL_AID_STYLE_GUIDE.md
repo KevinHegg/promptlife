@@ -1,4 +1,4 @@
-# Prompt Life Visual Aid Style Guide v0.28.1
+# Prompt Life Visual Aid Style Guide v0.28.4
 
 Prompt Life visual aids should make model mechanics less mysterious without becoming dense posters. The core rule is simple: short labels live in the diagram; definitions, limits, and nuance live in accessible HTML callouts.
 
@@ -43,7 +43,42 @@ Generated PNGs must not contain tiny instructional text. Keep labels, captions, 
 
 ## Canonical Templates
 
-Use these six templates going forward. New visual ideas should first choose one of these patterns before inventing a custom layout.
+Use these templates going forward. New visual ideas should first choose one of these patterns before inventing a custom layout.
+
+## v0.28.4 Typography And Word-Wrap Rule
+
+Never split learner-facing words at non-syllable boundaries to make a diagram fit. If a label is too long, shorten the label, move the detail to an HTML callout, or redesign the layout.
+
+Hard rules:
+
+- no `break-all` visual text behavior
+- no arbitrary internal word splitting
+- no paragraph text inside small diagram shapes
+- no SVG text label longer than 18 characters unless manually approved
+- no long absolutely positioned text
+- visual labels use `.visual-label`, `.visual-chip`, `.visual-node-label`, `.visual-callout-title`, or `.visual-callout-body`
+- visual labels use natural wrapping at spaces only
+- full definitions and nuance live below the diagram in accessible HTML
+
+## v0.28.3 Exact-Mechanism Rule
+
+Stop using free-form flowcharts for Journey exact-mechanism visual aids. Exact-mechanism diagrams should use one of these three phone-safe patterns:
+
+- `Vertical Mechanism Strip`: stacked one-direction rows, usually three to five rows.
+- `Boundary Board`: two to four columns with short concept labels and no paragraph text inside columns.
+- `Tray / Stack / Bars`: a bounded workspace, stack, or bar strip with one visible operation.
+
+Hard rules:
+
+- no paragraph text inside diagrams
+- no tiny labels
+- no free-form flowcharts
+- no fake dashboards
+- no arrows unless the direction has instructional meaning
+- diagram labels are nouns or short verbs only
+- explanations live in captions and HTML callouts below
+
+Atmospheric PNGs, probability bars, and taxonomy maps may remain when they are not exact step-by-step mechanism diagrams.
 
 ## v0.28.1 Hard Reset Rules
 

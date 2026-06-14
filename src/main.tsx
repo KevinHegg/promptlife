@@ -72,7 +72,7 @@ const HOME_ASSETS = {
   heroFallback: `${ASSET}/illustrations/scene-hero-feature-cloud@mobile.png`
 }
 // Bump this for each shipped app change; the Badge screen displays it under Start over.
-const APP_VERSION = '0.28.2'
+const APP_VERSION = '0.28.7'
 const STORAGE_KEYS = {
   lastLocation: 'promptlife:v1:lastLocation',
   lessonId: 'promptlife:v1:lessonId',
@@ -2363,6 +2363,11 @@ function LayersStackInspectInteraction() {
 
 function HiddenStateSortInteraction() {
   const buckets = ['Durable', 'Temporary', 'Not in this forward pass']
+  const bucketLabel = {
+    Durable: 'Durable',
+    Temporary: 'This run',
+    'Not in this forward pass': 'Outside run'
+  }
   const items = [
     { id: 'embedding-table', label: 'embedding table', bucket: 'Durable' },
     { id: 'weight', label: 'weight', bucket: 'Durable' },
@@ -2397,7 +2402,7 @@ function HiddenStateSortInteraction() {
       </div>
       <div className="hidden-sort-buckets" aria-hidden="true">
         {buckets.map((bucket) => (
-          <span key={bucket}>{bucket}</span>
+          <span key={bucket}>{bucketLabel[bucket]}</span>
         ))}
       </div>
       <p className={allCorrect ? 'micro-feedback good' : 'micro-feedback'} role="status">
@@ -2426,7 +2431,7 @@ function LogitsRawToggleInteraction() {
     <div className="morning-interaction decision-interaction logits-toggle-demo">
       <div className="segmented-control mini" role="group" aria-label="Toggle raw scores and probabilities">
         <button className={isRaw ? 'active' : ''} onClick={() => setMode('raw')} aria-pressed={isRaw}>Raw scores</button>
-        <button className={!isRaw ? 'active' : ''} onClick={() => setMode('probabilities')} aria-pressed={!isRaw}>Probabilities?</button>
+        <button className={!isRaw ? 'active' : ''} onClick={() => setMode('probabilities')} aria-pressed={!isRaw} aria-label="Show probabilities">Probs?</button>
       </div>
       <div className="decision-score-list" aria-live="polite">
         {decisionCandidates.map((candidate) => (

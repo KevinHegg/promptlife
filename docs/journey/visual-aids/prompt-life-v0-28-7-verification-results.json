@@ -1,0 +1,111 @@
+{
+  "version": "0.28.7",
+  "generatedAt": "2026-06-14T21:27:05.504Z",
+  "status": "pass",
+  "commands": [
+    {
+      "command": "npm run typecheck",
+      "status": "pass",
+      "exitCode": 0,
+      "startedAt": "2026-06-14T21:23:12.026Z",
+      "endedAt": "2026-06-14T21:23:13.708Z",
+      "notes": "> promptlife@0.28.7 typecheck\n> tsc --noEmit"
+    },
+    {
+      "command": "npm run build",
+      "status": "pass",
+      "exitCode": 0,
+      "startedAt": "2026-06-14T21:23:13.708Z",
+      "endedAt": "2026-06-14T21:23:14.235Z",
+      "notes": "> promptlife@0.28.7 build\n> vite build\n\nvite v8.0.14 building client environment for production...\n\u001b[2K\rtransforming...✓ 39 modules transformed.\nrendering chunks...\ncomputing gzip size...\ndist/index.html                     1.03 kB │ gzip:   0.47 kB\ndist/assets/index-DMxoEmxG.css    151.39 kB │ gzip:  29.10 kB\ndist/assets/index-b963uE7X.js   1,078.36 kB │ gzip: 262.25 kB\n\n✓ built in 265ms\n[plugin builtin:vite-reporter] \n(!) Some chunks are larger than 500 kB after minification. Consider:\n- Using dynamic import() to code-split the application\n- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting\n- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit."
+    },
+    {
+      "command": "npm run build:pages",
+      "status": "pass",
+      "exitCode": 0,
+      "startedAt": "2026-06-14T21:23:14.235Z",
+      "endedAt": "2026-06-14T21:23:14.643Z",
+      "notes": "> promptlife@0.28.7 build:pages\n> GITHUB_PAGES=true vite build\n\nvite v8.0.14 building client environment for production...\n\u001b[2K\rtransforming...✓ 39 modules transformed.\nrendering chunks...\ncomputing gzip size...\ndist/index.html                     1.05 kB │ gzip:   0.47 kB\ndist/assets/index-DMxoEmxG.css    151.39 kB │ gzip:  29.10 kB\ndist/assets/index-BpsMqR3_.js   1,078.40 kB │ gzip: 262.26 kB\n\n✓ built in 167ms\n[plugin builtin:vite-reporter] \n(!) Some chunks are larger than 500 kB after minification. Consider:\n- Using dynamic import() to code-split the application\n- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting\n- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit."
+    },
+    {
+      "command": "npm run audit:visual-assets",
+      "status": "pass",
+      "exitCode": 0,
+      "startedAt": "2026-06-14T21:23:14.643Z",
+      "endedAt": "2026-06-14T21:23:14.843Z",
+      "notes": "> promptlife@0.28.7 audit:visual-assets\n> node scripts/audit-visual-assets.mjs\n\nVisual asset audit passed. Checked 12 manifest entries; live assets: 1; pending assets: 0."
+    },
+    {
+      "command": "npm run audit:visual-aids",
+      "status": "pass",
+      "exitCode": 0,
+      "startedAt": "2026-06-14T21:23:14.843Z",
+      "endedAt": "2026-06-14T21:23:15.066Z",
+      "notes": "> promptlife@0.28.7 audit:visual-aids\n> node scripts/audit-visual-aids.mjs && node scripts/audit-word-wrap.mjs\n\nVisual aid audit passed: 39 aids, 0 mismatches, 0 readiness issues.\nWord-wrap audit pass.\nChecked 77 files.\nUnsafe CSS: 0\nKnown bad splits: 0\nLong internal labels: 0\nDiagram paragraphs: 0"
+    },
+    {
+      "command": "npm run audit:visual-overflow",
+      "status": "pass",
+      "exitCode": 0,
+      "startedAt": "2026-06-14T21:23:15.066Z",
+      "endedAt": "2026-06-14T21:24:52.250Z",
+      "notes": "> promptlife@0.28.7 audit:visual-overflow\n> node scripts/audit-visual-overflow.mjs\n\nVisual overflow audit passed. Checked 39 learner-route visual aids at 320px and 390px."
+    },
+    {
+      "command": "npm run audit:word-wrap",
+      "status": "pass",
+      "exitCode": 0,
+      "startedAt": "2026-06-14T21:24:52.250Z",
+      "endedAt": "2026-06-14T21:24:52.503Z",
+      "notes": "> promptlife@0.28.7 audit:word-wrap\n> node scripts/audit-word-wrap.mjs\n\nWord-wrap audit pass.\nChecked 77 files.\nUnsafe CSS: 0\nKnown bad splits: 0\nLong internal labels: 0\nDiagram paragraphs: 0"
+    },
+    {
+      "command": "npm run audit:learner-copy",
+      "status": "pass",
+      "exitCode": 0,
+      "startedAt": "2026-06-14T21:24:52.503Z",
+      "endedAt": "2026-06-14T21:24:52.698Z",
+      "notes": "> promptlife@0.28.7 audit:learner-copy\n> node scripts/audit-learner-copy.mjs\n\nLearner-copy audit passed. Checked 19 learner-facing source files."
+    },
+    {
+      "command": "npm run audit:language",
+      "status": "pass",
+      "exitCode": 0,
+      "startedAt": "2026-06-14T21:24:52.698Z",
+      "endedAt": "2026-06-14T21:24:52.876Z",
+      "notes": "> promptlife@0.28.7 audit:language\n> node scripts/audit-language.mjs\n\nLanguage audit passed. Checked 61 current source/docs files for banned wording."
+    },
+    {
+      "command": "npm run audit:answers",
+      "status": "pass",
+      "exitCode": 0,
+      "startedAt": "2026-06-14T21:24:52.876Z",
+      "endedAt": "2026-06-14T21:24:53.237Z",
+      "notes": "uestions: 0%\nRevised active-development cards: 6\nRevised active-development questions: 19\nRevised active-development choices: 76\nRevised active-development wrong-answer distractors: 57\nRevised audit-seed correct-answer positions: [4,3,1,4,2,3,1,2,4,1,4,1,1,3,4,3,3,2,2]\nv0.27.10 active-development cards: 12\nv0.27.10 active-development questions: 39\nv0.27.10 active-development choices: 156\nv0.27.10 active-development wrong-answer distractors: 117\nv0.27.10 audit-seed correct-answer positions: [4,1,3,4,2,2,4,3,4,3,3,3,4,3,4,2,4,2,1,2,1,2,4,1,1,4,1,1,4,3,4,4,4,1,1,1,3,3,1]\nv0.27.15 active-development cards: 39\nv0.27.15 active-development questions: 136\nv0.27.15 active-development choices: 544\nv0.27.15 active-development wrong-answer distractors: 408\nv0.27.15 model-thinking/application/mechanism questions: 136\nv0.27.15 direct-definition questions: 0\nv0.27.15 audit-seed correct-answer positions: [4,1,2,2,1,4,4,1,2,2,2,4,3,1,1,3,4,2,2,1,3,2,4,1,3,3,2,4,3,3,4,3,2,1,4,1,2,2,2,1,4,1,1,4,2,4,1,1,3,4,2,1,3,2,3,3,4,4,3,3,4,2,1,3,1,1,2,4,2,2,1,2,1,4,4,3,2,4,3,1,4,3,4,2,3,3,2,3,2,1,1,4,3,4,4,1,4,3,1,4,4,3,4,4,2,3,4,2,2,2,2,3,1,1,1,4,3,4,3,2,3,1,2,1,1,4,1,2,1,4,1,1,2,3,1,2]\nCheckpoint audit passed."
+    },
+    {
+      "command": "npm run audit:checkpoints",
+      "status": "pass",
+      "exitCode": 0,
+      "startedAt": "2026-06-14T21:24:53.237Z",
+      "endedAt": "2026-06-14T21:24:53.591Z",
+      "notes": "uestions: 0%\nRevised active-development cards: 6\nRevised active-development questions: 19\nRevised active-development choices: 76\nRevised active-development wrong-answer distractors: 57\nRevised audit-seed correct-answer positions: [4,3,1,4,2,3,1,2,4,1,4,1,1,3,4,3,3,2,2]\nv0.27.10 active-development cards: 12\nv0.27.10 active-development questions: 39\nv0.27.10 active-development choices: 156\nv0.27.10 active-development wrong-answer distractors: 117\nv0.27.10 audit-seed correct-answer positions: [4,1,3,4,2,2,4,3,4,3,3,3,4,3,4,2,4,2,1,2,1,2,4,1,1,4,1,1,4,3,4,4,4,1,1,1,3,3,1]\nv0.27.15 active-development cards: 39\nv0.27.15 active-development questions: 136\nv0.27.15 active-development choices: 544\nv0.27.15 active-development wrong-answer distractors: 408\nv0.27.15 model-thinking/application/mechanism questions: 136\nv0.27.15 direct-definition questions: 0\nv0.27.15 audit-seed correct-answer positions: [4,1,2,2,1,4,4,1,2,2,2,4,3,1,1,3,4,2,2,1,3,2,4,1,3,3,2,4,3,3,4,3,2,1,4,1,2,2,2,1,4,1,1,4,2,4,1,1,3,4,2,1,3,2,3,3,4,4,3,3,4,2,1,3,1,1,2,4,2,2,1,2,1,4,4,3,2,4,3,1,4,3,4,2,3,3,2,3,2,1,1,4,3,4,4,1,4,3,1,4,4,3,4,4,2,3,4,2,2,2,2,3,1,1,1,4,3,4,3,2,3,1,2,1,1,4,1,2,1,4,1,1,2,3,1,2]\nCheckpoint audit passed."
+    },
+    {
+      "command": "npm run audit:question-clues",
+      "status": "pass",
+      "exitCode": 0,
+      "startedAt": "2026-06-14T21:24:53.591Z",
+      "endedAt": "2026-06-14T21:24:53.792Z",
+      "notes": "> promptlife@0.28.7 audit:question-clues\n> node scripts/audit-question-clues.mjs\n\nQuestion-clue audit completed.\nTerm-echo candidates: 36\nAnswer-length warnings: 43\nVague-stem warnings: 0\nWrote docs/journey/checkpoints/question-clue-audit-v0-27-15.md"
+    },
+    {
+      "command": "npm run audit:exercises",
+      "status": "pass",
+      "exitCode": 0,
+      "startedAt": "2026-06-14T21:24:53.792Z",
+      "endedAt": "2026-06-14T21:27:05.504Z",
+      "notes": "> promptlife@0.28.7 audit:exercises\n> node scripts/audit-exercises.mjs\n\nExercise audit passed. Inventoried 39 Journey interactions and exported review PDFs."
+    }
+  ]
+}

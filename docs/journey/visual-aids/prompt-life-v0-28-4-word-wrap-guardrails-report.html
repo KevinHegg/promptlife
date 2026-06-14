@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Prompt Life v0.28.4 Word-Wrap Guardrails Report</title>
+  <style>
+    :root {
+      color: #07124a;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      word-break: normal;
+      overflow-wrap: normal;
+      hyphens: none;
+    }
+    body { margin: 0; padding: 32px; background: #f8fbff; }
+    h1 { margin: 0 0 8px; font-size: 30px; line-height: 1.05; }
+    h2 { margin: 0 0 12px; font-size: 18px; }
+    p, li { max-width: 780px; line-height: 1.5; }
+    .summary, table, .shot-card {
+      margin: 18px 0;
+      padding: 18px;
+      border: 1px solid #cfd8ef;
+      border-radius: 12px;
+      background: white;
+      box-shadow: 0 10px 28px rgba(7, 18, 74, 0.08);
+    }
+    .summary ul { margin: 0; padding-left: 20px; line-height: 1.55; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { vertical-align: top; padding: 10px; border-bottom: 1px solid #e1e7f6; font-size: 12px; line-height: 1.35; }
+    th { color: #009f9c; text-align: left; text-transform: uppercase; font-size: 10px; letter-spacing: 0.04em; }
+    code { color: #121e72; }
+    .shot-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    figure { margin: 0; }
+    img { display: block; width: 100%; border: 1px solid #cfd8ef; border-radius: 10px; background: #eef7ff; }
+    figcaption, .missing-shot { margin-top: 6px; color: #4f5b7a; font-size: 12px; font-weight: 800; }
+    .missing-shot { padding: 36px 12px; border: 1px dashed #9aa8ca; border-radius: 10px; text-align: center; }
+    @media print {
+      body { padding: 20px; background: white; }
+      .shot-card { break-inside: avoid; page-break-inside: avoid; }
+      tr { break-inside: avoid; page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <h1>Prompt Life v0.28.4 Word-Wrap Guardrails Report</h1>
+  <p>Generated 2026-06-14T03:02:55.482Z. This packet documents the typography and visual-label repair pass for mobile Journey visuals.</p>
+
+  <section class="summary">
+    <h2>Audit Result</h2>
+    <ul>
+      <li>audit:word-wrap status: pass</li>
+      <li>Unsafe wrapping CSS issues: 0</li>
+      <li>Known bad split strings: 0</li>
+      <li>Long internal labels: 0</li>
+      <li>Paragraphs inside diagram bodies: 0</li>
+    </ul>
+  </section>
+
+  <section class="summary">
+    <h2>CSS Rules Changed</h2>
+    <ul>
+      <li>Replaced arbitrary overflow wrapping in current app CSS with natural wrapping.</li>
+      <li>Added shared guardrail classes: <code>.visual-label</code>, <code>.visual-chip</code>, <code>.visual-node-label</code>, <code>.visual-callout-title</code>, and <code>.visual-callout-body</code>.</li>
+      <li>Visual labels now use <code>word-break: normal</code>, <code>overflow-wrap: normal</code>, and <code>hyphens: none</code>.</li>
+      <li>Four-column boundary boards collapse to a 2-by-2 layout at very narrow widths so labels have room to wrap at spaces.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Visual Labels Shortened</h2>
+    <table>
+      <thead><tr><th>Location</th><th>Before</th><th>After</th></tr></thead>
+      <tbody>
+    <tr>
+      <td>Prompt vs Response internal panel subtitle</td>
+      <td>provided before generation</td>
+      <td>given first</td>
+    </tr>
+  
+    <tr>
+      <td>Prompt vs Response internal panel subtitle</td>
+      <td>what the next run sees</td>
+      <td>next run sees</td>
+    </tr>
+  
+    <tr>
+      <td>Tokenization source panel subtitle</td>
+      <td>human-readable sentence</td>
+      <td>sentence</td>
+    </tr>
+  
+    <tr>
+      <td>Tokenization stream panel subtitle</td>
+      <td>model-readable chunks</td>
+      <td>token chunks</td>
+    </tr>
+  
+    <tr>
+      <td>Tokenization uneven-example panel subtitle</td>
+      <td>tokens are not always words</td>
+      <td>not always words</td>
+    </tr>
+  
+    <tr>
+      <td>Tokenization source panel text</td>
+      <td>A jealous dog chased a startled cat...</td>
+      <td>A jealous dog...</td>
+    </tr>
+  
+    <tr>
+      <td>Inference mechanism-strip row</td>
+      <td>Temporary activations</td>
+      <td>Activations</td>
+    </tr>
+  
+    <tr>
+      <td>Fine-Tuning boundary-board label</td>
+      <td>Retrieve</td>
+      <td>Find</td>
+    </tr>
+  
+    <tr>
+      <td>Hidden States boundary-board label</td>
+      <td>Embedding</td>
+      <td>Embed</td>
+    </tr>
+  
+    <tr>
+      <td>Model Literate Synthesis boundary-board label</td>
+      <td>Model mechanics</td>
+      <td>Model</td>
+    </tr>
+  
+    <tr>
+      <td>Model Literate Synthesis boundary-board label</td>
+      <td>Evidence checking</td>
+      <td>Evidence</td>
+    </tr>
+  
+    <tr>
+      <td>Model Literate Synthesis boundary-board label</td>
+      <td>Human responsibility</td>
+      <td>Human role</td>
+    </tr>
+  
+    <tr>
+      <td>Attention token chips</td>
+      <td>chased / because / hissed</td>
+      <td>saw / as / ran</td>
+    </tr>
+  </tbody>
+    </table>
+  </section>
+
+  <section class="summary">
+    <h2>Moved To Callouts</h2>
+    <ul>
+      <li>Temporary activations remains fully explained in the Inference HTML callout.</li><li>Human responsibility remains fully explained in the Model Literate Synthesis caption and callout.</li><li>Full retrieval, embedding, mechanics, and evidence-checking terms remain in captions, callouts, glossary chips, and accessible descriptions.</li><li>The full tokenization sentence stays in the lesson/callouts rather than inside a small diagram panel.</li><li>Prompt/response timing detail stays in the callouts rather than long panel subtitles.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>320px And 390px Screenshots</h2>
+    
+    <section class="shot-card">
+      <h2>Prompt vs Response</h2>
+      <div class="shot-grid">
+        
+    <figure>
+      <img src="../screenshots/v0-28-4-word-wrap/prompt-response-320.png" alt="prompt-response at 320px">
+      <figcaption>320px</figcaption>
+    </figure>
+  
+        
+    <figure>
+      <img src="../screenshots/v0-28-4-word-wrap/prompt-response-390.png" alt="prompt-response at 390px">
+      <figcaption>390px</figcaption>
+    </figure>
+  
+      </div>
+    </section>
+  
+    <section class="shot-card">
+      <h2>Text to Tokens</h2>
+      <div class="shot-grid">
+        
+    <figure>
+      <img src="../screenshots/v0-28-4-word-wrap/tokenization-320.png" alt="tokenization at 320px">
+      <figcaption>320px</figcaption>
+    </figure>
+  
+        
+    <figure>
+      <img src="../screenshots/v0-28-4-word-wrap/tokenization-390.png" alt="tokenization at 390px">
+      <figcaption>390px</figcaption>
+    </figure>
+  
+      </div>
+    </section>
+  
+    <section class="shot-card">
+      <h2>Fine-Tuning</h2>
+      <div class="shot-grid">
+        
+    <figure>
+      <img src="../screenshots/v0-28-4-word-wrap/before-morning-finetuning-path-320.png" alt="before-morning-finetuning-path at 320px">
+      <figcaption>320px</figcaption>
+    </figure>
+  
+        
+    <figure>
+      <img src="../screenshots/v0-28-4-word-wrap/before-morning-finetuning-path-390.png" alt="before-morning-finetuning-path at 390px">
+      <figcaption>390px</figcaption>
+    </figure>
+  
+      </div>
+    </section>
+  
+    <section class="shot-card">
+      <h2>Inference</h2>
+      <div class="shot-grid">
+        
+    <figure>
+      <img src="../screenshots/v0-28-4-word-wrap/inference-pass-320.png" alt="inference-pass at 320px">
+      <figcaption>320px</figcaption>
+    </figure>
+  
+        
+    <figure>
+      <img src="../screenshots/v0-28-4-word-wrap/inference-pass-390.png" alt="inference-pass at 390px">
+      <figcaption>390px</figcaption>
+    </figure>
+  
+      </div>
+    </section>
+  
+    <section class="shot-card">
+      <h2>Attention</h2>
+      <div class="shot-grid">
+        
+    <figure>
+      <img src="../screenshots/v0-28-4-word-wrap/attention-320.png" alt="attention at 320px">
+      <figcaption>320px</figcaption>
+    </figure>
+  
+        
+    <figure>
+      <img src="../screenshots/v0-28-4-word-wrap/attention-390.png" alt="attention at 390px">
+      <figcaption>390px</figcaption>
+    </figure>
+  
+      </div>
+    </section>
+  
+    <section class="shot-card">
+      <h2>MLP</h2>
+      <div class="shot-grid">
+        
+    <figure>
+      <img src="../screenshots/v0-28-4-word-wrap/mlp-320.png" alt="mlp at 320px">
+      <figcaption>320px</figcaption>
+    </figure>
+  
+        
+    <figure>
+      <img src="../screenshots/v0-28-4-word-wrap/mlp-390.png" alt="mlp at 390px">
+      <figcaption>390px</figcaption>
+    </figure>
+  
+      </div>
+    </section>
+  
+    <section class="shot-card">
+      <h2>Layers</h2>
+      <div class="shot-grid">
+        
+    <figure>
+      <img src="../screenshots/v0-28-4-word-wrap/layers-320.png" alt="layers at 320px">
+      <figcaption>320px</figcaption>
+    </figure>
+  
+        
+    <figure>
+      <img src="../screenshots/v0-28-4-word-wrap/layers-390.png" alt="layers at 390px">
+      <figcaption>390px</figcaption>
+    </figure>
+  
+      </div>
+    </section>
+  
+    <section class="shot-card">
+      <h2>Hidden States</h2>
+      <div class="shot-grid">
+        
+    <figure>
+      <img src="../screenshots/v0-28-4-word-wrap/hidden-states-320.png" alt="hidden-states at 320px">
+      <figcaption>320px</figcaption>
+    </figure>
+  
+        
+    <figure>
+      <img src="../screenshots/v0-28-4-word-wrap/hidden-states-390.png" alt="hidden-states at 390px">
+      <figcaption>390px</figcaption>
+    </figure>
+  
+      </div>
+    </section>
+  
+    <section class="shot-card">
+      <h2>Vectors</h2>
+      <div class="shot-grid">
+        
+    <figure>
+      <img src="../screenshots/v0-28-4-word-wrap/vectors-320.png" alt="vectors at 320px">
+      <figcaption>320px</figcaption>
+    </figure>
+  
+        
+    <figure>
+      <img src="../screenshots/v0-28-4-word-wrap/vectors-390.png" alt="vectors at 390px">
+      <figcaption>390px</figcaption>
+    </figure>
+  
+      </div>
+    </section>
+  
+    <section class="shot-card">
+      <h2>Tensors</h2>
+      <div class="shot-grid">
+        
+    <figure>
+      <img src="../screenshots/v0-28-4-word-wrap/tensors-320.png" alt="tensors at 320px">
+      <figcaption>320px</figcaption>
+    </figure>
+  
+        
+    <figure>
+      <img src="../screenshots/v0-28-4-word-wrap/tensors-390.png" alt="tensors at 390px">
+      <figcaption>390px</figcaption>
+    </figure>
+  
+      </div>
+    </section>
+  
+    <section class="shot-card">
+      <h2>Context Window</h2>
+      <div class="shot-grid">
+        
+    <figure>
+      <img src="../screenshots/v0-28-4-word-wrap/context-window-320.png" alt="context-window at 320px">
+      <figcaption>320px</figcaption>
+    </figure>
+  
+        
+    <figure>
+      <img src="../screenshots/v0-28-4-word-wrap/context-window-390.png" alt="context-window at 390px">
+      <figcaption>390px</figcaption>
+    </figure>
+  
+      </div>
+    </section>
+  
+    <section class="shot-card">
+      <h2>Model Literate Synthesis</h2>
+      <div class="shot-grid">
+        
+    <figure>
+      <img src="../screenshots/v0-28-4-word-wrap/synthesis-map-compass-lantern-320.png" alt="synthesis-map-compass-lantern at 320px">
+      <figcaption>320px</figcaption>
+    </figure>
+  
+        
+    <figure>
+      <img src="../screenshots/v0-28-4-word-wrap/synthesis-map-compass-lantern-390.png" alt="synthesis-map-compass-lantern at 390px">
+      <figcaption>390px</figcaption>
+    </figure>
+  
+      </div>
+    </section>
+  
+  </section>
+</body>
+</html>

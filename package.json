@@ -1,6 +1,6 @@
 {
   "name": "promptlife",
-  "version": "0.28.2",
+  "version": "0.28.7",
   "private": true,
   "type": "module",
   "scripts": {
@@ -13,9 +13,11 @@
     "audit:question-clues": "node scripts/audit-question-clues.mjs",
     "audit:learner-copy": "node scripts/audit-learner-copy.mjs",
     "audit:language": "node scripts/audit-language.mjs",
-    "audit:visual-aids": "node scripts/audit-visual-aids.mjs",
+    "audit:visual-aids": "node scripts/audit-visual-aids.mjs && node scripts/audit-word-wrap.mjs",
+    "audit:visual-assets": "node scripts/audit-visual-assets.mjs",
     "audit:visual-overflow": "node scripts/audit-visual-overflow.mjs",
     "audit:exercises": "node scripts/audit-exercises.mjs",
+    "audit:word-wrap": "node scripts/audit-word-wrap.mjs",
     "preview": "vite preview --host 0.0.0.0",
     "export:lesson-pdf": "node scripts/export-lesson-pdf.mjs",
     "export:lesson-cards": "PROMPTLIFE_PDF_OUT=docs/content-inventory/prompt-life-lesson-cards-v0-9-3-visual-system.pdf node scripts/export-lesson-pdf.mjs"

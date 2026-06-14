@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Prompt Life v0.28.6 Visual Asset Intake Report</title>
+  <style>
+    :root {
+      color: #07124a;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      word-break: normal;
+      overflow-wrap: normal;
+      hyphens: none;
+    }
+    body { margin: 0; padding: 32px; background: #f7fbff; }
+    h1 { margin: 0 0 8px; font-size: 30px; line-height: 1.05; }
+    h2 { margin: 0 0 12px; font-size: 18px; }
+    p, li { line-height: 1.45; }
+    .lede { max-width: 840px; color: #29385f; }
+    .metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin: 18px 0; }
+    .metric, .panel, table {
+      background: white;
+      border: 1px solid #cfd8ef;
+      border-radius: 12px;
+      box-shadow: 0 10px 28px rgba(7, 18, 74, 0.08);
+    }
+    .metric { padding: 14px; }
+    .metric strong { display: block; font-size: 26px; }
+    .metric span { color: #009f9c; font-size: 11px; font-weight: 900; text-transform: uppercase; }
+    .panel { padding: 18px; margin: 18px 0; }
+    table { width: 100%; border-collapse: collapse; margin: 18px 0; overflow: hidden; }
+    th, td { vertical-align: top; padding: 10px; border-bottom: 1px solid #e1e7f6; font-size: 11px; line-height: 1.35; }
+    th { text-align: left; color: #009f9c; text-transform: uppercase; font-size: 9px; letter-spacing: 0.04em; }
+    code { color: #121e72; font-size: 10px; }
+    @media print {
+      body { padding: 20px; background: white; }
+      .panel, tr { break-inside: avoid; page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <h1>Prompt Life v0.28.6 Visual Asset Intake Report</h1>
+  <p class="lede">Generated 2026-06-14T03:21:22.838Z. This pass creates a safe intake system for future Journey Image 2 assets. No new images were generated and no current Journey visuals were replaced.</p>
+
+  <section class="metrics">
+    <div class="metric"><strong>12</strong><span>Manifest entries</span></div>
+    <div class="metric"><strong>12</strong><span>Pending assets</span></div>
+    <div class="metric"><strong>0</strong><span>Live assets</span></div>
+    <div class="metric"><strong>0</strong><span>Audit issues</span></div>
+  </section>
+
+  <section class="panel">
+    <h2>Intake System</h2>
+    <ul>
+      <li>Folder structure created under <code>public/assets/journey-visuals/v0-28/</code>.</li>
+      <li>Manifest created with pending Image 2 concept-card entries.</li>
+      <li>Renderer can keep coded visuals, render live manifest images, or show a clean pending placeholder.</li>
+      <li>Pending manifest entries do not replace current coded visuals.</li>
+      <li>Validation command: <code>npm run audit:visual-assets</code>.</li>
+    </ul>
+  </section>
+
+  <section class="panel">
+    <h2>Renderer Behavior</h2>
+    <ul>
+      <li><code>pending-asset</code>: current coded/generated visual remains active.</li>
+      <li><code>pending-placeholder</code>: learner sees “Visual update pending” with normal callouts below.</li>
+      <li><code>live</code>: manifest image renders from the optimized asset path and must pass thumbnail, text-verification, dimension, and file-size checks.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Manifest Entries</h2>
+    <table>
+      <thead>
+        <tr><th>Stage</th><th>Card</th><th>Status</th><th>Paths</th><th>Alt</th><th>Caption</th><th>Audit</th></tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>1</td>
+        <td><strong>What Is an LLM?</strong><br><code>what-is-llm</code></td>
+        <td>pending-asset</td>
+        <td><code>/assets/journey-visuals/v0-28/optimized/what-is-an-llm.png</code><br><code>/assets/journey-visuals/v0-28/thumbnails/what-is-an-llm.png</code></td>
+        <td>A prompt ribbon enters a folded-paper model cloud and one response-token glow emerges.</td>
+        <td>A polished concept image will show a prompt entering a learned model space and one token emerging while the HTML callouts carry the exact mechanics.</td>
+        <td>ok</td>
+      </tr>
+    
+      <tr>
+        <td>1</td>
+        <td><strong>Pretraining</strong><br><code>pretraining</code></td>
+        <td>pending-asset</td>
+        <td><code>/assets/journey-visuals/v0-28/optimized/pretraining.png</code><br><code>/assets/journey-visuals/v0-28/thumbnails/pretraining.png</code></td>
+        <td>Many blank paper streams shape glowing model pattern layers before use.</td>
+        <td>A future concept image will show broad pattern learning from many examples without implying perfect source memory.</td>
+        <td>ok</td>
+      </tr>
+    
+      <tr>
+        <td>1</td>
+        <td><strong>Alignment</strong><br><code>alignment</code></td>
+        <td>pending-asset</td>
+        <td><code>/assets/journey-visuals/v0-28/optimized/alignment.png</code><br><code>/assets/journey-visuals/v0-28/thumbnails/alignment.png</code></td>
+        <td>Folded paths and light guardrails suggest behavior shaping without a conscious model.</td>
+        <td>A future concept image will show behavior shaping and guardrails while HTML keeps the conscience boundary explicit.</td>
+        <td>ok</td>
+      </tr>
+    
+      <tr>
+        <td>6</td>
+        <td><strong>Multimodal AI</strong><br><code>multimodal</code></td>
+        <td>pending-asset</td>
+        <td><code>/assets/journey-visuals/v0-28/optimized/multimodal-ai.png</code><br><code>/assets/journey-visuals/v0-28/thumbnails/multimodal-ai.png</code></td>
+        <td>Text, image, audio, and video-like paper forms flow into a shared representation field.</td>
+        <td>A future concept image will show multiple media types represented together without implying human sensation.</td>
+        <td>ok</td>
+      </tr>
+    
+      <tr>
+        <td>6</td>
+        <td><strong>The Perfect Storm</strong><br><code>perfect-storm</code></td>
+        <td>pending-asset</td>
+        <td><code>/assets/journey-visuals/v0-28/optimized/perfect-storm.png</code><br><code>/assets/journey-visuals/v0-28/thumbnails/perfect-storm.png</code></td>
+        <td>Several folded-paper streams converge into one modern capability cloud.</td>
+        <td>A future concept image will show convergence without placing all ingredient labels inside a cramped diagram.</td>
+        <td>ok</td>
+      </tr>
+    
+      <tr>
+        <td>7</td>
+        <td><strong>Collective Intelligence, Extracted</strong><br><code>collective-intelligence</code></td>
+        <td>pending-asset</td>
+        <td><code>/assets/journey-visuals/v0-28/optimized/collective-intelligence.png</code><br><code>/assets/journey-visuals/v0-28/thumbnails/collective-intelligence.png</code></td>
+        <td>Many blank human-created traces light a folded-paper lantern of learned patterns.</td>
+        <td>A future concept image will show human-created traces powering model patterns while provenance questions remain human.</td>
+        <td>ok</td>
+      </tr>
+    
+      <tr>
+        <td>7</td>
+        <td><strong>Costs We Must Count</strong><br><code>costs-we-must-count</code></td>
+        <td>pending-asset</td>
+        <td><code>/assets/journey-visuals/v0-28/optimized/costs-we-must-count.png</code><br><code>/assets/journey-visuals/v0-28/thumbnails/costs-we-must-count.png</code></td>
+        <td>A glowing answer card is connected to hidden infrastructure, labor, privacy, and governance shapes.</td>
+        <td>A future concept image will make hidden infrastructure and social costs visible without inventing metrics.</td>
+        <td>ok</td>
+      </tr>
+    
+      <tr>
+        <td>7</td>
+        <td><strong>Risk vs Myth</strong><br><code>risk-myth</code></td>
+        <td>pending-asset</td>
+        <td><code>/assets/journey-visuals/v0-28/optimized/risk-vs-myth.png</code><br><code>/assets/journey-visuals/v0-28/thumbnails/risk-vs-myth.png</code></td>
+        <td>A grounded review path sits beside fading myth shapes, suggesting practical risk literacy.</td>
+        <td>A future concept image will separate practical risk literacy from unsupported myths without fear-heavy imagery.</td>
+        <td>ok</td>
+      </tr>
+    
+      <tr>
+        <td>8</td>
+        <td><strong>Benefits Worth Taking Seriously</strong><br><code>benefits-worth-taking-seriously</code></td>
+        <td>pending-asset</td>
+        <td><code>/assets/journey-visuals/v0-28/optimized/benefits-worth-taking-seriously.png</code><br><code>/assets/journey-visuals/v0-28/thumbnails/benefits-worth-taking-seriously.png</code></td>
+        <td>A calm folded-paper tool garden shows useful AI supports with review lanterns.</td>
+        <td>A future concept image will show bounded, reviewed benefits without hype.</td>
+        <td>ok</td>
+      </tr>
+    
+      <tr>
+        <td>8</td>
+        <td><strong>Human-Centered AI</strong><br><code>human-centered-ai</code></td>
+        <td>pending-asset</td>
+        <td><code>/assets/journey-visuals/v0-28/optimized/human-centered-ai.png</code><br><code>/assets/journey-visuals/v0-28/thumbnails/human-centered-ai.png</code></td>
+        <td>Human-centered decision shapes surround a support card, with review and governance rails visible.</td>
+        <td>A future concept image will place dignity, human judgment, review, and governance ahead of automation.</td>
+        <td>ok</td>
+      </tr>
+    
+      <tr>
+        <td>8</td>
+        <td><strong>Better AI Is a Choice</strong><br><code>better-ai-choice</code></td>
+        <td>pending-asset</td>
+        <td><code>/assets/journey-visuals/v0-28/optimized/better-ai-choice.png</code><br><code>/assets/journey-visuals/v0-28/thumbnails/better-ai-choice.png</code></td>
+        <td>Folded paths and abstract levers suggest better AI as a human choice.</td>
+        <td>A future concept image will show better AI as a set of human design and governance choices, not destiny.</td>
+        <td>ok</td>
+      </tr>
+    
+      <tr>
+        <td>8</td>
+        <td><strong>Model Literate Synthesis</strong><br><code>model-literate-synthesis</code></td>
+        <td>pending-asset</td>
+        <td><code>/assets/journey-visuals/v0-28/optimized/model-literate-synthesis.png</code><br><code>/assets/journey-visuals/v0-28/thumbnails/model-literate-synthesis.png</code></td>
+        <td>A compass, lantern, and folded map integrate model mechanics, evidence checking, and human responsibility.</td>
+        <td>A future concept image will close the Journey with mechanics, evidence, and human responsibility while HTML callouts stay precise.</td>
+        <td>ok</td>
+      </tr>
+    </tbody>
+    </table>
+  </section>
+</body>
+</html>

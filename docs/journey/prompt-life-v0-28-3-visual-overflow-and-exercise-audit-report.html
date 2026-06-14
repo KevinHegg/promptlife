@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Prompt Life v0.28.3 Visual Overflow and Exercise Audit Report</title>
+  <style>
+    body { font-family: Inter, Arial, sans-serif; color: #07155f; margin: 36px; line-height: 1.5; }
+    h1, h2 { color: #101a7a; }
+    section { border: 1px solid #d8def0; border-radius: 10px; padding: 18px; margin-bottom: 18px; break-inside: avoid; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .metric { background: #f7fbff; border-radius: 8px; padding: 12px; }
+    ul { margin-top: 6px; }
+    .ok { color: #075f5e; font-weight: 700; }
+    .warn { color: #763300; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <h1>Prompt Life v0.28.3 Visual Overflow and Exercise Audit Report</h1>
+  <section>
+    <p><strong>Generated:</strong> 2026-06-14T21:26:36.561Z</p>
+    <p><strong>Readiness judgment:</strong> Ready for small human testing, with six P2 interactions to watch.</p>
+    <p><strong>Status:</strong> pass</p>
+  </section>
+  <section>
+    <h2>Visual Overflow</h2>
+    <div class="grid">
+      <div class="metric"><strong>Audit route</strong><br>learner Journey lesson route</div>
+      <div class="metric"><strong>Status</strong><br>pass</div>
+      <div class="metric"><strong>Visuals checked</strong><br>39</div>
+      <div class="metric"><strong>Visual row issues</strong><br>0</div>
+    </div>
+  </section>
+  <section>
+    <h2>Journey Exercises</h2>
+    <div class="grid">
+      <div class="metric"><strong>Total</strong><br>39</div>
+      <div class="metric"><strong>P0/P1/P2/P3</strong><br>P0 0, P1 0, P2 6, P3 33</div>
+      <div class="metric"><strong>Exercise issues</strong><br>0</div>
+      <div class="metric"><strong>Stages covered</strong><br>8</div>
+    </div>
+    <h3>Type Distribution</h3>
+    <ul><li>tap-step: 6</li><li>tap-reveal: 4</li><li>sort-buckets: 8</li><li>toggle-choice: 1</li><li>tap-choice: 3</li><li>label-pieces: 1</li><li>match-lookup: 1</li><li>tap-lookup: 1</li><li>toggle-view: 3</li><li>tap-axis: 1</li><li>connect-nodes: 2</li><li>tap-transform: 1</li><li>tap-stack: 1</li><li>tap-multiple: 3</li><li>tap-compare: 1</li><li>match-lanes: 1</li><li>order-sequence: 1</li></ul>
+  </section>
+  <section>
+    <h2>Fixed</h2>
+    <ul><li>Renamed the alignment exercise data item id from policy-filter to runtime-policy-filter while preserving the visible label &quot;policy filter&quot;; this removes a same-exercise id collision risk without changing learner copy.</li></ul>
+  </section>
+  <section>
+    <h2>Deferred</h2>
+    <ul>
+      <li>Six P2 interactions are kept for human testing because they are clear enough for now but need tester feedback on replay value or abstraction level.</li>
+      <li>No Journey exercise is recommended for immediate cut before small human testing.</li>
+      <li>No Journey exercise is recommended to move to Play in this pass; Play remains unchanged by requirement.</li>
+    </ul>
+  </section>
+</body>
+</html>
