@@ -1,0 +1,158 @@
+{
+  "version": "0.28.11",
+  "generatedAt": "2026-06-15T18:47:22.919Z",
+  "readiness": "ready for small human testing",
+  "watchItems": [
+    "What Is an LLM?",
+    "Vectors",
+    "Tensors",
+    "Sampling",
+    "Collective Intelligence, Extracted",
+    "Benefits Worth Taking Seriously",
+    "Model Literate Synthesis"
+  ],
+  "screenshots": [
+    {
+      "id": "home-390",
+      "label": "Home at 390px",
+      "selector": ".home-screen",
+      "screenshot": "screenshots/v0-28-11/home-390.png",
+      "pageHorizontalOverflow": 0,
+      "elementOverflowX": 0,
+      "navOverlap": false,
+      "text": "A DAY IN THE LIFE OF A PROMPTPrompt LifeDemystifying LLMs in the AI era through clear explanations, useful metaphors, and a little play.Current pathStart at the beginning0% complete. Next stop: What Is an LLM?0%Start journeyBig ideaAn LLM is not a mind, a database, or an unexplained shortcut. It is a learned prediction system that turns context into likely next tokens.View mapTry mini-gamesDefinitionsRelationshipsMetaphors"
+    },
+    {
+      "id": "journey-390",
+      "label": "Journey at 390px",
+      "selector": ".journey-screen",
+      "screenshot": "screenshots/v0-28-11/journey-390.png",
+      "pageHorizontalOverflow": 0,
+      "elementOverflowX": 0,
+      "navOverlap": false,
+      "text": "Main pathToday in Prompt LifeFollow one prompt from before training through inference, generation, and model literacy.Jump to a stage of the prompt’s day.1Before MorningModel shaped before use2Morning CommuteText becomes numbers3WorkdayLayers process context4Decision RoomOne token is chosen5Day RepeatsContext grows + expires6TwilightWider AI landscape7Midnight LedgerCosts and shadows8New DawnHuman centered AIAll stages follow one prompt through the full day: before training, through inference, generation, evidence, risks, costs, and better human use.1Before MorningThe model is shaped before your prompt arrives.The prompt has not arrived yet. The model is being shaped before ordinary use.FocusHow weights are shaped before ordinary use.Keep clearTraining changes weights; inference uses them.1What Is an LLM?A learned next-token prediction systemStart•2Where LLMs FitAI → machine learning → generative AI → LLMsPreview3Rationalists vs EmpiricistsRules versus learned patternsPreview4TrainingP"
+    },
+    {
+      "id": "journey-first-card-390",
+      "label": "Journey first card at 390px",
+      "selector": ".lesson-screen",
+      "screenshot": "screenshots/v0-28-11/journey-first-card-390.png",
+      "pageHorizontalOverflow": 0,
+      "elementOverflowX": 0,
+      "navOverlap": false,
+      "text": "Before Morning1 / 391Before Morning2Morning Commute3Workday4Decision Room5Day Repeats6Twilight7Midnight Ledger8New DawnWhat Is an LLM?A learned next-token prediction systemA large language model is a learned system that turns current context into probabilities for the next token.Visual aidWhat to pictureWhat Is an LLM?Score, choose, append, repeatAn LLM uses current context and learned weights to generate one response token at a time.Context enters The current prompt and response so far provide the visible input for this run.Weights shape scores Learned weights from training shape next-token scores without acting like a searchable database.Tokens emerge The response grows as one selected token is appended, then the model runs again.Key takeaway: An LLM turns context into next-token probabilities.Accessible description: A ribbon of context flows into a folded-paper model cloud, and glowing response-token shapes emerge one at a time.Key termsTap a term to open the glossary.LLMPromptRespo"
+    },
+    {
+      "id": "stage-1-image2-390",
+      "label": "Stage 1 Image 2 card at 390px",
+      "selector": ".visual-aid-panel",
+      "screenshot": "screenshots/v0-28-11/stage-1-image2-390.png",
+      "pageHorizontalOverflow": 0,
+      "elementOverflowX": 0,
+      "navOverlap": false,
+      "text": "Visual aidWhat to pictureWhat Is an LLM?Score, choose, append, repeatAn LLM uses current context and learned weights to generate one response token at a time.Context enters The current prompt and response so far provide the visible input for this run.Weights shape scores Learned weights from training shape next-token scores without acting like a searchable database.Tokens emerge The response grows as one selected token is appended, then the model runs again.Key takeaway: An LLM turns context into next-token probabilities.Accessible description: A ribbon of context flows into a folded-paper model cloud, and glowing response-token shapes emerge one at a time."
+    },
+    {
+      "id": "stage-7-image2-390",
+      "label": "Stage 7 Image 2 card at 390px",
+      "selector": ".visual-aid-panel",
+      "screenshot": "screenshots/v0-28-11/stage-7-image2-390.png",
+      "pageHorizontalOverflow": 0,
+      "elementOverflowX": 0,
+      "navOverlap": false,
+      "text": "Visual aidWhat to pictureCollective Intelligence, ExtractedNo creators, no modelHuman-created traces flow into learned model patterns while provenance and responsibility remain human questions.Human traces Writing, code, art, research, forums, and documentation can leave learnable traces.Collection questions Provenance, consent, copyright, attribution, and compensation matter.Model limit The model absorbs statistical patterns without responsibility.Key takeaway: The model did not create its abilities alone.Accessible description: Human-created documents, code, art, and media flow into a glowing folded-paper model shape, then into generated media traces."
+    },
+    {
+      "id": "exercise-context-window-390",
+      "label": "Try Interaction at 390px",
+      "selector": ".interaction-card",
+      "screenshot": "screenshots/v0-28-11/exercise-context-window-390.png",
+      "pageHorizontalOverflow": 0,
+      "elementOverflowX": 0,
+      "navOverlap": false,
+      "text": "Try interactionPush the context itemsFour-slot context windowemptyemptyemptyemptyFell outnothing yetPush: Old messagePush items into the tray. When the fifth item enters, the oldest one falls out.Tap items into a four-slot window and watch the oldest item fall out."
+    },
+    {
+      "id": "checkpoint-wrong-no-reveal-390",
+      "label": "Checkpoint wrong-answer no-reveal at 390px",
+      "selector": ".quiz-card",
+      "screenshot": "screenshots/v0-28-11/checkpoint-wrong-no-reveal-390.png",
+      "pageHorizontalOverflow": 0,
+      "elementOverflowX": 0,
+      "navOverlap": false,
+      "text": "Checkpoint1 of 2 questionsWhen an LLM answers a prompt by generating one token at a time, what is the model doing at each step?AIt reads with conscious understanding, then writes the whole answer at once.BIt changes its weights each time the user sends a new prompt.CIt searches a hidden database and copies the best matching passage.DIt scores next tokens from context, appends one, and repeats. Not quite. That gives the model too much mind. Fluent behavior can happen without awareness. Try another choice."
+    },
+    {
+      "id": "checkpoint-sequence-390",
+      "label": "Checkpoint multi-question sequence at 390px",
+      "selector": ".quiz-card",
+      "screenshot": "screenshots/v0-28-11/checkpoint-sequence-390.png",
+      "pageHorizontalOverflow": 0,
+      "elementOverflowX": 0,
+      "navOverlap": false,
+      "text": "Checkpoint2 of 2 questionsPrevious questionFinal questionAn LLM gives a fluent explanation of a poem. What should a model-literate learner conclude?AIt must have found a hidden perfect source and copied the interpretation.BIt generated tokens from context and learned patterns; fluency is not awareness.CThe poem prompt permanently taught the base model a new skill.DIt must have inner awareness because the explanation sounds human."
+    },
+    {
+      "id": "glossary-390",
+      "label": "Glossary at 390px",
+      "selector": ".glossary-screen",
+      "screenshot": "screenshots/v0-28-11/glossary-390.png",
+      "pageHorizontalOverflow": 0,
+      "elementOverflowX": 0,
+      "navOverlap": false,
+      "text": "Definitions plus relationshipsGlossaryUse each term with its neighbor. That is where the mental model gets stable.Practice modeGlossary DojoPractice twelve terms through definitions, relationships, and common mix-ups.Practice 12 termsSearch termsSort glossary termsA-ZLearning pathFind terms alphabetically.AccessibilityDesigning tools and materials so more people can perceive, understand, navigate, and participate.AI can support accessibility through drafting, summarization, translation, captioning, alternate formats, and assistive workflows when reviewed carefully.AccountabilityClear responsibility for decisions, harms, corrections, and oversight around an AI system.Accountability keeps people and institutions responsible even when AI helps produce an output.ActivationA temporary numerical value or pattern produced inside the model during a forward pass.Hidden states and many intermediate tensors are activation data during inference.AdapterA smaller set of trained parameters added to o"
+    },
+    {
+      "id": "play-390",
+      "label": "Play at 390px",
+      "selector": ".play-screen",
+      "screenshot": "screenshots/v0-28-11/play-390.png",
+      "pageHorizontalOverflow": 0,
+      "elementOverflowX": 0,
+      "navOverlap": false,
+      "text": "PLAY LABPlay to learnShort, calm challenges that make model mechanics visible.Progress saved on this device. 0 of 5 practice challenges show saved completion or review progress.Each challenge practices one model-literacy move.More belowPlay challengesSuggested order follows the Journey.Glossary DojoReadyPractice concept discrimination.Practice move: Name conceptsRecommended: AnytimeAnytimeGlossaryLearning cards: All learning cardsAction: Choose, compare, review.Time: 4 minPlayed: 0Progress: Not startedPractice termsAttention MatchReadyConnect a token to what it depends on.Practice move: Connect token cluesRecommended: After Stage 3 · WorkdayStage 3WorkdayLearning cards: AttentionAction: Connect relevant tokens.Time: 3 minPlayed: 0Progress: Not startedOpen matchProbability PickerReadyExplore probability-shaped next-token choices.Practice move: Choose likely next tokensRecommended: After Stage 4 · Decision RoomStage 4Decision RoomLearning cards: Logits, Softmax, SamplingAction: Choose on"
+    },
+    {
+      "id": "badge-390",
+      "label": "Badge at 390px",
+      "selector": ".badge-screen",
+      "screenshot": "screenshots/v0-28-11/badge-390.png",
+      "pageHorizontalOverflow": 0,
+      "elementOverflowX": 0,
+      "navOverlap": false,
+      "text": "BadgePrompt Life: Model LiterateUnder construction while the evidence model is reviewed.Under constructionPending human reviewPrompt Life: Model Literate is under construction. The Journey, checkpoint questions, and evidence model are being tested before any badge is issued.Your progress below is practice evidence, not an issued credential.Issue statusNot yet issuedHuman review statusPendingPractice evidence dashboardEvidence collected on this device0of 39Journey learning cards completed0of 8Stages completed0of 5Play challenges completed or reviewed0of 13Prompt Run steps saved--of 136Checkpoint questions masteredCheckpoint mastery tracking is being refined.Pendinghuman reviewBadge review status0saved attemptsOptional practice history0reflectionsReflection notes savedNo saved activity yetlast activityLatest saved Play activityLearning objectives in progressEvidence mapModel basicsNot startedDistinguish LLMs from the wider AI family, products, databases, and minds.0 of 3 related cardsBef"
+    }
+  ],
+  "checks": [
+    {
+      "name": "stage navigation links",
+      "status": "pass",
+      "detail": "8 stage buttons; horizontal overflow 0px."
+    },
+    {
+      "name": "checkpoint wrong-answer no-reveal",
+      "status": "pass",
+      "detail": "Wrong choice showed targeted feedback and did not reveal the correct answer."
+    },
+    {
+      "name": "checkpoint multi-question sequence",
+      "status": "pass",
+      "detail": "Before: 1 of 2 questions; after: 2 of 2 questions."
+    },
+    {
+      "name": "badge status language",
+      "status": "pass",
+      "detail": "Badge page checked for under construction, pending human review, and not issued language."
+    },
+    {
+      "name": "rendered process-language scan",
+      "status": "pass",
+      "detail": "No Tiny Interaction, magic, debug notes, placeholder asset text, or process-language leaks in captured learner screens."
+    },
+    {
+      "name": "390px overflow and bottom nav",
+      "status": "pass",
+      "detail": "No horizontal overflow or bottom-nav coverage found in captured 390px screens."
+    }
+  ]
+}

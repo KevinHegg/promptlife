@@ -1,0 +1,1132 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Prompt Life v0.28.10 Journey Exercise Review</title>
+  <style>
+    body { font-family: Inter, Arial, sans-serif; color: #07155f; margin: 32px; line-height: 1.45; }
+    h1, h2, h3 { color: #101a7a; }
+    .summary, .card { border: 1px solid #d8def0; border-radius: 10px; padding: 16px; margin: 0 0 18px; break-inside: avoid; }
+    .pill { display: inline-block; border: 1px solid #cfd8ff; border-radius: 999px; padding: 2px 8px; margin: 2px; font-size: 12px; font-weight: 800; }
+    .pass { color: #075f5e; font-weight: 700; }
+    .issue { color: #763300; background: #fff3df; padding: 8px; border-radius: 8px; }
+    .fix { color: #075f5e; background: #e9fffb; padding: 8px; border-radius: 8px; }
+    .watch { color: #4a3b00; background: #fff8d7; padding: 8px; border-radius: 8px; }
+    .shots { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    figure { margin: 0; }
+    img { width: 100%; max-height: 340px; object-fit: contain; border: 1px solid #d8def0; border-radius: 8px; background: #f8fbff; }
+    table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    th, td { border-bottom: 1px solid #d8def0; padding: 6px; text-align: left; vertical-align: top; }
+  </style>
+</head>
+<body>
+  <h1>Prompt Life v0.28.10 Journey Exercise Review</h1>
+  <section class="summary">
+    <p><strong>Generated:</strong> 2026-06-15T18:46:21.572Z</p>
+    <p><strong>Readiness judgment:</strong> ready for small human testing</p>
+    <p><strong>Exercises inventoried:</strong> 39</p>
+    <p><strong>Type distribution:</strong> tap-to-cycle: 11, sort / group: 8, comparison toggle: 5, single choice: 4, token labeling: 3, connect node: 2, ordered sequence: 2, card stack / tray: 1, mixed / other: 1, multi-select: 2</p>
+    <p><strong>Priority before:</strong> P0: 0, P1: 11, P2: 5, P3: 23</p>
+    <p><strong>Priority after:</strong> P0: 0, P1: 0, P2: 7, P3: 32</p>
+    <p><strong>Recommendation counts:</strong> keep: 39</p>
+    <p><strong>Visual overflow status:</strong> pass</p>
+    <p><strong>Fixed in this pass:</strong> Changed ambiguous “card” wording to “item” in the Journey copy and live context-tray feedback. Added explicit “Choose all” language for the multi-select governance levers. Added explicit “Choose all” language for the multi-select prompt-part picker. Changed shared sort feedback from “cards” to “items” so sort/group interactions do not sound like Journey-card navigation.</p>
+  </section>
+  <section class="summary">
+    <h2>Top 10 Exercise Issues / Watch Items</h2>
+    <ol><li>What Is an LLM?: watch with testers for clarity/redundancy.</li><li>Vectors: watch with testers for clarity/redundancy.</li><li>Tensors: watch with testers for clarity/redundancy.</li><li>Sampling: watch with testers for clarity/redundancy.</li><li>Collective Intelligence, Extracted: watch with testers for clarity/redundancy.</li><li>Benefits Worth Taking Seriously: watch with testers for clarity/redundancy.</li><li>Model Literate Synthesis: watch with testers for clarity/redundancy.</li></ol>
+  </section>
+  
+    <section class="card">
+      <h3>1. What Is an LLM?</h3>
+      <p><strong>Stage:</strong> Before Morning</p>
+      <p><strong>Learning objective:</strong> A large language model is a learned system that turns current context into probabilities for the next token. Practice boundary: An LLM is a conscious reader or a database.</p>
+      <p><strong>Exercise:</strong> Tap through one prompt <span class="pill">tap-to-cycle</span> <span class="pill">before P2</span> <span class="pill">after P2</span></p>
+      <p><strong>Prompt:</strong> Context enters, a next-token cloud appears, floor is chosen, then the appended response becomes the next context.</p>
+      <p><strong>Expected action:</strong> Tap through context, next-token cloud, chosen token, and updated context.</p>
+      <p><strong>Items / choices / nodes / steps:</strong> context enters | next-token cloud | chosen token | updated context</p>
+      <p><strong>Target behavior:</strong> Finish the prompt-to-next-context sequence.</p>
+      <p><strong>Feedback behavior:</strong> Step-specific insight text appears after each tap.</p>
+      <p><strong>Progress behavior:</strong> No. Journey progress is stored after checkpoint/reflection flow, not by the micro-interaction.</p>
+      <p><strong>Randomization:</strong> No. Exercise controls use fixed order; checkpoint answers remain randomized elsewhere.</p>
+      <p><strong>Fixed order:</strong> The prompt life-cycle sequence matters.</p>
+      <p><strong>Objective support:</strong> Yes. It practices the lesson mechanism or misconception boundary.</p>
+      <p><strong>Checkpoint duplicate:</strong> No. It gives practice or reveal before checkpoint reasoning.</p>
+      <p><strong>Visual duplicate:</strong> Watch during human testing; it may reinforce the visual closely.</p>
+      <p><strong>Mobile notes:</strong> 320px no horizontal overflow; 390px no horizontal overflow; bottom nav does not cover controls after scroll</p>
+      <p><strong>Rubric average:</strong> 4.1/5</p>
+      
+      <p class="pass">No P0/P1 issue remains.</p>
+      <p class="watch"><strong>Human-test watch:</strong> Watch in human testing for abstraction level, redundancy, or replay value.</p>
+      <div class="shots">
+        <figure><img src="screenshots/v0-28-10/1-what-is-llm-320.png" alt="320px interaction screenshot for What Is an LLM?"><figcaption>320px</figcaption></figure>
+        <figure><img src="screenshots/v0-28-10/1-what-is-llm-390.png" alt="390px interaction screenshot for What Is an LLM?"><figcaption>390px</figcaption></figure>
+      </div>
+    </section>
+  
+
+    <section class="card">
+      <h3>2. Where LLMs Fit</h3>
+      <p><strong>Stage:</strong> Before Morning</p>
+      <p><strong>Learning objective:</strong> A large language model is one kind of generative AI system, built with deep-learning methods inside the broader field of artificial intelligence. Practice boundary: All AI is an LLM, or all generative AI works like ChatGPT.</p>
+      <p><strong>Exercise:</strong> Tap a branch <span class="pill">tap-to-cycle</span> <span class="pill">before P3</span> <span class="pill">after P3</span></p>
+      <p><strong>Prompt:</strong> Reveal what each branch means in the AI family tree.</p>
+      <p><strong>Expected action:</strong> Tap branches in the AI family tree.</p>
+      <p><strong>Items / choices / nodes / steps:</strong> AI | machine learning | deep learning | generative AI | LLMs | diffusion | multimodal</p>
+      <p><strong>Target behavior:</strong> Reveal at least one branch explanation.</p>
+      <p><strong>Feedback behavior:</strong> Branch-specific one-sentence explanation.</p>
+      <p><strong>Progress behavior:</strong> No. Journey progress is stored after checkpoint/reflection flow, not by the micro-interaction.</p>
+      <p><strong>Randomization:</strong> No. Exercise controls use fixed order; checkpoint answers remain randomized elsewhere.</p>
+      <p><strong>Fixed order:</strong> Branches preserve the family-tree structure.</p>
+      <p><strong>Objective support:</strong> Yes. It practices the lesson mechanism or misconception boundary.</p>
+      <p><strong>Checkpoint duplicate:</strong> No. It gives practice or reveal before checkpoint reasoning.</p>
+      <p><strong>Visual duplicate:</strong> No serious duplicate; it adds a learner action.</p>
+      <p><strong>Mobile notes:</strong> 320px no horizontal overflow; 390px no horizontal overflow; bottom nav does not cover controls after scroll</p>
+      <p><strong>Rubric average:</strong> 4.8/5</p>
+      
+      <p class="pass">No P0/P1 issue remains.</p>
+      
+      <div class="shots">
+        <figure><img src="screenshots/v0-28-10/2-where-llms-fit-320.png" alt="320px interaction screenshot for Where LLMs Fit"><figcaption>320px</figcaption></figure>
+        <figure><img src="screenshots/v0-28-10/2-where-llms-fit-390.png" alt="390px interaction screenshot for Where LLMs Fit"><figcaption>390px</figcaption></figure>
+      </div>
+    </section>
+  
+
+    <section class="card">
+      <h3>3. Rationalists vs Empiricists</h3>
+      <p><strong>Stage:</strong> Before Morning</p>
+      <p><strong>Learning objective:</strong> Symbolic AI tries to reason with explicit rules and symbols; deep learning learns useful patterns from data by adjusting weights. Practice boundary: LLMs are hand-coded rulebooks, or symbolic AI is obsolete.</p>
+      <p><strong>Exercise:</strong> Sort rules and patterns <span class="pill">sort / group</span> <span class="pill">before P1</span> <span class="pill">after P3</span></p>
+      <p><strong>Prompt:</strong> Some ingredients are explicit rules, some are learned patterns, and many real systems combine both.</p>
+      <p><strong>Expected action:</strong> Tap each item to place it in rules, learned patterns, or hybrid systems.</p>
+      <p><strong>Items / choices / nodes / steps:</strong> explicit rule | learned weights | retrieval wrapper | policy filter</p>
+      <p><strong>Target behavior:</strong> All items land in the best group.</p>
+      <p><strong>Feedback behavior:</strong> Correctness highlighting plus summary insight.</p>
+      <p><strong>Progress behavior:</strong> No. Journey progress is stored after checkpoint/reflection flow, not by the micro-interaction.</p>
+      <p><strong>Randomization:</strong> No. Exercise controls use fixed order; checkpoint answers remain randomized elsewhere.</p>
+      <p><strong>Fixed order:</strong> Fixed items keep the rules-versus-patterns contrast compact.</p>
+      <p><strong>Objective support:</strong> Yes. It practices the lesson mechanism or misconception boundary.</p>
+      <p><strong>Checkpoint duplicate:</strong> No. It gives practice or reveal before checkpoint reasoning.</p>
+      <p><strong>Visual duplicate:</strong> No serious duplicate; it adds a learner action.</p>
+      <p><strong>Mobile notes:</strong> 320px no horizontal overflow; 390px no horizontal overflow; bottom nav does not cover controls after scroll</p>
+      <p><strong>Rubric average:</strong> 4.7/5</p>
+      <p class="fix"><strong>Fixed:</strong> Changed shared sort feedback from “cards” to “items” so sort/group interactions do not sound like Journey-card navigation.</p>
+      <p class="pass">No P0/P1 issue remains.</p>
+      
+      <div class="shots">
+        <figure><img src="screenshots/v0-28-10/3-history-320.png" alt="320px interaction screenshot for Rationalists vs Empiricists"><figcaption>320px</figcaption></figure>
+        <figure><img src="screenshots/v0-28-10/3-history-390.png" alt="390px interaction screenshot for Rationalists vs Empiricists"><figcaption>390px</figcaption></figure>
+      </div>
+    </section>
+  
+
+    <section class="card">
+      <h3>4. Training</h3>
+      <p><strong>Stage:</strong> Before Morning</p>
+      <p><strong>Learning objective:</strong> Training is the process that adjusts model weights by comparing predictions with target answers, such as actual next tokens. Practice boundary: When I chat with the model, it automatically trains itself.</p>
+      <p><strong>Exercise:</strong> Tap through the training loop <span class="pill">tap-to-cycle</span> <span class="pill">before P3</span> <span class="pill">after P3</span></p>
+      <p><strong>Prompt:</strong> Predict, compare, loss, update weights. The update is the durable learning step.</p>
+      <p><strong>Expected action:</strong> Tap through the training loop.</p>
+      <p><strong>Items / choices / nodes / steps:</strong> predict | compare | loss | update weights</p>
+      <p><strong>Target behavior:</strong> Reach the durable update step.</p>
+      <p><strong>Feedback behavior:</strong> Durable-update explanation.</p>
+      <p><strong>Progress behavior:</strong> No. Journey progress is stored after checkpoint/reflection flow, not by the micro-interaction.</p>
+      <p><strong>Randomization:</strong> No. Exercise controls use fixed order; checkpoint answers remain randomized elsewhere.</p>
+      <p><strong>Fixed order:</strong> Training order is the mechanism being taught.</p>
+      <p><strong>Objective support:</strong> Yes. It practices the lesson mechanism or misconception boundary.</p>
+      <p><strong>Checkpoint duplicate:</strong> No. It gives practice or reveal before checkpoint reasoning.</p>
+      <p><strong>Visual duplicate:</strong> No serious duplicate; it adds a learner action.</p>
+      <p><strong>Mobile notes:</strong> 320px no horizontal overflow; 390px no horizontal overflow; bottom nav does not cover controls after scroll</p>
+      <p><strong>Rubric average:</strong> 4.8/5</p>
+      
+      <p class="pass">No P0/P1 issue remains.</p>
+      
+      <div class="shots">
+        <figure><img src="screenshots/v0-28-10/4-training-320.png" alt="320px interaction screenshot for Training"><figcaption>320px</figcaption></figure>
+        <figure><img src="screenshots/v0-28-10/4-training-390.png" alt="390px interaction screenshot for Training"><figcaption>390px</figcaption></figure>
+      </div>
+    </section>
+  
+
+    <section class="card">
+      <h3>5. Pretraining</h3>
+      <p><strong>Stage:</strong> Before Morning</p>
+      <p><strong>Learning objective:</strong> Pretraining is the broad first training phase where a model learns general patterns by repeatedly predicting tokens across large datasets. Practice boundary: Pretraining means the model can perfectly recall everything it saw.</p>
+      <p><strong>Exercise:</strong> Pattern learning or recall? <span class="pill">comparison toggle</span> <span class="pill">before P3</span> <span class="pill">after P3</span></p>
+      <p><strong>Prompt:</strong> Pretraining is broad durable pattern learning, not a perfect memory of every source.</p>
+      <p><strong>Expected action:</strong> Toggle between broad pattern learning and perfect recall.</p>
+      <p><strong>Items / choices / nodes / steps:</strong> broad pattern learning | perfect recall</p>
+      <p><strong>Target behavior:</strong> Choose broad pattern learning.</p>
+      <p><strong>Feedback behavior:</strong> Boundary feedback against the perfect-memory myth.</p>
+      <p><strong>Progress behavior:</strong> No. Journey progress is stored after checkpoint/reflection flow, not by the micro-interaction.</p>
+      <p><strong>Randomization:</strong> No. Exercise controls use fixed order; checkpoint answers remain randomized elsewhere.</p>
+      <p><strong>Fixed order:</strong> Two stable states make the misconception boundary explicit.</p>
+      <p><strong>Objective support:</strong> Yes. It practices the lesson mechanism or misconception boundary.</p>
+      <p><strong>Checkpoint duplicate:</strong> No. It gives practice or reveal before checkpoint reasoning.</p>
+      <p><strong>Visual duplicate:</strong> No serious duplicate; it adds a learner action.</p>
+      <p><strong>Mobile notes:</strong> 320px no horizontal overflow; 390px no horizontal overflow; bottom nav does not cover controls after scroll</p>
+      <p><strong>Rubric average:</strong> 4.9/5</p>
+      
+      <p class="pass">No P0/P1 issue remains.</p>
+      
+      <div class="shots">
+        <figure><img src="screenshots/v0-28-10/5-pretraining-320.png" alt="320px interaction screenshot for Pretraining"><figcaption>320px</figcaption></figure>
+        <figure><img src="screenshots/v0-28-10/5-pretraining-390.png" alt="390px interaction screenshot for Pretraining"><figcaption>390px</figcaption></figure>
+      </div>
+    </section>
+  
+
+    <section class="card">
+      <h3>6. Overfitting and Generalization</h3>
+      <p><strong>Stage:</strong> Before Morning</p>
+      <p><strong>Learning objective:</strong> Overfitting happens when a model learns training examples too narrowly and performs poorly on new examples; generalization means learned patterns work beyond the examples seen during training. Practice boundary: If a model performs well on training data, it has learned well.</p>
+      <p><strong>Exercise:</strong> Choose the better curve <span class="pill">single choice</span> <span class="pill">before P3</span> <span class="pill">after P3</span></p>
+      <p><strong>Prompt:</strong> The smoother curve may miss a few old dots, but it carries the pattern to validation examples not used in training.</p>
+      <p><strong>Expected action:</strong> Choose the curve that generalizes better.</p>
+      <p><strong>Items / choices / nodes / steps:</strong> training-perfect curve | smoother validation-aware curve</p>
+      <p><strong>Target behavior:</strong> Select the smoother curve.</p>
+      <p><strong>Feedback behavior:</strong> Validation-example feedback.</p>
+      <p><strong>Progress behavior:</strong> No. Journey progress is stored after checkpoint/reflection flow, not by the micro-interaction.</p>
+      <p><strong>Randomization:</strong> No. Exercise controls use fixed order; checkpoint answers remain randomized elsewhere.</p>
+      <p><strong>Fixed order:</strong> The side-by-side comparison is spatial.</p>
+      <p><strong>Objective support:</strong> Yes. It practices the lesson mechanism or misconception boundary.</p>
+      <p><strong>Checkpoint duplicate:</strong> Partial risk: watch during human testing so it does not feel like a second checkpoint.</p>
+      <p><strong>Visual duplicate:</strong> No serious duplicate; it adds a learner action.</p>
+      <p><strong>Mobile notes:</strong> 320px no horizontal overflow; 390px no horizontal overflow; bottom nav does not cover controls after scroll</p>
+      <p><strong>Rubric average:</strong> 4.8/5</p>
+      
+      <p class="pass">No P0/P1 issue remains.</p>
+      
+      <div class="shots">
+        <figure><img src="screenshots/v0-28-10/6-overfitting-generalization-320.png" alt="320px interaction screenshot for Overfitting and Generalization"><figcaption>320px</figcaption></figure>
+        <figure><img src="screenshots/v0-28-10/6-overfitting-generalization-390.png" alt="390px interaction screenshot for Overfitting and Generalization"><figcaption>390px</figcaption></figure>
+      </div>
+    </section>
+  
+
+    <section class="card">
+      <h3>7. Fine-Tuning</h3>
+      <p><strong>Stage:</strong> Before Morning</p>
+      <p><strong>Learning objective:</strong> Fine-tuning is additional training that adapts a pretrained model toward a task, domain, style, or preference. Practice boundary: Prompting once is the same as fine-tuning.</p>
+      <p><strong>Exercise:</strong> Sort the steering moves <span class="pill">sort / group</span> <span class="pill">before P1</span> <span class="pill">after P3</span></p>
+      <p><strong>Prompt:</strong> Fine-tuning is durable training. Prompting and RAG steer the current run. Sampling chooses the next token.</p>
+      <p><strong>Expected action:</strong> Sort durable training, temporary context, and decoding moves.</p>
+      <p><strong>Items / choices / nodes / steps:</strong> fine-tuning | prompting | RAG | sampling</p>
+      <p><strong>Target behavior:</strong> Each steering move is assigned to the right change type.</p>
+      <p><strong>Feedback behavior:</strong> Bucket-specific correction.</p>
+      <p><strong>Progress behavior:</strong> No. Journey progress is stored after checkpoint/reflection flow, not by the micro-interaction.</p>
+      <p><strong>Randomization:</strong> No. Exercise controls use fixed order; checkpoint answers remain randomized elsewhere.</p>
+      <p><strong>Fixed order:</strong> Stable ordering keeps nearby terms comparable.</p>
+      <p><strong>Objective support:</strong> Yes. It practices the lesson mechanism or misconception boundary.</p>
+      <p><strong>Checkpoint duplicate:</strong> No. It gives practice or reveal before checkpoint reasoning.</p>
+      <p><strong>Visual duplicate:</strong> No serious duplicate; it adds a learner action.</p>
+      <p><strong>Mobile notes:</strong> 320px no horizontal overflow; 390px no horizontal overflow; bottom nav does not cover controls after scroll</p>
+      <p><strong>Rubric average:</strong> 4.7/5</p>
+      <p class="fix"><strong>Fixed:</strong> Changed shared sort feedback from “cards” to “items” so sort/group interactions do not sound like Journey-card navigation.</p>
+      <p class="pass">No P0/P1 issue remains.</p>
+      
+      <div class="shots">
+        <figure><img src="screenshots/v0-28-10/7-fine-tuning-320.png" alt="320px interaction screenshot for Fine-Tuning"><figcaption>320px</figcaption></figure>
+        <figure><img src="screenshots/v0-28-10/7-fine-tuning-390.png" alt="390px interaction screenshot for Fine-Tuning"><figcaption>390px</figcaption></figure>
+      </div>
+    </section>
+  
+
+    <section class="card">
+      <h3>8. Alignment</h3>
+      <p><strong>Stage:</strong> Before Morning</p>
+      <p><strong>Learning objective:</strong> Alignment is the effort to shape AI behavior toward human instructions, preferences, safety boundaries, and values. Practice boundary: Aligned means morally good or fully trustworthy.</p>
+      <p><strong>Exercise:</strong> Group the alignment methods <span class="pill">sort / group</span> <span class="pill">before P1</span> <span class="pill">after P3</span></p>
+      <p><strong>Prompt:</strong> Alignment can use durable shaping, runtime steering, and evaluation. It shapes behavior, not moral agency.</p>
+      <p><strong>Expected action:</strong> Group alignment methods by durable shaping, runtime steering, and evaluation.</p>
+      <p><strong>Items / choices / nodes / steps:</strong> instruction tuning | system prompt | policy filter | safety test</p>
+      <p><strong>Target behavior:</strong> Each method is assigned to its mechanism group.</p>
+      <p><strong>Feedback behavior:</strong> Method-group summary.</p>
+      <p><strong>Progress behavior:</strong> No. Journey progress is stored after checkpoint/reflection flow, not by the micro-interaction.</p>
+      <p><strong>Randomization:</strong> No. Exercise controls use fixed order; checkpoint answers remain randomized elsewhere.</p>
+      <p><strong>Fixed order:</strong> Stable group labels preserve the boundary.</p>
+      <p><strong>Objective support:</strong> Yes. It practices the lesson mechanism or misconception boundary.</p>
+      <p><strong>Checkpoint duplicate:</strong> No. It gives practice or reveal before checkpoint reasoning.</p>
+      <p><strong>Visual duplicate:</strong> No serious duplicate; it adds a learner action.</p>
+      <p><strong>Mobile notes:</strong> 320px no horizontal overflow; 390px no horizontal overflow; bottom nav does not cover controls after scroll</p>
+      <p><strong>Rubric average:</strong> 4.7/5</p>
+      <p class="fix"><strong>Fixed:</strong> Changed shared sort feedback from “cards” to “items” so sort/group interactions do not sound like Journey-card navigation.</p>
+      <p class="pass">No P0/P1 issue remains.</p>
+      
+      <div class="shots">
+        <figure><img src="screenshots/v0-28-10/8-alignment-320.png" alt="320px interaction screenshot for Alignment"><figcaption>320px</figcaption></figure>
+        <figure><img src="screenshots/v0-28-10/8-alignment-390.png" alt="390px interaction screenshot for Alignment"><figcaption>390px</figcaption></figure>
+      </div>
+    </section>
+  
+
+    <section class="card">
+      <h3>9. Inference</h3>
+      <p><strong>Stage:</strong> Morning Commute</p>
+      <p><strong>Learning objective:</strong> Inference is normal model use: fixed learned weights process the current context to produce scores for the next response token. Practice boundary: Normal chat automatically trains the model.</p>
+      <p><strong>Exercise:</strong> Walk the forward pass <span class="pill">tap-to-cycle</span> <span class="pill">before P3</span> <span class="pill">after P3</span></p>
+      <p><strong>Prompt:</strong> The current context moves through the model. Temporary activations change, but durable weights do not.</p>
+      <p><strong>Expected action:</strong> Tap through the forward pass from current context to next token.</p>
+      <p><strong>Items / choices / nodes / steps:</strong> current context | temporary activations | fixed weights | next-token scores</p>
+      <p><strong>Target behavior:</strong> Complete the forward pass without durable weight change.</p>
+      <p><strong>Feedback behavior:</strong> Temporary-versus-durable feedback.</p>
+      <p><strong>Progress behavior:</strong> No. Journey progress is stored after checkpoint/reflection flow, not by the micro-interaction.</p>
+      <p><strong>Randomization:</strong> No. Exercise controls use fixed order; checkpoint answers remain randomized elsewhere.</p>
+      <p><strong>Fixed order:</strong> Forward-pass order is the model mechanism.</p>
+      <p><strong>Objective support:</strong> Yes. It practices the lesson mechanism or misconception boundary.</p>
+      <p><strong>Checkpoint duplicate:</strong> No. It gives practice or reveal before checkpoint reasoning.</p>
+      <p><strong>Visual duplicate:</strong> No serious duplicate; it adds a learner action.</p>
+      <p><strong>Mobile notes:</strong> 320px no horizontal overflow; 390px no horizontal overflow; bottom nav does not cover controls after scroll</p>
+      <p><strong>Rubric average:</strong> 4.8/5</p>
+      
+      <p class="pass">No P0/P1 issue remains.</p>
+      
+      <div class="shots">
+        <figure><img src="screenshots/v0-28-10/9-inference-320.png" alt="320px interaction screenshot for Inference"><figcaption>320px</figcaption></figure>
+        <figure><img src="screenshots/v0-28-10/9-inference-390.png" alt="390px interaction screenshot for Inference"><figcaption>390px</figcaption></figure>
+      </div>
+    </section>
+  
+
+    <section class="card">
+      <h3>10. Prompt vs Response</h3>
+      <p><strong>Stage:</strong> Morning Commute</p>
+      <p><strong>Learning objective:</strong> Prompt tokens are given to the model; response tokens are generated by the model one at a time and appended to the context. Practice boundary: The model generates the whole response at once.</p>
+      <p><strong>Exercise:</strong> Label the context pieces <span class="pill">token labeling</span> <span class="pill">before P3</span> <span class="pill">after P3</span></p>
+      <p><strong>Prompt:</strong> Tap each row to see prompt, response so far, next token, and current context stay distinct.</p>
+      <p><strong>Expected action:</strong> Tap rows that separate prompt, response so far, next token, and updated context.</p>
+      <p><strong>Items / choices / nodes / steps:</strong> given prompt | response so far | next token | updated context</p>
+      <p><strong>Target behavior:</strong> Inspect all four context pieces.</p>
+      <p><strong>Feedback behavior:</strong> Row-specific explanation.</p>
+      <p><strong>Progress behavior:</strong> No. Journey progress is stored after checkpoint/reflection flow, not by the micro-interaction.</p>
+      <p><strong>Randomization:</strong> No. Exercise controls use fixed order; checkpoint answers remain randomized elsewhere.</p>
+      <p><strong>Fixed order:</strong> Rows mirror the generation trace.</p>
+      <p><strong>Objective support:</strong> Yes. It practices the lesson mechanism or misconception boundary.</p>
+      <p><strong>Checkpoint duplicate:</strong> No. It gives practice or reveal before checkpoint reasoning.</p>
+      <p><strong>Visual duplicate:</strong> No serious duplicate; it adds a learner action.</p>
+      <p><strong>Mobile notes:</strong> 320px no horizontal overflow; 390px no horizontal overflow; bottom nav does not cover controls after scroll</p>
+      <p><strong>Rubric average:</strong> 4.8/5</p>
+      
+      <p class="pass">No P0/P1 issue remains.</p>
+      
+      <div class="shots">
+        <figure><img src="screenshots/v0-28-10/10-prompt-response-320.png" alt="320px interaction screenshot for Prompt vs Response"><figcaption>320px</figcaption></figure>
+        <figure><img src="screenshots/v0-28-10/10-prompt-response-390.png" alt="390px interaction screenshot for Prompt vs Response"><figcaption>390px</figcaption></figure>
+      </div>
+    </section>
+  
+
+    <section class="card">
+      <h3>11. Tokenization</h3>
+      <p><strong>Stage:</strong> Morning Commute</p>
+      <p><strong>Learning objective:</strong> Tokenization splits text into chunks that can be represented as token IDs. Practice boundary: Tokens are always whole words or human concepts.</p>
+      <p><strong>Exercise:</strong> Split the sentence <span class="pill">token labeling</span> <span class="pill">before P3</span> <span class="pill">after P3</span></p>
+      <p><strong>Prompt:</strong> Tap once for token pieces, then show uneven chunks and punctuation.</p>
+      <p><strong>Expected action:</strong> Reveal token pieces and uneven chunks.</p>
+      <p><strong>Items / choices / nodes / steps:</strong> A | jealous | dog | chased | start|led | floor|.</p>
+      <p><strong>Target behavior:</strong> Notice tokens can be uneven and include punctuation.</p>
+      <p><strong>Feedback behavior:</strong> Token boundary feedback.</p>
+      <p><strong>Progress behavior:</strong> No. Journey progress is stored after checkpoint/reflection flow, not by the micro-interaction.</p>
+      <p><strong>Randomization:</strong> No. Exercise controls use fixed order; checkpoint answers remain randomized elsewhere.</p>
+      <p><strong>Fixed order:</strong> The sentence order makes token boundaries readable.</p>
+      <p><strong>Objective support:</strong> Yes. It practices the lesson mechanism or misconception boundary.</p>
+      <p><strong>Checkpoint duplicate:</strong> No. It gives practice or reveal before checkpoint reasoning.</p>
+      <p><strong>Visual duplicate:</strong> No serious duplicate; it adds a learner action.</p>
+      <p><strong>Mobile notes:</strong> 320px no horizontal overflow; 390px no horizontal overflow; bottom nav does not cover controls after scroll</p>
+      <p><strong>Rubric average:</strong> 4.8/5</p>
+      
+      <p class="pass">No P0/P1 issue remains.</p>
+      
+      <div class="shots">
+        <figure><img src="screenshots/v0-28-10/11-tokens-320.png" alt="320px interaction screenshot for Tokenization"><figcaption>320px</figcaption></figure>
+        <figure><img src="screenshots/v0-28-10/11-tokens-390.png" alt="390px interaction screenshot for Tokenization"><figcaption>390px</figcaption></figure>
+      </div>
+    </section>
+  
+
+    <section class="card">
+      <h3>12. Token IDs</h3>
+      <p><strong>Stage:</strong> Morning Commute</p>
+      <p><strong>Learning objective:</strong> A token ID is the number assigned to a token so the model can look up its learned starting vector. Practice boundary: The token ID is the meaning.</p>
+      <p><strong>Exercise:</strong> Match token to ID <span class="pill">token labeling</span> <span class="pill">before P3</span> <span class="pill">after P3</span></p>
+      <p><strong>Prompt:</strong> Match dog, cat, and floor to their lookup numbers and table rows.</p>
+      <p><strong>Expected action:</strong> Match token text to token IDs and table rows.</p>
+      <p><strong>Items / choices / nodes / steps:</strong> dog | cat | floor | ID rows</p>
+      <p><strong>Target behavior:</strong> Reveal lookup relationship without treating IDs as meaning.</p>
+      <p><strong>Feedback behavior:</strong> ID-is-not-meaning feedback.</p>
+      <p><strong>Progress behavior:</strong> No. Journey progress is stored after checkpoint/reflection flow, not by the micro-interaction.</p>
+      <p><strong>Randomization:</strong> No. Exercise controls use fixed order; checkpoint answers remain randomized elsewhere.</p>
+      <p><strong>Fixed order:</strong> Stable rows teach lookup rather than memory.</p>
+      <p><strong>Objective support:</strong> Yes. It practices the lesson mechanism or misconception boundary.</p>
+      <p><strong>Checkpoint duplicate:</strong> No. It gives practice or reveal before checkpoint reasoning.</p>
+      <p><strong>Visual duplicate:</strong> No serious duplicate; it adds a learner action.</p>
+      <p><strong>Mobile notes:</strong> 320px no horizontal overflow; 390px no horizontal overflow; bottom nav does not cover controls after scroll</p>
+      <p><strong>Rubric average:</strong> 4.8/5</p>
+      
+      <p class="pass">No P0/P1 issue remains.</p>
+      
+      <div class="shots">
+        <figure><img src="screenshots/v0-28-10/12-token-ids-320.png" alt="320px interaction screenshot for Token IDs"><figcaption>320px</figcaption></figure>
+        <figure><img src="screenshots/v0-28-10/12-token-ids-390.png" alt="390px interaction screenshot for Token IDs"><figcaption>390px</figcaption></figure>
+      </div>
+    </section>
+  
+
+    <section class="card">
+      <h3>13. Embeddings</h3>
+      <p><strong>Stage:</strong> Morning Commute</p>
+      <p><strong>Learning objective:</strong> An embedding is a learned starting vector retrieved for a token ID. Practice boundary: An embedding is a dictionary definition or a human memory.</p>
+      <p><strong>Exercise:</strong> Look up a starting vector <span class="pill">tap-to-cycle</span> <span class="pill">before P3</span> <span class="pill">after P3</span></p>
+      <p><strong>Prompt:</strong> Tap a token ID to retrieve its embedding row and notice what is durable versus temporary.</p>
+      <p><strong>Expected action:</strong> Tap a token ID to retrieve its embedding row.</p>
+      <p><strong>Items / choices / nodes / steps:</strong> token ID | embedding table row | starting vector</p>
+      <p><strong>Target behavior:</strong> Show the starting vector before context reshapes it.</p>
+      <p><strong>Feedback behavior:</strong> Durable embedding versus temporary hidden-state feedback.</p>
+      <p><strong>Progress behavior:</strong> No. Journey progress is stored after checkpoint/reflection flow, not by the micro-interaction.</p>
+      <p><strong>Randomization:</strong> No. Exercise controls use fixed order; checkpoint answers remain randomized elsewhere.</p>
+      <p><strong>Fixed order:</strong> Lookup order matches the data path.</p>
+      <p><strong>Objective support:</strong> Yes. It practices the lesson mechanism or misconception boundary.</p>
+      <p><strong>Checkpoint duplicate:</strong> No. It gives practice or reveal before checkpoint reasoning.</p>
+      <p><strong>Visual duplicate:</strong> No serious duplicate; it adds a learner action.</p>
+      <p><strong>Mobile notes:</strong> 320px no horizontal overflow; 390px no horizontal overflow; bottom nav does not cover controls after scroll</p>
+      <p><strong>Rubric average:</strong> 4.8/5</p>
+      
+      <p class="pass">No P0/P1 issue remains.</p>
+      
+      <div class="shots">
+        <figure><img src="screenshots/v0-28-10/13-embeddings-320.png" alt="320px interaction screenshot for Embeddings"><figcaption>320px</figcaption></figure>
+        <figure><img src="screenshots/v0-28-10/13-embeddings-390.png" alt="390px interaction screenshot for Embeddings"><figcaption>390px</figcaption></figure>
+      </div>
+    </section>
+  
+
+    <section class="card">
+      <h3>14. Vectors</h3>
+      <p><strong>Stage:</strong> Morning Commute</p>
+      <p><strong>Learning objective:</strong> A vector is a list of numbers that represents features of something, such as a token. Practice boundary: Each vector dimension has a simple human-readable label.</p>
+      <p><strong>Exercise:</strong> Toggle vector views <span class="pill">comparison toggle</span> <span class="pill">before P2</span> <span class="pill">after P2</span></p>
+      <p><strong>Prompt:</strong> Compare a simplified teaching view with the messier distributed view real models use.</p>
+      <p><strong>Expected action:</strong> Switch between teaching sliders and distributed feature bars.</p>
+      <p><strong>Items / choices / nodes / steps:</strong> teaching view | distributed view</p>
+      <p><strong>Target behavior:</strong> Reveal why real vector dimensions are distributed.</p>
+      <p><strong>Feedback behavior:</strong> Dimension-label limit feedback.</p>
+      <p><strong>Progress behavior:</strong> No. Journey progress is stored after checkpoint/reflection flow, not by the micro-interaction.</p>
+      <p><strong>Randomization:</strong> No. Exercise controls use fixed order; checkpoint answers remain randomized elsewhere.</p>
+      <p><strong>Fixed order:</strong> Two-state comparison keeps the abstraction manageable.</p>
+      <p><strong>Objective support:</strong> Yes. It practices the lesson mechanism or misconception boundary.</p>
+      <p><strong>Checkpoint duplicate:</strong> No. It gives practice or reveal before checkpoint reasoning.</p>
+      <p><strong>Visual duplicate:</strong> Watch during human testing; it may reinforce the visual closely.</p>
+      <p><strong>Mobile notes:</strong> 320px no horizontal overflow; 390px no horizontal overflow; bottom nav does not cover controls after scroll</p>
+      <p><strong>Rubric average:</strong> 4.2/5</p>
+      
+      <p class="pass">No P0/P1 issue remains.</p>
+      <p class="watch"><strong>Human-test watch:</strong> Watch in human testing for abstraction level, redundancy, or replay value.</p>
+      <div class="shots">
+        <figure><img src="screenshots/v0-28-10/14-vectors-320.png" alt="320px interaction screenshot for Vectors"><figcaption>320px</figcaption></figure>
+        <figure><img src="screenshots/v0-28-10/14-vectors-390.png" alt="390px interaction screenshot for Vectors"><figcaption>390px</figcaption></figure>
+      </div>
+    </section>
+  
+
+    <section class="card">
+      <h3>15. Tensors</h3>
+      <p><strong>Stage:</strong> Morning Commute</p>
+      <p><strong>Learning objective:</strong> A tensor is an organized block of numbers, often holding many token vectors at once. Practice boundary: A tensor is one word, one number, or a mysterious object.</p>
+      <p><strong>Exercise:</strong> Inspect the axes <span class="pill">tap-to-cycle</span> <span class="pill">before P2</span> <span class="pill">after P2</span></p>
+      <p><strong>Prompt:</strong> Tap token axis, feature axis, and batch note to see how vectors become a shaped block.</p>
+      <p><strong>Expected action:</strong> Inspect token axis, feature axis, and batch note.</p>
+      <p><strong>Items / choices / nodes / steps:</strong> token axis | feature axis | batch note</p>
+      <p><strong>Target behavior:</strong> See vectors as a shaped numerical block.</p>
+      <p><strong>Feedback behavior:</strong> Axis-specific explanation.</p>
+      <p><strong>Progress behavior:</strong> No. Journey progress is stored after checkpoint/reflection flow, not by the micro-interaction.</p>
+      <p><strong>Randomization:</strong> No. Exercise controls use fixed order; checkpoint answers remain randomized elsewhere.</p>
+      <p><strong>Fixed order:</strong> Axis order follows the tensor teaching diagram.</p>
+      <p><strong>Objective support:</strong> Yes. It practices the lesson mechanism or misconception boundary.</p>
+      <p><strong>Checkpoint duplicate:</strong> No. It gives practice or reveal before checkpoint reasoning.</p>
+      <p><strong>Visual duplicate:</strong> Watch during human testing; it may reinforce the visual closely.</p>
+      <p><strong>Mobile notes:</strong> 320px no horizontal overflow; 390px no horizontal overflow; bottom nav does not cover controls after scroll</p>
+      <p><strong>Rubric average:</strong> 4.1/5</p>
+      
+      <p class="pass">No P0/P1 issue remains.</p>
+      <p class="watch"><strong>Human-test watch:</strong> Watch in human testing for abstraction level, redundancy, or replay value. Uses “batch note” as a legitimate tensor concept, not implementation-process language.</p>
+      <div class="shots">
+        <figure><img src="screenshots/v0-28-10/15-tensors-320.png" alt="320px interaction screenshot for Tensors"><figcaption>320px</figcaption></figure>
+        <figure><img src="screenshots/v0-28-10/15-tensors-390.png" alt="390px interaction screenshot for Tensors"><figcaption>390px</figcaption></figure>
+      </div>
+    </section>
+  
+
+    <section class="card">
+      <h3>16. Attention</h3>
+      <p><strong>Stage:</strong> Workday</p>
+      <p><strong>Learning objective:</strong> Attention is a mechanism that assigns relevance weights between token positions in the current context. Practice boundary: Attention means consciousness or awareness.</p>
+      <p><strong>Exercise:</strong> Connect the pronoun <span class="pill">connect node</span> <span class="pill">before P3</span> <span class="pill">after P3</span></p>
+      <p><strong>Prompt:</strong> Choose which earlier token helps interpret “it.” Attention is relevance, not awareness.</p>
+      <p><strong>Expected action:</strong> Connect the pronoun token to the most relevant source token.</p>
+      <p><strong>Items / choices / nodes / steps:</strong> dog | cat | it</p>
+      <p><strong>Target behavior:</strong> Select cat as the likely referent.</p>
+      <p><strong>Feedback behavior:</strong> Relevance-not-awareness feedback.</p>
+      <p><strong>Progress behavior:</strong> No. Journey progress is stored after checkpoint/reflection flow, not by the micro-interaction.</p>
+      <p><strong>Randomization:</strong> No. Exercise controls use fixed order; checkpoint answers remain randomized elsewhere.</p>
+      <p><strong>Fixed order:</strong> Fixed sentence order preserves the pronoun example.</p>
+      <p><strong>Objective support:</strong> Yes. It practices the lesson mechanism or misconception boundary.</p>
+      <p><strong>Checkpoint duplicate:</strong> No. It gives practice or reveal before checkpoint reasoning.</p>
+      <p><strong>Visual duplicate:</strong> No serious duplicate; it adds a learner action.</p>
+      <p><strong>Mobile notes:</strong> 320px no horizontal overflow; 390px no horizontal overflow; bottom nav does not cover controls after scroll</p>
+      <p><strong>Rubric average:</strong> 4.9/5</p>
+      
+      <p class="pass">No P0/P1 issue remains.</p>
+      
+      <div class="shots">
+        <figure><img src="screenshots/v0-28-10/16-attention-320.png" alt="320px interaction screenshot for Attention"><figcaption>320px</figcaption></figure>
+        <figure><img src="screenshots/v0-28-10/16-attention-390.png" alt="390px interaction screenshot for Attention"><figcaption>390px</figcaption></figure>
+      </div>
+    </section>
+  
+
+    <section class="card">
+      <h3>17. MLP</h3>
+      <p><strong>Stage:</strong> Workday</p>
+      <p><strong>Learning objective:</strong> An MLP, or multi-layer perceptron, is a feed-forward network that reshapes each token’s feature vector inside a transformer layer. Practice boundary: The MLP mixes information between different token positions.</p>
+      <p><strong>Exercise:</strong> Before and after MLP <span class="pill">comparison toggle</span> <span class="pill">before P3</span> <span class="pill">after P3</span></p>
+      <p><strong>Prompt:</strong> Toggle the same token position before and after the MLP. The feature vector changes; the token ID and weights do not.</p>
+      <p><strong>Expected action:</strong> Toggle the same token before and after the MLP.</p>
+      <p><strong>Items / choices / nodes / steps:</strong> before MLP | after MLP</p>
+      <p><strong>Target behavior:</strong> Notice feature reshaping without changing the token ID or weights.</p>
+      <p><strong>Feedback behavior:</strong> Feature reshaping feedback.</p>
+      <p><strong>Progress behavior:</strong> No. Journey progress is stored after checkpoint/reflection flow, not by the micro-interaction.</p>
+      <p><strong>Randomization:</strong> No. Exercise controls use fixed order; checkpoint answers remain randomized elsewhere.</p>
+      <p><strong>Fixed order:</strong> Before/after comparison is the lesson point.</p>
+      <p><strong>Objective support:</strong> Yes. It practices the lesson mechanism or misconception boundary.</p>
+      <p><strong>Checkpoint duplicate:</strong> No. It gives practice or reveal before checkpoint reasoning.</p>
+      <p><strong>Visual duplicate:</strong> No serious duplicate; it adds a learner action.</p>
+      <p><strong>Mobile notes:</strong> 320px no horizontal overflow; 390px no horizontal overflow; bottom nav does not cover controls after scroll</p>
+      <p><strong>Rubric average:</strong> 4.9/5</p>
+      
+      <p class="pass">No P0/P1 issue remains.</p>
+      
+      <div class="shots">
+        <figure><img src="screenshots/v0-28-10/17-mlp-320.png" alt="320px interaction screenshot for MLP"><figcaption>320px</figcaption></figure>
+        <figure><img src="screenshots/v0-28-10/17-mlp-390.png" alt="390px interaction screenshot for MLP"><figcaption>390px</figcaption></figure>
+      </div>
+    </section>
+  
+
+    <section class="card">
+      <h3>18. Layers</h3>
+      <p><strong>Stage:</strong> Workday</p>
+      <p><strong>Learning objective:</strong> A layer is a repeated transformer block that refines hidden states through attention, MLPs, residual paths, and normalization. Practice boundary: Each layer is a human-like thought or reasoning step.</p>
+      <p><strong>Exercise:</strong> Inspect the stack <span class="pill">tap-to-cycle</span> <span class="pill">before P3</span> <span class="pill">after P3</span></p>
+      <p><strong>Prompt:</strong> Tap a layer to watch the same hidden-state ribbon move forward through repeated attention and MLP blocks.</p>
+      <p><strong>Expected action:</strong> Tap layers in a transformer stack.</p>
+      <p><strong>Items / choices / nodes / steps:</strong> layer 1 | layer 2 | layer 3 | layer 4</p>
+      <p><strong>Target behavior:</strong> Inspect repeated attention and MLP blocks.</p>
+      <p><strong>Feedback behavior:</strong> Repeated numerical transformation feedback.</p>
+      <p><strong>Progress behavior:</strong> No. Journey progress is stored after checkpoint/reflection flow, not by the micro-interaction.</p>
+      <p><strong>Randomization:</strong> No. Exercise controls use fixed order; checkpoint answers remain randomized elsewhere.</p>
+      <p><strong>Fixed order:</strong> Layer order is sequential.</p>
+      <p><strong>Objective support:</strong> Yes. It practices the lesson mechanism or misconception boundary.</p>
+      <p><strong>Checkpoint duplicate:</strong> No. It gives practice or reveal before checkpoint reasoning.</p>
+      <p><strong>Visual duplicate:</strong> No serious duplicate; it adds a learner action.</p>
+      <p><strong>Mobile notes:</strong> 320px no horizontal overflow; 390px no horizontal overflow; bottom nav does not cover controls after scroll</p>
+      <p><strong>Rubric average:</strong> 4.8/5</p>
+      
+      <p class="pass">No P0/P1 issue remains.</p>
+      
+      <div class="shots">
+        <figure><img src="screenshots/v0-28-10/18-layers-320.png" alt="320px interaction screenshot for Layers"><figcaption>320px</figcaption></figure>
+        <figure><img src="screenshots/v0-28-10/18-layers-390.png" alt="390px interaction screenshot for Layers"><figcaption>390px</figcaption></figure>
+      </div>
+    </section>
+  
+
+    <section class="card">
+      <h3>19. Hidden States</h3>
+      <p><strong>Stage:</strong> Workday</p>
+      <p><strong>Learning objective:</strong> A hidden state is a temporary context-shaped vector for a token at a particular layer. Practice boundary: Hidden states are secret memories, encrypted English, or stored thoughts.</p>
+      <p><strong>Exercise:</strong> Durable or temporary? <span class="pill">sort / group</span> <span class="pill">before P1</span> <span class="pill">after P3</span></p>
+      <p><strong>Prompt:</strong> Sort model parts by whether they persist as learned parameters, appear temporarily during this run, or sit outside the current forward pass.</p>
+      <p><strong>Expected action:</strong> Sort durable, temporary, and outside-forward-pass items.</p>
+      <p><strong>Items / choices / nodes / steps:</strong> embedding table | weight | hidden state | attention pattern | training data</p>
+      <p><strong>Target behavior:</strong> Separate learned parameters, temporary run state, and outside material.</p>
+      <p><strong>Feedback behavior:</strong> Temporary hidden-state feedback.</p>
+      <p><strong>Progress behavior:</strong> No. Journey progress is stored after checkpoint/reflection flow, not by the micro-interaction.</p>
+      <p><strong>Randomization:</strong> No. Exercise controls use fixed order; checkpoint answers remain randomized elsewhere.</p>
+      <p><strong>Fixed order:</strong> Fixed labels preserve the three-way boundary.</p>
+      <p><strong>Objective support:</strong> Yes. It practices the lesson mechanism or misconception boundary.</p>
+      <p><strong>Checkpoint duplicate:</strong> No. It gives practice or reveal before checkpoint reasoning.</p>
+      <p><strong>Visual duplicate:</strong> No serious duplicate; it adds a learner action.</p>
+      <p><strong>Mobile notes:</strong> 320px no horizontal overflow; 390px no horizontal overflow; bottom nav does not cover controls after scroll</p>
+      <p><strong>Rubric average:</strong> 4.7/5</p>
+      <p class="fix"><strong>Fixed:</strong> Changed shared sort feedback from “cards” to “items” so sort/group interactions do not sound like Journey-card navigation.</p>
+      <p class="pass">No P0/P1 issue remains.</p>
+      
+      <div class="shots">
+        <figure><img src="screenshots/v0-28-10/19-hidden-states-320.png" alt="320px interaction screenshot for Hidden States"><figcaption>320px</figcaption></figure>
+        <figure><img src="screenshots/v0-28-10/19-hidden-states-390.png" alt="390px interaction screenshot for Hidden States"><figcaption>390px</figcaption></figure>
+      </div>
+    </section>
+  
+
+    <section class="card">
+      <h3>20. Logits</h3>
+      <p><strong>Stage:</strong> Decision Room</p>
+      <p><strong>Learning objective:</strong> Logits are raw scores for possible next tokens before they are turned into probabilities. Practice boundary: Logits are probabilities or truth scores.</p>
+      <p><strong>Exercise:</strong> Raw scores or probabilities? <span class="pill">comparison toggle</span> <span class="pill">before P3</span> <span class="pill">after P3</span></p>
+      <p><strong>Prompt:</strong> Toggle the display and notice that logits are the before state: raw scores, not probabilities or truth.</p>
+      <p><strong>Expected action:</strong> Toggle raw scores and probability-ready framing.</p>
+      <p><strong>Items / choices / nodes / steps:</strong> raw scores | not probabilities | not truth</p>
+      <p><strong>Target behavior:</strong> Keep logits as raw next-token scores.</p>
+      <p><strong>Feedback behavior:</strong> Logits-are-not-probabilities feedback.</p>
+      <p><strong>Progress behavior:</strong> No. Journey progress is stored after checkpoint/reflection flow, not by the micro-interaction.</p>
+      <p><strong>Randomization:</strong> No. Exercise controls use fixed order; checkpoint answers remain randomized elsewhere.</p>
+      <p><strong>Fixed order:</strong> One contrast is enough at this point in the Journey.</p>
+      <p><strong>Objective support:</strong> Yes. It practices the lesson mechanism or misconception boundary.</p>
+      <p><strong>Checkpoint duplicate:</strong> No. It gives practice or reveal before checkpoint reasoning.</p>
+      <p><strong>Visual duplicate:</strong> No serious duplicate; it adds a learner action.</p>
+      <p><strong>Mobile notes:</strong> 320px no horizontal overflow; 390px no horizontal overflow; bottom nav does not cover controls after scroll</p>
+      <p><strong>Rubric average:</strong> 4.9/5</p>
+      
+      <p class="pass">No P0/P1 issue remains.</p>
+      
+      <div class="shots">
+        <figure><img src="screenshots/v0-28-10/20-logits-320.png" alt="320px interaction screenshot for Logits"><figcaption>320px</figcaption></figure>
+        <figure><img src="screenshots/v0-28-10/20-logits-390.png" alt="390px interaction screenshot for Logits"><figcaption>390px</figcaption></figure>
+      </div>
+    </section>
+  
+
+    <section class="card">
+      <h3>21. Softmax</h3>
+      <p><strong>Stage:</strong> Decision Room</p>
+      <p><strong>Learning objective:</strong> Softmax is a function that turns raw next-token scores into probabilities that sum to one. Practice boundary: Softmax guarantees truth or certainty.</p>
+      <p><strong>Exercise:</strong> Convert the scores <span class="pill">tap-to-cycle</span> <span class="pill">before P3</span> <span class="pill">after P3</span></p>
+      <p><strong>Prompt:</strong> Tap softmax to turn raw logits into probabilities that sum to 100%. Probability is still not truth.</p>
+      <p><strong>Expected action:</strong> Convert raw scores into probabilities.</p>
+      <p><strong>Items / choices / nodes / steps:</strong> raw logits | softmax | probabilities that sum to 100%</p>
+      <p><strong>Target behavior:</strong> See probabilities emerge from raw scores.</p>
+      <p><strong>Feedback behavior:</strong> Probability-not-truth feedback.</p>
+      <p><strong>Progress behavior:</strong> No. Journey progress is stored after checkpoint/reflection flow, not by the micro-interaction.</p>
+      <p><strong>Randomization:</strong> No. Exercise controls use fixed order; checkpoint answers remain randomized elsewhere.</p>
+      <p><strong>Fixed order:</strong> The transform has a natural before/after order.</p>
+      <p><strong>Objective support:</strong> Yes. It practices the lesson mechanism or misconception boundary.</p>
+      <p><strong>Checkpoint duplicate:</strong> No. It gives practice or reveal before checkpoint reasoning.</p>
+      <p><strong>Visual duplicate:</strong> No serious duplicate; it adds a learner action.</p>
+      <p><strong>Mobile notes:</strong> 320px no horizontal overflow; 390px no horizontal overflow; bottom nav does not cover controls after scroll</p>
+      <p><strong>Rubric average:</strong> 4.8/5</p>
+      
+      <p class="pass">No P0/P1 issue remains.</p>
+      
+      <div class="shots">
+        <figure><img src="screenshots/v0-28-10/21-softmax-320.png" alt="320px interaction screenshot for Softmax"><figcaption>320px</figcaption></figure>
+        <figure><img src="screenshots/v0-28-10/21-softmax-390.png" alt="390px interaction screenshot for Softmax"><figcaption>390px</figcaption></figure>
+      </div>
+    </section>
+  
+
+    <section class="card">
+      <h3>22. Sampling</h3>
+      <p><strong>Stage:</strong> Decision Room</p>
+      <p><strong>Learning objective:</strong> Sampling is the decoding step that chooses one next token from the probability distribution. Practice boundary: Sampling writes the whole response or permanently teaches the model.</p>
+      <p><strong>Exercise:</strong> Choose from the probability cloud <span class="pill">single choice</span> <span class="pill">before P2</span> <span class="pill">after P2</span></p>
+      <p><strong>Prompt:</strong> Pick the most likely next token from the local context. Probability is not truth; a likely token can still be unsupported in other situations.</p>
+      <p><strong>Expected action:</strong> Choose a next token from probability-shaped candidates.</p>
+      <p><strong>Items / choices / nodes / steps:</strong> floor | room | quantum</p>
+      <p><strong>Target behavior:</strong> Pick a likely next token while keeping probability separate from truth.</p>
+      <p><strong>Feedback behavior:</strong> Sampling uncertainty feedback.</p>
+      <p><strong>Progress behavior:</strong> No. Journey progress is stored after checkpoint/reflection flow, not by the micro-interaction.</p>
+      <p><strong>Randomization:</strong> No. Exercise controls use fixed order; checkpoint answers remain randomized elsewhere.</p>
+      <p><strong>Fixed order:</strong> Fixed candidates keep the example short.</p>
+      <p><strong>Objective support:</strong> Yes. It practices the lesson mechanism or misconception boundary.</p>
+      <p><strong>Checkpoint duplicate:</strong> Partial risk: watch during human testing so it does not feel like a second checkpoint.</p>
+      <p><strong>Visual duplicate:</strong> Watch during human testing; it may reinforce the visual closely.</p>
+      <p><strong>Mobile notes:</strong> 320px no horizontal overflow; 390px no horizontal overflow; bottom nav does not cover controls after scroll</p>
+      <p><strong>Rubric average:</strong> 4.1/5</p>
+      
+      <p class="pass">No P0/P1 issue remains.</p>
+      <p class="watch"><strong>Human-test watch:</strong> Watch in human testing for abstraction level, redundancy, or replay value.</p>
+      <div class="shots">
+        <figure><img src="screenshots/v0-28-10/22-sampling-320.png" alt="320px interaction screenshot for Sampling"><figcaption>320px</figcaption></figure>
+        <figure><img src="screenshots/v0-28-10/22-sampling-390.png" alt="390px interaction screenshot for Sampling"><figcaption>390px</figcaption></figure>
+      </div>
+    </section>
+  
+
+    <section class="card">
+      <h3>23. Autoregression</h3>
+      <p><strong>Stage:</strong> The Day Repeats</p>
+      <p><strong>Learning objective:</strong> Autoregression is response generation by repeatedly choosing one next token, appending it to the context, and running the model again. Practice boundary: The model writes the whole response at once.</p>
+      <p><strong>Exercise:</strong> Tap-step append loop <span class="pill">ordered sequence</span> <span class="pill">before P3</span> <span class="pill">after P3</span></p>
+      <p><strong>Prompt:</strong> Tap through choose token, append, and run again to see how the response-so-far grows.</p>
+      <p><strong>Expected action:</strong> Step through choose token, append, and run again.</p>
+      <p><strong>Items / choices / nodes / steps:</strong> choose token | append | run again</p>
+      <p><strong>Target behavior:</strong> Complete the append-and-repeat loop.</p>
+      <p><strong>Feedback behavior:</strong> Append-and-repeat feedback.</p>
+      <p><strong>Progress behavior:</strong> No. Journey progress is stored after checkpoint/reflection flow, not by the micro-interaction.</p>
+      <p><strong>Randomization:</strong> No. Exercise controls use fixed order; checkpoint answers remain randomized elsewhere.</p>
+      <p><strong>Fixed order:</strong> The sequence is the mechanism.</p>
+      <p><strong>Objective support:</strong> Yes. It practices the lesson mechanism or misconception boundary.</p>
+      <p><strong>Checkpoint duplicate:</strong> No. It gives practice or reveal before checkpoint reasoning.</p>
+      <p><strong>Visual duplicate:</strong> No serious duplicate; it adds a learner action.</p>
+      <p><strong>Mobile notes:</strong> 320px no horizontal overflow; 390px no horizontal overflow; bottom nav does not cover controls after scroll</p>
+      <p><strong>Rubric average:</strong> 4.7/5</p>
+      
+      <p class="pass">No P0/P1 issue remains.</p>
+      
+      <div class="shots">
+        <figure><img src="screenshots/v0-28-10/23-autoregression-320.png" alt="320px interaction screenshot for Autoregression"><figcaption>320px</figcaption></figure>
+        <figure><img src="screenshots/v0-28-10/23-autoregression-390.png" alt="390px interaction screenshot for Autoregression"><figcaption>390px</figcaption></figure>
+      </div>
+    </section>
+  
+
+    <section class="card">
+      <h3>24. Context Window</h3>
+      <p><strong>Stage:</strong> The Day Repeats</p>
+      <p><strong>Learning objective:</strong> The context window is the limited amount of tokens or media the model can consider at one time. Practice boundary: The context window is permanent memory.</p>
+      <p><strong>Exercise:</strong> Push the context items <span class="pill">card stack / tray</span> <span class="pill">before P1</span> <span class="pill">after P3</span></p>
+      <p><strong>Prompt:</strong> Tap items into a four-slot window and watch the oldest item fall out.</p>
+      <p><strong>Expected action:</strong> Push items into a bounded context tray.</p>
+      <p><strong>Items / choices / nodes / steps:</strong> old message | system instruction | user prompt | retrieved note | response so far</p>
+      <p><strong>Target behavior:</strong> Observe the oldest item fall out after the window fills.</p>
+      <p><strong>Feedback behavior:</strong> Temporary-window feedback.</p>
+      <p><strong>Progress behavior:</strong> No. Journey progress is stored after checkpoint/reflection flow, not by the micro-interaction.</p>
+      <p><strong>Randomization:</strong> No. Exercise controls use fixed order; checkpoint answers remain randomized elsewhere.</p>
+      <p><strong>Fixed order:</strong> The fixed order makes the capacity limit visible.</p>
+      <p><strong>Objective support:</strong> Yes. It practices the lesson mechanism or misconception boundary.</p>
+      <p><strong>Checkpoint duplicate:</strong> No. It gives practice or reveal before checkpoint reasoning.</p>
+      <p><strong>Visual duplicate:</strong> No serious duplicate; it adds a learner action.</p>
+      <p><strong>Mobile notes:</strong> 320px no horizontal overflow; 390px no horizontal overflow; bottom nav does not cover controls after scroll</p>
+      <p><strong>Rubric average:</strong> 4.7/5</p>
+      <p class="fix"><strong>Fixed:</strong> Changed ambiguous “card” wording to “item” in the Journey copy and live context-tray feedback.</p>
+      <p class="pass">No P0/P1 issue remains.</p>
+      
+      <div class="shots">
+        <figure><img src="screenshots/v0-28-10/24-context-window-320.png" alt="320px interaction screenshot for Context Window"><figcaption>320px</figcaption></figure>
+        <figure><img src="screenshots/v0-28-10/24-context-window-390.png" alt="390px interaction screenshot for Context Window"><figcaption>390px</figcaption></figure>
+      </div>
+    </section>
+  
+
+    <section class="card">
+      <h3>25. RAG and Retrieval</h3>
+      <p><strong>Stage:</strong> The Day Repeats</p>
+      <p><strong>Learning objective:</strong> Retrieval-augmented generation, or RAG, retrieves outside information and places it into the model’s current context before the model generates a response. Practice boundary: RAG is training, permanent memory, guaranteed truth, or consciousness.</p>
+      <p><strong>Exercise:</strong> Trace the retrieval lanes <span class="pill">tap-to-cycle</span> <span class="pill">before P3</span> <span class="pill">after P3</span></p>
+      <p><strong>Prompt:</strong> Tap prompt, retriever, notes, context tray, and response to see retrieval plus context, not training.</p>
+      <p><strong>Expected action:</strong> Trace prompt, retriever, retrieved notes, context tray, and response.</p>
+      <p><strong>Items / choices / nodes / steps:</strong> prompt | retriever | retrieved notes | context tray | response</p>
+      <p><strong>Target behavior:</strong> See retrieval plus context, not training.</p>
+      <p><strong>Feedback behavior:</strong> Retrieval-plus-context feedback.</p>
+      <p><strong>Progress behavior:</strong> No. Journey progress is stored after checkpoint/reflection flow, not by the micro-interaction.</p>
+      <p><strong>Randomization:</strong> No. Exercise controls use fixed order; checkpoint answers remain randomized elsewhere.</p>
+      <p><strong>Fixed order:</strong> RAG has a stepwise system path.</p>
+      <p><strong>Objective support:</strong> Yes. It practices the lesson mechanism or misconception boundary.</p>
+      <p><strong>Checkpoint duplicate:</strong> No. It gives practice or reveal before checkpoint reasoning.</p>
+      <p><strong>Visual duplicate:</strong> No serious duplicate; it adds a learner action.</p>
+      <p><strong>Mobile notes:</strong> 320px no horizontal overflow; 390px no horizontal overflow; bottom nav does not cover controls after scroll</p>
+      <p><strong>Rubric average:</strong> 4.8/5</p>
+      
+      <p class="pass">No P0/P1 issue remains.</p>
+      
+      <div class="shots">
+        <figure><img src="screenshots/v0-28-10/25-rag-retrieval-320.png" alt="320px interaction screenshot for RAG and Retrieval"><figcaption>320px</figcaption></figure>
+        <figure><img src="screenshots/v0-28-10/25-rag-retrieval-390.png" alt="390px interaction screenshot for RAG and Retrieval"><figcaption>390px</figcaption></figure>
+      </div>
+    </section>
+  
+
+    <section class="card">
+      <h3>26. Grounding</h3>
+      <p><strong>Stage:</strong> The Day Repeats</p>
+      <p><strong>Learning objective:</strong> Grounding means connecting a model’s response to available evidence, such as retrieved documents, citations, data, or tool results. Practice boundary: A citation-looking answer is automatically grounded.</p>
+      <p><strong>Exercise:</strong> Match claims to evidence <span class="pill">connect node</span> <span class="pill">before P3</span> <span class="pill">after P3</span></p>
+      <p><strong>Prompt:</strong> Connect supported claims to evidence and leave unsupported claims unanchored.</p>
+      <p><strong>Expected action:</strong> Connect claims to supporting evidence.</p>
+      <p><strong>Items / choices / nodes / steps:</strong> supported claim | evidence | unsupported claim</p>
+      <p><strong>Target behavior:</strong> Connect supported claims and leave unsupported claims unanchored.</p>
+      <p><strong>Feedback behavior:</strong> Evidence-match feedback.</p>
+      <p><strong>Progress behavior:</strong> No. Journey progress is stored after checkpoint/reflection flow, not by the micro-interaction.</p>
+      <p><strong>Randomization:</strong> No. Exercise controls use fixed order; checkpoint answers remain randomized elsewhere.</p>
+      <p><strong>Fixed order:</strong> Fixed examples prevent source confusion.</p>
+      <p><strong>Objective support:</strong> Yes. It practices the lesson mechanism or misconception boundary.</p>
+      <p><strong>Checkpoint duplicate:</strong> No. It gives practice or reveal before checkpoint reasoning.</p>
+      <p><strong>Visual duplicate:</strong> No serious duplicate; it adds a learner action.</p>
+      <p><strong>Mobile notes:</strong> 320px no horizontal overflow; 390px no horizontal overflow; bottom nav does not cover controls after scroll</p>
+      <p><strong>Rubric average:</strong> 4.9/5</p>
+      
+      <p class="pass">No P0/P1 issue remains.</p>
+      
+      <div class="shots">
+        <figure><img src="screenshots/v0-28-10/26-grounding-320.png" alt="320px interaction screenshot for Grounding"><figcaption>320px</figcaption></figure>
+        <figure><img src="screenshots/v0-28-10/26-grounding-390.png" alt="390px interaction screenshot for Grounding"><figcaption>390px</figcaption></figure>
+      </div>
+    </section>
+  
+
+    <section class="card">
+      <h3>27. Hallucinations</h3>
+      <p><strong>Stage:</strong> The Day Repeats</p>
+      <p><strong>Learning objective:</strong> A hallucination is a fluent model output that is unsupported, false, fabricated, or not grounded in the available evidence. Practice boundary: A hallucination means the model is lying or malicious.</p>
+      <p><strong>Exercise:</strong> Mark missing supports <span class="pill">single choice</span> <span class="pill">before P3</span> <span class="pill">after P3</span></p>
+      <p><strong>Prompt:</strong> Read three fluent claims and mark the ones that need evidence.</p>
+      <p><strong>Expected action:</strong> Choose the fluent claim that needs evidence before trust.</p>
+      <p><strong>Items / choices / nodes / steps:</strong> supported policy claim | unsupported date claim | review-needed caveat</p>
+      <p><strong>Target behavior:</strong> Select the unsupported fluent claim.</p>
+      <p><strong>Feedback behavior:</strong> Unsupported-output feedback.</p>
+      <p><strong>Progress behavior:</strong> No. Journey progress is stored after checkpoint/reflection flow, not by the micro-interaction.</p>
+      <p><strong>Randomization:</strong> No. Exercise controls use fixed order; checkpoint answers remain randomized elsewhere.</p>
+      <p><strong>Fixed order:</strong> The contrast depends on stable evidence labels.</p>
+      <p><strong>Objective support:</strong> Yes. It practices the lesson mechanism or misconception boundary.</p>
+      <p><strong>Checkpoint duplicate:</strong> Partial risk: watch during human testing so it does not feel like a second checkpoint.</p>
+      <p><strong>Visual duplicate:</strong> No serious duplicate; it adds a learner action.</p>
+      <p><strong>Mobile notes:</strong> 320px no horizontal overflow; 390px no horizontal overflow; bottom nav does not cover controls after scroll</p>
+      <p><strong>Rubric average:</strong> 4.8/5</p>
+      
+      <p class="pass">No P0/P1 issue remains.</p>
+      
+      <div class="shots">
+        <figure><img src="screenshots/v0-28-10/27-hallucinations-320.png" alt="320px interaction screenshot for Hallucinations"><figcaption>320px</figcaption></figure>
+        <figure><img src="screenshots/v0-28-10/27-hallucinations-390.png" alt="390px interaction screenshot for Hallucinations"><figcaption>390px</figcaption></figure>
+      </div>
+    </section>
+  
+
+    <section class="card">
+      <h3>28. How AI Learns</h3>
+      <p><strong>Stage:</strong> Twilight: The Wider Landscape</p>
+      <p><strong>Learning objective:</strong> AI systems can change or behave differently through durable training, human feedback, retrieval, prompting, or temporary in-context steering. Practice boundary: Any useful response means the model permanently learned something.</p>
+      <p><strong>Exercise:</strong> Sort the learning modes <span class="pill">sort / group</span> <span class="pill">before P1</span> <span class="pill">after P3</span></p>
+      <p><strong>Prompt:</strong> Durable update, temporary steering, retrieval, and evaluation solve different problems.</p>
+      <p><strong>Expected action:</strong> Sort durable update, temporary steering, retrieval, and evaluation modes.</p>
+      <p><strong>Items / choices / nodes / steps:</strong> pretraining | prompting | RAG | evaluation</p>
+      <p><strong>Target behavior:</strong> Assign each learning or steering mode to the right mechanism.</p>
+      <p><strong>Feedback behavior:</strong> What-changed feedback.</p>
+      <p><strong>Progress behavior:</strong> No. Journey progress is stored after checkpoint/reflection flow, not by the micro-interaction.</p>
+      <p><strong>Randomization:</strong> No. Exercise controls use fixed order; checkpoint answers remain randomized elsewhere.</p>
+      <p><strong>Fixed order:</strong> Stable options preserve the mechanism map.</p>
+      <p><strong>Objective support:</strong> Yes. It practices the lesson mechanism or misconception boundary.</p>
+      <p><strong>Checkpoint duplicate:</strong> No. It gives practice or reveal before checkpoint reasoning.</p>
+      <p><strong>Visual duplicate:</strong> No serious duplicate; it adds a learner action.</p>
+      <p><strong>Mobile notes:</strong> 320px no horizontal overflow; 390px no horizontal overflow; bottom nav does not cover controls after scroll</p>
+      <p><strong>Rubric average:</strong> 4.7/5</p>
+      <p class="fix"><strong>Fixed:</strong> Changed shared sort feedback from “cards” to “items” so sort/group interactions do not sound like Journey-card navigation.</p>
+      <p class="pass">No P0/P1 issue remains.</p>
+      
+      <div class="shots">
+        <figure><img src="screenshots/v0-28-10/28-how-ai-learns-320.png" alt="320px interaction screenshot for How AI Learns"><figcaption>320px</figcaption></figure>
+        <figure><img src="screenshots/v0-28-10/28-how-ai-learns-390.png" alt="390px interaction screenshot for How AI Learns"><figcaption>390px</figcaption></figure>
+      </div>
+    </section>
+  
+
+    <section class="card">
+      <h3>29. Diffusion vs Autoregression</h3>
+      <p><strong>Stage:</strong> Twilight: The Wider Landscape</p>
+      <p><strong>Learning objective:</strong> Autoregressive models generate one token at a time, while diffusion models often generate by gradually denoising a noisy pattern. Practice boundary: All generative AI works like ChatGPT.</p>
+      <p><strong>Exercise:</strong> Step through two loops <span class="pill">comparison toggle</span> <span class="pill">before P3</span> <span class="pill">after P3</span></p>
+      <p><strong>Prompt:</strong> Tap Token path or Denoise path to compare append-and-repeat with denoise-and-refine.</p>
+      <p><strong>Expected action:</strong> Step through token append path and denoise path.</p>
+      <p><strong>Items / choices / nodes / steps:</strong> token path | denoise path</p>
+      <p><strong>Target behavior:</strong> Compare autoregressive text with diffusion denoising.</p>
+      <p><strong>Feedback behavior:</strong> Autoregression-versus-diffusion feedback.</p>
+      <p><strong>Progress behavior:</strong> No. Journey progress is stored after checkpoint/reflection flow, not by the micro-interaction.</p>
+      <p><strong>Randomization:</strong> No. Exercise controls use fixed order; checkpoint answers remain randomized elsewhere.</p>
+      <p><strong>Fixed order:</strong> The comparison follows two named paths.</p>
+      <p><strong>Objective support:</strong> Yes. It practices the lesson mechanism or misconception boundary.</p>
+      <p><strong>Checkpoint duplicate:</strong> No. It gives practice or reveal before checkpoint reasoning.</p>
+      <p><strong>Visual duplicate:</strong> No serious duplicate; it adds a learner action.</p>
+      <p><strong>Mobile notes:</strong> 320px no horizontal overflow; 390px no horizontal overflow; bottom nav does not cover controls after scroll</p>
+      <p><strong>Rubric average:</strong> 4.9/5</p>
+      
+      <p class="pass">No P0/P1 issue remains.</p>
+      
+      <div class="shots">
+        <figure><img src="screenshots/v0-28-10/29-diffusion-320.png" alt="320px interaction screenshot for Diffusion vs Autoregression"><figcaption>320px</figcaption></figure>
+        <figure><img src="screenshots/v0-28-10/29-diffusion-390.png" alt="390px interaction screenshot for Diffusion vs Autoregression"><figcaption>390px</figcaption></figure>
+      </div>
+    </section>
+  
+
+    <section class="card">
+      <h3>30. Multimodal AI</h3>
+      <p><strong>Stage:</strong> Twilight: The Wider Landscape</p>
+      <p><strong>Learning objective:</strong> Multimodal AI works with more than one kind of input or output, such as text, images, audio, video, or code. Practice boundary: Multimodal AI has human-like perception or feelings.</p>
+      <p><strong>Exercise:</strong> Match media lanes <span class="pill">mixed / other</span> <span class="pill">before P3</span> <span class="pill">after P3</span></p>
+      <p><strong>Prompt:</strong> Tap an input-output pair to see how different media can be represented or connected.</p>
+      <p><strong>Expected action:</strong> Tap an input-output media pair.</p>
+      <p><strong>Items / choices / nodes / steps:</strong> image to caption | audio to transcript | text to image</p>
+      <p><strong>Target behavior:</strong> See different media represented or connected together.</p>
+      <p><strong>Feedback behavior:</strong> Representation-not-human-senses feedback.</p>
+      <p><strong>Progress behavior:</strong> No. Journey progress is stored after checkpoint/reflection flow, not by the micro-interaction.</p>
+      <p><strong>Randomization:</strong> No. Exercise controls use fixed order; checkpoint answers remain randomized elsewhere.</p>
+      <p><strong>Fixed order:</strong> Fixed pairs keep multimodal examples concrete.</p>
+      <p><strong>Objective support:</strong> Yes. It practices the lesson mechanism or misconception boundary.</p>
+      <p><strong>Checkpoint duplicate:</strong> No. It gives practice or reveal before checkpoint reasoning.</p>
+      <p><strong>Visual duplicate:</strong> No serious duplicate; it adds a learner action.</p>
+      <p><strong>Mobile notes:</strong> 320px no horizontal overflow; 390px no horizontal overflow; bottom nav does not cover controls after scroll</p>
+      <p><strong>Rubric average:</strong> 4.7/5</p>
+      
+      <p class="pass">No P0/P1 issue remains.</p>
+      
+      <div class="shots">
+        <figure><img src="screenshots/v0-28-10/30-multimodal-320.png" alt="320px interaction screenshot for Multimodal AI"><figcaption>320px</figcaption></figure>
+        <figure><img src="screenshots/v0-28-10/30-multimodal-390.png" alt="390px interaction screenshot for Multimodal AI"><figcaption>390px</figcaption></figure>
+      </div>
+    </section>
+  
+
+    <section class="card">
+      <h3>31. The Perfect Storm</h3>
+      <p><strong>Stage:</strong> Twilight: The Wider Landscape</p>
+      <p><strong>Learning objective:</strong> Modern LLMs became possible when human-created digital data, powerful compute and storage, deep-learning methods, human labor, and economic incentives converged. Practice boundary: LLMs appeared because of one event.</p>
+      <p><strong>Exercise:</strong> Tap storm ingredients <span class="pill">tap-to-cycle</span> <span class="pill">before P3</span> <span class="pill">after P3</span></p>
+      <p><strong>Prompt:</strong> Tap each stream to see why capability came from many converging conditions, not one mysterious spark.</p>
+      <p><strong>Expected action:</strong> Tap converging ingredient streams.</p>
+      <p><strong>Items / choices / nodes / steps:</strong> data | compute | storage | methods | labor | incentives</p>
+      <p><strong>Target behavior:</strong> Reveal convergence rather than one spark.</p>
+      <p><strong>Feedback behavior:</strong> Convergence-not-spark feedback.</p>
+      <p><strong>Progress behavior:</strong> No. Journey progress is stored after checkpoint/reflection flow, not by the micro-interaction.</p>
+      <p><strong>Randomization:</strong> No. Exercise controls use fixed order; checkpoint answers remain randomized elsewhere.</p>
+      <p><strong>Fixed order:</strong> The ingredient list is the concept map.</p>
+      <p><strong>Objective support:</strong> Yes. It practices the lesson mechanism or misconception boundary.</p>
+      <p><strong>Checkpoint duplicate:</strong> No. It gives practice or reveal before checkpoint reasoning.</p>
+      <p><strong>Visual duplicate:</strong> No serious duplicate; it adds a learner action.</p>
+      <p><strong>Mobile notes:</strong> 320px no horizontal overflow; 390px no horizontal overflow; bottom nav does not cover controls after scroll</p>
+      <p><strong>Rubric average:</strong> 4.8/5</p>
+      
+      <p class="pass">No P0/P1 issue remains.</p>
+      
+      <div class="shots">
+        <figure><img src="screenshots/v0-28-10/31-perfect-storm-320.png" alt="320px interaction screenshot for The Perfect Storm"><figcaption>320px</figcaption></figure>
+        <figure><img src="screenshots/v0-28-10/31-perfect-storm-390.png" alt="390px interaction screenshot for The Perfect Storm"><figcaption>390px</figcaption></figure>
+      </div>
+    </section>
+  
+
+    <section class="card">
+      <h3>32. Collective Intelligence, Extracted</h3>
+      <p><strong>Stage:</strong> Midnight Ledger</p>
+      <p><strong>Learning objective:</strong> Generative AI depends on patterns learned from human-created language, art, code, documents, research, and culture. Practice boundary: The model created its abilities alone.</p>
+      <p><strong>Exercise:</strong> Which questions stay human? <span class="pill">sort / group</span> <span class="pill">before P1</span> <span class="pill">after P2</span></p>
+      <p><strong>Prompt:</strong> Sort rights and source questions away from model mechanics.</p>
+      <p><strong>Expected action:</strong> Sort human-rights questions away from model mechanics.</p>
+      <p><strong>Items / choices / nodes / steps:</strong> creator consent | source credit | token probability | weight update</p>
+      <p><strong>Target behavior:</strong> Separate institutional questions from model mechanics.</p>
+      <p><strong>Feedback behavior:</strong> Accountability feedback.</p>
+      <p><strong>Progress behavior:</strong> No. Journey progress is stored after checkpoint/reflection flow, not by the micro-interaction.</p>
+      <p><strong>Randomization:</strong> No. Exercise controls use fixed order; checkpoint answers remain randomized elsewhere.</p>
+      <p><strong>Fixed order:</strong> Fixed set keeps ethics and mechanics separate.</p>
+      <p><strong>Objective support:</strong> Yes. It practices the lesson mechanism or misconception boundary.</p>
+      <p><strong>Checkpoint duplicate:</strong> No. It gives practice or reveal before checkpoint reasoning.</p>
+      <p><strong>Visual duplicate:</strong> Watch during human testing; it may reinforce the visual closely.</p>
+      <p><strong>Mobile notes:</strong> 320px no horizontal overflow; 390px no horizontal overflow; bottom nav does not cover controls after scroll</p>
+      <p><strong>Rubric average:</strong> 4.2/5</p>
+      <p class="fix"><strong>Fixed:</strong> Changed shared sort feedback from “cards” to “items” so sort/group interactions do not sound like Journey-card navigation.</p>
+      <p class="pass">No P0/P1 issue remains.</p>
+      <p class="watch"><strong>Human-test watch:</strong> Watch in human testing for abstraction level, redundancy, or replay value.</p>
+      <div class="shots">
+        <figure><img src="screenshots/v0-28-10/32-collective-intelligence-320.png" alt="320px interaction screenshot for Collective Intelligence, Extracted"><figcaption>320px</figcaption></figure>
+        <figure><img src="screenshots/v0-28-10/32-collective-intelligence-390.png" alt="390px interaction screenshot for Collective Intelligence, Extracted"><figcaption>390px</figcaption></figure>
+      </div>
+    </section>
+  
+
+    <section class="card">
+      <h3>33. Costs We Must Count</h3>
+      <p><strong>Stage:</strong> Midnight Ledger</p>
+      <p><strong>Learning objective:</strong> Generative AI has physical, social, cultural, and ethical costs that must be counted honestly. Practice boundary: Digital means weightless or cost-free.</p>
+      <p><strong>Exercise:</strong> Tap the cost ledger <span class="pill">tap-to-cycle</span> <span class="pill">before P3</span> <span class="pill">after P3</span></p>
+      <p><strong>Prompt:</strong> Tap a ledger entry to see what responsible AI literacy has to count.</p>
+      <p><strong>Expected action:</strong> Tap cost ledger entries.</p>
+      <p><strong>Items / choices / nodes / steps:</strong> energy | water | labor | infrastructure | maintenance</p>
+      <p><strong>Target behavior:</strong> Name costs responsible AI literacy has to count.</p>
+      <p><strong>Feedback behavior:</strong> Countable-cost feedback.</p>
+      <p><strong>Progress behavior:</strong> No. Journey progress is stored after checkpoint/reflection flow, not by the micro-interaction.</p>
+      <p><strong>Randomization:</strong> No. Exercise controls use fixed order; checkpoint answers remain randomized elsewhere.</p>
+      <p><strong>Fixed order:</strong> Ledger order is not assessed.</p>
+      <p><strong>Objective support:</strong> Yes. It practices the lesson mechanism or misconception boundary.</p>
+      <p><strong>Checkpoint duplicate:</strong> No. It gives practice or reveal before checkpoint reasoning.</p>
+      <p><strong>Visual duplicate:</strong> No serious duplicate; it adds a learner action.</p>
+      <p><strong>Mobile notes:</strong> 320px no horizontal overflow; 390px no horizontal overflow; bottom nav does not cover controls after scroll</p>
+      <p><strong>Rubric average:</strong> 4.8/5</p>
+      
+      <p class="pass">No P0/P1 issue remains.</p>
+      
+      <div class="shots">
+        <figure><img src="screenshots/v0-28-10/33-costs-we-must-count-320.png" alt="320px interaction screenshot for Costs We Must Count"><figcaption>320px</figcaption></figure>
+        <figure><img src="screenshots/v0-28-10/33-costs-we-must-count-390.png" alt="390px interaction screenshot for Costs We Must Count"><figcaption>390px</figcaption></figure>
+      </div>
+    </section>
+  
+
+    <section class="card">
+      <h3>34. Risk vs Myth</h3>
+      <p><strong>Stage:</strong> Midnight Ledger</p>
+      <p><strong>Learning objective:</strong> Risk literacy means separating practical, mechanism-based AI risks from myths or unsupported claims about what models are. Practice boundary: Risk only means sci-fi doom, or every fluent model has a mind.</p>
+      <p><strong>Exercise:</strong> Sort risk from myth <span class="pill">sort / group</span> <span class="pill">before P1</span> <span class="pill">after P3</span></p>
+      <p><strong>Prompt:</strong> Sort each claim as a real mechanism risk or an unsupported story.</p>
+      <p><strong>Expected action:</strong> Sort practical risks from unsupported stories.</p>
+      <p><strong>Items / choices / nodes / steps:</strong> privacy leak | bad automation | model wants power | instant omniscience</p>
+      <p><strong>Target behavior:</strong> Separate mechanism-backed risks from myths.</p>
+      <p><strong>Feedback behavior:</strong> Mechanism-risk feedback.</p>
+      <p><strong>Progress behavior:</strong> No. Journey progress is stored after checkpoint/reflection flow, not by the micro-interaction.</p>
+      <p><strong>Randomization:</strong> No. Exercise controls use fixed order; checkpoint answers remain randomized elsewhere.</p>
+      <p><strong>Fixed order:</strong> Stable claims support misconception repair.</p>
+      <p><strong>Objective support:</strong> Yes. It practices the lesson mechanism or misconception boundary.</p>
+      <p><strong>Checkpoint duplicate:</strong> No. It gives practice or reveal before checkpoint reasoning.</p>
+      <p><strong>Visual duplicate:</strong> No serious duplicate; it adds a learner action.</p>
+      <p><strong>Mobile notes:</strong> 320px no horizontal overflow; 390px no horizontal overflow; bottom nav does not cover controls after scroll</p>
+      <p><strong>Rubric average:</strong> 4.7/5</p>
+      <p class="fix"><strong>Fixed:</strong> Changed shared sort feedback from “cards” to “items” so sort/group interactions do not sound like Journey-card navigation.</p>
+      <p class="pass">No P0/P1 issue remains.</p>
+      
+      <div class="shots">
+        <figure><img src="screenshots/v0-28-10/34-risk-myth-320.png" alt="320px interaction screenshot for Risk vs Myth"><figcaption>320px</figcaption></figure>
+        <figure><img src="screenshots/v0-28-10/34-risk-myth-390.png" alt="390px interaction screenshot for Risk vs Myth"><figcaption>390px</figcaption></figure>
+      </div>
+    </section>
+  
+
+    <section class="card">
+      <h3>35. Benefits Worth Taking Seriously</h3>
+      <p><strong>Stage:</strong> New Dawn</p>
+      <p><strong>Learning objective:</strong> AI benefits are strongest when models amplify human judgment rather than replacing accountability. Practice boundary: AI benefits require believing in imminent utopia.</p>
+      <p><strong>Exercise:</strong> Sort benefit strength <span class="pill">sort / group</span> <span class="pill">before P1</span> <span class="pill">after P2</span></p>
+      <p><strong>Prompt:</strong> Sort benefit claims by confidence: useful now with review, plausible with safeguards, or speculative hype.</p>
+      <p><strong>Expected action:</strong> Sort benefit claims by evidence strength.</p>
+      <p><strong>Items / choices / nodes / steps:</strong> useful with review | plausible with safeguards | speculative hype</p>
+      <p><strong>Target behavior:</strong> Classify benefits without hype.</p>
+      <p><strong>Feedback behavior:</strong> Bounded-benefit feedback.</p>
+      <p><strong>Progress behavior:</strong> No. Journey progress is stored after checkpoint/reflection flow, not by the micro-interaction.</p>
+      <p><strong>Randomization:</strong> No. Exercise controls use fixed order; checkpoint answers remain randomized elsewhere.</p>
+      <p><strong>Fixed order:</strong> The three tiers are the reasoning frame.</p>
+      <p><strong>Objective support:</strong> Yes. It practices the lesson mechanism or misconception boundary.</p>
+      <p><strong>Checkpoint duplicate:</strong> No. It gives practice or reveal before checkpoint reasoning.</p>
+      <p><strong>Visual duplicate:</strong> Watch during human testing; it may reinforce the visual closely.</p>
+      <p><strong>Mobile notes:</strong> 320px no horizontal overflow; 390px no horizontal overflow; bottom nav does not cover controls after scroll</p>
+      <p><strong>Rubric average:</strong> 4.2/5</p>
+      <p class="fix"><strong>Fixed:</strong> Changed shared sort feedback from “cards” to “items” so sort/group interactions do not sound like Journey-card navigation.</p>
+      <p class="pass">No P0/P1 issue remains.</p>
+      <p class="watch"><strong>Human-test watch:</strong> Watch in human testing for abstraction level, redundancy, or replay value.</p>
+      <div class="shots">
+        <figure><img src="screenshots/v0-28-10/35-benefits-worth-taking-seriously-320.png" alt="320px interaction screenshot for Benefits Worth Taking Seriously"><figcaption>320px</figcaption></figure>
+        <figure><img src="screenshots/v0-28-10/35-benefits-worth-taking-seriously-390.png" alt="390px interaction screenshot for Benefits Worth Taking Seriously"><figcaption>390px</figcaption></figure>
+      </div>
+    </section>
+  
+
+    <section class="card">
+      <h3>36. Human-Centered AI</h3>
+      <p><strong>Stage:</strong> New Dawn</p>
+      <p><strong>Learning objective:</strong> Human-centered AI asks whether a system supports dignity, learning, responsibility, creativity, relationships, and the common good. Practice boundary: If AI is powerful, it should decide.</p>
+      <p><strong>Exercise:</strong> Center the human purpose <span class="pill">single choice</span> <span class="pill">before P3</span> <span class="pill">after P3</span></p>
+      <p><strong>Prompt:</strong> Choose the deployment that keeps people, review, and institutional accountability visible.</p>
+      <p><strong>Expected action:</strong> Choose the more human-centered deployment.</p>
+      <p><strong>Items / choices / nodes / steps:</strong> reviewable workflow | blind automation</p>
+      <p><strong>Target behavior:</strong> Select the accountable deployment.</p>
+      <p><strong>Feedback behavior:</strong> Review-and-accountability feedback.</p>
+      <p><strong>Progress behavior:</strong> No. Journey progress is stored after checkpoint/reflection flow, not by the micro-interaction.</p>
+      <p><strong>Randomization:</strong> No. Exercise controls use fixed order; checkpoint answers remain randomized elsewhere.</p>
+      <p><strong>Fixed order:</strong> The two scenarios form a boundary contrast.</p>
+      <p><strong>Objective support:</strong> Yes. It practices the lesson mechanism or misconception boundary.</p>
+      <p><strong>Checkpoint duplicate:</strong> Partial risk: watch during human testing so it does not feel like a second checkpoint.</p>
+      <p><strong>Visual duplicate:</strong> No serious duplicate; it adds a learner action.</p>
+      <p><strong>Mobile notes:</strong> 320px no horizontal overflow; 390px no horizontal overflow; bottom nav does not cover controls after scroll</p>
+      <p><strong>Rubric average:</strong> 4.8/5</p>
+      
+      <p class="pass">No P0/P1 issue remains.</p>
+      
+      <div class="shots">
+        <figure><img src="screenshots/v0-28-10/36-human-centered-ai-320.png" alt="320px interaction screenshot for Human-Centered AI"><figcaption>320px</figcaption></figure>
+        <figure><img src="screenshots/v0-28-10/36-human-centered-ai-390.png" alt="390px interaction screenshot for Human-Centered AI"><figcaption>390px</figcaption></figure>
+      </div>
+    </section>
+  
+
+    <section class="card">
+      <h3>37. Better AI Is a Choice</h3>
+      <p><strong>Stage:</strong> New Dawn</p>
+      <p><strong>Learning objective:</strong> The costs are shaped by design, deployment, governance, and incentives. Practice boundary: The harms are inevitable if the technology is useful.</p>
+      <p><strong>Exercise:</strong> Choose the better path <span class="pill">multi-select</span> <span class="pill">before P1</span> <span class="pill">after P3</span></p>
+      <p><strong>Prompt:</strong> Choose all design and governance levers that reduce risk or cost for an internal policy assistant.</p>
+      <p><strong>Expected action:</strong> Choose all design and governance levers that reduce risk or cost.</p>
+      <p><strong>Items / choices / nodes / steps:</strong> approved RAG | privacy | source review | task-fit model | monitoring | bad counterexamples</p>
+      <p><strong>Target behavior:</strong> Select all useful levers and no risky counterexamples.</p>
+      <p><strong>Feedback behavior:</strong> Selected lever feedback plus risk correction.</p>
+      <p><strong>Progress behavior:</strong> No. Journey progress is stored after checkpoint/reflection flow, not by the micro-interaction.</p>
+      <p><strong>Randomization:</strong> No. Exercise controls use fixed order; checkpoint answers remain randomized elsewhere.</p>
+      <p><strong>Fixed order:</strong> Fixed options keep multi-select review short.</p>
+      <p><strong>Objective support:</strong> Yes. It practices the lesson mechanism or misconception boundary.</p>
+      <p><strong>Checkpoint duplicate:</strong> No. It gives practice or reveal before checkpoint reasoning.</p>
+      <p><strong>Visual duplicate:</strong> No serious duplicate; it adds a learner action.</p>
+      <p><strong>Mobile notes:</strong> 320px no horizontal overflow; 390px no horizontal overflow; bottom nav does not cover controls after scroll</p>
+      <p><strong>Rubric average:</strong> 4.7/5</p>
+      <p class="fix"><strong>Fixed:</strong> Added explicit “Choose all” language for the multi-select governance levers.</p>
+      <p class="pass">No P0/P1 issue remains.</p>
+      
+      <div class="shots">
+        <figure><img src="screenshots/v0-28-10/37-better-ai-choice-320.png" alt="320px interaction screenshot for Better AI Is a Choice"><figcaption>320px</figcaption></figure>
+        <figure><img src="screenshots/v0-28-10/37-better-ai-choice-390.png" alt="390px interaction screenshot for Better AI Is a Choice"><figcaption>390px</figcaption></figure>
+      </div>
+    </section>
+  
+
+    <section class="card">
+      <h3>38. Effective Prompting from Model Literacy</h3>
+      <p><strong>Stage:</strong> New Dawn</p>
+      <p><strong>Learning objective:</strong> Good prompts work because they shape the current context: task, constraints, examples, data, audience, evidence needs, uncertainty, and output format. Practice boundary: Prompting is special wording or permanent teaching.</p>
+      <p><strong>Exercise:</strong> Pack the context tray <span class="pill">multi-select</span> <span class="pill">before P1</span> <span class="pill">after P3</span></p>
+      <p><strong>Prompt:</strong> Choose all missing prompt parts: task, audience/context, constraints, examples, evidence, uncertainty, format, and review cues.</p>
+      <p><strong>Expected action:</strong> Choose all missing context parts for a stronger prompt.</p>
+      <p><strong>Items / choices / nodes / steps:</strong> task | audience | constraints | examples | format | evidence | uncertainty | review</p>
+      <p><strong>Target behavior:</strong> Add all missing prompt parts while keeping the task fixed.</p>
+      <p><strong>Feedback behavior:</strong> Context-design feedback.</p>
+      <p><strong>Progress behavior:</strong> No. Journey progress is stored after checkpoint/reflection flow, not by the micro-interaction.</p>
+      <p><strong>Randomization:</strong> No. Exercise controls use fixed order; checkpoint answers remain randomized elsewhere.</p>
+      <p><strong>Fixed order:</strong> Stable parts reinforce prompt-as-context design.</p>
+      <p><strong>Objective support:</strong> Yes. It practices the lesson mechanism or misconception boundary.</p>
+      <p><strong>Checkpoint duplicate:</strong> No. It gives practice or reveal before checkpoint reasoning.</p>
+      <p><strong>Visual duplicate:</strong> No serious duplicate; it adds a learner action.</p>
+      <p><strong>Mobile notes:</strong> 320px no horizontal overflow; 390px no horizontal overflow; bottom nav does not cover controls after scroll</p>
+      <p><strong>Rubric average:</strong> 4.7/5</p>
+      <p class="fix"><strong>Fixed:</strong> Added explicit “Choose all” language for the multi-select prompt-part picker.</p>
+      <p class="pass">No P0/P1 issue remains.</p>
+      
+      <div class="shots">
+        <figure><img src="screenshots/v0-28-10/38-effective-prompting-literacy-320.png" alt="320px interaction screenshot for Effective Prompting from Model Literacy"><figcaption>320px</figcaption></figure>
+        <figure><img src="screenshots/v0-28-10/38-effective-prompting-literacy-390.png" alt="390px interaction screenshot for Effective Prompting from Model Literacy"><figcaption>390px</figcaption></figure>
+      </div>
+    </section>
+  
+
+    <section class="card">
+      <h3>39. Model Literate Synthesis</h3>
+      <p><strong>Stage:</strong> New Dawn</p>
+      <p><strong>Learning objective:</strong> Model literacy means understanding both the mechanics and the human consequences. Practice boundary: Fluency equals understanding or wisdom.</p>
+      <p><strong>Exercise:</strong> Light the map <span class="pill">ordered sequence</span> <span class="pill">before P2</span> <span class="pill">after P2</span></p>
+      <p><strong>Prompt:</strong> Put the model story in order, from prompt context to human accountability.</p>
+      <p><strong>Expected action:</strong> Put the model-literacy chain in order.</p>
+      <p><strong>Items / choices / nodes / steps:</strong> prompt | tokens | hidden states | logits | softmax | sample | append | human review</p>
+      <p><strong>Target behavior:</strong> Order the mechanics-to-accountability chain.</p>
+      <p><strong>Feedback behavior:</strong> Mechanics-to-accountability feedback.</p>
+      <p><strong>Progress behavior:</strong> No. Journey progress is stored after checkpoint/reflection flow, not by the micro-interaction.</p>
+      <p><strong>Randomization:</strong> No. Exercise controls use fixed order; checkpoint answers remain randomized elsewhere.</p>
+      <p><strong>Fixed order:</strong> The synthesis is explicitly sequential.</p>
+      <p><strong>Objective support:</strong> Yes. It practices the lesson mechanism or misconception boundary.</p>
+      <p><strong>Checkpoint duplicate:</strong> No. It gives practice or reveal before checkpoint reasoning.</p>
+      <p><strong>Visual duplicate:</strong> Watch during human testing; it may reinforce the visual closely.</p>
+      <p><strong>Mobile notes:</strong> 320px no horizontal overflow; 390px no horizontal overflow; bottom nav does not cover controls after scroll</p>
+      <p><strong>Rubric average:</strong> 4/5</p>
+      
+      <p class="pass">No P0/P1 issue remains.</p>
+      <p class="watch"><strong>Human-test watch:</strong> Watch in human testing for abstraction level, redundancy, or replay value.</p>
+      <div class="shots">
+        <figure><img src="screenshots/v0-28-10/39-model-literate-synthesis-320.png" alt="320px interaction screenshot for Model Literate Synthesis"><figcaption>320px</figcaption></figure>
+        <figure><img src="screenshots/v0-28-10/39-model-literate-synthesis-390.png" alt="390px interaction screenshot for Model Literate Synthesis"><figcaption>390px</figcaption></figure>
+      </div>
+    </section>
+  
+</body>
+</html>

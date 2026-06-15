@@ -671,7 +671,7 @@ export const lessons = [
     incorrectAnswers: ['Only a complete word', 'A permanent memory', 'A whole finished answer'],
     feedbackCorrect: 'Insight strengthened. Tokens are model-readable chunks, not always human words.',
     feedbackIncorrect: 'Not quite. Tokens are chunks chosen by a tokenizer, and they do not have to match human word boundaries.',
-    interaction: { type: 'tokenization-split', title: 'Split the sentence', copy: 'Tap once for token cards, then show uneven chunks and punctuation.' },
+    interaction: { type: 'tokenization-split', title: 'Split the sentence', copy: 'Tap once for token pieces, then show uneven chunks and punctuation.' },
     quiz: {
       question: 'What can a token be?',
       choices: ['A word, word piece, punctuation mark, or other text chunk', 'Only a complete word', 'A permanent memory', 'A whole finished answer'],
@@ -1317,7 +1317,7 @@ export const lessons = [
     incorrectAnswers: ['It becomes permanent memory.', 'It updates the weights.', 'It is always retrieved automatically.'],
     feedbackCorrect: 'Insight strengthened. The model can only use what remains visible in the current context.',
     feedbackIncorrect: 'Not quite. Context is temporary input; falling out of context is not training, memory, or automatic retrieval.',
-    interaction: { type: 'context-window-tray', title: 'Push the context cards', copy: 'Tap cards into a four-slot window and watch the oldest card fall out.' },
+    interaction: { type: 'context-window-tray', title: 'Push the context items', copy: 'Tap items into a four-slot window and watch the oldest item fall out.' },
     quiz: {
       question: 'What happens to information outside the context window?',
       choices: ['The model cannot directly use it in the current run.', 'It becomes permanent memory.', 'It updates the weights.', 'It is always retrieved automatically.'],
@@ -1949,7 +1949,7 @@ export const lessons = [
     incorrectAnswers: ['Assume bigger is always better', 'Remove all human accountability', 'Ignore data provenance'],
     feedbackCorrect: 'Insight unlocked: better AI is shaped by design and governance choices.',
     feedbackIncorrect: 'Not quite. Responsible systems depend on choices about scale, data, review, privacy, and evaluation.',
-    interaction: { type: 'better-ai-levers', title: 'Choose the better path', copy: 'Tap the design and governance levers that reduce risk or cost for an internal policy assistant.' },
+    interaction: { type: 'better-ai-levers', title: 'Choose the better path', copy: 'Choose all design and governance levers that reduce risk or cost for an internal policy assistant.' },
     quiz: {
       question: 'Which choice can reduce some AI risks?',
       choices: ['Use retrieval and human review when they fit the task', 'Assume bigger is always better', 'Remove all human accountability', 'Ignore data provenance'],
@@ -1998,7 +1998,7 @@ export const lessons = [
     incorrectAnswers: ['The model’s permanent weights', 'The model’s consciousness', 'A guarantee that every answer is true'],
     feedbackCorrect: 'Insight unlocked: prompting is context design.',
     feedbackIncorrect: 'Not quite. Prompting can help the current run, but it is not ordinary training or a truth guarantee.',
-    interaction: { type: 'prompt-builder', title: 'Pack the context tray', copy: 'Build a better prompt by adding task, audience/context, constraints, examples, evidence, uncertainty, format, and review cues.' },
+    interaction: { type: 'prompt-builder', title: 'Pack the context tray', copy: 'Choose all missing prompt parts: task, audience/context, constraints, examples, evidence, uncertainty, format, and review cues.' },
     quiz: {
       question: 'What does a good prompt usually shape?',
       choices: ['The current context for this run', 'The model’s permanent weights', 'The model’s consciousness', 'A guarantee that every answer is true'],

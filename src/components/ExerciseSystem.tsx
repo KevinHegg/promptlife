@@ -582,13 +582,13 @@ function ContextPreview({ sequence, windowSize }: { sequence: string[], windowSi
   const visibleStart = Math.max(0, sequence.length - windowSize)
   return (
     <div className="context-preview" aria-label="Context window preview">
-      <strong>After all cards enter</strong>
+      <strong>After all items enter</strong>
       <div>
         {sequence.map((item, index) => (
           <span key={item} className={index < visibleStart ? 'fell-out' : 'visible'}>{item}</span>
         ))}
       </div>
-      <small>Patterned cards fell out; solid cards remain visible.</small>
+      <small>Patterned items fell out; solid items remain visible.</small>
     </div>
   )
 }

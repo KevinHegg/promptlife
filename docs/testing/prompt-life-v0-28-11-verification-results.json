@@ -1,0 +1,65 @@
+{
+  "generatedAt": "2026-06-15T18:46:50.780Z",
+  "results": [
+    {
+      "command": "npm run typecheck",
+      "status": 0
+    },
+    {
+      "command": "npm run build",
+      "status": 0
+    },
+    {
+      "command": "npm run build:pages",
+      "status": 0
+    },
+    {
+      "command": "npm run audit:answers",
+      "status": 0
+    },
+    {
+      "command": "npm run audit:checkpoints",
+      "status": 0
+    },
+    {
+      "command": "npm run audit:question-clues",
+      "status": 0
+    },
+    {
+      "command": "npm run audit:learner-copy",
+      "status": 0
+    },
+    {
+      "command": "npm run audit:learner-leaks",
+      "status": 0
+    },
+    {
+      "command": "npm run audit:language",
+      "status": 0
+    },
+    {
+      "command": "npm run audit:visual-assets",
+      "status": 0
+    },
+    {
+      "command": "npm run audit:visual-aids",
+      "status": 0
+    },
+    {
+      "command": "npm run audit:visual-overflow",
+      "status": 0
+    },
+    {
+      "command": "npm run audit:word-wrap",
+      "status": 0
+    },
+    {
+      "command": "npm run audit:exercises",
+      "status": 0
+    },
+    {
+      "command": "npm audit --audit-level=high",
+      "status": 0
+    }
+  ]
+}

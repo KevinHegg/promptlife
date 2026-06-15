@@ -70,6 +70,7 @@
     "scripts/generate-image2-replacement-batch-report-v0287.mjs",
     "scripts/generate-image2-source-processing-report-v0287b.mjs",
     "scripts/generate-learner-copy-leak-report-v0288.mjs",
+    "scripts/generate-small-human-test-rc-v02811.mjs",
     "scripts/generate-visual-aid-quality-v02717.mjs",
     "scripts/generate-visual-aid-readiness-v0280.mjs",
     "scripts/generate-visual-aid-readiness-v0281.mjs",

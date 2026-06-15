@@ -303,22 +303,22 @@ export const exercises: Exercise[] = [
     id: 'context-window-fell-out',
     title: 'Context Window: What Fell Out?',
     concept: 'Temporary visible context',
-    prompt: 'A context window can only hold the newest four cards.',
+    prompt: 'A context window can only hold the newest four items.',
     goal: 'Identify which older information the model can no longer use after the window fills.',
     actionVerb: 'Tap',
-    actionInstruction: 'Tap a card that fell out of the current context window.',
+    actionInstruction: 'Tap an item that fell out of the current context window.',
     inputType: 'tap-choice',
     sequence: ['System: be concise', 'User: explain LLMs', 'Example: pet-conflict sentence', 'Tone: academic', 'Distractor: jokes', 'Output: three bullets'],
     windowSize: 4,
     items: [
       { id: 'system', label: 'System: be concise', correct: true },
       { id: 'user', label: 'User: explain LLMs', correct: true },
-      { id: 'tone', label: 'Tone: academic', feedback: 'Tone is still inside the last four cards, so it remains visible.' },
-      { id: 'output', label: 'Output: three bullets', feedback: 'Output is the newest card, so it remains visible.' }
+      { id: 'tone', label: 'Tone: academic', feedback: 'Tone is still inside the last four items, so it remains visible.' },
+      { id: 'output', label: 'Output: three bullets', feedback: 'Output is the newest item, so it remains visible.' }
     ],
     correctAnswer: ['system', 'user'],
-    feedbackCorrect: 'Good. Older cards fell out when newer cards entered the limited window.',
-    feedbackIncorrect: 'That card is still in the current window. The oldest cards are no longer visible.',
+    feedbackCorrect: 'Good. Older items fell out when newer items entered the limited window.',
+    feedbackIncorrect: 'That item is still in the current window. The oldest items are no longer visible.',
     insight: 'The model can only use what fits in the current context window.',
     glossaryTerms: ['context window', 'prompt token', 'input context', 'memory'],
     completionKey: 'exercise:context-window-fell-out'

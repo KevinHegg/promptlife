@@ -1,0 +1,162 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Prompt Life v0.28.11 Small Human Test Release Candidate</title>
+  <style>
+    body { font-family: Inter, Arial, sans-serif; color: #07155f; margin: 32px; line-height: 1.45; }
+    h1, h2, h3 { color: #101a7a; }
+    section { border: 1px solid #d8def0; border-radius: 10px; padding: 16px; margin: 0 0 18px; break-inside: avoid; }
+    .pill { display: inline-block; border-radius: 999px; background: #e9fffb; color: #075f5e; padding: 4px 10px; font-weight: 900; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    figure { margin: 0; break-inside: avoid; }
+    img { width: 100%; max-height: 430px; object-fit: contain; border: 1px solid #d8def0; border-radius: 8px; background: #f8fbff; }
+    figcaption { font-size: 12px; font-weight: 800; margin-top: 4px; }
+    li { margin: 0.25rem 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    th, td { border-bottom: 1px solid #d8def0; padding: 7px; text-align: left; vertical-align: top; }
+  </style>
+</head>
+<body>
+  <h1>Prompt Life v0.28.11 Small Human Test Release Candidate</h1>
+  <section>
+    <p><strong>Generated:</strong> 2026-06-15T18:47:22.919Z</p>
+    <p><span class="pill">Ready for small human testing</span></p>
+    <p>Prompt Life is under development. The single badge remains under construction, pending human review, and not issued.</p>
+  </section>
+  <section>
+    <h2>Summary</h2>
+    <ul>
+      <li>Final learner-facing label cleanup changed Tiny interaction to Try interaction.</li>
+      <li>Human-test packet and short feedback-form copy were created for colleague, friend, and family testing.</li>
+      <li>Release-candidate QA captured core learner screens at 390px.</li>
+      <li>No new features, checkpoint rewrites, Play changes, or Badge model changes were added.</li>
+    </ul>
+  </section>
+  <section>
+    <h2>Current App Status</h2>
+    <ul>
+      <li>Journey: 39 cards active.</li>
+      <li>Checkpoints: active and randomized by identity.</li>
+      <li>Visuals: 12 Image 2 concept-card manifest entries live; coded mechanism visuals remain where exact mechanics matter.</li>
+      <li>Exercises: 39 Journey Try Interactions inventoried in v0.28.10; P0 and P1 count is zero.</li>
+      <li>Play, Glossary, and Badge remain available for smoke testing.</li>
+    </ul>
+  </section>
+  <section>
+    <h2>Ready For Small Human Testing</h2>
+    <ul>
+      <li>Learner copy has passed leak, language, word-wrap, and visual audits.</li>
+      <li>Human testers can now try a short slice: Journey cards, checkpoints, Try Interactions, Glossary, Play, and Badge page glance.</li>
+      <li>Wrong-answer checkpoint feedback remains instructive without revealing the correct answer directly.</li>
+    </ul>
+  </section>
+  <section>
+    <h2>Not Final</h2>
+    <ul>
+      <li>The badge is not issued.</li>
+      <li>The Badge page is still under construction and pending human review.</li>
+      <li>Human testing should decide whether the P2 watch interactions need simplification.</li>
+    </ul>
+  </section>
+  <section>
+    <h2>Known Watch Items</h2>
+    <ul><li>What Is an LLM?</li><li>Vectors</li><li>Tensors</li><li>Sampling</li><li>Collective Intelligence, Extracted</li><li>Benefits Worth Taking Seriously</li><li>Model Literate Synthesis</li></ul>
+  </section>
+  <section>
+    <h2>Audit Results</h2>
+    <table>
+      <thead><tr><th>Command</th><th>Status</th></tr></thead>
+      <tbody><tr><td><code>npm run typecheck</code></td><td>pass</td></tr><tr><td><code>npm run build</code></td><td>pass</td></tr><tr><td><code>npm run build:pages</code></td><td>pass</td></tr><tr><td><code>npm run audit:answers</code></td><td>pass</td></tr><tr><td><code>npm run audit:checkpoints</code></td><td>pass</td></tr><tr><td><code>npm run audit:question-clues</code></td><td>pass</td></tr><tr><td><code>npm run audit:learner-copy</code></td><td>pass</td></tr><tr><td><code>npm run audit:learner-leaks</code></td><td>pass</td></tr><tr><td><code>npm run audit:language</code></td><td>pass</td></tr><tr><td><code>npm run audit:visual-assets</code></td><td>pass</td></tr><tr><td><code>npm run audit:visual-aids</code></td><td>pass</td></tr><tr><td><code>npm run audit:visual-overflow</code></td><td>pass</td></tr><tr><td><code>npm run audit:word-wrap</code></td><td>pass</td></tr><tr><td><code>npm run audit:exercises</code></td><td>pass</td></tr><tr><td><code>npm audit --audit-level=high</code></td><td>pass</td></tr></tbody>
+    </table>
+  </section>
+  <section>
+    <h2>Manual QA Results</h2>
+    <table>
+      <thead><tr><th>Check</th><th>Status</th><th>Detail</th></tr></thead>
+      <tbody><tr><td>stage navigation links</td><td>pass</td><td>8 stage buttons; horizontal overflow 0px.</td></tr><tr><td>checkpoint wrong-answer no-reveal</td><td>pass</td><td>Wrong choice showed targeted feedback and did not reveal the correct answer.</td></tr><tr><td>checkpoint multi-question sequence</td><td>pass</td><td>Before: 1 of 2 questions; after: 2 of 2 questions.</td></tr><tr><td>badge status language</td><td>pass</td><td>Badge page checked for under construction, pending human review, and not issued language.</td></tr><tr><td>rendered process-language scan</td><td>pass</td><td>No Tiny Interaction, magic, debug notes, placeholder asset text, or process-language leaks in captured learner screens.</td></tr><tr><td>390px overflow and bottom nav</td><td>pass</td><td>No horizontal overflow or bottom-nav coverage found in captured 390px screens.</td></tr></tbody>
+    </table>
+  </section>
+  <section>
+    <h2>Screenshots</h2>
+    <div class="grid">
+    <figure>
+      <img src="screenshots/v0-28-11/home-390.png" alt="Home at 390px">
+      <figcaption>Home at 390px</figcaption>
+    </figure>
+  
+
+    <figure>
+      <img src="screenshots/v0-28-11/journey-390.png" alt="Journey at 390px">
+      <figcaption>Journey at 390px</figcaption>
+    </figure>
+  
+
+    <figure>
+      <img src="screenshots/v0-28-11/journey-first-card-390.png" alt="Journey first card at 390px">
+      <figcaption>Journey first card at 390px</figcaption>
+    </figure>
+  
+
+    <figure>
+      <img src="screenshots/v0-28-11/stage-1-image2-390.png" alt="Stage 1 Image 2 card at 390px">
+      <figcaption>Stage 1 Image 2 card at 390px</figcaption>
+    </figure>
+  
+
+    <figure>
+      <img src="screenshots/v0-28-11/stage-7-image2-390.png" alt="Stage 7 Image 2 card at 390px">
+      <figcaption>Stage 7 Image 2 card at 390px</figcaption>
+    </figure>
+  
+
+    <figure>
+      <img src="screenshots/v0-28-11/exercise-context-window-390.png" alt="Try Interaction at 390px">
+      <figcaption>Try Interaction at 390px</figcaption>
+    </figure>
+  
+
+    <figure>
+      <img src="screenshots/v0-28-11/checkpoint-wrong-no-reveal-390.png" alt="Checkpoint wrong-answer no-reveal at 390px">
+      <figcaption>Checkpoint wrong-answer no-reveal at 390px</figcaption>
+    </figure>
+  
+
+    <figure>
+      <img src="screenshots/v0-28-11/checkpoint-sequence-390.png" alt="Checkpoint multi-question sequence at 390px">
+      <figcaption>Checkpoint multi-question sequence at 390px</figcaption>
+    </figure>
+  
+
+    <figure>
+      <img src="screenshots/v0-28-11/glossary-390.png" alt="Glossary at 390px">
+      <figcaption>Glossary at 390px</figcaption>
+    </figure>
+  
+
+    <figure>
+      <img src="screenshots/v0-28-11/play-390.png" alt="Play at 390px">
+      <figcaption>Play at 390px</figcaption>
+    </figure>
+  
+
+    <figure>
+      <img src="screenshots/v0-28-11/badge-390.png" alt="Badge at 390px">
+      <figcaption>Badge at 390px</figcaption>
+    </figure>
+  </div>
+  </section>
+  <section>
+    <h2>Files Changed At Report Time</h2>
+    <ul><li>M docs/audits/learner-copy-leak-audit-v0-28-8.json</li><li>M docs/audits/learner-copy-leak-audit-v0-28-8.md</li><li>M docs/audits/screenshots/v0-28-8-learner-leaks/badge-smoke-390.png</li><li>M docs/audits/screenshots/v0-28-8-learner-leaks/image2-perfect-storm-390.png</li><li>M docs/journey/checkpoints/question-clue-audit-v0-27-15.md</li><li>M docs/journey/visual-aids/flowchart-replacement-audit-v0-28-3.json</li><li>M docs/journey/visual-aids/flowchart-replacement-audit-v0-28-3.md</li><li>M docs/journey/visual-aids/visual-aid-consistency-audit-v0-28-3.md</li><li>M docs/journey/visual-aids/visual-aid-readiness-audit-v0-28-3.md</li><li>M docs/journey/visual-aids/visual-asset-audit-v0-28-9.json</li><li>M docs/journey/visual-aids/visual-asset-audit-v0-28-9.md</li><li>M docs/journey/visual-aids/visual-overflow-audit-v0-28-3.json</li><li>M docs/journey/visual-aids/visual-overflow-audit-v0-28-3.md</li><li>M docs/journey/visual-aids/word-wrap-audit-v0-28-4.json</li><li>M package-lock.json</li><li>M package.json</li><li>M scripts/audit-exercises.mjs</li><li>M src/components/ExerciseSystem.tsx</li><li>M src/data/content.ts</li><li>M src/data/exercises.ts</li><li>M src/main.tsx</li><li>?? docs/journey/exercises/journey-exercise-inventory-v0-28-10.csv</li><li>?? docs/journey/exercises/journey-exercise-inventory-v0-28-10.json</li><li>?? docs/journey/exercises/journey-exercise-inventory-v0-28-10.md</li><li>?? docs/journey/exercises/prompt-life-v0-28-10-journey-exercise-review.html</li><li>?? docs/journey/exercises/prompt-life-v0-28-10-journey-exercise-review.pdf</li><li>?? docs/journey/exercises/screenshots/v0-28-10/</li><li>?? docs/testing/prompt-life-v0-28-10-exercise-human-feedback.html</li><li>?? docs/testing/prompt-life-v0-28-10-exercise-human-feedback.md</li><li>?? docs/testing/prompt-life-v0-28-10-exercise-human-feedback.pdf</li><li>?? docs/testing/prompt-life-v0-28-11-feedback-form-copy.md</li><li>?? docs/testing/prompt-life-v0-28-11-manual-qa.json</li><li>?? docs/testing/prompt-life-v0-28-11-small-human-test-packet.html</li><li>?? docs/testing/prompt-life-v0-28-11-small-human-test-packet.md</li><li>?? docs/testing/prompt-life-v0-28-11-small-human-test-packet.pdf</li><li>?? docs/testing/prompt-life-v0-28-11-small-human-test-release-candidate-report.html</li><li>?? docs/testing/prompt-life-v0-28-11-small-human-test-release-candidate-report.pdf</li><li>?? docs/testing/prompt-life-v0-28-11-verification-results.json</li><li>?? docs/testing/screenshots/</li><li>?? &quot;public/assets/journey-visuals/v0-28/optimized/alignment 2.png&quot;</li><li>?? &quot;public/assets/journey-visuals/v0-28/optimized/benefits-worth-taking-seriously 2.png&quot;</li><li>?? &quot;public/assets/journey-visuals/v0-28/optimized/better-ai-choice 2.png&quot;</li><li>?? &quot;public/assets/journey-visuals/v0-28/optimized/multimodal-ai 2.png&quot;</li><li>?? &quot;public/assets/journey-visuals/v0-28/optimized/what-is-an-llm 2.png&quot;</li><li>?? &quot;public/assets/journey-visuals/v0-28/thumbnails/alignment 2.png&quot;</li><li>?? &quot;public/assets/journey-visuals/v0-28/thumbnails/benefits-worth-taking-seriously 2.png&quot;</li><li>?? &quot;public/assets/journey-visuals/v0-28/thumbnails/better-ai-choice 2.png&quot;</li><li>?? &quot;public/assets/journey-visuals/v0-28/thumbnails/multimodal-ai 2.png&quot;</li><li>?? &quot;public/assets/journey-visuals/v0-28/thumbnails/what-is-an-llm 2.png&quot;</li><li>?? scripts/generate-small-human-test-rc-v02811.mjs</li></ul>
+  </section>
+  <section>
+    <h2>Human-Test Packet Links</h2>
+    <ul>
+      <li>docs/testing/prompt-life-v0-28-11-small-human-test-packet.md</li>
+      <li>docs/testing/prompt-life-v0-28-11-small-human-test-packet.pdf</li>
+      <li>docs/testing/prompt-life-v0-28-11-feedback-form-copy.md</li>
+    </ul>
+  </section>
+</body>
+</html>

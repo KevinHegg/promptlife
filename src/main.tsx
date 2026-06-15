@@ -72,7 +72,7 @@ const HOME_ASSETS = {
   heroFallback: `${ASSET}/illustrations/scene-hero-feature-cloud@mobile.png`
 }
 // Bump this for each shipped app change; the Badge screen displays it under Start over.
-const APP_VERSION = '0.28.9'
+const APP_VERSION = '0.28.12'
 const STORAGE_KEYS = {
   lastLocation: 'promptlife:v1:lastLocation',
   lessonId: 'promptlife:v1:lessonId',
@@ -1239,7 +1239,7 @@ function LessonScreen({ lesson, mode, lessonIndex, totalLessons, reflection, onC
       )}
 
       <section className="lesson-panel interaction-card" aria-labelledby="interaction-title">
-        <span className="step-label">Tiny interaction</span>
+        <span className="step-label">Try interaction</span>
         <h2 id="interaction-title">{lesson.interaction.title}</h2>
         <MicroInteraction type={lesson.interaction.type} />
         <p>{lesson.interaction.copy}</p>
@@ -1961,7 +1961,7 @@ function ContextWindowTrayInteraction() {
       <p className={fallen.length ? 'micro-feedback good' : 'micro-feedback'} role="status">
         {fallen.length
           ? 'Insight strengthened. The model can only use what remains visible in the current context.'
-          : 'Push cards into the tray. When the fifth card enters, the oldest one falls out.'}
+          : 'Push items into the tray. When the fifth item enters, the oldest one falls out.'}
       </p>
     </div>
   )
@@ -3046,7 +3046,7 @@ function BetterAiLeversInteraction() {
 
   return (
     <div className="morning-interaction new-dawn-interaction better-ai-levers-demo">
-      <p className="micro-prompt">A department wants an AI assistant for internal policy questions. Tap the better-AI levers.</p>
+      <p className="micro-prompt">A department wants an AI assistant for internal policy questions. Choose all better-AI levers.</p>
       <div className="lever-panel" role="group" aria-label="Better AI design and governance levers">
         {levers.map((lever) => (
           <button
@@ -3100,7 +3100,7 @@ function PromptBuilderInteraction() {
 
   return (
     <div className="morning-interaction new-dawn-interaction prompt-builder-demo">
-      <p className="micro-prompt">Build a better prompt by adding the missing context parts.</p>
+      <p className="micro-prompt">Choose all missing context parts to build a better prompt.</p>
       <div className="prompt-draft-card" aria-live="polite">
         <span>Current prompt</span>
         <p>{prompt}</p>
@@ -3233,7 +3233,7 @@ function CycleSortInteraction({ label, categories, items, insight, successLabel 
           </div>
         ))}
       </div>
-      <p aria-live="polite">{allAssigned ? (allCorrect ? `${successLabel}. ${insight}` : 'A few cards are still in the wrong group. Keep cycling.') : 'Tap each card until it lands in the best group.'}</p>
+      <p aria-live="polite">{allAssigned ? (allCorrect ? `${successLabel}. ${insight}` : 'A few items are still in the wrong group. Keep cycling.') : 'Tap each item until it lands in the best group.'}</p>
     </div>
   )
 }
@@ -6072,6 +6072,7 @@ function BadgeScreen({
         <button className="secondary-btn danger" onClick={onResetProgress}>Reset progress</button>
         {statusMessage && <p className="feedback good" role="status">{statusMessage}</p>}
       </section>
+      <p className="app-version" aria-label={`Prompt Life version ${APP_VERSION}`}>v{APP_VERSION}</p>
     </section>
   )
 }
