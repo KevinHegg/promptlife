@@ -1,0 +1,793 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Prompt Life v0.28.9 Image 2 Source Processing Final Report</title>
+  <style>
+    :root {
+      color: #07124a;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      word-break: normal;
+      overflow-wrap: normal;
+      hyphens: none;
+    }
+    body { margin: 0; padding: 32px; background: #f6fbff; }
+    h1 { margin: 0 0 8px; font-size: 30px; line-height: 1.08; }
+    h2 { margin: 0 0 12px; font-size: 18px; }
+    p, li { line-height: 1.45; }
+    pre { white-space: pre-wrap; margin: 0; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 9px; line-height: 1.35; }
+    .lede { max-width: 960px; color: #2d3b62; }
+    .metrics { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin: 18px 0; }
+    .metric, .panel, table, .shot {
+      background: white;
+      border: 1px solid #cdd7ef;
+      border-radius: 12px;
+      box-shadow: 0 10px 26px rgba(7, 18, 74, 0.08);
+    }
+    .metric { padding: 14px; }
+    .metric strong { display: block; font-size: 26px; line-height: 1; }
+    .metric span, th, .eyebrow { color: #009f9c; font-size: 10px; font-weight: 900; letter-spacing: 0.04em; text-transform: uppercase; }
+    .panel { padding: 18px; margin: 18px 0; }
+    table { width: 100%; border-collapse: collapse; margin: 12px 0; overflow: hidden; }
+    th, td { vertical-align: top; padding: 9px; border-bottom: 1px solid #e1e7f6; font-size: 10.5px; line-height: 1.35; }
+    th { text-align: left; }
+    code { color: #121e72; font-size: 10px; }
+    .status { display: inline-flex; padding: 4px 7px; border-radius: 999px; font-weight: 900; background: #eef7ff; }
+    .status-live { background: #dffaf2; color: #065f4e; }
+    .status-missing { background: #fff4de; color: #704800; }
+    .status-rejected { background: #ffe4e6; color: #8a1124; }
+    .shot-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .shot { margin: 0; padding: 10px; break-inside: avoid; }
+    .shot img { display: block; width: 100%; height: auto; border-radius: 8px; border: 1px solid #d8e2f4; }
+    .shot figcaption, .shot span { display: block; margin-top: 8px; color: #334366; font-size: 11px; line-height: 1.35; }
+    .missing { min-height: 120px; display: grid; place-content: center; text-align: center; }
+    @media print {
+      body { padding: 20px; background: white; }
+      .panel, tr, .shot { break-inside: avoid; page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <h1>Prompt Life v0.28.9 Image 2 Source Processing</h1>
+  <p class="lede">Generated 2026-06-15T15:25:33.458Z. This pass processed the remaining six source files, created optimized and thumbnail derivatives, and made verified visuals live through the Journey visual manifest. Normal learner mode now has verified concept images for all twelve manifest entries.</p>
+
+  <section class="metrics">
+    <div class="metric"><strong>12</strong><span>Manifest entries</span></div>
+    <div class="metric"><strong>12</strong><span>Live assets</span></div>
+    <div class="metric"><strong>6</strong><span>Newly live</span></div>
+    <div class="metric"><strong>0</strong><span>Still missing</span></div>
+    <div class="metric"><strong>0</strong><span>Rejected</span></div>
+  </section>
+
+  <section class="panel">
+    <p class="eyebrow">Summary</p>
+    <h2>Six new assets were accepted</h2>
+    <p>The new live visuals are <strong>What Is an LLM?</strong>, <strong>Pretraining</strong>, <strong>Alignment</strong>, <strong>Multimodal AI</strong>, <strong>Benefits Worth Taking Seriously</strong>, <strong>Better AI Is a Choice</strong>. The six already-live visuals remain live. No assets were rejected, none remain missing, and no normal learner-facing implementation placeholder appears in this pass.</p>
+  </section>
+
+  <section class="panel">
+    <p class="eyebrow">Source Mapping</p>
+    <h2>Source Files, Optimized Files, and Thumbnails</h2>
+    <table>
+      <thead><tr><th>Card</th><th>Source</th><th>Optimized</th><th>Thumbnail</th><th>Status</th><th>Review notes</th></tr></thead>
+      <tbody>
+      <tr>
+        <td><strong>What Is an LLM?</strong><br><code>what-is-llm</code></td>
+        <td><code>what-is-an-llm.png</code><br>1672x941<br>1843 KB</td>
+        <td><code>what-is-an-llm.png</code><br>1448x815<br>1542 KB</td>
+        <td><code>what-is-an-llm.png</code><br>480x270<br>189 KB</td>
+        <td><span class="status status-live">live</span></td>
+        <td>Accepted live in v0.28.9. The textless prompt-to-model-to-token scene supports current context plus learned weights without implying consciousness, hidden search, or permanent learning.</td>
+      </tr>
+    
+      <tr>
+        <td><strong>Pretraining</strong><br><code>pretraining</code></td>
+        <td><code>pretraining.png</code><br>1672x941<br>2419 KB</td>
+        <td><code>pretraining.png</code><br>1448x815<br>1929 KB</td>
+        <td><code>pretraining.png</code><br>480x270<br>239 KB</td>
+        <td><span class="status status-live">live</span></td>
+        <td>Accepted live in v0.28.9. The broad example-stream scene conveys scale and reusable patterns without presenting sources as a searchable archive.</td>
+      </tr>
+    
+      <tr>
+        <td><strong>Alignment</strong><br><code>alignment</code></td>
+        <td><code>alignment.png</code><br>1672x941<br>1987 KB</td>
+        <td><code>alignment.png</code><br>1448x815<br>1621 KB</td>
+        <td><code>alignment.png</code><br>480x270<br>202 KB</td>
+        <td><span class="status status-live">live</span></td>
+        <td>Accepted live in v0.28.9. The path-and-guardrail scene supports behavior shaping without implying moral agency or a conscious model.</td>
+      </tr>
+    
+      <tr>
+        <td><strong>Multimodal AI</strong><br><code>multimodal</code></td>
+        <td><code>multimodal-ai.png</code><br>1672x941<br>1839 KB</td>
+        <td><code>multimodal-ai.png</code><br>1448x815<br>1552 KB</td>
+        <td><code>multimodal-ai.png</code><br>480x270<br>203 KB</td>
+        <td><span class="status status-live">live</span></td>
+        <td>Accepted live in v0.28.9. The text/image/audio/video streams are clear and avoid eye, brain, surveillance, or human-sensation imagery.</td>
+      </tr>
+    
+      <tr>
+        <td><strong>Benefits Worth Taking Seriously</strong><br><code>benefits-worth-taking-seriously</code></td>
+        <td><code>benefits-worth-taking-seriously.png</code><br>1672x941<br>2534 KB</td>
+        <td><code>benefits-worth-taking-seriously.png</code><br>1448x815<br>1973 KB</td>
+        <td><code>benefits-worth-taking-seriously.png</code><br>480x270<br>237 KB</td>
+        <td><span class="status status-live">live</span></td>
+        <td>Accepted live in v0.28.9. The guarded tool-garden scene shows practical benefit categories with a non-identifiable reviewer and avoids utopian claims.</td>
+      </tr>
+    
+      <tr>
+        <td><strong>Better AI Is a Choice</strong><br><code>better-ai-choice</code></td>
+        <td><code>better-ai-choice.png</code><br>1672x941<br>2200 KB</td>
+        <td><code>better-ai-choice.png</code><br>1448x815<br>1797 KB</td>
+        <td><code>better-ai-choice.png</code><br>480x270<br>229 KB</td>
+        <td><span class="status status-live">live</span></td>
+        <td>Accepted live in v0.28.9. The branching-path scene supports responsible choice and avoids inevitability or fake control-panel imagery.</td>
+      </tr>
+    </tbody>
+    </table>
+  </section>
+
+  <section class="panel">
+    <p class="eyebrow">Manifest</p>
+    <h2>All Image 2 Candidate Statuses</h2>
+    <table>
+      <thead><tr><th>Stage</th><th>Card</th><th>Status</th><th>Size</th><th>Text Check</th><th>Notes</th><th>Audit</th></tr></thead>
+      <tbody>
+      <tr>
+        <td>1</td>
+        <td><strong>What Is an LLM?</strong><br><code>what-is-llm</code></td>
+        <td><span class="status status-live">live</span></td>
+        <td>1448x815<br>1542 KB</td>
+        <td>verified</td>
+        <td>Accepted live in v0.28.9. The textless prompt-to-model-to-token scene supports current context plus learned weights without implying consciousness, hidden search, or permanent learning.</td>
+        <td>ok</td>
+      </tr>
+    
+      <tr>
+        <td>1</td>
+        <td><strong>Pretraining</strong><br><code>pretraining</code></td>
+        <td><span class="status status-live">live</span></td>
+        <td>1448x815<br>1929 KB</td>
+        <td>verified</td>
+        <td>Accepted live in v0.28.9. The broad example-stream scene conveys scale and reusable patterns without presenting sources as a searchable archive.</td>
+        <td>ok</td>
+      </tr>
+    
+      <tr>
+        <td>1</td>
+        <td><strong>Alignment</strong><br><code>alignment</code></td>
+        <td><span class="status status-live">live</span></td>
+        <td>1448x815<br>1621 KB</td>
+        <td>verified</td>
+        <td>Accepted live in v0.28.9. The path-and-guardrail scene supports behavior shaping without implying moral agency or a conscious model.</td>
+        <td>ok</td>
+      </tr>
+    
+      <tr>
+        <td>6</td>
+        <td><strong>Multimodal AI</strong><br><code>multimodal</code></td>
+        <td><span class="status status-live">live</span></td>
+        <td>1448x815<br>1552 KB</td>
+        <td>verified</td>
+        <td>Accepted live in v0.28.9. The text/image/audio/video streams are clear and avoid eye, brain, surveillance, or human-sensation imagery.</td>
+        <td>ok</td>
+      </tr>
+    
+      <tr>
+        <td>6</td>
+        <td><strong>The Perfect Storm</strong><br><code>perfect-storm</code></td>
+        <td><span class="status status-live">live</span></td>
+        <td>1448x815<br>1692 KB</td>
+        <td>verified</td>
+        <td>Accepted live in v0.28.7b. The textless convergence scene is horizontal, uncluttered, and supports the one-spark misconception repair.</td>
+        <td>ok</td>
+      </tr>
+    
+      <tr>
+        <td>7</td>
+        <td><strong>Collective Intelligence, Extracted</strong><br><code>collective-intelligence</code></td>
+        <td><span class="status status-live">live</span></td>
+        <td>1448x1086<br>2192 KB</td>
+        <td>verified</td>
+        <td>Accepted live in v0.28.7. Text check: no readable embedded text; abstract source traces are symbolic texture. Uses HTML caption and callouts for all instructional language.</td>
+        <td>ok</td>
+      </tr>
+    
+      <tr>
+        <td>7</td>
+        <td><strong>Costs We Must Count</strong><br><code>costs-we-must-count</code></td>
+        <td><span class="status status-live">live</span></td>
+        <td>1448x1086<br>2383 KB</td>
+        <td>verified</td>
+        <td>Accepted live in v0.28.7b. The image is textless, uses no fake statistics, and makes infrastructure, labor, privacy, and governance visible without doom framing.</td>
+        <td>ok</td>
+      </tr>
+    
+      <tr>
+        <td>7</td>
+        <td><strong>Risk vs Myth</strong><br><code>risk-myth</code></td>
+        <td><span class="status status-live">live</span></td>
+        <td>1448x815<br>1631 KB</td>
+        <td>verified</td>
+        <td>Accepted live in v0.28.7b. The split path is readable, non-dashboard, and separates practical safeguards from pale myth imagery without horror or model-consciousness framing.</td>
+        <td>ok</td>
+      </tr>
+    
+      <tr>
+        <td>8</td>
+        <td><strong>Benefits Worth Taking Seriously</strong><br><code>benefits-worth-taking-seriously</code></td>
+        <td><span class="status status-live">live</span></td>
+        <td>1448x815<br>1973 KB</td>
+        <td>verified</td>
+        <td>Accepted live in v0.28.9. The guarded tool-garden scene shows practical benefit categories with a non-identifiable reviewer and avoids utopian claims.</td>
+        <td>ok</td>
+      </tr>
+    
+      <tr>
+        <td>8</td>
+        <td><strong>Human-Centered AI</strong><br><code>human-centered-ai</code></td>
+        <td><span class="status status-live">live</span></td>
+        <td>1448x815<br>1599 KB</td>
+        <td>verified</td>
+        <td>Accepted live in v0.28.7b. The image keeps a human figure central, avoids robot-judge imagery, and uses HTML for all instructional language.</td>
+        <td>ok</td>
+      </tr>
+    
+      <tr>
+        <td>8</td>
+        <td><strong>Better AI Is a Choice</strong><br><code>better-ai-choice</code></td>
+        <td><span class="status status-live">live</span></td>
+        <td>1448x815<br>1797 KB</td>
+        <td>verified</td>
+        <td>Accepted live in v0.28.9. The branching-path scene supports responsible choice and avoids inevitability or fake control-panel imagery.</td>
+        <td>ok</td>
+      </tr>
+    
+      <tr>
+        <td>8</td>
+        <td><strong>Model Literate Synthesis</strong><br><code>model-literate-synthesis</code></td>
+        <td><span class="status status-live">live</span></td>
+        <td>1448x815<br>1771 KB</td>
+        <td>verified</td>
+        <td>Accepted live in v0.28.7b. The image is textless, non-certifying, and visually connects mechanics, evidence review, and human responsibility.</td>
+        <td>ok</td>
+      </tr>
+    </tbody>
+    </table>
+  </section>
+
+  <section class="panel">
+    <p class="eyebrow">Caption Review</p>
+    <h2>HTML Caption and Callout Copy</h2>
+    <table>
+      <thead><tr><th>Card</th><th>Caption</th><th>Callouts</th></tr></thead>
+      <tbody>
+      <tr>
+        <td><strong>What Is an LLM?</strong></td>
+        <td>An LLM uses current context and learned weights to generate one response token at a time.</td>
+        <td><strong>Context enters</strong>: The current prompt and response so far provide the visible input for this run.<br><strong>Weights shape scores</strong>: Learned weights from training shape next-token scores without acting like a searchable database.<br><strong>Tokens emerge</strong>: The response grows as one selected token is appended, then the model runs again.</td>
+      </tr>
+    
+      <tr>
+        <td><strong>Pretraining</strong></td>
+        <td>Pretraining shapes broad reusable patterns from many examples before ordinary use.</td>
+        <td><strong>Many examples</strong>: The training loop repeats across large collections of examples.<br><strong>Weights change</strong>: Prediction error drives durable weight updates during training.<br><strong>Not an archive</strong>: Pretraining does not create a perfect searchable memory of every source.</td>
+      </tr>
+    
+      <tr>
+        <td><strong>Alignment</strong></td>
+        <td>Alignment shapes behavior through training, feedback, policy, evaluation, and runtime controls.</td>
+        <td><strong>Behavior shaping</strong>: Training and feedback can encourage preferred response patterns.<br><strong>Runtime controls</strong>: Policies, filters, and system design can steer behavior during use.<br><strong>No conscience</strong>: Alignment does not give the model moral understanding or a truth guarantee.</td>
+      </tr>
+    
+      <tr>
+        <td><strong>Multimodal AI</strong></td>
+        <td>Multimodal systems can represent or process multiple media types together without human-like perception.</td>
+        <td><strong>Multiple media</strong>: Text, images, audio, video, or code can enter some systems.<br><strong>Shared representations</strong>: The system encodes media into model-usable forms or linked spaces.<br><strong>Not sensation</strong>: Processing media is not the same as seeing, hearing, or experiencing as a person does.</td>
+      </tr>
+    
+      <tr>
+        <td><strong>Benefits Worth Taking Seriously</strong></td>
+        <td>AI benefits can be real and useful when bounded by context, safeguards, evidence, and human review.</td>
+        <td><strong>Useful supports</strong>: Drafting, translation, summarization, accessibility, and coding help can be valuable with review.<br><strong>Bounded use</strong>: The value depends on task fit, evidence, safeguards, and context.<br><strong>Human review</strong>: People still judge quality, stakes, and consequences.</td>
+      </tr>
+    
+      <tr>
+        <td><strong>Better AI Is a Choice</strong></td>
+        <td>Better AI outcomes depend on design, data choices, evaluation, incentives, governance, and human review.</td>
+        <td><strong>Design choices</strong>: Task fit, model size, deployment, and safeguards shape outcomes.<br><strong>Institutional choices</strong>: Governance, incentives, evaluation, and labor planning affect who benefits.<br><strong>Human review</strong>: Better outcomes require accountable choices, not a single switch.</td>
+      </tr>
+    </tbody>
+    </table>
+  </section>
+
+  <section class="panel">
+    <p class="eyebrow">Screenshots</p>
+    <h2>320px, 390px, Desktop, and Smoke QA</h2>
+    <div class="shot-grid">
+      
+    
+    <figure class="shot">
+      <img src="../screenshots/v0-28-9-image2-source-processing-final/what-is-llm-image2-390.png" alt="What Is an LLM?: Image 2 visual at 390px.">
+      <figcaption>What Is an LLM?: Image 2 visual at 390px.</figcaption>
+    </figure>
+  
+    <figure class="shot">
+      <img src="../screenshots/v0-28-9-image2-source-processing-final/what-is-llm-image2-320.png" alt="What Is an LLM?: Image 2 visual at 320px.">
+      <figcaption>What Is an LLM?: Image 2 visual at 320px.</figcaption>
+    </figure>
+  
+    <figure class="shot">
+      <img src="../screenshots/v0-28-9-image2-source-processing-final/what-is-llm-image2-desktop-1024.png" alt="What Is an LLM?: Image 2 visual on desktop.">
+      <figcaption>What Is an LLM?: Image 2 visual on desktop.</figcaption>
+    </figure>
+  
+    <figure class="shot">
+      <img src="../screenshots/v0-28-9-image2-source-processing-final/pretraining-image2-390.png" alt="Pretraining: Image 2 visual at 390px.">
+      <figcaption>Pretraining: Image 2 visual at 390px.</figcaption>
+    </figure>
+  
+    <figure class="shot">
+      <img src="../screenshots/v0-28-9-image2-source-processing-final/pretraining-image2-320.png" alt="Pretraining: Image 2 visual at 320px.">
+      <figcaption>Pretraining: Image 2 visual at 320px.</figcaption>
+    </figure>
+  
+    <figure class="shot">
+      <img src="../screenshots/v0-28-9-image2-source-processing-final/pretraining-image2-desktop-1024.png" alt="Pretraining: Image 2 visual on desktop.">
+      <figcaption>Pretraining: Image 2 visual on desktop.</figcaption>
+    </figure>
+  
+    <figure class="shot">
+      <img src="../screenshots/v0-28-9-image2-source-processing-final/alignment-image2-390.png" alt="Alignment: Image 2 visual at 390px.">
+      <figcaption>Alignment: Image 2 visual at 390px.</figcaption>
+    </figure>
+  
+    <figure class="shot">
+      <img src="../screenshots/v0-28-9-image2-source-processing-final/alignment-image2-320.png" alt="Alignment: Image 2 visual at 320px.">
+      <figcaption>Alignment: Image 2 visual at 320px.</figcaption>
+    </figure>
+  
+    <figure class="shot">
+      <img src="../screenshots/v0-28-9-image2-source-processing-final/alignment-image2-desktop-1024.png" alt="Alignment: Image 2 visual on desktop.">
+      <figcaption>Alignment: Image 2 visual on desktop.</figcaption>
+    </figure>
+  
+    <figure class="shot">
+      <img src="../screenshots/v0-28-9-image2-source-processing-final/multimodal-image2-390.png" alt="Multimodal AI: Image 2 visual at 390px.">
+      <figcaption>Multimodal AI: Image 2 visual at 390px.</figcaption>
+    </figure>
+  
+    <figure class="shot">
+      <img src="../screenshots/v0-28-9-image2-source-processing-final/multimodal-image2-320.png" alt="Multimodal AI: Image 2 visual at 320px.">
+      <figcaption>Multimodal AI: Image 2 visual at 320px.</figcaption>
+    </figure>
+  
+    <figure class="shot">
+      <img src="../screenshots/v0-28-9-image2-source-processing-final/multimodal-image2-desktop-1024.png" alt="Multimodal AI: Image 2 visual on desktop.">
+      <figcaption>Multimodal AI: Image 2 visual on desktop.</figcaption>
+    </figure>
+  
+    <figure class="shot">
+      <img src="../screenshots/v0-28-9-image2-source-processing-final/benefits-worth-taking-seriously-image2-390.png" alt="Benefits Worth Taking Seriously: Image 2 visual at 390px.">
+      <figcaption>Benefits Worth Taking Seriously: Image 2 visual at 390px.</figcaption>
+    </figure>
+  
+    <figure class="shot">
+      <img src="../screenshots/v0-28-9-image2-source-processing-final/benefits-worth-taking-seriously-image2-320.png" alt="Benefits Worth Taking Seriously: Image 2 visual at 320px.">
+      <figcaption>Benefits Worth Taking Seriously: Image 2 visual at 320px.</figcaption>
+    </figure>
+  
+    <figure class="shot">
+      <img src="../screenshots/v0-28-9-image2-source-processing-final/benefits-worth-taking-seriously-image2-desktop-1024.png" alt="Benefits Worth Taking Seriously: Image 2 visual on desktop.">
+      <figcaption>Benefits Worth Taking Seriously: Image 2 visual on desktop.</figcaption>
+    </figure>
+  
+    <figure class="shot">
+      <img src="../screenshots/v0-28-9-image2-source-processing-final/better-ai-choice-image2-390.png" alt="Better AI Is a Choice: Image 2 visual at 390px.">
+      <figcaption>Better AI Is a Choice: Image 2 visual at 390px.</figcaption>
+    </figure>
+  
+    <figure class="shot">
+      <img src="../screenshots/v0-28-9-image2-source-processing-final/better-ai-choice-image2-320.png" alt="Better AI Is a Choice: Image 2 visual at 320px.">
+      <figcaption>Better AI Is a Choice: Image 2 visual at 320px.</figcaption>
+    </figure>
+  
+    <figure class="shot">
+      <img src="../screenshots/v0-28-9-image2-source-processing-final/better-ai-choice-image2-desktop-1024.png" alt="Better AI Is a Choice: Image 2 visual on desktop.">
+      <figcaption>Better AI Is a Choice: Image 2 visual on desktop.</figcaption>
+    </figure>
+  
+    
+    <figure class="shot">
+      <img src="../screenshots/v0-28-9-image2-source-processing-final/journey-card-what-is-llm-390-fullpage.png" alt="What Is an LLM?: Journey card smoke at 390px.">
+      <figcaption>What Is an LLM?: Journey card smoke at 390px.</figcaption>
+    </figure>
+  
+    <figure class="shot">
+      <img src="../screenshots/v0-28-9-image2-source-processing-final/journey-card-pretraining-390-fullpage.png" alt="Pretraining: Journey card smoke at 390px.">
+      <figcaption>Pretraining: Journey card smoke at 390px.</figcaption>
+    </figure>
+  
+    <figure class="shot">
+      <img src="../screenshots/v0-28-9-image2-source-processing-final/journey-card-alignment-390-fullpage.png" alt="Alignment: Journey card smoke at 390px.">
+      <figcaption>Alignment: Journey card smoke at 390px.</figcaption>
+    </figure>
+  
+    <figure class="shot">
+      <img src="../screenshots/v0-28-9-image2-source-processing-final/journey-card-multimodal-390-fullpage.png" alt="Multimodal AI: Journey card smoke at 390px.">
+      <figcaption>Multimodal AI: Journey card smoke at 390px.</figcaption>
+    </figure>
+  
+    <figure class="shot">
+      <img src="../screenshots/v0-28-9-image2-source-processing-final/journey-card-perfect-storm-390-fullpage.png" alt="The Perfect Storm: Journey card smoke at 390px.">
+      <figcaption>The Perfect Storm: Journey card smoke at 390px.</figcaption>
+    </figure>
+  
+    <figure class="shot">
+      <img src="../screenshots/v0-28-9-image2-source-processing-final/journey-card-collective-intelligence-390-fullpage.png" alt="Collective Intelligence, Extracted: Journey card smoke at 390px.">
+      <figcaption>Collective Intelligence, Extracted: Journey card smoke at 390px.</figcaption>
+    </figure>
+  
+    <figure class="shot">
+      <img src="../screenshots/v0-28-9-image2-source-processing-final/journey-card-costs-we-must-count-390-fullpage.png" alt="Costs We Must Count: Journey card smoke at 390px.">
+      <figcaption>Costs We Must Count: Journey card smoke at 390px.</figcaption>
+    </figure>
+  
+    <figure class="shot">
+      <img src="../screenshots/v0-28-9-image2-source-processing-final/journey-card-risk-myth-390-fullpage.png" alt="Risk vs Myth: Journey card smoke at 390px.">
+      <figcaption>Risk vs Myth: Journey card smoke at 390px.</figcaption>
+    </figure>
+  
+    <figure class="shot">
+      <img src="../screenshots/v0-28-9-image2-source-processing-final/journey-card-benefits-worth-taking-seriously-390-fullpage.png" alt="Benefits Worth Taking Seriously: Journey card smoke at 390px.">
+      <figcaption>Benefits Worth Taking Seriously: Journey card smoke at 390px.</figcaption>
+    </figure>
+  
+    <figure class="shot">
+      <img src="../screenshots/v0-28-9-image2-source-processing-final/journey-card-human-centered-ai-390-fullpage.png" alt="Human-Centered AI: Journey card smoke at 390px.">
+      <figcaption>Human-Centered AI: Journey card smoke at 390px.</figcaption>
+    </figure>
+  
+    <figure class="shot">
+      <img src="../screenshots/v0-28-9-image2-source-processing-final/journey-card-better-ai-choice-390-fullpage.png" alt="Better AI Is a Choice: Journey card smoke at 390px.">
+      <figcaption>Better AI Is a Choice: Journey card smoke at 390px.</figcaption>
+    </figure>
+  
+    <figure class="shot">
+      <img src="../screenshots/v0-28-9-image2-source-processing-final/journey-card-model-literate-synthesis-390-fullpage.png" alt="Model Literate Synthesis: Journey card smoke at 390px.">
+      <figcaption>Model Literate Synthesis: Journey card smoke at 390px.</figcaption>
+    </figure>
+  
+    
+    <figure class="shot">
+      <img src="../screenshots/v0-28-9-image2-source-processing-final/already-live-collective-intelligence-smoke-390.png" alt="Already-live smoke: Collective Intelligence still renders its concept image.">
+      <figcaption>Already-live smoke: Collective Intelligence still renders its concept image.</figcaption>
+    </figure>
+  
+    
+    <figure class="shot">
+      <img src="../screenshots/v0-28-9-image2-source-processing-final/badge-smoke-390.png" alt="Badge page smoke screenshot.">
+      <figcaption>Badge page smoke screenshot.</figcaption>
+    </figure>
+  
+    
+    <figure class="shot">
+      <img src="../screenshots/v0-28-9-image2-source-processing-final/play-smoke-390.png" alt="Play page smoke screenshot.">
+      <figcaption>Play page smoke screenshot.</figcaption>
+    </figure>
+  
+    
+    <figure class="shot">
+      <img src="../screenshots/v0-28-9-image2-source-processing-final/glossary-smoke-390.png" alt="Glossary page smoke screenshot.">
+      <figcaption>Glossary page smoke screenshot.</figcaption>
+    </figure>
+  
+  
+    </div>
+  </section>
+
+  <section class="panel">
+    <p class="eyebrow">Verification</p>
+    <h2>Command Results</h2>
+    
+    <table>
+      <thead><tr><th>Command</th><th>Status</th><th>Notes</th></tr></thead>
+      <tbody>
+        
+          <tr>
+            <td><code>npm run process:visual-assets</code></td>
+            <td>pass</td>
+            <td><pre>&gt; promptlife@0.28.9 process:visual-assets
+&gt; node scripts/process-journey-visual-assets.mjs
+
+Processed what-is-an-llm.png
+  source: public/assets/journey-visuals/v0-28/source/what-is-an-llm.png
+  optimized: public/assets/journey-visuals/v0-28/optimized/what-is-an-llm.png
+  thumbnail: public/assets/journey-visuals/v0-28/thumbnails/what-is-an-llm.png
+Processed pretraining.png
+  source: public/assets/journey-visuals/v0-28/source/pretraining.png
+  optimized: public/assets/journey-visuals/v0-28/optimized/pretraining.png
+  thumbnail: public/assets/journey-visuals/v0-28/thumbnails/pretraining.png
+Processed alignment.png
+  source: public/assets/journey-visuals/v0-28/source/alignment.png
+  optimized: public/assets/journey-visuals/v0-28/optimized/alignment.png
+  thumbnail: public/assets/journey-visuals/v0-28/thumbnails/alignment.png
+Processed multimodal-ai.png
+  source: public/assets/journey-visuals/v0-28/source/multimodal-ai.png
+  optimized: public/assets/journey-visuals/v0-28/optimized/multimodal-ai.png
+  thumbnail: public/assets/journey-visuals/v0-28/thumbnails/multimodal-ai.png
+Processed benefits-worth-taking-seriously.png
+  source: public/assets/journey-visuals/v0-28/source/benefits-worth-taking-seriously.png
+  optimized: public/assets/journey-visuals/v0-28/optimized/benefits-worth-taking-seriously.png
+  thumbnail: public/assets/journey-visuals/v0-28/thumbnails/benefits-worth-taking-seriously.png
+Processed better-ai-choice.png
+  source: public/assets/journey-visuals/v0-28/source/better-ai-choice.png
+  optimized: public/assets/journey-visuals/v0-28/optimized/better-ai-choice.png
+  thumbnail: public/assets/journey-visuals/v0-28/thumbnails/better-ai-choice.png</pre></td>
+          </tr>
+        
+          <tr>
+            <td><code>npm run typecheck</code></td>
+            <td>pass</td>
+            <td><pre>&gt; promptlife@0.28.9 typecheck
+&gt; tsc --noEmit</pre></td>
+          </tr>
+        
+          <tr>
+            <td><code>npm run build</code></td>
+            <td>pass</td>
+            <td><pre>&gt; promptlife@0.28.9 build
+&gt; vite build
+
+vite v8.0.14 building client environment for production...
+[2Ktransforming...✓ 39 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                     1.03 kB │ gzip:   0.46 kB
+dist/assets/index-DMxoEmxG.css    151.39 kB │ gzip:  29.10 kB
+dist/assets/index-DX0H-pql.js   1,078.31 kB │ gzip: 262.22 kB
+
+✓ built in 414ms
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.</pre></td>
+          </tr>
+        
+          <tr>
+            <td><code>npm run build:pages</code></td>
+            <td>pass</td>
+            <td><pre>&gt; promptlife@0.28.9 build:pages
+&gt; GITHUB_PAGES=true vite build
+
+vite v8.0.14 building client environment for production...
+[2Ktransforming...✓ 39 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                     1.05 kB │ gzip:   0.47 kB
+dist/assets/index-DMxoEmxG.css    151.39 kB │ gzip:  29.10 kB
+dist/assets/index-CjX-jPpJ.js   1,078.34 kB │ gzip: 262.23 kB
+
+✓ built in 183ms
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.</pre></td>
+          </tr>
+        
+          <tr>
+            <td><code>npm run audit:visual-assets</code></td>
+            <td>pass</td>
+            <td><pre>&gt; promptlife@0.28.9 audit:visual-assets
+&gt; node scripts/audit-visual-assets.mjs
+
+Visual asset audit passed. Checked 12 manifest entries; live assets before: 6; live assets after: 12; newly live: 6; missing assets: 0; rejected assets: 0; pending assets: 0.</pre></td>
+          </tr>
+        
+          <tr>
+            <td><code>npm run audit:visual-aids</code></td>
+            <td>pass</td>
+            <td><pre>&gt; promptlife@0.28.9 audit:visual-aids
+&gt; node scripts/audit-visual-aids.mjs &amp;&amp; node scripts/audit-word-wrap.mjs
+
+Visual aid audit passed: 39 aids, 0 mismatches, 0 readiness issues.
+Word-wrap audit pass.
+Checked 82 files.
+Unsafe CSS: 0
+Known bad splits: 0
+Long internal labels: 0
+Diagram paragraphs: 0</pre></td>
+          </tr>
+        
+          <tr>
+            <td><code>npm run audit:visual-overflow</code></td>
+            <td>pass</td>
+            <td><pre>&gt; promptlife@0.28.9 audit:visual-overflow
+&gt; node scripts/audit-visual-overflow.mjs
+
+Visual overflow audit passed. Checked 39 learner-route visual aids at 320px and 390px.</pre></td>
+          </tr>
+        
+          <tr>
+            <td><code>npm run audit:word-wrap</code></td>
+            <td>pass</td>
+            <td><pre>&gt; promptlife@0.28.9 audit:word-wrap
+&gt; node scripts/audit-word-wrap.mjs
+
+Word-wrap audit pass.
+Checked 82 files.
+Unsafe CSS: 0
+Known bad splits: 0
+Long internal labels: 0
+Diagram paragraphs: 0</pre></td>
+          </tr>
+        
+          <tr>
+            <td><code>npm run audit:learner-copy</code></td>
+            <td>pass</td>
+            <td><pre>&gt; promptlife@0.28.9 audit:learner-copy
+&gt; node scripts/audit-learner-copy.mjs
+
+Learner-copy audit passed. Checked 19 learner-facing source files.</pre></td>
+          </tr>
+        
+          <tr>
+            <td><code>npm run audit:learner-leaks</code></td>
+            <td>pass</td>
+            <td><pre>&gt; promptlife@0.28.9 audit:learner-leaks
+&gt; node scripts/audit-learner-leaks.mjs
+
+Learner leak audit passed. Static records: 45; allowed: 45; rendered screens: 7.</pre></td>
+          </tr>
+        
+          <tr>
+            <td><code>npm run audit:language</code></td>
+            <td>pass</td>
+            <td><pre>&gt; promptlife@0.28.9 audit:language
+&gt; node scripts/audit-language.mjs
+
+Language audit passed. Checked 61 current source/docs files for banned wording.</pre></td>
+          </tr>
+        
+          <tr>
+            <td><code>npm run audit:answers</code></td>
+            <td>pass</td>
+            <td><pre>/a | Fixed. Not a single-choice answer list. |
+| exercise:pretraining-patterns-not-recall | Pattern Learning, Not Perfect Recall | toggle-state | 2 | 2 | no | n/a | Fixed. Not a single-choice answer list. |
+| exercise:overfitting-held-out-check | Validation Check | toggle-state | 2 | 1 | no | n/a | Fixed. Not a single-choice answer list. |
+| exercise:fine-tuning-context-decoding-sort | Open Run or Durable Change? | sort-buckets | 5 | n/a | no | n/a | Fixed. Learner sorts into buckets. |
+| exercise:alignment-method-groups | Alignment Method Groups | sort-buckets | 8 | n/a | no | n/a | Fixed. Learner sorts into buckets. |
+| exercise:attention-relevance | Attention Is Relevance | connect-nodes | 10 | 7 | no | n/a | Fixed. Not a single-choice answer list. |
+| exercise:context-window-fell-out | Context Window: What Fell Out? | tap-choice | 4 | 1, 2 | yes | 2, 3 | Randomized. Correctness follows item id. |
+| exercise:training-nudge | Training Nudge | toggle-state | 2 | 1 | no | n/a | Fixed. Not a single-choice answer list. |
+| exercise:softmax-funnel | Softmax Funnel | tap-choice | 4 | 1 | yes | 4 | Randomized. Correctness follows item id. |
+| exercise:mlp-feature-reshape | MLP Feature Reshape | toggle-state | 2 | 2 | no | n/a | Fixed. Not a single-choice answer list. |
+| exercise:hidden-state-sort | Hidden State Sort | sort-buckets | 6 | n/a | no | n/a | Fixed. Learner sorts into buckets. |
+| exercise:open-book-or-learned | Open Book or Learned? | sort-buckets | 8 | n/a | no | n/a | Fixed. Learner sorts into buckets. |
+| exercise:brain-metaphor-boundary | Brain Metaphor Boundary | tap-multiple | 7 | n/a | no | n/a | Fixed. Multi-select grouping is clearer in authored order. |
+| prompt-run:prompt-run-prompt-response | Prompt or Response? | label-tokens | 1 | n/a | no | n/a | Fixed. Token sequence/context order is meaningful. |
+| prompt-run:prompt-run-tokenizer | Tokenizer | label-tokens | 1 | n/a | no | n/a | Fixed. Token sequence/context order is meaningful. |
+| prompt-run:prompt-run-token-ids | Token IDs | drag-match | 7 | n/a | no | n/a | Fixed. Learner matches paired items. |
+| prompt-run:prompt-run-embedding | Embedding Lookup | drag-match | 7 | n/a | no | n/a | Fixed. Learner matches paired items. |
+| prompt-run:prompt-run-tensor | Tensor Stack | drag-order | 3 | n/a | no | n/a | Fixed. Order is the learning objective. |
+| prompt-run:prompt-run-attention | Attention | connect-nodes | 10 | 7 | no | n/a | Fixed. Not a single-choice answer list. |
+| prompt-run:prompt-run-mlp | MLP Feature Reshape | drag-match | 5 | n/a | no | n/a | Fixed. Learner matches paired items. |
+| prompt-run:prompt-run-hidden-state | Hidden State | tap-choice | 3 | 1 | yes | 2 | Randomized. Correctness follows item id. |
+| prompt-run:prompt-run-logits | Logits | tap-choice | 4 | 1 | yes | 4 | Randomized. Correctness follows item id. |
+| prompt-run:prompt-run-softmax | Softmax Funnel | tap-choice | 4 | 1 | yes | 3 | Randomized. Correctness follows item id. |
+| prompt-run:prompt-run-sampling | Sampling | next-token-pick | 6 | 1, 2, 3 | yes | 3, 4, 5 | Randomized. Correctness follows item id. |
+| prompt-run:prompt-run-append-repeat | Append and Repeat | drag-order | 4 | n/a | no | n/a | Fixed. Order is the learning objective. |
+| prompt-run:prompt-run-final-order | Put the Run in Order | drag-order | 12 | n/a | no | n/a | Fixed. Order is the learning objective. |
+
+## Checkpoint Bank Audit
+Live Journey cards: 39
+Live checkpoint questions: 39
+Draft cards: 39
+Draft questions: 136
+Draft choices: 544
+Draft wrong-answer distractors: 408
+Draft question-count distribution: {&quot;2&quot;:5,&quot;3&quot;:12,&quot;4&quot;:20,&quot;5&quot;:2}
+Pilot cards: 6
+Pilot questions: 18
+Pilot choices: 72
+Pilot wrong-answer distractors: 54
+Pilot model-thinking/application/mechanism questions: 100%
+Pilot direct-definition questions: 0%
+Revised active-development cards: 6
+Revised active-development questions: 19
+Revised active-development choices: 76
+Revised active-development wrong-answer distractors: 57
+Revised audit-seed correct-answer positions: [4,3,1,4,2,3,1,2,4,1,4,1,1,3,4,3,3,2,2]
+v0.27.10 active-development cards: 12
+v0.27.10 active-development questions: 39
+v0.27.10 active-development choices: 156
+v0.27.10 active-development wrong-answer distractors: 117
+v0.27.10 audit-seed correct-answer positions: [4,1,3,4,2,2,4,3,4,3,3,3,4,3,4,2,4,2,1,2,1,2,4,1,1,4,1,1,4,3,4,4,4,1,1,1,3,3,1]
+v0.27.15 active-development cards: 39
+v0.27.15 active-development questions: 136
+v0.27.15 active-development choices: 544
+v0.27.15 active-development wrong-answer distractors: 408
+v0.27.15 model-thinking/application/mechanism questions: 136
+v0.27.15 direct-definition questions: 0
+v0.27.15 audit-seed correct-answer positions: [4,1,2,2,1,4,4,1,2,2,2,4,3,1,1,3,4,2,2,1,3,2,4,1,3,3,2,4,3,3,4,3,2,1,4,1,2,2,2,1,4,1,1,4,2,4,1,1,3,4,2,1,3,2,3,3,4,4,3,3,4,2,1,3,1,1,2,4,2,2,1,2,1,4,4,3,2,4,3,1,4,3,4,2,3,3,2,3,2,1,1,4,3,4,4,1,4,3,1,4,4,3,4,4,2,3,4,2,2,2,2,3,1,1,1,4,3,4,3,2,3,1,2,1,1,4,1,2,1,4,1,1,2,3,1,2]
+Checkpoint audit passed.</pre></td>
+          </tr>
+        
+          <tr>
+            <td><code>npm run audit:checkpoints</code></td>
+            <td>pass</td>
+            <td><pre>&gt; promptlife@0.28.9 audit:checkpoints
+&gt; node scripts/audit-checkpoints.mjs
+
+
+## Checkpoint Bank Audit
+Live Journey cards: 39
+Live checkpoint questions: 39
+Draft cards: 39
+Draft questions: 136
+Draft choices: 544
+Draft wrong-answer distractors: 408
+Draft question-count distribution: {&quot;2&quot;:5,&quot;3&quot;:12,&quot;4&quot;:20,&quot;5&quot;:2}
+Pilot cards: 6
+Pilot questions: 18
+Pilot choices: 72
+Pilot wrong-answer distractors: 54
+Pilot model-thinking/application/mechanism questions: 100%
+Pilot direct-definition questions: 0%
+Revised active-development cards: 6
+Revised active-development questions: 19
+Revised active-development choices: 76
+Revised active-development wrong-answer distractors: 57
+Revised audit-seed correct-answer positions: [4,3,1,4,2,3,1,2,4,1,4,1,1,3,4,3,3,2,2]
+v0.27.10 active-development cards: 12
+v0.27.10 active-development questions: 39
+v0.27.10 active-development choices: 156
+v0.27.10 active-development wrong-answer distractors: 117
+v0.27.10 audit-seed correct-answer positions: [4,1,3,4,2,2,4,3,4,3,3,3,4,3,4,2,4,2,1,2,1,2,4,1,1,4,1,1,4,3,4,4,4,1,1,1,3,3,1]
+v0.27.15 active-development cards: 39
+v0.27.15 active-development questions: 136
+v0.27.15 active-development choices: 544
+v0.27.15 active-development wrong-answer distractors: 408
+v0.27.15 model-thinking/application/mechanism questions: 136
+v0.27.15 direct-definition questions: 0
+v0.27.15 audit-seed correct-answer positions: [4,1,2,2,1,4,4,1,2,2,2,4,3,1,1,3,4,2,2,1,3,2,4,1,3,3,2,4,3,3,4,3,2,1,4,1,2,2,2,1,4,1,1,4,2,4,1,1,3,4,2,1,3,2,3,3,4,4,3,3,4,2,1,3,1,1,2,4,2,2,1,2,1,4,4,3,2,4,3,1,4,3,4,2,3,3,2,3,2,1,1,4,3,4,4,1,4,3,1,4,4,3,4,4,2,3,4,2,2,2,2,3,1,1,1,4,3,4,3,2,3,1,2,1,1,4,1,2,1,4,1,1,2,3,1,2]
+Checkpoint audit passed.</pre></td>
+          </tr>
+        
+          <tr>
+            <td><code>npm run audit:question-clues</code></td>
+            <td>pass</td>
+            <td><pre>&gt; promptlife@0.28.9 audit:question-clues
+&gt; node scripts/audit-question-clues.mjs
+
+Question-clue audit completed.
+Term-echo candidates: 36
+Answer-length warnings: 43
+Vague-stem warnings: 0
+Wrote docs/journey/checkpoints/question-clue-audit-v0-27-15.md</pre></td>
+          </tr>
+        
+          <tr>
+            <td><code>npm run audit:exercises</code></td>
+            <td>pass</td>
+            <td><pre>&gt; promptlife@0.28.9 audit:exercises
+&gt; node scripts/audit-exercises.mjs
+
+Exercise audit passed. Inventoried 39 Journey interactions and exported review PDFs.</pre></td>
+          </tr>
+        
+      </tbody>
+    </table>
+  
+  </section>
+
+  <section class="panel">
+    <p class="eyebrow">Backlog</p>
+    <h2>Remaining Visual Strategy Backlog</h2>
+    <p>Still missing from the Image 2 manifest after this pass: none.</p>
+  </section>
+</body>
+</html>

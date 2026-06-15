@@ -1,0 +1,90 @@
+{
+  "version": "0.28.8",
+  "generatedAt": "2026-06-15T03:17:11.552Z",
+  "commands": [
+    {
+      "command": "npm run typecheck",
+      "status": "pass",
+      "exitCode": 0,
+      "notes": "> promptlife@0.28.8 typecheck\n> tsc --noEmit"
+    },
+    {
+      "command": "npm run build",
+      "status": "pass",
+      "exitCode": 0,
+      "notes": "> promptlife@0.28.8 build\n> vite build\n\nvite v8.0.14 building client environment for production...\n\u001b[2K\rtransforming...✓ 39 modules transformed.\nrendering chunks...\ncomputing gzip size...\ndist/index.html                     1.03 kB │ gzip:   0.46 kB\ndist/assets/index-DMxoEmxG.css    151.39 kB │ gzip:  29.10 kB\ndist/assets/index-B7T76-az.js   1,078.31 kB │ gzip: 262.22 kB\n\n✓ built in 170ms\n[plugin builtin:vite-reporter] \n(!) Some chunks are larger than 500 kB after minification. Consider:\n- Using dynamic import() to code-split the application\n- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting\n- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit."
+    },
+    {
+      "command": "npm run build:pages",
+      "status": "pass",
+      "exitCode": 0,
+      "notes": "> promptlife@0.28.8 build:pages\n> GITHUB_PAGES=true vite build\n\nvite v8.0.14 building client environment for production...\n\u001b[2K\rtransforming...✓ 39 modules transformed.\nrendering chunks...\ncomputing gzip size...\ndist/index.html                     1.05 kB │ gzip:   0.47 kB\ndist/assets/index-DMxoEmxG.css    151.39 kB │ gzip:  29.10 kB\ndist/assets/index-BNaqCuWg.js   1,078.34 kB │ gzip: 262.23 kB\n\n✓ built in 160ms\n[plugin builtin:vite-reporter] \n(!) Some chunks are larger than 500 kB after minification. Consider:\n- Using dynamic import() to code-split the application\n- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting\n- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit."
+    },
+    {
+      "command": "npm run audit:answers",
+      "status": "pass",
+      "exitCode": 0,
+      "notes": "er identity, not A/B/C/D position. |\n| lesson:grounding | Grounding | Journey checkpoint | 4 | 1 | yes | 4 | Randomized. Correctness follows answer identity, not A/B/C/D position. |\n| lesson:hallucinations | Hallucinations | Journey checkpoint | 4 | 1 | yes | 4 | Randomized. Correctness follows answer identity, not A/B/C/D position. |\n| lesson:how-ai-learns | How AI Learns | Journey checkpoint | 4 | 1 | yes | 2 | Randomized. Correctness follows answer identity, not A/B/C/D position. |\n| lesson:diffusion | Diffusion vs Autoregression | Journey checkpoint | 4 | 1 | yes | 2 | Randomized. Correctness follows answer identity, not A/B/C/D position. |\n| lesson:multimodal | Multimodal AI | Journey checkpoint | 4 | 1 | yes | 3 | Randomized. Correctness follows answer identity, not A/B/C/D position. |\n| lesson:perfect-storm | The Perfect Storm | Journey checkpoint | 4 | 1 | yes | 3 | Randomized. Correctness follows answer identity, not A/B/C/D position. |\n| lesson:collective-intelligence | Collective Intelligence, Extracted | Journey checkpoint | 4 | 1 | yes | 2 | Randomized. Correctness follows answer identity, not A/B/C/D position. |\n| lesson:costs-we-must-count | Costs We Must Count | Journey checkpoint | 4 | 1 | yes | 1 | Randomized. Correctness follows answer identity, not A/B/C/D position. |\n| lesson:risk-myth | Risk vs Myth | Journey checkpoint | 4 | 1 | yes | 2 | Randomized. Correctness follows answer identity, not A/B/C/D position. |\n| lesson:benefits-worth-taking-seriously | Benefits Worth Taking Seriously | Journey checkpoint | 4 | 1 | yes | 1 | Randomized. Correctness follows answer identity, not A/B/C/D position. |\n| lesson:human-centered-ai | Human-Centered AI | Journey checkpoint | 4 | 1 | yes | 2 | Randomized. Correctness follows answer identity, not A/B/C/D position. |\n| lesson:better-ai-choice | Better AI Is a Choice | Journey checkpoint | 4 | 1 | yes | 2 | Randomized. Correctness follows answer identity, not A/B/C/D position. |\n| lesson:effective-prompting-literacy | Effective Prompting from Model Literacy | Journey checkpoint | 4 | 1 | yes | 2 | Randomized. Correctness follows answer identity, not A/B/C/D position. |\n| lesson:model-literate-synthesis | Model Literate Synthesis | Journey checkpoint | 4 | 1 | yes | 2 | Randomized. Correctness follows answer identity, not A/B/C/D position. |\n| exercise:prompt-or-response-label | Prompt or Response? | label-tokens | 2 | n/a | no | n/a | Fixed. Token sequence/context order is meaningful. |\n| exercise:pick-next-token | Pick the Next Token | next-token-pick | 6 | 1, 2, 3 | yes | 1, 4, 5 | Randomized. Correctness follows item id. |\n| exercise:durable-or-temporary | Durable or Temporary? | sort-buckets | 9 | n/a | no | n/a | Fixed. Learner sorts into buckets. |\n| exercise:traditions-ingredients | Rules, Patterns, or Hybrid? | sort-buckets | 6 | n/a | no | n/a | Fixed. Learner sorts into buckets. |\n| exercise:training-loop-durable-step | Training Loop: Durable Step | toggle-state | 4 | 4 | no | n/a | Fixed. Not a single-choice answer list. |\n| exercise:pretraining-patterns-not-recall | Pattern Learning, Not Perfect Recall | toggle-state | 2 | 2 | no | n/a | Fixed. Not a single-choice answer list. |\n| exercise:overfitting-held-out-check | Validation Check | toggle-state | 2 | 1 | no | n/a | Fixed. Not a single-choice answer list. |\n| exercise:fine-tuning-context-decoding-sort | Open Run or Durable Change? | sort-buckets | 5 | n/a | no | n/a | Fixed. Learner sorts into buckets. |\n| exercise:alignment-method-groups | Alignment Method Groups | sort-buckets | 8 | n/a | no | n/a | Fixed. Learner sorts into buckets. |\n| exercise:attention-relevance | Attention Is Relevance | connect-nodes | 10 | 7 | no | n/a | Fixed. Not a single-choice answer list. |\n| exercise:context-window-fell-out | Context Window: What Fell Out? | tap-choice | 4 | 1, 2 | yes | 2, 3 | Randomized. Correctness follows item id. |\n| exercise:training-nudge | Training Nudge | toggle-state | 2 | 1 | no | n/a | Fixed. Not a single-choice answer list. |\n| exercise:softmax-funnel | Softmax Funnel | tap-choice | 4 | 1 | yes | 4 | Randomized. Correctness follows item id. |\n| exercise:mlp-feature-reshape | MLP Feature Reshape | toggle-state | 2 | 2 | no | n/a | Fixed. Not a single-choice answer list. |\n| exercise:hidden-state-sort | Hidden State Sort | sort-buckets | 6 | n/a | no | n/a | Fixed. Learner sorts into buckets. |\n| exercise:open-book-or-learned | Open Book or Learned? | sort-buckets | 8 | n/a | no | n/a | Fixed. Learner sorts into buckets. |\n| exercise:brain-metaphor-boundary | Brain Metaphor Boundary | tap-multiple | 7 | n/a | no | n/a | Fixed. Multi-select grouping is clearer in authored order. |\n| prompt-run:prompt-run-prompt-response | Prompt or Response? | label-tokens | 1 | n/a | no | n/a | Fixed. Token sequence/context order is meaningful. |\n| prompt-run:prompt-run-tokenizer | Tokenizer | label-tokens | 1 | n/a | no | n/a | Fixed. Token sequence/context order is meaningful. |\n| prompt-run:prompt-run-token-ids | Token IDs | drag-match | 7 | n/a | no | n/a | Fixed. Learner matches paired items. |\n| prompt-run:prompt-run-embedding | Embedding Lookup | drag-match | 7 | n/a | no | n/a | Fixed. Learner matches paired items. |\n| prompt-run:prompt-run-tensor | Tensor Stack | drag-order | 3 | n/a | no | n/a | Fixed. Order is the learning objective. |\n| prompt-run:prompt-run-attention | Attention | connect-nodes | 10 | 7 | no | n/a | Fixed. Not a single-choice answer list. |\n| prompt-run:prompt-run-mlp | MLP Feature Reshape | drag-match | 5 | n/a | no | n/a | Fixed. Learner matches paired items. |\n| prompt-run:prompt-run-hidden-state | Hidden State | tap-choice | 3 | 1 | yes | 2 | Randomized. Correctness follows item id. |\n| prompt-run:prompt-run-logits | Logits | tap-choice | 4 | 1 | yes | 4 | Randomized. Correctness follows item id. |\n| prompt-run:prompt-run-softmax | Softmax Funnel | tap-choice | 4 | 1 | yes | 3 | Randomized. Correctness follows item id. |\n| prompt-run:prompt-run-sampling | Sampling | next-token-pick | 6 | 1, 2, 3 | yes | 3, 4, 5 | Randomized. Correctness follows item id. |\n| prompt-run:prompt-run-append-repeat | Append and Repeat | drag-order | 4 | n/a | no | n/a | Fixed. Order is the learning objective. |\n| prompt-run:prompt-run-final-order | Put the Run in Order | drag-order | 12 | n/a | no | n/a | Fixed. Order is the learning objective. |\n\n## Checkpoint Bank Audit\nLive Journey cards: 39\nLive checkpoint questions: 39\nDraft cards: 39\nDraft questions: 136\nDraft choices: 544\nDraft wrong-answer distractors: 408\nDraft question-count distribution: {\"2\":5,\"3\":12,\"4\":20,\"5\":2}\nPilot cards: 6\nPilot questions: 18\nPilot choices: 72\nPilot wrong-answer distractors: 54\nPilot model-thinking/application/mechanism questions: 100%\nPilot direct-definition questions: 0%\nRevised active-development cards: 6\nRevised active-development questions: 19\nRevised active-development choices: 76\nRevised active-development wrong-answer distractors: 57\nRevised audit-seed correct-answer positions: [4,3,1,4,2,3,1,2,4,1,4,1,1,3,4,3,3,2,2]\nv0.27.10 active-development cards: 12\nv0.27.10 active-development questions: 39\nv0.27.10 active-development choices: 156\nv0.27.10 active-development wrong-answer distractors: 117\nv0.27.10 audit-seed correct-answer positions: [4,1,3,4,2,2,4,3,4,3,3,3,4,3,4,2,4,2,1,2,1,2,4,1,1,4,1,1,4,3,4,4,4,1,1,1,3,3,1]\nv0.27.15 active-development cards: 39\nv0.27.15 active-development questions: 136\nv0.27.15 active-development choices: 544\nv0.27.15 active-development wrong-answer distractors: 408\nv0.27.15 model-thinking/application/mechanism questions: 136\nv0.27.15 direct-definition questions: 0\nv0.27.15 audit-seed correct-answer positions: [4,1,2,2,1,4,4,1,2,2,2,4,3,1,1,3,4,2,2,1,3,2,4,1,3,3,2,4,3,3,4,3,2,1,4,1,2,2,2,1,4,1,1,4,2,4,1,1,3,4,2,1,3,2,3,3,4,4,3,3,4,2,1,3,1,1,2,4,2,2,1,2,1,4,4,3,2,4,3,1,4,3,4,2,3,3,2,3,2,1,1,4,3,4,4,1,4,3,1,4,4,3,4,4,2,3,4,2,2,2,2,3,1,1,1,4,3,4,3,2,3,1,2,1,1,4,1,2,1,4,1,1,2,3,1,2]\nCheckpoint audit passed."
+    },
+    {
+      "command": "npm run audit:checkpoints",
+      "status": "pass",
+      "exitCode": 0,
+      "notes": "> promptlife@0.28.8 audit:checkpoints\n> node scripts/audit-checkpoints.mjs\n\n\n## Checkpoint Bank Audit\nLive Journey cards: 39\nLive checkpoint questions: 39\nDraft cards: 39\nDraft questions: 136\nDraft choices: 544\nDraft wrong-answer distractors: 408\nDraft question-count distribution: {\"2\":5,\"3\":12,\"4\":20,\"5\":2}\nPilot cards: 6\nPilot questions: 18\nPilot choices: 72\nPilot wrong-answer distractors: 54\nPilot model-thinking/application/mechanism questions: 100%\nPilot direct-definition questions: 0%\nRevised active-development cards: 6\nRevised active-development questions: 19\nRevised active-development choices: 76\nRevised active-development wrong-answer distractors: 57\nRevised audit-seed correct-answer positions: [4,3,1,4,2,3,1,2,4,1,4,1,1,3,4,3,3,2,2]\nv0.27.10 active-development cards: 12\nv0.27.10 active-development questions: 39\nv0.27.10 active-development choices: 156\nv0.27.10 active-development wrong-answer distractors: 117\nv0.27.10 audit-seed correct-answer positions: [4,1,3,4,2,2,4,3,4,3,3,3,4,3,4,2,4,2,1,2,1,2,4,1,1,4,1,1,4,3,4,4,4,1,1,1,3,3,1]\nv0.27.15 active-development cards: 39\nv0.27.15 active-development questions: 136\nv0.27.15 active-development choices: 544\nv0.27.15 active-development wrong-answer distractors: 408\nv0.27.15 model-thinking/application/mechanism questions: 136\nv0.27.15 direct-definition questions: 0\nv0.27.15 audit-seed correct-answer positions: [4,1,2,2,1,4,4,1,2,2,2,4,3,1,1,3,4,2,2,1,3,2,4,1,3,3,2,4,3,3,4,3,2,1,4,1,2,2,2,1,4,1,1,4,2,4,1,1,3,4,2,1,3,2,3,3,4,4,3,3,4,2,1,3,1,1,2,4,2,2,1,2,1,4,4,3,2,4,3,1,4,3,4,2,3,3,2,3,2,1,1,4,3,4,4,1,4,3,1,4,4,3,4,4,2,3,4,2,2,2,2,3,1,1,1,4,3,4,3,2,3,1,2,1,1,4,1,2,1,4,1,1,2,3,1,2]\nCheckpoint audit passed."
+    },
+    {
+      "command": "npm run audit:question-clues",
+      "status": "pass",
+      "exitCode": 0,
+      "notes": "> promptlife@0.28.8 audit:question-clues\n> node scripts/audit-question-clues.mjs\n\nQuestion-clue audit completed.\nTerm-echo candidates: 36\nAnswer-length warnings: 43\nVague-stem warnings: 0\nWrote docs/journey/checkpoints/question-clue-audit-v0-27-15.md"
+    },
+    {
+      "command": "npm run audit:learner-copy",
+      "status": "pass",
+      "exitCode": 0,
+      "notes": "> promptlife@0.28.8 audit:learner-copy\n> node scripts/audit-learner-copy.mjs\n\nLearner-copy audit passed. Checked 19 learner-facing source files."
+    },
+    {
+      "command": "npm run audit:learner-leaks",
+      "status": "pass",
+      "exitCode": 0,
+      "notes": "> promptlife@0.28.8 audit:learner-leaks\n> node scripts/audit-learner-leaks.mjs\n\nLearner leak audit passed. Static records: 45; allowed: 45; rendered screens: 7."
+    },
+    {
+      "command": "npm run audit:language",
+      "status": "pass",
+      "exitCode": 0,
+      "notes": "> promptlife@0.28.8 audit:language\n> node scripts/audit-language.mjs\n\nLanguage audit passed. Checked 61 current source/docs files for banned wording."
+    },
+    {
+      "command": "npm run audit:visual-assets",
+      "status": "pass",
+      "exitCode": 0,
+      "notes": "> promptlife@0.28.8 audit:visual-assets\n> node scripts/audit-visual-assets.mjs\n\nVisual asset audit passed. Checked 12 manifest entries; live assets before: 1; live assets after: 6; newly live: 5; missing assets: 6; rejected assets: 0; pending assets: 0."
+    },
+    {
+      "command": "npm run audit:visual-aids",
+      "status": "pass",
+      "exitCode": 0,
+      "notes": "> promptlife@0.28.8 audit:visual-aids\n> node scripts/audit-visual-aids.mjs && node scripts/audit-word-wrap.mjs\n\nVisual aid audit passed: 39 aids, 0 mismatches, 0 readiness issues.\nWord-wrap audit pass.\nChecked 82 files.\nUnsafe CSS: 0\nKnown bad splits: 0\nLong internal labels: 0\nDiagram paragraphs: 0"
+    },
+    {
+      "command": "npm run audit:visual-overflow",
+      "status": "pass",
+      "exitCode": 0,
+      "notes": "> promptlife@0.28.8 audit:visual-overflow\n> node scripts/audit-visual-overflow.mjs\n\nVisual overflow audit passed. Checked 39 learner-route visual aids at 320px and 390px."
+    },
+    {
+      "command": "npm run audit:word-wrap",
+      "status": "pass",
+      "exitCode": 0,
+      "notes": "> promptlife@0.28.8 audit:word-wrap\n> node scripts/audit-word-wrap.mjs\n\nWord-wrap audit pass.\nChecked 82 files.\nUnsafe CSS: 0\nKnown bad splits: 0\nLong internal labels: 0\nDiagram paragraphs: 0"
+    },
+    {
+      "command": "npm run audit:exercises",
+      "status": "pass",
+      "exitCode": 0,
+      "notes": "> promptlife@0.28.8 audit:exercises\n> node scripts/audit-exercises.mjs\n\nExercise audit passed. Inventoried 39 Journey interactions and exported review PDFs."
+    }
+  ]
+}

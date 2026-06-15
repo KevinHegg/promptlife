@@ -1,6 +1,6 @@
 {
   "version": "0.28.3",
-  "generatedAt": "2026-06-14T21:24:51.624Z",
+  "generatedAt": "2026-06-15T15:22:51.487Z",
   "status": "pass",
   "routeChecked": "learner Journey lesson route",
   "widths": [
@@ -38,7 +38,7 @@
           },
           "canvasOverflow": {
             "x": 0,
-            "y": 4
+            "y": 0
           },
           "clippedHtml": [],
           "paragraphTextInsideVisualShapes": [],
@@ -170,7 +170,7 @@
           },
           "canvasOverflow": {
             "x": 0,
-            "y": 4
+            "y": 0
           },
           "clippedHtml": [],
           "paragraphTextInsideVisualShapes": [],
@@ -269,7 +269,7 @@
           },
           "canvasOverflow": {
             "x": 0,
-            "y": 4
+            "y": 0
           },
           "clippedHtml": [],
           "paragraphTextInsideVisualShapes": [],
@@ -1003,7 +1003,7 @@
           "tinySvgLabels": [],
           "clippedSvgLabels": [],
           "overlappingSvgLabels": [],
-          "svgLabelCount": 7,
+          "svgLabelCount": 0,
           "generatedImageHasAlt": true,
           "navPresent": true,
           "navOverlap": false,
@@ -1036,7 +1036,7 @@
           "tinySvgLabels": [],
           "clippedSvgLabels": [],
           "overlappingSvgLabels": [],
-          "svgLabelCount": 8,
+          "svgLabelCount": 0,
           "generatedImageHasAlt": true,
           "navPresent": true,
           "navOverlap": false,
@@ -1094,7 +1094,7 @@
           },
           "canvasOverflow": {
             "x": 0,
-            "y": 0
+            "y": 4
           },
           "clippedHtml": [],
           "paragraphTextInsideVisualShapes": [],
@@ -1102,7 +1102,7 @@
           "tinySvgLabels": [],
           "clippedSvgLabels": [],
           "overlappingSvgLabels": [],
-          "svgLabelCount": 6,
+          "svgLabelCount": 0,
           "generatedImageHasAlt": true,
           "navPresent": true,
           "navOverlap": false,
@@ -1135,7 +1135,7 @@
           "tinySvgLabels": [],
           "clippedSvgLabels": [],
           "overlappingSvgLabels": [],
-          "svgLabelCount": 12,
+          "svgLabelCount": 0,
           "generatedImageHasAlt": true,
           "navPresent": true,
           "navOverlap": false,
@@ -1168,7 +1168,7 @@
           "tinySvgLabels": [],
           "clippedSvgLabels": [],
           "overlappingSvgLabels": [],
-          "svgLabelCount": 7,
+          "svgLabelCount": 0,
           "generatedImageHasAlt": true,
           "navPresent": true,
           "navOverlap": false,
@@ -1201,7 +1201,7 @@
           "tinySvgLabels": [],
           "clippedSvgLabels": [],
           "overlappingSvgLabels": [],
-          "svgLabelCount": 7,
+          "svgLabelCount": 0,
           "generatedImageHasAlt": true,
           "navPresent": true,
           "navOverlap": false,
@@ -1234,7 +1234,7 @@
           "tinySvgLabels": [],
           "clippedSvgLabels": [],
           "overlappingSvgLabels": [],
-          "svgLabelCount": 7,
+          "svgLabelCount": 0,
           "generatedImageHasAlt": true,
           "navPresent": true,
           "navOverlap": false,
@@ -1292,7 +1292,7 @@
           },
           "canvasOverflow": {
             "x": 0,
-            "y": 16
+            "y": 0
           },
           "clippedHtml": [],
           "paragraphTextInsideVisualShapes": [],
@@ -1330,7 +1330,7 @@
           },
           "canvasOverflow": {
             "x": 0,
-            "y": 4
+            "y": 0
           },
           "clippedHtml": [],
           "paragraphTextInsideVisualShapes": [],
@@ -1462,7 +1462,7 @@
           },
           "canvasOverflow": {
             "x": 0,
-            "y": 4
+            "y": 0
           },
           "clippedHtml": [],
           "paragraphTextInsideVisualShapes": [],
@@ -1561,7 +1561,7 @@
           },
           "canvasOverflow": {
             "x": 0,
-            "y": 4
+            "y": 0
           },
           "clippedHtml": [],
           "paragraphTextInsideVisualShapes": [],
@@ -2295,7 +2295,7 @@
           "tinySvgLabels": [],
           "clippedSvgLabels": [],
           "overlappingSvgLabels": [],
-          "svgLabelCount": 7,
+          "svgLabelCount": 0,
           "generatedImageHasAlt": true,
           "navPresent": true,
           "navOverlap": false,
@@ -2328,7 +2328,7 @@
           "tinySvgLabels": [],
           "clippedSvgLabels": [],
           "overlappingSvgLabels": [],
-          "svgLabelCount": 8,
+          "svgLabelCount": 0,
           "generatedImageHasAlt": true,
           "navPresent": true,
           "navOverlap": false,
@@ -2386,7 +2386,7 @@
           },
           "canvasOverflow": {
             "x": 0,
-            "y": 0
+            "y": 4
           },
           "clippedHtml": [],
           "paragraphTextInsideVisualShapes": [],
@@ -2394,7 +2394,7 @@
           "tinySvgLabels": [],
           "clippedSvgLabels": [],
           "overlappingSvgLabels": [],
-          "svgLabelCount": 6,
+          "svgLabelCount": 0,
           "generatedImageHasAlt": true,
           "navPresent": true,
           "navOverlap": false,
@@ -2427,7 +2427,7 @@
           "tinySvgLabels": [],
           "clippedSvgLabels": [],
           "overlappingSvgLabels": [],
-          "svgLabelCount": 12,
+          "svgLabelCount": 0,
           "generatedImageHasAlt": true,
           "navPresent": true,
           "navOverlap": false,
@@ -2460,7 +2460,7 @@
           "tinySvgLabels": [],
           "clippedSvgLabels": [],
           "overlappingSvgLabels": [],
-          "svgLabelCount": 7,
+          "svgLabelCount": 0,
           "generatedImageHasAlt": true,
           "navPresent": true,
           "navOverlap": false,
@@ -2493,7 +2493,7 @@
           "tinySvgLabels": [],
           "clippedSvgLabels": [],
           "overlappingSvgLabels": [],
-          "svgLabelCount": 7,
+          "svgLabelCount": 0,
           "generatedImageHasAlt": true,
           "navPresent": true,
           "navOverlap": false,
@@ -2526,7 +2526,7 @@
           "tinySvgLabels": [],
           "clippedSvgLabels": [],
           "overlappingSvgLabels": [],
-          "svgLabelCount": 7,
+          "svgLabelCount": 0,
           "generatedImageHasAlt": true,
           "navPresent": true,
           "navOverlap": false,
@@ -2584,7 +2584,7 @@
           },
           "canvasOverflow": {
             "x": 0,
-            "y": 22
+            "y": 0
           },
           "clippedHtml": [],
           "paragraphTextInsideVisualShapes": [],

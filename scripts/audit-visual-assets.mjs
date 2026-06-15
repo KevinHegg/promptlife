@@ -6,8 +6,10 @@ import { visualAidReadinessBriefs } from './visual-aid-readiness-data-v0283.mjs'
 const root = process.cwd()
 const manifestPath = path.join(root, 'public', 'assets', 'journey-visuals', 'v0-28', 'manifest.json')
 const outDir = path.join(root, 'docs', 'journey', 'visual-aids')
-const auditJsonPath = path.join(outDir, 'visual-asset-audit-v0-28-7.json')
-const auditMdPath = path.join(outDir, 'visual-asset-audit-v0-28-7.md')
+const auditVersion = '0.28.9'
+const previousAuditJsonPath = path.join(outDir, 'visual-asset-audit-v0-28-7b.json')
+const auditJsonPath = path.join(outDir, 'visual-asset-audit-v0-28-9.json')
+const auditMdPath = path.join(outDir, 'visual-asset-audit-v0-28-9.md')
 const allowedStatuses = new Set(['pending-asset', 'pending-placeholder', 'live', 'deferred', 'missing', 'rejected'])
 const allowedTypes = new Set(['image2-concept-card'])
 const knownCardIds = new Set(visualAidReadinessBriefs.map((brief) => brief.learningCardId))
@@ -19,6 +21,10 @@ const maxHeight = 4096
 
 function readJson(filePath) {
   return JSON.parse(fs.readFileSync(filePath, 'utf8'))
+}
+
+function readJsonIfExists(filePath) {
+  return fs.existsSync(filePath) ? readJson(filePath) : null
 }
 
 function toPublicPath(assetPath) {
@@ -174,13 +180,16 @@ function validateAsset(asset) {
 
 function renderMarkdown(payload) {
   const lines = [
-    '# Prompt Life Visual Asset Audit v0.28.7',
+    '# Prompt Life Visual Asset Audit v0.28.9',
     '',
     `Generated: ${payload.generatedAt}`,
     `Status: ${payload.status}`,
     `Manifest: \`${payload.manifestPath}\``,
     `Assets checked: ${payload.summary.total}`,
-    `Live assets: ${payload.summary.live}`,
+    `Live assets before: ${payload.summary.liveBefore}`,
+    `Live assets after: ${payload.summary.liveAfter}`,
+    `Newly live assets: ${payload.summary.newlyLive}`,
+    `Newly live card IDs: ${payload.summary.newlyLiveAssets.join(', ') || 'none'}`,
     `Pending assets: ${payload.summary.pending}`,
     `Missing assets: ${payload.summary.missing}`,
     `Rejected assets: ${payload.summary.rejected}`,
@@ -201,17 +210,25 @@ function renderMarkdown(payload) {
 function main() {
   fs.mkdirSync(outDir, { recursive: true })
   const manifest = readJson(manifestPath)
+  const previousAudit = readJsonIfExists(previousAuditJsonPath)
+  const previousLiveIds = new Set((previousAudit?.rows ?? []).filter((row) => row.status === 'live').map((row) => row.cardId))
   const rows = manifest.assets.map(validateAsset)
+  const liveRows = rows.filter((row) => row.status === 'live')
+  const newlyLiveAssets = liveRows.map((row) => row.cardId).filter((cardId) => !previousLiveIds.has(cardId))
   const issues = rows.flatMap((row) => row.issues.map((message) => `${row.cardId}: ${message}`))
   const payload = {
-    version: '0.28.7',
+    version: auditVersion,
     generatedAt: new Date().toISOString(),
     manifestPath: path.relative(root, manifestPath),
     manifestVersion: manifest.version,
     status: issues.length ? 'fail' : 'pass',
     summary: {
       total: rows.length,
-      live: rows.filter((row) => row.status === 'live').length,
+      live: liveRows.length,
+      liveBefore: previousLiveIds.size,
+      liveAfter: liveRows.length,
+      newlyLive: newlyLiveAssets.length,
+      newlyLiveAssets,
       pending: rows.filter((row) => row.status === 'pending-asset' || row.status === 'pending-placeholder').length,
       deferred: rows.filter((row) => row.status === 'deferred').length,
       missing: rows.filter((row) => row.status === 'missing').length,
@@ -230,7 +247,7 @@ function main() {
     process.exit(1)
   }
 
-  console.log(`Visual asset audit passed. Checked ${rows.length} manifest entries; live assets: ${payload.summary.live}; pending assets: ${payload.summary.pending}.`)
+  console.log(`Visual asset audit passed. Checked ${rows.length} manifest entries; live assets before: ${payload.summary.liveBefore}; live assets after: ${payload.summary.liveAfter}; newly live: ${payload.summary.newlyLive}; missing assets: ${payload.summary.missing}; rejected assets: ${payload.summary.rejected}; pending assets: ${payload.summary.pending}.`)
 }
 
 main()

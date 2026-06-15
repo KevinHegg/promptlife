@@ -3560,7 +3560,7 @@ export const FULL_CHECKPOINT_BANK_V02715 = {
           },
           {
             "choiceId": "v02712-costs-we-must-count-q3-4-governance",
-            "text": "It proves small pilots need no review."
+            "text": "It proves small trials need no review."
           }
         ],
         "answer": "It hides infrastructure, energy, labor, and policy costs.",

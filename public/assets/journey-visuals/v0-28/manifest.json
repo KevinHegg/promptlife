@@ -1,5 +1,5 @@
 {
-  "version": "0.28.7",
+  "version": "0.28.9",
   "assets": [
     {
       "cardId": "what-is-llm",
@@ -8,27 +8,54 @@
       "assetPath": "/assets/journey-visuals/v0-28/optimized/what-is-an-llm.png",
       "thumbPath": "/assets/journey-visuals/v0-28/thumbnails/what-is-an-llm.png",
       "type": "image2-concept-card",
-      "status": "missing",
-      "alt": "A prompt ribbon enters a folded-paper model cloud and one response-token glow emerges.",
-      "caption": "A polished concept image will show a prompt entering a learned model space and one token emerging while the HTML callouts carry the exact mechanics.",
+      "status": "live",
+      "alt": "A ribbon of context flows into a folded-paper model cloud, and glowing response-token shapes emerge one at a time.",
+      "caption": "An LLM uses current context and learned weights to generate one response token at a time.",
       "callouts": [
         {
           "label": "Context enters",
-          "text": "The current prompt and response-so-far become visible input for this run."
+          "text": "The current prompt and response so far provide the visible input for this run."
         },
         {
-          "label": "Weights shape probabilities",
-          "text": "Learned weights, built earlier, shape next-token scores."
+          "label": "Weights shape scores",
+          "text": "Learned weights from training shape next-token scores without acting like a searchable database."
         },
         {
-          "label": "One token emerges",
-          "text": "The model selects one response token and appends it."
+          "label": "Tokens emerge",
+          "text": "The response grows as one selected token is appended, then the model runs again."
         }
       ],
       "containsEmbeddedText": false,
-      "imageTextVerified": false,
-      "notes": "What Is an LLM? remains on the current coded/generated visual in v0.28.7 because no optimized asset and thumbnail were provided.",
-      "missingReason": "missing optimized asset and thumbnail as of v0.28.7"
+      "imageTextVerified": true,
+      "notes": "Accepted live in v0.28.9. The textless prompt-to-model-to-token scene supports current context plus learned weights without implying consciousness, hidden search, or permanent learning.",
+      "sourcePath": "/assets/journey-visuals/v0-28/source/what-is-an-llm.png",
+      "dimensions": {
+        "width": 1448,
+        "height": 815
+      },
+      "fileSizeBytes": 1579418,
+      "thumbDimensions": {
+        "width": 480,
+        "height": 270
+      },
+      "thumbFileSizeBytes": 193234,
+      "qualityReview": {
+        "reviewedIn": "0.28.9",
+        "result": "accepted",
+        "checks": [
+          "source image found",
+          "optimized asset created",
+          "thumbnail created",
+          "textless image or no readable embedded text",
+          "no fake dashboard, chart, or metric visual",
+          "no banned word or debug label",
+          "no scary AI imagery or robot judge",
+          "no photorealistic identifiable people",
+          "no model consciousness implication",
+          "horizontal composition fits the generated visual frame",
+          "HTML caption and callouts carry the teaching"
+        ]
+      }
     },
     {
       "cardId": "pretraining",
@@ -37,27 +64,54 @@
       "assetPath": "/assets/journey-visuals/v0-28/optimized/pretraining.png",
       "thumbPath": "/assets/journey-visuals/v0-28/thumbnails/pretraining.png",
       "type": "image2-concept-card",
-      "status": "missing",
-      "alt": "Many blank paper streams shape glowing model pattern layers before use.",
-      "caption": "A future concept image will show broad pattern learning from many examples without implying perfect source memory.",
+      "status": "live",
+      "alt": "Many folded paper examples stream across a dawn landscape into layered glowing model patterns.",
+      "caption": "Pretraining shapes broad reusable patterns from many examples before ordinary use.",
       "callouts": [
         {
           "label": "Many examples",
-          "text": "Pretraining repeats the training loop across large collections of examples."
+          "text": "The training loop repeats across large collections of examples."
         },
         {
           "label": "Weights change",
-          "text": "Prediction errors drive repeated durable updates."
+          "text": "Prediction error drives durable weight updates during training."
         },
         {
-          "label": "Not memory",
-          "text": "Pretraining does not create a searchable copy of every source."
+          "label": "Not an archive",
+          "text": "Pretraining does not create a perfect searchable memory of every source."
         }
       ],
       "containsEmbeddedText": false,
-      "imageTextVerified": false,
-      "notes": "Pretraining remains on the current coded/generated visual in v0.28.7 because no optimized asset and thumbnail were provided.",
-      "missingReason": "missing optimized asset and thumbnail as of v0.28.7"
+      "imageTextVerified": true,
+      "notes": "Accepted live in v0.28.9. The broad example-stream scene conveys scale and reusable patterns without presenting sources as a searchable archive.",
+      "sourcePath": "/assets/journey-visuals/v0-28/source/pretraining.png",
+      "dimensions": {
+        "width": 1448,
+        "height": 815
+      },
+      "fileSizeBytes": 1975551,
+      "thumbDimensions": {
+        "width": 480,
+        "height": 270
+      },
+      "thumbFileSizeBytes": 245064,
+      "qualityReview": {
+        "reviewedIn": "0.28.9",
+        "result": "accepted",
+        "checks": [
+          "source image found",
+          "optimized asset created",
+          "thumbnail created",
+          "textless image or no readable embedded text",
+          "no fake dashboard, chart, or metric visual",
+          "no banned word or debug label",
+          "no scary AI imagery or robot judge",
+          "no photorealistic identifiable people",
+          "no model consciousness implication",
+          "horizontal composition fits the generated visual frame",
+          "HTML caption and callouts carry the teaching"
+        ]
+      }
     },
     {
       "cardId": "alignment",
@@ -66,27 +120,54 @@
       "assetPath": "/assets/journey-visuals/v0-28/optimized/alignment.png",
       "thumbPath": "/assets/journey-visuals/v0-28/thumbnails/alignment.png",
       "type": "image2-concept-card",
-      "status": "missing",
-      "alt": "Folded paths and light guardrails suggest behavior shaping without a conscious model.",
-      "caption": "A future concept image will show behavior shaping and guardrails while HTML keeps the conscience boundary explicit.",
+      "status": "live",
+      "alt": "Folded-paper response paths move through guardrails, review symbols, and policy-like checkpoints.",
+      "caption": "Alignment shapes behavior through training, feedback, policy, evaluation, and runtime controls.",
       "callouts": [
         {
           "label": "Behavior shaping",
-          "text": "Training and system design can encourage preferred response patterns."
+          "text": "Training and feedback can encourage preferred response patterns."
         },
         {
-          "label": "Guardrails",
-          "text": "Runtime safeguards can reduce risky paths during use."
+          "label": "Runtime controls",
+          "text": "Policies, filters, and system design can steer behavior during use."
         },
         {
           "label": "No conscience",
-          "text": "Alignment does not give the model moral understanding."
+          "text": "Alignment does not give the model moral understanding or a truth guarantee."
         }
       ],
       "containsEmbeddedText": false,
-      "imageTextVerified": false,
-      "notes": "Alignment remains on the current coded/generated visual in v0.28.7 because no optimized asset and thumbnail were provided.",
-      "missingReason": "missing optimized asset and thumbnail as of v0.28.7"
+      "imageTextVerified": true,
+      "notes": "Accepted live in v0.28.9. The path-and-guardrail scene supports behavior shaping without implying moral agency or a conscious model.",
+      "sourcePath": "/assets/journey-visuals/v0-28/source/alignment.png",
+      "dimensions": {
+        "width": 1448,
+        "height": 815
+      },
+      "fileSizeBytes": 1659468,
+      "thumbDimensions": {
+        "width": 480,
+        "height": 270
+      },
+      "thumbFileSizeBytes": 207133,
+      "qualityReview": {
+        "reviewedIn": "0.28.9",
+        "result": "accepted",
+        "checks": [
+          "source image found",
+          "optimized asset created",
+          "thumbnail created",
+          "textless image or no readable embedded text",
+          "no fake dashboard, chart, or metric visual",
+          "no banned word or debug label",
+          "no scary AI imagery or robot judge",
+          "no photorealistic identifiable people",
+          "no model consciousness implication",
+          "horizontal composition fits the generated visual frame",
+          "HTML caption and callouts carry the teaching"
+        ]
+      }
     },
     {
       "cardId": "multimodal",
@@ -95,27 +176,54 @@
       "assetPath": "/assets/journey-visuals/v0-28/optimized/multimodal-ai.png",
       "thumbPath": "/assets/journey-visuals/v0-28/thumbnails/multimodal-ai.png",
       "type": "image2-concept-card",
-      "status": "missing",
-      "alt": "Text, image, audio, and video-like paper forms flow into a shared representation field.",
-      "caption": "A future concept image will show multiple media types represented together without implying human sensation.",
+      "status": "live",
+      "alt": "Text pages, image panels, audio waves, and video frames flow into a shared folded-paper representation space.",
+      "caption": "Multimodal systems can represent or process multiple media types together without human-like perception.",
       "callouts": [
         {
           "label": "Multiple media",
-          "text": "Text, image, audio, video, or code can enter some systems."
+          "text": "Text, images, audio, video, or code can enter some systems."
         },
         {
-          "label": "Representation",
-          "text": "The system encodes media into usable representations or linked spaces."
+          "label": "Shared representations",
+          "text": "The system encodes media into model-usable forms or linked spaces."
         },
         {
           "label": "Not sensation",
-          "text": "Multimodal processing is not human experience."
+          "text": "Processing media is not the same as seeing, hearing, or experiencing as a person does."
         }
       ],
       "containsEmbeddedText": false,
-      "imageTextVerified": false,
-      "notes": "Multimodal AI remains on the current coded/generated visual in v0.28.7 because no optimized asset and thumbnail were provided.",
-      "missingReason": "missing optimized asset and thumbnail as of v0.28.7"
+      "imageTextVerified": true,
+      "notes": "Accepted live in v0.28.9. The text/image/audio/video streams are clear and avoid eye, brain, surveillance, or human-sensation imagery.",
+      "sourcePath": "/assets/journey-visuals/v0-28/source/multimodal-ai.png",
+      "dimensions": {
+        "width": 1448,
+        "height": 815
+      },
+      "fileSizeBytes": 1589102,
+      "thumbDimensions": {
+        "width": 480,
+        "height": 270
+      },
+      "thumbFileSizeBytes": 208000,
+      "qualityReview": {
+        "reviewedIn": "0.28.9",
+        "result": "accepted",
+        "checks": [
+          "source image found",
+          "optimized asset created",
+          "thumbnail created",
+          "textless image or no readable embedded text",
+          "no fake dashboard, chart, or metric visual",
+          "no banned word or debug label",
+          "no scary AI imagery or robot judge",
+          "no photorealistic identifiable people",
+          "no model consciousness implication",
+          "horizontal composition fits the generated visual frame",
+          "HTML caption and callouts carry the teaching"
+        ]
+      }
     },
     {
       "cardId": "perfect-storm",
@@ -124,27 +232,53 @@
       "assetPath": "/assets/journey-visuals/v0-28/optimized/perfect-storm.png",
       "thumbPath": "/assets/journey-visuals/v0-28/thumbnails/perfect-storm.png",
       "type": "image2-concept-card",
-      "status": "missing",
-      "alt": "Several folded-paper streams converge into one modern capability cloud.",
-      "caption": "A future concept image will show convergence without placing all ingredient labels inside a cramped diagram.",
+      "status": "live",
+      "alt": "Several folded-paper streams converge into one glowing capability cloud.",
+      "caption": "Data, compute, storage, methods, labor, and incentives converged into modern LLM capability.",
       "callouts": [
         {
-          "label": "Data",
-          "text": "Human-created data supplied patterns."
+          "label": "Many inputs",
+          "text": "Data, compute, storage, and methods each mattered."
         },
         {
-          "label": "Scale",
-          "text": "Compute and storage made large training practical."
+          "label": "Human systems",
+          "text": "Labor, funding, products, and demand helped move capability into use."
         },
         {
-          "label": "Methods and incentives",
-          "text": "Methods, labor, and demand moved systems into products."
+          "label": "Convergence",
+          "text": "Modern LLMs came from conditions meeting, not one single breakthrough."
         }
       ],
       "containsEmbeddedText": false,
-      "imageTextVerified": false,
-      "notes": "The Perfect Storm remains on the current coded/generated visual in v0.28.7 because no optimized asset and thumbnail were provided.",
-      "missingReason": "missing optimized asset and thumbnail as of v0.28.7"
+      "imageTextVerified": true,
+      "notes": "Accepted live in v0.28.7b. The textless convergence scene is horizontal, uncluttered, and supports the one-spark misconception repair.",
+      "sourcePath": "/assets/journey-visuals/v0-28/source/perfect-storm.png",
+      "dimensions": {
+        "width": 1448,
+        "height": 815
+      },
+      "fileSizeBytes": 1733059,
+      "thumbDimensions": {
+        "width": 480,
+        "height": 270
+      },
+      "thumbFileSizeBytes": 228269,
+      "qualityReview": {
+        "reviewedIn": "0.28.7b",
+        "result": "accepted",
+        "checks": [
+          "source image found",
+          "optimized asset created",
+          "thumbnail created",
+          "textless image or no readable embedded text",
+          "no fake dashboard, chart, or metric visual",
+          "no banned word or debug label",
+          "no scary AI imagery or robot judge",
+          "no photorealistic identifiable people",
+          "no model consciousness implication",
+          "horizontal composition fits the generated visual frame"
+        ]
+      }
     },
     {
       "cardId": "collective-intelligence",
@@ -205,27 +339,53 @@
       "assetPath": "/assets/journey-visuals/v0-28/optimized/costs-we-must-count.png",
       "thumbPath": "/assets/journey-visuals/v0-28/thumbnails/costs-we-must-count.png",
       "type": "image2-concept-card",
-      "status": "missing",
-      "alt": "A glowing answer card is connected to hidden infrastructure, labor, privacy, and governance shapes.",
-      "caption": "A future concept image will make hidden infrastructure and social costs visible without inventing metrics.",
+      "status": "live",
+      "alt": "A glowing answer card sits in front of folded-paper infrastructure, cooling water, labor, privacy, and governance symbols.",
+      "caption": "AI answers depend on infrastructure, energy and water, labor, privacy, governance, and institutional choices.",
       "callouts": [
         {
           "label": "Infrastructure",
-          "text": "Energy, water, carbon, data centers, chips, and e-waste vary by system and workload."
+          "text": "Data centers, chips, energy, water, and e-waste are part of the real system."
         },
         {
           "label": "Human systems",
           "text": "Labor, privacy, bias, and information quality depend on deployment choices."
         },
         {
-          "label": "Power",
-          "text": "Data, compute, capital, and governance affect who benefits and who decides."
+          "label": "Institutions",
+          "text": "Governance, incentives, and access shape who benefits and who bears costs."
         }
       ],
       "containsEmbeddedText": false,
-      "imageTextVerified": false,
-      "notes": "Costs We Must Count remains on the current coded/generated visual in v0.28.7 because no optimized asset and thumbnail were provided.",
-      "missingReason": "missing optimized asset and thumbnail as of v0.28.7"
+      "imageTextVerified": true,
+      "notes": "Accepted live in v0.28.7b. The image is textless, uses no fake statistics, and makes infrastructure, labor, privacy, and governance visible without doom framing.",
+      "sourcePath": "/assets/journey-visuals/v0-28/source/costs-we-must-count.png",
+      "dimensions": {
+        "width": 1448,
+        "height": 1086
+      },
+      "fileSizeBytes": 2440652,
+      "thumbDimensions": {
+        "width": 480,
+        "height": 360
+      },
+      "thumbFileSizeBytes": 287175,
+      "qualityReview": {
+        "reviewedIn": "0.28.7b",
+        "result": "accepted",
+        "checks": [
+          "source image found",
+          "optimized asset created",
+          "thumbnail created",
+          "textless image or no readable embedded text",
+          "no fake dashboard, chart, or metric visual",
+          "no banned word or debug label",
+          "no scary AI imagery or robot judge",
+          "no photorealistic identifiable people",
+          "no model consciousness implication",
+          "horizontal composition fits the generated visual frame"
+        ]
+      }
     },
     {
       "cardId": "risk-myth",
@@ -234,27 +394,53 @@
       "assetPath": "/assets/journey-visuals/v0-28/optimized/risk-vs-myth.png",
       "thumbPath": "/assets/journey-visuals/v0-28/thumbnails/risk-vs-myth.png",
       "type": "image2-concept-card",
-      "status": "missing",
-      "alt": "A grounded review path sits beside fading myth shapes, suggesting practical risk literacy.",
-      "caption": "A future concept image will separate practical risk literacy from unsupported myths without fear-heavy imagery.",
+      "status": "live",
+      "alt": "A clear review path with safeguard symbols sits beside misty myth shapes on a separate path.",
+      "caption": "Model-literate users separate practical risks from unsupported myths, then choose review and safeguards.",
       "callouts": [
         {
-          "label": "Real mechanisms",
-          "text": "Privacy exposure, hallucination, tool misuse, overreliance, and bias can cause practical harm."
+          "label": "Practical risks",
+          "text": "Privacy exposure, hallucination, tool misuse, bias, and overreliance need concrete safeguards."
         },
         {
-          "label": "Myths",
-          "text": "Conscious chatbots and secret self-training during every chat are unsupported claims."
+          "label": "Unsupported myths",
+          "text": "Conscious chatbots, hidden omniscience, and secret self-training claims need evidence."
         },
         {
-          "label": "Accountability",
-          "text": "Institutions, vendors, policies, and affected communities shape prevention and review."
+          "label": "Review",
+          "text": "Risk literacy asks what system, context, tool, and institution are actually involved."
         }
       ],
       "containsEmbeddedText": false,
-      "imageTextVerified": false,
-      "notes": "Risk vs Myth remains on the current coded/generated visual in v0.28.7 because no optimized asset and thumbnail were provided.",
-      "missingReason": "missing optimized asset and thumbnail as of v0.28.7"
+      "imageTextVerified": true,
+      "notes": "Accepted live in v0.28.7b. The split path is readable, non-dashboard, and separates practical safeguards from pale myth imagery without horror or model-consciousness framing.",
+      "sourcePath": "/assets/journey-visuals/v0-28/source/risk-vs-myth.png",
+      "dimensions": {
+        "width": 1448,
+        "height": 815
+      },
+      "fileSizeBytes": 1670077,
+      "thumbDimensions": {
+        "width": 480,
+        "height": 270
+      },
+      "thumbFileSizeBytes": 210719,
+      "qualityReview": {
+        "reviewedIn": "0.28.7b",
+        "result": "accepted",
+        "checks": [
+          "source image found",
+          "optimized asset created",
+          "thumbnail created",
+          "textless image or no readable embedded text",
+          "no fake dashboard, chart, or metric visual",
+          "no banned word or debug label",
+          "no scary AI imagery or robot judge",
+          "no photorealistic identifiable people",
+          "no model consciousness implication",
+          "horizontal composition fits the generated visual frame"
+        ]
+      }
     },
     {
       "cardId": "benefits-worth-taking-seriously",
@@ -263,27 +449,54 @@
       "assetPath": "/assets/journey-visuals/v0-28/optimized/benefits-worth-taking-seriously.png",
       "thumbPath": "/assets/journey-visuals/v0-28/thumbnails/benefits-worth-taking-seriously.png",
       "type": "image2-concept-card",
-      "status": "missing",
-      "alt": "A calm folded-paper tool garden shows useful AI supports with review lanterns.",
-      "caption": "A future concept image will show bounded, reviewed benefits without hype.",
+      "status": "live",
+      "alt": "A person reviews useful paper-crafted AI tools for writing, translation, accessibility, summarization, and code support inside a guarded garden.",
+      "caption": "AI benefits can be real and useful when bounded by context, safeguards, evidence, and human review.",
       "callouts": [
         {
-          "label": "Useful with review",
-          "text": "Accessibility, translation, summarization, search, drafting, and coding help can be useful with review."
+          "label": "Useful supports",
+          "text": "Drafting, translation, summarization, accessibility, and coding help can be valuable with review."
         },
         {
-          "label": "Needs safeguards",
-          "text": "Tutoring, research triage, brainstorming, and workflows need context and evaluation."
+          "label": "Bounded use",
+          "text": "The value depends on task fit, evidence, safeguards, and context."
         },
         {
-          "label": "Evidence matters",
-          "text": "Broad replacement or no-cost claims should not be treated as fact."
+          "label": "Human review",
+          "text": "People still judge quality, stakes, and consequences."
         }
       ],
       "containsEmbeddedText": false,
-      "imageTextVerified": false,
-      "notes": "Benefits Worth Taking Seriously remains on the current coded/generated visual in v0.28.7 because no optimized asset and thumbnail were provided.",
-      "missingReason": "missing optimized asset and thumbnail as of v0.28.7"
+      "imageTextVerified": true,
+      "notes": "Accepted live in v0.28.9. The guarded tool-garden scene shows practical benefit categories with a non-identifiable reviewer and avoids utopian claims.",
+      "sourcePath": "/assets/journey-visuals/v0-28/source/benefits-worth-taking-seriously.png",
+      "dimensions": {
+        "width": 1448,
+        "height": 815
+      },
+      "fileSizeBytes": 2020276,
+      "thumbDimensions": {
+        "width": 480,
+        "height": 270
+      },
+      "thumbFileSizeBytes": 242431,
+      "qualityReview": {
+        "reviewedIn": "0.28.9",
+        "result": "accepted",
+        "checks": [
+          "source image found",
+          "optimized asset created",
+          "thumbnail created",
+          "textless image or no readable embedded text",
+          "no fake dashboard, chart, or metric visual",
+          "no banned word or debug label",
+          "no scary AI imagery or robot judge",
+          "no photorealistic identifiable people",
+          "no model consciousness implication",
+          "horizontal composition fits the generated visual frame",
+          "HTML caption and callouts carry the teaching"
+        ]
+      }
     },
     {
       "cardId": "human-centered-ai",
@@ -292,27 +505,53 @@
       "assetPath": "/assets/journey-visuals/v0-28/optimized/human-centered-ai.png",
       "thumbPath": "/assets/journey-visuals/v0-28/thumbnails/human-centered-ai.png",
       "type": "image2-concept-card",
-      "status": "missing",
-      "alt": "Human-centered decision shapes surround a support card, with review and governance rails visible.",
-      "caption": "A future concept image will place dignity, human judgment, review, and governance ahead of automation.",
+      "status": "live",
+      "alt": "A human-centered review space places a person before an AI support card, with accountability and governance symbols nearby.",
+      "caption": "AI output should support human judgment; people remain accountable for decisions, review, and governance.",
       "callouts": [
         {
-          "label": "Human judgment",
-          "text": "People remain accountable for high-stakes decisions and institutional use."
+          "label": "Support",
+          "text": "AI output can help people draft, notice, compare, or review."
         },
         {
-          "label": "Dignity",
-          "text": "Speed, profit, and automation should not outrank persons, learning, or relationships."
+          "label": "Judgment",
+          "text": "High-stakes decisions still need human responsibility and local context."
         },
         {
-          "label": "Model limit",
-          "text": "A model can sound ethical without moral understanding."
+          "label": "Accountability",
+          "text": "Review, appeal, policy, and governance belong to human institutions."
         }
       ],
       "containsEmbeddedText": false,
-      "imageTextVerified": false,
-      "notes": "Human-Centered AI remains on the current coded/generated visual in v0.28.7 because no optimized asset and thumbnail were provided.",
-      "missingReason": "missing optimized asset and thumbnail as of v0.28.7"
+      "imageTextVerified": true,
+      "notes": "Accepted live in v0.28.7b. The image keeps a human figure central, avoids robot-judge imagery, and uses HTML for all instructional language.",
+      "sourcePath": "/assets/journey-visuals/v0-28/source/human-centered-ai.png",
+      "dimensions": {
+        "width": 1448,
+        "height": 815
+      },
+      "fileSizeBytes": 1637320,
+      "thumbDimensions": {
+        "width": 480,
+        "height": 270
+      },
+      "thumbFileSizeBytes": 222397,
+      "qualityReview": {
+        "reviewedIn": "0.28.7b",
+        "result": "accepted",
+        "checks": [
+          "source image found",
+          "optimized asset created",
+          "thumbnail created",
+          "textless image or no readable embedded text",
+          "no fake dashboard, chart, or metric visual",
+          "no banned word or debug label",
+          "no scary AI imagery or robot judge",
+          "no photorealistic identifiable people",
+          "no model consciousness implication",
+          "horizontal composition fits the generated visual frame"
+        ]
+      }
     },
     {
       "cardId": "better-ai-choice",
@@ -321,27 +560,54 @@
       "assetPath": "/assets/journey-visuals/v0-28/optimized/better-ai-choice.png",
       "thumbPath": "/assets/journey-visuals/v0-28/thumbnails/better-ai-choice.png",
       "type": "image2-concept-card",
-      "status": "missing",
-      "alt": "Folded paths and abstract levers suggest better AI as a human choice.",
-      "caption": "A future concept image will show better AI as a set of human design and governance choices, not destiny.",
+      "status": "live",
+      "alt": "A person faces branching garden paths toward folded-paper symbols for design, governance, evaluation, incentives, and human review.",
+      "caption": "Better AI outcomes depend on design, data choices, evaluation, incentives, governance, and human review.",
       "callouts": [
         {
-          "label": "Technical choices",
-          "text": "Task fit, retrieval, evaluation, and efficiency can shape outcomes."
-        },
-        {
-          "label": "Data choices",
-          "text": "Provenance, consent, licensing, compensation, and privacy matter."
+          "label": "Design choices",
+          "text": "Task fit, model size, deployment, and safeguards shape outcomes."
         },
         {
           "label": "Institutional choices",
-          "text": "Review, policy, labor planning, and independent evaluation shape use."
+          "text": "Governance, incentives, evaluation, and labor planning affect who benefits."
+        },
+        {
+          "label": "Human review",
+          "text": "Better outcomes require accountable choices, not a single switch."
         }
       ],
       "containsEmbeddedText": false,
-      "imageTextVerified": false,
-      "notes": "Better AI Is a Choice remains on the current coded/generated visual in v0.28.7 because no optimized asset and thumbnail were provided.",
-      "missingReason": "missing optimized asset and thumbnail as of v0.28.7"
+      "imageTextVerified": true,
+      "notes": "Accepted live in v0.28.9. The branching-path scene supports responsible choice and avoids inevitability or fake control-panel imagery.",
+      "sourcePath": "/assets/journey-visuals/v0-28/source/better-ai-choice.png",
+      "dimensions": {
+        "width": 1448,
+        "height": 815
+      },
+      "fileSizeBytes": 1840205,
+      "thumbDimensions": {
+        "width": 480,
+        "height": 270
+      },
+      "thumbFileSizeBytes": 234491,
+      "qualityReview": {
+        "reviewedIn": "0.28.9",
+        "result": "accepted",
+        "checks": [
+          "source image found",
+          "optimized asset created",
+          "thumbnail created",
+          "textless image or no readable embedded text",
+          "no fake dashboard, chart, or metric visual",
+          "no banned word or debug label",
+          "no scary AI imagery or robot judge",
+          "no photorealistic identifiable people",
+          "no model consciousness implication",
+          "horizontal composition fits the generated visual frame",
+          "HTML caption and callouts carry the teaching"
+        ]
+      }
     },
     {
       "cardId": "model-literate-synthesis",
@@ -350,27 +616,53 @@
       "assetPath": "/assets/journey-visuals/v0-28/optimized/model-literate-synthesis.png",
       "thumbPath": "/assets/journey-visuals/v0-28/thumbnails/model-literate-synthesis.png",
       "type": "image2-concept-card",
-      "status": "missing",
-      "alt": "A compass, lantern, and folded map integrate model mechanics, evidence checking, and human responsibility.",
-      "caption": "A future concept image will close the Journey with mechanics, evidence, and human responsibility while HTML callouts stay precise.",
+      "status": "live",
+      "alt": "A folded-paper compass links model mechanics, evidence review, and human responsibility into one synthesis scene.",
+      "caption": "Model literacy connects mechanics, evidence checking, and human responsibility without treating fluency as wisdom.",
       "callouts": [
         {
           "label": "Mechanics",
-          "text": "Prompts become tokens, scores, probabilities, and generated tokens."
+          "text": "Prompts become tokens, vectors, states, scores, probabilities, and generated tokens."
         },
         {
           "label": "Evidence",
-          "text": "Fluent output still needs checking."
+          "text": "RAG, grounding, citations, and sources help only when the support actually matches."
         },
         {
           "label": "Responsibility",
-          "text": "Humans remain accountable for use, review, and decisions."
+          "text": "People remain accountable for use, review, governance, and decisions."
         }
       ],
       "containsEmbeddedText": false,
-      "imageTextVerified": false,
-      "notes": "Model Literate Synthesis remains on the current coded/generated visual in v0.28.7 because no optimized asset and thumbnail were provided.",
-      "missingReason": "missing optimized asset and thumbnail as of v0.28.7"
+      "imageTextVerified": true,
+      "notes": "Accepted live in v0.28.7b. The image is textless, non-certifying, and visually connects mechanics, evidence review, and human responsibility.",
+      "sourcePath": "/assets/journey-visuals/v0-28/source/model-literate-synthesis.png",
+      "dimensions": {
+        "width": 1448,
+        "height": 815
+      },
+      "fileSizeBytes": 1813598,
+      "thumbDimensions": {
+        "width": 480,
+        "height": 270
+      },
+      "thumbFileSizeBytes": 217475,
+      "qualityReview": {
+        "reviewedIn": "0.28.7b",
+        "result": "accepted",
+        "checks": [
+          "source image found",
+          "optimized asset created",
+          "thumbnail created",
+          "textless image or no readable embedded text",
+          "no fake dashboard, chart, or metric visual",
+          "no banned word or debug label",
+          "no scary AI imagery or robot judge",
+          "no photorealistic identifiable people",
+          "no model consciousness implication",
+          "horizontal composition fits the generated visual frame"
+        ]
+      }
     }
   ],
   "updatedAt": "2026-06-14T21:01:24.832Z"

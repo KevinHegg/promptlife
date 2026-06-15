@@ -1,0 +1,305 @@
+{
+  "version": "0.28.9",
+  "generatedAt": "2026-06-15T15:21:14.981Z",
+  "manifestPath": "public/assets/journey-visuals/v0-28/manifest.json",
+  "manifestVersion": "0.28.9",
+  "status": "pass",
+  "summary": {
+    "total": 12,
+    "live": 12,
+    "liveBefore": 6,
+    "liveAfter": 12,
+    "newlyLive": 6,
+    "newlyLiveAssets": [
+      "what-is-llm",
+      "pretraining",
+      "alignment",
+      "multimodal",
+      "benefits-worth-taking-seriously",
+      "better-ai-choice"
+    ],
+    "pending": 0,
+    "deferred": 0,
+    "missing": 0,
+    "rejected": 0,
+    "issueCount": 0
+  },
+  "rows": [
+    {
+      "cardId": "what-is-llm",
+      "title": "What Is an LLM?",
+      "status": "live",
+      "assetPath": "/assets/journey-visuals/v0-28/optimized/what-is-an-llm.png",
+      "thumbPath": "/assets/journey-visuals/v0-28/thumbnails/what-is-an-llm.png",
+      "live": true,
+      "assetExists": true,
+      "thumbExists": true,
+      "dimensions": {
+        "width": 1448,
+        "height": 815,
+        "format": "png"
+      },
+      "thumbDimensions": {
+        "width": 480,
+        "height": 270,
+        "format": "png"
+      },
+      "fileBytes": 1579418,
+      "thumbBytes": 193234,
+      "issues": []
+    },
+    {
+      "cardId": "pretraining",
+      "title": "Pretraining",
+      "status": "live",
+      "assetPath": "/assets/journey-visuals/v0-28/optimized/pretraining.png",
+      "thumbPath": "/assets/journey-visuals/v0-28/thumbnails/pretraining.png",
+      "live": true,
+      "assetExists": true,
+      "thumbExists": true,
+      "dimensions": {
+        "width": 1448,
+        "height": 815,
+        "format": "png"
+      },
+      "thumbDimensions": {
+        "width": 480,
+        "height": 270,
+        "format": "png"
+      },
+      "fileBytes": 1975551,
+      "thumbBytes": 245064,
+      "issues": []
+    },
+    {
+      "cardId": "alignment",
+      "title": "Alignment",
+      "status": "live",
+      "assetPath": "/assets/journey-visuals/v0-28/optimized/alignment.png",
+      "thumbPath": "/assets/journey-visuals/v0-28/thumbnails/alignment.png",
+      "live": true,
+      "assetExists": true,
+      "thumbExists": true,
+      "dimensions": {
+        "width": 1448,
+        "height": 815,
+        "format": "png"
+      },
+      "thumbDimensions": {
+        "width": 480,
+        "height": 270,
+        "format": "png"
+      },
+      "fileBytes": 1659468,
+      "thumbBytes": 207133,
+      "issues": []
+    },
+    {
+      "cardId": "multimodal",
+      "title": "Multimodal AI",
+      "status": "live",
+      "assetPath": "/assets/journey-visuals/v0-28/optimized/multimodal-ai.png",
+      "thumbPath": "/assets/journey-visuals/v0-28/thumbnails/multimodal-ai.png",
+      "live": true,
+      "assetExists": true,
+      "thumbExists": true,
+      "dimensions": {
+        "width": 1448,
+        "height": 815,
+        "format": "png"
+      },
+      "thumbDimensions": {
+        "width": 480,
+        "height": 270,
+        "format": "png"
+      },
+      "fileBytes": 1589102,
+      "thumbBytes": 208000,
+      "issues": []
+    },
+    {
+      "cardId": "perfect-storm",
+      "title": "The Perfect Storm",
+      "status": "live",
+      "assetPath": "/assets/journey-visuals/v0-28/optimized/perfect-storm.png",
+      "thumbPath": "/assets/journey-visuals/v0-28/thumbnails/perfect-storm.png",
+      "live": true,
+      "assetExists": true,
+      "thumbExists": true,
+      "dimensions": {
+        "width": 1448,
+        "height": 815,
+        "format": "png"
+      },
+      "thumbDimensions": {
+        "width": 480,
+        "height": 270,
+        "format": "png"
+      },
+      "fileBytes": 1733059,
+      "thumbBytes": 228269,
+      "issues": []
+    },
+    {
+      "cardId": "collective-intelligence",
+      "title": "Collective Intelligence, Extracted",
+      "status": "live",
+      "assetPath": "/assets/journey-visuals/v0-28/optimized/collective-intelligence.png",
+      "thumbPath": "/assets/journey-visuals/v0-28/thumbnails/collective-intelligence.png",
+      "live": true,
+      "assetExists": true,
+      "thumbExists": true,
+      "dimensions": {
+        "width": 1448,
+        "height": 1086,
+        "format": "png"
+      },
+      "thumbDimensions": {
+        "width": 480,
+        "height": 360,
+        "format": "png"
+      },
+      "fileBytes": 2244270,
+      "thumbBytes": 275562,
+      "issues": []
+    },
+    {
+      "cardId": "costs-we-must-count",
+      "title": "Costs We Must Count",
+      "status": "live",
+      "assetPath": "/assets/journey-visuals/v0-28/optimized/costs-we-must-count.png",
+      "thumbPath": "/assets/journey-visuals/v0-28/thumbnails/costs-we-must-count.png",
+      "live": true,
+      "assetExists": true,
+      "thumbExists": true,
+      "dimensions": {
+        "width": 1448,
+        "height": 1086,
+        "format": "png"
+      },
+      "thumbDimensions": {
+        "width": 480,
+        "height": 360,
+        "format": "png"
+      },
+      "fileBytes": 2440652,
+      "thumbBytes": 287175,
+      "issues": []
+    },
+    {
+      "cardId": "risk-myth",
+      "title": "Risk vs Myth",
+      "status": "live",
+      "assetPath": "/assets/journey-visuals/v0-28/optimized/risk-vs-myth.png",
+      "thumbPath": "/assets/journey-visuals/v0-28/thumbnails/risk-vs-myth.png",
+      "live": true,
+      "assetExists": true,
+      "thumbExists": true,
+      "dimensions": {
+        "width": 1448,
+        "height": 815,
+        "format": "png"
+      },
+      "thumbDimensions": {
+        "width": 480,
+        "height": 270,
+        "format": "png"
+      },
+      "fileBytes": 1670077,
+      "thumbBytes": 210719,
+      "issues": []
+    },
+    {
+      "cardId": "benefits-worth-taking-seriously",
+      "title": "Benefits Worth Taking Seriously",
+      "status": "live",
+      "assetPath": "/assets/journey-visuals/v0-28/optimized/benefits-worth-taking-seriously.png",
+      "thumbPath": "/assets/journey-visuals/v0-28/thumbnails/benefits-worth-taking-seriously.png",
+      "live": true,
+      "assetExists": true,
+      "thumbExists": true,
+      "dimensions": {
+        "width": 1448,
+        "height": 815,
+        "format": "png"
+      },
+      "thumbDimensions": {
+        "width": 480,
+        "height": 270,
+        "format": "png"
+      },
+      "fileBytes": 2020276,
+      "thumbBytes": 242431,
+      "issues": []
+    },
+    {
+      "cardId": "human-centered-ai",
+      "title": "Human-Centered AI",
+      "status": "live",
+      "assetPath": "/assets/journey-visuals/v0-28/optimized/human-centered-ai.png",
+      "thumbPath": "/assets/journey-visuals/v0-28/thumbnails/human-centered-ai.png",
+      "live": true,
+      "assetExists": true,
+      "thumbExists": true,
+      "dimensions": {
+        "width": 1448,
+        "height": 815,
+        "format": "png"
+      },
+      "thumbDimensions": {
+        "width": 480,
+        "height": 270,
+        "format": "png"
+      },
+      "fileBytes": 1637320,
+      "thumbBytes": 222397,
+      "issues": []
+    },
+    {
+      "cardId": "better-ai-choice",
+      "title": "Better AI Is a Choice",
+      "status": "live",
+      "assetPath": "/assets/journey-visuals/v0-28/optimized/better-ai-choice.png",
+      "thumbPath": "/assets/journey-visuals/v0-28/thumbnails/better-ai-choice.png",
+      "live": true,
+      "assetExists": true,
+      "thumbExists": true,
+      "dimensions": {
+        "width": 1448,
+        "height": 815,
+        "format": "png"
+      },
+      "thumbDimensions": {
+        "width": 480,
+        "height": 270,
+        "format": "png"
+      },
+      "fileBytes": 1840205,
+      "thumbBytes": 234491,
+      "issues": []
+    },
+    {
+      "cardId": "model-literate-synthesis",
+      "title": "Model Literate Synthesis",
+      "status": "live",
+      "assetPath": "/assets/journey-visuals/v0-28/optimized/model-literate-synthesis.png",
+      "thumbPath": "/assets/journey-visuals/v0-28/thumbnails/model-literate-synthesis.png",
+      "live": true,
+      "assetExists": true,
+      "thumbExists": true,
+      "dimensions": {
+        "width": 1448,
+        "height": 815,
+        "format": "png"
+      },
+      "thumbDimensions": {
+        "width": 480,
+        "height": 270,
+        "format": "png"
+      },
+      "fileBytes": 1813598,
+      "thumbBytes": 217475,
+      "issues": []
+    }
+  ]
+}

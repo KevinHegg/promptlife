@@ -72,7 +72,7 @@ const HOME_ASSETS = {
   heroFallback: `${ASSET}/illustrations/scene-hero-feature-cloud@mobile.png`
 }
 // Bump this for each shipped app change; the Badge screen displays it under Start over.
-const APP_VERSION = '0.28.7'
+const APP_VERSION = '0.28.9'
 const STORAGE_KEYS = {
   lastLocation: 'promptlife:v1:lastLocation',
   lessonId: 'promptlife:v1:lessonId',
@@ -4943,7 +4943,7 @@ function PromptRunScreen({ onBack, onAttempt, onProgress, onComplete, saved, pro
         <>
           {completedLegacy && (
             <PlayFeedbackPanel className="prompt-run-legacy-note">
-              <p>Saved Prompt Run progress was found on this device. This v2 capstone keeps that progress while offering a shorter active trace.</p>
+              <p>Saved Prompt Run progress was found on this device. This capstone keeps that progress while offering a shorter trace.</p>
             </PlayFeedbackPanel>
           )}
 
@@ -6007,7 +6007,7 @@ function BadgeScreen({
         <div className="badge-status-copy">
           <span className="badge-status-pill">Under construction</span>
           <h2 id="badge-status-title">Pending human review</h2>
-          <p>Prompt Life: Model Literate is under construction. The Journey, checkpoint bank, and evidence model are being tested before any badge is issued.</p>
+          <p>Prompt Life: Model Literate is under construction. The Journey, checkpoint questions, and evidence model are being tested before any badge is issued.</p>
           <p>Your progress below is practice evidence, not an issued credential.</p>
           <dl>
             <div><dt>Issue status</dt><dd>Not yet issued</dd></div>
@@ -6057,7 +6057,7 @@ function BadgeScreen({
         <p className="eyebrow">Draft badge criteria</p>
         <h2 id="badge-criteria-title">Criteria are not final.</h2>
         <ul>
-          <li>Complete the 39-card Journey and demonstrate checkpoint mastery across the full bank.</li>
+          <li>Complete the 39-card Journey and demonstrate checkpoint mastery across the checkpoint questions.</li>
           <li>Complete or meaningfully review the five Play practice challenges.</li>
           <li>Show synthesis evidence for model basics, training versus inference, prompt flow, context, grounding, probability, risk, and human-centered use.</li>
           <li>Receive human review before any badge is issued.</li>
@@ -6072,7 +6072,6 @@ function BadgeScreen({
         <button className="secondary-btn danger" onClick={onResetProgress}>Reset progress</button>
         {statusMessage && <p className="feedback good" role="status">{statusMessage}</p>}
       </section>
-      <p className="app-version" aria-label={`Prompt Life version ${APP_VERSION}`}>v{APP_VERSION}</p>
     </section>
   )
 }

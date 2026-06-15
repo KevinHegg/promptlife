@@ -141,7 +141,7 @@ export const retiredPlayChallenges: PlayChallengeMeta[] = [
     action: 'Retired',
     modelMove: 'Preserved only for storage compatibility.',
     misconceptionTags: ['abstract-pipeline'],
-    journeyStageRelationship: ['Legacy Play activity'],
+    journeyStageRelationship: ['Earlier Play activity'],
     glossaryTermIds: ['inference']
   },
   {
@@ -333,7 +333,7 @@ function bridgeLegacyProgress(meta: PlayChallengeMeta, base: PlayChallengeAttemp
         completions: Math.max(base.completions, finalDone ? 1 : 0),
         bestProgressPct: Math.max(base.bestProgressPct, bestProgressPct),
         status: finalDone ? 'completed' : 'in-progress',
-        lastOutcome: finalDone ? 'Completed through legacy Prompt Run progress.' : `${completedSteps} Prompt Run steps saved.`
+        lastOutcome: finalDone ? 'Completed through earlier Prompt Run progress.' : `${completedSteps} Prompt Run steps saved.`
       })
     }
   }
@@ -382,7 +382,7 @@ function bridgeLegacyProgress(meta: PlayChallengeMeta, base: PlayChallengeAttemp
       completions: Math.max(base.completions, 1),
       bestProgressPct: Math.max(base.bestProgressPct, 100),
       status: 'completed',
-      lastOutcome: 'Legacy learning tour preserved.'
+      lastOutcome: 'Earlier learning tour preserved.'
     })
   }
 
