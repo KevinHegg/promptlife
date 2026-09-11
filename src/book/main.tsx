@@ -76,7 +76,7 @@ function App() {
     path[1] ||
     (chapters.some((x) => x.id === book.lastChapter)
       ? book.lastChapter
-      : "answer");
+      : chapters[0].id);
   const chapter = chapters.find((x) => x.id === chapterId);
   const index = chapters.findIndex((x) => x.id === chapterId);
   useEffect(() => {
@@ -218,7 +218,7 @@ function App() {
         {menu ? "Close contents" : "Course contents"}{" "}
         <span>
           {page === "chapter" && chapter
-            ? `${String(index + 1).padStart(2, "0")} / 08`
+            ? `${String(index + 1).padStart(2, "0")} / ${String(chapters.length).padStart(2, "0")}`
             : ""}
         </span>
       </button>
@@ -266,8 +266,8 @@ function App() {
             One idea at a time.
           </div>
           <p className="sidebar-progress">
-            {chapters.filter((x) => book.read.includes(x.id)).length} of 8
-            chapters marked as read
+            {chapters.filter((x) => book.read.includes(x.id)).length} of{" "}
+            {chapters.length} chapters marked as read
           </p>
           <a className="sidebar-resume" href={chapterUrl(book.lastChapter)}>
             Resume reading
@@ -306,7 +306,7 @@ function App() {
           {page === "course" && (
             <>
               <div className="chapter-meta">
-                <span>THE COURSE / EIGHT CONNECTED CHAPTERS</span>
+                <span>THE COURSE / {chapters.length} CONNECTED CHAPTERS</span>
                 <span>START ANYWHERE. GO DEEPER.</span>
               </div>
               <h1>
@@ -327,17 +327,17 @@ function App() {
                   algebra is assumed.
                 </p>
                 <p>
-                  This edition focuses on text-generating transformers and the
-                  applications built around them. Experiments identify their
-                  simplifications. Nothing here calls a live model or requires
-                  an account.
+                  Begin with AI’s broader history and generative methods, then
+                  explore text-generating transformers and the applications
+                  built around them. Experiments identify their simplifications.
+                  Nothing here calls a live model or requires an account.
                 </p>
               </div>
               <div className="button-row">
                 <a className="primary" href={chapterUrl(book.lastChapter)}>
                   Continue reading
                 </a>
-                <a className="subtle" href={chapterUrl("answer")}>
+                <a className="subtle" href={chapterUrl(chapters[0].id)}>
                   Begin with chapter 1
                 </a>
               </div>

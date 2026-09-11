@@ -50,6 +50,14 @@ Playback starts only on request, pauses on manual stage selection or when the do
 
 Browser checks covered stage selection, playback advancement, generation-loop synchronization, future-token exclusion, keyboard adjustment of scores, and layouts at 390px and 1440px. These targeted checks do not constitute a full accessibility audit or learner study.
 
+## AI landscape chapter addition
+
+The course now opens with “The bigger picture,” bringing it to nine chapters. It distinguishes AI, machine learning, deep learning, and generative capabilities; introduces VAEs, GANs, image/latent diffusion, and text diffusion; and links selected historical milestones to sources. Gemini Diffusion's May 2025 announcement and DiffusionGemma's June 2026 documentation are identified separately. A scripted SVG comparison shows a growing autoregressive prefix alongside a revisable denoising canvas, without claiming measured speed or real model output.
+
+New notebooks begin with `landscape`; existing notebook records, chapter IDs, URLs, and the storage key remain compatible. Displayed chapter totals follow the curriculum length. The new lab has manual forward/backward controls, a keyboard-accessible slider, optional playback, and the shared reduced-motion behavior.
+
+Validation covers the nine-chapter structure and preservation of all eight prior chapter IDs, existing calculation and notebook tests, TypeScript checking, and the Pages build. Browser checks cover mobile layout, keyboard-controlled canvas changes, and the course entry link.
+
 ## Rollback without losing Pages
 
 Revert the redesign release commit on `main` with a new Git commit, then push normally. The existing Pages workflow will redeploy the previous app. Do not delete or rename the repository, reset shared history, or change the Pages URL.

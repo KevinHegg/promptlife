@@ -1,6 +1,6 @@
 # Prompt Life
 
-An interactive field guide to language models for curious, serious readers. Eight connected chapters explain generation, training, transformers, context, retrieval, tools, and evaluation through readable explanations and inspectable experiments.
+An interactive field guide to language models for curious, serious readers. Nine connected chapters place generative models in AI's broader landscape and history, then explain generation, training, transformers, context, retrieval, tools, and evaluation through readable explanations and inspectable experiments.
 
 **Read the course:** https://kevinhegg.github.io/promptlife/
 
@@ -31,7 +31,8 @@ Pushes to `main` run type checking, calculation/content/persistence tests, and t
 
 ## What is implemented
 
-- Eight question-led chapters with deeper sections, sources, optional transfer questions, and reflection.
+- Nine question-led chapters with deeper sections, sources, optional transfer questions, and reflection.
+- An opening AI/ML history and a scripted comparison of autoregressive generation and text denoising, including Google's Gemini Diffusion and DiffusionGemma research.
 - Responsive reading layout, mobile contents, keyboard controls, and reduced-motion support.
 - Direct chapter and experiment links using hash routes, compatible with GitHub Pages refreshes.
 - Real cl100k_base tokenization, loaded separately from the main app.

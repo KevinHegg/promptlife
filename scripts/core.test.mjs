@@ -99,10 +99,25 @@ test("notebook export is readable and imports preserve existing work", () => {
   );
 });
 test("all chapters, references, labs, and transfer questions form a complete course", () => {
-  assert.equal(chapters.length, 8);
+  assert.equal(chapters.length, 9);
+  assert.equal(chapters[0].id, "landscape");
   const ids = new Set(chapters.map((c) => c.id));
-  assert.equal(ids.size, 8);
-  assert.equal(new Set(chapters.map((c) => c.lab)).size, 8);
+  assert.equal(ids.size, chapters.length);
+  for (const id of [
+    "answer",
+    "prediction",
+    "training",
+    "transformer",
+    "assistant",
+    "evidence",
+    "tools",
+    "judgment",
+  ])
+    assert.ok(
+      ids.has(id),
+      `Existing links and notebook entries still resolve: ${id}`,
+    );
+  assert.equal(new Set(chapters.map((c) => c.lab)).size, chapters.length);
   for (const c of chapters) {
     assert.ok(c.before.length && c.after.length && c.deeper.paragraphs.length);
     assert.equal(c.challenge.options.filter((o) => o.correct).length, 1);

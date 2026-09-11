@@ -1,4 +1,5 @@
 export type LabId =
+  | "generators"
   | "trace"
   | "probability"
   | "training"
@@ -51,6 +52,126 @@ const risk = {
 
 export const chapters: Chapter[] = [
   {
+    id: "landscape",
+    title: "The bigger picture",
+    headline: "AI is a landscape.",
+    emphasis: "Language models are one part.",
+    description:
+      "Place generative AI within a longer history. Compare systems that classify, predict, and create—and two very different ways to generate text.",
+    question:
+      "Before you begin: does every AI system learn from data, and does every system that learns generate new content?",
+    before: [
+      {
+        title: "Four terms that answer different questions",
+        paragraphs: [
+          "Artificial intelligence is the broad field of building systems that perform tasks such as reasoning, planning, perception, and language use. Some approaches work with explicit rules and search. A program can search through possible chess moves without being a language model or learning from examples.",
+          "Machine learning is an approach within AI: fit a model from data or experience rather than write every decision rule by hand. A spam classifier, a demand forecast, and a recommendation model can all use machine learning. None needs to write a paragraph or make a picture. Deep learning is a family of machine-learning methods that uses neural networks with multiple layers to learn representations.",
+          "Generative AI describes systems used to produce content: text, images, speech, music, video, or other structured outputs. Today many use deep learning, but generative modeling predates modern deep networks. These labels answer different questions: AI names the broad field, machine learning names a way of building models, deep learning names a family of methods, and generative describes a capability. They are not four successive products that replaced one another.",
+        ],
+      },
+      {
+        title: "Where an LLM belongs",
+        paragraphs: [
+          "A large language model is a model of language trained at scale. Many familiar assistants use a transformer that generates text autoregressively: each selected token extends the sequence used for the next prediction. That is the main mechanism this course will unpack, not the definition of all AI or even all language modeling.",
+          "Keep three questions separate. What can the system produce: text, pictures, sound? What network processes the information: a transformer or another architecture? How does generation proceed: one piece after another, iterative denoising, or another method? A diffusion model can use a transformer. A system can accept images and still produce only text. The modality, architecture, and generation procedure do not determine one another.",
+        ],
+      },
+    ],
+    after: [
+      {
+        title: "Several ways to make something new",
+        paragraphs: [
+          "Autoregressive models build an output by conditioning each new piece on earlier pieces. Those pieces can represent text, audio, or other data. In ordinary token-by-token decoding, a committed token stays in the sequence; the application can separately ask for a rewrite or use more elaborate decoding procedures.",
+          "Variational autoencoders, or VAEs, learn an encoder and a decoder with a structured distribution of hidden representations. Sampling a representation and decoding it can produce a new example. Generative adversarial networks, or GANs, train a generator alongside a discriminator that distinguishes training examples from generated samples. Their training objectives differ, even when both produce pictures.",
+          "Diffusion models learn to reverse a process that corrupts data. For images, a common approach progressively adds noise during training and learns denoising updates. Generation begins with noise and applies learned updates, often guided by a text prompt. Some systems work in a compressed latent representation rather than directly in pixels. The result is synthesized; the model is not uncovering an original picture hidden in the starting noise.",
+          "These are important families, not an exhaustive catalog. Systems can combine them—for example, using an autoencoder to compress an image and diffusion to generate in that compressed space. Image, audio, and video generation deserve their own explanations; knowing next-token text generation is a useful beginning, not a universal recipe.",
+        ],
+      },
+      {
+        title: "Can a whole passage resolve together?",
+        paragraphs: [
+          "Yes, text diffusion can refine multiple positions together over successive passes. But text consists of discrete symbols, so it is not always literally a blurry sentence becoming sharper. Some approaches denoise continuous vectors and decode them into words. Others operate on token sequences using masks or other discrete corruption. The comparison above uses masks and provisional words to make the idea visible.",
+          "Google announced Gemini Diffusion as an experimental text-and-code model on May 20, 2025. It describes generation as refining noise into an output and allows correction during generation. This shows why 'a language model' need not mean 'a model that commits to one next token at a time.' It does not establish that diffusion is always more accurate, or that every Google language model uses it.",
+          "The size of the working area matters. A model may refine a whole fixed-length sequence, or refine a block and then move on to another block. Google's DiffusionGemma documentation, updated June 10, 2026, describes block-autoregressive generation with parallel denoising within a canvas. So 'the entire response slowly resolves as a whole' is a useful first image for some demonstrations, but not a universal description. Many positions can change together within the current working area; later blocks may still be generated in order.",
+          "Iterative does not necessarily mean slow. Parallel work can reduce latency, while extra denoising passes add computation. Hardware, sequence length, batch size, and implementation affect the result. Nor does revision guarantee truth: a model can refine an unsupported answer into a fluent unsupported answer. Watch the procedure, then evaluate the output separately.",
+        ],
+      },
+    ],
+    deeper: {
+      title: "Training corruption is not generation",
+      paragraphs: [
+        "During diffusion training, a specified corruption process creates noisy versions of examples. The model learns a reverse prediction task at different noise levels. During generation, the sampler starts from an appropriate noisy state and uses the learned model through a sequence of updates. The training schedule and generation schedule need not use the same number of steps.",
+        "In masked text diffusion, several unknown positions can be predicted from the visible context. Whether filled positions are later remasked or revised depends on the method and sampler. Continuous text diffusion instead works with noisy numerical representations. Neither should be illustrated as an autoregressive model writing a complete draft and then merely proofreading it.",
+        "Causal attention in later chapters describes the usual autoregressive decoder. Denoising models can allow bidirectional attention within their current canvas. That permits positions to inform one another; it does not give the system access to evidence absent from the prompt or its learned parameters.",
+      ],
+    },
+    lab: "generators",
+    takeaway:
+      "AI is broader than machine learning, and generative AI is broader than next-token language models. Separate the output type, architecture, and generation procedure.",
+    reflection:
+      "Explain how a spam classifier, an autoregressive text model, and an image diffusion model differ. Which labels do they share?",
+    challenge: {
+      question:
+        "A model uses transformer layers to refine many masked text positions in a block. What can you conclude?",
+      options: [
+        {
+          text: "It cannot be a diffusion model because transformers only generate left to right.",
+          feedback:
+            "Transformer is an architecture. The attention pattern, training objective, and generation procedure determine how it is used.",
+        },
+        {
+          text: "It combines a transformer architecture with a denoising procedure; this alone does not prove its answers are correct.",
+          correct: true,
+          feedback:
+            "Exactly. Architecture, generation procedure, and factual reliability are separate questions. Blocks can also be generated sequentially even when positions within a block are refined together.",
+        },
+        {
+          text: "It must resolve an unlimited response in one pass.",
+          feedback:
+            "Parallel updates within a block do not remove block boundaries, denoising steps, or output limits.",
+        },
+      ],
+    },
+    sources: [
+      {
+        title: "Goodfellow, Bengio & Courville · Deep Learning, introduction",
+        url: "https://www.deeplearningbook.org/contents/intro.html",
+      },
+      {
+        title: "McCarthy et al. · Dartmouth research proposal (1955)",
+        url: "https://www-formal.stanford.edu/jmc/history/dartmouth/dartmouth.html",
+      },
+      {
+        title: "Kingma & Welling · Auto-Encoding Variational Bayes (2013)",
+        url: "https://arxiv.org/abs/1312.6114",
+      },
+      {
+        title: "Goodfellow et al. · Generative Adversarial Networks (2014)",
+        url: "https://arxiv.org/abs/1406.2661",
+      },
+      {
+        title: "Ho et al. · Denoising Diffusion Probabilistic Models (2020)",
+        url: "https://arxiv.org/abs/2006.11239",
+      },
+      {
+        title: "Rombach et al. · Latent Diffusion Models (2021/2022)",
+        url: "https://arxiv.org/abs/2112.10752",
+      },
+      {
+        title: "Li et al. · Diffusion-LM (2022)",
+        url: "https://arxiv.org/abs/2205.14217",
+      },
+      {
+        title: "Google · Gemini Diffusion announcement (May 2025)",
+        url: "https://blog.google/innovation-and-ai/models-and-research/google-deepmind/gemini-diffusion/",
+      },
+      {
+        title: "Google · DiffusionGemma model overview (June 2026)",
+        url: "https://ai.google.dev/gemma/docs/diffusiongemma",
+      },
+    ],
+  },
+  {
     id: "answer",
     title: "An answer appears",
     headline: "What happens after",
@@ -89,7 +210,7 @@ export const chapters: Chapter[] = [
     deeper: {
       title: "The scope of this field guide",
       paragraphs: [
-        "The central mechanism here is a typical autoregressive text-generating transformer. It is an important family of language models, not a definition of every possible AI system. Image diffusion, speech processing, and other architectures need additional explanations.",
+        "The central mechanism from this chapter onward is a typical autoregressive text-generating transformer. The opening chapter places it alongside diffusion and other generative methods. It is an important family of language models, not a definition of every possible AI system.",
         "The diagrams show a conceptual generation loop. Real systems use optimizations, including cached intermediate information, so “repeat” does not mean that every previous computation is naively performed again. A fast implementation can preserve the same causal relationships.",
       ],
     },
@@ -658,6 +779,7 @@ export const chapters: Chapter[] = [
 ];
 
 export const labNames: Record<LabId, string> = {
+  generators: "Compare two generation procedures",
   trace: "Inspect a model request",
   probability: "Tokens & probability",
   training: "Train one weight",
@@ -668,6 +790,54 @@ export const labNames: Record<LabId, string> = {
   evaluation: "Diagnose an unfamiliar answer",
 };
 export const glossary = [
+  {
+    term: "Artificial intelligence (AI)",
+    chapter: "landscape",
+    definition:
+      "The broad field of building systems for tasks such as reasoning, planning, perception, and language use. It includes approaches based on rules and search as well as learning.",
+  },
+  {
+    term: "Machine learning (ML)",
+    chapter: "landscape",
+    definition:
+      "Methods that fit models from data or experience. They can support classification, prediction, generation, and other tasks.",
+  },
+  {
+    term: "Deep learning",
+    chapter: "landscape",
+    definition:
+      "Machine-learning methods using neural networks with multiple layers to learn representations. Deep models can be generative or serve other tasks.",
+  },
+  {
+    term: "Generative AI",
+    chapter: "landscape",
+    definition:
+      "Systems used to synthesize content such as text, images, speech, or video. This describes a capability, not one particular architecture or generation procedure.",
+  },
+  {
+    term: "Diffusion model",
+    chapter: "landscape",
+    definition:
+      "A generative model trained to reverse a data-corruption process. Generation uses learned denoising updates; text variants can refine multiple positions within a sequence or block.",
+  },
+  {
+    term: "Large language model (LLM)",
+    chapter: "landscape",
+    definition:
+      "A language model trained at scale. Familiar generative LLMs often use autoregressive transformers, but text diffusion illustrates a different generation procedure.",
+  },
+  {
+    term: "Generative adversarial network (GAN)",
+    chapter: "landscape",
+    definition:
+      "A generative approach that trains a generator against a discriminator distinguishing generated samples from training examples.",
+  },
+  {
+    term: "Variational autoencoder (VAE)",
+    chapter: "landscape",
+    definition:
+      "A model with an encoder and decoder that learns a structured distribution of latent representations from which new samples can be decoded.",
+  },
   {
     term: "Activation",
     chapter: "transformer",

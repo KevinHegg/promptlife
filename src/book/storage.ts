@@ -19,7 +19,7 @@ export const emptyNotebook = (): Notebook => ({
   notes: {},
   bookmarks: [],
   read: [],
-  lastChapter: "answer",
+  lastChapter: "landscape",
   snapshots: [],
 });
 const plain = (v: unknown): v is Record<string, unknown> =>

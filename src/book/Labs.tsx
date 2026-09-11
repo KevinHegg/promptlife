@@ -17,6 +17,7 @@ import {
   useDiagramPlayback,
 } from "./Diagrams";
 const Tokenizer = lazy(() => import("./Tokenizer"));
+const LandscapeLab = lazy(() => import("./LandscapeLab"));
 type Save = (title: string, text: string) => void;
 
 function Frame({
@@ -107,7 +108,7 @@ function TraceLab({ save }: { save: Save }) {
   const current = stages[step];
   return (
     <Frame
-      number="01"
+      number="02"
       title="Inspect a model request"
       mode="Authored walkthrough"
     >
@@ -187,7 +188,7 @@ function ProbabilityLab({ save }: { save: Save }) {
   }
   return (
     <Frame
-      number="02"
+      number="03"
       title="From scores to a next token"
       mode="Calculated toy model"
     >
@@ -304,7 +305,7 @@ function TrainingLab({ save }: { save: Save }) {
   const [steps, setSteps] = useState(0);
   const model = trainWeight(steps);
   return (
-    <Frame number="03" title="Train one weight" mode="Calculated toy model">
+    <Frame number="04" title="Train one weight" mode="Calculated toy model">
       <p>
         After “I drink”, this model can predict only “tea” or “coffee”. Its
         training set contains 75% tea. Its held-out set contains 50% tea.
@@ -414,7 +415,7 @@ function AttentionLab({ save }: { save: Save }) {
   const mixed = weights.reduce((sum, w, i) => sum + w * values[i], 0);
   return (
     <Frame
-      number="04"
+      number="05"
       title="The causal attention bench"
       mode="Calculated toy model"
     >
@@ -501,7 +502,7 @@ function ContextLab({ save }: { save: Save }) {
   const packed = packContext(selected, budget);
   const used = packed.filter((x) => x.included).reduce((s, x) => s + x.cost, 0);
   return (
-    <Frame number="05" title="Pack the context" mode="Calculated packing rule">
+    <Frame number="06" title="Pack the context" mode="Calculated packing rule">
       <p>
         A visible or selected message does not necessarily fit. This app tries
         items in the order shown and skips any that would exceed the input
@@ -618,7 +619,7 @@ function EvidenceLab({ save }: { save: Save }) {
       ? "The correct passage was supplied, but the generated answer changed 2016 to 2018. This is an unsupported generated claim, not a failure to retrieve the date."
       : record.explanation;
   return (
-    <Frame number="06" title="Follow the evidence" mode="Authored simulation">
+    <Frame number="07" title="Follow the evidence" mode="Authored simulation">
       <p className="experiment-question">
         When did Maya Chen open the Riverside community garden?
       </p>
@@ -779,7 +780,7 @@ function ToolsLab({ save }: { save: Save }) {
   const c = toolCases[index];
   return (
     <Frame
-      number="07"
+      number="08"
       title="Inspect the tool boundary"
       mode="Authored decision exercise"
     >
@@ -897,7 +898,7 @@ function EvaluationLab({ save }: { save: Save }) {
   const answered = Object.keys(answers).length;
   return (
     <Frame
-      number="08"
+      number="09"
       title="Diagnose an unfamiliar answer"
       mode="Transfer exercise"
     >
@@ -977,6 +978,7 @@ function EvaluationLab({ save }: { save: Save }) {
 
 export default function Lab({ id, save }: { id: LabId; save: Save }) {
   const components = {
+    generators: LandscapeLab,
     trace: TraceLab,
     probability: ProbabilityLab,
     training: TrainingLab,
