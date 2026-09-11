@@ -1,16 +1,17 @@
 {
   "name": "Prompt Life",
   "short_name": "Prompt Life",
-  "description": "A mobile-first learning app that teaches how large language models work from training to response.",
+  "description": "An interactive field guide to language models.",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#fbfcf8",
-  "theme_color": "#071B6F",
+  "background_color": "#fafbfc",
+  "theme_color": "#17283e",
   "icons": [
     {
-      "src": "./assets/generated/home/promptlife-mark.png",
-      "sizes": "1254x1254",
-      "type": "image/png"
+      "purpose": "any",
+      "sizes": "any",
+      "src": "./favicon.svg",
+      "type": "image/svg+xml"
     }
   ]
 }

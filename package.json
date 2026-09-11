@@ -1,34 +1,22 @@
 {
   "name": "promptlife",
-  "version": "0.28.12",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite --host 0.0.0.0",
+    "dev": "vite --host 127.0.0.1",
     "typecheck": "tsc --noEmit",
     "build": "vite build",
-    "build:pages": "GITHUB_PAGES=true vite build",
-    "audit:answers": "node scripts/audit-answers.mjs",
-    "audit:checkpoints": "node scripts/audit-checkpoints.mjs",
-    "audit:question-clues": "node scripts/audit-question-clues.mjs",
-    "audit:learner-copy": "node scripts/audit-learner-copy.mjs",
-    "audit:learner-leaks": "node scripts/audit-learner-leaks.mjs",
-    "audit:language": "node scripts/audit-language.mjs",
-    "audit:visual-aids": "node scripts/audit-visual-aids.mjs && node scripts/audit-word-wrap.mjs",
-    "audit:visual-assets": "node scripts/audit-visual-assets.mjs",
-    "audit:visual-overflow": "node scripts/audit-visual-overflow.mjs",
-    "audit:exercises": "node scripts/audit-exercises.mjs",
-    "audit:word-wrap": "node scripts/audit-word-wrap.mjs",
-    "process:visual-assets": "node scripts/process-journey-visual-assets.mjs",
-    "preview": "vite preview --host 0.0.0.0",
-    "export:lesson-pdf": "node scripts/export-lesson-pdf.mjs",
-    "export:lesson-cards": "PROMPTLIFE_PDF_OUT=docs/content-inventory/prompt-life-lesson-cards-v0-9-3-visual-system.pdf node scripts/export-lesson-pdf.mjs"
+    "build:pages": "node scripts/build-pages.mjs",
+    "preview": "vite preview --host 127.0.0.1",
+    "test": "node --experimental-strip-types --test scripts/core.test.mjs"
   },
   "dependencies": {
-    "@vitejs/plugin-react": "latest",
-    "react": "latest",
-    "react-dom": "latest",
-    "vite": "latest"
+    "@vitejs/plugin-react": "^6.0.2",
+    "gpt-tokenizer": "4.0.0",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "vite": "^8.0.16"
   },
   "devDependencies": {
     "@types/react": "^19.2.15",
