@@ -298,7 +298,7 @@ export const chapters: Chapter[] = [
         paragraphs: [
           "Attention computes a weighted combination of information from permitted token positions. In a common formulation, learned projections produce queries, keys, and values. Matching queries with keys produces scores; normalized scores weight the values that get combined.",
           "The words “query” and “key” may sound like a database search, but here they are vectors inside a calculation. Several attention heads can compute different patterns in parallel. Later layers work on representations already transformed by earlier layers.",
-          "In a causal text decoder, a position can use itself and earlier permitted positions. It cannot use later positions. The mask below enforces this restriction. The sentence is deliberately split into word-like positions for readability; these are not outputs from a real tokenizer.",
+          "In a causal text decoder, a position can use itself and earlier permitted positions. It cannot use later positions. The attention bench above enforces this restriction. The sentence is deliberately split into word-like positions for readability; these are not outputs from a real tokenizer.",
         ],
       },
       {

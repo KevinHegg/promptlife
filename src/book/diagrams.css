@@ -1,0 +1,210 @@
+.transformer-explorer {
+  margin-bottom: 32px;
+}
+.transformer-layout {
+  display: grid;
+  grid-template-columns: minmax(250px, 360px) minmax(0, 1fr);
+  gap: 28px;
+  align-items: start;
+}
+.transformer-svg {
+  width: 100%;
+  background: #f6f8fc;
+  border-radius: 12px;
+}
+.transformer-svg text,
+.attention-figure text,
+.generation-figure text {
+  font-family: "DM Sans", sans-serif;
+  font-size: 15px;
+  text-anchor: middle;
+  fill: #17283e;
+}
+.transformer-svg .diagram-small,
+.attention-figure .diagram-small,
+.generation-figure .diagram-small {
+  font-size: 13px;
+}
+.diagram-stage > rect,
+.diagram-stage > circle,
+.diagram-stage > g > rect {
+  fill: #fff;
+  stroke: #adb9cc;
+  stroke-width: 1.2;
+  transition:
+    fill 0.25s,
+    stroke 0.25s;
+}
+.diagram-stage.is-active > rect,
+.diagram-stage.is-active > circle,
+.diagram-stage.is-active > g > rect {
+  fill: #eaf0ff;
+  stroke: #2254cf;
+  stroke-width: 2.5;
+}
+.diagram-stage .vector-cell {
+  fill: #2254cf;
+  stroke: none;
+}
+.diagram-wire,
+.residual-wire,
+.generation-return {
+  fill: none;
+  stroke: #8998b0;
+  stroke-width: 2;
+  color: #8998b0;
+}
+.residual-wire {
+  stroke-width: 1.5;
+}
+.block-boundary {
+  fill: #f0f3f8;
+  fill-opacity: 0.65;
+  stroke: #aab4c3;
+  stroke-dasharray: 5 4;
+}
+.is-active .residual-wire,
+.generation-return.is-active {
+  stroke: #bd451f;
+  color: #bd451f;
+  stroke-width: 2.5;
+}
+.diagram-playing .is-active .residual-wire,
+.diagram-playing .generation-return.is-active {
+  stroke-dasharray: 7 5;
+  animation: diagram-flow 1s linear infinite;
+}
+@keyframes diagram-flow {
+  to {
+    stroke-dashoffset: -24;
+  }
+}
+.diagram-stage-list {
+  list-style: none;
+  margin: 0 0 22px;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+}
+.diagram-stage-list button {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  width: 100%;
+  text-align: left;
+  padding: 9px 12px;
+  font-size: 14px;
+  border: 1px solid #dce2e8;
+  border-radius: 6px;
+  background: white;
+  color: #17283e;
+}
+.diagram-stage-list button span {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #eef1f5;
+  font-size: 12px;
+}
+.diagram-stage-list button[aria-pressed="true"] {
+  border-color: #2254cf;
+  background: #eaf0ff;
+  font-weight: 700;
+}
+.diagram-stage-list button[aria-pressed="true"] span {
+  color: white;
+  background: #2254cf;
+}
+.diagram-explanation {
+  border-left: 3px solid #bd451f;
+  padding-left: 17px;
+}
+.experiment .diagram-explanation h3 {
+  font-size: 20px;
+  line-height: 1.4;
+  margin: 8px 0;
+}
+.experiment .diagram-explanation p {
+  font-size: 16px;
+  line-height: 1.7;
+}
+.attention-figure,
+.generation-figure {
+  margin: 22px 0;
+}
+.attention-figure svg {
+  display: block;
+  width: 100%;
+  max-width: 460px;
+  margin: auto;
+}
+.attention-figure .attention-flow {
+  fill: none;
+  stroke: #2254cf;
+  transition:
+    stroke-width 0.25s,
+    opacity 0.25s;
+}
+.attention-figure .diagram-inverse {
+  fill: white;
+}
+.attention-figure figcaption,
+.generation-figure figcaption {
+  color: #596579;
+  font-size: 14px;
+  line-height: 1.7;
+  margin: 12px 0 0;
+}
+.generation-layout {
+  display: grid;
+  grid-template-columns: minmax(250px, 360px) minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+.generation-figure {
+  margin-top: 8px;
+}
+.generation-figure svg {
+  width: 100%;
+  display: block;
+}
+.generation-layout .trace-output {
+  min-width: 0;
+}
+@media (max-width: 1100px) {
+  .transformer-layout,
+  .generation-layout {
+    grid-template-columns: 1fr;
+  }
+  .transformer-svg,
+  .generation-figure svg {
+    max-width: 360px;
+    margin: auto;
+    display: block;
+  }
+  .diagram-stage-list {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 420px) {
+  .diagram-stage-list {
+    grid-template-columns: 1fr;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .diagram-playing * {
+    animation: none !important;
+  }
+  .attention-flow,
+  .diagram-stage * {
+    transition: none !important;
+  }
+}
+@media print {
+  .diagram-playing * {
+    animation: none !important;
+  }
+}

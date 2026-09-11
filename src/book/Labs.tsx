@@ -10,6 +10,12 @@ import {
 } from "./model";
 import type { EvidenceId } from "./model";
 import type { LabId } from "./content";
+import {
+  AttentionDiagram,
+  GenerationDiagram,
+  TransformerExplorer,
+  useDiagramPlayback,
+} from "./Diagrams";
 const Tokenizer = lazy(() => import("./Tokenizer"));
 type Save = (title: string, text: string) => void;
 
@@ -60,6 +66,7 @@ function Bars({ labels, values }: { labels: string[]; values: number[] }) {
 
 function TraceLab({ save }: { save: Save }) {
   const [step, setStep] = useState(0);
+  const playback = useDiagramPlayback(step, setStep, 5);
   const stages = [
     {
       title: "Your message",
@@ -113,22 +120,39 @@ function TraceLab({ save }: { save: Save }) {
           <button
             key={s.title}
             aria-pressed={step === i}
-            onClick={() => setStep(i)}
+            onClick={() => playback.choose(i)}
           >
             <span>0{i + 1}</span>
             {s.title}
           </button>
         ))}
       </div>
-      <div className="trace-output" aria-live="polite">
-        <span className="eyebrow">{current.owner}</span>
-        <pre>{current.text}</pre>
-        <p>{current.detail}</p>
+      <div className="generation-layout">
+        <GenerationDiagram step={step} playing={playback.playing} />
+        <div
+          className="trace-output"
+          aria-live={playback.playing ? "off" : "polite"}
+        >
+          <span className="eyebrow">{current.owner}</span>
+          <pre>{current.text}</pre>
+          <p>{current.detail}</p>
+        </div>
       </div>
       <div className="button-row">
         <button
+          className="subtle"
+          onClick={playback.toggle}
+          disabled={playback.reducedMotion}
+        >
+          {playback.playing
+            ? "Pause animation"
+            : step === 4
+              ? "Replay animation"
+              : "Play animation"}
+        </button>
+        <button
           className="primary"
-          onClick={() => setStep((step + 1) % stages.length)}
+          onClick={() => playback.choose((step + 1) % stages.length)}
         >
           {step === 4 ? "Start again" : "Next stage"}
         </button>
@@ -138,6 +162,11 @@ function TraceLab({ save }: { save: Save }) {
           }
         />
       </div>
+      {playback.reducedMotion && (
+        <p className="lab-caption">
+          Reduced motion is on. Use Next stage or choose any stage above.
+        </p>
+      )}
     </Frame>
   );
 }
@@ -390,8 +419,8 @@ function AttentionLab({ save }: { save: Save }) {
       mode="Calculated toy model"
     >
       <p>
-        Choose a position. Dark cells are permitted; hatched cells are future
-        positions that the causal mask blocks.
+        Choose a position. Watch earlier values flow into it; hatched cells are
+        future positions that the causal mask blocks.
       </p>
       <label htmlFor="position">Position being computed</label>
       <select
@@ -405,14 +434,12 @@ function AttentionLab({ save }: { save: Save }) {
           </option>
         ))}
       </select>
-      <div className="mask-grid" aria-label="Causal attention mask">
-        {tokens.map((x, i) => (
-          <div key={x} className={i <= position ? "allowed" : "masked"}>
-            <span>{x}</span>
-            <small>{i <= position ? "Permitted" : "Future · blocked"}</small>
-          </div>
-        ))}
-      </div>
+      <AttentionDiagram
+        tokens={tokens}
+        position={position}
+        weights={weights}
+        values={values}
+      />
       <div className="lab-grid">
         <div>
           <h3>Illustrative scores for this row</h3>
@@ -960,5 +987,10 @@ export default function Lab({ id, save }: { id: LabId; save: Save }) {
     evaluation: EvaluationLab,
   };
   const Component = components[id];
-  return <Component save={save} />;
+  return (
+    <>
+      {id === "attention" && <TransformerExplorer />}
+      <Component save={save} />
+    </>
+  );
 }

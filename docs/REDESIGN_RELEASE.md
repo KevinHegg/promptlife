@@ -27,6 +27,7 @@ The notebook stores chapter notes, bookmarks, reading progress, and experiment o
 - `src/book/content.ts`: typed chapters, source links, glossary.
 - `src/book/model.ts`: pure numerical operations and experiment records.
 - `src/book/Labs.tsx`: experiment UI.
+- `src/book/Diagrams.tsx` and `src/book/diagrams.css`: SVG architecture, generation, and calculated attention diagrams; opt-in playback with manual stage controls.
 - `src/book/Tokenizer.tsx`: real tokenizer, dynamically loaded.
 - `src/book/storage.ts`: notebook schema, parsing, merging.
 - `src/book/main.tsx`: routes, course and reference screens, notebook, chapter renderer.
@@ -40,6 +41,14 @@ Historical curriculum and audit documents in `docs/` describe the original versi
 Strict TypeScript checking, Node tests, and the GitHub Pages production build are required locally and in deployment CI. Tests cover normalized and stable probabilities, causal exclusion, seeded sampling, training and held-out behavior, context budgets, Unicode token round-trips, notebook import/export, and the chapter/reference structure.
 
 This is an implemented first edition, not a completed learner study. Human comprehension testing, technical editorial review, and a full browser accessibility/responsive review remain necessary before describing it as a validated learning experience. No live-model experiments or recorded-model datasets are claimed.
+
+### Interactive diagrams
+
+Chapter 1 now illustrates the request and generation loop, synchronized with the existing trace. Chapter 4 adds a six-stage decoder-only transformer walkthrough and a causal attention flow diagram driven by the bench's calculated weights and scalar values. The architecture depicts a common pre-normalization block with two residual additions; its embedding colors and output bars are explicitly illustrative.
+
+Playback starts only on request, pauses on manual stage selection or when the document becomes hidden, and stops at the last stage. Reduced-motion preferences disable playback and CSS animation while keeping manual controls available. SVG titles and descriptions expose the active stage and numerical results. No dependencies were added.
+
+Browser checks covered stage selection, playback advancement, generation-loop synchronization, future-token exclusion, keyboard adjustment of scores, and layouts at 390px and 1440px. These targeted checks do not constitute a full accessibility audit or learner study.
 
 ## Rollback without losing Pages
 
