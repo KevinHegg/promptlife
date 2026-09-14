@@ -31,9 +31,10 @@ Pushes to `main` run type checking, calculation/content/persistence tests, and t
 
 ## What is implemented
 
-- Nine illustrated chapters with concise introductions, key ideas, optional fuller explanations, and primary sources.
-- Nine SVG illustrations and nine four-step simulations. Only Back, Next, and Restart control the simulations.
-- AI/ML history and a scripted comparison of autoregressive generation and text denoising.
+- Nine illustrated chapters with developed introductions, examples, connections between chapters, optional fuller explanations, and primary sources.
+- Nine simulations with 66 steps in total. Only Back, Next, and Restart control the simulations; numbers, tables, and visual states share one compact frame.
+- An eleven-milestone AI/ML timeline and a seven-step comparison of autoregressive generation and text denoising, with six positions in each track.
+- Worked math guides explain softmax, temperature, sampling, loss, gradients, attention mixtures, and context budgets in words and numbers.
 - Calculated probabilities, one-weight training, causal attention, and context packing; authored evidence, tool, and evaluation scenarios.
 - A searchable, alphabetical glossary, with term links in lessons and links back to their chapters.
 - Mobile contents, keyboard controls, direct chapter/simulation links, and device-local reading progress.
@@ -44,9 +45,11 @@ Pushes to `main` run type checking, calculation/content/persistence tests, and t
 | File | Responsibility |
 |---|---|
 | `src/book/content.ts` | Fuller explanations, glossary, source links |
-| `src/book/lessons.ts` | Concise lesson text and simulation scenes |
+| `src/book/lessons.ts` | Lesson introductions, connections, and typed visual scene data |
 | `src/book/model.ts` | Pure calculations and illustrative records |
-| `src/book/Simulation.tsx` | Shared step controls and SVG scenes |
+| `src/book/Simulation.tsx` | Shared step controls, SVG attention, token canvases, and calculated tables |
+| `src/book/MathGuide.tsx` | Worked examples and plain-language explanations of notation |
+| `src/book/Timeline.tsx` | Detailed historical milestones with source links |
 | `public/illustrations/` | Nine lesson SVG files |
 | `scripts/generate-lesson-illustrations.mjs` | Reproducible SVG source |
 | `src/book/progress.ts` | Device-local progress validation |

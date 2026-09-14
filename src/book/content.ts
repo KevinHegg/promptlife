@@ -258,7 +258,7 @@ export const chapters: Chapter[] = [
         paragraphs: [
           "A tokenizer converts text into a sequence of integer IDs. Its vocabulary may contain whole words, fragments, punctuation, and pieces that include spaces. It uses a particular encoding scheme, so the same text can be split differently by different tokenizers.",
           "A token ID is an address in a vocabulary. Its numerical size does not measure importance or meaning. An embedding lookup uses that ID to retrieve a learned vector: a list of numbers that starts the model’s representation of this token.",
-          "Try the tokenizer below. Add a space, change capitalization, or enter a word in another language. Small changes can alter the pieces. The full sequence decodes back to your text, even when an individual token contains only part of a character’s encoded bytes.",
+          "Adding a space, changing capitalization, or switching languages can change the token pieces. The full sequence decodes back to the original text, even when an individual token contains only part of a character’s encoded bytes. Our simulation uses readable candidate words so we can focus on their probabilities; these are not measurements from a real tokenizer.",
         ],
       },
     ],
@@ -393,7 +393,18 @@ export const chapters: Chapter[] = [
         },
       ],
     },
-    sources: [instructions, visual],
+    sources: [
+      {
+        title: "Google · Calculating a probability with the sigmoid function",
+        url: "https://developers.google.com/machine-learning/crash-course/logistic-regression/sigmoid-function",
+      },
+      {
+        title: "Google · Logistic regression loss",
+        url: "https://developers.google.com/machine-learning/crash-course/logistic-regression/loss-regularization",
+      },
+      instructions,
+      visual,
+    ],
   },
   {
     id: "transformer",
@@ -408,7 +419,7 @@ export const chapters: Chapter[] = [
       {
         title: "The same token, a different role",
         paragraphs: [
-          "Consider “river bank” and “bank loan.” The token corresponding to “bank” can start with the same learned embedding, yet it plays different roles. The model needs representations that depend on the surrounding sequence, not just on vocabulary entries.",
+          "Consider “river bank” and “savings bank.” The token corresponding to “bank” can start with the same learned embedding, yet it plays different roles. Earlier words supply different context for the causal decoder. The model needs representations that depend on the sequence, not just on vocabulary entries.",
           "A vector is a list of numbers. A matrix arranges numbers in rows and columns; a tensor generalizes these arrays to more axes. These are ways to organize computation, not little containers holding dictionary definitions. A model’s internal features need not correspond to neat concepts that a person can name.",
           "Position information matters too. “The dog chased the cat” differs from “The cat chased the dog” even though the words overlap. Transformer architectures incorporate position in different ways. Without an appropriate account of order, simply collecting token embeddings would lose something essential.",
         ],
@@ -562,7 +573,7 @@ export const chapters: Chapter[] = [
         paragraphs: [
           "You ask an assistant when a community garden opened. It answers immediately and gives you a source. That feels reassuring. But a citation tells you where to look; it does not tell you whether the answer is supported.",
           "In this small fictional archive, two people share a surname. One opened a plant nursery; the other opened a community garden. A search result can match several words in your question while describing the wrong event.",
-          "Change which passage reaches the assistant. Then try the answer with a deliberately wrong date, even when the correct source is supplied. These are two distinct failure points. Diagnosing them requires examining more than the final sentence.",
+          "A wrong passage and a wrong claim drawn from a correct passage are distinct failure points. The evidence walkthrough checks whether a source matches the question; the final chapter examines an incorrect date even though the correct passage was supplied. Diagnosing either failure requires examining more than the final sentence.",
         ],
       },
     ],
@@ -1108,5 +1119,53 @@ export const glossary = [
     chapter: "transformer",
     definition:
       "A list of numbers that can represent features or be transformed by a model. Its dimensions need not correspond to individual human-named concepts.",
+  },
+  {
+    term: "Exponentiation (exp)",
+    chapter: "prediction",
+    definition:
+      "Raising a base to a power. exp(z) means e raised to z, where e is about 2.718. Softmax uses this operation to turn logits into positive values before dividing by their total.",
+  },
+  {
+    term: "Logarithm (ln)",
+    chapter: "training",
+    definition:
+      "The inverse of exponentiation. The natural logarithm ln uses base e. Negative log probability is a common loss: it penalizes assigning little probability to an observed outcome.",
+  },
+  {
+    term: "Sigmoid",
+    chapter: "training",
+    definition:
+      "A function that maps a real number into a value between zero and one: 1 / (1 + exp(−w)). Our one-weight model uses it to turn a weight into the probability of tea.",
+  },
+  {
+    term: "Learning rate",
+    chapter: "training",
+    definition:
+      "A value that controls the scale of parameter updates during training. In our example, each update subtracts the gradient multiplied by a learning rate of 0.5.",
+  },
+  {
+    term: "Optimizer",
+    chapter: "training",
+    definition:
+      "An algorithm that updates learned parameters using gradients and, depending on the method, information from earlier updates. It determines how to move the parameters toward a lower training loss.",
+  },
+  {
+    term: "Probability distribution",
+    chapter: "prediction",
+    definition:
+      "A collection of probabilities assigned to possible outcomes. For a finite set of candidate tokens, the probabilities add to one. The distribution guides selection; it does not certify factual accuracy.",
+  },
+  {
+    term: "Matrix",
+    chapter: "transformer",
+    definition:
+      "A rectangular array of numbers arranged in rows and columns. Matrices organize many transformations in a transformer, including the learned projections used to compute queries, keys, and values.",
+  },
+  {
+    term: "Cross-entropy",
+    chapter: "training",
+    definition:
+      "A loss that measures predictions against a target distribution using negative log probabilities. Our binary example averages the penalties for tea and coffee according to how often each occurs.",
   },
 ];

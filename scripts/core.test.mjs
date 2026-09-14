@@ -26,8 +26,25 @@ test("visual lessons have complete scenes, illustrations, and working glossary l
   for (const chapter of chapters) {
     const lesson = lessons[chapter.id];
     assert.ok(lesson.intro && lesson.caption && lesson.note);
-    assert.equal(lesson.scenes.length, 4);
-    assert.ok(lesson.scenes.every((s) => s.title && s.text));
+    assert.ok(lesson.scenes.length >= 6);
+    assert.ok(
+      lesson.paragraphs.length >= 2 && lesson.observe && lesson.connection,
+    );
+    assert.ok(lesson.scenes.every((s) => s.title && s.text && s.visual));
+    for (const { visual } of lesson.scenes) {
+      if (visual.kind === "flow")
+        assert.ok(visual.active >= 0 && visual.active < visual.items.length);
+      if (visual.kind === "generation")
+        assert.ok(
+          Number.isInteger(visual.beat) && visual.beat >= 0 && visual.beat <= 6,
+        );
+      if (visual.kind === "capacity")
+        assert.ok(
+          Number.isInteger(visual.stage) &&
+            visual.stage >= 0 &&
+            visual.stage <= 6,
+        );
+    }
     assert.ok(
       lesson.terms.every((t) => terms.has(t)),
       chapter.id,

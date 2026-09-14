@@ -1,5 +1,15 @@
 # Interactive book release
 
+## September 14, 2026: teaching depth and UI polish
+
+The nine chapters now have fuller visible introductions, concrete examples, and connections to the next lesson. Optional fuller explanations include the foundation sections as well as the existing deeper material. Chapter shortcuts open the simulation, timeline, math, or fuller reading directly.
+
+The timeline contains eleven sourced milestones from Dartmouth through text diffusion, each with a short account of what the development adds. It is open by default and can be collapsed. The nine simulations now contain 66 steps, with six positions in both generation tracks, explicit intermediate calculations, changed-word indicators, and native text/tables alongside SVG attention diagrams. Only Back, Next, and Restart control a simulation.
+
+Four worked math guides explain notation and calculations for probabilities, sampling, training, attention, and context budgets. The glossary includes 61 terms, including the new mathematical vocabulary. Sidebar navigation, section disclosures, chapter headings, spacing, and mobile controls have been refined.
+
+Browser validation covers all 66 steps at 320 × 568, with follow-up checks after tightening the longest scenes; timeline and math links; expanded reading; keyboard navigation; and mobile and desktop layouts. Standard type, content, calculation, persistence, and Pages build checks remain required.
+
 ## September 14, 2026: visual lessons
 
 The active app now uses nine lesson SVG illustrations and nine compact, four-step simulations. Each step keeps a diagram, short explanation, and Back/Next controls together. Longer reading and sources sit in optional disclosure sections. A searchable, alphabetical glossary is linked from each lesson.

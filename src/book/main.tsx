@@ -2,6 +2,8 @@ import React, { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { chapters, glossary } from "./content";
 import { lessons } from "./lessons";
 import { loadProgress, PROGRESS_KEY } from "./progress";
+import Timeline from "./Timeline";
+import MathGuide from "./MathGuide";
 import "./guide.css";
 
 const Simulation = lazy(() => import("./Simulation"));
@@ -100,11 +102,22 @@ function Guide() {
     }
     const isSimulation =
       page === "chapter" && ["simulation", "experiment"].includes(path[2]);
+    const anchor =
+      page === "chapter"
+        ? {
+            timeline: "chapter-timeline",
+            math: "chapter-math",
+            details: "chapter-details",
+          }[path[2] as "timeline" | "math" | "details"]
+        : undefined;
     const target = isSimulation
       ? document.getElementById("chapter-simulation")
-      : mainRef.current;
+      : anchor
+        ? document.getElementById(anchor)
+        : mainRef.current;
+    if (target instanceof HTMLDetailsElement) target.open = true;
     target?.focus({ preventScroll: true });
-    if (isSimulation) target?.scrollIntoView({ block: "start" });
+    if (isSimulation || anchor) target?.scrollIntoView({ block: "start" });
     else window.scrollTo(0, 0);
   }, [hash]);
   const results = [...glossary]
@@ -117,6 +130,15 @@ function Guide() {
           .includes(search.trim().toLowerCase()),
     );
   const letters = [...new Set(glossary.map((t) => t.term[0]))].sort();
+  function repeatShortcut(event: React.MouseEvent<HTMLAnchorElement>) {
+    if (event.currentTarget.hash !== location.hash) return;
+    event.preventDefault();
+    const section = event.currentTarget.hash.split("/").pop();
+    const target = document.getElementById(`chapter-${section}`);
+    if (target instanceof HTMLDetailsElement) target.open = true;
+    target?.focus({ preventScroll: true });
+    target?.scrollIntoView({ block: "start" });
+  }
   return (
     <>
       <a
@@ -134,7 +156,11 @@ function Guide() {
         <a className="brand" href="#/course" aria-label="Prompt Life course">
           prompt<span>life</span>
           <span className="brand-mark" aria-hidden="true">
-            ▥
+            <svg viewBox="0 0 22 24" width="18" height="22" fill="currentColor">
+              <rect x="1" y="12" width="4" height="11" rx="1" />
+              <rect x="9" y="6" width="4" height="17" rx="1" />
+              <rect x="17" y="1" width="4" height="22" rx="1" />
+            </svg>
           </span>
         </a>
         <nav aria-label="Main">
@@ -213,9 +239,40 @@ function Guide() {
                 CHAPTER {String(index + 1).padStart(2, "0")}
               </p>
               <h1>{chapter.title}</h1>
-              <a className="jump-link" href={chapterUrl(chapter.id, true)}>
-                Walk through the simulation ↓
-              </a>
+              <p className="chapter-deck">{chapter.description}</p>
+              <nav className="chapter-shortcuts" aria-label="In this chapter">
+                <a href={chapterUrl(chapter.id, true)} onClick={repeatShortcut}>
+                  Simulation{" "}
+                  <span>{lessons[chapter.id].scenes.length} steps ↓</span>
+                </a>
+                {chapter.id === "landscape" && (
+                  <a
+                    href={`#/chapter/${chapter.id}/timeline`}
+                    onClick={repeatShortcut}
+                  >
+                    Timeline ↓
+                  </a>
+                )}
+                {[
+                  "prediction",
+                  "training",
+                  "transformer",
+                  "assistant",
+                ].includes(chapter.id) && (
+                  <a
+                    href={`#/chapter/${chapter.id}/math`}
+                    onClick={repeatShortcut}
+                  >
+                    The math ↓
+                  </a>
+                )}
+                <a
+                  href={`#/chapter/${chapter.id}/details`}
+                  onClick={repeatShortcut}
+                >
+                  Fuller explanation ↓
+                </a>
+              </nav>
               <div className="lesson-lead">
                 <figure className="lesson-illustration">
                   <img
@@ -233,12 +290,27 @@ function Guide() {
                     aria-label="Terms in this chapter"
                   >
                     {lessons[chapter.id].terms.map((term) => (
-                      <a key={term} href={termUrl(term)}>
-                        {term} ↗
+                      <a
+                        key={term}
+                        href={termUrl(term)}
+                        title={`Glossary: ${term}`}
+                      >
+                        {term}
                       </a>
                     ))}
                   </nav>
                 </div>
+              </div>
+              <div className="lesson-prose">
+                {lessons[chapter.id].paragraphs.map((p) => (
+                  <p key={p}>{p}</p>
+                ))}
+              </div>
+              {chapter.id === "landscape" && <Timeline />}
+              <div className="simulation-intro">
+                <p className="eyebrow">WATCH THE PROCESS</p>
+                <h2>{lessons[chapter.id].simulationTitle}</h2>
+                <p>{lessons[chapter.id].observe}</p>
               </div>
               <div id="chapter-simulation" tabIndex={-1}>
                 <Boundary key={chapter.id}>
@@ -257,54 +329,25 @@ function Guide() {
                 <span className="eyebrow">THE IDEA TO KEEP</span>
                 <p>{chapter.takeaway}</p>
               </aside>
-              {chapter.id === "landscape" && (
-                <details className="reading-detail">
-                  <summary>A short history of AI</summary>
-                  <ol className="history-list">
-                    <li>
-                      <strong>1955–1956 · A field gets a name.</strong> The
-                      Dartmouth proposal and workshop bring together questions
-                      about learning, language, and reasoning.
-                    </li>
-                    <li>
-                      <strong>1959 · Learning from experience.</strong> Arthur
-                      Samuel’s checkers work demonstrates machine learning.{" "}
-                      <a href="https://research.ibm.com/topics/machine-learning">
-                        IBM’s history ↗
-                      </a>
-                    </li>
-                    <li>
-                      <strong>1986–2012 · Learning representations.</strong>{" "}
-                      Backpropagation research and later GPU-powered image
-                      classification help establish deep learning.{" "}
-                      <a href="https://www.cs.toronto.edu/~hinton/backprop.html">
-                        Backpropagation ↗
-                      </a>{" "}
-                      ·{" "}
-                      <a href="https://www.cs.toronto.edu/~kriz/imagenet_classification_with_deep_convolutional.pdf">
-                        AlexNet ↗
-                      </a>
-                    </li>
-                    <li>
-                      <strong>2013–2017 · New generative approaches.</strong>{" "}
-                      VAEs, GANs, and the transformer open different paths to
-                      modeling data.
-                    </li>
-                    <li>
-                      <strong>2020–2026 · Diffusion expands.</strong> Image
-                      diffusion, text diffusion, and Google’s experiments show
-                      that generation can refine many positions together.
-                    </li>
-                  </ol>
-                  <p>
-                    Selected milestones, not a sequence of replacements. The
-                    methods continue to coexist.
-                  </p>
-                </details>
-              )}
-              <details className="reading-detail">
-                <summary>Read the fuller explanation</summary>
-                {chapter.after.map((section) => (
+              <p className="lesson-connection">
+                {lessons[chapter.id].connection}
+              </p>
+              <MathGuide key={chapter.id} chapter={chapter.id} />
+              <details
+                className="reading-detail"
+                id="chapter-details"
+                tabIndex={-1}
+                key={`${chapter.id}-details`}
+              >
+                <summary>
+                  <span className="detail-title">
+                    Read the fuller explanation
+                  </span>
+                  <span className="summary-hint">
+                    Build on the walkthrough at your own pace
+                  </span>
+                </summary>
+                {[...chapter.before, ...chapter.after].map((section) => (
                   <section key={section.title}>
                     <h2>{section.title}</h2>
                     {section.paragraphs.map((p) => (
@@ -320,7 +363,14 @@ function Guide() {
                 </section>
               </details>
               <details className="reading-detail">
-                <summary>Sources & further reading</summary>
+                <summary>
+                  <span className="detail-title">
+                    Sources & further reading
+                  </span>
+                  <span className="summary-hint">
+                    Follow the evidence and explore further
+                  </span>
+                </summary>
                 <ul>
                   {chapter.sources.map((source) => (
                     <li key={source.url}>
@@ -386,12 +436,12 @@ function Guide() {
               <h1>
                 {page === "course"
                   ? "See how language models work."
-                  : "One scene. One step at a time."}
+                  : "See each process unfold."}
               </h1>
               <p className="catalog-intro">
                 {page === "course"
                   ? "Start with the big picture. Follow the illustrations, step through the simulations, and open the deeper explanations when you want more."
-                  : "Follow each process with Back and Next. Every scene keeps the picture and explanation together."}
+                  : "Trace a generation loop, a weight update, or an evidence check. Advance at your own pace with Back and Next; each step reveals one more part of the process."}
               </p>
               {page === "course" && (
                 <div className="button-row">
