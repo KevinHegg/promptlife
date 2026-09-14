@@ -37,6 +37,7 @@ function Card({
   h = 42,
   label,
   active = false,
+  textSize = 16,
 }: {
   x?: number;
   y: number;
@@ -44,6 +45,7 @@ function Card({
   h?: number;
   label: string;
   active?: boolean;
+  textSize?: number;
 }) {
   return (
     <g>
@@ -57,7 +59,7 @@ function Card({
         stroke={active ? blue : "#b9c7d9"}
         strokeWidth={active ? 2 : 1}
       />
-      <Label x={x + w / 2} y={y + h / 2 + 5}>
+      <Label x={x + w / 2} y={y + h / 2 + 5} size={textSize}>
         {label}
       </Label>
     </g>
@@ -84,32 +86,34 @@ function Stages({ labels, step }: { labels: string[]; step: number }) {
 
 function Visual({ chapter, step }: { chapter: string; step: number }) {
   if (chapter === "landscape") {
-    const final = ["Cats", "chase", "mice."];
+    const final = ["Cats", "quietly", "chase", "small", "gray", "mice."];
+    const revealed = [0, 1, 3, 6][step];
     const draft = [
-      ["—", "—", "—"],
-      ["Cats", "—", "birds."],
-      ["Cats", "watch", "mice."],
+      ["—", "—", "—", "—", "—", "—"],
+      ["Cats", "—", "watch", "—", "gray", "birds."],
+      ["Cats", "quietly", "chase", "small", "gray", "birds."],
       final,
     ][step];
     return (
       <>
-        {[final.map((word, i) => (i < step ? word : "—")), draft].map(
+        {[final.map((word, i) => (i < revealed ? word : "—")), draft].map(
           (row, r) => (
             <g key={r}>
-              <Label y={r * 94 + 20} size={15}>
+              <Label y={r * 74 + 17} size={13}>
                 {r === 0
-                  ? "Autoregressive: extend the prefix"
-                  : "Denoising: refine the working area"}
+                  ? "AUTOREGRESSIVE · EXTEND THE PREFIX"
+                  : "DENOISING · REVISE THE WORKING AREA"}
               </Label>
               {row.map((word, i) => (
                 <Card
                   key={i}
-                  x={7 + i * 118}
-                  y={r * 94 + 30}
-                  w={110}
-                  h={43}
+                  x={7 + i * 58}
+                  y={r * 74 + 25}
+                  w={52}
+                  h={34}
                   label={word}
                   active={word !== "—"}
+                  textSize={13}
                 />
               ))}
             </g>
@@ -472,8 +476,8 @@ export default function Simulation({ chapter }: { chapter: string }) {
       <div className="simulation-scene" aria-live="polite" aria-atomic="true">
         <h2 id={`${id}-heading`}>{scene.title}</h2>
         <svg
-          className="simulation-visual"
-          viewBox="0 0 360 200"
+          className={`simulation-visual${chapter === "landscape" ? " landscape-visual" : ""}`}
+          viewBox={chapter === "landscape" ? "0 0 360 152" : "0 0 360 200"}
           role="img"
           aria-labelledby={`${id}-title ${id}-description`}
         >

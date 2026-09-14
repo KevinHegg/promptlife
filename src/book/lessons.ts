@@ -22,15 +22,15 @@ export const lessons: Record<string, Lesson> = {
     scenes: [
       {
         title: "Two ways to begin",
-        text: "Both methods receive the same prompt. An autoregressive response starts empty. This text-diffusion example starts with masked positions.",
+        text: "Both methods receive the same prompt and six open slots. An autoregressive response starts empty. This text-diffusion example starts with six masked positions.",
       },
       {
         title: "A prefix—or several positions",
-        text: "Autoregression commits the next piece. Denoising proposes pieces in different parts of its working area; they can still be provisional.",
+        text: "Autoregression commits the first piece. Denoising proposes pieces in several of its six positions; they can still be provisional.",
       },
       {
         title: "The middle can change",
-        text: "The autoregressive prefix grows. Our denoising example revises an earlier guess while filling other positions.",
+        text: "The autoregressive prefix grows from the left. Our denoising example revises “watch” to “chase” while filling other positions.",
       },
       {
         title: "A finished response",
