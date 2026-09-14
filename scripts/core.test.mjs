@@ -15,6 +15,43 @@ import {
   packContext,
 } from "../src/book/model.ts";
 import { chapters, glossary } from "../src/book/content.ts";
+import {
+  attendedState,
+  bankToken,
+  journeyCandidates,
+  journeyVocabulary,
+  positionedState,
+  transformedState,
+  vectorText,
+} from "../src/book/tokenJourneyModel.ts";
+
+test("the token journey keeps its embedding fixed while calculating states and output scores", () => {
+  const close = (actual, expected) => {
+    assert.equal(actual.length, expected.length);
+    actual.forEach((value, i) =>
+      assert.ok(Math.abs(value - expected[i]) < 1e-12),
+    );
+  };
+  assert.equal(
+    journeyVocabulary.map((token) => token.text).join(""),
+    "The river bank",
+  );
+  assert.equal(bankToken.id, 42);
+  close(bankToken.embedding, [0.2, -0.4, 0.7, 0.1]);
+  close(positionedState, [0.2, -0.3, 0.7, 0.3]);
+  close(attendedState, [0.3, -0.1, 0.6, 0.6]);
+  close(transformedState, [0.2, 0, 0.8, 0.6]);
+  assert.equal(vectorText(transformedState), "[0.2, 0.0, 0.8, 0.6]");
+  assert.notEqual(positionedState, bankToken.embedding);
+  assert.notEqual(attendedState, positionedState);
+  const logits = journeyCandidates.map((candidate) => candidate.score);
+  close(logits, [1.8, 0.5, -0.6]);
+  const chosen = journeyCandidates[logits.indexOf(Math.max(...logits))].text;
+  assert.equal(
+    journeyVocabulary.map((token) => token.text).join("") + chosen,
+    "The river bank was",
+  );
+});
 
 test("visual lessons have complete scenes, illustrations, and working glossary links", () => {
   const terms = new Set(glossary.map((t) => t.term));

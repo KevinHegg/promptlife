@@ -1,5 +1,15 @@
 # Interactive book release
 
+## September 14, 2026: following one token through chapter 5
+
+Chapter 5 now follows “ bank” in “The river bank” through 15 manually controlled steps: tokenization, token IDs, embedding lookup, vector coordinates, hidden states, position, attention, residual and feed-forward updates, later layers, contrasting context, output scores, probabilities, and appending a new token. The course now has 72 simulation steps.
+
+The visuals preserve the token’s identity while its working numbers change. The chapter defines an embedding as a vector and a hidden state as an internal representation at a particular position and stage. The worked math uses the same four-coordinate example, and advanced attention mechanics remain in the optional fuller explanation. A replacement SVG and revised glossary entries support the same story; the glossary now includes 62 terms.
+
+The vocabulary, position vector, sublayer updates, and later states are explicitly authored examples. Lookup, coordinate additions, output projections, and softmax are calculated. A regression check verifies the arithmetic and that the starting embedding is preserved, including formatting tiny floating-point residuals as zero.
+
+Responsive browser checks cover all 15 steps at 320 × 568, mobile math and glossary links, optional reading, keyboard stepping, Back/Restart, and the desktop introduction. The nine automated tests, strict type check, and Pages build remain required.
+
 ## September 14, 2026: teaching depth and UI polish
 
 The nine chapters now have fuller visible introductions, concrete examples, and connections to the next lesson. Optional fuller explanations include the foundation sections as well as the existing deeper material. Chapter shortcuts open the simulation, timeline, math, or fuller reading directly.

@@ -1,3 +1,5 @@
+import type { JourneyStage } from "./tokenJourneyModel";
+
 export type VisualSpec =
   | { kind: "flow"; items: [string, string][]; active: number }
   | { kind: "generation"; beat: number }
@@ -25,10 +27,7 @@ export type VisualSpec =
         | "hundred"
         | "heldout";
     }
-  | {
-      kind: "attention";
-      mode: "positions" | "scores" | "mask" | "weights" | "mix";
-    }
+  | { kind: "token-journey"; stage: JourneyStage }
   | { kind: "capacity"; stage: number };
 export type Scene = { title: string; text: string; visual: VisualSpec };
 export type Lesson = {
@@ -334,100 +333,102 @@ export const lessons: Record<string, Lesson> = {
   },
   transformer: {
     intro:
-      "The same word can play different roles in different contexts. Compare “river bank” with “savings bank.” A transformer starts with numerical representations of tokens and repeatedly updates them using information from the surrounding sequence.",
+      "Start with a familiar phrase: “The river bank.” How does “bank,” a piece of text, become something a model can calculate with? We will follow that one word all the way to a prediction for what comes next.",
     paragraphs: [
-      "A vector is simply a list of numbers. Token embeddings supply starting vectors; position information helps distinguish different word orders. Attention then mixes information between permitted positions. In a causal text decoder, a position can use itself and earlier positions. Later words are blocked, even when a training example lets us see the whole sentence.",
-      "Attention is only one part of a transformer block. A feed-forward network transforms each position’s representation, residual connections add updates, and normalization helps manage numerical scale. Repeating these operations builds context-sensitive hidden states. The walkthrough follows one attention row, then reconnects it to the rest of the block. You do not need matrix algebra to understand what each operation contributes.",
+      "The tokenizer splits text into pieces called tokens and assigns each one a token ID. That ID selects a row from the model’s learned embedding table. The row is a vector—a list of numbers. So an embedding is already a vector: “vector” describes its form, and “embedding” describes its job as a numerical starting point.",
+      "The model then works on a representation for each position. This working vector is called a hidden state. “Hidden” means it is internal to the network, usually absent from the chat display. Attention brings in information from permitted positions; further calculations update the numbers. The token stays “bank,” but its representation becomes sensitive to “river.” During ordinary generation, these working states change while the stored embeddings and other learned weights stay fixed.",
     ],
     caption:
-      "Each block mixes information and transforms it. Residual paths add updates to the representation already present.",
+      "Follow “bank”: its token ID selects an embedding vector, then transformer layers build a representation shaped by context.",
     terms: [
+      "Token",
+      "Token ID",
+      "Vector",
       "Embedding",
+      "Hidden state",
       "Attention",
-      "Causal mask",
-      "Query, key, and value",
-      "Residual connection",
-      "MLP",
     ],
-    simulationTitle: "Follow one position through a block",
+    simulationTitle: "Follow “bank,” one change at a time",
     observe:
-      "Focus on “the.” First decide which positions it can use, then follow the weights and the values separately.",
+      "Keep your eye on the highlighted token. First follow its ID, then its four numbers. There is no need to memorize the numbers—watch what changes and what stays fixed.",
     connection:
-      "The 1.579 in our example is a mixed numerical value, not a word or a measure of understanding. Real heads mix vectors, and many heads and layers contribute before the final vocabulary scores are computed.",
-    note: "Illustrative attention row. Scalar values stand in for vectors.",
+      "The journey returns us to chapter 3: the final hidden state at the last input position supplies next-token scores. “Bank” never turns into “was.” Its working vector helps predict “was,” which becomes a new token with its own position and embedding.",
+    note: "Toy tokens and numbers. Updates are supplied; arithmetic is calculated.",
     scenes: [
       scene(
-        "Start with representations",
-        "Token IDs select learned embeddings. Position information preserves order. These vectors are starting representations, not dictionary definitions.",
-        flow(
-          [
-            ["Tokens", "Maya · opened · the · garden"],
-            ["Embedding + position", "A numerical starting point for each"],
-            ["Focus", "Compute the position “the”"],
-          ],
-          1,
-        ),
+        "Begin with ordinary text",
+        "Our prompt ends with “The river bank.” Follow “bank” through the model. First, the text needs to become numbers.",
+        { kind: "token-journey", stage: "text" },
       ),
       scene(
-        "Focus on one position",
-        "We are computing the representation at “the.” The entire sentence is visible to us, but a causal decoder must respect the order.",
-        { kind: "attention", mode: "positions" },
+        "Split text into tokens",
+        "Our toy tokenizer uses three pieces. The dot marks a leading space. A real tokenizer may split words into smaller pieces.",
+        { kind: "token-journey", stage: "tokens" },
       ),
       scene(
-        "Compare queries and keys",
-        "A query at “the” is compared with keys at the other positions. We start with invented, already-scaled scores of 2, 1, 0, and 3.",
-        { kind: "attention", mode: "scores" },
+        "Give each token an ID",
+        "“ bank” gets ID 42 in our made-up vocabulary. This is a lookup number: a larger ID does not mean a more important token.",
+        { kind: "token-journey", stage: "id" },
       ),
       scene(
-        "Mask the future",
-        "“Garden” comes later. The mask removes it before softmax, so even its high score cannot give it any attention weight here.",
-        { kind: "attention", mode: "mask" },
+        "Look up the embedding",
+        "ID 42 selects one stored row. Its four numbers are the token’s embedding vector. Training learned such rows; looking one up does not retrain the model.",
+        { kind: "token-journey", stage: "lookup" },
       ),
       scene(
-        "Turn scores into weights",
-        "Softmax gives the permitted positions about 66.5%, 24.5%, and 9.0%. These shares tell us how much of each value to mix.",
-        { kind: "attention", mode: "weights" },
+        "A vector is a list",
+        "Read these as four separate coordinates. They are not percentages or labels such as “river.” Real LLMs use much longer vectors.",
+        { kind: "token-journey", stage: "vector" },
       ),
       scene(
-        "Multiply, then add",
-        "Use scalar values 1, 3, and 2. Multiply each by its share and add: the mixed value is approximately 1.579.",
-        { kind: "attention", mode: "mix" },
+        "Meet the hidden state",
+        "The model starts a working vector from the embedding. This internal representation is a hidden state. The stored row remains available for the next lookup.",
+        { kind: "token-journey", stage: "state" },
+      ),
+      scene(
+        "Include the position",
+        "“ bank” occupies position 3. Here we add a position vector, number by number. Other architectures incorporate order in different ways.",
+        { kind: "token-journey", stage: "position" },
+      ),
+      scene(
+        "Bring in the context",
+        "Attention mixes information from the permitted positions: “The,” “ river,” and “ bank.” It produces an update for bank’s working vector.",
+        { kind: "token-journey", stage: "attention" },
       ),
       scene(
         "Add the attention update",
-        "Heads are combined and projected into an update. A residual connection adds that update to the representation entering the attention sublayer.",
-        flow(
-          [
-            ["Existing representation", "The input to this sublayer"],
-            ["Attention update", "Combined and projected head outputs"],
-            ["Residual addition", "Existing representation + update"],
-          ],
-          2,
-        ),
+        "Add each update number to the number above it. This is a residual connection. The hidden state changes; ID 42 and its stored embedding stay fixed.",
+        { kind: "token-journey", stage: "add" },
       ),
       scene(
-        "Transform each position",
-        "A feed-forward network transforms each position separately. Add its update through a residual path. Normalization helps manage scale.",
-        flow(
-          [
-            ["Current representation", "After the attention update"],
-            ["Feed-forward network", "Learned transformations + nonlinearity"],
-            ["Residual addition", "Current representation + new update"],
-          ],
-          1,
-        ),
+        "Transform the numbers",
+        "A feed-forward network processes this position’s vector and supplies another update. Add it in the same way. This completes our simplified block.",
+        { kind: "token-journey", stage: "mlp" },
       ),
       scene(
-        "Repeat, then read out",
-        "Further blocks repeat this pattern. A final projection turns the relevant hidden state into vocabulary logits, ready for softmax and token selection.",
-        flow(
-          [
-            ["More blocks", "Attention and feed-forward updates"],
-            ["Vocabulary projection", "Hidden state → logits"],
-            ["Decoding", "Scores → probabilities → selection"],
-          ],
-          1,
-        ),
+        "Continue through layers",
+        "More blocks repeat attention and transformation. These are snapshots at bank’s position. We skip the intervening arithmetic and supply an illustrative final state.",
+        { kind: "token-journey", stage: "layers" },
+      ),
+      scene(
+        "Same token, new context",
+        "Compare “The savings bank.” The token ID and starting embedding are the same, but different context leads to a different working vector.",
+        { kind: "token-journey", stage: "context" },
+      ),
+      scene(
+        "Score what comes next",
+        "Return to “The river bank.” The final hidden state at bank’s position is multiplied by output weights to score possible next tokens.",
+        { kind: "token-journey", stage: "scores" },
+      ),
+      scene(
+        "Turn scores into shares",
+        "Softmax converts the three scores into probabilities. For this toy output, we use greedy selection: choose “ was,” the highest-scoring candidate.",
+        { kind: "token-journey", stage: "probabilities" },
+      ),
+      scene(
+        "Append a new token",
+        "The prompt still contains “ bank.” We append “ was” at a new position. Its own ID and embedding begin another trip through the model.",
+        { kind: "token-journey", stage: "append" },
       ),
     ],
   },

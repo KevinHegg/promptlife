@@ -1,8 +1,18 @@
-import { attentionWeights, softmax, trainWeight } from "./model";
+import { softmax, trainWeight } from "./model";
+import {
+  attendedState,
+  attentionUpdate,
+  bankToken,
+  journeyCandidates,
+  mlpUpdate,
+  positionedState,
+  positionUpdate,
+  transformedState,
+  vectorText,
+} from "./tokenJourneyModel";
 type WorkedStep = { title: string; formula: string; explanation: string };
 export default function MathGuide({ chapter }: { chapter: string }) {
   const p = softmax([3, 2, 1, -1]),
-    weights = attentionWeights([2, 1, 0, 3], 2),
     trained = trainWeight(100);
   const guides: Record<
     string,
@@ -83,36 +93,49 @@ export default function MathGuide({ chapter }: { chapter: string }) {
       ],
     },
     transformer: {
-      title: "Read attention as a weighted mixture",
+      title: "Read the vector arithmetic, one coordinate at a time",
       intro:
-        "Keep the attention weights and the learned parameters separate. Attention weights are temporary shares computed for this input. Learned parameters are the numbers training changes to produce queries, keys, values, and other transformations.",
+        "Use the same four-number example as the simulation. Square brackets mean “keep these numbers together as a list.” The example updates are supplied; the additions and output scores below are calculated from them.",
       steps: [
         {
-          title: "Start from scores, then apply the mask",
-          formula: "2, 1, 0, 3 → 2, 1, 0, blocked",
+          title: "Use an ID to select a row",
+          formula: `embedding[42] = ${vectorText(bankToken.embedding)}`,
           explanation:
-            "A query–key comparison produces a score for each position. We start after that comparison, with invented scaled scores. The causal mask removes the future position before normalization. Setting its score to zero would not be enough: softmax gives a zero score a positive share.",
+            "Here [42] means select row 42 from the embedding table. It does not mean multiply by 42. The result is four numbers—a four-dimensional vector. Its four coordinates are not probabilities and need not add to one.",
         },
         {
-          title: "Normalize only the permitted scores",
-          formula: `softmax(2, 1, 0) ≈ ${weights
-            .slice(0, 3)
-            .map((w) => w.toFixed(3))
+          title: "Add the position information",
+          formula: `${vectorText(bankToken.embedding)} + ${vectorText(positionUpdate)} = ${vectorText(positionedState)}`,
+          explanation:
+            "Add corresponding coordinates. The second coordinate is −0.4 + 0.1 = −0.3; the fourth is 0.1 + 0.2 = 0.3. The result is still a list of four numbers. We use additive position information here to make the calculation visible; other architectures handle position differently.",
+        },
+        {
+          title: "Add the attention update",
+          formula: `${vectorText(positionedState)} + ${vectorText(attentionUpdate)} = ${vectorText(attendedState)}`,
+          explanation:
+            "Again, add down each coordinate. For the third entry, 0.7 + (−0.1) = 0.6. This residual addition produces a new hidden state. It does not write the result back into embedding row 42. That distinction separates processing an input from training the model.",
+        },
+        {
+          title: "Apply the next update the same way",
+          formula: `${vectorText(attendedState)} + ${vectorText(mlpUpdate)} = ${vectorText(transformedState)}`,
+          explanation:
+            "The feed-forward network supplies this example update. Notice the second coordinate: −0.1 + 0.1 = 0.0. An update can increase, decrease, or leave a coordinate unchanged. Further blocks produce more hidden states; we supply the final example rather than calculate a full network.",
+        },
+        {
+          title: "Turn a final state into one candidate’s score",
+          formula: `“ was”: (0.6 × 1) + (−0.3 × 0) + (1.2 × 1) + (0.8 × 0) = ${journeyCandidates[0].score.toFixed(1)}`,
+          explanation:
+            "Multiply each coordinate of the final state [0.6, −0.3, 1.2, 0.8] by the corresponding output weight [1, 0, 1, 0], then add. This is a dot product. Every output candidate has its own weights. Our other two rows produce 0.5 for “ is” and −0.6 for “ closed.” These are logits, not probabilities.",
+        },
+        {
+          title: "Connect back to softmax",
+          formula: `softmax(1.8, 0.5, −0.6) ≈ ${softmax(
+            journeyCandidates.map((c) => c.score),
+          )
+            .map((p) => (100 * p).toFixed(1) + "%")
             .join(", ")}`,
           explanation:
-            "The permitted shares add to one. Garden’s share is zero because it is blocked. These shares tell the calculation how much of each value to combine; they do not measure a word’s importance in every context.",
-        },
-        {
-          title: "Multiply each value by its share",
-          formula: "0.665 × 1 + 0.245 × 3 + 0.090 × 2 ≈ 1.579",
-          explanation:
-            "The three products are about 0.665, 0.734, and 0.180 using unrounded weights. Add them to obtain the mixture. A weighted average can differ from every value that went into it. Real attention uses vectors: the multiplication and addition apply to their components.",
-        },
-        {
-          title: "Connect the mixture to the full formula",
-          formula: "Attention(Q, K, V) = softmax(QKᵀ / √dₖ + mask)V",
-          explanation:
-            "Q contains queries, K keys, and V values. The superscript T transposes K so queries can be compared with keys. The square-root factor scales scores by the key-vector dimension. The mask blocks forbidden positions; softmax makes shares; multiplication by V forms the mixtures. Multiple heads, projections, residual paths, and feed-forward networks surround this calculation.",
+            "These probabilities sum to approximately 100% after rounding. We normalize over just three toy output candidates. A real model scores its full output vocabulary before decoding rules are applied. The selected token is appended at a new position; the input token is not replaced.",
         },
       ],
     },

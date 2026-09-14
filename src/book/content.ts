@@ -409,58 +409,82 @@ export const chapters: Chapter[] = [
   {
     id: "transformer",
     title: "Inside a transformer",
-    headline: "How a piece of text",
-    emphasis: "acquires context.",
+    headline: "Follow one word.",
+    emphasis: "See its numbers change.",
     description:
-      "Follow the numbers through attention and transformation. Learn what can be seen, what gets mixed, and what changes.",
+      "From “bank” to a token ID, an embedding vector, and a hidden state: follow the small steps that make context possible.",
     question:
-      "Predict: can the representation of an earlier token use a word that appears later in a causal decoder?",
+      "In “river bank” and “savings bank,” what stays the same at the start, and what changes inside the model?",
     before: [
       {
-        title: "The same token, a different role",
+        title: "A word, a token, and an ID are different things",
         paragraphs: [
-          "Consider “river bank” and “savings bank.” The token corresponding to “bank” can start with the same learned embedding, yet it plays different roles. Earlier words supply different context for the causal decoder. The model needs representations that depend on the sequence, not just on vocabulary entries.",
-          "A vector is a list of numbers. A matrix arranges numbers in rows and columns; a tensor generalizes these arrays to more axes. These are ways to organize computation, not little containers holding dictionary definitions. A model’s internal features need not correspond to neat concepts that a person can name.",
-          "Position information matters too. “The dog chased the cat” differs from “The cat chased the dog” even though the words overlap. Transformer architectures incorporate position in different ways. Without an appropriate account of order, simply collecting token embeddings would lose something essential.",
+          "A word is a unit we recognize when reading. A token is a piece chosen by a tokenizer. Depending on the tokenizer and surrounding text, a word may be one token or several; spaces and punctuation also need to be represented. Our tiny example splits “The river bank” into “The,” “ river,” and “ bank.” The dot in the diagram makes the leading spaces visible.",
+          "Each piece has a token ID in the tokenizer’s vocabulary. We give “ bank” the invented ID 42. Think of an index number used to find a row: it identifies the piece but does not describe its meaning. ID 208 is not more important than ID 42, and nearby IDs need not have related meanings.",
+        ],
+      },
+      {
+        title: "An embedding is already a vector",
+        paragraphs: [
+          "A vector is an ordered list of numbers. Our example [0.2, −0.4, 0.7, 0.1] has four entries, also called components or coordinates. Its dimension is four. Negative values are ordinary coordinates; the entries do not need to add to one.",
+          "A token embedding is a vector used to represent a vocabulary item at the start of processing. The embedding table has a row for each token ID. During pretraining, its numbers are learned along with the model’s other parameters. During an ordinary generation request, ID 42 retrieves the stored row for “ bank.”",
+          "This gives us text → tokens → IDs → embedding vectors. There is no separate conversion from “vector” into “embedding.” One term names the mathematical form; the other names the representation’s role. Nor is a single coordinate necessarily a tidy concept such as “water” or “money.” Information can be spread across many coordinates.",
+        ],
+      },
+      {
+        title: "A hidden state is the working representation",
+        paragraphs: [
+          "Once the model begins processing a position, its working vector is called a hidden state. “State” means the current values at that point in the computation. “Hidden” means internal to the network, rather than directly presented as its text output. It does not mean a secret sentence or an inaccessible thought: model software can expose these arrays of numbers.",
+          "The initial representation comes from the token embedding, with position handled according to the architecture. Transformer blocks produce further states. You can therefore ask for the hidden state at bank’s position after the first layer, or after the final layer. Each answer refers to a particular position and stage, not one universal hidden state for the entire conversation.",
+          "Keep the stored row and the working vector separate. Processing “The river bank” changes internal activations, including hidden states, while the learned parameters remain fixed during ordinary generation. Processing “The savings bank” starts the same token from the same stored embedding, but different context can produce a different final state.",
         ],
       },
     ],
     after: [
       {
-        title: "Attention routes information between positions",
+        title: "Where position and attention enter the story",
         paragraphs: [
-          "Attention computes a weighted combination of information from permitted token positions. In a common formulation, learned projections produce queries, keys, and values. Matching queries with keys produces scores; normalized scores weight the values that get combined.",
-          "The words “query” and “key” may sound like a database search, but here they are vectors inside a calculation. Several attention heads can compute different patterns in parallel. Later layers work on representations already transformed by earlier layers.",
-          "In a causal text decoder, a position can use itself and earlier permitted positions. It cannot use later positions. The simulation above enforces this restriction. The sentence is deliberately split into word-like positions for readability; these are not outputs from a real tokenizer.",
+          "The order of the tokens matters. “The dog chased the cat” and “The cat chased the dog” contain the same words but mean different things. Our illustration adds a small position vector to each embedding. This is one way to represent order; other architectures, including those using rotary position information, incorporate it into attention calculations.",
+          "Attention mixes numerical information from permitted positions. For “ bank” in our causal decoder, those positions are “The,” “ river,” and “ bank” itself. Later positions are blocked by a causal mask. Even when training supplies a whole sequence at once, an earlier position cannot use a later token to predict it.",
+          "The diagram’s arrows stand for contributions to a numerical update. They do not move the visible words around, select a dictionary definition, or show every reason for a prediction. All positions have representations; we follow one so the whole process is easier to see.",
         ],
       },
       {
-        title: "Attention is only part of a layer",
+        title: "What a transformer block adds",
         paragraphs: [
-          "A feed-forward network, often called an MLP, applies learned transformations and nonlinearities separately to each position. Attention mixes information across positions; the MLP transforms the representation at each position. Residual connections retain and add information, and normalization helps keep the numerical computation well behaved.",
-          "After repeated layers, each position has a temporary hidden state shaped by the permitted context. A final projection maps the relevant hidden state into vocabulary scores. This connects the machinery here to the probabilities you explored earlier.",
-          "An attention heatmap is evidence about one computation. It is not a complete account of why the model made a claim. Many heads, layers, MLP operations, and decoding choices contribute. Attractive diagrams should not imply more interpretability than we actually have.",
+          "A residual connection adds an update to the representation already present. Add corresponding coordinates: first to first, second to second, and so on. In our example, the attention update changes bank’s working vector from [0.2, −0.3, 0.7, 0.3] to [0.3, −0.1, 0.6, 0.6]. It does not change the token ID or overwrite the stored embedding.",
+          "A feed-forward network, also called an MLP, then transforms the vector at each position using learned weights and a nonlinear operation. Its output supplies another residual update. Attention exchanges information across positions; the MLP processes each position’s current vector. Blocks repeat this pattern, with normalization controlling numerical scale.",
+          "Our walkthrough supplies the position vector, attention and MLP updates, and later hidden states. It calculates the displayed additions and output scores, but does not run a trained transformer. To keep the journey readable, it leaves out normalization, multiple heads, and the internal calculation of the updates. Real architectures differ in these details.",
+        ],
+      },
+      {
+        title: "The final state predicts a new token",
+        paragraphs: [
+          "At the end of the prompt, the final hidden state at the last input position is used to calculate scores across the output vocabulary. In “The river bank,” that is bank’s position. A learned output projection produces logits; softmax converts those scores to probabilities, as in chapter 3.",
+          "Our toy output compares only three candidates. Selecting “ was” appends a new token: “The river bank was.” Bank does not turn into was, and its ID does not change. The new token gets its own embedding and position. During efficient generation, cached attention information can avoid repeating work for earlier tokens.",
         ],
       },
     ],
     deeper: {
-      title: "From three scores to a mixed value",
+      title: "A closer look at the attention update",
       paragraphs: [
-        "The simulation fixes a row of illustrative query–key scores and scalar values. It masks future positions, applies softmax to allowed scores, and sums each value multiplied by its attention weight. A real attention head uses vectors rather than one scalar, but the weighted-sum relationship is the same.",
-        "Attending strongly to a position is not the same as copying its visible word. It contributes a learned numerical representation to a further calculation. The simulation shows how fixed scores become attention weights and then a mixed value.",
+        "Inside an attention head, learned transformations make three vectors from each position’s representation: a query, a key, and a value. Comparing the current query with permitted keys gives scores. Softmax turns those scores into shares; each share multiplies a value vector, and the results are added. Several heads can form different mixtures before their outputs are combined.",
+        "Here is a separate, smaller example of that mixing arithmetic. Suppose three permitted positions receive attention shares of 0.6, 0.3, and 0.1. If one coordinate of their value vectors is 1, 3, and 2, the mixed coordinate is (0.6 × 1) + (0.3 × 3) + (0.1 × 2) = 1.7. Repeat for the other coordinates to get a mixed vector. These shares are supplied for illustration; they are not the hidden state’s coordinates.",
+        "The compact formula is Attention(Q, K, V) = softmax(QKᵀ / √dₖ + mask)V. Q, K, and V collect the queries, keys, and values in tables called matrices. Transposing K (the superscript T) lines up the query–key comparisons. The square-root term scales the scores using the key-vector dimension. The mask excludes forbidden positions; softmax makes shares; multiplying by V forms the mixtures.",
+        "An attention weight is a temporary mixing share for this input. It differs from a learned model weight, which training adjusts. Likewise, an attention heatmap reveals one part of a computation, not a complete explanation of an answer. Many heads, layers, feed-forward operations, and output choices contribute.",
       ],
     },
     lab: "attention",
     takeaway:
-      "Representations change through layers. Causal attention mixes information only from permitted positions.",
+      "An embedding is a token’s starting vector. A hidden state is its working representation at a position and stage. Context changes the working numbers, while the token’s identity stays fixed.",
     reflection:
-      "What does an attention visualization reveal, and what would it be a mistake to infer from it?",
+      "In a different sentence containing the same token, which numbers would you expect to stay fixed and which could change?",
     challenge: {
       question:
         "A causal decoder processes “Maya opened the garden.” At the position for “opened,” which information is available through ordinary causal self-attention?",
       options: [
         {
-          text: "All five positions, because the entire sentence was supplied at once.",
+          text: "All the positions, because the entire sentence was supplied at once.",
           feedback:
             "Processing positions in parallel does not remove the causal mask. Later positions remain unavailable to the earlier position.",
         },
@@ -479,6 +503,14 @@ export const chapters: Chapter[] = [
     },
     sources: [
       transformer,
+      {
+        title: "PyTorch · Embedding lookup tables",
+        url: "https://docs.pytorch.org/docs/stable/generated/torch.nn.Embedding.html",
+      },
+      {
+        title: "Hugging Face · Hidden states and model outputs",
+        url: "https://huggingface.co/docs/transformers/main_classes/output",
+      },
       {
         title: "Jain & Wallace · Attention is not Explanation (2019)",
         url: "https://arxiv.org/abs/1902.10186",
@@ -795,7 +827,7 @@ export const labNames: Record<LabId, string> = {
   trace: "Inspect a model request",
   probability: "Tokens & probability",
   training: "Train one weight",
-  attention: "The causal attention bench",
+  attention: "Follow a token through a transformer",
   context: "Pack the context",
   evidence: "Follow the evidence",
   tools: "Inspect the tool boundary",
@@ -986,7 +1018,7 @@ export const glossary = [
     term: "Embedding",
     chapter: "transformer",
     definition:
-      "A numerical representation. Token embeddings begin the representation of vocabulary items; retrieval embeddings represent passages or queries for comparison. They serve different roles.",
+      "A vector used to represent something numerically. A token embedding is a learned starting vector looked up using a token ID. Retrieval embeddings instead represent passages or queries for comparison.",
   },
   {
     term: "Evaluation",
@@ -1016,7 +1048,7 @@ export const glossary = [
     term: "Hidden state",
     chapter: "transformer",
     definition:
-      "A temporary numerical representation at a position and stage in the model. It changes as layers transform the available information.",
+      "The model’s working vector at a particular token position and processing stage. It starts from an embedding and changes as the model processes context. Hidden means internal to the network; these numbers can be inspected in model software.",
   },
   {
     term: "In-context learning",
@@ -1115,10 +1147,16 @@ export const glossary = [
       "A neural-network architecture built around attention and other transformations of representations. This guide focuses on a typical causal decoder for text generation.",
   },
   {
+    term: "Token ID",
+    chapter: "transformer",
+    definition:
+      "An integer identifying a token in a tokenizer’s vocabulary. The model uses it to look up an embedding vector. The ID is an index, not a measure of meaning, importance, or similarity.",
+  },
+  {
     term: "Vector",
     chapter: "transformer",
     definition:
-      "A list of numbers that can represent features or be transformed by a model. Its dimensions need not correspond to individual human-named concepts.",
+      "An ordered list of numbers. Each entry is a component or coordinate; four entries make a four-dimensional vector. A model’s vectors do not need to add to one, and individual coordinates need not have a simple human-readable meaning.",
   },
   {
     term: "Exponentiation (exp)",

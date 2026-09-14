@@ -52,14 +52,24 @@ const illustrations = {
       text(180, 211, "Repeat with training examples", 14),
   ],
   transformer: [
-    "Attention and feed-forward updates with residual connections",
-    box(75, 10, 230, 40, "Attention", "#e7efff") +
-      box(75, 109, 230, 40, "Feed-forward network", "#e7efff") +
-      `<path d="M190 2H30V77H175M190 94H30V176H175" fill="none" stroke="#bd451f" stroke-width="2"/>` +
-      arrow("M190 51v12") +
-      arrow("M190 91v16") +
-      arrow("M190 150v12") +
-      `<circle cx="190" cy="77" r="13" fill="#fff" stroke="#2254cf"/><circle cx="190" cy="176" r="13" fill="#fff" stroke="#2254cf"/>${text(190, 83, "+")}${text(190, 182, "+")}${text(265, 83, "Add input", 13)}${text(265, 182, "Add input", 13)}${text(180, 214, "Repeat the block through many layers", 14)}`,
+    "Bank becomes a token ID, an embedding vector, and a context-sensitive hidden state",
+    text(180, 23, "The river bank", 20) +
+      box(24, 39, 134, 35, "Token ·bank", "#e7efff") +
+      arrow("M160 57h33") +
+      box(201, 39, 134, 35, "ID 42", "#e7efff") +
+      arrow("M268 76v13H180v7") +
+      box(24, 99, 311, 39, "[0.2, −0.4, 0.7, 0.1]") +
+      text(180, 153, "Embedding: the starting vector", 13) +
+      arrow("M180 158v15") +
+      box(
+        24,
+        180,
+        311,
+        32,
+        "Hidden state: the working vector",
+        "#fff2e9",
+        "#c98c6e",
+      ),
   ],
   assistant: [
     "A finite context window",

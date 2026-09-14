@@ -32,10 +32,11 @@ Pushes to `main` run type checking, calculation/content/persistence tests, and t
 ## What is implemented
 
 - Nine illustrated chapters with developed introductions, examples, connections between chapters, optional fuller explanations, and primary sources.
-- Nine simulations with 66 steps in total. Only Back, Next, and Restart control the simulations; numbers, tables, and visual states share one compact frame.
+- Nine simulations with 72 steps in total. Only Back, Next, and Restart control the simulations; numbers, tables, and visual states share one compact frame.
 - An eleven-milestone AI/ML timeline and a seven-step comparison of autoregressive generation and text denoising, with six positions in each track.
-- Worked math guides explain softmax, temperature, sampling, loss, gradients, attention mixtures, and context budgets in words and numbers.
-- Calculated probabilities, one-weight training, causal attention, and context packing; authored evidence, tool, and evaluation scenarios.
+- A 15-step transformer journey follows “bank” through tokens, IDs, embedding lookup, changing hidden states, and next-token prediction. Stored embeddings and working representations are explicitly distinguished.
+- Worked math guides explain softmax, temperature, sampling, loss, gradients, vector addition, output projection, and context budgets. The optional transformer reading includes a separate attention-mixture example.
+- Calculated probabilities, one-weight training, illustrative vector additions/output scores, and context packing; authored transformer updates, evidence, tool, and evaluation scenarios.
 - A searchable, alphabetical glossary, with term links in lessons and links back to their chapters.
 - Mobile contents, keyboard controls, direct chapter/simulation links, and device-local reading progress.
 - No notebook, login, badges, progression gates, or live-model calls.
@@ -47,7 +48,9 @@ Pushes to `main` run type checking, calculation/content/persistence tests, and t
 | `src/book/content.ts` | Fuller explanations, glossary, source links |
 | `src/book/lessons.ts` | Lesson introductions, connections, and typed visual scene data |
 | `src/book/model.ts` | Pure calculations and illustrative records |
-| `src/book/Simulation.tsx` | Shared step controls, SVG attention, token canvases, and calculated tables |
+| `src/book/Simulation.tsx` | Shared step controls, token canvases, and calculated tables |
+| `src/book/TokenJourney.tsx` | Persistent token identity, vector displays, and context-flow SVG |
+| `src/book/tokenJourneyModel.ts` | Authored vocabulary/updates and calculated vector additions/output scores |
 | `src/book/MathGuide.tsx` | Worked examples and plain-language explanations of notation |
 | `src/book/Timeline.tsx` | Detailed historical milestones with source links |
 | `public/illustrations/` | Nine lesson SVG files |

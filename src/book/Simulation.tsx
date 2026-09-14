@@ -1,16 +1,10 @@
 import { useId, useLayoutEffect, useRef, useState } from "react";
 import { lessons, type VisualSpec } from "./lessons";
-import {
-  attentionWeights,
-  contextItems,
-  packContext,
-  softmax,
-  trainWeight,
-} from "./model";
+import TokenJourney from "./TokenJourney";
+import { contextItems, packContext, softmax, trainWeight } from "./model";
 
 const words = ["floor", "room", "tiles", "elephant"];
 const scores = [3, 2, 1, -1];
-const attentionValues = [1, 3, 2];
 const percent = (p: number) => `${(100 * p).toFixed(1)}%`;
 function Formula({
   label,
@@ -343,118 +337,6 @@ function Training({
     </div>
   );
 }
-function Attention({
-  mode,
-}: {
-  mode: Extract<VisualSpec, { kind: "attention" }>["mode"];
-}) {
-  const weights = attentionWeights([2, 1, 0, 3], 2);
-  if (mode === "mix")
-    return (
-      <div className="number-table-scene">
-        <table>
-          <caption>Each share multiplies its value</caption>
-          <thead>
-            <tr>
-              <th>Position</th>
-              <th>Share × value</th>
-              <th>Result</th>
-            </tr>
-          </thead>
-          <tbody>
-            {["Maya", "opened", "the"].map((token, i) => (
-              <tr key={token}>
-                <th>{token}</th>
-                <td>
-                  {weights[i].toFixed(3)} × {attentionValues[i]}
-                </td>
-                <td>{(weights[i] * attentionValues[i]).toFixed(3)}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <p className="visual-result">
-          Sum ≈{" "}
-          {weights
-            .slice(0, 3)
-            .reduce((n, w, i) => n + w * attentionValues[i], 0)
-            .toFixed(3)}
-          <br />
-          <small>Computed using unrounded shares.</small>
-        </p>
-      </div>
-    );
-  const masked = mode === "mask" || mode === "weights";
-  return (
-    <svg
-      className="attention-visual"
-      viewBox="0 0 360 190"
-      role="img"
-      aria-label={`Computing “the”. ${mode === "scores" ? "Illustrative scores: Maya 2, opened 1, the 0, garden 3." : masked ? `Garden is blocked. ${mode === "weights" ? "Allowed shares: 66.5%, 24.5%, 9.0%." : "Maya, opened, and the are allowed."}` : "This position can use itself and earlier positions."}`}
-    >
-      {["Maya", "opened", "the", "garden"].map((token, i) => (
-        <g key={token}>
-          <rect
-            x={5 + i * 90}
-            y="14"
-            width="80"
-            height="36"
-            rx="6"
-            fill={i === 2 ? "#e7efff" : "#fff"}
-            stroke={i === 2 ? "#2254cf" : "#a8bad4"}
-          />
-          <text x={45 + i * 90} y="37" textAnchor="middle" fontSize="16">
-            {token}
-          </text>
-          <text
-            x={45 + i * 90}
-            y="75"
-            textAnchor="middle"
-            fontSize="15"
-            fill={masked && i === 3 ? "#b34c23" : "#17283e"}
-          >
-            {mode === "scores"
-              ? `Score ${[2, 1, 0, 3][i]}`
-              : masked
-                ? i === 3
-                  ? "Blocked"
-                  : mode === "weights"
-                    ? percent(weights[i])
-                    : "Allowed"
-                : i === 2
-                  ? "Focus"
-                  : `Position ${i + 1}`}
-          </text>
-          {masked && i < 3 && (
-            <path
-              d={`M${45 + i * 90} 83Q${45 + i * 90} 117 180 143`}
-              stroke="#2254cf"
-              strokeWidth={mode === "weights" ? 1 + weights[i] * 9 : 2}
-              fill="none"
-            />
-          )}
-          {masked && i === 3 && (
-            <path d="M290 18l50 28m0-28-50 28" stroke="#b34c23" />
-          )}
-        </g>
-      ))}
-      <rect
-        x="35"
-        y="144"
-        width="290"
-        height="35"
-        rx="6"
-        fill="#e7efff"
-        stroke="#2254cf"
-      />
-      <text x="180" y="167" textAnchor="middle" fontSize="16">
-        {mode === "weights"
-          ? "Mix values using these shares"
-          : "Computing the position “the”"}
-      </text>
-    </svg>
-  );
-}
 function Capacity({ stage }: { stage: number }) {
   const budget = stage >= 5 ? 8 : 7;
   const selected = contextItems.slice(0, Math.min(stage, 4)).map((x) => x.id);
@@ -519,8 +401,8 @@ function Visual({ spec }: { spec: VisualSpec }) {
       return <Probability mode={spec.mode} />;
     case "training":
       return <Training mode={spec.mode} />;
-    case "attention":
-      return <Attention mode={spec.mode} />;
+    case "token-journey":
+      return <TokenJourney stage={spec.stage} />;
     case "capacity":
       return <Capacity stage={spec.stage} />;
   }
