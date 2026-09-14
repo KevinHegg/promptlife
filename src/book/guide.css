@@ -1,0 +1,726 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,500;0,600;1,500&display=swap");
+:root {
+  font-family: "DM Sans", system-ui, sans-serif;
+  color: #17283e;
+  background: #fafbfc;
+  font-synthesis: none;
+  --blue: #2254cf;
+  --line: #dce3ed;
+  --muted: #53637a;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+a {
+  color: var(--blue);
+  text-underline-offset: 4px;
+}
+button,
+input {
+  font: inherit;
+}
+button {
+  cursor: pointer;
+}
+button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+a,
+button,
+input {
+  -webkit-tap-highlight-color: transparent;
+}
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+summary:focus-visible {
+  outline: 3px solid #b34c23;
+  outline-offset: 4px;
+}
+main:focus,
+#chapter-simulation:focus {
+  outline: none;
+}
+.skip-link {
+  position: absolute;
+  left: 12px;
+  top: -100px;
+  background: white;
+  padding: 12px;
+  z-index: 20;
+}
+.skip-link:focus {
+  top: 10px;
+}
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 18px 5%;
+  border-bottom: 1px solid var(--line);
+  background: white;
+}
+.brand {
+  font-weight: 700;
+  font-size: 28px;
+  letter-spacing: -1.2px;
+  text-decoration: none;
+  color: #17283e;
+}
+.brand > span:first-child {
+  font-weight: 400;
+}
+.brand-mark {
+  color: var(--blue);
+  padding-left: 10px;
+}
+.site-header nav {
+  display: flex;
+  gap: 28px;
+}
+.site-header nav a {
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--muted);
+  padding: 10px 0;
+}
+.site-header nav a[aria-current] {
+  color: var(--blue);
+}
+.book-layout {
+  display: grid;
+  grid-template-columns: 230px minmax(0, 1fr);
+  max-width: 1360px;
+  margin: auto;
+}
+.contents {
+  padding: 34px 24px;
+  border-right: 1px solid var(--line);
+}
+.contents ol {
+  list-style: none;
+  margin: 22px 0;
+  padding: 0;
+  display: grid;
+  gap: 18px;
+}
+.contents li {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.contents li > span {
+  font-size: 12px;
+  color: #6a7a90;
+}
+.contents a {
+  color: var(--muted);
+  text-decoration: none;
+}
+.contents a[aria-current] {
+  color: var(--blue);
+  font-weight: 700;
+}
+.reading-progress {
+  font-size: 13px;
+  border-top: 1px solid var(--line);
+  padding-top: 18px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+.mobile-contents {
+  display: none;
+}
+main {
+  min-width: 0;
+  padding: 32px clamp(24px, 4vw, 60px) 24px;
+  max-width: 1080px;
+}
+.eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: 1.5px;
+  color: var(--muted);
+  margin: 0 0 10px;
+}
+h1 {
+  font:
+    500 clamp(32px, 4vw, 48px)/1.12 "Source Serif 4",
+    Georgia,
+    serif;
+  letter-spacing: -0.8px;
+  margin: 0 0 16px;
+  max-width: 760px;
+}
+h2 {
+  font-size: 22px;
+  line-height: 1.3;
+}
+.jump-link {
+  display: inline-block;
+  font-size: 14px;
+  margin: 0 0 18px;
+}
+.lesson-lead {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  align-items: center;
+  margin: 0 0 30px;
+}
+.lesson-illustration {
+  margin: 0;
+}
+.lesson-illustration img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 14px;
+}
+.lesson-illustration figcaption {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.5;
+  margin-top: 10px;
+}
+.lesson-intro {
+  font-size: 18px;
+  line-height: 1.65;
+  margin: 0 0 18px;
+}
+.term-links {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.term-links a {
+  font-size: 13px;
+  line-height: 1.4;
+  text-decoration: none;
+  border-bottom: 1px solid #a9bddc;
+  padding: 4px 0;
+  margin-right: 6px;
+}
+.primary,
+.subtle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 10px 17px;
+  border-radius: 7px;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid var(--blue);
+  background: var(--blue);
+  color: white;
+}
+.subtle {
+  background: white;
+  border-color: #bac7d8;
+  color: #17283e;
+}
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 20px 0;
+}
+.simulation {
+  border: 1px solid #b7c9e3;
+  border-radius: 14px;
+  padding: 18px 22px;
+  background: white;
+  max-width: 760px;
+  margin: auto;
+  box-shadow: 0 8px 28px #233b6310;
+}
+.simulation-header {
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--muted);
+  font-size: 13px;
+}
+.simulation-header .eyebrow {
+  margin: 0;
+}
+.simulation-scene h2 {
+  font:
+    600 23px/1.25 "Source Serif 4",
+    Georgia,
+    serif;
+  margin: 12px 0 4px;
+  min-height: 58px;
+  display: flex;
+  align-items: center;
+}
+.simulation-visual {
+  font-family: "DM Sans", system-ui, sans-serif;
+  display: block;
+  width: 100%;
+  height: clamp(150px, calc(100svh - 390px), 200px);
+  background: #f1f5fc;
+  border-radius: 9px;
+}
+.simulation-scene > p {
+  font-size: 16px;
+  line-height: 1.5;
+  min-height: 120px;
+  margin: 14px 0;
+}
+.simulation-controls {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 15px;
+  border-top: 1px solid var(--line);
+  padding-top: 12px;
+}
+.simulation-controls button:first-child {
+  justify-self: start;
+}
+.simulation-controls button:last-child {
+  justify-self: end;
+}
+.simulation-controls button {
+  white-space: nowrap;
+}
+.step-dots {
+  justify-self: center;
+  display: flex;
+  gap: 6px;
+}
+.step-dots i {
+  width: 7px;
+  height: 7px;
+  background: #cad5e4;
+  border-radius: 50%;
+}
+.step-dots .current {
+  background: var(--blue);
+}
+.simulation-note {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.4;
+  margin: 12px 0 0;
+}
+.simulation.loading {
+  min-height: 420px;
+}
+.simulation svg text {
+  font-family: inherit;
+}
+#chapter-simulation,
+.simulation {
+  scroll-margin-top: 12px;
+}
+.takeaway {
+  max-width: 760px;
+  margin: 28px 0;
+  padding: 18px 22px;
+  border-left: 3px solid var(--blue);
+  background: #eaf0fa;
+}
+.takeaway p {
+  font:
+    500 21px/1.4 "Source Serif 4",
+    Georgia,
+    serif;
+  margin: 8px 0 0;
+}
+.reading-detail {
+  max-width: 760px;
+  border-bottom: 1px solid var(--line);
+  padding: 18px 0;
+  line-height: 1.75;
+}
+.reading-detail summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 17px;
+}
+.reading-detail section {
+  margin-top: 24px;
+}
+.reading-detail h2 {
+  font:
+    500 25px/1.3 "Source Serif 4",
+    Georgia,
+    serif;
+}
+.reading-detail p {
+  font-size: 17px;
+  line-height: 1.8;
+}
+.reading-detail li {
+  margin: 12px 0;
+}
+.history-list {
+  padding-left: 24px;
+}
+.history-list strong {
+  display: block;
+}
+.chapter-end {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 30px 0;
+}
+.chapter-end span {
+  font-size: 13px;
+  color: var(--muted);
+}
+.chapter-navigation {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  border-top: 1px solid var(--line);
+  padding-top: 22px;
+}
+.chapter-navigation a {
+  font-size: 18px;
+  text-decoration: none;
+  line-height: 1.4;
+}
+.chapter-navigation small {
+  display: block;
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+.catalog-intro {
+  max-width: 670px;
+  font-size: 18px;
+  line-height: 1.6;
+}
+.chapter-catalog {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  margin-top: 28px;
+}
+.chapter-card {
+  display: block;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  color: #17283e;
+  text-decoration: none;
+}
+.chapter-card img {
+  display: block;
+  width: 100%;
+  height: 175px;
+  background: #f1f5fc;
+  padding: 12px;
+}
+.chapter-card > div {
+  padding: 18px;
+}
+.chapter-card h2 {
+  font:
+    500 24px/1.2 "Source Serif 4",
+    Georgia,
+    serif;
+  margin: 8px 0;
+}
+.chapter-card p {
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.card-action {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--blue);
+}
+.search-label {
+  display: block;
+  font-size: 15px;
+  font-weight: 600;
+  margin: 25px 0 10px;
+}
+.search {
+  display: block;
+  width: 100%;
+  max-width: 760px;
+  padding: 14px;
+  border: 1px solid #9fb2cd;
+  border-radius: 8px;
+  font-size: 17px;
+  background: white;
+}
+.alphabet {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 16px 0;
+}
+.alphabet button {
+  min-width: 38px;
+  min-height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  background: white;
+  color: #17283e;
+}
+.alphabet button[aria-pressed="true"] {
+  background: var(--blue);
+  color: white;
+  border-color: var(--blue);
+}
+.result-count {
+  font-size: 14px;
+  color: var(--muted);
+}
+.glossary {
+  max-width: 760px;
+}
+.glossary > div {
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+}
+.glossary dt {
+  font-size: 21px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.glossary dd {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.7;
+}
+.glossary dd a {
+  display: block;
+  font-size: 14px;
+  margin-top: 10px;
+}
+.book-footer {
+  border-top: 1px solid var(--line);
+  margin-top: 44px;
+  padding-top: 22px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 12px;
+  color: var(--muted);
+}
+.storage-warning {
+  padding: 12px;
+  background: #fff0e8;
+  font-size: 14px;
+}
+.error-page {
+  padding: 30px;
+}
+@media (max-width: 1050px) {
+  .lesson-lead {
+    grid-template-columns: 1fr;
+  }
+  .lesson-illustration {
+    max-width: 430px;
+  }
+  .lesson-intro {
+    max-width: 660px;
+  }
+  .book-layout {
+    grid-template-columns: 200px minmax(0, 1fr);
+  }
+  .contents {
+    padding: 30px 18px;
+  }
+  .chapter-catalog {
+    grid-template-columns: 1fr;
+  }
+  .chapter-card {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+  }
+  .chapter-card img {
+    height: 100%;
+    min-height: 150px;
+    padding: 4px;
+  }
+  .chapter-card h2 {
+    font-size: 23px;
+  }
+}
+@media (max-width: 760px) {
+  .site-header {
+    padding: 12px 18px;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .brand {
+    font-size: 25px;
+  }
+  .brand-mark {
+    display: none;
+  }
+  .site-header nav {
+    gap: 18px;
+  }
+  .site-header nav a {
+    font-size: 14px;
+  }
+  .book-layout {
+    display: block;
+  }
+  .contents {
+    display: none;
+    border-bottom: 1px solid var(--line);
+  }
+  .contents.is-open {
+    display: block;
+  }
+  .mobile-contents {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding: 12px 18px;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    background: white;
+    color: #17283e;
+    font-size: 14px;
+  }
+  .mobile-contents span {
+    color: var(--muted);
+    font-size: 12px;
+  }
+  main {
+    padding: 24px 18px;
+  }
+  .lesson-lead {
+    gap: 18px;
+  }
+  .lesson-illustration {
+    max-width: 360px;
+    margin: auto;
+  }
+  .lesson-intro {
+    font-size: 17px;
+    line-height: 1.6;
+  }
+  .simulation {
+    padding: 14px;
+  }
+  .simulation-scene h2 {
+    font-size: 22px;
+  }
+  .simulation-scene > p {
+    min-height: 96px;
+  }
+  .takeaway {
+    padding: 16px;
+  }
+  .takeaway p {
+    font-size: 20px;
+  }
+  .chapter-catalog {
+    gap: 16px;
+  }
+  .chapter-card {
+    grid-template-columns: 110px 1fr;
+  }
+  .chapter-card > div {
+    padding: 14px;
+  }
+  .chapter-card img {
+    min-height: 136px;
+  }
+  .chapter-card p {
+    font-size: 14px;
+  }
+  .book-footer {
+    flex-direction: column;
+  }
+  .reading-detail p {
+    font-size: 16px;
+  }
+  .chapter-navigation a {
+    font-size: 17px;
+  }
+}
+@media (max-width: 370px) {
+  .site-header {
+    display: block;
+  }
+  .site-header nav {
+    justify-content: space-between;
+    margin-top: 6px;
+  }
+  .simulation {
+    padding: 12px;
+  }
+  .simulation-scene h2 {
+    font-size: 21px;
+  }
+  .simulation-controls {
+    gap: 8px;
+  }
+  .simulation-controls button {
+    padding: 10px 12px;
+  }
+  .simulation-note {
+    font-size: 12px;
+  }
+  .step-dots {
+    gap: 4px;
+  }
+  .chapter-card {
+    display: block;
+  }
+  .chapter-card img {
+    height: 145px;
+  }
+  .simulation-scene > p {
+    font-size: 15px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto !important;
+    animation: none !important;
+    transition: none !important;
+  }
+}
+@media print {
+  .site-header,
+  .contents,
+  .mobile-contents,
+  .simulation-controls,
+  .jump-link,
+  .chapter-end {
+    display: none;
+  }
+  .book-layout {
+    display: block;
+  }
+  main {
+    padding: 0;
+  }
+  .reading-detail {
+    break-inside: avoid;
+  }
+  .simulation {
+    box-shadow: none;
+  }
+}

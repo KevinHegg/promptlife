@@ -1,6 +1,6 @@
 # Prompt Life
 
-An interactive field guide to language models for curious, serious readers. Nine connected chapters place generative models in AI's broader landscape and history, then explain generation, training, transformers, context, retrieval, tools, and evaluation through readable explanations and inspectable experiments.
+An interactive field guide to language models for curious, serious readers. Nine connected chapters place generative models in AI's broader landscape and history, then explain generation, training, transformers, context, retrieval, tools, and evaluation through readable explanations and illustrations and step-through simulations.
 
 **Read the course:** https://kevinhegg.github.io/promptlife/
 
@@ -15,7 +15,7 @@ npm ci
 npm run dev
 ```
 
-Open the local address printed by Vite. No API keys, accounts, or backend are required. Fonts are requested from Google Fonts with local serif/sans-serif fallbacks; model calculations and notebook data stay in the browser.
+Open the local address printed by Vite. No API keys, accounts, or backend are required. Fonts are requested from Google Fonts with local serif/sans-serif fallbacks; model calculations and reading progress stay in the browser.
 
 ## Validate and build
 
@@ -31,36 +31,35 @@ Pushes to `main` run type checking, calculation/content/persistence tests, and t
 
 ## What is implemented
 
-- Nine question-led chapters with deeper sections, sources, optional transfer questions, and reflection.
-- An opening AI/ML history and a scripted comparison of autoregressive generation and text denoising, including Google's Gemini Diffusion and DiffusionGemma research.
-- Responsive reading layout, mobile contents, keyboard controls, and reduced-motion support.
-- Direct chapter and experiment links using hash routes, compatible with GitHub Pages refreshes.
-- Real cl100k_base tokenization, loaded separately from the main app.
-- Calculated softmax/sampling, one-weight training, causal attention, and context packing.
-- Authored evidence, tool-boundary, and diagnostic exercises with explicit limitations.
-- Searchable glossary linked back to chapters.
-- Local notebook with notes, bookmarks, reading progress, experiment observations, JSON import/export, and Markdown export.
-- No badges, progression gates, live-model calls, or credential claims.
+- Nine illustrated chapters with concise introductions, key ideas, optional fuller explanations, and primary sources.
+- Nine SVG illustrations and nine four-step simulations. Only Back, Next, and Restart control the simulations.
+- AI/ML history and a scripted comparison of autoregressive generation and text denoising.
+- Calculated probabilities, one-weight training, causal attention, and context packing; authored evidence, tool, and evaluation scenarios.
+- A searchable, alphabetical glossary, with term links in lessons and links back to their chapters.
+- Mobile contents, keyboard controls, direct chapter/simulation links, and device-local reading progress.
+- No notebook, login, badges, progression gates, or live-model calls.
 
 ## Code map
 
 | File | Responsibility |
 |---|---|
-| `src/book/content.ts` | Typed chapters, glossary, source links |
+| `src/book/content.ts` | Fuller explanations, glossary, source links |
+| `src/book/lessons.ts` | Concise lesson text and simulation scenes |
 | `src/book/model.ts` | Pure calculations and illustrative records |
-| `src/book/Labs.tsx` | Experiment interfaces |
-| `src/book/Tokenizer.tsx` | Lazy-loaded tokenizer |
-| `src/book/storage.ts` | Versioned notebook validation and merging |
-| `src/book/main.tsx` | Routes, reading, reference, and notebook screens |
-| `src/book/book.css` | Responsive visual system |
-| `scripts/core.test.mjs` | Numerical, content, tokenizer, and persistence checks |
+| `src/book/Simulation.tsx` | Shared step controls and SVG scenes |
+| `public/illustrations/` | Nine lesson SVG files |
+| `scripts/generate-lesson-illustrations.mjs` | Reproducible SVG source |
+| `src/book/progress.ts` | Device-local progress validation |
+| `src/book/main.tsx` | Routes, lessons, course, simulations, glossary |
+| `src/book/guide.css` | Responsive visual system |
+| `scripts/core.test.mjs` | Numerical, content, and progress checks |
 
 The old application source and decorative assets are preserved in the legacy repository and tag. Historical documents under `docs/` refer to that version; [the redesign release note](docs/REDESIGN_RELEASE.md) describes the active implementation and restoration approach.
 
 ## Learning and data boundaries
 
-These experiments are transparent toy calculations or authored scenarios, not recorded outputs from a frontier model. Fictional archive records are explicitly labeled. The tokenizer is real; the one-weight model is deliberately much smaller than an LLM.
+The simulations use transparent toy calculations or authored scenarios. They are not recorded outputs from a frontier model. Fictional archive records are explicitly labeled. The one-weight model is deliberately much smaller than an LLM.
 
-The new notebook uses `promptlife:book:v1`. Old progress keys remain untouched. Browser storage is device-local and may be cleared by browser settings; export a notebook backup to preserve or transfer it. Import merges supported notebooks and preserves existing notes.
+Reading progress uses `promptlife:progress:v1` in browser storage. It is device-local and may be cleared by browser settings. The notebook and its import/export and migration code have been removed; no accounts or synchronization are needed.
 
 The first edition needs learner testing and independent technical/editorial review. Passing software checks does not establish educational effectiveness or a complete accessibility audit.

@@ -268,7 +268,7 @@ export const chapters: Chapter[] = [
         paragraphs: [
           "At a generation step, the model produces a score, or logit, for each token in its vocabulary. Logits can be positive or negative and do not need to add up to anything. Softmax converts them into nonnegative probabilities whose total is one.",
           "Temperature changes the shape of that distribution before selection. Dividing the logits by a smaller positive temperature increases the separation between stronger and weaker candidates. A larger temperature makes the distribution flatter. This changes variation; it is not a dial for factual accuracy.",
-          "Sampling draws from the distribution. A less likely token can still be selected. Greedy selection is different: it selects a highest-scoring token. The experiment deliberately keeps the context fixed when drawing 100 times, so you can compare frequencies with probabilities. Generating a paragraph changes the context after each token, and therefore changes later probabilities.",
+          "Sampling draws from the distribution. A less likely token can still be selected. Greedy selection is different: it selects a highest-scoring token. The simulation compares fixed distributions before showing greedy selection. Generating a paragraph changes the context after each token, and therefore changes later probabilities.",
         ],
       },
       {
@@ -283,7 +283,7 @@ export const chapters: Chapter[] = [
       title: "Try the calculation",
       paragraphs: [
         "For each logit z, compute exp(z / T), then divide by the sum of those values over all candidates. Here T is a positive temperature. To avoid very large intermediate numbers, an implementation can subtract the largest scaled logit before exponentiating; the resulting probabilities are unchanged.",
-        "The lab uses only four candidates so every number is inspectable. A real vocabulary is much larger. Its percentages describe selection within this toy vocabulary, not measurements from a deployed model and not confidence that a statement is true.",
+        "The simulation uses only four candidates so every number is inspectable. A real vocabulary is much larger. Its percentages describe selection within this toy vocabulary, not measurements from a deployed model and not confidence that a statement is true.",
       ],
     },
     lab: "probability",
@@ -316,7 +316,8 @@ export const chapters: Chapter[] = [
     sources: [
       visual,
       {
-        title: "gpt-tokenizer · Implementation used in the token lab",
+        title:
+          "gpt-tokenizer · A tokenizer implementation for further exploration",
         url: "https://github.com/niieani/gpt-tokenizer",
       },
     ],
@@ -336,7 +337,7 @@ export const chapters: Chapter[] = [
         paragraphs: [
           "Imagine a model encountering the beginning of a sentence and assigning probabilities to possible continuations. During training, the actual continuation is available as a target. A loss function measures how poorly the prediction matches that target. Giving a low probability to the observed token produces a larger loss.",
           "Training adjusts parameters to reduce loss. In a neural network, backpropagation calculates how parameter changes would affect the loss, and an optimizer uses that information to update them. An individual update is small. Many updates across many examples can change the model’s behavior substantially.",
-          "The laboratory uses one adjustable weight and just two possible next words. That is far smaller than an LLM, but the calculation is real. The training set has three “tea” examples for every “coffee” example. Watch how the model’s prediction shifts toward that pattern.",
+          "The simulation uses one adjustable weight and just two possible next words. That is far smaller than an LLM, but the calculation is real. The training set has three “tea” examples for every “coffee” example. Watch how the model’s prediction shifts toward that pattern.",
         ],
       },
     ],
@@ -345,7 +346,7 @@ export const chapters: Chapter[] = [
         title: "Fitting examples is not the same as generalizing",
         paragraphs: [
           "If we judge a model only on the examples used to change its parameters, we can mistake familiarity for useful ability. Held-out examples let us ask a different question: does the learned behavior work on material that did not drive those updates?",
-          "The toy lab intentionally gives the held-out set a different balance: half tea, half coffee. Better fitting the training balance can make held-out performance worse. This is a simple distribution mismatch, not a complete demonstration of neural-network overfitting. In real work, both mismatch and overfitting can damage performance on new data.",
+          "The toy example intentionally gives the held-out set a different balance: half tea, half coffee. Better fitting the training balance can make held-out performance worse. This is a simple distribution mismatch, not a complete demonstration of neural-network overfitting. In real work, both mismatch and overfitting can damage performance on new data.",
           "Dataset quality, coverage, repetition, and evaluation design matter. A model can learn broad regularities and also memorize particular sequences. Neither a low training loss nor a persuasive example proves reliable performance on every task.",
         ],
       },
@@ -419,7 +420,7 @@ export const chapters: Chapter[] = [
         paragraphs: [
           "Attention computes a weighted combination of information from permitted token positions. In a common formulation, learned projections produce queries, keys, and values. Matching queries with keys produces scores; normalized scores weight the values that get combined.",
           "The words “query” and “key” may sound like a database search, but here they are vectors inside a calculation. Several attention heads can compute different patterns in parallel. Later layers work on representations already transformed by earlier layers.",
-          "In a causal text decoder, a position can use itself and earlier permitted positions. It cannot use later positions. The attention bench above enforces this restriction. The sentence is deliberately split into word-like positions for readability; these are not outputs from a real tokenizer.",
+          "In a causal text decoder, a position can use itself and earlier permitted positions. It cannot use later positions. The simulation above enforces this restriction. The sentence is deliberately split into word-like positions for readability; these are not outputs from a real tokenizer.",
         ],
       },
       {
@@ -434,8 +435,8 @@ export const chapters: Chapter[] = [
     deeper: {
       title: "From three scores to a mixed value",
       paragraphs: [
-        "The attention lab fixes a row of illustrative query–key scores and scalar values. It masks future positions, applies softmax to allowed scores, and sums each value multiplied by its attention weight. A real attention head uses vectors rather than one scalar, but the weighted-sum relationship is the same.",
-        "Change a score and observe both the attention weight and the mixed value. Notice that attending strongly to a position is not the same as copying its visible word. It contributes a learned numerical representation to a further calculation.",
+        "The simulation fixes a row of illustrative query–key scores and scalar values. It masks future positions, applies softmax to allowed scores, and sums each value multiplied by its attention weight. A real attention head uses vectors rather than one scalar, but the weighted-sum relationship is the same.",
+        "Attending strongly to a position is not the same as copying its visible word. It contributes a learned numerical representation to a further calculation. The simulation shows how fixed scores become attention weights and then a mixed value.",
       ],
     },
     lab: "attention",
@@ -497,7 +498,7 @@ export const chapters: Chapter[] = [
         title: "A chat history is not an unlimited memory",
         paragraphs: [
           "A model has a finite context capacity. The application must decide what fits in the current request, often reserving room for the response. It might include recent messages, summarize older exchanges, retrieve saved facts, or refuse a request that is too large.",
-          "The lab uses a transparent packing rule with made-up unit costs. Real systems count tokens and use more complex policies. The point is that a selected item can still be omitted when it does not fit. Seeing a fact on your screen is not proof that the model received it.",
+          "The simulation uses a transparent packing rule with made-up unit costs. Real systems count tokens and use more complex policies. The point is that a selected item can still be omitted when it does not fit. Seeing a fact on your screen is not proof that the model received it.",
           "Persistent memory is usually a product capability: information is stored outside the model and inserted into later requests when relevant. Inspecting that mechanism is more useful than assuming that every apparent recollection reflects a changed weight.",
         ],
       },
@@ -643,7 +644,7 @@ export const chapters: Chapter[] = [
         title: "Untrusted text can imitate instructions",
         paragraphs: [
           "Imagine a retrieved document containing a sentence that asks the assistant to email an archive to an outside address. That sentence is part of a source, not authorization from the user. A prompt-injection attempt tries to cross this boundary by making source material behave like instructions.",
-          "The lab is a small, authored decision exercise. Nothing is sent and no real tools are invoked. Its purpose is to distinguish the model’s proposal from the application’s authority. Even a model that usually rejects malicious text should operate behind enforceable access boundaries.",
+          "The simulation is a small, authored walkthrough. Nothing is sent and no real tools are invoked. Its purpose is to distinguish the model’s proposal from the application’s authority. Even a model that usually rejects malicious text should operate behind enforceable access boundaries.",
           "Useful safeguards include restricted tool capabilities, validated arguments, limits on repeated actions, visible outcomes, and human approval where consequences warrant it. The appropriate boundary depends on the action. Reading an already authorized source and sending it elsewhere are different operations.",
         ],
       },
@@ -790,6 +791,96 @@ export const labNames: Record<LabId, string> = {
   evaluation: "Diagnose an unfamiliar answer",
 };
 export const glossary = [
+  {
+    term: "Residual connection",
+    chapter: "transformer",
+    definition:
+      "A path that adds a sublayer’s output to its input. The model learns an update to an existing representation rather than replacing it entirely.",
+  },
+  {
+    term: "Gradient",
+    chapter: "training",
+    definition:
+      "A set of derivatives showing how a quantity such as loss changes with the parameters. A training algorithm uses this information to choose an update.",
+  },
+  {
+    term: "Retrieval",
+    chapter: "evidence",
+    definition:
+      "Finding relevant information in an external collection. A retrieved passage still needs to be checked for relevance and support for the answer.",
+  },
+  {
+    term: "Denoising",
+    chapter: "landscape",
+    definition:
+      "Predicting less-corrupted data from a noisy or masked representation. Diffusion generation applies learned denoising updates over successive steps.",
+  },
+  {
+    term: "Latent representation",
+    chapter: "landscape",
+    definition:
+      "An internal numerical representation rather than the visible text, pixels, or sound. Some diffusion models generate in a compressed latent space and then decode the result.",
+  },
+  {
+    term: "Modality",
+    chapter: "landscape",
+    definition:
+      "A form of information, such as text, images, audio, or video. The modalities a system accepts can differ from those it produces.",
+  },
+  {
+    term: "Decoding",
+    chapter: "prediction",
+    definition:
+      "The procedure for turning model scores into output tokens. Greedy selection and sampling are two decoding choices.",
+  },
+  {
+    term: "Greedy selection",
+    chapter: "prediction",
+    definition:
+      "Choosing a highest-scoring candidate at each generation step. It differs from drawing a candidate according to its probability.",
+  },
+  {
+    term: "Pretraining",
+    chapter: "training",
+    definition:
+      "The initial broad training that develops a model’s representations and capabilities before additional specialization or instruction-oriented training.",
+  },
+  {
+    term: "Held-out data",
+    chapter: "training",
+    definition:
+      "Examples excluded from the training updates and used to evaluate performance. They help test whether training improvements carry over.",
+  },
+  {
+    term: "Normalization",
+    chapter: "transformer",
+    definition:
+      "An operation that adjusts the scale of numerical representations. Transformer blocks often use layer normalization or related methods to help stabilize computation.",
+  },
+  {
+    term: "Query, key, and value",
+    chapter: "transformer",
+    definition:
+      "Learned projections used in attention. Query–key comparisons produce scores; normalized scores weight the values that are mixed together.",
+  },
+  {
+    term: "Attention head",
+    chapter: "transformer",
+    definition:
+      "One attention calculation using its own learned projections. Multiple heads can mix information in different ways before their outputs are combined.",
+  },
+  {
+    term: "Neural network",
+    chapter: "training",
+    definition:
+      "A parameterized system of connected computations that transforms inputs into outputs. Training adjusts its numerical weights; the artificial neurons are not biological brain cells.",
+  },
+  {
+    term: "Backpropagation",
+    chapter: "training",
+    definition:
+      "An efficient way to calculate gradients through a network using the chain rule. An optimizer then uses the gradients to update parameters.",
+  },
   {
     term: "Artificial intelligence (AI)",
     chapter: "landscape",

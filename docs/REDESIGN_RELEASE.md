@@ -1,5 +1,15 @@
 # Interactive book release
 
+## September 14, 2026: visual lessons
+
+The active app now uses nine lesson SVG illustrations and nine compact, four-step simulations. Each step keeps a diagram, short explanation, and Back/Next controls together. Longer reading and sources sit in optional disclosure sections. A searchable, alphabetical glossary is linked from each lesson.
+
+The notebook, import/export, migration support, old experiment interfaces, and unused tokenizer dependency are removed. Only device-local reading progress remains, using `promptlife:progress:v1`. There were no learner notebook records to migrate. The repository and GitHub Pages URL are unchanged.
+
+The current code map and commands are in the README. Sections below document the earlier redesign releases.
+
+Validation: TypeScript, eight automated checks, production Pages build, and asset-path checks pass. Browser checks cover all 36 scenes at phone widths, including 320 × 568, with revisions to keep the card and controls together; desktop layout at 1280px; glossary search, empty results, lesson links; keyboard stepping, backward navigation, restart; and reading progress after reload.
+
 ## Preservation
 
 - The original repository remains `KevinHegg/promptlife`.

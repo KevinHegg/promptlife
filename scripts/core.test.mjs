@@ -1,4 +1,11 @@
 import test from "node:test";
+import { existsSync } from "node:fs";
+import { lessons } from "../src/book/lessons.ts";
+import {
+  loadProgress,
+  parseProgress,
+  PROGRESS_KEY,
+} from "../src/book/progress.ts";
 import assert from "node:assert/strict";
 import {
   softmax,
@@ -7,13 +14,59 @@ import {
   trainWeight,
   packContext,
 } from "../src/book/model.ts";
-import {
-  emptyNotebook,
-  parseNotebook,
-  mergeNotebook,
-} from "../src/book/storage.ts";
 import { chapters, glossary } from "../src/book/content.ts";
-import { encode, decode } from "gpt-tokenizer/encoding/cl100k_base";
+
+test("visual lessons have complete scenes, illustrations, and working glossary links", () => {
+  const terms = new Set(glossary.map((t) => t.term));
+  assert.equal(terms.size, glossary.length);
+  assert.deepEqual(
+    Object.keys(lessons),
+    chapters.map((c) => c.id),
+  );
+  for (const chapter of chapters) {
+    const lesson = lessons[chapter.id];
+    assert.ok(lesson.intro && lesson.caption && lesson.note);
+    assert.equal(lesson.scenes.length, 4);
+    assert.ok(lesson.scenes.every((s) => s.title && s.text));
+    assert.ok(
+      lesson.terms.every((t) => terms.has(t)),
+      chapter.id,
+    );
+    assert.ok(
+      existsSync(
+        new URL(`../public/illustrations/${chapter.id}.svg`, import.meta.url),
+      ),
+    );
+  }
+});
+
+test("device progress loads, deduplicates, and handles unavailable storage", () => {
+  const data = new Map();
+  const storage = { getItem: (key) => data.get(key) ?? null };
+  assert.deepEqual(loadProgress(storage), {
+    progress: { read: [], lastChapter: "landscape" },
+    available: true,
+  });
+  data.set(
+    PROGRESS_KEY,
+    JSON.stringify({ read: ["answer", "answer"], lastChapter: "answer" }),
+  );
+  assert.deepEqual(loadProgress(storage).progress, {
+    read: ["answer"],
+    lastChapter: "answer",
+  });
+  data.set(PROGRESS_KEY, "broken");
+  assert.equal(loadProgress(storage).available, false);
+  assert.equal(
+    loadProgress({
+      getItem() {
+        throw new Error("denied");
+      },
+    }).available,
+    false,
+  );
+  assert.throws(() => parseProgress('{"read":[42],"lastChapter":"answer"}'));
+});
 
 test("softmax is normalized, stable, and matches the formerly incorrect example", () => {
   const p = softmax([5.8, 2.1, -1.2, -2]);
@@ -61,43 +114,6 @@ test("packing distinguishes selected from included and never exceeds budget", ()
   );
   assert.ok(packContext([], 8).every((x) => !x.included));
 });
-test("real tokenization round-trips punctuation, whitespace, Unicode, and literal special text", () => {
-  for (const text of ["A  dog.", "こんにちは世界", "🧠 café", "<|endoftext|>"])
-    assert.equal(decode(encode(text, { disallowedSpecial: new Set() })), text);
-  assert.ok(encode("A dog").length > 0);
-});
-test("notebook export is readable and imports preserve existing work", () => {
-  const original = {
-    ...emptyNotebook(),
-    notes: { answer: "My first explanation" },
-    bookmarks: ["answer"],
-  };
-  const incoming = {
-    ...emptyNotebook(),
-    notes: { answer: "Another explanation", evidence: "Check the source" },
-    bookmarks: ["evidence"],
-  };
-  const merged = mergeNotebook(
-    original,
-    parseNotebook(JSON.stringify(incoming)),
-  );
-  assert.ok(merged.notes.answer.includes("My first explanation"));
-  assert.ok(merged.notes.answer.includes("Another explanation"));
-  assert.equal(merged.notes.evidence, "Check the source");
-  assert.deepEqual(merged.bookmarks, ["answer", "evidence"]);
-  assert.deepEqual(parseNotebook(JSON.stringify(merged)), merged);
-  assert.deepEqual(mergeNotebook(merged, incoming), merged);
-  assert.throws(() =>
-    mergeNotebook(
-      { ...original, notes: { answer: "a".repeat(20000) } },
-      incoming,
-    ),
-  );
-  assert.throws(() => parseNotebook('{"version":2}'));
-  assert.throws(() =>
-    parseNotebook(JSON.stringify({ ...original, notes: { answer: 42 } })),
-  );
-});
 test("all chapters, references, labs, and transfer questions form a complete course", () => {
   assert.equal(chapters.length, 9);
   assert.equal(chapters[0].id, "landscape");
@@ -113,10 +129,7 @@ test("all chapters, references, labs, and transfer questions form a complete cou
     "tools",
     "judgment",
   ])
-    assert.ok(
-      ids.has(id),
-      `Existing links and notebook entries still resolve: ${id}`,
-    );
+    assert.ok(ids.has(id), `Existing chapter links still resolve: ${id}`);
   assert.equal(new Set(chapters.map((c) => c.lab)).size, chapters.length);
   for (const c of chapters) {
     assert.ok(c.before.length && c.after.length && c.deeper.paragraphs.length);

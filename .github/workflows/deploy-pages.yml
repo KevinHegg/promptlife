@@ -33,7 +33,7 @@ jobs:
       - name: Typecheck
         run: npm run typecheck
 
-      - name: Verify calculations and notebook
+      - name: Verify calculations, lessons, and reading progress
         run: npm test
 
       - name: Build
