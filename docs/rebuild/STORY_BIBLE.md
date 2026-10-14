@@ -68,7 +68,7 @@ The owner's brief is that this should be somewhere people want to be. Each rule 
 1. **One focal point.** Each screen has one thing at full contrast, and the rest recedes. *Test:* blur a screenshot; one shape still stands out.
 2. **The direction of travel is always clear.** Forward is rightward on the map and the strip. Next never moves: it stays bottom right on a laptop and in the thumb zone on a phone. *Test:* a new user finds Next within 2 seconds.
 3. **The same arrival every time.** The strip slides, the roundel appears, the doors open and the Arrive panel shows. *Test:* all eight stations share one Arrive structure.
-4. **Rest stops.** Every dense moment (Poke, Break it, Level 3) is followed by a quiet one (Name it, Stamp, the ride). Every two stations, the map offers a bench: "Good place to stop. The train will wait." *Test:* no two interactive steps run back to back.
+4. **Rest stops.** Every dense moment (Try it, Break it, Level 3) is followed by a quiet one (Learn it, Stamp, the ride). Every two stations, the map offers a bench: "Good place to stop. The train will wait." *Test:* no two interactive steps run back to back.
 5. **Light means used.** Lamps and lines light only when this run passed through them. The Academy stays dark during every answer. Nothing glows for decoration. *Test:* every lit element maps to an event in the run file.
 6. **Nothing moves on its own.** Motion starts with a tap and means a number changed: the train moves because a trip happened, and a bar grows because a chance changed. There are no idle loops, parallax or particles. *Test:* leave any screen alone for 10 seconds; nothing moves.
 7. **Red means sabotage.** Only Break it levers and R2's failed lamps are red.
@@ -77,8 +77,9 @@ The owner's brief is that this should be somewhere people want to be. Each rule 
 10. **Day and night.** Day is a printed pocket map: warm paper, ink lines, matte. Night is the backlit map board in a quiet station after the last train: deep blue-black, never pure black, where only lamps and the focal element glow. *Test:* at night the brightest thing is never the app's frame or controls.
 11. **Sound follows a tap.** The app is silent until the visitor turns sound on. Then each station gets a short original chime in the spirit of Tokyo's platform melodies, and the stamp gets a soft thunk. Nothing loops, and every sound has a visual twin.
 12. **The student holds the clock.** There are no timers, countdowns or streaks. The five-minute loop is our budget, not theirs.
-13. **Easy to leave and return.** The map is one tap away. The train parks where you left it, and lit lamps stay lit.
-14. **Quiet rewards.** No confetti. The stamp landing is the celebration.
+13. **Nothing blocks Next.** Each station runs Arrive, Try it, Learn it, Break it, Stamp. The separate Bet step was removed on 2026-10-14 at the owner's request: it cluttered navigation and its gate confused people. If predictions return, they must be optional and live inside another step.
+14. **Easy to leave and return.** The map is one tap away. The train parks where you left it, and lit lamps stay lit.
+15. **Quiet rewards.** No confetti. The stamp landing is the celebration.
 
 ## 6. The metaphor system
 

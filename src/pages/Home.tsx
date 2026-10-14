@@ -37,7 +37,7 @@ export function Home() {
           </a>
           <a className="btn" href="#ride">Or watch the whole trip first</a>
         </div>
-        <p className="muted small">Each station takes about five minutes: make a guess, try it yourself, learn the word for it, break it, and earn a stamp.</p>
+        <p className="muted small">Each station takes a few minutes: try it yourself, learn the word for it, break it, and earn a stamp.</p>
       </header>
 
       <LiveRun id="ride" compact />

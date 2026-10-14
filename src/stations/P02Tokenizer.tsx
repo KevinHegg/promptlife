@@ -100,11 +100,6 @@ export const P02_SPEC: LoopSpec = {
     panel: <CutterPanel />,
     flashback: { q: 'On the ride, how many word pieces did your question make?', a: `${runCounts.question} for the recorded model, out of ${runCounts.total} on the platform. Most came from the app.` }
   },
-  bet: {
-    question: 'Which of these is a single word piece for a frontier model?',
-    options: [{ text: '“flour” (no space)' }, { text: '“ flour” (a space in front)', correct: true }, { text: '“Flour” (capital F)' }],
-    reveal: 'Only the one with the space: piece number 28420. “flour” and “Flour” are two pieces each: fl + our, and Fl + our.'
-  },
   poke: {
     title: 'Make the tokenizer stumble',
     intro: 'Open the window and type anything. Try three things: add pieces by changing one letter; find a word that’s one piece after a space but two without; try another language.',

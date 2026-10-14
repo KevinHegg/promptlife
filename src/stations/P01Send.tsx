@@ -70,11 +70,6 @@ export const P01_SPEC: LoopSpec = {
     caption: 'This is your question. Ride along with it, all the way to the answer.',
     panel: <SendPanel />
   },
-  bet: {
-    question: 'To write its answer, how many times does the model run?',
-    options: [{ text: 'Once, for the whole answer' }, { text: 'Once per sentence' }, { text: 'Once per word-sized piece', correct: true }],
-    reveal: `Once per piece. This answer took ${runCounts.trips} trips, including ${runCounts.toolTrips} to write a calculator request you never see.`
-  },
   poke: {
     title: 'Ride along',
     intro: `The question is “${SCENARIO.user}” Watch which lines light up, and what piles onto the platform.`,

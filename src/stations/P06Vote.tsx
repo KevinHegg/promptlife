@@ -82,11 +82,6 @@ export const P06_SPEC: LoopSpec = {
     panel: <BoardPanel />,
     flashback: { q: 'At the top of The Stack, what comes out: one word, or a score for every possible next piece?', a: 'A score for every possible piece. This station turns scores into odds.' }
   },
-  bet: {
-    question: `The model can choose from about ${vocab.toLocaleString()} word pieces. How many get a chance above zero?`,
-    options: [{ text: 'Only the winner' }, { text: 'The top 10' }, { text: 'All of them, most with tiny odds', correct: true }],
-    reveal: 'All of them get a share, most of them microscopic. Settings like temperature decide how often long shots win.'
-  },
   poke: {
     title: 'Turn the temperature',
     intro: 'Open the window, pick a moment from the ride, and slide the temperature. Then play Beat the Model.',

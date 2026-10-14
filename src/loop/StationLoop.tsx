@@ -3,22 +3,21 @@ import { stationByCode, STATIONS } from '../data/network'
 import { readStation, saveStation } from '../lib/progress'
 import { hrefFor } from '../lib/router'
 import { chime, thunk } from '../lib/sound'
-import { BetCard, QuizCard } from './Choices'
+import { QuizCard } from './Choices'
 import { StampArt } from './StampArt'
 import { BEAT_LABELS, type BeatId, type LoopSpec } from './types'
 
 const today = () => new Date().toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' })
 
 /**
- * One station's five-minute loop, one beat per screen: Arrive, Bet, Poke, Name it, Break it, Stamp.
+ * One station's five-minute loop, one beat per screen: Arrive, Try it, Learn it, Break it, Stamp.
  * Next always sits in the same place. Beats you've passed stay reachable from the rail.
  */
 export function StationLoop({ spec }: { spec: LoopSpec }) {
-  const beats: BeatId[] = ['arrive', 'bet', 'poke', 'name', ...(spec.break ? (['break'] as BeatId[]) : []), 'stamp']
+  const beats: BeatId[] = ['arrive', 'poke', 'name', ...(spec.break ? (['break'] as BeatId[]) : []), 'stamp']
   const saved = useRef(readStation(spec.code))
   const [at, setAt] = useState(() => Math.min(saved.current.beat ?? 0, beats.length - 1))
   const [reached, setReached] = useState(() => Math.max(saved.current.beat ?? 0, 0))
-  const [betDone, setBetDone] = useState(false)
   const [answered, setAnswered] = useState<boolean[]>(() => spec.stamp.questions.map(() => false))
   const [stampedAt, setStampedAt] = useState<string | undefined>(saved.current.stampedAt)
   const topRef = useRef<HTMLDivElement>(null)
@@ -37,7 +36,6 @@ export function StationLoop({ spec }: { spec: LoopSpec }) {
     topRef.current?.scrollIntoView({ block: 'start', behavior: 'smooth' })
   }
 
-  const canAdvance = beat === 'bet' ? betDone || reached > at : beat === 'stamp' ? false : true
 
   const onAnswer = (k: number) => {
     const done = answered.map((v, i) => (i === k ? true : v))
@@ -75,17 +73,10 @@ export function StationLoop({ spec }: { spec: LoopSpec }) {
           </div>
         )}
 
-        {beat === 'bet' && (
-          <>
-            <p className="kicker">Bet · before you look</p>
-            <BetCard question={spec.bet.question} options={spec.bet.options} reveal={spec.bet.reveal} onDone={() => setBetDone(true)} />
-          </>
-        )}
-
         {beat === 'poke' && (
           <>
             <div className="beat-head">
-              <p className="kicker">Poke · about two minutes</p>
+              <p className="kicker">Try it</p>
               <h2>{spec.poke.title}</h2>
               <p>{spec.poke.intro}</p>
             </div>
@@ -96,7 +87,7 @@ export function StationLoop({ spec }: { spec: LoopSpec }) {
         {beat === 'name' && (
           <div className="name-it">
             <div className="name-text">
-              <p className="kicker">Name it</p>
+              <p className="kicker">Learn it</p>
               <p className="definition">{spec.name.definition}</p>
               <ul className="terms" aria-label="New terms">
                 {spec.name.terms.map((t) => <li key={t}>{t}</li>)}
@@ -163,8 +154,8 @@ export function StationLoop({ spec }: { spec: LoopSpec }) {
             <span className="hint">Answer both questions</span>
           )
         ) : (
-          <button type="button" className="btn primary" disabled={!canAdvance} onClick={() => go(at + 1)}>
-            {beat === 'bet' && !canAdvance ? 'Place a bet' : `Next: ${BEAT_LABELS[beats[at + 1]]} →`}
+          <button type="button" className="btn primary" onClick={() => go(at + 1)}>
+            Next: {BEAT_LABELS[beats[at + 1]]} →
           </button>
         )}
       </nav>

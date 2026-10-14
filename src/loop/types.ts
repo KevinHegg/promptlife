@@ -1,12 +1,11 @@
 import type { ReactNode } from 'react'
 
-export type BeatId = 'arrive' | 'bet' | 'poke' | 'name' | 'break' | 'stamp'
+export type BeatId = 'arrive' | 'poke' | 'name' | 'break' | 'stamp'
 
 export const BEAT_LABELS: Record<BeatId, string> = {
   arrive: 'Arrive',
-  bet: 'Bet',
-  poke: 'Poke',
-  name: 'Name it',
+  poke: 'Try it',
+  name: 'Learn it',
   break: 'Break it',
   stamp: 'Stamp'
 }
@@ -21,7 +20,6 @@ export type Receipt = { text: string; column: 'compute' | 'energy' | 'data' | 'l
 export type LoopSpec = {
   code: string
   arrive: { caption: string; panel: ReactNode; flashback?: { q: string; a: string } }
-  bet: { question: string; options: Option[]; reveal: string }
   poke: { title: string; intro: string; body: ReactNode }
   name: { definition: string; terms: string[]; picture: ReactNode; metaphor: string; breaks: string }
   break?: { title: string; intro: string; body: ReactNode }
