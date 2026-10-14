@@ -3,6 +3,7 @@ import { VoteLevels } from '../cutaway/stations/VoteLevels'
 import { stationByCode } from '../data/network'
 import { phase1, voteProbs } from '../data/phase1'
 import { modelName, trace } from '../data/trace'
+import { SCENARIO } from '../data/heroRun'
 import { BeatTheModel } from '../games/BeatTheModel'
 import type { LoopSpec } from '../loop/types'
 import { TokenText } from '../ui/TokenText'
@@ -63,7 +64,7 @@ function TemperatureBreak() {
               <figcaption>{T === 0 ? 'greedy: the same every time' : `seed ${r.seed}`}</figcaption>
             </figure>
           ))}
-          <p className="muted">Real replies from {trace ? modelName(trace) : 'the recorded model'}, sampled at temperature {T.toFixed(1)} with the calculator's 93.75 already on the platform.</p>
+          <p className="muted">Real replies from {trace ? modelName(trace) : 'the recorded model'}, sampled at temperature {T.toFixed(1)} with the calculator's {SCENARIO.toolResult} already on the platform.</p>
         </div>
       ) : (
         <p className="muted">The sampled replies at each temperature arrive with the next trace run.</p>
@@ -75,22 +76,22 @@ function TemperatureBreak() {
 export const P06_SPEC: LoopSpec = {
   code: 'P06',
   arrive: {
-    caption: 'Here every token in the vocabulary gets a score. Scores become odds, and one token is drawn.',
+    caption: 'Every possible next word piece gets a score. Scores become odds, and one piece is drawn.',
     panel: <BoardPanel />,
-    flashback: { q: 'At the top floor of The Stack, what comes out: one word, or a score for every token in the vocabulary?', a: 'A score for every token. This station turns those scores into odds.' }
+    flashback: { q: 'At the top of The Stack, what comes out: one word, or a score for every possible next piece?', a: 'A score for every possible piece. This station turns scores into odds.' }
   },
   bet: {
-    question: `The model scores about ${vocab.toLocaleString()} possible next tokens. How many get a probability above zero?`,
+    question: `The model can choose from about ${vocab.toLocaleString()} word pieces. How many get a chance above zero?`,
     options: [{ text: 'Only the winner' }, { text: 'The top 10' }, { text: 'All of them, most with tiny odds', correct: true }],
-    reveal: 'All of them get a share, most of them microscopic. Sampling settings can cut off the long shots.'
+    reveal: 'All of them get a share, most of them microscopic. Settings like temperature decide how often long shots win.'
   },
   poke: {
     title: 'Turn the temperature',
-    intro: 'Open the window, pick a moment from the run, and slide the temperature. Then play Beat the Model.',
+    intro: 'Open the window, pick a moment from the ride, and slide the temperature. Then play Beat the Model.',
     body: <PokeBody />
   },
   name: {
-    definition: 'The model turns its scores into probabilities that add up to 100%, and sampling draws the next token from them. Temperature reshapes the odds: low makes the favorite near-certain, high gives long shots a chance.',
+    definition: 'The model turns its scores into odds that add up to 100%, then draws the next piece. Temperature reshapes the odds: low makes the favorite almost certain, high gives long shots a chance.',
     terms: ['probability', 'temperature', 'sampling'],
     picture: <BoardPanel />,
     metaphor: 'An election with every token as a candidate.',

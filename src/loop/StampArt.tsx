@@ -40,8 +40,8 @@ const SCENES: Record<string, ReactElement> = {
       <rect x="-16" y="-22" width="30" height="16" rx="3" />
       <rect x="18" y="-22" width="26" height="16" rx="3" />
       <path d="M-32,-6 V4 M-1,-6 V4 M31,-6 V4" strokeDasharray="2 2" />
-      <text className="st-small" x="-32" y="16" textAnchor="middle">50</text>
-      <text className="st-small" x="-1" y="16" textAnchor="middle">1721</text>
+      <text className="st-small" x="-32" y="16" textAnchor="middle">922</text>
+      <text className="st-small" x="-1" y="16" textAnchor="middle">28420</text>
       <text className="st-small" x="31" y="16" textAnchor="middle">30</text>
       <path d="M-46,26 L46,26" strokeDasharray="4 3" />
     </g>

@@ -9,6 +9,8 @@ export type VoteCandidate = { id?: number; text: string; logit: number }
 export type VotePosition = {
   pos: number
   label: string
+  /** A plain one-line description from the trace pipeline, if present. */
+  plain?: string
   context: string
   chosen: { text: string; rank: number; prob: number }
   top: VoteCandidate[]

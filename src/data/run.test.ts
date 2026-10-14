@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { phase1, voteProbs } from './phase1'
 import { RUN, runCounts, textOf } from './run'
 import { trace } from './trace'
+import { SCENARIO } from './heroRun'
 
 describe.runIf(trace)('the recorded run the map plays', () => {
   it('accounts for every token exactly once', () => {
@@ -18,14 +19,16 @@ describe.runIf(trace)('the recorded run the map plays', () => {
     expect(runCounts.toolTrips + runCounts.replyTrips).toBe(RUN.trips)
   })
 
-  it('spells out the scripted reply', () => {
-    expect(textOf(RUN.turns[1].steps)).toBe('You need at least 93.75% on the final to get an A-.')
+  it('spells out the recorded reply', () => {
+    expect(textOf(RUN.turns[1].steps)).toBe(SCENARIO.reply)
   })
 
-  it('records that the model did not choose the tool call on its own', () => {
-    const first = RUN.turns[0].steps[0]
-    expect(first.rank).toBeGreaterThan(1)
-    expect(first.favorite).not.toBe(first.text)
+  it('knows the model’s own favorite wherever the recorded path differs', () => {
+    for (const turn of RUN.turns) {
+      for (const st of turn.steps) {
+        if (st.rank !== null && st.rank > 1) expect(st.favorite).not.toBe(st.text)
+      }
+    }
   })
 })
 

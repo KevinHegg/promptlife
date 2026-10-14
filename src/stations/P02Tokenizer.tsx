@@ -21,13 +21,13 @@ function CompareCuts() {
       <h3>Different models cut differently</h3>
       <div>
         <p className="kicker">Frontier tokenizer (o200k) · {frontier.length} pieces</p>
-        <Chips pieces={frontier} hot={(i) => frontier[i].text === ' syllabus'} />
+        <Chips pieces={frontier} hot={(i) => frontier[i].text === ' flour'} />
       </div>
       <div>
         <p className="kicker">The recorded model ({trace ? modelName(trace) : ''}) · {recorded.length} pieces</p>
-        <Chips pieces={recorded} hot={(i) => /syll|abus/.test(recorded[i].text)} />
+        <Chips pieces={recorded} hot={(i) => /flour/.test(recorded[i].text)} />
       </div>
-      <p className="muted">Same sentence, different vocabularies. The rest of the ride uses the recorded model's {recorded.length}.</p>
+      <p className="muted">Same sentence, different lists of pieces. The rest of the ride uses the recorded model's {recorded.length}.</p>
     </div>
   )
 }
@@ -44,17 +44,16 @@ function LettersBreak() {
         {on ? (
           <>
             <Chips pieces={letters.map((p) => ({ text: p.text }))} />
-            <p className="break-stat"><b>{n}</b> tokens instead of <b>{normal}</b>. Every later station does its work per token, so your question now costs about {(n / normal).toFixed(1)} times as much to process.</p>
+            <p className="break-stat"><b>{n}</b> pieces instead of <b>{normal}</b>. Every later station works piece by piece, so your question now costs about {(n / normal).toFixed(1)} times as much to process.</p>
             {L ? (
               <div className="said">
                 <p className="kicker">What the model wrote, given the question spelled out letter by letter</p>
                 <blockquote>{L.firstTurnGreedy.text.trim() || '(nothing)'}</blockquote>
                 <p>
-                  Wrong: it never works out the final exam score.
+                  For comparison, with the normal {normal} pieces and the calculator, the answer was “{SCENARIO.reply}”
                   {L.firstTurnGreedy.pToolCallStart !== undefined && phase1.freeFirstTurn?.pToolCallStart !== undefined && (
-                    <> Its odds of starting a calculator call also fell from {(phase1.freeFirstTurn.pToolCallStart * 100).toFixed(1)}% to {(L.firstTurnGreedy.pToolCallStart * 100).toFixed(2)}%.</>
-                  )}{' '}
-                  With the normal {normal} tokens and the calculator's help, the recorded run answered 93.75%.
+                    <> Spelled out, its chance of asking for the calculator went from {(phase1.freeFirstTurn.pToolCallStart * 100).toFixed(1)}% to {(L.firstTurnGreedy.pToolCallStart * 100).toFixed(2)}%.</>
+                  )}
                 </p>
                 <p className="muted">A real, unedited output of {trace ? modelName(trace) : 'the recorded model'}. It rarely saw text spelled out this way in training.</p>
               </div>
@@ -65,7 +64,7 @@ function LettersBreak() {
         ) : (
           <>
             <Chips pieces={recorded.length ? recorded : frontier} />
-            <p className="break-stat">The question as the model normally gets it: <b>{normal}</b> tokens. Flip the lever.</p>
+            <p className="break-stat">The question as the model normally gets it: <b>{normal}</b> pieces. Flip the lever.</p>
           </>
         )}
       </div>
@@ -77,10 +76,10 @@ function CutterPanel() {
   return (
     <svg className="arrive-art" viewBox="0 0 320 220" role="img" aria-label="The question feeds into a cutter and leaves as chips with numbered tickets">
       <rect x="10" y="60" width="120" height="26" rx="6" className="art-fill-soft" />
-      <text x="18" y="77" className="art-text">Using my syllabus, wh…</text>
+      <text x="18" y="77" className="art-text">Using my grandmoth…</text>
       <path d="M134,52 L150,73 L134,94" className="art-line" fill="none" />
       <path d="M150,40 V106" className="art-line" strokeDasharray="4 4" fill="none" />
-      {[['Using', '24849'], ['·my', '922'], ['·syllabus', '127031'], [',', '11']].map(([t, id], i) => (
+      {[['Using', '24849'], ['·my', '922'], ['·grandmother', '57468'], ["'s", '885']].map(([t, id], i) => (
         <g key={t} transform={`translate(${162 + (i % 2) * 74} ${54 + Math.floor(i / 2) * 64})`}>
           <g className="cut-chip" style={{ animationDelay: `${i * 0.25}s` }}>
             <rect width="66" height="24" rx="5" className="art-line" fill="none" />
@@ -97,18 +96,18 @@ function CutterPanel() {
 export const P02_SPEC: LoopSpec = {
   code: 'P02',
   arrive: {
-    caption: 'The model can’t read letters. Here your question is cut into pieces, and each piece trades its text for a number.',
+    caption: 'The model can’t read letters. Your question is cut into word pieces, and each piece becomes a number.',
     panel: <CutterPanel />,
-    flashback: { q: 'On the ride, how many tokens did your question make?', a: `${runCounts.question} in the recorded model, out of ${runCounts.total} on the platform. Most of the context came from the app.` }
+    flashback: { q: 'On the ride, how many word pieces did your question make?', a: `${runCounts.question} for the recorded model, out of ${runCounts.total} on the platform. Most came from the app.` }
   },
   bet: {
-    question: 'Which of these is a single token for a frontier tokenizer?',
-    options: [{ text: '“syllabus” (no space)' }, { text: '“ syllabus” (a space in front)', correct: true }, { text: '“Syllabus” (capital S)' }],
-    reveal: 'Only the one with the space: ID 127031. “Syllabus” is two pieces, S + yllabus. Plain “syllabus” is three: sy + ll + abus.'
+    question: 'Which of these is a single word piece for a frontier model?',
+    options: [{ text: '“flour” (no space)' }, { text: '“ flour” (a space in front)', correct: true }, { text: '“Flour” (capital F)' }],
+    reveal: 'Only the one with the space: piece number 28420. “flour” and “Flour” are two pieces each: fl + our, and Fl + our.'
   },
   poke: {
     title: 'Make the tokenizer stumble',
-    intro: 'Open the window and type. Try three challenges: raise the count by changing one letter; find a word that’s one token after a space and three without; give “ final” a new ID without changing the word.',
+    intro: 'Open the window and type anything. Try three things: add pieces by changing one letter; find a word that’s one piece after a space but two without; try another language.',
     body: (
       <>
         <TokenizerLevels station={station} />
@@ -117,17 +116,17 @@ export const P02_SPEC: LoopSpec = {
     )
   },
   name: {
-    definition: 'A tokenizer cuts text into tokens from a fixed vocabulary and swaps each for its token ID. From here on, the model sees only the IDs.',
+    definition: 'A tokenizer cuts text into word pieces, called tokens, from a fixed list, and swaps each one for its number, its token ID. From here on, the model sees only the numbers.',
     terms: ['token', 'token ID', 'vocabulary'],
     picture: (
       <div className="three-ways">
-        <div><p className="kicker">“ syllabus”</p><Chips pieces={[{ text: ' syllabus', id: 127031 }]} /></div>
-        <div><p className="kicker">“Syllabus”</p><Chips pieces={[{ text: 'S', id: 50 }, { text: 'yllabus', id: 156066 }]} /></div>
-        <div><p className="kicker">“syllabus”</p><Chips pieces={[{ text: 'sy', id: 5611 }, { text: 'll', id: 680 }, { text: 'abus', id: 67008 }]} /></div>
+        <div><p className="kicker">“ flour”</p><Chips pieces={[{ text: ' flour', id: 28420 }]} /></div>
+        <div><p className="kicker">“Flour”</p><Chips pieces={[{ text: 'Fl', id: 4245 }, { text: 'our', id: 401 }]} /></div>
+        <div><p className="kicker">“buttermilk”</p><Chips pieces={[{ text: 'but', id: 8293 }, { text: 'term', id: 8044 }, { text: 'ilk', id: 74313 }]} /></div>
       </div>
     ),
     metaphor: 'A coat check: hand over text, get a numbered ticket.',
-    breaks: 'A coat check returns your own coat. Every “ syllabus” gets the same ticket, and what that ticket fetches at P03 was set in training.'
+    breaks: 'A coat check returns your own coat. Every “ flour” gets the same ticket, and what that ticket stands for was set in training.'
   },
   break: {
     title: 'Cut by letters',
@@ -145,10 +144,10 @@ export const P02_SPEC: LoopSpec = {
         ]
       },
       {
-        q: 'Two classmates send the same question, one with the typo “sylabus.” What’s guaranteed to differ?',
+        q: 'Two people send the same question, one with the typo “flouur.” What’s guaranteed to differ?',
         options: [
           { text: 'The model’s weights', why: 'Nothing about the model changes between users.' },
-          { text: 'The tokens and their count, 17 versus 18', correct: true, why: '“ sylabus” splits into “ syl” + “abus”, one extra piece.' },
+          { text: 'The word pieces and their count, 19 versus 21', correct: true, why: '“ flouur” splits into “ fl” + “ou” + “ur”: two extra pieces.' },
           { text: 'Whether the answer is right', why: 'Models cope with most typos. Only the IDs are sure to differ.' }
         ]
       }

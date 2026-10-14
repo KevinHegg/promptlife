@@ -2,10 +2,16 @@
  * Drives the living map: moves the train along motion paths, lights lamps and lines,
  * and reports board/platform state through onChange. Framework-free on purpose:
  * the train moves every frame, so it touches the SVG directly instead of re-rendering React.
+ *
+ * Calm by design: the camera pans only between areas of the map (never chasing the train),
+ * the first trips are animated slowly, and repeated trips become a quick chase of lamps
+ * while the train waits at The Loop.
  */
 import { MAIN_Y, STOPS, STOP_NAMES, stationByCode, type MotionKey } from '../data/network'
 import type { Src } from '../data/heroRun'
 import { runCounts, type RunScript, type RunStep } from '../data/run'
+import { STORY } from '../data/story'
+import { trace } from '../data/trace'
 
 export type PlatformToken = { i: number; src: Src; text: string; fresh: boolean }
 
@@ -32,9 +38,10 @@ type Step = {
 
 type Pass = { f: number; fn: () => void; done?: boolean }
 
-const pct = (p: number | null) => (p === null ? '' : p >= 0.995 ? '99%+' : p < 0.01 ? `${(p * 100).toFixed(1)}%` : `${Math.round(p * 100)}%`)
 const isMarker = (text: string) => /^<\|.*\|>$/.test(text)
-const show = (text: string) => (/^\s+$/.test(text) ? 'a space' : `“${text.trim()}”`)
+
+/** Where the camera rests for each part of the trip (map x). */
+const FRAME = { send: 200, line: 690, workshop: 630, reply: 900 }
 
 export class RunEngine {
   private svg: SVGSVGElement
@@ -49,7 +56,7 @@ export class RunEngine {
   private idx = 0
   private lastTs = 0
   private raf = 0
-  private lastSetLeft = -1
+  private programmaticUntil = 0
   private userScrollAt = 0
   private fracs: Record<string, number> = {}
   private timers: number[] = []
@@ -123,7 +130,7 @@ export class RunEngine {
       s.update?.(1)
       this.idx++
       guard++
-    } while (this.idx < this.steps.length && (this.steps[this.idx].kind !== 'pause' || this.steps[this.idx].dur < 400) && guard < 2000)
+    } while (this.idx < this.steps.length && (this.steps[this.idx].kind !== 'pause' || this.steps[this.idx].dur < 1200) && guard < 2000)
     if (this.idx < this.steps.length) this.startStep(this.steps[this.idx])
     else this.finish()
     this.emit()
@@ -136,7 +143,7 @@ export class RunEngine {
       trip: 0,
       totalTrips: this.run.trips,
       station: 'P01 · SEND',
-      caption: `“Using my syllabus, what do I need on the final to get an A-?” is waiting at Send.`,
+      caption: STORY.waiting,
       toolText: '',
       replyText: '',
       tokens: [],
@@ -167,30 +174,23 @@ export class RunEngine {
     else this.state.replyText += step.text
   }
 
-  /** What the board says about one trip's vote. */
-  private voteLine(step: RunStep) {
-    if (step.prob === null) return `The winner is ${show(step.text)}.`
-    if (step.rank === 1) return `The winner is ${show(step.text)} at ${pct(step.prob)}.`
-    return `The model preferred ${show(step.favorite ?? '')} (${pct(step.favoriteProb)}). This recorded run used ${show(step.text)} (${pct(step.prob)}, rank ${step.rank}).`
-  }
-
-  /* ---------------- map helpers ---------------- */
+  /* ---------------- camera ---------------- */
 
   private onScroll = () => {
-    if (!this.scroller) return
-    if (Math.abs(this.scroller.scrollLeft - this.lastSetLeft) > 3) this.userScrollAt = performance.now()
+    if (performance.now() > this.programmaticUntil) this.userScrollAt = performance.now()
   }
 
-  private follow(x: number) {
+  /** Pan gently to an area of the map, only if the map is wider than its box and the user isn't scrolling it. */
+  private frame(x: number) {
     const sc = this.scroller
     if (!sc || sc.scrollWidth <= sc.clientWidth + 2) return
-    if (performance.now() - this.userScrollAt < 2500) return
+    if (performance.now() - this.userScrollAt < 4000) return
     const vb = this.svg.viewBox.baseVal
     const scale = this.svg.getBoundingClientRect().width / (vb?.width || 1120)
     const target = Math.max(0, Math.min(sc.scrollWidth - sc.clientWidth, x * scale - sc.clientWidth / 2))
-    if (Math.abs(target - sc.scrollLeft) < 4) return
-    this.lastSetLeft = Math.round(target)
-    sc.scrollLeft = target
+    if (Math.abs(target - sc.scrollLeft) < 8) return
+    this.programmaticUntil = performance.now() + 1200
+    sc.scrollTo({ left: target, behavior: this.reduce ? 'auto' : 'smooth' })
   }
 
   private fracOf(key: string, x: number, y: number) {
@@ -212,7 +212,6 @@ export class RunEngine {
 
   private parkAtSend() {
     this.train?.setAttribute('transform', `translate(70,${MAIN_Y})`)
-    this.follow(70)
   }
 
   private placeTrain(key: MotionKey, f: number) {
@@ -227,8 +226,9 @@ export class RunEngine {
     const dy = ahead ? b.y - a.y : a.y - b.y
     const ang = (Math.atan2(dy, dx) * 180) / Math.PI
     this.train.setAttribute('transform', `translate(${a.x.toFixed(1)},${a.y.toFixed(1)}) rotate(${ang.toFixed(1)})`)
-    this.follow(a.x)
   }
+
+  /* ---------------- lamps ---------------- */
 
   private lamp(code: string) {
     return this.svg.querySelector<SVGElement>(`[data-lamp="${code}"]`)
@@ -249,14 +249,14 @@ export class RunEngine {
     this.state.station = this.stationLabel(code)
   }
 
-  private flash(code: string) {
+  private flash(code: string, label = true) {
     const el = this.lamp(code)
     if (!el) return
     el.classList.add('on')
-    this.state.station = this.stationLabel(code)
+    if (label) this.state.station = this.stationLabel(code)
     if (this.reduce) return
     el.classList.add('flash')
-    this.timers.push(window.setTimeout(() => el.classList.remove('flash'), 260))
+    this.timers.push(window.setTimeout(() => el.classList.remove('flash'), 220))
   }
 
   private lightLine(id: string) {
@@ -269,17 +269,19 @@ export class RunEngine {
     return { kind: 'pause', dur, enter: () => { enter?.(); this.emit() } }
   }
 
-  private move(key: MotionKey, f0: number, f1: number, dur: number, passes: Pass[] = []): Step {
+  /** A timed step that fires passes along t in [0, 1]; with a path it also moves the train. */
+  private timed(dur: number, passes: Pass[], key?: MotionKey, f0 = 0, f1 = 1): Step {
     const ps = passes.map((p) => ({ ...p, done: false }))
     return {
       kind: 'move',
       dur,
       update: (t: number) => {
         const f = f0 + (f1 - f0) * t
-        this.placeTrain(key, f)
+        if (key) this.placeTrain(key, f)
+        const pos = key ? f : t
         let changed = false
         for (const p of ps) {
-          if (!p.done && (f1 >= f0 ? f >= p.f - 1e-6 : f <= p.f + 1e-6)) {
+          if (!p.done && (f1 >= f0 ? pos >= p.f - 1e-6 : pos <= p.f + 1e-6)) {
             p.done = true
             p.fn()
             changed = true
@@ -290,28 +292,48 @@ export class RunEngine {
     }
   }
 
-  private mainPasses(): Pass[] {
-    return ([['P03', 0.2], ['P04', 0.4], ['P05', 0.6]] as const).map(([code, f]) => ({ f, fn: () => this.flash(code) }))
+  private move(key: MotionKey, f0: number, f1: number, dur: number, passes: Pass[] = []): Step {
+    return this.timed(dur, passes, key, f0, f1)
   }
 
-  /** One autoregressive trip: back to Embedding, through the stack, a vote, and onto the platform. */
-  private trip(kind: 'tool' | 'reply', step: RunStep, pace: 'fast' | 'med', from: 'loop' | 'tokenizer' = 'loop'): Step[] {
-    const d = pace === 'fast' ? [200, 290, 30] : [320, 460, 100]
-    const vote: Pass = {
-      f: 0.8,
-      fn: () => {
-        this.flash('P06')
-        this.state.trip += 1
-        this.pick(kind, step)
-        if (isMarker(step.text)) this.caption(`Trip ${this.state.trip}: the model wrote its stop marker, ${step.text}, so this turn ends.`)
-        else if (step.rank !== null && step.rank > 1) this.caption(`Trip ${this.state.trip}: ${this.voteLine(step)}`)
-      }
+  private vote(kind: 'tool' | 'reply', step: RunStep, label: boolean, captionDiffs: boolean) {
+    return () => {
+      this.flash('P06', label)
+      this.state.trip += 1
+      this.pick(kind, step)
+      if (isMarker(step.text)) this.caption(STORY.stopMarker)
+      else if (captionDiffs && step.rank !== null && step.rank > 1 && step.favorite) this.caption(STORY.differs(step.favorite, step.text))
     }
+  }
+
+  /** A full animated trip: back round the inner loop to Embedding, up through the stack, a vote, onto the platform. */
+  private animatedTrip(kind: 'tool' | 'reply', step: RunStep, from: 'loop' | 'tokenizer'): Step[] {
     const steps: Step[] = []
-    if (from === 'loop') steps.push(this.move('ar', 0, 1, d[0]))
-    steps.push(this.move('main', from === 'loop' ? 0.2 : 0, 1, from === 'loop' ? d[1] : d[1] + 500, [...this.mainPasses(), vote, { f: 1, fn: () => this.flash('P07') }]))
-    steps.push(this.pauseStep(d[2], () => this.add([step.i])))
+    if (from === 'loop') steps.push(this.move('ar', 0, 1, 1100))
+    steps.push(
+      this.move('main', from === 'loop' ? 0.2 : 0, 1, from === 'loop' ? 1500 : 1900, [
+        { f: 0.2, fn: () => this.flash('P03') },
+        { f: 0.4, fn: () => this.flash('P04') },
+        { f: 0.6, fn: () => this.flash('P05') },
+        { f: 0.8, fn: this.vote(kind, step, true, true) },
+        { f: 1, fn: () => this.flash('P07') }
+      ])
+    )
+    steps.push(this.pauseStep(500, () => this.add([step.i])))
     return steps
+  }
+
+  /** A repeated trip, shown as a quick chase of lamps while the train waits at The Loop. */
+  private expressTrip(kind: 'tool' | 'reply', step: RunStep, dur: number): Step[] {
+    return [
+      this.timed(dur, [
+        { f: 0.05, fn: () => this.flash('P03', false) },
+        { f: 0.25, fn: () => this.flash('P04', false) },
+        { f: 0.45, fn: () => this.flash('P05', false) },
+        { f: 0.65, fn: this.vote(kind, step, false, false) },
+        { f: 0.9, fn: () => { this.flash('P07', false); this.add([step.i]) } }
+      ])
+    ]
   }
 
   private build(): Step[] {
@@ -321,106 +343,108 @@ export class RunEngine {
     const [toolTurn, ...laterTurns] = R.turns
     const firstStep = toolTurn?.steps[0]
 
-    S.push(this.pauseStep(2000, () => {
+    S.push(this.pauseStep(2600, () => {
       this.present = new Set()
       this.add(R.question)
       this.here('P01')
       this.parkAtSend()
-      this.caption(`P01 · Send: your question boards. It's ${C.question} tokens, though nothing has counted them yet.`)
+      this.frame(FRAME.send)
+      this.caption(STORY.send(C.question))
     }))
-    S.push(this.pauseStep(2600, () => {
+    S.push(this.pauseStep(3200, () => {
       this.lightLine('G')
       this.lamp('G1')?.classList.add('on')
       this.add(R.wrapper)
       this.state.station = this.stationLabel('G1')
-      this.caption(
-        C.toolDescription
-          ? `G1 · Gatehouse: the app adds a system prompt, a ${C.toolDescription}-token description of the calculator, and role markers. That's ${C.wrapper} tokens you never see.`
-          : 'G1 · Gatehouse: the app quietly puts a system prompt in front of your question.'
-      )
+      this.caption(STORY.gate)
     }))
-    S.push(this.pauseStep(900, () => {
+    S.push(this.pauseStep(2000, () => {
       this.lightLine('L')
-      this.caption('Transfer to the Library line. The app searches your course files before the model reads anything.')
+      this.caption(STORY.toLibrary)
     }))
-    S.push(this.move('lib', 0, 1, 4200, [
-      { f: this.fracs.L1, fn: () => { this.flash('L1'); this.caption('L1 · Search by meaning: the question is compared with every passage in your course files.') } },
-      { f: this.fracs.L2, fn: () => { this.flash('L2'); this.caption('L2 · Fetch passages: the two closest matches come from the syllabus and the gradebook.') } },
-      { f: this.fracs.L3, fn: () => { this.flash('L3'); this.caption(`L3 · Add to context: both passages board the train, ${C.passages} tokens.`); this.add(R.passages) } }
+    S.push(this.move('lib', 0, 1, 6000, [
+      { f: this.fracs.L1, fn: () => { this.flash('L1'); this.caption(STORY.L1) } },
+      { f: this.fracs.L2, fn: () => { this.flash('L2'); this.caption(STORY.L2) } },
+      { f: this.fracs.L3, fn: () => { this.flash('L3'); this.caption(STORY.L3); this.add(R.passages) } }
     ]))
-    S.push(this.pauseStep(2400, () => {
+    S.push(this.pauseStep(3200, () => {
       this.here('P02')
       this.add(R.genPrompt)
-      const n = this.present.size
-      this.caption(`P02 · Tokenizer: everything on board is now ${n} tokens, each with an ID number. You typed ${C.question} of them.`)
+      this.frame(FRAME.line)
+      this.caption(STORY.tokenizer(this.present.size, C.question))
     }))
 
     const slow: [string, number, string][] = [
-      ['P03', 0.2, 'P03 · Embedding: each ID looks up its own long list of numbers.'],
-      ['P04', 0.4, R.model
-        ? 'P04 · Attention: every token looks back at the ones before it. “final” in your question finds “final” in the syllabus and looks at the word after it: “exam”.'
-        : 'P04 · Attention: every token looks back at the others, all at the same time.'],
-      ['P05', 0.6, `P05 · The Stack: ${R.model ? '24' : 'dozens of'} layers rework those numbers, one floor after another.`]
+      ['P03', 0.2, STORY.embedding],
+      ['P04', 0.4, STORY.attention],
+      ['P05', 0.6, STORY.stack(trace?.model.layers ?? null)]
     ]
     let f = 0
     for (const [code, to, text] of slow) {
-      S.push(this.move('main', f, to, 950))
-      S.push(this.pauseStep(2400, () => { this.here(code); this.caption(text) }))
+      S.push(this.move('main', f, to, 1400))
+      S.push(this.pauseStep(3200, () => { this.here(code); this.caption(text) }))
       f = to
     }
     if (firstStep) {
-      S.push(this.move('main', 0.6, 0.8, 700))
-      S.push(this.pauseStep(firstStep.rank && firstStep.rank > 1 ? 5200 : 2600, () => {
+      S.push(this.move('main', 0.6, 0.8, 1100))
+      S.push(this.pauseStep(firstStep.rank && firstStep.rank > 1 ? 6500 : 3400, () => {
         this.here('P06')
         this.state.trip = 1
         this.pick('tool', firstStep)
-        this.caption(`P06 · The Vote: every token in the vocabulary gets a score. ${this.voteLine(firstStep)}${firstStep.rank && firstStep.rank > 1 ? ' Apps can require a tool call this way.' : ''}`)
+        this.caption(STORY.firstVote(firstStep.text, firstStep.prob, firstStep.favorite, firstStep.favoriteProb, firstStep.rank))
       }))
-      S.push(this.move('main', 0.8, 1, 700))
-      S.push(this.pauseStep(2500, () => {
+      S.push(this.move('main', 0.8, 1, 1100))
+      S.push(this.pauseStep(3600, () => {
         this.here('P07')
         this.add([firstStep.i])
-        this.caption(`P07 · The Loop: the new token joins the platform. Trip 1 of ${R.trips} is done, and the train heads back for the next token.`)
+        this.caption(STORY.loop(R.trips))
       }))
-      toolTurn.steps.slice(1).forEach((st, k) => {
-        S.push(...this.trip('tool', st, 'fast'))
-        if (k === 0) S.push(this.pauseStep(1500, () => this.caption('Each new token is one more trip around the loop. The model is spelling out a calculator call.')))
+      const rest = toolTurn.steps.slice(1)
+      rest.forEach((st, k) => {
+        if (k === 0) S.push(...this.animatedTrip('tool', st, 'loop'))
+        else {
+          if (k === 1) S.push(this.pauseStep(1800, () => { this.here('P07'); this.caption(STORY.writingRequest) }))
+          S.push(...this.expressTrip('tool', st, 260))
+        }
       })
     }
 
     laterTurns.forEach((turn, t) => {
       const bridge = R.bridges[t] ?? []
       const resultTokens = bridge.filter((i) => R.tokens[i].src === 'res')
-      S.push(this.pauseStep(2000, () => {
+      S.push(this.pauseStep(2600, () => {
         this.here('P07')
         this.lightLine('W')
-        this.caption('The call is complete. Transfer to the Workshop line, where the app takes over from the model.')
+        this.frame(FRAME.workshop)
+        this.caption(STORY.requestDone)
       }))
-      S.push(this.move('work', 0, 1, 5200, [
-        { f: this.fracs.W1, fn: () => { this.flash('W1'); this.caption('W1 · Read the call: the model ended its turn with a tool call. The app reads it.') } },
-        { f: this.fracs.W2, fn: () => { this.flash('W2'); this.caption('W2 · Run the tool: (90 − 0.6 × 87.5) ÷ 0.4 = 93.75. Exact, because a calculator did it.') } },
-        { f: this.fracs.W3, fn: () => { this.flash('W3'); this.caption('W3 · Paste the result: 93.75 goes back as plain text, wrapped in more role markers.'); this.add(bridge) } }
+      S.push(this.move('work', 0, 1, 7000, [
+        { f: this.fracs.W1, fn: () => { this.flash('W1'); this.caption(STORY.W1) } },
+        { f: this.fracs.W2, fn: () => { this.flash('W2'); this.caption(STORY.W2) } },
+        { f: this.fracs.W3, fn: () => { this.flash('W3'); this.caption(STORY.W3); this.add(bridge) } }
       ]))
-      S.push(this.pauseStep(2300, () => {
+      S.push(this.pauseStep(3000, () => {
         this.here('P02')
-        this.caption(`P02 · Tokenizer: the result is ${resultTokens.length} tokens${R.model ? ', one for each digit and one for the point' : ''}.`)
+        this.frame(FRAME.line)
+        this.caption(STORY.resultCut(resultTokens.length))
       }))
       turn.steps.forEach((st, k) => {
         if (k === 0) {
-          S.push(...this.trip(turn.kind, st, 'med', 'tokenizer'))
-          S.push(this.pauseStep(1600, () => this.caption(`With the result on board, the model starts the reply. ${this.voteLine(st)}`)))
+          S.push(...this.animatedTrip(turn.kind, st, 'tokenizer'))
+          S.push(this.pauseStep(2400, () => { this.here('P07'); this.caption(STORY.replying) }))
         } else {
-          S.push(...this.trip(turn.kind, st, 'med'))
+          S.push(...this.expressTrip(turn.kind, st, 420))
         }
       })
     })
 
-    S.push(this.move('reply', 0, 1, 1100))
+    S.push(this.pauseStep(600, () => this.frame(FRAME.reply)))
+    S.push(this.move('reply', 0, 1, 1600))
     S.push(this.pauseStep(1, () => {
       this.here('P08')
       this.lightLine('R')
       this.lamp('R1')?.classList.add('on')
-      this.caption(`P08 · Reply after ${R.trips} trips. Lit: Gatehouse, Library, Workshop. Dark: Academy, Scratchpad, Darkroom. The Academy stays dark because answering never changes the model.`)
+      this.caption(STORY.done(R.trips))
     }))
     return S
   }

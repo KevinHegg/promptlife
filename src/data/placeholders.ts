@@ -30,15 +30,15 @@ export type VoteView = {
 
 export const PLACEHOLDER_ATTENTION: AttentionView = {
   name: 'Example head',
-  label: 'where “final” looks',
-  query: ' final',
+  label: 'where “flour” looks',
+  query: ' flour',
   tokens: [
     { text: ' my', w: 0.08 },
-    { text: ' syllabus', w: 0.46 },
+    { text: ' card', w: 0.46 },
     { text: ' what', w: 0.05 },
     { text: ' need', w: 0.12 },
     { text: ' the', w: 0.21 },
-    { text: ' final', w: 0.08 }
+    { text: ' flour', w: 0.08 }
   ],
   real: false
 }

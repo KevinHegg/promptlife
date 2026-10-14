@@ -22,13 +22,13 @@ type Props = {
 type Label = { x: number; y: number; text: string; anchor?: 'start' | 'middle' | 'end'; kind?: 'stop' | 'line' | 'sub' | 'note'; line?: LineId }
 
 const LABELS: Label[] = [
-  { x: 86, y: 194, text: 'L1 Search by meaning' },
-  { x: 200, y: 96, text: 'L2 Fetch passages', anchor: 'middle' },
+  { x: 86, y: 194, text: 'L1 Search your files' },
+  { x: 200, y: 96, text: 'L2 Find matches', anchor: 'middle' },
   { x: 314, y: 176, text: 'L3 Add to', anchor: 'end' },
   { x: 314, y: 191, text: 'context', anchor: 'end' },
   { x: 200, y: 150, text: 'Library', anchor: 'middle', kind: 'line', line: 'L' },
-  { x: 200, y: 165, text: 'RAG', anchor: 'middle', kind: 'sub' },
-  { x: 86, y: 334, text: 'G1 Hidden system prompt' },
+  { x: 200, y: 165, text: 'finds your files', anchor: 'middle', kind: 'sub' },
+  { x: 86, y: 334, text: 'G1 Hidden instructions' },
   { x: 88, y: 397, text: 'Gatehouse', kind: 'line', line: 'G' },
   { x: 88, y: 412, text: 'G2 injection heist', kind: 'sub' },
   { x: 414, y: 169, text: 'D1 Image patches' },
@@ -43,8 +43,8 @@ const LABELS: Label[] = [
   { x: 1024, y: 194, text: 'R1 The Ledger', anchor: 'end' },
   { x: 1022, y: 97, text: 'Debug the Bot', anchor: 'end', kind: 'line', line: 'R' },
   { x: 1022, y: 112, text: 'R2 capstone', anchor: 'end', kind: 'sub' },
-  { x: 810, y: 464, text: 'W1 Read the call', anchor: 'middle' },
-  { x: 640, y: 464, text: 'W2 Run the tool', anchor: 'middle' },
+  { x: 810, y: 464, text: 'W1 Read the request', anchor: 'middle' },
+  { x: 640, y: 464, text: 'W2 Run the calculator', anchor: 'middle' },
   { x: 470, y: 464, text: 'W3 Paste the result', anchor: 'middle' },
   { x: 946, y: 350, text: 'Workshop', kind: 'line', line: 'W' },
   { x: 946, y: 365, text: 'tools · agents', kind: 'sub' },

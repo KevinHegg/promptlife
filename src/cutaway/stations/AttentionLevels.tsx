@@ -73,10 +73,10 @@ export function AttentionLevels({ station, views }: { station: Station; views: A
         <Level>
           <LevelText
             level={2}
-            title={view.real ? 'Find the heads' : `Where “${chipLabel(view.query)}” looks`}
+            title={view.real ? 'Who looks where' : `Where “${chipLabel(view.query)}” looks`}
             note={view.real ? view.source : 'Placeholder weights. The trace pipeline will supply real ones from a chosen head.'}
           >
-            <p>Each token splits its attention across itself and earlier tokens, and the shares add up to 1. Thicker arcs carry more.</p>
+            <p>Each word piece spreads its attention over itself and the pieces before it. Thicker arcs mean it looks there more. Different parts of the model look for different things.</p>
             {view.real && <p className="head-label">{view.label}</p>}
           </LevelText>
           <Vis>

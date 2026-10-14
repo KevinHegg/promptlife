@@ -13,8 +13,8 @@ export type Trace = {
   model: { id: string; layers: number; heads: number; dModel: number; vocabSize: number; license: string }
   tokens: { i: number; id: number; text: string; src: Src }[]
   steps: { pos: number; chosen: Candidate & { rank: number }; top: Candidate[] }[]
-  logitLens: { pos: number; label: string; layers: { layer: number; top: { text: string; prob: number }[] }[] }[]
-  attention: { layer: number; head: number; label: string; queryPos: number; weights: { pos: number; w: number }[] }[]
+  logitLens: { id?: string; plain?: string; pos: number; label: string; layers: { layer: number; top: { text: string; prob: number }[] }[] }[]
+  attention: { id?: string; plain?: string; layer: number; head: number; label: string; queryPos: number; weights: { pos: number; w: number }[] }[]
   embeddings?: { method: string; points: { text: string; x: number; y: number; group: string }[] }
   notes?: string[]
 }
@@ -37,11 +37,18 @@ function contextBefore(t: Trace, pos: number, maxChars = 30) {
   return `…${(cut >= 0 ? tail.slice(cut + 1) : tail).trim()}`
 }
 
-function headName(label: string) {
-  if (/induction/i.test(label)) return 'Induction head'
-  if (/previous/i.test(label)) return 'Previous-token head'
-  if (/copy/i.test(label)) return 'Copy head'
-  if (/syllabus/i.test(label)) return 'Looks back at “syllabus”'
+const HEAD_NAMES: Record<string, string> = {
+  'question-to-card': 'Looks at the card',
+  induction: 'Pattern finder',
+  'previous-token': 'Looks one back',
+  copy: 'Copier'
+}
+
+function headName(id: string | undefined, label: string) {
+  if (id && HEAD_NAMES[id]) return HEAD_NAMES[id]
+  if (/induction/i.test(label)) return 'Pattern finder'
+  if (/previous/i.test(label)) return 'Looks one back'
+  if (/copy/i.test(label)) return 'Copier'
   return 'Attention head'
 }
 
@@ -64,8 +71,8 @@ export function attentionViewsFromTrace(t: Trace): AttentionView[] {
       .sort((a, b) => a.pos - b.pos)
     const self = row.weights.find((w) => w.pos === row.queryPos)?.w ?? 0
     views.push({
-      name: headName(row.label),
-      label: row.label,
+      name: headName(row.id, row.label),
+      label: row.plain ?? row.label,
       query: query?.text ?? '',
       tokens: [
         ...earlier.map((w) => ({ text: t.tokens[w.pos]?.text ?? '?', w: w.w, pos: w.pos, src: t.tokens[w.pos]?.src })),
@@ -80,7 +87,11 @@ export function attentionViewsFromTrace(t: Trace): AttentionView[] {
 
 /** Show the floors where the final guess has formed; summarize the noisy floors below. */
 export function floorsFromTrace(t: Trace): FloorView | null {
-  const lens = t.logitLens.find((l) => l.label.includes("'9'")) ?? t.logitLens.find((l) => /\d/.test(l.label)) ?? t.logitLens[0]
+  const lens =
+    t.logitLens.find((l) => l.id === 'answer-digit') ??
+    t.logitLens.find((l) => l.id === 'reply-word') ??
+    t.logitLens.find((l) => /digit|'\d'/i.test(l.label)) ??
+    t.logitLens[0]
   if (!lens || lens.layers.length === 0) return null
   const layers = lens.layers.filter((l) => l.layer > 0)
   const finalGuess = layers[layers.length - 1].top[0]?.text
@@ -107,7 +118,7 @@ export function voteFromTrace(t: Trace): VoteView | null {
   const replySteps = t.steps.filter((s) => t.tokens[s.pos]?.src === 'rep')
   const step = [...replySteps].sort((a, b) => entropy(b.top.map((c) => c.prob)) - entropy(a.top.map((c) => c.prob)))[0] ?? t.steps[0]
   if (!step) return null
-  const chosen = step.chosen.text.trim() ? `“${step.chosen.text.trim()}”` : 'a space, the start of “93.75”'
+  const chosen = step.chosen.text.trim() ? `“${step.chosen.text.trim()}”` : 'a space, the start of the number'
   return {
     context: contextBefore(t, step.pos),
     candidates: step.top.slice(0, 6).map((c) => ({ text: c.text, logit: c.logit })),

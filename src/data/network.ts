@@ -8,9 +8,9 @@ export type Line = { id: LineId; name: string; color: string; blurb: string }
 
 export const LINES: Record<LineId, Line> = {
   P: { id: 'P', name: 'Prompt line', color: 'var(--main)', blurb: 'One run of the model, from your question to its reply.' },
-  L: { id: 'L', name: 'Library', color: 'var(--l-library)', blurb: 'Retrieval: the app fetches passages before the model reads anything.' },
-  W: { id: 'W', name: 'Workshop', color: 'var(--l-workshop)', blurb: 'Tools and agents: the model writes a request, the app runs it.' },
-  G: { id: 'G', name: 'Gatehouse', color: 'var(--l-gate)', blurb: 'The hidden system prompt, and how prompt injection works.' },
+  L: { id: 'L', name: 'Library', color: 'var(--l-library)', blurb: 'How apps find your documents and hand them to the model.' },
+  W: { id: 'W', name: 'Workshop', color: 'var(--l-workshop)', blurb: 'How a model “uses” a calculator or other tools: it writes a request, and the app runs it.' },
+  G: { id: 'G', name: 'Gatehouse', color: 'var(--l-gate)', blurb: 'The hidden instructions every app adds, and how people trick models into ignoring them.' },
   A: { id: 'A', name: 'Academy', color: 'var(--l-academy)', blurb: 'Training: where the model’s numbers came from.' },
   S: { id: 'S', name: 'Scratchpad', color: 'var(--l-scratch)', blurb: 'Reasoning models write their working before answering.' },
   D: { id: 'D', name: 'Darkroom', color: 'var(--l-dark)', blurb: 'Images become tokens; diffusion develops pictures from noise.' },
@@ -89,10 +89,10 @@ export const MOTION_PATHS = {
 export type MotionKey = keyof typeof MOTION_PATHS
 
 export const STOP_NAMES: Record<string, string> = {
-  L1: 'Search by meaning',
-  L2: 'Fetch passages',
+  L1: 'Search your files',
+  L2: 'Find matches',
   L3: 'Add to context',
-  G1: 'Hidden system prompt',
+  G1: 'Hidden instructions',
   G2: 'Injection heist',
   D1: 'Image patches',
   D2: 'Diffusion',
@@ -102,7 +102,7 @@ export const STOP_NAMES: Record<string, string> = {
   S1: 'Thinking tokens',
   R1: 'The Ledger',
   R2: 'Debug the Bot',
-  W1: 'Read the call',
-  W2: 'Run the tool',
+  W1: 'Read the request',
+  W2: 'Run the calculator',
   W3: 'Paste the result'
 }

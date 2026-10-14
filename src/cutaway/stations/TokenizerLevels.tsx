@@ -6,7 +6,7 @@ import { TokenText } from '../../ui/TokenText'
 import { Cutaway, Level, LevelText, Vis } from '../Cutaway'
 import { MapLevel } from '../MapLevel'
 
-const EXAMPLES = [' strawberry', 'strawberry', 'Strawberry', 'Syllabus', '¿Qué necesito en el final?', 'naïve café 🚇']
+const EXAMPLES = [' strawberry', 'strawberry', 'Strawberry', 'buttermilk', '¿Cuánta harina necesito?', 'naïve café 🚇']
 const HERO_PIECES: Piece[] = HERO_TOKENS.user.map((text, i) => ({ text, id: USER_IDS[i] }))
 
 export function TokenizerLevels({ station }: { station: Station }) {
@@ -57,7 +57,7 @@ export function TokenizerLevels({ station }: { station: Station }) {
               <div className="v-chips" aria-live="polite">
                 {pieces.slice(0, 72).map((p, i) => (
                   <span key={`${i}-${p.id}`} className="v-chip">
-                    <b className={!byLetter && p.id === 127031 ? 'hot' : ''}><TokenText text={p.text} /></b>
+                    <b className={!byLetter && p.id === 28420 ? 'hot' : ''}><TokenText text={p.text} /></b>
                     {!byLetter && <small>{p.id}</small>}
                   </span>
                 ))}
@@ -84,7 +84,7 @@ export function TokenizerLevels({ station }: { station: Station }) {
             <div className="v-col">
               <div className="formula">vocabulary = bytes + merge<sub>1</sub> + merge<sub>2</sub> + … + merge<sub>n</sub></div>
               <div className="worked">
-                common pieces become one token: “ syllabus” = <b>127031</b>
+                common pieces become one token: “ flour” = <b>28420</b>
                 <br />
                 your text: {chars} characters, {pieces.length} {byLetter ? 'letters' : 'tokens'}, about <b>{ratio}</b> characters each
                 <br />
