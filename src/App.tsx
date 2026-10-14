@@ -1,6 +1,7 @@
 import { Home } from './pages/Home'
 import { StationPage } from './pages/StationPage'
 import { useHashRoute } from './lib/router'
+import { SoundToggle } from './ui/SoundToggle'
 
 export function App() {
   const route = useHashRoute()
@@ -11,6 +12,7 @@ export function App() {
       <footer className="site-foot">
         <span>Prompt Life 1.0 alpha · rebuild branch</span>
         <span>Progress stays on this device.</span>
+        <SoundToggle />
       </footer>
     </div>
   )

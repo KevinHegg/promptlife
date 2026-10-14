@@ -6,6 +6,9 @@ import { VoteLevels } from '../cutaway/stations/VoteLevels'
 import { LINES, STATIONS, stationByCode } from '../data/network'
 import { STATION_CONTENT } from '../data/stationContent'
 import { cutawayData } from '../data/cutawayData'
+import { phase1 } from '../data/phase1'
+import { StationLoop } from '../loop/StationLoop'
+import { LOOPS } from '../stations'
 import { MetroMap } from '../map/MetroMap'
 import { markVisited } from '../lib/progress'
 import { hrefFor } from '../lib/router'
@@ -39,6 +42,7 @@ export function StationPage({ code }: { code: string }) {
   }, [station])
   if (!station || !content) return null
 
+  const loop = LOOPS[code]
   const i = STATIONS.findIndex((s) => s.code === code)
   const prev = STATIONS[i - 1]
   const next = STATIONS[i + 1]
@@ -55,6 +59,7 @@ export function StationPage({ code }: { code: string }) {
           focus={station.code}
           litLines={content.transfers}
           showTrain={false}
+          arriveAt={station.x}
           label={`Map strip around ${station.code} ${station.name}`}
         />
       </div>
@@ -68,11 +73,12 @@ export function StationPage({ code }: { code: string }) {
         </div>
       </header>
 
-      {content.cutaway === 'tokenizer' && <TokenizerLevels station={station} />}
-      {content.cutaway === 'attention' && <AttentionLevels station={station} views={cutawayData.attention} />}
-      {content.cutaway === 'stack' && <StackLevels station={station} view={cutawayData.floors} />}
-      {content.cutaway === 'vote' && <VoteLevels station={station} view={cutawayData.vote} />}
-      {!content.cutaway && (
+      {loop && <StationLoop key={code} spec={loop} />}
+      {!loop && content.cutaway === 'tokenizer' && <TokenizerLevels station={station} />}
+      {!loop && content.cutaway === 'attention' && <AttentionLevels station={station} views={cutawayData.attention} />}
+      {!loop && content.cutaway === 'stack' && <StackLevels station={station} view={cutawayData.floors} />}
+      {!loop && content.cutaway === 'vote' && <VoteLevels station={station} positions={phase1.votePositions} exactTail={phase1.real} />}
+      {!loop && !content.cutaway && (
         <div className="closed-window">
           <span className="closed-hole" aria-hidden="true" />
           <div>
@@ -82,7 +88,7 @@ export function StationPage({ code }: { code: string }) {
         </div>
       )}
 
-      {content.cutaway && (
+      {!loop && content.cutaway && (
         <p className="coming"><b>Coming next here:</b> {content.coming}</p>
       )}
 

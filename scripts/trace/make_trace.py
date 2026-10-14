@@ -245,6 +245,46 @@ def token_src(labels, text, s, e):
     return max(counts, key=lambda lab: (counts[lab], -SRC_PRIORITY.index(lab)))
 
 
+def build_hero(tok, sc=SCENARIO):
+    """
+    Render the hero conversation with the model's chat template, tokenize it, and label
+    every token's source. Shared by make_trace.py and make_phase1.py so token positions
+    are identical in both outputs.
+    """
+    notes = []
+    # Prefer the template's native tool calling; if the template silently drops the tool
+    # call (no tool support), fall back to describing the tool ourselves.
+    native_tools = True
+    msgs = build_messages(sc, native_tools=True)
+    if sc["toolExpression"] not in render(tok, msgs):
+        native_tools = False
+        msgs = build_messages(sc, native_tools=False)
+        notes.append("This chat template has no native tool calling: the calculator is "
+                     "described in the system message by the script and the call is written as "
+                     "'<tool_call>{json}</tool_call>' text in the assistant turn (fallback mode).")
+    text, char_labels, gen_ranges, note_bits = label_characters(tok, sc, msgs)
+    gen_prompt_str = render(tok, msgs[:2], add_generation_prompt=True)[len(render(tok, msgs[:2])):]
+    if sc["toolExpression"] not in text or sc["toolResult"] not in text:
+        sys.exit("The rendered conversation is missing the tool call or tool result.")
+    enc = tok(text, add_special_tokens=False, return_offsets_mapping=True)
+    ids = enc["input_ids"]
+    offsets = enc["offset_mapping"]
+    templ_ids = tok.apply_chat_template(msgs, tools=TOOLS, tokenize=True)
+    if list(templ_ids) != list(ids):
+        notes.append("WARNING: re-tokenizing the rendered text differs from "
+                     "apply_chat_template(tokenize=True); using the re-tokenized ids.")
+    tokens = []
+    gen_positions = []
+    for i, (tid, (s, e)) in enumerate(zip(ids, offsets)):
+        src = token_src(char_labels, text, s, e)
+        tokens.append({"i": i, "id": int(tid), "text": dec(tok, tid), "src": src})
+        if any(g0 <= s < g1 for g0, g1, _ in gen_ranges):
+            gen_positions.append(i)
+    return {"msgs": msgs, "text": text, "ids": list(ids), "tokens": tokens,
+            "gen_positions": gen_positions, "note_bits": note_bits, "notes": notes,
+            "native_tools": native_tools, "gen_prompt_str": gen_prompt_str}
+
+
 # --------------------------------------------------------------------------------------
 # 2. Analysis helpers
 # --------------------------------------------------------------------------------------
@@ -335,35 +375,11 @@ def main():
             license_str = "unknown (check the model card)"
 
     # ---- render + label ----------------------------------------------------------------
-    # Prefer the template's native tool calling; if the template silently drops the tool
-    # call (no tool support), fall back to describing the tool ourselves.
-    native_tools = True
-    msgs = build_messages(sc, native_tools=True)
-    if sc["toolExpression"] not in render(tok, msgs):
-        native_tools = False
-        msgs = build_messages(sc, native_tools=False)
-        notes.append("This chat template has no native tool calling: the calculator is "
-                     "described in the system message by the script and the call is written as "
-                     "'<tool_call>{json}</tool_call>' text in the assistant turn (fallback mode).")
-    text, char_labels, gen_ranges, note_bits = label_characters(tok, sc, msgs)
-    gen_prompt_str = render(tok, msgs[:2], add_generation_prompt=True)[len(render(tok, msgs[:2])):]
-    if sc["toolExpression"] not in text or sc["toolResult"] not in text:
-        sys.exit("The rendered conversation is missing the tool call or tool result.")
-    enc = tok(text, add_special_tokens=False, return_offsets_mapping=True)
-    ids = enc["input_ids"]
-    offsets = enc["offset_mapping"]
-    templ_ids = tok.apply_chat_template(msgs, tools=TOOLS, tokenize=True)
-    if list(templ_ids) != list(ids):
-        notes.append("WARNING: re-tokenizing the rendered text differs from "
-                     "apply_chat_template(tokenize=True); using the re-tokenized ids.")
-
-    tokens = []
-    gen_positions = []
-    for i, (tid, (s, e)) in enumerate(zip(ids, offsets)):
-        src = token_src(char_labels, text, s, e)
-        tokens.append({"i": i, "id": int(tid), "text": dec(tok, tid), "src": src})
-        if any(g0 <= s < g1 for g0, g1, _ in gen_ranges):
-            gen_positions.append(i)
+    hero = build_hero(tok, sc)
+    notes += hero["notes"]
+    msgs, ids, tokens = hero["msgs"], hero["ids"], hero["tokens"]
+    gen_positions, note_bits = hero["gen_positions"], hero["note_bits"]
+    native_tools, gen_prompt_str = hero["native_tools"], hero["gen_prompt_str"]
     T = len(ids)
 
     # ---- one forward pass --------------------------------------------------------------
@@ -581,8 +597,10 @@ def main():
                                                  add_generation_prompt=True)
             pid = torch.tensor([prompt_ids], device=args.device)
             with torch.no_grad():
+                # Pure greedy: override Qwen's generation_config.json, which sets
+                # repetition_penalty=1.1 and would otherwise apply even with do_sample=False.
                 g = model.generate(pid, attention_mask=torch.ones_like(pid),
-                                   max_new_tokens=60, do_sample=False,
+                                   max_new_tokens=60, do_sample=False, repetition_penalty=1.0,
                                    temperature=None, top_p=None, top_k=None)
             greedy[name] = tok.decode(g[0][len(prompt_ids):], skip_special_tokens=False)
         timings["greedy_s"] = time.time() - t0

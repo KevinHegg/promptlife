@@ -61,6 +61,37 @@ The scenario text lives in `SCENARIO` at the top of `make_trace.py` and must mat
 - venv: ~500 MB on disk. Install takes ~2 min the first time and ~50 s from the pip cache.
 - Output JSON: ~125 KB.
 
+## Phase 1 extras: `make_phase1.py`
+
+```sh
+~/.cache/promptlife/trace-venv/bin/python scripts/trace/make_phase1.py   # -> src/data/traces/phase1.json
+```
+
+It uses the same model, scenario and token positions; it imports `build_hero` from
+`make_trace.py` and checks the token ids against `hero-trace.json`. It never rewrites
+`hero-trace.json`. It takes about 50 s on CPU (about 24 s of that is sampling) and writes about
+320 KB:
+
+- **`votePositions`**: pos 249 (tool-call start), pos 313 (`' a'` / `' '` / `' an'`), and the
+  highest-entropy word in the reply (pos 324, `' achieve'` vs `' get'`). Each has the exact
+  top-500 `{id, text, logit}` and a `tail` that bins every other real vocab row by logit
+  (width 0.5, bin centers). The app's softmax at any temperature is the top-500 terms plus
+  `count * exp(center / T)` per bin; at T in [0.7, 2] the error is at most 1.5e-3. Qwen's 271
+  padding rows (ids >= 151665) are dropped.
+- **`temperatureRuns`**: the reply turn is sampled from tokens 0..308 at T = 0 (greedy, `seed:
+  null`), 0.7, 1.0, 1.5 and 2.0 (seeds 1-3). It uses pure temperature (no top-k, top-p or
+  repetition penalty), up to 40 tokens, and stops at `<|im_end|>` / `<|endoftext|>`.
+- **`freeFirstTurn`**: unforced greedy first turn (up to 260 tokens), plus a variant with
+  " Use the calculator tool for any arithmetic." added to the system prompt.
+- **`letters`**: the question re-fed as 60 single-character tokens instead of 18 normal ones.
+- **`beat`**: `thinkLike` (5 hero positions, top-200) and `sentences` (10 verbatim
+  public-domain lines, scored without a chat template, top-200).
+
+Pure greedy is not HF's default here. Qwen's `generation_config.json` sets
+`repetition_penalty=1.1`, which `generate()` applies even with `do_sample=False`. Both scripts
+now turn it off. The two "Unforced greedy" notes in the current `hero-trace.json` predate that
+fix.
+
 ## What the script does
 
 1. Renders the conversation with `tokenizer.apply_chat_template(..., tools=[calculator])`.

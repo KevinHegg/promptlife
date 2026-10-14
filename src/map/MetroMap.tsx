@@ -12,6 +12,8 @@ type Props = {
   /** Whether stations link to their pages. */
   linked?: boolean
   showTrain?: boolean
+  /** Static maps: a train that glides into the station at this x when the page opens. */
+  arriveAt?: number
   label: string
   className?: string
   svgRef?: React.Ref<SVGSVGElement>
@@ -51,7 +53,7 @@ const LABELS: Label[] = [
 
 const BRANCH_ORDER: Exclude<LineId, 'P'>[] = ['L', 'G', 'D', 'A', 'S', 'R', 'W']
 
-export function MetroMap({ viewBox = '0 0 1120 490', focus, litLines = [], linked = true, showTrain = true, label, className, svgRef }: Props) {
+export function MetroMap({ viewBox = '0 0 1120 490', focus, litLines = [], linked = true, showTrain = true, arriveAt, label, className, svgRef }: Props) {
   const uid = useId().replace(/:/g, '')
   const glow = `glow-${uid}`
   const arrow = `arrow-${uid}`
@@ -96,6 +98,15 @@ export function MetroMap({ viewBox = '0 0 1120 490', focus, litLines = [], linke
         <g data-train="" transform={`translate(70,${MAIN_Y})`}>
           <rect className="train-body" x="-15" y="-8" width="30" height="16" rx="8" />
           <rect className="train-win" x="-8" y="-3.5" width="16" height="7" rx="3" />
+        </g>
+      )}
+
+      {arriveAt !== undefined && (
+        <g transform={`translate(${arriveAt},${MAIN_Y})`}>
+          <g className="arriving">
+            <rect className="train-body" x="-15" y="-8" width="30" height="16" rx="8" />
+            <rect className="train-win" x="-8" y="-3.5" width="16" height="7" rx="3" />
+          </g>
         </g>
       )}
 

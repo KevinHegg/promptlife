@@ -5,6 +5,8 @@ import { LiveRun } from '../map/LiveRun'
 import { readVisited } from '../lib/progress'
 import { hrefFor } from '../lib/router'
 import { Roundel } from '../ui/Roundel'
+import { LOOPS } from '../stations'
+import { Pass } from './Pass'
 
 const BRANCHES: LineId[] = ['L', 'W', 'G', 'A', 'S', 'D', 'R']
 
@@ -15,7 +17,7 @@ export function Home() {
       <header className="masthead">
         <p className="kicker">Prompt Life · a living map of how language models work</p>
         <h1>Ride along with one question.</h1>
-        <p className="lede">A student asks an AI for help with a grade. Follow that question through a real model, station by station, then open any station to see the machinery inside.</p>
+        <p className="lede">A student asks an AI for help with a grade. Follow that question through a real model, station by station, then stop at any station to see the machinery inside.</p>
       </header>
 
       <LiveRun />
@@ -23,7 +25,7 @@ export function Home() {
       <section className="stations" aria-labelledby="stations-title">
         <div className="section-head">
           <h2 id="stations-title">Stations</h2>
-          <p className="muted">Open windows are lit. The rest open as the rebuild continues.</p>
+          <p className="muted">Stations marked “full loop” have the complete five-minute stop. Others open a window or are coming soon.</p>
         </div>
         <ol className="station-grid">
           {STATIONS.map((s) => {
@@ -36,6 +38,7 @@ export function Home() {
                   <span className="sc-body">
                     <span className="sc-name">{s.name}</span>
                     <span className="sc-line">{s.oneLiner}</span>
+                    {LOOPS[s.code] ? <span className="sc-tag">full loop</span> : open ? <span className="sc-tag dim">window</span> : null}
                   </span>
                   <span className={`sc-lamp${visited.has(s.code) ? ' on' : ''}`} aria-label={visited.has(s.code) ? 'visited' : 'not visited yet'} />
                 </a>
@@ -44,6 +47,8 @@ export function Home() {
           })}
         </ol>
       </section>
+
+      <Pass />
 
       <section className="branch-list" aria-labelledby="lines-title">
         <div className="section-head">
