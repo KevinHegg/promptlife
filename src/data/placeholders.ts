@@ -3,9 +3,11 @@
  * Every screen that shows these says so.
  */
 export type AttentionView = {
+  /** Short name for a head picker, e.g. "Induction head". */
+  name: string
   label: string
   query: string
-  tokens: { text: string; w: number }[] // earlier tokens (and the query itself, last)
+  tokens: { text: string; w: number; pos?: number; src?: string }[] // earlier tokens (and the query itself, last)
   real: boolean
   source?: string
 }
@@ -13,6 +15,8 @@ export type AttentionView = {
 export type FloorView = {
   context: string
   floors: { layer: number; guess: string; prob: number }[] // top of the building first
+  /** What the floors below the shown ones look like, e.g. "Layers 1–19: no clear guess yet". */
+  below?: string
   real: boolean
   source?: string
 }
@@ -25,6 +29,7 @@ export type VoteView = {
 }
 
 export const PLACEHOLDER_ATTENTION: AttentionView = {
+  name: 'Example head',
   label: 'where “final” looks',
   query: ' final',
   tokens: [

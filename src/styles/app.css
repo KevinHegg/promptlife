@@ -169,7 +169,7 @@ section { display: flex; flex-direction: column; gap: 16px; }
 /* ---------- die-cut cutaway ---------- */
 .cutaway { display: flex; flex-direction: column; gap: 12px; }
 .cut-fig {
-  --hx: 68%; --hy: 50%; --hx2: 92%; --hy2: 86%; --r1: 60px; --r2: 0px;
+  --hx: 68%; --hy: 50%; --hx2: 7%; --hy2: 88%; --r1: 60px; --r2: 0px;
   position: relative; margin: 0 10px 10px 0; height: 420px; border-radius: 16px; overflow: hidden;
   box-shadow: 5px 5px 0 -1px var(--lv2), 10px 10px 0 -2px var(--lv3), 10px 10px 0 -1px var(--rule);
   transition: --r1 0.8s cubic-bezier(0.6, 0, 0.2, 1), --r2 0.8s cubic-bezier(0.6, 0, 0.2, 1);
@@ -223,6 +223,9 @@ section { display: flex; flex-direction: column; gap: 16px; }
 .v-examples { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
 .chip-btn { font-family: var(--font-mono); font-size: 0.75rem; white-space: pre; border-radius: 999px; padding: 3px 10px; border: 1px solid var(--lv2-dim); background: transparent; color: var(--lv2-ink); cursor: pointer; }
 .chip-btn:hover { border-color: var(--doing); color: var(--doing); }
+.chip-btn[aria-pressed="true"] { background: var(--doing); border-color: var(--doing); color: var(--doing-ink); }
+.head-label { font-family: var(--font-mono); font-size: 0.8rem !important; color: var(--doing); }
+.v-below { font-family: var(--font-mono); font-size: 0.74rem; color: var(--lv2-dim); border-top: 1px dashed var(--lv2-dim); padding-top: 6px; width: 100%; max-width: 440px; text-align: center; }
 .v-count { font-family: var(--font-mono); font-size: 0.85rem; color: var(--lv2-dim); }
 .v-count b { color: var(--doing); font-size: 1.05rem; }
 .v-toggle { display: inline-flex; gap: 8px; align-items: center; font-family: var(--font-display); font-weight: 600; font-size: 0.88rem; color: var(--lv2-ink); cursor: pointer; }
@@ -246,6 +249,7 @@ section { display: flex; flex-direction: column; gap: 16px; }
 .v-attn .chipbox.hot { stroke: var(--doing); }
 .v-attn text { font-family: var(--font-mono); font-size: 12px; fill: var(--lv2-ink); }
 .v-attn .w { font-size: 10px; fill: var(--lv2-dim); }
+.v-attn .src { font-size: 9px; font-style: italic; }
 .v-attn .arc { fill: none; stroke: var(--doing); stroke-linecap: round; }
 .formula { font-family: var(--font-body); font-style: italic; font-size: clamp(1.05rem, 2vw, 1.3rem); line-height: 1.7; text-align: center; color: var(--ink); background: var(--lv3); padding: 10px 16px; border-radius: 8px; border: 1px solid var(--lv3-grid); }
 .formula sub, .formula sup { font-size: 0.65em; }
@@ -262,7 +266,7 @@ section { display: flex; flex-direction: column; gap: 16px; }
   body { padding-inline: 16px; }
   .station-grid, .lines { grid-template-columns: minmax(0, 1fr); }
   .bout { grid-template-columns: minmax(0, 1fr); }
-  .cut-fig { height: 640px; --hx: 50%; --hy: 68%; --hx2: 88%; --hy2: 96%; --r1: 52px; }
+  .cut-fig { height: 640px; --hx: 50%; --hy: 68%; --hx2: 10%; --hy2: 96%; --r1: 52px; }
   .cut-fig.tall { height: 720px; --hy: 66%; }
   .cut-fig[data-depth="1"] { --r1: 1200px; --r2: 28px; }
   .lv-in { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); }

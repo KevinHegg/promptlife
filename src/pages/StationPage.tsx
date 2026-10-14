@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { AttentionLevels } from '../cutaway/stations/AttentionLevels'
 import { StackLevels } from '../cutaway/stations/StackLevels'
 import { TokenizerLevels } from '../cutaway/stations/TokenizerLevels'
@@ -11,15 +11,29 @@ import { markVisited } from '../lib/progress'
 import { hrefFor } from '../lib/router'
 import { Roundel } from '../ui/Roundel'
 
-function stripViewBox(x: number) {
-  const w = 440
+/** A slim band of map around the station, drawn at roughly 1:1 so labels stay legible at any width. */
+function stripViewBox(x: number, pixelWidth: number) {
+  const w = Math.max(380, Math.min(1120, pixelWidth))
   const left = Math.max(0, Math.min(1120 - w, x - w / 2))
-  return `${left} 140 ${w} 230`
+  return `${left} 178 ${w} 150`
+}
+
+function useWidth<T extends HTMLElement>() {
+  const ref = useRef<T>(null)
+  const [width, setWidth] = useState(720)
+  useEffect(() => {
+    if (!ref.current) return
+    const ro = new ResizeObserver(([entry]) => setWidth(entry.contentRect.width))
+    ro.observe(ref.current)
+    return () => ro.disconnect()
+  }, [])
+  return [ref, width] as const
 }
 
 export function StationPage({ code }: { code: string }) {
   const station = stationByCode(code)
   const content = STATION_CONTENT[code]
+  const [stripRef, stripWidth] = useWidth<HTMLDivElement>()
   useEffect(() => {
     if (station) markVisited(station.code)
   }, [station])
@@ -35,9 +49,9 @@ export function StationPage({ code }: { code: string }) {
         <a href="#/">← Map</a>
       </nav>
 
-      <div className="strip">
+      <div className="strip" ref={stripRef}>
         <MetroMap
-          viewBox={stripViewBox(station.x)}
+          viewBox={stripViewBox(station.x, stripWidth)}
           focus={station.code}
           litLines={content.transfers}
           showTrain={false}
@@ -55,7 +69,7 @@ export function StationPage({ code }: { code: string }) {
       </header>
 
       {content.cutaway === 'tokenizer' && <TokenizerLevels station={station} />}
-      {content.cutaway === 'attention' && <AttentionLevels station={station} view={cutawayData.attention} />}
+      {content.cutaway === 'attention' && <AttentionLevels station={station} views={cutawayData.attention} />}
       {content.cutaway === 'stack' && <StackLevels station={station} view={cutawayData.floors} />}
       {content.cutaway === 'vote' && <VoteLevels station={station} view={cutawayData.vote} />}
       {!content.cutaway && (

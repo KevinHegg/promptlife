@@ -11,7 +11,7 @@
   --main: #121E72;
 
   /* line colors */
-  --l-gate: #B23A4E;
+  --l-gate: #4E8A2E;
   --l-dark: #1D66C9;
   --l-library: #0B8A86;
   --l-academy: #6447E8;
@@ -55,7 +55,7 @@
   :root:not([data-theme="light"]) {
     --paper: #0A0F2C; --sheet: #111842; --ink: #E9ECFA; --ink-2: #A9B1D6; --rule: #2A3366;
     --tint: #1A2253; --tint-2: #222B60; --accent: #3FD3CE; --main: #C9D0F5;
-    --l-gate: #F0788A; --l-dark: #74B2FF; --l-library: #3FD3CE; --l-academy: #A991FF;
+    --l-gate: #9BD66E; --l-dark: #74B2FF; --l-library: #3FD3CE; --l-academy: #A991FF;
     --l-workshop: #F2B85B; --l-scratch: #F39BC6; --l-reply: #9AA4C8;
     --doing: #F2B85B; --doing-ink: #2B1C00; --lamp-off: #2B3366; --flash: #FFF3B0;
     --lv2: #050824; --lv2-ink: #EEF0FF; --lv2-dim: #9AA3D8; --lv2-line: #1E2766;
@@ -66,7 +66,7 @@
 :root[data-theme="dark"] {
   --paper: #0A0F2C; --sheet: #111842; --ink: #E9ECFA; --ink-2: #A9B1D6; --rule: #2A3366;
   --tint: #1A2253; --tint-2: #222B60; --accent: #3FD3CE; --main: #C9D0F5;
-  --l-gate: #F0788A; --l-dark: #74B2FF; --l-library: #3FD3CE; --l-academy: #A991FF;
+  --l-gate: #9BD66E; --l-dark: #74B2FF; --l-library: #3FD3CE; --l-academy: #A991FF;
   --l-workshop: #F2B85B; --l-scratch: #F39BC6; --l-reply: #9AA4C8;
   --doing: #F2B85B; --doing-ink: #2B1C00; --lamp-off: #2B3366; --flash: #FFF3B0;
   --lv2: #050824; --lv2-ink: #EEF0FF; --lv2-dim: #9AA3D8; --lv2-line: #1E2766;

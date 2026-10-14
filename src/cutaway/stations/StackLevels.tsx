@@ -17,7 +17,7 @@ export function StackLevels({ station, view }: { station: Station; view: FloorVi
             title="Ride the elevator"
             note={view.real ? view.source : 'Placeholder guesses. The trace pipeline will read real ones from every layer.'}
           >
-            <p>After “{view.context}”, read the model's best guess for the next token at each floor. Low floors guess common words. High floors settle on the answer.</p>
+            <p>After “{view.context}”, read the model's best guess for the next token at each floor. {view.real ? 'In this small model the answer appears only near the top.' : 'Low floors guess common words. High floors settle on the answer.'}</p>
           </LevelText>
           <Vis>
             <div className="v-col">
@@ -30,6 +30,7 @@ export function StackLevels({ station, view }: { station: Station; view: FloorVi
                   </div>
                 ))}
               </div>
+              {view.below && <div className="v-below">{view.below}</div>}
               <div className="v-cap">bar length = how sure that floor is of its top guess</div>
             </div>
           </Vis>
