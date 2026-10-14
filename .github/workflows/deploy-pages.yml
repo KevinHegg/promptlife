@@ -33,8 +33,31 @@ jobs:
       - name: Typecheck
         run: npm run typecheck
 
+      - name: Test
+        run: npm test
+
       - name: Build
         run: npm run build:pages
+
+      # The September 2026 field guide is archived as the tag legacy-field-guide-v1.0.0
+      # and stays readable at /promptlife/archive/field-guide/.
+      - name: Check out the archived field guide
+        uses: actions/checkout@v4
+        with:
+          ref: legacy-field-guide-v1.0.0
+          path: archive-field-guide
+
+      - name: Build the archived field guide
+        working-directory: archive-field-guide
+        run: |
+          npm ci
+          npx vite build --base=/promptlife/archive/field-guide/ --outDir ../dist/archive/field-guide --emptyOutDir
+
+      - name: Add the archive index and old-address redirects
+        run: node scripts/pages-extras.mjs
+
+      - name: Verify Pages paths
+        run: node scripts/verify-pages.mjs
 
       - name: Configure Pages
         uses: actions/configure-pages@v5

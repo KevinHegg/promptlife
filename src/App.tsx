@@ -10,8 +10,9 @@ export function App() {
     <div className="wrap">
       <main>{station ? <StationPage key={station} code={station} /> : <Home />}</main>
       <footer className="site-foot">
-        <span>Prompt Life 1.0 alpha · rebuild branch</span>
+        <span>Prompt Life 2.0 alpha</span>
         <span>Progress stays on this device.</span>
+        {import.meta.env.PROD && <a href="./archive/">Earlier versions</a>}
         <SoundToggle />
       </footer>
     </div>
