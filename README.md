@@ -1,71 +1,136 @@
 # Prompt Life
 
-An interactive field guide to language models for curious, serious readers. Nine connected chapters place generative models in AI's broader landscape and history, then explain generation, training, transformers, context, retrieval, tools, and evaluation through readable explanations and illustrations and step-through simulations.
+Prompt Life is a mobile-first learning app about large language models for smart non-technical but academic audiences: advanced high-school students, first-year college students, faculty, higher-ed IT leaders, and PhDs outside computer science.
 
-**Read the course:** https://kevinhegg.github.io/promptlife/
+The through-line is a day in the life of a prompt. The app follows one prompt from pretraining and fine-tuning through inference, tokenization, embeddings, tensors, attention, MLPs, hidden states, logits, softmax, sampling, autoregression, context windows, diffusion, multimodal AI, and risk literacy.
 
-**Original version:** https://github.com/KevinHegg/promptlife-legacy — complete pre-redesign history, also preserved as `legacy-v0.28.12` in this repository.
+## Run Locally
 
-## Run locally
+From this project folder:
 
-Use Node.js 22.17 or newer within the Node 22 LTS line (the deployment workflow uses Node 22).
-
-```sh
-npm ci
+```bash
+cd ~/Desktop/promptlife
+npm install
 npm run dev
 ```
 
-Open the local address printed by Vite. No API keys, accounts, or backend are required. Fonts are requested from Google Fonts with local serif/sans-serif fallbacks; model calculations and reading progress stay in the browser.
+Open the local URL printed by Vite. In this workspace it is usually:
 
-## Validate and build
-
-```sh
-npm run typecheck
-npm test
-npm run build:pages
+```text
+http://localhost:5173/
 ```
 
-`build:pages` sets `/promptlife/` explicitly and works across Windows, macOS, and Linux. `npm run build` makes a root-path build. Output goes to `dist/`.
+## Build
 
-Pushes to `main` run type checking, calculation/content/persistence tests, and the Pages build, then deploy through the existing GitHub Actions workflow. The repository identity, Pages settings, and public address are preserved.
+```bash
+npm run typecheck
+npm run build
+```
 
-## What is implemented
+The production build is written to `dist/`.
 
-- Nine illustrated chapters with developed introductions, examples, connections between chapters, optional fuller explanations, and primary sources.
-- Nine simulations with 72 steps in total. Only Back, Next, and Restart control the simulations; numbers, tables, and visual states share one compact frame.
-- An eleven-milestone AI/ML timeline and a seven-step comparison of autoregressive generation and text denoising, with six positions in each track.
-- A 15-step transformer journey follows “bank” through tokens, IDs, embedding lookup, changing hidden states, and next-token prediction. Stored embeddings and working representations are explicitly distinguished.
-- Worked math guides explain softmax, temperature, sampling, loss, gradients, vector addition, output projection, and context budgets. The optional transformer reading includes a separate attention-mixture example.
-- Calculated probabilities, one-weight training, illustrative vector additions/output scores, and context packing; authored transformer updates, evidence, tool, and evaluation scenarios.
-- A searchable, alphabetical glossary, with term links in lessons and links back to their chapters.
-- Mobile contents, keyboard controls, direct chapter/simulation links, and device-local reading progress.
-- No notebook, login, badges, progression gates, or live-model calls.
+## Audits
 
-## Code map
+```bash
+npm run audit:answers
+npm run audit:checkpoints
+```
 
-| File | Responsibility |
-|---|---|
-| `src/book/content.ts` | Fuller explanations, glossary, source links |
-| `src/book/lessons.ts` | Lesson introductions, connections, and typed visual scene data |
-| `src/book/model.ts` | Pure calculations and illustrative records |
-| `src/book/Simulation.tsx` | Shared step controls, token canvases, and calculated tables |
-| `src/book/TokenJourney.tsx` | Persistent token identity, vector displays, and context-flow SVG |
-| `src/book/tokenJourneyModel.ts` | Authored vocabulary/updates and calculated vector additions/output scores |
-| `src/book/MathGuide.tsx` | Worked examples and plain-language explanations of notation |
-| `src/book/Timeline.tsx` | Detailed historical milestones with source links |
-| `public/illustrations/` | Nine lesson SVG files |
-| `scripts/generate-lesson-illustrations.mjs` | Reproducible SVG source |
-| `src/book/progress.ts` | Device-local progress validation |
-| `src/book/main.tsx` | Routes, lessons, course, simulations, glossary |
-| `src/book/guide.css` | Responsive visual system |
-| `scripts/core.test.mjs` | Numerical, content, and progress checks |
+`audit:answers` checks answer randomization surfaces and also runs the checkpoint-bank audit. `audit:checkpoints` validates the live Journey checkpoints, the draft v0.27.7 checkpoint question bank review files, the draft-only v0.27.8 model-thinking checkpoint pilot, the v0.27.9 first-six bank, the v0.27.10 first-twelve bank, and the active-development v0.27.12 all-card checkpoint bank.
 
-The old application source and decorative assets are preserved in the legacy repository and tag. Historical documents under `docs/` refer to that version; [the redesign release note](docs/REDESIGN_RELEASE.md) describes the active implementation and restoration approach.
+## Checkpoint Bank Fallback
 
-## Learning and data boundaries
+All 39 Journey learning cards use the v0.27.12 model-thinking checkpoint bank by default. To restore the previous single-question checkpoints for every card, add either query parameter:
 
-The simulations use transparent toy calculations or authored scenarios. They are not recorded outputs from a frontier model. Fictional archive records are explicitly labeled. The one-weight model is deliberately much smaller than an LLM.
+```text
+?legacyCheckpoints=1
+?checkpointBank=legacy
+```
 
-Reading progress uses `promptlife:progress:v1` in browser storage. It is device-local and may be cleared by browser settings. The notebook and its import/export and migration code have been removed; no accounts or synchronization are needed.
+## Export Lesson Review PDF
 
-The first edition needs learner testing and independent technical/editorial review. Passing software checks does not establish educational effectiveness or a complete accessibility audit.
+```bash
+npm run export:lesson-pdf
+```
+
+This writes the default review deck to:
+
+```text
+docs/review/prompt-life-lesson-cards-v0-9-3.pdf
+```
+
+For the curriculum inventory pass, run:
+
+```bash
+npm run export:lesson-cards
+```
+
+This writes the inventory review deck to:
+
+```text
+docs/content-inventory/prompt-life-lesson-cards-v0-9-3-visual-system.pdf
+```
+
+## Test On A Phone
+
+For a same-Wi-Fi phone test without deploying, run Vite on your local network:
+
+```bash
+cd ~/Desktop/promptlife
+npm run dev -- --host 0.0.0.0
+```
+
+Then open the Network URL Vite prints, usually in this shape:
+
+```text
+http://YOUR-MAC-LAN-IP:5173/
+```
+
+The repo also includes a GitHub Pages workflow. Pushes to `main` build the app with the `/promptlife/` base path and deploy it to:
+
+```text
+https://kevinhegg.github.io/promptlife/
+```
+
+Developer cache note for iPhone testing: after a `main` deploy, use a hard refresh, clear site data, add a cache-busting query such as `?v=02712`, or confirm the visible app version on the Badge page.
+
+## Reset Progress
+
+Progress is stored in this browser's `localStorage`, not cookies. Use the Badge screen's `Reset progress` button to start over on this device. Reset clears lessons, exercises, shared Play challenge progress, Glossary Dojo practice, Prompt Run progress, reflections, legacy mini-game insights, tours, and last location.
+
+For local debugging, add `?debug=1` to the app URL and open the Badge screen to reveal progress tools. See [docs/STORAGE_AND_RESET.md](docs/STORAGE_AND_RESET.md) for the exact keys and reset behavior.
+
+## Current Features
+
+- Vite + React app shell.
+- Mobile-first layout tuned for 390px width.
+- Simple navigation: Home, Journey, Play, Glossary, Badge.
+- Consistent lesson pattern: definition, where it happens, why it matters, relationship, metaphor, Brain Bridge, visual aid, tiny interaction, checkpoint, and reflection.
+- Reusable exercise system in Journey, Play challenges, and Prompt Run.
+- LocalStorage progress for completed lessons, exercises, shared Play challenge practice, Glossary Dojo rounds, legacy game insights, reflections, and the current location.
+- Lightweight React/SVG/CSS concept animations with reduced-motion support.
+- Lightweight lesson visual aids plus review routes at `/review/lesson-cards` and `/review/visual-aids`.
+- Lesson-card PDF export through `npm run export:lesson-pdf` and inventory review export through `npm run export:lesson-cards`.
+- v0.9 Batch 2 lessons for Inference, Prompt vs Response, Tokenization, Token IDs, Embeddings, Vectors, and Tensors.
+- v0.9.2 canonical pet-conflict example used across Prompt vs Response, tokenization, token IDs, embeddings, vectors, tensors, exercises, Prompt Run, glossary examples, and review PDFs.
+- v0.9.3 visual-aid system reset with RAG and Retrieval rebuilt as the gold-standard open-book retrieval visual.
+- v0.13 dedicated Journey cards for RAG, Grounding, and Hallucinations, plus a content-freeze candidate review.
+- v0.14 Glossary A-Z/Learning path sorting and Journey path filters for Essential, Deep, and Ethics.
+- v0.15 eight-section Journey narrative with clickable stage links and late-day sections for Twilight, Midnight Ledger, and New Dawn.
+- HTML legend/callout visual aid system designed to stay readable in mobile and PDF review.
+- Play mode with five calm practice challenges:
+  - Glossary Dojo
+  - Attention Match
+  - Probability Picker
+  - Context Stack
+  - Prompt Run capstone
+- Glossary screen plus accessible glossary drawer.
+- Retired Play compatibility routes for earlier Attention Weave, Token Pipeline Relay, and How AI Learns states, kept so older saved progress is not lost.
+- Model Literate badge screen focused on progress and reflection rather than scores.
+- Accessibility basics: semantic HTML, visible focus states, image alt text, real buttons, and reduced-motion support.
+
+## Product Principle
+
+One screen, one idea. One interaction, one relationship. Keep text in HTML for accessibility. Use visual assets to reduce mystery, not to hide the explanation.
+
+See [docs/PRODUCT_BLUEPRINT.md](docs/PRODUCT_BLUEPRINT.md) for the learning architecture, [docs/CONTENT_REPAIR_V0_6.md](docs/CONTENT_REPAIR_V0_6.md) for the v0.6 repair pass, [docs/content-inventory/CONTENT_INVENTORY_V0_6.md](docs/content-inventory/CONTENT_INVENTORY_V0_6.md) for the current curriculum inventory, [docs/VISUAL_AIDS_V0_6.md](docs/VISUAL_AIDS_V0_6.md) for visual aids, [docs/PLAY_MODE_V0_5.md](docs/PLAY_MODE_V0_5.md) for the current Play mode plus historical v0.5 notes, [docs/ANIMATION_SYSTEM.md](docs/ANIMATION_SYSTEM.md) for the concept animation approach, [docs/EXERCISE_SYSTEM.md](docs/EXERCISE_SYSTEM.md) for reusable exercises, and [docs/STORAGE_AND_RESET.md](docs/STORAGE_AND_RESET.md) for local progress storage.

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="icon-vocabulary-cloud">
+  <circle cx="32" cy="32" r="27" fill="#D9F4F5" stroke="#0E8D9B" stroke-width="2"/>
+  
+  <path d="M20 45 H45 a8 8 0 0 0 0-16 a11 11 0 0 0-20-5 a9 9 0 0 0-5 21Z" fill="#071B6F" stroke="#9BE7D5"/>
+  <circle cx="27" cy="35" r="2" fill="#9BE7D5"/><circle cx="33" cy="31" r="2" fill="#0E8D9B"/><circle cx="39" cy="37" r="2" fill="#5A3EC8"/><path d="M27 35 L33 31 L39 37" stroke="#9BE7D5" opacity=".7"/>
+
+</svg>

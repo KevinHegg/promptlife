@@ -1,0 +1,9 @@
+# Prompt Life trace pipeline. Tested on macOS (Apple M4) with the system Python 3.9.6.
+# torch 2.8 and transformers 4.57 are the last releases that support Python 3.9.
+torch==2.8.0
+transformers==4.57.6
+tokenizers==0.22.2
+huggingface_hub==0.36.2
+safetensors==0.7.0
+numpy==2.0.2
+Jinja2==3.1.6          # chat templates

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="icon-training">
+  <circle cx="32" cy="32" r="27" fill="#D9F4F5" stroke="#0E8D9B" stroke-width="2"/>
+  
+  <rect x="18" y="20" width="13" height="25" rx="3" fill="#1459C8"/><rect x="33" y="20" width="15" height="25" rx="3" fill="#0E8D9B"/><path d="M22 27 H28 M22 33 H28 M37 27 H44 M37 33 H44" stroke="white" stroke-width="2"/><circle cx="32" cy="48" r="5" fill="#5A3EC8"/>
+
+</svg>

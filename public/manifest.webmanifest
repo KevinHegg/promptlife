@@ -1,17 +1,16 @@
 {
   "name": "Prompt Life",
   "short_name": "Prompt Life",
-  "description": "An interactive field guide to language models.",
+  "description": "Ride along with one question through a real language model: a living transit map of how LLMs work.",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#fafbfc",
-  "theme_color": "#17283e",
+  "background_color": "#F7F5EF",
+  "theme_color": "#121E72",
   "icons": [
     {
-      "purpose": "any",
-      "sizes": "any",
-      "src": "./favicon.svg",
-      "type": "image/svg+xml"
+      "src": "./assets/generated/home/promptlife-mark.png",
+      "sizes": "1254x1254",
+      "type": "image/png"
     }
   ]
 }

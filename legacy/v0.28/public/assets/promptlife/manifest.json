@@ -1,0 +1,83 @@
+{
+  "brand": [
+    "public/assets/promptlife/brand/model-literate-badge.png",
+    "public/assets/promptlife/brand/model-literate-badge.svg",
+    "public/assets/promptlife/brand/promptlife-mark.png",
+    "public/assets/promptlife/brand/promptlife-mark.svg"
+  ],
+  "iconsSvg": [
+    "public/assets/promptlife/icons/svg/icon-attention.svg",
+    "public/assets/promptlife/icons/svg/icon-context-window.svg",
+    "public/assets/promptlife/icons/svg/icon-diffusion.svg",
+    "public/assets/promptlife/icons/svg/icon-fine-tuning.svg",
+    "public/assets/promptlife/icons/svg/icon-glossary.svg",
+    "public/assets/promptlife/icons/svg/icon-layers.svg",
+    "public/assets/promptlife/icons/svg/icon-mlp.svg",
+    "public/assets/promptlife/icons/svg/icon-model-literate-badge.svg",
+    "public/assets/promptlife/icons/svg/icon-multimodal.svg",
+    "public/assets/promptlife/icons/svg/icon-quiz.svg",
+    "public/assets/promptlife/icons/svg/icon-risk.svg",
+    "public/assets/promptlife/icons/svg/icon-seed-run.svg",
+    "public/assets/promptlife/icons/svg/icon-softmax.svg",
+    "public/assets/promptlife/icons/svg/icon-tokens.svg",
+    "public/assets/promptlife/icons/svg/icon-training.svg",
+    "public/assets/promptlife/icons/svg/icon-vocabulary-cloud.svg"
+  ],
+  "iconsPng": [
+    "public/assets/promptlife/icons/png/icon-attention.png",
+    "public/assets/promptlife/icons/png/icon-context-window.png",
+    "public/assets/promptlife/icons/png/icon-diffusion.png",
+    "public/assets/promptlife/icons/png/icon-fine-tuning.png",
+    "public/assets/promptlife/icons/png/icon-glossary.png",
+    "public/assets/promptlife/icons/png/icon-layers.png",
+    "public/assets/promptlife/icons/png/icon-mlp.png",
+    "public/assets/promptlife/icons/png/icon-model-literate-badge.png",
+    "public/assets/promptlife/icons/png/icon-multimodal.png",
+    "public/assets/promptlife/icons/png/icon-quiz.png",
+    "public/assets/promptlife/icons/png/icon-risk.png",
+    "public/assets/promptlife/icons/png/icon-seed-run.png",
+    "public/assets/promptlife/icons/png/icon-softmax.png",
+    "public/assets/promptlife/icons/png/icon-tokens.png",
+    "public/assets/promptlife/icons/png/icon-training.png",
+    "public/assets/promptlife/icons/png/icon-vocabulary-cloud.png"
+  ],
+  "illustrations": [
+    "public/assets/promptlife/illustrations/scene-attention-weave.png",
+    "public/assets/promptlife/illustrations/scene-autoregression-window.png",
+    "public/assets/promptlife/illustrations/scene-brain-metaphor-limits.png",
+    "public/assets/promptlife/illustrations/scene-context-stack.png",
+    "public/assets/promptlife/illustrations/scene-diffusion-multimodal.png",
+    "public/assets/promptlife/illustrations/scene-fine-tuning-path.png",
+    "public/assets/promptlife/illustrations/scene-hero-feature-cloud.png",
+    "public/assets/promptlife/illustrations/scene-mlp-forge.png",
+    "public/assets/promptlife/illustrations/scene-model-literate-badge.png",
+    "public/assets/promptlife/illustrations/scene-token-pipeline-relay.png",
+    "public/assets/promptlife/illustrations/scene-tokens-to-tensors.png",
+    "public/assets/promptlife/illustrations/scene-training-rainstorm.png",
+    "public/assets/promptlife/illustrations/scene-vocabulary-cloud.png"
+  ],
+  "illustrationsMobile": [
+    "public/assets/promptlife/illustrations/scene-attention-weave@mobile.png",
+    "public/assets/promptlife/illustrations/scene-autoregression-window@mobile.png",
+    "public/assets/promptlife/illustrations/scene-brain-metaphor-limits@mobile.png",
+    "public/assets/promptlife/illustrations/scene-context-stack@mobile.png",
+    "public/assets/promptlife/illustrations/scene-diffusion-multimodal@mobile.png",
+    "public/assets/promptlife/illustrations/scene-fine-tuning-path@mobile.png",
+    "public/assets/promptlife/illustrations/scene-hero-feature-cloud@mobile.png",
+    "public/assets/promptlife/illustrations/scene-mlp-forge@mobile.png",
+    "public/assets/promptlife/illustrations/scene-model-literate-badge@mobile.png",
+    "public/assets/promptlife/illustrations/scene-token-pipeline-relay@mobile.png",
+    "public/assets/promptlife/illustrations/scene-tokens-to-tensors@mobile.png",
+    "public/assets/promptlife/illustrations/scene-training-rainstorm@mobile.png",
+    "public/assets/promptlife/illustrations/scene-vocabulary-cloud@mobile.png"
+  ],
+  "backgrounds": [
+    "public/assets/promptlife/backgrounds/bg-feature-cloud-soft.png",
+    "public/assets/promptlife/backgrounds/bg-night-learning-loop.png",
+    "public/assets/promptlife/backgrounds/bg-token-mist.png"
+  ],
+  "sprites": [
+    "public/assets/promptlife/sprites/operator-button-strip.png",
+    "public/assets/promptlife/sprites/token-chip-strip.png"
+  ]
+}

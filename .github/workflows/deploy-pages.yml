@@ -33,30 +33,31 @@ jobs:
       - name: Typecheck
         run: npm run typecheck
 
-      - name: Verify calculations, lessons, and reading progress
+      - name: Test
         run: npm test
 
       - name: Build
         run: npm run build:pages
 
-      - name: Verify Pages paths
-        run: node scripts/verify-build.mjs
-
-      # The subway-map rebuild lives on the `rebuild` branch and is published beside this site
-      # at /promptlife/next/. Its own workflow re-runs this one whenever that branch changes.
-      - name: Check out the rebuild branch
+      # The September 2026 field guide is archived as the tag legacy-field-guide-v1.0.0
+      # and stays readable at /promptlife/archive/field-guide/.
+      - name: Check out the archived field guide
         uses: actions/checkout@v4
         with:
-          ref: rebuild
-          path: rebuild-src
+          ref: legacy-field-guide-v1.0.0
+          path: archive-field-guide
 
-      - name: Build the rebuild into /next/
-        working-directory: rebuild-src
+      - name: Build the archived field guide
+        working-directory: archive-field-guide
         run: |
           npm ci
-          npm run typecheck
-          npm test
-          npx vite build --base=/promptlife/next/ --outDir ../dist/next --emptyOutDir
+          npx vite build --base=/promptlife/archive/field-guide/ --outDir ../dist/archive/field-guide --emptyOutDir
+
+      - name: Add the archive index and old-address redirects
+        run: node scripts/pages-extras.mjs
+
+      - name: Verify Pages paths
+        run: node scripts/verify-pages.mjs
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
