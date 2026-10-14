@@ -42,6 +42,22 @@ jobs:
       - name: Verify Pages paths
         run: node scripts/verify-build.mjs
 
+      # The subway-map rebuild lives on the `rebuild` branch and is published beside this site
+      # at /promptlife/next/. Its own workflow re-runs this one whenever that branch changes.
+      - name: Check out the rebuild branch
+        uses: actions/checkout@v4
+        with:
+          ref: rebuild
+          path: rebuild-src
+
+      - name: Build the rebuild into /next/
+        working-directory: rebuild-src
+        run: |
+          npm ci
+          npm run typecheck
+          npm test
+          npx vite build --base=/promptlife/next/ --outDir ../dist/next --emptyOutDir
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
