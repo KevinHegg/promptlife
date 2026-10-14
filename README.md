@@ -1,136 +1,46 @@
 # Prompt Life
 
-Prompt Life is a mobile-first learning app about large language models for smart non-technical but academic audiences: advanced high-school students, first-year college students, faculty, higher-ed IT leaders, and PhDs outside computer science.
+A living transit map of how language models work. One student question ("Using my syllabus, what do I need on the final to get an A-?") rides through a real model, station by station. At each station you bet, poke at real numbers, break something on purpose, and earn a stamp.
 
-The through-line is a day in the life of a prompt. The app follows one prompt from pretraining and fine-tuning through inference, tokenization, embeddings, tensors, attention, MLPs, hidden states, logits, softmax, sampling, autoregression, context windows, diffusion, multimodal AI, and risk literacy.
+Live: https://kevinhegg.github.io/promptlife/
 
-## Run Locally
-
-From this project folder:
+## Run it
 
 ```bash
-cd ~/Desktop/promptlife
 npm install
 npm run dev
 ```
 
-Open the local URL printed by Vite. In this workspace it is usually:
-
-```text
-http://localhost:5173/
-```
-
-## Build
+Then open the address Vite prints (usually http://localhost:5173/).
 
 ```bash
 npm run typecheck
+npm test
 npm run build
 ```
 
-The production build is written to `dist/`.
+## How it's organized
 
-## Audits
+- `src/map/`: the living map, its run engine, the departure board and the context "platform".
+- `src/loop/`: the five-minute station loop (Arrive, Bet, Poke, Name it, Break it, Stamp), stamps.
+- `src/stations/`: the content for each station with a full loop (Send, Tokenizer, The Vote so far).
+- `src/cutaway/`: the die-cut levels (Map, Cutaway, Bedrock) for each station.
+- `src/games/`: Beat the Model.
+- `src/data/`: the network, the hero scenario, and adapters for the recorded model runs.
+- `src/data/traces/`: real numbers from a small open model (Qwen2.5-0.5B-Instruct), made by `scripts/trace/`.
+- `docs/rebuild/`: the story bible, storyboards, trace report and student test scripts.
 
-```bash
-npm run audit:answers
-npm run audit:checkpoints
-```
+## Real numbers
 
-`audit:answers` checks answer randomization surfaces and also runs the checkpoint-bank audit. `audit:checkpoints` validates the live Journey checkpoints, the draft v0.27.7 checkpoint question bank review files, the draft-only v0.27.8 model-thinking checkpoint pilot, the v0.27.9 first-six bank, the v0.27.10 first-twelve bank, and the active-development v0.27.12 all-card checkpoint bank.
+Everything the app shows about the model comes from recorded runs (`scripts/trace/README.md` explains how to regenerate them) or from a real tokenizer in the browser. Anything illustrative is labeled on screen.
 
-## Checkpoint Bank Fallback
+## Deploying
 
-All 39 Journey learning cards use the v0.27.12 model-thinking checkpoint bank by default. To restore the previous single-question checkpoints for every card, add either query parameter:
+Pushing to `main` runs `.github/workflows/deploy-pages.yml`, which tests and builds the app for https://kevinhegg.github.io/promptlife/. The same workflow also publishes the archive.
 
-```text
-?legacyCheckpoints=1
-?checkpointBank=legacy
-```
+## Earlier versions
 
-## Export Lesson Review PDF
+- The interactive field guide (September 2026, v1.0.0): tag `legacy-field-guide-v1.0.0`, still online at https://kevinhegg.github.io/promptlife/archive/field-guide/
+- The card-based journey (June 2026, v0.28.12): tag `legacy-v0.28.12`. Its sources are also kept in `legacy/v0.28/`, and unfinished v0.28.13 work is on the branch `archive/v0.28.13-wip`.
 
-```bash
-npm run export:lesson-pdf
-```
-
-This writes the default review deck to:
-
-```text
-docs/review/prompt-life-lesson-cards-v0-9-3.pdf
-```
-
-For the curriculum inventory pass, run:
-
-```bash
-npm run export:lesson-cards
-```
-
-This writes the inventory review deck to:
-
-```text
-docs/content-inventory/prompt-life-lesson-cards-v0-9-3-visual-system.pdf
-```
-
-## Test On A Phone
-
-For a same-Wi-Fi phone test without deploying, run Vite on your local network:
-
-```bash
-cd ~/Desktop/promptlife
-npm run dev -- --host 0.0.0.0
-```
-
-Then open the Network URL Vite prints, usually in this shape:
-
-```text
-http://YOUR-MAC-LAN-IP:5173/
-```
-
-The repo also includes a GitHub Pages workflow. Pushes to `main` build the app with the `/promptlife/` base path and deploy it to:
-
-```text
-https://kevinhegg.github.io/promptlife/
-```
-
-Developer cache note for iPhone testing: after a `main` deploy, use a hard refresh, clear site data, add a cache-busting query such as `?v=02712`, or confirm the visible app version on the Badge page.
-
-## Reset Progress
-
-Progress is stored in this browser's `localStorage`, not cookies. Use the Badge screen's `Reset progress` button to start over on this device. Reset clears lessons, exercises, shared Play challenge progress, Glossary Dojo practice, Prompt Run progress, reflections, legacy mini-game insights, tours, and last location.
-
-For local debugging, add `?debug=1` to the app URL and open the Badge screen to reveal progress tools. See [docs/STORAGE_AND_RESET.md](docs/STORAGE_AND_RESET.md) for the exact keys and reset behavior.
-
-## Current Features
-
-- Vite + React app shell.
-- Mobile-first layout tuned for 390px width.
-- Simple navigation: Home, Journey, Play, Glossary, Badge.
-- Consistent lesson pattern: definition, where it happens, why it matters, relationship, metaphor, Brain Bridge, visual aid, tiny interaction, checkpoint, and reflection.
-- Reusable exercise system in Journey, Play challenges, and Prompt Run.
-- LocalStorage progress for completed lessons, exercises, shared Play challenge practice, Glossary Dojo rounds, legacy game insights, reflections, and the current location.
-- Lightweight React/SVG/CSS concept animations with reduced-motion support.
-- Lightweight lesson visual aids plus review routes at `/review/lesson-cards` and `/review/visual-aids`.
-- Lesson-card PDF export through `npm run export:lesson-pdf` and inventory review export through `npm run export:lesson-cards`.
-- v0.9 Batch 2 lessons for Inference, Prompt vs Response, Tokenization, Token IDs, Embeddings, Vectors, and Tensors.
-- v0.9.2 canonical pet-conflict example used across Prompt vs Response, tokenization, token IDs, embeddings, vectors, tensors, exercises, Prompt Run, glossary examples, and review PDFs.
-- v0.9.3 visual-aid system reset with RAG and Retrieval rebuilt as the gold-standard open-book retrieval visual.
-- v0.13 dedicated Journey cards for RAG, Grounding, and Hallucinations, plus a content-freeze candidate review.
-- v0.14 Glossary A-Z/Learning path sorting and Journey path filters for Essential, Deep, and Ethics.
-- v0.15 eight-section Journey narrative with clickable stage links and late-day sections for Twilight, Midnight Ledger, and New Dawn.
-- HTML legend/callout visual aid system designed to stay readable in mobile and PDF review.
-- Play mode with five calm practice challenges:
-  - Glossary Dojo
-  - Attention Match
-  - Probability Picker
-  - Context Stack
-  - Prompt Run capstone
-- Glossary screen plus accessible glossary drawer.
-- Retired Play compatibility routes for earlier Attention Weave, Token Pipeline Relay, and How AI Learns states, kept so older saved progress is not lost.
-- Model Literate badge screen focused on progress and reflection rather than scores.
-- Accessibility basics: semantic HTML, visible focus states, image alt text, real buttons, and reduced-motion support.
-
-## Product Principle
-
-One screen, one idea. One interaction, one relationship. Keep text in HTML for accessibility. Use visual assets to reduce mystery, not to hide the explanation.
-
-See [docs/PRODUCT_BLUEPRINT.md](docs/PRODUCT_BLUEPRINT.md) for the learning architecture, [docs/CONTENT_REPAIR_V0_6.md](docs/CONTENT_REPAIR_V0_6.md) for the v0.6 repair pass, [docs/content-inventory/CONTENT_INVENTORY_V0_6.md](docs/content-inventory/CONTENT_INVENTORY_V0_6.md) for the current curriculum inventory, [docs/VISUAL_AIDS_V0_6.md](docs/VISUAL_AIDS_V0_6.md) for visual aids, [docs/PLAY_MODE_V0_5.md](docs/PLAY_MODE_V0_5.md) for the current Play mode plus historical v0.5 notes, [docs/ANIMATION_SYSTEM.md](docs/ANIMATION_SYSTEM.md) for the concept animation approach, [docs/EXERCISE_SYSTEM.md](docs/EXERCISE_SYSTEM.md) for reusable exercises, and [docs/STORAGE_AND_RESET.md](docs/STORAGE_AND_RESET.md) for local progress storage.
+Progress in the app is stored only in the browser on each device.
