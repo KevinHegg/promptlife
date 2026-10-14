@@ -27,26 +27,26 @@ export const MODEL_USED_TOOL_ITSELF = !!phase1.freeFirstTurn?.usedTool
 export const STORY = {
   waiting: `${q(SCENARIO.user)} is waiting at Send.`,
   send: (pieces: number) => `Your question boards the train: ${pieces} word pieces, called tokens.`,
-  gate: 'Before the model sees anything, the app adds hidden instructions and a description of its calculator.',
+  gate: 'First, the app quietly adds hidden instructions and a description of its calculator.',
   toLibrary: 'Next, the Library line: the app searches your saved files.',
   L1: 'Searching: which of your files match the question?',
   L2: 'Found two matches: the recipe card, and the back of the card.',
   L3: 'Both are added to what the model will read.',
-  tokenizer: (all: number, yours: number) => `Everything is cut into word pieces, and each becomes a number. ${all} pieces in all; you typed ${yours}.`,
+  tokenizer: (all: number, yours: number) => `Everything is cut into word pieces, and each becomes a number: ${all} pieces. You typed ${yours}.`,
   embedding: 'Each number is swapped for a long list of numbers that stands for its meaning.',
   attention: lookBack?.plain ?? 'Each piece looks back at earlier pieces for clues.',
   stack: (layers: number | null) => `${layers ?? 'Dozens of'} layers of math refine every piece, one floor at a time.`,
   firstVote: (chosen: string, prob: number | null, favorite: string | null, favoriteProb: number | null, rank: number | null) =>
     rank !== null && rank > 1 && favorite
-      ? `The model scores every possible next piece. Its favorite was ${shown(favorite)} (${pct(favoriteProb ?? 0)}), to start explaining in words. This app requires its calculator, so the run starts a calculator request instead.`
+      ? `Its favorite was ${shown(favorite)} (${pct(favoriteProb ?? 0)}), to answer in words. This app requires the calculator, so the ride starts a request.`
       : /tool_call/.test(chosen)
-        ? `The model scores every possible next piece. Its pick${prob !== null ? `, at ${pct(prob)}` : ''}: start a calculator request instead of answering in words.`
+        ? `The model scores every possible next piece. Its pick${prob !== null ? `, at ${pct(prob)}` : ''}: start a calculator request.`
         : `The model scores every possible next piece. Its pick: ${shown(chosen)}${prob !== null ? ` (${pct(prob)})` : ''}.`,
-  loop: (trips: number) => `The new piece joins the platform. Then the whole trip runs again for the next piece. ${trips} trips in this answer.`,
+  loop: (trips: number) => `The new piece joins the platform, and the trip runs again for the next one: ${trips} trips in all.`,
   writingRequest: 'Writing a calculator request, one piece per trip.',
   requestDone: MODEL_OWN_SUM
-    ? `Request done. Left to itself, this model asked for ${MODEL_OWN_SUM}, the wrong sum; this recorded ride uses the right one. Now the app takes over.`
-    : 'The request is done. The model stops, and the app takes over on the Workshop line.',
+    ? `Request done. On its own, this model asked for ${MODEL_OWN_SUM}, the wrong sum; this ride uses the right one.`
+    : 'The request is done. The model stops, and the app takes over.',
   W1: 'The app reads the request.',
   W2: `The calculator works it out: ${TOOL_IN_WORDS} = ${SCENARIO.toolResult}.`,
   W3: 'The result is pasted back in, as text.',
@@ -54,7 +54,7 @@ export const STORY = {
   replying: 'Now the model writes the answer, one piece per trip.',
   stopMarker: 'The model writes its “stop” piece, so this part ends.',
   differs: (favorite: string, used: string) => `The model's favorite here was ${shown(favorite)}; the recorded answer used ${shown(used)}.`,
-  done: (trips: number) => `Arrived after ${trips} trips. Lit lines were used. The Academy, where models are trained, stays dark: answering never changes the model.`
+  done: (trips: number) => `Arrived after ${trips} trips. The Academy, where models are trained, stays dark: answering never changes the model.`
 }
 
 /** A tool call's raw text, shown plainly: calculator(2.25 * 30 / 8). */

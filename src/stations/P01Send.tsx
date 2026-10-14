@@ -51,10 +51,11 @@ function SendPanel() {
   return (
     <svg className="arrive-art" viewBox="0 0 320 220" role="img" aria-label="A phone with the question typed and a thumb over Send">
       <rect x="100" y="10" width="120" height="200" rx="18" className="art-line" fill="none" />
-      <rect x="112" y="34" width="96" height="58" rx="10" className="art-fill-soft" />
-      <text x="118" y="52" className="art-text">Using Grandma's recipe</text>
-      <text x="118" y="65" className="art-text">card, how much flour</text>
-      <text x="118" y="78" className="art-text">for 30 people?</text>
+      <rect x="110" y="32" width="100" height="74" rx="10" className="art-fill-soft" />
+      <text x="117" y="49" className="art-text sm">Using my grandma's</text>
+      <text x="117" y="62" className="art-text sm">recipe card, how</text>
+      <text x="117" y="75" className="art-text sm">much flour do I need</text>
+      <text x="117" y="88" className="art-text sm">to feed 30 people?</text>
       <circle cx="192" cy="176" r="14" className="art-accent" />
       <path d="M186,176 L198,176 M193,171 L198,176 L193,181" className="art-line-light" fill="none" />
       <path d="M232,150 Q260,138 300,120 M232,176 L304,176 M232,202 Q260,214 300,232" className="art-line dim" fill="none" />

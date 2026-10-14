@@ -14,17 +14,22 @@ export function DepartureBoard({ snap }: { snap: RunSnapshot | null }) {
         <span>TRIP {trip} / {total}</span>
       </div>
       <p className="bcap" aria-live="polite">{snap?.caption}</p>
-      {snap?.replyText ? (
-        <p className="bout">
-          <span className="blab">ANSWER</span>
-          <span className={`rep${writingReply ? ' cursor' : ''}`}>{snap.replyText}</span>
-        </p>
-      ) : snap?.toolText ? (
-        <p className="bout">
-          <span className="blab">CALCULATOR REQUEST</span>
-          <span className={`tool${writingTool ? ' cursor' : ''}`}>{friendlyRequest(snap.toolText)}</span>
-        </p>
-      ) : null}
+      {/* Always rendered, so the board keeps one height for the whole ride. */}
+      <p className="bout">
+        {snap?.replyText ? (
+          <>
+            <span className="blab">ANSWER</span>
+            <span className={`rep${writingReply ? ' cursor' : ''}`}>{snap.replyText}</span>
+          </>
+        ) : snap?.toolText ? (
+          <>
+            <span className="blab">CALCULATOR REQUEST</span>
+            <span className={`tool${writingTool ? ' cursor' : ''}`}>{friendlyRequest(snap.toolText)}</span>
+          </>
+        ) : (
+          <span className="blab">THE ANSWER WILL APPEAR HERE</span>
+        )}
+      </p>
     </div>
   )
 }

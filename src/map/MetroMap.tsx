@@ -40,7 +40,7 @@ const LABELS: Label[] = [
   { x: 707, y: 122, text: 'A3 human feedback', kind: 'sub' },
   { x: 945, y: 147, text: 'Scratchpad', kind: 'line', line: 'S' },
   { x: 945, y: 162, text: 'S1 thinking', kind: 'sub' },
-  { x: 1024, y: 194, text: 'R1 The Ledger', anchor: 'end' },
+  { x: 1024, y: 194, text: 'R1 Ledger', anchor: 'end' },
   { x: 1022, y: 97, text: 'Debug the Bot', anchor: 'end', kind: 'line', line: 'R' },
   { x: 1022, y: 112, text: 'R2 capstone', anchor: 'end', kind: 'sub' },
   { x: 810, y: 464, text: 'W1 Read the request', anchor: 'middle' },

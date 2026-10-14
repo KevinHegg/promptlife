@@ -507,7 +507,6 @@ blockquote { margin: 0; padding: 10px 14px; border-left: 3px solid var(--ink-2);
 .bcap { font-family: var(--font-body); font-size: 1.02rem; line-height: 1.45; min-height: 2.9em; color: var(--board-text); }
 .bout { display: flex; flex-wrap: wrap; gap: 2px 10px; align-items: baseline; font-size: 0.92rem; }
 .live { scroll-margin-top: 12px; }
-.live .mapbox { scroll-behavior: smooth; }
 
 @media (max-width: 640px) {
   .board { padding: 10px 12px 12px; }
@@ -516,4 +515,28 @@ blockquote { margin: 0; padding: 10px 14px; border-left: 3px solid var(--ink-2);
   .bout { font-size: 0.85rem; }
   .masthead h1 { font-size: 2rem; }
   .question-card p { font-size: 1rem; }
+}
+
+/* ================= Phase 1.2: steady board, zoomed-out phone map ================= */
+/* The board holds one height for the whole ride: three caption lines and one answer line. */
+.board .bcap {
+  height: calc(3 * 1.45em); min-height: 0; overflow: hidden;
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3;
+}
+.board .bout {
+  height: calc(2 * 1.4em); overflow: hidden; align-content: flex-start;
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2;
+}
+.board .bout .blab { margin-right: 8px; }
+.art-text.sm { font-size: 8.6px; }
+
+/* Phones: show more of the map at once, with labels sized up so they stay readable. */
+@media (max-width: 640px) {
+  .mapbox .metro { min-width: 720px; }
+  .mapbox .t-st { font-size: 17px; }
+  .mapbox .t-code { font-size: 12px; }
+  .mapbox .t-stop { font-size: 14px; }
+  .mapbox .t-line { font-size: 15px; }
+  .mapbox .t-sub { font-size: 13px; }
+  .mapbox .t-note { font-size: 15px; }
 }

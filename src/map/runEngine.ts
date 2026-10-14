@@ -41,7 +41,7 @@ type Pass = { f: number; fn: () => void; done?: boolean }
 const isMarker = (text: string) => /^<\|.*\|>$/.test(text)
 
 /** Where the camera rests for each part of the trip (map x). */
-const FRAME = { send: 200, line: 690, workshop: 630, reply: 900 }
+const FRAME = { send: 200, line: 690 }
 
 export class RunEngine {
   private svg: SVGSVGElement
@@ -56,8 +56,12 @@ export class RunEngine {
   private idx = 0
   private lastTs = 0
   private raf = 0
-  private programmaticUntil = 0
+  private lastSetLeft = -1
   private userScrollAt = 0
+  /** Camera: a fixed map x to rest on, or follow the train. Eased every frame, never jumped. */
+  private camX: number | null = null
+  private camFollow = false
+  private trainX = 70
   private fracs: Record<string, number> = {}
   private timers: number[] = []
   private present = new Set<number>()
@@ -133,6 +137,7 @@ export class RunEngine {
     } while (this.idx < this.steps.length && (this.steps[this.idx].kind !== 'pause' || this.steps[this.idx].dur < 1200) && guard < 2000)
     if (this.idx < this.steps.length) this.startStep(this.steps[this.idx])
     else this.finish()
+    this.updateCamera(5000)
     this.emit()
   }
 
@@ -177,20 +182,40 @@ export class RunEngine {
   /* ---------------- camera ---------------- */
 
   private onScroll = () => {
-    if (performance.now() > this.programmaticUntil) this.userScrollAt = performance.now()
+    const sc = this.scroller
+    if (sc && Math.abs(sc.scrollLeft - this.lastSetLeft) > 2) this.userScrollAt = performance.now()
   }
 
-  /** Pan gently to an area of the map, only if the map is wider than its box and the user isn't scrolling it. */
+  /** Rest the camera on an area of the map. */
   private frame(x: number) {
+    this.camX = x
+    this.camFollow = false
+  }
+
+  /** Let the camera trail the train (used on long, one-way stretches). */
+  private follow() {
+    this.camFollow = true
+  }
+
+  /**
+   * Ease the map's scroll toward the camera target with a slow, steady time constant, so motion
+   * never jumps or reverses abruptly. Does nothing when the whole map fits, or for 4 s after the
+   * student scrolls it by hand.
+   */
+  private updateCamera(dt: number) {
     const sc = this.scroller
     if (!sc || sc.scrollWidth <= sc.clientWidth + 2) return
     if (performance.now() - this.userScrollAt < 4000) return
+    const x = this.camFollow ? this.trainX : this.camX
+    if (x === null) return
     const vb = this.svg.viewBox.baseVal
     const scale = this.svg.getBoundingClientRect().width / (vb?.width || 1120)
     const target = Math.max(0, Math.min(sc.scrollWidth - sc.clientWidth, x * scale - sc.clientWidth / 2))
-    if (Math.abs(target - sc.scrollLeft) < 8) return
-    this.programmaticUntil = performance.now() + 1200
-    sc.scrollTo({ left: target, behavior: this.reduce ? 'auto' : 'smooth' })
+    const k = this.reduce ? 1 : 1 - Math.exp(-dt / 700)
+    const next = sc.scrollLeft + (target - sc.scrollLeft) * k
+    if (Math.abs(next - sc.scrollLeft) < 0.3) return
+    sc.scrollLeft = next
+    this.lastSetLeft = sc.scrollLeft
   }
 
   private fracOf(key: string, x: number, y: number) {
@@ -211,6 +236,7 @@ export class RunEngine {
   }
 
   private parkAtSend() {
+    this.trainX = 70
     this.train?.setAttribute('transform', `translate(70,${MAIN_Y})`)
   }
 
@@ -225,6 +251,7 @@ export class RunEngine {
     const dx = ahead ? b.x - a.x : a.x - b.x
     const dy = ahead ? b.y - a.y : a.y - b.y
     const ang = (Math.atan2(dy, dx) * 180) / Math.PI
+    this.trainX = a.x
     this.train.setAttribute('transform', `translate(${a.x.toFixed(1)},${a.y.toFixed(1)}) rotate(${ang.toFixed(1)})`)
   }
 
@@ -360,6 +387,7 @@ export class RunEngine {
     }))
     S.push(this.pauseStep(2000, () => {
       this.lightLine('L')
+      this.follow()
       this.caption(STORY.toLibrary)
     }))
     S.push(this.move('lib', 0, 1, 6000, [
@@ -370,7 +398,7 @@ export class RunEngine {
     S.push(this.pauseStep(3200, () => {
       this.here('P02')
       this.add(R.genPrompt)
-      this.frame(FRAME.line)
+      this.follow()
       this.caption(STORY.tokenizer(this.present.size, C.question))
     }))
 
@@ -396,6 +424,7 @@ export class RunEngine {
       S.push(this.move('main', 0.8, 1, 1100))
       S.push(this.pauseStep(3600, () => {
         this.here('P07')
+        this.frame(FRAME.line)
         this.add([firstStep.i])
         this.caption(STORY.loop(R.trips))
       }))
@@ -415,7 +444,7 @@ export class RunEngine {
       S.push(this.pauseStep(2600, () => {
         this.here('P07')
         this.lightLine('W')
-        this.frame(FRAME.workshop)
+        this.follow()
         this.caption(STORY.requestDone)
       }))
       S.push(this.move('work', 0, 1, 7000, [
@@ -425,20 +454,20 @@ export class RunEngine {
       ]))
       S.push(this.pauseStep(3000, () => {
         this.here('P02')
-        this.frame(FRAME.line)
+        this.follow()
         this.caption(STORY.resultCut(resultTokens.length))
       }))
       turn.steps.forEach((st, k) => {
         if (k === 0) {
           S.push(...this.animatedTrip(turn.kind, st, 'tokenizer'))
-          S.push(this.pauseStep(2400, () => { this.here('P07'); this.caption(STORY.replying) }))
+          S.push(this.pauseStep(2400, () => { this.here('P07'); this.frame(FRAME.line); this.caption(STORY.replying) }))
         } else {
           S.push(...this.expressTrip(turn.kind, st, 420))
         }
       })
     })
 
-    S.push(this.pauseStep(600, () => this.frame(FRAME.reply)))
+    S.push(this.pauseStep(600, () => this.follow()))
     S.push(this.move('reply', 0, 1, 1600))
     S.push(this.pauseStep(1, () => {
       this.here('P08')
@@ -460,6 +489,8 @@ export class RunEngine {
     this.fresh = new Set()
     this.here('P01')
     this.parkAtSend()
+    this.camX = FRAME.send
+    this.camFollow = false
     this.steps = this.build()
     this.idx = 0
     this.emit()
@@ -508,6 +539,7 @@ export class RunEngine {
     const dt = this.lastTs ? Math.min(100, ts - this.lastTs) : 0
     this.lastTs = ts
     this.advance(dt)
+    this.updateCamera(dt)
     if (this.state.playing) this.raf = requestAnimationFrame(this.tick)
   }
 }
