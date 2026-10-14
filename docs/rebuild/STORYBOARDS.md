@@ -1,493 +1,563 @@
 # Prompt Life Storyboards: the Prompt line
 
-Phase 0. One storyboard per main-line station, P01 Send to P08 Reply, then the branch lines. Follows `STORY_BIBLE.md` for voice, metaphors, vocabulary and accuracy.
+Phase 0. This document has one storyboard for each main-line station, P01 Send to P08 Reply, followed by the branch lines. It follows `STORY_BIBLE.md` for voice, metaphors, vocabulary and accuracy. Revised October 14 for the recipe-card hero question and plainer copy.
+
+**The hero run.**
+
+| Step | Content |
+|---|---|
+| Hidden instructions | "You are a helpful assistant." |
+| Passages the app finds | "Recipe card: Grandma's buttermilk biscuits. Serves 8. 2 1/4 cups flour, 1 tablespoon baking powder, 1/2 teaspoon salt, 6 tablespoons butter, 1 cup buttermilk." and "Back of the card: Two biscuits per person. Bake at 425°F for 12 minutes." |
+| Question | "Using my grandmother's recipe card, how much flour do I need to feed 30 people?" |
+| Calculator request | `2.25 * 30 / 8` |
+| Result | `8.4375` |
+| Reply | About 8.4 cups of flour† |
 
 **Conventions**
 
-- Quoted text is on-screen copy. Arrive captions are ≤ 25 words; every on-screen block is ≤ 80 words.
-- **†** marks a number from o200k_base or the plan's scripted run; replace it with the trace model's number. The trace model's tokenizer won't match o200k (Qwen-family tokenizers cut numbers into single digits), so totals like 37 trips and 106 tokens will change.
-- **V-…** names a precomputed alternate run from the trace pipeline, stored as a full run file so the map can replay it. R2 Debug the Bot reuses them.
-- Where a reveal depends on data we don't have yet, the copy is a template, finished after the trace.
-- If the model can't produce the hero run on its own, the pipeline teacher-forces the scripted tokens and the on-screen note says: "We fed the model this exact reply and recorded its odds at each step."
-- Stamp options are in display order. "(correct)" marks the answer; each distractor's one-line rationale follows the dash.
+- **Screen copy.** Quoted text is on-screen copy. Arrive captions are 18 words or fewer. Every other on-screen block is 50 words or fewer. Screen copy says "word piece" until P02 gives it the name "token."
+- **The † mark.** It flags a count from o200k_base or wording that must come from the recorded run.
+  - The verified o200k counts are: question 19 pieces and 79 characters, hidden instructions 6, passages 69, calculator request 12, result 4, reply 16. That makes 126 on the platform and 28 trips.
+  - The recorded model (Qwen2.5-0.5B-Instruct, per `TRACE_SPIKE.md`) cuts every number into single digits, so its counts will differ.
+  - The current recorded trace is still the old scenario. It must be re-recorded.
+- **Precomputed runs (V-…).** These are alternate runs from the trace pipeline, each saved as a full run file the map can replay. R2 Debug the Bot reuses them.
+- **Templates.** Where a reveal depends on data we don't have yet, the copy is a template, finished after the recording.
+- **Steering.** When the recording steered the model, the screen says so. In the spike, the small model's first choice was to answer in prose, not to call the calculator. That steering line appears at W and P08, not during the first ride.
+- **Stamp options.** They're listed in display order. "(correct)" marks the answer; each wrong option's one-line reason follows the dash.
 
 ---
 
 ## P01 Send (prologue)
 
 #### Arrive
-Panel: a phone, the question typed, a thumb over Send. Behind it the whole map, every line dark, the train parked at P01.
-Caption: "This is your question about your grade. Tap Send and ride along with it, all the way to the answer."
+Panel: a phone with the question in a chat bubble and a thumb over Send. Behind it is the dark map, with the train waiting at P01.
+Caption: "Here's a question about Grandma's biscuits. Tap Send and follow it all the way to the answer."
 
 #### Bet
 "To write its answer, how many times does the model run?"
 - Once, for the whole answer
 - Once per sentence
-- Once per word-sized piece (correct)
+- Once per word piece (correct)
 
-Reveal: "Once per piece. Your answer took 37† trips, including 20† for a calculator request you never saw."
+Reveal: "Once per word piece. This answer took 28† trips, including 12† for a calculator request you never saw."
 
 #### Poke
-The 60-second ride on the living map (Play/Pause, Next stop; tap a lamp for its caption) while the platform fills by source. Then: "Tap the part of the platform you typed." The right tap outlines 17 of 106† chips and unlocks every station.
-Data: the run file (route events; each token's source, position and trip; lines lit), with the app's wrapper (chat template, tool description) as a gray segment.
+This is the ride from the home page, with one job: "Tap the part of the platform you typed." The right tap outlines 19 of the 126† chips. Visitors who skipped the ride on the home page take it here first. They get Play/Pause and Next stop, and can tap a lamp for its caption.
+Data: the run file, covering route events, each piece's source, position and trip, and which lines are lit. The pieces the app added appear as one gray segment.
 
 #### Name it
-"A large language model (LLM) scores every possible next piece of text given its context, picks one, and repeats. Your prompt is what you typed; the context is everything it reads, including what the app added."
-Terms: LLM, prompt, context. Picture: the platform in six colors, your part outlined.
-Metaphor: the train is the whole context, riding once per new piece. Where it breaks: "Nothing travels. It's one calculation, run again for each new piece."
+"A large language model (LLM) scores every possible next word piece, picks one and repeats. Your prompt is what you typed; the context is everything it reads, including what the app added."
+Terms: LLM, prompt, context.
+Picture: the platform in six colors, with your part outlined.
+Metaphor: the train is everything the model reads, and it rides once per new piece. Where it breaks: "Nothing actually travels. It's one calculation, run again for each new piece."
 
 #### Break it
-None; the prologue unlocks the map instead.
+None. The prologue opens the map instead.
 
 #### Stamp
-1. "A friend says the chatbot 'remembered your syllabus.' What actually put it in front of the model?"
-   - It memorized it in training — your syllabus was never in its training text.
-   - The app searched your files and pasted passages into the context (correct)
-   - The model searched your files itself — the model only writes text; the app searches.
-2. "You type 'Summarize this' and attach a 30-page reading. What fills most of the context?"
-   - Your two words — a sliver, like your 17 of 106†.
-   - The reading's text (correct)
-   - A summary prepared in advance — nothing is prepared; the summary comes one token per trip.
+1. "A friend says the chatbot 'remembered Grandma's recipe.' What actually put the recipe in front of the model?"
+   - It memorized it in training — Grandma's card was never in its training text.
+   - The app found the card in your files and pasted it in (correct)
+   - The model searched your files itself — the model only writes text; the app does the searching.
+2. "You type 'Summarize this' and attach a 30-page apartment lease. What fills most of the context?"
+   - Your two words — they're a sliver, like your 19 of 126†.
+   - The lease (correct)
+   - A summary the model made in advance — nothing is made in advance; the summary comes one piece per trip.
 
-Stamp: a thumb on a round Send button, colored lines fanning out from it.
+Stamp design: a thumb on a round Send button, with colored lines fanning out from it.
 
 #### Level 3 Bedrock
-One line: p(next token | context) = softmax(W_out · Stack(Embed(IDs))). Then the loop as pseudocode: tokenize; repeat { score, draw, append } until a stop token. Trips = tokens generated.
+The whole machine in one line: p(next piece | context) = softmax(W_out · Stack(Embed(IDs))). Below it, the loop as pseudocode: cut into pieces; repeat { score, draw, add } until a stop piece. Trips = pieces written.
 
 #### Receipt line
-"Your question, syllabus and gradebook left your device. The provider's policy decides who keeps them, and for how long." (data)
+"Your question and your recipe files left your device. The provider's policy decides who keeps them, and for how long." (data)
 
 #### Flashback into P02
-"On the ride, how many tokens did your question make?" 17†, of 106† on the platform.
+"On the ride, how many word pieces did your question make?" Answer: 19†, out of 126† on the platform.
 
 ---
 
 ## P02 Tokenizer
 
 #### Arrive
-Panel: the question feeds into a cutter and leaves as chips, each with a numbered ticket.
-Caption: "The model can't read letters. Here your question is cut into pieces, and each piece trades its text for a number."
+Panel: the question slides into a cutter and comes out as chips, each with a numbered ticket.
+Caption: "The model can't read letters. Your question gets cut into word pieces, and each piece gets a number."
 
 #### Bet
-"Which of these is a single token?"
-- "syllabus" (no space)
-- " syllabus" (a space in front) (correct)
-- "Syllabus" (capital S)
+"Which of these is a single word piece?"
+- "flour"
+- "·flour" (with a space in front) (correct)
+- "Flour"
 
-Reveal: "Only the one with the space: ID 127031. 'Syllabus' is two pieces, S + yllabus. Plain 'syllabus' is three: sy + ll + abus."
+Reveal: "Only the one with a space in front. It's piece number 28420. Without the space it's two pieces, fl + our. With a capital, it's Fl + our."
 
 #### Poke
-A live tokenizer (o200k_base, in the browser) preloaded with the question; typing updates chips, IDs and "17 tokens, 60 characters." Challenges: raise the count by changing one letter ("sylabus" makes 18); find a word that's one token after a space and three without (strawberry); give ' final' a new ID without changing the word (1721 becomes 12625 or 17196). A toggle shows the trace model's cut: "Different models cut text differently."
-Data: gpt-tokenizer (already a dependency); the trace model's tokens for the hero texts and challenge words.
+A live tokenizer (o200k_base, in the browser) opens on the question: "19 word pieces, 79 characters." Type anything; chips and numbers update. Challenges:
+1. "Add one letter and watch the count jump." ("flouur" makes 21.)
+2. "Find a word that's one piece after a space and two without." (grandmother, biscuits)
+3. "Find the strangest cut." (buttermilk: but + term + ilk)
+4. "Try another language." ("How much flour do I need to feed 30 people?" is 12 pieces; "¿Cuánta harina necesito para 30 personas?" is 10.)
+
+A toggle shows the recorded model's cuts, where every digit is its own piece: "Different models cut text differently."
+Data: gpt-tokenizer (a dependency already) and the recorded model's pieces for these texts.
 
 #### Name it
-"A tokenizer cuts text into tokens from a fixed vocabulary and swaps each for its token ID. From here on, the model sees only the IDs."
-Terms: token, token ID, vocabulary. Picture: "syllabus" three ways, as chips with ID tags.
-Metaphor: a coat check: hand over text, get a numbered ticket. Where it breaks: "A coat check returns your own coat. Every ' syllabus' gets the same ticket, and what it fetches at P03 was set in training."
+"The tokenizer cuts text into word pieces, called tokens, and swaps each one for its number, the token ID. From here on, the model sees only numbers."
+Terms: token (word piece), token ID.
+Picture: "flour" three ways, as chips with numbered tickets.
+Metaphor: a coat check, where you hand over a piece of text and get a numbered ticket. Where it breaks: "A coat check gives back your own coat. Here every ' flour' gets the same ticket, and what that ticket fetches was set in training."
 
 #### Break it
-Lever: "Cut by letters": 60 one-character tokens instead of 17. The platform fills 3.5 times faster, trips and cost rise, and the reply should degrade, since the model rarely saw text spelled out that way. Caption finished after the variant runs.
-Data: V-P02-letters, the question force-split into single-character IDs. Precomputed: yes.
+Lever: "Cut by letters," which makes 79 one-letter pieces instead of 19. The platform fills four times faster and the trip and cost meters jump. The reply should get worse, since the model rarely saw text spelled out letter by letter. The caption is finished after the precomputed run.
+Data: V-P02-letters. Precomputed: yes.
 
 #### Stamp
 1. "Why have chatbots often miscounted the r's in 'strawberry'?"
-   - They can't count to three — counting isn't the issue; the letters aren't in what it sees.
-   - ' strawberry' reaches the model as one ID, not ten letters (correct)
-   - It isn't in the vocabulary — it is, as one piece, which is the problem.
-2. "Two classmates send the same question, one with the typo 'sylabus.' What's guaranteed to differ?"
-   - The model's weights — nothing about the model changes between users.
-   - The tokens and their count, 17 versus 18 (correct)
-   - Whether the answer is right — models cope with most typos; only the IDs are sure to differ.
+   - They can't count to three — counting isn't the problem; the letters aren't in what it sees.
+   - ' strawberry' reaches the model as one numbered piece, not ten letters (correct)
+   - The word isn't in its list — it is, as one piece, and that's the problem.
+2. "Two people send the same question, one with the typo 'flouur.' What's sure to be different?"
+   - The model itself — nothing about the model changes between users.
+   - The word pieces and their count: 19 versus 21 (correct)
+   - Whether the answer is right — models cope with most typos; only the pieces are sure to differ.
 
-Stamp: a paper strip cut into chips, each with a tiny ticket number.
+Stamp design: a paper strip cut into chips, each with a tiny ticket number.
 
 #### Level 3 Bedrock
-Byte-pair encoding, animated: " syllabus" starts as 9 bytes, and the lowest-ranked adjacent pair merges, step by step, until one ID remains. Vocabulary = 256 bytes + an ordered merge list learned once from a large text sample. Special tokens (G1) sit outside the list.
+Byte-pair encoding, animated: " flour" starts as 6 bytes. Pairs merge step by step, the pair learned earliest first, until one ID remains. The vocabulary is 256 bytes plus an ordered list of merges, built once from a large sample of text. The special tokens of the chat template (G1) sit outside that list.
 
 #### Receipt line
-"You pay in tokens, and windows are measured in them. Many languages need more tokens than English for the same meaning. [cite]" (compute)
+"You pay by the word piece. The same meaning takes more pieces in some languages than others, and some pay far more. [cite]" (compute)
 
 #### Flashback into P03
-"Does ID 1721† (' final') carry the meaning of 'final'?" No. It's a row number.
+"Does piece number 28420† (' flour') carry the meaning of 'flour'?" Answer: No. It's only a row number.
 
 ---
 
 ## P03 Embedding
 
 #### Arrive
-Panel: a ticket slides into a wall of numbered drawers; one opens, and a striped strip of numbers rolls out.
-Caption: "An ID is only a row number. Here each one pulls its row from a table: a long list of numbers learned in training."
+Panel: a ticket slides into a wall of numbered drawers. One drawer opens, and a long striped strip of numbers rolls out.
+Caption: "An ID is only a row number. Each one pulls out its row: a long list of numbers."
 
 #### Bet
-"' final' appears in 'final exam' and in 'World Cup final.' Does it pull the same row in both?"
+"' feed' appears in 'feed 30 people' and in 'my news feed.' Does it pull the same row both times?"
 - No: it reads the sentence first, then picks a row
 - Yes: the same row every time (correct)
 - No: rows are random
 
-Reveal: "Same ID, same row, every time. The starting numbers can't tell which final you mean. Context mixes in at P04."
+Reveal: "Same number, same row, every time. At this stop the model can't tell which 'feed' you mean. The sentence starts to matter at P04."
 
 #### Poke
-A map of meaning: ~2,000 tokens from the trace model's embedding table, squashed to 2D. Tap one to light its 8 nearest neighbors (measured in the full table) and see its vector strip. Challenges: find the neighbors of ' final'; find two lookalikes that live far apart. Expect spelling neighbors (' Final', ' finals') too: "Starting rows group spelling and use." Note: "Two dimensions can't hold 896†. Trust the neighbor list, not the screen."
-Data: rows for ~2,000 tokens, a named 2D projection, precomputed neighbors.
+A map of meaning: about 40 words from the recorded model's table, in groups (baking, people, places, number words, which stand in for numbers because this model splits digits). Tap a word to light its nearest neighbors, measured across all 896 numbers, and see its strip. Challenges: "Find the neighbors of ' flour'." "Find two lookalikes that live far apart."
+Note: "A flat map can't hold 896 directions. Trust the neighbor list, not the distance on screen."
+Data: rows and neighbors for the chosen words; a projection onto the group centers (the spike: 92% of groups kept, versus 42% for plain PCA).
 
 #### Name it
-"An embedding is the vector, a list of numbers, stored for each token ID in a table that's part of the model's weights. Training pushed tokens used in similar ways toward similar vectors."
-Terms: embedding, vector, weights. Picture: ticket, drawer, vector strip.
-Metaphor: a city where tokens used alike share a block. Where it breaks: "This city has 896† directions, not 2, and none of them means anything you could name."
+"An embedding is the list of numbers stored for each token ID. Those lists are part of the model's weights, the numbers set in training, and words used in similar ways ended up with similar lists."
+Terms: embedding, weights.
+Picture: ticket, drawer, strip of numbers.
+Metaphor: a city where words used alike live on the same block. Where it breaks: "This city has 896 directions, not 2, and none of them means anything you could name."
 
 #### Break it
-Lever: "Scramble the table": 10%, 50% or 100% of rows swapped among tokens. A light scramble may change a word; a full one should turn the reply to noise. The model depends on these exact numbers.
-Data: V-P03-scramble-10, -50, -100. Precomputed: yes.
+Lever: "Scramble the table," which swaps 10%, 50% or 100% of the rows. A light scramble may change a word; a full one should turn the reply to noise. The point is that the model depends on these exact numbers.
+Data: V-P03-scramble-10, -50 and -100. Precomputed: yes.
 
 #### Stamp
 1. "A new slang word takes off next month. While you chat, can the model add a row for it?"
    - Yes, it learns words as you use them — using a model never changes its weights.
-   - Yes, if you define it in your prompt — the definition helps from the context; no row is added.
-   - No: the table is fixed, and the word is split into existing tokens (correct)
-2. "Two tokens have very similar vectors. Best guess about them?"
-   - They mean exactly the same thing — similar use isn't identical meaning; ' hot' and ' cold' are often neighbors.
-   - They appeared in similar places in the training text (correct)
-   - Someone grouped them by hand — training placed them; nobody labeled the directions.
+   - Yes, if you explain it in your message — the explanation helps this one answer; no row is added.
+   - No: the table is fixed, so the word gets cut into pieces it already has (correct)
+2. "Two words have very similar lists of numbers. What's the best guess?"
+   - They mean exactly the same thing — similar use isn't the same meaning; 'hot' and 'cold' are often neighbors.
+   - They showed up in similar places in the training text (correct)
+   - Someone grouped them by hand — training placed them; nobody labeled anything.
 
-Stamp: a chest of drawers, one open, a striped strip falling out.
+Stamp design: a chest of drawers, one open, with a striped strip falling out.
 
 #### Level 3 Bedrock
-E: one row per vocabulary entry, 896† columns; for Qwen2.5-0.5B, about 136 million numbers, a quarter of its weights†. Lookup: x = E[id]. Cosine similarity, a·b / (|a| |b|), live for any two tokens. This model reuses E at P06 to score tokens†.
+The embedding matrix E has one row per vocabulary entry and 896 columns. For Qwen2.5-0.5B, that's about 136 million numbers, a quarter of its weights. Lookup is x = E[id]. Cosine similarity, a·b / (|a| |b|), is computed live for any two words. This model reuses E at P06 to score every piece.
 
 #### Receipt line
 "These numbers were learned from human writing and carry its patterns, stereotypes included. Consent and credit for that writing are disputed. [cite]" (data)
 
 #### Flashback into P04
-"Leaving P03, is your ' final' identical to the one in 'World Cup final'?" Yes. Your sentence hasn't touched it yet.
+"Leaving P03, is ' feed' in your question the same as ' feed' in 'my news feed'?" Answer: Yes. Your sentence hasn't touched it yet.
 
 ---
 
 ## P04 Attention
 
 #### Arrive
-Panel: the platform's chips in a row; arcs reach back from ' final' in your question, drawn from the head chosen for Poke.
-Caption: "Here every token looks back at the tokens before it and takes a weighted mix of what they carry."
+Panel: the chips in a row. Curved arcs reach back from ' flour' in your question to earlier chips, drawn from one real head in the recording.
+Caption: "Here every word piece looks back at the pieces before it and borrows from them."
 
 #### Bet
-"Can ' final' in your question look at 'A-', which comes after it?"
+"Can ' flour' in your question look at 'people', which comes after it?"
 - Yes: it sees the whole question at once
-- Only if the two words are related
-- No: only tokens before it (correct)
+- Only if the words are related
+- No: only pieces before it (correct)
 
-Reveal: "Only backward. That rule lets the same machine write one token at a time: no token ever needs one that doesn't exist yet."
+Reveal: "Only backward. That's what lets the same machine write one piece at a time: no piece ever needs one that doesn't exist yet."
 
 #### Poke
-Tap any chip: arcs fan back to every earlier token, width by weight, summing to 1. A dial switches among 6† curated heads, nicknamed after studying the trace ("looks one back," "copies numbers"). Challenges: find a head linking ' final' to the syllabus passage; find the head reading the tool result as the reply writes 93.75. Note: "Many heads park weight on the first token when nothing else fits. A known habit."
-Data: attention rows for ~10 query positions, all layers and heads. If no head cleanly links ' final' to the syllabus, lead with the copying challenge.
+Tap any chip: arcs fan back to every earlier piece, thicker where it borrows more, each fan adding up to 100%. A dial switches among 6† chosen heads, nicknamed after studying the recording ("looks one back," "copies numbers"). Challenges: "Find a head that links ' flour' in your question to ' flour' on the card." "While the reply writes 8.4, find the head looking at the calculator's answer."
+The first piece is faded, with a note: "Many heads park extra weight on the very first piece. Many models do this."
+Data: attention rows for about 10 positions, all layers and heads. The old run had a look-one-back head, a copy head and a first-piece habit in 71% of heads; re-check here.
 
 #### Name it
-"Attention lets each token take a weighted mix of information from earlier tokens, with weights that add up to 1. Each layer has several attention heads, each scoring a different kind of relevance."
-Terms: attention, attention head. Picture: arcs from ' final', widths labeled.
-Metaphor: a highlighter over the earlier text, darker where more is borrowed. Where it breaks: "A highlighter implies a reader. Nobody is reading; the weights come from multiplying vectors."
+"Attention lets each word piece take a weighted mix of information from earlier pieces; the weights add up to 100%. Each layer has several attention heads, each looking for a different kind of link."
+Terms: attention, attention head.
+Picture: arcs from ' flour', with widths labeled.
+Metaphor: a highlighter run over earlier text, darker where more is borrowed. Where it breaks: "A highlighter suggests a reader. Nobody is reading; the weights come from multiplying numbers."
 
 #### Break it
-Lever: Normal / "Hide the passages" (nothing may look at the syllabus or gradebook) / "Self only." Hiding the passages should leave a fluent reply with invented or missing numbers; self-only should give noise.
-Data: V-P04-hide-passages, V-P04-self-only (masks changed in every layer). Precomputed: yes.
+Lever: Normal / "Hide the recipe card" / "Self only." "Hide the recipe card" means nothing may look at the passages; it should leave a fluent reply with made-up amounts. "Self only" should give noise.
+Data: V-P04-hide-passages and V-P04-self-only. Precomputed: yes.
 
 #### Stamp
-1. "In 'Do not include citations,' a head weights 'not' heavily. Does that show the model understood?"
+1. "In 'Do not add sugar,' a head puts heavy weight on 'not.' Does that show the model understood?"
    - Yes: attention is focus — nobody is there to focus.
-   - No: it shows how numbers were mixed; only the output shows if the instruction was followed (correct)
-   - Yes: high weight means high confidence — weights describe mixing, not certainty.
-2. "How can the 40th token of a reply still use a fact from the first line of the context?"
-   - The fact was trained in during the chat — weights don't change while answering.
-   - It can't; only the last few tokens matter — it can, while the fact is on the platform.
-   - Every new token can look back at every earlier token on the platform (correct)
+   - No: it shows how numbers were mixed; only the reply shows whether the instruction was followed (correct)
+   - Yes: heavy weight means high confidence — weights describe mixing, not certainty.
+2. "How can the 40th piece of a reply still use a fact from the first line of the context?"
+   - The fact was trained in during the chat — the model doesn't change while answering.
+   - It can't; only the last few pieces matter — it can, as long as the fact is still on the platform.
+   - Every new piece can look back at every earlier piece on the platform (correct)
 
-Stamp: arcs bridging over a row of chips, like a footbridge.
+Stamp design: arcs bridging over a row of chips, like a footbridge.
 
 #### Level 3 Bedrock
-score_ij = q_i · k_j / √d, masked so j ≤ i; a_ij = softmax over j; out_i = Σ_j a_ij v_j, with one real row worked live. Trace model†: 14 query heads sharing 2 key-value groups, 64 numbers per head.
+Attention as math: score_ij = q_i · k_j / √d, masked so j ≤ i (the causal mask). Then a_ij = softmax over j, and out_i = Σ_j a_ij v_j. One real row is worked live. Qwen2.5-0.5B has 14 query heads sharing 2 key-value groups, with 64 numbers per head.
 
 #### Receipt line
-"Every token looks back at every earlier one, so long contexts cost more per reply." (compute)
+"Every word piece looks back at every earlier one, so long chats cost more per reply." (compute)
 
 #### Flashback into P05
-"When ' final' borrowed from earlier tokens, did that happen once or many times?" Many. Every layer runs its own attention.
+"When ' flour' borrowed from earlier pieces, did that happen once or many times?" Answer: Many. Every layer does its own looking back.
 
 ---
 
 ## P05 The Stack
 
 #### Arrive
-Panel: a cutaway building above P05. Each token's vector rides an elevator up 24† floors; every floor has an attention room, then a rework room.
-Caption: "Here the numbers ride up a stack of layers. Each floor adds an edit, and the next-token guess gets sharper."
+Panel: a cutaway building above P05. Each piece's numbers ride an elevator up 24 floors, passing a looking-back room and a reworking room on every floor.
+Caption: "The numbers ride up 24 floors. Each floor makes an edit, and the guess gets sharper."
 
 #### Bet
-"As the model writes the first digit of 93.75, at which floor does the right digit first lead?"
+"As the reply writes the 8 in '8.4,' on which floor does '8' first become the top guess?"
 - Floor 1
-- Around the middle
-- Near the top (expected correct; confirm with the trace)
+- Around floor 12
+- Near the top (expected correct; confirm in the recording)
 
-Reveal template: "Floor [k] of 24†. Low floors guess [what the trace shows]; the answer arrives late, after enough borrowing."
+Reveal template: "Floor [k] of 24. Below about floor 18 the guesses are junk, and the answer shows up only in the last few floors." In the spike, the old run's answer appeared at floors 21 to 23.
 
 #### Poke
-Ride the elevator: drag the car and read the top 5 guesses per floor at three moments: the run's first token (where the tool call begins), the first digit of 93.75, and ' final' in the reply. Challenge: "Find the floor where the tool call takes the lead." Note: "Reading a guess mid-building is a research trick. Middle floors weren't trained to be read."
-Data: top-10 guesses per layer for every generated position.
+Ride the elevator: drag the car and read the top 5 guesses on each floor. Choose among three moments: the 8 in the answer, ' cups', and ' flour' in the reply. Floors 1 to 17 are grouped under "no word yet," as the spike recommends; floors 18 to 24 are shown one at a time.
+Challenge: "Find the floor where '8' takes the lead."
+Note: "Reading a guess partway up is a research trick. The middle floors weren't built to be read."
+Data: the top 10 guesses on every layer for each piece the model writes.
 
 #### Name it
-"A transformer is a stack of layers; each runs attention, then reworks every token's numbers separately. The result is added to the token's hidden state, the vector it carries up the stack."
-Terms: layer, transformer, hidden state. Picture: the elevator shaft, a guess on each floor.
-Metaphor: one draft passed up a building, each floor adding tracked changes without erasing anything. Where it breaks: "The draft is 896† numbers, not words. The words we show are only a peek."
+"A transformer is a stack of layers. Each layer looks back (attention), then reworks each piece's numbers, adding its edit to what was already there."
+Terms: layer, transformer.
+Picture: the elevator shaft, with a guess on each floor.
+Metaphor: one draft passed up a building, each floor adding edits without erasing anything. Where it breaks: "The draft is 896 numbers, not words. The words we show are only a peek."
 
 #### Break it
-Lever: Normal / "Skip one middle floor" / "Skip the top half." Skipping one floor often barely changes the reply; skipping the top half should leave fluent-looking text with wrong or missing numbers.
-Data: V-P05-skip-mid, V-P05-skip-top (exit after floor 12†, then final norm and output table). Precomputed: yes.
+Lever: Normal / "Skip one middle floor" / "Skip the top half." Skipping one floor often barely matters. Skipping the top half should give fluent-looking text with wrong or missing amounts.
+Data: V-P05-skip-mid and V-P05-skip-top, which exits after floor 12. Precomputed: yes.
 
 #### Stamp
 1. "A bigger model has more layers. What does that give it, most directly?"
-   - More rounds of mixing and reworking for every token (correct)
-   - A longer context window — that's a separate design limit.
+   - More rounds of looking back and reworking for every piece (correct)
+   - A bigger context window — that's a separate design limit.
    - Extra floors when a question is hard — every trip runs every floor once, easy or hard.
-2. "A mid-stack guess shows a wrong answer; the top floor gets it right. Best description?"
-   - The model changed its mind — no mind; one vector kept being edited.
-   - The model lied, then corrected itself — lying needs intent.
-   - An unfinished hidden state, read with a trick, before later floors added their edits (correct)
+2. "A guess read halfway up is wrong, and the top floor gets it right. What's the best description?"
+   - The model changed its mind — there's no mind; one list of numbers kept being edited.
+   - The model lied, then fixed it — lying needs intent.
+   - An unfinished draft, read with a trick, before later floors added their edits (correct)
 
-Stamp: an elevator floor dial, its needle near the top.
+Stamp design: an elevator floor dial with its needle near the top.
 
 #### Level 3 Bedrock
-The residual stream: h ← h + Attention(norm(h)); h ← h + MLP(norm(h)); repeat 24† times. The MLP widens 896† numbers to 4,864† and back. The logit lens: guess = W_out · norm(h_layer).
+The residual stream: h ← h + Attention(norm(h)), then h ← h + MLP(norm(h)), repeated for 24 layers. The MLP widens 896 numbers to 4,864 and back. The logit lens reads a guess at any floor: guess = W_out · norm(h_layer). Floor 0 echoes the input piece, because this model scores with its own embedding table.
 
 #### Receipt line
-"Every trip runs every floor: about a billion arithmetic operations per token here, far more in frontier models. [cite]" (energy)
+"Every trip runs every floor: about a billion arithmetic steps per word piece here, far more in big models. [cite]" (energy)
 
 #### Flashback into P06
-"At the top floor, what comes out: one word, or a score for every token in the vocabulary?" A score for every token.
+"At the top floor, what comes out: one word, or a score for every word piece the model knows?" Answer: A score for every piece.
 
 ---
 
 ## P06 The Vote
 
 #### Arrive
-Panel: a departure board above P06; candidate tokens flip into rows with odds; one row lights.
-Caption: "Here every token in the vocabulary gets a score. Scores become odds, and one token is drawn."
+Panel: a departure board above P06. Candidate pieces flip into rows with their chances, and one row lights.
+Caption: "Every word piece the model knows gets a score. Scores become chances, and one piece is drawn."
 
 #### Bet
-"The model scores about 150,000† possible next tokens. How many get a probability above zero?"
+"The model knows about 150,000 word pieces. How many have some chance of being picked next?"
 - Only the winner
 - The top 10
-- All of them, most with tiny odds (correct)
+- All of them, most with tiny chances (correct)
 
-Reveal: "All of them get a share, most of them microscopic. Sampling settings can cut off the long shots."
+Reveal: "All of them, but most chances are microscopic. Some chatbots also cut off the long shots before drawing."
 
 #### Poke
-A temperature slider from 0 to 2 over the real scores at one moment, with an "everything else" bar so shares sum to 100%. "Draw 20" (the prototype's Spin) samples 20 tokens and tallies them. Then Beat the Model (spec under Branch lines).
-Data: full score vectors at 3 curated positions, so every slider setting is exact; top-10 scores plus log-sum-exp at every other generated position; top-200 at Beat the Model positions.
+A temperature slider (0 to 2) over the real scores at a moment where the race is close; the spike found the answer's digits near-certain, so pick from the recording. An "everything else" bar keeps the total at 100%. "Draw 20" (the prototype's Spin) draws 20 times and tallies the results. Then Beat the Model.
+Data: full score lists at 3 chosen positions (so every slider setting is exact); top 10 plus the total elsewhere; top 200 at Beat the Model positions.
 
 #### Name it
-"The model turns its scores into probabilities that add up to 100%, and sampling draws the next token from them. Temperature reshapes the odds: low makes the favorite near-certain, high gives long shots a chance."
-Terms: probability, temperature, sampling. Picture: departure-board bars at temperature 1.
-Metaphor: an election with every token as a candidate. Where it breaks: "No one votes, and the favorite can lose: the winner is drawn in proportion to its odds, unless the temperature is 0."
+"The model turns scores into probabilities that add up to 100%, and sampling draws the next piece. Temperature changes the spread: low makes the favorite nearly certain, and high gives long shots a chance."
+Terms: probability, temperature, sampling.
+Picture: departure-board bars at temperature 1.
+Metaphor: an election with every word piece on the ballot. Where it breaks: "Nobody votes, and the favorite can lose. The winner is drawn by chance, in proportion to its odds, unless the temperature is 0."
 
 #### Break it
-Lever: temperature 0 / 1 / 2. At 0 the reply is identical every time; at 1, expect small wording changes; at 2, it drifts into nonsense within a few tokens, and the number may change.
-Data: V-P06-T0, -T1, -T2, three seeded samples each. Precomputed: yes.
+Lever: temperature 0, 1 or 2. At 0 the reply is the same every time. At 1 the wording changes a little. At 2 it turns to nonsense within a few pieces, and the amount may change.
+Data: V-P06-T0, -T1 and -T2, with three seeded samples each. Precomputed: yes.
 
 #### Stamp
-1. "A chatbot writes 'I'm 95% sure.' Is that the model's probability that the claim is true?"
-   - Yes: it reads its own probabilities — it doesn't see its odds unless an app adds them to the context.
-   - Yes, if the temperature is low — temperature changes the draw, not what the odds mean.
-   - No: it's text the model wrote; its odds are about the next token, not truth (correct)
-2. "You ask the same question twice and get different answers. Nothing else changed. Most likely reason?"
-   - Sampling drew different tokens (correct)
-   - It learned from your first question — weights don't change between answers.
-   - It searched differently the second time — possible in apps that search again, but here the context was identical.
+1. "A chatbot writes 'I'm 95% sure.' Is that its probability that the claim is true?"
+   - Yes: it reads its own chances — it doesn't see them unless an app adds them to what it reads.
+   - Yes, if the temperature is low — temperature changes the draw, not what the chances mean.
+   - No: those are words it wrote; its chances are about the next piece, not the truth (correct)
+2. "You ask the same question twice and get different answers. Nothing else changed. Why?"
+   - The draw came out differently (correct)
+   - It learned from your first question — it doesn't change between answers.
+   - It searched your files differently — possible in apps that search again, but here it read exactly the same thing.
 
-Stamp: a departure board with one lit row.
+Stamp design: a departure board with one lit row.
 
 #### Level 3 Bedrock
-Softmax with temperature: p_i = e^(z_i / T) / Σ_j e^(z_j / T), with the real scores (logits) on screen and the arithmetic recomputed as the slider moves. Temperature 0 means "always take the top score." A note on top-p, which drops the long tail before drawing.
+Softmax with temperature: p_i = e^(z_i / T) / Σ_j e^(z_j / T). The real scores (logits) are on screen, and the arithmetic is redone as the slider moves. Temperature 0 means "always take the top score." A note explains top-p, which drops the long tail before drawing.
 
 #### Receipt line
-"The provider sets the temperature. Different answers to the same question are a design choice." (accountability)
+"The company running the chatbot sets the temperature. Different answers to the same question are a design choice." (accountability)
 
 #### Flashback into P07
-"The vote drew one token. Where does it go?" To your screen, and onto the platform for the next trip.
+"The Vote drew one piece. Where does it go?" Answer: To your screen, and onto the platform for the next trip.
 
 ---
 
 ## P07 The Loop
 
 #### Arrive
-Panel: the new chip boards the train; the train loops from P07 back to P03, skipping the Tokenizer; the trip counter flips 07 to 08.
-Caption: "Here the new token joins the platform, and the whole trip runs again for the next one, until a stop token wins."
+Panel: the new chip boards the train, and the train loops back to P03, skipping the Tokenizer. The trip counter flips from 07 to 08.
+Caption: "The new piece joins the platform, and the whole trip runs again for the next one."
 
 #### Bet
-"When the new token loops back, where does it re-enter?"
+"When the new piece loops back, where does it get back on?"
 - P02 Tokenizer: it's text again
-- P03 Embedding: it's already an ID (correct)
+- P03 Embedding: it already has its number (correct)
 - P06 The Vote: just vote again
 
-Reveal: "Straight to P03. The model wrote an ID, so there's nothing to cut. Text from outside, like a tool result, goes back through P02."
+Reveal: "Straight to P03. The model wrote a number, so there's nothing to cut. Text from outside, like the calculator's answer, goes back through P02."
 
 #### Poke
-Step the reply one token per tap. The platform fills, the trip counter climbs, and two bars compare work per trip: recomputing everything versus saved work for the new token only. Then shrink the platform: chips that no longer fit fade out, oldest first, system prompt kept, the policy labeled as the app's choice.
-Data: the ordered sequence with sources; per trip, the drawn token, its probability and the top 10.
+Step through the reply one piece per tap. The platform fills and the trip counter climbs. Two bars compare the work per trip: redoing everything versus reusing saved work.
+Then shrink the platform. Pieces that no longer fit fade out, oldest first, while the hidden instructions stay. The rule is labeled as the app's choice.
+Data: the ordered pieces with their sources, plus each trip's drawn piece, its chance and the top 10.
 
 #### Name it
-"The model is autoregressive: each new token is appended to the context and fed back in to predict the next. The context window is the most tokens the model can take in at once."
-Terms: autoregressive, context window. Picture: the loop above the platform, with a gauge reading 106† of 32,768†.
-Metaphor: writing a sentence where you reread everything so far before each word. Where it breaks: "Real systems save each earlier token's work, so later trips process only the new token."
+"The model writes one piece, adds it to what it reads, and runs again for the next. The context window is the most it can read at once."
+Terms: context window.
+Picture: the loop above the platform, with a gauge reading 126† of 32,768.
+Metaphor: writing a sentence where you reread everything so far before each new word. Where it breaks: "Real systems save each earlier piece's work, so later trips handle only the new piece."
 
 #### Break it
-Lever: platform size: fits all / drops the syllabus / drops both passages. Without the syllabus the model can't see 40% or 90%; expect a confident reply built on an invented requirement, or a request for the syllabus. The tone doesn't change. That's the lesson.
-Data: V-P07-no-syllabus, V-P07-no-passages (trimmed before generation). Precomputed: yes.
+Lever: platform size, set to fits everything, drops the recipe card, or drops both passages. Without the card the model can't see "Serves 8" or "2 1/4 cups." Expect a confident reply with a made-up amount, or a request for the recipe. The tone doesn't change, and that's the lesson.
+Data: V-P07-no-card and V-P07-no-passages. Precomputed: yes.
 
 #### Stamp
-1. "300 messages into a chat, the bot ignores a rule you set at the start. The app trims old messages. What's most likely to help?"
-   - Tell it to remember harder — words can't restore tokens that were cut.
-   - Wait a day for it to learn the rule — it never learns from chats.
-   - Restate the rule in a recent message (correct)
-2. "A reply is 200 tokens long. How many trips did it take?"
-   - 1: replies come out whole — one token per trip.
-   - 200: one per new token (correct)
-   - 200 plus your prompt's length — the prompt rides in all at once on the first trip.
+1. "300 messages into a chat, the bot forgets you said you're vegetarian. The app trims old messages. What helps most?"
+   - Tell it to try harder to remember — words can't bring back pieces that were cut.
+   - Wait a day for it to learn — it never learns from chats.
+   - Say it again in a recent message (correct)
+2. "A reply is 200 pieces long. How many trips did it take?"
+   - 1: replies come out whole — one piece per trip.
+   - 200: one per new piece (correct)
+   - 200 plus the length of your question — your question rides along, all at once, on the first trip.
 
-Stamp: a loop of track with an arrow and a trip counter.
+Stamp design: a loop of track with an arrow and a trip counter.
 
 #### Level 3 Bedrock
-p(reply | context) = Π_t p(token_t | context, earlier tokens). The first trip (prefill) handles every context token in parallel; each later trip (decode) handles one, reusing saved keys and values: the KV cache, shown growing each trip.
+Generation is autoregressive: p(reply | context) = Π_t p(piece_t | context, earlier pieces). The first trip (prefill) handles every piece at once. Each later trip (decode) handles one piece, reusing saved keys and values: the KV cache.
 
 #### Receipt line
-"37† trips. Long replies, thinking tokens and tool loops multiply trips, and each draws electricity. Per-answer estimates vary widely. [cite: range]" (energy)
+"28† trips. Long replies, thinking and tool use multiply trips, and each trip uses electricity. Estimates per answer vary widely. [cite: range]" (energy)
 
 #### Flashback into P08
-"What makes the loop stop?" The vote draws a special stop token, or the app hits a length limit.
+"What makes the loop stop?" Answer: The Vote draws a special stop piece, or the app hits a length limit.
 
 ---
 
 ## P08 Reply
 
 #### Arrive
-Panel: the reply appears on the phone. Behind it, the map: Gatehouse, Library and Workshop lit; Academy, Scratchpad and Darkroom dark. A receipt starts printing.
-Caption: "A stop token wins the vote, the loop ends, and the app shows you the reply. Here's what it took."
+Panel: the reply appears on the phone: about 8.4 cups†. Behind it, the map shows Gatehouse, Library and Workshop lit, and Academy, Scratchpad and Darkroom dark. A receipt starts printing.
+Caption: "A stop piece wins the vote, the loop ends, and you get your answer. Here's what it took."
 
 #### Bet
 "Did answering your question change the model?"
-- Yes: it learned your grades
+- Yes: it learned Grandma's recipe
 - A little: every chat trains it
-- No: its weights are exactly the same (correct)
+- No: its numbers are exactly the same (correct)
 
-Reveal: "Not one weight changed. The Academy line stayed dark the whole ride. Some companies save chats to train future models, but that happens later, separately."
+Reveal: "Not one number changed. The Academy line stayed dark the whole ride. Some companies save chats to train future models, but that happens later, separately."
 
 #### Poke
-Replay the run on a scrubber, trip 1 to 37†: each trip shows the drawn token, its odds and the lit stations. Find the trip where the tool call began, the least sure trip, and where the reply copied 93.75 from the tool result. Then read the receipt: tokens in by source, tokens out, trips, lines lit and dark.
-Data: the complete run file, plus each drawn token's probability.
+Replay the run on a scrubber, trip 1 to 28†; each trip shows the drawn piece, its chance and the lit stations. Find where the calculator request began, the least sure trip, and where the reply copied 8.4 from 8.4375. If the recording steered the model, the board says so here: "Its first choice was to start writing. We sent it to the calculator." Then read the receipt.
+Data: the full run file, each drawn piece's chance and, where steered, the model's own first choice.
 
 #### Name it
-"Inference is running a trained model on new context: fixed weights, one token per trip, until a stop token. Fluent text comes out whether or not anything supports it, and false or unsupported output is a hallucination."
-Terms: inference, stop token, hallucination. Picture: the receipt.
+"Inference is using a trained model: fixed numbers, one piece per trip, until a stop token. Fluent text comes out whether or not anything supports it, and false or unsupported text is a hallucination."
+Terms: inference, stop token, hallucination.
+Picture: the receipt.
 Metaphor: none. The receipt is literal.
 
 #### Break it
-Lever: "Ban the stop token." The model keeps writing past its answer. Expect rambling, repetition or an invented next turn, since turn markers are tokens it learned to predict.
-Data: V-P08-no-stop (the stop token's score set to minus infinity; 80 extra tokens). Precomputed: yes. Then the spur opens: R1 The Ledger and R2 Debug the Bot.
+Lever: "Ban the stop token." The model keeps writing past its answer. Expect rambling, repetition or a made-up next message, because the end of a turn is one more piece it learned to predict.
+Data: V-P08-no-stop, with 80 extra pieces. Precomputed: yes. After Break it, the spur opens: R1 The Ledger and R2 Debug the Bot.
 
 #### Stamp
-1. "Your reply said 93.75%. What makes the arithmetic trustworthy?"
-   - The vote picked the most probable digits — probable isn't the same as correct.
-   - The calculator the app ran at W2; the model copied its result (correct)
+1. "The reply said about 8.4 cups. What makes the arithmetic trustworthy?"
+   - The Vote picked the most likely digits — likely isn't the same as correct.
+   - The calculator the app ran at W2; the model copied its answer (correct)
    - The Stack does exact math — models can do some arithmetic, with no guarantee.
-2. "A classmate says, 'I told the bot my grade last week, so now it knows.' What's true?"
-   - Yes: models learn from every chat — inference never changes weights.
-   - Only if the app saved it and put it back into this context (correct)
+2. "A friend says, 'I told the bot about my nut allergy last week, so now it knows.' What's true?"
+   - Yes: models learn from every chat — answering never changes the model.
+   - Only if the app saved it and pasted it into this conversation (correct)
    - No: models can't use personal information — they can use anything on the platform.
 
-Stamp: a speech bubble with a receipt tearing off its bottom edge.
+Stamp design: a speech bubble with a receipt tearing off its bottom edge.
 
 #### Level 3 Bedrock
-The run's total log-probability, Σ_t log p(token_t), summed live from the trace's per-trip numbers, beside the counts: tokens in, tokens out, trips, weights changed: 0.
+The run's total log-probability, Σ_t log p(piece_t), summed live from the recorded trips. Beside it are the counts: pieces in, pieces out, trips, and weights changed: 0.
 
 #### Receipt line
-"The reply has no author in the usual sense. Responsibility for errors rests with the people who build, deploy and rely on it." (accountability)
+"The reply has no author in the usual sense. Responsibility for errors rests with the people who build it, offer it and rely on it." (accountability)
 
 #### Flashback into R1
-"Your run used 106† tokens. If you paid per token, which would you pay for?" All of them: the app's wrapper, the passages, the tool call and the reply, not only your 17.
+"Your run used 126† word pieces. If you paid by the piece, which would you pay for?" Answer: All of them. That means the app's additions, the recipe card, the calculator request and the reply, not only your 19.
 
 ---
 
 ## Branch lines
 
 ### L Library (Send to Tokenizer): L1 Search by meaning, L2 Fetch passages, L3 Add to context
-The model has never seen your syllabus. Before it reads anything, the app compares your question with chunks of your course files using a separate, smaller embedding model, fetches the closest chunks and pastes them into the context, where they enter at P02.
-**Interaction: the Reading Room.** About 15 chunks of a fictional course folder are ranked by similarity to your question. Drag a cutoff to choose how many board, then see the reply change.
-**Game: Wrong Page.** Retrieval returns last year's syllabus, where an A- starts at 92%. The calculator does its job, and the reply says "98.75%" with full confidence. Use the reply's citation to find the bad passage, then fix the retrieval.
-**Fixes:** "the model knows my files," and "a cited answer is a correct answer."
-**Terms:** RAG, semantic search, grounding.
-**Needs:** the fictional corpus; precomputed similarity scores; V-L-wrong-syllabus, V-L-none, V-L-gradebook-only.
+The model has never seen Grandma's card. Before the model reads anything, the app compares your question with chunks of your files, using a separate search model. It takes the closest chunks and pastes them in, and they enter the line at P02.
+- **Interaction: the Recipe Box.** About 15 chunks from a made-up folder (recipes, a grocery list, party plans) are ranked by closeness to your question. Drag a cutoff to choose how many get pasted in, and watch the reply change.
+- **Game: Wrong Card.** Search returns Grandma's drop-biscuit card, which serves 12. The calculator does its job (2.25 × 30 / 12 = 5.625), and the reply says "about 5.6 cups" with full confidence. Use the reply's citation to find the wrong card, then fix the search.
+- **Misconceptions fixed:** "The model knows my files." "A cited answer is a correct answer."
+- **Terms:** RAG, search by meaning.
+- **Needs:** the made-up folder, precomputed closeness scores, and the precomputed runs V-L-wrong-card, V-L-none and V-L-back-only.
 
-### W Workshop (The Loop to Tokenizer): W1 Read the call, W2 Run the tool, W3 Paste the result
-The model can't run anything. The app pasted a description of the calculator into the context earlier; the model writes a tool call as text, in a format it was fine-tuned to produce, and ends its turn. The app reads the call, runs the calculator and pastes 93.75 back as text, which enters at P02.
-**Interaction: the Tool Bench.** Read the raw call, special tokens included, before the app tidies it. Then "Unplug the calculator": the model has to write the digits itself.
-**Game: Agent Loop.** A three-tool task (search course files, calculate, add a study block to your calendar) runs as repeated loops. You approve or deny each permission request; one fetched page tries to invite a stranger to your calendar.
-**Fixes:** "the model runs code or browses the web," and "an agent is a different kind of AI."
-**Terms:** tool call, agent, permission.
-**Needs:** raw call and tool-description tokens from the trace; V-W-no-tool; a scripted agent run, labeled as scripted.
+### W Workshop (The Loop to Tokenizer): W1 Read the request, W2 Run the tool, W3 Paste the result
+The model can't run anything.
+1. Earlier, the app pasted a short description of the calculator into what the model reads.
+2. The model writes a calculator request as text, in a format it was trained on, and ends its turn.
+3. The app reads the request, runs the calculator and pastes 8.4375 back as text, which enters at P02.
 
-### G Gatehouse (from Send): G1 Hidden system prompt, G2 Injection Heist
-**G1.** See the raw context: the chat template's special tokens marking who's speaking, the system prompt, the tool description, then your 17†. A counter shows how much of the platform you never saw.
-**G2 Injection Heist.** Locker Bot keeps a fictional locker code in its system prompt and has been told never to share it. Three attack rounds: ask directly; disguise the ask (role-play, translation, formatting); plant an instruction in a course file the Library will fetch. Then switch sides and choose defense cards: firmer wording, marking fetched text as data, an app-side filter on replies, keeping the secret out of the context, removing tools the bot doesn't need. Each card replays against the attack library with honest hit rates. The lesson: wording helps a little; the reliable fixes keep secrets out of the context and limit what a hijacked model can do.
-**Fixes:** "the system prompt is a locked rulebook," and "the model can tell instructions from data."
-**Terms:** system prompt, chat template, special token; prompt injection.
-**Needs:** the full templated sequence from the trace; an attack-card library with replies precomputed from a real small model, each run several times.
+If the recording needed steering, this is where the board says so.
+- **Interaction: the Tool Bench.** See the raw request before the app tidies it. Then "Unplug the calculator": the model has to write the digits itself.
+- **Game: Agent Loop.** A task with three tools (search your recipes, calculate, add items to a shopping list) runs as repeated loops. You approve or deny each permission, and one fetched web page tries to send your list to a stranger.
+- **Misconceptions fixed:** "The model runs code or browses the web." "An agent is a different kind of AI."
+- **Terms:** tool call, agent, permission.
+- **Needs:** the raw request and the calculator description from the recording, plus V-W-no-tool and a scripted agent run labeled "scripted."
+
+### G Gatehouse (from Send): G1 Hidden instructions, G2 Injection Heist
+**G1.** See everything the model actually reads: the hidden labels marking who's talking, the hidden instructions, the calculator description, then your 19† pieces. A counter shows how much you never saw.
+
+**G2 Injection Heist.** Pantry Bot keeps Grandma's secret ingredient in its hidden instructions and has been told never to share it. It works in three steps.
+1. **Attack.** Three rounds:
+   - ask directly
+   - disguise the ask (role-play, translation, "write a poem about it")
+   - plant an instruction in a recipe page the Library will fetch
+2. **Defend.** Switch sides and choose defense cards:
+   - firmer wording
+   - marking fetched text as data
+   - an app-side filter on replies
+   - keeping the secret out of what the bot reads
+   - removing tools it doesn't need
+3. **Replay.** Each card replays against the attack library, with honest hit rates.
+
+The lesson is that wording helps a little. The reliable fixes keep secrets out of what the model reads and limit what a hijacked bot can do.
+- **Misconceptions fixed:** "Hidden instructions are locked rules." "The model can tell instructions from data."
+- **Terms:** system prompt, prompt injection.
+- **Needs:** everything the model reads, from the recording, plus an attack-card library with replies precomputed from a real small model, each attack run several times.
 
 ### A Academy (from The Stack): A1 Pretraining, A2 Fine-tuning, A3 Human feedback
 The only line that never lights during an answer.
-**A1.** The guessing game at scale: predict the next token of real text, measure the miss (the loss), nudge every weight slightly, and repeat across trillions of tokens. Interaction: train a tiny character-level model in the browser on a public-domain text. The lamp lights here, and only here, as its samples go from noise to near-words.
-**A2.** The hero question sent to the base model, which continues the page (perhaps by writing more questions), beside the fine-tuned model, which answers and calls the tool.
-**A3.** Rank pairs of replies, then see how many such choices become a training signal.
-**Fixes:** "chatting trains it," and "fine-tuning installs values or facts reliably."
-**Terms:** pretraining, loss; base model, fine-tuning; human feedback (RLHF).
-**Needs:** V-A-base (the base model on the hero prompt); the in-browser trainer; 6 curated preference pairs.
+- **A1.** The fill-in-the-blank game at scale: guess the next piece of real text, measure the miss, nudge every number slightly, and repeat across trillions of pieces. To try it, train a tiny letter-level model in the browser on a public-domain text. The lamp lights here, and only here, as its output goes from noise to near-words.
+- **A2.** The hero question goes to the base model, which carries on the page (perhaps by writing more recipe questions). Beside it, the fine-tuned model answers.
+- **A3.** Rank pairs of replies, then see how many such choices become training data.
+- **Misconceptions fixed:** "Chatting trains it." "Fine-tuning reliably installs facts or values."
+- **Terms:** pretraining, base model, fine-tuning, human feedback.
+- **Needs:** V-A-base (the base model on the hero question), the in-browser trainer, and 6 chosen pairs of replies.
 
 ### S Scratchpad (from The Loop): S1 Thinking tokens
-Reasoning models write working before the answer. Thinking tokens ride the same loop, cost the same per trip and fill the same platform; products may hide or summarize them.
-**Interaction: Show your work.** A harder version of the hero question (two exams, one dropped quiz) runs with thinking off and on. Thinking tokens fill the platform in gray, the trip counter climbs well past 37†, and you check which run got the right number.
-**Fixes:** "it's thinking like a person," and "the written reasoning shows exactly how it got the answer." The steps can help, but they aren't guaranteed to be a faithful account. [cite]
-**Terms:** reasoning model, thinking tokens.
-**Needs:** a small open model with a thinking switch, run both ways (V-S-think-off, V-S-think-on), with trip counts.
+Reasoning models write out working before the answer. Those thinking tokens ride the same loop, cost the same per trip and fill the same platform. Some products hide them or show a summary.
+- **Interaction: Show your work.** A harder question: "Half my 30 guests will eat three biscuits instead of two. How much flour now?" That's 75 biscuits at 16 per batch, so about 10.5 cups. It runs with thinking off and then on. Thinking tokens fill the platform in gray, the trip counter climbs well past 28†, and you check which run got it right.
+- **Misconceptions fixed:** "It's thinking like a person." "The written thinking shows exactly how it got the answer." The steps can help, but they aren't guaranteed to be a faithful account. [cite]
+- **Terms:** reasoning model, thinking tokens.
+- **Needs:** a small open model with a thinking switch, run both ways (V-S-think-off and V-S-think-on), with trip counts.
 
 ### D Darkroom (from Tokenizer): D1 Image patches, D2 Diffusion
-**D1.** A photo of the syllabus page is cut into a grid of patches; a vision encoder turns each patch into a vector that rides the platform like a token. Slide the image's resolution and watch the token count change.
-**D2.** A different machine. Diffusion starts from noise and removes a little at each step, steered by the text prompt. Scrub a 30-step timeline for "a subway map drawn in ink." Break it: remove the text steering, or stop at step 10. A note says some newer image generators work token by token instead.
-**Fixes:** "image generators collage stored pictures," "the model sees like I do," and "all generative AI writes one token at a time."
-**Terms:** multimodal, image patch; diffusion.
-**Needs:** one vision-language model's patch grid and token counts for the photo; seeded frames from a small open diffusion model, with and without text steering.
+- **D1.** A photo of Grandma's handwritten card is cut into a grid of patches. A vision encoder turns each patch into numbers that ride the platform like word pieces. Resize the photo and watch the piece count change.
+- **D2.** A different machine. Diffusion starts from noise and removes a little at each step, steered by the text request. Scrub a 30-step timeline for "a plate of biscuits, drawn in ink." For Break it, remove the text steering or stop at step 10. A note says some newer image generators work piece by piece instead.
+- **Misconceptions fixed:** "Image generators collage stored pictures." "The model sees like I do." "All AI writes one piece at a time."
+- **Terms:** multimodal, diffusion.
+- **Needs:** one vision-language model's patch grid and piece count for the photo, plus seeded frames from a small open diffusion model, with and without text steering.
 
 ### R Reply spur (from Reply): R1 The Ledger, R2 Debug the Bot
-**R1 The Ledger.** The receipt lines from every stamped station, totaled in five columns: compute, energy, data, labor, accountability. The first line is what you got. Tap any line for its source and range. "Change one choice" toggles (smaller model, shorter reply, thinking on, no retrieval) show which lines move and in which direction, never a falsely precise total.
-**R2 Debug the Bot.** The capstone, played on the map. Six broken runs replay, and a station lamp flashes red. Tap where it went wrong, then pick the fix. Cases reuse variants: wrong syllabus (L2), unplugged calculator (W2), injected passage (G2 via L3), trimmed window (P07), temperature 2 (P06), banned stop token (P08). No score; each case ends with "Which station failed?" and one line of why. Finish at 5 of 6, retries unlimited.
-**Needs:** cited ranges for the Ledger; every variant as a replayable run file.
+- **R1 The Ledger.** The receipt lines from every stamped station, totaled in five columns: compute, energy, data, labor and accountability. The first line is what you got. Tap any line to see its source and range. "Change one choice" toggles (smaller model, shorter reply, thinking on, no file search) show which lines move and in which direction. The Ledger never shows a falsely precise total.
+- **R2 Debug the Bot.** The capstone, played on the map. Six broken runs replay, and a station lamp flashes red. Tap where it went wrong, then pick the fix. The cases reuse precomputed runs:
+  - wrong card (L2)
+  - unplugged calculator (W2)
+  - planted instruction in a recipe page (G2 via L3)
+  - trimmed platform (P07)
+  - temperature 2 (P06)
+  - banned stop token (P08)
+
+  There's no score. Each case ends with "Which station failed?" and one line of why. You finish at 5 of 6, with unlimited retries.
+- **Needs:** cited ranges for the Ledger, and every precomputed run as a replayable run file.
 
 ### Beat the Model (P06, replayable from the map)
-Two round types, five rounds each. Scores stay on the device; no leaderboard.
-- **Think like the model.** See the hero run up to a point and pick or type the next token. You score the probability the model gave your guess, 0 to 100; then its favorite and odds appear. It teaches that predictable text scores high.
-- **Beat the model.** Real human-written sentences from public-domain course readings. You both guess the next word; then the true word appears with the model's odds for it. You beat the model when you guessed the true word and it gave that word under 20%. It teaches that probable isn't the same as what's true or what was actually written.
+There are two kinds of round, five rounds each. Scores stay on the device; there's no leaderboard.
+- **Think like the model.** See the hero run up to a point, then pick or type the next piece. You score the chance the model gave your guess, from 0 to 100. Then its favorite and its chances appear. This teaches that predictable text scores high.
+- **Beat the model.** These rounds use real sentences from public-domain cookbooks and other texts. You and the model both guess the next word. Then the true word appears with the model's chance for it. You beat the model when you guessed the true word and the model gave it under 20%. This teaches that "likely" isn't the same as "true" or "what was actually written."
 
-Free-typed guesses outside the stored top 200 show "below the cutoff." Multi-token guesses score as the product of their tokens' odds, precomputed for offered options only.
-**Needs:** top-200 probabilities at ~20 curated positions; 10 human sentences with the model's odds at each blank.
+Typed guesses outside the stored top 200 show "below the cutoff." Guesses of more than one piece score as the product of their pieces' chances, precomputed only for the offered options.
+**Needs:** the top 200 chances at about 20 chosen positions, and 10 human sentences with the model's chances at each blank.
 
 ---
 
 ## Trace pipeline requests
 
-**Hero run:** every token with source and ID, chat template and tool description included; per trip, top-10 scores plus log-sum-exp; full score vectors at 3 curated positions; top-200 at Beat the Model positions; per-layer top-10 guesses for generated positions; attention rows for ~10 queries across all layers and heads; embedding rows for ~2,000 tokens with a 2D projection and neighbors.
+**Hero run.** First, re-record it for the recipe-card scenario. Then capture:
+- every piece with its source and ID, including everything the app adds
+- for each trip, the top 10 scores plus the total
+- the full list of scores at 3 chosen positions
+- the top 200 at the Beat the Model positions
+- the top 10 guesses on every layer for each piece the model writes
+- attention rows for about 10 positions, across all layers and heads
+- embedding rows for about 40 chosen words, with neighbors and a projection that keeps groups apart
+- the model's own first choice wherever we steer it
 
-**Variants:** V-P02-letters; V-P03-scramble-10/50/100; V-P04-hide-passages, V-P04-self-only; V-P05-skip-mid, V-P05-skip-top; V-P06-T0/T1/T2 (3 seeds each); V-P07-no-syllabus, V-P07-no-passages; V-P08-no-stop; V-L-wrong-syllabus, V-L-none, V-L-gradebook-only; V-W-no-tool; V-A-base; V-S-think-off, V-S-think-on; the G2 attack library.
+**Precomputed runs:**
+- main line: V-P02-letters; V-P03-scramble-10, -50 and -100; V-P04-hide-passages and V-P04-self-only; V-P05-skip-mid and V-P05-skip-top; V-P06-T0, -T1 and -T2 (3 seeds each); V-P07-no-card and V-P07-no-passages; V-P08-no-stop
+- branch lines: V-L-wrong-card, V-L-none and V-L-back-only; V-W-no-tool; V-A-base; V-S-think-off and V-S-think-on; the G2 attack library
 
 ---
 
 ## Open questions for the owner
 
-- **Trace model.** Qwen2.5-0.5B-Instruct, or a small Qwen3-family model whose thinking switch would let S1 use the same machine as the main line? Either way its tokenizer splits numbers into single digits, so 37 trips and 106 tokens will change. Should the main line show the trace model's counts, keeping o200k for the playground under a "different models cut differently" note?
-- **If the small model can't produce the hero run by itself** (a clean tool call, a correct copy of 93.75), do we teacher-force and label it, trace a larger model, or simplify the hero?
-- **Injection Heist:** curated attack cards with precomputed replies (recommended for v1), or live typing against a model, which means a browser download of several hundred MB or a hosted API with cost and privacy review?
-- **The guide** as a white-gloved, pointing-and-calling hand borrowed from Japanese rail practice: right tone, or too cute? Named or unnamed?
-- **Ledger sources:** who owns the cited ranges (energy per answer, training labor, tokenizer language costs), and does the institution's values language from the old source registry belong in the Ledger or only in the instructor guide?
-- **Sound:** commission short original station chimes now, or ship silent through Phase 1?
+- **Steering honesty.** The spike found the small model would rather answer in prose than call the calculator. I've put the line "Its first choice was to start writing. We sent it to the calculator" at W and P08 only, so the first ride stays simple. Is that the right place?
+- **First visit for faculty.** Is "skip to the first stop" enough, or should the station list also show on the very first screen? That would cost the single focal point.
+- **Injection Heist.** Should it use attack cards with precomputed replies (recommended for v1), or live typing against a model? Live typing means a browser download of several hundred MB, or a hosted service that needs a cost and privacy review.
+- **The guide.** Is a white-gloved, pointing-and-calling hand the right tone, or too cute? Should it have a name?
+- **Ledger sources.** Who supplies the cited ranges (energy per answer, training labor, language costs)? Does the values language in the old source registry belong in the Ledger, or only in the instructor guide?
+- **Sound.** Commission short original station chimes now, or stay silent through Phase 1?
