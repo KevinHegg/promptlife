@@ -3,6 +3,7 @@ import type { Src } from '../data/heroRun'
 import { phase1 } from '../data/phase1'
 import { RUN, runCounts } from '../data/run'
 import { MetroMap } from './MetroMap'
+import { MODEL_OWN_SUM, MODEL_USED_TOOL_ITSELF } from '../data/story'
 import { RunEngine, type PlatformToken, type RunSnapshot } from './runEngine'
 import { DepartureBoard } from './DepartureBoard'
 import { Platform } from './Platform'
@@ -99,7 +100,10 @@ export function LiveRun({ autoplay = false, onPick, outline, aside, compact = fa
                   <li>Most of what the model reads came from the app, not from you. You typed {runCounts.question} of {runCounts.total} pieces.</li>
                   <li>The Academy line, where models are trained, stays dark. Answering doesn’t change the model.</li>
                   {phase1.freeFirstTurn && !phase1.freeFirstTurn.usedTool && (
-                    <li>Left to itself, this small model skipped the calculator and did the math in words. This run follows the path where the app required the calculator.</li>
+                    <li>Left to itself, this small model skipped the calculator and did the math in words. This ride follows the path where the app required the calculator.</li>
+                  )}
+                  {MODEL_USED_TOOL_ITSELF && MODEL_OWN_SUM && (
+                    <li>Left to itself, this small model did ask for the calculator, but with the wrong sum ({MODEL_OWN_SUM}). The ride follows a corrected request. Small models need checking.</li>
                   )}
                 </ul>
                 <p className="src">{RUN.model ? `A recorded run of ${RUN.model}, a small open model. The numbers are real.` : 'Token splits are real; the route is scripted.'}</p>

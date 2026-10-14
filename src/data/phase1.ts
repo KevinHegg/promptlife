@@ -90,6 +90,7 @@ function lastLine(ctx: string) {
 }
 
 function shortLabel(v: VotePosition, firstGenerated: number) {
+  if (v.plain && v.plain.includes(':')) return v.plain.split(':')[0]
   if (v.pos === firstGenerated) return 'Start of the answer'
   const words = lastLine(v.context).split(' ').slice(-3).join(' ')
   return `“…${words} ___”`

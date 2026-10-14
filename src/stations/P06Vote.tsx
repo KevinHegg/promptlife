@@ -4,6 +4,7 @@ import { stationByCode } from '../data/network'
 import { phase1, voteProbs } from '../data/phase1'
 import { modelName, trace } from '../data/trace'
 import { SCENARIO } from '../data/heroRun'
+import { isClean } from '../lib/safeText'
 import { BeatTheModel } from '../games/BeatTheModel'
 import type { LoopSpec } from '../loop/types'
 import { TokenText } from '../ui/TokenText'
@@ -15,17 +16,18 @@ const vocab = trace ? Math.round(trace.model.vocabSize / 1000) * 1000 : 150000
 
 function BoardPanel() {
   const rows = vote ? vote.top.slice(0, 4) : []
+  const caption = vote?.plain ?? (vote ? `after “${vote.context}”` : '')
   const probs = vote ? voteProbs(vote, 1).top : []
   return (
     <div className="mini-board" role="img" aria-label="A departure board listing candidate tokens with their odds">
-      <div className="mb-head"><span>P06 · THE VOTE</span><span>NEXT TOKEN</span></div>
+      <div className="mb-head"><span>P06 · THE VOTE</span><span>NEXT PIECE</span></div>
       {rows.map((c, i) => (
         <div key={i} className={`mb-row${i === 0 ? ' lit' : ''}`} style={{ animationDelay: `${0.15 * i}s` }}>
           <span className="mb-tok"><TokenText text={c.text} /></span>
           <span className="mb-p">{(probs[i] * 100).toFixed(0)}%</span>
         </div>
       ))}
-      {vote && <p className="mb-ctx">after “{vote.context}”</p>}
+      {caption && <p className="mb-ctx">{caption}</p>}
     </div>
   )
 }
@@ -52,7 +54,7 @@ const TEMPS = [0, 0.7, 1, 1.5, 2]
 
 function TemperatureBreak() {
   const [T, setT] = useState(1)
-  const runs = phase1.temperatureRuns.filter((r) => Math.abs(r.T - T) < 1e-6)
+  const runs = phase1.temperatureRuns.filter((r) => Math.abs(r.T - T) < 1e-6 && isClean(r.text))
   return (
     <div className="break-body">
       <Dial<number> stops={TEMPS} value={T} onChange={setT} label="Temperature" format={(t) => t.toFixed(1)} />

@@ -51,7 +51,7 @@ export function VoteLevels({ station, positions, exactTail }: { station: Station
             note={trace ? `Real scores from ${modelName(trace)}.${exactTail ? '' : ' “Everything else” is estimated from the top 10.'}` : 'Placeholder scores; the math is live.'}
           >
             <p>Pick a moment from the recorded run. Low temperature makes the favorite near-certain. High temperature gives long shots a real chance.</p>
-            <p className="ctx">{v.plain ? `${v.plain} ` : ''}After “{v.context}”, the recorded answer used <b><TokenText text={v.chosen.text} /></b>.</p>
+            <p className="ctx">{v.plain ?? `After “${v.context}”.`} The recorded answer used <b><TokenText text={v.chosen.text} /></b>.</p>
           </LevelText>
           <Vis>
             <div className="v-col">

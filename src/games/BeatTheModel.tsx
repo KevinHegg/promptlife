@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import { phase1, type Guess } from '../data/phase1'
 import { modelName, trace } from '../data/trace'
 import { TokenText } from '../ui/TokenText'
+import { isClean } from '../lib/safeText'
 
 type Round =
   | { kind: 'think'; context: string; truth: string; top: Guess[] }
@@ -12,7 +13,7 @@ const norm = (s: string) => s.trim().toLowerCase()
 
 /** Four choices: the model's favorite, the true token, and two plausible others, shuffled. */
 function choicesFor(r: Round): string[] {
-  const pool = r.top.map((g) => g.text).filter((t) => /\w/.test(t))
+  const pool = r.top.map((g) => g.text).filter((t) => /\w/.test(t) && isClean(t))
   const picks = new Set<string>([pool[0], r.truth])
   for (const t of pool.slice(1, 25)) {
     if (picks.size >= 4) break

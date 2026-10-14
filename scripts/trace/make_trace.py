@@ -48,19 +48,21 @@ hf_logging.set_verbosity_error()
 # Scenario (must match src/data/heroRun.ts SCENARIO exactly)
 # --------------------------------------------------------------------------------------
 SCENARIO = {
-    "system": "You are a helpful study assistant.",
+    "system": "You are a helpful assistant.",
     "passages": [
-        "Syllabus: The final exam is 40% of your course grade. An A- starts at 90%.",
-        "Gradebook: Your coursework average is 87.5% (60% of the grade).",
+        "Recipe card: Grandma's buttermilk biscuits. Serves 8. 2 1/4 cups flour, 1 tablespoon "
+        "baking powder, 1/2 teaspoon salt, 6 tablespoons butter, 1 cup buttermilk.",
+        "Back of the card: Two biscuits per person. Bake at 425\u00b0F for 12 minutes.",
     ],
-    "user": "Using my syllabus, what do I need on the final to get an A-?",
-    "toolExpression": "(90 - 0.6 * 87.5) / 0.4",
-    "toolResult": "93.75",
-    "reply": "You need at least 93.75% on the final to get an A-.",
+    "user": "Using my grandmother's recipe card, how much flour do I need to feed 30 people?",
+    "toolExpression": "2.25 * 30 / 8",
+    "toolResult": "8.4375",
+    # Placeholder; replaced below once the model's own greedy reply has been checked.
+    "reply": "You need about 8.4 cups of flour to feed 30 people.",
 }
 
 # How the app frames the retrieved passages inside the system message.
-RAG_HEADER = "\n\nCourse files:\n"
+RAG_HEADER = "\n\nYour files:\n"
 
 # The calculator tool, as an OpenAI-style JSON schema (what HF chat templates expect).
 TOOLS = [
@@ -435,117 +437,234 @@ def main():
     gen_tool = [p for p in gen_positions if tokens[p]["src"] == "tool"]
     gen_rep = [p for p in gen_positions if tokens[p]["src"] == "rep"]
     rep_digits = [p for p in gen_rep if tokens[p]["text"].strip().isdigit()]
-    rep_final = next((p for p in gen_rep if tokens[p]["text"] == " final"), None)
     tool_name = next((p for p in gen_tool if "calc" in tokens[p]["text"]), None)
+    # A content word in the reply: ' flour' if present, else the first alphabetic word
+    # longer than 3 letters that is not a function word.
+    rep_word = next((p for p in gen_rep if tokens[p]["text"] == " flour"), None)
+    if rep_word is None:
+        rep_word = next((p for p in gen_rep if tokens[p]["text"].strip().isalpha() and
+                         len(tokens[p]["text"].strip()) > 3 and
+                         tokens[p]["text"].strip().lower() not in {"about", "need", "your"}), None)
 
-    lens_targets = []
+    lens_targets = []   # (pos, id, technical label)
     if gen_tool:
-        lens_targets.append((gen_tool[0], "Start of the tool call: predicting %r right after "
-                             "'assistant'" % tokens[gen_tool[0]]["text"]))
+        lens_targets.append((gen_tool[0], "turn-start", "Start of the assistant's turn: "
+                             "predicting %r right after 'assistant'" % tokens[gen_tool[0]]["text"]))
     if tool_name is not None:
-        lens_targets.append((tool_name, "Choosing which tool: predicting %r inside the tool "
-                             "call" % tokens[tool_name]["text"]))
+        lens_targets.append((tool_name, "tool-name", "Choosing which tool: predicting %r inside "
+                             "the tool call" % tokens[tool_name]["text"]))
     if rep_digits:
-        lens_targets.append((rep_digits[0], "First digit of the answer: predicting %r of "
-                             "93.75 in the reply" % tokens[rep_digits[0]]["text"]))
-    if rep_final is not None:
-        lens_targets.append((rep_final, "Predicting ' final' in 'on the final' in the reply"))
+        lens_targets.append((rep_digits[0], "answer-digit", "First digit of the answer: "
+                             "predicting %r of %s in the reply" % (tokens[rep_digits[0]]["text"],
+                                                                   sc["toolResult"])))
+    if rep_word is not None:
+        lens_targets.append((rep_word, "reply-word", "Predicting %r in the reply"
+                             % tokens[rep_word]["text"]))
+
+    def lens_plain(lid, entry):
+        """One plain-English sentence for students (no 'logit', 'layer', 'rank')."""
+        final = entry["layers"][-1]["top"][0]
+        f_text, f_prob = final["text"], final["prob"]
+        first = next((ly["layer"] for ly in entry["layers"][1:]
+                      if ly["top"][0]["text"] == f_text), L)
+        frac = first / float(L)
+        when = ("only in the last few steps of the model's processing" if frac >= 0.8 else
+                "in the later part of the model's processing" if frac >= 0.6 else
+                "about halfway through the model's processing" if frac >= 0.4 else
+                "early in the model's processing")
+        sure = ("and by the end the model is almost certain" if f_prob >= 0.9 else
+                "and by the end it is the favorite" if f_prob >= 0.5 else
+                "and even at the end it is a close call")
+        word = f_text.strip() or "a space"
+        before = entry["layers"][L - 1]["top"][0]["text"].strip() if L >= 1 else ""
+        if first == L and before.isalnum() and before != word:
+            plan = ("calling the calculator" if f_text == "<tool_call>" else "'%s'" % word)
+            return ("Until the very last step the model leans toward writing '%s'; only at the "
+                    "end does %s win out." % (before, plan))
+        what = {
+            "turn-start": ("The plan to call the calculator shows up" if f_text == "<tool_call>"
+                           else "The plan to start with '%s' shows up" % word),
+            "tool-name": "The tool's name, '%s', shows up" % word,
+            "answer-digit": "The first digit of the answer, '%s', shows up" % word,
+            "reply-word": "The word '%s' shows up" % word,
+        }[lid]
+        tail = ""
+        if f_text != tokens[entry["pos"]]["text"]:
+            tail = " (the recorded answer uses '%s' here instead)" % (
+                tokens[entry["pos"]]["text"].strip() or "a space")
+        return "%s %s, %s%s." % (what, when, sure, tail)
+
     t0 = time.time()
-    logit_lens = [lens_at(p, lab) for p, lab in lens_targets]
+    logit_lens = []
+    for p, lid, lab in lens_targets:
+        e = lens_at(p, lab)
+        logit_lens.append({"id": lid, "pos": e["pos"], "label": lab,
+                           "plain": lens_plain(lid, e), "layers": e["layers"]})
     timings["lens_s"] = time.time() - t0
 
     # ---- attention search ---------------------------------------------------------------
+    # Rows, in this order and at most one per head: question-to-card, induction,
+    # previous-token, copy. Each row gets an id and a plain-English sentence.
     attention = []
-    user_final = find_token(tokens, " final", src="user")
-    syll_user = [t["i"] for t in tokens if t["src"] == "user" and
-                 t["text"].strip().lower() in ("syll", "abus", "syllabus")]
-    rag_syll = find_token_seq(tokens, ["S", "yll", "abus"], src="rag") or \
-        [t["i"] for t in tokens if t["src"] == "rag" and "yll" in t["text"]]
-    rag_exam = find_token(tokens, " exam", src="rag")
-    rag_final = find_token(tokens, " final", src="rag")
+    attn_notes = []
+    used_heads = set()
 
-    def best_head(q, targets, exclude_sink=False):
+    def best_head(q, targets, exclude=()):
         best = None
         for l in range(L):
             for h in range(H):
+                if (l, h) in exclude:
+                    continue
                 s = float(A[l][h, q, targets].sum())
                 if best is None or s > best[0]:
                     best = (s, l, h)
         return best
 
-    attn_notes = []
-    if user_final is not None:
-        # (a1) user ' final' -> user ' syllabus' (2 tokens: ' syll' + 'abus').
-        if syll_user:
-            s, l, h = best_head(user_final, syll_user)
-            attention.append({"layer": l, "head": h, "queryPos": user_final,
-                              "label": "' final' in the question looks back at ' syllabus' "
-                                       "(%.0f%% on ' syll'+'abus')" % (100 * s),
-                              "weights": attn_row(A, l, h, user_final, syll_user)})
-        # (a2) user ' final' -> passage ' exam'. The winner is typically an INDUCTION head:
-        # it finds the earlier ' final' (in "The final exam") and attends to the token
-        # that followed it, ' exam'.
-        if rag_exam is not None:
-            s, l, h = best_head(user_final, [rag_exam])
-            ind = rag_final is not None and rag_exam == rag_final + 1
-            # Inserted FIRST: it is the clearest row, and the app shows the first
-            # ' final' row (src/data/trace.ts attentionFromTrace).
-            attention.insert(0, {"layer": l, "head": h, "queryPos": user_final,
-                              "label": ("Induction head: ' final' in the question finds ' final' "
-                                        "in the syllabus and attends to the word after it, ' exam' "
-                                        "(%.0f%%)" if ind else
-                                        "' final' in the question looks at ' exam' in the "
-                                        "syllabus (%.0f%%)") % (100 * s),
-                              "weights": attn_row(A, l, h, user_final, [rag_exam, rag_final])})
-            # Only the syllabus-passage token for "Syllabus" is split into 'S'+'yll'+'abus'.
-            if rag_syll:
-                s3, l3, h3 = best_head(user_final, rag_syll)
-                attn_notes.append("Best head for question ' final' -> passage 'Syllabus' tokens "
-                                  "is only L%dH%d at %.1f%% (not exported)." % (l3, h3, 100 * s3))
+    def word(p):
+        """Plain text for a token; a digit or '.' is expanded to its whole number."""
+        def num(i):
+            return tokens[i]["text"] in ".0123456789" and tokens[i]["text"] != ""
+        if num(p) and tokens[p]["text"] != ".":
+            a, b = p, p
+            while a - 1 >= 0 and num(a - 1) and tokens[a - 1]["src"] == tokens[p]["src"]:
+                a -= 1
+            while b + 1 < T and num(b + 1) and tokens[b + 1]["src"] == tokens[p]["src"]:
+                b += 1
+            return "".join(tokens[i]["text"] for i in range(a, b + 1)).strip(".")
+        return tokens[p]["text"].strip() or "a space"
 
-    # (b) Previous-token head: highest mean weight on position i-1 over all positions.
+    where = {"rag": "the recipe card", "user": "the question", "sys": "the instructions",
+             "res": "the calculator's result", "tool": "the calculator call",
+             "rep": "the answer"}
+
+    # (a) question-to-card: a question word looks back at the same word on the card.
+    q2c = []
+    for q_text, card_texts in ((" flour", [" flour"]), (" people", [" person", " people"])):
+        qp = find_token(tokens, q_text, src="user")
+        targets = [t["i"] for t in tokens if t["src"] == "rag" and t["text"] in card_texts]
+        if qp is not None and targets:
+            s, l, h = best_head(qp, targets)
+            q2c.append((s, l, h, qp, targets))
+    if q2c:
+        for s, l, h, qp, targets in q2c[1:]:
+            attn_notes.append("Also found: question %r -> card %s, L%dH%d at %.0f%% (not "
+                              "exported, so each head appears once)."
+                              % (tokens[qp]["text"], [tokens[t]["text"] for t in targets],
+                                 l, h, 100 * s))
+        s, l, h, qp, targets = q2c[0]
+        used_heads.add((l, h))
+        tgt = max(targets, key=lambda t: A[l][h, qp, t])
+        attention.append({
+            "id": "question-to-card", "layer": l, "head": h, "queryPos": qp,
+            "label": "Question %r looks back at %r on the recipe card (%.0f%%)"
+                     % (tokens[qp]["text"], tokens[tgt]["text"], 100 * s),
+            "plain": "When the question says '%s', this part of the model looks back at '%s' "
+                     "on the recipe card." % (word(qp), word(tgt)),
+            "weights": attn_row(A, l, h, qp, targets)})
+
+    # (b) induction: for every token that appeared earlier (same id), weight on the token
+    # right AFTER its previous occurrence. Best head by the average over all repeats.
+    repeats = []
+    for q in range(T):
+        if tokens[q]["src"] == "special" or not tokens[q]["text"].strip():
+            continue
+        prev = [j for j in range(q - 1) if ids[j] == ids[q]]
+        if prev:
+            repeats.append((q, prev[-1]))
+    if repeats:
+        ind = np.zeros((L, H))
+        for q, j in repeats:
+            ind += np.stack([A[l][:, q, j + 1] for l in range(L)])
+        ind /= len(repeats)
+        for flat in np.argsort(-ind, axis=None):
+            il, ih = (int(v) for v in np.unravel_index(int(flat), ind.shape))
+            if (il, ih) not in used_heads:
+                break
+        # Example: a question/answer token whose "next after previous occurrence" is a real
+        # word, with the strongest weight in this head.
+        ex = [(A[il][ih, q, j + 1], q, j) for q, j in repeats
+              if tokens[q]["src"] in ("user", "rep", "tool") and tokens[j + 1]["src"] != "special"
+              and tokens[j + 1]["text"].strip()]
+        if ex:
+            w, q, j = max(ex)
+            if w >= 0.3:
+                used_heads.add((il, ih))
+                attention.append({
+                    "id": "induction", "layer": il, "head": ih, "queryPos": q,
+                    "label": "Induction head: %r in %s finds the earlier %r in %s and attends to "
+                             "the token after it, %r (%.0f%%; mean %.2f over %d repeated tokens)"
+                             % (tokens[q]["text"], where[tokens[q]["src"]], tokens[j]["text"],
+                                where[tokens[j]["src"]], tokens[j + 1]["text"], 100 * w,
+                                ind[il, ih], len(repeats)),
+                    "plain": "When %s writes '%s', this part of the model finds the earlier '%s' "
+                             "in %s and looks at what came right after it, '%s'."
+                             % (where[tokens[q]["src"]], word(q), word(j),
+                                where[tokens[j]["src"]], word(j + 1)),
+                    "weights": attn_row(A, il, ih, q, [j, j + 1])})
+            else:
+                attn_notes.append("No convincing induction example (best %.2f); row skipped." % w)
+
+    # (c) previous-token head: highest mean weight on position i-1 over all positions.
     idx = np.arange(1, T)
     prev_scores = np.array([[A[l][h, idx, idx - 1].mean() for h in range(H)] for l in range(L)])
-    pl, ph = (int(v) for v in np.unravel_index(int(prev_scores.argmax()), prev_scores.shape))
-    # Example query: the reply token whose i-1 weight is closest to the head's median
-    # (a representative row, not a cherry-picked one).
+    for flat in np.argsort(-prev_scores, axis=None):
+        pl, ph = (int(v) for v in np.unravel_index(int(flat), prev_scores.shape))
+        if (pl, ph) not in used_heads:
+            break
+    used_heads.add((pl, ph))
+    # Example query: the reply WORD whose i-1 weight is closest to the head's median.
     med = float(np.median(A[pl][ph, idx, idx - 1]))
-    q_prev = min(gen_rep or [T - 2], key=lambda i: abs(A[pl][ph, i, i - 1] - med))
-    attention.append({"layer": pl, "head": ph, "queryPos": q_prev,
-                      "label": "Previous-token head: each token looks mostly at the one just "
-                               "before it (mean %.2f across all %d tokens)" % (prev_scores[pl, ph], T),
-                      "weights": attn_row(A, pl, ph, q_prev, [q_prev - 1])})
+    pool = [i for i in gen_rep if tokens[i]["text"].strip().isalpha() and
+            tokens[i - 1]["text"].strip().isalpha()] or gen_rep or [T - 2]
+    q_prev = min(pool, key=lambda i: abs(A[pl][ph, i, i - 1] - med))
+    attention.append({
+        "id": "previous-token", "layer": pl, "head": ph, "queryPos": q_prev,
+        "label": "Previous-token head: each token looks mostly at the one just before it "
+                 "(mean %.2f across all %d tokens)" % (prev_scores[pl, ph], T),
+        "plain": "This part of the model mostly looks at the word just before: at '%s', it "
+                 "looks at '%s'." % (word(q_prev), word(q_prev - 1)),
+        "weights": attn_row(A, pl, ph, q_prev, [q_prev - 1])})
 
-    # (c) Copy head: reply digits <- tool-result digits. For every reply slot that has to
-    # produce a digit of 93.75 (the slot BEFORE the digit), score each head by the weight
-    # it puts on the matching token of the tool result; average over the digits.
+    # (d) copy head: reply number <- tool-result digits. The k-th token of the reply's
+    # number is paired with the k-th token of the result while the ids match; the query is
+    # the slot BEFORE each reply token (the one that has to produce it).
     res_pos = [t["i"] for t in tokens if t["src"] == "res"]
     if res_pos and rep_digits:
         first = rep_digits[0]
-        n = len(res_pos)
-        q_slots = list(range(first - 1, first - 1 + n))      # ' ', '9', '3', '.', '7'
-        if all(tokens[q + 1]["id"] == tokens[r]["id"] for q, r in zip(q_slots, res_pos)):
+        pairs = []
+        for k, r in enumerate(res_pos):
+            if first + k < T and tokens[first + k]["id"] == tokens[r]["id"]:
+                pairs.append((first + k - 1, r))
+            else:
+                break
+        if pairs:
             copy = np.zeros((L, H))
-            for q, r in zip(q_slots, res_pos):
+            for q, r in pairs:
                 copy += np.stack([A[l][:, q, r] for l in range(L)])
-            copy /= n
-            cl, ch = (int(v) for v in np.unravel_index(int(copy.argmax()), copy.shape))
-            per = ", ".join("%r->%.2f" % (tokens[r]["text"], A[cl][ch, q, r])
-                            for q, r in zip(q_slots, res_pos))
-            attn_notes.append("Copy head L%dH%d: weight on the matching result digit when "
-                              "producing each reply digit: %s (mean %.2f)." % (cl, ch, per, copy[cl, ch]))
-            for q, r in zip(q_slots[:2], res_pos[:2]):
-                attention.append({"layer": cl, "head": ch, "queryPos": q,
-                                  "label": "Copy head: %s, about to write %r, looks at the "
-                                           "%r in the tool result (%.0f%%)"
-                                           % ("the space before the answer"
-                                              if not tokens[q]["text"].strip() else
-                                              "reply %r" % tokens[q]["text"],
-                                              tokens[q + 1]["text"],
-                                              tokens[r]["text"], 100 * A[cl][ch, q, r]),
-                                  "weights": attn_row(A, cl, ch, q, res_pos)})
+            copy /= len(pairs)
+            for flat in np.argsort(-copy, axis=None):
+                cl, ch = (int(v) for v in np.unravel_index(int(flat), copy.shape))
+                if (cl, ch) not in used_heads:
+                    break
+            used_heads.add((cl, ch))
+            per = ", ".join("%r->%.2f" % (tokens[r]["text"], A[cl][ch, q, r]) for q, r in pairs)
+            attn_notes.append("Copy head L%dH%d: weight on the matching result token when "
+                              "producing each token of the reply's number: %s (mean %.2f)."
+                              % (cl, ch, per, copy[cl, ch]))
+            q, r = pairs[0]
+            attention.append({
+                "id": "copy", "layer": cl, "head": ch, "queryPos": q,
+                "label": "Copy head: %s, about to write %r, looks at the %r in the tool result "
+                         "(%.0f%%)" % ("the space before the number" if not tokens[q]["text"].strip()
+                                        else "reply %r" % tokens[q]["text"],
+                                        tokens[q + 1]["text"], tokens[r]["text"],
+                                        100 * A[cl][ch, q, r]),
+                "plain": "Just before writing the number, this part of the model looks straight "
+                         "at the calculator's result, %s, and copies its first digit, '%s'."
+                         % (sc["toolResult"], tokens[r]["text"].strip()),
+                "weights": attn_row(A, cl, ch, q, res_pos)})
         else:
-            attn_notes.append("Reply digits do not match the tool-result tokens 1:1; copy-head "
+            attn_notes.append("The reply's number does not start like the tool result; copy-head "
                               "search skipped.")
 
     # ---- embeddings map ----------------------------------------------------------------
@@ -624,10 +743,16 @@ def main():
         "Forced decoding (teacher forcing): one forward pass over %d tokens; steps[k] reads "
         "the logits at pos-1, i.e. what the model predicted for token pos having seen "
         "everything before it." % T,
-        "Probabilities are softmax at temperature 1 over the full %d-row unembedding "
-        "(includes Qwen's unused padding rows, which carry ~0 mass)." % logits.shape[-1],
+        "Probabilities are softmax at temperature 1 over the full %d-row unembedding, "
+        "including the %d unused padding rows beyond the tokenizer's %d real tokens; at the "
+        "step positions those rows hold at most %.1g of the probability."
+        % (logits.shape[-1], logits.shape[-1] - len(tok), len(tok), max(
+            float(torch.softmax(logits[s["pos"] - 1].double(), -1)[len(tok):].sum())
+            for s in steps)),
         "Token text is the decoded string with real spaces/newlines (no 'Ġ'/'Ċ'). Qwen "
-        "splits every digit into its own token, so ' 93.75' is ' ', '9', '3', '.', '7', '5'.",
+        "splits every digit into its own token, so %r is %s."
+        % (" " + sc["toolResult"], ", ".join(repr(dec(tok, i)) for i in
+                                             tok.encode(" " + sc["toolResult"]))),
         "Tool-call turn: " + summarize(tool_steps) + ".",
         "Reply turn: " + summarize(rep_steps) + ".",
         "Source labels come from character offsets; a token spanning two sources takes the "
@@ -649,7 +774,7 @@ def main():
     # (e.g. ' "(' vs ' "' then '('), which makes the scripted token look unlikely.
     for s in steps:
         c, top1 = s["chosen"], s["top"][0]
-        if c["rank"] > 1 and len(top1["text"]) < len(c["text"]) and \
+        if c["rank"] > 1 and top1["text"].strip() and len(top1["text"]) < len(c["text"]) and \
                 c["text"].startswith(top1["text"]):
             notes.append("Tokenization artifact at pos %d: scripted token %r is rank %d "
                          "(p=%.2g) because the model prefers to write it in pieces; its top-1 "

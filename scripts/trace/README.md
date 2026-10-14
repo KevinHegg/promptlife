@@ -1,8 +1,8 @@
 # Trace pipeline
 
 `make_trace.py` runs a small open instruct model over the Prompt Life hero conversation
-(system prompt + two retrieved passages + student question + calculator tool call + tool
-result + reply) in one forced-decoding forward pass. It writes the real numbers the app
+(system prompt + two retrieved passages from Grandma's recipe card + the student's flour
+question + calculator tool call + tool result + reply) in one forced-decoding forward pass. It writes the real numbers the app
 shows to `src/data/traces/hero-trace.json`: tokens and sources, top-10 next-token candidates
 at every assistant-generated token, logit-lens guesses per layer, selected attention rows,
 and a 2-D embedding map. Spike write-up: `docs/rebuild/TRACE_SPIKE.md`.
@@ -46,7 +46,13 @@ Its chat template has no tool support, so the script describes the calculator it
 writes the call as `<tool_call>{json}</tool_call>` text. `notes` says when this fallback is used.
 
 The scenario text lives in `SCENARIO` at the top of `make_trace.py` and must match
-`src/data/heroRun.ts`.
+`src/data/heroRun.ts`. The passages go in the system message after `"\n\nYour files:\n"`.
+
+When the scenario changes, first check the model's own greedy reply after the tool result.
+The `greedy reply turn` line in the console output and `notes` show it. If it is correct,
+natural and short, script that reply instead, so most reply tokens are the model's top-1.
+For the recipe scenario, the greedy reply was correct but 28 tokens long (over the 25-token
+limit), so the shorter scripted reply was kept.
 
 ## Cost (Apple M4, 24 GB, CPU, float32)
 
@@ -54,12 +60,12 @@ The scenario text lives in `SCENARIO` at the top of `make_trace.py` and must mat
 |---|---|---|---|
 | first-run download (HF cache, `~/.cache/huggingface`) | 0.95 GB, ~1 min | 0.69 GB, ~45 s | 2.9 GB, ~3.5 min |
 | model load (cached) | ~1 s | ~1 s | ~1.5 s |
-| forward pass (all hidden states + attentions) | 0.3-0.9 s (330 tokens) | 0.25 s (221 tokens) | 1.9 s (330 tokens) |
+| forward pass (all hidden states + attentions) | 0.3-0.9 s (~340 tokens) | 0.25 s (221 tokens) | 1.9 s (330 tokens) |
 | whole script incl. greedy check (cached) | ~7 s wall | ~6 s wall | ~17 s wall |
 | peak RAM (float32) | 3.3 GB | 2.5 GB | 9.6 GB |
 
 - venv: ~500 MB on disk. Install takes ~2 min the first time and ~50 s from the pip cache.
-- Output JSON: ~125 KB.
+- Output JSON: ~115-125 KB.
 
 ## Phase 1 extras: `make_phase1.py`
 
@@ -69,28 +75,47 @@ The scenario text lives in `SCENARIO` at the top of `make_trace.py` and must mat
 
 It uses the same model, scenario and token positions; it imports `build_hero` from
 `make_trace.py` and checks the token ids against `hero-trace.json`. It never rewrites
-`hero-trace.json`. It takes about 50 s on CPU (about 24 s of that is sampling) and writes about
-320 KB:
+`hero-trace.json`, so regenerate `hero-trace.json` first. It takes 30-50 s on CPU and writes
+about 320 KB:
 
-- **`votePositions`**: pos 249 (tool-call start), pos 313 (`' a'` / `' '` / `' an'`), and the
-  highest-entropy word in the reply (pos 324, `' achieve'` vs `' get'`). Each has the exact
+- **`votePositions`**: the first token of the assistant's turn, plus the 2 most undecided
+  word choices in the reply (highest entropy among reply tokens that contain a letter). Each
+  has a short `plain` label for students, a technical `label`, and the exact
   top-500 `{id, text, logit}` and a `tail` that bins every other real vocab row by logit
   (width 0.5, bin centers). The app's softmax at any temperature is the top-500 terms plus
   `count * exp(center / T)` per bin; at T in [0.7, 2] the error is at most 1.5e-3. Qwen's 271
   padding rows (ids >= 151665) are dropped.
-- **`temperatureRuns`**: the reply turn is sampled from tokens 0..308 at T = 0 (greedy, `seed:
-  null`), 0.7, 1.0, 1.5 and 2.0 (seeds 1-3). It uses pure temperature (no top-k, top-p or
-  repetition penalty), up to 40 tokens, and stops at `<|im_end|>` / `<|endoftext|>`.
-- **`freeFirstTurn`**: unforced greedy first turn (up to 260 tokens), plus a variant with
-  " Use the calculator tool for any arithmetic." added to the system prompt.
-- **`letters`**: the question re-fed as 60 single-character tokens instead of 18 normal ones.
-- **`beat`**: `thinkLike` (5 hero positions, top-200) and `sentences` (10 verbatim
-  public-domain lines, scored without a chat template, top-200).
+- **`temperatureRuns`**: the reply turn is sampled from everything before the first reply
+  token, at T = 0 (greedy, `seed: null`) and at 0.7, 1.0, 1.5 and 2.0 (3 samples each). It
+  uses pure temperature (no top-k, top-p or repetition penalty), up to 40 tokens, and stops at
+  `<|im_end|>` / `<|endoftext|>`. Each temperature draws from its own seeds: 100*i + k for
+  the i-th temperature, so 0.7 uses 101-150, 1.0 uses 201-250, and so on. Every sample is
+  checked by `screen.py`; one that hits is rejected and the next seed is drawn. The `seed` in
+  each run is the seed actually used. To redo only these runs and leave every other byte of
+  the file alone, run `make_phase1.py --only-temperature-runs`.
+- **`freeFirstTurn`**: unforced greedy first turn (up to 260 tokens). The variant with
+  " Use the calculator tool for any arithmetic." added to the system prompt is written twice:
+  as top-level `freeFirstTurnNudged` (what `src/data/phase1.ts` reads) and nested as
+  `freeFirstTurn.withCalculatorInstruction`.
+- **`letters`**: the question re-fed as one token per character (79 instead of 20 for the
+  recipe question).
+- **`beat`**: `thinkLike` has 5 hero positions with their top-200 guesses. They are listed in
+  `THINK_LIKE` as (source, token text, occurrence), and at least 3 come from the reply.
+  `sentences` has 10 verbatim public-domain lines, scored without a chat template, top-200.
+  They do not depend on the scenario.
+
+Content screen: `screen.py` holds a blocklist of sexual, profane, slur and violent words. It
+is a superset of the app's `src/lib/safeText.ts`, checks English only, and splits hits into
+strong and mild. Run it on its own to scan every model-written text in both JSON files; it only
+reports and never edits:
+
+```sh
+~/.cache/promptlife/trace-venv/bin/python scripts/trace/screen.py
+```
 
 Pure greedy is not HF's default here. Qwen's `generation_config.json` sets
 `repetition_penalty=1.1`, which `generate()` applies even with `do_sample=False`. Both scripts
-now turn it off. The two "Unforced greedy" notes in the current `hero-trace.json` predate that
-fix.
+now turn it off.
 
 ## What the script does
 
@@ -104,9 +129,18 @@ fix.
    at `pos-1`, softmaxed over the full vocabulary, plus the scripted token's rank.
 4. `logitLens`: at four positions it applies the final RMSNorm and the unembedding to
    `hidden_states[0..L]`. HF's last hidden state is already normed; the script detects that,
-   so the norm is never applied twice.
-5. `attention`: it searches all layers and heads for (a) the question's ` final` attending
-   to ` syllabus`, and to ` exam` in the passage, (b) the best previous-token head, and
-   (c) a copy head from reply digits to tool-result digits.
+   so the norm is never applied twice. The four positions are `turn-start`, `tool-name`,
+   `answer-digit` and `reply-word` (` flour` if present). Each entry has an `id` and a `plain`
+   sentence written from the data, with no jargon.
+5. `attention`: it searches all layers and heads and writes one row per id, in this order,
+   using each head only once:
+   - `question-to-card`: the question's ` flour` (or ` people`) attending to the same word on
+     the card.
+   - `induction`: the best head by the average weight on "the token after this token's
+     previous occurrence", with its clearest example.
+   - `previous-token`.
+   - `copy`: the slot before the reply's number attending to the matching tool-result digit.
+
+   Each row has an `id` and a `plain` sentence.
 6. `embeddings`: it L2-normalizes the input-embedding rows of 40 single-token words, then
    projects them onto the PCA plane of the group centroids (see notes in the JSON for why).

@@ -36,24 +36,24 @@ from transformers.utils import logging as hf_logging  # noqa: E402
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from make_trace import SCENARIO, TOOLS, build_hero, build_messages, dec, r4  # noqa: E402
+from screen import hits as screen_hits  # noqa: E402
 
 hf_logging.set_verbosity_error()
 
 # --------------------------------------------------------------------------------------
 # Curated choices
 # --------------------------------------------------------------------------------------
-VOTE_FIXED = [
-    (249, "First token of the assistant's turn: answer in prose, or call the calculator?"),
-    (313, "After 'You need at least': a space before the number, or ' a' / ' an'?"),
-]
-# 5 hero positions for "think like the model": two easy, one medium, one open, and one
-# where the model is confidently wrong.
+# Vote positions are chosen from the data: the first token of the assistant's turn plus
+# the N most undecided WORD choices in the reply (highest entropy; tokens with a letter).
+VOTE_REPLY_WORDS = 2
+# 5 hero positions for "think like the model", given as (src, token text, occurrence, kind)
+# so they survive scenario changes. At least 3 come from the reply.
 THINK_LIKE = [
-    (312, "easy"),     # ' least' after 'You need at' (p~1)
-    (322, "easy"),     # ' final' in 'on the final'
-    (255, "medium"),   # tool name 'calculator' (vs 'calculate')
-    (264, "open"),     # first digit of the expression: '9' vs '8' ...
-    (270, "wrong"),    # '0.6' in the expression: the model expects '0.5'
+    ("rep", " flour", 0, "easy"),    # '...cups of' -> ' flour'
+    ("rep", "8", 0, "easy"),         # first digit of the answer, copied from the tool result
+    ("rep", " feed", 0, "medium"),   # 'to feed' vs 'to serve' / 'to make'
+    ("rep", " about", 0, "open"),    # the model would write the number directly (' ' first)
+    ("tool", "2", 0, "wrong"),       # first digit of the expression: the model expects '3' (30)
 ]
 FREE_NUDGE = " Use the calculator tool for any arithmetic."
 
@@ -93,7 +93,13 @@ SENTENCES = [
      " deliberately"),
 ]
 
-TEMPS = [(0.0, [None]), (0.7, [1, 2, 3]), (1.0, [1, 2, 3]), (1.5, [1, 2, 3]), (2.0, [1, 2, 3])]
+# Temperature runs: T=0 is one greedy run. For T at index i (0.7 -> 1, 1.0 -> 2, ...) the
+# candidate seeds are 100*i + 1 .. 100*i + SEED_POOL, so each temperature gets its own random
+# draws. Each sample is screened (screen.py); a sample that hits is rejected and the next
+# seed is drawn, until the temperature has SAMPLES_PER_T clean samples.
+TEMPS = [0.0, 0.7, 1.0, 1.5, 2.0]
+SAMPLES_PER_T = 3
+SEED_POOL = 50
 MARKERS = {"<tool_call>", "</tool_call>"}
 
 
@@ -158,6 +164,33 @@ def sample(model, prefix_ids, temp, seed, max_new, stop_ids, n_real):
     return out, False
 
 
+def temperature_runs(model, tok, prefix, stop_ids, n_real, per_t=SAMPLES_PER_T,
+                     pool=SEED_POOL):
+    """Screened temperature samples. Returns (runs, rejected) where rejected lists
+    (T, seed, blocked terms, text) for every sample that was redrawn."""
+    runs, rejected = [], []
+    for ti, T in enumerate(TEMPS):
+        seeds = [None] if T == 0 else [100 * ti + k for k in range(1, pool + 1)]
+        kept = 0
+        for seed in seeds:
+            g, natural = sample(model, prefix, T, seed, 40, stop_ids, n_real)
+            text = tok.decode(g)
+            bad = screen_hits(text)
+            if bad and T != 0:
+                rejected.append((T, seed, bad, text))
+                continue
+            if bad:
+                rejected.append((T, seed, bad, text))   # greedy cannot be redrawn; reported
+            runs.append({"T": T, "seed": seed, "text": text,
+                         "tokens": [dec(tok, i) for i in g], "stoppedNaturally": natural})
+            kept += 1
+            if kept == (1 if T == 0 else per_t):
+                break
+        if kept < (1 if T == 0 else per_t):
+            sys.exit("Only %d clean samples at T=%s within %d seeds" % (kept, T, pool))
+    return runs, rejected
+
+
 def top_text_prob(tok, row, k):
     p = torch.softmax(row.double(), -1)
     v, ix = torch.topk(p, k)
@@ -174,6 +207,9 @@ def main():
     ap.add_argument("--hero", default=None,
                     help="hero-trace.json to check token alignment against "
                          "(default: <repo>/src/data/traces/hero-trace.json if present)")
+    ap.add_argument("--only-temperature-runs", action="store_true",
+                    help="regenerate ONLY temperatureRuns inside the existing output file; every "
+                         "other byte of the file is left as it is")
     ap.add_argument("--vote-top", type=int, default=500)
     ap.add_argument("--beat-top", type=int, default=200)
     args = ap.parse_args()
@@ -204,30 +240,68 @@ def main():
         notes.append("Token positions (pos) are the same as in hero-trace.json "
                      "(checked against its token ids).")
 
+    gen_rep = [p for p in hero["gen_positions"] if tokens[p]["src"] == "rep"]
+    if args.only_temperature_runs:
+        with open(out_path, "rb") as f:
+            raw = f.read()
+        existing = json.loads(raw)
+        if (json.dumps(existing, indent=1, ensure_ascii=False) + "\n").encode() != raw:
+            sys.exit("%s does not round-trip byte-for-byte; refusing to patch it." % out_path)
+        runs, rejected = temperature_runs(model, tok, ids[:min(gen_rep)], stop_ids, n_real)
+        existing["temperatureRuns"] = runs
+        with open(out_path, "w") as f:
+            json.dump(existing, f, indent=1, ensure_ascii=False)
+            f.write("\n")
+        for T, seed, bad, text in rejected:
+            print("rejected   T=%.1f seed=%s %s: %r" % (T, seed, ",".join(bad), text[:90]))
+        for r in runs:
+            print("T=%.1f s=%-4s %s %r" % (r["T"], r["seed"],
+                                          "stop" if r["stoppedNaturally"] else "cut ", r["text"]))
+        print("wrote      %s (temperatureRuns only)" % out_path)
+        return
+
     with torch.no_grad():
         logits = model(torch.tensor([ids])).logits[0].float()   # [T, rows]
     real = logits[:, :n_real]
+    tc_id = tok.convert_tokens_to_ids("<tool_call>")
 
     # ---- 1. votePositions --------------------------------------------------------------
-    gen_rep = [p for p in hero["gen_positions"] if tokens[p]["src"] == "rep"]
     ent = {p: entropy(real[p - 1]) for p in hero["gen_positions"]}
-    fixed = {p for p, _ in VOTE_FIXED}
-    best_rep = max((p for p in gen_rep if p not in fixed), key=lambda p: ent[p])
-    top2 = torch.topk(real[best_rep - 1], 2).indices.tolist()
-    vote_specs = VOTE_FIXED + [
-        (best_rep, "Highest-entropy word in the reply (H=%.2f nats): %r or %r?"
-         % (ent[best_rep], dec(tok, top2[0]), dec(tok, top2[1])))]
-    end_turn = [p for p in hero["gen_positions"] if p > best_rep and ids[p] == im_end]
-    if end_turn and ent[end_turn[0]] > ent[best_rep]:
-        notes.append("votePositions: pos %d is the highest-entropy WORD in the reply. The "
-                     "closing <|im_end|> at pos %d is higher overall (H=%.2f: stop p=%.2f vs "
-                     "%r p=%.2f); it was not used because it is a stop-or-continue choice, "
-                     "not a word choice." % (
-                         best_rep, end_turn[0], ent[end_turn[0]],
-                         float(torch.softmax(real[end_turn[0] - 1].double(), -1)[im_end]),
-                         dec(tok, torch.topk(real[end_turn[0] - 1], 2).indices[1].item()),
-                         float(torch.topk(torch.softmax(real[end_turn[0] - 1].double(), -1),
-                                          2).values[1])))
+    turn_start = min(hero["gen_positions"])
+    words = [p for p in gen_rep if any(ch.isalpha() for ch in tokens[p]["text"])]
+    picked = sorted(words, key=lambda p: -ent[p])[:VOTE_REPLY_WORDS]
+
+    def short(p):
+        return dec(tok, p).strip() or "a space"
+
+    def vote_plain(pos):
+        row = real[pos - 1]
+        top3 = torch.topk(row, 3).indices.tolist()
+        if pos == turn_start:
+            if tc_id in top3:
+                return "Start of the answer: explain in words, or call the calculator?"
+            return "Start of the answer: '%s' or '%s'?" % (short(top3[0]), short(top3[1]))
+        so_far = "".join(tokens[i]["text"] for i in range(min(gen_rep), pos)).split()
+        opts = ["'%s'" % short(i) for i in top3[:2]]
+        if ids[pos] not in top3[:2]:
+            opts.append("the recorded '%s'" % short(ids[pos]))
+        choice = (", ".join(opts[:-1]) + " or " + opts[-1]) if len(opts) > 1 else opts[0]
+        if not so_far:
+            return "First word of the reply: %s?" % choice
+        return "After '%s': %s?" % (" ".join(so_far[-3:]), choice)
+
+    vote_specs = [(turn_start, "First token of the assistant's turn (H=%.2f nats)"
+                   % ent[turn_start])]
+    for p in sorted(picked):
+        t2 = torch.topk(real[p - 1], 2).indices.tolist()
+        vote_specs.append((p, "Undecided word in the reply (H=%.2f nats): %r or %r?"
+                           % (ent[p], dec(tok, t2[0]), dec(tok, t2[1]))))
+    others = sorted(((ent[p], p) for p in gen_rep if p not in picked), reverse=True)[:1]
+    if others and others[0][0] > min(ent[p] for p in picked):
+        notes.append("votePositions: the reply words were chosen by entropy among reply tokens "
+                     "that contain a letter. Reply position %d (%r) is more undecided (H=%.2f) but "
+                     "was skipped because it is not a word choice." % (
+                         others[0][1], tokens[others[0][1]]["text"], others[0][0]))
 
     vote_positions, approx_err = [], []
     for pos, label in vote_specs:
@@ -246,7 +320,7 @@ def main():
         bins = [{"logit": r4((b + 0.5) * width), "count": int(c)}
                 for b, c in zip(uniq.tolist(), counts.tolist())]
         vote_positions.append({
-            "pos": pos, "label": label,
+            "pos": pos, "label": label, "plain": vote_plain(pos),
             "context": visible_context(tokens, pos, 40),
             "chosen": {"text": dec(tok, tid), "rank": rank_of(row, tid),
                        "prob": r4(p_exact[tid])},
@@ -283,28 +357,25 @@ def main():
 
     # ---- 2. temperatureRuns -------------------------------------------------------------
     reply_start = min(gen_rep)                       # first reply token; prefix = 0..start-1
-    prefix = ids[:reply_start]
     t0 = time.time()
-    temperature_runs = []
-    for T, seeds in TEMPS:
-        for seed in seeds:
-            g, natural = sample(model, prefix, T, seed, 40, stop_ids, n_real)
-            temperature_runs.append({"T": T, "seed": seed, "text": tok.decode(g),
-                                     "tokens": [dec(tok, i) for i in g],
-                                     "stoppedNaturally": natural})
+    temperature_runs_out, rejected = temperature_runs(model, tok, ids[:reply_start], stop_ids,
+                                                      n_real)
     t_temp = time.time() - t0
     notes.append("temperatureRuns: context = hero tokens 0..%d (through the generation prompt "
                  "'<|im_start|>assistant\\n' after </tool_response>). Pure temperature sampling "
                  "(no top-k, no top-p) over the %d real vocab rows, torch.multinomial with "
                  "torch.Generator().manual_seed(seed); T=0 is greedy and has seed null. Max 40 new "
                  "tokens; stops at <|im_end|> or <|endoftext|> (Qwen's two EOS ids), and the stop "
-                 "token is not included in text/tokens. A token that is part of a multi-byte "
+                 "token is not included in text/tokens. Each temperature has its own seeds "
+                 "(100*i + k for the i-th temperature, k = 1..%d). Every sample is screened against "
+                 "a blocklist of sexual, profane, slur and violent words (scripts/trace/screen.py, "
+                 "English only); a sample that hits is redrawn with the next seed, so seeds can "
+                 "skip numbers (%d samples rejected). A token that is part of a multi-byte "
                  "character decodes to '\\ufffd' on its own; 'text' is decoded as a whole."
-                 % (reply_start - 1, n_real))
+                 % (reply_start - 1, n_real, SEED_POOL, len(rejected)))
 
     # ---- 3. freeFirstTurn ----------------------------------------------------------------
     first_tool = min(p for p in hero["gen_positions"] if tokens[p]["src"] == "tool")
-    tc_id = tok.convert_tokens_to_ids("<tool_call>")
 
     def first_turn(prefix_ids, max_new):
         g, natural = sample(model, prefix_ids, 0.0, None, max_new, stop_ids, n_real)
@@ -331,8 +402,9 @@ def main():
     nudged = first_turn(list(ids_n), 260)
     nudged["finalNumberMentioned"] = final_number(nudged["text"])
     free_first_turn = dict(free)
-    free_first_turn["withCalculatorInstruction"] = dict(
-        nudged, systemPrompt=sc_n["system"])
+    free_first_turn_nudged = dict(nudged, systemPrompt=sc_n["system"])
+    # Kept in both places: nested (original layout) and top-level (what src/data/phase1.ts reads).
+    free_first_turn["withCalculatorInstruction"] = free_first_turn_nudged
     notes.append("freeFirstTurn: greedy, context = hero tokens 0..%d (tools available), max 260 "
                  "new tokens, stop at <|im_end|>. usedTool = the text contains a real "
                  "'<tool_call>' token; mentionsCalculator = the word 'calculator' appears at all "
@@ -346,9 +418,8 @@ def main():
     notes.append("All generation in this file is PURE greedy/temperature sampling: no "
                  "repetition penalty, top-k or top-p. Qwen's generation_config.json defaults to "
                  "repetition_penalty=1.1, temperature=0.7, top_p=0.8, top_k=20, and HF generate() "
-                 "applies the repetition penalty even when do_sample=False. That is why the "
-                 "greedy reply quoted in hero-trace.json's notes says 'To achieve' while pure "
-                 "greedy says 'To get' (p=0.440 vs 0.426 after 'To').")
+                 "applies the repetition penalty even when do_sample=False; make_trace.py turns "
+                 "it off too.")
 
     # ---- 4. letters ----------------------------------------------------------------------
     q = SCENARIO["user"]
@@ -378,7 +449,12 @@ def main():
 
     # ---- 5. beat ---------------------------------------------------------------------------
     think_like = []
-    for pos, kind in THINK_LIKE:
+    for src, text, nth, kind in THINK_LIKE:
+        hits = [t["i"] for t in tokens if t["src"] == src and t["text"] == text and
+                t["i"] in hero["gen_positions"]]
+        if len(hits) <= nth:
+            sys.exit("thinkLike: no generated %s token %r (occurrence %d)" % (src, text, nth))
+        pos = hits[nth]
         row = real[pos - 1]
         p = torch.softmax(row.double(), -1)
         think_like.append({"pos": pos, "kind": kind,
@@ -421,8 +497,9 @@ def main():
         "generatedAt": _dt.datetime.now(_dt.timezone.utc).replace(microsecond=0).isoformat(),
         "model": model_info,
         "votePositions": vote_positions,
-        "temperatureRuns": temperature_runs,
+        "temperatureRuns": temperature_runs_out,
         "freeFirstTurn": free_first_turn,
+        "freeFirstTurnNudged": free_first_turn_nudged,
         "letters": letters,
         "beat": {"thinkLike": think_like, "sentences": sentences},
         "notes": notes,
@@ -437,7 +514,7 @@ def main():
                                                        ent[v["pos"]]) for v in vote_positions))
     print("approx     worst |err| %.2e at pos %d T=%.1f; tail mass %s" % (
         worst[2], worst[0], worst[1], tails))
-    for r in temperature_runs:
+    for r in temperature_runs_out:
         print("T=%.1f s=%s %s %r" % (r["T"], r["seed"], "stop" if r["stoppedNaturally"] else "cut ",
                                      r["text"]))
     print("free       tool=%s n=%d final=%s p(tc)=%.3g: %r" % (
