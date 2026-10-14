@@ -1,0 +1,78 @@
+/* Prompt Life design tokens: paper by day, transit night by dark mode. */
+:root {
+  --paper: #F7F5EF;
+  --sheet: #FFFDF8;
+  --ink: #07124A;
+  --ink-2: #48527A;
+  --rule: #DCDAE3;
+  --tint: #ECEAF2;
+  --tint-2: #E2E0EB;
+  --accent: #0B8A86;
+  --main: #121E72;
+
+  /* line colors */
+  --l-gate: #B23A4E;
+  --l-dark: #1D66C9;
+  --l-library: #0B8A86;
+  --l-academy: #6447E8;
+  --l-workshop: #B87410;
+  --l-scratch: #C2427F;
+  --l-reply: #56607F;
+
+  /* signals */
+  --doing: #F2B85B;
+  --doing-ink: #4A3000;
+  --lamp-off: #D9D6E2;
+  --flash: #FFF3B0;
+
+  /* cutaway levels */
+  --lv2: #101A5C;
+  --lv2-ink: #EEF0FF;
+  --lv2-dim: #AEB6E8;
+  --lv2-line: #2C3888;
+  --lv3: #F1EEE4;
+  --lv3-grid: #E0DACB;
+  --cut-shadow: rgba(4, 8, 40, 0.42);
+
+  /* departure board: the same in both themes */
+  --board-bg: #0D0E12;
+  --board-edge: #2A2C33;
+  --board-led: #FFB13B;
+  --board-text: #F3EDE0;
+  --board-green: #57E3A4;
+  --board-dim: #8C7D62;
+
+  --font-display: "Overpass", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Source Serif 4", "Iowan Old Style", Georgia, serif;
+  --font-mono: "Overpass Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --font-board: "DotGothic16", "Overpass Mono", ui-monospace, monospace;
+
+  --radius: 14px;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0A0F2C; --sheet: #111842; --ink: #E9ECFA; --ink-2: #A9B1D6; --rule: #2A3366;
+    --tint: #1A2253; --tint-2: #222B60; --accent: #3FD3CE; --main: #C9D0F5;
+    --l-gate: #F0788A; --l-dark: #74B2FF; --l-library: #3FD3CE; --l-academy: #A991FF;
+    --l-workshop: #F2B85B; --l-scratch: #F39BC6; --l-reply: #9AA4C8;
+    --doing: #F2B85B; --doing-ink: #2B1C00; --lamp-off: #2B3366; --flash: #FFF3B0;
+    --lv2: #050824; --lv2-ink: #EEF0FF; --lv2-dim: #9AA3D8; --lv2-line: #1E2766;
+    --lv3: #161C46; --lv3-grid: #232B60; --cut-shadow: rgba(0, 0, 0, 0.7);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0A0F2C; --sheet: #111842; --ink: #E9ECFA; --ink-2: #A9B1D6; --rule: #2A3366;
+  --tint: #1A2253; --tint-2: #222B60; --accent: #3FD3CE; --main: #C9D0F5;
+  --l-gate: #F0788A; --l-dark: #74B2FF; --l-library: #3FD3CE; --l-academy: #A991FF;
+  --l-workshop: #F2B85B; --l-scratch: #F39BC6; --l-reply: #9AA4C8;
+  --doing: #F2B85B; --doing-ink: #2B1C00; --lamp-off: #2B3366; --flash: #FFF3B0;
+  --lv2: #050824; --lv2-ink: #EEF0FF; --lv2-dim: #9AA3D8; --lv2-line: #1E2766;
+  --lv3: #161C46; --lv3-grid: #232B60; --cut-shadow: rgba(0, 0, 0, 0.7);
+  color-scheme: dark;
+}
+
+@property --r1 { syntax: "<length>"; inherits: true; initial-value: 60px; }
+@property --r2 { syntax: "<length>"; inherits: true; initial-value: 0px; }
