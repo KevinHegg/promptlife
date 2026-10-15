@@ -15,7 +15,7 @@ Phase 0. This document has one storyboard for each main-line station, P01 Send t
 
 **Conventions**
 
-- **Screen copy.** Quoted text is on-screen copy. Arrive captions are 18 words or fewer. Every other on-screen block is 50 words or fewer. Screen copy says "word piece" until P02 gives it the name "token."
+- **Screen copy.** Quoted text is on-screen copy. Arrive captions are 18 words or fewer. Every other on-screen block is 50 words or fewer. Screen copy says "token" until P02 gives it the name "token."
 - **The † mark.** It flags a count from o200k_base or wording that must come from the recorded run.
   - The verified o200k counts are: question 19 pieces and 79 characters, hidden instructions 6, passages 69, calculator request 12, result 4, reply 16. That makes 126 on the platform and 28 trips.
   - The recorded model (Qwen2.5-0.5B-Instruct, per `TRACE_SPIKE.md`) cuts every number into single digits, so its counts will differ.
@@ -37,16 +37,16 @@ Caption: "Here's a question about Grandma's biscuits. Tap Send and follow it all
 "To write its answer, how many times does the model run?"
 - Once, for the whole answer
 - Once per sentence
-- Once per word piece (correct)
+- Once per token (correct)
 
-Reveal: "Once per word piece. This answer took 28† trips, including 12† for a calculator request you never saw."
+Reveal: "Once per token. This answer took 28† trips, including 12† for a calculator request you never saw."
 
 #### Poke
 This is the ride from the home page, with one job: "Tap the part of the platform you typed." The right tap outlines 19 of the 126† chips. Visitors who skipped the ride on the home page take it here first. They get Play/Pause and Next stop, and can tap a lamp for its caption.
 Data: the run file, covering route events, each piece's source, position and trip, and which lines are lit. The pieces the app added appear as one gray segment.
 
 #### Name it
-"A large language model (LLM) scores every possible next word piece, picks one and repeats. Your prompt is what you typed; the context is everything it reads, including what the app added."
+"A large language model (LLM) scores every possible next token, picks one and repeats. Your prompt is what you typed; the context is everything it reads, including what the app added."
 Terms: LLM, prompt, context.
 Picture: the platform in six colors, with your part outlined.
 Metaphor: the train is everything the model reads, and it rides once per new piece. Where it breaks: "Nothing actually travels. It's one calculation, run again for each new piece."
@@ -73,7 +73,7 @@ The whole machine in one line: p(next piece | context) = softmax(W_out · Stack(
 "Your question and your recipe files left your device. The provider's policy decides who keeps them, and for how long." (data)
 
 #### Flashback into P02
-"On the ride, how many word pieces did your question make?" Answer: 19†, out of 126† on the platform.
+"On the ride, how many tokens did your question make?" Answer: 19†, out of 126† on the platform.
 
 ---
 
@@ -81,10 +81,10 @@ The whole machine in one line: p(next piece | context) = softmax(W_out · Stack(
 
 #### Arrive
 Panel: the question slides into a cutter and comes out as chips, each with a numbered ticket.
-Caption: "The model can't read letters. Your question gets cut into word pieces, and each piece gets a number."
+Caption: "The model can't read letters. Your question gets cut into tokens, and each piece gets a number."
 
 #### Bet
-"Which of these is a single word piece?"
+"Which of these is a single token?"
 - "flour"
 - "·flour" (with a space in front) (correct)
 - "Flour"
@@ -92,7 +92,7 @@ Caption: "The model can't read letters. Your question gets cut into word pieces,
 Reveal: "Only the one with a space in front. It's piece number 28420. Without the space it's two pieces, fl + our. With a capital, it's Fl + our."
 
 #### Poke
-A live tokenizer (o200k_base, in the browser) opens on the question: "19 word pieces, 79 characters." Type anything; chips and numbers update. Challenges:
+A live tokenizer (o200k_base, in the browser) opens on the question: "19 tokens, 79 characters." Type anything; chips and numbers update. Challenges:
 1. "Add one letter and watch the count jump." ("flouur" makes 21.)
 2. "Find a word that's one piece after a space and two without." (grandmother, biscuits)
 3. "Find the strangest cut." (buttermilk: but + term + ilk)
@@ -102,8 +102,8 @@ A toggle shows the recorded model's cuts, where every digit is its own piece: "D
 Data: gpt-tokenizer (a dependency already) and the recorded model's pieces for these texts.
 
 #### Name it
-"The tokenizer cuts text into word pieces, called tokens, and swaps each one for its number, the token ID. From here on, the model sees only numbers."
-Terms: token (word piece), token ID.
+"The tokenizer cuts text into tokens, called tokens, and swaps each one for its number, the token ID. From here on, the model sees only numbers."
+Terms: token (token), token ID.
 Picture: "flour" three ways, as chips with numbered tickets.
 Metaphor: a coat check, where you hand over a piece of text and get a numbered ticket. Where it breaks: "A coat check gives back your own coat. Here every ' flour' gets the same ticket, and what that ticket fetches was set in training."
 
@@ -118,7 +118,7 @@ Data: V-P02-letters. Precomputed: yes.
    - The word isn't in its list — it is, as one piece, and that's the problem.
 2. "Two people send the same question, one with the typo 'flouur.' What's sure to be different?"
    - The model itself — nothing about the model changes between users.
-   - The word pieces and their count: 19 versus 21 (correct)
+   - The tokens and their count: 19 versus 21 (correct)
    - Whether the answer is right — models cope with most typos; only the pieces are sure to differ.
 
 Stamp design: a paper strip cut into chips, each with a tiny ticket number.
@@ -127,7 +127,7 @@ Stamp design: a paper strip cut into chips, each with a tiny ticket number.
 Byte-pair encoding, animated: " flour" starts as 6 bytes. Pairs merge step by step, the pair learned earliest first, until one ID remains. The vocabulary is 256 bytes plus an ordered list of merges, built once from a large sample of text. The special tokens of the chat template (G1) sit outside that list.
 
 #### Receipt line
-"You pay by the word piece. The same meaning takes more pieces in some languages than others, and some pay far more. [cite]" (compute)
+"You pay by the token. The same meaning takes more pieces in some languages than others, and some pay far more. [cite]" (compute)
 
 #### Flashback into P03
 "Does piece number 28420† (' flour') carry the meaning of 'flour'?" Answer: No. It's only a row number.
@@ -190,7 +190,7 @@ The embedding matrix E has one row per vocabulary entry and 896 columns. For Qwe
 
 #### Arrive
 Panel: the chips in a row. Curved arcs reach back from ' flour' in your question to earlier chips, drawn from one real head in the recording.
-Caption: "Here every word piece looks back at the pieces before it and borrows from them."
+Caption: "Here every token looks back at the pieces before it and borrows from them."
 
 #### Bet
 "Can ' flour' in your question look at 'people', which comes after it?"
@@ -206,7 +206,7 @@ The first piece is faded, with a note: "Many heads park extra weight on the very
 Data: attention rows for about 10 positions, all layers and heads. The old run had a look-one-back head, a copy head and a first-piece habit in 71% of heads; re-check here.
 
 #### Name it
-"Attention lets each word piece take a weighted mix of information from earlier pieces; the weights add up to 100%. Each layer has several attention heads, each looking for a different kind of link."
+"Attention lets each token take a weighted mix of information from earlier pieces; the weights add up to 100%. Each layer has several attention heads, each looking for a different kind of link."
 Terms: attention, attention head.
 Picture: arcs from ' flour', with widths labeled.
 Metaphor: a highlighter run over earlier text, darker where more is borrowed. Where it breaks: "A highlighter suggests a reader. Nobody is reading; the weights come from multiplying numbers."
@@ -231,7 +231,7 @@ Stamp design: arcs bridging over a row of chips, like a footbridge.
 Attention as math: score_ij = q_i · k_j / √d, masked so j ≤ i (the causal mask). Then a_ij = softmax over j, and out_i = Σ_j a_ij v_j. One real row is worked live. Qwen2.5-0.5B has 14 query heads sharing 2 key-value groups, with 64 numbers per head.
 
 #### Receipt line
-"Every word piece looks back at every earlier one, so long chats cost more per reply." (compute)
+"Every token looks back at every earlier one, so long chats cost more per reply." (compute)
 
 #### Flashback into P05
 "When ' flour' borrowed from earlier pieces, did that happen once or many times?" Answer: Many. Every layer does its own looking back.
@@ -284,10 +284,10 @@ Stamp design: an elevator floor dial with its needle near the top.
 The residual stream: h ← h + Attention(norm(h)), then h ← h + MLP(norm(h)), repeated for 24 layers. The MLP widens 896 numbers to 4,864 and back. The logit lens reads a guess at any floor: guess = W_out · norm(h_layer). Floor 0 echoes the input piece, because this model scores with its own embedding table.
 
 #### Receipt line
-"Every trip runs every floor: about a billion arithmetic steps per word piece here, far more in big models. [cite]" (energy)
+"Every trip runs every floor: about a billion arithmetic steps per token here, far more in big models. [cite]" (energy)
 
 #### Flashback into P06
-"At the top floor, what comes out: one word, or a score for every word piece the model knows?" Answer: A score for every piece.
+"At the top floor, what comes out: one word, or a score for every token the model knows?" Answer: A score for every piece.
 
 ---
 
@@ -295,10 +295,10 @@ The residual stream: h ← h + Attention(norm(h)), then h ← h + MLP(norm(h)), 
 
 #### Arrive
 Panel: a departure board above P06. Candidate pieces flip into rows with their chances, and one row lights.
-Caption: "Every word piece the model knows gets a score. Scores become chances, and one piece is drawn."
+Caption: "Every token the model knows gets a score. Scores become chances, and one piece is drawn."
 
 #### Bet
-"The model knows about 150,000 word pieces. How many have some chance of being picked next?"
+"The model knows about 150,000 tokens. How many have some chance of being picked next?"
 - Only the winner
 - The top 10
 - All of them, most with tiny chances (correct)
@@ -313,7 +313,7 @@ Data: full score lists at 3 chosen positions (so every slider setting is exact);
 "The model turns scores into probabilities that add up to 100%, and sampling draws the next piece. Temperature changes the spread: low makes the favorite nearly certain, and high gives long shots a chance."
 Terms: probability, temperature, sampling.
 Picture: departure-board bars at temperature 1.
-Metaphor: an election with every word piece on the ballot. Where it breaks: "Nobody votes, and the favorite can lose. The winner is drawn by chance, in proportion to its odds, unless the temperature is 0."
+Metaphor: an election with every token on the ballot. Where it breaks: "Nobody votes, and the favorite can lose. The winner is drawn by chance, in proportion to its odds, unless the temperature is 0."
 
 #### Break it
 Lever: temperature 0, 1 or 2. At 0 the reply is the same every time. At 1 the wording changes a little. At 2 it turns to nonsense within a few pieces, and the amount may change.
@@ -441,7 +441,7 @@ The run's total log-probability, Σ_t log p(piece_t), summed live from the recor
 "The reply has no author in the usual sense. Responsibility for errors rests with the people who build it, offer it and rely on it." (accountability)
 
 #### Flashback into R1
-"Your run used 126† word pieces. If you paid by the piece, which would you pay for?" Answer: All of them. That means the app's additions, the recipe card, the calculator request and the reply, not only your 19.
+"Your run used 126† tokens. If you paid by the piece, which would you pay for?" Answer: All of them. That means the app's additions, the recipe card, the calculator request and the reply, not only your 19.
 
 ---
 
@@ -506,7 +506,7 @@ Reasoning models write out working before the answer. Those thinking tokens ride
 - **Needs:** a small open model with a thinking switch, run both ways (V-S-think-off and V-S-think-on), with trip counts.
 
 ### D Darkroom (from Tokenizer): D1 Image patches, D2 Diffusion
-- **D1.** A photo of Grandma's handwritten card is cut into a grid of patches. A vision encoder turns each patch into numbers that ride the platform like word pieces. Resize the photo and watch the piece count change.
+- **D1.** A photo of Grandma's handwritten card is cut into a grid of patches. A vision encoder turns each patch into numbers that ride the platform like tokens. Resize the photo and watch the piece count change.
 - **D2.** A different machine. Diffusion starts from noise and removes a little at each step, steered by the text request. Scrub a 30-step timeline for "a plate of biscuits, drawn in ink." For Break it, remove the text steering or stop at step 10. A note says some newer image generators work piece by piece instead.
 - **Misconceptions fixed:** "Image generators collage stored pictures." "The model sees like I do." "All AI writes one piece at a time."
 - **Terms:** multimodal, diffusion.

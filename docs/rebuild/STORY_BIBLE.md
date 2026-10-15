@@ -92,7 +92,7 @@ The subway carries the flow of the run and helps with wayfinding. Each limit of 
 | One trip per new token | Writing one token at a time | Saved work makes later trips much cheaper than the first. |
 | The inner loop skips the Tokenizer; the outer loops don't | New pieces are already numbered; passages and tool results arrive as text | Literal, except that the app, not the model, finds passages and runs tools. |
 | Transfers to branch lines | Work the app does | The model isn't waiting. It isn't running until the app starts the loop again. |
-| The platform | The context window | Big models hold 100,000 word pieces or more. When the window fills, the app decides what to cut. |
+| The platform | The context window | Big models hold 100,000 tokens or more. When the window fills, the app decides what to cut. |
 | Lit and dark lines | What this answer used | Lit means the calculation passed through, not that anything was noticed. |
 | The dark Academy | Answering doesn't change the model | Some companies save chats to train future models, separately and later. |
 | Levels: Map, Cutaway, Bedrock | How deep the explanation goes | These aren't the model's layers. Always say "level." |
@@ -106,7 +106,7 @@ The subway carries the flow of the run and helps with wayfinding. Each limit of 
 | P03 Embedding | A city where words used alike live on the same block | The city has 896 directions, and none of them means anything nameable |
 | P04 Attention | A highlighter over earlier text | Nobody is reading |
 | P05 The Stack | One draft passed up a building, each floor adding edits | The draft is numbers, not words |
-| P06 The Vote | An election among word pieces | There are no voters; the winner is drawn by chance |
+| P06 The Vote | An election among tokens | There are no voters; the winner is drawn by chance |
 | P07 The Loop | Rereading everything before each word | Saved work means no rereading |
 | P08 Reply | None; the receipt is literal | |
 | L | An open-book exam | The model can't tell which book is right |
@@ -121,7 +121,7 @@ The subway carries the flow of the run and helps with wayfinding. Each limit of 
 ## 7. The cast
 
 - **You.** The rider. The question is yours, and so is the pace.
-- **The train.** Your question, then everything the model reads. It's an object, with no eyes and no name. Its side shows a count of word pieces.
+- **The train.** Your question, then everything the model reads. It's an object, with no eyes and no name. Its side shows a count of tokens.
 - **The guide.** A human voice in the captions, seen only as a white-gloved hand. It borrows Japanese rail staff's pointing-and-calling (point at a signal, name it aloud): the hand points at the one focal thing on a screen and names it in plain words. Dry, warm, never sarcastic; never speaks for the model.
 - **The app.** Everything around the model: chat window, file search (L), tool runner (W), hidden instructions (G), and decisions to trim or stop. Drawn as the station building and signs, gray with dashed outlines.
 - **The model.** The Prompt line's track and machinery. It never gets a face, eyes, a robot body, a brain or a glowing head.
@@ -132,11 +132,11 @@ Machines never get faces, Pantry Bot included.
 
 ## 8. The visual alphabet
 
-Each source of word pieces has a fixed fill across the app, plus a text label: hidden instructions, passages, your question, tool call, tool result, reply. Wrapper pieces the app adds are gray.
+Each source of tokens has a fixed fill across the app, plus a text label: hidden instructions, passages, your question, tool call, tool result, reply. Wrapper pieces the app adds are gray.
 
 | Element | Looks like | Means | Never used for |
 |---|---|---|---|
-| Token chip | Rounded rectangle in monospace; a leading space shows as a middle dot (·flour) | One word piece | Words or ideas in general |
+| Token chip | Rounded rectangle in monospace; a leading space shows as a middle dot (·flour) | One token | Words or ideas in general |
 | ID tag | A ticket stub under the chip, in tabular numerals | That piece's number | Any other number |
 | Vector strip | Thin cells on a two-color scale; the first 32 are shown, then "… 896" | One piece's list of numbers | Texture |
 | Attention arc | A curve from a chip back to an earlier chip, its width set by weight | How much one piece borrows | Anything pointing forward |
@@ -156,7 +156,7 @@ Each station introduces at most three new terms, and fewer is better. A term cou
 | Station | Terms |
 |---|---|
 | P01 Send | large language model (LLM), prompt, context |
-| P02 Tokenizer | token (word piece), token ID |
+| P02 Tokenizer | token (token), token ID |
 | P03 Embedding | embedding, weights |
 | P04 Attention | attention, attention head |
 | P05 The Stack | layer, transformer |
@@ -195,10 +195,10 @@ Each station adds one line to a receipt printed after its Stamp; R1 The Ledger t
 | Station | Receipt line | Column |
 |---|---|---|
 | P01 | Your question and your recipe files left your device. The provider's policy decides who keeps them, and for how long. | data |
-| P02 | You pay by the word piece. The same meaning takes more pieces in some languages than others, and some pay far more. [cite] | compute |
+| P02 | You pay by the token. The same meaning takes more pieces in some languages than others, and some pay far more. [cite] | compute |
 | P03 | These numbers were learned from human writing and carry its patterns, stereotypes included. Consent and credit for that writing are disputed. [cite] | data |
-| P04 | Every word piece looks back at every earlier one, so long chats cost more per reply. | compute |
-| P05 | Every trip runs every floor: about a billion arithmetic steps per word piece here, far more in big models. [cite] | energy |
+| P04 | Every token looks back at every earlier one, so long chats cost more per reply. | compute |
+| P05 | Every trip runs every floor: about a billion arithmetic steps per token here, far more in big models. [cite] | energy |
 | P06 | The company running the chatbot sets the temperature. Different answers to the same question are a design choice. | accountability |
 | P07 | 28† trips. Long replies, thinking and tool use multiply trips, and each trip uses electricity. Estimates per answer vary widely. [cite: range] | energy |
 | P08 | The reply has no author in the usual sense. Responsibility for errors rests with the people who build it, offer it and rely on it. | accountability |
@@ -206,7 +206,7 @@ Each station adds one line to a receipt printed after its Stamp; R1 The Ledger t
 | W | The calculator ran with the app's permissions. Agents can do whatever their permissions allow. | accountability |
 | G | The company writes the hidden instructions, and you usually can't see them. | accountability |
 | A | Training used large amounts of electricity and the work of people who wrote, labeled and rated text, often for low pay. [cite] | labor |
-| S | Thinking costs word pieces like any others, and there can be far more of them than of the visible answer. | energy |
+| S | Thinking costs tokens like any others, and there can be far more of them than of the visible answer. | energy |
 | D | Image models learned from images collected at scale; consent and credit are contested. [cite] | data |
 
 ## 11. Accuracy rules
