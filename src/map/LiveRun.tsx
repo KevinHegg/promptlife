@@ -107,8 +107,8 @@ export function LiveRun({ autoplay = false, onPick, outline, aside, compact = fa
               <div className="notice">
                 <h3>What to notice</h3>
                 <ul>
-                  <li>The model writes one word piece per trip around the loop: {runCounts.trips} trips for this answer.</li>
-                  <li>Most of what the model reads came from the app, not from you. You typed {runCounts.question} of {runCounts.total} pieces.</li>
+                  <li>The model writes one token per trip around the loop: {runCounts.trips} trips for this answer.</li>
+                  <li>Most of what the model reads came from the app, not from you. You typed {runCounts.question} of {runCounts.total} tokens.</li>
                   <li>The Academy line, where models are trained, stays dark. Answering doesn’t change the model.</li>
                   {phase1.freeFirstTurn && !phase1.freeFirstTurn.usedTool && (
                     <li>Left to itself, this small model skipped the calculator and did the math in words. This ride follows the path where the app required the calculator.</li>

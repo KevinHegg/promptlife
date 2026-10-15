@@ -19,10 +19,10 @@ First- and second-year college students in any major, and the faculty who teach 
 | They often believe | The ride shows instead | Where |
 |---|---|---|
 | It looks things up in its memory | The app finds passages and pastes them in | P01, L |
-| It writes the whole answer at once | One word piece per trip around the loop | P01, P07 |
-| It reads letters and words like I do | It sees numbered word pieces | P02 |
+| It writes the whole answer at once | One token per trip around the loop | P01, P07 |
+| It reads letters and words like I do | It sees numbered tokens | P02 |
 | Chatting trains it; it remembers me | Its numbers stay fixed; "memory" features paste notes back in | P08, A |
-| If it sounds sure, it's right | Its odds are about the next word piece, not the truth | P06, L |
+| If it sounds sure, it's right | Its odds are about the next token, not the truth | P06, L |
 | Attention means it understands | Attention is a weighted mix of numbers | P04 |
 | It does math like a calculator | It writes likely digits; a calculator does the math | W, P08 |
 | Its instructions are locked rules | Instructions and data arrive as one stream of text | G |
@@ -35,7 +35,7 @@ First- and second-year college students in any major, and the faculty who teach 
 The owner stalled on the home page: too much at once, no clear first move. So a new visitor's first minute is designed.
 
 1. **Arrive (0–10 s).** One focal point: the hero question in a chat bubble with a Send arrow, over a dimmed, still map. Above it: "What happens inside a chatbot after you hit Send?" One big button, **Start the ride**, and under it, small: "About a minute. Or skip to the first stop." Nothing moves or sounds; no station list, no jargon; 30 words or fewer on screen.
-2. **The ride (optional, about 60 s).** It starts only on the tap. The train moves stop to stop while the board shows one plain caption at a time (12 words or fewer): "Your question is cut into word pieces." "The model scores every possible next piece." "It picks one, adds it and goes around again." Pause and Skip never move.
+2. **The ride (optional, about 60 s).** It starts only on the tap. The train moves stop to stop while the board shows one plain caption at a time (12 words or fewer): "Your question is cut into tokens." "The model scores every possible next token." "It picks one, adds it and goes around again." Pause and Skip never move.
 3. **The landing.** When the ride ends or is skipped, one card: "That was one answer: 28† trips around the loop. Now take it one stop at a time." One button, **Go to P01 Send**, and a quiet link, "See the whole map."
 4. **After that.** The map is home, with the station list below it. Returning visitors skip steps 1–3 and see the train where they left it, with one button: "Continue at P03 Embedding."
 
@@ -46,7 +46,7 @@ The owner stalled on the home page: too much at once, no clear first move. So a 
 Plain second person, present tense, for a first-year in any major reading on a phone. Curious and a little funny about situations, never about the reader, never by giving the machine feelings.
 
 - Arrive captions are 18 words or fewer. Every other on-screen block is 50 words or fewer. One idea per sentence.
-- On first mention, say "word piece," then give its name: "These word pieces are called tokens." After P02, "token" is fine.
+- Say "token" every time, and define it once at first use: "A token is a word part: “strawberry” is st · raw · berry." Repetition builds the word; synonyms like "word piece" dilute it (owner's direction, 2026-10-14).
 - Keep jargon off the screen. Rank, logit, vocabulary score, role markers, special tokens and residual stream appear only at Level 3.
 - No exclamation points. Don't use "simply," "just," "obviously" or "magic."
 - The model is "it." It scores, writes, picks, copies and looks back. It never thinks, knows, wants, understands, decides or remembers.
@@ -55,7 +55,7 @@ Plain second person, present tense, for a first-year in any major reading on a p
 
 | Do | Don't |
 |---|---|
-| "Your question is 19 word pieces. The model never sees the letters." | "Tokenization leverages byte-pair encoding to process input efficiently." |
+| "Your question is 19 tokens. The model never sees the letters." | "Tokenization leverages byte-pair encoding to process input efficiently." |
 | "The model gave ' cups' the highest score." | "The model thinks the answer is in cups." |
 | "Floors 1 to 18 guess junk. That's normal." | "Uh oh, the AI got confused!" |
 | "Hidden labels mark who's talking." | "The chat template inserts role-marker special tokens." |
@@ -77,7 +77,7 @@ The owner's brief is that this should be somewhere people want to be. Each rule 
 10. **Day and night.** Day is a printed pocket map: warm paper, ink lines, matte. Night is the backlit map board in a quiet station after the last train: deep blue-black, never pure black, where only lamps and the focal element glow. *Test:* at night the brightest thing is never the app's frame or controls.
 11. **Sound follows a tap.** The app is silent until the visitor turns sound on. Then each station gets a short original chime in the spirit of Tokyo's platform melodies, and the stamp gets a soft thunk. Nothing loops, and every sound has a visual twin.
 12. **The student holds the clock.** There are no timers, countdowns or streaks. The five-minute loop is our budget, not theirs.
-13. **Nothing blocks Next.** Each station runs Arrive, Try it, Learn it, Break it, Stamp. The separate Bet step was removed on 2026-10-14 at the owner's request: it cluttered navigation and its gate confused people. If predictions return, they must be optional and live inside another step.
+13. **Nothing blocks Next.** Each station runs Arrive, Try it, Learn it, Break it, Stamp. The separate Bet step was removed on 2026-10-14 (it cluttered navigation; "Place a bet" confused people). Predictions live on the Arrive screen as one short, optional "Guess first" question with one-tap choices.
 14. **Easy to leave and return.** The map is one tap away. The train parks where you left it, and lit lamps stay lit.
 15. **Quiet rewards.** No confetti. The stamp landing is the celebration.
 
@@ -87,9 +87,9 @@ The subway carries the flow of the run and helps with wayfinding. Each limit of 
 
 | On the map | In the model | Where it breaks |
 |---|---|---|
-| The Prompt line | The steps of one model run, in order | Nothing travels. On the first trip, every word piece goes through each step together. |
+| The Prompt line | The steps of one model run, in order | Nothing travels. On the first trip, every token goes through each step together. |
 | The train | Everything the model reads: hidden instructions, passages, question, reply so far | There's no vehicle and no driver. "Riding" is shorthand for numbers being changed. |
-| One trip per new word piece | Writing one piece at a time | Saved work makes later trips much cheaper than the first. |
+| One trip per new token | Writing one token at a time | Saved work makes later trips much cheaper than the first. |
 | The inner loop skips the Tokenizer; the outer loops don't | New pieces are already numbered; passages and tool results arrive as text | Literal, except that the app, not the model, finds passages and runs tools. |
 | Transfers to branch lines | Work the app does | The model isn't waiting. It isn't running until the app starts the loop again. |
 | The platform | The context window | Big models hold 100,000 word pieces or more. When the window fills, the app decides what to cut. |

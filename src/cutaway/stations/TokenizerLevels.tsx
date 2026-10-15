@@ -40,7 +40,7 @@ export function TokenizerLevels({ station }: { station: Station }) {
       cutaway={
         <Level>
           <LevelText level={2} title="Type anything">
-            <p>A real tokenizer splits your text into pieces and swaps each one for its ID. Try the examples, then break it.</p>
+            <p>A real tokenizer splits your text into tokens and swaps each token for its ID. Try the examples.</p>
           </LevelText>
           <Vis>
             <div className="v-col">
@@ -84,7 +84,7 @@ export function TokenizerLevels({ station }: { station: Station }) {
             <div className="v-col">
               <div className="formula">vocabulary = bytes + merge<sub>1</sub> + merge<sub>2</sub> + … + merge<sub>n</sub></div>
               <div className="worked">
-                common pieces become one token: “ flour” = <b>28420</b>
+                common letter groups become one token: “ flour” = <b>28420</b>
                 <br />
                 your text: {chars} characters, {pieces.length} {byLetter ? 'letters' : 'tokens'}, about <b>{ratio}</b> characters each
                 <br />

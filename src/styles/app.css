@@ -576,3 +576,23 @@ blockquote { margin: 0; padding: 10px 14px; border-left: 3px solid var(--ink-2);
 .cb-bar { height: 8px; border-radius: 4px; background: var(--tint); overflow: hidden; }
 .cb-fill { display: block; height: 100%; border-radius: 4px; }
 .cb-preview { font-family: var(--font-mono); font-size: 0.74rem; color: var(--ink-2); overflow-wrap: anywhere; }
+
+/* ================= Phase 1.4: visible train, progress, guesses ================= */
+/* Stations are slightly see-through, so a train waiting inside one stays visible. */
+.pill { fill-opacity: 0.42; }
+.bprog { height: 3px; border-radius: 2px; background: var(--board-edge); overflow: hidden; }
+.bprog span { display: block; height: 100%; background: var(--board-led); transition: width 0.6s ease; }
+.bprog.running span { animation: bprog-glow 1.6s ease-in-out infinite; }
+@keyframes bprog-glow { 50% { opacity: 0.55; } }
+
+.guess { display: flex; flex-direction: column; gap: 8px; padding: 12px 14px; border-radius: 12px; background: var(--paper); border: 1px dashed var(--ink-2); }
+.guess-q { font-family: var(--font-display); font-weight: 800; line-height: 1.3; }
+.guess-options { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip-choice { font: inherit; font-family: var(--font-display); font-weight: 700; font-size: 0.92rem; padding: 6px 14px 4px; border-radius: 999px; border: 1.5px solid var(--ink-2); background: var(--sheet); color: var(--ink); cursor: pointer; min-height: 38px; }
+.chip-choice:disabled { cursor: default; }
+.chip-choice.picked { border-color: var(--ink); border-width: 2.5px; }
+.chip-choice.correct { background: var(--accent); border-color: var(--accent); color: var(--paper); }
+.guess-reveal { font-size: 0.98rem; }
+@media (prefers-reduced-motion: reduce) {
+  .bprog.running span { animation: none; }
+}

@@ -20,7 +20,7 @@ function BoardPanel() {
   const probs = vote ? voteProbs(vote, 1).top : []
   return (
     <div className="mini-board" role="img" aria-label="A departure board listing candidate tokens with their odds">
-      <div className="mb-head"><span>P06 · THE VOTE</span><span>NEXT PIECE</span></div>
+      <div className="mb-head"><span>P06 · THE VOTE</span><span>NEXT TOKEN</span></div>
       {rows.map((c, i) => (
         <div key={i} className={`mb-row${i === 0 ? ' lit' : ''}`} style={{ animationDelay: `${0.15 * i}s` }}>
           <span className="mb-tok"><TokenText text={c.text} /></span>
@@ -65,9 +65,14 @@ function TemperatureBreak() {
 export const P06_SPEC: LoopSpec = {
   code: 'P06',
   arrive: {
-    caption: 'Every possible next word piece gets a score. Scores become odds, and one piece is drawn.',
+    caption: 'Every possible next token gets a score. Scores become odds, and one token is drawn.',
     panel: <BoardPanel />,
-    flashback: { q: 'At the top of The Stack, what comes out: one word, or a score for every possible next piece?', a: 'A score for every possible piece. This station turns scores into odds.' }
+    guess: {
+      q: 'Does the model always pick its top-scoring token?',
+      options: [{ text: 'Always' }, { text: 'Usually', correct: true }, { text: 'Rarely' }],
+      reveal: 'Usually. It draws from the odds, so the favorite usually wins, but not every time.'
+    },
+    flashback: { q: 'At the top of The Stack, what comes out: one word, or a score for every possible next token?', a: 'A score for every possible token. This station turns scores into odds.' }
   },
   poke: {
     title: 'Turn the temperature',
@@ -75,7 +80,7 @@ export const P06_SPEC: LoopSpec = {
     body: <VoteLevels station={station} positions={phase1.votePositions} exactTail={phase1.real} />
   },
   name: {
-    definition: 'The model turns its scores into odds that add up to 100%, then draws the next piece. Temperature reshapes the odds: low makes the favorite almost certain, high gives long shots a chance.',
+    definition: 'The model turns its scores into odds that add up to 100%, then draws the next token. Temperature reshapes the odds: low makes the favorite almost certain, high gives long shots a chance.',
     terms: ['probability', 'temperature', 'sampling'],
     picture: <BoardPanel />,
     metaphor: 'An election with every token as a candidate.',

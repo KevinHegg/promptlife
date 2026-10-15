@@ -28,7 +28,7 @@ export const MAIN_Y = 255
 
 export const STATIONS: Station[] = [
   { code: 'P01', name: 'Send', x: 70, oneLiner: 'Your question boards the train.' },
-  { code: 'P02', name: 'Tokenizer', x: 330, oneLiner: 'Text becomes numbered pieces.' },
+  { code: 'P02', name: 'Tokenizer', x: 330, oneLiner: 'Text becomes tokens, and tokens become numbers.' },
   { code: 'P03', name: 'Embedding', x: 450, oneLiner: 'Each ID looks up a long list of numbers.' },
   { code: 'P04', name: 'Attention', x: 570, oneLiner: 'Tokens look back at each other.' },
   { code: 'P05', name: 'The Stack', x: 690, oneLiner: 'Layer after layer sharpens the guess.' },

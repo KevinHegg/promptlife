@@ -13,6 +13,9 @@ export function DepartureBoard({ snap }: { snap: RunSnapshot | null }) {
         <span>{snap?.station ?? 'P01 · SEND'}</span>
         <span>TRIP {trip} / {total}</span>
       </div>
+      <div className={`bprog${snap?.playing ? ' running' : ''}`} aria-hidden="true">
+        <span style={{ width: `${Math.round((snap?.progress ?? 0) * 100)}%` }} />
+      </div>
       <p className="bcap" aria-live="polite">{snap?.caption}</p>
       {/* Always rendered, so the board keeps one height for the whole ride. */}
       <p className="bout">

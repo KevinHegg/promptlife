@@ -26,13 +26,13 @@ function LettersBreak() {
         {on ? (
           <>
             <Chips pieces={letters.map((p) => ({ text: p.text }))} />
-            <p className="break-stat"><b>{n}</b> pieces instead of <b>{normal}</b>. Every later station works piece by piece, so your question now costs about {(n / normal).toFixed(1)} times as much to process.</p>
+            <p className="break-stat"><b>{n}</b> tokens instead of <b>{normal}</b>. Every later station works token by token, so your question now costs about {(n / normal).toFixed(1)} times as much to process.</p>
             {L ? (
               <div className="said">
                 <p className="kicker">What the model wrote, given the question spelled out letter by letter</p>
                 <blockquote>{L.firstTurnGreedy.text.trim() || '(nothing)'}</blockquote>
                 <p>
-                  For comparison, with the normal {normal} pieces and the calculator, the answer was “{SCENARIO.reply}”
+                  For comparison, with the normal {normal} tokens and the calculator, the answer was “{SCENARIO.reply}”
                   {L.firstTurnGreedy.pToolCallStart !== undefined && phase1.freeFirstTurn?.pToolCallStart !== undefined && (
                     <> Spelled out, its chance of asking for the calculator went from {(phase1.freeFirstTurn.pToolCallStart * 100).toFixed(1)}% to {(L.firstTurnGreedy.pToolCallStart * 100).toFixed(2)}%.</>
                   )}
@@ -46,7 +46,7 @@ function LettersBreak() {
         ) : (
           <>
             <Chips pieces={recorded.length ? recorded : frontier} />
-            <p className="break-stat">The question as the model normally gets it: <b>{normal}</b> pieces. Flip the lever.</p>
+            <p className="break-stat">The question as the model normally gets it: <b>{normal}</b> tokens. Flip the lever.</p>
           </>
         )}
       </div>
@@ -78,17 +78,22 @@ function CutterPanel() {
 export const P02_SPEC: LoopSpec = {
   code: 'P02',
   arrive: {
-    caption: 'The model can’t read letters. Your question is cut into word pieces, and each piece becomes a number.',
+    caption: 'The model can’t read letters. Your question is cut into tokens, and each token becomes a number.',
     panel: <CutterPanel />,
-    flashback: { q: 'On the ride, how many word pieces did your question make?', a: `${runCounts.question} for the recorded model, out of ${runCounts.total} on the platform. Most came from the app.` }
+    guess: {
+      q: 'How many tokens is “strawberry”?',
+      options: [{ text: '1' }, { text: '3', correct: true }, { text: '10' }],
+      reveal: 'Three: st · raw · berry. The model never sees the letters.'
+    },
+    flashback: { q: 'On the ride, how many tokens did your question make?', a: `${runCounts.question} for the recorded model, out of ${runCounts.total} on the platform. Most came from the app.` }
   },
   poke: {
     title: 'Make the tokenizer stumble',
-    intro: 'Open the window and type anything. Try three things: add pieces by changing one letter; find a word that’s one piece after a space but two without; try another language.',
+    intro: 'Type anything and watch it split into tokens. Try “strawberry”, then change one letter, then try another language.',
     body: <TokenizerLevels station={station} />
   },
   name: {
-    definition: 'A tokenizer cuts text into word pieces, called tokens, from a fixed list, and swaps each one for its number, its token ID. From here on, the model sees only the numbers.',
+    definition: 'A tokenizer cuts text into tokens, word parts from a fixed list, and swaps each token for its number, its token ID. “strawberry” becomes st · raw · berry, then 302 · 1618 · 19772. From here on, the model sees only the numbers.',
     terms: ['token', 'token ID', 'vocabulary'],
     picture: (
       <div className="three-ways">
@@ -99,7 +104,7 @@ export const P02_SPEC: LoopSpec = {
     ),
     metaphor: 'A coat check: hand over text, get a numbered ticket.',
     breaks: 'A coat check returns your own coat. Every “ flour” gets the same ticket, and what that ticket stands for was set in training.',
-    note: recorded.length ? `Different models cut differently: the recorded model cuts your question into ${recorded.length} pieces, a frontier model into ${frontier.length}.` : undefined
+    note: recorded.length ? `Different models cut differently: the recorded model cuts your question into ${recorded.length} tokens, a frontier model into ${frontier.length}.` : undefined
   },
   break: {
     title: 'Cut by letters',
@@ -113,14 +118,14 @@ export const P02_SPEC: LoopSpec = {
         options: [
           { text: 'They can’t count to three', why: 'Counting isn’t the issue. The letters aren’t in what it sees.' },
           { text: '“ strawberry” reaches the model as one ID, not ten letters', correct: true, why: 'The model sees ID 101830, not s-t-r-a-w-b-e-r-r-y.' },
-          { text: 'It isn’t in the vocabulary', why: 'It is, as one piece. That’s the problem.' }
+          { text: 'It isn’t in the vocabulary', why: 'It is, as one token. That’s the problem.' }
         ]
       },
       {
         q: 'Two people send the same question, one with the typo “flouur.” What’s guaranteed to differ?',
         options: [
           { text: 'The model’s weights', why: 'Nothing about the model changes between users.' },
-          { text: 'The word pieces and their count, 19 versus 21', correct: true, why: '“ flouur” splits into “ fl” + “ou” + “ur”: two extra pieces.' },
+          { text: 'The tokens and their count, 19 versus 21', correct: true, why: '“ flouur” splits into “ fl” + “ou” + “ur”: two extra tokens.' },
           { text: 'Whether the answer is right', why: 'Models cope with most typos. Only the IDs are sure to differ.' }
         ]
       }

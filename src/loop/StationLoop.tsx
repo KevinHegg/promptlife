@@ -3,7 +3,7 @@ import { stationByCode, STATIONS } from '../data/network'
 import { readStation, saveStation } from '../lib/progress'
 import { hrefFor } from '../lib/router'
 import { chime, thunk } from '../lib/sound'
-import { QuizCard } from './Choices'
+import { GuessCard, QuizCard } from './Choices'
 import { StampArt } from './StampArt'
 import { BEAT_LABELS, type BeatId, type LoopSpec } from './types'
 
@@ -68,7 +68,8 @@ export function StationLoop({ spec }: { spec: LoopSpec }) {
             <div className="arrive-text">
               <p className="kicker">Arrive · {spec.code}</p>
               <p className="arrive-caption">{spec.arrive.caption}</p>
-              {spec.arrive.flashback && <Flashback {...spec.arrive.flashback} />}
+              {spec.arrive.guess && <GuessCard {...spec.arrive.guess} />}
+              {spec.arrive.flashback && !spec.arrive.guess && <Flashback {...spec.arrive.flashback} />}
             </div>
           </div>
         )}

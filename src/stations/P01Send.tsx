@@ -46,7 +46,7 @@ function RideThenFind() {
       <ContextBlocks onPick={right ? undefined : setChosen} chosen={chosen?.key} />
       <p className="reveal" aria-live="polite">
         {right ? (
-          <><b>That's you:</b> {runCounts.question} of {runCounts.total} word pieces. Everything else came from the app or the model.</>
+          <><b>That's you:</b> {runCounts.question} of {runCounts.total} tokens. Everything else came from the app or the model.</>
         ) : chosen ? (
           <><b>Not that one.</b> That's {SRC_NAMES[chosen.src]}.</>
         ) : null}
@@ -79,7 +79,12 @@ export const P01_SPEC: LoopSpec = {
   code: 'P01',
   arrive: {
     caption: 'This is your question. Ride along with it, all the way to the answer.',
-    panel: <SendPanel />
+    panel: <SendPanel />,
+    guess: {
+      q: 'How many times does the model run to write its answer?',
+      options: [{ text: 'Once' }, { text: 'Once per sentence' }, { text: 'Once per token', correct: true }],
+      reveal: `Once per token, a word part. This answer takes ${runCounts.trips} runs.`
+    }
   },
   poke: {
     title: 'Ride along',
@@ -87,11 +92,11 @@ export const P01_SPEC: LoopSpec = {
     body: <RideThenFind />
   },
   name: {
-    definition: 'A large language model (LLM) guesses the next word piece, adds it, and guesses again. Your prompt is what you typed. The context is everything it reads, including what the app added.',
-    terms: ['large language model', 'prompt', 'context'],
+    definition: 'A large language model (LLM) guesses the next token, adds it, and guesses again. A token is a word part: “strawberry” is st · raw · berry. Your prompt is what you typed. The context is everything it reads, including what the app added.',
+    terms: ['large language model', 'token', 'prompt', 'context'],
     picture: <ContextBar />,
-    metaphor: 'The train is the whole context, riding the line once for every new piece of the answer.',
-    breaks: 'Nothing travels. It’s one calculation, run again for each new piece.'
+    metaphor: 'The train is the whole context, riding the line once for every new token of the answer.',
+    breaks: 'Nothing travels. It’s one calculation, run again for each new token.'
   },
   stamp: {
     questions: [
@@ -106,9 +111,9 @@ export const P01_SPEC: LoopSpec = {
       {
         q: 'You type “Summarize this” and attach a 30-page reading. What fills most of the context?',
         options: [
-          { text: 'Your two words', why: `They're a sliver, like your ${runCounts.question} of ${runCounts.total} pieces here.` },
+          { text: 'Your two words', why: `They're a sliver, like your ${runCounts.question} of ${runCounts.total} tokens here.` },
           { text: 'The reading’s text', correct: true, why: 'Attached and fetched text usually dwarfs what you type.' },
-          { text: 'A summary prepared in advance', why: 'Nothing is prepared. The summary is written one piece per trip.' }
+          { text: 'A summary prepared in advance', why: 'Nothing is prepared. The summary is written one token per trip.' }
         ]
       }
     ],

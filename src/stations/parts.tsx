@@ -80,7 +80,7 @@ export type ContextBlock = { key: string; src: Src; label: string; count: number
 
 /**
  * The whole context grouped into a few labeled blocks (template markers counted on their own),
- * so a student can see what the model read without wading through hundreds of pieces.
+ * so a student can see what the model read without wading through hundreds of tokens.
  */
 export function contextBlocks(): ContextBlock[] {
   const lastPassage = RUN.passages[RUN.passages.length - 1] ?? -1
@@ -116,7 +116,7 @@ export function ContextBlocks({ onPick, chosen }: { onPick?: (b: ContextBlock) =
           <button type="button" className={`ctx-block${chosen === b.key ? ' chosen' : ''}`} onClick={() => onPick?.(b)} disabled={!onPick}>
             <span className="cb-top">
               <span className="cb-label">{b.label}</span>
-              <span className="cb-count">{b.count} pieces</span>
+              <span className="cb-count">{b.count} tokens</span>
             </span>
             <span className="cb-bar"><span className={`cb-fill tk-bg-${b.src}`} style={{ width: `${Math.max(1.5, (b.count / max) * 100)}%` }} /></span>
             <span className="cb-preview">{b.preview.length > 64 ? `${b.preview.slice(0, 64)}…` : b.preview}</span>

@@ -88,7 +88,10 @@ export function MetroMap({ viewBox = '0 0 1120 490', focus, litLines = [], linke
       ))}
 
       <path className="m-loop" d="M918,277 C880,352 500,352 462,277" markerEnd={`url(#${arrow})`} />
-      <path className="m-line m-main" d={`M70,${MAIN_Y} H1040`} />
+      {/* The main line runs between stations, not through them, so a train inside a see-through station stays visible. */}
+      {STATIONS.slice(1).map((s, k) => (
+        <path key={s.code} className="m-line m-main" d={`M${STATIONS[k].x + 50},${MAIN_Y} H${s.x - 50}`} />
+      ))}
 
       {Object.entries(MOTION_PATHS).map(([key, d]) => (
         <path key={key} className="m-motion" data-motion={key} d={d} />

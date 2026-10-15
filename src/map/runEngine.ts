@@ -25,6 +25,8 @@ export type RunSnapshot = {
   tokens: PlatformToken[]
   playing: boolean
   done: boolean
+  /** How far through the ride, 0 to 1. */
+  progress: number
 }
 
 type Step = {
@@ -62,6 +64,7 @@ export class RunEngine {
   private camX: number | null = null
   private camFollow = false
   private trainX = 70
+  private sinceEmit = 0
   private fracs: Record<string, number> = {}
   private timers: number[] = []
   private present = new Set<number>()
@@ -153,7 +156,8 @@ export class RunEngine {
       replyText: '',
       tokens: [],
       playing: false,
-      done: false
+      done: false,
+      progress: 0
     }
   }
 
@@ -161,7 +165,7 @@ export class RunEngine {
     const tokens: PlatformToken[] = [...this.present]
       .sort((a, b) => a - b)
       .map((i) => ({ i, src: this.run.tokens[i].src, text: this.run.tokens[i].text, fresh: this.fresh.has(i) }))
-    this.onChange({ ...this.state, tokens })
+    this.onChange({ ...this.state, tokens, progress: this.progress() })
   }
 
   private add(positions: number[]) {
@@ -496,6 +500,20 @@ export class RunEngine {
     this.emit()
   }
 
+  /** Share of the ride's running time already played, so the board's progress line moves steadily. */
+  private progress() {
+    if (this.state.done) return 1
+    let total = 0
+    let played = 0
+    this.steps.forEach((s, i) => {
+      const d = this.dur(s)
+      total += d
+      if (i < this.idx) played += d
+      else if (i === this.idx) played += Math.min(d, s.elapsed ?? 0)
+    })
+    return total ? played / total : 0
+  }
+
   private dur(s: Step) {
     return this.reduce && s.kind === 'move' ? 0 : s.dur
   }
@@ -540,6 +558,11 @@ export class RunEngine {
     this.lastTs = ts
     this.advance(dt)
     this.updateCamera(dt)
+    this.sinceEmit += dt
+    if (this.sinceEmit > 250 && this.state.playing) {
+      this.sinceEmit = 0
+      this.emit()
+    }
     if (this.state.playing) this.raf = requestAnimationFrame(this.tick)
   }
 }
