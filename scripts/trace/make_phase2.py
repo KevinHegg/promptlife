@@ -171,7 +171,20 @@ def word_map(tok, emb, n_real):
             if len(flour_nb) == FLOUR_NEIGHBORS:
                 break
 
+    # The rows on either side of ' flour' in the embedding table, for the Arrive picture: an ID
+    # is only an address, so neighbouring IDs hold unrelated tokens. Raw rows, no normalization.
+    table_rows = []
+    for tid in range(flour_id - 2, flour_id + 3):
+        row = emb[tid]
+        q = np.round(row / np.abs(row).max() * 127).astype(np.int8)
+        table_rows.append({
+            "id": int(tid), "text": dec(tok, tid),
+            "first": [round(float(v), 3) for v in row[:4]],
+            "strip": base64.b64encode(q.tobytes()).decode("ascii"),
+        })
+
     wm = {
+        "table": {"rows": int(emb.shape[0]), "cols": int(emb.shape[1]), "around": table_rows},
         "method": "Input-embedding rows (%d numbers each) L2-normalized, centered, projected onto "
                   "principal axes %d and %d of the %d group centroids, each axis scaled to [-1, 1]."
                   % (raw.shape[1], pair[0] + 1, pair[1] + 1, len(gids)),
@@ -210,6 +223,11 @@ def word_map(tok, emb, n_real):
         "bytes (int8): the raw row divided by its largest |value| and multiplied by 127, rounded "
         "(decode with Int8Array; the scale is not stored)."
         % (MAP_NEIGHBORS, raw.shape[1], raw.shape[1]))
+    notes.append(
+        "wordMap.table: the embedding table's shape, and the raw rows for the five ids centered on "
+        "' flour' (id %d): each with its decoded token, its first four numbers rounded to 3 decimals, "
+        "and a strip scaled so the largest |value| is 127. Neighbouring ids are unrelated tokens."
+        % flour_id)
     notes.append(
         "wordMap.flourNeighbors: cosine similarity of ' flour' (id %d) against all %d real vocab "
         "rows (the unused padding rows beyond the tokenizer are excluded), highest first, keeping "

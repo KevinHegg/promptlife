@@ -815,3 +815,7 @@ blockquote { margin: 0; padding: 10px 14px; border-left: 3px solid var(--ink-2);
 .wm-vocab { font-size: 0.85rem; color: var(--lv2-ink); line-height: 1.45; }
 /* "Normal" is not a sabotage: when chosen it shows in ink, not red. */
 .break-body .dial .dial-stop:nth-child(2).on { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+.table-art .table-hi { fill: color-mix(in srgb, var(--doing) 16%, transparent); stroke: var(--doing); stroke-width: 1.5; }
+.art-tag.big { font-size: 11px; font-weight: 700; }
+.table-art .art-text { font-size: 11px; }
+.table-art .art-text.sm { font-size: 10px; }

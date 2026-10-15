@@ -11,40 +11,51 @@ const flour = words.find((w) => w.text === ' flour')
 /** The recorded odds of “ flour” where the reply wrote it. */
 const flourOdds = trace?.steps.find((s) => s.chosen.text === ' flour')?.chosen.prob ?? 0.999
 
-/** A ticket goes into a wall of drawers; one drawer opens and a striped strip of numbers rolls out. */
-function DrawerPanel() {
-  // The real first 40 numbers of flour's row when recorded; a fixed pattern otherwise.
-  const v = flour ? decodeStrip(flour.strip).slice(0, 40) : Array.from({ length: 40 }, (_, i) => Math.sin(i * 1.7) * 0.8)
+/**
+ * A token ID is a row number: “flour” becomes ID 19828, which points at one row of the embedding
+ * table. The rows on either side hold unrelated tokens, because an ID is only an address. All
+ * numbers are the recorded model's own.
+ */
+function TablePanel() {
+  const table = phase2?.wordMap?.table
+  const here = table?.around.find((r) => r.text === ' flour')
+  if (!table || !here) return null
+  const fmt = (v: number) => (v < 0 ? `−${Math.abs(v).toFixed(3)}` : v.toFixed(3))
+  const rowY = (i: number) => 64 + i * 19
+  const hi = table.around.indexOf(here)
   return (
-    <svg className="arrive-art" viewBox="0 20 320 160" role="img" aria-label="A ticket for “flour” goes into a wall of numbered drawers, and one drawer rolls out a long strip of numbers">
-      <rect x="8" y="78" width="62" height="26" rx="6" className="art-fill-soft" />
-      <text x="39" y="95" textAnchor="middle" className="art-text">flour</text>
-      <path d="M74,91 H96 M90,85 L97,91 L90,97" className="art-line" fill="none" />
-      {Array.from({ length: 12 }, (_, i) => {
-        const col = i % 4
-        const row = Math.floor(i / 4)
-        const open = i === 5
+    <svg className="arrive-art table-art" viewBox="0 0 320 236" role="img" aria-label={`“flour” is token ID ${here.id}. The ID points at row ${here.id} of a table with ${table.rows.toLocaleString()} rows; that row is a list of ${table.cols} numbers.`}>
+      <rect x="8" y="8" width="60" height="24" rx="6" className="art-fill-soft" />
+      <text x="38" y="24" textAnchor="middle" className="art-text">flour</text>
+      <path d="M72,20 H92 M87,15 L93,20 L87,25" className="art-line" fill="none" />
+      <rect x="98" y="8" width="84" height="24" rx="6" className="art-accent" />
+      <text x="140" y="24" textAnchor="middle" className="art-tag big">ID {here.id}</text>
+      {/* The ID's arrow runs down the left margin and into its row, clear of the other rows. */}
+      <path d={`M106,33 V41 H2 V${rowY(hi) + 7} H6`} className="art-line" fill="none" strokeWidth="1.8" />
+      <path d={`M3,${rowY(hi) + 3} L7,${rowY(hi) + 7} L3,${rowY(hi) + 11}`} className="art-line" fill="none" strokeWidth="1.8" />
+      <text x="190" y="24" className="art-text sm">points at a row</text>
+      <text x="8" y="52" className="art-text sm">The table: {table.rows.toLocaleString()} rows, {table.cols} numbers in each</text>
+      {table.around.map((r, i) => {
+        const v = decodeStrip(r.strip)
+        const isHere = r === here
         return (
-          <g key={i}>
-            <rect x={106 + col * 34 + (open ? 10 : 0)} y={40 + row * 34} width="30" height="28" rx="3" className="art-line" fill="none" opacity={open ? 1 : 0.45} />
-            <circle cx={121 + col * 34 + (open ? 10 : 0)} cy={54 + row * 34} r="2" className="art-accent" opacity={open ? 1 : 0.5} />
+          <g key={r.id} opacity={isHere ? 1 : 0.42}>
+            {isHere && <rect x="4" y={rowY(i) - 2} width="312" height="18" rx="4" className="table-hi" />}
+            <text x="12" y={rowY(i) + 11} className="art-text">{r.id}</text>
+            <text x="54" y={rowY(i) + 11} className="art-text sm">{r.text.trim()}</text>
+            {Array.from({ length: 36 }, (_, k) => {
+              const x = v[k * 24] ?? 0
+              return <rect key={k} x={120 + k * 5.2} y={rowY(i)} width="4" height="14" rx="0.8" style={{ fill: x >= 0 ? 'var(--doing)' : 'var(--accent)', opacity: Math.min(1, 0.2 + Math.abs(x) * 1.6) }} />
+            })}
           </g>
         )
       })}
-      <g className="cut-chip" style={{ animationDelay: '0.4s' }}>
-        {v.map((x, i) => (
-          <rect
-            key={i}
-            x={150 + i * 4}
-            y={124}
-            width="3.4"
-            height="20"
-            rx="0.8"
-            style={{ fill: x >= 0 ? 'var(--doing)' : 'var(--accent)', opacity: Math.min(1, 0.25 + Math.abs(x) * 1.4) }}
-          />
-        ))}
-        <text x="150" y="160" className="art-text sm">896 numbers, one row</text>
+      <g className="cut-chip" style={{ animationDelay: '0.5s' }}>
+        <text x="8" y="182" className="art-text">flour’s row:</text>
+        <text x="8" y="198" className="art-text">{here.first.map(fmt).join('  ')}  … {table.cols} numbers</text>
       </g>
+      <text x="8" y="218" className="art-text sm" opacity="0.7">This is the recorded model’s ID.</text>
+      <text x="8" y="232" className="art-text sm" opacity="0.7">Each model numbers its tokens its own way.</text>
     </svg>
   )
 }
@@ -53,7 +64,7 @@ function DrawerPanel() {
 function StripCompare() {
   const near = flour ? words.find((w) => w.text === flour.neighbors[0]?.text) : undefined
   const far = words.find((w) => w.text === ' Tokyo') ?? words.find((w) => w.group === 'places')
-  if (!flour || !near || !far) return <DrawerPanel />
+  if (!flour || !near || !far) return <TablePanel />
   // Far words aren't in flour's top five, so measure from the stored rows (accurate to about 0.01).
   const farCos = cosine(decodeStrip(flour.strip), decodeStrip(far.strip))
   return (
@@ -70,7 +81,7 @@ export const P03_SPEC: LoopSpec = {
   code: 'P03',
   arrive: {
     caption: 'A token ID is only a row number. Each ID pulls out its row: a long list of numbers.',
-    panel: <DrawerPanel />,
+    panel: <TablePanel />,
     guess: {
       q: 'Does “feed” pull out the same row in “feed 30 people” and in “my news feed”?',
       options: [{ text: 'Yes, every time', correct: true }, { text: 'No, it reads the sentence first' }, { text: 'It’s random' }],

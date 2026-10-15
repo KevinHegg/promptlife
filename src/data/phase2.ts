@@ -16,7 +16,10 @@ export type MapWord = {
   /** base64 of 896 int8 values: the raw embedding row, scaled so the largest is ±127 */
   strip: string
 }
+export type TableRow = { id: number; text: string; first: number[]; strip: string }
 export type WordMap = {
+  /** The embedding table's size, and the real rows on either side of “ flour”. */
+  table?: { rows: number; cols: number; around: TableRow[] }
   method: string
   groups: { id: string; label: string }[]
   words: MapWord[]

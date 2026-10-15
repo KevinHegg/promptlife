@@ -1,12 +1,73 @@
 {
  "version": 1,
- "generatedAt": "2026-10-15T20:08:49+00:00",
+ "generatedAt": "2026-10-15T22:47:01+00:00",
  "model": {
   "id": "Qwen/Qwen2.5-0.5B-Instruct",
   "layers": 24,
   "hidden": 896
  },
  "wordMap": {
+  "table": {
+   "rows": 151936,
+   "cols": 896,
+   "around": [
+    {
+     "id": 19826,
+     "text": " scoring",
+     "first": [
+      0.014,
+      0.019,
+      -0.019,
+      -0.001
+     ],
+     "strip": "HyrX/gLDMgEm/uX309Q3LToZ7Sr0/AXRAQjr8xbu/yGtEOcHSiD/9PUT3NoS8Ov+xNUlKgb7GxcGDB7ZDxj6CxTYywfg9hvpKAkoGe35I+ny6O4ALRLP3qDnDCz/8isK5AnZyfJC5gg7FD0YGisA/wjC8eTyAhYM7+vsMoPpBpMc4Ofc7v/uKwgFDNwC8O0MnQY3AwwaWhLVsRrwzwn8OQfh7xcM40PZ6BjtFBwU7Nsf4AkK+Svm8cQW0BzrFQr/4xziADDyBMoQC+nSMhEZ8NLs1/Pj6f0sHwYID+wKFx4n2tEfyubqAeH3DQb87+EE6RPuFQg39Mco/h7z1RgYBQgf/Pnw/Q0N6B4D7/fnAvQRKfH37/gSxTMx0trZLxnjHQ4MrNL7AQH3BAMOL/M4CjULFQ/L2eSu+h/JLPzqA/f0D974Me8h/QYW1eMU5wvjDvsP5vYG4gcY7ATwHygwvff4CzXk/8sEIhQdHwzd4cENMrYNDOMRPO0yAe32M6D/3PcFIwP34QDmNfMEHxn0AjP9KRk1/un6FdgN8hAVAt/8A87s6Rc3LMff+Svr+h3/Mssa6+Q4FRHVwhjgLeb3HyDyC+7m/AP00jop3LkpGwwB9PrQAxASvfc6MAfu/CXn1Bgn2AkIDPwrKnkaCOXw5encCxfw+AjvLw8DJw/u2jUS4xgA3hny7fn47SrKIQGu+uTgGe4K7u0iFvfzEujp3/AEASQYztz1NgMgE+EI7CA5LvTV9t8wAuH8/9T91fHbGxrIBeTx8BXMCh3gDDU6EjgFEtg0yBYVBdvnJ/trAAfn9L0sEeQYB+bINszeFOwA0Pgc4iEV9AvcW+LuAAXiHxYw9jHaESO/6/sk5u7pIiD84+sy398u3vUR8Q3XDBD7ONwoedYO9wr5DAkbCcgUEA0EIATlwD7/5A7r3CIGSwws3SIX2Dn87d7r4RXY/TTgJBU0/sUrGNf78foo3wzhFAjoDea/4vz3GN3XDiTwIwkZE9HuMgDj4/nOJAMYHRTkQ//5zjAFEgjqGvf07AYo/+olYBv0f/oL1jDyFBHKD/O6E99DMBPsAPQdIgq3HeLenHYn6Cjq4hgpLTtS8vknMdQByevX4L326iD5MP0g0/foBy386fsZACYR7/Hm9e0PJxMD9B5DI/zB5yvS9uj5Ewr5IPn5FQ0d6yc1C8ry9wg="
+    },
+    {
+     "id": 19827,
+     "text": " approaches",
+     "first": [
+      -0.003,
+      0.005,
+      0.012,
+      -0.01
+     ],
+     "strip": "+A4f5PAODREuC+3SCfUnThXn9OEV/xPZ3/LfBMHnteIoC+YyBQ5dANoFBhT+A/UXHhPmPv8K7d/2KeAR3cw/4acM/enTGA7wEtz8CAEiDwXx0rbgaA3G9QMDqtY4pfD0yfjd3e7uJSLt+w8JZuwqH0ga+wrt7xfwy80jBsJGKPfz6ej4E/bf/iUE7iT+Quk59BEDswdOJrfT6NX8HMSw4fEaFQcUHVqo7REjNtD65agyRhLIFtUmoTcvrPLiPRDp5AAAFO9vIQowyzLu5/n048H5Pwb5QisBuyUpEgEYCdkR9ukM//KsAysgDQ0B8Q4IFPXjFiEc0PYXKisq6NPqBiTr9vY1xxFJBf4sUBcpHxQJPgQCGe4A9i/TVjv0Hxgixuj5zBT5CPkBGSX31j7CHggIHRD5HhYKDBb6FNki8ObpF/gEO8753EHcAen3FRQh7AwGEPUg0tUjw+4k7fP6Ae0fCNtXIPK9QO7XEPcu6Brq89YQEvUULysLA/vI7fCy50/3/M/WC905yH8M1/o2CPjpDQQW4RT6+Qw7VeTRzfsS3ewCyvqk7PjoJwIJzwZODMgRvu1bNAjK3rwj7iLxJMnrDqnXvh7WscsXASYN+/s3LgPII/VF1SsD6R4UHyUY71fp4+TuDenfMH0pCuL1Eu8Y8l7k+v7dDkbyzNbVKRkH3R0V89Lu4fEO/r/p5EYQ5cGjFesk29TrKv3nIgEM/v0EBPMRTRMRBh8S/w6UOPPQAPkBBtA49//I/tDlIvXU+sBk+O4lBPLoJccU/Rvs3P7H7fP5zDL//p4ZFSz1Dkz89Soq1CP14rvsTt7QKRYfL9EEABfE6o0NIzkjxA7pDgLMIesf2TfrHM7n5y8b4t7fPhtHHAAwIjzc/sa77f3puAwuLE797joO/xHWU+pwICsUP95m4xobZjsmFjBESgwF2yMl8jriFdwFBiP+qbYA+JTq/v4yAQoT8N/8/PcAz/3c9/X59S7eQN0C2A784MDvAiPS/BEUQePY/wUqBA/19vcu7CjeJyfozwrs7w3aAeIB88DxYhQG4tkDyxblz83xERA6CyL9PP75MIzh4jrfGgv87ekWERk8+TpXyO4lwVLR3jjlJg7oA979KwUsWQP/DhlNAeryGOjISPjqDis+wbnQxgMWxQAxATVB6O4WFC0P6vIY1MsN6hsCC+UPJsI="
+    },
+    {
+     "id": 19828,
+     "text": " flour",
+     "first": [
+      -0.023,
+      0.0,
+      0.005,
+      -0.006
+     ],
+     "strip": "wwEN8e3HI0gd5/YK9woSIe/8OAio5jcSGx33BBMNDkQAOwkO7khE2jUeSt8RAqoo5/f92UjzIdEB6/IoAPTrWSrP/vgD8igWPbUQG/rc9r7k8+IhTwXNAtm18RHs6RC6VwsYSgYm6UQszxoPZwTiDQPJChIJMMkB2wAF6JkjJzUcw83U3A/tHz4GA+PX38/lAan9JuP0MAzZ8/Qh0xo/2SEUFRcc+Dbg7fgkDfcB7AEV3r6SyQf+zwQH8tcD9SLK3cMyJSEKGhXI3A/x/hr86wI3GR0i8tsGNTb7MPAO8gPEFQr58g/7y9MPNuIi/dtJEAgqAR4aGVTnpwsk1N/DONvRKf6y8foU8gwI/QL52ibV7wbu2+0RDTMRw/0GDBLJ8iQaV9zvIvPa5OP8uDLcsRH0Ce4Q0zf9Ct7/Obvs8i8eMMUKAOAkzwb19wEIHxYmBBcd4fwD8cVaaQX+CzYlGs/k/BnDOMkKHMn4DLYiAiIN1gELDxD/CxtNENnl5K4a9iwSGAUByXwSFu3S2tsK7cww8c8J8AgT0PvqAQLk+LTxJfX8Bt4ALfQq+gLuPAUU5NfL7ygIDSLf4AI74A8GJkbB4/HRDwcGuuUA5tPzDssa8t7lIvXoER77QCSG/tkNHPUS99QxFuf35H/tFO8z3R5AHxcV32AZxvwSOKrh4RUdGg32Da3uPSE4G94V4Qsw0wOcA+L/yBzX8f8c2RErbCQ3/tQNGb0rCg0LtRbd/vcK5PsUIs0OMsrUChYSrAq2ytosBBL3C+fq+DHHAfXN9df1FADp2DDhC9bz1i9i9zje/BvoNAQD6dICYeXeDxn52NtX5xAgDO4fBAYSCQLrzykJRBnM/Db29+8VFesFEiLg7akxs9Ai6wrvJEDsFvvt6QYyQDUH6tS7Gc3xsdQdChveFxwWKczx8CC/DxTJEwUeuSIV0xgOKsv35xkJ8RsH6vUk4N8e6yHgPvMN0TL1/+PrvKnF5MIpH6kaOgLbLgUxKPT26cEhvNwd/iTVGu3yC/YH5cn97i8ot8D7CBvMBQ8aPDg4KSu0AzMgDO0K3eThIOPlGAwUFwoUCAKgCPvwz+qyEk7rNu3fBupbGfEjABAfPuz8Mt3j7wDhyg7dACbN+CQvFhLaACfb9lLw3hf84wTrVxja/NjSECcB6NUQ7ibnMcLQxxMr6gwY5ewNEMw="
+    },
+    {
+     "id": 19829,
+     "text": "VRT",
+     "first": [
+      0.027,
+      -0.007,
+      0.036,
+      0.032
+     ],
+     "strip": "LfQ7NQve/vzq2OX08e4ZEgkb8QQo5CXq8dBYBOflBS35Fgvu/EsaDQ8WJukMDSUk+OsQFPvY/RlCBRHA7vbHDgnJJQ70+xggCREVRQohCOoWGBodEDsfBgYr7v3ZHikQHA3y5uIpCsg30Ov8GA3xCkTY6A8O3AHXJTEKA/MQHM33EhLSCQ3QAAvmyQsiC+MTvxOI+DX69QHPvRHh+A8dBwwVBOr0ITX8Ie7tCPwD/w/2Bibu3fz5FrgzAQXY9dgdHR08CgMDJA0J8/IH2gX3I8H8LRxNJOgd1croRQonA/sR/fbV9CXO2DkiIAn4+fs55gvr6C8QGNr+wxz3AdfJ/THsCt8nEwL6+gwO6xAP+e0IBAb0Gikz/yz2A2zo+AkYAAYM4PjjAhj7BCjxRP0e4QAC/BkQAUAG3yQIetMFsg0V2PraDfn1LiAX/ukItB8TGwkFBvTm4RQC9P0T8TrVAuYQ7B8cBPlCA8IDBR3v7AkO1vYl+N3hKdsgyBUVJtkM/Pj3HADd+8wMExfe7+oCLO4B+A1AGyfw7gb1/w7zFTAB7xsyyxrgFNEvNRgjIAsOEQ0rBeL4Bx/06AIVIN3/6OgaBwX/BusTGgwY4iH9HN8EBdH64jUI/RDNCtoEHunz7ADY0ABdtOPiFC/+3egpFeHuHgQMBPT+AegvPOJ3E8PfKCL9BgbeujHtEjW7Nu/m5ePoVwzJ4iLeEPbkCvG9BPr2/hDOCQ/8Ftj88gHcFTD6zxP7DcUF6M3F+yEjNtAF4gkiy8or3yPp5AAVBAUEw/8VEQz79AjK99gfDP/8NwfgGBEMNDAj2TQRBrn/7fTn3/bsBg3U6bzoKRzx/xwK2xnQFAcj5OwJ3PkAAyHrCxTy/PECIAH93e7gEfnJ5AgBEAEA8yTx8wrX/dQ2IP0pHhX99Avc/A0V2hTiGgAZJCQJBQUVOxwoHCjR0xYp9BsV8A3sIu8uDATxBebk/+//HPYiDfUKvP6y8QLw5e7n+xAwANjuDPgGDRb7LhgYIhD9EM4Z/kPq/0Ic9jT19hL2PhAbQE/y3Pge3fbJ2wgRBPr7FgTx/iDtE+AFCxTj4BD41SDVJN8JFyEi2vZx9jAO4CDxBf7Y0wTM9wT0NuAlCwKBBRv5+CrnK/jgORb26QPZ8AMS+yI1A+PnARfd18UMuBAeAwkh7iQu0R4JDQ/e9SM="
+    },
+    {
+     "id": 19830,
+     "text": "USTOM",
+     "first": [
+      0.005,
+      0.006,
+      0.014,
+      0.009
+     ],
+     "strip": "CgwdE+kB+Ag00AogyvIrPdD3Ax707CrXvdQmuej+EjYg5uUK1ib2DSrXHATUFxkS1rQQBhXa0ggK8QIL6h/6G/ngMwQf8PsZAwwARPAQ+xoSHvsCPzTB6eAA3sYFzCfH/+r/4CMkGf9XN/8gAfq8zCAr2VEL5CACD89sFs395c07GiSw9L8DzgkYDQAPMO0GyseoHBcJE9D1pOziAzL7IBLW2/fcFpvl6gr99gm45wPiDAsD8R8EFPkS7Qb90u6wH94mGwm+GebyFd77JPr0HvUfyA2qB/0PELr9J1AyH/AT/csO9Svm8gRc/Sfs4fcsNQEQ9gLvAg7UuFLq+in8Iv36M7wFCPYJ/IE5vPnpBOgcMQgLpeYQDAzQ+RL3CAHgGeT89BEXEhT9IRQLJhcF+BH0IhAfKE7qEeYWcOFC/+oHDOPW4vDcDPMg+gvyuxHE2TJCqwzu3u4h5/j3DP74CtQeEPkqJhgIK/YM/yAD7Aj9HvX14QoM+/Mg4OzLBf342O4aGNfh98/pSgAKGxX5J/EDAN1SGPgt5eEQ+fjsKgbM894PzBD0MN1ARATmAxIk+cK/6fgZwxEIqg/3yPbqC6oaF/ceDvjYvRDsBfT2QP4FpuwKE8nhHNqy9A8R9a4K2AkU6jdcvf262ioY2/7nKfsZ+QccCAnzEvUqKRb0E/u6BPfeMv7asgj8KSgELg330dDdF/gsGwoMDsL/4Cny+OrXCyjaIukI3PzxBNQBASHp5/IhRugxBb7V8OQQSeoW0+gqEtNQ8hr4SeT3GPgEtOH7Jtzz7QrmItMW+BwF5jIFyhoY5hId5PEKLBQC6avMD+D2PAbb2ugF4RIjEUrzIAMNIuQ8CD5AGcy0CBzhOQoM5/3+KfsEGg/sASbd9AAN3pr3OgAg6AnzIO0dFhrWNMTqD+n48gL3B+vT5xw4ESLWBfvaCwgR6B4T90jy5xI2zjk3/BgaEdv2ECYExPr49wfu9gEQstfn+BzADuHh5dcB7Rjy7PoA9CL4DRkG8v/z8LrR8ET8ARAwACQzvjvOKesWCiDlLsnS7ALmvhb1CwzkE/kMDOr19TDPHfsDGAfEKfr3Jj4mJg4UtUBSLfo9axcKI6LeIAQG2OoeQOsn7CozDhUNAQP8NAD3EP/q8Pnq1+MS8y7VCwdEzuUUBsxY2Pj2BRrl7R7y/Sfu+KYn2gY="
+    }
+   ]
+  },
   "method": "Input-embedding rows (896 numbers each) L2-normalized, centered, projected onto principal axes 2 and 4 of the 6 group centroids, each axis scaled to [-1, 1].",
   "groups": [
    {
@@ -1737,6 +1798,7 @@
   "wordMap x/y: the raw input-embedding rows are L2-normalized and centered; PCA is run on the 6 group CENTROIDS (each group weighted equally, not the words), giving 5 axes (centroid singular values 0.604, 0.502, 0.457, 0.440, 0.426). Every pair of those axes was tried; each word is projected onto the pair and each axis min-max scaled to [-1, 1]. The pair kept, axes 2 and 4, has the highest same-group-nearest rate on the scaled map (100%; ties broken by the between/within-group variance ratio, 19.58). Axes 1 and 2 would give 85%; plain 2-D PCA of the words 46%. It is a linear projection of the real vectors.",
   "wordMap.sameGroupNearest: the fraction of the 41 words whose single nearest OTHER map word is in the same group. 'full' uses cosine similarity on the full 896-number rows (0.951); 'map' uses straight-line distance on the displayed 2-D x/y (1.000).",
   "wordMap.words[].neighbors: the 5 nearest OTHER map words by cosine similarity of the raw 896-number input-embedding rows, rounded to 3 decimals. strip: base64 of 896 signed bytes (int8): the raw row divided by its largest |value| and multiplied by 127, rounded (decode with Int8Array; the scale is not stored).",
+  "wordMap.table: the embedding table's shape, and the raw rows for the five ids centered on ' flour' (id 19828): each with its decoded token, its first four numbers rounded to 3 decimals, and a strip scaled so the largest |value| is 127. Neighbouring ids are unrelated tokens.",
   "wordMap.flourNeighbors: cosine similarity of ' flour' (id 19828) against all 151665 real vocab rows (the unused padding rows beyond the tokenizer are excluded), highest first, keeping only tokens whose text is a leading space + ASCII letters (regex '^ [A-Za-z]+$') and dropping ' flour' itself. The 10 kept are the readable ones among the top 16 rows.",
   "breaks: every run starts from the same context, hero tokens 0..326: everything through the generation prompt '<|im_start|>assistant\\n' after </tool_response>, where the model's second turn (the reply) begins. text = PURE greedy generation: argmax over the 151665 real vocab rows (padding rows excluded) with no repetition penalty, top-k, top-p or temperature; at most 40 new tokens; stops at <|im_end|> or <|endoftext|> (Qwen's two EOS ids; stoppedNaturally = true), and the stop token is not counted in tokenCount. text is decoded with skip_special_tokens=True. Every step recomputes the whole sequence (no KV cache), so the sabotage applies to every position, including generated tokens as they are fed back. The 'normal' text matches phase1.json's T=0 reply (which used a KV cache).",
   "breaks[].rightDigit: one teacher-forced pass over hero tokens 0..343 (the context plus the 17 RECORDED reply tokens 'You need about 8.4 cups of flour to feed 30 people.', not the variant's own reply) under the same sabotage. prob = P('8') for pos 331, read from the hidden state at pos 330, softmax at T=1 over the 151665 real vocab rows; top = the 3 most likely tokens there. Normal run: 0.9951 (hero-trace.json, softmax over all 151936 rows incl. padding: 0.9951).",
