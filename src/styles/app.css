@@ -736,3 +736,82 @@ blockquote { margin: 0; padding: 10px 14px; border-left: 3px solid var(--ink-2);
 .g-meet { font-family: var(--font-display); font-weight: 800; color: var(--ink); text-decoration: none; }
 /* Lesson terms link into the glossary. */
 .terms a { color: inherit; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 3px; }
+
+/* ================= Phase 2: Embedding, Attention and The Stack ================= */
+.challenge { font-family: var(--font-display); font-weight: 800; font-size: 0.85rem; color: var(--lv2-ink); padding: 4px 12px; border-radius: 999px; border: 1px dashed var(--lv2-dim); }
+.challenge.done { border-style: solid; border-color: var(--doing); color: var(--doing); }
+
+/* The map of meaning, on the dark panel. */
+.wordmap { --g1: #F2B85B; --g2: #3FD3CE; --g3: #A991FF; --g4: #F39BC6; --g5: #74B2FF; --g6: #9BD66E; }
+.wm { width: 100%; max-width: 460px; height: auto; touch-action: manipulation; }
+.wm-group { font-family: var(--font-display); font-weight: 800; font-size: 11px; letter-spacing: 0.02em; opacity: 0.9; }
+.wm-dot { cursor: pointer; outline: none; }
+.wm-dot .hit { fill: transparent; }
+.wm-dot .dot { fill: var(--c); stroke: var(--lv2); stroke-width: 1.5; transition: r 0.2s; }
+.wm-dot.on .dot { stroke: var(--lv2-ink); stroke-width: 2.5; }
+.wm-dot.near .dot { stroke: var(--lv2-ink); stroke-width: 1.2; }
+.wm-dot:focus-visible .dot { stroke: var(--doing); stroke-width: 3; }
+.wm-dot text { font-family: var(--font-mono); font-size: 10.5px; fill: var(--lv2-ink); paint-order: stroke; stroke: var(--lv2); stroke-width: 3px; }
+.wm-link { stroke: var(--lv2-dim); stroke-width: 1.2; stroke-dasharray: 3 3; }
+.wm-detail { width: 100%; max-width: 460px; display: flex; flex-direction: column; gap: 8px; }
+.wm-title { font-family: var(--font-display); font-weight: 800; font-size: 0.85rem; color: var(--lv2-ink); }
+.wm-near { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+.wm-near li { display: grid; grid-template-columns: 7.5em minmax(0, 1fr) 2.6em; gap: 8px; align-items: center; }
+.wm-near .chip-btn { justify-self: start; }
+.wm-bar { height: 8px; border-radius: 4px; background: var(--lv2-line); overflow: hidden; }
+.wm-bar span { display: block; height: 100%; background: var(--doing); border-radius: 4px; }
+.wm-cos { font-family: var(--font-mono); font-size: 0.75rem; color: var(--lv2-dim); text-align: right; }
+.row-strip { --strip-warm: #E8A33D; --strip-cool: #2A6FDB; margin: 0; display: flex; flex-direction: column; gap: 2px; width: 100%; }
+.lv2 .row-strip { --strip-warm: #F2B85B; --strip-cool: #74B2FF; }
+.row-strip canvas { width: 100%; height: 22px; image-rendering: pixelated; border-radius: 3px; background: color-mix(in srgb, currentColor 6%, transparent); }
+.row-strip figcaption { font-family: var(--font-mono); font-size: 0.72rem; opacity: 0.8; }
+.strip-compare { display: flex; flex-direction: column; gap: 8px; width: 100%; max-width: 420px; }
+
+/* Arcs from a real head, drawn on paper. */
+.paper-attn { margin: 0; width: 100%; max-width: 420px; display: flex; flex-direction: column; gap: 6px; }
+.paper-attn .v-attn .chipbox { fill: var(--sheet); stroke: var(--ink); }
+.paper-attn .v-attn .chipbox.hot { stroke: var(--doing); stroke-width: 2.5; }
+.paper-attn .v-attn text { fill: var(--ink); }
+.paper-attn .v-attn .w { fill: var(--ink-2); }
+.paper-attn .v-attn .arc { stroke: var(--doing); }
+
+/* The elevator: a shaft of floors beside a guess panel. */
+.elevator { gap: 10px; }
+.lift { display: grid; grid-template-columns: 38px minmax(0, 1fr); gap: 14px; width: 100%; max-width: 440px; align-items: start; }
+.shaft { list-style: none; margin: 0; padding: 4px; display: flex; flex-direction: column; gap: 2px; border: 1.5px solid var(--lv2-dim); border-radius: 6px; }
+.shaft .fl { display: block; width: 100%; height: 9px; border: 0; border-radius: 2px; background: var(--lv2-line); cursor: pointer; padding: 0; }
+.shaft .fl.lead { background: color-mix(in srgb, var(--doing) 45%, var(--lv2-line)); }
+.shaft .fl.on { background: var(--doing); box-shadow: 0 0 0 2px var(--lv2-ink); }
+.lift-panel { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.lift-buttons { display: flex; align-items: center; gap: 10px; }
+.lift-buttons .btn { min-width: 44px; justify-content: center; }
+.lift-floor { font-family: var(--font-board); font-size: 1.15rem; color: var(--lv2-ink); }
+.lift-floor small { font-size: 0.75rem; color: var(--lv2-dim); }
+.lift-guesses { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.lift-guesses li { display: grid; grid-template-columns: minmax(3.5em, auto) minmax(0, 1fr) 3.2em; gap: 8px; align-items: center; font-family: var(--font-mono); font-size: 0.85rem; color: var(--lv2-ink); }
+.lift-guesses li.is-final .lg-tok { color: var(--doing); font-weight: 700; }
+.lg-tok { white-space: pre; overflow: hidden; text-overflow: ellipsis; }
+.lg-bar { height: 10px; border-radius: 3px; background: var(--lv2-line); overflow: hidden; }
+.lg-bar span { display: block; height: 100%; background: var(--doing); transition: width 0.25s ease; }
+.lg-p { font-size: 0.75rem; color: var(--lv2-dim); text-align: right; }
+
+/* Learn it: the last floors for “8”, on paper. */
+.floor-list { display: flex; flex-direction: column; gap: 5px; width: 100%; max-width: 360px; }
+.fl-row { display: grid; grid-template-columns: 4.6em 2.2em minmax(0, 1fr); gap: 8px; align-items: center; font-family: var(--font-mono); font-size: 0.82rem; color: var(--ink-2); }
+.fl-row.lead { color: var(--ink); font-weight: 600; }
+.fl-bar { height: 10px; border-radius: 3px; background: var(--tint); overflow: hidden; }
+.fl-bar span { display: block; height: 100%; background: var(--doing); }
+
+/* Break it with text stops. */
+.break-body .dial-stop { font-family: var(--font-display); font-size: 0.82rem; padding: 6px 12px; }
+.tile-token { font-family: var(--font-mono) !important; white-space: pre; }
+@media (prefers-reduced-motion: reduce) { .wm-dot .dot, .lg-bar span { transition: none; } }
+.skip-chart { margin: 10px 0 0; display: flex; flex-direction: column; gap: 4px; }
+.skip-chart svg { width: 100%; max-width: 420px; height: auto; }
+.skip-chart rect.ok { fill: var(--accent); }
+.skip-chart rect.hurt { fill: var(--sabotage); }
+.skip-chart text { font-family: var(--font-mono); font-size: 8px; fill: var(--ink-2); }
+.skip-chart figcaption { font-size: 0.85rem; color: var(--ink-2); line-height: 1.45; }
+.wm-vocab { font-size: 0.85rem; color: var(--lv2-ink); line-height: 1.45; }
+/* "Normal" is not a sabotage: when chosen it shows in ink, not red. */
+.break-body .dial .dial-stop:nth-child(2).on { background: var(--ink); border-color: var(--ink); color: var(--paper); }

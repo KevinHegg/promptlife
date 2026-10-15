@@ -113,6 +113,46 @@ reports and never edits:
 ~/.cache/promptlife/trace-venv/bin/python scripts/trace/screen.py
 ```
 
+## Phase 2 extras: `make_phase2.py`
+
+```sh
+~/.cache/promptlife/trace-venv/bin/python scripts/trace/make_phase2.py   # -> src/data/traces/phase2.json
+```
+
+Data for the P03 Embedding, P04 Attention and P05 The Stack lessons. Like phase 1, it imports
+`build_hero` from `make_trace.py`, checks the token ids against `hero-trace.json`, and reads the
+`answer-digit` (pos 331) and `reply-word` (pos 336) positions from its `logitLens`. It takes
+about 100 s on CPU (one forward pass is ~0.25 s) and writes about 80 KB:
+
+- **`wordMap`**: 41 recipe-themed words in 6 groups (`WORD_GROUPS`). Each must be one token with
+  its leading space; a word that is not falls back to `ALTERNATES` and is named in `notes`.
+  x/y use make_trace's centroid-PCA, but every pair of the 5 centroid axes is tried and the
+  pair that best keeps each word's nearest neighbour in its own group on the scaled map is
+  kept. Each word has its 5 nearest map words (cosine on the full 896-number rows) and a
+  `strip`: base64 of the raw row as 896 int8 values scaled so max |value| = 127.
+  `flourNeighbors` is the 10 nearest readable words (`^ [A-Za-z]+$`) to ` flour` in the
+  whole real vocab.
+- **`breaks`**: sabotage experiments. All start from hero tokens 0..326 (through the
+  generation prompt of the reply turn). `text` is pure argmax (no repetition penalty, top-k
+  or top-p), up to 40 tokens, stopping at `<|im_end|>` / `<|endoftext|>`. There is no KV
+  cache: each step re-runs the whole sequence, so the sabotage also hits generated tokens as
+  they are fed back. `rightDigit` is a teacher-forced pass over the recorded reply under the
+  same sabotage: P("8") at pos 331 plus the top 3. The variants:
+  - embedding: `scramble-10/50/100` (`inputs_embeds`; seeded, nested position sets; chat
+    markers and added tokens are never scrambled) and `swap-flour-sugar` (adds `wordProb`
+    at pos 336);
+  - attention: `hide-card`, `hide-result`, `self-only` (additive 4D mask with eager
+    attention; the mask includes the causal rule);
+  - stack: `skip-mid`, `skip-first`, `top-half-gone`, `stop-18` (a `ModuleList` subset of
+    `model.model.layers`; the final norm and output head still run).
+- **`skipEach`**: P("8") with only floor k skipped, for k = 1..24.
+
+The script checks itself and writes the results to `notes`: feeding `inputs_embeds`, a plain
+causal 4D mask and an all-floors `ModuleList` must each reproduce the normal run exactly, and
+the `normal` text must equal phase 1's T=0 reply. Every greedy text, every top-3 token and every
+`flourNeighbors` word is checked with `screen.py`. Greedy output cannot be redrawn, so a hit
+keeps its record with `"flagged": true` and is named in `notes` and on the console.
+
 Pure greedy is not HF's default here. Qwen's `generation_config.json` sets
 `repetition_penalty=1.1`, which `generate()` applies even with `do_sample=False`. Both scripts
 now turn it off.

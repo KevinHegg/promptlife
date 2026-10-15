@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { tick, yes } from '../../lib/sound'
 import type { Station } from '../../data/network'
 import type { AttentionView } from '../../data/placeholders'
 import { Cutaway, Level, LevelText, Vis } from '../Cutaway'
@@ -13,7 +14,7 @@ function chipLabel(text: string) {
 }
 
 /** Chips laid out left to right in reading order, arcs from the query (last chip) back to earlier ones. */
-function Arcs({ view }: { view: AttentionView }) {
+export function Arcs({ view }: { view: AttentionView }) {
   const q = view.tokens.length - 1
   const widths = view.tokens.map((t) => chipLabel(t.text).length * 7.4 + 18)
   const xs: number[] = []
@@ -61,9 +62,23 @@ function Arcs({ view }: { view: AttentionView }) {
   )
 }
 
+/** The head a student is asked to find: the one linking “flour” in the question to the card. */
+const TARGET = 'Looks at the card'
+
 export function AttentionLevels({ station, views }: { station: Station; views: AttentionView[] }) {
-  const [pick, setPick] = useState(0)
+  // Start on a different head, so the challenge isn't solved before it begins.
+  const [pick, setPick] = useState(() => Math.max(0, views.findIndex((v) => v.name !== TARGET)))
+  const [found, setFound] = useState(false)
   const view = views[pick] ?? views[0]
+  const hasTarget = views.some((v) => v.name === TARGET)
+  const choose = (i: number) => {
+    setPick(i)
+    tick()
+    if (views[i]?.name === TARGET && !found) {
+      setFound(true)
+      yes()
+    }
+  }
   return (
     <Cutaway
       stationName={station.name}
@@ -74,23 +89,27 @@ export function AttentionLevels({ station, views }: { station: Station; views: A
           <LevelText
             level={2}
             title={view.real ? 'Who looks where' : `Where “${chipLabel(view.query)}” looks`}
-            note={view.real ? view.source : 'Placeholder weights. The trace pipeline will supply real ones from a chosen head.'}
+            note={view.real ? undefined : 'Placeholder weights. The trace pipeline will supply real ones from a chosen head.'}
           >
-            <p>Each token spreads its attention over itself and the tokens before it. Thicker arcs mean it looks there more. Different parts of the model look for different things.</p>
-            {view.real && <p className="head-label">{view.label}</p>}
+            <p>Thicker arcs mean a token borrows more from there. Each head looks back in its own way.</p>
           </LevelText>
           <Vis>
             <div className="v-col">
+              {hasTarget && (
+                <p className={`challenge${found ? ' done' : ''}`}>{found ? '✓ Found: the head that links “flour” in your question to the card' : 'Challenge: find the head that links “flour” in your question to “flour” on the card.'}</p>
+              )}
               {views.length > 1 && (
                 <div className="v-examples" role="group" aria-label="Attention heads">
                   {views.map((v, i) => (
-                    <button key={v.name + i} type="button" className="chip-btn" aria-pressed={i === pick} onClick={() => setPick(i)}>
+                    <button key={v.name + i} type="button" className="chip-btn" aria-pressed={i === pick} onClick={() => choose(i)}>
                       {v.name}
                     </button>
                   ))}
                 </div>
               )}
+              {view.real && <p className="head-label">{view.label}</p>}
               <Arcs view={view} />
+              {view.real && view.source && <p className="v-below">{view.source}</p>}
             </div>
           </Vis>
         </Level>

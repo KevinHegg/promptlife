@@ -160,8 +160,11 @@ Picture: ticket, drawer, strip of numbers.
 Metaphor: a city where words used alike live on the same block. Where it breaks: "This city has 896 directions, not 2, and none of them means anything you could name."
 
 #### Break it
-Lever: "Scramble the table," which swaps 10%, 50% or 100% of the rows. A light scramble may change a word; a full one should turn the reply to noise. The point is that the model depends on these exact numbers.
-Data: V-P03-scramble-10, -50 and -100. Precomputed: yes.
+"Scramble the table." It opens with the question: "Why do these exact numbers matter?" The dial has four stops: Normal, Flour → sugar, 1 row in 10, and Every row.
+- Flour → sugar keeps every token ID but hands the model sugar's row for "flour." The recorded reply says "8.4375 cups of sugar," and the odds of "flour" fall from 99.9% to almost zero.
+- 1 row in 10 leaves the odds of the "8" near 96%, but the reply slides into Chinese and garbles the amount.
+- Every row leaves nothing readable.
+Data: `phase2.json` breaks (scripts/trace/make_phase2.py). Built.
 
 #### Stamp
 1. "A new slang word takes off next month. While you chat, can the model add a row for it?"
@@ -212,8 +215,11 @@ Picture: arcs from ' flour', with widths labeled.
 Metaphor: a highlighter run over earlier text, darker where more is borrowed. Where it breaks: "A highlighter suggests a reader. Nobody is reading; the weights come from multiplying numbers."
 
 #### Break it
-Lever: Normal / "Hide the recipe card" / "Self only." "Hide the recipe card" means nothing may look at the passages; it should leave a fluent reply with made-up amounts. "Self only" should give noise.
-Data: V-P04-hide-passages and V-P04-self-only. Precomputed: yes.
+"Blindfold the heads." The dial has Normal, Hide the card, Hide the answer, and Only itself. The recording changed the plan:
+- Hiding the card during the reply changes nothing, since the answer now comes from the calculator.
+- Hiding the calculator's answer gives a fluent, wrong reply: "2. 25 cups of flour," copied from the card.
+- With Only itself, the model writes nothing but spaces.
+Data: `phase2.json`. Built.
 
 #### Stamp
 1. "In 'Do not add sugar,' a head puts heavy weight on 'not.' Does that show the model understood?"
@@ -265,8 +271,12 @@ Picture: the elevator shaft, with a guess on each floor.
 Metaphor: one draft passed up a building, each floor adding edits without erasing anything. Where it breaks: "The draft is 896 numbers, not words. The words we show are only a peek."
 
 #### Break it
-Lever: Normal / "Skip one middle floor" / "Skip the top half." Skipping one floor often barely matters. Skipping the top half should give fluent-looking text with wrong or missing amounts.
-Data: V-P05-skip-mid and V-P05-skip-top, which exits after floor 12. Precomputed: yes.
+"Skip floors." The dial has Normal, Skip floor 12, Skip floor 1, and Stop at 12.
+- Skip floor 12 keeps the reply right but shakier, at 72%.
+- Skip floor 1 repeats "mm."
+- Stop at 12 gives multilingual junk.
+- The takeaway adds a chart that skips each floor alone. Floors 1–2 are essential, and 6, 8 and 9 hurt. Floors 13–24 can each go almost harmlessly, but stopping at 18 fails, so the top floors are needed together.
+Data: `phase2.json` (`skipEach`). Built.
 
 #### Stamp
 1. "A bigger model has more layers. What does that give it, most directly?"

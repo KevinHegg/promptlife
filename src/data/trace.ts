@@ -140,3 +140,6 @@ export function voteFromTrace(t: Trace): VoteView | null {
     source: `Real scores from ${modelName(t)}. In the recorded reply it took ${chosen} (rank ${step.chosen.rank}).`
   }
 }
+
+/** The text just before a position, for captions outside this module. */
+export const contextBeforePos = (t: Trace, pos: number) => contextBefore(t, pos)

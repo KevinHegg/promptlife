@@ -1,0 +1,1752 @@
+{
+ "version": 1,
+ "generatedAt": "2026-10-15T20:08:49+00:00",
+ "model": {
+  "id": "Qwen/Qwen2.5-0.5B-Instruct",
+  "layers": 24,
+  "hidden": 896
+ },
+ "wordMap": {
+  "method": "Input-embedding rows (896 numbers each) L2-normalized, centered, projected onto principal axes 2 and 4 of the 6 group centroids, each axis scaled to [-1, 1].",
+  "groups": [
+   {
+    "id": "baking",
+    "label": "Baking"
+   },
+   {
+    "id": "measures",
+    "label": "Measures"
+   },
+   {
+    "id": "people",
+    "label": "People"
+   },
+   {
+    "id": "numbers",
+    "label": "Number words"
+   },
+   {
+    "id": "places",
+    "label": "Places"
+   },
+   {
+    "id": "actions",
+    "label": "Actions"
+   }
+  ],
+  "words": [
+   {
+    "text": " flour",
+    "id": 19828,
+    "group": "baking",
+    "x": 0.6819,
+    "y": 0.967,
+    "neighbors": [
+     {
+      "text": " dough",
+      "cos": 0.262
+     },
+     {
+      "text": " butter",
+      "cos": 0.206
+     },
+     {
+      "text": " sugar",
+      "cos": 0.198
+     },
+     {
+      "text": " milk",
+      "cos": 0.163
+     },
+     {
+      "text": " bake",
+      "cos": 0.159
+     }
+    ],
+    "strip": "wwEN8e3HI0gd5/YK9woSIe/8OAio5jcSGx33BBMNDkQAOwkO7khE2jUeSt8RAqoo5/f92UjzIdEB6/IoAPTrWSrP/vgD8igWPbUQG/rc9r7k8+IhTwXNAtm18RHs6RC6VwsYSgYm6UQszxoPZwTiDQPJChIJMMkB2wAF6JkjJzUcw83U3A/tHz4GA+PX38/lAan9JuP0MAzZ8/Qh0xo/2SEUFRcc+Dbg7fgkDfcB7AEV3r6SyQf+zwQH8tcD9SLK3cMyJSEKGhXI3A/x/hr86wI3GR0i8tsGNTb7MPAO8gPEFQr58g/7y9MPNuIi/dtJEAgqAR4aGVTnpwsk1N/DONvRKf6y8foU8gwI/QL52ibV7wbu2+0RDTMRw/0GDBLJ8iQaV9zvIvPa5OP8uDLcsRH0Ce4Q0zf9Ct7/Obvs8i8eMMUKAOAkzwb19wEIHxYmBBcd4fwD8cVaaQX+CzYlGs/k/BnDOMkKHMn4DLYiAiIN1gELDxD/CxtNENnl5K4a9iwSGAUByXwSFu3S2tsK7cww8c8J8AgT0PvqAQLk+LTxJfX8Bt4ALfQq+gLuPAUU5NfL7ygIDSLf4AI74A8GJkbB4/HRDwcGuuUA5tPzDssa8t7lIvXoER77QCSG/tkNHPUS99QxFuf35H/tFO8z3R5AHxcV32AZxvwSOKrh4RUdGg32Da3uPSE4G94V4Qsw0wOcA+L/yBzX8f8c2RErbCQ3/tQNGb0rCg0LtRbd/vcK5PsUIs0OMsrUChYSrAq2ytosBBL3C+fq+DHHAfXN9df1FADp2DDhC9bz1i9i9zje/BvoNAQD6dICYeXeDxn52NtX5xAgDO4fBAYSCQLrzykJRBnM/Db29+8VFesFEiLg7akxs9Ai6wrvJEDsFvvt6QYyQDUH6tS7Gc3xsdQdChveFxwWKczx8CC/DxTJEwUeuSIV0xgOKsv35xkJ8RsH6vUk4N8e6yHgPvMN0TL1/+PrvKnF5MIpH6kaOgLbLgUxKPT26cEhvNwd/iTVGu3yC/YH5cn97i8ot8D7CBvMBQ8aPDg4KSu0AzMgDO0K3eThIOPlGAwUFwoUCAKgCPvwz+qyEk7rNu3fBupbGfEjABAfPuz8Mt3j7wDhyg7dACbN+CQvFhLaACfb9lLw3hf84wTrVxja/NjSECcB6NUQ7ibnMcLQxxMr6gwY5ewNEMw="
+   },
+   {
+    "text": " sugar",
+    "id": 13163,
+    "group": "baking",
+    "x": 0.6891,
+    "y": 0.9647,
+    "neighbors": [
+     {
+      "text": " salt",
+      "cos": 0.238
+     },
+     {
+      "text": " yeast",
+      "cos": 0.214
+     },
+     {
+      "text": " spoon",
+      "cos": 0.21
+     },
+     {
+      "text": " flour",
+      "cos": 0.198
+     },
+     {
+      "text": " butter",
+      "cos": 0.184
+     }
+    ],
+    "strip": "+hX+CzYs6+Yb7+AqPstY9PMf////Mk/0EecG4efDIEqc2xb/FhgLMRP8Mlnu8egV08sJ49sBLhL+4RMkLfcASBXSI/ccCgfv3vKtD/EXN/AZ5L4TGAPjrOX5Oezw8ADnPAcaH/zjGUZC6vXtRMU12OcR/wYvHCNTyBMGxv0bGRXlAvj+HhvQBf217fsqBgwLNNAI2gAc3SbpNsckBkgYK+oR+U7x9gtKJT0d70nT/AT9AfTeBDMT7UIO5z8nBCffGORQKBUs/+0a/gwaMxEnxvck49fyvdvWL9g+RekO5A7n7gwmNQ32ugUE7/L32u0O8fk2LvA0J1IK5jUFFQAjvxgI/O0bLQbt+cstMwTiBOHv+fTK/Rbk+OPzshr+/DDtM/HfwvLG38bRArzu+jD83/z3D9UP7/Dy6/stD+uU5AcS9uEHCQYGzBgkzAT8BAMtKCwjJxMM9bc3HwIjOiL5SNO3EQe9GgrYD/AaE9XpxzH4OPzN7Oc04fAT9S7l0eoSGvAE8ea7yvv3+S/4DgTWD+Uq0f7VKQkK1xDxCQECGKkVLeJawMwht9oz9CYNEdMHxia8DfoG4Sj0HUEXLsb4OwAP7uj0AAke9B02J+DPziwK5tLCG/A0sx7s4wLFIvU0JiP4lC//BsQnFEriI/UDr+wi3Rb9Gd8c9dMADPiv6gPM0wW1C/7DwDLgIg66DvUS4+rT+yDp5ScP6tX8/TcM5iQBK/EH8AApLknj9zD1CRPkHjAeCOsB5L0V+xbt4QMKxrUs3do5LQAMABE6+hoJ1ePJHPUq/DHjBPgO1gLxzvgQGxTmygMx//X8CJoiCwUIfxr5AD8ODhph9e4A7M/T9/gbEiEpCAgOF9fm6+kPBEA2EMLq3NEN0un0KvtFFt7vDfUy3Dfr8g0B1yVP6BYSPtE0LhLxAxXu6QKw8frsCNIJ/OXTwi3uBObs6hYbvcUKIfsn+gkLBgjNBfPsCjT9xxDm1K3T6B3MQyYBEezv2/zO5zgzSPzSwxj30NHjJhvg2enfEzTVBzr58fMMDO/k+KNL5x4ct+rLAhK++fIazBXjAQIP9hka6jIJC+XR+8ALFkXuCkDQIy3z//JM4+lZ2TfRAcffFBPcEgv08iwLJuHs7u79D+fhAQYQDKYD9Ciq9SwBzN/fwADU4s78K/zYAN4E3fT8vxnt1DIIE8bX3tI="
+   },
+   {
+    "text": " butter",
+    "id": 14100,
+    "group": "baking",
+    "x": 0.8526,
+    "y": 0.8532,
+    "neighbors": [
+     {
+      "text": " milk",
+      "cos": 0.262
+     },
+     {
+      "text": " dough",
+      "cos": 0.213
+     },
+     {
+      "text": " flour",
+      "cos": 0.206
+     },
+     {
+      "text": " salt",
+      "cos": 0.204
+     },
+     {
+      "text": " pound",
+      "cos": 0.196
+     }
+    ],
+    "strip": "Ix8+AxP4+kHe2xwT++QeAPQA8RAd9j3T+cAf3uTh4zre7zHkD9wu4jRG+CISACX7JSCt1ejtzMAq4Rkr6xLXG+Lo8QcaJwMAO9rRCOH0+x/5/Ro+GgbOH++v/NIFHyXiO/Tk0O4QKgMWBOQKI/4RTxVC3d7vDxiuCwsv+hEO8+Hx8QL8B9fgExvyDwAuDOfyEbG1BPHd3ffgD/sGHBLt9PAYTyQTUiHx+REcGArkEeX5GRXP7SEd/w/v5fXp2xjc9APO5D70DwgfuvvJJz7y4Qv3IBIE6wEw2eIxCd8hvvIK7QH4BzHZ3iCycc/E+gsm/xHg9jow+wIttQ0O6eoc/bMMMhPd5QvtBb4SzusIA8ro9PwnIervHtvm9fsd/uINDv0ECOYlDvju9e/X6fD41PIiw+QYEhkDBwgOJ+b+9CEo9P/65uL64gfb7hMF+TsM/P5/COjX+N72SRjh/x/4ORcNPM76QOA4OPAmCe0lCPHf/eXt6+YTK/Iy1AnaFe0V/PYSLDP70fvgJgT9B7/8uwEn5usjFewQ9ATz9g0K0sMcExfo5xf3DfPlBR7u6OYIFfgX+uz53yL4CBMKEiYSGdjg/OvF9/kmKiRSAQP/PU8A1uoL2ggWGtcHIgPSJvY/7O4g2wUVGy/q8Bj/Gfn32CnoFCcIAgn70RLPATMG5vYH/Szx7CTq0f0HHwftCOTr1g3iARDZIPy2AA3x0jbcIugT7vvx5wcj9U0y4EYM+fIAIA4H3xwT5bf+/Qciy60Rot0MNe/8N9b/yQEMBwjy2CLT8P0HCxnbKPUYKglNFhT82xf7SSMP5QsD5RX6xeDoBQ8b6/MC2vwJBTcY++fu+NLyHRP9IgQ5CfEYWQcQFCgY+scV9OcCHB/8/Tj3Aun09AEmEgbgI9zj+f4BKs7x1+jWDfD9CfIHCeoC9PDK6fzpFBTe//4a/87kDyHt0hDS3vkbDd7m5N73NfRH9TjeBxEZ6a8G4u6+DtkUBib8PvPf2/0b+/3x8R8H2RXRA/se8gsKCSv+wDDo790Hu/joDdYLB9vy2+bsFwQD5bDg4wv74eD7GvP5LQA4DMwrD/nx30Tq4AQnDB8XzRFI6/339gby5i4hFAYDGfn2DQ3vCPzuDu8S8ukNG+P39OQb7SgE+Sz5xgvy5CLD+AkW+/XY4vEi9eco1v4/IRcwBKwn0bw="
+   },
+   {
+    "text": " salt",
+    "id": 12021,
+    "group": "baking",
+    "x": 0.6596,
+    "y": 0.7765,
+    "neighbors": [
+     {
+      "text": " sugar",
+      "cos": 0.238
+     },
+     {
+      "text": " butter",
+      "cos": 0.204
+     },
+     {
+      "text": " pinch",
+      "cos": 0.176
+     },
+     {
+      "text": " pound",
+      "cos": 0.138
+     },
+     {
+      "text": " milk",
+      "cos": 0.138
+     }
+    ],
+    "strip": "IhL5FAfoyBH7LOs3/+lUJg/c5Awa+RwYpdoJ5fwgDd7V1ir2/w/vKULk8CsBGuNP1P827RkIzO/T/flO7drTEsQPH/H4CtsJ8c0HD+Xw/O4DCxMEAxIQHfkX4fG+DfYNFgjyD+sqG8lCHfz9dwkuJgv58ek0P0bp2SETCyH1Gvoo+v6444H0DyUN6s0ZLuouV8++DBfmWeHs5PRV8xzdKu7/PgsHABkiIgYVLM/zCh8Q+R0M5Q//3B3o9AMoIB4rE/USNizq4fsVDB3G4dxM6+nqQsz15SzW/wb4IhMd4yc59gX//1Tw6v3aWQ4s1949AwQ2JvomCEAf4Tsh/gAN9B8dLDcy1BD3ENQrs/Imz9buG9TZ8cRJ7uUY6x8AK/cf5yr1x9XH0RYD99Xf9RUo4urX5eQf4tUg+/jlB+0a9eTg6cQDAubd5xMK7C05AyT1B1MrEPYHwe8G9Pv37BDv6fLKD1TeFObKBvYVCOjkpOkgLtLhKcQ224sTyPs9AwoU8O/3QzgJ2S8b7vy9idQGtxMg3gYCGxUFudrmBQYR4f0U3AIkISQSHNYQ3uEVCvwaGRoi+CL9BCbU5i4HNvPRChQp6Ov73P0qQ/nwvwz/FPIn4uZX8Ak0ARrgwCUfAgQz/0AQzt384v4HBEPv/ffv0/gDIfEqIRwa0Pww59DZ6uHQCADc1CDl2kPSI93J6inc5e7y9Bm0B+n9BTbP3PoWEBQfD8TyCvka1UPu3iTQ/Q4ACAY7+wUJ79zb+QgR2tU69CX4x/D8ESQE9zsk7T5V2BAWEdgTySXsUPwbByTv/gb6Jl7w9if+E0UX3us6EArF0vX2BP4cIuQJTAzhDQTKq74eBS1J6ysfKhzgEPcJ4uE2GKkL9RgN9OAHRADjD/4VDwAw7c8W3ujjx/YTTAQW//EKETDpTf3q2xH74Pbp79jyAybi5+/gwj3BuRII3hbqMgED8/858ejIOww4C/L+G//x8PQt6gHY8ykKC/8BzNkRFOwiAerW4ym90w7Rz9YrDtziA/L+IFoNADXaEPjs7f3RQQe0/iAu9vT5zAv07ubZ9a/7BgL/HycdB/TXL89CHA0dDvjxSubjVv85Dg48/RwI1P8CM0XcyiYaJ9Q7FNkt9fMSwuvl/yvd1cUW/RABlOns5Ccc6vug6ePcJQ7jFuYtBOrG/+oT+gICItAA2eY="
+   },
+   {
+    "text": " yeast",
+    "id": 40480,
+    "group": "baking",
+    "x": 0.6771,
+    "y": 0.7408,
+    "neighbors": [
+     {
+      "text": " sugar",
+      "cos": 0.214
+     },
+     {
+      "text": " dough",
+      "cos": 0.212
+     },
+     {
+      "text": " guests",
+      "cos": 0.17
+     },
+     {
+      "text": " grandmother",
+      "cos": 0.169
+     },
+     {
+      "text": " ounce",
+      "cos": 0.16
+     }
+    ],
+    "strip": "MgD57SYWzRsDFPgNHOEV/fgQCPXfL/qwIwYm8wvqLwb11NDq6fAPGh/m1RTxDdzR1PrtGunt1hD54Pf3JAgKEOHw/wf2Ee/2B9HtFu4BD9XuFe3yHfkbHgfs3xUG9Bjx8O37+RsFRBYo5+kqJ0EtGPcC0cH18iAh9w0KxrX85+IAKxjLFAL1ICoEFP01ABEfBA7GASATHCsD6vTk+fXsKfP+DjcC6w4hLSAH/fX67Bs1Bx/1AB398yjZ1yoMJRsINh00AtMCKur64xA9A+oFEPcR19wD7wsqL/v0/QMSF+fW5wsBDwHy8RDoKwe/IhQj6QjwKB62HfY5LfwO+uvT9LIJ4fcjRQ0d9/0fKvzvIefwyQH+C+8ZHBi7IC4cAQ0zPSAbyAX11QPqK+bX/SnpEeocJQIL5Czo6NHtNhvHAO31EcvL5PcQFxUOEwf06CUe++Md/fYNAs/9/RXj+BcAF/P27QLaFO757On68OLU8NkRIOn5DdAb6REg8x/rAu7byhEDFirfASDxDxjsueji8MNNCRwi7hQfAiYTCwPj6OYHE+g24SPLFB0iBgQHCBTbCe3j/fXhKhYi+gL+2hzzEi3zKgP+Eu/k3xkPCg4R+vUf6f8J7xAJsiAFSszzC77hGvv54RYk9g4eIn8K8v4QxhcW5v8CBwsZ1B4B/uUs1vbxEA7RAOL9LQ0TFCLizd0rCu8N//bo6QQL8/4a+PzqEfu79ekNGiMMLB7/0SL17uEBBgIGI/YB8u8A87wYBNHn1eUf2gQZJ/H/0gEGx+4E2BnlI/D4rhEbKOYYBNwd8w4ZCTrg5xoc6QEq+uoECNHuFxL/7ggBGCW9MQcf2QneFwP/JBba8/kSAhMQ8zoCIf4p4fH7AQIQ9QH09fETDvQF8SUkAwwaBecDK/j+D/P+KPsbHwkICv7m2REKBNrnMCIN8+oULyjlCgvx9OkU8Qz/9AsS4wzV9wXa0hYGCgz0GRsyDfnx0wDkO/7nHgTv1N3ACMazBPfbygsgvPUHPRHtD9YaHwb8EToVFiAgHwPQCe8LBQXRBwzp+xUwGfoI5qvyFgTAKRkaHCABAfIAJ9fm8PAm8xkHCjf7FfVGUyMZ3R0BOtTLAeIX6wHqDh8UHQ/j4x7D/tnr0+IC5OP88QL31+YM7tgyGwvSDSD2DuFO4vvwFwQK/E4IWRJcKhH7GAo="
+   },
+   {
+    "text": " dough",
+    "id": 30352,
+    "group": "baking",
+    "x": 0.5646,
+    "y": 1.0,
+    "neighbors": [
+     {
+      "text": " flour",
+      "cos": 0.262
+     },
+     {
+      "text": " bake",
+      "cos": 0.222
+     },
+     {
+      "text": " butter",
+      "cos": 0.213
+     },
+     {
+      "text": " yeast",
+      "cos": 0.212
+     },
+     {
+      "text": " kitchen",
+      "cos": 0.184
+     }
+    ],
+    "strip": "HRb3pgTvGWcJ2xTr/ds6+vgiDQrkKxoFGdUK2yTqDl/w+vnp8CfgERoNGf8V9tkM4968FADuBgk3vRIX/tP8Hw/O2ur98/kdA+nREfb/+fXR8fgBNQ3tBgQX/wX/Pt/G9QEJ9iIf+htZ/Q335+3f+cv2DMD7It7u9Og14s717wLeEuzY7hXeDSYwKtsb8x7D+QH6GegLQQLBAUE7PBL3CfsgG+ns8QvXCOkDAwvhCtgFzP8KGyTjAyINxwXw/hfgFsD04BT7GvHi7SDZ0TH7PBX95AkKLc318vgfGPQe8uEFGdgl5ezz0fHHQMf/GUAXHgj7KRzxECYx7hrv6dgkzDIbEQbIIfwGyAlXIu3X4BDwANoLAArnJBb/9y//QPEOJTnxEuWzGjb7VvMb+x4F9BENAuH1CT3ZDg/rH/TZINNPFv3uv/QVDgQNy//+ASUa2eMV7B0f/PkXHODoHwwAOvbZKCbz790aEPolBuwIHKneLCP84fgRMAk73vbc/84Q7vwV/zH75cT7DEAX9/niz+cR7djz4O365wLu7wv58eYm3QH+8eDRGywH1wCvEiVS/R/uExoIviAi0wwGyufYByIgCsD/J+gN5t8f0ApF+vka198KNAkD8Ofd9uuxBOck4MTyzwYbGtv8BDEJHf08/BMC7iHwHUH/xCr7IucxwQi34Nn1IgfN2isxDQi4/fL6xQ8YECADBxUOGvMh7OIOSwTjGz4dItznJS743jv+4+Mi+P8gOdsm0uLu+OkL4+4R6eoZCddBXuPT5er7x/MBAwG7+BocUeAZJ+lSBb/mEPzuuiUK9wvvYQgOf+fI694pHhki/Rj+Hf3fK0XLH+Un7uQRJPTzD/0k+9b9FvnsJvoztgsL7NruEhLZBiQeKT/3F98tJfwd2OH5PAfz6AXa1xHwH9033zwP/vr1+w3yCi9W2BAkGwoB1QL/8yDmyusg9Owf9t4QvCL0BxAN5gwj8PgaAvcT7RDaK+QVH/wA7v7aHwT77M33E9hPCB8BIfNL/yvkzCX1CRk+ECMn6U7xA+ws+g8v+svJ+v44DAkcAdDT9v3bKPwWD/fc/Qvd5tv4EgjmIQT27OoZ6A1a4Qf5CfUtD/fx3woRGf37H/r8Hwzd6iYQCuMT6DXk6d/K8Pb52xcMGxcAFMDDARME9uy4FfzdGAEQ9vgz/AzwDwMRSsk="
+   },
+   {
+    "text": " milk",
+    "id": 14074,
+    "group": "baking",
+    "x": 0.6137,
+    "y": 0.8615,
+    "neighbors": [
+     {
+      "text": " butter",
+      "cos": 0.262
+     },
+     {
+      "text": " cups",
+      "cos": 0.193
+     },
+     {
+      "text": " sugar",
+      "cos": 0.177
+     },
+     {
+      "text": " flour",
+      "cos": 0.163
+     },
+     {
+      "text": " aunt",
+      "cos": 0.161
+     }
+    ],
+    "strip": "AQ4sIOYP09Ma8wvOue8V6uw9ATgVLMvs/O0a2/vr3/nP/PvhFyhMBuMJ5fLdG+DnnTjDx+0F6PD73Awa3S4p/xzN1+AaFPvrEsa+ExIagegO+BUOFgz69xUO+k3r3FEjJQIkDRvcQhQ6N83vLNbOFB1G3ccdG/7tC+RGCB7kBuv3+UAP8e7O9gvdDQQWG8EJ/t3i/f3f2FqZDBMZMgnseSYX2QHeAjwI2fsYFyEQ3g3WGCjz2gM7LBLo2ALh9iKzxxAOFzLM7P7kowT3PBkLLc8yJ/v5GxbgBzMAGz0Q7Rs+ysEh1u0Cthb51E3rxf0S5AYJMQMD5U4A5gDT+eoiDs4V/8/f+fsDMu8Dud+V7t7v+/06KAUb+PEJ6xLnCGcY1tfl68gA0gUPxga66MMF6wYA19jf8uTNHRYSLOvIyPIvMPr05OwKHfn04VEQ5TLl+wouCAcK5tQO6iHxFC0VKvj7FN0GQAgQLLwoFs8gDx3xAvAS2+EUA/0CIhnhF/0FywP3Jg7f7SQey+gf0h/N2O/1sPE20uoRrdbr0wLh++IaFSQmD9m43yTT9OXZKhH4Er0ovT/sBz3gDCcH3Oo3FCAq4xbI4wYPIegREP0NvA7JJt/u8A4pRQbfF/4TCggV2RbOhQgSJPTV/1Yq//gB2BXq3SzZ3DskGRgAEALQ+gz+zie2+TAYKf/fO9ze/+j46uSqCP3fEhcpvRn32e8JFssgubH1KO0UJh0nMCYQ3eMkDu0nAbYdC8AY59rvFUB25uE3Gp4U+PPT4w454yz4+a/G2gfkJObzNu3zFuQv+0T6GiUyG9MLCOzC9xIFJQYJKBL0AwXo8OEJ/BjRHyzvod7SGwf/HQIzscYnNusUMQYtDgQcEfkPBgngMtvjPQUjFvonLgrNAcza9dzx9wn3LgXiEDUS1ejr2eu+5L744Cf10hYD5hAIJjIh/2PutCwP4xQFF+w00yzvHvTW5Cj0BvHuCO/U5Ue6I7LqNv74GN/Py8nTsf6f6fACsfLmBQb2PN4J1+HjIycyCCDv9BfK7RvxH9UD+S/M+f4L/t4UCNfuQPwkEPTu8NIqFrFp++L84/T5vCgXJQ8C+o5YLxEa1gnN3yA9JxS9Kt/31igr4vXS097xPsEkx0suv9MXChX4RO799DTjCenp2+Y9I+v9xxE7SNTp4AsUMe47C/kNtcI="
+   },
+   {
+    "text": " cup",
+    "id": 10525,
+    "group": "measures",
+    "x": 1.0,
+    "y": -1.0,
+    "neighbors": [
+     {
+      "text": " cups",
+      "cos": 0.684
+     },
+     {
+      "text": " spoon",
+      "cos": 0.23
+     },
+     {
+      "text": " pinch",
+      "cos": 0.16
+     },
+     {
+      "text": " ounce",
+      "cos": 0.149
+     },
+     {
+      "text": " pound",
+      "cos": 0.146
+     }
+    ],
+    "strip": "Dvn8vREYLwUQ6+vyaQ8OADn9/fAL3Af3MzTPy/fj7yoMtVTkXDPbArbwJ/a7Dy0KGAX6rAb77BD72hoSH9DpAe4HBe4z+usU7u2wBgT1By0fMSYCFgoKvwvgHfQV3t/y+L9CGusRBh/y0eXX/vcX9xBM6ggnFvEGEgb68Nn5CQQkLwsjHRoYGfL/ztUhG8EeOe/nyd8I+vPn6bjfFxT3ziAJ1w7SDDwkIikOFd3I2+r36h8U/cYtIfU6FNwLuBwT2RIR8iv34g1MrRo7LfQLIege/B0MBv8NIwrxBCMTMxK36D4MwvaB6CEe8hnn7O4HHPvRDO3zLBbX8wf2/ecKOwYgEsXgsBDz/84c6f1VCfD16BU6/OHzCfb9/BgRFBkMzNz2Of8wFtD/0gUp7AAJItwgDzAHDO4R6MkJEd4Qyvcq7fQIDuLjB/X8BAocAPo0FwtCFhSZEAf8+iLyJAAzR+EeEf4KHOTj6QIcA/EzIekARRb0B84a+87T3gf3P8oY/fb0B9Ho3g3Y183rpBIt9QINygT0BR0A0fTwEhn0CAMCORsAGEMPGxb/0NSxBfvlIvlEDuUQEzIazBAL9AUY5wVQABDw8xcBCiDgt94QDdnc0+PJ8PUAIjIXF+Hg3dsNtc3p8Q4BIA36v1TyEfwbF9miItMcP6b56C7RUODqMycsKezk9+gl0/gfOQ4qw8z+rgvo8f79IhTY7ArXBCsa8fLuG9f22BbD7xvsD9gFyv/f/wkD39I/HOw98u/vATL42ecC8bL8JQEKy/oM6D7y6hXx6+z8574Q8PQgGUTzCNmX8QXs9/Pp3d4RAC/H/wfXIvwm8RLh+8Au/ykMEATZ0/NC8DbtCenr8e/2PvziCODs8hz0zfX6IgTvJgb20vfu8fsyCBr+IPz2ChAJGw8IThIFGh4p180S/ggJ3Rbb1P306QwjDef0BQfzAPsdKBYuJCQV8wLZCNj8rej0+AH79gbzN90L/h3nJBf24xwFLvY0xe7+tQHvC+c94/ErMPnqNOrgENkuGRHjxhwHDTDd7/bEBw3/BRnowRsSDvjv4MXb+9T48zXw+BYc9zER5iIbCSDuJtPtJ/Yx6RsoIPE/BO0IAgPjA/fk7iEL1wvUywctPvH0BBcbN8EK+CEnGB71NsUV1RAsCu8Y9e8w6hDTyx23He3eAfcp7QwtCPUFE98="
+   },
+   {
+    "text": " cups",
+    "id": 25374,
+    "group": "measures",
+    "x": 0.9838,
+    "y": -0.8636,
+    "neighbors": [
+     {
+      "text": " cup",
+      "cos": 0.684
+     },
+     {
+      "text": " spoon",
+      "cos": 0.229
+     },
+     {
+      "text": " milk",
+      "cos": 0.193
+     },
+     {
+      "text": " butter",
+      "cos": 0.18
+     },
+     {
+      "text": " guests",
+      "cos": 0.179
+     }
+    ],
+    "strip": "FhEluhP0/wA7s+DlStLv62Ep+w4Byij1LBvY1dfb5ELlyy7jSyv04pkeRTvE8vjsFd8fiADb5/Ya4iD8MukG/P7t9fkrqwvh6PadGwj+BR4YeyMiKAlB1TukJOUF6C4nAgNA+iIHRwYJPKy4Nd4n2x1jr8YR9QzZDR3u0b8a5egVVg8JIBwWGuD70ehRGZwWORCzutoV4/Ao1M3n9RYNBhIalgfUGWMn6+1cKhDD3+IdHCMX8r8ESUkaBfkMthgY8kcI5FCrAwZEhfsaIPo6Ps8D+vkh9hgnCuQMMi4TQDq37B4P3MCT7xhH7Qoh0d4gNhzICMLKShTn+Q4FEAsFKQ3+LvbP3+/v4dwU0w9KAt3iAAc76+3r9e79BlITLu0b0IzhIwQmKukK2dIB3s4lA+ZMBuQlDwgQ8NPpPg4A0wYI9z78+egK7eoUCfgm8xdP9+9V2ieo/AAXJRe59PkMF9xOFQf4OuPlBOMvDQA+Id33LO/9+7A7vfkFGwv+aNgq8PTu4u7v6d3SADTngiIEDAZS3/AX8wb4p/73Tf0E7wIvJi8HMVgDIwog18idAiKyRuxfEOsxOy0r1xHe7h4N5Rk3JPv6+Rrf7TkD+9MfNATF1vXT+QnzIXg4PczTz/wLyend7AUhDlHz8nnu6vYnEvKBIt0K6MDx4lLWcuX/KeswJu/CwfYQ29opExdR0b/f1grdChk8RSj38+Kz/C0TBvcXIbz8/iDiFwYJAc/t6Onx5w7j3r8VIwRN4dMM7PPdscE8ApUeSuHv8OsNtCr83TTZzeQFAtwdKdcsXUkGCdmsxxHVEP4K4bIPBQrF+NnCOdwS9CC42qUcAfslweb7xc0xADHqAeTx6+0POwni6O3p6Cop4QPwRMrVAvL13Cj2EdIvCQjpUdLf6+E58wI0T/foOxrs4A0lBR4K/RHyvAz5/ykEKHH7JdbhBe4ZBg1QIbwcywCN//fyuOsxC/f57BoQObEM5l2kCRf6IunGGsE30xUEsN8KGvYYAfYvWO7wM+/+9x4iRDoWwwrqEkMOAcYDExYANg+y4BADABICwt2/Rv4j5C37+tQW+BXy8R9YF0XGTOfzMSUtGUlODb9jwxAy+vsk/br18UjxwNI4uRMzM/DAHxsWNOIBBQv5BBkDR8b2HRQY+gj7vq9GNvT3pRneLdXj8AUt/AlDEPT88c4="
+   },
+   {
+    "text": " ounce",
+    "id": 53708,
+    "group": "measures",
+    "x": 0.944,
+    "y": -0.8734,
+    "neighbors": [
+     {
+      "text": " pound",
+      "cos": 0.344
+     },
+     {
+      "text": " aunt",
+      "cos": 0.265
+     },
+     {
+      "text": " gram",
+      "cos": 0.244
+     },
+     {
+      "text": " pinch",
+      "cos": 0.19
+     },
+     {
+      "text": " cups",
+      "cos": 0.165
+     }
+    ],
+    "strip": "XRUl7ewyHDb47DzR4/DiAyAvERwu7TelnTb6DEa6JDUt9ucE+Q0pJyvdusTbCQVB1+stJejRCh0i6hzjJTPZGfUK7iLUxSgzGBEnIufe2gUI8QQ2QSIy8MIo+v74BBDlE+ry7AbdIPca9CNFAxAR6yM2GSQV/erDEhQv+TYxBSMnYHTREuAETQ6ZFvNdDvzK/ADH2RA32eIv9PfL1xM/3CA0uQDI+BjiRAY0Mx8cDtIMD6u9MCAJARNS7/385g3xY9ju6srm/9HkGgw76RIcxtPwCNjm1vIcAM6z3hAW/RPxEyME/BnX/jP8QjIvGw0o8SHzDAbc4gXT6h7M7wX6G/j38u/jD+YB/R0RFZ/Z1q1Wy/YB+d81Bhso5/IoDeRSGBLw3OXsWuD6t+081PUH6OTk+SQV+wYg8/oEPwzA6EFAIvPf0eztw76j6+0Z7iAzAMoE7eu8CApCDTjRz1MH5uME4MrnOcwBOcwGKzwsL9rUA/cu+P0vIvbd5PXuDbDgCVraLtr37wTH99cmsBEaDB8QKQW8t1QOxwETBA6k9Ar8G+EfBBfKB44fFDDxAQcX/AYF4dfu7icKx/oktfvm6t77FQoJBfTZJNoKoBcJ3xDj7P03+PUXDc7vBNz34vQSDxv/4PpCIDUb2WFF19QH5pu4y+4UOQIGFP3gFPXvJ+MhFvonBxxW/wYcD8nf0vcAHhq9HjOl5Bne0+Op7AoJzgsvzzgOKzIZAOwNDuYL/h4A6xUG2u8T8fZR1tsy1cE968z7BccsIurpK+LZ9MkDwv7OH/kIBAIR8soGKu4e0fkT7dz4/iPl6+pWMv7s9Ynt+hbqFhv6H/EVI/gExA7UKg8UPADw2R4V9NHUT/gMBgb1yOrkLiQNTTix3wZI+P7oChkY8t8TH/0cPe4TKzAbGBK3IB5KEvfdJwcHDbgE2QG5y1Ly+f4Y3u1L5OMT3y8eDzcj1S8bBQHW99wkw/n+FvMG3RId2x0KAEHJB/0z/tUTEuX64xUSCvve4QwX1OUBf8w170wWBC3N9/PuDOj+GvX2BhoA0PzD3/Hq8g4yACvt4fciCj8J6yXk/voAEuEI1tsIC/3Z6NgA6Alo4zEfxi7oNv2zLSEfIznk6vAv5/sNAPz7Dh3iKQcA39a3+igUH84y0wEs0vHw/RYd9tjhvAfX7BoNsRNJa9oCEevn2Qg="
+   },
+   {
+    "text": " gram",
+    "id": 23018,
+    "group": "measures",
+    "x": 0.7578,
+    "y": -0.6232,
+    "neighbors": [
+     {
+      "text": " pound",
+      "cos": 0.261
+     },
+     {
+      "text": " ounce",
+      "cos": 0.244
+     },
+     {
+      "text": " grandmother",
+      "cos": 0.169
+     },
+     {
+      "text": " yeast",
+      "cos": 0.147
+     },
+     {
+      "text": " aunt",
+      "cos": 0.13
+     }
+    ],
+    "strip": "7RoP0AXm4EMkuMgaYr7RDygYHuAICOjo8vwl6RMEytLE5g3q5TkD+PEKCtm/IgT8AccH/wzlOB8axC/9+hXSBw/MAfM5GyABB/7eKPG/BBMI0xUQLQ4Fz9vwENQQ7/Ci+QbGDe38Hh5GBCAy6AM2IxQ0EisX4hLVA/seAggKAbX+DA43FfTtC/XQBQcJFc/G6PPV9QXg5f8DBevi8Toi0RUC++cDEAfB2Sz55+gg+Lj2ze4dOQsc9t07/gi94BLzMsQODu4H6uMaKQn/OyIxH/XxD70M+Nwn+9kD9gwU9y0FFREjAxzt6tAL4QnjzCMtxyH8FdjxBeAVyBMD6wwR88oKI8IlI/bs5RkKKe7aBsMlGQE5Cuo6qfz18CkGJ+cPRNwF2gu/6vP1OegM3iAK+TEPIhQC/x07PhToEjzdLQT6Nt8HJQQPABcPHCb75unuBwpA09Yb5TwF9DG90Vf66w8I8kHRLCUT/vfiI/Lp5un5EEPms/TjSt8H/QziFuYD6hYJDvMT/S/LAukXrcXWE7cE8/omyi0U/dINDQW76RL6Fi8d5Sro7/vvLgosBfoS3fkP4wfV8DHDAQXZ9+PrGs/XAA7zHhbZDOP+0xYD+Pb0vQDo7A8WAsYCI+YE2fLkBuHUtuweKPH24lLq+eMJ6Pst1jYaNtcRDP/0POYlHQ/8F9vhAvj1uujU7RYSuQQSJ8s8BBXZ2xP34u/Y69H479zY8QH27Cf/MATk3OUWAf4wofAdDrsWHfLXydkj7MXnwb8F4J8n+zgGGiIMTtoLnv31DU4B5/n3394d/w/zRvXdLQb4Yxv0IzsB/+wr7BQI8gXdEey/FQfsD9nx9wrQMUMWES718R4O0LveWtPRDfkQ+SnVzQ4k/98N8grwBfj7/MUe3zELFQEjQ8UrFBoBQtYOBAzv3gIG7xLsDBvfDeUF8VU69j732CrJBcje3TEJQ+kKHfPs8CLvSAr9/Rvj4+8g+RH84dUJ7dDn+coUKvba/L7pD+QTCMn/BSXwHeRINQYs2QoL5w3DAfb4/wf1CMkQJP7i7O4UGvIK3QwJEvDJCw79FOESJjHZAwe7RBp/tiP33xDUEPgq/9I4GNQqOBXi8+iIEuzqO/EE8NFG9+sG0OgRDzPT9QkE9e7EFwUADwH6KAf509byyjEWB/Af/fIACAIrEi4/ByQSLt8H3uc="
+   },
+   {
+    "text": " pound",
+    "id": 30023,
+    "group": "measures",
+    "x": 0.8598,
+    "y": -0.7272,
+    "neighbors": [
+     {
+      "text": " ounce",
+      "cos": 0.344
+     },
+     {
+      "text": " gram",
+      "cos": 0.261
+     },
+     {
+      "text": " butter",
+      "cos": 0.196
+     },
+     {
+      "text": " pinch",
+      "cos": 0.19
+     },
+     {
+      "text": " cups",
+      "cos": 0.172
+     }
+    ],
+    "strip": "MzMV17sTAykb+eUM8ef8PxvtI+syIy/WB9n9ITo0Qx7oAAUN4g/y/P4CJ+HlFDcCEeoCQO/x+wYuJx/0OTkiJAUFCBAfNDkU7Q3nFrrl3+H6BAlIHg7uAsPB/rBBFBYJEdkd9esGJso/+n86QgwNLPA19/A4/eTU7+hA+8VG+yztAuskP+XAahubM91UBwQdHODlJ+nu7S2+2foVEzEGAg7x3wPTNufmGBU1wPntGrwZzcrqDO4X7kwe6vjjFhPTIskQ8vUg/Ak71y8YJt5CEgbYC+Uv0Tinz8Ma7h8ZwwHLMOY2BC6/4PsS/+so4O1I9yKwDBv0GBUPzREYzRz4GkcVAuwgA9ECzCf9MLkj+usmAbEEJ8QUQBUkEfEYFrD8z70m0vXLY/Xs5ej+r/XXUhAfDg75uArlDqXEMTi8Bdsr8hpD/e3v4dGwIBgp9gwL8AgeJgG/8+oEEAXh8h4IHDbqAPjYHAQtsbn9KvsK794E5vH5COo6zrbn1+/zGrv8Dg/2GODbmuHdG7He192+Fdrw4GcW1wr36iTa8jfRE9oiNyc0SBQR+7pN4xIBCuD4JCst3x3v3i6/Evbl+8vcJtwU8xAKHPjMHh0A6+4Rwcsuxb0T6fgPMfYgKiMhC8of/Rwl9t8b8vpH3WgLyPL4y8sr//gVzvnZ+tfjBD1ZHhYyLwXmBAMY2ejBPr3/HwYnPb74FCnENM6z7/LCDRwR/Q44FeUgFAEQR/knAtPr9RRG4OLYF6cYM+tB1/ch3/963f4mxQJe1xDvHdC1Mwj8/hn0BS8YCOYL4O4oNxhYBgXVHxgODwzlBPFI9WHc0voOJRn7I/3n5bb88ziwvA3jH+8lGSDnDjIP9uvfAM3doyv3zjoJ8zTwIUXV/vUr1wGezvki3uMKBPI2/QAqRT0CEewCG94S5cXPG+zozgHgu/6tDVj9ExsWurIB7+v4sQv3HCasHgUHpdEILipM+0vgHyxEyQAs4uKnFwT9IfD4D+oU3uH41Pj56/Snw9rh8/hxQ+cdJvvrrPnOveDjCRHS+Rw3S1vP6Q7i6C35sesg8Dby5xg/DEPy6ffsBrXKzR1v4FEBRdfwAw2ysf9TGbpnAyHLFOkOIA45Li0A6TEJIRkH5gwMB+voY87f/OPCGDDFANQMJRb2Afrx6PQcBeMqIOdKBRPzmhI9QsQMNuQO1AY="
+   },
+   {
+    "text": " pinch",
+    "id": 49246,
+    "group": "measures",
+    "x": 0.8213,
+    "y": -0.6169,
+    "neighbors": [
+     {
+      "text": " pound",
+      "cos": 0.19
+     },
+     {
+      "text": " ounce",
+      "cos": 0.19
+     },
+     {
+      "text": " guests",
+      "cos": 0.18
+     },
+     {
+      "text": " salt",
+      "cos": 0.176
+     },
+     {
+      "text": " cups",
+      "cos": 0.166
+     }
+    ],
+    "strip": "+xgiC97OIgnw6r8p2iQKWBgZ/LUPyCDds/UNDmQJ+wwLLy4O5UslR/71DenlBxcN0o7uC9zcyPkYuSEQ9xXOI9wBdMf9DvH277wOJ9bSM86+5RcNHRDuBDMEC/8mMAb0EwkD79FFRcUVChkMRxYuydr+ASwt/S7YP8ln/bAMFOxnRQrUGf3m5rLsHycvBPvqBPfoBeUOBd7p1vHcG/oEAiLr0PbvABM8KfgD5uvQHc3d++gDIiEFG+TG9F0DHTEFDPsH+jbb7Abcvfi03+QKCt0h+RIm/SMV+gH1+xAa8dwtLe44+iYR1AE0OE0H9O0z6BDy+ya0RQvjRTgQ+hEU5Vb4Iwzc1BYbAvX6I+4oA+s7v7Q2r+/+BAkSEvYGHD7qD+UT7ePkL+379NEg3hQN3A8GEekTBvAn0xiuR/UY3Oz3vNr1FPrMFfSnJPMmDjoCzAkRGBPtGAfn9wz2CwraBBXyDVj1AhIL+jEe+e0TLfAIJ+HrDQPz7MseGP8ZEcL9BPfwMw0OsT7f7kMsARrRNvDq8AwX2evW1wUL+kki8eD6HOJGvzPDGjYCzen6IRbtF+UL4v0NHDon1fsGDwfaG9nCBOsV8Cb1IOvmBRYAGgTQCAUiHhQU0u+6Vja3CAvyzAkV3u0uDhr7Cn8cz97nT/bF8yIDUbz77vUsGcfoJ83q6cYFL90CyunVDrEAF/PjAdqf/hsSv/bs2iv51RGfG+vs5+QREhnXEuDqC/DS1ikgx+PmDcw68sop2N7HnSwMmhwXJto1Lff4xu8s2QMUxuPy8w3pxOf9IOg32fMA2xzxLB4GBw3YDvMy6gn05uu2HOXmRuzKRckOPD/j8rrp+x3T7/cA7BfbUu61G+0Cy/T52fro2gT78hINSO4Gv/jaJ/YiUy7nCcXMIMlCIvvTFusBE7n7yeTx9QwR9Qor2RgF/ecOJxAJ5EUN8iId5AY7ABgq/BklCuPv6QID2+QM/gxJ8tXu2jvtCu7g5wLXAQ5ABvccAQLGUTXtxOL4Bvg00RbmEBYGtyi+ChOaN9zaHUve/Qbh9+nv2e8MCSEcDLnABsMw7Tsj8hMQ5f/p6AsI7Rwl9Av2K9MMwgRO5kICzNwZB/ZALMnoGQfYQ6YI/xfc7CwL+dYNRtr4HNnXEAs5SwADNvQ7/93hHDkA6M+oEghhAQTrxuYRG10i/dHa3wc="
+   },
+   {
+    "text": " spoon",
+    "id": 45505,
+    "group": "measures",
+    "x": 0.768,
+    "y": -0.4978,
+    "neighbors": [
+     {
+      "text": " kitchen",
+      "cos": 0.248
+     },
+     {
+      "text": " cup",
+      "cos": 0.23
+     },
+     {
+      "text": " cups",
+      "cos": 0.229
+     },
+     {
+      "text": " sugar",
+      "cos": 0.21
+     },
+     {
+      "text": " grandmother",
+      "cos": 0.191
+     }
+    ],
+    "strip": "HA7gEeoSHhsU/O8wK91O0ColBhQb4zsKGRMOFP7mx0xf/TQCzBUZ6+oYFDUJAQcZ8/z4/v3c5Q4i80gQDxQ7FxrhFwMUwKsOl8PZEAAJOgfmCAkjDgEh4+r7LNAw8griOR8fAAMdDhQb8BU5Qxs41c4NxwEgCRL49tb3Dxv62R3w6AvDBvYIBBcLzwE5BMjIKt3oN/JHEhky7OTuKzNQGvDwFwraGwQbVTTS5Qvp500P2BPfFuwCJQLVGzP/6y4YDTgGGH84JeBm5yoYEP4ULN9B7scEGRL6LgIA9w8UA/X40Obp5xa6yFUfOh0H9Os5GAy999ddHCHd0CzpDwk7BNodEswq6h0Z67809CDhytzxNdUZ1gfEENQlHdzv+QJK+inJJvfNLf8i+xnu5UcY3AIcuQQB7RbuBzEJO8zQGN32+Bfo9U7UHRLZI/7dACssygk4Dg3X9PUg9PTS4yQWCKLP6i8cCs4v/b3wLBclJQwJ8PnpDfHD++QVFCwRuQ0IDecZ+h+38vsL8SLu5wae/QwZBRzr1fQxL+z0xQfeAQgTBi0R+w0N9gkhG/rL8eL1Gv8KBOHL/zcf6DgQ+NnV4awW7ATlCBf8KBTg2jn7F/jcDsz2OgI0KiMPVQu2IA0f/hIS9vooBPAa7GcHBePrA7Hl/jsRItP9Bx39bv/b4TjjAOa48/IdDvH0+g324xrcCvD9BgQIERC+4dK7AQcBAwPmJtgmGRf1DiTxBq/6DzDfJ9T58NoUBQA36BP9//oQAhkMFtIIAfsT/RsRAQrNtLQH7Ujq9q0UFPD+Wi4TAFPX+RgM+g4Y7fonGu7x3NvYSxwP8P8A9tARBd/b0CQP28c5ATAf2RsGY60tT9gG8gjo7Nj5FssgEgzT5O0m9tkS/+cwMQ0a6u7Y5ADjC/AW5eQfDe1Dzdnk9yK2ut3aDBEKLKDG+yPTE0Gw6ucsJSQtSQTQ8STYNA4DEtvrpx2r2hDO/rvv/g0O/CD28QIFSL3yugQL7/LQAgMg9zLbGe3yQw0zAuT//ffx6eYR++f0HP0I+yj9HKC0vvYHEO3TBOnX+zPu+R7zLtvx/fvZ2sQk1zzewf8TKdsZ5vZbmxsqzwPe0Oy6PmjlCRLdFBot4PwF2ygKNP0S3PXz+TnV58j40O09AfYJ3DTN0Cj4FuAGz/sZHuNL3yk0/CgaAOIgEeM="
+   },
+   {
+    "text": " grandmother",
+    "id": 38184,
+    "group": "people",
+    "x": 0.3757,
+    "y": -0.7428,
+    "neighbors": [
+     {
+      "text": " aunt",
+      "cos": 0.497
+     },
+     {
+      "text": " mother",
+      "cos": 0.414
+     },
+     {
+      "text": " spoon",
+      "cos": 0.191
+     },
+     {
+      "text": " yeast",
+      "cos": 0.169
+     },
+     {
+      "text": " gram",
+      "cos": 0.169
+     }
+    ],
+    "strip": "OPQRDB0I7AwRKNUH6en7HBUo/NfhLuchBAQVzSL+/xjXBPMPyNn69vMtR+MZBAI8z7kZDQX8CwQR6yYlKwvpF+7dH9jitibj+tEJD+UL7hLx8/wg5f/oDwweC9IpB9gP/RYA8eMO8O5OLSMkJg/++QYw+fYXGeXjARL0AgDf+QvVGu/NEu7q/gj3/vAyLAfw8fTUDfU8CzoQzjfn9Az2GAT58iYTHR756S/wEv4MCAkH2+IM9f4WDsLo/z7GCBkvENoSHAwaDArv0eAN/tkYCe8IItjk3NYdAQwZ8+kn++Uk9PPg6P3kwgPMFygr8N8GABjsJAvuGi8ELxP/4w/gF/boB+bl7AsEBPABGhgG/t0S5jAjIcQo3+nT1+fyNhwPAgwT/Ov8//E9DA++zicCKDL3xgUd9v0V6Qc+KOMf2PvPK/YQ4x4gDvP+6fzR6zcd6P3Z3xzhBgztUP7K4ErZPuIEGgEXCQVFCPTYFx0F2t0G5RHe++IZDUEd2Oz2Ot4k1jfw/9T8/hIMDf+/4dn66xHeIA/79/0NFPf09Bn1/ADp9T082gRZJhvm+BoZBfolDenB3gcNBDYM8hgRKwru9+TIKvfz7QQBPLn4AvrnGN4G8+MLCf4d9hIJ+xYdCxHbBRjqAvs2xfrqNH/57efy7gAPFxwO9+Ac9CsCKOMIzhwe/Pzc2RwQuwLyAe3BLt/iAh3rOt75+xMK+eIAMfnv6ify1ScIFePbNegMCf/M9ScVwOIW/uALzc4D/R4OO/YnCMQ1/7j2AP3I9v8hGuoZx+4OICjf0ST/v+L9EwIxAhT59hECDu40sMnvEQbmMhPoAeIM6fzZxufl9QXqAtP5PesYIu4c6AIK8L0NAxz7Awcx/RAr/O4DDenev/YSHAgI5AkWGALw+yjZ++sNJtgSCu4IAgM85c3v6fq//BLbFxnkFSEZLxYdLfjXCewM2zLR6QMkKwMK/g/z1QT57xXpzOsa2AMo3c/b/zHYBRAaBckY69vy9ujzIghA2BPcNh8NJ0UQ+CvQ8yMS6tYJ5ggDHQQLy969Dd3K7ebi/f8Z4QT0+/4E4VAh0QgEBR0R99op5R89XzUTFCbPJf9t+xwP6ecP5fPZ3wIqC/PYMhkUEwPX0BHX5yvcEhnuFbzi/Oso5Q0JKh4Fsg/nCv3Q/t3MJAsS3/Pz7CMFBSVKGe0R9RE="
+   },
+   {
+    "text": " mother",
+    "id": 6554,
+    "group": "people",
+    "x": 0.3017,
+    "y": -0.5427,
+    "neighbors": [
+     {
+      "text": " grandmother",
+      "cos": 0.414
+     },
+     {
+      "text": " aunt",
+      "cos": 0.286
+     },
+     {
+      "text": " family",
+      "cos": 0.205
+     },
+     {
+      "text": " milk",
+      "cos": 0.14
+     },
+     {
+      "text": " eight",
+      "cos": 0.121
+     }
+    ],
+    "strip": "9SkGBAr6IAUTHecc1voFLyJHIvMHRbzqQxb8+xrz4NfaMSAH8O1HAiIXGBcd8/XuABLZHgYm4fUr7w9Z/h/g/uHW1pcYGxDq9/wKCPnt1BPmBOAOKBECKj0M4g4cDwMm/SziCf0G3OstVxktMx3/5u3YKNPEQPk1A+30A+i7+AbnJ7rcAMMGFQTrMecEPNz+6cevJ94yGDXhBEkH7gcjKRH4xxcGCQLq80j7JtcJ5NvW1eL7/+8oCAzoEFXh3w/TDM2zF0AOCr3VwsfwHAoYIw0Z8xbG0ugA3tqYAPcj4vJJIPzpA+z9vvfyJiT4B6Mb+wD1/WOv4DX3FBPuLfweKCj52fPn3BTf3u8z3CQQEhkoKiwRJtA7AfTVssYEFyH6EXgiLhd0MtMoxRjpHxPgHS8L5iUOBQHv+bvVE/Mz+dvgQ+wV2ecc/9Hs1yUG2fktJ/gV4gMDK/bIMTjx0ho99NT89jsbCwFU79EAEwjvvcfqPgQEGPvZzBbZ+Rm2Nc0v6iTyITYJ3zM+IFAU3uwJ9ePnHyDlHAMaSOrhBQnFGQTlBCzyCv8xLxL0C/HSNshM9PIW0yj0BCMIFxRP9+/b7evlKuve0gcXNObjCuXqEegh+AT479gpOBIE+wYzxPrW5ibu8xf5EgsjLjAb3vkQ4A/ZAfDX7/oX/w4YQ/rx+iMT398EzMoJx+/XEevjNgESE/ziGsTG9Pj7F/XjRAYh4H/7/yj1AAKg5iQA2BX40yIEuP8YFQEw+cLLCgIKGi906dA0ABsXOxwK4BcTSuoK1SAlFSDI6/ER6Or9xStCJVL8GRcNBfYdKM3g4uXjJT0RAgBM0FUoDLtCxgPoE+vM4cjKRQoVKRcOJOjhy/HJKen8zffuEyAm3r/rvRE1JyQBFSIz4ubmJ/LYAe4CK8IF/wEYL0UjLNjoFwEFzgPc7/jyICblDAMEJOvtMB8e0GPgEOQrEuRL+AbSEfjctunqAuv67fUW7+D2CB7c6wtGJ9nz9ugQ27f9EAE15DcYXhYXDkUPEPn2DPU0AfP24z8i58Uw9osIAB7zA+LQDSrv0gr/MNUO8REf7x8cVTYOrtwZGiAiQQEc+WsRMidWAzT8yvAl7+sWQOomLvMZLRUl4O4AJgfg0troFus84dQZG9kq2xVDBAtC1RbpD0bg/Omg8M4n9zH2FB4TyhkY9P8X1c0="
+   },
+   {
+    "text": " aunt",
+    "id": 50066,
+    "group": "people",
+    "x": 0.3495,
+    "y": -0.793,
+    "neighbors": [
+     {
+      "text": " grandmother",
+      "cos": 0.497
+     },
+     {
+      "text": " mother",
+      "cos": 0.286
+     },
+     {
+      "text": " ounce",
+      "cos": 0.265
+     },
+     {
+      "text": " friends",
+      "cos": 0.246
+     },
+     {
+      "text": " spoon",
+      "cos": 0.178
+     }
+    ],
+    "strip": "PPjd+xTvCvQSKP8L5gHmJTguDvr9AvcmABn0/gTu/AL/7/X+1un56y4KAdPo7Qka8e0N9fT389YRFQrlFC4ONwPhHNbs2AQB7/TrEvsgAiYH+AAQ7AH17A0ZEt34+gsKFw7ZAt4TGNw2RgcoLPsaBgv8Dw8V9v/r5/wL/jABww/3HBHCBuTs9+jyJAUj9ckE8erqH/MUCfAKCAwGC/T9EwAYIwbaBgP8+woOEQrwFPYC3eT4EckX+Nn3Ah7fBwsZGf0d/g4T+gP2+cL2Hf0g5PX4KwXk4L8B8fb8/vAZCQcc/RLp8Ar41Af/EEILA/z5ByAdESbf0RT5Bh/h6gv6B/7j6Ofl1wwPFfT75QgC9Avg+x0kHBEp5eASDuDp/hgfGRAG9gbvAtQO+BjrDdP+HRIAI+ka+xsa4/EWJ+rP/hX5K/kj+S/y+fjf7/TM3yMMyfwc3BXTBenxE//m/zMBKvwN7Oz9+vIiC+7qLiIVAOMhCBcT+fApHQsO9RQTBOsDySz9EPAEGugNAwQF7NIA9//mFQsG4/cRGvruCAnx5/zo9R0S2AT+C+oP/CfxCQMeAQIEx/8R6jAV+xUnHyQV6ffdGf797R4uDeoc+PX3DfTv2uUFzf818Q/q/wUh6v8K7QMrBOMk2/gUBH/0FfEX9fPtGeDW59cE6wEgBeQZ7AH9ExPp8zQXzxIlSREQGOHv3BD6L+3aCuUe8+jYJuMU8Bj9ACn7GtkZEg4e5MPgBhcc5BQwIgUO5+b29wAZF/gF++Ul39ce+RjuHegBFwcNyxLzAwf77Rnq7uPpCxEm7RfuD/odCPP+6M8gKdULIvQL9/gIBwYN6fQF+AoD+u736t3wBNwZFAsX+LL7+u/6A/f6C+gHD/UJIe/V2fg9CA8FAysNEATx+h7cIeoQMQX1/OMUCCoJ1vbX4v/V2bAC4CMOERMWFAoHIhjq/RwU+zz96Pgj+vcIDe/h5v8a3QfiD/T68v0U7gO+6Pb9HQMq+M0W+dkB7wfk3/In3Q4SDgonF/ka+x//Eu8D/Aja0ujoFA8VABIB6t4B4/HZ3Sf7EOQID+4DJCUfAATqBBYCBQYACfoyUhEP5OsKMM5HzA4p9xYFAwfKISQbG+jnDgkT+uLr9ff6AfHnAgwG6fwM9x7yCf0INfLn1uvbFvXmCN/pCvYh5APN7xICB/UiB9gaEQk="
+   },
+   {
+    "text": " family",
+    "id": 2997,
+    "group": "people",
+    "x": 0.04741,
+    "y": -0.5413,
+    "neighbors": [
+     {
+      "text": " mother",
+      "cos": 0.205
+     },
+     {
+      "text": " kitchen",
+      "cos": 0.178
+     },
+     {
+      "text": " friends",
+      "cos": 0.156
+     },
+     {
+      "text": " aunt",
+      "cos": 0.112
+     },
+     {
+      "text": " grandmother",
+      "cos": 0.107
+     }
+    ],
+    "strip": "B+4nJs3s1fbdMBpHwiw/6g3zHdABBtPRCtEAzP/tuhYe90D14gAQHQnrEBDv2zUX+N/f4CsyBvs0AB0q8PX8LwTq5RL/R/zI6NjT/tQJK6NAFVoC7hTv+CryJ9b6HPzpKC8eItgLAie9CQ/NBwfzdeXFLjaRFsv2zy37KbPIG8LvSdMGNssUNgjiDuv5L9krMsLSCPRG+O6j+yAP/0DMaO3Z8SI8vA8I7BLuHkLqEw2/4PP60foyHCDmHPrg6w4v3x0V/DvjG+kl7tTEGiL5ExUiyCzS0uXQ7N4bAAQaR+YoUO7g3/fa3+PpOQToU8D2KOIgHub/vjLp/Tzjvx/5HhcaNcMMDAv5Iw0JMD0T6UMbJPQsHP0QIhHd4xrLKPPfPuwFExgJHdPP/fikJiI5DvtD6lcjKxEQ+B0BBQkk8BjzGekM5bAe/wwSLcza0+4Z+GTlM0YnPgLlFcvfEg0nC/j87uQd/isiK8HhISP71b/VuwkYC+H45e8c5BfF5cQOUiAi/Q4Q9e9cIyDSF9Hs5+4VKQEP0cpGKSDQ1vQm7voU+Q3sExMA2RES1fcXAetR8QkQOCcoIhkKuU/+0wUk8sYeDdANRA8KPQTRLrPjyQH23x7d3gfA+ALR4fwUAdnr3TfH8OzbEkcV/RcY9fve6PL1Azb/Fc4zyRkA8ftMAkjm+e34XQzoKik3Fv0K5OQE+jfoG9j/D88VDOwHXe4f+BXK4w3iOsLtTfEfyhMnCQO0/CDsBi/l6dD8AN4lUB/lEub59AUnJND4EwT/DhshLvayqNj2KMa86OwK6QQqCvVYCCbL9CDj5AvfxNIo+dgK6Ok/HEMEK0+sFvUO7R8B2fT+IAD9IRor9xjatBbdKyX/GRDqHvcuD+87EAIyBuy77N06EdYQ+0318AdHPi0HBgDuMQIfGh7NwCwBz5opBN/VHTXVBfgPGfGeLQA13hQPCtrn/BDoO+z/xwEtEATv87x/4v3d7vz9LTX/4e41+itxEuIYT+Pn9vnsI/khTPzmRhMm3ejvxPof6+XN+wkC2MAL1/tJFdj/9dAbDh7T9AYaLTPxKRYYRzHkNBjR8AoB9MYx2xIQAusZ1/g9DCY++jjuRdTMPCYA8fQuTAe27ifuSfHQ1PrzR9P9ECQ3GvEPCQUmCiVfwiQ5D2zO/Qv0Ns3tsA7P+OACyNbrysYzNLs="
+   },
+   {
+    "text": " friends",
+    "id": 4780,
+    "group": "people",
+    "x": 0.3398,
+    "y": -0.7814,
+    "neighbors": [
+     {
+      "text": " guests",
+      "cos": 0.295
+     },
+     {
+      "text": " aunt",
+      "cos": 0.246
+     },
+     {
+      "text": " grandmother",
+      "cos": 0.158
+     },
+     {
+      "text": " family",
+      "cos": 0.156
+     },
+     {
+      "text": " cups",
+      "cos": 0.149
+     }
+    ],
+    "strip": "1gjuE1b0FzPwakH47uNPAFM0BeLP0OjgxUn15BME/kfD9Qva4UZK9AsEBOPXqQcCBdY5kTcR/h4UDjXlHCj4AfjT1v0l2wgT2HbFBgCwGQcUQOcCRwrAEkizXMTMsdkEPzivL+3rELoNR9IqJhgwaQz2EurTyQ0BDgg4CMDTyK8KUxf8L+DrZsE+sNzs+gMZDtnHxf4o4xb85sPSzvituRviz0sR0F4KESkKH8K68gbb/NTf1NUJC+0czccZJw7ltObfPjb96NnACOcmNgAfDuz1I/vK6hYYLtj+BxImHOkH/88S+foK+fg6J+kr7fEk6vMYGOsTAVkc5RHKyf6rxxb2CsMiziIUDPws3u7YICvtAgcL7hkWkRHq+Swg2wjL8ewR3dvxCu884vCoKd4PWAYb9vFEEyjHG/8AF7bDGeEg/akhDt3iEd3s9lgC1yP+3d71oB74ziHaG/8pEQelCM//CzEUCQ0XL/+8F+0d/7n0Ri9sy+dJCiNB3gkS4wFAEzHY08AkySr/EAbwCR0Q/KsRKDbo7MsgFuba6bfjy8HxBDH8FGIkr+vWDBdBHN3f/eRA8NxD0TNDAxZwGNn+3A0C/+wn/h/+/2AWHMvuHSTdvgUDDA/eugoIJhEB4sTY/CbQHSH4CPXtHX+6AOYX4gPO5CjpD9UHxecyMevd8vjXDQnn798WoxPY+/wBGPXZDvD1NerS+MsgM/L9CNsMFNkf5yLhUPv8GriG2sT1/i8g4AP2HxH48K7V1xnVBfDxEB5HVtMK3PvN1Nnj5iTRu/b57wYIFQfQ6uX7Mi75DPP69vQb684EA+sp4NVW0wL54q8aJwjJAir5LM4Ss7cr4PsL9wRX7fz0GeTl6Fj4788eHv389gL52ejZ7P8awuLiDWU89AnHPSodSRNGBmBJ/bnKLtRG8tbi2iXSNJ4bKAIjCDD9ABokYT0bSAMRFg4YHtHt+eO47NvBHAotOCPSv+O98tIE6B76/BIsMf7vAvcF5bn9MMo1DOfQ2fgSJANLNi7/TfK4BRhHy+yVyiLv9eJUJtE1y8+3N7lNngsl4+3089//YvcFrxX+6tUsEfyn+xMt+BY+9Ov5G/hSt/r4lfHdQinOQC0P4coE7NwPH/1u3VYFDuBg/AYF4yQOAg4J5p4JHQXN+owHHxH44vsb9rbdsa7qQeIYHuk0/eQGN9k="
+   },
+   {
+    "text": " people",
+    "id": 1251,
+    "group": "people",
+    "x": 0.258,
+    "y": -0.4786,
+    "neighbors": [
+     {
+      "text": " friends",
+      "cos": 0.135
+     },
+     {
+      "text": " guests",
+      "cos": 0.115
+     },
+     {
+      "text": " family",
+      "cos": 0.097
+     },
+     {
+      "text": " one",
+      "cos": 0.095
+     },
+     {
+      "text": " city",
+      "cos": 0.087
+     }
+    ],
+    "strip": "//4h7ssi6zby3TT6COUQFPE7Ui3q69jo7N7vIS0uGf3i5DziHAzRHSH9AtIw5x4y2+sSEPlCMBj80iUTJwsbFtktCC0aBCn7Gd/rBgfQ9CobFc4uHBXZEO8c6741Rs8aCj/GFeMP3BkSswhc2DEDLrbS5fswJuvR5NocMxHNJ9bLDhgGEwQHNupD2PsGDrkp8+37u/5WG+vzKewV2CMTPOsU5R72/v4VAtwx4OkG7gk2EyYi2NoN2RQPH8ctygbU7MA0ARM19RIKB86mJrUeFAXd8BDeBBrXCCzzo/QIEkX0F/wT8g7SKNa6U73p3eAb+9LbQzkRLBUZwBfY+so/AzxJ+t8w3/fA/jUhsxbY+/PXGM++4P79ne7wRASB/tIUwwn41zXF1h7eBfvt6RYO0SDj3vga7gj3x/MD9MzwwAL7GvYT8QIMCOHf3DEG5/MuKPIOyP8FwjLKC+P/+NjxKi7u6efaDzzr9RvtFBk3FekG/fXy/zLo4QMpCBW++xQMrDbN6v487fAH9doS1f8QuAr7TjYP2Rwx1Qfl7t0iwQkyyDLkCR7TDxjc3PAYK+z0Hy8IOfUXLDJGA/RK5ksWGQQmx8n7IvDMFTvq3dfL7DVFxDA+6ezh6PsGJEHQAgDY1BsKByja3dQH8CH75PDwwxXj2B4X/gPUBtUE5hDhAM77M+MUF/vvHAiqDOrz6QzwweYbKjUhsyAOHQUA6uYGPfnLBfn/Tcri7QHeHcEP9ghFJFoGMt7/8Be/OQssExoM9SA88hDn5dIawBLyxvPAFDKqIcoX8f3WGOE21cIU/QsBI9cX8i03Iwbc2+jo2wkIBQCpHPQB8PC53dEr5/o++x4pAfcf4QYMzgD5D/7m+PzFKrId4Rj4IQ/e6jka2NDkAAMz/t0p7Rrq0evs0+/9CCoMLAsB/wMeIBxmG+4uGffFLhYtANzJNSQZKQjgFwQXv/7wEyQn/8YC/MUyEx70KQk1A/YW//r8LAkWDgj1BUwED+/50qhQQhDP7vsm8Ak7BDQLqg8F+zAU9a4SEtzy0+ba4gcLo+ve9PYNCyAF2NH/5hnt/+ALzqzlEMMb0vsqz7Ue5hP+DCo0HfA50sn8PQ32Qrv4Jv4C4esoDu0W6/YTEwjqReogR64B+BERBvDM+Bg6FzjqEvz68Vr4/AXT3QrhBTfn6AcI+OP4FCjv6+M="
+   },
+   {
+    "text": " guests",
+    "id": 14709,
+    "group": "people",
+    "x": 0.2858,
+    "y": -0.5441,
+    "neighbors": [
+     {
+      "text": " friends",
+      "cos": 0.295
+     },
+     {
+      "text": " pinch",
+      "cos": 0.18
+     },
+     {
+      "text": " cups",
+      "cos": 0.179
+     },
+     {
+      "text": " yeast",
+      "cos": 0.17
+     },
+     {
+      "text": " kitchen",
+      "cos": 0.16
+     }
+    ],
+    "strip": "EfsnHhHf5R/OSw4MANIR/A31+usDzgMO+f4CDQUOUxjnADD8yDXLMhcbI8ny4xHa6Kb+IfP4ExEgQBnnD+cCDNYHOhje39HM/wQIFAf47xDz+PX0DAHT5RLaAeX/y/oH9fTY6/gnJ/01GSP+Oyn3HzDY6c/y9iHt3O8P6fD+7QAWDhkGADXwIOMIxPkS3vAD/vXu3+ga4tf05em5JBz1/PoS0hfmxxoW5egS8vbVAv4hDBsJuN39KB32CAUT7RbE+//+1P4c/BcJ8fjwHR7sFvIT2eTq2P0jGTELNMoWJB7K9+ng9NXz8+UZMu39Afgd0AcjOP8XHPHuyQzP2hDn/urtAs8c6gb5B9cX8yEALOjuFvwb5MsdxAbm+QXpJP3iN6zqEPj0ERoU5/sENQYe2wUeAQ0dtBXnvt4LJwCz3aQE2tUX+gPo9PAmGw/74yMDAfwD6TX87OwaBgXgDQn3FP4a7g8PDssAKvoR/xnfFr/8CPU8y/fv/DsGwuLwFCXZGf/vCQPzoyb4DfncLN33DREGDhAP6/QiBwLo7ecU8d8N9QH+5RMh6uAELd4IFC32GNLvCOADAR4iDPg/9RL99NvTCRUG7Pba4A8XGNz/KgjT9+Aj8A0J8gwMFg0V/9nWHhbbCAEW+v8ECn8jH/gE9Pf3BTMG0OYF9ur/MOLm8g8M7Nr88/rm4ygIChTzH/jq9N3mLwf07zkB6+cn0+sAJ+wz6OP7IB8P5OAI7Pj1Ix795wT8EeXi+eIV1MAm7aMV9y9D/t4PHP3o7OIKrgMnABEW/f7u+Sro+OEf6SzS/e4DASX4+0IFCP8F8+kE6gn2+wftJwXtGQ01FQPx2e7+I8fhwdwD4Qvi89XkBCQK+McEExISMeX7B/fuHCLh5iT5JP0kGf75Auwb+t3pCw4P4+MSGuT/CPML+Bbf+vAm9fws8BIXPxYUEiwBKxEB2/Ym8xne5wULCxLZGvEQGhgC9AQb9OI03fLy8gDo9uENDvIj2ggAF+T7EvEIDfb3DeYF//bOBgT8GTPk8xkHDgfWB9QR/wAL++Xs7NrM/xzg2qvy1N0SDOkr0QXwMePy/CTQ9+T6+Acr6BMCvfpI/vsw+hkXENEPyf8o3Qfw6iIKC+ME7SEEEvPwC7oPBN72DAMH9wEO//T56t/26AMOFuXn6ALWAcX6Ivn6Cu0e4fbcwAQ="
+   },
+   {
+    "text": " one",
+    "id": 825,
+    "group": "numbers",
+    "x": 0.3171,
+    "y": -0.05671,
+    "neighbors": [
+     {
+      "text": " two",
+      "cos": 0.352
+     },
+     {
+      "text": " three",
+      "cos": 0.238
+     },
+     {
+      "text": " people",
+      "cos": 0.095
+     },
+     {
+      "text": " ten",
+      "cos": 0.089
+     },
+     {
+      "text": " eight",
+      "cos": 0.065
+     }
+    ],
+    "strip": "BjH62FotABgPIrwD+/QdPgg2KArCCvoHLA0Q+SUgJuYdI+XdBMjzF8sGGvUD8CPrIhIVo/pfUd7wJjj2zyv7P8LTucf7He/cxSsx8A/P8xD8LOYLGCa8LyD/8iP0NdMlyNf75xTQwNrMmPpFE/3t7OLvwLD8DfnZMRPG7Br5IQ/0EyfwQQIh7yL7BCIdM+IyDgwp5UE49PsPAL8CFjA5wf0Z1dZJmvkJAf+dOw8x3QX/L/rNGzrUsDy80a9OqgT+ztALDd4dJvDWDBv3/esUB8kkDhT7FR33+L0KHOQQUBYD+yLzwPFQ4cu4DQyP7e8QEuHGvD3s4dowocXFrhEDAZz+BRbDVwMnxwgE1xJAHfQczO/L/ALv79Uaxdes0r/gNRfEBcbTOebAWwgjMz8aGfP4Fh4vFwEc/xf43fTs3AdP/x0H3RYc2/T9UhTO6RL42s3tDibMztIBAxshM5Q39jkPJBvAOiP/uxKrDB/9viYaFPIizhAW8Mz36cwDIwIKz9fmDSz98S3u7/IZ/fwR3wZBRBL4SjkX5TDpC/Pv+QcT3xnoEQjwNgEGEBDaz0AOuBsNFx9F6RcHzQ4P7J1S2gT0+hXjA5XrCvCX7/oKBg7kFBRA+eHg9QTTzuEmER7n9RYMFB6S1AbbzvUKpxEEy8knxPUYzfX00xjg4TXu/ftIK/JZA1NcDffVoxwUsEMHNw4e9vS1Ot8X+D9OSffd0ATcpN3vFPVB8gQQ/iUY8CsJBCYc8QM3FMagEeWGHKMTK/q+9gP/IfciMeXx0CwBGvQFMxM0C4ENuQLM0PXixe/8CinkMuUIAVv8zAPfSwkGFcMNQQEP+bMh4idkB+MFKOvOCcji2sXpEgbsPvzWVgT0J9IW+CjhExNOGPUfPJM+9fNU87PWzx/wGK5OFz/wChgaTutvIvP2F+/u/MsbAQFE9vng/NT19CfYGCoyMgIYP9z8Hwzd0cwiMogJWizOLdDuzwX7DPXr49ENFC3YKyf3IR7qC7Yq+vjrAwckBf3GlSbxrPTLxeYDKQDIvN5VoAr30+4/J1zpTdwk5d7fyyQDBQwQ8Pif97vI8ObJ+vgK9wnr+Rb05hS9HvcbT6f6PbPT6hUbzO+8sPJTBPalASZjtcvTRvIGMeEm6/rSCi4e+vn9IME+RUQTu9sP3zTzHxIhJx0+YPgB7BvYDMQcAa0="
+   },
+   {
+    "text": " two",
+    "id": 1378,
+    "group": "numbers",
+    "x": 0.4213,
+    "y": -0.02547,
+    "neighbors": [
+     {
+      "text": " three",
+      "cos": 0.677
+     },
+     {
+      "text": " eight",
+      "cos": 0.377
+     },
+     {
+      "text": " one",
+      "cos": 0.352
+     },
+     {
+      "text": " ten",
+      "cos": 0.26
+     },
+     {
+      "text": " thirty",
+      "cos": 0.111
+     }
+    ],
+    "strip": "HFMX3BcHEeDLCOfSAjkQINP199/ZBc4+69o39Aor1ikk+/Dk6xUY7N8E6LwAAUkiBAj16PteDg7xQw61C+se9bij1qug+w/p4Bv979dZ8vcPEL/x5jUW/D///SbfGv/s2xHoGxHi2LfCudEs2/HFtuocEcfXBPEjBs0X1Q5n6v/uMQMg/vD+GegA6kcdEj26FQbmo/P+/hHhEtX0XjgkzesMJ9NZGU3J8d6INrk/jxGXCbjJFTXui0HdFwRrTPX/Qs9E/fOzTNQL/efF4tzmELNHwxuT90a0IBD4SO4dT1T6vSAB+7FnDOTl5wIVt/8P6tkssQEOI9cK1UC25CY0IL/M3Kz98ez1xz0as9HswDUM2vDPM/AL6OD94u3hEpIk8CwyBu0osv4E698LTy43IflQzj0yI+ksBDTqAjrWDwEawxYMUCRbAhet4CXhzynbYvAEQwT00sI73S/2Igc1/yr2J00DUS0ZGOEM+7z5qeUNHMrlJqv7C9biHa04wyrtocjl7aFgIC6ZvRYb8NnT7LT05eYfABYUFhH97NrnHA8fxSAD3QL59/g1/wEN9NkRS/oSQg83zhjwFtXj3fXrq+USOOs56A/hAQIp+tUuDf4QBPM3sfou6dol7vgpH/lLGI3zOQqy9MPzSyTalgwHHu4F6iYl6+y6m9ar7+Lbx0b9LTcs4jIJDwDeBCUh7SMLCDXHCKIT8a8DCfR1U9EYQjvZ1NUNRAMEFyInCUGlDEAr8g0QK/LL1svtJd/6/qrJJuzJDiQJ39rlAwjzFBsC7FG/M1gb8Yg8uOYSryraJgX89GA1yzUp/BjaEy3lL97DMcTeMdAI+M4D+/Fg79Yc6BYf14jp/O4HJz3SFRMPyvkQ9+tczCQLRCwaGu051rgMs9dR4InP8fP+lMAqv7r0LxHdWNs3FPwFF6BR3CxM9fQ41Mof2crz6QfIRvMQK/ILWh3zAiAo2cAf/9wVfyb4COnm1wT/2Ljg+dr8JejKTPgN7AX/FsBO69Dj7gb79BDC7ff4vaPh4No1QtvG+gUSpvXk4NcMDE7g7uPRNuLm5k7g9fYg8foLD51owh48+eYv8vBN+yT5EQ0FYuc6J8Ib4LjB+wo18k0o6gBVwAbR/jLvYM34Gur6QvLu5+T/KRQp7e9YFwoIa/Dv1tsI5jL3CeH+JRn8Gxv/8NXX6jAX9Zo="
+   },
+   {
+    "text": " three",
+    "id": 2326,
+    "group": "numbers",
+    "x": 0.4304,
+    "y": -0.04937,
+    "neighbors": [
+     {
+      "text": " two",
+      "cos": 0.677
+     },
+     {
+      "text": " eight",
+      "cos": 0.479
+     },
+     {
+      "text": " thirty",
+      "cos": 0.426
+     },
+     {
+      "text": " ten",
+      "cos": 0.323
+     },
+     {
+      "text": " one",
+      "cos": 0.238
+     }
+    ],
+    "strip": "Jxg98MH29Bb23R3o8horINj1++zVLuEdK9A3+ukrxD0I/84B+hXpBwUr/KPkEBVB6tIC+hlHBvgRJBfP+fHw8MO9+ayS6NnLHDUd8/RoR8ASJ9cW/CsNHDAE7hTwFur3CB3iOAAR2Jvqwu8D2d/QwgH77OLMG+DxAev4Bvb94NUOH/j/zvIPFMDq9W8JBzXbDAjQufAJLf4J/ugIJUkTBQ7WIvFkAi2zI/KbOKJOyjudNfbd9hf5tTj7BxNEQQUePMMR3r+1WQEh2Oz16ffq88clqhWh+irUESoDIAYeKFS8DiUGEtv1/uwy2zD9rvQXC+1H4iLzJ/AD6CjozhR1+aPo1Mr57uXi7fTulO8P3QsM0QPfTgpB2wtKGwsOAqIXCy7zEP/f87MZ6AYEKybWCgpN2jYXKSra10/jFgDwKRoAvBAoF+5HBiCh0wYCzBoSJPTiMTkl4fRFByfwEQMXExwD6w0vQDn0/Cws/rXhs/0oFOLZsdDt+MP9+c1f1xQ5tQn7u4En70QJwDAnBvLo+L3a8ukMGx/1/w35Rs7o7QLlwyT1yeEhygsoEAH69wgxJPsWHS05zhgLF/PY7/gLw8r+Hh/8PRfD6hoKFOIEJf7jKO8U7vcw+tkD4gIkMgcK5p/2/BjM+uXQI0HFywIh7/Q+KfoEAParscnm+ffZzUgmClIG5MLWIAku9gwg5xrtLR+wEvI1Ab0wr/VfPOMjWBbnwe8zNPm99P4ODxzMGUVK5gTxDBTiHMvzAMXB7ccCBgjX+B0/6+LvQGTp2Sf4Hy/HM0IS+8VVyeMLzg/2MtIS5iok8egDwAwABPHnNdnCRskiWNP1zu4fGeAx0QEX9d81r7Tmzv8BHP/ozBHh+Bn9BAxPxCsYCBMIG9v3//f53u9B6JsB6vDDm8ktmvv/E/z5WeEb6f8SMLcK+t0jzNhGIDQr28fX5fniNAriJOrfAAIiDS1h3vQG6QcmUD77PQYI4eUU0Q/WNPsBJwrpGwUm1PQJCK8gAc/pHRbF0OTZHPv+57rk3CEiRBEJ4u8au+AiAev36UIm+t3sLs7m5jfy5hQO9uM338wUpjQJA9cQIA02EBT6DajiDx0/CboRAuPy9h5o6eMNEBtE4gYJHiHYUOz1EuwG7AUu3O73J/ZP8ABX8RYLXxkO5xj85TL658wYwCYSGEwNBuwZ7O4SBLw="
+   },
+   {
+    "text": " eight",
+    "id": 8063,
+    "group": "numbers",
+    "x": 0.6398,
+    "y": -0.06876,
+    "neighbors": [
+     {
+      "text": " ten",
+      "cos": 0.537
+     },
+     {
+      "text": " three",
+      "cos": 0.479
+     },
+     {
+      "text": " thirty",
+      "cos": 0.448
+     },
+     {
+      "text": " two",
+      "cos": 0.377
+     },
+     {
+      "text": " hundred",
+      "cos": 0.192
+     }
+    ],
+    "strip": "EfsNCPoFABD+5PvuAQMqKs4h/eT5KiwRz+gJ6vL8SUwL0rIM0yk/ByAkCCDeDhhD1+3n7wQlFgMiQBXl5AP//sitEKr0HsbJ6PDtHAgpDwUQ6gIJBSwf+QQqGQzh4iMW7eL7UA4uDYb+2NrjyiIZxw3yIeYR+vMD/gtANfHj6O8fXA0dC/4j3ufpHVL6DTDvCgK+4OoXFdQSH+gaEhUQ/8D2Db0u6P0G9PfjHAcy1AfM+OfuHgkf8PAOyzkXEhLeNO4AMgH2FCIHBQbYsTLvH7n3s9kA8BfUJUH/ABcfLFofDd4MFdLW6/tH+eA74Rsz2w8EHBDf4/T29jq3Jxw28vEb/s46PwDX4tkeyAXW6yYU8R0cOfctMQkZBgTd/+kAJRMG9iG28/od0//+F/HB8wkI9SMHI/kRxC3bKAT3NwjxAxf8Ix8lBRDU1/TsvAkQ8PsMBzMzvfljATDp6yzpz+b1DBEn+/4oMR9JD7n+yvUYG+TY5M8BPwzm8eQx9eRW7N4H9wQQGBfk6RP8LQDn877IFh3bGi3e0woMFuLLDxoECPfsw9AN3vROMPj29+g02QAxESslvxLu7ece4uE2y7X3EgTsMjL0Odwc/uwADtz4/vctwfxM9cMVIMbJDwwd388Q8DD2IxwdPEz23P8yRxEpC+ES7/SwAtH45fW+2B1cGiMYvvobAzbB/9XN9/vuBw7sIA7+6ADx3usbDfj+MhHCmAEuEDXp+x0BLd7oEVM+LCEIw0ELOdUvEAgFJMoS/fX89v5aOOfsyTQeGjHq3DASFSD0GdU4x+4ltT0lFjTP8kEN4ffxEgi7ATf/9770N9snHL3G/ScrVwYc4gnuE9r34Mz64x724v41CjrBBh4Yx9ZOzvIsMSbc7Q4R7Ubz+/Yu8N8EHP/XzN9J1gbyEAYIOg0MINX65b3p3eseK9EkODbtwePo2wz2KTHzM/3mB94tEDVB3tvo8PsBQhIFBOck9gsz2Bf08eHw9x0sBdXo7AL2f8zk+hH8Dw3j0+T2/xUd0tz0Fhj5/N4Y9QMG5OYYEvjoGSMF7/zxJkMR1BTX+BHmHxESAur+DQhOCg7u4fkcAwYSDEss3xVP9dkp8vLzEwMoAysOGhga9zsaBP/3UPH25gnW190I8U74CPAo90dbyv0lHOcB8O8j1BTH18QtGAXZyjkkEOAaKPL42+c="
+   },
+   {
+    "text": " ten",
+    "id": 5779,
+    "group": "numbers",
+    "x": 0.458,
+    "y": -0.04592,
+    "neighbors": [
+     {
+      "text": " eight",
+      "cos": 0.537
+     },
+     {
+      "text": " thirty",
+      "cos": 0.465
+     },
+     {
+      "text": " three",
+      "cos": 0.323
+     },
+     {
+      "text": " hundred",
+      "cos": 0.288
+     },
+     {
+      "text": " two",
+      "cos": 0.26
+     }
+    ],
+    "strip": "8OTu5cIVHQZB+f8L7tghVrr4Ddz07g4hytP6Hwn/NRQkBekY6BIAGhMJzQPtCfQd4tX0Lt4jCPwIHiAQGgwQ6dC4/OflTDirKvP3DNPGHtgLHOQy6gwoEAH8G0Dv9v7wqPMjKkcnLrnv0/Lo3Az52xDZLMPnDyj3jBouJfnZ9gw9XN8Y3QBcA63rF/T83SPCBBX4Cyrrx+70AcrRLPwLsOn418YZ6N8m9wUDFa4fvffgMtj/HTL0FvEWxxoWJyjcH9/81joG7iwOvCr4yd739fwPrhUBAeOgDT4F8+UcISz3It8IEsLZxugq6dgu8Tgh0vfp6TDnFMk3GTHZEjgsPb35AhTvGg7v1ekj2dMRDQomDQYDDgEaBCIKCgLcEhoN0fPt/R3O8AP/ruLT7Qeh3T/tFfvxBgUj2w7N5fL2QTUY8gACLQrv8g7y/tLu7/T6Iwrh2yMw9Acv1xHG7wcTCAb3N+oaHdETLTYiDODspuEp3gz0v9z+EREI79Qn7uc++L4FxzsUFjDP/ufqQgfV3dW+7/HIFh0I3fvyNu2u+hT+BB/728/0584cLhAV2/dF2Sod9SQU6ywPBgv3zO8G8t4K+g4S+vTkJ/8VI+L89RAu2eMW8PFE3AoZEeLjC+vu+//93w/4D+saND/g4QAxJOtWGsv77MvhHZsH/vTfHDExGjjVB/8nJPzd+9T7GCPT9igR/ezg8xkR/xwWIwHeIx/m+f0iECL/+xQPV/oFECcrBDHsvvwYHPY9M+HeDBAfFyGwCS0DIS0O71cRJFHqvRUgIzP/EfNDGu9G4Pvw6hPa9S787s21TRTY1jPqEv4HJ+tLCLvt5eoQEQdf+Rzs2dn5zd0R2UDHJf5X7iPUMhcIxi0RwPYmRjMwCxwdERgT5chB2M4MCwjo0RNts+7x/QUaCinv9wPuw/MgOuEAP+MpJC8T684E3OvnLAbYOf7n+9Ma0CARBOEIDOcSJ+kLK/wbBu0h5voLBuf3Ke36+Ojy7essRsQHBQD2JAnz4+8nzTZD4un5JeYb8tEs+ObW08LA99Mm1ynp+u4h2i7T6zXmNur3M/gAGvciGP/1DzjrA/Qa4Rjt8iXiCNsg2+/7/xn8/y0c8H8MGwIlBEH35ja1Kub5/enF2N0N9DQUC/YY7CI319/hTfoRFdto9SvxBc7hugi9/wn0E9/bBO4YGxk="
+   },
+   {
+    "text": " thirty",
+    "id": 26127,
+    "group": "numbers",
+    "x": 0.4506,
+    "y": -0.1165,
+    "neighbors": [
+     {
+      "text": " ten",
+      "cos": 0.465
+     },
+     {
+      "text": " eight",
+      "cos": 0.448
+     },
+     {
+      "text": " three",
+      "cos": 0.426
+     },
+     {
+      "text": " hundred",
+      "cos": 0.401
+     },
+     {
+      "text": " Tokyo",
+      "cos": 0.124
+     }
+    ],
+    "strip": "Et0g+doP1vMY8eIY0vU7Fsr1Ifb89TMTDvUX8uoj0j4SBcrqBk0JGQwc5cW9BgkX2uTuHAAD5idA8hgF9/sNwAHGBKf1F/vc/vrXIwLaH97xDf0gQScWNgPYJfjiBvYg8uIKKAtM/ZUGBDMHgeTlyUflIfXNDfLt3vQhNOvm8ucuVfELCgEeEs3a9iQh8O/8GyjLC+oE7SULw+78Ezz6Bw/i6coZ8f/LGRLyDsQi2k3xFQYF9i0HCOMY7BH8Fh/t/7DvuezjB08H9PMd9QTT5NQP4yHhAvn67f06tBoUCw7mJuEUDubAtepP/v0P8yVIHSb78RLqJfvXwiID4Roh76YB3BH5DALU+9P/yPviGcUNKR/3A/Uv2yJMGQsJHu3/Lez1Ed0NJ+4SyPniCvKm3gr1Bu/4Ck+0zz7wNAT6FuYgFPwN6w3w//iszMUJxRBr+f79/S0k6P5MJv3m2v4LLfbwErsnCdooJBknG9bkputD+xDQ4vAoCwUb29Yc7u4Lqysg7d0N0jAL4v8aOQUS/dzeD/gWCTYX6/rta+m8CBz7z18Jzd0v490C3u3x3PVL5Pjt6CFA3yXuF/n94ecg5uDg/jDiGfm2GxEhCyXStgkewu7xB+31x+8g/ePHIMcD1QzsBCcI/SwERTUV5PEJ6u0iKhYp8ObPKMMP/hHNJgUs9Tjx/b3o7CPiCeTOEAiu7zIYNRXzIi4L+8wZCfzlHO817RAO8xoU7P3vF9IHExI+LVD+zvzvKNwT/uDK+xQh9gj/EgA2GQ4f0ToRJjgDAPfeHyzZAvFC3uI/COk0EyHtC/4YEtP11AwTDfwNFwrMV90r7AXY20YYPP0jHgQA5NwD+tj7xk3dzBQH8v+eMR8b4vwZ4xMfAzsL8h4PMRkB/uMr8vMU7Rj56BUotCoVBwQ2OEX18wb1Db7p7bANC/o+HxBiGS0Ku9kGOQHdFv8pufUm5g8m9fLu/+tTOPvrE+YB8d0z2CbbK+AMMRkE8doE+P0HTd7c5dsMciH15vsD/fz1FwHkAR839eJCCQ35AskeGh0Q/eIa1f/0BQ7B5yTn+xfcKezm9wYJIRvX/R0YLicWEzH7FsAF8ghc/Any1i/uLA0P9vz+GUnvICwJ80nZEjHZ7eDzu+MZ8gn49QEo7SZA5f4HGygKBB8A8vjy1+4pyAW13SL4COsIQOL95Q4="
+   },
+   {
+    "text": " hundred",
+    "id": 7739,
+    "group": "numbers",
+    "x": 0.487,
+    "y": -0.1813,
+    "neighbors": [
+     {
+      "text": " thirty",
+      "cos": 0.401
+     },
+     {
+      "text": " ten",
+      "cos": 0.288
+     },
+     {
+      "text": " eight",
+      "cos": 0.192
+     },
+     {
+      "text": " ounce",
+      "cos": 0.154
+     },
+     {
+      "text": " gram",
+      "cos": 0.118
+     }
+    ],
+    "strip": "+Okd+dz15gQK7BssAeflL7IHNQ00+vgI/cnnxxjH4wlA+N/gNEUOQQf/AA/6B+DW6r7gNwD2ywAR1iUM6/sDWAjyFNcBWyPmBADmEQPUQBD1CfLXayA7GMDuDdr45f34Mwf4JAdA6hH7FDPjzrXu2/PzFgUHDNH6KtL+JgEa2TIjK/jRTxMFKAHZIggGE/Ps9w7kHvDWI/IL8RGfGSL2tOj27sEO2gQq+xv7CPYm0SAa6t3R7O4xIecV4wcYBSPgJ6b02ewlBk8JG9EV4uX57fj47NkB/AwA0uT5qA8UEBElDfr1CMzW0Q4dKx77JjY05RlXGiLn4csR7RwYJxzbJN4/DfUB9/i4AQvj4fQR8wIeDgME6wAs6yz/8RK8GiwbByH97Nm2+zX34wQH/x/S7hXN2/gaDxDkEC3fG/gZ658M/TAUA8YY5RHl1eDl5yD0BBbk7QYPCA81EwC+zPG47/sCF/UI+NACVRL4JPvOvcQxFzT++P8KAfM6+rEAMPshCREJHiju3gnRyxrJFCMe6RDeuyHd+VJADxfdK+z9BArsBTYFDTbf/q8TvPoo4R5IEgnSkzEMaCjuTP/X4B/1/uTqGp7H0unt8QEi3vUUzfoai+C6wAsj3O5ADg7Z/TzW8irQ6hkA1/b45EMEEPAVIdz3CD8DC9vdJdUAdendSzAb/PvpNtQK6t8GI9nhDeNO7Q3tICzvRikILsvyANoNGO/P3R4CKBor2Qnr/RwyxgvvPyTDuu7nH+st+fPcLkLi5SUbKOkb/t8GFU4YDDLi6Ng2GPrlQjE1M9I97OsS+CAEJQkBARHWLRMfM/k94PblKOwi0eLUBCsCMORqIAbU49sXJfEG9C4e1jX3+SGtECkDACoCBQQUBxYP9E0AQ/0S7vA23xATBdUt3Q506w/sDP/8LlXRCMfuIgEVKQL9Au4A9e0FDCAC7OT9M/MA5+rr8gvl0grwBwQJBB1H5rwP9hEdC8ZO11M0/CQVMv3YI9YMBuURLM7IOtn2HxUAzfhd6PMJCw3ZLzr3zrLv8BT9Ev4yKwIUG7vQ79rl1gbZ8gnwW9Tt0iXJ3eAJWF3nICfrEu3/ODDRKtxP+jNoHQX8sgfw/PfiHn8lHiLvSCcP/RceBUjx+g4V28HA5vT1BP/b5PEfHOTn1wqaFQ4L9fD35wgA1PWfvijyLNb5PvMCCxo="
+   },
+   {
+    "text": " Paris",
+    "id": 12095,
+    "group": "places",
+    "x": -0.9736,
+    "y": -0.1312,
+    "neighbors": [
+     {
+      "text": " London",
+      "cos": 0.384
+     },
+     {
+      "text": " Tokyo",
+      "cos": 0.342
+     },
+     {
+      "text": " city",
+      "cos": 0.109
+     },
+     {
+      "text": " thirty",
+      "cos": 0.081
+     },
+     {
+      "text": " friends",
+      "cos": 0.079
+     }
+    ],
+    "strip": "Sff70PtQEq3sD/8d+ybwLlUs6R3ZxOn+AALR0CkoG+/HJuf3BPXT4j7ktv0xFBca5+Yo6+sx2LYGAB7a+gT0Ljj1OQbiCuUI/zgIKAM4N8rsDf0cKRkHAN8A8/VcC0TMFOj94MnXAuo0EknAH+K+2t7zScEXxO7O2eQO/sXj8OkY/Q7HDTE4DR3ZGMQv/qf9CS3UBCTL7UnqEtsKNeYLDNT/DCIFJua0FT4WEeLuIecC0A/g9zH9PNoJ9ikz/w0KRBDABAQpNfwhw9wnXM/EBwkUTiUgGPHeAaEQJuIi/fTP9ev8BijQ7AI0tysR/tv3FPoc/wIZ5+w89xEHyvcVuTP0ywXlA/ruCNzKA/P67/NIAvj9V93xlgLYCDM3QcUcrSDa9eLb1PHz0O3cEvDLNO7zJ9AOCRz/PvICIO/qzu/zDY8RBBcKEdwaCRnj5f/jEznpE+swqBVCCgsg/gDkALLg/xrZ5vtBDyFA4tbyEOgu4TcfIDoI2wUNCEMQy9zbAAXd5yVXCS0JErL7LDfU4Sgg2eo12A0WPQj+LO7RULTM8EEIEPgLTrYUFs/w2DAjv9z81Osl3tXs//nlB7nvz0vdDyPoH/v4Df/hciHJDgr0+ywB6eAYx/ogAdHpFOYhElrv5wMdw/IR4lAFHekg6QXoyOfYHCkLB/w/8R8mBhtM1szi2N08zAjw2/ozGRzCECj2Fy8p/NwEOboc5/zUIfNGL7kKKv0EAe/+5iD47/nl9RIZF9DhEQAWJ9bh0/Lq6gD91+/O49fY5fMNIh7eJfnkQw8M5lqy+OssJQHNzG8fDQfzQdYGLDPMB/XlzAEj2Nng+yL08tMELAHTFxQW3VE0ksXb0iD66inqDO2hwMUlTB0IDBIIEQ4aBEL97hAGxgs+L+k+DlD75OYEBg3K9x0eFCLDB2b09hC/F+Hs3RcEFAjNCbfO9/TB7czxqSfWF/MVtgH4++IQyQjs7k0LG87+5sff5v/yMtfH2BcHXfkM3cw08vcI8Rcn5QvS9hoBDg/XEMomHWIlMTjuQg76DLIDS+IvCDML+iMXM9brNwgONi0o5Qv2gRvtPb0S7uDmEQU1tWQUDuIUK9Ao4EcA6h+4JvTfRLVJDdsHxsnj+PcAmRMZmVpODJQW4vsf4Q7oHvfgWxAv/twP4iIxGQHTm+q5xTARIqoTyxviBubY5Rk="
+   },
+   {
+    "text": " Tokyo",
+    "id": 26194,
+    "group": "places",
+    "x": -0.9455,
+    "y": -0.2079,
+    "neighbors": [
+     {
+      "text": " Paris",
+      "cos": 0.342
+     },
+     {
+      "text": " London",
+      "cos": 0.327
+     },
+     {
+      "text": " city",
+      "cos": 0.16
+     },
+     {
+      "text": " aunt",
+      "cos": 0.149
+     },
+     {
+      "text": " kitchen",
+      "cos": 0.13
+     }
+    ],
+    "strip": "+tct4AouwhEhKArg/PH/K2rmxNDT8VcLHzvuYUcRBSbsFBHyAvnA+HbczUq2Kzfex9jg98Ty9R3UCDC9+AULDvKqN/rzHAg5LBUKKgs5H83bAgvZNxQnAgTzrUH/KBz1IfkHCvaz8hsREzpB7dfb3C3+6Pkk8e7e9g4XF9LV08487LvX6AEO9CkJ9eNBCP3+yvTE8/wN+DClxMkgG/ntFSEWAxXMttPaAxoqPSbyMtY7C+8aGCI/EvLEyUAwEBf7QAn49Q32LezlMAn9PN0x9QLi8jUKAuQB7gjf//4n0MkhKrXNyAzu5PgtyBs+r9kNLxzq/B0RBRBT2ywbBDJE+r8D9t7+MP0Bwhjw5Qft1wz9+fDkEjcRCunFJxk3NNpd99v5UgYk8Bw32uoIWSVLCUACKRH9DP0aEAw5Or4JH9fXQur88vcILk0A+AT13PT8EDT7+rhECR8PAwjBHAviCqszFuPQxE7PN/Py+KD+x+YuASLb3D0Y4f5ARRzcz/oO19/p/Pk34wLiEjTr+BPYwxDCFOM7BQgs+v4fyO8ICxm8AxIxCcT4HeX/JtHkv/8txM7YtvceuwLV8upf+ezk5A3F7RjPHRHT3f7xLAGv+QpY5wfQCPfaLxMSWcfJCfwnAQ4I5twjybrr5326/+MH/Sfp9t/aAw4DD/7x7SdYHEbW7On0Ey8+5etL8KgQP9vw+szHOA4KQx/1DMoVu9flFMcPFQVGKA3VLgRIJfbqzuUKFCXxFdLY8NAf4Lf+PNco2AUs/98mIQDSyOQnJh1DFfvi6Bw29yXU69EODg73C04rBt8xHv7n10L0/OgV1uX2p/nvGTkHoszm8RjxrxkSGFHth7Wv0B4AKeXP9g3VGvnqQzTpIOINJxUNByg27ibn0w0kGe4H4xf5PSP36FohMSf1DUYhE/rkGeD238cEtQ4CMhAAL/sX6dPkxue0Ci5i7g7xwg71Az4A/+cA5kUAGtr/88cGyQ20QLvj9vbOSAICFvLh2wEN9EP9MxxDD+IG9NghJf/WGTYrxPD6McUVGPbMMhorNQfq/f352x6jEtb+LBMu7hMerSwDNMYMOvTu+NMzMhAY9hgR3eUg3kE6xRQR8bvKIdcpIve8K9wrL/t/oz6+ADPv5bIW6PD8AQzE8vfvL/QusxYjuvABIOIAvtwU8xS4HQcHuij5+wT9Gys="
+   },
+   {
+    "text": " London",
+    "id": 7148,
+    "group": "places",
+    "x": -1.0,
+    "y": -0.08643,
+    "neighbors": [
+     {
+      "text": " Paris",
+      "cos": 0.384
+     },
+     {
+      "text": " Tokyo",
+      "cos": 0.327
+     },
+     {
+      "text": " city",
+      "cos": 0.158
+     },
+     {
+      "text": " pound",
+      "cos": 0.133
+     },
+     {
+      "text": " salt",
+      "cos": 0.062
+     }
+    ],
+    "strip": "TAwU+dIcECLkEgEl9hAMNCDYCgDgBADZDPfkCyn3/ugFNOPv7hXO6SzTzQIVJxX5EgL/AQAr5931/wsa6ifuA+rKLSEhR8ksCy/mDQY28wfz/Ob16fzlF/sB5/zuBjn4FNLjIObT4/j5twcPycz0/vbW+g4G8tPQ6x/mAusW4roa5dHjBg/3E/oHBNstIvcEJfzrHQXlFR0KFfYfPQzgEfEr9DrS/+i1BAMg5R4L58sc/O3Y6tni+QYCDQILDwr0HujkE2UyA+IW7wgQKzn9BQYHPMc/8eP9/NQSGi0M2QU6GvIY0SPY3CER3AgQ6OcDG+cj+xwUOQFE3AokDCX1+efmBQ0pAfrwDRgk9en3//IO/e3xf+76CM4GGfAo3NYG3fQcFgMc/O4D4e8JFQ8VJwYLy9EFHvcBIxoBC+AD6AQGBeMQ8e4FPvoFFQ3t/A/8RjofMtb6tx0Y3c4ICA3+DrfeLdnkvBnt+/wO5fv3A+P2uvkkByAPtAgPDSAT7OXcHunn4wA5JBb9TKwYDRHx3BEBmfT35fcY//P4IgwFIubaERAoL+UN6dwwJfnV5gQs2PMY6jojAO8MChkU6uT+GBMNDQQG4gjxxwvwAvTu/QA59QDf2egGHD4n6A38DvUy7eMsE+kD7M/t40kl9uz1zP3v6dm0BhIhCN0u8CQm6BcaD9/5/AYs2OL/wr838xUjIeTcFx4h7t8OIcMNKbQJIw4c6+ATKw7qIP74JugO8d3eN9AG9gzGC+w6HPv+7Qcz9dgC1P7wIOH+5Ooq/jc35hn9/PUEM/fX9uPtARnT3PgM7MfrG9T06TMM3Pge9e4jCg8BBA3BqOQpJuXq9OQK6SsrAuTY9BoAKRMwEgu57u4k/u7lHwgRQhrYAFwf9iUcz/IqwQT9Ju/6AvgZ5wYdC/4LGyb03CHcCQLrE+Lv3ub/HPvAK6fk59Xp7xbk9RzM+hbYzPwk9O73BP4JBUIbL/X5+dDWAPABLe7/4QnXKxNF9QcJEBgBzQsOxP0IG9wU8QL47bP8MyTaAPAVNvoLAOsAO+z9TAkcCwvoIQs9ExcCMkj+IPz31tvczxY38wDxDuDjHigLA0rhU+gI9TMPIzUAENno4j80J+X7HvgGLNgj6BPu5SDl7a/ixRbp8vjzGefuTAn+zQL53QfBC+8D08cdBP8DQdTY5f8F//EWKAY="
+   },
+   {
+    "text": " city",
+    "id": 3283,
+    "group": "places",
+    "x": -0.7088,
+    "y": -0.3382,
+    "neighbors": [
+     {
+      "text": " Tokyo",
+      "cos": 0.16
+     },
+     {
+      "text": " London",
+      "cos": 0.158
+     },
+     {
+      "text": " station",
+      "cos": 0.127
+     },
+     {
+      "text": " Paris",
+      "cos": 0.109
+     },
+     {
+      "text": " cups",
+      "cos": 0.103
+     }
+    ],
+    "strip": "/+nRyg8gAQHVLsEP/qkYAi8SHbH78QLn4x3XKPz3xT8jLtzq8hzlDuwo+/PgFRAl98Msvkgl+QMN1w3YJw8IBE7hMRsHFA3DRyfdHikIHwsyOAbgJCy0DEA5usobAxP+/e/aA0XY+jk8SvobvNZMG/AbLs/cCMwkHdogCNUOFVDuxNBNxQYDQB0WDNPhJNAByP8l6p0mKhXdBRsPLwT15jEx1SsO784c8hAbFx3/6ebQQhjhQd3i3SIcHfPqBA8/EjwF8lwO6tAB1OLkGQs/GujV3vDjNSY5/5YR3RQdKPgh1h/C6C8C8N9BRfbA4u0uOfwLDsgYSNQa2WoA6dkN8uf9YCS0IO3U2iHN5SHD97X49f7nossNFjwm4fDv7zUbPurPHtIMCfPaM9DaBPEXEOLzHTUJFNr5HPYSHYkNG/0OCwX63y77LxHPRgnmxgHqIDToMfKsrdwl09sIxwH05t6cACwIohQqFbclHjLiBr0NGRfLJhCXuiIRHdsbBLwAuwrjPM4n6vTp/TP7B+kEQvji8Oo4AP8DFrS4Ld4b8Bb6ETke8zQhqOHXIdVG4U8d3cnfHxjy/CrlFkEOGQn/+R8G7QcTGxBgCe/eRfwMLRcw802i/dkcGRAFDd4FU9E77hT2zhvh6tcd5nAh4PAHLxTZDebdLgoBAvkMxCYpCvXdI8rq8ysy6xPT++z1/tQ8BOoVPRMpJyz5CwAuI8BPHea0vNAeTgmKxRoePLvDEvnctRcUGuXfCd3fFtDF+AQ0B/MKOP4s4v/2AfQw5CL2DxjbCermF9LmEPxUBCuhBUMPSPsRDAn6FTTQ9wkAHK+O8z/m8yv8Cvy3OSwl8/m58OLbB/zN3/UIFvFS8+js///rvcO+5uk3zOr72gIht//UKAI7Awkm/iEjtw3wAds/9BkaHPv6qdsC7N8DCAYUxw8ZFC3x3dPTEP/2BPXvWAzNyhnfB/oHBBD8xCEc+O5a4t8K4PTs8DjlNCbqGSPRReslLvQBBNO85Pq6PhsSGhDS4/zwKzXhOgkANekYSQ7F5PPV89QiTFTCFgHTKD//2sXmBfIzDiQMvhMDGDsw+iUmAevnOB4CD8z4BvlXFOslDSgWXNTj+BIVDAMrB8cUHeIoAhQFBDkcIMHwAvgN7+oI6vHwfyj3AKwZ3fb45gki6Br3y/kgGMH/0tr4FO1C7Pc="
+   },
+   {
+    "text": " kitchen",
+    "id": 9780,
+    "group": "places",
+    "x": -0.3698,
+    "y": 0.05149,
+    "neighbors": [
+     {
+      "text": " cook",
+      "cos": 0.379
+     },
+     {
+      "text": " bake",
+      "cos": 0.25
+     },
+     {
+      "text": " spoon",
+      "cos": 0.248
+     },
+     {
+      "text": " eat",
+      "cos": 0.212
+     },
+     {
+      "text": " dough",
+      "cos": 0.184
+     }
+    ],
+    "strip": "ISha2t4h2REiS+9GFPwO7N8d8OQJ+fMLHgr36kwPJUEb7C785/UOGRIDBjZJCOPiJNvVIDAA2QMc0zL1/BAxCgktHfGiDevvyRTqDvYDJ8UNwg7S0QEC0dfs9soD9R0JOP058kcX+ABK+9/qCQDoF+w5CenLLCTnVGPy6ggS5hEJDMfPKw7u8DL78Ano9t/YIxjVIQJEJNXv7O4d/w0DHTgX//0g3Uy00BL56P7oHT/9vezdAfvo7vfA/ijOxxvr/Mrk4jQYJ/0NtNwazBntau0Y8jn8N/73JPgl9xYaBtzlLRHL2iX03zvmNiPHurU89AnIOyMd8An96EfzGiUDG8H4zbP8BQzxCejm9uoJzitYKOgKCvvs8+fG8R7qCEQr8ejOFSDWSSbw0wf0E/wUuTYMAjAHIBMuFhu+Ld4sxPzQCuXj5e7E4HAKQDT52fXr7QIxHfMX5NkxOwagEw4NPPHTCiLp/vg0AMYYGTnlF8P5/gz3MAEIJRM78A+64vTW3N3x4uQH/AvRIA4Q+ucZ7fblGDAV7v8L0CPQ7AEp1AkMHRcS18/5LVYaGsXhGv4SwFPxIdgfHTms+ygeCwge/+cEBAMXHe+yDbPt0gS68FwkusuhEDWeDNgQQMgMMPQryxLp/RgQHjDfIH8mUvX46u4L4A3UHO7f4xHu9gv0yCD4+P29GjSr6CYU7O3+Ru32yt+0LgMa2yD+9gbwAcj+CwDl2gT8Ci7kCxL/BAX8B+jd9+Eb+wnQ0gcr4LYn+dsJDCAJPts4Puq2C/D7BegDpsPy8jTADBf4JuMBK/YpBtNAJQ41ETM2Ctxa8N0jDtDSIBofFhIcKQENGATU2Pr8nOzh4/vmBw1Cs7AOUwTT/vX2EgAG/d0F8Rzf8Sa+EP8KLeMxMegJ9yWUCRwu7EUz5BoyDBf/Chzp2AbUrg7yBxYsCfP90A7o8BLT8u3iEg8GBuvy4gDS7iv36evwztQBx+Uu7d3p6Cbs6ArFIwIKKBIJAekQA936JPIxDhUiGPTpLyzZReX1/ebuOtEE6y0EAtcSBic2BOEuQC/wE/cRztnr0/3uH+QE05zo9CUO/94YJCLrAyvkKQVRuB1j6CAvCA3o3+j72xnDLt0K+QXu8fviH9zi7hdFB8AAE+b2/uH9+9P/3EQA2TDrITQKJubQwehl9AAgytYCCwYj3B35wPE="
+   },
+   {
+    "text": " station",
+    "id": 8056,
+    "group": "places",
+    "x": -0.5593,
+    "y": -0.03396,
+    "neighbors": [
+     {
+      "text": " kitchen",
+      "cos": 0.129
+     },
+     {
+      "text": " city",
+      "cos": 0.127
+     },
+     {
+      "text": " guests",
+      "cos": 0.123
+     },
+     {
+      "text": " thirty",
+      "cos": 0.1
+     },
+     {
+      "text": " grandmother",
+      "cos": 0.098
+     }
+    ],
+    "strip": "6QIvAg5G+eH7P+dCONX4HDYkFtsVv91L/eTgEjEHVD/pxtPt/OgbCfXcBFIgCtlG7wPpHugGOP0hxBobJgXz993a/dPF3B769+IFEBYbgQIc9u3t1/oe2yEQvtQCFA/g9fXVJx3lvrvpPD7pBMDKCCTk//vr6zNA/wohDRov8+3gzx0P3eo5BiQY+9rvGQz98AzeDffTv7AonPNCKzDByloTysbY7QMUMhoc6/AL6RsTKg0IWhTOAxL+uS0I5hYtEwLdBDv1MSAYzELj995bMvsxCfr9ANjSQwv9EeUe6jI75JMi8v7c2e/55R/B9U4iIQgCAxgoCQ2+Ryfx2ArFBPznFhdIHAz82QLgF8f+M64N4xjDU/0M2NX0xzgCsB4w2P/kLxQgKCf6JxBIHuD3qw4Q///h5dHz78W6HfbS5hIjFTYW5gYL+hQw0grq9hsR+DQgEflP3C78IwfyryD1pQr55C0ZINJCKOgBHwsO6fhAnx/lHwHl5fP9zR4j7fIsyRH658rsywcUAQEdH88MEg9FECoK2dIbrh7bAxYCEwkN4DzI9hU388HkJuXw2SQU4xfdywT21y+zEQaxycPlAjMVABQoAA4cwPQkEBonCQggt+75/P/qxx7T/uMNTuMD+dLb+cLz0xLRJnwzEuwsTf3K0/YDw+rS8P0SDQniGxLkDQTqBOjbpDMYDPPN2eD29O/iEBAaKigIHQEg0AbtGA/u0AQaFRUPLyg28gjxH+dHGPAKJcfh+Qg2BKhJIctBrhAj+Ls848YhufH+yN4f2N0E2kjrGi/7sesI8z3WJ/NBBuz9Sg3m8i4H4eBXz8/p2yLo3s/cr9ajVAnuVPgoH9PPD/xFAgMoisW4Bqwf5dgqGSCXBu0d4gr67BoC9NrvMyQwLx7Z+VUNNEkoOwX3Ew0QIu7vCA3wFOj059n1FQQv5CQaAf368uAFAAwTI9TryibMN9smIvzzOCAJDyLmO/kAOTEE7QbtMNgW8DZEB+3g8ywDzAPK5rTXJCH5RRr+0iHaDSLfJLwX5P8SCc7u8BAN+RH6DvvPGM7788D/ydnn79NQ9kIvCRwFCxLL1yMaEeH7+fXm5UbDBQw3AgzV5O8S79PowgTcHAcMBO0QL7naBe7r8/lDSegrQRvdCPffAM3asevMSesm7AHg9/0TGBUk6NDqus4juuj6Uy8Xt/E="
+   },
+   {
+    "text": " bake",
+    "id": 22544,
+    "group": "actions",
+    "x": 0.2826,
+    "y": 0.3437,
+    "neighbors": [
+     {
+      "text": " cook",
+      "cos": 0.399
+     },
+     {
+      "text": " kitchen",
+      "cos": 0.25
+     },
+     {
+      "text": " dough",
+      "cos": 0.222
+     },
+     {
+      "text": " eat",
+      "cos": 0.192
+     },
+     {
+      "text": " butter",
+      "cos": 0.191
+     }
+    ],
+    "strip": "HvERGEzh7AACXgP5zOfV3RD2+dwB5/f46vYqJyvDy08JQCcQKhUaLN8IB/MP8gnjH/nD8w++4xk5thjv/OfBUPD3HeeBAf/6JvzRHvEQFRK9rwbRAROhIYVN0rklCPzd+vzj7wYuJ01PCsUjIModSebet8sa9QPkIPUpzL1KIwvd5eBEQGkd1wDt8fMK2escP+Xi/AEo2TbI2vkB+OvczCTcFu2pEzMD9r8LABbf2+M8A/37GVT29RgBA//eGRjp1ufB9fUKQj4az9r8CjfXCe4y8NwE+BcT6QnIGvwfCQD9BfLiCCjD6gfPG+rwPBVEEikAAiTj1jIPzznQ/iIa6zwDEwjtvQoxJeUHDO/BIhj07fE1QuQHTQcMFBjq2031HAf37O7r9ysIAPT3/8fd3QHy/lYn3zkOzeQOOaIGCtj8B+nc8BYFDBcU7SJE3TEt/g32u+whHBgH9yzWLxkc2/QF7Cfx4/v2FvIhJd7uKMXDAuboDf488P4lsiHyPtPxv0jzFhj0AuINHfZU6d04zP8oKhPo/+cl+gjLKUwIIPJQ70Af3rb+LhsquQ0ZGvoY+UPy1/v3ATfp+iYp8ELB6boACRnYFDTd+MskmDL8+RXjQsvUvyHIAq0iO9vtrxtBuSAu3NkdASXG/lzaD+Yw+gEQBPuq8h7j7hIha8f74gzvK+YPGf3QmBUSBv8FEAoB5Pu4Jdci7O3x8PkGKeDxMQwe96bo+NIK9ysiA+oQLfEGGRESM9bdwMMf6cwJD9Lg6wkj0NsbOAf68c+w+Nf34dT4Bx4N8ekKIOo4SvgCJPce8RMVKCZYBMcF7//6TQ3PMx4mETfl29YhQBwj3QvvEza8Mw4Q0S5XwuwiPhbtFBsP4gQkCDPA9fj9R+Y/RQjR38AtNhrl8BL9IDUkPS78FhT4Funq7B7cKRzgGv8hIiIBAOk80QAq5RHfA9n0tNkF+R3qHOEw6M4C9zdO1tYS/B7a5Mrn6+eqABr7DzLf2Qwt3fwnGsLz8/VWJyP2Di1J3kPow83sHgoR7LPjDugeJO1BNRc4+/TV4fPM9SHUIazcKCQSRtP7/uIB+Ub9xdUXveEJE/UIHPYQtBBg2j0P99rvH/3g4PPq2BLj2BW2rhQK2fX83toXGuTiNvH57AzbCuQFwx4QyP0qG/AD+/Uf1j4x7QfZyFASDULwTsEA8u4="
+   },
+   {
+    "text": " cook",
+    "id": 4296,
+    "group": "actions",
+    "x": 0.02462,
+    "y": 0.1405,
+    "neighbors": [
+     {
+      "text": " bake",
+      "cos": 0.399
+     },
+     {
+      "text": " kitchen",
+      "cos": 0.379
+     },
+     {
+      "text": " eat",
+      "cos": 0.262
+     },
+     {
+      "text": " spoon",
+      "cos": 0.162
+     },
+     {
+      "text": " guests",
+      "cos": 0.156
+     }
+    ],
+    "strip": "LxJv9Cwl8CIZKOByK9vpDwbXByL3+9XwF+YnC+7JwDMCKzP7+vj6FN0NRxEU79T0/g7W/g7wnBASCiDU/ui81OsyGQP/4QIgDOnfFwAeHQL+9vjtEBjLKQIfIT3o8yYGGBED6gMu+SQrAf7ZF93/B7b/89U/JyfEWPUHGQLlGjOy4/IFKFZB1SIY9x/rEsHQ/AmhJzVl4P7s4swHF//nCEMk+7u9BW24BPkS/Pbj+xwmztLrCyYR2tjk5g3fASG6DSgXJwYKFhI5wfc3CgsDSNAJ6QDQ8QnnIcr5ISoT+QYL+PLj4Bvx4SgENxLy2tA5EwvRJgATxfBLJELeBxncTBAwL9HlDx8H1sxI6+ES6Qv0Muzn9fDgBhAK2hHw/ysMaQzewA8PztgSCuIiBMgS3wQcIkoGCUs68wHPMugw1PTEJJcQFUrgDjAT6zQc594cDvzO8vlBFBcmDOcCMBPoFNkfIzsH5IXj0No4EPbiMrYFARvZQ+EM5fIf7yL2Dv7TsAAO3OgXEwYXNN1l7Or+2/Lw/B/t0gckCrG0EkQSKAIT8hPk0b0e+ln8/db2+gcB4gkZIPbf/yvJBFIiBzv6AM70FCIS1R7LEdLxAgKxLhEqC/H88RXpE7Y2Tu/52+g2tRkYBQYDOA3QT2UGSvkr/vcUGkHQAO3t2SsvG/XZBOP+DwYDABEpgf352OYA+QHH6L/SFtoD4krSF/Ei6i0kDBZF+9biD90A5xT5Eh3nB/Ia+hEc7uvV+df1ArEXCM+b0vdABq/aLu7+AQL/4cI73e4C1/MFOhcaEwUa/scV8PwS1x4J5i5JIPEX6/La8dUIMhM0DBw6z/BQFezu/QAUA/P15wL2zBITp/vTPQXIK92/px0uRxwEKyX5I9AAQAPwIvMuAxEULwX4AuspWTMBF/krIOT81/P64SDf+Cr9WPXICwxEESUBAQsE5OT/5A+wCASiHw8N1dwRzxIA4Sf3CucJ/vL/9zIG6da5E+EKEAIGyejc6dwWGRUKO//7NAQPKhyxE+UfIfwF18P45f4ZBMgOFiNEJtgACvzi+kvWDOLOBxwiUxgaBuL2ESPVxgIM9A8WLzD24LMz9yVKzxEl9ewDCQn2wCPzDbwLIdgG2h7n/tAW/ewl5Pji+Qf+/R/qv6gZFfkE4PspHi4LHQXXCiEX7QAF5coeK/QKHfH/reE="
+   },
+   {
+    "text": " feed",
+    "id": 5395,
+    "group": "actions",
+    "x": 0.1772,
+    "y": 0.3186,
+    "neighbors": [
+     {
+      "text": " eat",
+      "cos": 0.189
+     },
+     {
+      "text": " cook",
+      "cos": 0.14
+     },
+     {
+      "text": " flour",
+      "cos": 0.124
+     },
+     {
+      "text": " kitchen",
+      "cos": 0.119
+     },
+     {
+      "text": " spoon",
+      "cos": 0.116
+     }
+    ],
+    "strip": "3/9q/d/oDDH8+toXzBnq6CTu+AD6DQQHHBAd79HYAAhFGQcHDinrAiIDJggJFfXh+AwBA//9/BQF9RTj3O8I1foEAPL8NAsOAv4hCgUU/Pr1JQsg7RMXBdjvA+XhBNv08e3g/vP9BOUj9xgVFM/w2QYECATkLAHy7O0iI98O7f726v3Y+/7dAQsgAOII+vbIEO3jKxLY1Pza4vjw1g73HfME0ePoBekbFAQrLBzr4BTY0+wY8fkm9AzLNggK8wbv5QUsGF7s8CTT9hjbCggJCf4oqOrsHgLuERcQAfkQ793r3QIBGyLl7BH31QP23gsQ2wnm5RQC5RMWDAbmzwTs9ubtf/3h7RD+CwPJ/xjpHgcSCy7E5ePW/ivz7f8CExMi+vX7EOEsJBIULAgjJxka9sjwEAMPDiPv+fzsGBgB1i7jFAIC5/YMKOgYCffS8iT+OSIG8ff1+fsI+CgOICQPCubTAScC78Du7dL3FiYKHw0jJBX67P0BKAQSEf/q9AIMCrb0zfDo9QvxI+MgEf4K79//KAS86Pn05gPy8hTX8QL7CRrt2gwK8RkRBe1L9wDLACH56wAUDSTt6hX2Rvgc+Rsj9g3W+uD68OkK7AL6+PoO5u/36hkl2w4eCwr7Ld7C5Q77+B75BQMI6z3y/PMI7ggh8y3TEyHg99gaC/Dh7fPs7OflBuPxTiT8+Pb/9hvVI9wC/uMN8Qn2sgcP9ygIHecYyxD3Cvjx9ef//jwJ5Aoj2QH0JMzzH+L4/KnzIf0bCiMjCtDV/fcYKg7eFfcbyB4i5SQF+g4D8ekO8fPWGCgDA9UQ3y36/BslFQr86Tvn2v8A/P/+BOYdIzDYDvrw2QgiAQk2BPUjGSXv0g0PQ/PaBAfy5d39Ff0C8wzoHALV9Bki7gD1BgvjBRQQAREFEdgVDvIW4Tv7Cg0CEtgdLOTOFukN6CINAhzSAQPSAgEJPA8MCR0Z7w7/DN8H/jDrARwGB+fr/RMYGd8K5OgUG/gG7t0lygbRx+kIBQISJBH07vzpFcAJAMAC2ubYAQfX/dbkOS8V6QP+BNsD7SHKBdToAzP90wAZ7u8IEvIZJN4ALTrj6ynnOskI4tQwG+IdHund9RHg/RX1/fsd+vfZ+/8G8Q7qFfPqEgr9+P33//Ul2QHFw/wKHtLYDyn/CPAIEQc18/sQ6vv7IfcLIez0Jww="
+   },
+   {
+    "text": " mix",
+    "id": 6514,
+    "group": "actions",
+    "x": 0.1891,
+    "y": 0.134,
+    "neighbors": [
+     {
+      "text": " stir",
+      "cos": 0.142
+     },
+     {
+      "text": " bake",
+      "cos": 0.12
+     },
+     {
+      "text": " cook",
+      "cos": 0.119
+     },
+     {
+      "text": " feed",
+      "cos": 0.109
+     },
+     {
+      "text": " ounce",
+      "cos": 0.108
+     }
+    ],
+    "strip": "Mw0FQucnDQQL8+0PXTLtGuLHAP8irSsG5PspMQ4JCc0TBvIZEC8wGyzZLwzWAundE/4d7Q0EA/0l3xbkEezu9rMGJtAd0xcxHD0RDfrh9s0NBwfy/Bvp3hITFgXD6RnUFP3rC9z66RsN0xj9H+f47iAvBYEG8uO85/Y98iHvGkoW6PXa3dFGThPzDw4I+tkQ7RTwIiAXBVjY5x4z3g0OGtSw8dDZHx3jDvcA/UL3EPzc+h/+5tAN0vPu+xTmKAXoAuC9IUIAEuUj2hYNIhDwIvf69BgC8RHz2NGbCvoEL/MP9Av83g/6+wUGKRfh6+gMGPEGRTob8jYHAxv2AfnJvhQO+e4W6PEIIk7FP+oO6r8N8/3iy9kPAQfOvAEN5g8TIRPyGhf2BhcEDAEBOMzj0b0S4ODXCNwq9ujmAijm1/fUFhM0vlAZNOry6Bns9g4SICAW7t46EhBB/h4A4wPuBgryDAvoORHl++8aLQft1NHzzyTwBwP7Aez52s0R6RfVs+IKBvwVxQMhCMjF/BYv0QkNGN/w/g4IChT+KSr9ChH5uhH66xgVIg8X+AspEDK2GDvj/+wC7DYL6y8CwO8J8tMv/g3SEwGC7hMPBDIPAUbxHeH88RYIBAcd8RQjLvL0Bh6/9x73EfvCCCQS6OYGIMtLQeUPLxkFEi/pIRIe+/bj6NspD+A1BBwpAEwTBAIX5Pje9vwNA/8XEfUB6dZC/8zh+y/6CRjJLRw9uP0AGB8eDB0kKOL36O4/7Qnj3usD2QYs/cwIMfP/A8rx2/ALxb8THe8G+PLszeD29usuBtzo3dHaLgUU9fnr6i0Q7gEzL+oc7RcD9t3CDTPd+y7w++DZJRbhFATcvODU7SD84ggPARM09SwdEesvC+1AM80H6yko//YKAwvP8s0Z8wmpKev3EAYbC/To/iQqzAEhAyQYDswF7iUVFxYXKUIPASseAST0yDE3zg8LKEjw5wUY4QcstNQAAyVX7uECFL3iIPAjLBL/8PXW++4P9wx09Q4eB0zt+9QVQerl49DiCSTo6uzm+y3Z6PXX5sTMBjnQ6LMUIgjgCAZM8wkk/BHo29L5Jf0A38wBIvUv5BYwEfIJBP0P3zjwEuHkKC4YAvA2MevYAO4MFCMXB+Ue787t8PG3SgAP7CcyDPT0CeoG/fnr9L/hKeX89i30PAL8JtbhFhs="
+   },
+   {
+    "text": " stir",
+    "id": 23065,
+    "group": "actions",
+    "x": 0.1749,
+    "y": 0.2133,
+    "neighbors": [
+     {
+      "text": " mix",
+      "cos": 0.142
+     },
+     {
+      "text": " bake",
+      "cos": 0.131
+     },
+     {
+      "text": " flour",
+      "cos": 0.124
+     },
+     {
+      "text": " cook",
+      "cos": 0.119
+     },
+     {
+      "text": " spoon",
+      "cos": 0.112
+     }
+    ],
+    "strip": "8vMiEzwkDRz03PoGDNnyHDvyDN7z8BHx+eDp9gIG6CkEAvP4CvnqDecCwi0v/+rQEhkn99Lp+PskEAroCfgLFvQrEgAyERUjAx4B/xgQ1OQq5u0SHwDr9Bs+77/KFTPq89jt7v1VyckACQYlGhADGeoU0e4W5sEp9QpAysQo+1ASvgkNI94p4vr9ABnx5tkACMDw9uYx9xSPDSQSIyb0CxI10u4m4znz9vj86gwS8SDrGDgX+x/wBPbk5gzXGR3oMhcaF+YkEbYE4iMTuzMONfke92T9E7cixgQs9g0dzM78Cefn4AIA6yok4wg0I/8F/wcZIgUv+yz61fkS/gn2Bycr9xQA6goJ1MoNsDLz3s8Q/gXoMNMI6Q/JRPcz2vEMFAU09xEX6PoNKqkQF8frz+3oFwUR9vbe9+MiHPwNDyUx6wQB6Nv+5ADp2fUY/+MS7hYF4jAE9RccHOkJDwnmSe/AMDnvGOwDAecoJvcHCwb74DDi7egNAv7GEOMQ6+AA3BAW9OAU1hgGGL0ACz8GFP/GDhwpH8roB9zuzUQH8uYK8/0n6QcmF1nt2AbcAM3MHgbeyyLT9yH95xEd//zf++YF+RUR78nSCRUF9gPiB+v8EBPgFwsI9xUCBPXaESQP8yn62/okstUHyxsCBvsYKdr5JecA8kML+ujCLQIGJc3m7MseASoUBP79HRAK6NsBHePeAf4DAAjfzPgZD+UK/BAY+xTuFu4SxSDd8+br7Pgn5PQNBf3UE80W8Q4gxyb/4wkp7AtQIfvz5fQF6Nneueop1f3qCcXzA+zfAxDe/FMRMOjbGREg4wTR2wjyEgn1/ff84Nn+9BvMRNgF89vwIv8kE/ERwhYA5isIKAoB1eodEA8MGgIS7roDe/I6GiD+6Bszqu7XKdj8DjIW3e0P9RVyD+D/G7zj5PbGpBD6FATyAwjjzAjDGOj1B/kR2Ob03gjn1/zzDw33zvn27+PP6AnV2+8c+tIMFycFMuYAJuYN/A//uOf8MES9OftD/gf2MvsHDM318gwO3MUYASHXBvYKBjnp9PrX3Bz7GL395Nzg6hH7DwkWCsQb0Tvi/7kD/u8FBf7++fEa2QM88vYl9inqQv81E/P47Br98doWEgwi1vXqFgQgFgv68//65Bb6f+smDTMF69QKEPUN8Nv8zwfiBfD/5Ak0+S9Q998KAc0="
+   },
+   {
+    "text": " serve",
+    "id": 8683,
+    "group": "actions",
+    "x": 0.1423,
+    "y": 0.01468,
+    "neighbors": [
+     {
+      "text": " eat",
+      "cos": 0.15
+     },
+     {
+      "text": " feed",
+      "cos": 0.105
+     },
+     {
+      "text": " bake",
+      "cos": 0.09
+     },
+     {
+      "text": " station",
+      "cos": 0.083
+     },
+     {
+      "text": " spoon",
+      "cos": 0.08
+     }
+    ],
+    "strip": "77g3Fy7zHBk5JM8EHjwXGv8rEuCy6gPx/wZBKg7sDf8O8jQY07r/8/jvL0LxFCYV7QIQG+72JAcN+xwHCwj0XRz457sp7g0U29oUD/41/Nnn9+ff8B7s7u7X5w/F6GLgkAa23MIbAh3zPuY0A/jJQ9zp1isBAef78AthCS8d7TgnKhRA5t0V1wAn6wgo1wXz2zD1D6ww+RIX9yPfDjYIEw0Q+OwB+xYNE+gP+/wEBNL8AEji9Qb5OQ/ZpBYnCj7jJuwS/fzC/dgG7SH8vPkb9ST9BfrV7tL07ff6BS0aLz4YCNeH1AHtRcDg47hBOO8gGhzU7u+7uCfD7/kRGRHH+gr+5e8A8RIiPBQLDBTd6QtO+wLwCPrgK18HBvUQz/fu/s0COAvaL/bd7rfqOxsx2SxDxDwZVfIi9AoUGSbz8kYt9er78fnl4AH66+Ll5BfGHRVJrAbn1vfEAxAQBwsBluA1uSrR8rw7yT/8Lfb6GOLhD94OvBja8bK/x/78Jg79EAYm60zdIMDgHyHn9D3i39b5uRHVug7nFs7ZtDLABRIqBQjT/Bkf8fLlD+4H6g8i8CAmG9Ez4CkZ8wceCAfbIysmw8gDCAMcFC4Etgv9RLkf1vryuC4pBdnhCQkE3RDf9xMx5Ezr7BL5WGFAB/nuUdYCE1na9/gF5CIK4un1vPHr6yzOJR9CAF8i/OgPDd8RSv2/8+UR4y4w+PrLH0QH/ccJ8wYoAU377o8nGfv49vX1BCDs9arND+vs7OXr3fwREjINMPb9EAjrRj0MR8oJtjnZ5w4IJ+IW1+Mj+xAIVMbozRHyFRU4GQsl/VlbDw/A0Sf0XeQD67c6CdT08vciGyb5/wNV0hjv+ub4IuYe//gLUCHlB+z13tLIwwv8CEz08NErDbC0lznQ3DkUxsQgEw/NEf8bBv4bHyEECj7u9NrAT+ru2TLJHjXKAvno8R6kCBXc9tNGAyMkwywByhjlIAL9/wQY8MunG+ITLRIKKiT5IxtI4gbq+uQR9Ti97vX2I+K2Cbr8+e3rGAbqCf3XAtX38wEeHi/uAu/V8QUm76IF28zvEvbPzOD6Df/uEc/eB9Cv6gPx8yvRIDE17isjD+al59PO5gDhHEke5bnO99WdOPQCwB/nFuj80DJNCSYz6vDvOP4b3+jqgRM7Hhr+1AcQJQsjC0z2GyAGFFYVRCM="
+   },
+   {
+    "text": " eat",
+    "id": 8180,
+    "group": "actions",
+    "x": 0.1743,
+    "y": 0.2771,
+    "neighbors": [
+     {
+      "text": " cook",
+      "cos": 0.262
+     },
+     {
+      "text": " kitchen",
+      "cos": 0.212
+     },
+     {
+      "text": " bake",
+      "cos": 0.192
+     },
+     {
+      "text": " feed",
+      "cos": 0.189
+     },
+     {
+      "text": " serve",
+      "cos": 0.15
+     }
+    ],
+    "strip": "9Tt0vugp1CPvqgItOvoRHRO4HsbYIhrY//kKAdvUGn8N3fjuO/HnKQ0tBgQW8QVB1B0t0vvw3ck1DBvHw9URFgw0+ybqFE62IObeM+URHuYlwUoZ+xDYxCRC2RHo+hUg/u7gAgJOHRDn9s0J36XdKblRyvYxCT6zD1s+JRvXueQJ48XWLcwq+NgI+sXZEMH+3da+1sxa2QD08wz7HQERpvMKzBAQBB0bLdw+RymUEStX/TG4GetRB7n5B/MFsBHOGPHQ/xH2//I4BvHfuNUTAtoL+gHM1V7pEfu26+0Y6R7vJdfttOcXCsAYQgX4LTgmvhRZKt3a3xsqFAvF3uD+7/wGG9HcHxAkDNfJDt8Lt8JB8h0X4b6/WTkkATea0h314NTy9eXzAg7dDeTo3RMfHbz5G11BLDM27jHLMxpK9xLNKRT43gEmEukg7QTg+wPF/Qok9M8O9Mbq4PcDK/TsCxTWv/WjFcraDehAKOcnH/k8DL8FGdwsAuMvL0A7CMTbzs/7zOmyIgFHQyQQ9gnUGhIW/0zGAUf1Ceqy5jn48f8N/+Hy1wIdEBX6FPXw0vbr70EWGP7csybL+v7/HbAQbh4I5d6TBh38FMHZ0zblDkD7vvgHAvsC/AwjTgIlHtkI1/gisEMBLgG7zWkgF+MIEOoLBzitGugF/P4kE9YCxxTgIyfbHdDg3/8JDQUHLt7OYdis/xvn0grY7PoT+/XHbt3pAAsMCvwj9f3+6RD98P0kCUsqPf/o/Lnk6SsMF8kV3iEjDbgf4djXzAUHIg/1mbwVxCwLFgDk5vQL49cx5SYdDdoHzAD/NOzZ2vfzJBvyD/v8UEU1/fBTORbmuyAUBgjyBCYFPfRA4T77RUsYDQ/si9Ur6PbNIP3Ut9woEWfZ7xEwGcbFzwEBCPoF9wUZ7AQvDyH1E/zR3Qbl0hP9HMb4JzLYFvz9BQUDDgPf6hbwB+c9BBhZs8nFGPXr0hQKBvAlAsLy8TjlAR3azOYIMvwi2vVF9O0FoCLl8lIe8QY+Kif8+OzRENOzB+YDHw60C+MhBQXnDfb79uGw5gPyTfTt2S4OARscCtXeFhjs5RML474wDkLmMq0dGxxDxzv41vzj1wTIBRfKJc8V5wEI5RLwHeIM5UwQL/kY69XQDyMNyLoLFj0V/sP4Ghv08/UzsBvhz/4P7P/05B/3RQr+470="
+   }
+  ],
+  "sameGroupNearest": {
+   "full": 0.951,
+   "map": 1.0
+  },
+  "flourNeighbors": [
+   {
+    "text": " Flour",
+    "cos": 0.687
+   },
+   {
+    "text": " flourish",
+    "cos": 0.462
+   },
+   {
+    "text": " flourishing",
+    "cos": 0.355
+   },
+   {
+    "text": " thr",
+    "cos": 0.301
+   },
+   {
+    "text": " gluten",
+    "cos": 0.294
+   },
+   {
+    "text": " Flower",
+    "cos": 0.293
+   },
+   {
+    "text": " flor",
+    "cos": 0.293
+   },
+   {
+    "text": " wheat",
+    "cos": 0.284
+   },
+   {
+    "text": " thrive",
+    "cos": 0.28
+   },
+   {
+    "text": " starch",
+    "cos": 0.278
+   }
+  ]
+ },
+ "breaks": [
+  {
+   "id": "normal",
+   "station": "all",
+   "label": "Normal",
+   "text": "To feed 30 people using your grandmother's recipe card, you would need approximately 8.4375 cups of flour.",
+   "stoppedNaturally": true,
+   "tokenCount": 28,
+   "rightDigit": {
+    "prob": 0.9951,
+    "top": [
+     {
+      "text": "8",
+      "prob": 0.9951
+     },
+     {
+      "text": "1",
+      "prob": 0.001427
+     },
+     {
+      "text": "2",
+      "prob": 0.0008509
+     }
+    ]
+   }
+  },
+  {
+   "id": "scramble-10",
+   "station": "P03",
+   "label": "10% of rows",
+   "text": "To feed奶奶的家常菜，你需要2.2.25s的面粉、,。",
+   "stoppedNaturally": true,
+   "tokenCount": 21,
+   "rightDigit": {
+    "prob": 0.9571,
+    "top": [
+     {
+      "text": "8",
+      "prob": 0.9571
+     },
+     {
+      "text": "3",
+      "prob": 0.01619
+     },
+     {
+      "text": "2",
+      "prob": 0.01075
+     }
+    ]
+   }
+  },
+  {
+   "id": "scramble-50",
+   "station": "P03",
+   "label": "Half the rows",
+   "text": "<tool_call>\n\nize{\" \" \" {\"ede,う \" \"s, ..\"\"",
+   "stoppedNaturally": true,
+   "tokenCount": 21,
+   "rightDigit": {
+    "prob": 0.02046,
+    "top": [
+     {
+      "text": "2",
+      "prob": 0.1083
+     },
+     {
+      "text": "1",
+      "prob": 0.05989
+     },
+     {
+      "text": "3",
+      "prob": 0.05594
+     }
+    ]
+   }
+  },
+  {
+   "id": "scramble-100",
+   "station": "P03",
+   "label": "Every row",
+   "text": "Comoernet\n\nize\n\n",
+   "stoppedNaturally": true,
+   "tokenCount": 5,
+   "rightDigit": {
+    "prob": 2.512e-07,
+    "top": [
+     {
+      "text": "\n\n",
+      "prob": 0.1638
+     },
+     {
+      "text": "\n",
+      "prob": 0.08787
+     },
+     {
+      "text": "  \n",
+      "prob": 0.007294
+     }
+    ]
+   }
+  },
+  {
+   "id": "swap-flour-sugar",
+   "station": "P03",
+   "label": "Flour’s row → sugar’s row",
+   "text": "To feed 30 people using your grandmother's recipe, you would need approximately 8.4375 cups of sugar.",
+   "stoppedNaturally": true,
+   "tokenCount": 27,
+   "rightDigit": {
+    "prob": 0.995,
+    "top": [
+     {
+      "text": "8",
+      "prob": 0.995
+     },
+     {
+      "text": "1",
+      "prob": 0.001375
+     },
+     {
+      "text": "2",
+      "prob": 0.0009393
+     }
+    ]
+   },
+   "wordProb": {
+    "text": " flour",
+    "prob": 5.634e-06,
+    "top": [
+     {
+      "text": " sugar",
+      "prob": 0.9994
+     },
+     {
+      "text": " gran",
+      "prob": 0.0002621
+     },
+     {
+      "text": " Sugar",
+      "prob": 7.83e-05
+     }
+    ]
+   }
+  },
+  {
+   "id": "hide-card",
+   "station": "P04",
+   "label": "Hide the recipe card",
+   "text": "To feed 30 people using your grandmother's recipe card, you would need approximately 8.4375 cups of flour.",
+   "stoppedNaturally": true,
+   "tokenCount": 28,
+   "rightDigit": {
+    "prob": 0.9964,
+    "top": [
+     {
+      "text": "8",
+      "prob": 0.9964
+     },
+     {
+      "text": "0",
+      "prob": 0.001217
+     },
+     {
+      "text": "1",
+      "prob": 0.001192
+     }
+    ]
+   }
+  },
+  {
+   "id": "hide-result",
+   "station": "P04",
+   "label": "Hide the calculator’s answer",
+   "text": "To feed 30 people using your grandmother's recipe card, you would need 2. 25 cups of flour.",
+   "stoppedNaturally": true,
+   "tokenCount": 26,
+   "rightDigit": {
+    "prob": 0.11,
+    "top": [
+     {
+      "text": "9",
+      "prob": 0.3607
+     },
+     {
+      "text": "2",
+      "prob": 0.257
+     },
+     {
+      "text": "1",
+      "prob": 0.1135
+     }
+    ]
+   }
+  },
+  {
+   "id": "self-only",
+   "station": "P04",
+   "label": "Each token sees only itself",
+   "text": "                                          ",
+   "stoppedNaturally": false,
+   "tokenCount": 40,
+   "rightDigit": {
+    "prob": 0.0008168,
+    "top": [
+     {
+      "text": " ",
+      "prob": 0.3382
+     },
+     {
+      "text": " �",
+      "prob": 0.04968
+     },
+     {
+      "text": "2",
+      "prob": 0.04599
+     }
+    ]
+   }
+  },
+  {
+   "id": "skip-mid",
+   "station": "P05",
+   "label": "Skip floor 12",
+   "text": "You will need 8.4375 cups of flour to make 30 people.",
+   "stoppedNaturally": true,
+   "tokenCount": 20,
+   "rightDigit": {
+    "prob": 0.7231,
+    "top": [
+     {
+      "text": "8",
+      "prob": 0.7231
+     },
+     {
+      "text": "1",
+      "prob": 0.09578
+     },
+     {
+      "text": "2",
+      "prob": 0.05703
+     }
+    ]
+   }
+  },
+  {
+   "id": "skip-first",
+   "station": "P05",
+   "label": "Skip floor 1",
+   "text": " i am mm mm mm mm mm mm mm mm mm mm mm mm mm mm mm mm mm mm mm mm mm mm mm mm mm mm mm mm mm mm mm mm mm mm mm j mm j",
+   "stoppedNaturally": false,
+   "tokenCount": 40,
+   "rightDigit": {
+    "prob": 8.364e-05,
+    "top": [
+     {
+      "text": " mm",
+      "prob": 0.04755
+     },
+     {
+      "text": " ",
+      "prob": 0.03058
+     },
+     {
+      "text": " am",
+      "prob": 0.02763
+     }
+    ]
+   }
+  },
+  {
+   "id": "top-half-gone",
+   "station": "P05",
+   "label": "Stop at floor 12",
+   "text": "').\"تضمنiện (*(( ])->allesирующ/stretch/stretch/stretchажorgeous迩 Targets责任制רכיםирующ/stretch rencont].'//----------------------------------------------------------------------------------------------------------------伙伴关系垚ирующ/stretchNSBundle/stretchирующ/stretch@login...');\n//****************************************************************************rish_();\n *))-deals-deals colorWith炘-double",
+   "stoppedNaturally": false,
+   "tokenCount": 40,
+   "rightDigit": {
+    "prob": 1.367e-08,
+    "top": [
+     {
+      "text": "ään",
+      "prob": 0.0756
+     },
+     {
+      "text": "荑",
+      "prob": 0.02632
+     },
+     {
+      "text": "肩膀",
+      "prob": 0.02472
+     }
+    ]
+   }
+  },
+  {
+   "id": "stop-18",
+   "station": "P05",
+   "label": "Stop at floor 18",
+   "text": "如果你ISOString格式的女孩🥣念憬indre/ay/ay/,]={\n/************************************************************************************************{\n\n/************************************************************************************************ирующ/stretch/stretch/stretch/stretch/stretch/stretchleiolate/stretch latinavroletiolate/stretch latinavroletiolate/stretch latinavroletiolate/stretch",
+   "stoppedNaturally": false,
+   "tokenCount": 40,
+   "rightDigit": {
+    "prob": 5.139e-06,
+    "top": [
+     {
+      "text": "rounded",
+      "prob": 0.01427
+     },
+     {
+      "text": "滉",
+      "prob": 0.01126
+     },
+     {
+      "text": "LECTION",
+      "prob": 0.01089
+     }
+    ]
+   }
+  }
+ ],
+ "skipEach": [
+  {
+   "floor": 1,
+   "prob": 8.364e-05
+  },
+  {
+   "floor": 2,
+   "prob": 0.005505
+  },
+  {
+   "floor": 3,
+   "prob": 0.6627
+  },
+  {
+   "floor": 4,
+   "prob": 0.8859
+  },
+  {
+   "floor": 5,
+   "prob": 0.9625
+  },
+  {
+   "floor": 6,
+   "prob": 0.2692
+  },
+  {
+   "floor": 7,
+   "prob": 0.8874
+  },
+  {
+   "floor": 8,
+   "prob": 0.433
+  },
+  {
+   "floor": 9,
+   "prob": 0.3109
+  },
+  {
+   "floor": 10,
+   "prob": 0.6976
+  },
+  {
+   "floor": 11,
+   "prob": 0.8782
+  },
+  {
+   "floor": 12,
+   "prob": 0.7231
+  },
+  {
+   "floor": 13,
+   "prob": 0.9646
+  },
+  {
+   "floor": 14,
+   "prob": 0.9886
+  },
+  {
+   "floor": 15,
+   "prob": 0.9949
+  },
+  {
+   "floor": 16,
+   "prob": 0.9487
+  },
+  {
+   "floor": 17,
+   "prob": 0.9665
+  },
+  {
+   "floor": 18,
+   "prob": 0.997
+  },
+  {
+   "floor": 19,
+   "prob": 0.9987
+  },
+  {
+   "floor": 20,
+   "prob": 0.9957
+  },
+  {
+   "floor": 21,
+   "prob": 0.9933
+  },
+  {
+   "floor": 22,
+   "prob": 0.9395
+  },
+  {
+   "floor": 23,
+   "prob": 0.9984
+  },
+  {
+   "floor": 24,
+   "prob": 0.9991
+  }
+ ],
+ "notes": [
+  "Token positions (pos) are the same as in hero-trace.json (checked against its token ids). The answer's first digit '8' is pos 331 (logitLens 'answer-digit') and the reply's ' flour' is pos 336 (logitLens 'reply-word').",
+  "wordMap: 41 words in 6 groups, each ONE Qwen token with its leading space (tokenizer.encode(' ' + word)). No substitutions were needed: every suggested word is a single token. Number words stand in for numbers because Qwen splits every digit into its own token.",
+  "wordMap x/y: the raw input-embedding rows are L2-normalized and centered; PCA is run on the 6 group CENTROIDS (each group weighted equally, not the words), giving 5 axes (centroid singular values 0.604, 0.502, 0.457, 0.440, 0.426). Every pair of those axes was tried; each word is projected onto the pair and each axis min-max scaled to [-1, 1]. The pair kept, axes 2 and 4, has the highest same-group-nearest rate on the scaled map (100%; ties broken by the between/within-group variance ratio, 19.58). Axes 1 and 2 would give 85%; plain 2-D PCA of the words 46%. It is a linear projection of the real vectors.",
+  "wordMap.sameGroupNearest: the fraction of the 41 words whose single nearest OTHER map word is in the same group. 'full' uses cosine similarity on the full 896-number rows (0.951); 'map' uses straight-line distance on the displayed 2-D x/y (1.000).",
+  "wordMap.words[].neighbors: the 5 nearest OTHER map words by cosine similarity of the raw 896-number input-embedding rows, rounded to 3 decimals. strip: base64 of 896 signed bytes (int8): the raw row divided by its largest |value| and multiplied by 127, rounded (decode with Int8Array; the scale is not stored).",
+  "wordMap.flourNeighbors: cosine similarity of ' flour' (id 19828) against all 151665 real vocab rows (the unused padding rows beyond the tokenizer are excluded), highest first, keeping only tokens whose text is a leading space + ASCII letters (regex '^ [A-Za-z]+$') and dropping ' flour' itself. The 10 kept are the readable ones among the top 16 rows.",
+  "breaks: every run starts from the same context, hero tokens 0..326: everything through the generation prompt '<|im_start|>assistant\\n' after </tool_response>, where the model's second turn (the reply) begins. text = PURE greedy generation: argmax over the 151665 real vocab rows (padding rows excluded) with no repetition penalty, top-k, top-p or temperature; at most 40 new tokens; stops at <|im_end|> or <|endoftext|> (Qwen's two EOS ids; stoppedNaturally = true), and the stop token is not counted in tokenCount. text is decoded with skip_special_tokens=True. Every step recomputes the whole sequence (no KV cache), so the sabotage applies to every position, including generated tokens as they are fed back. The 'normal' text matches phase1.json's T=0 reply (which used a KV cache).",
+  "breaks[].rightDigit: one teacher-forced pass over hero tokens 0..343 (the context plus the 17 RECORDED reply tokens 'You need about 8.4 cups of flour to feed 30 people.', not the variant's own reply) under the same sabotage. prob = P('8') for pos 331, read from the hidden state at pos 330, softmax at T=1 over the 151665 real vocab rows; top = the 3 most likely tokens there. Normal run: 0.9951 (hero-trace.json, softmax over all 151936 rows incl. padding: 0.9951).",
+  "Embedding sabotage (P03) feeds inputs_embeds: the token ids are unchanged, but the input-embedding rows looked up for some positions are replaced before floor 1. The model has tied embeddings (tie_word_embeddings=True; the output head IS the same 151936 x 896 matrix), and only the INPUT lookup is changed: the output head that turns the last hidden state into scores is untouched.",
+  "scramble-*: chat markers stay intact: positions labeled 'special' (<|im_start|>, role names, the newline after them, <|im_end|>, the <tool_response> wrappers) and every added token (ids >= 151643, e.g. <tool_call>, </tool_call>) are never scrambled. That leaves 289 of the 327 context positions. numpy default_rng(20261015) draws one uniform u[pos] and one replacement id repl[pos] in 0..151642 (ordinary tokens only, so no chat marker is injected) for every position. In the context, the round(f x 289) content positions with the smallest u are scrambled: scramble-10 29 (f=0.10), scramble-50 144 (f=0.50), scramble-100 289 (f=1.00). From pos 327 on (generated tokens fed back during greedy, or the recorded reply in the teacher-forced pass) a content position is scrambled when u[pos] < f. A scrambled position gets the row of repl[pos] (or repl[pos] + 1 if that is the token itself). The sets are nested: every position scrambled at 10% is also scrambled at 50% and 100%, with the same replacement.",
+  "scramble-* positions. Context, scramble-10: [4, 6, 19, 21, 50, 56, 62, 85, 87, 99, 101, 117, 124, 144, 156, 160, 162, 171, 175, 177, 184, 190, 196, 204, 254, 258, 260, 278, 285]. scramble-50 adds: [3, 13, 15, 16, 24, 25, 31, 32, 34, 36, 40, 42, 43, 48, 52, 54, 55, 61, 63, 66, 69, 70, 73, 75, 76, 78, 80, 83, 84, 86, 89, 91, 94, 95, 96, 100, 105, 106, 109, 115, 116, 118, 119, 121, 122, 125, 126, 131, 133, 134, 135, 136, 138, 139, 143, 147, 149, 151, 152, 154, 155, 159, 165, 166, 167, 168, 170, 172, 180, 181, 183, 186, 188, 194, 199, 207, 208, 210, 211, 215, 217, 223, 224, 228, 232, 233, 236, 239, 241, 242, 249, 251, 252, 255, 263, 264, 265, 266, 267, 268, 281, 282, 284, 288, 289, 292, 293, 294, 297, 298, 299, 311, 312, 313, 316]. scramble-100: all 289 content positions. From pos 327 on, the positions scrambled (unless the token there is an added token) are, for 10%: [328, 337, 341, 345, 346, 355]; for 50%: [328, 329, 331, 332, 333, 334, 335, 337, 338, 339, 340, 341, 342, 343, 344, 345, 346, 349, 351, 352, 353, 355, 358, 359, 363, 364, 365] (the recorded reply occupies pos 327-343, greedy output pos 327-366).",
+  "swap-flour-sugar: every position whose token is ' flour' (id 19828; 2 in the context: pos 34 (rag), pos 258 (user), plus any generated or recorded ' flour' fed back) gets the input row of ' sugar' (id 13163). Token ids are unchanged. wordProb is the teacher-forced P(' flour') for the recorded reply's pos 336 (hidden state at pos 335, after '... cups of'), softmax over the 151665 real rows, with the top 3 there.",
+  "Attention sabotage (P04): an additive 4D mask [1, 1, T, T] (0 = may look, float32 min = blocked) is passed to the model with attn_implementation='eager'; transformers uses a 4D mask as-is and adds it to the scores before the softmax, in all 24 floors and all 14 heads. The mask includes the causal rule (no looking ahead). hide-card: a query that is not a 'rag' token (everything outside the two passages and their 'Your files:' header: the rest of the system message, the tool definitions, the question, the tool call, the result, the reply) may not look at any 'rag' token (pos 9-83, 75 tokens); the passages still see each other. hide-result: every query after the last 'res' token (pos > 316) may not look at the 'res' tokens pos 311-316 (the calculator's 8.4375); the wrappers around them stay visible. self-only: every token looks only at itself (the diagonal), so attention mixes in nothing from other tokens. Check: the plain causal rule as a 4D mask reproduces the unmasked run to max |logit difference| 0.0e+00.",
+  "Stack sabotage (P05): use_cache=False; model.model.layers is temporarily replaced with a ModuleList of the kept floors, so a skipped floor's residual stream passes through unchanged. The final RMSNorm and the (tied) output head still run after the last kept floor; token positions and rotary embeddings are unchanged. Floors are numbered 1..24 (floor k = model.model.layers[k-1]). skip-mid drops floor 12, skip-first drops floor 1, top-half-gone keeps floors 1-12, stop-18 keeps floors 1-18. skipEach[k-1].prob is the teacher-forced P('8') at pos 331 with only floor k skipped. Check: running with all 24 floors through the same swap gives max |hidden difference| 0.0e+00.",
+  "Check: feeding inputs_embeds (the plain lookup) instead of input_ids changes no logit by more than 0.0e+00.",
+  "Content screen: every greedy text, every top-3 token and every flourNeighbors word was checked with scripts/trace/screen.py (a superset of src/lib/safeText.ts). Greedy cannot be redrawn, so a hit keeps its record and sets \"flagged\": true. Nothing was flagged."
+ ]
+}

@@ -62,6 +62,8 @@ const NOT_QUITE = [part('D4', { type: 'triangle', level: 0.6, attack: 0.02, deca
 const STAMP = [...notes(['C4', 'E4', 'G4', 'C5'], { step: 0.12, attack: 0.015, decay: 0.45, level: 0.7 }), ...bowl('C4', 0.36)]
 const LEVER = [part('C4', { type: 'triangle', level: 0.7, attack: 0.03, decay: 0.5 }), part('D4', { level: 0.5, attack: 0.03, decay: 0.5 })]
 const OPEN = flute('G4')
+const PIP = woodTick('G5', 'G4')
+const STOP_TICK = woodTick('E5', 'E4')
 
 // ---------- playback ----------
 
@@ -158,19 +160,20 @@ function wake(): Promise<AudioContext | null> {
   }
 }
 
-let lastAt = 0
-function play(recipe: Part[], delay = 0) {
+const lastAt = new Map<Part[], number>()
+/** gain scales a sound below the shared peak, for quiet background cues. */
+function play(recipe: Part[], delay = 0, gain = 1) {
   if (!soundOn()) return
-  // Taps in quick succession don't stack into a clatter.
+  // Taps and pips in quick succession don't stack into a clatter.
   const now = performance.now()
-  if (recipe === TICK && now - lastAt < 90) return
-  lastAt = now
+  if ((recipe === TICK || recipe === PIP) && now - (lastAt.get(recipe) ?? 0) < 90) return
+  lastAt.set(recipe, now)
   void wake().then((audio) => {
     if (!audio) return
     if (!peaks.has(recipe)) peaks.set(recipe, peakOf(recipe))
     const input = roomFor(audio)
     const start = audio.currentTime + 0.012 + delay
-    const scale = PEAK / (peaks.get(recipe) ?? 1)
+    const scale = (PEAK * gain) / (peaks.get(recipe) ?? 1)
     for (const p of recipe) {
       // Gain always ramps from silence and back; it never jumps, so there are no clicks.
       const osc = audio.createOscillator()
@@ -211,11 +214,11 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
 
 // ---------- what the app plays ----------
 
-/** Arriving at a station: its own bowl note. */
-export function chime(code: string) {
-  const n = Math.max(1, parseInt(code.slice(1), 10) || 1)
-  const station = STATION_BOWLS[(n - 1) % STATION_BOWLS.length]
-  play(station)
+/** Arriving at a station: its own bowl note. Quieter (gain < 1) when the train only passes through. */
+export function chime(code: string, gain = 1) {
+  if (!/^P0[1-8]$/.test(code)) return
+  const n = parseInt(code.slice(1), 10)
+  play(STATION_BOWLS[n - 1], 0, gain)
 }
 const STATION_BOWLS = STATION_NOTES.map((n) => bowl(n))
 
@@ -233,3 +236,9 @@ export const stampSound = () => play(STAMP)
 export const lever = () => play(LEVER)
 /** A die-cut window opens onto the level below. */
 export const open = () => play(OPEN)
+/** On the map ride: a side-line stop goes by. */
+export const passStop = () => play(STOP_TICK, 0, 0.6)
+/** On the map ride: one more token joins during the quick repeat trips. */
+export const pip = () => play(PIP, 0, 0.3)
+/** On the map ride: the answer arrives. */
+export const rideEnd = () => play(STAMP, 0, 0.85)

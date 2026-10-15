@@ -46,6 +46,40 @@ const SCENES: Record<string, ReactElement> = {
       <path d="M-46,26 L46,26" strokeDasharray="4 3" />
     </g>
   ),
+  // A chest of drawers, one pulled open, a striped strip of numbers falling out.
+  P03: (
+    <g className="st-ink" strokeWidth="2.5">
+      <rect x="-40" y="-30" width="56" height="52" rx="3" fill="none" />
+      <path d="M-40,-13 H16 M-40,4 H16 M-12,-30 V22" fill="none" />
+      <rect x="-12" y="4" width="40" height="17" rx="2" fill="none" />
+      <circle cx="-26" cy="-21" r="1.8" className="st-fill" />
+      <circle cx="2" cy="-21" r="1.8" className="st-fill" />
+      <circle cx="-26" cy="-4" r="1.8" className="st-fill" />
+      <path d="M28,12 C36,14 40,20 42,30" fill="none" strokeWidth="7" strokeDasharray="2 2.4" />
+    </g>
+  ),
+  // Arcs bridging over a row of chips, like a footbridge.
+  P04: (
+    <g className="st-ink" fill="none" strokeWidth="2.5" strokeLinecap="round">
+      <rect x="-46" y="8" width="18" height="12" rx="3" />
+      <rect x="-24" y="8" width="18" height="12" rx="3" />
+      <rect x="-2" y="8" width="18" height="12" rx="3" />
+      <rect x="20" y="8" width="26" height="12" rx="3" className="st-fill" />
+      <path d="M33,6 C33,-34 -37,-34 -37,6" strokeWidth="4" />
+      <path d="M33,6 C33,-18 -15,-18 -15,6" />
+      <path d="M33,6 C33,-6 7,-6 7,6" opacity="0.6" />
+    </g>
+  ),
+  // An elevator floor dial, needle near the top floor.
+  P05: (
+    <g className="st-ink" fill="none" strokeWidth="2.5" strokeLinecap="round">
+      <path d="M-40,14 A40,40 0 0,1 40,14" />
+      <path d="M-34,-6 L-29,-3 M-20,-22 L-17,-17 M0,-28 L0,-22 M20,-22 L17,-17 M34,-6 L29,-3" />
+      <path d="M0,14 L27,-13" strokeWidth="3.5" />
+      <circle cy="14" r="5" className="st-fill" />
+      <rect x="-14" y="22" width="28" height="10" rx="2" />
+    </g>
+  ),
   // A departure board with one lit row.
   P06: (
     <g className="st-ink" strokeWidth="2.5">

@@ -8,6 +8,7 @@
  * while the train waits at The Loop.
  */
 import { MAIN_Y, STOPS, STOP_NAMES, stationByCode, type MotionKey } from '../data/network'
+import { chime, depart, passStop, pip, rideEnd } from '../lib/sound'
 import type { Src } from '../data/heroRun'
 import { runCounts, type RunScript, type RunStep } from '../data/run'
 import { STORY } from '../data/story'
@@ -106,6 +107,7 @@ export class RunEngine {
 
   play() {
     if (this.state.done) this.reset()
+    if (this.idx === 0 && !this.steps[0]?.started) depart()
     this.state.playing = true
     this.lastTs = 0
     this.emit()
@@ -278,6 +280,8 @@ export class RunEngine {
     })
     this.lamp(code)?.classList.add('on', 'here')
     this.state.station = this.stationLabel(code)
+    // Sound only while the ride is actually playing, never while skipping ahead or resetting.
+    if (this.state.playing) chime(code)
   }
 
   private flash(code: string, label = true) {
@@ -285,6 +289,11 @@ export class RunEngine {
     if (!el) return
     el.classList.add('on')
     if (label) this.state.station = this.stationLabel(code)
+    // A narrated pass rings the station softly (a rising run along the line); a side stop ticks.
+    if (label && this.state.playing) {
+      if (code.startsWith('P')) chime(code, 0.55)
+      else passStop()
+    }
     if (this.reduce) return
     el.classList.add('flash')
     this.timers.push(window.setTimeout(() => el.classList.remove('flash'), 220))
@@ -362,7 +371,7 @@ export class RunEngine {
         { f: 0.25, fn: () => this.flash('P04', false) },
         { f: 0.45, fn: () => this.flash('P05', false) },
         { f: 0.65, fn: this.vote(kind, step, false, false) },
-        { f: 0.9, fn: () => { this.flash('P07', false); this.add([step.i]) } }
+        { f: 0.9, fn: () => { this.flash('P07', false); this.add([step.i]); if (this.state.playing) pip() } }
       ])
     ]
   }
@@ -527,6 +536,7 @@ export class RunEngine {
   }
 
   private finish() {
+    if (this.state.playing) rideEnd()
     this.state.playing = false
     this.state.done = true
     this.emit()
