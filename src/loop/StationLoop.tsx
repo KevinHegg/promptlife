@@ -13,7 +13,7 @@ const today = () => new Date().toLocaleDateString(undefined, { year: 'numeric', 
  * One station's five-minute loop, one beat per screen: Arrive, Try it, Learn it, Break it, Stamp.
  * Next always sits in the same place. Beats you've passed stay reachable from the rail.
  */
-export function StationLoop({ spec }: { spec: LoopSpec }) {
+export function StationLoop({ spec, onRideOn, onBeatChange }: { spec: LoopSpec; onRideOn?: (code: string) => void; onBeatChange?: (beat: BeatId) => void }) {
   const beats: BeatId[] = ['arrive', 'poke', 'name', ...(spec.break ? (['break'] as BeatId[]) : []), 'stamp']
   const saved = useRef(readStation(spec.code))
   const [at, setAt] = useState(() => Math.min(saved.current.beat ?? 0, beats.length - 1))
@@ -28,6 +28,7 @@ export function StationLoop({ spec }: { spec: LoopSpec }) {
   useEffect(() => {
     saveStation(spec.code, { beat: Math.max(at, reached) })
     if (beat === 'arrive') chime(spec.code)
+    onBeatChange?.(beat)
   }, [at, reached, beat, spec.code])
 
   const go = (i: number) => {
@@ -150,7 +151,11 @@ export function StationLoop({ spec }: { spec: LoopSpec }) {
         <button type="button" className="btn" disabled={at === 0} onClick={() => go(at - 1)}>← Back</button>
         {beat === 'stamp' ? (
           stampedAt && next ? (
-            <a className="btn primary" href={hrefFor(next.code)}>Ride on to {next.code} {next.name} →</a>
+            onRideOn ? (
+              <button type="button" className="btn primary" onClick={() => onRideOn(next.code)}>Ride on to {next.name} →</button>
+            ) : (
+              <a className="btn primary" href={hrefFor(next.code)}>Ride on to {next.name} →</a>
+            )
           ) : stampedAt ? (
             <a className="btn primary" href="#/">Back to the map →</a>
           ) : (

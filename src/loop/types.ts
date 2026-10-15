@@ -27,6 +27,8 @@ export type LoopSpec = {
   name: { definition: string; terms: string[]; picture: ReactNode; metaphor: string; breaks: string; note?: string }
   break?: { title: string; intro: string; body: ReactNode }
   stamp: { questions: QuizQuestion[]; art: ReactNode; receipt: Receipt }
+  /** Steps during which the page's small map window hides (e.g. while a full map is on screen). */
+  hideLocatorOn?: BeatId[]
   /** Optional extra offered after the stamp lands, never in the way of the loop. */
   bonus?: { label: string; body: ReactNode }
 }

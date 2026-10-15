@@ -14,6 +14,10 @@ type Props = {
   showTrain?: boolean
   /** Static maps: a train that glides into the station at this x when the page opens. */
   arriveAt?: number
+  /** A tiny overview: no labels or station names, just lines, stations and lamps. */
+  minimal?: boolean
+  /** Stations to show as lit (visited). */
+  litStations?: string[]
   label: string
   className?: string
   svgRef?: React.Ref<SVGSVGElement>
@@ -53,11 +57,21 @@ const LABELS: Label[] = [
 
 const BRANCH_ORDER: Exclude<LineId, 'P'>[] = ['L', 'G', 'D', 'A', 'S', 'R', 'W']
 
-export function MetroMap({ viewBox = '0 0 1120 490', focus, litLines = [], linked = true, showTrain = true, arriveAt, label, className, svgRef }: Props) {
+export function MetroMap({ viewBox = '0 0 1120 490', focus, litLines = [], linked = true, showTrain = true, arriveAt, minimal = false, litStations = [], label, className, svgRef }: Props) {
   const uid = useId().replace(/:/g, '')
   const glow = `glow-${uid}`
   const arrow = `arrow-${uid}`
   const lit = new Set(litLines)
+  const litSet = new Set(litStations)
+  // The inner group lets CSS scale the train without fighting the transform the engine sets.
+  const train = (
+    <g data-train="" transform={`translate(70,${MAIN_Y})`}>
+      <g className="train-art">
+        <rect className="train-body" x="-15" y="-8" width="30" height="16" rx="8" />
+        <rect className="train-win" x="-8" y="-3.5" width="16" height="7" rx="3" />
+      </g>
+    </g>
+  )
 
   return (
     <svg
@@ -87,7 +101,7 @@ export function MetroMap({ viewBox = '0 0 1120 490', focus, litLines = [], linke
         </g>
       ))}
 
-      <path className="m-loop" d="M918,277 C880,352 500,352 462,277" markerEnd={`url(#${arrow})`} />
+      <path className="m-loop" d="M918,277 C880,352 500,352 462,277" markerEnd={minimal ? undefined : `url(#${arrow})`} />
       {/* The main line runs between stations, not through them, so a train inside a see-through station stays visible. */}
       {STATIONS.slice(1).map((s, k) => (
         <path key={s.code} className="m-line m-main" d={`M${STATIONS[k].x + 50},${MAIN_Y} H${s.x - 50}`} />
@@ -97,12 +111,7 @@ export function MetroMap({ viewBox = '0 0 1120 490', focus, litLines = [], linke
         <path key={key} className="m-motion" data-motion={key} d={d} />
       ))}
 
-      {showTrain && (
-        <g data-train="" transform={`translate(70,${MAIN_Y})`}>
-          <rect className="train-body" x="-15" y="-8" width="30" height="16" rx="8" />
-          <rect className="train-win" x="-8" y="-3.5" width="16" height="7" rx="3" />
-        </g>
-      )}
+      {showTrain && !minimal && train}
 
       {arriveAt !== undefined && (
         <g transform={`translate(${arriveAt},${MAIN_Y})`}>
@@ -116,10 +125,16 @@ export function MetroMap({ viewBox = '0 0 1120 490', focus, litLines = [], linke
       {STATIONS.map((s) => {
         const pill = (
           <>
-            <rect className="pill" x={s.x - 52} y={MAIN_Y - 20} width="104" height="40" rx="20" />
-            <text className="t-code" x={s.x - 8} y={MAIN_Y - 4} textAnchor="middle">{s.code}</text>
-            <text className="t-st" x={s.x} y={MAIN_Y + 12} textAnchor="middle">{s.name}</text>
-            <circle className={`lamp${focus === s.code ? ' on here' : ''}`} data-lamp={s.code} cx={s.x + 20} cy={MAIN_Y - 8} r="4" />
+            <rect className={`pill${focus === s.code ? ' here' : ''}`} x={s.x - 52} y={MAIN_Y - 20} width="104" height="40" rx="20" />
+            {!minimal && <text className="t-code" x={s.x - 8} y={MAIN_Y - 4} textAnchor="middle">{s.code}</text>}
+            {!minimal && <text className="t-st" x={s.x} y={MAIN_Y + 12} textAnchor="middle">{s.name}</text>}
+            <circle
+              className={`lamp${focus === s.code ? ' on here' : litSet.has(s.code) ? ' on' : ''}`}
+              data-lamp={s.code}
+              cx={minimal ? s.x : s.x + 20}
+              cy={minimal ? MAIN_Y - 28 : MAIN_Y - 8}
+              r={minimal ? 9 : 4}
+            />
           </>
         )
         return linked ? (
@@ -141,7 +156,10 @@ export function MetroMap({ viewBox = '0 0 1120 490', focus, litLines = [], linke
         />
       ))}
 
-      {LABELS.map((l, i) => (
+      {/* In the small locator map there are no labels to protect, so the train rides on top. */}
+      {showTrain && minimal && train}
+
+      {!minimal && LABELS.map((l, i) => (
         <text
           key={i}
           className={l.kind === 'line' ? 't-line' : l.kind === 'sub' ? 't-sub' : l.kind === 'note' ? 't-note' : 't-stop'}

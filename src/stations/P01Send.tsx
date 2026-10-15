@@ -77,6 +77,8 @@ function SendPanel() {
 
 export const P01_SPEC: LoopSpec = {
   code: 'P01',
+  // Try it shows the full ride map; one map on screen at a time.
+  hideLocatorOn: ['poke'],
   arrive: {
     caption: 'This is your question. Ride along with it, all the way to the answer.',
     panel: <SendPanel />,
