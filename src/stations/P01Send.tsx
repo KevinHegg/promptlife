@@ -1,15 +1,13 @@
 import { useState } from 'react'
 import type { Src } from '../data/heroRun'
 import { runCounts } from '../data/run'
-import { SCENARIO } from '../data/heroRun'
 import type { LoopSpec } from '../loop/types'
 import { LiveRun } from '../map/LiveRun'
-import type { PlatformToken } from '../map/runEngine'
-import { ContextBar } from './parts'
+import { ContextBar, ContextBlocks, type ContextBlock } from './parts'
 
 const SRC_NAMES: Record<Src, string> = {
   special: 'a hidden marker the app adds to show who is speaking',
-  sys: 'part of the app’s hidden instructions or its description of the calculator',
+  sys: 'something the app adds: hidden instructions, or a description of its calculator',
   rag: 'part of the recipe card the app found in your files',
   user: 'your question',
   tool: 'the tool call the model wrote',
@@ -17,33 +15,46 @@ const SRC_NAMES: Record<Src, string> = {
   rep: 'the reply the model wrote'
 }
 
-function FindYourself() {
-  const [found, setFound] = useState(false)
-  const [miss, setMiss] = useState<Src | null>(null)
-  const pick = (t: PlatformToken) => {
-    if (t.src === 'user') {
-      setFound(true)
-      setMiss(null)
-    } else setMiss(t.src)
-  }
-  return (
-    <LiveRun
-      onPick={found ? undefined : pick}
-      outline={found ? 'user' : undefined}
-      aside={
-        <div className="notice task">
-          <h3>Your task</h3>
-          <p>Press play and watch the ride. Then tap the part of the platform that you typed.</p>
-          {found ? (
-            <p className="reveal"><b>That's you.</b> {runCounts.question} of {runCounts.total} word pieces. Everything else came from the app or from the model.</p>
-          ) : miss ? (
-            <p className="reveal"><b>Not that one.</b> That's {SRC_NAMES[miss]}.</p>
-          ) : (
-            <p className="muted">Tip: long gray stretches fold up. Tap “+ more” to open them.</p>
-          )}
+/**
+ * Two small steps instead of one busy screen: first watch the ride (one map, one button),
+ * then find your own words among everything the model read.
+ */
+function RideThenFind() {
+  const [step, setStep] = useState<'watch' | 'find'>('watch')
+  const [rideDone, setRideDone] = useState(false)
+  const [chosen, setChosen] = useState<ContextBlock | null>(null)
+  const right = chosen?.src === 'user'
+
+  if (step === 'watch') {
+    return (
+      <div className="substep">
+        <p className="substep-label">1 of 2 · Watch the ride</p>
+        <LiveRun compact onDone={() => setRideDone(true)} />
+        <div className="substep-next">
+          <button type="button" className={`btn${rideDone ? ' primary' : ''}`} onClick={() => setStep('find')}>
+            {rideDone ? 'Now find your words →' : 'Skip to finding your words →'}
+          </button>
         </div>
-      }
-    />
+      </div>
+    )
+  }
+
+  return (
+    <div className="substep">
+      <p className="substep-label">2 of 2 · Find your words</p>
+      <p>This is everything the model read, grouped by where it came from. Which part did <b>you</b> type?</p>
+      <ContextBlocks onPick={right ? undefined : setChosen} chosen={chosen?.key} />
+      <p className="reveal" aria-live="polite">
+        {right ? (
+          <><b>That's you:</b> {runCounts.question} of {runCounts.total} word pieces. Everything else came from the app or the model.</>
+        ) : chosen ? (
+          <><b>Not that one.</b> That's {SRC_NAMES[chosen.src]}.</>
+        ) : null}
+      </p>
+      <div className="substep-next">
+        <button type="button" className="link-btn" onClick={() => setStep('watch')}>← Watch the ride again</button>
+      </div>
+    </div>
   )
 }
 
@@ -72,8 +83,8 @@ export const P01_SPEC: LoopSpec = {
   },
   poke: {
     title: 'Ride along',
-    intro: `The question is “${SCENARIO.user}” Watch which lines light up, and what piles onto the platform.`,
-    body: <FindYourself />
+    intro: 'Press play and watch which lines light up. Then find your own words.',
+    body: <RideThenFind />
   },
   name: {
     definition: 'A large language model (LLM) guesses the next word piece, adds it, and guesses again. Your prompt is what you typed. The context is everything it reads, including what the app added.',

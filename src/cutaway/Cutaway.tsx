@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from 'react'
+import { useEffect, useState, type ReactNode } from 'react'
 
 type Props = {
   stationName: string
@@ -13,10 +13,16 @@ const LEVELS = ['Map', 'Cutaway', 'Bedrock'] as const
 
 /**
  * Three stacked paper levels. Die-cut circular windows (CSS masks) open from the map
- * down to the machine (Cutaway) and then to the math (Bedrock).
+ * down to the machine (Cutaway) and then to the math (Bedrock). The window opens on its own
+ * a moment after arrival, so the student lands on the part they can play with; one toggle
+ * leads down to the math and back.
  */
 export function Cutaway({ stationName, map, cutaway, bedrock, size = 'regular' }: Props) {
   const [depth, setDepth] = useState(0)
+  useEffect(() => {
+    const t = window.setTimeout(() => setDepth((d) => (d === 0 ? 1 : d)), 450)
+    return () => window.clearTimeout(t)
+  }, [])
   return (
     <div className="cutaway">
       <figure className={`cut-fig ${size}`} data-depth={depth} aria-label={`${stationName}, level ${depth + 1} of 3: ${LEVELS[depth]}`}>
@@ -26,13 +32,15 @@ export function Cutaway({ stationName, map, cutaway, bedrock, size = 'regular' }
         <div className="lv lv1" inert={depth !== 0} onClick={() => depth === 0 && setDepth(1)}>{map}</div>
         <button className="rim rim1" type="button" aria-label="Open the window" tabIndex={depth === 0 ? 0 : -1} onClick={() => setDepth(1)} />
       </figure>
-      <div className="depth" role="group" aria-label="Level">
-        {LEVELS.map((name, i) => (
-          <button key={name} className="btn" type="button" aria-pressed={depth === i} onClick={() => setDepth(i)}>
-            {i + 1} · {name}
+      <div className="depth">
+        {depth < 2 ? (
+          <button className="btn small" type="button" onClick={() => setDepth(depth === 0 ? 1 : 2)}>
+            {depth === 0 ? 'Open the window' : 'Show the math ↓'}
           </button>
-        ))}
-        <span className="hint">{depth === 0 ? 'Or tap the window itself.' : depth === 1 ? 'Tap the small window to dig to the math.' : 'This level is optional.'}</span>
+        ) : (
+          <button className="btn small" type="button" onClick={() => setDepth(1)}>Back to the machine ↑</button>
+        )}
+        <span className="hint">{depth === 2 ? 'The math is optional.' : ''}</span>
       </div>
     </div>
   )

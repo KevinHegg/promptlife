@@ -75,3 +75,54 @@ export function Reveal({ label, children }: { label: string; children: ReactNode
   const [open, setOpen] = useState(false)
   return open ? <>{children}</> : <button type="button" className="btn small" onClick={() => setOpen(true)}>{label}</button>
 }
+
+export type ContextBlock = { key: string; src: Src; label: string; count: number; preview: string }
+
+/**
+ * The whole context grouped into a few labeled blocks (template markers counted on their own),
+ * so a student can see what the model read without wading through hundreds of pieces.
+ */
+export function contextBlocks(): ContextBlock[] {
+  const lastPassage = RUN.passages[RUN.passages.length - 1] ?? -1
+  const labelFor = (src: Src, i: number) => {
+    if (src === 'sys') return i > lastPassage && lastPassage >= 0 ? 'The calculator’s instructions' : 'Hidden instructions'
+    return ({ rag: 'Your files (the recipe card)', user: 'Your question', tool: 'The model’s calculator request', res: 'The calculator’s result', rep: 'The answer', special: 'Markers' } as Record<string, string>)[src]
+  }
+  const blocks: ContextBlock[] = []
+  let markers = 0
+  for (const t of RUN.tokens) {
+    if (t.src === 'special') {
+      markers++
+      continue
+    }
+    const label = labelFor(t.src, t.i)
+    const last = blocks[blocks.length - 1]
+    if (last && last.label === label) {
+      last.count++
+      if (last.preview.length < 70) last.preview += t.text
+    } else blocks.push({ key: `${t.src}-${t.i}`, src: t.src, label, count: 1, preview: t.text })
+  }
+  blocks.push({ key: 'markers', src: 'special', label: 'Hidden markers between the parts', count: markers, preview: '<|im_start|> user … <|im_end|>' })
+  return blocks.map((b) => ({ ...b, preview: b.preview.replace(/\s+/g, ' ').trim() }))
+}
+
+export function ContextBlocks({ onPick, chosen }: { onPick?: (b: ContextBlock) => void; chosen?: string }) {
+  const blocks = contextBlocks()
+  const max = Math.max(...blocks.map((b) => b.count))
+  return (
+    <ol className="ctx-blocks">
+      {blocks.map((b) => (
+        <li key={b.key}>
+          <button type="button" className={`ctx-block${chosen === b.key ? ' chosen' : ''}`} onClick={() => onPick?.(b)} disabled={!onPick}>
+            <span className="cb-top">
+              <span className="cb-label">{b.label}</span>
+              <span className="cb-count">{b.count} pieces</span>
+            </span>
+            <span className="cb-bar"><span className={`cb-fill tk-bg-${b.src}`} style={{ width: `${Math.max(1.5, (b.count / max) * 100)}%` }} /></span>
+            <span className="cb-preview">{b.preview.length > 64 ? `${b.preview.slice(0, 64)}…` : b.preview}</span>
+          </button>
+        </li>
+      ))}
+    </ol>
+  )
+}

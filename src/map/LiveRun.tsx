@@ -19,19 +19,30 @@ type Props = {
   /** Hide the platform and notes (a lighter view for the home page). */
   compact?: boolean
   id?: string
+  onDone?: () => void
 }
 
 /** The living map with its board and controls, playing the recorded run. */
-export function LiveRun({ autoplay = false, onPick, outline, aside, compact = false, id }: Props) {
+export function LiveRun({ autoplay = false, onPick, outline, aside, compact = false, id, onDone }: Props) {
   const svgRef = useRef<SVGSVGElement>(null)
   const boxRef = useRef<HTMLDivElement>(null)
   const engineRef = useRef<RunEngine | null>(null)
   const [snap, setSnap] = useState<RunSnapshot | null>(null)
   const [reduced, setReduced] = useState(false)
+  const doneRef = useRef(onDone)
+  doneRef.current = onDone
 
   useEffect(() => {
     if (!svgRef.current) return
-    const engine = new RunEngine({ svg: svgRef.current, scroller: boxRef.current, run: RUN, onChange: setSnap })
+    const engine = new RunEngine({
+      svg: svgRef.current,
+      scroller: boxRef.current,
+      run: RUN,
+      onChange: (s) => {
+        setSnap(s)
+        if (s.done) doneRef.current?.()
+      }
+    })
     engineRef.current = engine
     setReduced(engine.reducedMotion)
     let io: IntersectionObserver | null = null
@@ -63,7 +74,7 @@ export function LiveRun({ autoplay = false, onPick, outline, aside, compact = fa
     : reduced
       ? 'Reduced motion is on, so the train jumps between stations.'
       : started
-        ? 'Pause anytime, or skip to the next stop.'
+        ? 'Pause anytime.'
         : 'About a minute. Nothing moves until you press play.'
 
   return (
@@ -79,8 +90,8 @@ export function LiveRun({ autoplay = false, onPick, outline, aside, compact = fa
         <button className="btn primary" type="button" onClick={() => (snap?.playing ? engine?.pause() : engine?.play())}>
           {playLabel}
         </button>
-        {started && <button className="btn" type="button" onClick={() => engine?.next()}>Next stop</button>}
-        {started && <button className="btn" type="button" onClick={() => engine?.restart()}>Restart</button>}
+        {!compact && started && <button className="btn" type="button" onClick={() => engine?.next()}>Next stop</button>}
+        {!compact && started && <button className="btn" type="button" onClick={() => engine?.restart()}>Restart</button>}
         <span className="hint">{hint}</span>
       </div>
       {!compact && (

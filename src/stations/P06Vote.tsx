@@ -32,22 +32,9 @@ function BoardPanel() {
   )
 }
 
-function PokeBody() {
-  const [playing, setPlaying] = useState(false)
-  return playing ? (
-    <BeatTheModel onClose={() => setPlaying(false)} />
-  ) : (
-    <>
-      <VoteLevels station={station} positions={phase1.votePositions} exactTail={phase1.real} />
-      <div className="game-invite">
-        <div>
-          <h3>Beat the Model</h3>
-          <p>Five rounds. Guess the next word, then see the odds the model gave your guess, and whether a real writer agreed.</p>
-        </div>
-        <button type="button" className="btn primary" onClick={() => setPlaying(true)} disabled={!phase1.beat.thinkLike.length}>Play</button>
-      </div>
-    </>
-  )
+function BonusGame() {
+  const [playing, setPlaying] = useState(true)
+  return playing ? <BeatTheModel onClose={() => setPlaying(false)} /> : <p className="muted">Thanks for playing.</p>
 }
 
 const TEMPS = [0, 0.7, 1, 1.5, 2]
@@ -84,8 +71,8 @@ export const P06_SPEC: LoopSpec = {
   },
   poke: {
     title: 'Turn the temperature',
-    intro: 'Open the window, pick a moment from the ride, and slide the temperature. Then play Beat the Model.',
-    body: <PokeBody />
+    intro: 'Pick a moment from the ride and slide the temperature. Watch the odds change.',
+    body: <VoteLevels station={station} positions={phase1.votePositions} exactTail={phase1.real} />
   },
   name: {
     definition: 'The model turns its scores into odds that add up to 100%, then draws the next piece. Temperature reshapes the odds: low makes the favorite almost certain, high gives long shots a chance.',
@@ -120,5 +107,6 @@ export const P06_SPEC: LoopSpec = {
     ],
     art: null,
     receipt: { text: 'The provider sets the temperature. Different answers to the same question are a design choice.', column: 'accountability' }
-  }
+  },
+  bonus: phase1.beat.thinkLike.length ? { label: 'Bonus game: Beat the Model', body: <BonusGame /> } : undefined
 }

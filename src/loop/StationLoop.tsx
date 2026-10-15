@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { stationByCode, STATIONS } from '../data/network'
 import { readStation, saveStation } from '../lib/progress'
 import { hrefFor } from '../lib/router'
@@ -96,6 +96,7 @@ export function StationLoop({ spec }: { spec: LoopSpec }) {
                 <p><b>Picture it:</b> {spec.name.metaphor}</p>
                 <p className="breaks"><b>Where that breaks:</b> {spec.name.breaks}</p>
               </div>
+              {spec.name.note && <p className="muted small">{spec.name.note}</p>}
             </div>
             <div className="name-picture">{spec.name.picture}</div>
           </div>
@@ -125,6 +126,7 @@ export function StationLoop({ spec }: { spec: LoopSpec }) {
               {stampedAt ? (
                 <>
                   <p className="stamp-msg">Stamped. {station?.name} is in your pass.</p>
+                  {spec.bonus && <Bonus {...spec.bonus} />}
                   <div className="receipt">
                     <p className="kicker">Receipt</p>
                     <p>{spec.stamp.receipt.text}</p>
@@ -161,6 +163,11 @@ export function StationLoop({ spec }: { spec: LoopSpec }) {
       </nav>
     </div>
   )
+}
+
+function Bonus({ label, body }: { label: string; body: ReactNode }) {
+  const [open, setOpen] = useState(false)
+  return open ? <div className="bonus-body">{body}</div> : <button type="button" className="btn" onClick={() => setOpen(true)}>{label}</button>
 }
 
 function Flashback({ q, a }: { q: string; a: string }) {

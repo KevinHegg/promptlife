@@ -14,24 +14,6 @@ const frontier = HERO_TOKENS.user.map((text, i) => ({ text, id: USER_IDS[i] }))
 const recorded = trace ? RUN.question.map((i) => ({ text: trace!.tokens[i].text, id: trace!.tokens[i].id })) : []
 const letters = splitByCharacter(SCENARIO.user)
 
-function CompareCuts() {
-  if (!recorded.length) return null
-  return (
-    <div className="compare-cuts">
-      <h3>Different models cut differently</h3>
-      <div>
-        <p className="kicker">Frontier tokenizer (o200k) · {frontier.length} pieces</p>
-        <Chips pieces={frontier} hot={(i) => frontier[i].text === ' flour'} />
-      </div>
-      <div>
-        <p className="kicker">The recorded model ({trace ? modelName(trace) : ''}) · {recorded.length} pieces</p>
-        <Chips pieces={recorded} hot={(i) => /flour/.test(recorded[i].text)} />
-      </div>
-      <p className="muted">Same sentence, different lists of pieces. The rest of the ride uses the recorded model's {recorded.length}.</p>
-    </div>
-  )
-}
-
 function LettersBreak() {
   const [on, setOn] = useState(false)
   const L = phase1.letters
@@ -103,12 +85,7 @@ export const P02_SPEC: LoopSpec = {
   poke: {
     title: 'Make the tokenizer stumble',
     intro: 'Open the window and type anything. Try three things: add pieces by changing one letter; find a word that’s one piece after a space but two without; try another language.',
-    body: (
-      <>
-        <TokenizerLevels station={station} />
-        <CompareCuts />
-      </>
-    )
+    body: <TokenizerLevels station={station} />
   },
   name: {
     definition: 'A tokenizer cuts text into word pieces, called tokens, from a fixed list, and swaps each one for its number, its token ID. From here on, the model sees only the numbers.',
@@ -121,7 +98,8 @@ export const P02_SPEC: LoopSpec = {
       </div>
     ),
     metaphor: 'A coat check: hand over text, get a numbered ticket.',
-    breaks: 'A coat check returns your own coat. Every “ flour” gets the same ticket, and what that ticket stands for was set in training.'
+    breaks: 'A coat check returns your own coat. Every “ flour” gets the same ticket, and what that ticket stands for was set in training.',
+    note: recorded.length ? `Different models cut differently: the recorded model cuts your question into ${recorded.length} pieces, a frontier model into ${frontier.length}.` : undefined
   },
   break: {
     title: 'Cut by letters',

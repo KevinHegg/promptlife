@@ -21,7 +21,9 @@ export type LoopSpec = {
   code: string
   arrive: { caption: string; panel: ReactNode; flashback?: { q: string; a: string } }
   poke: { title: string; intro: string; body: ReactNode }
-  name: { definition: string; terms: string[]; picture: ReactNode; metaphor: string; breaks: string }
+  name: { definition: string; terms: string[]; picture: ReactNode; metaphor: string; breaks: string; note?: string }
   break?: { title: string; intro: string; body: ReactNode }
   stamp: { questions: QuizQuestion[]; art: ReactNode; receipt: Receipt }
+  /** Optional extra offered after the stamp lands, never in the way of the loop. */
+  bonus?: { label: string; body: ReactNode }
 }
