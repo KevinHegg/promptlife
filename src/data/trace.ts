@@ -24,13 +24,27 @@ export const trace: Trace | null = Object.values(files)[0] ?? null
 
 export const modelName = (t: Trace) => t.model.id.split('/').pop() ?? t.model.id
 
-/** The text just before a position, cut back to a word boundary (models split numbers into digits). */
+/**
+ * The text just before a position, within the current turn (so a tool result never runs into the
+ * reply), cut back to a word boundary (models split numbers into digits).
+ */
 function contextBefore(t: Trace, pos: number, maxChars = 30) {
-  const text = t.tokens
-    .slice(Math.max(0, pos - 24), pos)
-    .filter((tok) => tok.src !== 'special')
-    .map((tok) => tok.text)
-    .join('')
+  const start = Math.max(0, pos - 24)
+  let from = start
+  for (let i = pos - 1; i >= start; i--) {
+    if (t.tokens[i]?.src === 'special') {
+      from = i + 1
+      break
+    }
+  }
+  const joined = (a: number) =>
+    t.tokens
+      .slice(a, pos)
+      .filter((tok) => tok.src !== 'special')
+      .map((tok) => tok.text)
+      .join('')
+  // At the very start of a turn, show the end of the turn before instead.
+  const text = joined(from).trim() ? joined(from) : joined(start)
   if (text.length <= maxChars) return text.trim()
   const tail = text.slice(-maxChars)
   const cut = tail.indexOf(' ')

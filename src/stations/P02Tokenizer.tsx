@@ -56,7 +56,7 @@ function LettersBreak() {
 
 function CutterPanel() {
   return (
-    <svg className="arrive-art" viewBox="0 0 320 220" role="img" aria-label="The question feeds into a cutter and leaves as chips with numbered tickets">
+    <svg className="arrive-art" viewBox="0 32 320 136" role="img" aria-label="The question feeds into a cutter and leaves as chips with numbered tickets">
       <rect x="10" y="60" width="120" height="26" rx="6" className="art-fill-soft" />
       <text x="18" y="77" className="art-text">Using my grandmoth…</text>
       <path d="M134,52 L150,73 L134,94" className="art-line" fill="none" />
@@ -89,7 +89,7 @@ export const P02_SPEC: LoopSpec = {
   },
   poke: {
     title: 'Make the tokenizer stumble',
-    intro: 'Type anything and watch it split into tokens. Try “strawberry”, then change one letter, then try another language.',
+    intro: 'Type anything, or tap an example. Try “strawberry”, then change one letter.',
     body: <TokenizerLevels station={station} />
   },
   name: {

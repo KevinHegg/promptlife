@@ -1,4 +1,4 @@
-import { useEffect, useState, type ReactNode } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from 'react'
 
 type Props = {
   stationName: string
@@ -19,13 +19,40 @@ const LEVELS = ['Map', 'Cutaway', 'Bedrock'] as const
  */
 export function Cutaway({ stationName, map, cutaway, bedrock, size = 'regular' }: Props) {
   const [depth, setDepth] = useState(0)
+  const figRef = useRef<HTMLElement>(null)
+  // On phones the box takes the height of the level you're looking at (CSS reads --fit-h),
+  // so there's no empty band and no scrolling inside the box.
+  const [fitH, setFitH] = useState<number | null>(null)
+  // Height changes animate only after the first fit, so arriving doesn't wobble.
+  const [settled, setSettled] = useState(false)
   useEffect(() => {
     const t = window.setTimeout(() => setDepth((d) => (d === 0 ? 1 : d)), 450)
-    return () => window.clearTimeout(t)
+    const s = window.setTimeout(() => setSettled(true), 120)
+    return () => {
+      window.clearTimeout(t)
+      window.clearTimeout(s)
+    }
   }, [])
+  useLayoutEffect(() => {
+    const fig = figRef.current
+    const level = fig?.querySelector<HTMLElement>(`.lv${depth === 2 ? 3 : 2} > .lv-in`)
+    if (!level) return
+    const measure = () => setFitH(Math.ceil(level.offsetHeight))
+    measure()
+    if (typeof ResizeObserver === 'undefined') return
+    const ro = new ResizeObserver(measure)
+    ro.observe(level)
+    return () => ro.disconnect()
+  }, [depth])
   return (
     <div className="cutaway">
-      <figure className={`cut-fig ${size}`} data-depth={depth} aria-label={`${stationName}, level ${depth + 1} of 3: ${LEVELS[depth]}`}>
+      <figure
+        ref={figRef}
+        className={`cut-fig ${size}${settled ? ' settled' : ''}`}
+        data-depth={depth}
+        style={fitH ? { ['--fit-h' as string]: `${fitH}px` } : undefined}
+        aria-label={`${stationName}, level ${depth + 1} of 3: ${LEVELS[depth]}`}
+      >
         <div className="lv lv3" inert={depth < 2}>{bedrock}</div>
         <div className="lv lv2" inert={depth !== 1}>{cutaway}</div>
         <button className="rim rim2" type="button" aria-label="Dig to the math" tabIndex={depth === 1 ? 0 : -1} onClick={() => setDepth(2)} />

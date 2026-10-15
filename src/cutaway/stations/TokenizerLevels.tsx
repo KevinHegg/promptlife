@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { HERO_TOKENS, SCENARIO, USER_IDS } from '../../data/heroRun'
 import type { Station } from '../../data/network'
 import { splitByCharacter, tokenize, type Piece } from '../../lib/tokenizer'
@@ -8,12 +8,15 @@ import { MapLevel } from '../MapLevel'
 
 const EXAMPLES = [' strawberry', 'strawberry', 'Strawberry', 'buttermilk', '¿Cuánta harina necesito?', 'naïve café 🚇']
 const HERO_PIECES: Piece[] = HERO_TOKENS.user.map((text, i) => ({ text, id: USER_IDS[i] }))
+/** About one sentence. Our recipe question is 79 characters. */
+const MAX_CHARS = 100
 
 export function TokenizerLevels({ station }: { station: Station }) {
   const [text, setText] = useState(SCENARIO.user)
   const [byLetter, setByLetter] = useState(false)
   const [pieces, setPieces] = useState<Piece[]>(HERO_PIECES)
   const [error, setError] = useState('')
+  const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     let alive = true
@@ -39,13 +42,38 @@ export function TokenizerLevels({ station }: { station: Station }) {
       map={<MapLevel station={station} />}
       cutaway={
         <Level>
-          <LevelText level={2} title="Type anything">
-            <p>A real tokenizer splits your text into tokens and swaps each token for its ID. Try the examples.</p>
+          <LevelText level={2} title="A real tokenizer">
+            <p>Each token gets its ID number.</p>
           </LevelText>
           <Vis>
             <div className="v-col">
-              <label className="visually-hidden" htmlFor="tok-input">Text to tokenize</label>
-              <input id="tok-input" className="tok-input" value={text} maxLength={160} onChange={(e) => setText(e.target.value)} spellCheck={false} />
+              <label className="visually-hidden" htmlFor="tok-input">Text to tokenize, up to {MAX_CHARS} characters</label>
+              <div className="tok-field">
+                <input
+                  id="tok-input"
+                  ref={inputRef}
+                  className="tok-input"
+                  value={text}
+                  maxLength={MAX_CHARS}
+                  placeholder="Type a sentence"
+                  onChange={(e) => setText(e.target.value)}
+                  spellCheck={false}
+                  autoComplete="off"
+                  autoCapitalize="off"
+                />
+                {text && (
+                  <button
+                    type="button"
+                    className="tok-clear"
+                    onClick={() => {
+                      setText('')
+                      inputRef.current?.focus()
+                    }}
+                  >
+                    Clear
+                  </button>
+                )}
+              </div>
               <div className="v-examples" role="group" aria-label="Examples">
                 <button type="button" className="chip-btn" onClick={() => setText(SCENARIO.user)}>our question</button>
                 {EXAMPLES.map((ex) => (
@@ -64,7 +92,7 @@ export function TokenizerLevels({ station }: { station: Station }) {
                 {pieces.length > 72 && <span className="v-cap">+{pieces.length - 72} more</span>}
               </div>
               <p className="v-count">
-                {chars} characters → <b>{pieces.length}</b> {byLetter ? 'letters' : 'tokens'}
+                {chars}/{MAX_CHARS} characters → <b>{pieces.length}</b> {byLetter ? 'letters' : 'tokens'}
               </p>
               <label className="v-toggle">
                 <input type="checkbox" checked={byLetter} onChange={(e) => setByLetter(e.target.checked)} />

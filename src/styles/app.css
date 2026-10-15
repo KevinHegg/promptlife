@@ -620,3 +620,46 @@ blockquote { margin: 0; padding: 10px 14px; border-left: 3px solid var(--ink-2);
 .locator-nav a, .locator-nav .link-btn { color: var(--ink); text-decoration: none; font-family: var(--font-display); font-weight: 800; }
 .locator-here { font-family: var(--font-mono); font-weight: 400; font-size: 0.75rem; color: var(--ink-2); }
 .link-btn.strong { text-decoration: none; }
+
+/* ================= Phase 1.6: tighter phones, a tokenizer you can clear ================= */
+.tok-field { position: relative; width: 100%; }
+.tok-field .tok-input { padding-right: 72px; }
+.tok-input::placeholder { color: var(--lv2-dim); }
+.tok-clear {
+  position: absolute; right: 6px; top: 50%; transform: translateY(-50%);
+  font-family: var(--font-display); font-weight: 700; font-size: 0.8rem;
+  padding: 5px 11px; border-radius: 999px; border: 1px solid var(--lv2-dim);
+  background: var(--lv2); color: var(--lv2-ink); cursor: pointer;
+}
+.tok-clear:hover, .tok-clear:focus-visible { border-color: var(--doing); color: var(--doing); }
+
+@media (max-width: 640px) {
+  /* The box is as tall as the level you're looking at: no empty band, no scrolling inside it. */
+  .cut-fig, .cut-fig.tall {
+    height: max(320px, var(--fit-h, 640px));
+  }
+  .cut-fig.settled { transition: --r1 0.8s cubic-bezier(0.6, 0, 0.2, 1), --r2 0.8s cubic-bezier(0.6, 0, 0.2, 1), height 0.4s ease; }
+  .lv2 > .lv-in, .lv3 > .lv-in { position: relative; inset: auto; }
+  /* The peek-hole to the math sits a fixed distance from the bottom, below the content. */
+  .cut-fig { --hy2: calc(100% - 28px); }
+  .cut-fig[data-depth="1"] { --r2: 22px; }
+  .lv-vis { overflow: visible; align-items: flex-start; padding: 10px 16px 58px; }
+  .lv-text { padding: 16px 18px 2px; gap: 6px; }
+  .v-col { gap: 10px; }
+  /* 16px stops iOS from zooming in when the field is tapped. */
+  .tok-input { font-size: 16px; }
+  /* Examples ride on one line that scrolls sideways, fading at the edge. */
+  .v-examples {
+    flex-wrap: nowrap; justify-content: flex-start; overflow-x: auto; width: 100%;
+    padding-bottom: 2px; scrollbar-width: none;
+    -webkit-mask-image: linear-gradient(to right, #000 85%, transparent);
+    mask-image: linear-gradient(to right, #000 85%, transparent);
+  }
+  .v-examples::-webkit-scrollbar { display: none; }
+  .v-examples .chip-btn { flex: none; padding: 5px 11px; }
+  .loop { gap: 12px; }
+  .beat-head { gap: 4px; }
+}
+@media (max-width: 640px) and (prefers-reduced-motion: reduce) {
+  .cut-fig.settled { transition: none; }
+}
