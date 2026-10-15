@@ -5,7 +5,8 @@
 const VISITED = 'promptlife.v1.visited'
 const STATIONS = 'promptlife.v1.stations'
 
-export type StationProgress = { beat: number; stampedAt?: string }
+/** beat: the furthest step reached. at: the step last on screen, for resuming. */
+export type StationProgress = { beat: number; at?: number; stampedAt?: string }
 
 function read<T>(key: string, fallback: T): T {
   try {

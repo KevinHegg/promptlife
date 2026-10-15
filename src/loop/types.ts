@@ -32,3 +32,6 @@ export type LoopSpec = {
   /** Optional extra offered after the stamp lands, never in the way of the loop. */
   bonus?: { label: string; body: ReactNode }
 }
+
+/** The steps one station's loop walks through, in order. */
+export const beatsFor = (spec: LoopSpec): BeatId[] => ['arrive', 'poke', 'name', ...(spec.break ? (['break'] as BeatId[]) : []), 'stamp']

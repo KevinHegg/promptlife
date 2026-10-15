@@ -2,6 +2,7 @@ import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { MAIN_Y, STATIONS, stationByCode } from '../data/network'
 import { readStations, readVisited } from '../lib/progress'
 import { hrefFor } from '../lib/router'
+import { depart } from '../lib/sound'
 import { MetroMap } from './MetroMap'
 
 /** Set just before riding on, so the next page starts with the train already in place. */
@@ -114,6 +115,7 @@ export function StationLocator({ code, leavingTo, onGo }: Props) {
 
 /** Ride on: let the locator's train glide forward, then open the next station. */
 export function rideOn(code: string, setLeaving: (c: string) => void) {
+  depart()
   setLeaving(code)
   arrivedByRide = code
   window.setTimeout(() => {

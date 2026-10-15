@@ -1,23 +1,25 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { stationByCode, STATIONS } from '../data/network'
+import { glossaryHref, glossaryIdFor } from '../lib/glossaryLink'
 import { readStation, saveStation } from '../lib/progress'
 import { hrefFor } from '../lib/router'
-import { chime, thunk } from '../lib/sound'
+import { chime, stampSound, tick } from '../lib/sound'
 import { GuessCard, QuizCard } from './Choices'
 import { StampArt } from './StampArt'
-import { BEAT_LABELS, type BeatId, type LoopSpec } from './types'
+import { BEAT_LABELS, beatsFor, type BeatId, type LoopSpec } from './types'
 
 const today = () => new Date().toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' })
 
 /**
  * One station's five-minute loop, one beat per screen: Arrive, Try it, Learn it, Break it, Stamp.
- * Next always sits in the same place. Beats you've passed stay reachable from the rail.
+ * Next always sits in the same place. Every step is reachable from the rail, so a stamped
+ * station works as a refresher: it reopens at Arrive with everything open.
  */
 export function StationLoop({ spec, onRideOn, onBeatChange }: { spec: LoopSpec; onRideOn?: (code: string) => void; onBeatChange?: (beat: BeatId) => void }) {
-  const beats: BeatId[] = ['arrive', 'poke', 'name', ...(spec.break ? (['break'] as BeatId[]) : []), 'stamp']
+  const beats = beatsFor(spec)
   const saved = useRef(readStation(spec.code))
-  const [at, setAt] = useState(() => Math.min(saved.current.beat ?? 0, beats.length - 1))
-  const [reached, setReached] = useState(() => Math.max(saved.current.beat ?? 0, 0))
+  const [at, setAt] = useState(() => (saved.current.stampedAt ? 0 : Math.min(saved.current.at ?? saved.current.beat ?? 0, beats.length - 1)))
+  const [reached, setReached] = useState(() => (saved.current.stampedAt ? beats.length - 1 : Math.max(saved.current.beat ?? 0, 0)))
   const [answered, setAnswered] = useState<boolean[]>(() => spec.stamp.questions.map(() => false))
   const [stampedAt, setStampedAt] = useState<string | undefined>(saved.current.stampedAt)
   const topRef = useRef<HTMLDivElement>(null)
@@ -26,12 +28,13 @@ export function StationLoop({ spec, onRideOn, onBeatChange }: { spec: LoopSpec; 
   const next = STATIONS[STATIONS.findIndex((s) => s.code === spec.code) + 1]
 
   useEffect(() => {
-    saveStation(spec.code, { beat: Math.max(at, reached) })
+    saveStation(spec.code, { beat: Math.max(at, reached), at })
     if (beat === 'arrive') chime(spec.code)
     onBeatChange?.(beat)
   }, [at, reached, beat, spec.code])
 
   const go = (i: number) => {
+    tick()
     setAt(i)
     setReached((r) => Math.max(r, i))
     topRef.current?.scrollIntoView({ block: 'start', behavior: 'smooth' })
@@ -45,7 +48,7 @@ export function StationLoop({ spec, onRideOn, onBeatChange }: { spec: LoopSpec; 
       const d = today()
       setStampedAt(d)
       saveStation(spec.code, { beat: beats.length - 1, stampedAt: d })
-      window.setTimeout(thunk, 350)
+      window.setTimeout(stampSound, 350)
     }
   }
 
@@ -54,7 +57,7 @@ export function StationLoop({ spec, onRideOn, onBeatChange }: { spec: LoopSpec; 
       <ol className="beat-rail" aria-label="This station's loop">
         {beats.map((b, i) => (
           <li key={b} className={`${i === at ? 'now' : ''}${i < at || (i <= reached && i !== at) ? ' passed' : ''}`}>
-            <button type="button" disabled={i > reached} onClick={() => go(i)} aria-current={i === at ? 'step' : undefined}>
+            <button type="button" onClick={() => go(i)} aria-current={i === at ? 'step' : undefined}>
               <span className="dot" aria-hidden="true" />
               <span className="lbl">{BEAT_LABELS[b]}</span>
             </button>
@@ -92,7 +95,10 @@ export function StationLoop({ spec, onRideOn, onBeatChange }: { spec: LoopSpec; 
               <p className="kicker">Learn it</p>
               <p className="definition">{spec.name.definition}</p>
               <ul className="terms" aria-label="New terms">
-                {spec.name.terms.map((t) => <li key={t}>{t}</li>)}
+                {spec.name.terms.map((t) => {
+                  const id = glossaryIdFor(t)
+                  return <li key={t}>{id ? <a href={glossaryHref(id)}>{t}</a> : t}</li>
+                })}
               </ul>
               <div className="metaphor">
                 <p><b>Picture it:</b> {spec.name.metaphor}</p>

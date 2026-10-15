@@ -1,13 +1,21 @@
 import { useState, type ReactNode } from 'react'
 import type { Src } from '../data/heroRun'
 import { RUN, runCounts } from '../data/run'
+import { lever, tick } from '../lib/sound'
 import { TokenText } from '../ui/TokenText'
 
 /** A red-handled sabotage switch. Red is reserved for Break it. */
 export function Lever({ on, onChange, label }: { on: boolean; onChange: (v: boolean) => void; label: string }) {
   return (
     <label className={`lever${on ? ' on' : ''}`}>
-      <input type="checkbox" checked={on} onChange={(e) => onChange(e.target.checked)} />
+      <input
+        type="checkbox"
+        checked={on}
+        onChange={(e) => {
+          if (e.target.checked) lever()
+          onChange(e.target.checked)
+        }}
+      />
       <span className="lever-track" aria-hidden="true"><span className="lever-handle" /></span>
       <span className="lever-label">{label}</span>
     </label>
@@ -20,7 +28,10 @@ export function Dial<T extends number | string>({ stops, value, onChange, label,
     <div className="dial" role="radiogroup" aria-label={label}>
       <span className="dial-label">{label}</span>
       {stops.map((s) => (
-        <button key={String(s)} type="button" role="radio" aria-checked={s === value} className={`dial-stop${s === value ? ' on' : ''}`} onClick={() => onChange(s)}>
+        <button key={String(s)} type="button" role="radio" aria-checked={s === value} className={`dial-stop${s === value ? ' on' : ''}`} onClick={() => {
+            tick()
+            onChange(s)
+          }}>
           {format ? format(s) : String(s)}
         </button>
       ))}

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { notQuite, yes } from '../lib/sound'
 import type { Guess, Option } from './types'
 
 /** A quick guess: one tap shows the answer. Optional; nothing waits on it. */
@@ -15,7 +16,11 @@ export function GuessCard({ q, options, reveal }: Guess) {
             type="button"
             className={`chip-choice${picked === i ? ' picked' : ''}${picked !== null && o.correct ? ' correct' : ''}`}
             disabled={picked !== null}
-            onClick={() => setPicked(i)}
+            onClick={() => {
+              setPicked(i)
+              if (o.correct) yes()
+              else notQuite()
+            }}
           >
             {o.text}
           </button>
@@ -45,6 +50,8 @@ export function QuizCard({ q, options, onCorrect }: { q: string; options: Option
               disabled={solved || was}
               onClick={() => {
                 setTried((t) => [...t, i])
+                if (o.correct) yes()
+                else notQuite()
                 if (o.correct) {
                   setSolved(true)
                   onCorrect()

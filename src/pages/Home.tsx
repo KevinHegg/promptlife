@@ -4,26 +4,19 @@ import { STATIONS } from '../data/network'
 import { STATION_CONTENT } from '../data/stationContent'
 import { LiveRun } from '../map/LiveRun'
 import { readStations } from '../lib/progress'
+import { resumePoint } from '../lib/resume'
 import { hrefFor } from '../lib/router'
 import { StampArt } from '../loop/StampArt'
 import { Roundel } from '../ui/Roundel'
 import { LOOPS } from '../stations'
 
-/** The first ready station the visitor hasn't stamped yet. */
-function nextStop() {
-  const progress = readStations()
-  return STATIONS.find((s) => LOOPS[s.code] && !progress[s.code]?.stampedAt) ?? STATIONS[0]
-}
-
 /** Home: the question, one way in, the ride, and the stations. Nothing else. */
 export function Home() {
   const progress = useMemo(readStations, [])
-  const resume = useMemo(nextStop, [])
-  const started = Object.keys(progress).length > 0
+  const resume = useMemo(resumePoint, [])
   return (
     <>
       <header className="masthead">
-        <p className="kicker">Prompt Life</p>
         <h1>What happens after you hit Send?</h1>
         <p className="lede">Follow one question through a real AI model, like a train through a subway map.</p>
         <div className="question-card">
@@ -32,7 +25,7 @@ export function Home() {
         </div>
         <div className="cta">
           <a className="btn primary big" href={hrefFor(resume.code)}>
-            {started ? `Continue: ${resume.name} →` : 'Start the ride →'}
+            {resume.started ? `Continue: ${resume.name} · ${resume.step} →` : 'Start the ride →'}
           </a>
         </div>
       </header>

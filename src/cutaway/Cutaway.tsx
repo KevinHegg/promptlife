@@ -1,4 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from 'react'
+import { open } from '../lib/sound'
 
 type Props = {
   stationName: string
@@ -33,6 +34,12 @@ export function Cutaway({ stationName, map, cutaway, bedrock, size = 'regular' }
       window.clearTimeout(s)
     }
   }, [])
+  // A soft flute each time a window opens onto a deeper level.
+  const lastDepth = useRef(0)
+  useEffect(() => {
+    if (depth > lastDepth.current) open()
+    lastDepth.current = depth
+  }, [depth])
   useLayoutEffect(() => {
     const fig = figRef.current
     const level = fig?.querySelector<HTMLElement>(`.lv${depth === 2 ? 3 : 2} > .lv-in`)
