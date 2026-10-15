@@ -88,7 +88,7 @@ export const P06_SPEC: LoopSpec = {
   },
   break: {
     title: 'Crank the temperature',
-    intro: 'Same question, same calculator result. Only the temperature changes.',
+    intro: 'Why not let the model pick freely? Same question, same calculator result. Turn up the temperature and watch the answer fall apart.',
     body: <TemperatureBreak />
   },
   stamp: {

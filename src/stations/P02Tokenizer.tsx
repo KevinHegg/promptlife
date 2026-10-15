@@ -7,49 +7,72 @@ import { modelName, trace } from '../data/trace'
 import { TokenizerLevels } from '../cutaway/stations/TokenizerLevels'
 import { splitByCharacter } from '../lib/tokenizer'
 import type { LoopSpec } from '../loop/types'
-import { Chips, Lever } from './parts'
+import { Chips, Lever, Reveal } from './parts'
 
 const station = stationByCode('P02')!
 const frontier = HERO_TOKENS.user.map((text, i) => ({ text, id: USER_IDS[i] }))
 const recorded = trace ? RUN.question.map((i) => ({ text: trace!.tokens[i].text, id: trace!.tokens[i].id })) : []
 const letters = splitByCharacter(SCENARIO.user)
 
+/**
+ * Break it: send the question one letter at a time. Two numbers flip with the lever (tokens, and
+ * the chance the model asks for the calculator), then one line on why tokenizers use word parts.
+ */
 function LettersBreak() {
   const [on, setOn] = useState(false)
   const L = phase1.letters
   const n = L?.questionTokenCountLetters ?? letters.length
   const normal = L?.questionTokenCountNormal ?? runCounts.question
+  const pNormal = phase1.freeFirstTurn?.pToolCallStart
+  const pLetters = L?.firstTurnGreedy.pToolCallStart
+  const pct = (p: number) => `${Math.round(p * 100)}%`
+  const wrote = L?.firstTurnGreedy.text.trim() ?? ''
+  const drifted = /biscuit/i.test(wrote)
+  const pieces = on ? letters : recorded.length ? recorded : frontier
   return (
     <div className="break-body">
-      <Lever on={on} onChange={setOn} label="Cut by letters" />
+      <Lever on={on} onChange={setOn} label="Send it letter by letter" />
       <div className={`break-result${on ? ' broken' : ''}`}>
+        <Chips pieces={pieces.map((p) => ({ text: p.text }))} small={on} />
+        <div className="break-tiles">
+          <div className="break-tile">
+            <span className="kicker">Tokens</span>
+            <b>{on ? n : normal}</b>
+            <small>{on ? `about ${Math.round(n / normal)}× the work at every station` : 'word parts'}</small>
+          </div>
+          {pNormal !== undefined && pLetters !== undefined && (
+            <div className="break-tile">
+              <span className="kicker">Asks for the calculator</span>
+              <b>{pct(on ? pLetters : pNormal)}</b>
+              <small>{on ? 'it lost the thread' : 'of the time'}</small>
+            </div>
+          )}
+        </div>
         {on ? (
-          <>
-            <Chips pieces={letters.map((p) => ({ text: p.text }))} />
-            <p className="break-stat"><b>{n}</b> tokens instead of <b>{normal}</b>. Every later station works token by token, so your question now costs about {(n / normal).toFixed(1)} times as much to process.</p>
-            {L ? (
-              <div className="said">
-                <p className="kicker">What the model wrote, given the question spelled out letter by letter</p>
-                <blockquote>{L.firstTurnGreedy.text.trim() || '(nothing)'}</blockquote>
-                <p>
-                  For comparison, with the normal {normal} tokens and the calculator, the answer was “{SCENARIO.reply}”
-                  {L.firstTurnGreedy.pToolCallStart !== undefined && phase1.freeFirstTurn?.pToolCallStart !== undefined && (
-                    <> Spelled out, its chance of asking for the calculator went from {(phase1.freeFirstTurn.pToolCallStart * 100).toFixed(1)}% to {(L.firstTurnGreedy.pToolCallStart * 100).toFixed(2)}%.</>
-                  )}
-                </p>
-                <p className="muted">A real, unedited output of {trace ? modelName(trace) : 'the recorded model'}. It rarely saw text spelled out this way in training.</p>
-              </div>
-            ) : (
-              <p className="muted">The recorded model's answer to the spelled-out question arrives with the next trace run.</p>
-            )}
-          </>
+          L ? (
+            <>
+              <p className="break-stat">
+                {drifted ? 'It drifted off: it started counting biscuits instead of flour, and never asked for the calculator.' : 'It lost track of the question and never asked for the calculator.'}
+              </p>
+              <Reveal label="Read what it wrote">
+                <div className="said">
+                  <blockquote>{wrote} …</blockquote>
+                  <p className="muted small">Real, unedited output of {trace ? modelName(trace) : 'the recorded model'}. It almost never saw text spelled out letter by letter in training.</p>
+                </div>
+              </Reveal>
+            </>
+          ) : (
+            <p className="muted">The recorded model's answer to the spelled-out question arrives with the next trace run.</p>
+          )
         ) : (
-          <>
-            <Chips pieces={recorded.length ? recorded : frontier} />
-            <p className="break-stat">The question as the model normally gets it: <b>{normal}</b> tokens. Flip the lever.</p>
-          </>
+          <p className="break-stat">This is how the model normally gets your question. Flip the lever to send the same text one letter at a time.</p>
         )}
       </div>
+      {on && (
+        <p className="break-why">
+          <b>That's why tokens are word parts.</b> Letters make too many tokens, in a form the model rarely saw. Whole words would fail on any word missing from the list, like a typo or a new name.
+        </p>
+      )}
     </div>
   )
 }
@@ -107,8 +130,8 @@ export const P02_SPEC: LoopSpec = {
     note: recorded.length ? `Different models cut differently: the recorded model cuts your question into ${recorded.length} tokens, a frontier model into ${frontier.length}.` : undefined
   },
   break: {
-    title: 'Cut by letters',
-    intro: 'What if the tokenizer cut every character on its own?',
+    title: 'Feed it letters',
+    intro: 'Why cut text into word parts at all? Send your question one letter at a time and see what breaks.',
     body: <LettersBreak />
   },
   stamp: {

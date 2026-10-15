@@ -28,9 +28,9 @@ export function Dial<T extends number | string>({ stops, value, onChange, label,
   )
 }
 
-export function Chips({ pieces, hot }: { pieces: { text: string; id?: number }[]; hot?: (i: number) => boolean }) {
+export function Chips({ pieces, hot, small }: { pieces: { text: string; id?: number }[]; hot?: (i: number) => boolean; small?: boolean }) {
   return (
-    <div className="chips-row">
+    <div className={`chips-row${small ? ' small' : ''}`}>
       {pieces.map((p, i) => (
         <span key={i} className={`chip-tk${hot?.(i) ? ' hot' : ''}`}>
           <b><TokenText text={p.text} /></b>

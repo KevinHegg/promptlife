@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { HERO_TOKENS, SCENARIO, USER_IDS } from '../../data/heroRun'
 import type { Station } from '../../data/network'
-import { splitByCharacter, tokenize, type Piece } from '../../lib/tokenizer'
+import { tokenize, type Piece } from '../../lib/tokenizer'
 import { TokenText } from '../../ui/TokenText'
 import { Cutaway, Level, LevelText, Vis } from '../Cutaway'
 import { MapLevel } from '../MapLevel'
@@ -13,24 +13,19 @@ const MAX_CHARS = 100
 
 export function TokenizerLevels({ station }: { station: Station }) {
   const [text, setText] = useState(SCENARIO.user)
-  const [byLetter, setByLetter] = useState(false)
   const [pieces, setPieces] = useState<Piece[]>(HERO_PIECES)
   const [error, setError] = useState('')
   const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     let alive = true
-    if (byLetter) {
-      setPieces(splitByCharacter(text))
-      return
-    }
     tokenize(text)
       .then((p) => alive && setPieces(p))
       .catch(() => alive && setError('The tokenizer did not load. Check your connection and reload.'))
     return () => {
       alive = false
     }
-  }, [text, byLetter])
+  }, [text])
 
   const chars = Array.from(text).length
   const ratio = pieces.length ? (chars / pieces.length).toFixed(1) : '0'
@@ -85,19 +80,15 @@ export function TokenizerLevels({ station }: { station: Station }) {
               <div className="v-chips" aria-live="polite">
                 {pieces.slice(0, 72).map((p, i) => (
                   <span key={`${i}-${p.id}`} className="v-chip">
-                    <b className={!byLetter && p.id === 28420 ? 'hot' : ''}><TokenText text={p.text} /></b>
-                    {!byLetter && <small>{p.id}</small>}
+                    <b className={p.id === 28420 ? 'hot' : ''}><TokenText text={p.text} /></b>
+                    <small>{p.id}</small>
                   </span>
                 ))}
                 {pieces.length > 72 && <span className="v-cap">+{pieces.length - 72} more</span>}
               </div>
               <p className="v-count">
-                {chars}/{MAX_CHARS} characters → <b>{pieces.length}</b> {byLetter ? 'letters' : 'tokens'}
+                {chars}/{MAX_CHARS} characters → <b>{pieces.length}</b> tokens
               </p>
-              <label className="v-toggle">
-                <input type="checkbox" checked={byLetter} onChange={(e) => setByLetter(e.target.checked)} />
-                Break it: split by single letters instead
-              </label>
               {error && <p className="v-cap">{error}</p>}
             </div>
           </Vis>
@@ -114,7 +105,7 @@ export function TokenizerLevels({ station }: { station: Station }) {
               <div className="worked">
                 common letter groups become one token: “ flour” = <b>28420</b>
                 <br />
-                your text: {chars} characters, {pieces.length} {byLetter ? 'letters' : 'tokens'}, about <b>{ratio}</b> characters each
+                your text: {chars} characters, {pieces.length} tokens, about <b>{ratio}</b> characters each
                 <br />
                 every later station does work per token, so fewer tokens means less work
               </div>

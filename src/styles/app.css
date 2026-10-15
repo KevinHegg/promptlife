@@ -663,3 +663,13 @@ blockquote { margin: 0; padding: 10px 14px; border-left: 3px solid var(--ink-2);
 @media (max-width: 640px) and (prefers-reduced-motion: reduce) {
   .cut-fig.settled { transition: none; }
 }
+
+/* Break it: two numbers that flip with the lever, then the takeaway. */
+.chips-row.small { gap: 3px 2px; }
+.chips-row.small .chip-tk b { font-size: 0.72rem; padding: 1px 4px; border-width: 1.2px; }
+.break-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 8px; }
+.break-tile { display: flex; flex-direction: column; gap: 2px; padding: 10px 12px; border-radius: 10px; background: var(--sheet); border: 1px solid var(--rule); }
+.break-tile b { font-family: var(--font-display); font-weight: 800; font-size: 1.7rem; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.break-result.broken .break-tile b { color: var(--sabotage); }
+.break-tile small { font-size: 0.8rem; color: var(--ink-2); line-height: 1.3; }
+.break-why { padding: 12px 14px; border-left: 4px solid var(--accent); background: var(--sheet); border-radius: 0 10px 10px 0; line-height: 1.5; }

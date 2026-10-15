@@ -108,7 +108,7 @@ Picture: "flour" three ways, as chips with numbered tickets.
 Metaphor: a coat check, where you hand over a piece of text and get a numbered ticket. Where it breaks: "A coat check gives back your own coat. Here every ' flour' gets the same ticket, and what that ticket fetches was set in training."
 
 #### Break it
-Lever: "Cut by letters," which makes 79 one-letter pieces instead of 19. The platform fills four times faster and the trip and cost meters jump. The reply should get worse, since the model rarely saw text spelled out letter by letter. The caption is finished after the precomputed run.
+"Feed it letters." The intro asks the question first: why cut text into word parts at all? Lever: "Send it letter by letter." Two tiles flip with it. Tokens go from 20 to 79, about 4× the work at every station. The chance of asking for the calculator drops from 75% to 9%. One line says what the recorded model did: it drifted to counting biscuits instead of flour. Its full output sits behind "Read what it wrote." The step closes with the answer: letters make too many tokens, in a form the model rarely saw, and whole words fail on typos and new names, so tokens are word parts. Every Break it opens with its "why" question.
 Data: V-P02-letters. Precomputed: yes.
 
 #### Stamp
