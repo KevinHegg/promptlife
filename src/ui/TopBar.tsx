@@ -10,6 +10,7 @@ import { LOOPS } from '../stations'
 import { MetroMap } from '../map/MetroMap'
 import { Roundel } from './Roundel'
 import { SoundToggle } from './SoundToggle'
+import { StartOver } from './StartOver'
 
 /**
  * One slim bar on every page: home, the glossary, and a Stations sheet for jumping anywhere.
@@ -172,6 +173,7 @@ function StationsSheet({ open, onClose, here }: { open: boolean; onClose: () => 
             <a href="#/" onClick={onClose}>The whole map</a>
             <a href="#/glossary" onClick={onClose}>Glossary</a>
             <SoundToggle />
+            <StartOver />
           </div>
         </div>
       )}

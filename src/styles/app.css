@@ -960,3 +960,8 @@ blockquote { margin: 0; padding: 10px 14px; border-left: 3px solid var(--ink-2);
 .card-journey { margin: 0; padding-left: 1.3em; display: flex; flex-direction: column; gap: 6px; font-size: 0.9rem; line-height: 1.45; color: var(--ink-2); }
 .card-journey b { color: var(--ink); font-family: var(--font-display); font-weight: 800; }
 .card-journey li::marker { font-family: var(--font-display); font-weight: 800; color: var(--doing); }
+/* Start over: a quiet link that asks once before clearing. */
+.start-over-ask { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 0.88rem; }
+.start-over-ask > span { font-weight: 600; }
+.btn.danger { background: var(--sabotage); border-color: var(--sabotage); color: #fff; }
+.progress-line .start-over { align-self: flex-start; font-family: var(--font-display); font-weight: 700; font-size: 0.85rem; color: var(--ink-2); }

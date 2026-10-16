@@ -49,10 +49,18 @@ export function saveStation(code: string, p: StationProgress) {
   write(STATIONS, all)
 }
 
+/**
+ * Start over: forget everything this app stored on this device (stamps, steps, hints and the sound
+ * setting), so the next person on a shared phone starts fresh.
+ */
 export function resetProgress() {
   try {
-    window.localStorage.removeItem(VISITED)
-    window.localStorage.removeItem(STATIONS)
+    const keys: string[] = []
+    for (let i = 0; i < window.localStorage.length; i++) {
+      const k = window.localStorage.key(i)
+      if (k?.startsWith('promptlife.')) keys.push(k)
+    }
+    keys.forEach((k) => window.localStorage.removeItem(k))
   } catch {
     /* nothing to reset */
   }

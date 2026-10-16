@@ -3,6 +3,7 @@ import type { StationProgress } from '../lib/progress'
 import type { ResumePoint } from '../lib/resume'
 import { hrefFor } from '../lib/router'
 import { LOOPS } from '../stations'
+import { StartOver } from './StartOver'
 
 type Props = {
   progress: Record<string, StationProgress>
@@ -40,6 +41,7 @@ export function ProgressLine({ progress, resume }: Props) {
       <p className="pl-note">
         Your progress is always under <span className="pl-btn"><span className="stations-icon" aria-hidden="true" /> Stations</span>, top right, on every page.
       </p>
+      {STATIONS.some((s) => progress[s.code]) && <StartOver />}
     </nav>
   )
 }

@@ -3,6 +3,7 @@ import { Home } from './pages/Home'
 import { StationPage } from './pages/StationPage'
 import { useHashRoute } from './lib/router'
 import { SoundToggle } from './ui/SoundToggle'
+import { StartOver } from './ui/StartOver'
 import { TopBar } from './ui/TopBar'
 
 export function App() {
@@ -20,6 +21,7 @@ export function App() {
         <span>Progress stays on this device.</span>
         {import.meta.env.PROD && <a href="./archive/">Earlier versions</a>}
         <SoundToggle />
+        <StartOver />
       </footer>
     </div>
   )
