@@ -37,8 +37,23 @@ export function StationLoop({ spec, onRideOn, onBeatChange }: { spec: LoopSpec; 
     tick()
     setAt(i)
     setReached((r) => Math.max(r, i))
-    topRef.current?.scrollIntoView({ block: 'start', behavior: 'smooth' })
   }
+
+  // After a new step has rendered, bring the top of the loop into view. Scrolling in the click
+  // handler started before the new step existed, so the page's height changed mid-scroll and it
+  // could land partway down. Only scroll when the top isn't already comfortably on screen.
+  const firstRender = useRef(true)
+  useEffect(() => {
+    if (firstRender.current) {
+      firstRender.current = false
+      return
+    }
+    const el = topRef.current
+    if (!el) return
+    const top = el.getBoundingClientRect().top
+    // An instant jump, like turning a page: reliable on iPhone, and no extra motion.
+    if (top < 0 || top > window.innerHeight * 0.35) el.scrollIntoView({ block: 'start' })
+  }, [at])
 
 
   const onAnswer = (k: number) => {

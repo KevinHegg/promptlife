@@ -14,8 +14,38 @@ import { SoundToggle } from './SoundToggle'
  * One slim bar on every page: home, the glossary, and a Stations sheet for jumping anywhere.
  * When you've jumped back for a refresher, a quiet banner offers the way back to where you were.
  */
+/** How many visits the Stations button is highlighted for, until someone has opened it. */
+const HINT_KEY = 'promptlife.v1.stationsHint'
+const HINT_VISITS = 3
+
+/** Decided once per page load, so a visit is counted once however often React sets up. */
+let hintDecision: boolean | null = null
+
+function hintThisVisit(): boolean {
+  if (hintDecision !== null) return hintDecision
+  try {
+    const n = Number(window.localStorage.getItem(HINT_KEY) ?? '0')
+    hintDecision = n < HINT_VISITS
+    if (hintDecision) window.localStorage.setItem(HINT_KEY, String(n + 1))
+  } catch {
+    hintDecision = false
+  }
+  return hintDecision
+}
+
+function stopHint() {
+  hintDecision = false
+  try {
+    window.localStorage.setItem(HINT_KEY, String(HINT_VISITS))
+  } catch {
+    /* nothing to remember */
+  }
+}
+
 export function TopBar({ route }: { route: string }) {
   const [open, setOpen] = useState(false)
+  // On someone's first few visits, the Stations button pulses gently a few times: it holds their progress.
+  const [hint, setHint] = useState(hintThisVisit)
   const here = /^P0[1-8]$/.test(route) ? route : null
   const resume = resumePoint()
   const reviewing = here !== null && resume.started && resume.code !== here
@@ -27,11 +57,13 @@ export function TopBar({ route }: { route: string }) {
           <a href="#/glossary" aria-current={route.startsWith('glossary') ? 'page' : undefined}>Glossary</a>
           <button
             type="button"
-            className="stations-btn"
+            className={`stations-btn${hint ? ' hint' : ''}`}
             aria-haspopup="dialog"
             onClick={() => {
               tick()
               setOpen(true)
+              setHint(false)
+              stopHint()
             }}
           >
             <span className="stations-icon" aria-hidden="true" />
@@ -41,7 +73,7 @@ export function TopBar({ route }: { route: string }) {
       </header>
       {reviewing && (
         <a className="resume-bar" href={hrefFor(resume.code)}>
-          <span>Reviewing.</span> Resume {resume.name} · {resume.step} →
+          <span>Reviewing.</span> Resume {resume.name}, {resume.step} →
         </a>
       )}
       <StationsSheet open={open} onClose={() => setOpen(false)} here={here} />
@@ -79,7 +111,7 @@ function StationsSheet({ open, onClose, here }: { open: boolean; onClose: () => 
           </div>
           {resume && resume.started && resume.code !== here && (
             <a className="btn primary sheet-resume" href={hrefFor(resume.code)} onClick={onClose}>
-              Resume: {resume.name} · {resume.step} →
+              Resume: {resume.name}, {resume.step} →
             </a>
           )}
           <ol className="station-list sheet-list">
