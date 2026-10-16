@@ -881,3 +881,14 @@ blockquote { margin: 0; padding: 10px 14px; border-left: 3px solid var(--ink-2);
 .cs-floor { fill: var(--accent); opacity: 0.35; }
 .cs-labels.two { height: 27px; }
 .cs-labels span { top: 0; }
+
+/* Correct is green with a check; incorrect is red with a cross. Same everywhere. */
+.verdict.yes { color: var(--right); }
+.verdict.no { color: var(--sabotage); }
+.option.correct { border-color: var(--right); background: color-mix(in srgb, var(--right) 12%, var(--paper)); }
+.option.wrong { border-color: var(--sabotage); }
+.option .mark { font-weight: 900; margin-right: 8px; }
+.option .mark.right { color: var(--right); }
+.option .mark.wrong { color: var(--sabotage); }
+.chip-choice.correct { background: var(--right); border-color: var(--right); color: #fff; }
+.chip-choice .mark { font-weight: 900; margin-right: 5px; }

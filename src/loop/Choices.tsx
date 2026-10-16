@@ -23,14 +23,15 @@ export function GuessCard({ q, options, reveal }: Guess) {
               else notQuite()
             }}
           >
-            {picked !== null && o.correct ? '✓ ' : ''}
+            {picked !== null && o.correct && <span className="mark" aria-hidden="true">✓</span>}
+            {picked === i && !o.correct && <span className="mark" aria-hidden="true">✗</span>}
             {o.text}
           </button>
         ))}
       </div>
       {picked !== null && (
         <p className="guess-reveal" aria-live="polite">
-          <b className={`verdict ${right ? 'yes' : 'no'}`}>{right ? 'Yes.' : 'Not quite.'}</b> {reveal}
+          <Verdict right={right} /> {reveal}
         </p>
       )}
     </div>
@@ -64,6 +65,7 @@ export function QuizCard({ q, options, onCorrect }: { q: string; options: Option
                 }
               }}
             >
+              {was && <span className={`mark ${o.correct ? 'right' : 'wrong'}`} aria-hidden="true">{o.correct ? '✓' : '✗'}</span>}
               {o.text}
             </button>
           )
@@ -71,9 +73,14 @@ export function QuizCard({ q, options, onCorrect }: { q: string; options: Option
       </div>
       {last !== undefined && options[last].why && (
         <p className="reveal" aria-live="polite">
-          <b>{options[last].correct ? 'Yes.' : 'Not quite.'}</b> {options[last].why}
+          <Verdict right={!!options[last].correct} /> {options[last].why}
         </p>
       )}
     </div>
   )
+}
+
+/** Right or wrong, said the same way everywhere: a green check and “Correct.”, or a red cross and “Not quite.” */
+export function Verdict({ right }: { right: boolean }) {
+  return <b className={`verdict ${right ? 'yes' : 'no'}`}>{right ? '✓ Correct.' : '✗ Not quite.'}</b>
 }
