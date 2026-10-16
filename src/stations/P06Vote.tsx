@@ -8,6 +8,7 @@ import { isClean } from '../lib/safeText'
 import { BeatTheModel } from '../games/BeatTheModel'
 import type { LoopSpec } from '../loop/types'
 import { TokenText } from '../ui/TokenText'
+import { Howto } from '../ui/Howto'
 import { Dial } from './parts'
 
 const station = stationByCode('P06')!
@@ -44,6 +45,7 @@ function TemperatureBreak() {
   const runs = phase1.temperatureRuns.filter((r) => Math.abs(r.T - T) < 1e-6 && isClean(r.text))
   return (
     <div className="break-body">
+      <Howto>Pick a temperature and read the replies it drew.</Howto>
       <Dial<number> stops={TEMPS} value={T} onChange={setT} label="Temperature" format={(t) => t.toFixed(1)} />
       {phase1.temperatureRuns.length ? (
         <div className="samples">

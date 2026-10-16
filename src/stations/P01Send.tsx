@@ -2,6 +2,7 @@ import { useState } from 'react'
 import type { Src } from '../data/heroRun'
 import { runCounts } from '../data/run'
 import type { LoopSpec } from '../loop/types'
+import { Howto } from '../ui/Howto'
 import { LiveRun } from '../map/LiveRun'
 import { ContextBar, ContextBlocks, type ContextBlock } from './parts'
 
@@ -29,6 +30,7 @@ function RideThenFind() {
     return (
       <div className="substep">
         <p className="substep-label">1 of 2 · Watch the ride</p>
+        <Howto>Press Play and watch which lines light up.</Howto>
         <LiveRun compact onDone={() => setRideDone(true)} />
         <div className="substep-next">
           <button type="button" className={`btn${rideDone ? ' primary' : ''}`} onClick={() => setStep('find')}>
@@ -43,6 +45,7 @@ function RideThenFind() {
     <div className="substep">
       <p className="substep-label">2 of 2 · Find your words</p>
       <p>This is everything the model read, grouped by where it came from. Which part did <b>you</b> type?</p>
+      <Howto>Tap the block you typed.</Howto>
       <ContextBlocks onPick={right ? undefined : setChosen} chosen={chosen?.key} />
       <p className="reveal" aria-live="polite">
         {right ? (

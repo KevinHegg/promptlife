@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import { phase1, type Guess } from '../data/phase1'
 import { modelName, trace } from '../data/trace'
+import { Howto } from '../ui/Howto'
 import { TokenText } from '../ui/TokenText'
 import { isClean } from '../lib/safeText'
 
@@ -83,6 +84,13 @@ export function BeatTheModel({ onClose }: { onClose: () => void }) {
         <span className="blank">{guess !== null ? <TokenText text={r.truth} /> : '___'}</span>
       </p>
       {r.kind === 'beat' && <p className="game-src">{r.source}</p>}
+      {guess === null && (
+        <Howto>
+          {r.kind === 'think'
+            ? 'Guess the word that fills the blank. You score the odds the model gave your guess.'
+            : 'A person wrote this. Guess their word; you beat the model if you get it and the model didn’t expect it.'}
+        </Howto>
+      )}
       <div className="options" role="group" aria-label="Your guess">
         {choices.map((c) => (
           <button

@@ -3,6 +3,7 @@ import type { Station } from '../../data/network'
 import { contextBeforePos, trace } from '../../data/trace'
 import { isClean } from '../../lib/safeText'
 import { tick, yes } from '../../lib/sound'
+import { Howto } from '../../ui/Howto'
 import { TokenText } from '../../ui/TokenText'
 import { Cutaway, Level, LevelText, Vis } from '../Cutaway'
 import { MapLevel } from '../MapLevel'
@@ -52,6 +53,7 @@ export function Elevator() {
   const context = trace ? contextBeforePos(trace, lens.pos) : ''
   return (
     <div className="v-col elevator">
+      <Howto>Pick a moment, then tap a floor or use ▲ ▼.</Howto>
       <div className="v-examples" role="group" aria-label="Moment">
         {lenses.map((x) => (
           <button key={x.id} type="button" className="chip-btn" aria-pressed={x.id === m.id} onClick={() => { setMid(x.id); tick() }}>{x.name}</button>

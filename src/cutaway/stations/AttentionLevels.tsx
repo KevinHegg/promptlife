@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { tick, yes } from '../../lib/sound'
+import { Howto } from '../../ui/Howto'
 import type { Station } from '../../data/network'
 import type { AttentionView } from '../../data/placeholders'
 import { Cutaway, Level, LevelText, Vis } from '../Cutaway'
@@ -98,6 +99,7 @@ export function AttentionLevels({ station, views }: { station: Station; views: A
               {hasTarget && (
                 <p className={`challenge${found ? ' done' : ''}`}>{found ? '✓ Found: the head that links “flour” in your question to the card' : 'Challenge: find the head that links “flour” in your question to “flour” on the card.'}</p>
               )}
+              {views.length > 1 && <Howto>Tap a head. Its arcs show where one token borrows from.</Howto>}
               {views.length > 1 && (
                 <div className="v-examples" role="group" aria-label="Attention heads">
                   {views.map((v, i) => (

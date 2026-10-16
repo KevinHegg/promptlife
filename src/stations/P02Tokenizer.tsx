@@ -7,6 +7,7 @@ import { modelName, trace } from '../data/trace'
 import { TokenizerLevels } from '../cutaway/stations/TokenizerLevels'
 import { splitByCharacter } from '../lib/tokenizer'
 import type { LoopSpec } from '../loop/types'
+import { Howto } from '../ui/Howto'
 import { Chips, Lever, Reveal } from './parts'
 
 const station = stationByCode('P02')!
@@ -31,6 +32,7 @@ function LettersBreak() {
   const pieces = on ? letters : recorded.length ? recorded : frontier
   return (
     <div className="break-body">
+      <Howto>Flip the lever, then compare the two numbers.</Howto>
       <Lever on={on} onChange={setOn} label="Send it letter by letter" />
       <div className={`break-result${on ? ' broken' : ''}`}>
         <Chips pieces={pieces.map((p) => ({ text: p.text }))} small={on} />

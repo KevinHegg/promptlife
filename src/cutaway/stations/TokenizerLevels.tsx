@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { HERO_TOKENS, SCENARIO, USER_IDS } from '../../data/heroRun'
 import type { Station } from '../../data/network'
 import { tokenize, type Piece } from '../../lib/tokenizer'
+import { Howto } from '../../ui/Howto'
 import { TokenText } from '../../ui/TokenText'
 import { Cutaway, Level, LevelText, Vis } from '../Cutaway'
 import { MapLevel } from '../MapLevel'
@@ -42,6 +43,7 @@ export function TokenizerLevels({ station }: { station: Station }) {
           </LevelText>
           <Vis>
             <div className="v-col">
+              <Howto>Type a sentence, or tap an example below.</Howto>
               <label className="visually-hidden" htmlFor="tok-input">Text to tokenize, up to {MAX_CHARS} characters</label>
               <div className="tok-field">
                 <input
@@ -69,7 +71,7 @@ export function TokenizerLevels({ station }: { station: Station }) {
                   </button>
                 )}
               </div>
-              <div className="v-examples" role="group" aria-label="Examples">
+              <div className="v-examples scroll" role="group" aria-label="Examples">
                 <button type="button" className="chip-btn" onClick={() => setText(SCENARIO.user)}>our question</button>
                 {EXAMPLES.map((ex) => (
                   <button key={ex} type="button" className="chip-btn" onClick={() => setText(ex)}>

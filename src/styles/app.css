@@ -648,14 +648,15 @@ blockquote { margin: 0; padding: 10px 14px; border-left: 3px solid var(--ink-2);
   .v-col { gap: 10px; }
   /* 16px stops iOS from zooming in when the field is tapped. */
   .tok-input { font-size: 16px; }
-  /* Examples ride on one line that scrolls sideways, fading at the edge. */
-  .v-examples {
+  /* The tokenizer's long example list rides on one line that scrolls sideways, fading at the
+     edge. Every other row of choices wraps, so no option is hidden. */
+  .v-examples.scroll {
     flex-wrap: nowrap; justify-content: flex-start; overflow-x: auto; width: 100%;
     padding-bottom: 2px; scrollbar-width: none;
     -webkit-mask-image: linear-gradient(to right, #000 85%, transparent);
     mask-image: linear-gradient(to right, #000 85%, transparent);
   }
-  .v-examples::-webkit-scrollbar { display: none; }
+  .v-examples.scroll::-webkit-scrollbar { display: none; }
   .v-examples .chip-btn { flex: none; padding: 5px 11px; }
   .loop { gap: 12px; }
   .beat-head { gap: 4px; }
@@ -824,3 +825,32 @@ blockquote { margin: 0; padding: 10px 14px; border-left: 3px solid var(--ink-2);
 .verdict { font-family: var(--font-display); font-weight: 900; }
 .verdict.yes { color: var(--accent); }
 .verdict.no { color: var(--sabotage); }
+
+/* What to do, said at the control, the same way everywhere. */
+.howto { display: flex; align-items: baseline; gap: 8px; font-family: var(--font-display); font-weight: 800; font-size: 0.9rem; line-height: 1.35; align-self: stretch; }
+.howto-mark { flex: none; width: 0; height: 0; border-left: 8px solid var(--doing); border-top: 5px solid transparent; border-bottom: 5px solid transparent; transform: translateY(-1px); }
+.lv2 .howto { color: var(--lv2-ink); }
+
+/* Pills that wrap instead of scrolling, readable on the light math level. */
+.v-examples.wrap { flex-wrap: wrap; justify-content: center; overflow: visible; -webkit-mask-image: none; mask-image: none; }
+.lv3 .chip-btn { color: var(--ink); border-color: var(--ink-2); background: var(--sheet); font-size: 0.8rem; padding: 4px 12px; }
+.lv3 .chip-btn:hover { border-color: var(--ink); color: var(--ink); }
+.lv3 .chip-btn[aria-pressed="true"] { background: var(--doing); border-color: var(--doing); color: var(--doing-ink); }
+
+/* Cosine as an angle. */
+.cos-angle { width: 100%; max-width: 300px; height: auto; }
+.ca-a { stroke: var(--ink); stroke-width: 2.5; }
+.ca-b { stroke: var(--accent); stroke-width: 2.5; }
+.ca-head-a { fill: var(--ink); }
+.ca-head-b { fill: var(--accent); }
+.ca-o { fill: var(--ink); }
+.ca-arc { fill: none; stroke: var(--doing); stroke-width: 2; }
+.ca-deg { font-family: var(--font-mono); font-size: 11px; font-weight: 700; fill: var(--ink); }
+.ca-label { font-family: var(--font-mono); font-size: 11px; fill: var(--ink); }
+.ca-label.b { fill: var(--accent); font-weight: 700; }
+.cos-read { font-family: var(--font-mono); font-size: 0.9rem; }
+.cos-read b { color: var(--accent); }
+.cos-key { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 6px 12px; margin: 0; font-size: 0.9rem; line-height: 1.45; width: 100%; max-width: 440px; }
+.cos-key dt { font-family: var(--font-mono); font-weight: 700; white-space: nowrap; }
+.cos-key dd { margin: 0; }
+.lv3 .v-below { color: var(--ink-2); border-top-color: var(--rule); }

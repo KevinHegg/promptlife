@@ -80,6 +80,7 @@ The owner's brief is that this should be somewhere people want to be. Each rule 
 13. **Nothing blocks Next.** Each station runs Arrive, Try it, Learn it, Break it, Stamp. The separate Bet step was removed on 2026-10-14 (it cluttered navigation; "Place a bet" confused people). Predictions live on the Arrive screen as one short, optional "Guess first" question with one-tap choices.
 14. **Easy to leave and return.** The map is one tap away. The train parks where you left it, and lit lamps stay lit.
 15. **Quiet rewards.** No confetti. The stamp landing is the celebration.
+16. **Say what to do at the control.** Every exercise has one "how to" line right above its controls, in the same style everywhere: a small amber marker and a short plain instruction, such as "Pick a word to compare with flour." The intro above the box isn't enough. Rows of choices wrap so no option is hidden; only the tokenizer's long example list scrolls sideways. Every guess and quiz answer says "Yes." or "Not quite."
 
 ## 6. The metaphor system
 

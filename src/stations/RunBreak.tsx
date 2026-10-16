@@ -2,6 +2,7 @@ import { useState, type ReactNode } from 'react'
 import { breaksFor, pct, type BreakRun } from '../data/phase2'
 import { modelName, trace } from '../data/trace'
 import { TokenText } from '../ui/TokenText'
+import { Howto } from '../ui/Howto'
 import { Dial } from './parts'
 
 type Props = {
@@ -37,6 +38,7 @@ export function RunBreak({ station, ids, verdicts, takeaway, word, labels = {} }
   const top = measure.top[0]
   return (
     <div className="break-body">
+      <Howto>Pick a sabotage. The numbers and the reply change with it.</Howto>
       <Dial<string>
         stops={runs.map((r) => r.id)}
         value={run.id}

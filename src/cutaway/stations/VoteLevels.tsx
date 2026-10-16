@@ -3,6 +3,7 @@ import type { Station } from '../../data/network'
 import { voteProbs, type VotePosition } from '../../data/phase1'
 import { modelName, trace } from '../../data/trace'
 import { sample } from '../../lib/softmax'
+import { Howto } from '../../ui/Howto'
 import { TokenText } from '../../ui/TokenText'
 import { Cutaway, Level, LevelText, Vis } from '../Cutaway'
 import { MapLevel } from '../MapLevel'
@@ -55,6 +56,7 @@ export function VoteLevels({ station, positions, exactTail }: { station: Station
           </LevelText>
           <Vis>
             <div className="v-col">
+              <Howto>Pick a moment, slide the temperature, then tap Draw 20.</Howto>
               {positions.length > 1 && (
                 <div className="v-examples" role="group" aria-label="Moments in the run">
                   {positions.map((p, i) => (
@@ -79,7 +81,7 @@ export function VoteLevels({ station, positions, exactTail }: { station: Station
                 </div>
               </div>
               <label className="v-slider" htmlFor="temp">
-                <span>T</span>
+                <span>Temperature</span>
                 <input id="temp" type="range" min={0} max={2} step={0.1} value={temp} onChange={(e) => { setTemp(parseFloat(e.target.value)); setDraws([]) }} />
                 <span>{temp.toFixed(1)}</span>
               </label>
