@@ -17,9 +17,8 @@ export function App() {
         {station ? <StationPage key={station} code={station} /> : glossary ? <GlossaryPage term={route.split('/')[1]} /> : <Home />}
       </main>
       <footer className="site-foot">
-        <span>Prompt Life 2.0 alpha</span>
+        <span>Prompt Life v2.0.{__BUILD__ || 'dev'}</span>
         <span>Progress stays on this device.</span>
-        {import.meta.env.PROD && <a href="./archive/">Earlier versions</a>}
         <SoundToggle />
         <StartOver />
       </footer>

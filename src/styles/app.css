@@ -1029,3 +1029,34 @@ blockquote { margin: 0; padding: 10px 14px; border-left: 3px solid var(--ink-2);
 .st-buttons { justify-content: space-between; width: 100%; max-width: 460px; }
 .st-buttons .btn { white-space: nowrap; }
 .st-trip { white-space: nowrap; font-size: 1rem; }
+
+/* ================= The Stations sheet fills the screen; its button becomes an open tab ================= */
+.sheet, .sheet[open] {
+  width: 100%; max-width: 100%; height: 100vh; height: 100dvh; max-height: none; margin: 0; padding: 0;
+  border: 0; border-radius: 0; background: var(--paper); box-shadow: none; animation: none;
+}
+.sheet::backdrop { background: var(--paper); }
+.sheet-in { width: 100%; max-width: calc(1120px + 40px); height: 100%; margin-inline: auto; padding: 0 20px; gap: 0; }
+.sheet-in::before, .sheet-in::after { display: none; }
+/* The same row as the page's top bar, so it seems to stay put. */
+.sheet-bar { flex: none; display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; padding-top: 12px; }
+.sheet-bar .wordmark, .sheet-bar .topbar-nav > a { margin-bottom: 10px; }
+.sheet-bar .topbar-nav { align-items: flex-end; }
+/* The open tab: no bottom edge, sitting over the card's top border so the two read as one piece. */
+.stations-btn.tab { position: relative; z-index: 2; margin-bottom: -2px; padding: 6px 12px 14px; border-radius: 14px 14px 0 0; border-bottom-color: var(--sheet); background: var(--sheet); animation: none; box-shadow: none; }
+.sheet-card {
+  position: relative; flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; gap: 12px;
+  align-self: flex-end; width: min(520px, 100%); margin: 0 0 14px 12px; padding: 14px 16px 0;
+  background: var(--sheet); border: 2px solid var(--ink); border-radius: 18px 0 18px 18px;
+  box-shadow: -6px 6px 0 -1px var(--doing), -12px 12px 0 -2px var(--lv3), -12px 12px 0 -0.5px var(--ink);
+  animation: card-down 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+/* A punched slot at the foot of the card, showing the navy level beneath. */
+.sheet-card::after { content: ""; align-self: center; flex: none; width: 48px; height: 10px; margin: 0 0 10px; border-radius: 6px; background: var(--lv2); box-shadow: inset 0 3px 5px var(--cut-shadow), inset 0 0 0 1.5px var(--ink); }
+.sheet-card .sheet-foot { padding-bottom: 10px; }
+@keyframes card-down { from { transform: translateY(-14px); opacity: 0; } }
+@media (max-width: 640px) {
+  .sheet-in { padding: 0 16px; }
+  .sheet-card { width: auto; align-self: stretch; margin-left: 12px; }
+}
+@media (prefers-reduced-motion: reduce) { .sheet-card { animation: none; } }

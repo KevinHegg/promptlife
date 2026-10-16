@@ -126,10 +126,19 @@ function StationsSheet({ open, onClose, here }: { open: boolean; onClose: () => 
     >
       {open && (
         <div className="sheet-in">
-          <div className="sheet-head">
-            <h2 id="sheet-title">Stations</h2>
-            <button type="button" className="sheet-x" aria-label="Close" onClick={onClose}>×</button>
+          {/* The top bar stays where it was, and the Stations button becomes an open tab joined to the card below. */}
+          <div className="sheet-bar">
+            <a className="wordmark" href="#/" onClick={onClose}>Prompt Life</a>
+            <nav className="topbar-nav" aria-label="Site">
+              <a href="#/glossary" onClick={onClose}>Glossary</a>
+              <button type="button" className="stations-btn tab" aria-expanded="true" aria-label="Close stations" onClick={onClose}>
+                <span className="stations-icon" aria-hidden="true" />
+                Stations
+              </button>
+            </nav>
           </div>
+          <div className="sheet-card">
+          <h2 id="sheet-title" className="visually-hidden">Stations</h2>
           <div className="sheet-window" aria-hidden="true">
             <MetroMap
               viewBox="0 70 1120 400"
@@ -181,6 +190,7 @@ function StationsSheet({ open, onClose, here }: { open: boolean; onClose: () => 
             <a href="#/glossary" onClick={onClose}>Glossary</a>
             <SoundToggle />
             <StartOver />
+          </div>
           </div>
         </div>
       )}
