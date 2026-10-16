@@ -80,6 +80,24 @@ const SCENES: Record<string, ReactElement> = {
       <rect x="-14" y="22" width="28" height="10" rx="2" />
     </g>
   ),
+  // A loop of track with an arrow, and a trip counter.
+  P07: (
+    <g className="st-ink" fill="none" strokeWidth="2.5" strokeLinecap="round">
+      <path d="M-30,6 C-30,-28 30,-28 30,6 C30,26 -30,26 -30,6" strokeWidth="4" />
+      <path d="M24,-6 L30,6 L36,-6" />
+      <rect x="-16" y="-2" width="32" height="14" rx="2" />
+      <text className="st-small" x="0" y="9" textAnchor="middle" fill="currentColor" stroke="none">47</text>
+    </g>
+  ),
+  // A speech bubble with a receipt tearing off its bottom edge.
+  P08: (
+    <g className="st-ink" fill="none" strokeWidth="2.5" strokeLinejoin="round">
+      <path d="M-38,-26 H38 V2 H-6 L-16,12 V2 H-38 Z" />
+      <path d="M-26,-14 H26 M-26,-6 H12" />
+      <path d="M-22,16 H22 V34 L16,30 L10,34 L4,30 L-2,34 L-8,30 L-14,34 L-22,30 Z" />
+      <path d="M-14,21 H14 M-14,26 H6" strokeWidth="1.5" />
+    </g>
+  ),
   // A departure board with one lit row.
   P06: (
     <g className="st-ink" strokeWidth="2.5">

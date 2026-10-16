@@ -38,7 +38,9 @@ export type BreakRun = {
   wordProb?: { prob: number; top: Guess[] }
   flagged?: boolean
   /** What the sabotage touched: context positions (0-based), every token, or floors removed (1-based). */
-  changed?: { positions?: number[]; all?: boolean; floorsRemoved?: number[] }
+  changed?: { positions?: number[]; all?: boolean; floorsRemoved?: number[]; banned?: string[] }
+  /** For runs that cut the context: how many tokens were left for the model to read. */
+  keptTokens?: number
 }
 export type Phase2 = {
   wordMap?: WordMap
@@ -46,6 +48,8 @@ export type Phase2 = {
   contextLength?: number
   breaks: BreakRun[]
   skipEach?: { floor: number; prob: number }[]
+  /** The stop marker's odds right after the recorded reply, with the top 3 there. */
+  stopProb?: { prob: number; top: Guess[] }
   notes?: string[]
 }
 
@@ -88,4 +92,4 @@ export function cosine(a: number[], b: number[]) {
   return na && nb ? dot / Math.sqrt(na * nb) : 0
 }
 
-export const pct = (p: number) => (p >= 0.995 ? `${(p * 100).toFixed(1)}%` : p < 0.001 ? '<0.1%' : p < 0.1 ? `${(p * 100).toFixed(1)}%` : `${Math.round(p * 100)}%`)
+export const pct = (p: number) => (p >= 0.9995 ? '>99.9%' : p >= 0.995 ? `${(p * 100).toFixed(1)}%` : p < 0.001 ? '<0.1%' : p < 0.1 ? `${(p * 100).toFixed(1)}%` : `${Math.round(p * 100)}%`)

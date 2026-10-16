@@ -3,15 +3,18 @@
 Prompt Life trace pipeline, phase 2 extras -> src/data/traces/phase2.json
 
 Same model, same scenario and same token positions as make_trace.py (hero-trace.json).
-It adds the data for the P03 Embedding / P04 Attention / P05 The Stack lessons:
+It adds the data for the P03 Embedding / P04 Attention / P05 The Stack / P07 The Loop /
+P08 Reply lessons:
 
   wordMap   ~40 recipe-themed single-token words: a 2-D map of their input-embedding rows,
             each word's 5 nearest map words, a "barcode" strip of the raw row, and the 10
             nearest readable words to ' flour' in the whole vocabulary
   breaks    sabotage experiments on the reply turn: scramble the embedding table, swap
             flour's row for sugar's, hide tokens from attention, skip or cut floors of the
-            stack. Each records the greedy reply and the teacher-forced probability of the
-            answer's first digit '8'.
+            stack, trim the context the way a chat app does (whole tokens deleted, positions
+            renumbered), ban the stop token. Each records the greedy reply and the
+            teacher-forced probability of the answer's first digit '8'.
+  stopProb  normal run: the teacher-forced P('<|im_end|>') right after the recorded reply
   skipEach  for every single floor k = 1..24: P('8') with only that floor skipped
 
 Usage:
@@ -67,6 +70,7 @@ FLOUR_NEIGHBORS = 10
 READABLE = re.compile(r"^ [A-Za-z]+$")
 
 MAX_NEW = 40
+NO_STOP_MAX_NEW = 80                                   # P08 no-stop: the EOS ids are banned
 SCRAMBLE_SEED = 20261015
 SCRAMBLES = [("scramble-10", 0.10, "10% of rows"), ("scramble-50", 0.50, "Half the rows"),
              ("scramble-100", 1.00, "Every row")]
@@ -254,6 +258,9 @@ class Runner:
       embed(seq, x)  -> edits the input-embedding rows x [T, d] in place
       mask           -> name of an attention rule, built into an additive 4D mask
       keep           -> list of decoder-layer indices to run (others skipped)
+      ban            -> token ids whose scores are set to -inf (greedy and teacher-forced)
+    A variant may also bring its own shorter context ("prefix"); the sequence is then simply
+    shorter, with ordinary position ids 0..T-1.
     """
 
     def __init__(self, model, tok, hero_src, n_real):
@@ -307,16 +314,21 @@ class Runner:
             out = self.model.model(inputs_embeds=x[None], attention_mask=mask, use_cache=False)
         return out.last_hidden_state[0]
 
-    def logits(self, h, rows):
+    def logits(self, h, rows, ban=()):
+        """Scores over the real vocab rows; ids in `ban` get -inf (never chosen, prob 0)."""
         with torch.no_grad():
-            return self.model.lm_head(h[rows]).double()[:, :self.n_real]
+            out = self.model.lm_head(h[rows]).double()[:, :self.n_real]
+        if ban:
+            out[:, list(ban)] = float("-inf")
+        return out
 
     def greedy(self, prefix, v, stop_ids, max_new=None):
         """Pure argmax, recomputing the whole sequence each step so the sabotage applies
         to every position, including generated tokens as they are fed back."""
         seq, out = list(prefix), []
+        ban = v.get("ban", ())
         for _ in range(max_new or MAX_NEW):
-            nxt = int(self.logits(self.hidden(seq, v), [len(seq) - 1])[0].argmax())
+            nxt = int(self.logits(self.hidden(seq, v), [len(seq) - 1], ban)[0].argmax())
             if nxt in stop_ids:
                 return out, True
             out.append(nxt)
@@ -458,6 +470,50 @@ def main():
         if "keep" in v:
             v["changed"] = {"floorsRemoved": [k + 1 for k in range(L) if k not in v["keep"]]}
 
+    # P07 The Loop: the app trims the context. Whole tokens are DELETED from the hero ids (no
+    # masking, no edits); the rest keep their order and are renumbered 0..n-1.
+    im_start = tok.convert_tokens_to_ids("<|im_start|>")
+    im_end = tok.convert_tokens_to_ids("<|im_end|>")
+    eot = tok.convert_tokens_to_ids("<|endoftext|>")
+
+    def message_span(label):
+        """Hero positions of the one chat message holding the `label` tokens: from its
+        <|im_start|> through the '\\n' after its <|im_end|>."""
+        where = [p for p in range(len(prefix)) if src[p] == label]
+        a = max(p for p in range(where[0]) if ids[p] == im_start)
+        b = min(p for p in range(where[-1], len(prefix)) if ids[p] == im_end)
+        if (where != list(range(where[0], where[-1] + 1)) or dec(tok, ids[b + 1]) != "\n"
+                or ids[a:b + 1].count(im_start) != 1 or ids[a:b + 1].count(im_end) != 1):
+            sys.exit("The %r tokens are not one whole chat message." % label)
+        return list(range(a, b + 2))
+
+    sys_end = ids.index(im_end)                         # the system message's own <|im_end|>
+    first_rag = src.index("rag")                        # 'Your' of the 'Your files:' header
+    kept_sys = [p for p in range(first_rag) if src[p] == "sys"]
+    drop_card = list(range(first_rag, sys_end))         # header + passages + '# Tools' block
+    if (tok.decode([ids[p] for p in kept_sys]).rstrip() != SCENARIO["system"]
+            or any(src[p] not in ("rag", "sys") for p in drop_card)
+            or any(src[p] == "rag" for p in range(len(src)) if p not in drop_card)
+            or dec(tok, ids[drop_card[-1]]) != "</tool_call>"):
+        sys.exit("Unexpected system message layout; the trim positions would be wrong.")
+    drop_question = drop_card + message_span("user")
+    drop_result = drop_question + message_span("tool")
+    trims = [("trim-card", "Cut the card", drop_card),
+             ("trim-question", "Cut the question too", drop_question),
+             ("trim-to-result", "Only the answer left", drop_result)]
+    for vid, label, drop in trims:
+        gone = set(drop)
+        kp = [ids[p] for p in range(len(prefix)) if p not in gone]
+        variants.append({"id": vid, "station": "P07", "label": label, "prefix": kp,
+                         "wordProb": True, "changed": {"positions": sorted(gone)},
+                         "keptTokens": len(kp)})
+
+    # P08 Reply: ban the stop token. Both EOS ids get -inf before every argmax (and before the
+    # softmax of the teacher-forced pass), so the reply cannot end by itself.
+    variants.append({"id": "no-stop", "station": "P08", "label": "Ban the stop token",
+                     "ban": [im_end, eot], "maxNew": NO_STOP_MAX_NEW, "wordProb": True,
+                     "changed": {"banned": [dec(tok, im_end), dec(tok, eot)]}})
+
     # ---- sanity checks ------------------------------------------------------------------
     with torch.no_grad():
         ref = model(torch.tensor([forced]), use_cache=False).logits[0, :, :n_real].double()
@@ -470,20 +526,67 @@ def main():
     d_floors = float((h_all - h_plain).abs().max())
     hero_p8 = next(s["chosen"]["prob"] for s in hero_json["steps"] if s["pos"] == digit_pos)
 
+    # stopProb: in the normal teacher-forced pass, P(<|im_end|>) right after the recorded reply.
+    if ids[reply_end] != im_end:
+        sys.exit("The recorded reply is not followed by <|im_end|> (pos %d)." % reply_end)
+    stop_row = run.logits(h_plain, [reply_end - 1])[0]
+    stop_prob = {"text": dec(tok, im_end), "prob": r4(torch.softmax(stop_row, -1)[im_end]),
+                 "top": top_text_prob(tok, stop_row, 3)}
+    hero_stop = next(s["chosen"]["prob"] for s in hero_json["steps"] if s["pos"] == reply_end)
+
+    # Trim checks. (1) Each trimmed context must be token for token what the chat template
+    # renders for the shortened conversation, with no tools= list (the '# Tools' block is cut)
+    # and the kept system text. (2) Sensitivity: the same, but with the system text exactly
+    # SCENARIO['system'] (pos 8 is the merged token '.\n\n'; a fresh render ends in '.').
+    msgs = hero["msgs"]
+    if [m["role"] for m in msgs[:4]] != ["system", "user", "assistant", "tool"]:
+        sys.exit("Unexpected message order in the hero conversation.")
+    trim_keep = {"trim-card": [1, 2, 3], "trim-question": [2, 3], "trim-to-result": [3]}
+    kept_sys_text = tok.decode([ids[p] for p in kept_sys])
+    reply_ids = ids[reply_start:reply_end]
+
+    def render_ids(system_text, keep_msgs):
+        conv = [{"role": "system", "content": system_text}] + [msgs[i] for i in keep_msgs]
+        return [int(t) for t in tok.apply_chat_template(conv, tokenize=True,
+                                                         add_generation_prompt=True)]
+
+    trim_check = {}
+    for v in variants:
+        if v["id"] not in trim_keep:
+            continue
+        kp = v["prefix"]
+        alt = render_ids(SCENARIO["system"], trim_keep[v["id"]])
+        p_alt = None
+        if len(alt) == len(kp):
+            h = run.hidden(alt + reply_ids, {})
+            row = run.logits(h, [len(alt) + digit_pos - reply_start - 1])[0]
+            p_alt = r4(torch.softmax(row, -1)[digit_id])
+        trim_check[v["id"]] = {
+            "template": render_ids(kept_sys_text, trim_keep[v["id"]]) == kp,
+            "altDiff": [(i, a, b) for i, (a, b) in enumerate(zip(kp, alt))
+                        if a != b] if len(alt) == len(kp) else "length %d" % len(alt),
+            "altP8": p_alt}
+
     # ---- run every variant ----------------------------------------------------------------
-    breaks, flagged, timings = [], [], {}
+    breaks, flagged, timings, gen_ids = [], [], {}, {}
     for v in variants:
         t0 = time.time()
-        g, natural = run.greedy(prefix, v, stop_ids)
+        vp = v.get("prefix", prefix)                   # a trim brings its own shorter context
+        shift = len(prefix) - len(vp)                  # tokens deleted before the reply
+        ban = v.get("ban", ())
+        g, natural = run.greedy(vp, v, stop_ids, v.get("maxNew"))
+        gen_ids[v["id"]] = g
         text = tok.decode(g, skip_special_tokens=True)
-        h = run.hidden(forced, v)
-        rows = run.logits(h, [digit_pos - 1, word_pos - 1])
+        h = run.hidden(forced if shift == 0 else vp + reply_ids, v)
+        rows = run.logits(h, [digit_pos - 1 - shift, word_pos - 1 - shift], ban)
         p = torch.softmax(rows[0], -1)
         rec = {"id": v["id"], "station": v["station"], "label": v["label"], "text": text,
                "stoppedNaturally": natural, "tokenCount": len(g),
                "rightDigit": {"prob": r4(p[digit_id]), "top": top_text_prob(tok, rows[0], 3)}}
         if v.get("changed"):
             rec["changed"] = v["changed"]
+        if "keptTokens" in v:
+            rec["keptTokens"] = v["keptTokens"]
         if v.get("wordProb"):
             pw = torch.softmax(rows[1], -1)
             rec["wordProb"] = {"text": dec(tok, word_id), "prob": r4(pw[word_id]),
@@ -512,6 +615,9 @@ def main():
         if screen_hits(c["text"]):
             flagged.append(("wordMap.flourNeighbors", screen_hits(c["text"]),
                             app_hits(c["text"]), c["text"]))
+    for c in stop_prob["top"]:
+        if screen_hits(c["text"]):
+            flagged.append(("stopProb", screen_hits(c["text"]), app_hits(c["text"]), c["text"]))
 
     # ---- notes --------------------------------------------------------------------------
     normal = breaks[0]
@@ -617,6 +723,108 @@ def main():
     notes.append(
         "Check: feeding inputs_embeds (the plain lookup) instead of input_ids changes no logit "
         "by more than %.1e." % d_embeds)
+
+    def spans(ps):
+        """[9, 10, 11, 20] -> '9-11, 20'"""
+        out, ps = [], sorted(ps)
+        for k, grp in itertools.groupby(enumerate(ps), lambda e: e[1] - e[0]):
+            run_ = [q for _, q in grp]
+            out.append("%d-%d" % (run_[0], run_[-1]) if len(run_) > 1 else "%d" % run_[0])
+        return ", ".join(out)
+
+    by_id = {b["id"]: b for b in breaks}
+    rag_tok = [p for p in drop_card if src[p] == "rag"]
+    tools_tok = [p for p in drop_card if src[p] == "sys"]
+    res_msg = message_span("res")
+    merged = kept_sys[-1]
+    notes.append(
+        "Context trimming (P07): trim-card, trim-question and trim-to-result are the only runs "
+        "that do NOT start from the shared %d-token context. Each is a SHORTER token sequence: "
+        "whole tokens are deleted from the hero ids (nothing is masked or edited), the rest keep "
+        "their order and are renumbered 0..keptTokens-1, and the model gets ordinary position ids "
+        "0..T-1, so everything after a cut sits at a lower position. changed.positions lists the "
+        "ORIGINAL hero positions deleted. trim-card deletes pos %s (%d tokens): the 'Your files:' "
+        "header and both recipe passages (the 'rag' tokens, pos %s) and the '# Tools' block the "
+        "chat template adds for the calculator (pos %s: its function signature with the tool's "
+        "description, and the <tool_call> instructions, ending '</tool_call>'). It keeps "
+        "'<|im_start|>system\\n' (pos 0-%d), %r (pos %s) and the system message's own "
+        "'<|im_end|>\\n' (pos %d-%d), plus every later message. Pos %d is the single token %r "
+        "(id %d), so the kept system text ends in a blank line before <|im_end|>. trim-question "
+        "also deletes the whole question message, pos %s (<|im_start|>user ... <|im_end|>\\n). "
+        "trim-to-result also deletes the assistant's tool-call message, pos %s "
+        "(<|im_start|>assistant\\n<tool_call>...</tool_call><|im_end|>\\n), leaving only the "
+        "system message, the tool-response message (pos %s, the calculator's %s inside "
+        "<tool_response>) and the generation prompt '<|im_start|>assistant\\n' (pos %d-%d). "
+        "keptTokens: %s."
+        % (len(prefix), spans(drop_card), len(drop_card), spans(rag_tok), spans(tools_tok),
+           kept_sys[0] - 1, SCENARIO["system"], spans(kept_sys), sys_end, sys_end + 1, merged,
+           dec(tok, ids[merged]), ids[merged], spans(message_span("user")),
+           spans(message_span("tool")), spans(res_msg), SCENARIO["toolResult"],
+           reply_start - 3, reply_start - 1,
+           ", ".join("%s %d" % (vid, by_id[vid]["keptTokens"]) for vid, _, _ in trims)))
+    notes.append(
+        "trim-* text is pure greedy from the trimmed context, exactly as for the other runs (at "
+        "most %d new tokens, the same two stop ids, no KV cache). rightDigit and wordProb are "
+        "teacher-forced on the trimmed context plus the same %d recorded reply tokens, read at "
+        "the recorded reply's %r and ' flour' (hero pos %d and %d, minus the d tokens deleted: "
+        "%s), softmax over the %d real vocab rows, with the top 3 there."
+        % (MAX_NEW, reply_end - reply_start, tokens[digit_pos]["text"], digit_pos, word_pos,
+           "; ".join("%s pos %d and %d" % (vid, digit_pos - len(d), word_pos - len(d))
+                     for vid, _, d in trims), n_real))
+    alt_diffs = [", ".join("pos %d is %r (id %d) instead of %r (id %d)"
+                           % (i, dec(tok, kp_i), kp_i, dec(tok, alt_i), alt_i)
+                           for i, kp_i, alt_i in c["altDiff"])
+                 if isinstance(c["altDiff"], list) else c["altDiff"]
+                 for c in trim_check.values()]
+    notes.append(
+        "Check: each trimmed context is token for token what tokenizer.apply_chat_template("
+        "conversation, add_generation_prompt=True) renders with no tools= list (so no '# Tools' "
+        "block) for the shortened conversation, with the system text %r: %s. A fresh render "
+        "with the system text exactly %r differs only at that merged token (%s) and would give "
+        "P(%r) = %s."
+        % (kept_sys_text, "; ".join("%s %s" % (k, "matches" if c["template"] else "DIFFERS")
+                                    for k, c in trim_check.items()),
+           SCENARIO["system"], ("in each: " + alt_diffs[0]) if len(set(alt_diffs)) == 1 else
+           "; ".join("%s: %s" % (k, d) for k, d in zip(trim_check, alt_diffs)),
+           tokens[digit_pos]["text"],
+           ", ".join("%s %s" % (k, c["altP8"]) for k, c in trim_check.items())))
+    ns = by_id["no-stop"]
+    ns_ids, normal_ids = gen_ids["no-stop"], gen_ids["normal"]
+    ns_marks = [t for t in ns_ids if t >= first_added]
+    same = next((i for i, (a, b) in enumerate(zip(ns_ids, normal_ids)) if a != b),
+                min(len(ns_ids), len(normal_ids)))
+    notes.append(
+        "Stop token (P08): no-stop starts from the shared context with nothing else changed, but "
+        "at every greedy step the scores of both EOS ids, <|im_end|> (id %d) and <|endoftext|> "
+        "(id %d), are set to -inf before the argmax, so the reply cannot end by itself and runs "
+        "for the full %d new tokens (stoppedNaturally = false; every other run is capped at %d). "
+        "%s rightDigit and wordProb come from the usual teacher-forced pass over the recorded "
+        "reply with the same two ids set to -inf before the softmax; the recorded %r and ' flour' "
+        "are not EOS, so this only renormalizes (P(%r): normal %.4g, no-stop %.4g). %s"
+        % (im_end, eot, NO_STOP_MAX_NEW, MAX_NEW,
+           ("Its first %d new tokens are the normal run's whole reply, token for token; where "
+            "the normal run then stopped, no-stop carries on with its best token that is not a "
+            "stop token."
+            % len(normal_ids)) if same == len(normal_ids) else
+           ("It matches the normal run's reply for its first %d new tokens." % same),
+           tokens[digit_pos]["text"], tokens[digit_pos]["text"],
+           normal["rightDigit"]["prob"], ns["rightDigit"]["prob"],
+           ("Its %d new tokens include %d other special or added token(s) (%s), which "
+            "skip_special_tokens=True drops from text, as for every run."
+            % (len(ns_ids), len(ns_marks),
+               ", ".join("%s at new token %d" % (dec(tok, t), i + 1)
+                         for i, t in enumerate(ns_ids) if t >= first_added)))
+           if ns_marks else "Its %d new tokens contain no other special or added token."
+           % len(ns_ids)))
+    notes.append(
+        "stopProb: in the normal (unsabotaged) teacher-forced pass over hero tokens 0..%d, "
+        "P(%r) for pos %d, read from the hidden state at pos %d (the recorded reply's final %r), "
+        "softmax at T=1 over the %d real vocab rows, with the top 3 there: %.4g (hero-trace.json, "
+        "softmax over all %d rows incl. padding: %.4g). It is the model's own chance of ending "
+        "the reply right there; no-stop takes that choice away."
+        % (reply_end - 1, dec(tok, im_end), reply_end, reply_end - 1,
+           tokens[reply_end - 1]["text"], n_real, stop_prob["prob"],
+           model.lm_head.weight.shape[0], hero_stop))
     notes.append(
         "Content screen: every greedy text, every top-3 token and every flourNeighbors word was "
         "checked with scripts/trace/screen.py (a superset of src/lib/safeText.ts). Greedy cannot "
@@ -631,6 +839,7 @@ def main():
         "wordMap": wm,
         "contextLength": len(prefix),
         "breaks": breaks,
+        "stopProb": stop_prob,
         "skipEach": skip_each,
         "notes": notes,
     }
@@ -655,6 +864,17 @@ def main():
         if "wordProb" in b:
             print("%-17s P(' flour')=%.4g top %s" % ("", b["wordProb"]["prob"], [
                 (c["text"], c["prob"]) for c in b["wordProb"]["top"]]))
+    print("stopProb   P(%r)=%.4g (hero %.4g) top %s" % (
+        stop_prob["text"], stop_prob["prob"], hero_stop,
+        [(c["text"], c["prob"]) for c in stop_prob["top"]]))
+    for v in variants:
+        if v["id"] in trim_check:
+            c = trim_check[v["id"]]
+            print("%-17s keptTokens=%d  template %s  alt '.' P('8')=%s  removed %s" % (
+                v["id"], v["keptTokens"], "matches" if c["template"] else "DIFFERS",
+                c["altP8"], spans(v["changed"]["positions"])))
+            print("  decoded: %r" % tok.decode(v["prefix"], skip_special_tokens=False))
+    print("no-stop    new tokens: %r" % tok.decode(gen_ids["no-stop"], skip_special_tokens=False))
     print("skipEach   " + " ".join("%d:%.3g" % (s["floor"], s["prob"]) for s in skip_each))
     for w, b, a, t in flagged:
         print("FLAGGED    %s %s%s %r" % (w, ",".join(b), " [app: %s]" % ",".join(a) if a else "",

@@ -19,6 +19,10 @@ type Props = {
   word?: { label: string; after: string; normal: number }
   /** Shorter dial labels than the recorded ones, by run id. */
   labels?: Record<string, string>
+  /** The station the mini line marks, when it isn't the lesson's own (e.g. the stop ban acts at The Vote). */
+  where?: string
+  /** Number tiles to show instead of the right-digit ones, for runs measured another way. */
+  tiles?: (run: BreakRun, normal: BreakRun) => { label: string; value: ReactNode; note: string }[]
 }
 
 /** The stations a sabotage can sit at, in ride order. */
@@ -27,7 +31,8 @@ const LINE = [
   { code: 'P03', name: 'Embedding' },
   { code: 'P04', name: 'Attention' },
   { code: 'P05', name: 'The Stack' },
-  { code: 'P06', name: 'The Vote' }
+  { code: 'P06', name: 'The Vote' },
+  { code: 'P07', name: 'The Loop' }
 ]
 
 /** A tiny main line with the sabotaged station marked, so “where” is a place on the map. */
@@ -36,7 +41,7 @@ function MiniLine({ at }: { at: string | null }) {
     <svg className="mini-line" viewBox="0 0 320 46" role="img" aria-label={at ? `The sabotage happens at ${LINE.find((s) => s.code === at)?.name}.` : 'Nothing is sabotaged.'}>
       <path d="M20,14 H300" className="ml-track" />
       {LINE.map((s, i) => {
-        const x = 32 + i * 64
+        const x = 28 + i * 52.8
         const hit = s.code === at
         return (
           <g key={s.code} className={hit ? 'ml-hit' : ''}>
@@ -132,7 +137,7 @@ function FloorStrip({ removed }: { removed: number[] }) {
  * strip of the context or the floors), then two tests: what it wrote on its own, and its odds at one
  * spot given the right words up to there.
  */
-export function RunBreak({ station, ids, explains, verdicts, takeaway, word, labels = {} }: Props) {
+export function RunBreak({ station, ids, explains, verdicts, takeaway, word, labels = {}, where, tiles }: Props) {
   const all = breaksFor(station)
   const runs = ['normal', ...ids].map((id) => all.find((b) => b.id === id)).filter((b): b is BreakRun => !!b)
   const [id, setId] = useState('normal')
@@ -162,7 +167,7 @@ export function RunBreak({ station, ids, explains, verdicts, takeaway, word, lab
       <div className={`sabotage-what${broken ? ' on' : ''}`}>
         <p className="kicker">What we changed</p>
         <p>{explains[run.id] ?? ''}</p>
-        <MiniLine at={broken ? station : null} />
+        <MiniLine at={broken ? where ?? station : null} />
         {broken && changed?.floorsRemoved && <FloorStrip removed={changed.floorsRemoved} />}
         {broken && (changed?.positions || changed?.all) && <ContextStrip changed={changed} />}
       </div>
@@ -172,6 +177,17 @@ export function RunBreak({ station, ids, explains, verdicts, takeaway, word, lab
           <blockquote>{run.text.trim() ? <>{run.text.trim()}{run.stoppedNaturally ? '' : ' …'}</> : '(nothing readable)'}</blockquote>
           {verdicts[run.id] && <p className="break-stat">{verdicts[run.id]}</p>}
         </div>
+        {tiles ? (
+          <div className="break-tiles">
+            {tiles(run, normal).map((t) => (
+              <div key={t.label} className="break-tile">
+                <span className="kicker">{t.label}</span>
+                <b>{t.value}</b>
+                <small>{t.note}</small>
+              </div>
+            ))}
+          </div>
+        ) : (
         <div className="break-tiles">
           <div className="break-tile">
             <span className="kicker">{onWord && word ? `Odds of “${word.label}” after “${word.after}”` : 'Odds of “8” after “You need about”'}</span>
@@ -186,6 +202,7 @@ export function RunBreak({ station, ids, explains, verdicts, takeaway, word, lab
             </div>
           )}
         </div>
+        )}
         <p className="muted small">
           Two tests, both real runs of {trace ? modelName(trace) : 'the recorded model'}: it writes the reply on its own, always taking its top token; and we check its odds at one spot, after feeding it the right words up to there.
         </p>

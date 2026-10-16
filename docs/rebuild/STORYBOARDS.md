@@ -367,9 +367,7 @@ Caption: "The new piece joins the platform, and the whole trip runs again for th
 Reveal: "Straight to P03. The model wrote a number, so there's nothing to cut. Text from outside, like the calculator's answer, goes back through P02."
 
 #### Poke
-Step through the reply one piece per tap. The platform fills and the trip counter climbs. Two bars compare the work per trip: redoing everything versus reusing saved work.
-Then shrink the platform. Pieces that no longer fit fade out, oldest first, while the hidden instructions stay. The rule is labeled as the app's choice.
-Data: the ordered pieces with their sources, plus each trip's drawn piece, its chance and the top 10.
+Built as "Step the reply." There is one trip per tap: the token drawn, its odds and the top 3, a gauge of tokens read out of 32,768, and a line on the saved work that is reused. The final trip draws the stop marker at 97%. Trips where the recording used a token that wasn't the model's top pick are marked "Steered." Shrinking the window moved to Break it.
 
 #### Name it
 "The model writes one piece, adds it to what it reads, and runs again for the next. The context window is the most it can read at once."
@@ -378,8 +376,7 @@ Picture: the loop above the platform, with a gauge reading 126† of 32,768.
 Metaphor: writing a sentence where you reread everything so far before each new word. Where it breaks: "Real systems save each earlier piece's work, so later trips handle only the new piece."
 
 #### Break it
-Lever: platform size, set to fits everything, drops the recipe card, or drops both passages. Without the card the model can't see "Serves 8" or "2 1/4 cups." Expect a confident reply with a made-up amount, or a request for the recipe. The tone doesn't change, and that's the lesson.
-Data: V-P07-no-card and V-P07-no-passages. Precomputed: yes.
+Built as "Shrink the window." The app keeps the hidden instructions pinned and cuts the oldest parts. The dial has four stops: Normal, Cut the card, Cut the question too, and Only the answer left. Each run is a true truncation of the context at the moment the reply begins, recorded by `make_phase2.py`. The verdicts are written from the recorded replies.
 
 #### Stamp
 1. "300 messages into a chat, the bot forgets you said you're vegetarian. The app trims old messages. What helps most?"
@@ -419,7 +416,11 @@ Caption: "A stop piece wins the vote, the loop ends, and you get your answer. He
 Reveal: "Not one number changed. The Academy line stayed dark the whole ride. Some companies save chats to train future models, but that happens later, separately."
 
 #### Poke
-Replay the run on a scrubber, trip 1 to 28†; each trip shows the drawn piece, its chance and the lit stations. Find where the calculator request began, the least sure trip, and where the reply copied 8.4 from 8.4375. If the recording steered the model, the board says so here: "Its first choice was to start writing. We sent it to the calculator." Then read the receipt.
+Built as "Replay the run," a strip of all 47 trips. Each bar's height is the odds of the token drawn, and steered trips are outlined in red. There are three things to find:
+- where the recording overrode the model's math (trip 16: the model wanted "3", and the recording wrote "2");
+- where the reply copies the 8;
+- the model's least sure pick among its own choices.
+The text builds as you scrub: the request, the calculator's 8.4375, then the reply. The receipt is the Learn it picture.
 Data: the full run file, each drawn piece's chance and, where steered, the model's own first choice.
 
 #### Name it

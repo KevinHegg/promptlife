@@ -119,10 +119,11 @@ reports and never edits:
 ~/.cache/promptlife/trace-venv/bin/python scripts/trace/make_phase2.py   # -> src/data/traces/phase2.json
 ```
 
-Data for the P03 Embedding, P04 Attention and P05 The Stack lessons. Like phase 1, it imports
-`build_hero` from `make_trace.py`, checks the token ids against `hero-trace.json`, and reads the
-`answer-digit` (pos 331) and `reply-word` (pos 336) positions from its `logitLens`. It takes
-about 100 s on CPU (one forward pass is ~0.25 s) and writes about 80 KB:
+Data for the P03 Embedding, P04 Attention, P05 The Stack, P07 The Loop and P08 Reply lessons.
+Like phase 1, it imports `build_hero` from `make_trace.py`, checks the token ids against
+`hero-trace.json`, and reads the `answer-digit` (pos 331) and `reply-word` (pos 336) positions
+from its `logitLens`. It takes about 125 s on CPU (one forward pass is ~0.25 s) and writes
+about 110 KB:
 
 - **`wordMap`**: 41 recipe-themed words in 6 groups (`WORD_GROUPS`). Each must be one token with
   its leading space; a word that is not falls back to `ALTERNATES` and is named in `notes`.
@@ -144,14 +145,40 @@ about 100 s on CPU (one forward pass is ~0.25 s) and writes about 80 KB:
   - attention: `hide-card`, `hide-result`, `self-only` (additive 4D mask with eager
     attention; the mask includes the causal rule);
   - stack: `skip-mid`, `skip-first`, `top-half-gone`, `stop-18` (a `ModuleList` subset of
-    `model.model.layers`; the final norm and output head still run).
+    `model.model.layers`; the final norm and output head still run);
+  - context trimming (P07), the one exception to the shared context: `trim-card`,
+    `trim-question`, `trim-to-result` build a shorter sequence by deleting whole tokens (no
+    mask, no edits) and renumbering the rest 0..n-1, the way an app keeps the system prompt
+    and drops older material. `trim-card` deletes pos 9-243 (the "Your files:" header, both
+    passages and the template's `# Tools` block with the calculator's description) and keeps
+    `<|im_start|>system\nYou are a helpful assistant.` and the system `<|im_end|>\n`. Pos 8 is
+    the merged token `.\n\n`, so the kept system text ends in a blank line. `trim-question` also
+    deletes the question message (pos 246-270); `trim-to-result` also deletes the tool-call
+    message (pos 271-303), leaving the system message, the tool response (8.4375) and the
+    generation prompt. Each adds `keptTokens` (92 / 67 / 34), `wordProb`, and
+    `changed.positions` (the ORIGINAL hero positions deleted). `rightDigit`/`wordProb` are
+    teacher-forced on the trimmed context plus the recorded reply, so their positions shift
+    down by the number of tokens deleted. The script checks that each trimmed context is
+    exactly what `apply_chat_template` (no `tools=`) renders for the shortened conversation, and
+    prints each one decoded with its special tokens;
+  - stop token (P08): `no-stop` bans both EOS ids (`<|im_end|>`, `<|endoftext|>`: -inf before
+    every argmax, and before the softmax of the teacher-forced pass) and runs for 80 new
+    tokens; `changed.banned` names them.
+- **`stopProb`**: in the normal teacher-forced pass, P(`<|im_end|>`) at pos 344, right after the
+  recorded reply's final token, plus the top 3 (0.9737, the same as `hero-trace.json`).
 - **`skipEach`**: P("8") with only floor k skipped, for k = 1..24.
 
 The script checks itself and writes the results to `notes`: feeding `inputs_embeds`, a plain
 causal 4D mask and an all-floors `ModuleList` must each reproduce the normal run exactly, and
-the `normal` text must equal phase 1's T=0 reply. Every greedy text, every top-3 token and every
-`flourNeighbors` word is checked with `screen.py`. Greedy output cannot be redrawn, so a hit
-keeps its record with `"flagged": true` and is named in `notes` and on the console.
+the `normal` text must equal phase 1's T=0 reply. Every greedy text, every top-3 token (including
+`stopProb`'s) and every `flourNeighbors` word is checked with `screen.py`. Greedy output cannot
+be redrawn, so a hit keeps its record with `"flagged": true` and is named in `notes` and on the
+console.
+
+New runs are appended after the existing records, and new top-level fields and notes are only
+inserted, so a regeneration leaves every earlier byte of `phase2.json` unchanged apart from
+`generatedAt` (the CPU float32 run is deterministic). Check that with a line diff against the
+previous file before committing.
 
 Pure greedy is not HF's default here. Qwen's `generation_config.json` sets
 `repetition_penalty=1.1`, which `generate()` applies even with `do_sample=False`. Both scripts
