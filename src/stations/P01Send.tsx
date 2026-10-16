@@ -12,7 +12,7 @@ const SRC_NAMES: Record<Src, string> = {
   sys: 'something the app adds: hidden instructions, or a description of its calculator',
   rag: 'part of the recipe card you uploaded, which the app pasted in',
   user: 'your question',
-  tool: 'the tool call the model wrote',
+  tool: 'the calculator request the model wrote',
   res: 'the calculator’s result, pasted in by the app',
   rep: 'the reply the model wrote'
 }
@@ -97,7 +97,7 @@ export const P01_SPEC: LoopSpec = {
     guess: {
       q: 'How many times does the model run to write its answer?',
       options: [{ text: 'Once' }, { text: 'Once per sentence' }, { text: 'Once per token', correct: true }],
-      reveal: `Once per token, a word part. This answer takes ${runCounts.trips} runs.`
+      reveal: `Once per token, a word part. This answer takes ${runCounts.trips} runs. We call each run a trip.`
     }
   },
   poke: {
@@ -117,7 +117,7 @@ export const P01_SPEC: LoopSpec = {
       {
         q: 'A friend says the chatbot “remembered” Grandma’s recipe card. What actually put it in front of the model?',
         options: [
-          { text: 'It memorized it in training', why: 'That card was never in its training text.' },
+          { text: 'It learned the card before it was released', why: 'That card was never in the text it learned from.' },
           { text: 'The app found the card among your uploads and added it to what the model reads', correct: true, why: 'The app does the searching, before the model reads anything.' },
           { text: 'The model opened your upload itself', why: 'The model only reads and writes text. The app does the searching and pasting.' }
         ]

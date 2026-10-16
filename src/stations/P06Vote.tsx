@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { VoteLevels } from '../cutaway/stations/VoteLevels'
 import { stationByCode } from '../data/network'
-import { phase1, voteProbs } from '../data/phase1'
+import { phase1, plainOf, voteProbs } from '../data/phase1'
 import { modelName, trace } from '../data/trace'
 import { SCENARIO } from '../data/heroRun'
 import { isClean } from '../lib/safeText'
@@ -9,6 +9,7 @@ import { BeatTheModel } from '../games/BeatTheModel'
 import type { LoopSpec } from '../loop/types'
 import { TokenText } from '../ui/TokenText'
 import { Howto } from '../ui/Howto'
+import { Term } from '../ui/Term'
 import { Dial } from './parts'
 
 const station = stationByCode('P06')!
@@ -17,7 +18,7 @@ const vocab = trace ? Math.round(trace.model.vocabSize / 1000) * 1000 : 150000
 
 function BoardPanel() {
   const rows = vote ? vote.top.slice(0, 4) : []
-  const caption = vote?.plain ?? (vote ? `after “${vote.context}”` : '')
+  const caption = plainOf(vote?.plain) ?? (vote ? `after “${vote.context}”` : '')
   const probs = vote ? voteProbs(vote, 1).top : []
   return (
     <div className="mini-board" role="img" aria-label="A departure board listing candidate tokens with their odds">
@@ -52,10 +53,10 @@ function TemperatureBreak() {
           {runs.map((r) => (
             <figure key={`${r.T}-${r.seed}`} className={`sample${T >= 1.5 ? ' hot' : ''}`}>
               <blockquote>{r.text.trim() || '(empty)'}{r.stoppedNaturally ? '' : ' …'}</blockquote>
-              <figcaption>{T === 0 ? 'greedy: the same every time' : `seed ${r.seed}`}</figcaption>
+              <figcaption>{T === 0 ? 'temperature 0: the same every time' : `draw ${runs.indexOf(r) + 1}`}</figcaption>
             </figure>
           ))}
-          <p className="muted">Real replies from {trace ? modelName(trace) : 'the recorded model'}, sampled at temperature {T.toFixed(1)} with the calculator's {SCENARIO.toolResult} already on the platform.</p>
+          <p className="muted">Real replies from <Term id="recorded-model">this model</Term>, drawn at temperature {T.toFixed(1)}, with the calculator’s {SCENARIO.toolResult} already in what it reads.</p>
         </div>
       ) : (
         <p className="muted">The sampled replies at each temperature arrive with the next trace run.</p>
@@ -78,11 +79,11 @@ export const P06_SPEC: LoopSpec = {
   },
   poke: {
     title: 'Turn the temperature',
-    intro: 'Pick a moment from the ride and slide the temperature. Watch the odds change.',
+    intro: <>Pick a moment from the ride and slide the <Term id="temperature">temperature</Term>, a dial for how often long shots win. Watch the chances change.</>,
     body: <VoteLevels station={station} positions={phase1.votePositions} exactTail={phase1.real} />
   },
   name: {
-    definition: 'The model turns its scores into odds that add up to 100%, then draws the next token. Temperature reshapes the odds: low makes the favorite almost certain, high gives long shots a chance.',
+    definition: 'The model turns its scores into odds that add up to 100%, then draws the next token. That draw is called sampling. Temperature reshapes the odds: low makes the favorite almost certain, high gives long shots a chance.',
     terms: ['probability', 'temperature', 'sampling'],
     picture: <BoardPanel />,
     metaphor: 'An election with every token as a candidate.',

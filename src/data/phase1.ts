@@ -127,3 +127,6 @@ export function voteProbs(v: VotePosition, T: number): { top: number[]; rest: nu
   const sum = e.reduce((a, b) => a + b, 0) + tail
   return { top: e.map((x) => x / sum), rest: tail / sum }
 }
+
+/** A moment's description in plain words: the pipeline says "the recorded 'need'"; students see "'need', the word in our answer". */
+export const plainOf = (s?: string) => s?.replace(/the recorded '([^']+)'/g, "'$1', the word in our answer")

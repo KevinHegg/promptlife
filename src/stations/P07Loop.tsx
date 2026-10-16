@@ -50,7 +50,7 @@ function WindowGauge() {
     <div className="window-gauge">
       <p><b>{read.toLocaleString()}</b> of {WINDOW.toLocaleString()} tokens</p>
       <span className="sg-track"><span style={{ width: `${Math.max(0.8, (read / WINDOW) * 100)}%` }} /></span>
-      <p className="muted small">This whole run, card and calculator included, used about {Math.round((read / WINDOW) * 1000) / 10}% of the recorded model’s window, in {total} trips.</p>
+      <p className="muted small">This whole run, card and calculator included, used about {Math.round((read / WINDOW) * 1000) / 10}% of this model’s window, in {total} trips.</p>
     </div>
   )
 }
@@ -72,8 +72,8 @@ export const P07_SPEC: LoopSpec = {
     body: <LoopLevels station={station} />
   },
   name: {
-    definition: `The model writes one token, adds it to what it reads, and runs again for the next. The context window is the most it can read at once: ${WINDOW.toLocaleString()} tokens for the recorded model.`,
-    terms: ['autoregressive generation', 'context window', 'stop token', 'KV cache'],
+    definition: `The model writes one token, adds it to what it reads, and runs again for the next. This loop is called autoregressive generation. The context window is the most it can read at once: ${WINDOW.toLocaleString()} tokens for this model.`,
+    terms: ['autoregressive generation', 'context window', 'stop token'],
     picture: <WindowGauge />,
     metaphor: 'Writing a sentence where you reread everything so far before each new word.',
     breaks: 'Real systems save each earlier token’s work, so later trips handle only the new token.'
@@ -88,9 +88,9 @@ export const P07_SPEC: LoopSpec = {
         labels={{ 'trim-card': 'Cut the card', 'trim-question': 'Cut the question too', 'trim-to-result': 'Only the answer left' }}
         tiles={(run) => [
           {
-            label: 'Odds of “flour” after “cups of”',
+            label: 'Chance of “flour” after “cups of”',
             value: pct(run.wordProb?.prob ?? flourOdds),
-            note: run.id === 'normal' ? 'it knows what the number is for' : `normally ${pct(flourOdds)}; top pick “${(run.wordProb?.top[0]?.text ?? '').trim()}”`
+            note: run.id === 'normal' ? 'it knows what the number is for' : `normally ${pct(flourOdds)}; likeliest now “${(run.wordProb?.top[0]?.text ?? '').trim()}”`
           },
           {
             label: 'Tokens it could still see',
@@ -135,7 +135,7 @@ export const P07_SPEC: LoopSpec = {
     ],
     art: null,
     receipt: {
-      text: `${total} trips for one answer. Long replies, thinking and tool use multiply trips, and each trip uses electricity.`,
+      text: `${total} trips for one answer. Long replies, written-out reasoning and calculator requests multiply trips, and each trip uses electricity.`,
       column: 'energy',
       source: { label: 'Luccioni, Jernite & Strubell, 2024', href: 'https://arxiv.org/abs/2311.16863' }
     }

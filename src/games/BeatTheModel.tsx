@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import { phase1, type Guess } from '../data/phase1'
 import { modelName, trace } from '../data/trace'
 import { Howto } from '../ui/Howto'
+import { Term } from '../ui/Term'
 import { TokenText } from '../ui/TokenText'
 import { isClean } from '../lib/safeText'
 
@@ -115,7 +116,7 @@ export function BeatTheModel({ onClose }: { onClose: () => void }) {
         <div className="game-result" aria-live="polite">
           {r.kind === 'think' ? (
             <p>
-              The model gave your guess <b>{p === null ? 'less than its top 200 (below the cutoff)' : pct(p)}</b>, so you score {Math.round((p ?? 0) * 100)}. Its favorite was <b><TokenText text={favorite.text} /></b> at {pct(favorite.prob)}.
+              The model gave your guess <b>{p === null ? 'too low to make its top 200' : pct(p)}</b>, so you score {Math.round((p ?? 0) * 100)}. Its favorite was <b><TokenText text={favorite.text} /></b> at {pct(favorite.prob)}.
             </p>
           ) : hit ? (
             <p>
@@ -131,7 +132,7 @@ export function BeatTheModel({ onClose }: { onClose: () => void }) {
           </button>
         </div>
       )}
-      <p className="game-note">Odds from {trace ? modelName(trace) : 'the recorded model'}. Scores stay on this device.</p>
+      <p className="game-note">Odds from <Term id="recorded-model">this model</Term>. Scores stay on this device.</p>
     </div>
   )
 }

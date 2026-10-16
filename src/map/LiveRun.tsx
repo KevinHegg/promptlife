@@ -75,7 +75,7 @@ export function LiveRun({ autoplay = false, onPick, outline, aside, compact = fa
       ? 'Reduced motion is on, so the train jumps between stations.'
       : started
         ? 'Pause anytime.'
-        : 'About a minute. Nothing moves until you press play.'
+        : 'About a minute. Each trip is one run of the model, writing one token.'
 
   return (
     <section className="live" aria-label="The ride" id={id}>

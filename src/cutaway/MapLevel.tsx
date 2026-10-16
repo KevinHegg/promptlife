@@ -13,7 +13,7 @@ export function MapLevel({ station, children }: { station: Station; children?: R
         <h3>{station.name}</h3>
         <p>{station.oneLiner}</p>
         {children}
-        <p className="lvtag">Level 1 · Map</p>
+        <p className="lvtag">On the map</p>
       </div>
       <Vis>
         <svg className="lv1-map" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" aria-hidden="true">

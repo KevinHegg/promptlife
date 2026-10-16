@@ -4,6 +4,7 @@ import { voteProbs, type VotePosition } from '../../data/phase1'
 import { modelName, trace } from '../../data/trace'
 import { sample } from '../../lib/softmax'
 import { Howto } from '../../ui/Howto'
+import { plainOf } from '../../data/phase1'
 import { TokenText } from '../../ui/TokenText'
 import { Cutaway, Level, LevelText, Vis } from '../Cutaway'
 import { MapLevel } from '../MapLevel'
@@ -51,8 +52,8 @@ export function VoteLevels({ station, positions, exactTail }: { station: Station
             title="Turn the temperature"
             note={trace ? `Real scores from ${modelName(trace)}.${exactTail ? '' : ' “Everything else” is estimated from the top 10.'}` : 'Placeholder scores; the math is live.'}
           >
-            <p>Pick a moment from the recorded run. Low temperature makes the favorite near-certain. High temperature gives long shots a real chance.</p>
-            <p className="ctx">{v.plain ?? `After “${v.context}”.`} The recorded answer used <b><TokenText text={v.chosen.text} /></b>.</p>
+            <p>Pick a moment from the ride. Low temperature makes the favorite near-certain. High temperature gives long shots a real chance.</p>
+            <p className="ctx">{plainOf(v.plain) ?? `After “${v.context}”.`} The answer on this ride used <b><TokenText text={v.chosen.text} /></b>.</p>
           </LevelText>
           <Vis>
             <div className="v-col">
@@ -102,7 +103,7 @@ export function VoteLevels({ station, positions, exactTail }: { station: Station
       bedrock={
         <Level>
           <LevelText level={3} title="Softmax with temperature">
-            <p>Divide every score by the temperature, raise e to each result, then divide by the total so the odds add up to 1. Temperature 0 means always take the top score. Top-p sampling drops the long tail before drawing.</p>
+            <p>Divide every score by the temperature, raise e to each result, then divide by the total so the odds add up to 1. Temperature 0 means always take the top score. In the formula, z is a token’s score, T the temperature, and e is about 2.718. Top-p sampling draws only from the likeliest tokens.</p>
           </LevelText>
           <Vis>
             <div className="v-col">

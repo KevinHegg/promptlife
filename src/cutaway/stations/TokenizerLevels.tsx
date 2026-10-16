@@ -43,7 +43,7 @@ export function TokenizerLevels({ station }: { station: Station }) {
           </LevelText>
           <Vis>
             <div className="v-col">
-              <Howto>Type a sentence, or tap an example below.</Howto>
+              <Howto>Type a sentence, or tap an example below. A dot (·) marks a space before a word: “ flour” and “flour” are different tokens.</Howto>
               <label className="visually-hidden" htmlFor="tok-input">Text to tokenize, up to {MAX_CHARS} characters</label>
               <div className="tok-field">
                 <input
@@ -99,7 +99,7 @@ export function TokenizerLevels({ station }: { station: Station }) {
       bedrock={
         <Level>
           <LevelText level={3} title="Byte-pair encoding">
-            <p>The vocabulary is built once, before training. Start from single bytes, then keep merging the most common neighboring pair in a huge sample of text. After that, splitting text is a fixed lookup.</p>
+            <p>The vocabulary is built once, before training. Start from single bytes, the 256 basic codes computers store text in, then keep merging the most common neighboring pair in a huge sample of text. After that, splitting text is a fixed lookup.</p>
           </LevelText>
           <Vis>
             <div className="v-col">

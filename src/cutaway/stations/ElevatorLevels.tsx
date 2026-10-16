@@ -4,6 +4,7 @@ import { contextBeforePos, trace } from '../../data/trace'
 import { isClean } from '../../lib/safeText'
 import { tick, yes } from '../../lib/sound'
 import { Howto } from '../../ui/Howto'
+import { Term } from '../../ui/Term'
 import { TokenText } from '../../ui/TokenText'
 import { Cutaway, Level, LevelText, Vis } from '../Cutaway'
 import { MapLevel } from '../MapLevel'
@@ -12,7 +13,7 @@ import { MapLevel } from '../MapLevel'
 const MOMENTS: { id: string; name: string }[] = [
   { id: 'answer-digit', name: 'The 8 in 8.4' },
   { id: 'reply-word', name: '“flour” in the reply' },
-  { id: 'turn-start', name: 'The first move' }
+  { id: 'turn-start', name: 'Calculator or words?' }
 ]
 
 type Lens = NonNullable<typeof trace>['logitLens'][number]
@@ -98,7 +99,7 @@ export function Elevator() {
           <p className="v-cap">{here.layer < lead.floor - 2 ? 'Scraps: this floor’s guess is not the answer yet.' : here.layer >= lead.floor ? `“${lead.final.trim() || lead.final}” leads from floor ${lead.floor} up.` : 'Getting close.'}</p>
         </div>
       </div>
-      <p className="v-below">Reading a guess partway up is a research trick, the logit lens. The middle floors weren’t built to be read.</p>
+      <p className="v-below">Reading a floor’s guess is a measurement trick called the <Term id="logit-lens">logit lens</Term>. The middle floors weren’t built to be read.</p>
     </div>
   )
 }
@@ -132,8 +133,9 @@ export function ElevatorLevels({ station }: { station: Station }) {
                 <br />repeat for all 24 floors
               </div>
               <div className="worked">
-                the feed-forward step widens <b>896</b> numbers to <b>4,864</b> and back
-                <br />read a floor: guess = W<sub>out</sub> · norm(h)
+                h is the token’s 896 numbers; ← means “replace with”; norm rescales them
+                <br />the feed-forward step widens <b>896</b> numbers to <b>4,864</b> and back
+                <br />read a floor: guess = W<sub>out</sub> · norm(h), where W<sub>out</sub> is the final scoring table
                 <br />this trick is called the <b>logit lens</b>
               </div>
             </div>

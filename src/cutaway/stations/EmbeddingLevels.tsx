@@ -105,7 +105,7 @@ export function WordMapView() {
       </svg>
       {word ? (
         <div className="wm-detail">
-          <p className="wm-title">Closest to “{label(word.text)}”, using all 896 numbers</p>
+          <p className="wm-title">Closest to “{label(word.text)}” (1 = alike, 0 = unrelated)</p>
           <ol className="wm-near">
             {word.neighbors.map((n, _i, all) => (
               <li key={n.text}>
@@ -127,7 +127,7 @@ export function WordMapView() {
       ) : (
         <p className="v-cap">Colors are groups. Lines will point to the closest rows.</p>
       )}
-      <p className="v-below">A flat map can’t hold 896 directions. Trust the neighbor list, not the distance on screen.</p>
+      <p className="v-below">A flat map can’t show all 896 numbers. Trust the list, not the distance on screen.</p>
     </div>
   )
 }

@@ -54,7 +54,7 @@ function TablePanel() {
         <text x="8" y="182" className="art-text">flour’s row:</text>
         <text x="8" y="198" className="art-text">{here.first.map(fmt).join('  ')}  … {table.cols} numbers</text>
       </g>
-      <text x="8" y="218" className="art-text sm" opacity="0.7">This is the recorded model’s ID.</text>
+      <text x="8" y="218" className="art-text sm" opacity="0.7">This is the number our model uses.</text>
       <text x="8" y="232" className="art-text sm" opacity="0.7">Each model numbers its tokens its own way.</text>
     </svg>
   )
@@ -72,7 +72,7 @@ function StripCompare() {
       <Strip b64={flour.strip} label={flour.text} />
       <Strip b64={near.strip} label={`${near.text} · ${flour.neighbors[0].cos.toFixed(2)}`} />
       <Strip b64={far.strip} label={`${far.text} · ${farCos.toFixed(2)}`} />
-      <p className="muted small">Each stripe is one of 896 numbers. The number after a word is its similarity to “flour”, from 1 (same direction) down to 0 (unrelated).</p>
+      <p className="muted small">Each stripe is one of 896 numbers. The number after a word is its similarity to “flour”, from 1 (alike) down to 0 (unrelated).</p>
     </div>
   )
 }
@@ -94,11 +94,11 @@ export const P03_SPEC: LoopSpec = {
     body: <EmbeddingLevels station={station} />
   },
   name: {
-    definition: 'An embedding is the list of numbers stored for each token ID: 896 of them in the recorded model. They’re part of the model’s weights, set in training, and tokens used in similar ways ended up with similar lists.',
+    definition: 'An embedding is the list of numbers stored for each token ID: 896 of them in this model. Each list is called a vector. The lists are part of the model’s weights, the numbers set in training that never change while it answers, and tokens used in similar ways ended up with similar lists.',
     terms: ['embedding', 'vector', 'weights'],
     picture: <StripCompare />,
     metaphor: 'A city where words used alike live on the same block.',
-    breaks: 'This city has 896 directions, not 2, and none of them has a name you could read.'
+    breaks: 'Real rows have 896 numbers, not 2, and none of them means anything you could name.'
   },
   break: {
     title: 'Scramble the table',
@@ -118,7 +118,7 @@ export const P03_SPEC: LoopSpec = {
         verdicts={{
           normal: 'Right: 8.4375 cups of flour.',
           'swap-flour-sugar': 'It reads sugar’s row, so it writes “cups of sugar.”',
-          'scramble-10': 'On its own, it slides into Chinese and garbles the amount (“Grandma’s home cooking… you need 2.2.25s of flour”). Fed the right words, it still finds the 8: small damage can derail the writing before it reaches the number.',
+          'scramble-10': 'On its own, it slides into Chinese and garbles the amount (“Grandma’s home cooking… you need 2.2.25s of flour”). When we type in the right words, it still picks the 8: a little damage can derail the writing before it ever reaches the number.',
           'scramble-100': 'Nothing readable is left.'
         }}
         takeaway={<p><b>That’s why the table matters.</b> The token IDs never changed, only the rows they pulled out. The model reads rows, not words, so a wrong row is a wrong word as far as it can tell.</p>}

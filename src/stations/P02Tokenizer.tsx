@@ -8,6 +8,7 @@ import { TokenizerLevels } from '../cutaway/stations/TokenizerLevels'
 import { splitByCharacter } from '../lib/tokenizer'
 import type { LoopSpec } from '../loop/types'
 import { Howto } from '../ui/Howto'
+import { Term } from '../ui/Term'
 import { Chips, Lever, Reveal } from './parts'
 
 const station = stationByCode('P02')!
@@ -59,7 +60,7 @@ function LettersBreak() {
               <Reveal label="Read what it wrote">
                 <div className="said">
                   <blockquote>{wrote} …</blockquote>
-                  <p className="muted small">Real, unedited output of {trace ? modelName(trace) : 'the recorded model'}. It almost never saw text spelled out letter by letter in training.</p>
+                  <p className="muted small">Real, unedited output of <Term id="recorded-model">this model</Term>. It almost never saw text spelled out letter by letter in training.</p>
                 </div>
               </Reveal>
             </>
@@ -118,7 +119,7 @@ export const P02_SPEC: LoopSpec = {
     body: <TokenizerLevels station={station} />
   },
   name: {
-    definition: 'A tokenizer cuts text into tokens, word parts from a fixed list, and swaps each token for its number, its token ID. “strawberry” becomes st · raw · berry, then 302 · 1618 · 19772. From here on, the model sees only the numbers.',
+    definition: 'A tokenizer cuts text into tokens, word parts from a fixed list called its vocabulary, and swaps each token for its number, its token ID. “strawberry” becomes st · raw · berry, then 302 · 1618 · 19772. From here on, the model sees only the numbers.',
     terms: ['token', 'token ID', 'vocabulary'],
     picture: (
       <div className="three-ways">
@@ -129,7 +130,7 @@ export const P02_SPEC: LoopSpec = {
     ),
     metaphor: 'A coat check: hand over text, get a numbered ticket.',
     breaks: 'A coat check returns your own coat. Every “ flour” gets the same ticket, and what that ticket stands for was set in training.',
-    note: recorded.length ? `Different models cut differently: the recorded model cuts your question into ${recorded.length} tokens, a frontier model into ${frontier.length}.` : undefined
+    note: recorded.length ? `Different models cut differently: this model cuts your question into ${recorded.length} tokens, a big chatbot’s tokenizer into ${frontier.length}.` : undefined
   },
   break: {
     title: 'Feed it letters',
@@ -149,7 +150,7 @@ export const P02_SPEC: LoopSpec = {
       {
         q: 'Two people send the same question, one with the typo “flouur.” What’s guaranteed to differ?',
         options: [
-          { text: 'The model’s weights', why: 'Nothing about the model changes between users.' },
+          { text: 'The model’s numbers', why: 'Nothing about the model changes between users.' },
           { text: 'The tokens and their count, 19 versus 21', correct: true, why: '“ flouur” splits into “ fl” + “ou” + “ur”: two extra tokens.' },
           { text: 'Whether the answer is right', why: 'Models cope with most typos. Only the IDs are sure to differ.' }
         ]
@@ -157,7 +158,7 @@ export const P02_SPEC: LoopSpec = {
     ],
     art: null,
     receipt: {
-      text: 'You pay in tokens, and context windows are measured in them. The same text can take many times more tokens in some languages than in English.',
+      text: 'You pay in tokens, and the limit on how much a model can read is counted in tokens too. The same text can take many times more tokens in some languages than in English.',
       column: 'compute',
       source: { label: 'Petrov et al., NeurIPS 2023', href: 'https://arxiv.org/abs/2305.15425' }
     }

@@ -5,7 +5,7 @@ import { pct, phase2 } from '../data/phase2'
 import { runCounts } from '../data/run'
 import { trace } from '../data/trace'
 import type { LoopSpec } from '../loop/types'
-import { LOOPS } from '.'
+import { allLoops } from './registry'
 import { RunBreak } from './RunBreak'
 
 const station = stationByCode('P08')!
@@ -37,7 +37,8 @@ function ReplyPanel() {
 
 /** Every station's receipt line, printed together, with the run's totals. */
 function Receipt() {
-  const rows = STATIONS.map((s) => ({ s, r: LOOPS[s.code]?.stamp.receipt })).filter((x) => x.r)
+  const loops = allLoops()
+  const rows = STATIONS.map((s) => ({ s, r: loops[s.code]?.stamp.receipt })).filter((x) => x.r)
   return (
     <figure className="receipt-paper">
       <p className="rcp-head">PROMPT LIFE · ONE ANSWER</p>
@@ -67,12 +68,12 @@ export const P08_SPEC: LoopSpec = {
     guess: {
       q: 'Did answering your question change the model?',
       options: [{ text: 'Yes: it learned Grandma’s recipe' }, { text: 'A little: every chat trains it' }, { text: 'No: its numbers are exactly the same', correct: true }],
-      reveal: 'Not one number changed. The Academy line stayed dark the whole ride. Some companies save chats to train future models, but that happens later, separately.'
+      reveal: 'Not one number changed. The Academy line, where training happens, stayed dark the whole ride. Some companies save chats to train future models, but that happens later, separately.'
     }
   },
   poke: {
     title: 'Replay the run',
-    intro: 'Every trip, from the first token of the calculator request to the stop marker.',
+    intro: 'Every trip, from the first token of the calculator request to the stop token.',
     body: <ReplayLevels station={station} />
   },
   name: {
@@ -92,12 +93,12 @@ export const P08_SPEC: LoopSpec = {
         ids={['no-stop']}
         labels={{ 'no-stop': 'Ban the stop token' }}
         explains={{
-          normal: 'Nothing. The stop marker can win the vote like any other token.',
-          'no-stop': 'At The Vote, the stop marker may never be picked, so the loop can’t end on its own. We let it run for 80 more tokens.'
+          normal: 'Nothing. The stop token can win the vote like any other token.',
+          'no-stop': 'At The Vote, the stop token may never be picked, so the loop can’t end on its own. We let it run for 80 more tokens.'
         }}
         tiles={(run) => [
           {
-            label: 'Odds of the stop marker once the answer is done',
+            label: 'Chance of the stop token once the answer is done',
             value: run.id === 'no-stop' ? 'banned' : pct(stopOdds()),
             note: run.id === 'no-stop' ? `normally ${pct(stopOdds())}` : 'so the loop ends there'
           },
@@ -108,10 +109,10 @@ export const P08_SPEC: LoopSpec = {
           }
         ]}
         verdicts={{
-          normal: 'It stops as soon as the answer is done: the stop marker wins the vote.',
+          normal: 'It stops as soon as the answer is done: the stop token wins the vote.',
           'no-stop': 'It writes the same answer, then keeps going with an explanation, and the explanation is wrong: it treats 2.25 cups as per person, when the card says 2 1/4 cups serves 8. It was still writing when we cut it off.'
         }}
-        takeaway={<p><b>That’s why replies end.</b> The model has no sense of being finished. Ending is one more prediction, and when it can’t pick the stop marker it keeps writing.</p>}
+        takeaway={<p><b>That’s why replies end.</b> The model has no sense of being finished. Ending is one more prediction, and when it can’t pick the stop token it keeps writing.</p>}
       />
     )
   },

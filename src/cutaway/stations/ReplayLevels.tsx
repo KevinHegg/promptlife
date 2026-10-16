@@ -11,7 +11,7 @@ import { MapLevel } from '../MapLevel'
 
 const pctOf = (p: number) => (p >= 0.995 ? `${(p * 100).toFixed(1)}%` : p < 0.01 ? `${(p * 100).toFixed(1)}%` : `${Math.round(p * 100)}%`)
 const isStop = (t: string) => /<\|im_end\|>|<\|endoftext\|>/.test(t)
-const show = (t: string) => (isStop(t) ? 'stop marker' : t)
+const show = (t: string) => (isStop(t) ? 'stop token' : t)
 
 /**
  * Replay the whole run, trip by trip. A strip shows every trip as a bar as tall as the model's
@@ -30,9 +30,9 @@ export function Replay() {
     const eight = steps.find((s) => s.pos >= firstReply && s.chosen.text === '8')
     const overrode = steps.find((s) => s.pos < firstReply && s.chosen.rank > 1)
     return [
-      { id: 'overrode', label: 'Where the recording overrode its math', at: overrode ? steps.indexOf(overrode) : -1 },
+      { id: 'overrode', label: 'Where we swapped in the right sum', at: overrode ? steps.indexOf(overrode) : -1 },
       { id: 'eight', label: 'Where the reply copies the 8', at: eight ? steps.indexOf(eight) : -1 },
-      { id: 'unsure', label: 'Its least sure pick of its own', at: leastSure ? steps.indexOf(leastSure) : -1 }
+      { id: 'unsure', label: 'Where it was least sure of its own choice', at: leastSure ? steps.indexOf(leastSure) : -1 }
     ].filter((t) => t.at >= 0)
   }, [steps, firstReply])
   if (!trace || !steps.length) return <p className="v-cap">The recorded run arrives with the next trace run.</p>
@@ -116,10 +116,10 @@ export function Replay() {
       <div className="st-trip-card">
         <p className="st-drawn">
           {inReply ? 'Writing the reply. ' : 'Writing the calculator request. '}
-          {isStop(step.chosen.text) ? 'Drew the stop marker' : <>Drew <b>{isClean(step.chosen.text) ? <TokenText text={step.chosen.text} /> : '…'}</b></>} at {pctOf(step.chosen.prob)}.
+          {isStop(step.chosen.text) ? 'Drew the stop token' : <>Drew <b>{isClean(step.chosen.text) ? <TokenText text={step.chosen.text} /> : '…'}</b></>} at {pctOf(step.chosen.prob)}.
         </p>
         {steered && (
-          <p className="st-steered">Steered: the model’s top pick was <b><TokenText text={show(steered.text)} /></b> ({pctOf(steered.prob)}). The recording used the scripted text.</p>
+          <p className="st-steered">Not its first choice: it liked <b><TokenText text={show(steered.text)} /></b> more ({pctOf(steered.prob)}). This replay keeps one fixed answer.</p>
         )}
       </div>
       <div className="rp-text">
@@ -152,7 +152,7 @@ export function ReplayLevels({ station }: { station: Station }) {
       bedrock={
         <Level>
           <LevelText level={3} title="The run’s odds, added up">
-            <p>Multiply the odds of every token drawn and you get the odds of the whole run. Adding logarithms keeps the numbers readable.</p>
+            <p>Multiply the odds of every token drawn and you get the odds of the whole run. A logarithm turns multiplying into adding, so the tiny numbers stay readable.</p>
           </LevelText>
           <Vis>
             <RunOdds />
@@ -174,7 +174,7 @@ function RunOdds() {
       <div className="formula">log p(run) = Σ<sub>t</sub> log p(token<sub>t</sub>)</div>
       <div className="worked">
         {steps.length} trips: <b>{logp.toFixed(1)}</b> (natural log)
-        <br />{own} of {steps.length} tokens were the model’s own top pick
+        <br />{own} of {steps.length} tokens were the model’s own first choice
         <br />weights changed by this run: <b>0</b>
       </div>
     </div>

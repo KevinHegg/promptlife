@@ -10,7 +10,8 @@ type Props = {
   size?: 'regular' | 'tall'
 }
 
-const LEVELS = ['Map', 'Cutaway', 'Bedrock'] as const
+/** Plain names for the three levels: no app-internal words like “cutaway” or “bedrock” on screen. */
+const LEVELS = ['On the map', 'Up close', 'The math (optional)'] as const
 
 /**
  * Three stacked paper levels. Die-cut circular windows (CSS masks) open from the map
@@ -58,7 +59,7 @@ export function Cutaway({ stationName, map, cutaway, bedrock, size = 'regular' }
         className={`cut-fig ${size}${settled ? ' settled' : ''}`}
         data-depth={depth}
         style={fitH ? { ['--fit-h' as string]: `${fitH}px` } : undefined}
-        aria-label={`${stationName}, level ${depth + 1} of 3: ${LEVELS[depth]}`}
+        aria-label={`${stationName}: ${LEVELS[depth]}`}
       >
         <div className="lv lv3" inert={depth < 2}>{bedrock}</div>
         <div className="lv lv2" inert={depth !== 1}>{cutaway}</div>
@@ -83,7 +84,7 @@ export function Cutaway({ stationName, map, cutaway, bedrock, size = 'regular' }
 export function LevelText({ level, title, children, note }: { level: 1 | 2 | 3; title: string; children: ReactNode; note?: string }) {
   return (
     <div className="lv-text">
-      <p className="lvtag">Level {level} · {LEVELS[level - 1]}</p>
+      <p className="lvtag">{LEVELS[level - 1]}</p>
       <h3>{title}</h3>
       <div className="lv-body">{children}</div>
       {note && <p className="note">{note}</p>}

@@ -16,6 +16,9 @@ function chipLabel(text: string) {
 }
 
 /** Chips laid out left to right in reading order, arcs from the query (last chip) back to earlier ones. */
+/** A share of attention as a percentage; tiny shares read “<1%”, not a misleading 0%. */
+const share = (w: number) => (w < 0.005 ? '<1%' : `${Math.round(w * 100)}%`)
+
 export function Arcs({ view }: { view: AttentionView }) {
   const q = view.tokens.length - 1
   const widths = view.tokens.map((t) => chipLabel(t.text).length * 7.4 + 18)
@@ -56,7 +59,7 @@ export function Arcs({ view }: { view: AttentionView }) {
               {t.src && SRC_LABEL[t.src] && <title>{`from the ${SRC_LABEL[t.src]}`}</title>}
             </rect>
             <text x={xs[i]} y={157} textAnchor="middle">{chipLabel(t.text)}</text>
-            <text className="w" x={xs[i]} y={180} textAnchor="middle">{i === q ? `self ${t.w.toFixed(2)}` : t.w.toFixed(2)}</text>
+            <text className="w" x={xs[i]} y={180} textAnchor="middle">{i === q ? `itself ${share(t.w)}` : share(t.w)}</text>
           </g>
         )
       })}
@@ -137,14 +140,14 @@ export function AttentionLevels({ station, views }: { station: Station; views: A
             title={view.real ? 'Who looks where' : `Where “${chipLabel(view.query)}” looks`}
             note={view.real ? undefined : 'Placeholder weights. The trace pipeline will supply real ones from a chosen head.'}
           >
-            <p>Thicker arcs mean a token borrows more from there. Each head looks back in its own way.</p>
+            <p>This model has 336 heads. We picked four with clear patterns and gave them nicknames. Thicker arcs mean more is borrowed from there.</p>
           </LevelText>
           <Vis>
             <div className="v-col">
               {hasTarget && (
                 <p className={`challenge${found ? ' done' : ''}`}>{found ? '✓ Found: the head that links “flour” in your question to the card' : 'Challenge: find the head that links “flour” in your question to “flour” on the card.'}</p>
               )}
-              {views.length > 1 && <Howto>Tap a head. Its arcs show where one token borrows from.</Howto>}
+              {views.length > 1 && <Howto>Tap a head, one of the model’s ways of looking back. Its arcs show where one token borrows from.</Howto>}
               {views.length > 1 && (
                 <div className="v-examples" role="group" aria-label="Attention heads">
                   {views.map((v, i) => (
@@ -175,9 +178,9 @@ export function AttentionLevels({ station, views }: { station: Station; views: A
                 <br />out<sub>i</sub> = Σ<sub>j</sub> a<sub>ij</sub> v<sub>j</sub>
               </div>
               <div className="worked">
-                d = vector length per head, <b>64</b> in this model
-                <br />each row of weights adds up to <b>1</b>
-                <br />a causal mask hides every later token
+                q, k, v: the query, key and value lists each token makes, <b>64</b> numbers each here (d)
+                <br />softmax turns the scores into shares that add up to <b>1</b>; Σ means add them all up
+                <br />the causal mask is the no-looking-ahead rule: later tokens are hidden
               </div>
             </div>
           </Vis>

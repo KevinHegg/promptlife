@@ -22,7 +22,7 @@ export function replySteps(): Step[] {
 
 const pctOf = (p: number) => (p >= 0.995 ? `${(p * 100).toFixed(1)}%` : p < 0.01 ? `${(p * 100).toFixed(1)}%` : `${Math.round(p * 100)}%`)
 const isStop = (t: string) => /<\|im_end\|>|<\|endoftext\|>/.test(t)
-const show = (t: string) => (isStop(t) ? 'stop marker' : t)
+const show = (t: string) => (isStop(t) ? 'stop token' : t)
 
 /**
  * Step the reply: one trip per tap. Each trip shows the token it drew, the odds, the runners-up, and
@@ -71,7 +71,7 @@ export function LoopStepper() {
       {step ? (
         <div className="st-trip-card">
           <p className="st-drawn">
-            {isStop(step.chosen.text) ? 'Drew the stop marker' : <>Drew <b><TokenText text={step.chosen.text} /></b></>} at {pctOf(step.chosen.prob)}
+            {isStop(step.chosen.text) ? 'Drew the stop token' : <>Drew <b><TokenText text={step.chosen.text} /></b></>} at {pctOf(step.chosen.prob)}
           </p>
           <ol className="lift-guesses">
             {step.top.slice(0, 3).map((g, i) => (
@@ -83,13 +83,13 @@ export function LoopStepper() {
             ))}
           </ol>
           {steered && (
-            <p className="st-steered">Steered: the model’s top pick was <b><TokenText text={show(steered.text)} /></b> ({pctOf(steered.prob)}). The recording used the scripted reply.</p>
+            <p className="st-steered">Not its first choice: it liked <b><TokenText text={show(steered.text)} /></b> more ({pctOf(steered.prob)}). This replay keeps one fixed answer.</p>
           )}
-          {isStop(step.chosen.text) && <p className="st-end">The stop marker won, so the loop ends and the app shows the reply.</p>}
+          {isStop(step.chosen.text) && <p className="st-end">The stop token won, so the loop ends and the app shows the reply.</p>}
         </div>
       ) : (
         <p className="v-cap">
-          Before the reply, {tripsBefore} trips wrote the calculator request. This replays the recorded reply; where a token wasn’t the model’s own top pick, a red line says so.
+          Before the reply, {tripsBefore} trips wrote the calculator request. This replays one fixed answer; where a token wasn’t the model’s own first choice, a red line says so.
         </p>
       )}
       <div className="st-gauge">
@@ -126,6 +126,8 @@ export function LoopLevels({ station }: { station: Station }) {
             <div className="v-col">
               <div className="formula">p(reply) = p(t<sub>1</sub>) · p(t<sub>2</sub> | t<sub>1</sub>) · p(t<sub>3</sub> | t<sub>1</sub>, t<sub>2</sub>) · …</div>
               <div className="worked">
+                p(a | b) means the chance of a, given b; t<sub>1</sub>, t<sub>2</sub> are the reply’s tokens
+                <br />
                 the first trip, <b>prefill</b>, reads every token in the context at once
                 <br />each later trip, <b>decode</b>, adds one token and reuses saved keys and values
                 <br />that saved work is the <b>KV cache</b>

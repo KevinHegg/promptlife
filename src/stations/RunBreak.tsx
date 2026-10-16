@@ -1,6 +1,7 @@
 import { useState, type ReactNode } from 'react'
 import { breaksFor, pct, phase2, type BreakRun } from '../data/phase2'
-import { modelName, trace } from '../data/trace'
+import { trace } from '../data/trace'
+import { Term } from '../ui/Term'
 import { Howto } from '../ui/Howto'
 import { TokenText } from '../ui/TokenText'
 import { Dial } from './parts'
@@ -190,13 +191,13 @@ export function RunBreak({ station, ids, explains, verdicts, takeaway, word, lab
         ) : (
         <div className="break-tiles">
           <div className="break-tile">
-            <span className="kicker">{onWord && word ? `Odds of “${word.label}” after “${word.after}”` : 'Odds of “8” after “You need about”'}</span>
+            <span className="kicker">{onWord && word ? `Chance of “${word.label}” after “${word.after}”` : 'Chance of “8” after “You need about”'}</span>
             <b>{pct(measure.prob)}</b>
-            <small>{onWord && word ? `normally ${pct(word.normal)}` : broken ? `normally ${pct(normal.rightDigit.prob)}` : 'given the right words up to there'}</small>
+            <small>{onWord && word ? `normally ${pct(word.normal)}` : broken ? `normally ${pct(normal.rightDigit.prob)}` : 'when we type in the right words up to there'}</small>
           </div>
           {top && (
             <div className="break-tile">
-              <span className="kicker">Its top pick there</span>
+              <span className="kicker">Its likeliest token there</span>
               <b className="tile-token"><TokenText text={top.text} /></b>
               <small>{pct(top.prob)}</small>
             </div>
@@ -204,7 +205,7 @@ export function RunBreak({ station, ids, explains, verdicts, takeaway, word, lab
         </div>
         )}
         <p className="muted small">
-          Two tests, both real runs of {trace ? modelName(trace) : 'the recorded model'}: it writes the reply on its own, always taking its top token; and we check its odds at one spot, after feeding it the right words up to there.
+          Two tests on <Term id="recorded-model">this model</Term>: first it writes on its own, always taking its likeliest token; then we type in the real answer up to one spot and check its chance of the right next token.
         </p>
       </div>
       {tried && <div className="break-why">{takeaway}</div>}

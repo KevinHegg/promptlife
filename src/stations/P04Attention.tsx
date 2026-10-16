@@ -2,6 +2,7 @@ import { AttentionLevels, Arcs } from '../cutaway/stations/AttentionLevels'
 import { cutawayData } from '../data/cutawayData'
 import { stationByCode } from '../data/network'
 import type { LoopSpec } from '../loop/types'
+import { Term } from '../ui/Term'
 import { RunBreak } from './RunBreak'
 
 const station = stationByCode('P04')!
@@ -24,7 +25,7 @@ export const P04_SPEC: LoopSpec = {
   code: 'P04',
   arrive: {
     caption: 'Here every token looks back at the tokens before it and borrows from them.',
-    panel: <PaperArcs which={card} caption="One real head: “flour” in your question looks back at “flour” on Grandma’s recipe card, the card you uploaded." />,
+    panel: <PaperArcs which={card} caption="One part of the model that looks back: “flour” in your question looks back at “flour” on Grandma’s recipe card, the card you uploaded." />,
     guess: {
       q: 'Can “flour” in your question look at “people,” which comes after it?',
       options: [{ text: 'Yes, it sees the whole question' }, { text: 'Only if the words are related' }, { text: 'No, only tokens before it', correct: true }],
@@ -33,11 +34,11 @@ export const P04_SPEC: LoopSpec = {
   },
   poke: {
     title: 'Follow the arcs',
-    intro: 'Pick a head and see where a token borrows from. Each head’s weights add up to 100%.',
+    intro: <>The model looks back in many separate ways at once. Each one is called an attention <Term id="attention-head">head</Term>. Pick one and see where a token borrows from.</>,
     body: <AttentionLevels station={station} views={heads} />
   },
   name: {
-    definition: 'Attention lets each token take a weighted mix of information from the tokens before it, with weights that add up to 100%. Each layer has several attention heads, each with its own pattern of looking back.',
+    definition: 'Attention lets each token borrow a mix of information from the tokens before it, in shares that add up to 100%. The model has many attention heads, each looking back in its own way.',
     terms: ['attention', 'attention head'],
     picture: <PaperArcs which={copier} caption="The “Copier” head, just before the reply writes 8: nearly all its weight is on the calculator’s answer." />,
     metaphor: 'A highlighter run over earlier text, darker where more is borrowed.',
@@ -53,8 +54,8 @@ export const P04_SPEC: LoopSpec = {
         labels={{ 'hide-card': 'Hide the card', 'hide-result': 'Hide the answer', 'self-only': 'Only itself' }}
         explains={{
           normal: 'Nothing. Every token may look back at every token before it.',
-          'hide-card': 'No token may look back at the recipe card. Its tokens are blacked out for every head, on every floor.',
-          'hide-result': 'No token may look back at the calculator’s answer, 8.4375. It’s blacked out for every head, on every floor.',
+          'hide-card': 'No token may look back at the recipe card. Its tokens are blacked out for every head, everywhere in the model.',
+          'hide-result': 'No token may look back at the calculator’s answer, 8.4375. It’s blacked out for every head, everywhere in the model.',
           'self-only': 'Each token may look only at itself, so nothing else in the context gets in.'
         }}
         verdicts={{

@@ -53,13 +53,13 @@ export function Chips({ pieces, hot, small }: { pieces: { text: string; id?: num
 }
 
 const SRC_ORDER: { src: Src; label: string }[] = [
-  { src: 'special', label: 'role markers' },
-  { src: 'sys', label: 'system prompt and tool description' },
-  { src: 'rag', label: 'fetched passages' },
+  { src: 'special', label: 'hidden markers' },
+  { src: 'sys', label: 'hidden instructions and the calculator’s instructions' },
+  { src: 'rag', label: 'your upload (the card)' },
   { src: 'user', label: 'your question' },
-  { src: 'tool', label: 'tool call' },
-  { src: 'res', label: 'tool result' },
-  { src: 'rep', label: 'reply' }
+  { src: 'tool', label: 'calculator request' },
+  { src: 'res', label: 'calculator’s result' },
+  { src: 'rep', label: 'the answer' }
 ]
 
 /** The whole context as one bar, drawn to scale by source, with your part outlined. */

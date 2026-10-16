@@ -35,14 +35,14 @@ export const STORY = {
   tokenizer: (all: number, yours: number) => `Everything is cut into tokens, and each token becomes a number: ${all} tokens. You typed ${yours}.`,
   embedding: 'Each token’s number is swapped for a long list of numbers that stands for its meaning.',
   attention: lookBack?.plain ?? 'Each token looks back at earlier tokens for clues.',
-  stack: (layers: number | null) => `${layers ?? 'Dozens of'} layers of math refine every token, one floor at a time.`,
+  stack: (layers: number | null) => `${layers ?? 'Dozens of'} floors of math rework every token’s numbers, one floor at a time.`,
   firstVote: (chosen: string, prob: number | null, favorite: string | null, favoriteProb: number | null, rank: number | null) =>
     rank !== null && rank > 1 && favorite
       ? `Its favorite was ${shown(favorite)} (${pct(favoriteProb ?? 0)}), to answer in words. This app requires the calculator, so the ride starts a request.`
       : /tool_call/.test(chosen)
         ? `The model scores every possible next token. Its pick${prob !== null ? `, at ${pct(prob)}` : ''}: start a calculator request.`
         : `The model scores every possible next token. Its pick: ${shown(chosen)}${prob !== null ? ` (${pct(prob)})` : ''}.`,
-  loop: (trips: number) => `The new token joins the platform, and the trip runs again for the next token: ${trips} trips in all.`,
+  loop: (trips: number) => `The new token is added to what the model reads, and the trip runs again for the next token: ${trips} trips in all.`,
   writingRequest: 'Writing a calculator request, one token per trip.',
   requestDone: MODEL_OWN_SUM
     ? `Request done. On its own, this model asked for ${MODEL_OWN_SUM}, the wrong sum; this ride uses the right one.`
@@ -53,7 +53,7 @@ export const STORY = {
   resultCut: (n: number) => `The result is cut into tokens too: ${n} of them.`,
   replying: 'Now the model writes the answer, one token per trip.',
   stopMarker: 'The model writes its “stop” token, so this part ends.',
-  differs: (favorite: string, used: string) => `The model's favorite here was ${shown(favorite)}; the recorded answer used ${shown(used)}.`,
+  differs: (favorite: string, used: string) => `Its first choice here was ${shown(favorite)}. This ride follows a saved answer that used ${shown(used)}.`,
   done: (trips: number) => `Arrived after ${trips} trips. The Academy, where models are trained, stays dark: answering never changes the model.`
 }
 

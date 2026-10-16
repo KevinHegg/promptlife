@@ -81,6 +81,11 @@ The owner's brief is that this should be somewhere people want to be. Each rule 
 14. **Easy to leave and return.** The map is one tap away. The train parks where you left it, and lit lamps stay lit.
 15. **Quiet rewards.** No confetti. The stamp landing is the celebration.
 16. **Say what to do at the control.** Every exercise has one "how to" line right above its controls, in the same style everywhere: a small amber marker and a short plain instruction, such as "Pick a word to compare with flour." The intro above the box isn't enough. Rows of choices wrap so no option is hidden; only the tokenizer's long example list scrolls sideways. Every guess and quiz answer says "✓ Correct." in green or "✗ Not quite." in red, and the options carry the same marks ("Yes." confused people when the right answer began with "No"). Every sabotage says, before any result, what we changed (one plain sentence) and where: a mini main line marks the station, and a strip of the context or the floors shows the exact tokens or floors touched. When two measures disagree (what it wrote on its own versus its odds at one spot when fed the right words), the labels name both tests.
+17. **Explain a word before you lean on it.** Where a student first meets a technical word, explain it in the same sentence, or make it a tap-to-define term (`<Term id="…">`). That opens a small card with the glossary's one-line meaning, a tiny picture for the key terms, an example from our run, and a link to the full entry. The one-line meanings shown in those cards may only use words the student has already met. Specifics:
+   - Say "floor" before The Stack, and "layer" only once The Stack has said a layer is a floor.
+   - Never put research or app-internal words on screen: "recorded model" (say "this model"), "steered" or "scripted" (say "not its first choice; this replay keeps one fixed answer"), "top pick" (say "likeliest token"), "platform", "cutaway" or "bedrock".
+   - "Weights" means the numbers set in training. Attention has "shares".
+   - Every chip under Learn it names a word that its definition uses.
 
 ## 6. The metaphor system
 

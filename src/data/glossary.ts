@@ -114,6 +114,19 @@ export const GLOSSARY: GlossaryEntry[] = [
     related: ['system-prompt', 'stop-token', 'tool-call', 'fine-tuning']
   },
 
+  {
+    id: 'recorded-model',
+    term: 'the recorded model',
+    aka: ['this model', 'Qwen2.5-0.5B-Instruct'],
+    station: 'P01',
+    short: 'The small, free model we ran on our question and recorded: Qwen2.5-0.5B-Instruct. Big chatbots work the same way, at a much larger size.',
+    deeper: [
+      'Every number in this app comes from a real run. We gave Qwen2.5-0.5B-Instruct, an open model with about 494 million weights, the same recipe-card question and saved what happened inside it on every trip.',
+      'It is small on purpose. It runs on a laptop, so we could look inside every floor and repeat every experiment. Frontier chatbots are far bigger and make fewer mistakes, but they read tokens, look back with attention and draw the next token the same way.',
+      'The replay follows one fixed answer. Where that answer was not the model’s own first choice, the app says so.'
+    ],
+    related: ['large-language-model', 'weights', 'sampling']
+  },
   // ── P02 Tokenizer ───────────────────────────────────────────────────────
   {
     id: 'tokenizer',
@@ -204,6 +217,20 @@ export const GLOSSARY: GlossaryEntry[] = [
     related: ['embedding', 'residual-stream', 'attention']
   },
 
+  {
+    id: 'weights',
+    term: 'weights',
+    aka: ['parameters'],
+    station: 'P03',
+    short: 'Weights are the numbers set in training that turn a context into scores. They stay fixed while the model answers: nothing you type changes them.',
+    deeper: [
+      'Every table in the model is weights: the embedding table, the attention tables, the feed-forward tables. The recorded model has about 494 million: 136 million in its embedding table and about 358 million in its 24 layers. Every trip uses all of them, roughly two arithmetic steps per weight, so about a billion steps per token.',
+      'Training sets them by trial and error at enormous scale: guess the next token, measure the miss, nudge every weight slightly to make that miss smaller, repeat. Answering never runs that loop. After this whole run, the number of weights that changed is 0.',
+      'Because the weights are fixed after training, what the model can reproduce about the world stops at its training data’s cutoff, and your chats don’t teach it. Some companies save chats to train future versions, separately and later. Weights also aren’t a store of sentences: facts are spread through them, approximately.'
+    ],
+    example: 'The “0.5B” in Qwen2.5-0.5B-Instruct means about half a billion weights. Counted from its published settings, the exact figure is 494,032,768.',
+    related: ['large-language-model', 'pretraining', 'embedding', 'inference']
+  },
   // ── P04 Attention ───────────────────────────────────────────────────────
   {
     id: 'attention',
@@ -223,7 +250,7 @@ export const GLOSSARY: GlossaryEntry[] = [
     term: 'attention head',
     aka: ['head', 'query, key and value'],
     station: 'P04',
-    short: 'An attention head is one of several attention calculations running side by side in each layer, each with its own weights and its own pattern of looking back.',
+    short: 'An attention head is one of many separate ways the model looks back, side by side, each with its own pattern of where to look.',
     deeper: [
       'Inside a head, every token makes three short vectors from its current numbers. Its query says what to look for, its key says what it offers to others, and its value is what it hands over if chosen. In the recorded model, each is 64 numbers.',
       'To look back, a token multiplies its query with each earlier token’s key, adds up the products, and scales the result down, giving one score per earlier token. Softmax turns those scores into weights that add up to 100%, and the head’s output is the weighted mix of the values.',
@@ -317,20 +344,6 @@ export const GLOSSARY: GlossaryEntry[] = [
     ],
     example: 'At the start of the model’s first turn, the lens shows “To” on top at layers 21 to 23. Only the final layer flips to <tool_call>, at 75%, the start of the calculator request.',
     related: ['residual-stream', 'layer', 'score']
-  },
-  {
-    id: 'weights',
-    term: 'weights',
-    aka: ['parameters'],
-    station: 'P05',
-    short: 'Weights are the numbers set in training that turn a context into scores. They stay fixed while the model answers: nothing you type changes them.',
-    deeper: [
-      'Every table in the model is weights: the embedding table, the attention tables, the feed-forward tables. The recorded model has about 494 million: 136 million in its embedding table and about 358 million in its 24 layers. Every trip uses all of them, roughly two arithmetic steps per weight, so about a billion steps per token.',
-      'Training sets them by trial and error at enormous scale: guess the next token, measure the miss, nudge every weight slightly to make that miss smaller, repeat. Answering never runs that loop. After this whole run, the number of weights that changed is 0.',
-      'Because the weights are fixed after training, what the model can reproduce about the world stops at its training data’s cutoff, and your chats don’t teach it. Some companies save chats to train future versions, separately and later. Weights also aren’t a store of sentences: facts are spread through them, approximately.'
-    ],
-    example: 'The “0.5B” in Qwen2.5-0.5B-Instruct means about half a billion weights. Counted from its published settings, the exact figure is 494,032,768.',
-    related: ['large-language-model', 'pretraining', 'embedding', 'inference']
   },
 
   // ── P06 The Vote ────────────────────────────────────────────────────────

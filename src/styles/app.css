@@ -1060,3 +1060,42 @@ blockquote { margin: 0; padding: 10px 14px; border-left: 3px solid var(--ink-2);
   .sheet-card { width: auto; align-self: stretch; margin-left: 12px; }
 }
 @media (prefers-reduced-motion: reduce) { .sheet-card { animation: none; } }
+
+/* ================= Words worth learning: tap for a small card ================= */
+.term { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline dotted; text-decoration-thickness: 2px; text-underline-offset: 4px; text-decoration-color: var(--doing); }
+.term[aria-expanded="true"] { background: color-mix(in srgb, var(--doing) 28%, transparent); border-radius: 4px; }
+.term-card {
+  position: fixed; z-index: 50; display: flex; flex-direction: column; gap: 8px; padding: 12px 14px 12px;
+  background: var(--paper); color: var(--ink); border: 2px solid var(--ink); border-radius: 14px;
+  box-shadow: 4px 4px 0 -1px var(--doing), 8px 8px 0 -2px var(--lv3), 8px 8px 0 -0.5px var(--ink);
+  font-family: var(--font-body); font-size: 0.92rem; line-height: 1.45; text-align: left;
+  animation: term-in 0.18s ease-out;
+}
+@keyframes term-in { from { opacity: 0; transform: translateY(-4px); } }
+@media (prefers-reduced-motion: reduce) { .term-card { animation: none; } }
+.tc-term { font-family: var(--font-display); font-weight: 900; font-size: 1rem; }
+.tc-picture svg { width: 100%; height: auto; display: block; max-height: 110px; }
+.tc-example { font-size: 0.84rem; color: var(--ink-2); }
+.tc-example b { color: var(--ink); font-family: var(--font-display); font-weight: 800; }
+.tc-more { font-family: var(--font-display); font-weight: 800; font-size: 0.85rem; color: var(--ink); }
+/* The little pictures: one ink, one accent. */
+.tp-chip { fill: var(--sheet); stroke: var(--ink); stroke-width: 1.5; }
+.tp-chip.hot { fill: color-mix(in srgb, var(--doing) 55%, var(--sheet)); }
+.tp-chip.cool { fill: var(--tint); }
+.tp-chip.faint { stroke-dasharray: 3 2; opacity: 0.7; }
+.tp-text { font-family: var(--font-mono); font-size: 10px; fill: var(--ink); }
+.tp-text.left { text-anchor: start; }
+.tp-label { font-family: var(--font-display); font-weight: 700; font-size: 10px; fill: var(--ink-2); }
+.tp-label.mono { font-family: var(--font-mono); font-weight: 400; }
+.tp-arc { fill: none; stroke: var(--doing); stroke-linecap: round; }
+.tp-arc.faint { opacity: 0.5; }
+.tp-dot { fill: var(--sheet); stroke: var(--ink); stroke-width: 1.5; }
+.tp-dot.hot { fill: var(--doing); }
+.tp-line { fill: none; stroke: var(--ink); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.tp-line.hot { stroke: var(--doing); stroke-width: 3; }
+.tp-axis { fill: none; stroke: var(--rule); stroke-width: 1.5; }
+.tp-bar { fill: var(--doing); }
+.tp-bar.cool { fill: var(--accent); opacity: 0.7; }
+.tp-track { fill: var(--tint); }
+.tp-stop { fill: var(--ink); }
+.tp-peek { fill: var(--doing); stroke: var(--ink); stroke-width: 2; }

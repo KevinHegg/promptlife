@@ -93,7 +93,7 @@ export function attentionViewsFromTrace(t: Trace): AttentionView[] {
         { text: query?.text ?? '', w: self, pos: row.queryPos, src: query?.src }
       ],
       real: true,
-      source: `Real weights from ${modelName(t)}, layer ${row.layer}, head ${row.head}. Template markers and the first token, which soaks up spare attention, are hidden.`
+      source: `Real numbers from this model (${modelName(t)}). Hidden markers and the very first token, which collects leftover attention, are left out.`
     })
   }
   return views

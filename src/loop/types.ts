@@ -15,17 +15,17 @@ export type Option = { text: string; correct?: boolean; why?: string }
 export type QuizQuestion = { q: string; options: Option[] }
 
 /** A quick, optional guess before the lesson. Never blocks Next. */
-export type Guess = { q: string; options: Option[]; reveal: string }
+export type Guess = { q: string; options: Option[]; reveal: ReactNode }
 
 export type Receipt = { text: string; column: 'compute' | 'energy' | 'data' | 'labor' | 'accountability'; source?: { label: string; href: string } }
 
 /** Everything one station's five-minute loop needs. */
 export type LoopSpec = {
   code: string
-  arrive: { caption: string; panel: ReactNode; flashback?: { q: string; a: string }; guess?: Guess }
-  poke: { title: string; intro: string; body: ReactNode }
-  name: { definition: string; terms: string[]; picture: ReactNode; metaphor: string; breaks: string; note?: string }
-  break?: { title: string; intro: string; body: ReactNode }
+  arrive: { caption: ReactNode; panel: ReactNode; flashback?: { q: string; a: string }; guess?: Guess }
+  poke: { title: string; intro: ReactNode; body: ReactNode }
+  name: { definition: ReactNode; terms: string[]; picture: ReactNode; metaphor: ReactNode; breaks: ReactNode; note?: ReactNode }
+  break?: { title: string; intro: ReactNode; body: ReactNode }
   stamp: { questions: QuizQuestion[]; art: ReactNode; receipt: Receipt }
   /** Steps during which the page's small map window hides (e.g. while a full map is on screen). */
   hideLocatorOn?: BeatId[]

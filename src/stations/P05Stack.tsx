@@ -87,7 +87,7 @@ function SkipChart() {
 export const P05_SPEC: LoopSpec = {
   code: 'P05',
   arrive: {
-    caption: `The numbers ride up ${floorsTotal} floors. Each floor makes an edit, and the guess gets sharper.`,
+    caption: `The numbers ride up ${floorsTotal} floors. Each floor makes an edit, and its guess for the next token gets sharper.`,
     panel: <BuildingPanel />,
     guess: {
       q: 'As the reply writes the 8 in “8.4,” on which floor does “8” first take the lead?',
@@ -103,7 +103,7 @@ export const P05_SPEC: LoopSpec = {
     body: <ElevatorLevels station={station} />
   },
   name: {
-    definition: `A transformer is a stack of layers, ${floorsTotal} in the recorded model. Each layer looks back (attention), then reworks each token’s numbers on their own, adding its edit to what was already there.`,
+    definition: `A transformer is a stack of layers, the floors you rode: ${floorsTotal} in this model. Each layer looks back (attention), then reworks each token’s numbers on their own, adding its edit to what was already there. That running list of numbers is the residual stream.`,
     terms: ['layer', 'transformer', 'residual stream'],
     picture: <FloorList />,
     metaphor: 'One draft passed up a building, each floor adding edits without erasing anything.',
@@ -143,8 +143,8 @@ export const P05_SPEC: LoopSpec = {
       {
         q: 'A bigger model has more layers. What does that give it, most directly?',
         options: [
-          { text: 'More rounds of looking back and reworking for every token', correct: true, why: 'Each layer is one more round of attention and feed-forward edits.' },
-          { text: 'A bigger context window', why: 'That’s a separate design limit.' },
+          { text: 'More rounds of looking back and reworking for every token', correct: true, why: 'Each layer is one more round of looking back and reworking.' },
+          { text: 'Room to read more text', why: 'That’s a separate design limit.' },
           { text: 'Extra floors only when a question is hard', why: 'Every trip runs every floor once, easy or hard.' }
         ]
       },
@@ -153,7 +153,7 @@ export const P05_SPEC: LoopSpec = {
         options: [
           { text: 'The model changed its mind', why: 'There’s no mind. One list of numbers kept being edited.' },
           { text: 'The model lied, then fixed it', why: 'Lying needs intent. This is arithmetic.' },
-          { text: 'An unfinished draft, read with a trick, before later floors added their edits', correct: true, why: 'The logit lens peeks at a half-finished calculation.' }
+          { text: 'An unfinished draft, read with a trick, before later floors added their edits', correct: true, why: 'Reading a floor’s guess peeks at a half-finished calculation.' }
         ]
       }
     ],
