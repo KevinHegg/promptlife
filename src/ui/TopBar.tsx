@@ -46,11 +46,13 @@ function stopHint() {
 
 export function TopBar({ route }: { route: string }) {
   const [open, setOpen] = useState(false)
+  // Any change of page closes the sheet, including the browser's back button.
+  useEffect(() => setOpen(false), [route])
   // On someone's first few visits, the Stations button pulses gently a few times: it holds their progress.
   const [hint, setHint] = useState(hintThisVisit)
   const here = /^P0[1-8]$/.test(route) ? route : null
   const resume = resumePoint()
-  const reviewing = here !== null && resume.started && resume.code !== here
+  const reviewing = here !== null && resume.started && !resume.complete && resume.code !== here
   return (
     <>
       <header className="topbar">
@@ -95,12 +97,17 @@ function StationsSheet({ open, onClose, here }: { open: boolean; onClose: () => 
   useEffect(() => {
     if (!open) return
     const y = window.scrollY
+    const hash = window.location.hash
     const b = document.body.style
     const prev = { position: b.position, top: b.top, left: b.left, right: b.right }
     Object.assign(b, { position: 'fixed', top: `-${y}px`, left: '0', right: '0' })
     return () => {
       Object.assign(b, prev)
+      // Closed in place: back to the same spot. Closed by going to another page: start at its top.
       window.scrollTo(0, y)
+      window.setTimeout(() => {
+        if (window.location.hash !== hash) window.scrollTo(0, 0)
+      }, 0)
     }
   }, [open])
   // Read fresh each time the sheet opens, so it reflects steps taken since the page loaded.
@@ -135,7 +142,7 @@ function StationsSheet({ open, onClose, here }: { open: boolean; onClose: () => 
               label="The map, with the stations you have visited lit."
             />
           </div>
-          {resume && resume.started && resume.code !== here && (
+          {resume && resume.started && !resume.complete && resume.code !== here && (
             <a className="btn primary sheet-resume" href={hrefFor(resume.code)} onClick={onClose}>
               Resume: {resume.name}, {resume.step} →
             </a>

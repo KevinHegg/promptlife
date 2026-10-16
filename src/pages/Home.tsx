@@ -40,7 +40,7 @@ export function Home() {
         </div>
         <div className="cta">
           <a className="btn primary big" href={hrefFor(resume.code)}>
-            {resume.started ? `Continue: ${resume.name}, ${resume.step} →` : 'Start the ride →'}
+            {resume.complete ? `You rode the whole line. Ride again from ${resume.name} →` : resume.started ? `Continue: ${resume.name}, ${resume.step} →` : 'Start the ride →'}
           </a>
         </div>
         <ProgressLine progress={progress} resume={resume} />

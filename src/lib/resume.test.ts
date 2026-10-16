@@ -36,6 +36,11 @@ describe('resumePoint', () => {
     expect(resumePoint()).toMatchObject({ code: 'P02', step: 'Arrive' })
   })
 
+  it('offers the start again once the last lesson is stamped', () => {
+    saveStation('P08', { beat: 4, at: 4, stampedAt: 'today' })
+    expect(resumePoint()).toMatchObject({ code: 'P01', complete: true })
+  })
+
   it('keeps going forward even when an earlier stamp was skipped', () => {
     saveStation('P01', { beat: 4, at: 4 })
     saveStation('P02', { beat: 2, at: 2 })

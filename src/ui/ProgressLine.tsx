@@ -21,13 +21,13 @@ export function ProgressLine({ progress, resume }: Props) {
     <nav className="progress-line" aria-label="Your progress">
       <p className="pl-summary">
         <b>Your trip:</b> {stamped} of {STATIONS.length} stamped
-        {resume.started ? <> · next, {resume.name}</> : null}
+        {resume.complete ? <> · you rode the whole line</> : resume.started ? <> · next, {resume.name}</> : null}
       </p>
       <ol className="pl-stops">
         {STATIONS.map((s, i) => {
           const p = progress[s.code]
           const state = p?.stampedAt ? 'stamped' : p ? 'started' : LOOPS[s.code] ? 'ready' : 'soon'
-          const next = resume.code === s.code
+          const next = !resume.complete && resume.code === s.code
           const said = { stamped: 'stamped', started: 'started', ready: 'not started', soon: 'coming soon' }[state]
           return (
             <li key={s.code}>

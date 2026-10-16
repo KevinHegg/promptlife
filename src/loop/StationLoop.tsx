@@ -179,8 +179,15 @@ export function StationLoop({ spec, onRideOn, onBeatChange }: { spec: LoopSpec; 
             )
           ) : stampedAt ? (
             <a className="btn primary" href="#/">Back to the map →</a>
+          ) : next ? (
+            // Nothing blocks Next: the stamp waits for the answers, but the ride can go on.
+            onRideOn ? (
+              <button type="button" className="btn" onClick={() => onRideOn(next.code)}>Skip to {next.name} →</button>
+            ) : (
+              <a className="btn" href={hrefFor(next.code)}>Skip to {next.name} →</a>
+            )
           ) : (
-            <span className="hint">Answer both questions</span>
+            <a className="btn" href="#/">Back to the map →</a>
           )
         ) : (
           <button type="button" className="btn primary" onClick={() => go(at + 1)}>
