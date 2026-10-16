@@ -819,3 +819,8 @@ blockquote { margin: 0; padding: 10px 14px; border-left: 3px solid var(--ink-2);
 .art-tag.big { font-size: 11px; font-weight: 700; }
 .table-art .art-text { font-size: 11px; }
 .table-art .art-text.sm { font-size: 10px; }
+/* Guess first says right or not, like the Stamp questions. */
+.chip-choice.wrong { border-color: var(--sabotage); color: var(--ink-2); text-decoration: line-through; text-decoration-color: var(--sabotage); }
+.verdict { font-family: var(--font-display); font-weight: 900; }
+.verdict.yes { color: var(--accent); }
+.verdict.no { color: var(--sabotage); }

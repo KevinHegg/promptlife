@@ -2,9 +2,10 @@ import { useState } from 'react'
 import { notQuite, yes } from '../lib/sound'
 import type { Guess, Option } from './types'
 
-/** A quick guess: one tap shows the answer. Optional; nothing waits on it. */
+/** A quick guess: one tap says right or not, then shows the answer. Optional; nothing waits on it. */
 export function GuessCard({ q, options, reveal }: Guess) {
   const [picked, setPicked] = useState<number | null>(null)
+  const right = picked !== null && !!options[picked]?.correct
   return (
     <div className="guess">
       <p className="kicker">Guess first</p>
@@ -14,7 +15,7 @@ export function GuessCard({ q, options, reveal }: Guess) {
           <button
             key={o.text}
             type="button"
-            className={`chip-choice${picked === i ? ' picked' : ''}${picked !== null && o.correct ? ' correct' : ''}`}
+            className={`chip-choice${picked === i ? ' picked' : ''}${picked !== null && o.correct ? ' correct' : ''}${picked === i && !o.correct ? ' wrong' : ''}`}
             disabled={picked !== null}
             onClick={() => {
               setPicked(i)
@@ -22,11 +23,16 @@ export function GuessCard({ q, options, reveal }: Guess) {
               else notQuite()
             }}
           >
+            {picked !== null && o.correct ? '✓ ' : ''}
             {o.text}
           </button>
         ))}
       </div>
-      {picked !== null && <p className="guess-reveal" aria-live="polite">{reveal}</p>}
+      {picked !== null && (
+        <p className="guess-reveal" aria-live="polite">
+          <b className={`verdict ${right ? 'yes' : 'no'}`}>{right ? 'Yes.' : 'Not quite.'}</b> {reveal}
+        </p>
+      )}
     </div>
   )
 }
