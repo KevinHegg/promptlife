@@ -3,6 +3,7 @@ import type { Src } from '../data/heroRun'
 import { runCounts } from '../data/run'
 import type { LoopSpec } from '../loop/types'
 import { Howto } from '../ui/Howto'
+import { HOW_THE_CARD_GOT_THERE, RecipeCard } from '../ui/RecipeCard'
 import { LiveRun } from '../map/LiveRun'
 import { ContextBar, ContextBlocks, type ContextBlock } from './parts'
 
@@ -54,6 +55,14 @@ function RideThenFind() {
           <><b>Not that one.</b> That's {SRC_NAMES[chosen.src]}.</>
         ) : null}
       </p>
+      {/* The biggest block the app added is the recipe card: show it, and how it got there. */}
+      {(right || chosen?.src === 'rag') && (
+        <div className="card-reveal">
+          <p className="kicker">{right ? 'And the card the app added' : 'Here’s that card'}</p>
+          <RecipeCard />
+          <p className="card-how">{HOW_THE_CARD_GOT_THERE}</p>
+        </div>
+      )}
       <div className="substep-next">
         <button type="button" className="link-btn" onClick={() => setStep('watch')}>← Watch the ride again</button>
       </div>

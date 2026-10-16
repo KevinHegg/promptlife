@@ -932,3 +932,28 @@ blockquote { margin: 0; padding: 10px 14px; border-left: 3px solid var(--ink-2);
 .pl-note { font-size: 0.85rem; color: var(--ink-2); line-height: 1.45; }
 .pl-btn { display: inline-flex; align-items: center; gap: 5px; padding: 0 8px; border: 1.5px solid var(--ink-2); border-radius: 999px; font-family: var(--font-display); font-weight: 800; font-size: 0.78rem; color: var(--ink); white-space: nowrap; }
 .pl-btn .stations-icon { width: 11px; height: 8px; }
+
+/* Grandma's recipe card: an index card with blue rules and a red top line. */
+.recipe-card {
+  margin: 0; display: flex; flex-direction: column; max-width: 520px;
+  padding: 8px 18px 12px; border-radius: 6px; color: #2B2A33;
+  background-color: #FFFDF4;
+  /* A red rule under the label, then a blue rule under every line of text (26px apart). */
+  background-image: linear-gradient(to bottom, transparent 31px, #E2747A 31px, #E2747A 32.5px, transparent 32.5px), repeating-linear-gradient(to bottom, transparent 0 25px, #BFD3EE 25px 26px);
+  background-position: 0 0, 0 38px;
+  background-repeat: no-repeat, repeat;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06), 3px 4px 0 -1px #E9E2CC, 3px 4px 0 0 rgba(0, 0, 0, 0.12);
+  transform: rotate(-0.6deg);
+}
+.recipe-card::before { content: "From your files"; height: 30px; line-height: 22px; font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: #8A8574; }
+.recipe-card p { margin-top: 0; font-family: var(--font-body); font-style: italic; font-size: 0.98rem; line-height: 26px; white-space: pre-wrap; }
+.recipe-card .rc-back { margin-top: 26px; }
+.recipe-card mark { background: color-mix(in srgb, var(--doing) calc(var(--w, 1) * 100%), transparent); color: inherit; border-radius: 3px; padding: 0 2px; font-weight: 700; font-style: normal; }
+.recipe-card figcaption { margin-top: 14px; font-family: var(--font-body); font-style: normal; font-size: 0.82rem; color: #5A5866; line-height: 1.4; background: #FFFDF4; }
+.card-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; padding-top: 8px; margin-top: 4px; border-top: 1px dashed var(--rule); font-size: 0.92rem; }
+.card-row .link-btn { font-family: var(--font-display); font-weight: 800; color: var(--ink); }
+.card-how { font-size: 0.88rem; color: var(--ink-2); line-height: 1.45; }
+.card-reveal { display: flex; flex-direction: column; gap: 8px; }
+.arc-sources { display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 520px; }
+.arc-sources > p { font-size: 0.92rem; line-height: 1.5; color: var(--lv2-ink); }
+.arc-sources b { color: var(--doing); font-family: var(--font-mono); font-weight: 600; }

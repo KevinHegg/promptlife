@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { tick, yes } from '../../lib/sound'
 import { Howto } from '../../ui/Howto'
+import { RecipeCard } from '../../ui/RecipeCard'
 import type { Station } from '../../data/network'
 import type { AttentionView } from '../../data/placeholders'
 import { Cutaway, Level, LevelText, Vis } from '../Cutaway'
@@ -63,6 +64,50 @@ export function Arcs({ view }: { view: AttentionView }) {
   )
 }
 
+const WHERE: Record<string, string> = {
+  rag: 'on the recipe card',
+  user: 'in your question',
+  sys: 'in the hidden instructions',
+  tool: 'in the calculator request',
+  res: 'in the calculator’s answer',
+  rep: 'in the reply so far'
+}
+const pctW = (w: number) => `${Math.round(w * 100)}%`
+
+/**
+ * Where the arcs land, in words: which token is looking, and which earlier tokens get its weight,
+ * each with where it sits. When a head looks at the recipe card, the card itself appears with
+ * those words marked.
+ */
+function ArcSources({ view }: { view: AttentionView }) {
+  const query = view.tokens[view.tokens.length - 1]
+  const targets = view.tokens.slice(0, -1).filter((t) => t.w >= 0.01).sort((a, b) => b.w - a.w).slice(0, 3)
+  const onCard = view.tokens.slice(0, -1).filter((t) => t.src === 'rag' && t.w >= 0.05)
+  const max = Math.max(...onCard.map((t) => t.w), 0.01)
+  return (
+    <div className="arc-sources">
+      <p>
+        <b>“{chipLabel(query.text)}”</b>{query.src && WHERE[query.src] ? `, ${WHERE[query.src]},` : ''} looks back at{' '}
+        {targets.length
+          ? targets.map((t, i) => (
+              <span key={i}>
+                {i ? (i === targets.length - 1 ? ' and ' : ', ') : ''}
+                <b>“{chipLabel(t.text)}”</b> {t.src && WHERE[t.src] ? WHERE[t.src] : ''} ({pctW(t.w)})
+              </span>
+            ))
+          : 'many tokens a little each'}
+        .
+      </p>
+      {onCard.length > 0 && (
+        <RecipeCard
+          highlight={Object.fromEntries(onCard.map((t) => [t.pos ?? -1, t.w / max]))}
+          caption="The recipe card the app found in your files, with the words this head looks at marked."
+        />
+      )}
+    </div>
+  )
+}
+
 /** The head a student is asked to find: the one linking “flour” in the question to the card. */
 const TARGET = 'Looks at the card'
 
@@ -111,6 +156,7 @@ export function AttentionLevels({ station, views }: { station: Station; views: A
               )}
               {view.real && <p className="head-label">{view.label}</p>}
               <Arcs view={view} />
+              {view.real && <ArcSources view={view} />}
               {view.real && view.source && <p className="v-below">{view.source}</p>}
             </div>
           </Vis>

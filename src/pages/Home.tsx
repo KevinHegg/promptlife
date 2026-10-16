@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { SCENARIO } from '../data/heroRun'
 import { STATIONS } from '../data/network'
 import { STATION_CONTENT } from '../data/stationContent'
@@ -8,6 +8,7 @@ import { resumePoint } from '../lib/resume'
 import { hrefFor } from '../lib/router'
 import { StampArt } from '../loop/StampArt'
 import { ProgressLine } from '../ui/ProgressLine'
+import { HOW_THE_CARD_GOT_THERE, RecipeCard } from '../ui/RecipeCard'
 import { Roundel } from '../ui/Roundel'
 import { LOOPS } from '../stations'
 
@@ -15,6 +16,7 @@ import { LOOPS } from '../stations'
 export function Home() {
   const progress = useMemo(readStations, [])
   const resume = useMemo(resumePoint, [])
+  const [showCard, setShowCard] = useState(false)
   return (
     <>
       <header className="masthead">
@@ -23,6 +25,18 @@ export function Home() {
         <div className="question-card">
           <span className="kicker">The question</span>
           <p>“{SCENARIO.user}”</p>
+          <div className="card-row">
+            <span>+ Grandma’s recipe card, from your files</span>
+            <button type="button" className="link-btn" aria-expanded={showCard} onClick={() => setShowCard(!showCard)}>
+              {showCard ? 'Hide the card' : 'Show the card'}
+            </button>
+          </div>
+          {showCard && (
+            <>
+              <RecipeCard />
+              <p className="card-how">{HOW_THE_CARD_GOT_THERE}</p>
+            </>
+          )}
         </div>
         <div className="cta">
           <a className="btn primary big" href={hrefFor(resume.code)}>
