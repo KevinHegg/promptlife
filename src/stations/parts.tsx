@@ -97,7 +97,7 @@ export function contextBlocks(): ContextBlock[] {
   const lastPassage = RUN.passages[RUN.passages.length - 1] ?? -1
   const labelFor = (src: Src, i: number) => {
     if (src === 'sys') return i > lastPassage && lastPassage >= 0 ? 'The calculator’s instructions' : 'Hidden instructions'
-    return ({ rag: 'Your files (the recipe card)', user: 'Your question', tool: 'The model’s calculator request', res: 'The calculator’s result', rep: 'The answer', special: 'Markers' } as Record<string, string>)[src]
+    return ({ rag: 'Your upload (the recipe card)', user: 'Your question', tool: 'The model’s calculator request', res: 'The calculator’s result', rep: 'The answer', special: 'Markers' } as Record<string, string>)[src]
   }
   const blocks: ContextBlock[] = []
   let markers = 0

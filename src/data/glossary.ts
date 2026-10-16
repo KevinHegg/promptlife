@@ -82,7 +82,7 @@ export const GLOSSARY: GlossaryEntry[] = [
       'The context grows as the model writes. Each new token joins the end, and the next trip reads all of it, the model’s own earlier tokens included. Tool results and passages the app fetches arrive the same way, as text pasted into the stream.',
       'Context isn’t memory. “Memory” features in chat apps save notes and paste them into later contexts. If a fact isn’t in the context or set in the weights during training, the model can’t use it, and a confident reply can be built on nothing.'
     ],
-    example: 'The recorded run’s context reached 346 tokens: 20 you typed, 75 from your files, 166 of hidden instructions and calculator description, 34 hidden markers, the 28-token calculator request, the 6-token result, and the 17-token reply.',
+    example: 'The recorded run’s context reached 346 tokens: 20 you typed, 75 from the card you uploaded, 166 of hidden instructions and calculator description, 34 hidden markers, the 28-token calculator request, the 6-token result, and the 17-token reply.',
     related: ['prompt', 'context-window', 'system-prompt', 'retrieval']
   },
   {
@@ -509,7 +509,7 @@ export const GLOSSARY: GlossaryEntry[] = [
     term: 'retrieval (RAG)',
     aka: ['RAG', 'retrieval-augmented generation', 'search by meaning'],
     station: 'L',
-    short: 'Retrieval, or RAG, is the app searching your files or the web and pasting the best matches into the context before the model runs.',
+    short: 'Retrieval, or RAG, is the app searching your uploaded files or the web and pasting the best matches into the context before the model runs.',
     deeper: [
       'The model never searches anything. The app does: it splits documents into chunks, turns each chunk into a vector with a separate embedding model, and does the same with your question. Chunks whose vectors point the same way as the question’s are the closest matches, and the top few get pasted in. Many apps mix in plain keyword search too.',
       'Why bother? The weights can’t contain your files, and they stop at a training cutoff. Retrieval brings in current, private, or exact facts, and lets the reply point to its source. It’s cheaper than retraining, and you change what it finds by changing the files.',

@@ -101,7 +101,7 @@ function ArcSources({ view }: { view: AttentionView }) {
       {onCard.length > 0 && (
         <RecipeCard
           highlight={Object.fromEntries(onCard.map((t) => [t.pos ?? -1, t.w / max]))}
-          caption="The recipe card the app found in your files, with the words this head looks at marked."
+          caption="The recipe card you uploaded, with the words this head looks at marked."
         />
       )}
     </div>

@@ -26,12 +26,12 @@ type Props = {
 type Label = { x: number; y: number; text: string; anchor?: 'start' | 'middle' | 'end'; kind?: 'stop' | 'line' | 'sub' | 'note'; line?: LineId }
 
 const LABELS: Label[] = [
-  { x: 86, y: 194, text: 'L1 Search your files' },
+  { x: 86, y: 194, text: 'L1 Search your uploads' },
   { x: 200, y: 96, text: 'L2 Find matches', anchor: 'middle' },
   { x: 314, y: 176, text: 'L3 Add to', anchor: 'end' },
   { x: 314, y: 191, text: 'context', anchor: 'end' },
   { x: 200, y: 150, text: 'Library', anchor: 'middle', kind: 'line', line: 'L' },
-  { x: 200, y: 165, text: 'finds your files', anchor: 'middle', kind: 'sub' },
+  { x: 200, y: 165, text: 'your uploads', anchor: 'middle', kind: 'sub' },
   { x: 86, y: 334, text: 'G1 Hidden instructions' },
   { x: 88, y: 397, text: 'Gatehouse', kind: 'line', line: 'G' },
   { x: 88, y: 412, text: 'G2 injection heist', kind: 'sub' },

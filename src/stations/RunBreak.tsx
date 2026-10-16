@@ -53,7 +53,7 @@ function MiniLine({ at }: { at: string | null }) {
 const SRC_CLASS: Record<string, string> = { special: 'cs-special', sys: 'cs-sys', rag: 'cs-rag', user: 'cs-user', tool: 'cs-tool', res: 'cs-res' }
 const BLOCKS: { src: string[]; label: string }[] = [
   { src: ['sys'], label: 'hidden instructions' },
-  { src: ['rag'], label: 'your files' },
+  { src: ['rag'], label: 'your upload' },
   { src: ['user'], label: 'question' },
   { src: ['tool', 'res'], label: 'calculator' }
 ]

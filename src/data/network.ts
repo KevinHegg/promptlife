@@ -89,7 +89,7 @@ export const MOTION_PATHS = {
 export type MotionKey = keyof typeof MOTION_PATHS
 
 export const STOP_NAMES: Record<string, string> = {
-  L1: 'Search your files',
+  L1: 'Search your uploads',
   L2: 'Find matches',
   L3: 'Add to context',
   G1: 'Hidden instructions',

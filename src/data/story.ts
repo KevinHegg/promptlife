@@ -29,7 +29,7 @@ export const STORY = {
   send: (tokens: number) => `Your question boards as ${tokens} tokens. Tokens are word parts: “strawberry” is st · raw · berry.`,
   gate: 'First, the app quietly adds hidden instructions and a description of its calculator.',
   toLibrary: 'Next, the Library line: the app searches your saved files.',
-  L1: 'Searching: which of your files match the question?',
+  L1: 'Searching: which parts of your uploads match the question?',
   L2: 'Found two matches: the recipe card, and the back of the card.',
   L3: 'Both are added to what the model will read.',
   tokenizer: (all: number, yours: number) => `Everything is cut into tokens, and each token becomes a number: ${all} tokens. You typed ${yours}.`,

@@ -24,7 +24,7 @@ export const P04_SPEC: LoopSpec = {
   code: 'P04',
   arrive: {
     caption: 'Here every token looks back at the tokens before it and borrows from them.',
-    panel: <PaperArcs which={card} caption="One real head: “flour” in your question looks back at “flour” on Grandma’s recipe card, the card the app found in your files." />,
+    panel: <PaperArcs which={card} caption="One real head: “flour” in your question looks back at “flour” on Grandma’s recipe card, the card you uploaded." />,
     guess: {
       q: 'Can “flour” in your question look at “people,” which comes after it?',
       options: [{ text: 'Yes, it sees the whole question' }, { text: 'Only if the words are related' }, { text: 'No, only tokens before it', correct: true }],

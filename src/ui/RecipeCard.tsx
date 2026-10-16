@@ -18,7 +18,7 @@ function cardLines(): Tok[][] {
 
 /**
  * Grandma's recipe card, drawn as an index card. The words are the exact text the app found in
- * your files and pasted in ahead of your question. Positions in `highlight` are marked, darker for
+ * your uploads and pasted in ahead of your question. Positions in `highlight` are marked, darker for
  * a higher weight (0 to 1), so a lesson can show where the model looked.
  */
 export function RecipeCard({ highlight = {}, caption }: { highlight?: Record<number, number>; caption?: string }) {
@@ -43,6 +43,16 @@ export function RecipeCard({ highlight = {}, caption }: { highlight?: Record<num
   )
 }
 
-/** How the card got into the context, in one plain line. */
-export const HOW_THE_CARD_GOT_THERE =
-  'The model never opens your files. When you ask, the app searches them, finds this card, and pastes its text in ahead of your question.'
+/**
+ * How the card got into the context, in three plain steps. An ordinary chatbot upload, not an
+ * agent: agents come late in the course, if at all.
+ */
+export function CardJourney() {
+  return (
+    <ol className="card-journey" aria-label="How the card got there">
+      <li><b>Earlier,</b> you uploaded a copy of Grandma’s card to the chatbot. It’s kept with your chat.</li>
+      <li><b>When you ask,</b> the app searches your uploads for text that matches your question and finds two pieces: the front of the card and the back.</li>
+      <li><b>It pastes them in</b> ahead of your question, under the heading “Your files:”. The model never opens a file; it only reads the pasted text.</li>
+    </ol>
+  )
+}

@@ -10,7 +10,7 @@ The hero question never changes:
 
 > "Using my grandmother's recipe card, how much flour do I need to feed 30 people?"
 
-The app finds the recipe card (serves 8, 2 1/4 cups flour) and its back in "your files," the model asks a calculator for 2.25 × 30 / 8, the calculator returns 8.4375, and the reply says about 8.4 cups† († = wording or count from the recorded run). It's everyday on purpose: no coursework, nothing anyone could hand in, yet every step is a real chatbot job. Visitors bring their own text to the playgrounds, never to the hero run, so every number on the main line can be real.
+Earlier, the student uploaded a copy of the recipe card to the chatbot. When they ask, the app searches their uploads and pastes the matching parts in, the card (serves 8, 2 1/4 cups flour) and its back, under the heading "Your files:". The model never opens a file. Say "the card you uploaded," never "your files" or anything that suggests an agent searching a computer: agents come late in the course, if at all. Then the model asks a calculator for 2.25 × 30 / 8, the calculator returns 8.4375, and the reply says about 8.4 cups† († = wording or count from the recorded run). It's everyday on purpose: no coursework, nothing anyone could hand in, yet every step is a real chatbot job. Visitors bring their own text to the playgrounds, never to the hero run, so every number on the main line can be real.
 
 ## 2. Audience and what they already believe
 

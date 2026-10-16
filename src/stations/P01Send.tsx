@@ -3,14 +3,14 @@ import type { Src } from '../data/heroRun'
 import { runCounts } from '../data/run'
 import type { LoopSpec } from '../loop/types'
 import { Howto } from '../ui/Howto'
-import { HOW_THE_CARD_GOT_THERE, RecipeCard } from '../ui/RecipeCard'
+import { CardJourney, RecipeCard } from '../ui/RecipeCard'
 import { LiveRun } from '../map/LiveRun'
 import { ContextBar, ContextBlocks, type ContextBlock } from './parts'
 
 const SRC_NAMES: Record<Src, string> = {
   special: 'a hidden marker the app adds to show who is speaking',
   sys: 'something the app adds: hidden instructions, or a description of its calculator',
-  rag: 'part of the recipe card the app found in your files',
+  rag: 'part of the recipe card you uploaded, which the app pasted in',
   user: 'your question',
   tool: 'the tool call the model wrote',
   res: 'the calculator’s result, pasted in by the app',
@@ -60,7 +60,7 @@ function RideThenFind() {
         <div className="card-reveal">
           <p className="kicker">{right ? 'And the card the app added' : 'Here’s that card'}</p>
           <RecipeCard />
-          <p className="card-how">{HOW_THE_CARD_GOT_THERE}</p>
+          <CardJourney />
         </div>
       )}
       <div className="substep-next">
@@ -118,8 +118,8 @@ export const P01_SPEC: LoopSpec = {
         q: 'A friend says the chatbot “remembered” Grandma’s recipe card. What actually put it in front of the model?',
         options: [
           { text: 'It memorized it in training', why: 'That card was never in its training text.' },
-          { text: 'The app found the card in your files and added it to what the model reads', correct: true, why: 'The app does the searching, before the model reads anything.' },
-          { text: 'The model searched your files itself', why: 'The model only writes text. The app does the searching.' }
+          { text: 'The app found the card among your uploads and added it to what the model reads', correct: true, why: 'The app does the searching, before the model reads anything.' },
+          { text: 'The model opened your upload itself', why: 'The model only reads and writes text. The app does the searching and pasting.' }
         ]
       },
       {

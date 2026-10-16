@@ -8,7 +8,7 @@ import { resumePoint } from '../lib/resume'
 import { hrefFor } from '../lib/router'
 import { StampArt } from '../loop/StampArt'
 import { ProgressLine } from '../ui/ProgressLine'
-import { HOW_THE_CARD_GOT_THERE, RecipeCard } from '../ui/RecipeCard'
+import { CardJourney, RecipeCard } from '../ui/RecipeCard'
 import { Roundel } from '../ui/Roundel'
 import { LOOPS } from '../stations'
 
@@ -26,7 +26,7 @@ export function Home() {
           <span className="kicker">The question</span>
           <p>“{SCENARIO.user}”</p>
           <div className="card-row">
-            <span>+ Grandma’s recipe card, from your files</span>
+            <span>+ Grandma’s recipe card, which you uploaded earlier</span>
             <button type="button" className="link-btn" aria-expanded={showCard} onClick={() => setShowCard(!showCard)}>
               {showCard ? 'Hide the card' : 'Show the card'}
             </button>
@@ -34,7 +34,7 @@ export function Home() {
           {showCard && (
             <>
               <RecipeCard />
-              <p className="card-how">{HOW_THE_CARD_GOT_THERE}</p>
+              <CardJourney />
             </>
           )}
         </div>
