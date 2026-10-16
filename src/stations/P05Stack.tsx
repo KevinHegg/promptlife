@@ -117,6 +117,12 @@ export const P05_SPEC: LoopSpec = {
         station="P05"
         ids={['skip-mid', 'skip-first', 'top-half-gone']}
         labels={{ 'skip-mid': 'Skip floor 12', 'skip-first': 'Skip floor 1', 'top-half-gone': 'Stop at 12' }}
+        explains={{
+          normal: 'Nothing. Every token rides all 24 floors.',
+          'skip-mid': 'We took out floor 12. The numbers go straight from floor 11 to floor 13.',
+          'skip-first': 'We took out floor 1. The numbers go straight to floor 2.',
+          'top-half-gone': 'We took out floors 13 to 24. The guess is read straight off floor 12.'
+        }}
         verdicts={{
           normal: 'Right: 8.4375 cups of flour.',
           'skip-mid': 'Still right, a little shakier: the grammar slips (“to make 30 people”).',

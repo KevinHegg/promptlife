@@ -432,15 +432,21 @@ def main():
     for vid, frac, label in SCRAMBLES:
         fn, chosen = scramble(frac)
         scr_counts[vid] = (frac, chosen)
-        variants.append({"id": vid, "station": "P03", "label": label, "embed": fn})
+        variants.append({"id": vid, "station": "P03", "label": label, "embed": fn,
+                         "changed": {"positions": [int(q) for q in chosen]}})
+    # What each sabotage touched, for the app's "where" picture: context positions (0-based,
+    # within the shared prefix) or the floors removed (1-based).
+    at = lambda label: [p for p in range(len(prefix)) if p < len(src) and src[p] == label]
     variants += [
         {"id": "swap-flour-sugar", "station": "P03", "label": "Flour’s row → sugar’s row",
-         "embed": swap_flour, "wordProb": True},
-        {"id": "hide-card", "station": "P04", "label": "Hide the recipe card", "mask": "hide-card"},
+         "embed": swap_flour, "wordProb": True,
+         "changed": {"positions": [p for p in range(len(prefix)) if prefix[p] == flour_id]}},
+        {"id": "hide-card", "station": "P04", "label": "Hide the recipe card", "mask": "hide-card",
+         "changed": {"positions": at("rag")}},
         {"id": "hide-result", "station": "P04", "label": "Hide the calculator’s answer",
-         "mask": "hide-result"},
+         "mask": "hide-result", "changed": {"positions": at("res")}},
         {"id": "self-only", "station": "P04", "label": "Each token sees only itself",
-         "mask": "self-only"},
+         "mask": "self-only", "changed": {"all": True}},
         {"id": "skip-mid", "station": "P05", "label": "Skip floor 12",
          "keep": [i for i in range(L) if i != 11]},
         {"id": "skip-first", "station": "P05", "label": "Skip floor 1", "keep": list(range(1, L))},
@@ -448,6 +454,9 @@ def main():
          "keep": list(range(12))},
         {"id": "stop-18", "station": "P05", "label": "Stop at floor 18", "keep": list(range(18))},
     ]
+    for v in variants:
+        if "keep" in v:
+            v["changed"] = {"floorsRemoved": [k + 1 for k in range(L) if k not in v["keep"]]}
 
     # ---- sanity checks ------------------------------------------------------------------
     with torch.no_grad():
@@ -473,6 +482,8 @@ def main():
         rec = {"id": v["id"], "station": v["station"], "label": v["label"], "text": text,
                "stoppedNaturally": natural, "tokenCount": len(g),
                "rightDigit": {"prob": r4(p[digit_id]), "top": top_text_prob(tok, rows[0], 3)}}
+        if v.get("changed"):
+            rec["changed"] = v["changed"]
         if v.get("wordProb"):
             pw = torch.softmax(rows[1], -1)
             rec["wordProb"] = {"text": dec(tok, word_id), "prob": r4(pw[word_id]),
@@ -618,6 +629,7 @@ def main():
         "generatedAt": _dt.datetime.now(_dt.timezone.utc).replace(microsecond=0).isoformat(),
         "model": {"id": args.model, "layers": L, "hidden": cfg.hidden_size},
         "wordMap": wm,
+        "contextLength": len(prefix),
         "breaks": breaks,
         "skipEach": skip_each,
         "notes": notes,

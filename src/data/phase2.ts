@@ -37,9 +37,13 @@ export type BreakRun = {
   rightDigit: { prob: number; top: Guess[] }
   wordProb?: { prob: number; top: Guess[] }
   flagged?: boolean
+  /** What the sabotage touched: context positions (0-based), every token, or floors removed (1-based). */
+  changed?: { positions?: number[]; all?: boolean; floorsRemoved?: number[] }
 }
 export type Phase2 = {
   wordMap?: WordMap
+  /** How many context tokens every run starts from (everything before the reply). */
+  contextLength?: number
   breaks: BreakRun[]
   skipEach?: { floor: number; prob: number }[]
   notes?: string[]

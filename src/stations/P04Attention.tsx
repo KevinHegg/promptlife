@@ -51,6 +51,12 @@ export const P04_SPEC: LoopSpec = {
         station="P04"
         ids={['hide-card', 'hide-result', 'self-only']}
         labels={{ 'hide-card': 'Hide the card', 'hide-result': 'Hide the answer', 'self-only': 'Only itself' }}
+        explains={{
+          normal: 'Nothing. Every token may look back at every token before it.',
+          'hide-card': 'No token may look back at the recipe card. Its tokens are blacked out for every head, on every floor.',
+          'hide-result': 'No token may look back at the calculator’s answer, 8.4375. It’s blacked out for every head, on every floor.',
+          'self-only': 'Each token may look only at itself, so nothing else in the context gets in.'
+        }}
         verdicts={{
           normal: 'Right: it copies 8.4375 from the calculator’s answer.',
           'hide-card': 'No change. By now the answer comes from the calculator, so the card isn’t needed.',

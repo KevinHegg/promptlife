@@ -108,12 +108,18 @@ export const P03_SPEC: LoopSpec = {
         station="P03"
         ids={['swap-flour-sugar', 'scramble-10', 'scramble-100']}
         labels={{ 'swap-flour-sugar': 'Flour → sugar', 'scramble-10': '1 row in 10', 'scramble-100': 'Every row' }}
-        word={{ label: 'flour', normal: flourOdds }}
+        word={{ label: 'flour', after: 'cups of', normal: flourOdds }}
+        explains={{
+          normal: 'Nothing. Each token ID pulls out its own row, as usual.',
+          'swap-flour-sugar': 'Both times the model looked up “flour” (on the card and in your question), we handed it sugar’s row instead. The token IDs stayed the same.',
+          'scramble-10': 'For 1 token in 10, picked at random, we swapped its row for a random token’s row. That happened to include “flour” in your question.',
+          'scramble-100': 'We swapped every token’s row for a random token’s row. Only the hidden markers between messages were left alone.'
+        }}
         verdicts={{
           normal: 'Right: 8.4375 cups of flour.',
-          'swap-flour-sugar': 'The token IDs still say flour, but the model got sugar’s row, so it wrote “cups of sugar.”',
-          'scramble-10': 'One row in ten swapped, including the question’s “flour”: the odds of “8” barely move, yet the reply slides into Chinese and garbles the amount (“Grandma’s home cooking… you need 2.2.25s of flour”).',
-          'scramble-100': 'Every row swapped: nothing readable is left.'
+          'swap-flour-sugar': 'It reads sugar’s row, so it writes “cups of sugar.”',
+          'scramble-10': 'On its own, it slides into Chinese and garbles the amount (“Grandma’s home cooking… you need 2.2.25s of flour”). Fed the right words, it still finds the 8: small damage can derail the writing before it reaches the number.',
+          'scramble-100': 'Nothing readable is left.'
         }}
         takeaway={<p><b>That’s why the table matters.</b> The token IDs never changed, only the rows they pulled out. The model reads rows, not words, so a wrong row is a wrong word as far as it can tell.</p>}
       />

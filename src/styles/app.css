@@ -854,3 +854,30 @@ blockquote { margin: 0; padding: 10px 14px; border-left: 3px solid var(--ink-2);
 .cos-key dt { font-family: var(--font-mono); font-weight: 700; white-space: nowrap; }
 .cos-key dd { margin: 0; }
 .lv3 .v-below { color: var(--ink-2); border-top-color: var(--rule); }
+
+/* Break it: what we changed, and where. */
+.sabotage-what { display: flex; flex-direction: column; gap: 8px; padding: 12px 14px; border-radius: 12px; border: 1.5px dashed var(--rule); background: var(--sheet); }
+.sabotage-what.on { border-color: var(--sabotage); }
+.sabotage-what > p:not(.kicker) { line-height: 1.5; }
+.mini-line { width: 100%; max-width: 420px; height: auto; }
+.ml-track { stroke: var(--main); stroke-width: 5; stroke-linecap: round; opacity: 0.5; }
+.ml-stop { fill: var(--sheet); stroke: var(--main); stroke-width: 2.5; }
+.ml-hit .ml-stop { fill: var(--sabotage); stroke: var(--sabotage); }
+.ml-x { stroke: #fff; stroke-width: 2; stroke-linecap: round; }
+.ml-name { font-family: var(--font-display); font-weight: 700; font-size: 10px; fill: var(--ink-2); }
+.ml-hit .ml-name { fill: var(--sabotage); font-weight: 900; }
+.ctx-strip { margin: 0; display: flex; flex-direction: column; gap: 3px; width: 100%; max-width: 420px; }
+.ctx-strip svg { width: 100%; height: 24px; display: block; }
+.cs-labels { position: relative; height: 14px; font-family: var(--font-mono); font-size: 0.66rem; color: var(--ink-2); }
+.cs-labels span { position: absolute; transform: translateX(-50%); white-space: nowrap; }
+.ctx-strip figcaption { font-size: 0.82rem; color: var(--ink-2); line-height: 1.4; }
+.cs-hit { fill: var(--sabotage); }
+.cs-special { fill: var(--ink-2); opacity: 0.3; }
+.cs-sys { fill: var(--l-gate); opacity: 0.45; }
+.cs-rag { fill: var(--l-library); opacity: 0.45; }
+.cs-user { fill: var(--main); opacity: 0.6; }
+.cs-tool { fill: var(--l-workshop); opacity: 0.45; }
+.cs-res { fill: var(--l-workshop); opacity: 0.7; }
+.cs-floor { fill: var(--accent); opacity: 0.35; }
+.cs-labels.two { height: 27px; }
+.cs-labels span { top: 0; }
