@@ -7,6 +7,7 @@ import { hrefFor } from '../lib/router'
 import { tick } from '../lib/sound'
 import { StampArt } from '../loop/StampArt'
 import { LOOPS } from '../stations'
+import { MetroMap } from '../map/MetroMap'
 import { Roundel } from './Roundel'
 import { SoundToggle } from './SoundToggle'
 
@@ -89,6 +90,18 @@ function StationsSheet({ open, onClose, here }: { open: boolean; onClose: () => 
     if (open && !d.open) d.showModal()
     if (!open && d.open) d.close()
   }, [open])
+  // While the sheet is open, the page behind it stays put, so a swipe scrolls only the station list.
+  useEffect(() => {
+    if (!open) return
+    const y = window.scrollY
+    const b = document.body.style
+    const prev = { position: b.position, top: b.top, left: b.left, right: b.right }
+    Object.assign(b, { position: 'fixed', top: `-${y}px`, left: '0', right: '0' })
+    return () => {
+      Object.assign(b, prev)
+      window.scrollTo(0, y)
+    }
+  }, [open])
   // Read fresh each time the sheet opens, so it reflects steps taken since the page loaded.
   const progress = open ? readStations() : {}
   const visited = open ? readVisited() : new Set<string>()
@@ -108,6 +121,18 @@ function StationsSheet({ open, onClose, here }: { open: boolean; onClose: () => 
           <div className="sheet-head">
             <h2 id="sheet-title">Stations</h2>
             <button type="button" className="sheet-x" aria-label="Close" onClick={onClose}>×</button>
+          </div>
+          <div className="sheet-window" aria-hidden="true">
+            <MetroMap
+              viewBox="0 70 1120 400"
+              minimal
+              linked={false}
+              showTrain={false}
+              focus={here ?? resume?.code}
+              litStations={STATIONS.filter((s) => visited.has(s.code) || progress[s.code]).map((s) => s.code)}
+              className="locator-map"
+              label="The map, with the stations you have visited lit."
+            />
           </div>
           {resume && resume.started && resume.code !== here && (
             <a className="btn primary sheet-resume" href={hrefFor(resume.code)} onClick={onClose}>

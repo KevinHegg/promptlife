@@ -688,9 +688,18 @@ blockquote { margin: 0; padding: 10px 14px; border-left: 3px solid var(--ink-2);
 .resume-bar span { font-weight: 600; color: var(--ink-2); margin-right: 4px; }
 
 /* The Stations sheet: a card from the bottom on phones, a centered card on wider screens. */
-.sheet { padding: 0; border: 1.5px solid var(--ink); border-radius: 20px; background: var(--paper); color: var(--ink); width: min(480px, calc(100vw - 24px)); max-height: min(86dvh, 760px); overflow: auto; }
+/* A die-cut card: thick ink edge, stacked paper layers peeking out behind it, and only the list scrolls. */
+.sheet { padding: 0; border: 2px solid var(--ink); border-radius: 22px; background: var(--paper); color: var(--ink); width: min(480px, calc(100vw - 24px)); max-height: min(86dvh, 760px); overflow: hidden; overscroll-behavior: contain;
+  box-shadow: 6px 6px 0 -1px var(--doing), 12px 12px 0 -2px var(--lv3), 12px 12px 0 -0.5px var(--ink); }
+.sheet[open] { display: flex; flex-direction: column; }
 .sheet::backdrop { background: color-mix(in srgb, var(--ink) 35%, transparent); }
-.sheet-in { display: flex; flex-direction: column; gap: 12px; padding: 16px 18px 20px; }
+.sheet-in { display: flex; flex-direction: column; gap: 12px; padding: 16px 18px 0; min-height: 0; flex: 1; }
+/* A punched slot at the top of the card, showing the navy level beneath, like the lesson cutaways. */
+.sheet-in::before { content: ""; align-self: center; flex: none; width: 48px; height: 10px; margin-top: -6px; border-radius: 6px; background: var(--lv2); box-shadow: inset 0 3px 5px var(--cut-shadow), inset 0 0 0 1.5px var(--ink); }
+.sheet-window { flex: none; border-radius: 18px; overflow: hidden; background: var(--sheet); box-shadow: inset 0 6px 14px var(--cut-shadow), inset 0 0 0 1.5px var(--ink); padding: 4px 6px; }
+.sheet-window .locator-map { display: block; width: 100%; height: auto; }
+.sheet-list { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; padding-bottom: 6px; }
+.sheet-foot { flex: none; padding: 10px 0 calc(16px + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--rule); }
 .sheet-head { display: flex; align-items: center; justify-content: space-between; }
 .sheet-head h2 { font-size: 1.3rem; }
 .sheet-x { width: 36px; height: 36px; border-radius: 50%; border: 1.5px solid var(--rule); background: var(--sheet); color: var(--ink); font-size: 1.3rem; line-height: 1; cursor: pointer; }
@@ -701,7 +710,8 @@ blockquote { margin: 0; padding: 10px 14px; border-left: 3px solid var(--ink-2);
 .sheet-foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 16px; font-family: var(--font-display); font-weight: 800; font-size: 0.88rem; }
 .sheet-foot a { color: var(--ink); }
 @media (max-width: 640px) {
-  .sheet { width: 100%; max-width: 100%; margin: auto 0 0; border-radius: 20px 20px 0 0; border-bottom: 0; padding-bottom: env(safe-area-inset-bottom, 0px); }
+  .sheet { width: 100%; max-width: 100%; max-height: 88dvh; margin: auto 0 0; border-radius: 22px 22px 0 0; border-bottom: 0;
+    box-shadow: 0 -6px 0 -1px var(--doing), 0 -12px 0 -2px var(--lv3), 0 -12px 0 -0.5px var(--ink); }
   .sheet[open] { animation: sheet-up 0.32s cubic-bezier(0.2, 0.8, 0.2, 1); }
   .topbar-nav { gap: 12px; }
 }
