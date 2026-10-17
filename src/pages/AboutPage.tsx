@@ -1,4 +1,5 @@
 import { academyRuns } from '../data/academy'
+import { thinkRuns } from '../data/scratchpad'
 import { gatehouse, gatehouseBig } from '../data/gatehouse'
 import { library } from '../data/library'
 import { phase1 } from '../data/phase1'
@@ -15,7 +16,8 @@ function recordedRuns() {
     (library?.runs.length ?? 0) +
     (gatehouse?.heist.runs.length ?? 0) +
     (gatehouseBig?.heist.runs.length ?? 0) +
-    academyRuns.length
+    academyRuns.length +
+    ['off', 'budget-64', 'budget-256', 'on'].reduce((n, c) => n + thinkRuns(c).length, 0)
   )
 }
 
@@ -45,6 +47,7 @@ const MODELS: { name: string; href: string; size: string; license: string; role:
   { name: 'Qwen2.5-0.5B-Instruct', href: 'https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct', size: '494 million numbers', license: 'Apache 2.0', role: 'The model on our ride. Every main-line station, the Library, the Workshop, the Gatehouse and the Academy.' },
   { name: 'Qwen2.5-0.5B', href: 'https://huggingface.co/Qwen/Qwen2.5-0.5B', size: '494 million numbers', license: 'Apache 2.0', role: 'The same model before fine-tuning, in the Academy.' },
   { name: 'Qwen2.5-1.5B-Instruct', href: 'https://huggingface.co/Qwen/Qwen2.5-1.5B-Instruct', size: '1.5 billion numbers', license: 'Apache 2.0', role: 'Three times bigger, same family. It reran the Gatehouse heist for comparison.' },
+  { name: 'Qwen3-0.6B', href: 'https://huggingface.co/Qwen/Qwen3-0.6B', size: '0.6 billion numbers', license: 'Apache 2.0', role: 'A newer small model with a thinking switch. It answered our question 40 times in the Scratchpad, thinking off, cut short, and on.' },
   { name: 'all-MiniLM-L6-v2', href: 'https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2', size: '23 million numbers', license: 'Apache 2.0', role: 'A small model that only measures how alike two texts are. It scored Grandma’s recipe box in the Library.' },
   { name: 'o200k_base tokenizer', href: 'https://github.com/niieani/gpt-tokenizer', size: 'about 200,000 tokens', license: 'MIT', role: 'The tokenizer used by OpenAI’s GPT-4o models. It runs live in your browser at the Tokenizer.' },
   { name: 'The Academy’s tiny model', href: 'https://github.com/KevinHegg/promptlife/blob/main/src/lib/tinyLM.ts', size: '8,109 numbers', license: 'MIT', role: 'Written for Prompt Life. It trains live on your device, on Grandma’s 13 recipe cards.' }

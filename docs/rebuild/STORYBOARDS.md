@@ -529,7 +529,7 @@ The lesson is that wording helps a little. The reliable fixes keep secrets out o
 - **Try it, 1 of 2:** a real letter-level model (`src/lib/tinyLM.ts`, 8,109 numbers, seeded) trains live on the 13 recipe-box cards. The chance it gives the right next letter goes from 3% to 87% in 1,500 rounds, and what it writes goes from noise to "grandma's cornbread. serves 9."
 - **Try it, 2 of 2:** "Be the rater" offers three pairs of real recorded replies: right versus wrong, keeping a rule versus leaking it, and a matter of taste.
 - **Break it:** "Feed it different pages" trains a fresh copy for 800 rounds on each of: the cards, a typo everywhere ("flower"), one card, and scrambled letters. `tinyLM.test.ts` checks every verdict.
-- **Not built yet:** A2, the base model versus the instruct model, needs a download of Qwen2.5-0.5B (base).
+- **A2, built (2026-10-17) with `make_academy.py`.** The same page goes to Qwen2.5-0.5B (base) and to the instruct model. P(<tool_call>) is under 0.01% for base and 75% for instruct. P(<|im_end|>) after the answer is under 0.01% for base and 92% for instruct. The base model rewrote the page and invented the user's next question. Lesson: fine-tuning teaches the shape of a conversation.
 
 The only line that never lights during an answer.
 - **A1.** The fill-in-the-blank game at scale: guess the next piece of real text, measure the miss, nudge every number slightly, and repeat across trillions of pieces. To try it, train a tiny letter-level model in the browser on a public-domain text. The lamp lights here, and only here, as its output goes from noise to near-words.
@@ -540,6 +540,13 @@ The only line that never lights during an answer.
 - **Needs:** V-A-base (the base model on the hero question), the in-browser trainer, and 6 chosen pairs of replies.
 
 ### S Scratchpad (from The Loop): S1 Thinking tokens
+**Built (2026-10-17).** Data: `make_scratchpad.py`, with Qwen3-0.6B (it has a thinking switch; the ride's model doesn't). It answered our question with no calculator, 10 runs per condition.
+- **Results:** thinking off got 0 of 10 right (75 tokens each); cut at 64 tokens, 1 of 10; cut at 256, 1 of 10; thinking on, 3 of 10 (966 tokens each).
+- **Cut at 64,** the working moved into the answer: 5 of 10 answers ran past the 400-token cap.
+- **Faithfulness example:** a right run (8.4375) also wrote "8 15/16".
+- **The lesson:** Try it switches thinking off and on and lets you read all 10 runs. Learn it shows the token bars. Break it is "Cut the thinking short."
+- **The planned harder question was too hard for a 0.6B model** (thinking runs of about 2,400 tokens, all wrong), so it was dropped.
+
 Reasoning models write out working before the answer. Those thinking tokens ride the same loop, cost the same per trip and fill the same platform. Some products hide them or show a summary.
 - **Interaction: Show your work.** A harder question: "Half my 30 guests will eat three biscuits instead of two. How much flour now?" That's 75 biscuits at 16 per batch, so about 10.5 cups. It runs with thinking off and then on. Thinking tokens fill the platform in gray, the trip counter climbs well past 28†, and you check which run got it right.
 - **Misconceptions fixed:** "It's thinking like a person." "The written thinking shows exactly how it got the answer." The steps can help, but they aren't guaranteed to be a faithful account. [cite]
