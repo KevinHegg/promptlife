@@ -1099,3 +1099,60 @@ blockquote { margin: 0; padding: 10px 14px; border-left: 3px solid var(--ink-2);
 .tp-track { fill: var(--tint); }
 .tp-stop { fill: var(--ink); }
 .tp-peek { fill: var(--doing); stroke: var(--ink); stroke-width: 2; }
+
+/* ================= Side lines ================= */
+.line-kicker { display: inline-flex; align-items: center; gap: 8px; }
+.line-dot { width: 12px; height: 12px; border-radius: 50%; border: 3.5px solid var(--c); background: var(--sheet); }
+.line-page h1 { color: var(--ink); text-decoration: underline; text-decoration-color: var(--c); text-decoration-thickness: 5px; text-underline-offset: 8px; }
+.line-roundel { flex: none; width: 34px; height: 34px; border-radius: 50%; border: 5px solid var(--c); background: var(--sheet); display: grid; place-items: center; font-family: var(--font-display); font-weight: 900; font-size: 0.85rem; color: var(--ink); }
+.sheet-sub { margin-top: 6px; }
+/* The Workshop's workbench: three stops, taken in order. */
+.bench { display: flex; flex-direction: column; gap: 12px; padding: 14px; border-radius: 16px; background: var(--sheet); border: 1.5px solid var(--ink); }
+.bench-steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.bench-steps li { display: flex; flex-direction: column; gap: 8px; padding: 10px 12px; border-radius: 12px; border: 1.5px dashed var(--rule); }
+.bench-steps li.now { border-style: solid; border-color: var(--l-workshop); }
+.bench-steps li.done { border-style: solid; border-color: var(--rule); background: var(--paper); }
+.bench-steps li.later { opacity: 0.55; }
+.bench-label { font-family: var(--font-display); font-weight: 800; font-size: 0.9rem; color: var(--l-workshop); }
+.bench-raw { margin: 0; padding: 8px 10px; border-radius: 8px; background: var(--lv2); color: var(--lv2-ink); font-family: var(--font-mono); font-size: 0.75rem; white-space: pre-wrap; overflow-wrap: anywhere; }
+.bench-result { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.bench-result b { font-family: var(--font-mono); font-size: 1.4rem; }
+.bench-calc { display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 8px; background: var(--l-workshop); color: #fff; font-weight: 900; }
+/* The Library: cards ranked by match, with a cut line under the top K. */
+.retrieval { gap: 10px; align-items: stretch; }
+.rt-q { font-family: var(--font-display); font-weight: 800; font-size: 1rem; }
+.ranked { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 3px; width: 100%; }
+.ranked li { position: relative; display: grid; grid-template-columns: 1.6em minmax(0, 10em) minmax(0, 1fr) 2.6em; gap: 8px; align-items: center; padding: 4px 6px; border-radius: 6px; font-size: 0.85rem; }
+.ranked li.in { background: color-mix(in srgb, var(--l-library) 16%, var(--sheet)); }
+.ranked li.out { opacity: 0.5; }
+.rk-rank { font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-2); text-align: right; }
+.rk-card { font-family: var(--font-display); font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.rk-bar { height: 8px; border-radius: 4px; background: var(--tint); overflow: hidden; }
+.rk-bar span { display: block; height: 100%; background: var(--l-library); border-radius: 4px; }
+.rk-cos { font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-2); text-align: right; }
+.rk-cut { position: absolute; left: 0; right: 0; bottom: -9px; border-top: 2px dashed var(--l-library); font-family: var(--font-mono); font-size: 0.62rem; color: var(--l-library); text-align: right; padding-top: 1px; z-index: 1; pointer-events: none; }
+.ranked li:has(.rk-cut) { margin-bottom: 14px; }
+.k-chart { margin: 0; display: flex; flex-direction: column; gap: 6px; }
+.k-chart figcaption { font-size: 0.85rem; color: var(--ink-2); }
+.kc-bars { display: flex; align-items: flex-end; gap: 8px; height: 110px; }
+.kc-bar { flex: 1; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; gap: 3px; border: 0; background: none; padding: 0; cursor: pointer; font: inherit; }
+.kc-fill { width: 70%; min-height: 3px; border-radius: 4px 4px 0 0; background: var(--l-library); opacity: 0.55; }
+.kc-bar.on .kc-fill { opacity: 1; outline: 2px solid var(--ink); }
+.kc-p { font-family: var(--font-mono); font-size: 0.68rem; color: var(--ink); }
+.kc-k { font-family: var(--font-display); font-weight: 800; font-size: 0.72rem; color: var(--ink-2); }
+.bench-panel { width: 100%; max-width: 340px; }
+.bench-panel svg { width: 100%; height: auto; }
+.ranked.compact li { padding: 2px 6px; font-size: 0.8rem; }
+.ranked li.holds .rk-card { color: var(--ink); }
+.rk-check { color: var(--right); font-weight: 900; margin-right: 4px; }
+.kc-stack { width: 70%; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; }
+.kc-stack .kc-fill { width: 100%; border-radius: 0 0 0 0; }
+.kc-wrong { display: block; width: 100%; background: var(--sabotage); opacity: 0.75; border-radius: 4px 4px 0 0; }
+.kc-bar.on .kc-stack { outline: 2px solid var(--ink); }
+/* Choose K sits on paper: ink for the chosen K (red is for Break it), readable captions. */
+.retrieval .dial-stop.on { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+.retrieval .v-cap, .retrieval .v-below { color: var(--ink-2); }
+.retrieval .v-below { border-top-color: var(--rule); }
+.retrieval .chip-btn { color: var(--ink); border-color: var(--ink-2); background: var(--sheet); }
+.retrieval .chip-btn[aria-pressed="true"] { background: var(--l-library); border-color: var(--l-library); color: #fff; }
+.ranked li { grid-template-columns: 1.6em minmax(0, 1.5fr) minmax(0, 1fr) 2.6em; }

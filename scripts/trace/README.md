@@ -184,6 +184,51 @@ Pure greedy is not HF's default here. Qwen's `generation_config.json` sets
 `repetition_penalty=1.1`, which `generate()` applies even with `do_sample=False`. Both scripts
 now turn it off.
 
+## Library and Workshop: `make_library.py`
+
+```sh
+~/.cache/promptlife/trace-venv/bin/python scripts/trace/make_library.py   # -> src/data/traces/library.json
+```
+
+Data for the two side-line lessons. It needs one more model: the retriever
+`sentence-transformers/all-MiniLM-L6-v2` (Apache-2.0, ~87 MB in the HF cache, downloaded on the
+first run). It loads with plain `transformers` (`AutoModel` + `AutoTokenizer`, safetensors), so
+no extra pip package is needed. The run takes about 65 s on CPU and writes about 27 KB.
+
+- **`chunks`**: Grandma's recipe box, 13 chunks (`CHUNKS`): one per card front, plus the back of
+  the biscuit card. The first two are byte-identical to the hero's passages (checked). Each has
+  `buttermilk` (the text contains the word, case-insensitive) and `flour` (the amount before
+  "flour", else null).
+- **`questions`**: `lookup` ("How much flour do Grandma's biscuits need?", one card holds the
+  answer) and `all-buttermilk` ("Which of Grandma's recipes use buttermilk?", the answer needs
+  every card). `scores` holds the retriever's cosine for all 13 chunks, highest first: mean
+  pooling over the attention mask, then L2 normalization (the model card's recipe), and cosine
+  is the dot product of the unit vectors.
+- **`runs`**, all on Qwen2.5-0.5B-Instruct with pure greedy decoding (argmax, KV cache, no
+  repetition penalty), stopping at `<|im_end|>` / `<|endoftext|>`:
+  - `lookup-k{K}` and `buttermilk-k{K}` for K = 1, 2, 3, 5, 8, 13. The top-K chunks go into
+    the system message in rank order, in the hero's `"\n\nYour files:\n"` layout, with no tools.
+    `lookup` adds `rightAmount`: a teacher-forced pass with the assistant prefix
+    `"Grandma's biscuits need "`, P("2") and the top 3 there. `buttermilk` adds `named`,
+    `correct`, `missed` and `wrong`, found by regexes on dish names (`NAME_PATTERNS`).
+  - `buttermilk-tool`: no chunks; a `search_recipe_box` tool instead. The call
+    `{"word": "buttermilk"}` is forced, and the tool result is the real list of matching cards
+    over all 13 chunks. `toolChoice` is the model's own P(`<tool_call>`) as its first token.
+  - `own-request` (Workshop): the hero conversation, but the calculator gets the model's own
+    greedy request (`30 * 6`, the same as `phase1.json` `freeFirstTurn`, checked) and returns
+    the exact result (180).
+  - `no-calculator` (Workshop): the hero context with no tool, so the model must do the
+    arithmetic itself. `finalNumber` is the last number in the text and `statedCups` is the
+    last amount written before "cup(s)".
+
+Caps are 60 new tokens for `lookup` and `own-request`, 100 for `buttermilk`, and 120 for
+`no-calculator`. A run that hits its cap also gets `untilStop`: the same greedy run continued
+to at most 400 tokens. It is a diagnostic. Some answers only go wrong after the cap (for
+example, `lookup-k13`).
+Every step's gap between the top two scores is recorded, and every near-tie (gap < 0.01) is
+re-checked without the KV cache. Every text and every top-3 token is screened with
+`screen.py`. A hit would set `"flagged": true`, since greedy output cannot be redrawn.
+
 ## What the script does
 
 1. Renders the conversation with `tokenizer.apply_chat_template(..., tools=[calculator])`.

@@ -466,6 +466,16 @@ The model has never seen Grandma's card. Before the model reads anything, the ap
 - **Terms:** RAG, search by meaning.
 - **Needs:** the made-up folder, precomputed closeness scores, and the precomputed runs V-L-wrong-card, V-L-none and V-L-back-only.
 
+
+**Built (2026-10-16).** A five-step side-line lesson at `#/L`.
+- **Arrive:** Grandma's whole recipe box: 12 cards, 13 chunks, with the biscuit card's back as its own chunk. "The app can't paste in every card, so it picks the top K."
+- **Try it, "Choose K":** two questions.
+  - "One card has the answer": how much flour the biscuits need. The biscuit card ranks first, so it's right at every K (98–99%). With all 13 cards, though, it concludes "6 tablespoons of flour".
+  - "The answer is spread out": which recipes use buttermilk. Small K misses recipes, and large K muddles the list with wrong ones, because the model lists whatever it was given.
+  - Every card is ranked by MiniLM (`all-MiniLM-L6-v2`), with a cut line under the top K and a check on each card that holds part of the answer.
+- **Break it, "Ask about all of them":** Top 3 gets 3 of 6. Top 8 gets 5 right and 3 wrong. All 13 gets 5 right and 5 wrong, and still misses coleslaw. The search tool gets 6 of 6, and the model chose the tool on its own 55% of the time.
+- **Takeaway:** retrieval finds; tools count.
+- **Data:** `scripts/trace/make_library.py` writes `library.json`.
 ### W Workshop (The Loop to Tokenizer): W1 Read the request, W2 Run the tool, W3 Paste the result
 The model can't run anything.
 1. Earlier, the app pasted a short description of the calculator into what the model reads.
@@ -479,6 +489,14 @@ If the recording needed steering, this is where the board says so.
 - **Terms:** tool call, agent, permission.
 - **Needs:** the raw request and the calculator description from the recording, plus V-W-no-tool and a scripted agent run labeled "scripted."
 
+
+**Built (2026-10-16).** A five-step side-line lesson at `#/W`.
+- **Try it:** a three-step workbench that matches W1–W3: read the request, run the calculator (the app does the math), and paste the result back in as tokens.
+- **Break it, "Trust the calculator?":**
+  - Normal: 8.4375.
+  - "Run its own request": 30 × 6 = 180, and the reply says "180 cups of flour", sounding just as sure.
+  - "No calculator": it reasons in words to "60 cups".
+- **Takeaway:** a tool is only as good as the request.
 ### G Gatehouse (from Send): G1 Hidden instructions, G2 Injection Heist
 **G1.** See everything the model actually reads: the hidden labels marking who's talking, the hidden instructions, the calculator description, then your 19† pieces. A counter shows how much you never saw.
 

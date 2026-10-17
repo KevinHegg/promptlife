@@ -39,6 +39,22 @@ export const STATIONS: Station[] = [
 
 export const stationByCode = (code: string) => STATIONS.find((s) => s.code === code)
 
+/** The side lines in the order the ride meets them, each with where it branches off the main line. */
+export const SIDE_LINES: { code: Exclude<LineId, 'P'>; oneLiner: string; from: string }[] = [
+  { code: 'L', oneLiner: 'How the app finds your upload, and why it brings back only the top K.', from: 'P01' },
+  { code: 'G', oneLiner: 'The hidden instructions, and how people trick bots into ignoring them.', from: 'P01' },
+  { code: 'D', oneLiner: 'How pictures become tokens, and pictures come from noise.', from: 'P02' },
+  { code: 'A', oneLiner: 'Where the model’s numbers came from.', from: 'P05' },
+  { code: 'W', oneLiner: 'How the model uses a calculator, and what tools can do that searching can’t.', from: 'P07' },
+  { code: 'S', oneLiner: 'Models that write out their steps first.', from: 'P07' },
+  { code: 'R', oneLiner: 'What one answer cost, and a final challenge.', from: 'P08' }
+]
+
+export const isSideLine = (code: string): code is Exclude<LineId, 'P'> => SIDE_LINES.some((l) => l.code === code)
+
+/** A place's display name: a station's, or a side line's. */
+export const placeName = (code: string) => stationByCode(code)?.name ?? (isSideLine(code) ? LINES[code].name : code)
+
 export type Stop = {
   code: string
   line: LineId

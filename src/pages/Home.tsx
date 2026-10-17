@@ -10,6 +10,7 @@ import { StampArt } from '../loop/StampArt'
 import { ProgressLine } from '../ui/ProgressLine'
 import { CardJourney, RecipeCard } from '../ui/RecipeCard'
 import { Roundel } from '../ui/Roundel'
+import { SideLineList } from '../ui/SideLines'
 import { LOOPS } from '../stations'
 
 /** Home: the question, one way in, your progress, the stations, then the optional ride. Nothing else. */
@@ -71,6 +72,12 @@ export function Home() {
             )
           })}
         </ol>
+      </section>
+
+      <section className="stations" aria-labelledby="side-title">
+        <h2 id="side-title">Side lines</h2>
+        <p className="muted">Short trips off the main line, for what happens around the model.</p>
+        <SideLineList progress={progress} />
       </section>
 
       <section className="home-ride" aria-labelledby="ride-title">

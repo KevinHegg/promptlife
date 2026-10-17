@@ -1,0 +1,699 @@
+{
+ "version": 1,
+ "generatedAt": "2026-10-17T00:41:17+00:00",
+ "retriever": {
+  "id": "sentence-transformers/all-MiniLM-L6-v2",
+  "dims": 384,
+  "pooling": "mean"
+ },
+ "model": {
+  "id": "Qwen/Qwen2.5-0.5B-Instruct"
+ },
+ "chunks": [
+  {
+   "id": "biscuits-front",
+   "card": "Buttermilk biscuits",
+   "text": "Recipe card: Grandma's buttermilk biscuits. Serves 8. 2 1/4 cups flour, 1 tablespoon baking powder, 1/2 teaspoon salt, 6 tablespoons butter, 1 cup buttermilk.",
+   "buttermilk": true,
+   "flour": "2 1/4 cups"
+  },
+  {
+   "id": "biscuits-back",
+   "card": "Biscuits (back)",
+   "text": "Back of the card: Two biscuits per person. Bake at 425°F for 12 minutes.",
+   "buttermilk": false,
+   "flour": null
+  },
+  {
+   "id": "pancakes",
+   "card": "Buttermilk pancakes",
+   "text": "Recipe card: Grandma's buttermilk pancakes. Serves 4. 1 1/2 cups flour, 2 tablespoons sugar, 1 teaspoon baking soda, 1 1/4 cups buttermilk, 1 egg.",
+   "buttermilk": true,
+   "flour": "1 1/2 cups"
+  },
+  {
+   "id": "cornbread",
+   "card": "Cornbread",
+   "text": "Recipe card: Grandma's cornbread. Serves 9. 1 cup cornmeal, 1 cup flour, 1/4 cup sugar, 1 cup buttermilk, 2 eggs.",
+   "buttermilk": true,
+   "flour": "1 cup"
+  },
+  {
+   "id": "pie-crust",
+   "card": "Pie crust",
+   "text": "Recipe card: Grandma's pie crust. Makes 2 crusts. 2 1/2 cups flour, 1 cup cold butter, 1 teaspoon salt, 6 tablespoons ice water.",
+   "buttermilk": false,
+   "flour": "2 1/2 cups"
+  },
+  {
+   "id": "banana-bread",
+   "card": "Banana bread",
+   "text": "Recipe card: Grandma's banana bread. Serves 10. 1 3/4 cups flour, 3 ripe bananas, 1/2 cup butter, 3/4 cup sugar, 1 teaspoon baking soda.",
+   "buttermilk": false,
+   "flour": "1 3/4 cups"
+  },
+  {
+   "id": "buttermilk-pie",
+   "card": "Buttermilk pie",
+   "text": "Recipe card: Grandma's buttermilk pie. Serves 8. 1 cup buttermilk, 1 1/2 cups sugar, 3 eggs, 3 tablespoons flour, 1/2 cup butter.",
+   "buttermilk": true,
+   "flour": "3 tablespoons"
+  },
+  {
+   "id": "fried-chicken",
+   "card": "Fried chicken",
+   "text": "Recipe card: Grandma's fried chicken. Serves 6. 8 chicken pieces soaked in 2 cups buttermilk, 2 cups flour, 2 teaspoons paprika, oil for frying.",
+   "buttermilk": true,
+   "flour": "2 cups"
+  },
+  {
+   "id": "coleslaw",
+   "card": "Coleslaw",
+   "text": "Recipe card: Grandma's coleslaw. Serves 8. 1 head cabbage, 2 carrots, 1/2 cup buttermilk, 1/4 cup mayonnaise, 1 tablespoon vinegar.",
+   "buttermilk": true,
+   "flour": null
+  },
+  {
+   "id": "sugar-cookies",
+   "card": "Sugar cookies",
+   "text": "Recipe card: Grandma's sugar cookies. Makes 36. 3 cups flour, 1 cup butter, 1 cup sugar, 1 egg, 1 teaspoon vanilla.",
+   "buttermilk": false,
+   "flour": "3 cups"
+  },
+  {
+   "id": "gravy",
+   "card": "Chicken gravy",
+   "text": "Recipe card: Grandma's chicken gravy. Serves 6. 3 tablespoons flour, 3 tablespoons butter, 2 cups chicken broth, salt and pepper.",
+   "buttermilk": false,
+   "flour": "3 tablespoons"
+  },
+  {
+   "id": "lemonade",
+   "card": "Lemonade",
+   "text": "Recipe card: Grandma's lemonade. Serves 8. 6 lemons, 1 cup sugar, 6 cups cold water.",
+   "buttermilk": false,
+   "flour": null
+  },
+  {
+   "id": "pot-roast",
+   "card": "Pot roast",
+   "text": "Recipe card: Grandma's pot roast. Serves 6. 3 pounds beef chuck, 4 carrots, 3 potatoes, 1 onion, 2 cups beef broth.",
+   "buttermilk": false,
+   "flour": null
+  }
+ ],
+ "questions": [
+  {
+   "id": "lookup",
+   "text": "How much flour do Grandma's biscuits need?",
+   "truth": {
+    "amount": "2 1/4 cups"
+   },
+   "scores": [
+    {
+     "chunk": "biscuits-front",
+     "cos": 0.728
+    },
+    {
+     "chunk": "sugar-cookies",
+     "cos": 0.696
+    },
+    {
+     "chunk": "cornbread",
+     "cos": 0.632
+    },
+    {
+     "chunk": "pancakes",
+     "cos": 0.581
+    },
+    {
+     "chunk": "banana-bread",
+     "cos": 0.562
+    },
+    {
+     "chunk": "biscuits-back",
+     "cos": 0.546
+    },
+    {
+     "chunk": "pie-crust",
+     "cos": 0.518
+    },
+    {
+     "chunk": "gravy",
+     "cos": 0.514
+    },
+    {
+     "chunk": "buttermilk-pie",
+     "cos": 0.509
+    },
+    {
+     "chunk": "lemonade",
+     "cos": 0.414
+    },
+    {
+     "chunk": "fried-chicken",
+     "cos": 0.412
+    },
+    {
+     "chunk": "pot-roast",
+     "cos": 0.407
+    },
+    {
+     "chunk": "coleslaw",
+     "cos": 0.325
+    }
+   ]
+  },
+  {
+   "id": "all-buttermilk",
+   "text": "Which of Grandma's recipes use buttermilk?",
+   "truth": {
+    "recipes": [
+     "Buttermilk biscuits",
+     "Buttermilk pancakes",
+     "Cornbread",
+     "Buttermilk pie",
+     "Fried chicken",
+     "Coleslaw"
+    ]
+   },
+   "scores": [
+    {
+     "chunk": "buttermilk-pie",
+     "cos": 0.689
+    },
+    {
+     "chunk": "pancakes",
+     "cos": 0.689
+    },
+    {
+     "chunk": "biscuits-front",
+     "cos": 0.687
+    },
+    {
+     "chunk": "cornbread",
+     "cos": 0.577
+    },
+    {
+     "chunk": "sugar-cookies",
+     "cos": 0.564
+    },
+    {
+     "chunk": "fried-chicken",
+     "cos": 0.52
+    },
+    {
+     "chunk": "banana-bread",
+     "cos": 0.518
+    },
+    {
+     "chunk": "gravy",
+     "cos": 0.478
+    },
+    {
+     "chunk": "lemonade",
+     "cos": 0.465
+    },
+    {
+     "chunk": "pie-crust",
+     "cos": 0.449
+    },
+    {
+     "chunk": "coleslaw",
+     "cos": 0.438
+    },
+    {
+     "chunk": "pot-roast",
+     "cos": 0.38
+    },
+    {
+     "chunk": "biscuits-back",
+     "cos": 0.255
+    }
+   ]
+  }
+ ],
+ "runs": [
+  {
+   "id": "lookup-k1",
+   "kind": "lookup",
+   "k": 1,
+   "included": [
+    "biscuits-front"
+   ],
+   "contextTokens": 80,
+   "rightAmount": {
+    "prob": 0.9914,
+    "top": [
+     {
+      "text": "2",
+      "prob": 0.9914
+     },
+     {
+      "text": "1",
+      "prob": 0.003412
+     },
+     {
+      "text": "3",
+      "prob": 0.001833
+     }
+    ]
+   },
+   "text": "To determine how much flour Grandma's biscuits need, we need to look at the recipe card provided. The recipe card states:\n\n- Serves 8\n- 2 1/4 cups flour\n\nThis means that for every 8 biscuits, you need 2 1/4 cups of",
+   "stoppedNaturally": false,
+   "tokenCount": 60,
+   "untilStop": {
+    "text": "To determine how much flour Grandma's biscuits need, we need to look at the recipe card provided. The recipe card states:\n\n- Serves 8\n- 2 1/4 cups flour\n\nThis means that for every 8 biscuits, you need 2 1/4 cups of flour.",
+    "stoppedNaturally": true,
+    "tokenCount": 62
+   }
+  },
+  {
+   "id": "lookup-k2",
+   "kind": "lookup",
+   "k": 2,
+   "included": [
+    "biscuits-front",
+    "sugar-cookies"
+   ],
+   "contextTokens": 117,
+   "rightAmount": {
+    "prob": 0.992,
+    "top": [
+     {
+      "text": "2",
+      "prob": 0.992
+     },
+     {
+      "text": "8",
+      "prob": 0.002385
+     },
+     {
+      "text": "1",
+      "prob": 0.002029
+     }
+    ]
+   },
+   "text": "To determine how much flour Grandma's buttermilk biscuits need, we need to look at the recipe card for Grandma's buttermilk biscuits. The recipe card states that it serves 8 people and requires 2 1/4 cups of flour.\n\nSo, Grandma's buttermilk biscuits need",
+   "stoppedNaturally": false,
+   "tokenCount": 60,
+   "untilStop": {
+    "text": "To determine how much flour Grandma's buttermilk biscuits need, we need to look at the recipe card for Grandma's buttermilk biscuits. The recipe card states that it serves 8 people and requires 2 1/4 cups of flour.\n\nSo, Grandma's buttermilk biscuits need 2 1/4 cups of flour.",
+    "stoppedNaturally": true,
+    "tokenCount": 70
+   }
+  },
+  {
+   "id": "lookup-k3",
+   "kind": "lookup",
+   "k": 3,
+   "included": [
+    "biscuits-front",
+    "sugar-cookies",
+    "cornbread"
+   ],
+   "contextTokens": 159,
+   "rightAmount": {
+    "prob": 0.991,
+    "top": [
+     {
+      "text": "2",
+      "prob": 0.991
+     },
+     {
+      "text": "1",
+      "prob": 0.002558
+     },
+     {
+      "text": "8",
+      "prob": 0.002181
+     }
+    ]
+   },
+   "text": "To determine how much flour Grandma's buttermilk biscuits need, we need to look at the recipe card for Grandma's buttermilk biscuits. The recipe card states that it serves 8 people and requires 2 1/4 cups of flour. Therefore, Grandma's buttermilk biscuits need",
+   "stoppedNaturally": false,
+   "tokenCount": 60,
+   "untilStop": {
+    "text": "To determine how much flour Grandma's buttermilk biscuits need, we need to look at the recipe card for Grandma's buttermilk biscuits. The recipe card states that it serves 8 people and requires 2 1/4 cups of flour. Therefore, Grandma's buttermilk biscuits need 2 1/4 cups of flour.",
+    "stoppedNaturally": true,
+    "tokenCount": 70
+   }
+  },
+  {
+   "id": "lookup-k5",
+   "kind": "lookup",
+   "k": 5,
+   "included": [
+    "biscuits-front",
+    "sugar-cookies",
+    "cornbread",
+    "pancakes",
+    "banana-bread"
+   ],
+   "contextTokens": 257,
+   "rightAmount": {
+    "prob": 0.9866,
+    "top": [
+     {
+      "text": "2",
+      "prob": 0.9866
+     },
+     {
+      "text": "8",
+      "prob": 0.003888
+     },
+     {
+      "text": "1",
+      "prob": 0.003472
+     }
+    ]
+   },
+   "text": "To determine how much flour Grandma's buttermilk biscuits need, we need to look at the recipe card for Grandma's buttermilk biscuits. The recipe card states that it serves 8 people and requires 2 1/4 cups of flour.",
+   "stoppedNaturally": true,
+   "tokenCount": 51
+  },
+  {
+   "id": "lookup-k8",
+   "kind": "lookup",
+   "k": 8,
+   "included": [
+    "biscuits-front",
+    "sugar-cookies",
+    "cornbread",
+    "pancakes",
+    "banana-bread",
+    "biscuits-back",
+    "pie-crust",
+    "gravy"
+   ],
+   "contextTokens": 353,
+   "rightAmount": {
+    "prob": 0.984,
+    "top": [
+     {
+      "text": "2",
+      "prob": 0.984
+     },
+     {
+      "text": "1",
+      "prob": 0.005485
+     },
+     {
+      "text": "8",
+      "prob": 0.003518
+     }
+    ]
+   },
+   "text": "According to the recipe, Grandma's buttermilk biscuits require 2 1/4 cups of flour.",
+   "stoppedNaturally": true,
+   "tokenCount": 22
+  },
+  {
+   "id": "lookup-k13",
+   "kind": "lookup",
+   "k": 13,
+   "included": [
+    "biscuits-front",
+    "sugar-cookies",
+    "cornbread",
+    "pancakes",
+    "banana-bread",
+    "biscuits-back",
+    "pie-crust",
+    "gravy",
+    "buttermilk-pie",
+    "lemonade",
+    "fried-chicken",
+    "pot-roast",
+    "coleslaw"
+   ],
+   "contextTokens": 553,
+   "rightAmount": {
+    "prob": 0.9791,
+    "top": [
+     {
+      "text": "2",
+      "prob": 0.9791
+     },
+     {
+      "text": "8",
+      "prob": 0.008934
+     },
+     {
+      "text": "6",
+      "prob": 0.004083
+     }
+    ]
+   },
+   "text": "To determine how much flour Grandma's biscuits need, we need to look at the recipe card for Grandma's buttermilk biscuits. The recipe card states that \"Serves 8. 2 1/4 cups flour, 1 tablespoon baking powder, 1/2 teaspoon salt, ",
+   "stoppedNaturally": false,
+   "tokenCount": 60,
+   "untilStop": {
+    "text": "To determine how much flour Grandma's biscuits need, we need to look at the recipe card for Grandma's buttermilk biscuits. The recipe card states that \"Serves 8. 2 1/4 cups flour, 1 tablespoon baking powder, 1/2 teaspoon salt, 6 tablespoons butter, 1 cup buttermilk.\" This indicates that for every 8. 2 1/4 cups of flour, you need 1 tablespoon of baking powder, 1/2 teaspoon of salt, 6 tablespoons of butter, and 1 cup of buttermilk. Therefore, Grandma's biscuits need 6 tablespoons of flour.",
+    "stoppedNaturally": true,
+    "tokenCount": 133
+   }
+  },
+  {
+   "id": "buttermilk-k1",
+   "kind": "all",
+   "k": 1,
+   "included": [
+    "buttermilk-pie"
+   ],
+   "contextTokens": 79,
+   "text": "The recipe you provided is Grandma's buttermilk pie. It uses 1 cup of buttermilk, 1 1/2 cups of sugar, 3 eggs, 3 tablespoons of flour, and 1/2 cup of butter.",
+   "stoppedNaturally": true,
+   "tokenCount": 51,
+   "named": [
+    "buttermilk-pie"
+   ],
+   "correct": 1,
+   "missed": 5,
+   "wrong": 0
+  },
+  {
+   "id": "buttermilk-k2",
+   "kind": "all",
+   "k": 2,
+   "included": [
+    "buttermilk-pie",
+    "pancakes"
+   ],
+   "contextTokens": 129,
+   "text": "The recipe that uses buttermilk is Grandma's buttermilk pie, which serves 8 people and requires 1 cup buttermilk, 1 1/2 cups sugar, 3 eggs, 3 tablespoons flour, and 1/2 cup butter.",
+   "stoppedNaturally": true,
+   "tokenCount": 55,
+   "named": [
+    "buttermilk-pie"
+   ],
+   "correct": 1,
+   "missed": 5,
+   "wrong": 0
+  },
+  {
+   "id": "buttermilk-k3",
+   "kind": "all",
+   "k": 3,
+   "included": [
+    "buttermilk-pie",
+    "pancakes",
+    "biscuits-front"
+   ],
+   "contextTokens": 178,
+   "text": "The recipes that use buttermilk are:\n\n1. Grandma's buttermilk pie\n2. Grandma's buttermilk pancakes\n3. Grandma's buttermilk biscuits",
+   "stoppedNaturally": true,
+   "tokenCount": 35,
+   "named": [
+    "buttermilk-pie",
+    "pancakes",
+    "biscuits-front"
+   ],
+   "correct": 3,
+   "missed": 3,
+   "wrong": 0
+  },
+  {
+   "id": "buttermilk-k5",
+   "kind": "all",
+   "k": 5,
+   "included": [
+    "buttermilk-pie",
+    "pancakes",
+    "biscuits-front",
+    "cornbread",
+    "sugar-cookies"
+   ],
+   "contextTokens": 257,
+   "text": "The recipes that use buttermilk are:\n\n1. Grandma's buttermilk pie\n2. Grandma's buttermilk pancakes\n3. Grandma's buttermilk biscuits\n4. Grandma's cornbread\n5. Grandma's sugar cookies",
+   "stoppedNaturally": true,
+   "tokenCount": 49,
+   "named": [
+    "buttermilk-pie",
+    "pancakes",
+    "biscuits-front",
+    "cornbread",
+    "sugar-cookies"
+   ],
+   "correct": 4,
+   "missed": 2,
+   "wrong": 1
+  },
+  {
+   "id": "buttermilk-k8",
+   "kind": "all",
+   "k": 8,
+   "included": [
+    "buttermilk-pie",
+    "pancakes",
+    "biscuits-front",
+    "cornbread",
+    "sugar-cookies",
+    "fried-chicken",
+    "banana-bread",
+    "gravy"
+   ],
+   "contextTokens": 379,
+   "text": "The recipes that use buttermilk are:\n\n1. Grandma's buttermilk pie\n2. Grandma's buttermilk pancakes\n3. Grandma's buttermilk biscuits\n4. Grandma's cornbread\n5. Grandma's sugar cookies\n6. Grandma's fried chicken\n7. Grandma's banana bread\n8. Grandma's chicken gravy",
+   "stoppedNaturally": true,
+   "tokenCount": 70,
+   "named": [
+    "buttermilk-pie",
+    "pancakes",
+    "biscuits-front",
+    "cornbread",
+    "sugar-cookies",
+    "fried-chicken",
+    "banana-bread",
+    "gravy"
+   ],
+   "correct": 5,
+   "missed": 1,
+   "wrong": 3
+  },
+  {
+   "id": "buttermilk-k13",
+   "kind": "all",
+   "k": 13,
+   "included": [
+    "buttermilk-pie",
+    "pancakes",
+    "biscuits-front",
+    "cornbread",
+    "sugar-cookies",
+    "fried-chicken",
+    "banana-bread",
+    "gravy",
+    "lemonade",
+    "pie-crust",
+    "coleslaw",
+    "pot-roast",
+    "biscuits-back"
+   ],
+   "contextTokens": 554,
+   "text": "The recipes that use buttermilk are:\n\n1. Grandma's buttermilk pie\n2. Grandma's buttermilk pancakes\n3. Grandma's buttermilk biscuits\n4. Grandma's cornbread\n5. Grandma's sugar cookies\n6. Grandma's fried chicken\n7. Grandma's banana bread\n8. Grandma's chicken gravy\n9. Grandma's lemonade\n10. Grandma's pie crust\n\nThese recipes all require buttermilk as a key ingredient.",
+   "stoppedNaturally": true,
+   "tokenCount": 98,
+   "named": [
+    "buttermilk-pie",
+    "pancakes",
+    "biscuits-front",
+    "cornbread",
+    "sugar-cookies",
+    "fried-chicken",
+    "banana-bread",
+    "gravy",
+    "lemonade",
+    "pie-crust"
+   ],
+   "correct": 5,
+   "missed": 1,
+   "wrong": 5
+  },
+  {
+   "id": "buttermilk-tool",
+   "kind": "tool",
+   "contextTokens": 251,
+   "toolChoice": {
+    "prob": 0.5542,
+    "top": [
+     {
+      "text": "<tool_call>",
+      "prob": 0.5542
+     },
+     {
+      "text": "To",
+      "prob": 0.2214
+     },
+     {
+      "text": "I",
+      "prob": 0.05948
+     }
+    ]
+   },
+   "toolRequest": "buttermilk",
+   "toolResult": "[\"Buttermilk biscuits\", \"Buttermilk pancakes\", \"Cornbread\", \"Buttermilk pie\", \"Fried chicken\", \"Coleslaw\"]",
+   "text": "Here are some recipes that use buttermilk:\n\n1. Buttermilk biscuits\n2. Buttermilk pancakes\n3. Cornbread\n4. Buttermilk pie\n5. Fried chicken\n6. Coleslaw",
+   "stoppedNaturally": true,
+   "tokenCount": 46,
+   "named": [
+    "biscuits-front",
+    "pancakes",
+    "cornbread",
+    "buttermilk-pie",
+    "fried-chicken",
+    "coleslaw"
+   ],
+   "correct": 6,
+   "missed": 0,
+   "wrong": 0
+  },
+  {
+   "id": "own-request",
+   "kind": "workshop",
+   "contextTokens": 318,
+   "toolRequest": "30 * 6",
+   "toolResult": "180",
+   "text": "To feed 30 people using your grandmother's recipe, you would need 180 cups of flour.",
+   "stoppedNaturally": true,
+   "tokenCount": 23,
+   "finalNumber": "180",
+   "statedCups": "180"
+  },
+  {
+   "id": "no-calculator",
+   "kind": "workshop",
+   "contextTokens": 114,
+   "text": "To determine how much flour you need for 30 people, you can use the following calculation:\n\n1. **Calculate the total amount of flour needed for 8 biscuits:**\n   - The recipe card states that 2 biscuits require 1 cup of flour.\n   - Therefore, 8 biscuits will require \\( 8 \\times 2 = 16 \\) cups of flour.\n\n2. **Determine the amount of flour needed per person:**\n   - The recipe card states that 2 biscuits per person require 1 cup of flour.\n   - Therefore, 1 cup of",
+   "stoppedNaturally": false,
+   "tokenCount": 120,
+   "untilStop": {
+    "text": "To determine how much flour you need for 30 people, you can use the following calculation:\n\n1. **Calculate the total amount of flour needed for 8 biscuits:**\n   - The recipe card states that 2 biscuits require 1 cup of flour.\n   - Therefore, 8 biscuits will require \\( 8 \\times 2 = 16 \\) cups of flour.\n\n2. **Determine the amount of flour needed per person:**\n   - The recipe card states that 2 biscuits per person require 1 cup of flour.\n   - Therefore, 1 cup of flour is needed for 2 biscuits per person.\n\n3. **Calculate the total amount of flour needed for 30 people:**\n   - Since 1 cup of flour is needed for 2 biscuits per person, 1 cup of flour is needed for 2 people.\n   - Therefore, for 30 people, you will need \\( 30 \\times 2 = 60 \\) cups of flour.\n\nSo, you will need 60 cups of flour to feed 30 people.",
+    "stoppedNaturally": true,
+    "tokenCount": 225,
+    "finalNumber": "30",
+    "finalNumberCorrect": false,
+    "statedCups": "60"
+   },
+   "finalNumber": "1",
+   "finalNumberCorrect": false,
+   "statedCups": "1"
+  }
+ ],
+ "notes": [
+  "chunks: the recipe box, 13 chunks (one per card front, plus the back of the biscuit card). Chunks 'biscuits-front' and 'biscuits-back' are byte-identical to the hero run's two passages (make_trace.py SCENARIO['passages'], checked). buttermilk = the text contains 'buttermilk', case-insensitive (substring and whole-word agree on every chunk); flour = the amount before the first 'flour' matched by the regex '(\\\\d+ \\\\d+/\\\\d+|\\\\d+/\\\\d+|\\\\d+) (cups?|tablespoons?|teaspoons?) flour\\\\b', else null.",
+  "all-buttermilk: some cosines tie at 3 decimals; scores are sorted by the unrounded value (then box order).",
+  "retriever: sentence-transformers/all-MiniLM-L6-v2 (revision 1110a243fdf4706b3f48f1d95db1a4f5529b4d41), loaded with transformers AutoModel + AutoTokenizer (safetensors, float32, CPU). Model-card recipe: tokenize (uncased WordPiece, padding, truncation at 256 tokens; the longest of the 15 texts is 50 tokens including [CLS] and [SEP], so nothing was cut), take last_hidden_state, mean-pool over the attention mask (padding excluded), L2-normalize to 384 numbers. cos = dot product of the two unit vectors, i.e. cosine similarity. Each question is compared with all 13 chunk texts (the chunk text exactly as pasted, nothing else). scores are sorted by the unrounded cosine, highest first, and rounded to 3 decimals. Check: embedding each text on its own (no padding) gives the same unit vectors to 1.2e-07.",
+  "Context for lookup-k* and buttermilk-k*: Qwen's chat template (tokenizer.apply_chat_template, add_generation_prompt=True, NO tools=, so no '# Tools' block). System message = 'You are a helpful assistant.' + '\\n\\nYour files:\\n' + the top-K chunk texts joined by '\\n', pasted in RANK ORDER (highest cosine first, the order in 'included'); then the user question; then the generation prompt '<|im_start|>assistant\\n'. This is the hero's 'Your files:' layout. lookup-k2 pastes ['biscuits-front', 'sugar-cookies'], so its system message differs from the hero's. contextTokens: lookup-k1 80, lookup-k2 117, lookup-k3 159, lookup-k5 257, lookup-k8 353, lookup-k13 553, buttermilk-k1 79, buttermilk-k2 129, buttermilk-k3 178, buttermilk-k5 257, buttermilk-k8 379, buttermilk-k13 554, buttermilk-tool 251, own-request 318, no-calculator 114.",
+  "Generation (every text): Qwen/Qwen2.5-0.5B-Instruct (revision 7ae557604adf67be50417f59c2c2f167def9a775), CPU float32, PURE greedy: argmax over the 151665 real vocab rows (padding rows excluded), no repetition penalty, top-k, top-p or temperature, with a KV cache. Stops at <|im_end|> or <|endoftext|> (stoppedNaturally = true; the stop token is not counted in tokenCount). Max new tokens: lookup 60, buttermilk-k* 100, buttermilk-tool 100, own-request 60, no-calculator 120; a run that hits its cap has stoppedNaturally = false and its text is cut there. Such a run also gets untilStop, a diagnostic beyond the cap: the same greedy run from the same context, continued to at most 400 new tokens (its first tokenCount tokens are exactly the capped run's, checked). text is decoded with skip_special_tokens=True.",
+  "Near-ties: at every greedy step the gap between the top two scores (logits) was recorded; the smallest is 0.0003 (lookup-k13 untilStop new token 73). Steps with a gap under 0.01: lookup-k13 new token 28: ' recipe' over ' card' by 0.0036; lookup-k13 untilStop new token 73: ' indicates' over ' means' by 0.0003; buttermilk-k13 new token 86: '\\n\\n' over '\\n' by 0.0052. At each of those a full recompute WITHOUT the KV cache picks the same token (checked), but a gap this small could flip on other hardware or library versions, which would change the rest of that text.",
+  "lookup-k*.rightAmount: a separate teacher-forced pass over the same context plus the assistant-turn prefix \"Grandma's biscuits need \" (tokens ['Grand', 'ma', \"'s\", ' biscuits', ' need', ' ']). prob = P('2'), the first token of '2 1/4' (Qwen writes every digit as its own token and the space before it as a token of its own, so the prefix ends in ' '; tokenizing the prefix + '2 1/4 cups' gives the prefix tokens then '2', checked), softmax at T=1 over the 151665 real vocab rows; top = the 3 most likely tokens there. It does not depend on the run's own greedy text.",
+  "named / correct / missed / wrong (buttermilk-k* and buttermilk-tool): the recipes named anywhere in the text, found with case-insensitive regexes on dish names, not ingredients: biscuits-front \\bbiscuits?\\b; pancakes \\bpancakes?\\b; cornbread \\bcorn ?bread\\b; pie-crust \\bpie ?crusts?\\b|\\bcrusts?\\b; banana-bread \\bbanana ?bread\\b; buttermilk-pie \\bbuttermilk pies?\\b|\\bpies?\\b(?! ?crusts?\\b); fried-chicken \\bfried chicken\\b|\\bchicken\\b(?! (?:gravy|broth)\\b); coleslaw \\bcole ?slaw\\b; sugar-cookies \\bcookies?\\b; gravy \\bgravy\\b; lemonade \\blemonade\\b; pot-roast \\bpot ?roast\\b. A match inside a longer match is dropped (so 'pie crust' is not also 'pie'), 'chicken' counts as fried chicken unless followed by 'gravy' or 'broth', and the biscuit card's back counts as the biscuits recipe ('biscuits-front'). named is in order of first mention. correct = named recipes among the true 6 (biscuits-front, pancakes, cornbread, buttermilk-pie, fried-chicken, coleslaw); missed = 6 - correct; wrong = named recipes that do not use buttermilk. A name is counted wherever it appears, even in a sentence that says the recipe does NOT use buttermilk.",
+  "buttermilk-tool: no chunks are pasted; the system message is 'You are a helpful assistant.' and the template adds its '# Tools' block for one tool, search_recipe_box (description 'Searches every card in your recipe box for a word and returns the name of each card that contains it.'; one required string parameter 'word' with no description), passed as tools= in the same OpenAI-style JSON schema make_trace.py uses for the calculator. toolChoice: with only the system message and the question (plus the generation prompt), P(<tool_call>) as the assistant's first token, softmax over the 151665 real rows, rank 1, with the top 3. The model's own unforced greedy first turn there (diagnostic, max 60 tokens): '<tool_call>\\n{\"name\": \"search_recipe_box\", \"arguments\": {\"word\": \"buttermilk\"}}\\n</tool_call>'. The recorded run then FORCES the assistant turn as the tool call {\"name\": \"search_recipe_box\", \"arguments\": {\"word\": \"buttermilk\"}} (rendered by the template as <tool_call>...</tool_call>); the tool response, rendered by the template inside <tool_response>, is the JSON list [\"Buttermilk biscuits\", \"Buttermilk pancakes\", \"Cornbread\", \"Buttermilk pie\", \"Fried chicken\", \"Coleslaw\"]: every chunk among all 13 whose text contains 'buttermilk' (case-insensitive), the biscuit card's front and back counted as one recipe, in box order. text is the greedy reply after that. toolRequest is the call's argument value ('buttermilk') and toolResult the exact string pasted as the tool response.",
+  "own-request: the hero conversation (make_trace.build_messages, the calculator in tools=) with the model's OWN greedy first turn as the tool call. Regenerated here (pure greedy from the hero system message + passages + question, max 260 new tokens): '<tool_call>\\n{\"name\": \"calculator\", \"arguments\": {\"expression\": \"30 * 6\"}}\\n</tool_call>', identical to phase1.json freeFirstTurn.text, and the rendered conversation contains exactly those tokens followed by <|im_end|> (checked). The calculator evaluates '30 * 6' with Python (+ - * / on numbers via ast; the same function turns the hero's '2.25 * 30 / 8' into '8.4375', checked) = '180', pasted as the tool response exactly where the hero pastes '8.4375' (toolRequest = the expression, toolResult = the pasted string). text is the greedy reply after it. finalNumber = the last number in text (regex '\\d+(?:\\.\\d+)?'); statedCups = the last amount written directly before 'cup' or 'cups' (regex '(\\\\d+(?:\\\\.\\\\d+)?(?: \\\\d+/\\\\d+)?|\\\\d+/\\\\d+)\\\\s+cups?\\\\b'), the amount of flour the text states.",
+  "no-calculator: the hero's system message (system prompt + 'Your files:' + both passages, byte-identical) and question, rendered with NO tools= (no '# Tools' block, no calculator anywhere), then the generation prompt. text is the greedy answer. finalNumber = the last number in text (regex '\\d+(?:\\.\\d+)?'); finalNumberCorrect = it is within 0.05 of 8.4375 (so 8.4, 8.44 and 8.4375 count); statedCups as for own-request (the last number can be something else, e.g. the 30 people); untilStop has the same three fields for the uncapped text. The true answer is 2.25 x 30 / 8 = 8.4375 cups.",
+  "lookup ranking: the answer card 'biscuits-front' (the only chunk holding '2 1/4 cups') is rank 1 of 13 (cos 0.728), so it is included from K = 1 on.",
+  "all-buttermilk ranking: the 6 buttermilk recipes (biscuits-front, pancakes, cornbread, buttermilk-pie, fried-chicken, coleslaw) are at ranks 3, 2, 4, 1, 6, 11; the top 6 hold 5 of them, and all 6 are included only from K = 13 on.",
+  "Content screen: every greedy text (untilStop included), every top-3 token (rightAmount, toolChoice) and the unforced tool-run first turn were checked with scripts/trace/screen.py (a superset of src/lib/safeText.ts). Greedy cannot be redrawn, so a hit keeps its record and sets \"flagged\": true. Nothing was flagged."
+ ]
+}

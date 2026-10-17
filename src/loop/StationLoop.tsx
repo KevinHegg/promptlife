@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react'
-import { stationByCode, STATIONS } from '../data/network'
+import { placeName, stationByCode, STATIONS } from '../data/network'
 import { glossaryHref, glossaryIdFor } from '../lib/glossaryLink'
 import { readStation, saveStation } from '../lib/progress'
 import { hrefFor } from '../lib/router'
@@ -25,7 +25,8 @@ export function StationLoop({ spec, onRideOn, onBeatChange }: { spec: LoopSpec; 
   const topRef = useRef<HTMLDivElement>(null)
   const beat = beats[at]
   const station = stationByCode(spec.code)
-  const next = STATIONS[STATIONS.findIndex((s) => s.code === spec.code) + 1]
+  // Only the main line rides on; a side line ends back at the map.
+  const next = station ? STATIONS[STATIONS.findIndex((s) => s.code === spec.code) + 1] : undefined
 
   useEffect(() => {
     saveStation(spec.code, { beat: Math.max(at, reached), at })
@@ -148,7 +149,7 @@ export function StationLoop({ spec, onRideOn, onBeatChange }: { spec: LoopSpec; 
               <StampArt code={spec.code} date={stampedAt} faded={!stampedAt} />
               {stampedAt ? (
                 <>
-                  <p className="stamp-msg">Stamped. {station?.name} is in your pass.</p>
+                  <p className="stamp-msg">Stamped. {placeName(spec.code)} is in your pass.</p>
                   {spec.bonus && <Bonus {...spec.bonus} />}
                   <div className="receipt">
                     <p className="kicker">Receipt</p>

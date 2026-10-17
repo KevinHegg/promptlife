@@ -216,6 +216,8 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
 
 /** Arriving at a station: its own bowl note. Quieter (gain < 1) when the train only passes through. */
 export function chime(code: string, gain = 1) {
+  // Side lines arrive with the soft flute instead of a station's bowl.
+  if (/^[LWGASDR]$/.test(code)) return play(OPEN, 0, gain)
   if (!/^P0[1-8]$/.test(code)) return
   const n = parseInt(code.slice(1), 10)
   play(STATION_BOWLS[n - 1], 0, gain)

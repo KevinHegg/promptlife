@@ -532,6 +532,20 @@ export const GLOSSARY: GlossaryEntry[] = [
     related: ['context', 'embedding', 'vector', 'prompt-injection', 'hallucination']
   },
 
+  {
+    id: 'top-k-retrieval',
+    term: 'top-K retrieval',
+    aka: ['top K', 'K chunks'],
+    station: 'L',
+    short: 'Top-K retrieval means the app pastes in only the K chunks that best match your question. The model never sees the rest.',
+    deeper: [
+      'The app splits your uploads into chunks, scores every chunk against your question, and keeps the K highest. K is a setting the app’s builders choose, often somewhere from 3 to 20. Everything below the cut stays out of the context.',
+      'Choosing K is a trade. Too small, and the chunk that holds the answer may miss the cut. Too large, and lookalike chunks crowd in: other recipes with other amounts, which can muddle the answer, and every extra chunk fills the context window.',
+      'Some questions need every chunk, like counting or adding across all of your files. Top K can’t answer those: the model sees K chunks and answers from them, usually without saying it saw only part. A tool that reads everything can.',
+      'Don’t mix it up with top-k sampling at The Vote, which limits which next tokens can be drawn. Same letter, different job.'
+    ],
+    related: ['retrieval', 'context-window', 'tool-call', 'sampling']
+  },
   // ── W Workshop ──────────────────────────────────────────────────────────
   {
     id: 'tool-call',

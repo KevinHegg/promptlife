@@ -11,6 +11,8 @@ import { MetroMap } from '../map/MetroMap'
 import { Roundel } from './Roundel'
 import { SoundToggle } from './SoundToggle'
 import { StartOver } from './StartOver'
+import { SideLineList } from './SideLines'
+import { LINE_LOOPS } from '../stations/lines'
 
 /**
  * One slim bar on every page: home, the glossary, and a Stations sheet for jumping anywhere.
@@ -156,7 +158,8 @@ function StationsSheet({ open, onClose, here }: { open: boolean; onClose: () => 
               Resume: {resume.name}, {resume.step} →
             </a>
           )}
-          <ol className="station-list sheet-list">
+          <div className="sheet-list">
+          <ol className="station-list">
             {STATIONS.map((s) => {
               const ready = !!LOOPS[s.code]
               const preview = !ready && !!STATION_CONTENT[s.code]?.cutaway
@@ -185,6 +188,13 @@ function StationsSheet({ open, onClose, here }: { open: boolean; onClose: () => 
               )
             })}
           </ol>
+          {Object.keys(LINE_LOOPS).length > 0 && (
+            <>
+              <p className="kicker sheet-sub">Side lines</p>
+              <SideLineList progress={progress} onlyReady onPick={onClose} />
+            </>
+          )}
+          </div>
           <div className="sheet-foot">
             <a href="#/" onClick={onClose}>The whole map</a>
             <a href="#/glossary" onClick={onClose}>Glossary</a>

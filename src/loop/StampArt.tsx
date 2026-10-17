@@ -98,6 +98,25 @@ const SCENES: Record<string, ReactElement> = {
       <path d="M-14,21 H14 M-14,26 H6" strokeWidth="1.5" />
     </g>
   ),
+  // Index cards with a magnifier over the top few: the app fetches only the top K.
+  L: (
+    <g className="st-ink" fill="none" strokeWidth="2.5">
+      <rect x="-40" y="-14" width="34" height="24" rx="2" />
+      <rect x="-30" y="-6" width="34" height="24" rx="2" />
+      <rect x="-20" y="2" width="34" height="24" rx="2" />
+      <circle cx="22" cy="-10" r="13" strokeWidth="3" />
+      <path d="M31,-1 L42,10" strokeWidth="4" strokeLinecap="round" />
+      <path d="M15,-12 H29 M15,-7 H25" strokeWidth="1.5" />
+    </g>
+  ),
+  // A calculator: the model writes the request, the app does the math.
+  W: (
+    <g className="st-ink" fill="none" strokeWidth="2.5">
+      <rect x="-24" y="-30" width="48" height="60" rx="5" />
+      <rect x="-17" y="-23" width="34" height="12" rx="2" className="st-fill" />
+      {[0, 1, 2].map((r) => [0, 1, 2].map((c) => <rect key={`${r}${c}`} x={-17 + c * 12} y={-4 + r * 11} width="9" height="8" rx="1.5" />))}
+    </g>
+  ),
   // A departure board with one lit row.
   P06: (
     <g className="st-ink" strokeWidth="2.5">
