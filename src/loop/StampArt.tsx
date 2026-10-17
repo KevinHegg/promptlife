@@ -1,10 +1,9 @@
 import type { ReactElement } from 'react'
-import { stationByCode } from '../data/network'
+import { placeName } from '../data/network'
 
 /** Station stamps in the spirit of Japanese eki stamps: one ink color, a ring, a small scene. */
 export function StampArt({ code, date, size = 150, faded = false }: { code: string; date?: string; size?: number; faded?: boolean }) {
-  const station = stationByCode(code)
-  const name = station?.name ?? code
+  const name = placeName(code)
   return (
     <svg className={`stamp-art${faded ? ' faded' : ''}`} viewBox="0 0 160 160" width={size} height={size} role="img" aria-label={`${code} ${name} stamp${date ? `, ${date}` : ''}`}>
       <defs>

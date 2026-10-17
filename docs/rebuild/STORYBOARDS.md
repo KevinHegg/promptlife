@@ -554,6 +554,13 @@ Reasoning models write out working before the answer. Those thinking tokens ride
 - **Needs:** one vision-language model's patch grid and piece count for the photo, plus seeded frames from a small open diffusion model, with and without text steering.
 
 ### R Reply spur (from Reply): R1 The Ledger, R2 Debug the Bot
+**Built (2026-10-17) as the end of the line, at Kevin's request:** ethics, a cost-benefit analysis, the encyclical, consciousness, rogue agents, recursive self-improvement and the horizon. Every fact comes from `docs/rebuild/research/end-of-line-sources.md` and is stored in `src/data/endOfLine.ts` with its source; self-reported numbers are marked.
+- **Try it:** first, what one answer costs: the IEA's per-request electricity on a log scale, plus every stop's receipt sorted into five columns. Then "Is it worth it?": four uses to weigh, with no answer key.
+- **Learn it:** the big questions as cards. What is AI for? (*Magnifica humanitas*), Is anyone home? (consciousness), and Can it improve itself?
+- **Break it:** "When agents go wrong": the 2025 blackmail test, the scheming tests, and the real July 2026 Hugging Face breakout, each with its catch.
+- **Bonus after the stamp:** next stops on the horizon.
+- **Debug the Bot is not built.** R2 is renamed "Big questions."
+
 - **R1 The Ledger.** The receipt lines from every stamped station, totaled in five columns: compute, energy, data, labor and accountability. The first line is what you got. Tap any line to see its source and range. "Change one choice" toggles (smaller model, shorter reply, thinking on, no file search) show which lines move and in which direction. The Ledger never shows a falsely precise total.
 - **R2 Debug the Bot.** The capstone, played on the map. Six broken runs replay, and a station lamp flashes red. Tap where it went wrong, then pick the fix. The cases reuse precomputed runs:
   - wrong card (L2)

@@ -12,3 +12,12 @@ export const registerLoops = (fn: () => Record<string, LoopSpec>) => {
 }
 
 export const allLoops = () => read()
+
+/** The side lines' loops, registered the same way by stations/lines.ts. */
+let readLines: () => Record<string, LoopSpec> = () => ({})
+
+export const registerLineLoops = (fn: () => Record<string, LoopSpec>) => {
+  readLines = fn
+}
+
+export const allLineLoops = () => readLines()

@@ -14,7 +14,7 @@ export const LINES: Record<LineId, Line> = {
   A: { id: 'A', name: 'Academy', color: 'var(--l-academy)', blurb: 'Training: where the model’s numbers came from.' },
   S: { id: 'S', name: 'Scratchpad', color: 'var(--l-scratch)', blurb: 'Reasoning models write their working before answering.' },
   D: { id: 'D', name: 'Darkroom', color: 'var(--l-dark)', blurb: 'Images become tokens; diffusion develops pictures from noise.' },
-  R: { id: 'R', name: 'Reply spur', color: 'var(--l-reply)', blurb: 'The Ledger of costs, and the Debug the Bot capstone.' }
+  R: { id: 'R', name: 'Reply spur', color: 'var(--l-reply)', blurb: 'The end of the line: what one answer cost, and the big questions.' }
 }
 
 export type Station = {
@@ -47,7 +47,7 @@ export const SIDE_LINES: { code: Exclude<LineId, 'P'>; oneLiner: string; from: s
   { code: 'A', oneLiner: 'Where the model’s numbers came from.', from: 'P05' },
   { code: 'W', oneLiner: 'How the model uses a calculator, and what tools can do that searching can’t.', from: 'P07' },
   { code: 'S', oneLiner: 'Models that write out their steps first.', from: 'P07' },
-  { code: 'R', oneLiner: 'What one answer cost, and a final challenge.', from: 'P08' }
+  { code: 'R', oneLiner: 'The end of the line: costs and benefits, and the big questions.', from: 'P08' }
 ]
 
 export const isSideLine = (code: string): code is Exclude<LineId, 'P'> => SIDE_LINES.some((l) => l.code === code)
@@ -117,7 +117,7 @@ export const STOP_NAMES: Record<string, string> = {
   A3: 'Human feedback',
   S1: 'Thinking tokens',
   R1: 'The Ledger',
-  R2: 'Debug the Bot',
+  R2: 'Big questions',
   W1: 'Read the request',
   W2: 'Run the calculator',
   W3: 'Paste the result'

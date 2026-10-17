@@ -1226,3 +1226,38 @@ blockquote { margin: 0; padding: 10px 14px; border-left: 3px solid var(--ink-2);
 .heist-detail { display: flex; flex-direction: column; gap: 6px; padding: 8px 10px 4px; }
 .heist-detail blockquote { margin: 0; padding: 8px 12px; border-left: 4px solid var(--rule); background: var(--paper); white-space: pre-wrap; font-size: 0.9rem; }
 .heist-detail blockquote.leaked { border-left-color: var(--sabotage); }
+
+/* ── Reply spur: the end of the line ─────────────────────────────────── */
+.src-link { font-size: 0.78rem; color: var(--ink-2); white-space: nowrap; }
+.src-link::before { content: '↗ '; }
+.cost-view, .worth-it, .horizon { display: flex; flex-direction: column; gap: 12px; }
+.energy-bars { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.eb { width: 100%; display: grid; grid-template-columns: 1fr auto; grid-template-areas: 'label wh' 'track track'; gap: 4px 10px; padding: 8px 10px; border-radius: 10px; background: var(--sheet); border: 1.5px solid var(--rule); color: var(--ink); font: inherit; text-align: left; cursor: pointer; }
+.eb.on { border-color: var(--ink); }
+.eb-label { grid-area: label; font-size: 0.9rem; }
+.eb-wh { grid-area: wh; font-family: var(--font-mono); font-size: 0.82rem; white-space: nowrap; }
+.eb-track { grid-area: track; height: 10px; border-radius: 5px; background: var(--rule); overflow: hidden; }
+.eb-track > span { display: block; height: 100%; background: color-mix(in srgb, var(--l-reply) 70%, var(--ink)); }
+.eb.on .eb-track > span { background: var(--doing); }
+.fact-list { margin: 0; padding-left: 1.1rem; display: flex; flex-direction: column; gap: 8px; font-size: 0.92rem; line-height: 1.5; }
+.ledger { display: flex; flex-direction: column; gap: 12px; margin-top: 8px; }
+.ledger-col h4 { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2); margin: 0 0 6px; }
+.ledger-col ul { margin: 0; padding-left: 1.1rem; display: flex; flex-direction: column; gap: 6px; font-size: 0.88rem; line-height: 1.45; }
+.ledger-col li.stamped::marker { content: '✓ '; color: var(--l-library); }
+.worth-card { display: flex; flex-direction: column; gap: 8px; padding: 12px 14px; border-radius: 12px; border: 1.5px dashed var(--rule); }
+.worth-ask { font-family: var(--font-display); font-weight: 800; font-size: 0.98rem; line-height: 1.35; }
+.worth-options { display: flex; flex-wrap: wrap; gap: 6px; }
+.worth-sides { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+.worth-sides ul { margin: 4px 0 0; padding-left: 1.1rem; font-size: 0.9rem; line-height: 1.45; display: flex; flex-direction: column; gap: 4px; }
+.big-questions { display: flex; flex-direction: column; gap: 8px; width: 100%; }
+.bq { border-radius: 12px; border: 1.5px solid var(--rule); background: var(--sheet); overflow: hidden; }
+.bq.open { border-color: var(--ink); }
+.bq-head { width: 100%; text-align: left; padding: 12px 14px; font-family: var(--font-display); font-weight: 800; font-size: 1.05rem; color: var(--ink); background: none; border: 0; cursor: pointer; }
+.bq-head::after { content: ' ▾'; color: var(--ink-2); }
+.bq.open .bq-head::after { content: ' ▴'; }
+.bq-body { display: flex; flex-direction: column; gap: 10px; padding: 0 14px 14px; font-size: 0.92rem; line-height: 1.5; }
+.bq-ride { padding: 8px 12px; border-left: 4px solid var(--doing); background: var(--paper); border-radius: 0 8px 8px 0; }
+/* Chips on paper (the side lines' own pages), not on the dark machine level. */
+.worth-it .chip-btn { color: var(--ink); border-color: var(--ink-2); background: var(--sheet); font-size: 0.8rem; padding: 5px 12px; }
+.worth-it .chip-btn:hover { border-color: var(--ink); color: var(--ink); }
+.worth-it .chip-btn[aria-pressed="true"] { background: var(--doing); border-color: var(--doing); color: var(--doing-ink); }

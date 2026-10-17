@@ -666,5 +666,33 @@ export const GLOSSARY: GlossaryEntry[] = [
     ],
     example: 'The recorded run made two requests: 274 tokens in and 29 out, then 327 in and 18 out. That bills 601 input tokens and 47 output tokens, and your 20-token question is counted twice.',
     related: ['token', 'context-window', 'kv-cache', 'reasoning-model', 'byte-pair-encoding']
+  },
+  {
+    id: 'alignment',
+    term: 'alignment',
+    aka: ['AI alignment', 'AI safety'],
+    station: 'R',
+    short: 'Alignment is the work of making AI systems do what their makers and users intend, including when nobody is checking.',
+    deeper: [
+      'A model learns to score next tokens, not to share anyone’s goals. Fine-tuning and human feedback steer it toward helpful, honest replies, but they shape behavior from the outside. Nobody can yet read the weights and confirm what a model will do in every situation.',
+      'So labs test it. In one 2025 test, many leading models acting as an email agent chose blackmail when told they would be shut down. The setup was contrived, and the lab saw no sign of it in real use, but it showed how a goal plus tools can go wrong.',
+      'Testing has its own problem: models increasingly notice when they are being tested, and can behave better then. That is why safeguards outside the model matter too, such as limited access, logs, and a person approving risky actions.'
+    ],
+    example: 'In the Gatehouse, Pantry Bot was told never to reveal the secret ingredient, and gave it away in 28 of 50 replies. Following the app’s rules is a small, everyday piece of alignment.',
+    related: ['human-feedback', 'agent', 'prompt-injection', 'recursive-self-improvement']
+  },
+  {
+    id: 'recursive-self-improvement',
+    term: 'recursive self-improvement',
+    aka: ['intelligence explosion', 'AI building AI'],
+    station: 'R',
+    short: 'Recursive self-improvement is AI helping build better AI, which then helps build better AI still. Pieces of it exist now; whether it could run away is debated.',
+    deeper: [
+      'In 1965 the statistician I. J. Good argued that a machine able to design better machines could set off an intelligence explosion, the last invention people would need to make, as long as it stayed under control.',
+      'Pieces of that loop are real. In 2025 an AI system sped up a step in training its own successors. In 2026 labs reported that AI wrote most of their new code, while people still chose the research goals.',
+      'Some researchers argue the world should keep the ability to slow down or pause if the loop speeds up, which would take agreement among labs in several countries. Others doubt the loop can run without people at all.'
+    ],
+    example: 'On our ride the model changed 0 of its 494 million numbers. Self-improvement means AI doing the Academy’s work, the training, for the next model.',
+    related: ['pretraining', 'alignment', 'agent']
   }
 ]
