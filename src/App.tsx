@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { AboutPage } from './pages/AboutPage'
 import { GlossaryPage } from './pages/GlossaryPage'
 import { Home } from './pages/Home'
 import { LinePage } from './pages/LinePage'
@@ -20,10 +21,10 @@ export function App() {
     <div className="wrap">
       <TopBar route={route} />
       <main>
-        {station ? <StationPage key={station} code={station} /> : line ? <LinePage key={line} code={line} /> : glossary ? <GlossaryPage term={route.split('/')[1]} /> : <Home />}
+        {station ? <StationPage key={station} code={station} /> : line ? <LinePage key={line} code={line} /> : glossary ? <GlossaryPage term={route.split('/')[1]} /> : route === 'about' ? <AboutPage /> : <Home />}
       </main>
       <footer className="site-foot">
-        <span>Prompt Life v2.0.{__BUILD__ || 'dev'}</span>
+        <span>Prompt Life v2.0.{__BUILD__ || 'dev'} · <a href="#/about">How it was made</a></span>
         <span>Progress stays on this device.</span>
         <SoundToggle />
         <StartOver />

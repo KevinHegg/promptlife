@@ -22,7 +22,7 @@ export function Home() {
     <>
       <header className="masthead">
         <h1>What happens after you hit Send?</h1>
-        <p className="lede">Follow one question through a real AI model, like a train through a subway map.</p>
+        <p className="lede">Follow one question through a real AI model, like a train through a subway map. <a className="lede-link" href="#/about">Every number is real: here’s how.</a></p>
         <div className="question-card">
           <span className="kicker">The question</span>
           <p>“{SCENARIO.user}”</p>

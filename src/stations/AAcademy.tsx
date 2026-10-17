@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { ArcPanel, Rater, Trainer, TrainBreak, type RaterPair } from '../cutaway/stations/AcademyTrainer'
+import { FineTune } from '../cutaway/stations/FineTune'
 import { gatehouseSample } from '../data/gatehouse'
 import { libraryRun } from '../data/library'
 import { phase1 } from '../data/phase1'
@@ -55,16 +56,31 @@ function pairs(): RaterPair[] {
 }
 
 function TryIt() {
-  const [step, setStep] = useState<'train' | 'rate'>('train')
+  const [step, setStep] = useState<'train' | 'tune' | 'rate'>('train')
   if (step === 'train') {
     return (
       <div className="substep">
-        <p className="substep-label">1 of 2 · Train a tiny model</p>
+        <p className="substep-label">1 of 3 · Train a tiny model</p>
         <Trainer />
         <p className="muted small">
           This toy has 8,109 numbers and practices on 1,612 letters. The model on our ride, Qwen2.5-0.5B, has about 494 million numbers and was trained on about 18 trillion tokens, with the same loop: guess, measure the miss, nudge.
         </p>
         <div className="substep-next">
+          <button type="button" className="btn primary" onClick={() => setStep('tune')}>Next: before and after fine-tuning →</button>
+        </div>
+      </div>
+    )
+  }
+  if (step === 'tune') {
+    return (
+      <div className="substep">
+        <p className="substep-label">2 of 3 · Before and after fine-tuning</p>
+        <p>
+          Pretraining on that much text makes a <i>base model</i>. Its makers then <Term id="fine-tuning">fine-tune</Term> it on example chats. Here’s the same page, our ride’s question and card, sent to Qwen’s base model and to the fine-tuned model on our ride.
+        </p>
+        <FineTune />
+        <div className="substep-next">
+          <button type="button" className="link-btn" onClick={() => setStep('train')}>← Back</button>
           <button type="button" className="btn primary" onClick={() => setStep('rate')}>Next: be the rater →</button>
         </div>
       </div>
@@ -72,8 +88,8 @@ function TryIt() {
   }
   return (
     <div className="substep">
-      <p className="substep-label">2 of 2 · Be the rater</p>
-      <p>Guessing the next token makes a model that continues text. To make an assistant, people compare pairs of its replies and pick the better one. These are real replies from the model on our ride.</p>
+      <p className="substep-label">3 of 3 · Be the rater</p>
+      <p>Fine-tuning shows the model good example replies. Then people compare pairs of its replies and pick the better one. These are real replies from the model on our ride.</p>
       <Rater
         pairs={pairs()}
         outro={
@@ -83,7 +99,7 @@ function TryIt() {
         }
       />
       <div className="substep-next">
-        <button type="button" className="link-btn" onClick={() => setStep('train')}>← Back to training</button>
+        <button type="button" className="link-btn" onClick={() => setStep('tune')}>← Back</button>
       </div>
     </div>
   )
@@ -104,7 +120,7 @@ export const LINE_A_SPEC: LoopSpec = {
   },
   poke: {
     title: 'Train a model',
-    intro: 'Training is a guessing game: guess the next letter, measure the miss, nudge every number a little, repeat. Watch a tiny model learn Grandma’s recipe box, then judge some real replies yourself.',
+    intro: 'Three stages, the Academy’s three stops: train a tiny model yourself, see what fine-tuning changed in a real one, then judge real replies the way raters do.',
     body: <TryIt />
   },
   name: {

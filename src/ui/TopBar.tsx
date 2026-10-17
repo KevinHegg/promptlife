@@ -198,6 +198,7 @@ function StationsSheet({ open, onClose, here }: { open: boolean; onClose: () => 
           <div className="sheet-foot">
             <a href="#/" onClick={onClose}>The whole map</a>
             <a href="#/glossary" onClick={onClose}>Glossary</a>
+            <a href="#/about" onClick={onClose}>How it was made</a>
             <SoundToggle />
             <StartOver />
           </div>

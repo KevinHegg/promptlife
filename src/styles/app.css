@@ -1266,3 +1266,36 @@ blockquote { margin: 0; padding: 10px 14px; border-left: 3px solid var(--ink-2);
 .size-switch { display: inline-flex; align-self: flex-start; border: 1.5px solid var(--ink); border-radius: 999px; overflow: hidden; }
 .size-switch button { font-size: 0.85rem; padding: 6px 12px; background: var(--sheet); color: var(--ink); border: 0; cursor: pointer; }
 .size-switch button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.fine-tune { display: flex; flex-direction: column; gap: 12px; }
+.ft-pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px; }
+.ft-card { display: flex; flex-direction: column; gap: 8px; padding: 12px 14px; border-radius: 12px; background: var(--sheet); border: 1.5px solid var(--rule); min-width: 0; }
+.ft-card:last-child { border-color: var(--l-academy); }
+.ft-model { font-family: var(--font-mono); font-size: 0.75rem; color: var(--ink-2); }
+.ft-stat { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.ft-stat b { font-family: var(--font-display); font-weight: 800; font-size: 1.5rem; font-variant-numeric: tabular-nums; }
+.ft-stat span { font-size: 0.85rem; color: var(--ink-2); }
+.ft-said { margin: 0; padding: 8px 10px; border-radius: 8px; background: var(--lv2); color: var(--lv2-ink); font-family: var(--font-mono); font-size: 0.75rem; line-height: 1.45; white-space: pre-wrap; overflow-wrap: anywhere; }
+.ft-note { font-size: 0.88rem; line-height: 1.45; }
+.substep-next:has(.link-btn + .btn) { justify-content: space-between; }
+
+/* ── About: how it was made ──────────────────────────────────────────── */
+.lede-link { white-space: nowrap; font-size: 0.92em; }
+.about { display: flex; flex-direction: column; gap: 32px; max-width: 68ch; margin-inline: auto; padding-block: 8px 24px; }
+.about-head { display: flex; flex-direction: column; gap: 10px; }
+.about-head h1 { font-family: var(--font-display); font-weight: 900; font-size: clamp(1.8rem, 6vw, 2.6rem); line-height: 1.1; }
+.about-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px; margin-top: 6px; }
+.about-sec { display: flex; flex-direction: column; gap: 12px; }
+.about-sec h2 { font-family: var(--font-display); font-weight: 800; font-size: 1.35rem; }
+.about-sec h3 { font-family: var(--font-display); font-weight: 800; font-size: 1.02rem; margin-bottom: 4px; }
+.about-sec p, .about-sec li { line-height: 1.55; }
+.method-line { list-style: none; margin: 0; padding: 0; position: relative; display: flex; flex-direction: column; gap: 18px; }
+.method-line::before { content: ''; position: absolute; left: 15px; top: 14px; bottom: 14px; width: 6px; border-radius: 3px; background: var(--main); }
+.method-line li { position: relative; display: grid; grid-template-columns: 36px 1fr; gap: 14px; align-items: start; }
+.ml-dot { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: var(--sheet); border: 5px solid var(--main); font-family: var(--font-display); font-weight: 900; font-size: 0.95rem; z-index: 1; }
+.model-cards { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px; }
+.model-cards li { display: flex; flex-direction: column; gap: 4px; padding: 12px 14px; border-radius: 12px; background: var(--sheet); border: 1.5px solid var(--rule); }
+.mc-name { font-family: var(--font-mono); font-weight: 600; font-size: 0.9rem; color: var(--ink); }
+.mc-meta { font-size: 0.8rem; color: var(--ink-2); }
+.model-cards p { font-size: 0.9rem; }
+.two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.about code { font-family: var(--font-mono); font-size: 0.85em; }
