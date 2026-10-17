@@ -131,7 +131,7 @@ export const P08_SPEC: LoopSpec = {
         options: [
           { text: 'Yes: models learn from every chat', why: 'Answering never changes the model.' },
           { text: 'Only if the app saved it and pasted it into this conversation', correct: true, why: 'The model can use only what’s in its context.' },
-          { text: 'No: models can’t use personal information', why: 'They can use anything in the context.' }
+          { text: 'Yes: the model remembers each person it talks to', why: 'The model keeps nothing between chats. Any memory is the app saving notes and pasting them back in.' }
         ]
       }
     ],

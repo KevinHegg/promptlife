@@ -132,7 +132,7 @@ export const P03_SPEC: LoopSpec = {
         options: [
           { text: 'Yes, it learns words as you use them', why: 'Using a model never changes its weights.' },
           { text: 'Yes, if you explain the word in your message', why: 'The explanation helps this one answer. No row is added.' },
-          { text: 'No: the table is fixed, so the word is cut into tokens it already has', correct: true, why: 'Any word can be spelled from existing tokens, and each keeps its old row.' }
+          { text: 'No: it spells the word from tokens it already has', correct: true, why: 'Any word can be spelled from existing tokens, and each keeps its old row.' }
         ]
       },
       {

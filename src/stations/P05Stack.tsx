@@ -149,11 +149,11 @@ export const P05_SPEC: LoopSpec = {
         ]
       },
       {
-        q: 'A guess read halfway up is wrong, and the top floor gets it right. What’s the best description?',
+        q: 'In the elevator, floor 12’s guess was a scrap of text and the top floor’s was “8.” What does that tell you?',
         options: [
-          { text: 'The model changed its mind', why: 'There’s no mind. One list of numbers kept being edited.' },
-          { text: 'The model lied, then fixed it', why: 'Lying needs intent. This is arithmetic.' },
-          { text: 'An unfinished draft, read with a trick, before later floors added their edits', correct: true, why: 'Reading a floor’s guess peeks at a half-finished calculation.' }
+          { text: 'Floor 12 made a mistake that a later floor caught', why: 'No floor checks another. Floor 12’s numbers were never meant to be read as a guess.' },
+          { text: 'The answer wasn’t built yet; later floors kept adding edits', correct: true, why: 'Every floor edits the same list of numbers. Read it halfway and you see unfinished work.' },
+          { text: 'The floors voted, and “8” won', why: 'The vote happens once, after the top floor. Inside the stack, one list of numbers is edited.' }
         ]
       }
     ],

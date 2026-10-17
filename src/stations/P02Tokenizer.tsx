@@ -142,8 +142,8 @@ export const P02_SPEC: LoopSpec = {
       {
         q: 'Why have chatbots often miscounted the r’s in “strawberry”?',
         options: [
-          { text: 'They can’t count to three', why: 'Counting isn’t the issue. The letters aren’t in what it sees.' },
-          { text: '“ strawberry” reaches the model as one ID, not ten letters', correct: true, why: 'The model sees ID 101830, not s-t-r-a-w-b-e-r-r-y.' },
+          { text: 'Double letters confuse its spelling rules', why: 'It has no spelling rules. It never sees the letters at all.' },
+          { text: 'It gets “ strawberry” as one ID, not ten letters', correct: true, why: 'The model sees ID 101830, not s-t-r-a-w-b-e-r-r-y.' },
           { text: 'It isn’t in the vocabulary', why: 'It is, as one token. That’s the problem.' }
         ]
       },

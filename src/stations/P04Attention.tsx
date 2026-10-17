@@ -71,11 +71,11 @@ export const P04_SPEC: LoopSpec = {
   stamp: {
     questions: [
       {
-        q: 'In “Do not add sugar,” a head puts heavy weight on “not.” Does that show the model understood?',
+        q: 'In “Do not add sugar,” a head gives most of its attention to “not.” Does that show the model understood?',
         options: [
-          { text: 'Yes: attention is focus', why: 'Nobody is there to focus. The weights describe how numbers were mixed.' },
-          { text: 'No: it shows how numbers were mixed; only the reply shows whether the instruction was followed', correct: true, why: 'Weights show where information came from, not understanding.' },
-          { text: 'Yes: heavy weight means high confidence', why: 'Attention weights describe mixing, not certainty.' }
+          { text: 'Yes: attention is focus', why: 'Nobody is there to focus. The shares describe how numbers were mixed.' },
+          { text: 'No: it shows how numbers were mixed, not understanding', correct: true, why: 'Attention shares show where information came from. Only the reply shows whether “not” was obeyed.' },
+          { text: 'Yes: a big share means it’s confident', why: 'Attention shares describe mixing, not certainty.' }
         ]
       },
       {

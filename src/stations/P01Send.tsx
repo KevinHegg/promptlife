@@ -129,7 +129,7 @@ export const P01_SPEC: LoopSpec = {
         options: [
           { text: 'Your two words', why: `They're a sliver, like your ${runCounts.question} of ${runCounts.total} tokens here.` },
           { text: 'The reading’s text', correct: true, why: 'Attached and fetched text usually dwarfs what you type.' },
-          { text: 'A summary prepared in advance', why: 'Nothing is prepared. The summary is written one token per trip.' }
+          { text: 'What it already knows about the topic', why: 'What it learned lives in its weights, not in the context. The context is what it reads right now.' }
         ]
       }
     ],

@@ -120,14 +120,14 @@ export const P07_SPEC: LoopSpec = {
         q: '300 messages into a chat, the bot forgets you said you’re vegetarian. The app trims old messages. What helps most?',
         options: [
           { text: 'Tell it to try harder to remember', why: 'Words can’t bring back tokens that were cut from the context.' },
-          { text: 'Wait a day for it to learn', why: 'It never learns from your chats.' },
+          { text: 'Start a new chat so it has more room', why: 'A new chat starts empty: everything you said before is gone.' },
           { text: 'Say it again in a recent message', correct: true, why: 'Then it’s back in the context, where the model can use it.' }
         ]
       },
       {
         q: 'A reply is 200 tokens long. How many trips did it take?',
         options: [
-          { text: '1: replies come out whole', why: 'One token per trip.' },
+          { text: 'About 150: one per word', why: 'Trips count tokens, not words, and a token is often less than a word.' },
           { text: '200: one per new token', correct: true, why: 'Each trip writes exactly one token.' },
           { text: '200 plus the length of your question', why: 'Your question rides along, all at once, on the first trip.' }
         ]

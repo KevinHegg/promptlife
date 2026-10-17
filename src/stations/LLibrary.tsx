@@ -120,17 +120,17 @@ export const LINE_L_SPEC: LoopSpec = {
       {
         q: 'You upload a year of receipts and ask “How much did I spend on coffee?” The app pastes in the top 5 receipts. What’s the risk?',
         options: [
-          { text: 'None: it reads all your receipts', why: 'It reads only the 5 the app pasted in.' },
-          { text: 'The total covers only the receipts it was given, so it’s probably too low', correct: true, why: 'Top K can’t add up what it never saw.' },
-          { text: 'It refuses to answer', why: 'Usually it answers anyway, and sounds sure.' }
+          { text: 'None: it reads every receipt, so the total is right', why: 'It reads only the 5 the app pasted in.' },
+          { text: 'The total covers only 5 receipts, so it’s too low', correct: true, why: 'Top K can’t add up what it never saw.' },
+          { text: 'It says it can’t see the other receipts', why: 'It rarely mentions what it wasn’t given. It answers from what it has, and sounds sure.' }
         ]
       },
       {
         q: 'An app raises K from 3 to 50. What’s the most likely effect?',
         options: [
           { text: 'Every answer gets better', why: 'Lookalike chunks crowd in and can muddle the answer.' },
-          { text: 'More of the right chunks, but more noise too, and a fuller context window', correct: true, why: 'Bigger K is a trade, not a fix.' },
-          { text: 'Nothing: K doesn’t matter', why: 'K decides everything the model gets to see.' }
+          { text: 'More of the right chunks, but more lookalikes too', correct: true, why: 'Bigger K is a trade, not a fix.' },
+          { text: 'Slower answers, but otherwise the same', why: 'Speed is a cost, but K also decides everything the model gets to see.' }
         ]
       }
     ],

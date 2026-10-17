@@ -88,15 +88,15 @@ export const LINE_W_SPEC: LoopSpec = {
         options: [
           { text: 'The calculator’s arithmetic', why: 'The calculator is exact. The question it was asked may not be.' },
           { text: 'Whether it asked the calculator the right question', correct: true, why: 'A perfect calculator can solve the wrong problem.' },
-          { text: 'Nothing: tools make answers correct', why: 'Tools do exactly what they’re asked, right or wrong.' }
+          { text: 'How confident it sounds about the result', why: 'Confidence is just more text. Check the question it sent the calculator.' }
         ]
       },
       {
         q: 'Which job is a tool better at than pasting in the top K chunks?',
         options: [
-          { text: 'Finding the one passage that answers a question', why: 'Retrieval does that well.' },
-          { text: 'Counting or adding across every one of your files', correct: true, why: 'A tool can read everything; top K sees a few chunks.' },
-          { text: 'Writing a friendly reply', why: 'That’s the model’s job.' }
+          { text: 'Finding the passage that best matches a question', why: 'Retrieval does that well.' },
+          { text: 'Counting or adding across all your uploads', correct: true, why: 'A tool can read everything; top K sees a few chunks.' },
+          { text: 'Understanding what your question means', why: 'The model does that part either way. A tool adds a way to read everything.' }
         ]
       }
     ],
