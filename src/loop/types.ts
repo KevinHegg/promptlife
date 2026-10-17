@@ -29,6 +29,8 @@ export type LoopSpec = {
   stamp: { questions: QuizQuestion[]; art: ReactNode; receipt: Receipt }
   /** Steps during which the page's small map window hides (e.g. while a full map is on screen). */
   hideLocatorOn?: BeatId[]
+  /** Steps that skip the ride ticket (the question and model), shown on Try it and Break it by default. */
+  hideTicketOn?: BeatId[]
   /** Optional extra offered after the stamp lands, never in the way of the loop. */
   bonus?: { label: string; body: ReactNode }
 }

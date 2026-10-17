@@ -800,10 +800,12 @@ blockquote { margin: 0; padding: 10px 14px; border-left: 3px solid var(--ink-2);
 .shaft .fl.lead { background: color-mix(in srgb, var(--doing) 45%, var(--lv2-line)); }
 .shaft .fl.on { background: var(--doing); box-shadow: 0 0 0 2px var(--lv2-ink); }
 .lift-panel { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
-.lift-buttons { display: flex; align-items: center; gap: 10px; }
-.lift-buttons .btn { min-width: 44px; justify-content: center; }
-.lift-floor { font-family: var(--font-board); font-size: 1.15rem; color: var(--lv2-ink); }
+.lift-buttons { display: flex; align-items: center; gap: 6px; flex-wrap: nowrap; }
+.lift-buttons .btn { min-width: 44px; padding-inline: 10px; justify-content: center; flex: none; }
+.lift-floor { font-family: var(--font-board); font-size: 1.05rem; color: var(--lv2-ink); white-space: nowrap; }
 .lift-floor small { font-size: 0.75rem; color: var(--lv2-dim); }
+/* Narrow phones: the shaft already shows how many floors there are. */
+@media (max-width: 370px) { .lift-floor small { display: none; } }
 .lift-guesses { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
 .lift-guesses li { display: grid; grid-template-columns: minmax(3.5em, auto) minmax(0, 1fr) 3.2em; gap: 8px; align-items: center; font-family: var(--font-mono); font-size: 0.85rem; color: var(--lv2-ink); }
 .lift-guesses li.is-final .lg-tok { color: var(--doing); font-weight: 700; }
@@ -956,6 +958,10 @@ blockquote { margin: 0; padding: 10px 14px; border-left: 3px solid var(--ink-2);
 .recipe-card .rc-back { margin-top: 26px; }
 .recipe-card mark { background: color-mix(in srgb, var(--doing) calc(var(--w, 1) * 100%), transparent); color: inherit; border-radius: 3px; padding: 0 2px; font-weight: 700; font-style: normal; }
 .recipe-card figcaption { margin-top: 14px; font-family: var(--font-body); font-style: normal; font-size: 0.82rem; color: #5A5866; line-height: 1.4; background: #FFFDF4; }
+.ride-ticket { display: flex; flex-direction: column; gap: 4px; padding: 10px 14px; margin-bottom: 14px; border-radius: 10px; background: var(--paper, var(--sheet)); border: 1.5px dashed var(--rule); max-width: 64ch; }
+.ride-ticket .tk-q { font-family: var(--font-display); font-weight: 800; font-size: 0.98rem; line-height: 1.35; }
+.ride-ticket .tk-by { font-size: 0.84rem; line-height: 1.45; color: var(--ink-2); }
+.ride-ticket .link-btn { font-family: var(--font-display); font-weight: 800; color: var(--ink); }
 .card-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; padding-top: 8px; margin-top: 4px; border-top: 1px dashed var(--rule); font-size: 0.92rem; }
 .card-row .link-btn { font-family: var(--font-display); font-weight: 800; color: var(--ink); }
 .card-how { font-size: 0.88rem; color: var(--ink-2); line-height: 1.45; }

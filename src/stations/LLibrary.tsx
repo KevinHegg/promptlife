@@ -79,6 +79,8 @@ function allOptions(verdicts: Record<string, string>): TextBreakOption[] {
 
 export const LINE_L_SPEC: LoopSpec = {
   code: 'L',
+  // The Library asks its own questions about the whole recipe box.
+  hideTicketOn: ['poke', 'break'],
   arrive: {
     caption: 'On the ride you uploaded one card. Now picture Grandma’s whole recipe box. The app can’t paste in every card, so it picks the top K.',
     panel: <BoxPanel />,

@@ -54,7 +54,7 @@ export function Elevator() {
   const context = trace ? contextBeforePos(trace, lens.pos) : ''
   return (
     <div className="v-col elevator">
-      <Howto>Pick a moment, then tap a floor or use ▲ ▼.</Howto>
+      <Howto>Pick a moment, then tap a floor or use ▲ ▼.</Howto>
       <div className="v-examples" role="group" aria-label="Moment">
         {lenses.map((x) => (
           <button key={x.id} type="button" className="chip-btn" aria-pressed={x.id === m.id} onClick={() => { setMid(x.id); tick() }}>{x.name}</button>

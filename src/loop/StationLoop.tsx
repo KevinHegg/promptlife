@@ -6,6 +6,7 @@ import { hrefFor } from '../lib/router'
 import { chime, stampSound, tick } from '../lib/sound'
 import { GuessCard, QuizCard } from './Choices'
 import { StampArt } from './StampArt'
+import { RideTicket } from '../ui/RideTicket'
 import { BEAT_LABELS, beatsFor, type BeatId, type LoopSpec } from './types'
 
 const today = () => new Date().toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' })
@@ -96,6 +97,7 @@ export function StationLoop({ spec, onRideOn, onBeatChange }: { spec: LoopSpec; 
 
         {beat === 'poke' && (
           <>
+            {!spec.hideTicketOn?.includes('poke') && <RideTicket />}
             <div className="beat-head">
               <p className="kicker">Try it</p>
               <h2>{spec.poke.title}</h2>
@@ -128,6 +130,7 @@ export function StationLoop({ spec, onRideOn, onBeatChange }: { spec: LoopSpec; 
 
         {beat === 'break' && spec.break && (
           <>
+            {!spec.hideTicketOn?.includes('break') && <RideTicket />}
             <div className="beat-head">
               <p className="kicker sabotage">Break it · sabotage</p>
               <h2>{spec.break.title}</h2>

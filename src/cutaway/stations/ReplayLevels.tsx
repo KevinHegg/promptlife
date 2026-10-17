@@ -55,7 +55,7 @@ export function Replay() {
   const W = steps.length * 7
   return (
     <div className="v-col replay">
-      <Howto>Drag along the strip, or use ◀ ▶, to replay one trip at a time.</Howto>
+      <Howto>Drag along the strip, or use ◀ ▶, to replay one trip at a time.</Howto>
       <ul className="rp-targets">
         {targets.map((t) => (
           <li key={t.id} className={found.has(t.id) ? 'done' : ''}>{found.has(t.id) ? '✓ ' : ''}{t.label}</li>
