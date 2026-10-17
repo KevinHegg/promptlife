@@ -131,7 +131,7 @@ export const P05_SPEC: LoopSpec = {
         }}
         takeaway={
           <>
-            <p><b>That’s why it’s a stack.</b> Each floor builds on the edits below it. Floors 13 to 24 can each go missing almost harmlessly, yet stopping at floor 18 turns the reply to junk: the top floors are spare one at a time but needed together.</p>
+            <p><b>That’s why it’s a stack.</b> Each floor builds on the edits below it. Take out any one of floors 13 to 24 and the reply barely changes. Take out the top six at once, floors 19 to 24, and it turns to junk. No single top floor matters much on its own; together, they finish the answer.</p>
             <SkipChart />
           </>
         }
