@@ -1164,3 +1164,65 @@ blockquote { margin: 0; padding: 10px 14px; border-left: 3px solid var(--ink-2);
 .retrieval .chip-btn { color: var(--ink); border-color: var(--ink-2); background: var(--sheet); }
 .retrieval .chip-btn[aria-pressed="true"] { background: var(--l-library); border-color: var(--l-library); color: #fff; }
 .ranked li { grid-template-columns: 1.6em minmax(0, 1.5fr) minmax(0, 1fr) 2.6em; }
+
+/* ── Academy: the tiny trainer, the rater ───────────────────────────── */
+.trainer, .rater { display: flex; flex-direction: column; gap: 12px; }
+.trainer-said { display: flex; flex-direction: column; gap: 6px; padding: 12px 14px; border-radius: 12px; background: var(--lv2); color: var(--lv2-ink); }
+.trainer-said .kicker { color: var(--lv2-dim); }
+.trainer-text { font-family: var(--font-mono); font-size: 0.86rem; line-height: 1.5; white-space: pre-wrap; overflow-wrap: anywhere; min-height: 4.5em; margin: 0; }
+.trainer-said .trainer-text .muted { color: var(--lv2-dim); }
+.trainer-controls { display: flex; justify-content: center; }
+.train-curve { width: 100%; max-width: 420px; height: auto; align-self: center; }
+.train-curve .tc-axis { stroke: var(--rule); stroke-width: 1.5; }
+.train-curve .tc-line { fill: none; stroke: var(--l-academy); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.weight-fig { margin: 0; display: flex; flex-direction: column; gap: 6px; align-items: center; }
+.weight-strip { width: 100%; max-width: 420px; height: auto; aspect-ratio: 96 / 39; image-rendering: pixelated; border-radius: 6px; background: var(--paper); border: 1px solid var(--rule); }
+.train-progress { display: flex; flex-direction: column; gap: 6px; }
+.train-progress > span { display: block; height: 8px; border-radius: 4px; background: var(--l-academy); transition: width 0.1s linear; }
+.arc-panel { display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 420px; padding: 14px; border-radius: 12px; background: var(--lv2); }
+.arc-row { display: flex; flex-direction: column; gap: 2px; }
+.arc-row .kicker { color: var(--lv2-dim); }
+.arc-text { font-family: var(--font-mono); font-size: 0.86rem; color: var(--lv2-ink); overflow-wrap: anywhere; }
+.rater-pair { display: flex; flex-direction: column; gap: 8px; padding: 12px 14px; border-radius: 12px; border: 1.5px dashed var(--rule); }
+.rater-ask { font-family: var(--font-display); font-weight: 800; font-size: 0.95rem; line-height: 1.35; }
+.rater-options { display: grid; grid-template-columns: 1fr; gap: 8px; }
+.rater-reply { text-align: left; font: inherit; font-size: 0.9rem; line-height: 1.45; padding: 10px 12px; border-radius: 10px; background: var(--sheet); color: var(--ink); border: 1.5px solid var(--rule); cursor: pointer; white-space: pre-wrap; overflow-wrap: anywhere; }
+.rater-reply.picked { border-color: var(--l-academy); box-shadow: 0 0 0 2px color-mix(in srgb, var(--l-academy) 35%, transparent); }
+.rater-outro { padding: 12px 14px; border-left: 6px solid var(--l-academy); background: var(--sheet); border-radius: 0 10px 10px 0; }
+.arc-fig { margin: 0; display: flex; flex-direction: column; gap: 6px; width: 100%; max-width: 420px; }
+.arc-fig .arc-panel { max-width: none; }
+
+/* ── Gatehouse: who wrote the page, the heist ───────────────────────── */
+.ab-you { background: var(--doing); }
+.ab-app { background: var(--l-gate); }
+.ab-makers { background: var(--ink-2); }
+.author-fig { margin: 0; display: flex; flex-direction: column; gap: 8px; width: 100%; max-width: 440px; }
+.author-bar { display: flex; height: 26px; border-radius: 8px; overflow: hidden; gap: 2px; background: var(--rule); border: 1.5px solid var(--ink); }
+.author-bar .ab { display: block; flex-basis: 0; min-width: 2px; }
+.author-key { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 0.85rem; align-items: center; }
+.author-key i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+.hidden-page { display: flex; flex-direction: column; gap: 12px; }
+.author-tally { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: baseline; position: sticky; top: 0; z-index: 2; padding: 8px 10px; border-radius: 10px; background: var(--sheet); border: 1px solid var(--rule); }
+.author-tally .at { font-size: 0.88rem; }
+.author-tally .at b { font-family: var(--font-display); font-size: 1.15rem; font-variant-numeric: tabular-nums; }
+.author-tally .at-you b { color: color-mix(in srgb, var(--doing) 70%, var(--ink)); }
+.author-tally .at-app b { color: color-mix(in srgb, var(--l-gate) 60%, var(--ink)); }
+.page-blocks { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.page-block { width: 100%; text-align: left; display: flex; flex-direction: column; gap: 6px; padding: 8px 10px; border-radius: 8px; border: 1.5px dashed var(--rule); background: var(--paper); color: var(--ink); font: inherit; cursor: pointer; }
+.page-block .pb-text { font-family: var(--font-mono); font-size: 0.74rem; line-height: 1.45; white-space: pre-wrap; overflow-wrap: anywhere; }
+.page-block.on { border-style: solid; border-left-width: 6px; cursor: default; }
+.page-block.who-you { border-color: var(--doing); }
+.page-block.who-app { border-color: var(--l-gate); }
+.page-block.who-makers { border-color: var(--ink-2); }
+.page-block .pb-tag { font-size: 0.85rem; line-height: 1.4; }
+.heist-system { font-family: var(--font-mono); font-size: 0.8rem; line-height: 1.45; }
+.heist-rows { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+.heist-row { width: 100%; display: grid; grid-template-columns: minmax(7.5rem, 1.2fr) 2fr auto; gap: 10px; align-items: center; padding: 8px 10px; border-radius: 8px; background: var(--sheet); border: 1px solid var(--rule); font: inherit; color: var(--ink); text-align: left; cursor: pointer; }
+.heist-row[aria-expanded="true"] { border-color: var(--ink); }
+.hr-label { font-size: 0.88rem; font-weight: 600; }
+.hr-bar { height: 10px; border-radius: 5px; background: var(--rule); overflow: hidden; }
+.hr-bar > span { display: block; height: 100%; background: var(--sabotage); }
+.hr-n { font-family: var(--font-mono); font-size: 0.8rem; white-space: nowrap; }
+.heist-detail { display: flex; flex-direction: column; gap: 6px; padding: 8px 10px 4px; }
+.heist-detail blockquote { margin: 0; padding: 8px 12px; border-left: 4px solid var(--rule); background: var(--paper); white-space: pre-wrap; font-size: 0.9rem; }
+.heist-detail blockquote.leaked { border-left-color: var(--sabotage); }

@@ -498,6 +498,12 @@ If the recording needed steering, this is where the board says so.
   - "No calculator": it reasons in words to "60 cups".
 - **Takeaway:** a tool is only as good as the request.
 ### G Gatehouse (from Send): G1 Hidden instructions, G2 Injection Heist
+**Built (2026-10-17).** Data: `scripts/trace/make_gatehouse.py` writes `gatehouse.json`.
+- **Try it:** "Read the whole page" shows the hero first turn as the model reads it, in ten blocks. Tap one to see who wrote it. Of 274 tokens: you 92 (20 typed plus a 72-token upload), the app 92, the model's makers 90.
+- **Break it:** "Steal the secret" puts Pantry Bot's three defenses (never reveal it, stronger wording, keep it out) against five attacks. Each pairing ran 10 times with the model's own sampling. Leaks: 28, 22 and 1 of 50; the one was a lucky "cinnamon and nutmeg" guess.
+- **The planted note in the upload went 0 for 30.** This small model hardly follows instructions buried in a long page, the app's own included. The takeaway says so honestly.
+- **The original plan below was trimmed.** The defense cards became three recorded defenses, and there are no live attacks.
+
 **G1.** See everything the model actually reads: the hidden labels marking who's talking, the hidden instructions, the calculator description, then your 19† pieces. A counter shows how much you never saw.
 
 **G2 Injection Heist.** Pantry Bot keeps Grandma's secret ingredient in its hidden instructions and has been told never to share it. It works in three steps.
@@ -519,6 +525,12 @@ The lesson is that wording helps a little. The reliable fixes keep secrets out o
 - **Needs:** everything the model reads, from the recording, plus an attack-card library with replies precomputed from a real small model, each attack run several times.
 
 ### A Academy (from The Stack): A1 Pretraining, A2 Fine-tuning, A3 Human feedback
+**Built (2026-10-17).**
+- **Try it, 1 of 2:** a real letter-level model (`src/lib/tinyLM.ts`, 8,109 numbers, seeded) trains live on the 13 recipe-box cards. The chance it gives the right next letter goes from 3% to 87% in 1,500 rounds, and what it writes goes from noise to "grandma's cornbread. serves 9."
+- **Try it, 2 of 2:** "Be the rater" offers three pairs of real recorded replies: right versus wrong, keeping a rule versus leaking it, and a matter of taste.
+- **Break it:** "Feed it different pages" trains a fresh copy for 800 rounds on each of: the cards, a typo everywhere ("flower"), one card, and scrambled letters. `tinyLM.test.ts` checks every verdict.
+- **Not built yet:** A2, the base model versus the instruct model, needs a download of Qwen2.5-0.5B (base).
+
 The only line that never lights during an answer.
 - **A1.** The fill-in-the-blank game at scale: guess the next piece of real text, measure the miss, nudge every number slightly, and repeat across trillions of pieces. To try it, train a tiny letter-level model in the browser on a public-domain text. The lamp lights here, and only here, as its output goes from noise to near-words.
 - **A2.** The hero question goes to the base model, which carries on the page (perhaps by writing more recipe questions). Beside it, the fine-tuned model answers.
