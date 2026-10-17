@@ -58,6 +58,14 @@ const HEAD_NAMES: Record<string, string> = {
   copy: 'Copier'
 }
 
+/** What each recorded head does, in story words; the trace's own label is written for us. */
+const HEAD_PLAIN: Record<string, string> = {
+  'question-to-card': 'When your question says “flour”, this head looks back at “flour” on the recipe card. It’s one way your question gets tied to the card.',
+  induction: 'The model has just written 30 in the calculator request. This head finds the earlier 30 in your question and looks at the word after it, “people”: what came next last time may come next again.',
+  'previous-token': 'This head mostly looks at the token just before. At “need” in the reply, it looks at “You”.',
+  copy: 'At the space just before the reply’s number, this head looks straight at the 8 in the calculator’s answer, 8.4375, so the reply can copy it.'
+}
+
 function headName(id: string | undefined, label: string) {
   if (id && HEAD_NAMES[id]) return HEAD_NAMES[id]
   if (/induction/i.test(label)) return 'Pattern finder'
@@ -86,14 +94,14 @@ export function attentionViewsFromTrace(t: Trace): AttentionView[] {
     const self = row.weights.find((w) => w.pos === row.queryPos)?.w ?? 0
     views.push({
       name: headName(row.id, row.label),
-      label: row.plain ?? row.label,
+      label: (row.id && HEAD_PLAIN[row.id]) ?? row.plain ?? row.label,
       query: query?.text ?? '',
       tokens: [
         ...earlier.map((w) => ({ text: t.tokens[w.pos]?.text ?? '?', w: w.w, pos: w.pos, src: t.tokens[w.pos]?.src })),
         { text: query?.text ?? '', w: self, pos: row.queryPos, src: query?.src }
       ],
       real: true,
-      source: `Real numbers from this model (${modelName(t)}). Hidden markers and the very first token, which collects leftover attention, are left out.`
+      source: `Real numbers from this model (${modelName(t)}).`
     })
   }
   return views

@@ -224,7 +224,6 @@ section { display: flex; flex-direction: column; gap: 16px; }
 .chip-btn { font-family: var(--font-mono); font-size: 0.75rem; white-space: pre; border-radius: 999px; padding: 3px 10px; border: 1px solid var(--lv2-dim); background: transparent; color: var(--lv2-ink); cursor: pointer; }
 .chip-btn:hover { border-color: var(--doing); color: var(--doing); }
 .chip-btn[aria-pressed="true"] { background: var(--doing); border-color: var(--doing); color: var(--doing-ink); }
-.head-label { font-family: var(--font-mono); font-size: 0.8rem !important; color: var(--doing); }
 .v-below { font-family: var(--font-mono); font-size: 0.74rem; color: var(--lv2-dim); border-top: 1px dashed var(--lv2-dim); padding-top: 6px; width: 100%; max-width: 440px; text-align: center; }
 .v-count { font-family: var(--font-mono); font-size: 0.85rem; color: var(--lv2-dim); }
 .v-count b { color: var(--doing); font-size: 1.05rem; }
@@ -244,13 +243,15 @@ section { display: flex; flex-direction: column; gap: 16px; }
 .spin-chip { font-family: var(--font-mono); font-size: 0.75rem; border: 1px solid var(--lv2-dim); border-radius: 4px; padding: 0 5px; margin: 2px; white-space: pre; display: inline-block; }
 .spin-chip:first-child { border-color: var(--doing); color: var(--doing); }
 .v-cap { font-family: var(--font-mono); font-size: 0.74rem; color: var(--lv2-dim); text-align: center; }
-.v-attn { width: 100%; max-width: 520px; height: auto; }
+.v-attn { width: 100%; max-width: 360px; height: auto; }
 .v-attn .chipbox { fill: var(--lv2); stroke: var(--lv2-dim); stroke-width: 1.5; }
 .v-attn .chipbox.hot { stroke: var(--doing); }
 .v-attn text { font-family: var(--font-mono); font-size: 12px; fill: var(--lv2-ink); }
 .v-attn .w { font-size: 10px; fill: var(--lv2-dim); }
 .v-attn .src { font-size: 9px; font-style: italic; }
 .v-attn .arc { fill: none; stroke: var(--doing); stroke-linecap: round; }
+.v-attn .arc-tip { fill: var(--doing); }
+.v-attn .arc-share { font-size: 11.5px; font-weight: 600; }
 .formula { font-family: var(--font-body); font-style: italic; font-size: clamp(1.05rem, 2vw, 1.3rem); line-height: 1.7; text-align: center; color: var(--ink); background: var(--lv3); padding: 10px 16px; border-radius: 8px; border: 1px solid var(--lv3-grid); }
 .formula sub, .formula sup { font-size: 0.65em; }
 .worked { font-family: var(--font-mono); font-size: 0.8rem; line-height: 1.7; color: var(--ink); background: var(--lv3); padding: 8px 14px; border-radius: 8px; border: 1px solid var(--lv3-grid); max-width: 460px; }
@@ -962,6 +963,7 @@ blockquote { margin: 0; padding: 10px 14px; border-left: 3px solid var(--ink-2);
 .arc-sources { display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 520px; }
 .arc-sources > p { font-size: 0.92rem; line-height: 1.5; color: var(--lv2-ink); }
 .arc-sources b { color: var(--doing); font-family: var(--font-mono); font-weight: 600; }
+.arc-sources > p.arc-meaning { font-size: 0.82rem; color: var(--lv2-dim); }
 .card-journey { margin: 0; padding-left: 1.3em; display: flex; flex-direction: column; gap: 6px; font-size: 0.9rem; line-height: 1.45; color: var(--ink-2); }
 .card-journey b { color: var(--ink); font-family: var(--font-display); font-weight: 800; }
 .card-journey li::marker { font-family: var(--font-display); font-weight: 800; color: var(--doing); }

@@ -7,59 +7,59 @@ import type { AttentionView } from '../../data/placeholders'
 import { Cutaway, Level, LevelText, Vis } from '../Cutaway'
 import { MapLevel } from '../MapLevel'
 
-const SRC_LABEL: Record<string, string> = { sys: 'system', rag: 'passage', user: 'question', tool: 'tool call', res: 'tool result', rep: 'reply' }
-
 function chipLabel(text: string) {
   if (/^ +$/.test(text)) return '␣'
   if (text === '\n') return '↵'
   return text.trim() || text
 }
 
-/** Chips laid out left to right in reading order, arcs from the query (last chip) back to earlier ones. */
 /** A share of attention as a percentage; tiny shares read “<1%”, not a misleading 0%. */
 const share = (w: number) => (w < 0.005 ? '<1%' : `${Math.round(w * 100)}%`)
 
+/** Where a token sits, in a few words, for the tag under its chip. */
+const PLACE: Record<string, string> = {
+  rag: 'recipe card',
+  user: 'your question',
+  sys: 'hidden instructions',
+  tool: 'calculator request',
+  res: 'calculator answer',
+  rep: 'reply'
+}
+
+/** The earlier token a head gives the most attention to. */
+const topOf = (view: AttentionView) => view.tokens.slice(0, -1).reduce<AttentionView['tokens'][number] | undefined>((a, b) => (!a || b.w > a.w ? b : a), undefined)
+
+/**
+ * One head, one arc: the token that is looking (right) and the earlier token it gives the most
+ * attention to (left), with that share written on the arc. Each head we show puts nearly all its
+ * attention on one token, so the small shares are summed into one line instead of drawn.
+ */
 export function Arcs({ view }: { view: AttentionView }) {
-  const q = view.tokens.length - 1
-  const widths = view.tokens.map((t) => chipLabel(t.text).length * 7.4 + 18)
-  const xs: number[] = []
-  let x = 10
-  view.tokens.forEach((t, i) => {
-    const prev = view.tokens[i - 1]
-    if (i > 0) x += prev && t.pos !== undefined && prev.pos !== undefined && t.pos - prev.pos > 1 ? 30 : 12 // room for "…" between distant tokens
-    xs.push(x + widths[i] / 2)
-    x += widths[i]
-  })
-  const width = Math.max(300, x + 10)
-  const max = Math.max(...view.tokens.slice(0, q).map((t) => t.w), 0.01)
-  const strongest = [...view.tokens.slice(0, q)].sort((a, b) => b.w - a.w)[0]
+  const query = view.tokens[view.tokens.length - 1]
+  const top = topOf(view)
+  if (!query || !top) return null
+  const adjacent = query.pos !== undefined && top.pos !== undefined && query.pos - top.pos === 1
+  const xa = adjacent ? 95 : 62
+  const xb = adjacent ? 165 : 198
+  const y = 100
+  const h = adjacent ? 56 : 84
+  const chips = [
+    { t: top, x: xa, hot: false },
+    { t: query, x: xb, hot: true }
+  ]
   return (
-    <svg className="v-attn" viewBox={`0 0 ${width} 196`} role="img" aria-label={`“${chipLabel(view.query)}” puts the most attention on “${chipLabel(strongest?.text ?? '')}”`}>
-      {view.tokens.slice(0, q).map((t, i) => {
-        const x0 = xs[q]
-        const x1 = xs[i]
-        const h = Math.min(126, 28 + (x0 - x1) * 0.45)
+    <svg className="v-attn" viewBox="0 18 260 132" role="img" aria-label={`“${chipLabel(query.text)}” gives ${share(top.w)} of its attention to “${chipLabel(top.text)}”.`}>
+      <path className="arc" d={`M${xb},${y} C${xb},${y - h} ${xa},${y - h} ${xa},${y - 10}`} strokeWidth={(2 + top.w * 6).toFixed(1)} />
+      <path className="arc-tip" d={`M${xa - 7},${y - 12} L${xa + 7},${y - 12} L${xa},${y - 1} Z`} />
+      <text className="arc-share" x={(xa + xb) / 2} y={y - h * 0.75 - 10} textAnchor="middle">{share(top.w)} of its attention</text>
+      {!adjacent && <text className="w" x={(xa + xb) / 2} y={y + 16} textAnchor="middle">…</text>}
+      {chips.map(({ t, x, hot }) => {
+        const w = chipLabel(t.text).length * 7.4 + 22
         return (
-          <path
-            key={i}
-            className="arc"
-            d={`M${x0},140 C${x0},${140 - h} ${x1},${140 - h} ${x1},140`}
-            strokeWidth={(1 + (t.w / max) * 9).toFixed(1)}
-            opacity={(0.25 + 0.75 * (t.w / max)).toFixed(2)}
-          />
-        )
-      })}
-      {view.tokens.map((t, i) => {
-        const prev = view.tokens[i - 1]
-        const gap = i > 0 && prev && t.pos !== undefined && prev.pos !== undefined && t.pos - prev.pos > 1
-        return (
-          <g key={i}>
-            {gap && <text className="w" x={xs[i] - widths[i] / 2 - 15} y={157} textAnchor="middle">…</text>}
-            <rect className={`chipbox${i === q ? ' hot' : ''}`} x={xs[i] - widths[i] / 2} y={142} width={widths[i]} height={22} rx={5}>
-              {t.src && SRC_LABEL[t.src] && <title>{`from the ${SRC_LABEL[t.src]}`}</title>}
-            </rect>
-            <text x={xs[i]} y={157} textAnchor="middle">{chipLabel(t.text)}</text>
-            <text className="w" x={xs[i]} y={180} textAnchor="middle">{i === q ? `itself ${share(t.w)}` : share(t.w)}</text>
+          <g key={x}>
+            <rect className={`chipbox${hot ? ' hot' : ''}`} x={x - w / 2} y={y} width={w} height={24} rx={5} />
+            <text x={x} y={y + 16} textAnchor="middle">{chipLabel(t.text)}</text>
+            {t.src && PLACE[t.src] && <text className="w" x={x} y={y + 42} textAnchor="middle">{PLACE[t.src]}</text>}
           </g>
         )
       })}
@@ -67,44 +67,34 @@ export function Arcs({ view }: { view: AttentionView }) {
   )
 }
 
-const WHERE: Record<string, string> = {
-  rag: 'on the recipe card',
-  user: 'in your question',
-  sys: 'in the hidden instructions',
-  tool: 'in the calculator request',
-  res: 'in the calculator’s answer',
-  rep: 'in the reply so far'
+/** A token named in a sentence: quoted, or “the space” when it is only a space. */
+const said = (text: string, start = false) => {
+  const l = chipLabel(text)
+  if (l === '␣') return start ? 'The space' : 'the space'
+  if (l === '↵') return start ? 'The line break' : 'the line break'
+  return `“${l}”`
 }
-const pctW = (w: number) => `${Math.round(w * 100)}%`
 
 /**
- * Where the arcs land, in words: which token is looking, and which earlier tokens get its weight,
- * each with where it sits. When a head looks at the recipe card, the card itself appears with
- * those words marked.
+ * Under the arc: what this head does, then what the percentage means. When a head looks at the
+ * recipe card, the card itself appears with that word marked.
  */
 function ArcSources({ view }: { view: AttentionView }) {
   const query = view.tokens[view.tokens.length - 1]
-  const targets = view.tokens.slice(0, -1).filter((t) => t.w >= 0.01).sort((a, b) => b.w - a.w).slice(0, 3)
+  const top = topOf(view)
+  if (!query || !top) return null
   const onCard = view.tokens.slice(0, -1).filter((t) => t.src === 'rag' && t.w >= 0.05)
   const max = Math.max(...onCard.map((t) => t.w), 0.01)
   return (
     <div className="arc-sources">
-      <p>
-        <b>“{chipLabel(query.text)}”</b>{query.src && WHERE[query.src] ? `, ${WHERE[query.src]},` : ''} looks back at{' '}
-        {targets.length
-          ? targets.map((t, i) => (
-              <span key={i}>
-                {i ? (i === targets.length - 1 ? ' and ' : ', ') : ''}
-                <b>“{chipLabel(t.text)}”</b> {t.src && WHERE[t.src] ? WHERE[t.src] : ''} ({pctW(t.w)})
-              </span>
-            ))
-          : 'many tokens a little each'}
-        .
+      <p>{view.label}</p>
+      <p className="arc-meaning">
+        Every token has 100% of its attention to share out among itself and the tokens before it. {said(query.text, true)} gives {share(top.w)} to {said(top.text)}; the other {share(Math.max(0, 1 - top.w))} is spread thin over the rest.
       </p>
       {onCard.length > 0 && (
         <RecipeCard
           highlight={Object.fromEntries(onCard.map((t) => [t.pos ?? -1, t.w / max]))}
-          caption="The recipe card you uploaded, with the words this head looks at marked."
+          caption="The card you uploaded, with the word this head looks at marked."
         />
       )}
     </div>
@@ -140,14 +130,14 @@ export function AttentionLevels({ station, views }: { station: Station; views: A
             title={view.real ? 'Who looks where' : `Where “${chipLabel(view.query)}” looks`}
             note={view.real ? undefined : 'Placeholder weights. The trace pipeline will supply real ones from a chosen head.'}
           >
-            <p>This model has 336 heads. We picked four with clear patterns and gave them nicknames. Thicker arcs mean more is borrowed from there.</p>
+            <p>This model has 336 heads. Here are four, nicknamed for what they do.</p>
           </LevelText>
           <Vis>
             <div className="v-col">
               {hasTarget && (
                 <p className={`challenge${found ? ' done' : ''}`}>{found ? '✓ Found: the head that links “flour” in your question to the card' : 'Challenge: find the head that links “flour” in your question to “flour” on the card.'}</p>
               )}
-              {views.length > 1 && <Howto>Tap a head, one of the model’s ways of looking back. Its arcs show where one token borrows from.</Howto>}
+              {views.length > 1 && <Howto>Tap a head to see where it looks.</Howto>}
               {views.length > 1 && (
                 <div className="v-examples" role="group" aria-label="Attention heads">
                   {views.map((v, i) => (
@@ -157,7 +147,6 @@ export function AttentionLevels({ station, views }: { station: Station; views: A
                   ))}
                 </div>
               )}
-              {view.real && <p className="head-label">{view.label}</p>}
               <Arcs view={view} />
               {view.real && <ArcSources view={view} />}
               {view.real && view.source && <p className="v-below">{view.source}</p>}

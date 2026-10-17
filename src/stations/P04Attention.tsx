@@ -40,7 +40,7 @@ export const P04_SPEC: LoopSpec = {
   name: {
     definition: 'Attention lets each token borrow a mix of information from the tokens before it, in shares that add up to 100%. The model has many attention heads, each looking back in its own way.',
     terms: ['attention', 'attention head'],
-    picture: <PaperArcs which={copier} caption="The “Copier” head, just before the reply writes 8: nearly all its weight is on the calculator’s answer." />,
+    picture: <PaperArcs which={copier} caption="The “Copier” head, just before the reply writes 8: nearly all its attention goes to the 8 in the calculator’s answer." />,
     metaphor: 'A highlighter run over earlier text, darker where more is borrowed.',
     breaks: 'A highlighter suggests a reader. Nobody is reading; the weights come from multiplying numbers.'
   },
