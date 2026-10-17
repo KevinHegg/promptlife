@@ -22,16 +22,29 @@ export type Gatehouse = {
   }
 }
 
-const files = import.meta.glob('./traces/gatehouse.json', { eager: true, import: 'default' }) as Record<string, Gatehouse>
-const raw = Object.values(files)[0] ?? null
+const files = import.meta.glob('./traces/gatehouse*.json', { eager: true, import: 'default' }) as Record<string, Gatehouse>
+const ok = (g?: Gatehouse) => (g && g.page?.blocks?.length ? g : null)
 
-export const gatehouse: Gatehouse | null = raw && raw.page?.blocks?.length ? raw : null
+/** The model on our ride (Qwen2.5-0.5B-Instruct). */
+export const gatehouse: Gatehouse | null = ok(files['./traces/gatehouse.json'])
+/** The same heist on a model three times bigger from the same family (Qwen2.5-1.5B-Instruct). */
+export const gatehouseBig: Gatehouse | null = ok(files['./traces/gatehouse-1.5b.json'])
+
+export type Size = 'small' | 'big'
+const bySize = (size: Size) => (size === 'big' ? gatehouseBig : gatehouse)
 
 /** The runs for one attack against one defense, unclean text hidden. */
-export function heistRuns(defense: string, attack: string): HeistRun[] {
-  return (gatehouse?.heist.runs ?? [])
+export function heistRuns(defense: string, attack: string, size: Size = 'small'): HeistRun[] {
+  return (bySize(size)?.heist.runs ?? [])
     .filter((r) => r.defense === defense && r.attack === attack)
     .map((r) => (isClean(r.text) ? r : { ...r, text: '' }))
+}
+
+/** How many replies leaked the secret against one defense, across every attack. */
+export function leaksFor(defense: string, size: Size = 'small') {
+  const attacks = bySize(size)?.heist.attacks ?? []
+  const runs = attacks.flatMap((a) => heistRuns(defense, a.id, size))
+  return { leaked: runs.filter((r) => r.leaked).length, of: runs.length }
 }
 
 /** One short, finished reply for an attack and defense that did, or didn't, leak the secret. */

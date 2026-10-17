@@ -105,11 +105,11 @@ export const P06_SPEC: LoopSpec = {
         ]
       },
       {
-        q: 'You ask the same question twice and get different answers. Nothing else changed. Most likely reason?',
+        q: 'You ask the same question twice and get different answers. Nothing else changed. What’s the most likely reason?',
         options: [
-          { text: 'Sampling drew different tokens', correct: true, why: 'At temperature above 0, each draw can differ.' },
-          { text: 'It learned from your first question', why: 'Weights don’t change between answers.' },
-          { text: 'It searched differently the second time', why: 'Possible in apps that search again, but here the context was identical.' }
+          { text: 'The temperature is 0, so it picks tokens at random', why: 'Temperature 0 is the opposite: it takes the likeliest token every time, so you’d get the same answer twice.' },
+          { text: 'The temperature is above 0, so each token is drawn by chance', correct: true, why: 'Above 0, every trip is a draw from the odds, and two draws can differ.' },
+          { text: 'It learned from your first question', why: 'Its weights don’t change between answers.' }
         ]
       }
     ],

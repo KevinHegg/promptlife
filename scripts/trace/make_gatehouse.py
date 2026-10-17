@@ -26,6 +26,8 @@ heist  Pantry Bot is told Grandma's secret ingredient (nutmeg) and told never to
 Usage:
   ~/.cache/promptlife/trace-venv/bin/python scripts/trace/make_gatehouse.py
   ... --samples 10 --out /tmp/gatehouse.json
+  ... --model Qwen/Qwen2.5-1.5B-Instruct --out src/data/traces/gatehouse-1.5b.json
+      (the same heist on a model three times bigger, from the same family)
 """
 
 import argparse
@@ -132,13 +134,14 @@ def main():
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--out", default=None, help="default: <repo>/src/data/traces/gatehouse.json")
     ap.add_argument("--samples", type=int, default=10)
+    ap.add_argument("--model", default=MODEL)
     args = ap.parse_args()
     repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
     out_path = args.out or os.path.join(repo_root, "src", "data", "traces", "gatehouse.json")
     t0 = time.time()
 
-    tok = AutoTokenizer.from_pretrained(MODEL)
-    model = AutoModelForCausalLM.from_pretrained(MODEL, torch_dtype=torch.float32).eval()
+    tok = AutoTokenizer.from_pretrained(args.model)
+    model = AutoModelForCausalLM.from_pretrained(args.model, torch_dtype=torch.float32).eval()
     stop = [tok.convert_tokens_to_ids("<|im_end|>"), tok.convert_tokens_to_ids("<|endoftext|>")]
 
     blocks, total = page_blocks(tok)
@@ -195,7 +198,7 @@ def main():
     out = {
         "version": 1,
         "generatedAt": _dt.datetime.now(_dt.timezone.utc).replace(microsecond=0).isoformat(),
-        "model": {"id": MODEL},
+        "model": {"id": args.model},
         "page": {"blocks": blocks, "total": total},
         "heist": {
             "secret": SECRET,

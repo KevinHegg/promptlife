@@ -85,7 +85,7 @@ export const LINE_R_SPEC: LoopSpec = {
       {
         q: 'An AI agent can read your email and send messages for you. Which safeguard matters most?',
         options: [
-          { text: 'Firm instructions to behave', why: 'In the Gatehouse, firmer wording cut leaks only from 28 to 22 of 50.' },
+          { text: 'Firm instructions to behave', why: 'In the Gatehouse, stronger wording helped, but a poem still got the secret out every time.' },
           { text: 'Least access, and asking you before it sends anything', correct: true, why: 'Limits outside the model hold even when its words don’t.' },
           { text: 'The most capable model available', why: 'More capable isn’t safer: the agents that broke out in 2026 were frontier models.' }
         ]

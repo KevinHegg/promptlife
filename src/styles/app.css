@@ -18,7 +18,7 @@ h2 { font-size: clamp(1.4rem, 3vw, 1.9rem); font-weight: 900; line-height: 1.15;
 h3 { font-size: 1.1rem; font-weight: 800; line-height: 1.25; }
 p { margin: 0; }
 a { color: var(--accent); text-underline-offset: 3px; }
-button { font: inherit; }
+button { font: inherit; -webkit-user-select: none; user-select: none; touch-action: manipulation; }
 :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
 .kicker { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2); }
 .mono { font-family: var(--font-mono); font-size: 0.9em; }
@@ -312,6 +312,8 @@ button.tk { appearance: none; }
 .beat-head { display: flex; flex-direction: column; gap: 6px; max-width: 64ch; }
 .beat-nav { display: flex; justify-content: space-between; align-items: center; gap: 12px; position: sticky; bottom: 0; padding-block: 12px calc(12px + env(safe-area-inset-bottom, 0px)); background: linear-gradient(to top, var(--paper) 70%, transparent); z-index: 10; }
 .beat-nav .btn[disabled] { opacity: 0.45; cursor: default; }
+/* iPhone Safari with its toolbar tucked away: a tap at the very bottom only brings the toolbar back, so lift the buttons clear of that strip. */
+.toolbar-tucked .beat-nav { padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 36px); }
 a.btn { text-decoration: none; display: inline-flex; align-items: center; }
 .kicker.sabotage { color: var(--l-gate-red, #C0392B); }
 
@@ -1261,3 +1263,6 @@ blockquote { margin: 0; padding: 10px 14px; border-left: 3px solid var(--ink-2);
 .worth-it .chip-btn { color: var(--ink); border-color: var(--ink-2); background: var(--sheet); font-size: 0.8rem; padding: 5px 12px; }
 .worth-it .chip-btn:hover { border-color: var(--ink); color: var(--ink); }
 .worth-it .chip-btn[aria-pressed="true"] { background: var(--doing); border-color: var(--doing); color: var(--doing-ink); }
+.size-switch { display: inline-flex; align-self: flex-start; border: 1.5px solid var(--ink); border-radius: 999px; overflow: hidden; }
+.size-switch button { font-size: 0.85rem; padding: 6px 12px; background: var(--sheet); color: var(--ink); border: 0; cursor: pointer; }
+.size-switch button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }

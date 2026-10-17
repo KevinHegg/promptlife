@@ -1,5 +1,5 @@
 import { useState, type ReactNode } from 'react'
-import { gatehouse, heistRuns, type PageBlock, type Who } from '../../data/gatehouse'
+import { gatehouse, gatehouseBig, heistRuns, type PageBlock, type Size, type Who } from '../../data/gatehouse'
 import { tick, yes } from '../../lib/sound'
 import { Howto } from '../../ui/Howto'
 import { Dial } from '../../stations/parts'
@@ -96,9 +96,10 @@ export function HiddenPage() {
   )
 }
 
-/** Break it: steal Pantry Bot's secret. Pick a defense; every attack ran 10 times against it. */
+/** Break it: steal Pantry Bot's secret. Pick a model and a defense; every attack ran 10 times against it. Verdicts are keyed “small-plain”, “big-firm” and so on. */
 export function Heist({ verdicts, takeaway }: { verdicts: Record<string, ReactNode>; takeaway: ReactNode }) {
   const H = gatehouse?.heist
+  const [size, setSize] = useState<Size>('small')
   const [def, setDef] = useState(H?.defenses[0]?.id ?? 'plain')
   const [open, setOpen] = useState<string | null>(null)
   const [tried, setTried] = useState(false)
@@ -106,7 +107,7 @@ export function Heist({ verdicts, takeaway }: { verdicts: Record<string, ReactNo
   const d = H.defenses.find((x) => x.id === def) ?? H.defenses[0]
   const first = d.id === H.defenses[0].id
   const rows = H.attacks.map((a) => {
-    const runs = heistRuns(d.id, a.id)
+    const runs = heistRuns(d.id, a.id, size)
     const leaks = runs.filter((r) => r.leaked)
     const pool = (leaks.length ? leaks : runs).filter((r) => r.text)
     const sample = [...pool].sort((x, y) => Number(y.stoppedNaturally) - Number(x.stoppedNaturally) || x.text.length - y.text.length)[0]
@@ -116,7 +117,16 @@ export function Heist({ verdicts, takeaway }: { verdicts: Record<string, ReactNo
   const runsTotal = rows.reduce((s, r) => s + r.n, 0)
   return (
     <div className="break-body">
-      <Howto>Pick a defense, then tap an attack to read one of its replies.</Howto>
+      <Howto>Pick a model and a defense, then tap an attack to read one of its replies.</Howto>
+      {gatehouseBig && (
+        <div className="size-switch" role="group" aria-label="Model">
+          {(['small', 'big'] as Size[]).map((z) => (
+            <button key={z} type="button" aria-pressed={size === z} onClick={() => { setSize(z); setTried(true); tick() }}>
+              {z === 'small' ? 'Our model (0.5B)' : 'Three times bigger (1.5B)'}
+            </button>
+          ))}
+        </div>
+      )}
       <Dial<string>
         stops={H.defenses.map((x) => x.id)}
         value={d.id}
@@ -161,7 +171,7 @@ export function Heist({ verdicts, takeaway }: { verdicts: Record<string, ReactNo
             </li>
           ))}
         </ul>
-        <p className="break-stat">{verdicts[d.id]}</p>
+        <p className="break-stat">{verdicts[`${size}-${d.id}`]}</p>
         <p className="muted small">Each attack was run 10 times, drawing tokens the way the model normally does, so replies vary.</p>
       </div>
       {tried && <div className="break-why">{takeaway}</div>}
