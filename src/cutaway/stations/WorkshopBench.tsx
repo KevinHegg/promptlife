@@ -36,7 +36,7 @@ export function WorkshopBench() {
   }
   return (
     <div className="bench">
-      <Howto>Take the three steps in order, like the Workshop’s three stops on the map.</Howto>
+      <Howto>Tap each button in turn, top to bottom.</Howto>
       <ol className="bench-steps">
         <li className={step >= 1 ? 'done' : 'now'}>
           <p className="bench-label">W1 · Read the request</p>

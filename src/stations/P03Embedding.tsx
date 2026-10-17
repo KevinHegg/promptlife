@@ -90,7 +90,7 @@ export const P03_SPEC: LoopSpec = {
   },
   poke: {
     title: 'Find flour’s neighbors',
-    intro: 'Tap “flour” and see which rows are most like it.',
+    intro: 'Find “flour” on the map of meaning and tap it to see which words sit closest.',
     body: <EmbeddingLevels station={station} />
   },
   name: {

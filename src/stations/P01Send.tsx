@@ -31,7 +31,7 @@ function RideThenFind() {
     return (
       <div className="substep">
         <p className="substep-label">1 of 2 · Watch the ride</p>
-        <Howto>Press Play and watch which lines light up.</Howto>
+        <Howto>Tap “Play the ride” and watch which lines light up.</Howto>
         <LiveRun compact onDone={() => setRideDone(true)} />
         <div className="substep-next">
           <button type="button" className={`btn${rideDone ? ' primary' : ''}`} onClick={() => setStep('find')}>
@@ -102,7 +102,7 @@ export const P01_SPEC: LoopSpec = {
   },
   poke: {
     title: 'Ride along',
-    intro: 'Press play and watch which lines light up. Then find your own words.',
+    intro: 'Two short steps: watch your question ride through the model, then find your own words in what it read.',
     body: <RideThenFind />
   },
   name: {

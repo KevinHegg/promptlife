@@ -66,7 +66,7 @@ export function WordMapView() {
   return (
     <div className="v-col wordmap">
       <p className={`challenge${found ? ' done' : ''}`}>{found ? '✓ Found: flour’s neighbors' : 'Challenge: find the neighbors of “flour.”'}</p>
-      <Howto>Tap a dot to see the words closest to it.</Howto>
+      <Howto>Tap a dot to see its word and the words closest to it. Flour is in Baking.</Howto>
       <svg className="wm" viewBox={`0 0 ${W} ${H}`} role="group" aria-label="A map of meaning: tap a word to see its nearest neighbors">
         {centroids.map((g) => (
           <text key={g.id} className="wm-group" x={Math.min(W - 30, Math.max(30, g.x))} y={Math.max(12, g.y - 16)} textAnchor="middle" style={{ fill: GROUP_COLORS[groupIndex.get(g.id) ?? 0] }}>
