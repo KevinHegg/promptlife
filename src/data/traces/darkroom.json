@@ -1,0 +1,261 @@
+{
+ "version": 1,
+ "generatedAt": "2026-10-17T23:51:33+00:00",
+ "card": {
+  "file": "darkroom/card.png",
+  "width": 1200,
+  "height": 560
+ },
+ "patches": {
+  "model": "Qwen/Qwen2-VL-2B-Instruct",
+  "patchSize": 14,
+  "merge": 2,
+  "questions": [
+   {
+    "id": "read",
+    "text": "Read this recipe card word for word."
+   },
+   {
+    "id": "flour",
+    "text": "How much flour does this recipe use, and how many people does it serve?"
+   }
+  ],
+  "sizes": [
+   {
+    "width": 1200,
+    "height": 560,
+    "file": "darkroom/card-1200.png",
+    "answers": {
+     "read": {
+      "text": "Sure, here is the recipe card word for word:\n\n---\n\n**Grandma's Buttermilk Biscuits**\n\n**Serves 8**\n\n- 2 1/4 cups flour\n- 1 tablespoon baking powder\n- 1/2 teaspoon salt\n- 6 tablespoons butter\n- 1 cup buttermilk\n- 1 cup buttermilk\n\n**Instructions:**\n\n1. Preheat the oven to 425°F (220°C).\n2. In a large bowl, whisk together the flour, baking powder, and salt.\n3. In a separate bowl, beat the butter until it is smooth and creamy.\n4. Gradually add the buttermilk to the flour mixture, stirring until a smooth dough forms.\n5. Knead the",
+      "flagged": false
+     },
+     "flour": {
+      "text": "The recipe uses 2 1/4 cups of flour. It serves 8 people.",
+      "flagged": false
+     }
+    },
+    "grid": {
+     "t": 1,
+     "h": 40,
+     "w": 86
+    },
+    "patches": 3440,
+    "tokens": 860,
+    "resizedTo": [
+     1204,
+     560
+    ]
+   },
+   {
+    "width": 600,
+    "height": 280,
+    "file": "darkroom/card-600.png",
+    "answers": {
+     "read": {
+      "text": "Sure, here is the recipe card word for word:\n\n---\n\n**Grandma's Buttermilk Biscuits**\n\n**Serves 8**\n\n- 2 1/4 cups flour\n- 1 tablespoon baking powder\n- 1/2 teaspoon salt\n- 6 tablespoons butter\n- 1 cup buttermilk\n- 2 biscuits per person\n- 1 cup buttermilk\n- Bake at 425°F, 12 minutes.\n\n---\n\nLet's break it down:\n\n- **Serves 8**: This indicates that the recipe is designed to serve 8 people.\n- **2 1/4 cups flour**: This means you will need 2 1/4 cups of all-purpose flour.\n- **1 tablespoon baking powder**: This is",
+      "flagged": false
+     },
+     "flour": {
+      "text": "The recipe uses 2.14 cups of flour. It serves 8 people.",
+      "flagged": false
+     }
+    },
+    "grid": {
+     "t": 1,
+     "h": 20,
+     "w": 42
+    },
+    "patches": 840,
+    "tokens": 210,
+    "resizedTo": [
+     588,
+     280
+    ]
+   },
+   {
+    "width": 300,
+    "height": 140,
+    "file": "darkroom/card-300.png",
+    "answers": {
+     "read": {
+      "text": "Sure, here is the recipe card word for word:\n\n---\n\n**Grandma's Buttermilk Biscuits**\n\n**Serves 8**\n\n**2 1/4 cups flour**\n1 tablespoon baking powder\n1/2 teaspoon salt\n6 tablespoons butter\n1 cup buttermilk\n\n---\n\nInstructions:\n\n1. In a large bowl, combine the flour, baking powder, and salt.\n2. Cut in the butter until the mixture resembles coarse crumbs.\n3. Add the buttermilk and mix until a dough forms.\n4. Knead the dough for a few minutes until it is smooth and elastic.\n5. Place the dough in a greased bowl and cover with a damp cloth.\n6. Let the dough rise in a warm place for about 1 hour, or until it",
+      "flagged": false
+     },
+     "flour": {
+      "text": "The recipe uses 2 1/4 cups of flour. It serves 8 people.",
+      "flagged": false
+     }
+    },
+    "grid": {
+     "t": 1,
+     "h": 10,
+     "w": 22
+    },
+    "patches": 220,
+    "tokens": 55,
+    "resizedTo": [
+     308,
+     140
+    ]
+   },
+   {
+    "width": 150,
+    "height": 70,
+    "file": "darkroom/card-150.png",
+    "answers": {
+     "read": {
+      "text": "Sure, here is the recipe card word for word:\n\n---\n\n**Grandma's Butterly Biscuits**\n\n**Ingredients:**\n\n- 2 cups all-purpose flour\n- 1/2 cup unsalted butter, softened\n- 1/2 cup granulated sugar\n- 1/2 cup packed brown sugar\n- 1/2 cup packed light brown sugar\n- 1/2 cup granulated sugar\n- 1/2 cup packed brown sugar\n- 1/2 cup granulated sugar\n- 1/2 cup packed brown sugar\n- 1/2 cup granulated sugar\n- 1/2 cup packed brown sugar\n- 1/2 cup granulated sugar\n- 1/2 cup packed brown sugar\n- 1",
+      "flagged": false
+     },
+     "flour": {
+      "text": "The recipe for Grandma's Butterflake Biscuits uses 2 cups of flour. It serves 8 people.",
+      "flagged": false
+     }
+    },
+    "grid": {
+     "t": 1,
+     "h": 4,
+     "w": 10
+    },
+    "patches": 40,
+    "tokens": 10,
+    "resizedTo": [
+     140,
+     56
+    ]
+   }
+  ]
+ },
+ "diffusion": {
+  "model": "stable-diffusion-v1-5/stable-diffusion-v1-5",
+  "scheduler": "DDIM",
+  "steps": 30,
+  "size": 512,
+  "frameSize": 256,
+  "device": "mps",
+  "runs": [
+   {
+    "id": "prompt",
+    "prompt": "a plate of buttermilk biscuits, black ink drawing on white paper",
+    "guidance": 7.5,
+    "seed": 1,
+    "frames": [
+     "darkroom/diffusion/prompt/00.jpg",
+     "darkroom/diffusion/prompt/01.jpg",
+     "darkroom/diffusion/prompt/02.jpg",
+     "darkroom/diffusion/prompt/03.jpg",
+     "darkroom/diffusion/prompt/04.jpg",
+     "darkroom/diffusion/prompt/05.jpg",
+     "darkroom/diffusion/prompt/06.jpg",
+     "darkroom/diffusion/prompt/07.jpg",
+     "darkroom/diffusion/prompt/08.jpg",
+     "darkroom/diffusion/prompt/09.jpg",
+     "darkroom/diffusion/prompt/10.jpg",
+     "darkroom/diffusion/prompt/11.jpg",
+     "darkroom/diffusion/prompt/12.jpg",
+     "darkroom/diffusion/prompt/13.jpg",
+     "darkroom/diffusion/prompt/14.jpg",
+     "darkroom/diffusion/prompt/15.jpg",
+     "darkroom/diffusion/prompt/16.jpg",
+     "darkroom/diffusion/prompt/17.jpg",
+     "darkroom/diffusion/prompt/18.jpg",
+     "darkroom/diffusion/prompt/19.jpg",
+     "darkroom/diffusion/prompt/20.jpg",
+     "darkroom/diffusion/prompt/21.jpg",
+     "darkroom/diffusion/prompt/22.jpg",
+     "darkroom/diffusion/prompt/23.jpg",
+     "darkroom/diffusion/prompt/24.jpg",
+     "darkroom/diffusion/prompt/25.jpg",
+     "darkroom/diffusion/prompt/26.jpg",
+     "darkroom/diffusion/prompt/27.jpg",
+     "darkroom/diffusion/prompt/28.jpg",
+     "darkroom/diffusion/prompt/29.jpg",
+     "darkroom/diffusion/prompt/30.jpg"
+    ]
+   },
+   {
+    "id": "prompt-seed2",
+    "prompt": "a plate of buttermilk biscuits, black ink drawing on white paper",
+    "guidance": 7.5,
+    "seed": 2,
+    "frames": [
+     "darkroom/diffusion/prompt-seed2/00.jpg",
+     "darkroom/diffusion/prompt-seed2/01.jpg",
+     "darkroom/diffusion/prompt-seed2/02.jpg",
+     "darkroom/diffusion/prompt-seed2/03.jpg",
+     "darkroom/diffusion/prompt-seed2/04.jpg",
+     "darkroom/diffusion/prompt-seed2/05.jpg",
+     "darkroom/diffusion/prompt-seed2/06.jpg",
+     "darkroom/diffusion/prompt-seed2/07.jpg",
+     "darkroom/diffusion/prompt-seed2/08.jpg",
+     "darkroom/diffusion/prompt-seed2/09.jpg",
+     "darkroom/diffusion/prompt-seed2/10.jpg",
+     "darkroom/diffusion/prompt-seed2/11.jpg",
+     "darkroom/diffusion/prompt-seed2/12.jpg",
+     "darkroom/diffusion/prompt-seed2/13.jpg",
+     "darkroom/diffusion/prompt-seed2/14.jpg",
+     "darkroom/diffusion/prompt-seed2/15.jpg",
+     "darkroom/diffusion/prompt-seed2/16.jpg",
+     "darkroom/diffusion/prompt-seed2/17.jpg",
+     "darkroom/diffusion/prompt-seed2/18.jpg",
+     "darkroom/diffusion/prompt-seed2/19.jpg",
+     "darkroom/diffusion/prompt-seed2/20.jpg",
+     "darkroom/diffusion/prompt-seed2/21.jpg",
+     "darkroom/diffusion/prompt-seed2/22.jpg",
+     "darkroom/diffusion/prompt-seed2/23.jpg",
+     "darkroom/diffusion/prompt-seed2/24.jpg",
+     "darkroom/diffusion/prompt-seed2/25.jpg",
+     "darkroom/diffusion/prompt-seed2/26.jpg",
+     "darkroom/diffusion/prompt-seed2/27.jpg",
+     "darkroom/diffusion/prompt-seed2/28.jpg",
+     "darkroom/diffusion/prompt-seed2/29.jpg",
+     "darkroom/diffusion/prompt-seed2/30.jpg"
+    ]
+   },
+   {
+    "id": "no-steering",
+    "prompt": "",
+    "guidance": 1.0,
+    "seed": 1,
+    "frames": [
+     "darkroom/diffusion/no-steering/00.jpg",
+     "darkroom/diffusion/no-steering/01.jpg",
+     "darkroom/diffusion/no-steering/02.jpg",
+     "darkroom/diffusion/no-steering/03.jpg",
+     "darkroom/diffusion/no-steering/04.jpg",
+     "darkroom/diffusion/no-steering/05.jpg",
+     "darkroom/diffusion/no-steering/06.jpg",
+     "darkroom/diffusion/no-steering/07.jpg",
+     "darkroom/diffusion/no-steering/08.jpg",
+     "darkroom/diffusion/no-steering/09.jpg",
+     "darkroom/diffusion/no-steering/10.jpg",
+     "darkroom/diffusion/no-steering/11.jpg",
+     "darkroom/diffusion/no-steering/12.jpg",
+     "darkroom/diffusion/no-steering/13.jpg",
+     "darkroom/diffusion/no-steering/14.jpg",
+     "darkroom/diffusion/no-steering/15.jpg",
+     "darkroom/diffusion/no-steering/16.jpg",
+     "darkroom/diffusion/no-steering/17.jpg",
+     "darkroom/diffusion/no-steering/18.jpg",
+     "darkroom/diffusion/no-steering/19.jpg",
+     "darkroom/diffusion/no-steering/20.jpg",
+     "darkroom/diffusion/no-steering/21.jpg",
+     "darkroom/diffusion/no-steering/22.jpg",
+     "darkroom/diffusion/no-steering/23.jpg",
+     "darkroom/diffusion/no-steering/24.jpg",
+     "darkroom/diffusion/no-steering/25.jpg",
+     "darkroom/diffusion/no-steering/26.jpg",
+     "darkroom/diffusion/no-steering/27.jpg",
+     "darkroom/diffusion/no-steering/28.jpg",
+     "darkroom/diffusion/no-steering/29.jpg",
+     "darkroom/diffusion/no-steering/30.jpg"
+    ]
+   }
+  ]
+ },
+ "notes": [
+  "patches: the card image is drawn by this script (Pillow, Noteworthy font) and resized with Lanczos to each width; the Qwen2-VL processor then resizes to a multiple of 28 pixels (resizedTo) and cuts 14x14 patches, merging 2x2 into one token (tokens = image placeholder tokens in the prompt). Answers: greedy, max 160 new tokens, CPU float32.",
+  "diffusion: stable-diffusion-v1-5/stable-diffusion-v1-5, DDIM, 30 steps, 512x512, frames downscaled to 256x256 JPEG. Frame 00 is the starting noise; frame k is the VAE decoding of the latents after step k. Seeds from torch.Generator('cpu')."
+ ]
+}

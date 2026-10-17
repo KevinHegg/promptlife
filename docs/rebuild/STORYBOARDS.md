@@ -554,6 +554,15 @@ Reasoning models write out working before the answer. Those thinking tokens ride
 - **Needs:** a small open model with a thinking switch, run both ways (V-S-think-off and V-S-think-on), with trip counts.
 
 ### D Darkroom (from Tokenizer): D1 Image patches, D2 Diffusion
+**Built (2026-10-17).** `make_darkroom.py` draws the card with Pillow in the Noteworthy font, writes `darkroom.json`, and saves pictures under `public/darkroom/`.
+- **D1:** Qwen2-VL-2B-Instruct reads the card at 1200, 600, 300 and 150 px, costing 860, 210, 55 and 10 tokens (the card as text is 72).
+  - 1200 px: right, but it invents baking steps.
+  - 600 px: says "2.14 cups."
+  - 300 px: right.
+  - 150 px: reads "Butterly Biscuits" and invents a sugar recipe.
+- **D2:** Stable Diffusion 1.5 (DDIM, 30 steps, on the Mac's GPU) draws "a plate of buttermilk biscuits, black ink drawing on white paper." Every step is saved. It made a photo with a dish of something black.
+- **Break it:** stop at step 10, different noise (seed 2: another plate), or no words (abstract swirls).
+
 - **D1.** A photo of Grandma's handwritten card is cut into a grid of patches. A vision encoder turns each patch into numbers that ride the platform like tokens. Resize the photo and watch the piece count change.
 - **D2.** A different machine. Diffusion starts from noise and removes a little at each step, steered by the text request. Scrub a 30-step timeline for "a plate of biscuits, drawn in ink." For Break it, remove the text steering or stop at step 10. A note says some newer image generators work piece by piece instead.
 - **Misconceptions fixed:** "Image generators collage stored pictures." "The model sees like I do." "All AI writes one piece at a time."

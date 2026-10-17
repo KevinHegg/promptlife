@@ -1,4 +1,5 @@
 import { academyRuns } from '../data/academy'
+import { darkroom } from '../data/darkroom'
 import { thinkRuns } from '../data/scratchpad'
 import { gatehouse, gatehouseBig } from '../data/gatehouse'
 import { library } from '../data/library'
@@ -17,7 +18,9 @@ function recordedRuns() {
     (gatehouse?.heist.runs.length ?? 0) +
     (gatehouseBig?.heist.runs.length ?? 0) +
     academyRuns.length +
-    ['off', 'budget-64', 'budget-256', 'on'].reduce((n, c) => n + thinkRuns(c).length, 0)
+    ['off', 'budget-64', 'budget-256', 'on'].reduce((n, c) => n + thinkRuns(c).length, 0) +
+    (darkroom?.patches.sizes.length ?? 0) * 2 +
+    (darkroom?.diffusion.runs.length ?? 0)
   )
 }
 
@@ -48,6 +51,8 @@ const MODELS: { name: string; href: string; size: string; license: string; role:
   { name: 'Qwen2.5-0.5B', href: 'https://huggingface.co/Qwen/Qwen2.5-0.5B', size: '494 million numbers', license: 'Apache 2.0', role: 'The same model before fine-tuning, in the Academy.' },
   { name: 'Qwen2.5-1.5B-Instruct', href: 'https://huggingface.co/Qwen/Qwen2.5-1.5B-Instruct', size: '1.5 billion numbers', license: 'Apache 2.0', role: 'Three times bigger, same family. It reran the Gatehouse heist for comparison.' },
   { name: 'Qwen3-0.6B', href: 'https://huggingface.co/Qwen/Qwen3-0.6B', size: '0.6 billion numbers', license: 'Apache 2.0', role: 'A newer small model with a thinking switch. It answered our question 40 times in the Scratchpad, thinking off, cut short, and on.' },
+  { name: 'Qwen2-VL-2B-Instruct', href: 'https://huggingface.co/Qwen/Qwen2-VL-2B-Instruct', size: '2.2 billion numbers', license: 'Apache 2.0', role: 'A small model that reads pictures. It read a picture of Grandma’s card at four sizes in the Darkroom.' },
+  { name: 'Stable Diffusion v1.5', href: 'https://huggingface.co/stable-diffusion-v1-5/stable-diffusion-v1-5', size: 'about 1 billion numbers', license: 'CreativeML OpenRAIL-M', role: 'An open image generator. Every one of its 30 steps, noise to biscuits, was saved for the Darkroom.' },
   { name: 'all-MiniLM-L6-v2', href: 'https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2', size: '23 million numbers', license: 'Apache 2.0', role: 'A small model that only measures how alike two texts are. It scored Grandma’s recipe box in the Library.' },
   { name: 'o200k_base tokenizer', href: 'https://github.com/niieani/gpt-tokenizer', size: 'about 200,000 tokens', license: 'MIT', role: 'The tokenizer used by OpenAI’s GPT-4o models. It runs live in your browser at the Tokenizer.' },
   { name: 'The Academy’s tiny model', href: 'https://github.com/KevinHegg/promptlife/blob/main/src/lib/tinyLM.ts', size: '8,109 numbers', license: 'MIT', role: 'Written for Prompt Life. It trains live on your device, on Grandma’s 13 recipe cards.' }

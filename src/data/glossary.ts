@@ -652,6 +652,35 @@ export const GLOSSARY: GlossaryEntry[] = [
     related: ['autoregressive-generation', 'token-cost', 'context-window', 'fine-tuning']
   },
 
+  // ── D Darkroom ──────────────────────────────────────────────────────────
+  {
+    id: 'multimodal',
+    term: 'multimodal',
+    aka: ['vision-language model', 'image tokens'],
+    station: 'D',
+    short: 'A multimodal model reads more than text. A picture is cut into small squares, and each becomes a list of numbers that rides along like a token.',
+    deeper: [
+      'A vision model cuts the picture into a grid of patches, often 14 pixels square, and turns each into numbers the language model can read beside your words. Bigger pictures make more patches, so they cost more tokens and fill more of the context window.',
+      'Detail depends on size. Shrink a picture and fine print blurs into fewer patches; the model then guesses, and can invent text that was never there. Reading a picture is still prediction, not seeing the way you do.'
+    ],
+    example: 'The small vision model in the Darkroom read Grandma’s card as 860 tokens at full size, against 72 tokens as text. Shrunk to 10 tokens, it read Butterly Biscuits and invented a recipe full of sugar.',
+    related: ['token', 'context-window', 'diffusion']
+  },
+  {
+    id: 'diffusion',
+    term: 'diffusion',
+    aka: ['diffusion model', 'image generator'],
+    station: 'D',
+    short: 'Diffusion makes a picture by starting from random noise and removing a little at each step, steered by a text prompt, until an image appears.',
+    deeper: [
+      'Training teaches the model to predict the noise in noisy pictures. To make a new picture, it starts from pure noise and repeatedly subtracts what it predicts is noise, nudged toward pictures that match the words.',
+      'Nothing is copied from a stored image: the same words with different starting noise give a different picture. But a model can reproduce images it saw many times in training, and what it learned came from billions of captioned pictures collected from the web.',
+      'Some newer image generators work differently, writing a picture piece by piece the way a chatbot writes tokens.'
+    ],
+    example: 'In the Darkroom, “a plate of buttermilk biscuits, black ink drawing” became a photo of biscuits with a little dish of something black. With no words at all, the same noise became abstract swirls.',
+    related: ['multimodal', 'pretraining', 'temperature']
+  },
+
   // ── R Reply spur ────────────────────────────────────────────────────────
   {
     id: 'token-cost',
